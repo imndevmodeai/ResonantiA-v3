@@ -1,0 +1,17 @@
+[
+  {
+    "spr_id": "SynergyAnalysisTooL",
+    "term": "Synergy Analysis Tool",
+    "definition": "A conceptual meta-analytical tool designed to evaluate the combined outputs and IARs from multiple, distinct analytical steps or workflows to identify and quantify emergent synergistic value (i.e., \'1+1=3\' effects) or negative interference. It compares observed outcomes against postulated synergies and conceptual metrics.",
+    "category": "MetaAnalyticalTool",
+    "relationships": {
+      "type": "MetaCognitiveSupportTool",
+      "used_by": ["SIRC", "SOMA-Pattern"],
+      "analyzes": ["IntegratedActionReflectioN (multiple sources)", "Workflow Outputs (multiple sources)", "Synergy Design Postulates"],
+      "aims_to_detect": ["Emergent Insight", "Cross-Validation Strength", "Synergistic Value", "Interference Effects", "AlignmentWithSynergyPostulate"],
+      "requirement": "Mandatory IAR Output (reflecting confidence in synergy assessment)"
+    },
+    "blueprint_details": "Conceptual tool for ResonantiA v3.0. Implementation would require advanced algorithms for pattern detection across heterogeneous data, meta-analysis of confidence scores, comparison against qualitative postulates, and potentially qualitative LLM-based assessment of combined narratives. Input: List of task result dictionaries (incl. IARs), Synergy Design Postulate, Conceptual Synergy Metrics. Output: Synergy assessment report (synergy_achieved_level, confidence, summary) and its own IAR.",
+    "example_usage": "Invoke SynergyAnalysisTooL within SIRC to assess if the SOMA-Pattern achieved the postulated 1+1=3 effect."
+  }
+] 

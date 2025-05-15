@@ -1,0 +1,73 @@
+{
+  "name": "Insight Solidification Workflow (v3.0)",
+  "description": "Validates and integrates new insights into the Knowledge Tapestry by creating/updating SPRs.",
+  "version": "3.0",
+  "tasks": {
+    "start_solidification": {
+      "description": "Acknowledge initiation of insight solidification.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Initiating Insight Solidification for concept: {{ initial_context.insight_data.CoreConcept }}"
+      },
+      "dependencies": []
+    },
+    "vet_spr_data": {
+      "description": "Vet the proposed SPR definition and insight validity.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are the VettingAgent. Evaluate the following proposed SPR definition based on the provided insight data and ResonantiA v3.0 principles.\n\nInsight Data:\n```json\n{{ initial_context.insight_data }}\n```\n\nProposed SPR Directive:\n```json\n{{ initial_context.spr_directive }}\n```\n\nInstructions:\n1. Assess the clarity, accuracy, and conciseness of the proposed 'Definition'.\n2. Validate the 'SuggestedSPR' format (Guardian Points).\n3. Check for potential overlap or conflict with existing concepts (conceptual check).\n4. Evaluate the appropriateness of the 'Category' and 'Relationships'.\n5. Assess the validity and reliability of the 'SourceReference' (if possible, consider confidence/issues from source IAR data - though not explicitly passed here).\n6. Provide a recommendation: 'Approve', 'Approve with Minor Revisions (Specify)', 'Reject (Specify Reasons)'.\n\nOutput JSON: {\"vetting_summary\": \"...\", \"format_check\": \"Pass|Fail\", \"uniqueness_check\": \"Pass|Concern|Fail\", \"definition_clarity\": \"Good|Fair|Poor\", \"relationships_check\": \"Appropriate|Needs Revision|Inappropriate\", \"source_vetting\": \"Verified|Plausible|Questionable|N/A\", \"recommendation\": \"Approve|Revise|Reject\", \"revision_suggestions\": \"...\"}",
+        "max_tokens": 700
+      },
+      "outputs": {
+        "response_text": "string", # Expected to be JSON string
+        "reflection": "dict"
+      },
+      "dependencies": ["start_solidification"]
+    },
+    "parse_vetting_result": {
+        "description": "Parse the JSON output from the vetting step.",
+        "action_type": "execute_code",
+        "inputs": {
+            "language": "python",
+            "code": "import json\nvetting_json_str = context.get('vet_spr_data', {}).get('response_text', '{}')\ntry:\n    vetting_result = json.loads(vetting_json_str)\nexcept Exception as e:\n    print(f'Error parsing vetting JSON: {e}')\n    vetting_result = {'recommendation': 'Reject', 'error': f'JSON Parse Error: {e}'}\nresult = {'parsed_vetting': vetting_result}"
+        },
+        "outputs": {"parsed_vetting": "dict", "stdout": "string", "stderr": "string", "exit_code": "int", "reflection": "dict"},
+        "dependencies": ["vet_spr_data"],
+        "condition": "{{ vet_spr_data.reflection.status == 'Success' }}"
+    },
+    "add_spr_to_tapestry": {
+      "description": "Simulate adding the vetted SPR to the Knowledge Tapestry via SPRManager.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "# Simulation: In a real system, this would call SPRManager.add_spr\nimport json\n\nspr_directive = context.get('initial_context', {}).get('spr_directive', {})\nspr_id = spr_directive.get('SuggestedSPR')\noverwrite = spr_directive.get('OverwriteIfExists', False)\nvetting_rec = context.get('parse_vetting_result', {}).get('parsed_vetting', {}).get('recommendation', 'Reject')\n\nif vetting_rec.startswith('Approve') and spr_id:\n    print(f\"Simulating SPRManager.add_spr for '{spr_id}' (Overwrite: {overwrite}).\")\n    # Construct the definition to add (potentially using revisions from vetting)\n    # For simulation, we just use the input directive\n    spr_to_add = {**spr_directive.get('SPRMetadata',{}), 'spr_id': spr_id, 'term': spr_directive.get('SPRMetadata',{}).get('term', spr_id)}\n    status = 'Success: Simulated SPR addition.'\n    result = {'spr_added_id': spr_id, 'status_message': status}\nelse:\n    print(f\"SPR '{spr_id}' not added. Vetting recommendation: {vetting_rec}\")\n    status = f'Failure: SPR not added (Vetting: {vetting_rec}).'\n    result = {'spr_added_id': None, 'status_message': status, 'error': f'Vetting recommendation was {vetting_rec}'}\n\nprint(json.dumps(result))\n",
+        "input_data": ""
+      },
+      "outputs": {
+        "stdout": "string",
+        "stderr": "string",
+        "exit_code": "int",
+        "spr_added_id": "string",
+        "status_message": "string",
+        "error": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["parse_vetting_result"],
+      "condition": "{{ parse_vetting_result.reflection.status == 'Success' and parse_vetting_result.parsed_vetting.recommendation.startswith('Approve') }}"
+    },
+    "final_display": {
+        "description": "Display the final outcome of the solidification process.",
+        "action_type": "display_output",
+        "inputs": {
+            "content": {
+                "solidification_status": "{{ add_spr_to_tapestry.reflection.status if 'add_spr_to_tapestry' in context else 'Skipped (Vetting Failed)' }}",
+                "vetting_recommendation": "{{ parse_vetting_result.parsed_vetting.recommendation if 'parse_vetting_result' in context else 'N/A' }}",
+                "spr_id_processed": "{{ add_spr_to_tapestry.spr_added_id if 'add_spr_to_tapestry' in context and add_spr_to_tapestry.spr_added_id else initial_context.spr_directive.SuggestedSPR }}",
+                "final_message": "{{ add_spr_to_tapestry.status_message if 'add_spr_to_tapestry' in context else 'SPR addition skipped or failed due to vetting.' }}"
+            },
+            "format": "json"
+        },
+        "dependencies": ["add_spr_to_tapestry", "parse_vetting_result"] # Depends on both paths
+    }
+  }
+}

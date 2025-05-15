@@ -1,0 +1,78 @@
+{
+  "name": "MLOps Model Retraining Workflow (Conceptual v3.0)",
+  "description": "Conceptual workflow for monitoring model performance and triggering retraining if needed, using IAR status checks.",
+  "version": "3.0",
+  "tasks": {
+    "fetch_performance_metrics": {
+      "description": "Simulate fetching latest performance metrics for a deployed model.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import random\n# Simulate fetching metrics\nmetrics = {'mae': random.uniform(5, 15), 'r2_score': random.uniform(0.4, 0.8)}\nprint(f'Fetched metrics: {metrics}')\nresult = {'current_metrics': metrics}"
+      },
+      "outputs": {"current_metrics": "dict", "stdout": "string", "reflection": "dict"},
+      "dependencies": []
+    },
+    "evaluate_metrics": {
+      "description": "Evaluate if metrics meet retraining threshold.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "metrics = context.get('fetch_performance_metrics', {}).get('current_metrics', {})\nmae_threshold = context.get('initial_context', {}).get('mae_retrain_threshold', 10)\nretrain_needed = metrics.get('mae', 999) > mae_threshold\nprint(f'MAE: {metrics.get('mae')}, Threshold: {mae_threshold}, Retrain Needed: {retrain_needed}')\nresult = {'retrain_trigger': retrain_needed}"
+      },
+      "outputs": {"retrain_trigger": "bool", "stdout": "string", "reflection": "dict"},
+      "dependencies": ["fetch_performance_metrics"],
+      "condition": "{{ fetch_performance_metrics.reflection.status == 'Success' }}"
+    },
+    "fetch_new_training_data": {
+      "description": "Simulate fetching new data for retraining.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "# Simulate fetching new data\nnew_data = {'feature1': [1,2,3,4,5], 'target': [11,12,13,14,15]}\nprint('Simulated fetching new training data.')\nresult = {'new_data_ref': 'simulated_data_batch_123'}"
+      },
+      "outputs": {"new_data_ref": "string", "stdout": "string", "reflection": "dict"},
+      "dependencies": ["evaluate_metrics"],
+      "condition": "{{ evaluate_metrics.retrain_trigger == True }}"
+    },
+    "retrain_model": {
+      "description": "Retrain the model using the new data.",
+      "action_type": "run_prediction",
+      "inputs": {
+        "operation": "train_model",
+        "data_ref": "{{ fetch_new_training_data.new_data_ref }}", # Reference to fetched data
+        "model_type": "{{ initial_context.model_type }}", # Get from initial context
+        "target": "{{ initial_context.target_variable }}",
+        "model_id": "{{ initial_context.model_id_base }}_retrained_{{ workflow_run_id }}" # Create new ID
+      },
+      "outputs": {"model_id": "string", "evaluation_score": "float", "reflection": "dict"},
+      "dependencies": ["fetch_new_training_data"],
+      "condition": "{{ fetch_new_training_data.reflection.status == 'Success' }}"
+    },
+    "deploy_new_model": {
+      "description": "Conceptual: Deploy the newly retrained model.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "new_model_id = context.get('retrain_model', {}).get('model_id')\nif new_model_id:\n    print(f'Simulating deployment of new model: {new_model_id}')\n    status = 'Success: Simulated deployment.'\n    result = {'deployment_status': 'Success', 'deployed_model_id': new_model_id}\nelse:\n    status = 'Failure: No new model ID found for deployment.'\n    result = {'deployment_status': 'Failure', 'error': status}\nprint(status)"
+      },
+      "outputs": {"deployment_status": "string", "deployed_model_id": "string", "error": "string", "stdout": "string", "reflection": "dict"},
+      "dependencies": ["retrain_model"],
+      "condition": "{{ retrain_model.reflection.status == 'Success' }}"
+    },
+    "final_status_display": {
+        "description": "Display the final status of the MLOps cycle.",
+        "action_type": "display_output",
+        "inputs": {
+            "content": {
+                "retrain_triggered": "{{ evaluate_metrics.retrain_trigger if 'evaluate_metrics' in context else 'Evaluation Skipped' }}",
+                "retrain_status": "{{ retrain_model.reflection.status if 'retrain_model' in context else 'N/A' }}",
+                "deployment_status": "{{ deploy_new_model.deployment_status if 'deploy_new_model' in context else 'N/A' }}",
+                "new_model_id": "{{ deploy_new_model.deployed_model_id if 'deploy_new_model' in context else 'N/A' }}"
+            },
+            "format": "json"
+        },
+        "dependencies": ["deploy_new_model", "evaluate_metrics"] # Depends on both paths
+    }
+  }
+}

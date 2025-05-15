@@ -1,0 +1,77 @@
+{
+  "name": "Temporal Forecasting Workflow (v3.0)",
+  "description": "Fetches data, trains a time series model, generates forecasts, and displays results including IAR status.",
+  "version": "3.0",
+  "tasks": {
+    "fetch_data": {
+      "description": "Fetch historical time series data (Simulated).",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import pandas as pd\nimport numpy as np\n# Simulate fetching data\nnp.random.seed(42)\ndates = pd.date_range(start='2023-01-01', periods=100, freq='D')\nvalues = 50 + np.arange(100) * 0.2 + np.random.normal(0, 5, 100)\ndata = pd.DataFrame({'timestamp': dates.strftime('%Y-%m-%d'), 'value': values})\nprint(f'Fetched {len(data)} data points.')\nresult = {'time_series_data': data.to_dict(orient='list')}"
+      },
+      "outputs": {"time_series_data": "dict", "stdout": "string", "reflection": "dict"},
+      "dependencies": []
+    },
+    "preprocess_data": {
+      "description": "Preprocess data (e.g., set timestamp index - Simulated).",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import pandas as pd\n# Simulate preprocessing\ndata_dict = context.get('fetch_data', {}).get('time_series_data', {})\ntarget_col = context.get('initial_context', {}).get('target_column', 'value')\nif not data_dict or target_col not in data_dict:\n    raise ValueError('Input data or target column missing for preprocessing')\ndf = pd.DataFrame(data_dict)\ndf['timestamp'] = pd.to_datetime(df['timestamp'])\ndf = df.set_index('timestamp')\nprint(f'Preprocessed data. Index type: {df.index.dtype}, Target: {target_col}')\n# Return only the target series for simplicity in this example\nresult = {'processed_data': df[[target_col]].to_dict(orient='list')}"
+      },
+      "outputs": {"processed_data": "dict", "stdout": "string", "reflection": "dict"},
+      "dependencies": ["fetch_data"],
+      "condition": "{{ fetch_data.reflection.status == 'Success' }}"
+    },
+    "train_forecasting_model": {
+      "description": "Train a time series forecasting model.",
+      "action_type": "run_prediction",
+      "inputs": {
+        "operation": "train_model",
+        "data": "{{ preprocess_data.processed_data }}",
+        "model_type": "{{ initial_context.model_type | default('ARIMA') }}", # Use initial context or default
+        "target": "{{ initial_context.target_column | default('value') }}",
+        "model_id": "forecast_model_{{ workflow_run_id }}"
+        # Add model-specific params like 'order' if needed
+      },
+      "outputs": {"model_id": "string", "evaluation_score": "float", "reflection": "dict"},
+      "dependencies": ["preprocess_data"],
+      "condition": "{{ preprocess_data.reflection.status == 'Success' }}"
+    },
+    "generate_forecast": {
+      "description": "Generate future state forecasts.",
+      "action_type": "run_prediction",
+      "inputs": {
+        "operation": "forecast_future_states",
+        "model_id": "{{ train_forecasting_model.model_id }}",
+        "steps_to_forecast": "{{ initial_context.steps_to_forecast | default(10) }}",
+        "data": "{{ preprocess_data.processed_data }}" # Pass processed data if model needs it for context
+      },
+      "outputs": {"forecast": "list", "confidence_intervals": "list", "reflection": "dict"},
+      "dependencies": ["train_forecasting_model"],
+      "condition": "{{ train_forecasting_model.reflection.status == 'Success' }}"
+    },
+    "display_forecast_results": {
+      "description": "Display the forecast results and IAR status.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "forecast_summary": {
+            "model_type": "{{ initial_context.model_type | default('ARIMA') }}",
+            "target_column": "{{ initial_context.target_column | default('value') }}",
+            "steps_forecasted": "{{ initial_context.steps_to_forecast | default(10) }}",
+            "training_status": "{{ train_forecasting_model.reflection.status if 'train_forecasting_model' in context else 'Skipped' }}",
+            "training_confidence": "{{ train_forecasting_model.reflection.confidence if 'train_forecasting_model' in context else 'N/A' }}",
+            "forecasting_status": "{{ generate_forecast.reflection.status if 'generate_forecast' in context else 'Skipped' }}",
+            "forecasting_confidence": "{{ generate_forecast.reflection.confidence if 'generate_forecast' in context else 'N/A' }}",
+            "forecast_values": "{{ generate_forecast.forecast if 'generate_forecast' in context else 'N/A' }}",
+            "note": "{{ generate_forecast.note if 'generate_forecast' in context else '' }}"
+          }
+        },
+        "format": "json"
+      },
+      "dependencies": ["generate_forecast"]
+    }
+  }
+}

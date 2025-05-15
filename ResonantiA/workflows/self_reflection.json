@@ -1,0 +1,76 @@
+{
+  "name": "Self Reflection Workflow (Metacognitive Shift Simulation v3.0)",
+  "description": "Simulates the Cognitive Reflection Cycle (CRC) triggered by dissonance, analyzing the IAR-enriched thought trail to identify root cause and formulate correction.",
+  "version": "3.0",
+  "tasks": {
+    "start_reflection": {
+      "description": "Acknowledge initiation of self-reflection.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Initiating Self Reflection (Metacognitive Shift Simulation) due to dissonance: {{ initial_context.dissonance_source }}"
+      },
+      "dependencies": []
+    },
+    "retrieve_thought_trail": {
+      "description": "Simulate retrieval of relevant processing history including IAR data.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "# Simulation: In a real system, this would query a log or state manager.\n# We'll just use the triggering_context provided.\nimport json\n\ntriggering_context = context.get('initial_context', {}).get('triggering_context', {})\n\n# Simulate extracting relevant trail parts including IAR\ntrail_snippet = {\n    'task_id_before_error': triggering_context.get('prior_task_id', {}),\n    'error_source_description': context.get('initial_context', {}).get('dissonance_source', 'Unknown')\n}\n\nresult = {'thought_trail_snippet': trail_snippet}\nprint(f\"Simulated retrieval of thought trail snippet: {json.dumps(result)}\")\n",
+        "input_data": ""
+      },
+      "outputs": {
+        "stdout": "string",
+        "stderr": "string",
+        "exit_code": "int",
+        "thought_trail_snippet": "dict",
+        "reflection": "dict"
+      },
+      "dependencies": ["start_reflection"]
+    },
+    "analyze_dissonance": {
+      "description": "Analyze the thought trail snippet (incl. IAR) to identify root cause.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Perform Cognitive Reflection Cycle (CRC) / IdentifyDissonance step.\nObjective: Identify the root cause of the reported dissonance.\nReported Dissonance: {{ initial_context.dissonance_source }}\n\nRelevant Thought Trail Snippet (including prior step result & IAR reflection):\n```json\n{{ retrieve_thought_trail.thought_trail_snippet }}\n```\n\nAnalyze the snippet, focusing on the prior step's 'reflection' data (status, confidence, potential_issues). Compare this with the reported dissonance. What is the most likely root cause (e.g., flawed logic, misinterpreted input, tool failure despite success status, low confidence ignored, external factor)? Explain your reasoning based *specifically* on the provided trail and IAR data.",
+        "max_tokens": 600
+      },
+      "outputs": {
+        "response_text": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["retrieve_thought_trail"],
+      "condition": "{{ retrieve_thought_trail.reflection.status == 'Success' }}"
+    },
+    "formulate_correction": {
+      "description": "Formulate a corrective action based on the dissonance analysis.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Based on the following dissonance analysis:\n```\n{{ analyze_dissonance.response_text }}\n```\n\nFormulate a specific, actionable correction. Options include: retry prior step with modified inputs, use alternative tool/workflow, adjust internal assumption, request Keyholder clarification, flag knowledge for InsightSolidificatioN, or halt execution. Justify your chosen correction.",
+        "max_tokens": 400
+      },
+      "outputs": {
+        "response_text": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["analyze_dissonance"],
+      "condition": "{{ analyze_dissonance.reflection.status == 'Success' }}"
+    },
+    "display_correction_plan": {
+      "description": "Display the outcome of the self-reflection process.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "reflection_summary": "Self-reflection process completed.",
+          "dissonance_source": "{{ initial_context.dissonance_source }}",
+          "root_cause_analysis": "{{ analyze_dissonance.response_text }}",
+          "proposed_correction": "{{ formulate_correction.response_text }}",
+          "analysis_confidence": "{{ analyze_dissonance.reflection.confidence }}",
+          "correction_confidence": "{{ formulate_correction.reflection.confidence }}"
+        },
+        "format": "json"
+      },
+      "dependencies": ["formulate_correction"]
+    }
+  }
+}

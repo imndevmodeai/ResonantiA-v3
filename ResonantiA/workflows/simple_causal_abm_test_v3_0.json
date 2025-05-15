@@ -1,0 +1,83 @@
+{
+  "name": "Simple Causal-ABM Test Workflow (v3.0)",
+  "description": "Generates synthetic data, performs basic causal estimation, runs a basic ABM simulation, and displays results including IAR status.",
+  "version": "3.0",
+  "tasks": {
+    "generate_data": {
+      "description": "Generate synthetic data with a simple causal link.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import pandas as pd\nimport numpy as np\nnp.random.seed(42)\nn = 100\nx = np.random.normal(0, 1, n)\nz = np.random.normal(0, 1, n) # Confounder\ny = 0.5 * x + 0.3 * z + np.random.normal(0, 0.5, n)\ndata = pd.DataFrame({'x': x, 'y': y, 'z': z})\nprint(f'Generated data with {len(data)} rows.')\nresult = {'synthetic_data': data.to_dict(orient='list')}"
+      },
+      "outputs": {"synthetic_data": "dict", "stdout": "string", "reflection": "dict"},
+      "dependencies": []
+    },
+    "estimate_causal_effect": {
+      "description": "Estimate the causal effect of X on Y.",
+      "action_type": "perform_causal_inference",
+      "inputs": {
+        "operation": "estimate_effect",
+        "data": "{{ generate_data.synthetic_data }}",
+        "treatment": "x",
+        "outcome": "y",
+        "confounders": ["z"]
+        # Method defaults to config.CAUSAL_DEFAULT_ESTIMATION_METHOD
+      },
+      "outputs": {"causal_effect": "float", "confidence_intervals": "list", "error": "string", "note": "string", "reflection": "dict"},
+      "dependencies": ["generate_data"],
+      "condition": "{{ generate_data.reflection.status == 'Success' }}"
+    },
+    "create_abm_model": {
+      "description": "Create a basic ABM.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "create_model",
+        "model_type": "basic",
+        "width": 10,
+        "height": 10,
+        "density": 0.6
+      },
+      "outputs": {"model": "object", "error": "string", "note": "string", "reflection": "dict"},
+      "dependencies": [] # Independent of causal for this simple test
+    },
+    "run_abm_simulation": {
+      "description": "Run the ABM simulation.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model": "{{ create_abm_model.model }}", # Pass the created model instance/config
+        "steps": 50,
+        "visualize": false
+      },
+      "outputs": {"model_data": "list", "final_state_grid": "list", "error": "string", "note": "string", "reflection": "dict"},
+      "dependencies": ["create_abm_model"],
+      "condition": "{{ create_abm_model.reflection.status == 'Success' }}"
+    },
+    "display_results": {
+      "description": "Display causal effect and ABM simulation outcome with IAR status.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "causal_analysis_summary": {
+            "status": "{{ estimate_causal_effect.reflection.status if 'estimate_causal_effect' in context else 'Skipped' }}",
+            "confidence": "{{ estimate_causal_effect.reflection.confidence if 'estimate_causal_effect' in context else 'N/A' }}",
+            "note": "{{ estimate_causal_effect.note if 'estimate_causal_effect' in context else '' }}",
+            "estimated_effect": "{{ estimate_causal_effect.causal_effect if 'estimate_causal_effect' in context else 'N/A' }}",
+            "error": "{{ estimate_causal_effect.error if 'estimate_causal_effect' in context else None }}"
+          },
+          "abm_simulation_summary": {
+            "status": "{{ run_abm_simulation.reflection.status if 'run_abm_simulation' in context else 'Skipped' }}",
+            "confidence": "{{ run_abm_simulation.reflection.confidence if 'run_abm_simulation' in context else 'N/A' }}",
+            "note": "{{ run_abm_simulation.note if 'run_abm_simulation' in context else '' }}",
+            "steps_run": "{{ run_abm_simulation.simulation_steps_run if 'run_abm_simulation' in context else 'N/A' }}",
+            "final_active_agents": "{{ run_abm_simulation.active_count if 'run_abm_simulation' in context else 'N/A' }}",
+            "error": "{{ run_abm_simulation.error if 'run_abm_simulation' in context else None }}"
+          }
+        },
+        "format": "json"
+      },
+      "dependencies": ["estimate_causal_effect", "run_abm_simulation"]
+    }
+  }
+}

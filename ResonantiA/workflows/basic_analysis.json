@@ -1,0 +1,59 @@
+{
+  "name": "Basic Analysis Workflow (v3.0 Enhanced)",
+  "description": "Performs a web search based on a user query, summarizes the results using an LLM (considering search confidence), and displays a formatted summary including IAR status.",
+  "version": "3.0",
+  "tasks": {
+    "start_display": {
+      "description": "Display the initial user query.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Starting Basic Analysis for query: {{ initial_context.user_query }}"
+      },
+      "dependencies": []
+    },
+    "perform_search": {
+      "description": "Perform web search using the user query.",
+      "action_type": "search_web",
+      "inputs": {
+        "query": "{{ initial_context.user_query }}",
+        "num_results": 5
+      },
+      "outputs": {
+        "results": "list",
+        "reflection": "dict"
+      },
+      "dependencies": ["start_display"]
+    },
+    "summarize_results": {
+      "description": "Summarize search results using LLM, noting search confidence.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "User Query: {{ initial_context.user_query }}\n\nSearch Results (Confidence: {{ perform_search.reflection.confidence }}):\n```json\n{{ perform_search.results }}\n```\n\nPlease provide a concise summary of these search results relevant to the user query. Acknowledge the search confidence score in your assessment if it's low (e.g., below 0.7).",
+        "max_tokens": 500
+      },
+      "outputs": {
+        "response_text": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["perform_search"],
+      "condition": "{{ perform_search.reflection.status == 'Success' }}"
+    },
+    "display_summary": {
+      "description": "Format and display the final summary including IAR status.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\n\nsearch_status = context.get('perform_search', {}).get('reflection', {}).get('status', 'N/A')\nsearch_conf = context.get('perform_search', {}).get('reflection', {}).get('confidence', 'N/A')\nsummary_status = context.get('summarize_results', {}).get('reflection', {}).get('status', 'N/A')\nsummary_conf = context.get('summarize_results', {}).get('reflection', {}).get('confidence', 'N/A')\nsummary_text = context.get('summarize_results', {}).get('response_text', 'Summary generation failed or skipped.')\n\noutput = f\"\"\"--- Analysis Summary (ResonantiA v3.0) ---\nUser Query: {context.get('initial_context',{}).get('user_query','N/A')}\n\nSearch Status: {search_status} (Confidence: {search_conf})\nSummary Status: {summary_status} (Confidence: {summary_conf})\n\nSummary:\n{summary_text}\n---------------------------------------\"\"\"\n\nprint(output)\n# Return the formatted string as primary output for potential further use\nresult = {'formatted_summary': output}\n",
+        "input_data": ""
+      },
+      "outputs": {
+        "stdout": "string",
+        "stderr": "string",
+        "exit_code": "int",
+        "formatted_summary": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["summarize_results"]
+    }
+  }
+}

@@ -109,4 +109,6 @@ tests/logs/    # Exclude test-specific logs
 # Dependencies (if managed locally, though venv is preferred)
 # node_modules/
 
-# --- End of .gitignore --- 
+# --- End of .gitignore ---
+
+# Test commit for snapshot hook 
