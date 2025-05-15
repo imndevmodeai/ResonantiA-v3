@@ -54,7 +54,7 @@ def test_train_timeseries_model_success(sample_time_series_data):
         "operation": "train_model",
         "data": sample_time_series_data.to_dict(orient='list'), # Pass data as dict
         "model_type": "ARIMA", # Or config.PREDICTIVE_DEFAULT_TIMESERIES_MODEL
-        "target_column": "value", # Renamed from target for clarity
+        "target": "value", # Renamed from target for clarity
         "timestamp_column": "timestamp", # Specify timestamp column
         "model_id": "test_arima_model"
         # Add ARIMA order if needed: "model_params": {"order": (1,1,0)}
@@ -88,35 +88,45 @@ def test_train_timeseries_model_success(sample_time_series_data):
 @pytest.mark.skipif(run_prediction is None, reason="run_prediction not imported")
 def test_forecast_success(sample_time_series_data):
     """Test successful forecasting using a trained model."""
-    # This test would likely need multiple steps or fixtures:
-    # 1. Train a model (or mock the training step / load a pre-saved simulated model)
-    #    For this example, we assume the model exists or training is mocked internally by run_prediction
-    model_id_trained = "test_arima_model_trained_for_forecast" # Assume this exists from a prior step/fixture
-    steps_to_forecast = 10
-    inputs = {
-        "operation": "forecast_future_states",
-        "model_id": model_id_trained,
-        "steps_to_forecast": steps_to_forecast,
-        # "data": sample_time_series_data.to_dict(orient='list') # Pass original data if model needs it (depends on impl)
+    # 1. Train a model first to ensure the artifact exists
+    model_id_to_test = "test_forecast_model_" + pd.Timestamp.now().strftime("%Y%m%d%H%M%S") # Use unique ID
+    train_inputs = {
+        "operation": "train_model",
+        "data": sample_time_series_data.to_dict(orient='list'),
+        "model_type": "ARIMA",
+        "target": "value", # Ensure this matches expected key
+        "timestamp_column": "timestamp",
+        "model_id": model_id_to_test
     }
-    # Skip if the run_prediction function itself failed to import
     if run_prediction is None:
         pytest.skip("run_prediction function not available")
 
-    result = run_prediction(**inputs)
+    train_result = run_prediction(**train_inputs)
+    assert train_result.get("error") is None, f"Training failed before forecast: {train_result.get('error')}"
+    assert train_result.get("model_id") == model_id_to_test
 
-    assert result is not None
-    assert result.get("error") is None
-    assert "forecast" in result
-    assert isinstance(result["forecast"], list)
-    assert len(result["forecast"]) == steps_to_forecast
-    assert "confidence_intervals" in result # Check if CIs are returned
-    assert isinstance(result["confidence_intervals"], list)
-    assert len(result["confidence_intervals"]) == steps_to_forecast
+    # 2. Now test forecasting with the trained model_id
+    steps_to_forecast = 10
+    forecast_inputs = {
+        "operation": "forecast_future_states",
+        "model_id": model_id_to_test, # Use the ID from the training step
+        "steps_to_forecast": steps_to_forecast
+    }
+
+    forecast_result = run_prediction(**forecast_inputs)
+
+    assert forecast_result is not None
+    assert forecast_result.get("error") is None
+    assert "forecast" in forecast_result
+    assert isinstance(forecast_result["forecast"], list)
+    assert len(forecast_result["forecast"]) == steps_to_forecast
+    assert "confidence_intervals" in forecast_result # Check if CIs are returned
+    assert isinstance(forecast_result["confidence_intervals"], list)
+    assert len(forecast_result["confidence_intervals"]) == steps_to_forecast
 
     # Check IAR
-    assert "reflection" in result
-    reflection = result["reflection"]
+    assert "reflection" in forecast_result
+    reflection = forecast_result["reflection"]
     assert reflection["status"] == "Success"
     assert reflection["confidence"] is not None
 
@@ -127,5 +137,66 @@ def test_forecast_success(sample_time_series_data):
 
 # --- Tests for 'evaluate_model' Operation (Conceptual) ---
 # Similar structure: train/load model, call evaluate, check metrics and IAR
+
+# --- Combined Scenario Test ---
+@pytest.mark.skipif(run_prediction is None, reason="run_prediction not imported")
+def test_train_evaluate_forecast_flow(sample_time_series_data):
+    """Tests a combined flow: Train -> Evaluate -> Forecast."""
+    if run_prediction is None: # Should be caught by pytestmark, but good practice
+        pytest.skip("run_prediction function not available")
+
+    full_data = sample_time_series_data
+    train_size = int(len(full_data) * 0.8)
+    train_df = full_data.iloc[:train_size]
+    evaluate_df = full_data.iloc[train_size:]
+
+    model_id_combo = "test_combo_model_" + pd.Timestamp.now().strftime("%Y%m%d%H%M%S%f")
+
+    # 1. Train Model
+    train_inputs = {
+        "operation": "train_model",
+        "data": train_df.to_dict(orient='list'),
+        "model_type": "ARIMA",
+        "target": "value",
+        "timestamp_column": "timestamp",
+        "model_id": model_id_combo
+    }
+    train_result = run_prediction(**train_inputs)
+    assert train_result.get("error") is None, f"Combined Test - Training failed: {train_result.get('error')}"
+    assert train_result.get("model_id") == model_id_combo
+    assert "reflection" in train_result
+    assert train_result["reflection"]["status"] == "Success"
+
+    # 2. Evaluate Model
+    evaluate_inputs = {
+        "operation": "evaluate_model",
+        "model_id": model_id_combo,
+        "data": evaluate_df.to_dict(orient='list'), # This is the actual_data for evaluation
+        "target": "value",
+        "timestamp_column": "timestamp",
+        "evaluation_metrics": ["mean_absolute_error", "mean_squared_error"]
+    }
+    eval_result = run_prediction(**evaluate_inputs)
+    assert eval_result.get("error") is None, f"Combined Test - Evaluation failed: {eval_result.get('error')}"
+    assert "evaluation_scores" in eval_result
+    assert "mean_absolute_error" in eval_result["evaluation_scores"]
+    assert "mean_squared_error" in eval_result["evaluation_scores"]
+    assert "reflection" in eval_result
+    assert eval_result["reflection"]["status"] == "Success"
+
+    # 3. Forecast Future States
+    steps_to_forecast = 15
+    forecast_inputs = {
+        "operation": "forecast_future_states",
+        "model_id": model_id_combo,
+        "steps_to_forecast": steps_to_forecast
+    }
+    forecast_result = run_prediction(**forecast_inputs)
+    assert forecast_result.get("error") is None, f"Combined Test - Forecasting failed: {forecast_result.get('error')}"
+    assert "forecast" in forecast_result
+    assert isinstance(forecast_result["forecast"], list)
+    assert len(forecast_result["forecast"]) == steps_to_forecast
+    assert "reflection" in forecast_result
+    assert forecast_result["reflection"]["status"] == "Success"
 
 # --- END OF FILE tests/unit/test_predictive_modeling_tool.py --- 

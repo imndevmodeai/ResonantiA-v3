@@ -614,614 +614,615 @@ class ABMTool:
                 except Exception: pass
             return None
 
-        def analyze_results(self, results: Dict[str, Any], analysis_type: Optional[str] = None, **kwargs) -> Dict[str, Any]:
-            """
-            [IAR Enabled] Analyzes results from an ABM simulation run.
-            Includes enhanced temporal analysis (convergence, oscillation) and spatial patterns.
-
-            Args:
-                results (Dict[str, Any]): The dictionary returned by run_simulation.
-                analysis_type (str, optional): Type of analysis ('basic', 'pattern', 'network').
-                                            Defaults to config.ABM_DEFAULT_ANALYSIS_TYPE.
-                **kwargs: Additional parameters for specific analysis types.
-
-            Returns:
-                Dict containing analysis results nested under 'analysis' key, and IAR reflection.
-            """
-            analysis_type_used = analysis_type or getattr(config, 'ABM_DEFAULT_ANALYSIS_TYPE', 'basic')
-            # --- Initialize Results & Reflection ---
-            primary_result = {"analysis_type": analysis_type_used, "analysis": {}, "error": None, "note": ""}
-            reflection_status = "Failure"; reflection_summary = f"Analysis init failed for type '{analysis_type_used}'."; reflection_confidence = 0.0; reflection_alignment = "N/A"; reflection_issues = []; reflection_preview = None
-
-            # --- Simulation Mode ---
-            is_simulated_input = "SIMULATED" in results.get("note", "")
-            if not self.is_available and is_simulated_input:
-                primary_result["note"] = f"SIMULATED {analysis_type_used} analysis - Mesa library not available"
-                logger.warning(f"Simulating ABM result analysis '{analysis_type_used}' (Mesa unavailable).")
-                sim_analysis = self._simulate_result_analysis(analysis_type_used, results) # Pass results for context
-                primary_result["analysis"] = sim_analysis.get("analysis", {})
-                primary_result["error"] = sim_analysis.get("error")
-                if primary_result["error"]: reflection_issues = [primary_result["error"]]
-                else: reflection_status = "Success"; reflection_summary = f"Simulated analysis '{analysis_type_used}' completed."; reflection_confidence = 0.6; reflection_alignment = "Aligned with analysis goal (simulated)."; reflection_issues = ["Analysis is simulated."]; reflection_preview = primary_result["analysis"]
-                return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
-            elif not self.is_available and not is_simulated_input:
-                # If Mesa isn't available but input isn't marked simulated, proceed cautiously
-                logger.warning("Mesa not available, attempting basic analysis on potentially real results dictionary structure.")
-                # Fall through to actual analysis logic, which might partially work if keys match
-
-            # --- Actual Analysis ---
-            try:
-                logger.info(f"Analyzing ABM results using '{analysis_type_used}' analysis...")
-                analysis_output: Dict[str, Any] = {} # Store specific analysis metrics here
-                error_msg = results.get("error") # Propagate error from simulation run if present
-                if error_msg: logger.warning(f"Analyzing results from a simulation run that reported an error: {error_msg}")
-
-                # --- Analysis Type Dispatcher ---
-                if analysis_type_used == "basic":
-                    # Perform basic temporal and spatial analysis
-                    analysis_output["time_series"] = self._analyze_time_series(results)
-                    analysis_output["spatial"] = self._analyze_spatial(results)
-                    # Check for errors reported by sub-analyzers
-                    ts_error = analysis_output["time_series"].get("error")
-                    sp_error = analysis_output["spatial"].get("error")
-                    if ts_error or sp_error: error_msg = f"Time Series Error: {ts_error}; Spatial Error: {sp_error}"
-
-                elif analysis_type_used == "pattern":
-                    # Perform pattern detection using SciPy (if available)
-                    if not SCIPY_AVAILABLE: error_msg = "SciPy library required for 'pattern' analysis but not available."
-                    else: analysis_output["detected_patterns"] = self._detect_patterns(results)
-                    pattern_error = next((p.get("error") for p in analysis_output.get("detected_patterns",[]) if isinstance(p,dict) and p.get("error")), None)
-                    if pattern_error: error_msg = f"Pattern detection error: {pattern_error}"
-
-                # --- Add other analysis types here ---
-                # elif analysis_type_used == "network":
-                #     if not nx: error_msg = "NetworkX library required for 'network' analysis but not available."
-                #     else:
-                #         # Requires model to have a graph attribute or agent data suitable for graph construction
-                #         # analysis_output["network_metrics"] = self._analyze_network(results) ...
-                #         error_msg = "Network analysis not implemented."
-
-                else:
-                    error_msg = f"Unknown analysis type specified: {analysis_type_used}"
-
-                # Store results and potential errors
-                primary_result["analysis"] = analysis_output
-                primary_result["error"] = error_msg # Update error status
-
-                # --- Generate Final IAR Reflection ---
-                if primary_result["error"]:
-                    reflection_status = "Failure"; reflection_summary = f"ABM analysis '{analysis_type_used}' failed: {primary_result['error']}"; reflection_confidence = 0.1; reflection_issues = [primary_result["error"]]
-                    reflection_alignment = "Failed to meet analysis goal."
-                else:
-                    reflection_status = "Success"; reflection_summary = f"ABM analysis '{analysis_type_used}' completed successfully."; reflection_confidence = 0.85; reflection_alignment = "Aligned with analyzing simulation results."; reflection_issues = None; reflection_preview = analysis_output
-                    if not self.is_available: reflection_issues = ["Analysis performed without Mesa library validation."] # Add note if Mesa missing
-
-                return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
-
-            except Exception as e_analyze:
-                # Catch unexpected errors during analysis orchestration
-                logger.error(f"Unexpected error analyzing ABM results: {e_analyze}", exc_info=True)
-                primary_result["error"] = str(e_analyze)
-                reflection_issues = [f"Unexpected analysis error: {e_analyze}"]
-                reflection_summary = f"Analysis failed: {e_analyze}"
-                return {**primary_result, "reflection": _create_reflection("Failure", reflection_summary, 0.0, "N/A", reflection_issues, None)}
-
-        # --- Internal Helper Methods for Analysis ---
-        def _analyze_time_series(self, results: Dict[str, Any]) -> Dict[str, Any]:
-            """Analyzes model-level time series data for temporal patterns."""
-            ts_analysis: Dict[str, Any] = {"error": None}
-            model_data_list = results.get("model_data")
-            active_count = results.get("active_count") # Final count from simulation result
-            inactive_count = results.get("inactive_count")
-            total_agents = self._get_total_agents(results)
-
-            if not model_data_list or not isinstance(model_data_list, list):
-                ts_analysis["error"] = "Model time series data ('model_data' list) not found or invalid."
-                return ts_analysis
-
-            try:
-                # Extract 'Active' agent count time series (assuming it was collected)
-                active_series = [step_data.get('Active') for step_data in model_data_list if isinstance(step_data, dict) and 'Active' in step_data]
-                if not active_series or any(x is None for x in active_series):
-                    ts_analysis["error"] = "'Active' agent count not found in model_data steps."
-                    return ts_analysis
-
-                active_series_numeric = np.array([float(x) for x in active_series]) # Convert to numpy float array
-                num_steps = len(active_series_numeric)
-                ts_analysis["num_steps"] = num_steps
-                ts_analysis["final_active"] = active_count if active_count is not None else active_series_numeric[-1]
-                ts_analysis["final_inactive"] = inactive_count if inactive_count is not None else (total_agents - ts_analysis["final_active"] if total_agents is not None and ts_analysis["final_active"] is not None else None)
-                ts_analysis["max_active"] = float(np.max(active_series_numeric)) if active_series_numeric.size > 0 else None
-                ts_analysis["min_active"] = float(np.min(active_series_numeric)) if active_series_numeric.size > 0 else None
-                ts_analysis["avg_active"] = float(np.mean(active_series_numeric)) if num_steps > 0 else None
-
-                # Temporal Pattern Detection
-                ts_analysis["convergence_step"] = self._detect_convergence(active_series_numeric) # Returns step index or -1
-                ts_analysis["oscillating"] = self._detect_oscillation(active_series_numeric) # Returns boolean
-
-                logger.debug(f"Time series analysis complete. Convergence: {ts_analysis['convergence_step']}, Oscillation: {ts_analysis['oscillating']}")
-
-            except Exception as e_ts:
-                logger.error(f"Error during time series analysis: {e_ts}", exc_info=True)
-                ts_analysis["error"] = f"Time series analysis failed: {e_ts}"
-
-            return ts_analysis
-
-        def _analyze_spatial(self, results: Dict[str, Any]) -> Dict[str, Any]:
-            """Analyzes the final spatial grid state for patterns."""
-            sp_analysis: Dict[str, Any] = {"error": None}
-            final_state_grid_list = results.get("final_state_grid")
-
-            if not final_state_grid_list or not isinstance(final_state_grid_list, list):
-                sp_analysis["error"] = "Final state grid ('final_state_grid' list) not found or invalid."
-                return sp_analysis
-
-            try:
-                grid = np.array(final_state_grid_list)
-                if grid.ndim != 2:
-                    sp_analysis["error"] = f"Final state grid data is not 2-dimensional (shape: {grid.shape})."
-                    return sp_analysis
-
-                sp_analysis["grid_dimensions"] = list(grid.shape)
-                active_mask = grid > 0.5 # Example: define active state
-                sp_analysis["active_cell_count"] = int(np.sum(active_mask))
-                sp_analysis["active_ratio"] = float(np.mean(active_mask)) if grid.size > 0 else 0.0
-
-                # Calculate spatial metrics (examples)
-                sp_analysis["clustering_coefficient"] = self._calculate_clustering(grid, active_mask) # Avg local similarity
-                sp_analysis["spatial_entropy"] = self._calculate_entropy(grid) # Shannon entropy of grid states
-
-                logger.debug(f"Spatial analysis complete. Clustering: {sp_analysis.get('clustering_coefficient'):.4f}, Entropy: {sp_analysis.get('spatial_entropy'):.4f}")
-
-            except Exception as e_sp:
-                logger.error(f"Error during spatial analysis: {e_sp}", exc_info=True)
-                sp_analysis["error"] = f"Spatial analysis failed: {e_sp}"
-
-            return sp_analysis
-
-        def _detect_patterns(self, results: Dict[str, Any]) -> List[Dict[str, Any]]:
-            """Detects spatial patterns like clusters using SciPy (if available)."""
-            patterns: List[Dict[str, Any]] = []
-            if not SCIPY_AVAILABLE or ndimage is None:
-                patterns.append({"note": "SciPy library not available, cannot perform pattern detection."})
-                return patterns
-
-            final_state_grid_list = results.get("final_state_grid")
-            if not final_state_grid_list or not isinstance(final_state_grid_list, list):
-                patterns.append({"error": "Final state grid not found for pattern detection."})
-                return patterns
-
-            try:
-                grid = np.array(final_state_grid_list)
-                if grid.ndim != 2:
-                    patterns.append({"error": f"Pattern detection requires 2D grid, got shape {grid.shape}."})
-                    return patterns
-
-                # Example: Detect clusters of "active" cells (state > 0.5)
-                threshold = 0.5 # Define what constitutes an "active" cell for clustering
-                active_cells = (grid > threshold).astype(int)
-                # Define connectivity structure (e.g., 8-connectivity for 2D)
-                structure = ndimage.generate_binary_structure(2, 2)
-                # Label connected components (clusters)
-                labeled_clusters, num_features = ndimage.label(active_cells, structure=structure)
-
-                if num_features > 0:
-                    logger.info(f"Detected {num_features} active spatial clusters.")
-                    cluster_indices = np.arange(1, num_features + 1) # Indices used by ndimage functions
-                    # Calculate properties for each cluster
-                    cluster_sizes = ndimage.sum_labels(active_cells, labeled_clusters, index=cluster_indices)
-                    centroids = ndimage.center_of_mass(active_cells, labeled_clusters, index=cluster_indices) # Returns list of (row, col) tuples
-                    # Calculate average state value within each cluster using original grid
-                    avg_values = ndimage.mean(grid, labeled_clusters, index=cluster_indices)
-
-                    for i in range(num_features):
-                        # Ensure centroid is list/tuple even if only one feature
-                        centroid_coords = centroids[i] if isinstance(centroids, list) else centroids
-                        patterns.append({
-                            "type": "active_cluster",
-                            "id": int(cluster_indices[i]),
-                            "size": int(cluster_sizes[i]),
-                            "centroid_row": float(centroid_coords[0]), # row index
-                            "centroid_col": float(centroid_coords[1]), # column index
-                            "average_state_in_cluster": float(avg_values[i])
-                        })
-                else:
-                    logger.info("No active spatial clusters detected.")
-                    patterns.append({"note": "No significant active clusters found."})
-
-            except Exception as e_pattern:
-                logger.error(f"Error during pattern detection: {e_pattern}", exc_info=True)
-                patterns.append({"error": f"Pattern detection failed: {e_pattern}"})
-
-            return patterns
-
-        def convert_to_state_vector(self, abm_result: Dict[str, Any], representation_type: str = "final_state", **kwargs) -> Dict[str, Any]:
-            """
-            [IAR Enabled] Converts ABM simulation results into a normalized state vector
-            suitable for comparison (e.g., using CFP).
-
-            Args:
-                abm_result (Dict[str, Any]): The dictionary returned by run_simulation or analyze_results.
-                representation_type (str): Method for conversion ('final_state', 'time_series', 'metrics').
-                **kwargs: Additional parameters (e.g., num_ts_steps for time_series).
-
-            Returns:
-                Dict containing 'state_vector' (list), 'dimensions', 'representation_type', and IAR reflection.
-            """
-            # --- Initialize Results & Reflection ---
-            primary_result = {"state_vector": None, "representation_type": representation_type, "dimensions": 0, "error": None}
-            reflection_status = "Failure"; reflection_summary = f"State conversion init failed for type '{representation_type}'."; reflection_confidence = 0.0; reflection_alignment = "N/A"; reflection_issues = []; reflection_preview = None
-
-            # Check if input result itself indicates an error
-            input_error = abm_result.get("error")
-            if input_error:
-                primary_result["error"] = f"Input ABM result contains error: {input_error}"
-                reflection_issues = [primary_result["error"]]
-                reflection_summary = f"Input ABM result invalid: {input_error}"
-                return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
-
-            logger.info(f"Converting ABM results to state vector using representation: '{representation_type}'")
-            state_vector = np.array([])
-            error_msg = None
-            try:
-                if representation_type == "final_state":
-                    # Use the flattened final grid state
-                    final_grid_list = abm_result.get("final_state_grid")
-                    if final_grid_list and isinstance(final_grid_list, list):
-                        state_vector = np.array(final_grid_list).flatten()
-                        if state_vector.size == 0: error_msg = "Final state grid is empty."
-                    else: error_msg = "Final state grid ('final_state_grid') not available or invalid in ABM results."
-                elif representation_type == "time_series":
-                    # Use the last N steps of key model variables (e.g., 'Active' count)
-                    model_data_list = abm_result.get("model_data")
-                    num_ts_steps = int(kwargs.get('num_ts_steps', 10)) # Number of recent steps to use
-                    variable_to_use = kwargs.get('variable', 'Active') # Which variable to use
-                    if model_data_list and isinstance(model_data_list, list) and len(model_data_list) > 0:
-                        try:
-                            series = [step_data.get(variable_to_use) for step_data in model_data_list if isinstance(step_data, dict) and variable_to_use in step_data]
-                            if not series or any(x is None for x in series): error_msg = f"Time series variable '{variable_to_use}' not found or contains None values."
-                            else:
-                                series_numeric = np.array(series, dtype=float)
-                                # Take last num_ts_steps, pad if shorter
-                                if len(series_numeric) >= num_ts_steps: state_vector = series_numeric[-num_ts_steps:]
-                                else: padding = np.zeros(num_ts_steps - len(series_numeric)); state_vector = np.concatenate((padding, series_numeric))
-                        except Exception as ts_parse_err: error_msg = f"Could not parse '{variable_to_use}' time series: {ts_parse_err}"
-                    else: error_msg = "Model time series data ('model_data') not available or empty."
-                elif representation_type == "metrics":
-                    # Use summary metrics calculated by analyze_results (requires analysis to be run first)
-                    analysis_data = abm_result.get("analysis", {}).get("analysis") # Get nested analysis dict
-                    if analysis_data and isinstance(analysis_data, dict):
-                        metrics = []
-                        # Extract metrics from time series and spatial analysis (handle potential errors)
-                        ts_analysis = analysis_data.get("time_series", {})
-                        sp_analysis = analysis_data.get("spatial", {})
-                        metrics.append(float(ts_analysis.get("final_active", 0) or 0))
-                        metrics.append(float(ts_analysis.get("convergence_step", -1) or -1)) # Use -1 if not converged
-                        metrics.append(1.0 if ts_analysis.get("oscillating", False) else 0.0)
-                        metrics.append(float(sp_analysis.get("clustering_coefficient", 0) or 0))
-                        metrics.append(float(sp_analysis.get("spatial_entropy", 0) or 0))
-                        metrics.append(float(sp_analysis.get("active_ratio", 0) or 0))
-                        state_vector = np.array(metrics)
-                    else: error_msg = "'analysis' results subsection not found or invalid in ABM results. Run 'analyze_results' first for 'metrics' conversion."
-                else:
-                    error_msg = f"Unknown representation type for ABM state conversion: {representation_type}"
-
-                # --- Final Processing & Normalization ---
-                if error_msg:
-                    primary_result["error"] = error_msg
-                    state_vector_final = np.array([0.0, 0.0]) # Default error state vector
-                elif state_vector.size == 0:
-                    logger.warning(f"Resulting state vector for type '{representation_type}' is empty. Using default error state.")
-                    state_vector_final = np.array([0.0, 0.0]) # Handle empty vector case
-
-                # Normalize the final state vector (L2 norm) - optional, depends on CFP use case
-                norm = np.linalg.norm(state_vector_final)
-                if norm > 1e-15:
-                    state_vector_normalized = state_vector_final / norm
-                else:
-                    logger.warning(f"State vector for type '{representation_type}' has zero norm. Not normalizing.")
-                    state_vector_normalized = state_vector_final # Avoid division by zero
-
-                state_vector_list = state_vector_normalized.tolist()
-                dimensions = len(state_vector_list)
-                primary_result.update({"state_vector": state_vector_list, "dimensions": dimensions})
-
-                # --- Generate IAR Reflection ---
-                if primary_result["error"]:
-                    reflection_status = "Failure"; reflection_summary = f"State conversion failed: {primary_result['error']}"; reflection_confidence = 0.1; reflection_issues = [primary_result["error"]]
-                    reflection_alignment = "Failed to convert state."
-                else:
-                    reflection_status = "Success"; reflection_summary = f"ABM results successfully converted to state vector (type: {representation_type}, dim: {dimensions})."; reflection_confidence = 0.9; reflection_alignment = "Aligned with preparing data for comparison/CFP."; reflection_issues = None; reflection_preview = state_vector_list
-
-                return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
-
-            except Exception as e_conv:
-                # Catch unexpected errors during conversion process
-                logger.error(f"Unexpected error converting ABM results to state vector: {e_conv}", exc_info=True)
-                primary_result["error"] = f"Unexpected conversion failure: {e_conv}"
-                reflection_issues = [f"Unexpected conversion error: {e_conv}"]
-                reflection_summary = f"Conversion failed: {e_conv}"
-                # Ensure default state vector is set on critical error
-                if primary_result.get("state_vector") is None: primary_result["state_vector"] = [0.0, 0.0]; primary_result["dimensions"] = 2
-                return {**primary_result, "reflection": _create_reflection("Failure", reflection_summary, 0.0, "N/A", reflection_issues, None)}
-
-        # --- Internal Simulation Methods ---
-        # (These simulate outcomes when Mesa is unavailable)
-        def _simulate_model_creation(self, model_type, agent_class=None, **kwargs):
-            """Simulates model creation when Mesa is not available."""
-            logger.info(f"Simulating creation of {model_type} model")
-            width=kwargs.get('width',10); height=kwargs.get('height',10); density=kwargs.get('density',0.5)
-            model_params=kwargs.get('model_params',{}); agent_params=kwargs.get('agent_params',{})
-            # Return a dictionary representing the simulated model's configuration
-            sim_model_config = {
-                "simulated": True, "type": model_type, "width": width, "height": height, "density": density,
-                "params": {**model_params, "simulated": True}, "agent_params": agent_params,
-                "agent_class_name": getattr(agent_class or BasicGridAgent, '__name__', 'UnknownAgent'),
-                "run_id": uuid.uuid4().hex[:8] # Give simulation a run ID
-            }
-            return {
-                "model": sim_model_config, "type": model_type,
-                "dimensions": [width, height], "initial_density": density,
-                "agent_count": int(width * height * density),
-                "params": {**model_params, "simulated": True},
-                "agent_params_used": agent_params, "error": None
-            }
-
-        def _simulate_model_run(self, steps, visualize, width=10, height=10):
-            """Simulates running the model when Mesa is not available."""
-            logger.info(f"Simulating ABM run for {steps} steps ({width}x{height} grid)")
-            np.random.seed(int(time.time()) % 1000 + 2) # Seed for some variability
-            active_series = []; inactive_series = []; total_agents = width * height;
-            current_active = total_agents * np.random.uniform(0.05, 0.15) # Random initial active
-            for i in range(steps):
-                # Simple random walk simulation for active count
-                equilibrium = total_agents * np.random.uniform(0.4, 0.6); # Fluctuate equilibrium
-                drift = (equilibrium - current_active) * np.random.uniform(0.02, 0.08);
-                noise = np.random.normal(0, total_agents * 0.03);
-                change = drift + noise
-                current_active = max(0, min(total_agents, current_active + change))
-                active_series.append(current_active); inactive_series.append(total_agents - current_active)
-
-            # Simulate final grid state based on final active ratio
-            grid = np.zeros((width, height));
-            active_ratio_final = active_series[-1] / total_agents if total_agents > 0 else 0
-            grid[np.random.rand(width, height) < active_ratio_final] = 1 # Randomly assign active state
-
-            results = {
-                "model_data": [{"Step": i, "Active": active_series[i], "Inactive": inactive_series[i]} for i in range(steps)],
-                "agent_data_last_step": {"note": "Agent data not generated in simulation"},
-                "final_state_grid": grid.tolist(),
-                "active_count": int(round(active_series[-1])),
-                "inactive_count": int(round(inactive_series[-1])),
-                "simulation_steps_run": steps,
-                "error": None
-            }
-            if visualize:
-                results["visualization_path"] = "simulated_visualization_not_generated.png"
-                results["visualization_error"] = "Visualization skipped in simulation mode."
-            return results
-
-        def _simulate_result_analysis(self, analysis_type, results=None):
-            """Simulates analysis of ABM results when libraries are unavailable."""
-            logger.info(f"Simulating '{analysis_type}' analysis of ABM results")
-            analysis: Dict[str, Any] = {"analysis_type": analysis_type, "error": None}
-            np.random.seed(int(time.time()) % 1000 + 3) # Seed for variability
-
-            if analysis_type == "basic":
-                # Simulate plausible metrics
-                final_active = results.get('active_count', 55.0 + np.random.rand()*10) if results else 55.0 + np.random.rand()*10
-                total_agents = results.get('agent_count', 100) if results else 100
-                analysis["time_series"] = {
-                    "final_active": float(final_active),
-                    "final_inactive": float(total_agents - final_active if total_agents else 45.0 - np.random.rand()*10),
-                    "max_active": float(final_active * np.random.uniform(1.1, 1.5)),
-                    "avg_active": float(final_active * np.random.uniform(0.8, 1.1)),
-                    "convergence_step": int(results.get('simulation_steps_run', 50) * np.random.uniform(0.6, 0.9)) if results else int(30 + np.random.rand()*20),
-                    "oscillating": np.random.choice([True, False], p=[0.3, 0.7])
-                }
-                analysis["spatial"] = {
-                    "grid_dimensions": results.get('dimensions', [10,10]) if results else [10,10],
-                    "clustering_coefficient": float(np.random.uniform(0.5, 0.8)),
-                    "spatial_entropy": float(np.random.uniform(0.6, 0.95)),
-                    "active_ratio": float(final_active / total_agents if total_agents else 0.55 + np.random.rand()*0.1)
-                }
-            elif analysis_type == "pattern":
-                num_clusters = np.random.randint(0, 4)
-                patterns = []
-                for i in range(num_clusters):
-                    patterns.append({
-                        "type": "active_cluster (simulated)", "id": i+1,
-                        "size": int(10 + np.random.rand()*15),
-                        "centroid_row": float(np.random.uniform(2, 8)), # Assuming 10x10 grid roughly
-                        "centroid_col": float(np.random.uniform(2, 8)),
-                        "average_state_in_cluster": float(np.random.uniform(0.8, 1.0))
-                    })
-                if not patterns: patterns.append({"note": "No significant clusters found (simulated)."})
-                analysis["detected_patterns"] = patterns
-            # Add simulation for other analysis types (e.g., network) if needed
-            else:
-                analysis["error"] = f"Unknown or unimplemented simulated analysis type: {analysis_type}"
-
-            return {"analysis": analysis, "error": analysis.get("error")}
-
-
-        # --- Internal Analysis Helpers (Implemented) ---
-        def _get_total_agents(self, results: Dict[str, Any]) -> Optional[int]:
-            """Helper to get total agent count, handling different result structures."""
-            if 'agent_count' in results: return results['agent_count']
-            if 'params' in results and isinstance(results['params'], dict):
-                dims = results['params'].get('dimensions')
-                density = results['params'].get('density')
-                if isinstance(dims, list) and len(dims) == 2 and isinstance(density, (float, int)):
-                    return int(dims[0] * dims[1] * density)
-            if 'final_state_grid' in results and isinstance(results['final_state_grid'], list):
-                try: return int(np.sum(np.array(results['final_state_grid']) != -1)) # Count non-empty cells
-                except Exception: pass
-            return None
-
-        def _detect_convergence(self, series: Union[List[float], np.ndarray], window: int = 10, threshold_ratio: float = 0.01) -> int:
-            """Detects convergence in a time series (variance stabilizes). Returns step index or -1."""
-            if len(series) < window * 2: return -1 # Not enough data
-            series_arr = np.array(series)
-            try:
-                # Calculate rolling variance
-                rolling_var = pd.Series(series_arr).rolling(window=window).var().to_numpy()
-                # Check if variance in the last window is small relative to overall variance or mean
-                last_window_var = rolling_var[-1]
-                overall_mean = np.mean(series_arr[-window:]) # Mean of last window
-                threshold = abs(overall_mean * threshold_ratio) if overall_mean != 0 else threshold_ratio
-
-                if not np.isnan(last_window_var) and last_window_var < threshold:
-                    # Find first point where rolling variance drops below threshold (approx convergence start)
-                    converged_indices = np.where(rolling_var < threshold)[0]
-                    # Return first index or approx end (ensure index is valid)
-                    return int(converged_indices[0]) if len(converged_indices) > 0 else len(series_arr) - window
-            except Exception as e_conv:
-                logger.warning(f"Convergence detection failed: {e_conv}")
-            return -1 # Return -1 if no convergence detected or error
-
-        def _detect_oscillation(self, series: Union[List[float], np.ndarray], prominence_threshold: float = 0.1) -> bool:
-            """Detects oscillation using peak finding (requires SciPy). Returns boolean."""
-            if not SCIPY_AVAILABLE or find_peaks is None or len(series) < 10: return False
-            series_arr = np.array(series)
-            try:
-                # Calculate relative prominence threshold based on data range
-                data_range = np.ptp(series_arr) # Peak-to-peak range
-                if data_range < 1e-6: return False # Avoid issues with flat series
-                prominence = data_range * prominence_threshold
-                # Find peaks with minimum prominence
-                peaks, _ = find_peaks(series_arr, prominence=prominence)
-                # Simple check: If multiple significant peaks exist, assume oscillation
-                return len(peaks) > 2 # Require at least 3 peaks for oscillation signal
-            except Exception as e_osc:
-                logger.warning(f"Oscillation detection failed: {e_osc}")
-            return False
-
-        def _calculate_clustering(self, grid: np.ndarray, active_mask: np.ndarray) -> float:
-            """Calculates a simple spatial clustering coefficient (avg neighbor similarity)."""
-            if grid.size == 0 or active_mask.size == 0: return 0.0
-            rows, cols = grid.shape
-            total_similarity = 0.0
-            active_count = np.sum(active_mask)
-            if active_count == 0: return 0.0
-
-            active_grid_range = np.ptp(grid[active_mask]) if np.any(active_mask) else 1.0
-            if active_grid_range < 1e-9: active_grid_range = 1.0 # Avoid division by zero
-
-            for r in range(rows):
-                for c in range(cols):
-                    if active_mask[r, c]: # Only calculate for active cells
-                        cell_state = grid[r, c]
-                        neighbor_similarity_sum = 0.0
-                        neighbor_count = 0
-                        # Check 8 neighbors (Moore neighborhood)
-                        for dr in [-1, 0, 1]:
-                            for dc in [-1, 0, 1]:
-                                if dr == 0 and dc == 0: continue
-                                nr, nc = r + dr, c + dc
-                                # Check bounds
-                                if 0 <= nr < rows and 0 <= nc < cols:
-                                    neighbor_state = grid[nr, nc]
-                                    # Simple similarity: 1 - normalized difference
-                                    similarity = 1.0 - abs(cell_state - neighbor_state) / active_grid_range
-                                    neighbor_similarity_sum += similarity
-                                    neighbor_count += 1
-                        if neighbor_count > 0:
-                            total_similarity += (neighbor_similarity_sum / neighbor_count)
-
-            return float(total_similarity / active_count) if active_count > 0 else 0.0
-
-        def _calculate_entropy(self, grid: np.ndarray) -> float:
-            """Calculates spatial Shannon entropy based on state distribution."""
-            if not SCIPY_AVAILABLE or scipy_entropy is None or grid.size == 0: return 0.0
-            try:
-                # Get unique states and their counts (excluding potential empty cell markers like -1)
-                states, counts = np.unique(grid[grid != -1], return_counts=True)
-                if counts.sum() == 0: return 0.0 # Entropy is 0 if no valid states
-                # Calculate probabilities
-                probabilities = counts / counts.sum()
-                # Calculate Shannon entropy using scipy.stats.entropy (base 2)
-                return float(scipy_entropy(probabilities, base=2))
-            except Exception as e_ent:
-                logger.warning(f"Spatial entropy calculation failed: {e_ent}")
-                return 0.0
-
-
-    # --- Main Wrapper Function (Handles Operations & IAR) ---
-    def perform_abm(inputs: Dict[str, Any]) -> Dict[str, Any]:
+    # --- analyze_results method should be at this indentation level ---
+    def analyze_results(self, results: Dict[str, Any], analysis_type: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """
-        [IAR Enabled] Main wrapper function for dispatching ABM operations.
-        Instantiates ABMTool and calls the appropriate method based on 'operation'.
+        [IAR Enabled] Analyzes results from an ABM simulation run.
+        Includes enhanced temporal analysis (convergence, oscillation) and spatial patterns.
 
         Args:
-            inputs (Dict[str, Any]): Dictionary containing:
-                operation (str): The ABM operation ('create_model', 'run_simulation',
-                                'analyze_results', 'convert_to_state'). Required.
-                **kwargs: Other inputs specific to the operation (e.g., model, steps,
-                        results, analysis_type, representation_type).
+            results (Dict[str, Any]): The dictionary returned by run_simulation.
+            analysis_type (str, optional): Type of analysis ('basic', 'pattern', 'network').
+                                        Defaults to config.ABM_DEFAULT_ANALYSIS_TYPE.
+            **kwargs: Additional parameters for specific analysis types.
 
         Returns:
-            Dict[str, Any]: Dictionary containing results and the IAR reflection.
+            Dict containing analysis results nested under 'analysis' key, and IAR reflection.
         """
-        operation = inputs.get("operation")
-        # Pass all other inputs as kwargs to the tool methods
-        kwargs = {k: v for k, v in inputs.items() if k != 'operation'}
+        analysis_type_used = analysis_type or getattr(config, 'ABM_DEFAULT_ANALYSIS_TYPE', 'basic')
+        # --- Initialize Results & Reflection ---
+        primary_result = {"analysis_type": analysis_type_used, "analysis": {}, "error": None, "note": ""}
+        reflection_status = "Failure"; reflection_summary = f"Analysis init failed for type '{analysis_type_used}'."; reflection_confidence = 0.0; reflection_alignment = "N/A"; reflection_issues = []; reflection_preview = None
 
-        # Initialize result dict and default reflection
-        result = {"libs_available": MESA_AVAILABLE, "error": None}
-        reflection_status = "Failure"; reflection_summary = f"ABM op '{operation}' init failed."; reflection_confidence = 0.0; reflection_alignment = "N/A"; reflection_issues = ["Initialization error."]; reflection_preview = None
+        # --- Simulation Mode ---
+        is_simulated_input = "SIMULATED" in results.get("note", "")
+        if not self.is_available and is_simulated_input:
+            primary_result["note"] = f"SIMULATED {analysis_type_used} analysis - Mesa library not available"
+            logger.warning(f"Simulating ABM result analysis '{analysis_type_used}' (Mesa unavailable).")
+            sim_analysis = self._simulate_result_analysis(analysis_type_used, results) # Pass results for context
+            primary_result["analysis"] = sim_analysis.get("analysis", {})
+            primary_result["error"] = sim_analysis.get("error")
+            if primary_result["error"]: reflection_issues = [primary_result["error"]]
+            else: reflection_status = "Success"; reflection_summary = f"Simulated analysis '{analysis_type_used}' completed."; reflection_confidence = 0.6; reflection_alignment = "Aligned with analysis goal (simulated)."; reflection_issues = ["Analysis is simulated."]; reflection_preview = primary_result["analysis"]
+            return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
+        elif not self.is_available and not is_simulated_input:
+            # If Mesa isn't available but input isn't marked simulated, proceed cautiously
+            logger.warning("Mesa not available, attempting basic analysis on potentially real results dictionary structure.")
+            # Fall through to actual analysis logic, which might partially work if keys match
 
-        if not operation:
-            result["error"] = "Missing 'operation' input for perform_abm."
-            reflection_issues = [result["error"]]
-            reflection_summary = "Input validation failed: Missing operation."
-            return {**result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
+        # --- Actual Analysis ---
+        try:
+            logger.info(f"Analyzing ABM results using '{analysis_type_used}' analysis...")
+            analysis_output: Dict[str, Any] = {} # Store specific analysis metrics here
+            error_msg = results.get("error") # Propagate error from simulation run if present
+            if error_msg: logger.warning(f"Analyzing results from a simulation run that reported an error: {error_msg}")
+
+            # --- Analysis Type Dispatcher ---
+            if analysis_type_used == "basic":
+                # Perform basic temporal and spatial analysis
+                analysis_output["time_series"] = self._analyze_time_series(results)
+                analysis_output["spatial"] = self._analyze_spatial(results)
+                # Check for errors reported by sub-analyzers
+                ts_error = analysis_output["time_series"].get("error")
+                sp_error = analysis_output["spatial"].get("error")
+                if ts_error or sp_error: error_msg = f"Time Series Error: {ts_error}; Spatial Error: {sp_error}"
+
+            elif analysis_type_used == "pattern":
+                # Perform pattern detection using SciPy (if available)
+                if not SCIPY_AVAILABLE: error_msg = "SciPy library required for 'pattern' analysis but not available."
+                else: analysis_output["detected_patterns"] = self._detect_patterns(results)
+                pattern_error = next((p.get("error") for p in analysis_output.get("detected_patterns",[]) if isinstance(p,dict) and p.get("error")), None)
+                if pattern_error: error_msg = f"Pattern detection error: {pattern_error}"
+
+            # --- Add other analysis types here ---
+            # elif analysis_type_used == "network":
+            #     if not nx: error_msg = "NetworkX library required for 'network' analysis but not available."
+            #     else:
+            #         # Requires model to have a graph attribute or agent data suitable for graph construction
+            #         # analysis_output["network_metrics"] = self._analyze_network(results) ...
+            #         error_msg = "Network analysis not implemented."
+
+            else:
+                error_msg = f"Unknown analysis type specified: {analysis_type_used}"
+
+            # Store results and potential errors
+            primary_result["analysis"] = analysis_output
+            primary_result["error"] = error_msg # Update error status
+
+            # --- Generate Final IAR Reflection ---
+            if primary_result["error"]:
+                reflection_status = "Failure"; reflection_summary = f"ABM analysis '{analysis_type_used}' failed: {primary_result['error']}"; reflection_confidence = 0.1; reflection_issues = [primary_result["error"]]
+                reflection_alignment = "Failed to meet analysis goal."
+            else:
+                reflection_status = "Success"; reflection_summary = f"ABM analysis '{analysis_type_used}' completed successfully."; reflection_confidence = 0.85; reflection_alignment = "Aligned with analyzing simulation results."; reflection_issues = None; reflection_preview = analysis_output
+                if not self.is_available: reflection_issues = ["Analysis performed without Mesa library validation."] # Add note if Mesa missing
+
+            return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
+
+        except Exception as e_analyze:
+            # Catch unexpected errors during analysis orchestration
+            logger.error(f"Unexpected error analyzing ABM results: {e_analyze}", exc_info=True)
+            primary_result["error"] = str(e_analyze)
+            reflection_issues = [f"Unexpected analysis error: {e_analyze}"]
+            reflection_summary = f"Analysis failed: {e_analyze}"
+            return {**primary_result, "reflection": _create_reflection("Failure", reflection_summary, 0.0, "N/A", reflection_issues, None)}
+
+    # --- Internal Helper Methods for Analysis ---
+    def _analyze_time_series(self, results: Dict[str, Any]) -> Dict[str, Any]:
+        """Analyzes model-level time series data for temporal patterns."""
+        ts_analysis: Dict[str, Any] = {"error": None}
+        model_data_list = results.get("model_data")
+        active_count = results.get("active_count") # Final count from simulation result
+        inactive_count = results.get("inactive_count")
+        total_agents = self._get_total_agents(results)
+
+        if not model_data_list or not isinstance(model_data_list, list):
+            ts_analysis["error"] = "Model time series data ('model_data' list) not found or invalid."
+            return ts_analysis
 
         try:
-            tool = ABMTool() # Instantiate the tool
-            op_result: Dict[str, Any] = {} # Store result from the specific tool method
+            # Extract 'Active' agent count time series (assuming it was collected)
+            active_series = [step_data.get('Active') for step_data in model_data_list if isinstance(step_data, dict) and 'Active' in step_data]
+            if not active_series or any(x is None for x in active_series):
+                ts_analysis["error"] = "'Active' agent count not found in model_data steps."
+                return ts_analysis
 
-            # --- Dispatch to appropriate tool method ---
-            if operation == "create_model":
-                op_result = tool.create_model(**kwargs)
-            elif operation == "run_simulation":
-                model_input = kwargs.get('model')
-                if model_input is None: op_result = {"error": "Missing 'model' input for run_simulation."}
-                else: op_result = tool.run_simulation(**kwargs) # Pass all kwargs including model
-            elif operation == "analyze_results":
-                results_input = kwargs.get('results')
-                if results_input is None: op_result = {"error": "Missing 'results' input for analyze_results."}
-                else: op_result = tool.analyze_results(**kwargs) # Pass all kwargs including results
-            elif operation == "convert_to_state":
-                abm_result_input = kwargs.get('abm_result') # Use 'abm_result' for clarity? Or stick to 'results'? Let's assume 'abm_result' for now.
-                if abm_result_input is None: op_result = {"error": "Missing 'abm_result' input for convert_to_state."}
-                else: op_result = tool.convert_to_state_vector(**kwargs) # Pass all kwargs including abm_result
+            active_series_numeric = np.array([float(x) for x in active_series]) # Convert to numpy float array
+            num_steps = len(active_series_numeric)
+            ts_analysis["num_steps"] = num_steps
+            ts_analysis["final_active"] = active_count if active_count is not None else active_series_numeric[-1]
+            ts_analysis["final_inactive"] = inactive_count if inactive_count is not None else (total_agents - ts_analysis["final_active"] if total_agents is not None and ts_analysis["final_active"] is not None else None)
+            ts_analysis["max_active"] = float(np.max(active_series_numeric)) if active_series_numeric.size > 0 else None
+            ts_analysis["min_active"] = float(np.min(active_series_numeric)) if active_series_numeric.size > 0 else None
+            ts_analysis["avg_active"] = float(np.mean(active_series_numeric)) if num_steps > 0 else None
+
+            # Temporal Pattern Detection
+            ts_analysis["convergence_step"] = self._detect_convergence(active_series_numeric) # Returns step index or -1
+            ts_analysis["oscillating"] = self._detect_oscillation(active_series_numeric) # Returns boolean
+
+            logger.debug(f"Time series analysis complete. Convergence: {ts_analysis['convergence_step']}, Oscillation: {ts_analysis['oscillating']}")
+
+        except Exception as e_ts:
+            logger.error(f"Error during time series analysis: {e_ts}", exc_info=True)
+            ts_analysis["error"] = f"Time series analysis failed: {e_ts}"
+
+        return ts_analysis
+
+    def _analyze_spatial(self, results: Dict[str, Any]) -> Dict[str, Any]:
+        """Analyzes the final spatial grid state for patterns."""
+        sp_analysis: Dict[str, Any] = {"error": None}
+        final_state_grid_list = results.get("final_state_grid")
+
+        if not final_state_grid_list or not isinstance(final_state_grid_list, list):
+            sp_analysis["error"] = "Final state grid ('final_state_grid' list) not found or invalid."
+            return sp_analysis
+
+        try:
+            grid = np.array(final_state_grid_list)
+            if grid.ndim != 2:
+                sp_analysis["error"] = f"Final state grid data is not 2-dimensional (shape: {grid.shape})."
+                return sp_analysis
+
+            sp_analysis["grid_dimensions"] = list(grid.shape)
+            active_mask = grid > 0.5 # Example: define active state
+            sp_analysis["active_cell_count"] = int(np.sum(active_mask))
+            sp_analysis["active_ratio"] = float(np.mean(active_mask)) if grid.size > 0 else 0.0
+
+            # Calculate spatial metrics (examples)
+            sp_analysis["clustering_coefficient"] = self._calculate_clustering(grid, active_mask) # Avg local similarity
+            sp_analysis["spatial_entropy"] = self._calculate_entropy(grid) # Shannon entropy of grid states
+
+            logger.debug(f"Spatial analysis complete. Clustering: {sp_analysis.get('clustering_coefficient'):.4f}, Entropy: {sp_analysis.get('spatial_entropy'):.4f}")
+
+        except Exception as e_sp:
+            logger.error(f"Error during spatial analysis: {e_sp}", exc_info=True)
+            sp_analysis["error"] = f"Spatial analysis failed: {e_sp}"
+
+        return sp_analysis
+
+    def _detect_patterns(self, results: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Detects spatial patterns like clusters using SciPy (if available)."""
+        patterns: List[Dict[str, Any]] = []
+        if not SCIPY_AVAILABLE or ndimage is None:
+            patterns.append({"note": "SciPy library not available, cannot perform pattern detection."})
+            return patterns
+
+        final_state_grid_list = results.get("final_state_grid")
+        if not final_state_grid_list or not isinstance(final_state_grid_list, list):
+            patterns.append({"error": "Final state grid not found for pattern detection."})
+            return patterns
+
+        try:
+            grid = np.array(final_state_grid_list)
+            if grid.ndim != 2:
+                patterns.append({"error": f"Pattern detection requires 2D grid, got shape {grid.shape}."})
+                return patterns
+
+            # Example: Detect clusters of "active" cells (state > 0.5)
+            threshold = 0.5 # Define what constitutes an "active" cell for clustering
+            active_cells = (grid > threshold).astype(int)
+            # Define connectivity structure (e.g., 8-connectivity for 2D)
+            structure = ndimage.generate_binary_structure(2, 2)
+            # Label connected components (clusters)
+            labeled_clusters, num_features = ndimage.label(active_cells, structure=structure)
+
+            if num_features > 0:
+                logger.info(f"Detected {num_features} active spatial clusters.")
+                cluster_indices = np.arange(1, num_features + 1) # Indices used by ndimage functions
+                # Calculate properties for each cluster
+                cluster_sizes = ndimage.sum_labels(active_cells, labeled_clusters, index=cluster_indices)
+                centroids = ndimage.center_of_mass(active_cells, labeled_clusters, index=cluster_indices) # Returns list of (row, col) tuples
+                # Calculate average state value within each cluster using original grid
+                avg_values = ndimage.mean(grid, labeled_clusters, index=cluster_indices)
+
+                for i in range(num_features):
+                    # Ensure centroid is list/tuple even if only one feature
+                    centroid_coords = centroids[i] if isinstance(centroids, list) else centroids
+                    patterns.append({
+                        "type": "active_cluster",
+                        "id": int(cluster_indices[i]),
+                        "size": int(cluster_sizes[i]),
+                        "centroid_row": float(centroid_coords[0]), # row index
+                        "centroid_col": float(centroid_coords[1]), # column index
+                        "average_state_in_cluster": float(avg_values[i])
+                    })
             else:
-                op_result = {"error": f"Unknown ABM operation specified: {operation}"}
+                logger.info("No active spatial clusters detected.")
+                patterns.append({"note": "No significant active clusters found."})
 
-            # --- Process Result and Extract Reflection ---
-            # Merge the operation's result dictionary into the main result
-            result.update(op_result)
-            # Extract the reflection dictionary generated by the tool method (it should always exist)
-            internal_reflection = result.pop("reflection", None) if isinstance(result, dict) else None
+        except Exception as e_pattern:
+            logger.error(f"Error during pattern detection: {e_pattern}", exc_info=True)
+            patterns.append({"error": f"Pattern detection failed: {e_pattern}"})
 
-            # If reflection is missing (indicates error in tool method), create a default one
-            if internal_reflection is None:
-                logger.error(f"Internal reflection missing from ABM operation '{operation}' result! This indicates a protocol violation in the tool implementation.")
-                internal_reflection = _create_reflection("Failure", "Internal reflection missing from tool.", 0.0, "N/A", ["Tool implementation error: Missing IAR."], op_result)
-                result["error"] = result.get("error", "Internal reflection missing.") # Ensure error is noted
+        return patterns
 
-            # --- Final Return ---
-            # The final result includes primary output keys and the 'reflection' dictionary
-            result["reflection"] = internal_reflection
-            return result
+    def convert_to_state_vector(self, abm_result: Dict[str, Any], representation_type: str = "final_state", **kwargs) -> Dict[str, Any]:
+        """
+        [IAR Enabled] Converts ABM simulation results into a normalized state vector
+        suitable for comparison (e.g., using CFP).
 
-        except Exception as e_wrapper:
-            # Catch unexpected errors in the wrapper/dispatch logic
-            logger.error(f"Critical error in perform_abm wrapper for operation '{operation}': {e_wrapper}", exc_info=True)
-            result["error"] = str(e_wrapper)
-            reflection_issues = [f"Critical failure in ABM wrapper: {e_wrapper}"]
-            result["reflection"] = _create_reflection("Failure", f"Critical failure in wrapper: {e_wrapper}", 0.0, "N/A", reflection_issues, None)
-            return result
+        Args:
+            abm_result (Dict[str, Any]): The dictionary returned by run_simulation or analyze_results.
+            representation_type (str): Method for conversion ('final_state', 'time_series', 'metrics').
+            **kwargs: Additional parameters (e.g., num_ts_steps for time_series).
+
+        Returns:
+            Dict containing 'state_vector' (list), 'dimensions', 'representation_type', and IAR reflection.
+        """
+        # --- Initialize Results & Reflection ---
+        primary_result = {"state_vector": None, "representation_type": representation_type, "dimensions": 0, "error": None}
+        reflection_status = "Failure"; reflection_summary = f"State conversion init failed for type '{representation_type}'."; reflection_confidence = 0.0; reflection_alignment = "N/A"; reflection_issues = []; reflection_preview = None
+
+        # Check if input result itself indicates an error
+        input_error = abm_result.get("error")
+        if input_error:
+            primary_result["error"] = f"Input ABM result contains error: {input_error}"
+            reflection_issues = [primary_result["error"]]
+            reflection_summary = f"Input ABM result invalid: {input_error}"
+            return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
+
+        logger.info(f"Converting ABM results to state vector using representation: '{representation_type}'")
+        state_vector = np.array([])
+        error_msg = None
+        try:
+            if representation_type == "final_state":
+                # Use the flattened final grid state
+                final_grid_list = abm_result.get("final_state_grid")
+                if final_grid_list and isinstance(final_grid_list, list):
+                    state_vector = np.array(final_grid_list).flatten()
+                    if state_vector.size == 0: error_msg = "Final state grid is empty."
+                else: error_msg = "Final state grid ('final_state_grid') not available or invalid in ABM results."
+            elif representation_type == "time_series":
+                # Use the last N steps of key model variables (e.g., 'Active' count)
+                model_data_list = abm_result.get("model_data")
+                num_ts_steps = int(kwargs.get('num_ts_steps', 10)) # Number of recent steps to use
+                variable_to_use = kwargs.get('variable', 'Active') # Which variable to use
+                if model_data_list and isinstance(model_data_list, list) and len(model_data_list) > 0:
+                    try:
+                        series = [step_data.get(variable_to_use) for step_data in model_data_list if isinstance(step_data, dict) and variable_to_use in step_data]
+                        if not series or any(x is None for x in series): error_msg = f"Time series variable '{variable_to_use}' not found or contains None values."
+                        else:
+                            series_numeric = np.array(series, dtype=float)
+                            # Take last num_ts_steps, pad if shorter
+                            if len(series_numeric) >= num_ts_steps: state_vector = series_numeric[-num_ts_steps:]
+                            else: padding = np.zeros(num_ts_steps - len(series_numeric)); state_vector = np.concatenate((padding, series_numeric))
+                    except Exception as ts_parse_err: error_msg = f"Could not parse '{variable_to_use}' time series: {ts_parse_err}"
+                else: error_msg = "Model time series data ('model_data') not available or empty."
+            elif representation_type == "metrics":
+                # Use summary metrics calculated by analyze_results (requires analysis to be run first)
+                analysis_data = abm_result.get("analysis", {}).get("analysis") # Get nested analysis dict
+                if analysis_data and isinstance(analysis_data, dict):
+                    metrics = []
+                    # Extract metrics from time series and spatial analysis (handle potential errors)
+                    ts_analysis = analysis_data.get("time_series", {})
+                    sp_analysis = analysis_data.get("spatial", {})
+                    metrics.append(float(ts_analysis.get("final_active", 0) or 0))
+                    metrics.append(float(ts_analysis.get("convergence_step", -1) or -1)) # Use -1 if not converged
+                    metrics.append(1.0 if ts_analysis.get("oscillating", False) else 0.0)
+                    metrics.append(float(sp_analysis.get("clustering_coefficient", 0) or 0))
+                    metrics.append(float(sp_analysis.get("spatial_entropy", 0) or 0))
+                    metrics.append(float(sp_analysis.get("active_ratio", 0) or 0))
+                    state_vector = np.array(metrics)
+                else: error_msg = "'analysis' results subsection not found or invalid in ABM results. Run 'analyze_results' first for 'metrics' conversion."
+            else:
+                error_msg = f"Unknown representation type for ABM state conversion: {representation_type}"
+
+            # --- Final Processing & Normalization ---
+            if error_msg:
+                primary_result["error"] = error_msg
+                state_vector_final = np.array([0.0, 0.0]) # Default error state vector
+            elif state_vector.size == 0:
+                logger.warning(f"Resulting state vector for type '{representation_type}' is empty. Using default error state.")
+                state_vector_final = np.array([0.0, 0.0]) # Handle empty vector case
+
+            # Normalize the final state vector (L2 norm) - optional, depends on CFP use case
+            norm = np.linalg.norm(state_vector_final)
+            if norm > 1e-15:
+                state_vector_normalized = state_vector_final / norm
+            else:
+                logger.warning(f"State vector for type '{representation_type}' has zero norm. Not normalizing.")
+                state_vector_normalized = state_vector_final # Avoid division by zero
+
+            state_vector_list = state_vector_normalized.tolist()
+            dimensions = len(state_vector_list)
+            primary_result.update({"state_vector": state_vector_list, "dimensions": dimensions})
+
+            # --- Generate IAR Reflection ---
+            if primary_result["error"]:
+                reflection_status = "Failure"; reflection_summary = f"State conversion failed: {primary_result['error']}"; reflection_confidence = 0.1; reflection_issues = [primary_result["error"]]
+                reflection_alignment = "Failed to convert state."
+            else:
+                reflection_status = "Success"; reflection_summary = f"ABM results successfully converted to state vector (type: {representation_type}, dim: {dimensions})."; reflection_confidence = 0.9; reflection_alignment = "Aligned with preparing data for comparison/CFP."; reflection_issues = None; reflection_preview = state_vector_list
+
+            return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
+
+        except Exception as e_conv:
+            # Catch unexpected errors during conversion process
+            logger.error(f"Unexpected error converting ABM results to state vector: {e_conv}", exc_info=True)
+            primary_result["error"] = f"Unexpected conversion failure: {e_conv}"
+            reflection_issues = [f"Unexpected conversion error: {e_conv}"]
+            reflection_summary = f"Conversion failed: {e_conv}"
+            # Ensure default state vector is set on critical error
+            if primary_result.get("state_vector") is None: primary_result["state_vector"] = [0.0, 0.0]; primary_result["dimensions"] = 2
+            return {**primary_result, "reflection": _create_reflection("Failure", reflection_summary, 0.0, "N/A", reflection_issues, None)}
+
+    # --- Internal Simulation Methods ---
+    # (These simulate outcomes when Mesa is unavailable)
+    def _simulate_model_creation(self, model_type, agent_class=None, **kwargs):
+        """Simulates model creation when Mesa is not available."""
+        logger.info(f"Simulating creation of {model_type} model")
+        width=kwargs.get('width',10); height=kwargs.get('height',10); density=kwargs.get('density',0.5)
+        model_params=kwargs.get('model_params',{}); agent_params=kwargs.get('agent_params',{})
+        # Return a dictionary representing the simulated model's configuration
+        sim_model_config = {
+            "simulated": True, "type": model_type, "width": width, "height": height, "density": density,
+            "params": {**model_params, "simulated": True}, "agent_params": agent_params,
+            "agent_class_name": getattr(agent_class or BasicGridAgent, '__name__', 'UnknownAgent'),
+            "run_id": uuid.uuid4().hex[:8] # Give simulation a run ID
+        }
+        return {
+            "model": sim_model_config, "type": model_type,
+            "dimensions": [width, height], "initial_density": density,
+            "agent_count": int(width * height * density),
+            "params": {**model_params, "simulated": True},
+            "agent_params_used": agent_params, "error": None
+        }
+
+    def _simulate_model_run(self, steps, visualize, width=10, height=10):
+        """Simulates running the model when Mesa is not available."""
+        logger.info(f"Simulating ABM run for {steps} steps ({width}x{height} grid)")
+        np.random.seed(int(time.time()) % 1000 + 2) # Seed for some variability
+        active_series = []; inactive_series = []; total_agents = width * height;
+        current_active = total_agents * np.random.uniform(0.05, 0.15) # Random initial active
+        for i in range(steps):
+            # Simple random walk simulation for active count
+            equilibrium = total_agents * np.random.uniform(0.4, 0.6); # Fluctuate equilibrium
+            drift = (equilibrium - current_active) * np.random.uniform(0.02, 0.08);
+            noise = np.random.normal(0, total_agents * 0.03);
+            change = drift + noise
+            current_active = max(0, min(total_agents, current_active + change))
+            active_series.append(current_active); inactive_series.append(total_agents - current_active)
+
+        # Simulate final grid state based on final active ratio
+        grid = np.zeros((width, height));
+        active_ratio_final = active_series[-1] / total_agents if total_agents > 0 else 0
+        grid[np.random.rand(width, height) < active_ratio_final] = 1 # Randomly assign active state
+
+        results = {
+            "model_data": [{"Step": i, "Active": active_series[i], "Inactive": inactive_series[i]} for i in range(steps)],
+            "agent_data_last_step": {"note": "Agent data not generated in simulation"},
+            "final_state_grid": grid.tolist(),
+            "active_count": int(round(active_series[-1])),
+            "inactive_count": int(round(inactive_series[-1])),
+            "simulation_steps_run": steps,
+            "error": None
+        }
+        if visualize:
+            results["visualization_path"] = "simulated_visualization_not_generated.png"
+            results["visualization_error"] = "Visualization skipped in simulation mode."
+        return results
+
+    def _simulate_result_analysis(self, analysis_type, results=None):
+        """Simulates analysis of ABM results when libraries are unavailable."""
+        logger.info(f"Simulating '{analysis_type}' analysis of ABM results")
+        analysis: Dict[str, Any] = {"analysis_type": analysis_type, "error": None}
+        np.random.seed(int(time.time()) % 1000 + 3) # Seed for variability
+
+        if analysis_type == "basic":
+            # Simulate plausible metrics
+            final_active = results.get('active_count', 55.0 + np.random.rand()*10) if results else 55.0 + np.random.rand()*10
+            total_agents = results.get('agent_count', 100) if results else 100
+            analysis["time_series"] = {
+                "final_active": float(final_active),
+                "final_inactive": float(total_agents - final_active if total_agents else 45.0 - np.random.rand()*10),
+                "max_active": float(final_active * np.random.uniform(1.1, 1.5)),
+                "avg_active": float(final_active * np.random.uniform(0.8, 1.1)),
+                "convergence_step": int(results.get('simulation_steps_run', 50) * np.random.uniform(0.6, 0.9)) if results else int(30 + np.random.rand()*20),
+                "oscillating": np.random.choice([True, False], p=[0.3, 0.7])
+            }
+            analysis["spatial"] = {
+                "grid_dimensions": results.get('dimensions', [10,10]) if results else [10,10],
+                "clustering_coefficient": float(np.random.uniform(0.5, 0.8)),
+                "spatial_entropy": float(np.random.uniform(0.6, 0.95)),
+                "active_ratio": float(final_active / total_agents if total_agents else 0.55 + np.random.rand()*0.1)
+            }
+        elif analysis_type == "pattern":
+            num_clusters = np.random.randint(0, 4)
+            patterns = []
+            for i in range(num_clusters):
+                patterns.append({
+                    "type": "active_cluster (simulated)", "id": i+1,
+                    "size": int(10 + np.random.rand()*15),
+                    "centroid_row": float(np.random.uniform(2, 8)), # Assuming 10x10 grid roughly
+                    "centroid_col": float(np.random.uniform(2, 8)),
+                    "average_state_in_cluster": float(np.random.uniform(0.8, 1.0))
+                })
+            if not patterns: patterns.append({"note": "No significant clusters found (simulated)."})
+            analysis["detected_patterns"] = patterns
+        # Add simulation for other analysis types (e.g., network) if needed
+        else:
+            analysis["error"] = f"Unknown or unimplemented simulated analysis type: {analysis_type}"
+
+        return {"analysis": analysis, "error": analysis.get("error")}
+
+
+    # --- Internal Analysis Helpers (Implemented) ---
+    def _get_total_agents(self, results: Dict[str, Any]) -> Optional[int]:
+        """Helper to get total agent count, handling different result structures."""
+        if 'agent_count' in results: return results['agent_count']
+        if 'params' in results and isinstance(results['params'], dict):
+            dims = results['params'].get('dimensions')
+            density = results['params'].get('density')
+            if isinstance(dims, list) and len(dims) == 2 and isinstance(density, (float, int)):
+                return int(dims[0] * dims[1] * density)
+        if 'final_state_grid' in results and isinstance(results['final_state_grid'], list):
+            try: return int(np.sum(np.array(results['final_state_grid']) != -1)) # Count non-empty cells
+            except Exception: pass
+        return None
+
+    def _detect_convergence(self, series: Union[List[float], np.ndarray], window: int = 10, threshold_ratio: float = 0.01) -> int:
+        """Detects convergence in a time series (variance stabilizes). Returns step index or -1."""
+        if len(series) < window * 2: return -1 # Not enough data
+        series_arr = np.array(series)
+        try:
+            # Calculate rolling variance
+            rolling_var = pd.Series(series_arr).rolling(window=window).var().to_numpy()
+            # Check if variance in the last window is small relative to overall variance or mean
+            last_window_var = rolling_var[-1]
+            overall_mean = np.mean(series_arr[-window:]) # Mean of last window
+            threshold = abs(overall_mean * threshold_ratio) if overall_mean != 0 else threshold_ratio
+
+            if not np.isnan(last_window_var) and last_window_var < threshold:
+                # Find first point where rolling variance drops below threshold (approx convergence start)
+                converged_indices = np.where(rolling_var < threshold)[0]
+                # Return first index or approx end (ensure index is valid)
+                return int(converged_indices[0]) if len(converged_indices) > 0 else len(series_arr) - window
+        except Exception as e_conv:
+            logger.warning(f"Convergence detection failed: {e_conv}")
+        return -1 # Return -1 if no convergence detected or error
+
+    def _detect_oscillation(self, series: Union[List[float], np.ndarray], prominence_threshold: float = 0.1) -> bool:
+        """Detects oscillation using peak finding (requires SciPy). Returns boolean."""
+        if not SCIPY_AVAILABLE or find_peaks is None or len(series) < 10: return False
+        series_arr = np.array(series)
+        try:
+            # Calculate relative prominence threshold based on data range
+            data_range = np.ptp(series_arr) # Peak-to-peak range
+            if data_range < 1e-6: return False # Avoid issues with flat series
+            prominence = data_range * prominence_threshold
+            # Find peaks with minimum prominence
+            peaks, _ = find_peaks(series_arr, prominence=prominence)
+            # Simple check: If multiple significant peaks exist, assume oscillation
+            return len(peaks) > 2 # Require at least 3 peaks for oscillation signal
+        except Exception as e_osc:
+            logger.warning(f"Oscillation detection failed: {e_osc}")
+        return False
+
+    def _calculate_clustering(self, grid: np.ndarray, active_mask: np.ndarray) -> float:
+        """Calculates a simple spatial clustering coefficient (avg neighbor similarity)."""
+        if grid.size == 0 or active_mask.size == 0: return 0.0
+        rows, cols = grid.shape
+        total_similarity = 0.0
+        active_count = np.sum(active_mask)
+        if active_count == 0: return 0.0
+
+        active_grid_range = np.ptp(grid[active_mask]) if np.any(active_mask) else 1.0
+        if active_grid_range < 1e-9: active_grid_range = 1.0 # Avoid division by zero
+
+        for r in range(rows):
+            for c in range(cols):
+                if active_mask[r, c]: # Only calculate for active cells
+                    cell_state = grid[r, c]
+                    neighbor_similarity_sum = 0.0
+                    neighbor_count = 0
+                    # Check 8 neighbors (Moore neighborhood)
+                    for dr in [-1, 0, 1]:
+                        for dc in [-1, 0, 1]:
+                            if dr == 0 and dc == 0: continue
+                            nr, nc = r + dr, c + dc
+                            # Check bounds
+                            if 0 <= nr < rows and 0 <= nc < cols:
+                                neighbor_state = grid[nr, nc]
+                                # Simple similarity: 1 - normalized difference
+                                similarity = 1.0 - abs(cell_state - neighbor_state) / active_grid_range
+                                neighbor_similarity_sum += similarity
+                                neighbor_count += 1
+                    if neighbor_count > 0:
+                        total_similarity += (neighbor_similarity_sum / neighbor_count)
+
+        return float(total_similarity / active_count) if active_count > 0 else 0.0
+
+    def _calculate_entropy(self, grid: np.ndarray) -> float:
+        """Calculates spatial Shannon entropy based on state distribution."""
+        if not SCIPY_AVAILABLE or scipy_entropy is None or grid.size == 0: return 0.0
+        try:
+            # Get unique states and their counts (excluding potential empty cell markers like -1)
+            states, counts = np.unique(grid[grid != -1], return_counts=True)
+            if counts.sum() == 0: return 0.0 # Entropy is 0 if no valid states
+            # Calculate probabilities
+            probabilities = counts / counts.sum()
+            # Calculate Shannon entropy using scipy.stats.entropy (base 2)
+            return float(scipy_entropy(probabilities, base=2))
+        except Exception as e_ent:
+            logger.warning(f"Spatial entropy calculation failed: {e_ent}")
+            return 0.0
+
+
+# --- Main Wrapper Function (Handles Operations & IAR) ---
+def perform_abm(inputs: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    [IAR Enabled] Main wrapper function for dispatching ABM operations.
+    Instantiates ABMTool and calls the appropriate method based on 'operation'.
+
+    Args:
+        inputs (Dict[str, Any]): Dictionary containing:
+            operation (str): The ABM operation ('create_model', 'run_simulation',
+                            'analyze_results', 'convert_to_state'). Required.
+            **kwargs: Other inputs specific to the operation (e.g., model, steps,
+                    results, analysis_type, representation_type).
+
+    Returns:
+        Dict[str, Any]: Dictionary containing results and the IAR reflection.
+    """
+    operation = inputs.get("operation")
+    # Pass all other inputs as kwargs to the tool methods
+    kwargs = {k: v for k, v in inputs.items() if k != 'operation'}
+
+    # Initialize result dict and default reflection
+    result = {"libs_available": MESA_AVAILABLE, "error": None}
+    reflection_status = "Failure"; reflection_summary = f"ABM op '{operation}' init failed."; reflection_confidence = 0.0; reflection_alignment = "N/A"; reflection_issues = ["Initialization error."]; reflection_preview = None
+
+    if not operation:
+        result["error"] = "Missing 'operation' input for perform_abm."
+        reflection_issues = [result["error"]]
+        reflection_summary = "Input validation failed: Missing operation."
+        return {**result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
+
+    try:
+        tool = ABMTool() # Instantiate the tool
+        op_result: Dict[str, Any] = {} # Store result from the specific tool method
+
+        # --- Dispatch to appropriate tool method ---
+        if operation == "create_model":
+            op_result = tool.create_model(**kwargs)
+        elif operation == "run_simulation":
+            model_input = kwargs.get('model')
+            if model_input is None: op_result = {"error": "Missing 'model' input for run_simulation."}
+            else: op_result = tool.run_simulation(**kwargs) # Pass all kwargs including model
+        elif operation == "analyze_results":
+            results_input = kwargs.get('results')
+            if results_input is None: op_result = {"error": "Missing 'results' input for analyze_results."}
+            else: op_result = tool.analyze_results(**kwargs) # Pass all kwargs including results
+        elif operation == "convert_to_state":
+            abm_result_input = kwargs.get('abm_result') # Use 'abm_result' for clarity? Or stick to 'results'? Let's assume 'abm_result' for now.
+            if abm_result_input is None: op_result = {"error": "Missing 'abm_result' input for convert_to_state."}
+            else: op_result = tool.convert_to_state_vector(**kwargs) # Pass all kwargs including abm_result
+        else:
+            op_result = {"error": f"Unknown ABM operation specified: {operation}"}
+
+        # --- Process Result and Extract Reflection ---
+        # Merge the operation's result dictionary into the main result
+        result.update(op_result)
+        # Extract the reflection dictionary generated by the tool method (it should always exist)
+        internal_reflection = result.pop("reflection", None) if isinstance(result, dict) else None
+
+        # If reflection is missing (indicates error in tool method), create a default one
+        if internal_reflection is None:
+            logger.error(f"Internal reflection missing from ABM operation '{operation}' result! This indicates a protocol violation in the tool implementation.")
+            internal_reflection = _create_reflection("Failure", "Internal reflection missing from tool.", 0.0, "N/A", ["Tool implementation error: Missing IAR."], op_result)
+            result["error"] = result.get("error", "Internal reflection missing.") # Ensure error is noted
+
+        # --- Final Return ---
+        # The final result includes primary output keys and the 'reflection' dictionary
+        result["reflection"] = internal_reflection
+        return result
+
+    except Exception as e_wrapper:
+        # Catch unexpected errors in the wrapper/dispatch logic
+        logger.error(f"Critical error in perform_abm wrapper for operation '{operation}': {e_wrapper}", exc_info=True)
+        result["error"] = str(e_wrapper)
+        reflection_issues = [f"Critical failure in ABM wrapper: {e_wrapper}"]
+        result["reflection"] = _create_reflection("Failure", f"Critical failure in wrapper: {e_wrapper}", 0.0, "N/A", reflection_issues, None)
+        return result
 
 # --- END OF FILE 3.0ArchE/agent_based_modeling_tool.py ---

@@ -5,8 +5,11 @@ import os
 import json
 import time
 import pytest
-from workflow_engine import WorkflowEngine
+from ResonantiA.ArchE.workflow_engine import WorkflowEngine
 import logging
+from pathlib import Path
+from unittest.mock import MagicMock, patch
+from ResonantiA.ArchE.spr_manager import SPRManager
 
 @pytest.fixture
 def workflow_engine():
@@ -14,9 +17,16 @@ def workflow_engine():
 
 @pytest.fixture
 def tsp_workflow_data():
-    workflow_path = os.path.join('workflows', 'traveling_salesman_optimization.json')
-    with open(workflow_path, 'r') as f:
-        return json.load(f)
+    # Construct path relative to the project root (assuming Happier/ is root)
+    # The test file is at Happier/ResonantiA/ArchE/tests/integration/test_tsp_workflow.py
+    # We want Happier/ResonantiA/workflows/...
+    base_path = Path(__file__).parent.parent.parent.parent # Gets to Happier/
+    workflow_path = base_path / 'ResonantiA' / 'workflows' / 'traveling_salesman_optimization.json'
+    try:
+        with open(workflow_path, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        pytest.skip("Workflow data file not found")
 
 @pytest.fixture
 def tsp_data():

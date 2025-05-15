@@ -1,5 +1,3 @@
-# --- requirements.txt ---
-
 # Core Python utilities often used in analysis and tools
 numpy             # Fundamental package for numerical computing
 scipy             # Scientific computing library (stats, optimization, linear algebra)
@@ -19,7 +17,7 @@ docker            # Python library for interacting with the Docker daemon API
 # Agent-Based Modeling Tool (Section 3.13, 7.14)
 mesa              # Core library for agent-based modeling framework
 matplotlib        # For generating visualizations of ABM results
-scipy             # Also used by ABM analysis helpers (ndimage, stats.entropy, signal.find_peaks)
+# scipy is already listed above
 
 # Predictive Modeling Tool (Time Series Focus - Section 3.8, 7.19)
 statsmodels       # Comprehensive stats models, including ARIMA, VAR (for prediction & causality)
@@ -28,9 +26,12 @@ joblib            # For saving/loading trained models (e.g., statsmodels/sklearn
 # prophet         # Optional: Facebook's forecasting library (often requires C++ compiler setup)
 # pmdarima        # Optional: For automatic ARIMA order selection
 
+# OR-Tools (for TSP baseline and other optimization)
+ortools
+
 # Causal Inference Tool (Temporal Capabilities - Section 3.12, 7.13)
 dowhy             # Core framework for causal estimation (requires graphviz potentially)
-statsmodels       # Also contains Granger causality tests, VAR models relevant here
+# statsmodels is already listed above
 # causal-learn    # Optional: Library for various causal discovery algorithms (PC, GES, etc.)
 # gcastle         # Optional: Another library with causal discovery algorithms
 # tigramite       # Optional: For advanced temporal causal discovery (PCMCI+) - Requires careful setup
@@ -42,6 +43,4 @@ numexpr           # For safe evaluation of mathematical strings (used in calcula
 
 # Testing Framework
 pytest
-pytest-mock
-
-# --- end of requirements.txt ---
+pytest-mock 

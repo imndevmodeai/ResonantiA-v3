@@ -80,14 +80,14 @@ class LLMProviderError(Exception):
 # For now, it's a conceptual stub. The WorkflowEngine will have its own data quantization mixin.
 
 class QuantizationUtils:
-    \"\"\"
+    """
     Conceptual placeholder for utility class for quantizing and dequantizing model weights.
     This is for LLM model weights, distinct from potential data quantization in the workflow engine.
     Actual implementation would involve details for different bit depths (e.g., 8, 4, 2 bits).
-    \"\"\"
+    """
     @staticmethod
     def quantize_weights(weights: np.ndarray, bits: int = 8) -> Tuple[np.ndarray, float, float]:
-        \"\"\"Simulates weight quantization. Not a functional implementation.\"\"\"
+        """Simulates weight quantization. Not a functional implementation."""
         logger.info(f"Conceptual: Quantizing weights to {bits} bits.")
         if not isinstance(weights, np.ndarray):
             raise TypeError("Weights must be a NumPy array.")
@@ -100,7 +100,7 @@ class QuantizationUtils:
 
     @staticmethod
     def dequantize_weights(quantized: np.ndarray, scale: float, zero_point: float) -> np.ndarray:
-        \"\"\"Simulates weight dequantization. Not a functional implementation.\"\"\"
+        """Simulates weight dequantization. Not a functional implementation."""
         logger.info(f"Conceptual: Dequantizing weights with scale={scale}, zero_point={zero_point}.")
         if not isinstance(quantized, np.ndarray):
             raise TypeError("Quantized weights must be a NumPy array.")
@@ -109,7 +109,7 @@ class QuantizationUtils:
     
     @staticmethod
     def mixed_precision_matmul(A: np.ndarray, B: np.ndarray, quantize_a: bool = True, quantize_b: bool = True, bits: int = 8) -> np.ndarray:
-        \"\"\"Simulates mixed-precision matrix multiplication. Not functional.\"\"\"
+        """Simulates mixed-precision matrix multiplication. Not functional."""
         logger.info(f"Conceptual: Mixed-precision matmul, quantize_A={quantize_a}, quantize_B={quantize_b}, bits={bits}.")
         if quantize_a:
             A_quant, scale_a, zp_a = QuantizationUtils.quantize_weights(A, bits)
@@ -126,10 +126,10 @@ class QuantizationUtils:
 
 # --- Base LLM Provider (Abstract Concept) ---
 class BaseLLMProvider:
-    \"\"\"
+    """
     Abstract base class for LLM providers. Defines a common interface.
     Actual implementations would handle API calls to specific services (OpenAI, Google, etc.).
-    \"\"\"
+    """
     def __init__(self, api_key: str, base_url: Optional[str] = None, **kwargs):
         """
         Initializes the provider. Requires API key.

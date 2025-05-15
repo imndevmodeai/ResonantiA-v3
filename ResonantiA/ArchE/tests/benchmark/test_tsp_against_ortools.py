@@ -1,7 +1,8 @@
 import os, json, pytest, math, logging
-from workflow_engine import WorkflowEngine
-from utils.tsplib_loader import tsplib_to_abm_data
-from benchmarks.ortools_baseline import solve as ortools_solve
+from pathlib import Path
+from ResonantiA.ArchE.workflow_engine import WorkflowEngine
+from ResonantiA.ArchE.utils.tsplib_loader import tsplib_to_abm_data
+from ResonantiA.ArchE.benchmarks.ortools_baseline import solve as ortools_solve
 
 # Configure logging for the test
 logging.basicConfig(level=logging.INFO)
@@ -13,19 +14,28 @@ DATA = [
     # Add more instances if downloaded
 ]
 
-datasets_dir = 'data/tsplib'
+# Define base path for data files relative to project root
+BASE_DATA_PATH = Path(__file__).parent.parent.parent.parent / 'ResonantiA' / 'data' / 'tsplib'
 
 @pytest.mark.parametrize("instance, opt_dist", DATA)
 def test_abm_vs_ortools(instance, opt_dist):
-    tsp_path = os.path.join(datasets_dir, f"{instance}.tsp")
-    if not os.path.exists(tsp_path):
-        pytest.skip(f"TSPLIB file {instance} missing")
+    tsp_path = BASE_DATA_PATH / f"{instance}.tsp"
+    if not tsp_path.exists():
+        pytest.skip(f"TSPLIB file {tsp_path} missing")
 
-    tsp_data = tsplib_to_abm_data(tsp_path)
+    tsp_data = tsplib_to_abm_data(str(tsp_path))
 
     print(f"DEBUG TEST: tsp_data before execute_workflow: cities present: {True if tsp_data and tsp_data.get('cities') else False}, num_cities: {len(tsp_data.get('cities', [])) if tsp_data else -1}", flush=True)
-    # Run ABM workflow
-    wf = json.load(open('../../../../todo/traveling_salesman_optimization.json'))
+    
+    # Construct path to workflow file relative to project root
+    base_workflow_path = Path(__file__).parent.parent.parent.parent # Gets to Happier/
+    workflow_file_path = base_workflow_path / 'ResonantiA' / 'workflows' / 'traveling_salesman_optimization.json'
+    
+    if not workflow_file_path.exists():
+        pytest.skip(f"Workflow file {workflow_file_path} missing for TSP test")
+
+    with open(workflow_file_path, 'r') as wf_file:
+        wf = json.load(wf_file)
     engine = WorkflowEngine()
     res = engine.execute_workflow(wf, input_data={'tsp_data': tsp_data})
     abm_res = res['step_results']['tsp_simulation']['result']

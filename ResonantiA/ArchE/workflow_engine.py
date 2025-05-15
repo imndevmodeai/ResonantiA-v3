@@ -18,6 +18,8 @@ from . import config
 from .action_registry import execute_action # Imports the function that calls specific tools
 from .spr_manager import SPRManager # May be used for SPR-related context or validation
 from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS # Imports error handling logic
+import uuid # Added import
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -477,24 +479,23 @@ class WorkflowEngine:
 
                 except Exception as exec_exception:
                     # Catch critical exceptions during input resolution or action execution call
-                    logger.error(f"Critical exception during task '{task_id}' action '{action_type}' (attempt {current_attempt}): {exec_exception}", exc_info=True)
-                    # Create a standard error structure with a default reflection
-                    action_error_details = {
+                    logger.error(f"Critical exception during task '{task_id}' action '{action_type}' \n(attempt {current_attempt}): {exec_exception}", exc_info=True)
+
+                    # TEMPORARY BYPASS of handle_action_error due to signature mismatch
+                    # Treat critical exceptions during action execution as immediate failure for now.
+                    action_error_details = { # Create error details structure
                         "error": f"Critical execution exception: {str(exec_exception)}",
                         "reflection": {
-                                "status": "Failure", "summary": f"Critical exception: {exec_exception}",
-                                "confidence": 0.0, "alignment_check": "N/A",
-                                "potential_issues": ["System Error during execution."], "raw_output_preview": None
+                               "status": "Failure", "summary": f"Critical exception during action execution: {exec_exception}",
+                               "confidence": 0.0, "alignment_check": "N/A",
+                               "potential_issues": ["System Error during execution."], "raw_output_preview": None
                         }
                     }
-                    # Decide whether to retry based on error handler logic
-                    error_handling_outcome = handle_action_error(task_id, action_type, action_error_details, task_results, current_attempt, max_action_attempts, task_data.get("error_strategy"))
-                    if error_handling_outcome['status'] == 'retry' and current_attempt < max_action_attempts:
-                        logger.info(f"Workflow engine retrying task '{task_id}' (attempt {current_attempt + 1}) after critical exception.")
-                        current_attempt += 1; time.sleep(error_handling_outcome.get('delay_sec', 0.2 * current_attempt)) # Use delay from handler
-                        continue # Retry the loop
-                    else: # Fail definitively if no retry or max attempts reached
-                        task_failed_definitively = True; break
+                    task_results[task_id] = action_error_details # Store the error details as task result
+                    task_status[task_id] = 'failed' # Mark the task as failed
+                    task_failed_definitively = True
+                    logger.error(f"Task '{task_id}' failed definitively after critical exception.")
+                    break # Exit retry loop
 
             # --- Update Workflow State After Task Execution Attempt(s) ---
             executed_task_ids.add(task_id)

@@ -1,4 +1,4 @@
- --- START OF FILE 3.0ArchE/cfp_framework.py ---
+#--- START OF FILE 3.0ArchE/cfp_framework.py ---
 # ResonantiA Protocol v3.0 - cfp_framework.py
 # Implements the Comparative Fluxual Processing (CFP) Framework.
 # Incorporates Quantum-Inspired principles and State Evolution logic.
@@ -56,7 +56,7 @@ def _create_reflection(status: str, summary: str, confidence: Optional[float], a
     return {"status": status, "summary": summary, "confidence": confidence, "alignment_check": alignment if alignment else "N/A", "potential_issues": issues_list, "raw_output_preview": preview_str}
 
 
-class CfpframeworK:
+class CFPFramework:
     """
     Comparative Fluxual Processing (CFP) Framework - Quantum Enhanced w/ Evolution (v3.0).
 

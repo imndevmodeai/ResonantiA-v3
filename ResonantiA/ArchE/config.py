@@ -72,11 +72,11 @@ ABM_VISUALIZATION_ENABLED = True # Enable/disable generation of matplotlib visua
 ABM_DEFAULT_ANALYSIS_TYPE = "basic" # Default analysis type for ABM results ('basic', 'pattern', 'network')
 
 # --- File Paths ---
-# Assumes execution from the root 'ResonantiA' directory containing the '3.0ArchE' package
-BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__))) # Assumes config.py is inside 3.0ArchE
-MASTERMIND_DIR = os.path.join(BASE_DIR, "3.0ArchE") # Path to the core package
+# Assumes execution from the root 'ResonantiA' directory containing the 'ArchE' package
+BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__))) # Assumes config.py is inside ArchE
+MASTERMIND_DIR = os.path.join(BASE_DIR, "ArchE") # Path to the core package
 WORKFLOW_DIR = os.path.join(BASE_DIR, "workflows") # Path to workflow JSON files
-KNOWLEDGE_GRAPH_DIR = os.path.join(BASE_DIR, "knowledge_graph") # Path to knowledge graph data
+KNOWLEDGE_GRAPH_DIR = os.path.join(MASTERMIND_DIR, "knowledge_graph") # Path to knowledge graph data WITHIN ArchE
 LOG_DIR = os.path.join(BASE_DIR, "logs") # Path for log files
 OUTPUT_DIR = os.path.join(BASE_DIR, "outputs") # Path for generated outputs (results, visualizations, models)
 MODEL_SAVE_DIR = os.path.join(OUTPUT_DIR, "models") # Path specifically for saved models

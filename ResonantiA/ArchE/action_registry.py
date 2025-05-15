@@ -14,10 +14,12 @@ from . import config
 from .tools import run_search, invoke_llm, display_output, calculate_math # Basic tools
 from .enhanced_tools import call_api, perform_complex_data_analysis, interact_with_database # Enhanced tools
 from .code_executor import execute_code # Code execution tool
-from .cfp_framework import CfpframeworK # Import the class for the wrapper
+from .cfp_framework import CFPFramework # Import the class for the wrapper
 from .causal_inference_tool import perform_causal_inference # Causal tool main function
 from .agent_based_modeling_tool import perform_abm # ABM tool main function
 from .predictive_modeling_tool import run_prediction # Predictive tool main function
+from .synergy_analysis_tool import perform_synergy_analysis 
+#from .causal_discovery_tool import CausalDiscoveryTool #yet to be built
 
 logger = logging.getLogger(__name__)
 
@@ -39,8 +41,8 @@ def run_cfp_action(inputs: Dict[str, Any]) -> Dict[str, Any]:
 
     try:
         # Check if the required class/dependency is available
-        if CfpframeworK is None:
-            raise ImportError("CFP Framework class (CfpframeworK) is not available (check cfp_framework.py).")
+        if CFPFramework is None:
+            raise ImportError("CFP Framework class (CFPFramework) is not available (check cfp_framework.py).")
 
         # Extract and validate inputs required by CfpframeworK
         system_a_config = inputs.get('system_a_config', inputs.get('system_a'))
@@ -62,7 +64,7 @@ def run_cfp_action(inputs: Dict[str, Any]) -> Dict[str, Any]:
 
         logger.debug(f"Initializing CfpframeworK with Observable='{observable}', T={time_horizon}, Evolution='{evolution_model}'...")
         # Initialize the CFP framework class with validated parameters
-        cfp_analyzer = CfpframeworK(
+        cfp_analyzer = CFPFramework(
             system_a_config=system_a_config,
             system_b_config=system_b_config,
             observable=observable,
@@ -148,6 +150,7 @@ ACTION_REGISTRY: Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]] = {
     "perform_causal_inference": perform_causal_inference, # Points to implemented version
     "perform_abm": perform_abm, # Points to implemented version
     "run_prediction": run_prediction, # Points to implemented version
+    "perform_synergy_analysis": perform_synergy_analysis, # Points to implemented version
 
     # Add other custom actions here
     # "my_custom_action": my_custom_action_function,
@@ -251,8 +254,11 @@ def execute_action(action_type: str, inputs: Dict[str, Any]) -> Dict[str, Any]:
         reflection_status = result.get("reflection", {}).get("status", "Unknown")
         if reflection_status != "Success":
             # Log warnings or errors based on the reported reflection status
-            log_level = logging.ERROR if reflection_status == "Failure" else logging.warning
-            log_level(f"Action '{action_type}' completed with reflection status: {reflection_status}. Error: {result.get('error')}. Summary: {result.get('reflection',{}).get('summary')}")
+            log_message = f"Action '{action_type}' completed with reflection status: {reflection_status}. Error: {result.get('error')}. Summary: {result.get('reflection',{}).get('summary')}"
+            if reflection_status == "Failure":
+                logger.error(log_message)
+            else:
+                logger.warning(log_message)
         else:
             logger.debug(f"Action '{action_type}' completed successfully (Reflection Status: Success).")
 
