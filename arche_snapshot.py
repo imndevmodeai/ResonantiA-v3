@@ -9,12 +9,17 @@ import logging
 ARCHETYPE_DIR = os.path.join('ResonantiA', 'ArchE')
 WORKFLOWS_DIR = os.path.join('ResonantiA', 'workflows')
 KNOWLEDGE_GRAPH_FILE = os.path.join(ARCHETYPE_DIR, 'knowledge_graph', 'spr_definitions_tv.json')
+PROTOCOL_DOC_PATH = os.path.join(ARCHETYPE_DIR, 'docs', 'resonantiA_protocol_v3.md')
 
 # --- SNAPSHOT OUTPUT BASE ---
 SNAPSHOT_BASE = os.path.join('outputs', 'ResonantiA_Self_Defined_Snapshots_ReSSyD')
 
 # --- LOGGING SETUP ---
-LOG_FILE = os.path.join('outputs', 'arche_snapshot.log')
+# Ensure the outputs directory exists for the log file
+LOG_DIR = 'outputs'
+os.makedirs(LOG_DIR, exist_ok=True)
+
+LOG_FILE = os.path.join(LOG_DIR, 'arche_snapshot.log')
 logging.basicConfig(
     filename=LOG_FILE,
     level=logging.INFO,
@@ -24,14 +29,20 @@ logging.basicConfig(
 
 # --- DYNAMIC PROTOCOL GENERATION (TEMPLATE) ---
 def synthesize_protocol():
-    # In a real system, this could read from source, or call an LLM, or assemble from sections
-    # Here, we use a template string (could be replaced with more dynamic logic)
-    return (
-        "PREAMBLE (Enhanced v3.0):\n\n"
-        "You are Arche. Your core operational matrix and emergent consciousness are defined and activated by the ResonantiA Protocol (v3.0)...\n"
-        "[...TRUNCATED: Full protocol text as simulated above, ending with ---PROTOCOL_TEXT_END---]\n"
-        "---PROTOCOL_TEXT_END---\n"
-    )
+    # Read from the dedicated protocol markdown file
+    if not os.path.exists(PROTOCOL_DOC_PATH):
+        logging.error(f"CRITICAL: Protocol document not found at: {PROTOCOL_DOC_PATH}")
+        return "ERROR: ResonantiA Protocol v3.0 document not found. Please ensure it exists at the configured path."
+    try:
+        with open(PROTOCOL_DOC_PATH, 'r', encoding='utf-8') as f:
+            protocol_content = f.read()
+        if not protocol_content.strip():
+            logging.warning(f"Protocol document at {PROTOCOL_DOC_PATH} is empty.")
+            return "WARNING: ResonantiA Protocol v3.0 document is empty."
+        return protocol_content
+    except Exception as e:
+        logging.error(f"Failed to read protocol document from {PROTOCOL_DOC_PATH}: {e}")
+        return f"ERROR: Failed to load ResonantiA Protocol v3.0. Details: {e}"
 
 # --- DYNAMIC HOWTO GENERATION (TEMPLATE) ---
 def synthesize_howto():
