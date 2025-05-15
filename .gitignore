@@ -111,4 +111,4 @@ tests/logs/    # Exclude test-specific logs
 
 # --- End of .gitignore ---
 
-# Test commit for snapshot hook 
+# Test commit for snapshot hook (attempt 2) 
