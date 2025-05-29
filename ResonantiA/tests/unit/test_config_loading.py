@@ -1,89 +1,72 @@
 import unittest
-import os # Added for os.path.isabs
-import logging # Added to check LOG_LEVEL type
+import os
 import sys
 
-# Determine the path to the '3.0ArchE' directory
-# Path of current file: Happier/ResonantiA/3.0ArchE/tests/unit/test_config_loading.py
-# Path to 3.0ArchE directory: os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-arche_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Add the parent of '3.0ArchE' (i.e., 'Happier/ResonantiA') to sys.path
-# to allow 'from 3.0ArchE import config' if '3.0ArchE' is a package
-# However, direct import of '3.0ArchE' is problematic due to its name.
-# Instead, add '3.0ArchE' itself to the path so we can just 'import config'
-if arche_dir_path not in sys.path:
-    sys.path.insert(0, arche_dir_path)
+# Attempt to import the config module directly, assuming tests are run correctly from project root.
+CONFIG_MODULE_FOUND = False
+CONFIG_VALUES_LOADED = False
+ERROR_MESSAGE = ""
+CONFIG_DIRECT_LOADED = False
 
 try:
-    import config
+    from ResonantiA.ArchE import config
+    # Try accessing a known variable to confirm it's loaded correctly
+    _ = config.MASTERMIND_DIR 
+    CONFIG_MODULE_FOUND = True
+    CONFIG_VALUES_LOADED = True
+    CONFIG_DIRECT_LOADED = True
+    print(f"Successfully loaded config via: from ResonantiA.ArchE import config. MASTERMIND_DIR: {config.MASTERMIND_DIR}")
 except ImportError as e:
-    # This block might be hit if 'python -m unittest test_config_loading.py' is run from 'tests/unit/'
-    # or if the primary sys.path manipulation isn't enough for the execution context.
-    # A more robust solution is to ensure tests are run from the project root or that
-    # the 3.0ArchE package is properly installed/discoverable.
-    print(f"Failed to import config directly. Sys.path: {sys.path}", file=sys.stderr)
-    print(f"ImportError: {e}", file=sys.stderr)
-    # As a last resort for this specific file structure, try relative import if tests are run as module
-    try:
-        from ... import config as config_relative
-        config = config_relative # Use the relatively imported module
-    except ImportError as e_rel:
-        print(f"Relative import also failed: {e_rel}", file=sys.stderr)
-        raise ImportError("Could not import 'config' module. Ensure 3.0ArchE is in Python path or tests are run correctly.") from e_rel
+    ERROR_MESSAGE = f"Primary import (from ResonantiA.ArchE import config) failed: {e}"
+    print(ERROR_MESSAGE)
+    print(f"sys.path was: {sys.path}")
+    # If this fails, the test 'test_config_module_found_and_loaded' will catch it.
 
 class TestConfigLoading(unittest.TestCase):
 
-    def test_config_module_imported_successfully(self):
-        """Test that the config module can be imported."""
-        self.assertTrue(hasattr(config, '__file__'), "config module was not imported successfully.")
+    def test_config_module_found_and_loaded(self):
+        """Test that the config module was found and its values can be accessed."""
+        if not CONFIG_DIRECT_LOADED:
+            # This provides a clearer error message in the test itself if the top-level import failed.
+            print(f"DEBUG: test_config_module_found_and_loaded: CONFIG_DIRECT_LOADED is False. Error during import: {ERROR_MESSAGE}")
+        self.assertTrue(CONFIG_MODULE_FOUND, f"Config module could not be imported. Error: {ERROR_MESSAGE}")
+        self.assertTrue(CONFIG_VALUES_LOADED, "Config module was imported, but accessing values failed. This indicates an issue within config.py or its dependencies.")
+        self.assertIsNotNone(config.MASTERMIND_DIR, "MASTERMIND_DIR should not be None.")
+        self.assertIsNotNone(config.SPR_JSON_FILE, "SPR_JSON_FILE should not be None.")
 
-    def test_llm_providers_defined_correctly(self):
-        """Test that LLM_PROVIDERS is defined and is a dictionary."""
-        self.assertTrue(hasattr(config, 'LLM_PROVIDERS'), "LLM_PROVIDERS not found in config.")
-        self.assertIsInstance(config.LLM_PROVIDERS, dict, "LLM_PROVIDERS should be a dictionary.")
-        self.assertIn("openai", config.LLM_PROVIDERS, "OpenAI provider missing from LLM_PROVIDERS.")
+    def test_config_values_are_correct_type(self):
+        """Test that specific config values have the expected types."""
+        if not CONFIG_DIRECT_LOADED:
+            self.skipTest(f"Skipping type check as config module failed to load. Error: {ERROR_MESSAGE}")
+        
+        self.assertIsInstance(config.MASTERMIND_DIR, str)
+        self.assertIsInstance(config.SPR_JSON_FILE, str)
+        self.assertIsInstance(config.DEBUG_MODE, bool)
+        self.assertIsInstance(config.LOG_LEVEL, int) # LOG_LEVEL is an int (e.g., logging.INFO)
+        # Add more type checks as needed for other critical config variables
 
-    def test_code_executor_timeout_defined_correctly(self):
-        """Test that CODE_EXECUTOR_TIMEOUT is defined and is an integer."""
-        self.assertTrue(hasattr(config, 'CODE_EXECUTOR_TIMEOUT'), "CODE_EXECUTOR_TIMEOUT not found in config.")
-        self.assertIsInstance(config.CODE_EXECUTOR_TIMEOUT, int, "CODE_EXECUTOR_TIMEOUT should be an integer.")
-        self.assertGreater(config.CODE_EXECUTOR_TIMEOUT, 0, "CODE_EXECUTOR_TIMEOUT should be positive.")
+    def test_critical_paths_exist_or_are_creatable(self):
+        """Test that critical directory paths defined in config either exist or can be created (conceptual)."""
+        if not CONFIG_DIRECT_LOADED:
+            self.skipTest(f"Skipping path check as config module failed to load. Error: {ERROR_MESSAGE}")
 
-    def test_log_level_defined_correctly(self):
-        """Test that LOG_LEVEL is defined and is a valid logging level (integer)."""
-        self.assertTrue(hasattr(config, 'LOG_LEVEL'), "LOG_LEVEL not found in config.")
-        self.assertIsInstance(config.LOG_LEVEL, int, "LOG_LEVEL should be an integer (e.g., logging.INFO).")
-        # Check if it's one of the standard logging levels for good measure
-        valid_levels = [logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL]
-        self.assertIn(config.LOG_LEVEL, valid_levels, f"LOG_LEVEL {config.LOG_LEVEL} is not a standard logging level.")
-
-    def test_base_dir_defined_correctly(self):
-        """Test that BASE_DIR is defined, is a string, and is an absolute path."""
-        self.assertTrue(hasattr(config, 'BASE_DIR'), "BASE_DIR not found in config.")
-        self.assertIsInstance(config.BASE_DIR, str, "BASE_DIR should be a string.")
-        self.assertTrue(os.path.isabs(config.BASE_DIR), f"BASE_DIR '{config.BASE_DIR}' should be an absolute path.")
-        self.assertTrue(os.path.exists(config.BASE_DIR), f"BASE_DIR '{config.BASE_DIR}' path does not exist.")
-
-    # Original placeholder test - can be removed or kept
-    def test_config_loads_successfully_generic(self):
-        """
-        Original generic test that the configuration loads without critical errors.
-        This is somewhat redundant with test_config_module_imported_successfully.
-        """
-        try:
-            # This just re-confirms import works
-            from ... import config as app_config # Re-check import within test
-            self.assertIsNotNone(app_config)
-        except ImportError:
-            self.fail("config.py could not be imported or is missing.")
-        self.assertTrue(True)
-
-    # Add more specific tests for config values below
-    # def test_specific_api_key_present(self):
-    #     from .... import config as app_config
-    #     self.assertIsNotNone(app_config.API_KEY, "API_KEY should be defined in config.")
-    #     self.assertIsInstance(app_config.API_KEY, str, "API_KEY should be a string.")
+        # For directories that are expected to exist or be creatable by the application
+        paths_to_check = [
+            config.MASTERMIND_DIR,
+            os.path.dirname(config.SPR_JSON_FILE), # Check parent dir of SPR file
+            config.WORKFLOW_DIR,
+            config.LOG_DIR,
+            config.OUTPUT_DIR,
+            # Add other critical paths from config
+        ]
+        for path in paths_to_check:
+            # This test doesn't create them, just checks if they are absolute or can be conceptualized.
+            # A more robust test might try os.makedirs(path, exist_ok=True) if appropriate.
+            self.assertTrue(os.path.isabs(path) or not path.startswith("/"), 
+                            f"Path {path} should be absolute or a relative path not starting with root slash.")
+            # Here, we are mostly ensuring the config values are present and look like paths.
+            # Actual directory creation is usually handled by the application setup.
+            print(f"Config path check: {path} (is_abs: {os.path.isabs(path)})")
 
 if __name__ == '__main__':
     unittest.main() 

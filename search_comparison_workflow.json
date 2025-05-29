@@ -1,0 +1,78 @@
+{
+  "name": "Search_Comparison_Workflow_v1_0",
+  "description": "Workflow to compare external browser automation search results with internal Cursor LLM AI agent search results for R&D insights.",
+  "version": "1.0",
+  "tasks": {
+    "initiate_search_comparison": {
+      "description": "Log the start of the search comparison process.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "--- Search Comparison Workflow (v1.0) Initiated for Wearable Sensor Technology for Sexual Stimulation ---"
+      },
+      "dependencies": []
+    },
+    "perform_external_search": {
+      "description": "Perform an external search using web search tools to gather publicly available information.",
+      "action_type": "execute_tool",
+      "inputs": {
+        "tool": "web_search",
+        "search_term": "wearable sensor technology for sexual stimulation",
+        "explanation": "To gather external context and market trends on wearable sensor technology for sexual stimulation."
+      },
+      "outputs": {
+        "external_results": "list",
+        "external_summary": "string",
+        "stdout": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["initiate_search_comparison"]
+    },
+    "perform_internal_search": {
+      "description": "Perform an internal search within the project codebase to gather proprietary information.",
+      "action_type": "execute_tool",
+      "inputs": {
+        "tool": "codebase_search",
+        "query": "wearable sensor technology for sexual stimulation",
+        "target_directories": ["src", "docs", "research"],
+        "explanation": "To find internal code, documents, and research related to wearable sensor technology for sexual stimulation."
+      },
+      "outputs": {
+        "internal_results": "list",
+        "internal_summary": "string",
+        "stdout": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["initiate_search_comparison"]
+    },
+    "compare_search_results": {
+      "description": "Analyze and compare external and internal search results to identify insights and opportunities.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "# Compare external and internal search results\nexternal_data = context.get('perform_external_search', {}).get('external_results', [])\ninternal_data = context.get('perform_internal_search', {}).get('internal_results', [])\n\n# Summarize findings\nexternal_summary = f'External search returned {len(external_data)} relevant items.'\ninternal_summary = f'Internal search returned {len(internal_data)} relevant items.'\n\n# Basic comparison logic (placeholder for deeper analysis)\ncomparison_notes = []\nif len(external_data) > len(internal_data):\n    comparison_notes.append('External knowledge base is broader than internal resources. Consider market research integration.')\nelse:\n    comparison_notes.append('Internal development may be ahead of public knowledge. Focus on protecting IP.')\n\nfull_comparison_summary = f'{external_summary} {internal_summary} Comparison insight: {' '.join(comparison_notes)}'\nprint(full_comparison_summary)\nresult = {\n    'comparison_summary': full_comparison_summary,\n    'external_count': len(external_data),\n    'internal_count': len(internal_data),\n    'actionable_insights': comparison_notes\n}" 
+      },
+      "outputs": {
+        "comparison_summary": "string",
+        "external_count": "int",
+        "internal_count": "int",
+        "actionable_insights": "list",
+        "stdout": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["perform_external_search", "perform_internal_search"]
+    },
+    "feed_into_rd_process": {
+      "description": "Generate a report or directive for the next R&D process based on comparison insights.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "comparison_summary": "{{ compare_search_results.comparison_summary if 'compare_search_results' in context else 'Comparison not completed.' }}",
+          "actionable_insights": "{{ compare_search_results.actionable_insights if 'compare_search_results' in context else 'No insights available.' }}",
+          "next_steps_message": "Based on the comparison, the next R&D process should prioritize the identified insights. Standing by for Keyholder directive on implementation."
+        },
+        "format": "json"
+      },
+      "dependencies": ["compare_search_results"]
+    }
+  }
+} 

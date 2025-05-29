@@ -1,0 +1,136 @@
+{
+  "workflow_id": "asf_master_protocol_generation_v1",
+  "name": "ReSSyD Master Documentation Generation Workflow",
+  "description": "Assembles and packages the complete current ResonantiA Protocol state including documentation, workflows, SPRs, codebase manifest, and setup instructions.",
+  "version": "1.0",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+  "spr_reference": "Ressyd master generation workfloW",
+  "tasks": [
+    {
+      "task_id": "generate_timestamp",
+      "description": "Generate a unique timestamp for the package.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import datetime\n\ntimestamp = datetime.datetime.now().strftime(\"%Y%m%d_%H%M%S\")\nprint(timestamp)"
+      },
+      "outputs": {
+        "package_timestamp": "string"
+      },
+      "reflection_config": {
+        "generate_reflection": true,
+        "summary_prompt": "Summarize the outcome of timestamp generation."
+      }
+    },
+    {
+      "task_id": "collect_protocol_document",
+      "description": "Placeholder for collecting the main ResonantiA Protocol v3.0 document.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "protocol_doc_path = \"ResonantiA_Protocol_v3.0_Compiled.md\"\n# In a real scenario, this task would involve compiling the document from various sources.\n# For now, it's a placeholder name.\nwith open(protocol_doc_path, 'w') as f:\n    f.write(\"# ResonantiA Protocol v3.0 - Compiled Document (Placeholder)\n\nThis document is a placeholder generated by the ReSSyD Master Documentation workflow. \nIn a full implementation, this would contain the assembled protocol text.\")\nprint(protocol_doc_path)"
+      },
+      "outputs": {
+        "protocol_document_path": "string"
+      },
+      "dependencies": ["generate_timestamp"],
+      "reflection_config": {
+        "generate_reflection": true,
+        "summary_prompt": "Summarize the outcome of protocol document collection."
+      }
+    },
+    {
+      "task_id": "list_workflow_jsons",
+      "description": "List all workflow JSON files.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import os\nimport json\nworkflow_dir = \"ResonantiA/ArchE/workflows\"\nworkflow_files = [os.path.join(workflow_dir, f) for f in os.listdir(workflow_dir) if f.endswith('.json')]\nprint(json.dumps(workflow_files))"
+      },
+      "outputs": {
+        "workflow_file_list": "list"
+      },
+      "dependencies": ["generate_timestamp"],
+      "reflection_config": {
+        "generate_reflection": true,
+        "summary_prompt": "Summarize the outcome of listing workflow JSONs."
+      }
+    },
+    {
+      "task_id": "export_spr_knowledge_graph",
+      "description": "Provide the path to the SPR knowledge graph.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "spr_file_path = \"ResonantiA/ArchE/knowledge_graph/spr_definitions_tv.json\"\nprint(spr_file_path)"
+      },
+      "outputs": {
+        "spr_graph_path": "string"
+      },
+      "dependencies": ["generate_timestamp"],
+      "reflection_config": {
+        "generate_reflection": true,
+        "summary_prompt": "Summarize the outcome of SPR knowledge graph export."
+      }
+    },
+    {
+      "task_id": "generate_codebase_manifest",
+      "description": "Generate a manifest of key codebase files.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import os\nimport json\nkey_dirs = [\"ResonantiA/ArchE\", \"ResonantiA/ArchE/tools\", \"ResonantiA/ArchE/workflows\", \"ResonantiA/ArchE/knowledge_graph\"]\nmanifest = {}\nfor k_dir in key_dirs:\n    file_list = []\n    if os.path.exists(k_dir) and os.path.isdir(k_dir):\n        for root, _, files in os.walk(k_dir):\n            for file in files:\n                file_list.append(os.path.join(root, file))\n    manifest[k_dir] = file_list\nprint(json.dumps(manifest))"
+      },
+      "outputs": {
+        "codebase_manifest_data": "dict"
+      },
+      "dependencies": ["generate_timestamp"],
+      "reflection_config": {
+        "generate_reflection": true,
+        "summary_prompt": "Summarize the outcome of codebase manifest generation."
+      }
+    },
+    {
+      "task_id": "synthesize_setup_instructions",
+      "description": "Use LLM (Arche) to synthesize setup and usage instructions.",
+      "action_type": "llm_tool",
+      "inputs": {
+        "prompt_spr": "LLMInstructionSynthesisPromptX",
+        "context_data": {
+          "protocol_version": "3.0",
+          "workflow_files": "{{ list_workflow_jsons.workflow_file_list }}",
+          "spr_graph_file": "{{ export_spr_knowledge_graph.spr_graph_path }}",
+          "code_manifest": "{{ generate_codebase_manifest.codebase_manifest_data }}"
+        }
+      },
+      "outputs": {
+        "setup_instructions_text": "string"
+      },
+      "dependencies": ["list_workflow_jsons", "export_spr_knowledge_graph", "generate_codebase_manifest"],
+      "reflection_config": {
+        "generate_reflection": true,
+        "summary_prompt": "Summarize the outcome of synthesizing setup/usage instructions."
+      }
+    },
+    {
+      "task_id": "package_artifacts",
+      "description": "Simulate packaging of all generated artifacts.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\npackage_name = f\"ResonantiA_Protocol_Snapshot_{{ generate_timestamp.package_timestamp }}.zip\"\nartifact_paths = {\n    \"protocol_document\": \"{{ collect_protocol_document.protocol_document_path }}\",\n    \"workflow_files\": {{ list_workflow_jsons.workflow_file_list }},\n    \"spr_graph\": \"{{ export_spr_knowledge_graph.spr_graph_path }}\",\n    \"codebase_manifest\": {{ generate_codebase_manifest.codebase_manifest_data }},\n    \"setup_instructions\": \"{{ synthesize_setup_instructions.setup_instructions_text | default('Instructions not generated.') }}\"\n}\n# In a real scenario, this would involve creating a zip file.\n# For now, we just print the intended package name and manifest.\nprint(json.dumps({\"package_name\": package_name, \"contents\": artifact_paths}))"
+      },
+      "outputs": {
+        "package_report": "dict"
+      },
+      "dependencies": ["collect_protocol_document", "synthesize_setup_instructions"],
+      "reflection_config": {
+        "generate_reflection": true,
+        "summary_prompt": "Summarize the outcome of artifact packaging."
+      }
+    }
+  ],
+  "final_outputs": {
+    "overall_status": "string",
+    "package_details": "{{ package_artifacts.package_report }}"
+  }
+} 

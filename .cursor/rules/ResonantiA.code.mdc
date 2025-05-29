@@ -1,7 +1,7 @@
 ---
-description: sourcecode
+description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 
 

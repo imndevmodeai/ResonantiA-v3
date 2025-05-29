@@ -26,12 +26,18 @@ logger = logging.getLogger(__name__)
 class WorkflowEngine:
     """
     Executes workflows defined in JSON (Process Blueprints) according to ResonantiA v3.0.
-    Manages task execution order based on dependencies, resolves inputs using context
-    (including nested access into results and IAR reflections), evaluates conditions,
-    invokes actions via the action registry, stores the complete action result
-    (primary output + IAR reflection dict) in the context, and integrates with
-    error handling strategies (retry, fail_fast, trigger_metacog).
-    Acknowledges Keyholder Override conceptually for potential bypasses.
+    Serves as the execution backbone for these Process Blueprints, including those
+    instantiating MetaWorkflow SPRs, by orchestrating task execution based on dependencies,
+    resolving inputs using context, and evaluating conditions.
+
+    Critically, it manages the invocation of actions (tools) via the action_registry
+    and ensures adherence to the Integrated Action Reflection (IAR) protocol by
+    storing the complete action result (primary output + 'reflection' dictionary)
+    from each step into the workflow context. This IAR data is then available for
+    subsequent tasks and conditional logic.
+
+    The engine also integrates with error handling strategies (retry, fail_fast,
+    trigger_metacog) and conceptually acknowledges Keyholder Override for potential bypasses.
     """
     def __init__(self, spr_manager: Optional[SPRManager] = None):
         # Initialize with paths and settings from config
@@ -111,60 +117,72 @@ class WorkflowEngine:
             logger.error(f"Recursion depth limit ({self.max_recursion_depth}) exceeded resolving value for key '{current_key}'. Returning None.")
             return None
 
-        if isinstance(value, str) and value.startswith("{{") and value.endswith("}}"):
-            # Extract path and attempt resolution
-            var_path = value[2:-2].strip()
-            if not var_path: return None # Handle empty braces {{}}
-
-            # Handle special context references
-            if var_path == 'initial_context':
-                # Return a deep copy to prevent modification of original context
-                return copy.deepcopy(context.get('initial_context', {}))
-            if var_path == 'workflow_run_id':
-                return context.get('workflow_run_id', 'unknown_run')
-
-            # Resolve path using dot notation (e.g., task_id.results.key, task_id.reflection.confidence)
-            parts = var_path.split('.')
-            current_val = context # Start resolution from the top-level context
-            try:
-                for i, part in enumerate(parts):
-                    if isinstance(current_val, dict):
-                            # Try accessing as dict key, then integer key (for potential dicts with int keys)
+        if isinstance(value, str):
+            # Regex to find all occurrences of {{ var.path }}
+            # Non-greedy match for var.path to handle multiple on one line correctly
+            # Needs to handle cases where the entire string is a template vs. interpolation
+            
+            # First, check if the entire string is a template {{...}}
+            if value.startswith("{{") and value.endswith("}}"):
+                var_path = value[2:-2].strip()
+                if not var_path: return None # Handle empty braces {{}}
+                # ... (rest of the existing full-template resolution logic, copied below)
+                if var_path == 'initial_context':
+                    return copy.deepcopy(context.get('initial_context', {}))
+                if var_path == 'workflow_run_id':
+                    return context.get('workflow_run_id', 'unknown_run')
+                parts = var_path.split('.')
+                current_val = context
+                try:
+                    for i, part in enumerate(parts):
+                        if isinstance(current_val, dict):
                             if part in current_val:
                                 current_val = current_val[part]
                             elif part.isdigit() and int(part) in current_val:
                                 current_val = current_val[int(part)]
-                            # Special case: Allow accessing initial context keys directly if top-level
                             elif i == 0 and 'initial_context' in context and part in context['initial_context']:
                                 current_val = context['initial_context'][part]
                             else:
                                 raise KeyError(f"Key '{part}' not found in dictionary.")
-                    elif isinstance(current_val, list):
-                            # Try accessing as list index
+                        elif isinstance(current_val, list):
                             try:
                                 idx = int(part)
-                                # Check bounds
                                 if not -len(current_val) <= idx < len(current_val):
                                     raise IndexError("List index out of range.")
                                 current_val = current_val[idx]
                             except (ValueError, IndexError) as e_list:
-                                # Raise KeyError for consistency in error handling below
                                 raise KeyError(f"Invalid list index '{part}': {e_list}")
-                    else:
-                            # Cannot traverse further if not dict or list
+                        else:
                             raise TypeError(f"Cannot access part '{part}' in non-dict/non-list context: {type(current_val)}")
+                    resolved_value = copy.deepcopy(current_val) if isinstance(current_val, (dict, list)) else current_val
+                    logger.debug(f"Resolved full template '{var_path}' for key '{current_key}' to value: {str(resolved_value)[:80]}...")
+                    return resolved_value
+                except (KeyError, IndexError, TypeError) as e:
+                    logger.warning(f"Could not resolve context variable '{var_path}' for key '{current_key}'. Error: {e}. Returning None.")
+                    return None
+                except Exception as e_resolve:
+                    logger.error(f"Unexpected error resolving context variable '{var_path}' for key '{current_key}': {e_resolve}", exc_info=True)
+                    return None
+            else:
+                # If not a full template, perform string interpolation
+                # Using a simpler regex to find all {{...}} occurrences
+                # This will replace each {{var.path}} with its resolved value or "None" if unresolvable
+                # A more robust version might raise errors or have specific format for unresolvable vars
+                def replace_match(match):
+                    var_path_interpolated = match.group(1).strip()
+                    # Temporarily call _resolve_value for this sub-template.
+                    # This is recursive. Ensure base cases handle depth correctly.
+                    # Wrap with {{}} to use the full-template logic above for resolution.
+                    resolved_var = self._resolve_value(f"{{{{{var_path_interpolated}}}}}", context, f"{current_key} [interpolation of {var_path_interpolated}]", depth + 1)
+                    return str(resolved_var) if resolved_var is not None else "None" # Or handle unresolved differently
+                
+                # Use re.sub with a function to handle replacements
+                # Regex to find {{ any_chars_non_greedy }} 
+                interpolated_string = re.sub(r"{{\s*(.*?)\s*}}", replace_match, value)
+                if interpolated_string != value:
+                     logger.debug(f"Interpolated string for key '{current_key}'. Original: '{value}', Result: '{interpolated_string}'")
+                return interpolated_string
 
-                # Deep copy mutable results (dicts, lists) to prevent accidental modification
-                resolved_value = copy.deepcopy(current_val) if isinstance(current_val, (dict, list)) else current_val
-                logger.debug(f"Resolved context path '{var_path}' for key '{current_key}' to value: {str(resolved_value)[:80]}...")
-                return resolved_value
-            except (KeyError, IndexError, TypeError) as e:
-                # Log warning if resolution fails
-                logger.warning(f"Could not resolve context variable '{var_path}' for key '{current_key}'. Error: {e}. Returning None.")
-                return None
-            except Exception as e_resolve:
-                logger.error(f"Unexpected error resolving context variable '{var_path}' for key '{current_key}': {e_resolve}", exc_info=True)
-                return None
         elif isinstance(value, dict):
             # Recursively resolve values within a dictionary
             return {k: self._resolve_value(v, context, k, depth + 1) for k, v in value.items()}
@@ -457,7 +475,8 @@ class WorkflowEngine:
                     if not action_type: raise ValueError("Task action_type is missing.") # Should be caught earlier, but safeguard
 
                     # Execute the action via the registry - Expects a dict return including 'reflection'
-                    action_result = execute_action(action_type, inputs) # Action registry handles IAR validation conceptually
+                    # Pass task_id, task_results (as current_workflow_context), and run_id (as workflow_id)
+                    action_result = execute_action(action_type, inputs)
 
                     # Check for explicit error key in the result first
                     if isinstance(action_result, dict) and action_result.get("error"):
@@ -557,6 +576,53 @@ class WorkflowEngine:
         task_results["task_statuses"] = task_status # Include final status of each task
         task_results["workflow_run_duration_sec"] = round(run_duration, 2)
 
+        # --- Generate Workflow-Level IAR ---
+        num_total_tasks = len(tasks)
+        num_completed = sum(1 for st in task_status.values() if st == 'completed')
+        num_failed = sum(1 for st in task_status.values() if st == 'failed')
+        num_skipped = sum(1 for st in task_status.values() if st == 'skipped')
+        num_incomplete = sum(1 for st in task_status.values() if st == 'incomplete')
+
+        workflow_reflection_summary = f"Workflow '{workflow_display_name}' finished with status: {overall_status}. "
+        workflow_reflection_summary += f"Tasks: {num_completed} completed, {num_failed} failed, {num_skipped} skipped, {num_incomplete} incomplete out of {num_total_tasks} total."
+        
+        workflow_reflection_status = "Success" # Default, adjust based on overall_status
+        workflow_reflection_confidence = 1.0 # Default, adjust
+        workflow_reflection_issues = []
+
+        if overall_status == "Completed Successfully":
+            workflow_reflection_confidence = 0.95 # High, but acknowledge distributed nature
+        elif overall_status == "Completed with Errors":
+            workflow_reflection_status = "Partial Success" # Or "Failure" depending on severity interpretation
+            workflow_reflection_confidence = 0.5
+            workflow_reflection_issues.append(f"{num_failed} task(s) failed.")
+            if task_results.get("workflow_error"): workflow_reflection_issues.append(task_results["workflow_error"])
+        elif overall_status == "Incomplete":
+            workflow_reflection_status = "Failure"
+            workflow_reflection_confidence = 0.2
+            workflow_reflection_issues.append(f"{num_incomplete} task(s) did not complete.")
+            if task_results.get("workflow_error"): workflow_reflection_issues.append(task_results["workflow_error"])
+        elif overall_status == "Failed": # e.g. structural errors, critical load failures
+            workflow_reflection_status = "Failure"
+            workflow_reflection_confidence = 0.0
+            workflow_reflection_issues.append(f"Workflow failed to execute properly. Error: {task_results.get('error', 'Unknown structural/load error')}")
+
+        task_results["reflection"] = {
+            "status": workflow_reflection_status,
+            "summary": workflow_reflection_summary,
+            "confidence": workflow_reflection_confidence,
+            "alignment_check": "Workflow-level alignment (assessed by Keyholder/Meta-Cognition)",
+            "potential_issues": workflow_reflection_issues if workflow_reflection_issues else None,
+            "raw_output_preview": f"Overall status: {overall_status}, Failed tasks: {num_failed}",
+            "metrics": {
+                 "total_tasks": num_total_tasks,
+                 "completed_tasks": num_completed,
+                 "failed_tasks": num_failed,
+                 "skipped_tasks": num_skipped,
+                 "incomplete_tasks": num_incomplete,
+                 "run_duration_sec": round(run_duration, 2)
+            }
+        }
         # Return the complete context, including initial context, task results (with IAR), and final status info
         return task_results
 

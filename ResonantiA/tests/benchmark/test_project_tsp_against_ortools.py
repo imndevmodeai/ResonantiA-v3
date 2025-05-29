@@ -1,7 +1,7 @@
 import os, json, pytest, math, logging
-from workflow_engine import WorkflowEngine
-from utils.tsplib_loader import tsplib_to_abm_data
-from benchmarks.ortools_baseline import solve as ortools_solve
+from ResonantiA.ArchE.workflow_engine import WorkflowEngine
+from ResonantiA.ArchE.utils.tsplib_loader import tsplib_to_abm_data
+from ResonantiA.ArchE.benchmarks.ortools_baseline import solve as ortools_solve
 
 # Configure logging for the test
 logging.basicConfig(level=logging.INFO)

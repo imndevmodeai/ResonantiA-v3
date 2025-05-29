@@ -1,0 +1,55 @@
+{
+  "name": "ASASF Session Context Restore Workflow (v3.0)",
+  "description": "Loads and presents a previously captured session context capsule to aid re-engagement.",
+  "version": "3.0",
+  "tasks": {
+    "load_capsule_file": {
+      "description": "Load the session context capsule from the specified file path.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport os\\n\\ncapsule_filepath = context.get('initial_context', {}).get('capsule_filepath')\\nif not capsule_filepath or not isinstance(capsule_filepath, str) or not os.path.exists(capsule_filepath):\\n    sessions_dir = context.get('initial_context', {}).get('asf_capsule_output_dir', 'outputs/ASASF_Snapshots/session_capsules')\\n    if os.path.isdir(sessions_dir):\\n        capsules = sorted([os.path.join(sessions_dir, f) for f in os.listdir(sessions_dir) if f.startswith('ASASF_SessionContextCapsule_') and f.endswith('.json')], key=os.path.getmtime, reverse=True)\\n        if capsules:\\n            capsule_filepath = capsules[0]\\n            print(f'No specific capsule_filepath provided, using latest found: {capsule_filepath}')\\n        else:\\n            raise FileNotFoundError(f'No Session Context Capsule files found in {sessions_dir} and no specific path provided.')\\n    else:\\n        raise FileNotFoundError(f'Session Context Capsule file not found at: {capsule_filepath} (and sessions_dir {sessions_dir} not found).')\\n\\nwith open(capsule_filepath, 'r', encoding='utf-8') as f:\\n    session_capsule_data = json.load(f)\\n\\nprint(f'Successfully loaded session context capsule from: {capsule_filepath}')\\nresult = {'session_capsule_data': session_capsule_data, 'loaded_capsule_path': capsule_filepath}"
+      },
+      "outputs": {"session_capsule_data": "dict", "loaded_capsule_path": "string", "reflection": "dict"},
+      "dependencies": []
+    },
+    "display_loaded_context_summary": {
+      "description": "Display a summary of the loaded session context for Keyholder review.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "message": "ASASF: Loaded Session Context Capsule for Review",
+          "capsule_source_file": "{{ load_capsule_file.loaded_capsule_path }}",
+          "capture_timestamp": "{{ load_capsule_file.session_capsule_data.overall_capture_timestamp }}",
+          "keyholder_notes_preview": "{{ load_capsule_file.session_capsule_data.keyholder_session_notes[:500] }}..."
+        },
+        "format": "json"
+      },
+      "dependencies": ["load_capsule_file"],
+      "condition": "{{ load_capsule_file.reflection.status == 'Success' }}"
+    },
+    "prime_arche_with_restored_context": {
+      "description": "Use LLM to summarize the capsule and prime current session (Conceptual).",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "The following is a 'Session Context Capsule' from a previous ResonantiA development session. Please provide a concise summary focusing on: 1. Keyholder's main points/goals from their notes. 2. Arche's operational context highlights (last workflow, key SPRs if mentioned). 3. Suggest 1-2 immediate focus points or questions to help re-engage with that development state and continue effectively.\\n\\nSession Context Capsule:\\n```json\\n{{ load_capsule_file.session_capsule_data }}\\n```\\n\\nConcise Priming Summary & Suggested Focus Points:",
+        "max_tokens": 700
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["load_capsule_file"],
+      "condition": "{{ load_capsule_file.reflection.status == 'Success' }}"
+    },
+    "display_priming_summary_for_session": {
+        "description": "Display the LLM-generated priming summary to kickstart the session.",
+        "action_type": "display_output",
+        "inputs": {
+            "content": {
+                "message": "ASASF: Session context restored. LLM Priming Summary & Focus Suggestions:",
+                "priming_summary": "{{ prime_arche_with_restored_context.response_text }}"
+            }
+        },
+        "dependencies": ["prime_arche_with_restored_context"],
+        "condition": "{{ prime_arche_with_restored_context.reflection.status == 'Success' }}"
+    }
+  }
+} 

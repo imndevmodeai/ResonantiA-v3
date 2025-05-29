@@ -104,7 +104,7 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """
     language = inputs.get("language")
     code = inputs.get("code")
-    input_data = inputs.get("input_data", "") # Default to empty string if not provided
+    raw_input_data = inputs.get("input_data")
 
     # --- Initialize Results & Reflection ---
     primary_result = {"stdout": "", "stderr": "", "exit_code": -1, "error": None, "sandbox_method_used": "N/A"}
@@ -120,14 +120,31 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
         primary_result["error"] = "Missing or invalid 'language' string input."; reflection_issues.append(primary_result["error"])
     elif not code or not isinstance(code, str):
         primary_result["error"] = "Missing or invalid 'code' string input."; reflection_issues.append(primary_result["error"])
-    elif not isinstance(input_data, str):
-        # Attempt to convert input_data to string if it's not, log warning
+    
+    input_data_str: str
+    if raw_input_data is None:
+        input_data_str = ""
+    elif isinstance(raw_input_data, str):
+        input_data_str = raw_input_data
+    elif isinstance(raw_input_data, dict): # Or other types you want to auto-serialize
         try:
-            input_data = str(input_data)
-            logger.warning(f"Input 'input_data' was not a string ({type(inputs.get('input_data'))}), converted to string.")
-        except Exception as e_str:
-            primary_result["error"] = f"Invalid 'input_data': Cannot convert type {type(inputs.get('input_data'))} to string ({e_str})."
-            reflection_issues.append(primary_result["error"])
+            input_data_str = json.dumps(raw_input_data)
+        except TypeError as e:
+            error_msg = f"Invalid 'input_data': Failed to serialize dictionary to JSON: {e}"
+            primary_result["error"] = error_msg; reflection_issues.append(error_msg)
+            # Fallback to empty string or handle as critical error
+            input_data_str = "" # Or re-raise / return error immediately
+            logger.error(error_msg, exc_info=True) 
+    else:
+        # For other non-string, non-dict types, attempt to convert to string
+        try:
+            input_data_str = str(raw_input_data)
+            logger.warning(f"Input 'input_data' was of type {type(raw_input_data)}, converted to string for stdin.")
+        except Exception as e_str_conv:
+            error_msg = f"Invalid 'input_data': Cannot convert type {type(raw_input_data)} to string for stdin: {e_str_conv}"
+            primary_result["error"] = error_msg; reflection_issues.append(error_msg)
+            input_data_str = "" # Or re-raise / return error immediately
+            logger.error(error_msg, exc_info=True)
 
     if primary_result["error"]:
         reflection_summary = f"Input validation failed: {primary_result['error']}"
@@ -143,23 +160,23 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
     exec_result: Dict[str, Any] = {} # Dictionary to store results from internal execution functions
     if method_to_use == 'docker':
         if DOCKER_AVAILABLE:
-            exec_result = _execute_with_docker(language, code, input_data)
+            exec_result = _execute_with_docker(language, code, input_data_str)
         else:
             # Fallback if Docker configured but unavailable
             logger.warning("Docker configured but unavailable. Falling back to 'subprocess' (less secure).")
             primary_result["sandbox_method_used"] = 'subprocess' # Update actual method used
             reflection_issues.append("Docker unavailable, fell back to subprocess.")
-            exec_result = _execute_with_subprocess(language, code, input_data)
+            exec_result = _execute_with_subprocess(language, code, input_data_str)
             if exec_result.get("error"): # If subprocess also failed (e.g., interpreter missing)
                 reflection_issues.append(f"Subprocess fallback failed: {exec_result.get('error')}")
     elif method_to_use == 'subprocess':
         logger.warning("Executing code via 'subprocess' sandbox. This provides limited isolation and is less secure than Docker.")
-        exec_result = _execute_with_subprocess(language, code, input_data)
+        exec_result = _execute_with_subprocess(language, code, input_data_str)
     elif method_to_use == 'none':
         logger.critical("Executing code with NO SANDBOX ('none'). This is EXTREMELY INSECURE and should only be used in trusted debugging environments with full awareness of risks.")
         reflection_issues.append("CRITICAL SECURITY RISK: Code executed without sandbox.")
         # Use subprocess logic for actual execution, but flag clearly that no sandbox was intended
-        exec_result = _execute_with_subprocess(language, code, input_data)
+        exec_result = _execute_with_subprocess(language, code, input_data_str)
         exec_result["note"] = "Executed with NO SANDBOX ('none' method)." # Add note to result
     else: # Should not happen due to resolution logic, but safeguard
         exec_result = {"error": f"Internal configuration error: Unsupported sandbox method '{method_to_use}' resolved.", "exit_code": -1}

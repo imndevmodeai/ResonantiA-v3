@@ -1,103 +1,49 @@
-const puppeteer = require("puppeteer");
-const puppeteerExtra = require("puppeteer-extra");
-const StealthPlugin = require("puppeteer-extra-plugin-stealth");
-const ExtraPluginAnonymizeUa = require("puppeteer-extra-plugin-anonymize-ua");
-const fs = require('fs').promises;
+const puppeteer = require('puppeteer-core'); // Using puppeteer-core as it's likely intended for a package
 const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
 
+// Import puppeteer-extra and plugins
+const puppeteerExtra = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteerExtra.use(StealthPlugin());
-puppeteerExtra.use(ExtraPluginAnonymizeUa());
+
+const AnonymizeUaPlugin = require('puppeteer-extra-plugin-anonymize-ua');
+puppeteerExtra.use(AnonymizeUaPlugin());
+
 
 /**
- * Search the web using DuckDuckGo or Google
- * @param {string} query - The search query
- * @param {string} searchEngine - The search engine to use (duckduckgo or google)
+ * Performs a search on a given search engine and extracts the results.
+ * @param {Page} page - Puppeteer page object
+ * @param {string} query - Search query
+ * @param {string} searchEngine - Search engine to use (google or duckduckgo)
  * @param {boolean} debug - Whether to enable debug mode
  * @returns {Promise<Array>} - Array of search results
  */
-async function search(query, searchEngine = "duckduckgo", debug = false) {
-  let browser;
+async function search(page, query, searchEngine = "duckduckgo", debug = false) {
   try {
-    console.log(`Searching for "${query}" on ${searchEngine}...`);
-    
-    // Configure browser launch options
-    const launchOptions = {
-      headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-web-security",
-        "--disable-features=IsolateOrigins,site-per-process"
-      ]
-    };
-    
-    // Launch browser
-    browser = await puppeteerExtra.launch(launchOptions);
-    const page = await browser.newPage();
-    
-    // Set a realistic user agent
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
-    
-    // Set viewport to a common desktop resolution
-    await page.setViewport({ width: 1280, height: 800 });
-    
-    // Enable debug logging if requested
-    if (debug) {
-      page.on('console', msg => console.log('PAGE LOG:', msg.text()));
-      
-      // Log all requests
-      await page.setRequestInterception(true);
-      page.on('request', request => {
-        console.log(`Request: ${request.url()}`);
-        request.continue();
-      });
-    }
-    
-    // Determine search URL based on engine
-    let searchUrl;
-    if (searchEngine.toLowerCase() === "google") {
-      const encodedQuery = encodeURIComponent(query);
-      searchUrl = `https://www.google.com/search?q=${encodedQuery}`;
-      console.log("Warning: Google search may be blocked by CAPTCHA");
+    console.error(`Searching for \"${query}\" on ${searchEngine}...`);
+
+    // Navigate to the search engine
+    const searchUrl = searchEngine === "google" ? "https://www.google.com/search?q=" + encodeURIComponent(query) : "https://duckduckgo.com/html/";
+    console.error(`Navigating to ${searchUrl}`);
+    await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+
+    if (searchEngine === "google") {
+      return await handleGoogleSearch(page, query, debug);
+    } else if (searchEngine === "duckduckgo") {
+      return await handleDuckDuckGoSearch(page, query, debug);
     } else {
-      // Default to DuckDuckGo
-      searchUrl = "https://duckduckgo.com/html/";
+      throw new Error(`Unsupported search engine: ${searchEngine}`);
     }
-    
-    // Navigate to search page
-    console.log(`Navigating to ${searchUrl}`);
-    await page.goto(searchUrl, { 
-      waitUntil: "networkidle2",
-      timeout: 30000 
-    });
-    
-    // Take screenshot if debugging
-    if (debug) {
-      const screenshotPath = path.join(path.dirname(require.main.filename), 'search-page.png');
-      await page.screenshot({ path: screenshotPath, fullPage: true });
-      console.log(`Screenshot saved to ${screenshotPath}`);
-    }
-    
-    // Handle search based on engine
-    let results = [];
-    
-    if (searchEngine.toLowerCase() === "google") {
-      results = await handleGoogleSearch(page, query, debug);
-    } else {
-      results = await handleDuckDuckGoSearch(page, query, debug);
-    }
-    
-    return results;
-    
+
   } catch (error) {
     console.error(`Search error: ${error.message}`);
-    return { error: error.message };
-  } finally {
-    if (browser) {
-      await browser.close();
-    }
+    return [];
   }
 }
+
 
 /**
  * Handle Google search
@@ -108,85 +54,43 @@ async function search(query, searchEngine = "duckduckgo", debug = false) {
  */
 async function handleGoogleSearch(page, query, debug) {
   try {
-    console.log("Handling Google search...");
-    
-    // Check for and handle consent dialog
-    try {
-      const consentSelectors = [
-        'button[aria-label="Accept all"]',
-        'button[aria-label="Reject all"]',
-        '#L2AGLb',
-        'button.tHlp8d'
-      ];
-      
-      for (const selector of consentSelectors) {
-        try {
-          console.log(`Looking for consent button with selector: ${selector}`);
-          const consentButtonExists = await page.$(selector) !== null;
-          
-          if (consentButtonExists) {
-            console.log(`Found consent button with selector: ${selector}`);
-            await page.click(selector);
-            console.log("Clicked consent button");
-            
-            // Wait for navigation or timeout
-            await Promise.race([
-              page.waitForNavigation({ timeout: 5000 }),
-              new Promise(resolve => setTimeout(resolve, 5000))
-            ]);
-            
-            break;
-          }
-        } catch (e) {
-          console.log(`Error with selector ${selector}: ${e.message}`);
-        }
-      }
-    } catch (e) {
-      console.log(`Error handling consent: ${e.message}`);
-    }
-    
-    // Check if we're on a CAPTCHA page
-    const pageContent = await page.content();
-    if (pageContent.includes("recaptcha") || pageContent.includes("Our systems have detected unusual traffic")) {
-      console.log("CAPTCHA detected! Google is blocking automated access.");
-      return { error: "CAPTCHA detected. Google search is not available." };
-    }
-    
-    // Wait for search results with multiple possible selectors
-    const searchResultSelectors = [
-      "div#search",
+    console.error("Handling Google search...");
+
+    // Wait for search results to load
+    const selectors = [
       "div.g",
       "div.tF2Cxc",
       "div[data-sokoban-container]",
-      "div.v7W49e"
+      "div.v7W49e",
+      "div.MjjYud"
     ];
-    
+
     let resultsFound = false;
-    for (const selector of searchResultSelectors) {
+    for (const selector of selectors) {
       try {
-        console.log(`Waiting for selector: ${selector}`);
+        console.error(`Waiting for selector: ${selector}`);
         await page.waitForSelector(selector, { timeout: 5000 });
-        console.log(`Found results with selector: ${selector}`);
+        console.error(`Found results with selector: ${selector}`);
         resultsFound = true;
         break;
       } catch (e) {
-        console.log(`Selector ${selector} not found: ${e.message}`);
+        console.error(`Selector ${selector} not found: ${e.message}`);
       }
     }
-    
+
     if (!resultsFound) {
-      console.log("Could not find search results with any selector");
+      console.error("Could not find search results with any selector");
       if (debug) {
-        const screenshotPath = path.join(path.dirname(require.main.filename), 'search-results.png');
+        const screenshotPath = path.join(__dirname, 'search-results.png');
         await page.screenshot({ path: screenshotPath, fullPage: true });
-        console.log(`Results page screenshot saved to ${screenshotPath}`);
+        console.error(`Results page screenshot saved to ${screenshotPath}`);
       }
       return [];
     }
-    
+
     // Extract search results
     return await extractGoogleResults(page);
-    
+
   } catch (error) {
     console.error(`Google search error: ${error.message}`);
     return [];
@@ -202,30 +106,30 @@ async function handleGoogleSearch(page, query, debug) {
  */
 async function handleDuckDuckGoSearch(page, query, debug) {
   try {
-    console.log("Handling DuckDuckGo search...");
-    
+    console.error("Handling DuckDuckGo search...");
+
     // Type search query and submit
     await page.type("input[name=\"q\"]", query);
     await page.keyboard.press("Enter");
-    
+
     // Wait for results to load
     try {
       await page.waitForSelector(".result", { timeout: 10000 });
     } catch (e) {
-      console.log(`Error waiting for DuckDuckGo results: ${e.message}`);
+      console.error(`Error waiting for DuckDuckGo results: ${e.message}`);
       return [];
     }
-    
+
     // Take screenshot if debugging
     if (debug) {
-      const screenshotPath = path.join(path.dirname(require.main.filename), 'search-results.png');
+      const screenshotPath = path.join(__dirname, 'search-results.png');
       await page.screenshot({ path: screenshotPath, fullPage: true });
-      console.log(`Results screenshot saved to ${screenshotPath}`);
+      console.error(`Results screenshot saved to ${screenshotPath}`);
     }
-    
+
     // Extract search results
     return await extractDuckDuckGoResults(page);
-    
+
   } catch (error) {
     console.error(`DuckDuckGo search error: ${error.message}`);
     return [];
@@ -238,12 +142,12 @@ async function handleDuckDuckGoSearch(page, query, debug) {
  * @returns {Promise<Array>} - Array of search results
  */
 async function extractGoogleResults(page) {
-  console.log("Extracting Google search results...");
-  
+  console.error("Extracting Google search results...");
+
   try {
     return await page.evaluate(() => {
       let items = [];
-      
+
       // Try multiple selectors for Google
       const selectors = [
         "div.g",
@@ -252,7 +156,7 @@ async function extractGoogleResults(page) {
         "div.v7W49e",
         "div.MjjYud"
       ];
-      
+
       for (const selector of selectors) {
         const elements = document.querySelectorAll(selector);
         if (elements && elements.length > 0) {
@@ -260,7 +164,7 @@ async function extractGoogleResults(page) {
           break;
         }
       }
-      
+
       // If still no results, try a more generic approach
       if (items.length === 0) {
         // Look for any div containing an h3 (likely a search result)
@@ -270,31 +174,31 @@ async function extractGoogleResults(page) {
           items = items.filter(item => item !== null);
         }
       }
-      
+
       return items.slice(0, 5).map(item => {
         let title = "N/A";
         let link = "N/A";
         let description = "N/A";
-        
+
         try {
           // Try multiple selectors for Google result components
-          const titleElement = item.querySelector("h3") || 
+          const titleElement = item.querySelector("h3") ||
                               item.querySelector(".LC20lb");
-          
+
           const linkElement = item.querySelector("a");
-          
-          const descElement = item.querySelector("div[data-content-feature='1']") || 
-                             item.querySelector(".VwiC3b") || 
+
+          const descElement = item.querySelector("div[data-content-feature='1']") ||
+                             item.querySelector(".VwiC3b") ||
                              item.querySelector(".IsZvec") ||
                              item.querySelector(".lEBKkf");
-          
+
           title = titleElement ? titleElement.textContent.trim() : "N/A";
           link = linkElement ? linkElement.href : "N/A";
           description = descElement ? descElement.textContent.trim() : "N/A";
         } catch (e) {
-          // If there's an error extracting data from this item, return what we have
+          // If there\'s an error extracting data from this item, return what we have
         }
-        
+
         return { title, link, description };
       });
     });
@@ -310,55 +214,226 @@ async function extractGoogleResults(page) {
  * @returns {Promise<Array>} - Array of search results
  */
 async function extractDuckDuckGoResults(page) {
-  console.log("Extracting DuckDuckGo search results...");
-  
+  console.error("Extracting DuckDuckGo search results...");
+
   try {
     return await page.evaluate(() => {
       const items = Array.from(document.querySelectorAll(".result"));
-      
+
       return items.slice(0, 5).map(item => {
         let title = "N/A";
         let link = "N/A";
         let description = "N/A";
-        
+        let result_date_snippet = null; // New field
+
         try {
           const titleElement = item.querySelector(".result__title a");
-          const linkElement = item.querySelector(".result__url a");
+          const linkElement = item.querySelector("a[href]") || item.querySelector(".result__url a");
           const descElement = item.querySelector(".result__snippet");
-          
+
+          // Attempt to find a date snippet associated with the result
+          // This is highly dependent on DDG's structure and might need refinement
+          const dateSnippetElement = item.querySelector(".result__timestamp") || 
+                                     item.querySelector(".result__age"); // Hypothetical selectors
+
           title = titleElement ? titleElement.textContent.trim() : "N/A";
           link = linkElement ? linkElement.href : "N/A";
           description = descElement ? descElement.textContent.trim() : "N/A";
+          result_date_snippet = dateSnippetElement ? dateSnippetElement.textContent.trim() : null;
+
         } catch (e) {
           // If there's an error extracting data from this item, return what we have
         }
-        
-        return { title, link, description };
+
+        return { title, link, description, result_date_snippet }; // Added result_date_snippet
       });
     });
   } catch (error) {
     console.error(`Error extracting DuckDuckGo results: ${error.message}`);
     return [];
   }
+  }
+
+/**
+ * Scrape content from a given URL.
+ * @param {Page} page - Puppeteer page object
+ * @param {string} url - URL to scrape
+ * @returns {Promise<string>} - Scraped content
+ */
+async function scrapePageContent(page, url) {
+  let attempts = 0;
+  const maxAttempts = 2;
+  let lastError = null;
+
+  while (attempts < maxAttempts) {
+    try {
+      console.error(`Scraping content from ${url} (Attempt ${attempts + 1}/${maxAttempts})`);
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+      // Wait for a bit to let dynamic content load, if any (optional, adjust as needed)
+      // await new Promise(resolve => setTimeout(resolve, 1000));
+
+      const pageData = await page.evaluate(() => {
+        let content = document.body.innerText || "N/A";
+        let publication_date = null;
+        const metaSelectors = [
+          'meta[property="article:published_time"]',
+          'meta[name="date"]',
+          'meta[name="Date"]',
+          'meta[name="pubdate"]',
+          'meta[name="publishdate"]',
+          'meta[name="article.created"]',
+          'meta[name="article.published"]',
+          'meta[itemprop="datePublished"]',
+        ];
+        for (const selector of metaSelectors) {
+          const el = document.querySelector(selector);
+          if (el && el.content) {
+            publication_date = el.content;
+            break;
+          }
+        }
+        if (!publication_date) {
+          const timeEl = document.querySelector('time[datetime]');
+          if (timeEl && timeEl.getAttribute('datetime')) {
+            publication_date = timeEl.getAttribute('datetime');
+          }
+        }
+        // Add more sophisticated date extraction logic here if needed (e.g., JSON-LD)
+
+        const fullHtml = document.documentElement.outerHTML;
+        return { content, publication_date, fullHtml };
+      });
+      
+      console.error(`Successfully scraped ${url}`);
+      return pageData; // Return object with content, publication_date, fullHtml
+
+  } catch (error) {
+      lastError = error;
+      console.error(`Error scraping ${url} (Attempt ${attempts + 1}): ${error.message}`);
+      attempts++;
+      if (attempts < maxAttempts) {
+        console.error(`Retrying in 2 seconds...`);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } else {
+        console.error(`Failed to scrape ${url} after ${maxAttempts} attempts.`);
+        return { content: "Error: Could not scrape content.", publication_date: null, fullHtml: "", error: error.message };
+  }
+    }
+  }
+  // Should not be reached if loop logic is correct, but as a fallback:
+  return { content: "Error: Max retries reached, unknown error.", publication_date: null, fullHtml: "", error: lastError ? lastError.message : "Unknown error" };
 }
 
 /**
- * Main function
+ * Main function to orchestrate the search and scraping process.
  */
-(async () => {
+async function main() {
+  let browser = null;
+  let tempDir = null;
   try {
-    // Get command line arguments
-    const query = process.argv[2] || "ResonantiA AI";
-    const searchEngine = process.argv[3] || "duckduckgo";
-    const debug = process.argv.includes("--debug");
-    
-    // Perform search
-    const results = await search(query, searchEngine, debug);
-    
-    // Output results
-    console.log(JSON.stringify(results, null, 2));
-    
+    const query = process.argv[2];
+    const numResults = parseInt(process.argv[3] || '3', 10);
+    const searchEngine = process.argv[4] || "duckduckgo"; // Default to duckduckgo
+    const outputDirArg = process.argv[5]; // Optional base directory for archives from Python
+    const debug = process.argv.includes('--debug');
+
+    if (!query) {
+      console.error("Usage: node search.js <query> [numResults] [searchEngine] [outputDir] [--debug]");
+      process.exit(1);
+    }
+
+    // Create a unique temporary directory for this run's archives
+    // This temp dir will be created inside the script's own directory or a system temp if outputDirArg is not specified
+    const baseTempPath = outputDirArg ? path.join(outputDirArg, 'search_archives') : os.tmpdir();
+    fs.mkdirSync(baseTempPath, { recursive: true }); // Ensure base archive dir exists
+    tempDir = fs.mkdtempSync(path.join(baseTempPath, 'run-'));
+    console.error(`Archives for this run will be stored in: ${tempDir}`);
+
+    // const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(); // Let puppeteer-extra handle this
+    // console.error(`Using browser executable: ${executablePath}`);
+
+    browser = await puppeteerExtra.launch({
+      headless: true, // Consider 'new' for future Puppeteer versions
+      // executablePath: executablePath, // Removed to let puppeteer-extra find it
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
+    });
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1280, height: 800 });
+
+    const searchResults = await search(page, query, searchEngine, debug);
+    const processedResults = [];
+
+    for (let i = 0; i < Math.min(searchResults.length, numResults); i++) {
+      const result = searchResults[i];
+      if (!result.link || result.link === "N/A" || result.link.startsWith('javascript:')) continue;
+
+      console.error(`Processing URL (${i+1}/${Math.min(searchResults.length, numResults)}): ${result.link}`);
+      const pageData = await scrapePageContent(page, result.link);
+      
+      let archived_html_path = null;
+      let archived_screenshot_path = null;
+
+      if (pageData.fullHtml) {
+        const urlHash = crypto.createHash('md5').update(result.link).digest('hex');
+        const htmlFilename = `page_${urlHash}_${i}.html`;
+        archived_html_path = path.join(tempDir, htmlFilename);
+        try {
+          fs.writeFileSync(archived_html_path, pageData.fullHtml);
+          console.error(`Saved HTML for ${result.link} to ${archived_html_path}`);
+        } catch (e) {
+          console.error(`Error saving HTML for ${result.link}: ${e.message}`);
+          archived_html_path = null; // Reset path if save failed
+        }
+      }
+
+      try {
+        const screenshotFilename = `screenshot_${crypto.createHash('md5').update(result.link).digest('hex')}_${i}.png`;
+        archived_screenshot_path = path.join(tempDir, screenshotFilename);
+        await page.screenshot({ path: archived_screenshot_path, fullPage: true });
+        console.error(`Saved screenshot for ${result.link} to ${archived_screenshot_path}`);
+      } catch (e) {
+        console.error(`Error taking/saving screenshot for ${result.link}: ${e.message}`);
+        archived_screenshot_path = null;
+      }
+
+      processedResults.push({
+        title: result.title,
+        link: result.link,
+        description: result.description,
+        result_date_snippet: result.result_date_snippet, // From initial search result page
+        content: pageData.content, // Main text from scraped page
+        publication_date: pageData.publication_date, // From scraped page
+        archived_html_path: archived_html_path ? path.relative(outputDirArg || process.cwd(), archived_html_path) : null, // Relative path
+        archived_screenshot_path: archived_screenshot_path ? path.relative(outputDirArg || process.cwd(), archived_screenshot_path) : null, // Relative path
+        error_scraping: pageData.error || null
+      });
+    }
+
+    console.log(JSON.stringify(processedResults, null, 2));
+
   } catch (error) {
-    console.error(JSON.stringify({ error: error.message }, null, 2));
-    process.exit(1);
+    console.error(`Critical error in main: ${error.message}\nStack: ${error.stack}`);
+    // Output an empty array or error structure in case of critical failure before/during processing results
+    console.log(JSON.stringify([{ error: "Main process_failed", details: error.message }], null, 2));
+    process.exitCode = 1; // Indicate failure
+  } finally {
+    if (browser) {
+      try {
+      await browser.close();
+      } catch (e) {
+        console.error(`Error closing browser: ${e.message}`);
+      }
+    }
+    // Do not delete tempDir here; Python side will be responsible for cleanup after copying.
+    // if (tempDir) {
+    //   fs.rmSync(tempDir, { recursive: true, force: true });
+    //   console.error(`Cleaned up temporary archive directory: ${tempDir}`);
+    // }
   }
+}
+
+// Ensure OS module is required if not already (for os.tmpdir())
+const os = require('os');
+
+main();

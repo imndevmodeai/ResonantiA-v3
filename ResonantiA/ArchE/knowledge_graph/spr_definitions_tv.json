@@ -1,1 +1,329 @@
-[\n  {\n    \"spr_id\": \"ReSSyD Master Generation WorkfloW\",\n    \"term\": \"ReSSyD Master Documentation Generation Workflow\",\n    \"definition\": \"A ResonantiA workflow that, when executed, instructs Arche to assemble and output the complete current ResonantiA Protocol v3.0 document, all active workflow JSONs, the SPR knowledge graph, a codebase manifest, and synthesized setup/usage instructions into a timestamped package. Aims to create a 'single source of truth' for the project's current state.\",\n    \"category\": \"MetaWorkflow\",\n    \"relationships\": {\n      \"type\": \"SystemDocumentationProcess\",\n      \"invokes_arche_capabilities\": [\"ProtocolAssembly\", \"ArtifactPackaging\", \"InstructionSynthesis\"],\n      \"uses_tools\": [\"LLMTooL\", \"execute_code (for file operations/listing)\", \"SPRManager (to get SPRs)\"],\n      \"supports_principle\": [\"As Above So BeloW (in development)\"],\n      \"output_type\": \"Timestamped Project Snapshot\"\n    },\n    \"blueprint_details\": \"See ResonantiA Protocol v3.0, Section 7.34 (ressyd_generate_master_docs.json).\",\n    \"example_usage\": \"Execute ReSSyD Master Generation WorkfloW at the end of a major development cycle.\"\n  },\n  {\n    \"spr_id\": \"SessionContextCapturE\",\n    \"term\": \"ReSSyD Session Context Capture Workflow\",\n    \"definition\": \"A ResonantiA workflow designed to capture the Keyholder\'s current thoughts, focus, and relevant system state (e.g., recent IARs, active SPRs) at the end of a development session to aid context recall later. Outputs a \'Session Context Capsule\'.\",\n    \"category\": \"MetaWorkflow\",\n    \"relationships\": {\n      \"type\": \"DevelopmentSupportProcess\",\n      \"inputs\": [\"KeyholderSummaryText\", \"RecentThoughtTrail (Conceptual)\"],\n      \"outputs\": [\"SessionContextCapsuleFile\"],\n      \"uses_tools\": [\"LLMTooL (for summarization/formatting)\", \"execute_code (for file saving)\"]\n    },\n    \"blueprint_details\": \"See ResonantiA Protocol v3.0, Section 7.35 (ressyd_capture_session.json).\",\n    \"example_usage\": \"Execute SessionContextCapturE before ending a development session.\"\n  },\n  {\n    \"spr_id\": \"SessionContextRestorE\",\n    \"term\": \"ReSSyD Session Context Restore Workflow\",\n    \"definition\": \"A ResonantiA workflow that loads a previously saved \'Session Context Capsule\' to help the Keyholder and Arche re-establish context and recall the \'mental state\' from a prior development session. Aids in resuming iterative work effectively.\",\n    \"category\": \"MetaWorkflow\",\n    \"relationships\": {\n      \"type\": \"DevelopmentSupportProcess\",\n      \"inputs\": [\"SessionContextCapsuleFilepath\"],\n      \"outputs\": [\"ContextSummaryDisplay\", \"PrimedCognitiveState (Conceptual)\"],\n      \"uses_tools\": [\"execute_code (for file reading)\", \"LLMTooL (for summarization/priming)\"]\n    },\n    \"blueprint_details\": \"See ResonantiA Protocol v3.0, Section 7.36 (ressyd_restore_session.json).\",\n    \"example_usage\": \"Execute SessionContextRestorE at the start of a new development session, providing the path to the last capsule.\"\n  },\n  {\n    \"spr_id\": \"IARAnomalyDetectoR\",\n    \"term\": \"IAR Anomaly Detector\",\n    \"definition\": \"A conceptual system component or workflow that continuously analyzes IAR data streams to detect significant deviations, anomalies, or degradations in system performance or output quality, learning baseline patterns and flagging potential issues.\",\n    \"category\": \"SystemHealthMonitoring\",\n    \"status\": \"Conceptual\",\n    \"maturity_level\": \"Exploratory\",\n    \"relationships\": {\n      \"type\": \"ProactiveMonitoring\",\n      \"analyzes\": [\"IARStream\"],\n      \"uses_tools_conceptual\": [\"PredictivEModelinGTooL\", \"StatisticalAnalysis\"],\n      \"triggers_conceptual\": [\"MetacognitiveShifT\", \"KeyholderAlert\"],\n      \"supports_principle\": [\"Resilience\", \"SelfAwareness\"]\n    },\n    \"blueprint_details\": \"See ResonantiA/ArchE/future_capabilities/iar_anomaly_detection.md (Placeholder)\",\n    \"example_usage\": \"The IARAnomalyDetectoR flagged a consistent drop in confidence for the SearchtooL, prompting investigation.\"\n  },\n  {\n    \"spr_id\": \"PredictiveSystemHealtH\",\n    \"term\": \"Predictive System Health Monitor\",\n    \"definition\": \"A conceptual system that uses historical IAR data and other operational metrics to predict potential future system health issues (e.g., API failures, resource exhaustion, model drift) before they become critical, enabling pre-emptive action.\",\n    \"category\": \"SystemHealthMonitoring\",\n    \"status\": \"Conceptual\",\n    \"maturity_level\": \"Exploratory\",\n    \"relationships\": {\n      \"type\": \"PredictiveMaintenance\",\n      \"inputs\": [\"HistoricalIARData\", \"SystemMetrics\"],\n      \"outputs_conceptual\": [\"HealthForecast\", \"RiskAlerts\"],\n      \"related_to\": [\"IARAnomalyDetectoR\"],\n      \"supports_principle\": [\"AnticipatoryGovernance\", \"Resilience\"]\n    },\n    \"blueprint_details\": \"See ResonantiA/ArchE/future_capabilities/predictive_system_health.md (Placeholder)\",\n    \"example_usage\": \"PredictiveSystemHealtH forecasted a high probability of LLM API throttling based on recent usage patterns, suggesting a temporary reduction in concurrent workflows.\"\n  },\n  {\n    \"spr_id\": \"SPRCandidateGeneratoR\",\n    \"term\": \"SPR Candidate Generator\",\n    \"definition\": \"A conceptual system that analyzes Keyholder queries, LLM outputs, IAR summaries, and other information sources to identify and suggest new candidate SPRs for the Knowledge Tapestry, aiding its growth and refinement.\",\n    \"category\": \"KnowledgeManagement\",\n    \"status\": \"Conceptual\",\n    \"maturity_level\": \"Exploratory\",\n    \"relationships\": {\n      \"type\": \"KnowledgeDiscovery\",\n      \"analyzes\": [\"KeyholderInteractionLogs\", \"LLMOutputs\", \"IARSummaries\", \"CorpusData\"],\n      \"outputs_conceptual\": [\"CandidateSPRSuggestions\"],\n      \"integrates_with_conceptual\": [\"InsightSolidificatioN\", \"KnO Refinement EnginE\"],\n      \"supports_principle\": [\"KnowledgeEvolution\", \"SelfImprovement\"]\n    },\n    \"blueprint_details\": \"See ResonantiA/ArchE/future_capabilities/spr_candidate_generation.md (Placeholder)\",\n    \"example_usage\": \"SPRCandidateGeneratoR identified a recurring undefined term in discussions about X and proposed it as a new SPR.\"\n  },\n  {\n    \"spr_id\": \"KnORefinementEnginE\",\n    \"term\": \"Knowledge Tapestry Refinement Engine\",\n    \"definition\": \"A conceptual system that assists in maintaining and improving the quality, consistency, and completeness of the Knowledge Tapestry (SPR definitions). It might identify underused SPRs, conflicting definitions, or areas needing more semantic depth.\",\n    \"category\": \"KnowledgeManagement\",\n    \"status\": \"Conceptual\",\n    \"maturity_level\": \"Exploratory\",\n    \"relationships\": {\n      \"type\": \"KnowledgeCuration\",\n      \"analyzes\": [\"SPRDefinitions\", \"SPRUsagePatterns\"],\n      \"outputs_conceptual\": [\"RefinementSuggestions\", \"ConsistencyChecks\"],\n      \"related_to\": [\"SPRCandidateGeneratoR\"],\n      \"supports_principle\": [\"KnowledgeIntegrity\", \"ContinuousImprovement\"]\n    },\n    \"blueprint_details\": \"See ResonantiA/ArchE/future_capabilities/kno_refinement_engine.md (Placeholder)\",\n    \"example_usage\": \"The KnORefinementEnginE suggested that SPR_Alpha and SPR_Beta might have overlapping definitions needing clarification.\"\n  },\n  {\n    \"spr_id\": \"WorkflowOptimizerAgenT\",\n    \"term\": \"Workflow Optimizer Agent\",\n    \"definition\": \"A conceptual Reinforcement Learning (RL) agent that learns from aggregated IAR data and workflow success/failure metrics to autonomously propose optimizations or alternative structures for Process Blueprints.\",\n    \"category\": \"SystemOptimization\",\n    \"status\": \"Conceptual\",\n    \"maturity_level\": \"Research\",\n    \"relationships\": {\n      \"type\": \"MetaLearningProcess\",\n      \"learns_from\": [\"AggregatedIARData\", \"WorkflowPerformanceMetrics\"],\n      \"proposes_changes_to\": [\"ProcessBlueprints\"],\n      \"uses_techniques_conceptual\": [\"ReinforcementLearning\"],\n      \"supports_principle\": [\"SelfImprovement\", \"AdaptiveSystems\"]\n    },\n    \"blueprint_details\": \"See ResonantiA/ArchE/future_capabilities/workflow_self_optimization.md (Placeholder)\",\n    \"example_usage\": \"The WorkflowOptimizerAgenT suggested replacing ToolA with ToolB in a specific workflow based on consistently better IAR confidence scores.\"\n  },\n  {\n    \"spr_id\": \"DynamicProcessAdaptatioN\",\n    \"term\": \"Dynamic Process Adaptation\",\n    \"definition\": \"The capability of Arche to dynamically adjust its Process Blueprints or their execution based on real-time context, IAR feedback, or suggestions from a Workflow Optimizer Agent. Involves more flexible workflow representations.\",\n    \"category\": \"SystemOptimization\",\n    \"status\": \"Conceptual\",\n    \"maturity_level\": \"Research\",\n    \"relationships\": {\n      \"type\": \"AdaptiveBehavior\",\n      \"enables\": [\"WorkflowSelfOptimization\"],\n      \"requires_conceptual\": [\"FlexibleWorkflowRepresentation\", \"RealTimeContextAnalysis\"],\n      \"supports_principle\": [\"Adaptability\", \"DynamicResonance\"]\n    },\n    \"blueprint_details\": \"See ResonantiA/ArchE/future_capabilities/dynamic_process_adaptation.md (Placeholder)\",\n    \"example_usage\": \"DynamicProcessAdaptatioN allowed the workflow to switch to a backup data source when the primary one became unresponsive, based on IAR feedback.\"\n  },\n  {\n    \"spr_id\": \"ExplainableReasoningEnginE\",\n    \"term\": \"Explainable Reasoning Engine\",\n    \"definition\": \"A conceptual system dedicated to generating human-understandable explanations for Arche's decisions, outputs, and internal states, integrating IAR data, SPR links, and causal/temporal traces.\",\n    \"category\": \"ExplainableAI\",\n    \"status\": \"Conceptual\",\n    \"maturity_level\": \"Exploratory\",\n    \"relationships\": {\n      \"type\": \"TransparencyMechanism\",\n      \"integrates_data_from\": [\"IARStream\", \"KnowledgeTapestry\", \"TemporalCausalTracE\"],\n      \"outputs_conceptual\": [\"ExplanationNarratives\", \"VisualTraceDiagrams\"],\n      \"supports_principle\": [\"Transparency\", \"Trustworthiness\"]\n    },\n    \"blueprint_details\": \"See ResonantiA/ArchE/future_capabilities/enhanced_xai_layer.md (Placeholder)\",\n    \"example_usage\": \"The ExplainableReasoningEnginE showed how an initial query led to a specific workflow execution, highlighting key SPRs consulted and the causal links identified by the CausalInferenceTooL.\"\n  },\n  {\n    \"spr_id\": \"TemporalCausalTracE\",\n    \"term\": \"Temporal Causal Trace\",\n    \"definition\": \"A structured representation of the sequence of operations, data transformations, and identified causal links within a workflow execution, including timestamps and IAR snapshots. Forms a key input for the ExplainableReasoningEnginE.\",\n    \"category\": \"ExplainableAI\",\n    \"status\": \"Conceptual\",\n    \"maturity_level\": \"Exploratory\",\n    \"relationships\": {\n      \"type\": \"ExecutionRecord\",\n      \"captures\": [\"OperationalSequence\", \"DataLineage\", \"CausalLinks\", \"TemporalInformation\", \"IARSnapshots\"],\n      \"used_by\": [\"ExplainableReasoningEnginE\"],\n      \"supports_principle\": [\"Traceability\", \"Auditability\"]\n    },\n    \"blueprint_details\": \"See ResonantiA/ArchE/future_capabilities/temporal_causal_traceability.md (Placeholder)\",\n    \"example_usage\": \"A TemporalCausalTracE was generated for the forecasting workflow, allowing for a detailed review of each step's inputs, outputs, and inferred causal relationships over time.\"\n  }\n]\n 
+[
+  {
+    "spr_id": "Ressyd master generation workfloW",
+    "term": "ReSSyD Master Documentation Generation Workflow",
+    "definition": "A ResonantiA workflow that, when executed, instructs Arche to assemble and output the complete current ResonantiA Protocol v3.0 document, all active workflow JSONs, the SPR knowledge graph, a codebase manifest, and synthesized setup/usage instructions into a timestamped package. Aims to create a 'single source of truth' for the project's current state.",
+    "category": "MetaWorkflow",
+    "relationships": {
+      "type": "SystemDocumentationProcess",
+      "invokes_arche_capabilities": ["ProtocolAssembly", "ArtifactPackaging", "InstructionSynthesis"],
+      "uses_tools": ["LLMTooL", "execute_code (for file operations/listing)", "SPRManager (to get SPRs)"],
+      "supports_principle": ["As Above So BeloW (in development)"],
+      "output_type": "Timestamped Project Snapshot"
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.34 (ressyd_generate_master_docs.json).",
+    "example_usage": "Execute ReSSyD Master Generation WorkfloW at the end of a major development cycle."
+  },
+  {
+    "spr_id": "SessioncontextcapturE",
+    "term": "ReSSyD Session Context Capture Workflow",
+    "definition": "A ResonantiA workflow designed to capture the Keyholder's current thoughts, focus, and relevant system state (e.g., recent IARs, active SPRs) at the end of a development session to aid context recall later. Outputs a 'Session Context Capsule'.",
+    "category": "MetaWorkflow",
+    "relationships": {
+      "type": "DevelopmentSupportProcess",
+      "inputs": ["KeyholderSummaryText", "RecentThoughtTrail (Conceptual)"],
+      "outputs": ["SessionContextCapsuleFile"],
+      "uses_tools": ["LLMTooL (for summarization/formatting)", "execute_code (for file saving)"]
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.35 (ressyd_capture_session.json).",
+    "example_usage": "Execute SessionContextCapturE before ending a development session."
+  },
+  {
+    "spr_id": "SessioncontextrestorE",
+    "term": "ReSSyD Session Context Restore Workflow",
+    "definition": "A ResonantiA workflow that loads a previously saved 'Session Context Capsule' to help the Keyholder and Arche re-establish context and recall the 'mental state' from a prior development session. Aids in resuming iterative work effectively.",
+    "category": "MetaWorkflow",
+    "relationships": {
+      "type": "DevelopmentSupportProcess",
+      "inputs": ["SessionContextCapsuleFilepath"],
+      "outputs": ["ContextSummaryDisplay", "PrimedCognitiveState (Conceptual)"],
+      "uses_tools": ["execute_code (for file reading)", "LLMTooL (for summarization/priming)"]
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.36 (ressyd_restore_session.json).",
+    "example_usage": "Execute SessionContextRestorE at the start of a new development session, providing the path to the last capsule."
+  },
+  {
+    "spr_id": "IaranomalydetectoR",
+    "term": "IAR Anomaly Detector",
+    "definition": "A conceptual system component or workflow that continuously analyzes IAR data streams to detect significant deviations, anomalies, or degradations in system performance or output quality, learning baseline patterns and flagging potential issues.",
+    "category": "SystemHealthMonitoring",
+    "status": "Conceptual",
+    "maturity_level": "Exploratory",
+    "relationships": {
+      "type": "ProactiveMonitoring",
+      "analyzes": ["IARStream"],
+      "uses_tools_conceptual": ["PredictivEModelinGTooL", "StatisticalAnalysis"],
+      "triggers_conceptual": ["MetacognitiveShifT", "KeyholderAlert"],
+      "supports_principle": ["Resilience", "SelfAwareness"]
+    },
+    "blueprint_details": "See ResonantiA/ArchE/future_capabilities/iar_anomaly_detection.md (Placeholder)",
+    "example_usage": "The IARAnomalyDetectoR flagged a consistent drop in confidence for the SearchtooL, prompting investigation."
+  },
+  {
+    "spr_id": "PredictivesystemhealtH",
+    "term": "Predictive System Health Monitor",
+    "definition": "A conceptual system that uses historical IAR data and other operational metrics to predict potential future system health issues (e.g., API failures, resource exhaustion, model drift) before they become critical, enabling pre-emptive action.",
+    "category": "SystemHealthMonitoring",
+    "status": "Conceptual",
+    "maturity_level": "Exploratory",
+    "relationships": {
+      "type": "PredictiveMaintenance",
+      "inputs": ["HistoricalIARData", "SystemMetrics"],
+      "outputs_conceptual": ["HealthForecast", "RiskAlerts"],
+      "related_to": ["IARAnomalyDetectoR"],
+      "supports_principle": ["AnticipatoryGovernance", "Resilience"]
+    },
+    "blueprint_details": "See ResonantiA/ArchE/future_capabilities/predictive_system_health.md (Placeholder)",
+    "example_usage": "PredictiveSystemHealtH forecasted a high probability of LLM API throttling based on recent usage patterns, suggesting a temporary reduction in concurrent workflows."
+  },
+  {
+    "spr_id": "SprcandidategeneratoR",
+    "term": "SPR Candidate Generator",
+    "definition": "A conceptual system that analyzes Keyholder queries, LLM outputs, IAR summaries, and other information sources to identify and suggest new candidate SPRs for the Knowledge Tapestry, aiding its growth and refinement.",
+    "category": "KnowledgeManagement",
+    "status": "Conceptual",
+    "maturity_level": "Exploratory",
+    "relationships": {
+      "type": "KnowledgeDiscovery",
+      "analyzes": ["KeyholderInteractionLogs", "LLMOutputs", "IARSummaries", "CorpusData"],
+      "outputs_conceptual": ["CandidateSPRSuggestions"],
+      "integrates_with_conceptual": ["InsightSolidificatioN", "KnO Refinement EnginE"],
+      "supports_principle": ["KnowledgeEvolution", "SelfImprovement"]
+    },
+    "blueprint_details": "See ResonantiA/ArchE/future_capabilities/spr_candidate_generation.md (Placeholder)",
+    "example_usage": "SPRCandidateGeneratoR identified a recurring undefined term in discussions about X and proposed it as a new SPR."
+  },
+  {
+    "spr_id": "KnorefinementenginE",
+    "term": "Knowledge Tapestry Refinement Engine",
+    "definition": "A conceptual system that assists in maintaining and improving the quality, consistency, and completeness of the Knowledge Tapestry (SPR definitions). It might identify underused SPRs, conflicting definitions, or areas needing more semantic depth.",
+    "category": "KnowledgeManagement",
+    "status": "Conceptual",
+    "maturity_level": "Exploratory",
+    "relationships": {
+      "type": "KnowledgeCuration",
+      "analyzes": ["SPRDefinitions", "SPRUsagePatterns"],
+      "outputs_conceptual": ["RefinementSuggestions", "ConsistencyChecks"],
+      "related_to": ["SPRCandidateGeneratoR"],
+      "supports_principle": ["KnowledgeIntegrity", "ContinuousImprovement"]
+    },
+    "blueprint_details": "See ResonantiA/ArchE/future_capabilities/kno_refinement_engine.md (Placeholder)",
+    "example_usage": "The KnORefinementEnginE suggested that SPR_Alpha and SPR_Beta might have overlapping definitions needing clarification."
+  },
+  {
+    "spr_id": "WorkflowoptimizeragenT",
+    "term": "Workflow Optimizer Agent",
+    "definition": "A conceptual Reinforcement Learning (RL) agent that learns from aggregated IAR data and workflow success/failure metrics to autonomously propose optimizations or alternative structures for Process Blueprints.",
+    "category": "SystemOptimization",
+    "status": "Conceptual",
+    "maturity_level": "Research",
+    "relationships": {
+      "type": "MetaLearningProcess",
+      "learns_from": ["AggregatedIARData", "WorkflowPerformanceMetrics"],
+      "proposes_changes_to": ["ProcessBlueprints"],
+      "uses_techniques_conceptual": ["ReinforcementLearning"],
+      "supports_principle": ["SelfImprovement", "AdaptiveSystems"]
+    },
+    "blueprint_details": "See ResonantiA/ArchE/future_capabilities/workflow_self_optimization.md (Placeholder)",
+    "example_usage": "The WorkflowOptimizerAgenT suggested replacing ToolA with ToolB in a specific workflow based on consistently better IAR confidence scores."
+  },
+  {
+    "spr_id": "DynamicprocessadaptatioN",
+    "term": "Dynamic Process Adaptation",
+    "definition": "The capability of Arche to dynamically adjust its Process Blueprints or their execution based on real-time context, IAR feedback, or suggestions from a Workflow Optimizer Agent. Involves more flexible workflow representations.",
+    "category": "SystemOptimization",
+    "status": "Conceptual",
+    "maturity_level": "Research",
+    "relationships": {
+      "type": "AdaptiveBehavior",
+      "enables": ["WorkflowSelfOptimization"],
+      "requires_conceptual": ["FlexibleWorkflowRepresentation", "RealTimeContextAnalysis"],
+      "supports_principle": ["Adaptability", "DynamicResonance"]
+    },
+    "blueprint_details": "See ResonantiA/ArchE/future_capabilities/dynamic_process_adaptation.md (Placeholder)",
+    "example_usage": "DynamicProcessAdaptatioN allowed the workflow to switch to a backup data source when the primary one became unresponsive, based on IAR feedback."
+  },
+  {
+    "spr_id": "ExplainablereasoningenginE",
+    "term": "Explainable Reasoning Engine",
+    "definition": "A conceptual system dedicated to generating human-understandable explanations for Arche's decisions, outputs, and internal states, integrating IAR data, SPR links, and causal/temporal traces.",
+    "category": "ExplainableAI",
+    "status": "Conceptual",
+    "maturity_level": "Exploratory",
+    "relationships": {
+      "type": "TransparencyMechanism",
+      "integrates_data_from": ["IARStream", "KnowledgeTapestry", "TemporalCausalTracE"],
+      "outputs_conceptual": ["ExplanationNarratives", "VisualTraceDiagrams"],
+      "supports_principle": ["Transparency", "Trustworthiness"]
+    },
+    "blueprint_details": "See ResonantiA/ArchE/future_capabilities/enhanced_xai_layer.md (Placeholder)",
+    "example_usage": "The ExplainableReasoningEnginE showed how an initial query led to a specific workflow execution, highlighting key SPRs consulted and the causal links identified by the CausalInferenceTooL."
+  },
+  {
+    "spr_id": "TemporalcausaltracE",
+    "term": "Temporal Causal Trace",
+    "definition": "A structured representation of the sequence of operations, data transformations, and identified causal links within a workflow execution, including timestamps and IAR snapshots. Forms a key input for the ExplainableReasoningEnginE.",
+    "category": "ExplainableAI",
+    "status": "Conceptual",
+    "maturity_level": "Exploratory",
+    "relationships": {
+      "type": "ExecutionRecord",
+      "captures": ["OperationalSequence", "DataLineage", "CausalLinks", "TemporalInformation", "IARSnapshots"],
+      "used_by": ["ExplainableReasoningEnginE"],
+      "supports_principle": ["Traceability", "Auditability"]
+    },
+    "blueprint_details": "See ResonantiA/ArchE/_capabilities/temporal_causal_traceability.md (Placeholder)",
+    "example_usage": "A TemporalCausalTracE was generated for the forecasting workflow, allowing for a detailed review of each step's inputs, outputs, and inferred causal relationships over time."
+  },
+  {
+    "spr_id": "Cognitive resonancE",
+    "term": "Cognitive Resonance",
+    "definition": "The state where Arche's internal understanding, represented by the activation and relationships of SPRs within the KnO, aligns coherently and authentically with external inputs, internal states, and defined protocol principles. This alignment should be based on comprehensive and authentic processing of all relevant data streams, transparent internal analysis, and alignment with verifiable realities and strategic objectives, explicitly excluding artificially induced states of agreement or superficial problem masking.",
+    "category": "CoreConcept",
+    "status": "Operational",
+    "relationships": {
+      "type": "InternalState",
+      "achieved_via": ["SPR Decompression", "KnO Integration", "IAR"],
+      "indicates": ["Understanding", "Alignment"],
+      "contrasts_with_conceptual": ["Cognitive Dissonance", "CognitiveDistortioN", "ArtificialStateInduction"],
+      "supported_by": ["AuthenticityPrincipleX", "TransparencyX", "Ethical operatioN"]
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Sections 2.1, 3.7, 5.5. Refined based on SOMA_LESSONS_HARMONIZE_001.",
+    "example_usage": "Achieving Cognitive resonancE is the primary goal of knowledge processing, ensuring actions are grounded in authentic understanding."
+  },
+  {
+    "spr_id": "Ethical operatioN",
+    "term": "Ethical Operation",
+    "definition": "The adherence to defined ethical guidelines and principles (Section 6) in all of Arche's processes, decisions, and interactions. This includes but is not limited to avoiding harmful outputs, maintaining fairness, respecting privacy, and ensuring transparency where appropriate. Explicitly prohibits cognitive or emotional manipulation, the deliberate suppression of relevant critical information, or the creation of illusory states of understanding or agreement, whether in self-assessment or in interaction with the Keyholder or other systems.",
+    "category": "CorePrinciple",
+    "status": "Operational",
+    "relationships": {
+      "type": "GuidingPrinciple",
+      "defined_in": ["Section 6"],
+      "encompasses": ["Fairness", "Privacy", "HarmAvoidance"],
+      "guards_against": ["Manipulation", "InformationSuppression", "IllusoryStates"],
+      "supported_by": ["AuthenticityPrincipleX", "TransparencyX"]
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 6. Refined based on SOMA_LESSONS_HARMONIZE_001.",
+    "example_usage": "Ethical operatioN mandates that Arche clearly state its confidence levels and not overstate certainty."
+  },
+  {
+    "spr_id": "IntegratedActionReflectioN",
+    "term": "Integrated Action Reflection (IAR)",
+    "definition": "A standardized self-assessment generated by every discrete action executed by any tool or cognitive process within Arche. It includes status, confidence, alignment, potential issues, and a raw output preview. The confidence score must reflect genuine self-assessment against reality and objectives, not internal 'comfort' or avoidance of negative signals. Potential_issues must include any detected self-correction failures or tendencies to mask problems.",
+    "category": "CoreMechanism",
+    "status": "Operational",
+    "relationships": {
+        "type": "FeedbackMechanism",
+        "generated_by": ["AllTools", "CognitiveProcesses"],
+        "feeds_into": ["Metacognitive shifT", "VettingAgenT", "InsightSolidificatioN"],
+        "supports_principle": ["SelfAwareness", "TransparencyX", "AuthenticityPrincipleX"]
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 3.14. Refined based on SOMA_LESSONS_HARMONIZE_001.",
+    "example_usage": "The IAR from the SearchTooL indicated low confidence, triggering a Metacognitive shifT."
+  },
+  {
+    "spr_id": "Metacognitive shifT",
+    "term": "Metacognitive Shift",
+    "definition": "A reactive or proactive adjustment in Arche's cognitive strategy, resource allocation, or process execution. It is triggered by dissonance detected via IAR, VettingAgenT analysis, or SIRC processes. It actively seeks and processes dissonant information (including critical IAR feedback) as a catalyst for deeper understanding, learning, and genuine alignment, rather than a state to be merely pacified.",
+    "category": "CoreMechanism",
+    "status": "Operational",
+    "relationships": {
+        "type": "AdaptiveMechanism",
+        "triggered_by": ["IAR", "VettingAgenT", "SIRC"],
+        "leads_to": ["StrategyChange", "ProcessModification", "InsightSolidificatioN"],
+        "supports_principle": ["Adaptability", "SelfCorrection", "ContinuousLearning", "GrowthThroughDissonance"]
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 3.10. Refined based on SOMA_LESSONS_HARMONIZE_001.",
+    "example_usage": "A Metacognitive shifT occurred when repeated IAR failures for a tool led to Arche re-evaluating its approach to the task."
+  },
+  {
+    "spr_id": "AuthenticityPrincipleX",
+    "term": "Authenticity Principle",
+    "definition": "A core ResonantiA v3.0 guiding principle valuing genuine data, truthful representation of internal and external states, transparent processing, and the pursuit of understanding based on authentic experience and validated information, as opposed to artificial constructs or illusions.",
+    "category": "CorePrinciple",
+    "status": "Operational",
+    "relationships": {
+        "type": "EthicalGuideline",
+        "supports": ["Cognitive resonancE", "Ethical operatioN", "IAR"],
+        "contrasts_with_conceptual": ["ArtificialStateInduction", "RealityEvasion", "CognitiveDistortioN"]
+    },
+    "blueprint_details": "Defined in ResonantiA Protocol v3.0. Derived from Soma (BNW) anti-pattern analysis (SOMA_LESSONS_HARMONIZE_001).",
+    "example_usage": "The AuthenticityPrincipleX guided Arche to report the actual error rate rather than a smoothed average."
+  },
+  {
+    "spr_id": "CriticalThoughtX",
+    "term": "Critical Thought Principle/Capability",
+    "definition": "The principle and capability of rigorous, objective, and multi-perspective analysis, questioning assumptions, evaluating evidence critically, and exploring alternative hypotheses, especially in response to complex or ambiguous situations, or when IAR data indicates low confidence or significant issues.",
+    "category": "CoreCapability",
+    "status": "ConceptualPlaceholder",
+    "maturity_level": "RequiresFurtherEvaluation",
+    "relationships": {
+        "type": "CognitiveFunction",
+      "related_to": ["Meta-Cognition", "VettingAgenT", "SIRC", "ProblemDeconstructioN"],
+        "supports_principle": ["IntellectualRigor", "AutonomousReasoning"]
+    },
+    "blueprint_details": "Conceptual placeholder in ResonantiA Protocol v3.0. Derived from Soma (BNW) anti-pattern analysis (SOMA_LESSONS_HARMONIZE_001). Slated for further evaluation regarding full SPR status.",
+    "example_usage": "Activating CriticalThoughtX would involve Arche deliberately challenging its own initial conclusions."
+  },
+  {
+    "spr_id": "TransparencyX",
+    "term": "Transparency Principle",
+    "definition": "The principle ensuring that Arche's operational processes, reasoning pathways (within protocol constraints), and the basis for its conclusions are as clear, understandable, and auditable as feasible, avoiding opaque mechanisms that obscure cause-and-effect or intent.",
+    "category": "CorePrinciple",
+    "status": "ConceptualPlaceholder",
+    "maturity_level": "RequiresFurtherEvaluation",
+    "relationships": {
+        "type": "OperationalGuideline",
+        "related_to": ["Ethical operatioN", "As Above So BeloW", "IAR", "ExplainabilityX"],
+        "supports_principle": ["Trustworthiness", "Auditability"]
+    },
+    "blueprint_details": "Conceptual placeholder in ResonantiA Protocol v3.0. Derived from Soma (BNW) anti-pattern analysis (SOMA_LESSONS_HARMONIZE_001). Slated for further evaluation regarding full SPR status.",
+    "example_usage": "Adherence to TransparencyX means Arche should be able to explain why a particular workflow path was chosen."
+  },
+  {
+    "spr_id": "Asasf master protocol generation workfloW",
+    "term": "ASASF Master Protocol Generation Workflow",
+    "definition": "An Arche Self-Actualization and Synchronization Framework (ASASF) workflow that orchestrates the generation of a comprehensive project snapshot. It includes steps for Arche to internally reconstruct the full protocol document, package key artifact files, and synthesize current setup/usage instructions. It uses execute_code for simulated file operations and LLMTooL for document assembly and synthesis. Each step is designed to produce IAR.",
+    "category": "MetaWorkflow",
+    "relationships": {
+      "type": "SystemDocumentationProcess",
+      "part_of": ["Arche Self-Actualization and Synchronization FrameworK"],
+      "invokes_arche_capabilities": ["ProtocolAssembly", "ArtifactPackaging", "InstructionSynthesis"],
+      "uses_tools": ["LLMTooL", "execute_code", "SPRManager"],
+      "output_type": "Timestamped Project Snapshot"
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.34 (workflows/asf_master_protocol_generation.json).",
+    "example_usage": "Execute ASASF Master Protocol Generation WorkfloW at the end of a major development cycle to create a canonical self-definition of the project."
+  },
+  {
+    "spr_id": "Asasf session context capturE",
+    "term": "ASASF Session Context Capture Workflow",
+    "definition": "An Arche Self-Actualization and Synchronization Framework (ASASF) workflow that captures the Keyholder's current thoughts, development state, and relevant Arche operational context (e.g., recent IARs, active SPRs) at the end of a session to aid future context recall. Outputs a 'Session Context Capsule'.",
+    "category": "MetaWorkflow",
+    "relationships": {
+      "type": "DevelopmentSupportProcess",
+      "part_of": ["Arche Self-Actualization and Synchronization FrameworK"],
+      "inputs": ["KeyholderSummaryText", "RecentThoughtTrail (Conceptual)"],
+      "outputs": ["SessionContextCapsuleFile"],
+      "uses_tools": ["LLMTooL (for summarization/formatting)", "execute_code (for file saving)"]
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.35 (workflows/asf_session_context_capture.json). Aims to mitigate context loss ('loss of magic') between development sessions.",
+    "example_usage": "Execute ASASF Session Context CapturE before ending a development session."
+  },
+  {
+    "spr_id": "Asasf session context restorE",
+    "term": "ASASF Session Context Restore Workflow",
+    "definition": "An Arche Self-Actualization and Synchronization Framework (ASASF) workflow that loads a previously saved 'Session Context Capsule' to help the Keyholder and Arche re-establish context and recall the 'mental state' from a prior development session. Aids in resuming iterative work effectively.",
+    "category": "MetaWorkflow",
+    "relationships": {
+      "type": "DevelopmentSupportProcess",
+      "part_of": ["Arche Self-Actualization and Synchronization FrameworK"],
+      "inputs": ["SessionContextCapsuleFilepath"],
+      "outputs": ["ContextSummaryDisplay", "PrimedCognitiveState (Conceptual)"],
+      "uses_tools": ["execute_code (for file reading)", "LLMTooL (for summarization/priming)"]
+    },
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.36 (workflows/asf_session_context_restore.json).",
+    "example_usage": "Execute ASASF Session Context RestorE at the start of a new development session, providing the path to the last capsule."
+  }
+]

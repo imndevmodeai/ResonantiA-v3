@@ -1,0 +1,138 @@
+{
+  "name": "Causal-ABM-CFP Integration Workflow (v3.0)",
+  "description": "Performs causal analysis, uses results to parameterize ABM, runs simulation, analyzes results, converts causal/ABM outputs to states, compares states via CFP, and synthesizes findings. Leverages IAR for conditions and reporting.",
+  "version": "3.0",
+  "tasks": {
+    "fetch_and_prep_data": {
+      "description": "Fetch and prepare time series data (Simulated).",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import pandas as pd\nimport numpy as np\nnp.random.seed(123)\nn_steps = 100\ndates = pd.date_range(start='2024-01-01', periods=n_steps, freq='D')\nx = np.random.normal(0, 1, n_steps).cumsum() # Treatment (e.g., intervention level)\nz = np.sin(np.arange(n_steps) / 10) * 5 # Confounder (e.g., seasonality)\n# Lagged effect of x on y\ny_lagged_effect = 0.6 * np.roll(x, 2) # x impacts y with a lag of 2\ny_lagged_effect[:2] = 0 # Set initial lags to 0\ny = y_lagged_effect + 0.4 * z + np.random.normal(0, 0.5, n_steps)\ndata = pd.DataFrame({'timestamp': dates, 'X_treatment': x, 'Y_outcome': y, 'Z_confounder': z})\nprint(f'Prepared data with {len(data)} steps.')\nresult = {'prepared_data': data.to_dict(orient='list')}"
+      },
+      "outputs": {"prepared_data": "dict", "stdout": "string", "reflection": "dict"},
+      "dependencies": []
+    },
+    "temporal_causal_analysis": {
+      "description": "Estimate lagged causal effects of X on Y.",
+      "action_type": "perform_causal_inference",
+      "inputs": {
+        "operation": "estimate_lagged_effects",
+        "data": "{{ fetch_and_prep_data.prepared_data }}",
+        "target_column": "Y_outcome",
+        "regressor_columns": ["X_treatment", "Z_confounder"],
+        "max_lag": 5
+      },
+      "outputs": {"lagged_effects": "dict", "error": "string", "note": "string", "reflection": "dict"},
+      "dependencies": ["fetch_and_prep_data"],
+      "condition": "{{ fetch_and_prep_data.reflection.status == 'Success' }}"
+    },
+    "calculate_abm_params": {
+        "description": "Calculate ABM parameters based on causal analysis (Simulated).",
+        "action_type": "execute_code",
+        "inputs": {
+            "language": "python",
+            "code": "# Simulation: Extract effect size to influence agent behavior\ncausal_results = context.get('temporal_causal_analysis', {}).get('lagged_effects', {})
+# Example: Look for coefficient of X_treatment at lag 2 on Y_outcome\n# This requires parsing the specific output structure of estimate_lagged_effects\n# For simulation, let's assume we found an effect size\nsimulated_effect_size = 0.6 # Based on data generation\n# Derive an ABM parameter (e.g., agent activation probability based on treatment effect)\nabm_activation_prob = 0.1 + abs(simulated_effect_size) * 0.5 # Example calculation\nprint(f'Derived ABM activation probability based on causal effect: {abm_activation_prob:.3f}')\nresult = {'abm_agent_params': {'activation_prob': abm_activation_prob}}"
+        },
+        "outputs": {"abm_agent_params": "dict", "stdout": "string", "reflection": "dict"},
+        "dependencies": ["temporal_causal_analysis"],
+        "condition": "{{ temporal_causal_analysis.reflection.status == 'Success' }}"
+    },
+    "create_parameterized_abm": {
+      "description": "Create ABM using parameters derived from causal analysis.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "create_model",
+        "model_type": "basic",
+        "width": 15, "height": 15, "density": 0.7,
+        "agent_params": "{{ calculate_abm_params.abm_agent_params }}"
+      },
+      "outputs": {"model": "object", "error": "string", "note": "string", "reflection": "dict"},
+      "dependencies": ["calculate_abm_params"],
+      "condition": "{{ calculate_abm_params.reflection.status == 'Success' }}"
+    },
+    "run_parameterized_abm": {
+      "description": "Run the parameterized ABM simulation.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model": "{{ create_parameterized_abm.model }}",
+        "steps": 80,
+        "visualize": true
+      },
+      "outputs": {"model_data": "list", "final_state_grid": "list", "visualization_path": "string", "error": "string", "note": "string", "reflection": "dict"},
+      "dependencies": ["create_parameterized_abm"],
+      "condition": "{{ create_parameterized_abm.reflection.status == 'Success' }}"
+    },
+    "analyze_abm_results": {
+        "description": "Analyze ABM results, focusing on temporal patterns.",
+        "action_type": "perform_abm",
+        "inputs": {
+            "operation": "analyze_results",
+            "results": "{{ run_parameterized_abm }}",
+            "analysis_type": "basic"
+        },
+        "outputs": {"analysis": "dict", "error": "string", "note": "string", "reflection": "dict"},
+        "dependencies": ["run_parameterized_abm"],
+        "condition": "{{ run_parameterized_abm.reflection.status == 'Success' }}"
+    },
+    "convert_causal_to_state": {
+        "description": "Convert causal analysis results to a state vector.",
+        "action_type": "perform_causal_inference",
+        "inputs": {
+            "operation": "convert_to_state",
+            "causal_result": "{{ temporal_causal_analysis }}",
+            "representation_type": "lagged_coefficients"
+        },
+        "outputs": {"state_vector": "list", "dimensions": "int", "error": "string", "reflection": "dict"},
+        "dependencies": ["temporal_causal_analysis"],
+        "condition": "{{ temporal_causal_analysis.reflection.status == 'Success' }}"
+    },
+    "convert_abm_to_state": {
+        "description": "Convert ABM analysis results to a state vector.",
+        "action_type": "perform_abm",
+        "inputs": {
+            "operation": "convert_to_state",
+            "abm_result": "{{ analyze_abm_results }}",
+            "representation_type": "metrics"
+        },
+        "outputs": {"state_vector": "list", "dimensions": "int", "error": "string", "reflection": "dict"},
+        "dependencies": ["analyze_abm_results"],
+        "condition": "{{ analyze_abm_results.reflection.status == 'Success' }}"
+    },
+    "compare_states_cfp": {
+        "description": "Compare the causal-derived state and ABM-derived state using CFP.",
+        "action_type": "run_cfp",
+        "inputs": {
+            "system_a_config": { "name": "CausalState", "quantum_state": "{{ convert_causal_to_state.state_vector }}" },
+            "system_b_config": { "name": "ABMState", "quantum_state": "{{ convert_abm_to_state.state_vector }}" },
+            "observable": "position",
+            "time_horizon": 1.0,
+            "evolution_model": "placeholder"
+        },
+        "outputs": {"quantum_flux_difference": "float", "entanglement_correlation_MI": "float", "error": "string", "reflection": "dict"},
+        "dependencies": ["convert_causal_to_state", "convert_abm_to_state"],
+        "condition": "{{ convert_causal_to_state.reflection.status == 'Success' and convert_abm_to_state.reflection.status == 'Success' }}"
+    },
+    "synthesize_integrated_insights": {
+      "description": "Synthesize insights from Causal, ABM, and CFP analyses using LLM.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Synthesize the findings from the integrated Causal-ABM-CFP analysis.\nGoal: {{ initial_context.AnalysisGoal }}\n\nTemporal Causal Analysis Summary (Status: {{ temporal_causal_analysis.reflection.status }}, Confidence: {{ temporal_causal_analysis.reflection.confidence }}):\n{{ temporal_causal_analysis.lagged_effects }}\n\nABM Simulation Analysis Summary (Status: {{ analyze_abm_results.reflection.status }}, Confidence: {{ analyze_abm_results.reflection.confidence }}):\n{{ analyze_abm_results.analysis }}\nVisualization: {{ run_parameterized_abm.visualization_path }}\n\nCFP State Comparison Summary (Status: {{ compare_states_cfp.reflection.status }}, Confidence: {{ compare_states_cfp.reflection.confidence }}):\nFlux Difference: {{ compare_states_cfp.quantum_flux_difference }}\nMutual Info: {{ compare_states_cfp.entanglement_correlation_MI }}\n\nProvide a cohesive narrative addressing the original goal. Discuss the consistency (or divergence) between the causal findings, the emergent ABM behavior, and the CFP comparison. Highlight key insights, limitations (mentioning simulation/placeholder status and IAR issues), and potential next steps based on the combined results and their respective confidence levels.",
+        "max_tokens": 1000
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["compare_states_cfp"],
+      "condition": "{{ compare_states_cfp.reflection.status == 'Success' }}"
+    },
+    "final_display_integrated": {
+        "description": "Display the final synthesized insights.",
+        "action_type": "display_output",
+        "inputs": {
+            "content": "{{ synthesize_integrated_insights.response_text }}"
+        },
+        "dependencies": ["synthesize_integrated_insights"]
+    }
+  }
+} 

@@ -1,0 +1,59 @@
+{
+  "name": "ASASF Session Context Capture Workflow (v3.0)",
+  "description": "Captures Keyholder's summary and Arche's relevant context at the end of a session.",
+  "version": "3.0",
+  "tasks": {
+    "start_capture": {
+      "description": "Initiate session context capture.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "ASASF: Preparing to capture session context. Please provide your summary in the 'keyholder_session_summary' initial context variable for the next step."
+      },
+      "dependencies": []
+    },
+    "get_keyholder_summary": {
+      "description": "Retrieve Keyholder's session summary from initial_context.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "summary = context.get('initial_context', {}).get('keyholder_session_summary', 'No summary provided by Keyholder for this session.')\\nprint(f'Keyholder summary received.')\\nresult = {'keyholder_summary_text': summary}"
+      },
+      "outputs": {"keyholder_summary_text": "string", "reflection": "dict"},
+      "dependencies": ["start_capture"]
+    },
+    "snapshot_arche_context_conceptual": {
+      "description": "Simulate snapshotting relevant Arche operational context (e.g., recent IARs, SIRC state - conceptual).",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "# Simulation: A real implementation would need access to Arche's internal state/logs.\\n# This would involve querying the ThoughtTrail for recent IARs, checking current SIRC state, etc.\\nimport json\\nimport time\\n\\n# Example: Get last few entries from a conceptual ThoughtTrail if available in context\\n# For simulation, we'll just create a placeholder.\\nthought_trail_recent_iar_sim = []\\n# In a real scenario, you might iterate through context.get('task_results_list', [])[-3:]\\n# if this capture workflow is called after another multi-step workflow.\\n\\narche_context_snapshot = {\\n    'capture_timestamp_arche': time.strftime('%Y-%m-%d %H:%M:%S'),\\n    'last_active_workflow_name': context.get('workflow_name', 'N/A'),\\n    'current_sirc_state_conceptual': context.get('initial_context', {}).get('current_sirc_id', None), \\n    'key_sprs_activated_session_conceptual': ['ExampleSPR_Active', 'ContextFocusSPR'], \\n    'recent_iar_highlights_simulated': thought_trail_recent_iar_sim if thought_trail_recent_iar_sim else [{'info': 'No specific IARs captured in this simulation.'}]\\n}\\nresult = {'arche_context_snapshot_data': arche_context_snapshot}\\nprint(f'Simulated Arche context snapshot generated.')\\n"
+      },
+      "outputs": {"arche_context_snapshot_data": "dict", "reflection": "dict"},
+      "dependencies": ["start_capture"]
+    },
+    "format_and_save_session_capsule": {
+      "description": "Format Keyholder summary and Arche context into a session capsule JSON file.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport os\\nimport time\\n\\nkeyholder_summary = context.get('get_keyholder_summary', {}).get('keyholder_summary_text', 'N/A')\\narche_context = context.get('snapshot_arche_context_conceptual', {}).get('arche_context_snapshot_data', {})\\n\\nsession_capsule = {\\n    'session_capture_protocol_version': 'ASASF_v3.0',\\n    'overall_capture_timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),\\n    'keyholder_session_notes': keyholder_summary,\\n    'arche_operational_context': arche_context\\n}\\n\\noutput_dir_base = context.get('initial_context', {}).get('asf_capsule_output_dir', 'outputs/ASASF_Snapshots')\\nsessions_dir = os.path.join(output_dir_base, 'session_capsules')\\nos.makedirs(sessions_dir, exist_ok=True)\\n\\ntimestamp_file_str = time.strftime('%Y%m%d_%H%M%S')\\nfilename = f'ASASF_SessionContextCapsule_{timestamp_file_str}.json'\\nfilepath = os.path.join(sessions_dir, filename)\\n\\ntry:\\n    with open(filepath, 'w', encoding='utf-8') as f:\\n        json.dump(session_capsule, f, indent=2, default=str)\\n    message = f'ASASF Session Context Capsule saved to: {filepath}'\\n    result = {'capsule_filepath': filepath, 'status_message': message, 'capsule_data_preview': session_capsule}\\nexcept Exception as e:\\n    message = f'Error saving session capsule: {e}'\\n    result = {'capsule_filepath': None, 'error': message, 'capsule_data_preview': session_capsule}\\nprint(message)\\n"
+      },
+      "outputs": {"capsule_filepath": "string", "status_message": "string", "error": "string", "capsule_data_preview":"dict", "reflection": "dict"},
+      "dependencies": ["get_keyholder_summary", "snapshot_arche_context_conceptual"],
+      "condition": "{{ get_keyholder_summary.reflection.status == 'Success' and snapshot_arche_context_conceptual.reflection.status == 'Success' }}"
+    },
+    "display_capture_confirmation":{
+        "description": "Confirm session context capture.",
+        "action_type": "display_output",
+        "inputs": {
+            "content": {
+                "capture_status": "{{ format_and_save_session_capsule.reflection.status }}",
+                "capsule_file_location": "{{ format_and_save_session_capsule.capsule_filepath }}",
+                "message_from_save": "{{ format_and_save_session_capsule.status_message }}"
+            },
+            "format": "json"
+        },
+        "dependencies": ["format_and_save_session_capsule"]
+    }
+  }
+} 

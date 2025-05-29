@@ -267,37 +267,59 @@ class SPRManager:
             # Return a deep copy to prevent external modification of the internal state
             return copy.deepcopy(list(self.sprs.values()))
         except Exception as e_copy:
-            logger.error(f"Failed to deepcopy all SPRs: {e_copy}. Returning potentially shared references.")
+            logger.error(f"Failed to deepcopy all SPRs: {e_copy}. Returning potentially shared references.", exc_info=True)
             return list(self.sprs.values()) # Fallback
 
     def is_spr(self, text: Optional[str]) -> Tuple[bool, Optional[str]]:
         """
-        Checks if a given text string strictly matches the SPR format (Guardian Points).
-        Format: First char alphanumeric, last char alphanumeric, middle chars lowercase/space.
-        Excludes common acronyms (e.g., all caps > 3 chars).
+        Checks if a given text string strictly matches the SPR format (Guardian Points)
+        based on user-defined rules:
+        - Min length 3.
+        - First char: Alphanumeric; if letter, must be UPPERCASE.
+        - Last char: Alphanumeric; if letter, must be UPPERCASE.
+        - Middle chars (if any): ONLY lowercase letters or spaces. No uppercase.
+        - No leading/trailing spaces globally.
+        - Word-based interpretation: Not strictly enforced here, but the pattern should
+          allow for forms like "ExamplE" or "Word WordY".
+          The core check is on character types at positions.
         """
-        if not text or not isinstance(text, str) or len(text) < 2:
-            # Must be a string of at least length 2
-            return False, None
+        if not text or not isinstance(text, str):
+            return False, "SPR text must be a non-empty string."
+
+        # Rule: Min length 3
+        if len(text) < 3:
+            return False, f"SPR '{text}' is too short (min 3 chars required)."
+
+        # Rule: No leading/trailing spaces globally (already implicitly handled by char checks if they fail on space)
+        # but good to be explicit if we change logic later.
+        if text.strip() != text:
+            return False, f"SPR '{text}' must not have leading or trailing spaces."
 
         first_char = text[0]
         last_char = text[-1]
-        middle_part = text[1:-1]
+        middle_chars = text[1:-1] # This will be empty if len(text) == 2, handled by min length 3
 
-        # Check Guardian Points: First and last must be alphanumeric
-        is_first_guardian = first_char.isalnum()
-        is_last_guardian = last_char.isalnum()
+        # Rule: First character
+        if not first_char.isalnum():
+            return False, f"SPR '{text}': First character '{first_char}' must be alphanumeric."
+        if first_char.isalpha() and not first_char.isupper():
+            return False, f"SPR '{text}': First alphabetic character '{first_char}' must be uppercase."
 
-        # Check Middle Part: Must be all lowercase or spaces, or empty if length is 2
-        is_middle_valid = all(c.islower() or c.isspace() for c in middle_part) or not middle_part
+        # Rule: Last character
+        if not last_char.isalnum():
+            return False, f"SPR '{text}': Last character '{last_char}' must be alphanumeric."
+        if last_char.isalpha() and not last_char.isupper():
+            return False, f"SPR '{text}': Last alphabetic character '{last_char}' must be uppercase."
 
-        # Exclude common acronyms (e.g., "NASA", "API") - all caps and length > 3
-        is_common_acronym = text.isupper() and len(text) > 3
-
-        # Combine checks
-        is_match = is_first_guardian and is_last_guardian and is_middle_valid and not is_common_acronym
-
-        return is_match, text if is_match else None
+        # Rule: Middle characters (if any)
+        if middle_chars: # Only check if middle_chars is not an empty string
+            for char_idx, char_val in enumerate(middle_chars):
+                if not (char_val.islower() or char_val.isspace()):
+                    return False, f"SPR '{text}': Middle character '{char_val}' (at index {char_idx + 1}) must be lowercase or a space."
+                if char_val.isupper(): # This is a stronger condition than the previous one, kept for clarity
+                    return False, f"SPR '{text}': Middle character '{char_val}' (at index {char_idx + 1}) must not be uppercase."
+        # If we made it here, all rules passed.
+        return True, None
 
     # --- Conceptual SPR Writer/Decompressor Interface Methods ---
     # These methods provide a conceptual interface aligning with Section 3 roles.

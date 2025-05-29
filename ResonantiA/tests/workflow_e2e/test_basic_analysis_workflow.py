@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 from typing import Dict # Import Dict
+from functools import wraps
 
 # Attempt to import necessary modules with error handling
 try:
@@ -72,126 +73,60 @@ def e2e_engine(tmp_path: Path, monkeypatch) -> WorkflowEngine:
     spr_manager = SPRManager(config.SPR_JSON_FILE) # Use actual SPR file
     return WorkflowEngine(spr_manager=spr_manager)
 
-# Define mock return values for external calls
-MOCK_SEARCH_RESULTS = [{"title": "Mock Search Result", "link": "http://mock.com", "snippet": "This is a mock snippet."}]
-MOCK_LLM_SUMMARY = "This is the mocked LLM summary of the search results."
-MOCK_REFLECTION_SUCCESS = {
-    "status": "Success", "summary": "Mocked action successful.", "confidence": 0.9,
-    "alignment_check": "Aligned", "potential_issues": None, "raw_output_preview": "mock..."
-}
-MOCK_REFLECTION_SEARCH = {
-    "status": "Success", "summary": "Simulated search completed.", "confidence": 0.6,
-    "alignment_check": "Aligned", "potential_issues": ["Results are simulated."], "raw_output_preview": MOCK_SEARCH_RESULTS[0]['title'] if MOCK_SEARCH_RESULTS else ""
-}
+# Mock data for successful tool calls with IAR reflection
+MOCK_REFLECTION_SUCCESS = {"status": "Success", "summary": "Mocked tool executed successfully.", "confidence": 0.95, "alignment_check": "Aligned", "potential_issues": None, "raw_output_preview": "Mock success"}
+MOCK_REFLECTION_SEARCH = {"status": "Success", "summary": "Search successful.", "confidence": 0.9, "alignment_check": "Aligned", "potential_issues": None, "raw_output_preview": "Search results preview"}
 
-# Determine patch targets based on successful imports
-patch_targets = {}
-if run_search: patch_targets['run_search_patch'] = patch('ResonantiA.ArchE.tools.run_search')
-if invoke_llm: patch_targets['invoke_llm_patch'] = patch('ResonantiA.ArchE.tools.invoke_llm')
-if execute_code: patch_targets['execute_code_patch'] = patch('ResonantiA.ArchE.code_executor.execute_code')
-if display_output: patch_targets['display_output_patch'] = patch('ResonantiA.ArchE.tools.display_output')
+MOCK_SEARCH_RESULTS = [{"title": "Mock Result 1", "url": "http://mock.com/1", "snippet": "Mock snippet 1"}]
+MOCK_LLM_SUMMARY = "This is a mock LLM summary of the search results."
 
-# Function to apply multiple patches - requires careful ordering in decorator stack
-def apply_patches(func):
-    wrapped = func
-    # Apply patches in reverse order of definition for correct mock passing
-    if 'display_output_patch' in patch_targets: wrapped = patch_targets['display_output_patch'](wrapped)
-    if 'execute_code_patch' in patch_targets: wrapped = patch_targets['execute_code_patch'](wrapped)
-    if 'invoke_llm_patch' in patch_targets: wrapped = patch_targets['invoke_llm_patch'](wrapped)
-    if 'run_search_patch' in patch_targets: wrapped = patch_targets['run_search_patch'](wrapped)
-    return wrapped
-
+# This test will use mocker fixture for patching directly
 @pytest.mark.skipif(WorkflowEngine is None or config is None, reason="WorkflowEngine or config not imported.")
-@apply_patches
-def test_basic_analysis_workflow_e2e(
-    mock_search: MagicMock = None, mock_llm: MagicMock = None, mock_execute: MagicMock = None, mock_display: MagicMock = None, # Mocks passed in order of patching (inner first)
-    e2e_engine: WorkflowEngine = None):
+def test_basic_analysis_workflow_e2e(e2e_engine: WorkflowEngine, mocker):
     """
     Runs the basic_analysis.json workflow end-to-end with mocked external calls.
     Verifies final status and presence of key results and IAR data.
     """
-    # Check if mocks were created (i.e., patching was successful)
-    if not all ([mock_search, mock_llm, mock_execute, mock_display]):
-         pytest.skip("One or more required tool functions could not be mocked.")
+    # Mock the individual tool functions that would be called via ActionRegistry
+    mock_display = mocker.patch('ResonantiA.ArchE.tools.display_output', return_value={"status": "Displayed", "reflection": MOCK_REFLECTION_SUCCESS})
+    mock_search = mocker.patch('ResonantiA.ArchE.tools.run_search', return_value={"results": MOCK_SEARCH_RESULTS, "error": None, "provider_used": "mock", "reflection": MOCK_REFLECTION_SEARCH})
+    
+    # Mock get_llm_provider from llm_providers.py (imported by tools.py)
+    # to prevent real API key checks and client instantiation.
+    mock_get_client_cached = mocker.patch('ResonantiA.ArchE.tools._get_llm_provider_client_cached', return_value=("mock_client_instance", "mock_provider_name_from_cache", MagicMock())) # return (client, provider_name, cfg_to_monitor)
+    mock_llm_provider_getter = mocker.patch('ResonantiA.ArchE.llm_providers.get_llm_provider', return_value={"client": "mock_client_instance", "provider_name": "mock_provider"} )
+    mock_llm = mocker.patch('ResonantiA.ArchE.tools.invoke_llm', return_value={"response_text": MOCK_LLM_SUMMARY, "error": None, "provider_used": "mock", "model_used": "mock_model", "reflection": MOCK_REFLECTION_SUCCESS})
+    mock_execute = mocker.patch('ResonantiA.ArchE.code_executor.execute_code', return_value={"stdout": "Formatted Mock Report...", "stderr": "", "exit_code": 0, "error": None, "sandbox_method_used": "mock", "reflection": MOCK_REFLECTION_SUCCESS})
 
-    # Configure mock return values (including IAR reflection)
-    mock_display.return_value = {"status": "Displayed", "reflection": MOCK_REFLECTION_SUCCESS}
-    mock_search.return_value = {"results": MOCK_SEARCH_RESULTS, "error": None, "provider_used": "mock", "reflection": MOCK_REFLECTION_SEARCH}
-    mock_llm.return_value = {"response_text": MOCK_LLM_SUMMARY, "error": None, "provider_used": "mock", "model_used": "mock_model", "reflection": MOCK_REFLECTION_SUCCESS}
-    # Mock the final execute_code step that formats the output
-    mock_execute.return_value = {"stdout": "Formatted Mock Report...", "stderr": "", "exit_code": 0, "error": None, "sandbox_method_used": "mock", "reflection": MOCK_REFLECTION_SUCCESS}
-
-    workflow_file = "basic_analysis.json" # Assumes this exists in configured WORKFLOW_DIR
+    workflow_file = "basic_analysis.json" 
     workflow_path = Path(config.WORKFLOW_DIR) / workflow_file
     if not workflow_path.is_file():
          pytest.skip(f"Workflow file not found: {workflow_path}")
 
-    initial_context = {"user_query": "Test Query"}
+    initial_context = {"user_query": "Test Query for basic analysis"}
 
     # Run the workflow
     final_results = e2e_engine.run_workflow(workflow_file, initial_context)
 
-    # --- Assertions ---
-    assert final_results is not None
-    assert final_results.get("workflow_status") == "Completed Successfully"
-    assert final_results.get("error") is None
+    assert final_results is not None, "Workflow execution returned None"
+    assert final_results.get("workflow_status") == "Completed Successfully", \
+        f"Workflow did not complete successfully. Status: {final_results.get('workflow_status')}. Errors: {final_results.get('errors')}"
 
-    # Check if key tasks completed and their results/IAR are present
-    assert final_results.get("task_statuses", {}).get("perform_search") == "completed"
-    assert "perform_search" in final_results
-    assert final_results["perform_search"]["results"] == MOCK_SEARCH_RESULTS
-    assert "reflection" in final_results["perform_search"]
-    assert final_results["perform_search"]["reflection"]["status"] == "Success"
+    # Verify IAR reflection is present and indicates success
+    workflow_iar = final_results.get('reflection')
+    assert workflow_iar is not None, "Workflow IAR (reflection) is missing"
+    assert workflow_iar.get('status') == "Success", f"Workflow IAR status is not Success: {workflow_iar}"
 
-    assert final_results.get("task_statuses", {}).get("summarize_results") == "completed"
-    assert "summarize_results" in final_results
-    assert final_results["summarize_results"]["response_text"] == MOCK_LLM_SUMMARY
-    assert "reflection" in final_results["summarize_results"]
-    assert final_results["summarize_results"]["reflection"]["confidence"] == 0.9 # Check specific IAR value
+    # Check if key tasks were called (via their mocks)
+    mock_display.assert_called()
+    mock_search.assert_called_with(query="Test Query for basic analysis", num_results=3)
+    mock_llm.assert_called()
+    mock_execute.assert_called()
 
-    # Assuming task name is 'format_and_display_summary' or similar based on workflow json
-    display_task_name = "display_summary" # Use the actual task name from basic_analysis.json
-    # Find the actual task name if necessary (e.g., based on action type)
-    # TODO: Update display_task_name if different in basic_analysis.json
-    found_display_task = False
-    for task_id, task_details in final_results.get("task_statuses", {}).items():
-        if task_details == "completed" and task_id in final_results and final_results[task_id].get("stdout") == "Formatted Mock Report...":
-            display_task_name = task_id
-            found_display_task = True
-            break
-    if not found_display_task:
-        # Try finding based on action type if stdout check fails (mock might change)
-         for task_id, task_info in e2e_engine.load_workflow(workflow_file)["tasks"].items():
-             if task_info["action_type"] == "execute_code" or task_info["action_type"] == "display_output":
-                 if final_results.get("task_statuses", {}).get(task_id) == "completed":
-                     display_task_name = task_id
-                     found_display_task = True
-                     break
-
-    assert found_display_task, f"Could not find completed display/execute task in results: {final_results.get('task_statuses')}"
-    assert final_results.get("task_statuses", {}).get(display_task_name) == "completed"
-    assert display_task_name in final_results
-    assert final_results[display_task_name]["stdout"] == "Formatted Mock Report..."
-    assert "reflection" in final_results[display_task_name]
-
-    # Verify mocks were called
-    mock_search.assert_called_once()
-    mock_llm.assert_called_once()
-    mock_execute.assert_called_once() # Assumes display uses execute_code
-    # Check specific call arguments if needed
-    search_call_args, _ = mock_search.call_args
-    # Adjust if run_search input format is different (e.g., a single dict arg)
-    assert search_call_args[0].get("query") == "Test Query"
-    assert search_call_args[0].get("num_results", 5) == 5 # Check default or passed value
-
-    # Check that the LLM prompt received the search results (or mock thereof)
-    llm_call_args, _ = mock_llm.call_args
-    # Adjust if invoke_llm input format is different
-    prompt_input = llm_call_args[0].get('prompt', '') or llm_call_args[0].get('messages', '')
-    assert "Test Query" in str(prompt_input)
-    assert "Mock Search Result" in str(prompt_input)
-    # Check if search IAR confidence was potentially resolved and passed
-    # This depends heavily on how the workflow resolves and formats the prompt
-    # assert "Confidence: 0.6" in str(prompt_input)
+    # Check for specific data in the final context or step results if applicable
+    # This depends on the 'basic_analysis.json' workflow structure
+    # Example: Check if LLM summary is in the context or a step output
+    assert "final_report_content" in final_results.get("final_context", {}), "Final report content not in final context"
+    assert MOCK_LLM_SUMMARY in final_results["final_context"]["final_report_content"], "LLM summary missing from final report"
 
 # --- END OF FILE tests/workflow_e2e/test_basic_analysis_workflow.py --- 

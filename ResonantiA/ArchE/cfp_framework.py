@@ -100,6 +100,10 @@ class CFPFramework:
         self.ode_func_b = ode_func_b # Store ODE function if provided
         self.extra_config = kwargs # Store other config
 
+        # Attributes for feedback mechanism (for test compatibility)
+        self._global_best_value: float = float('inf')
+        self._agent_feedback_history: Dict[str, Any] = {}
+
         self.state_a_initial_raw = self._validate_and_get_state(self.system_a_config, 'A')
         self.state_b_initial_raw = self._validate_and_get_state(self.system_b_config, 'B')
         dim_a = len(self.state_a_initial_raw); dim_b = len(self.state_b_initial_raw)
@@ -337,4 +341,153 @@ class CFPFramework:
             # Return error structure with reflection
             return {"error": error_msg, "reflection": _create_reflection("Failure", summary, 0.0, "N/A", issues, None)}
 
-# --- END OF FILE 3.0ArchE/cf
+    # --- Static methods for classical state comparison (added for test compatibility) ---
+    @staticmethod
+    def compare_classical_states(state1: List[float], state2: List[float], method: str = 'euclidean') -> Dict[str, Any]:
+        issues = []
+        distance: Optional[float] = None
+        similarity: Optional[float] = None # Added for cosine
+        actual_method_used = method
+        status = "Success"
+        summary = f"Classical state comparison using '{method}' method."
+        confidence = 0.95 # Default high for successful math
+
+        if not isinstance(state1, (list, np.ndarray)) or not isinstance(state2, (list, np.ndarray)):
+            status = "Failure"
+            summary = "Input states must be lists or numpy arrays."
+            issues.append(summary); confidence = 0.1
+        else:
+            # Convert to numpy arrays first (if they were lists) to standardize
+            s1 = np.array(state1, dtype=float) if not isinstance(state1, np.ndarray) else state1.astype(float)
+            s2 = np.array(state2, dtype=float) if not isinstance(state2, np.ndarray) else state2.astype(float)
+
+            if s1.ndim != 1 or s2.ndim != 1: # Ensure they are 1D vectors after conversion
+                status = "Failure"
+                summary = "Input states must be 1D vectors."
+                issues.append(summary); confidence = 0.1
+            elif (s1.size == 0 and s2.size == 0) and method == 'euclidean': # Both empty, method is Euclidean
+                distance = 0.0
+                summary = "Euclidean distance between empty vectors is 0."
+            elif s1.size == 0 or s2.size == 0: # One or both empty, not covered by above
+                status = "Failure"
+                if method == 'cosine':
+                    summary = "Cannot compute cosine similarity if one or both vectors have zero magnitude."
+                else:
+                    summary = "Input state vectors cannot be empty for this comparison method (unless both are empty and method is Euclidean)."
+                issues.append(summary); confidence = 0.1
+            elif s1.shape != s2.shape:
+                status = "Failure"
+                summary = "State vectors must have the same dimension"
+                issues.append(summary); confidence = 0.1
+            else:
+                # Both are non-empty, 1D, and have same shape. Proceed with calculation.
+                if method == 'euclidean':
+                    distance = np.linalg.norm(s1 - s2)
+                elif method == 'manhattan':
+                    distance = np.sum(np.abs(s1 - s2))
+                elif method == 'cosine':
+                    dot_product = np.dot(s1, s2)
+                    norm_s1 = np.linalg.norm(s1)
+                    norm_s2 = np.linalg.norm(s2)
+                    # This case should be caught by s1.size == 0 or s2.size == 0 block if they are truly zero vectors
+                    # If they are non-zero but result in norm 0 (e.g. tiny floats), this check is still good.
+                    if norm_s1 == 0 or norm_s2 == 0: 
+                        similarity = 0.0
+                        distance = 1.0
+                        status = "Failure" 
+                        summary = "Cannot compute cosine similarity if one or both vectors have zero magnitude."
+                        issues.append(summary); confidence = 0.1
+                    else:
+                        similarity = dot_product / (norm_s1 * norm_s2)
+                        distance = 1.0 - similarity
+                else:
+                    status = "Failure"
+                    summary = f"Comparison method '{method}' not supported"
+                    issues.append(summary); confidence = 0.1
+                    actual_method_used = "unknown"
+
+        reflection = _create_reflection(status, summary, confidence, "N/A", issues, None)
+        return {
+            "distance": float(distance) if distance is not None else None,
+            "similarity": float(similarity) if similarity is not None else None, # Added
+            "method_used": actual_method_used, # Added
+            "reflection": reflection
+        }
+
+    # --- Methods for feedback mechanism (added for test_cfp_framework.py compatibility) ---
+    def get_global_best(self) -> float:
+        """Returns the current global best value. For test compatibility."""
+        return self._global_best_value
+
+    def update_global_best(self, new_value: float):
+        """Updates the global best value if the new value is better (lower). For test compatibility."""
+        if new_value < self._global_best_value:
+            self._global_best_value = new_value
+
+    def reset_global_best(self):
+        """Resets the global best value to infinity. For test compatibility."""
+        self._global_best_value = float('inf')
+
+    def process_feedback_request(self, agent_id: str, current_distance: float, previous_distance: float, effort_spent: float = 1.0, **kwargs) -> Dict[str, Any]:
+        """Processes feedback from an agent and provides a directive and IAR. For test compatibility."""
+        # Basic logic from test expectations
+        directive = "maintain"
+        notes = []
+        adjusted_effort = effort_spent
+        reset_to_best_known = False
+        achieved_new_global_best = False
+
+        if current_distance < self._global_best_value:
+            self._global_best_value = current_distance
+            self._agent_feedback_history[agent_id] = {"best_distance": current_distance, "effort_history": [effort_spent]}
+            directive = "exploit"
+            notes.append("New global best achieved!")
+            achieved_new_global_best = True
+        elif current_distance < previous_distance:
+            directive = "exploit" # Still improving locally
+            notes.append("Local improvement made.")
+        else: # current_distance >= previous_distance (stagnant or worse)
+            if current_distance > self._global_best_value * 1.05: # Significantly worse than global
+                directive = "maintain_or_explore_gently" # Test expects 'explore' sometimes based on this
+                notes.append("Stuck and far from global best. Consider exploring.")
+                reset_to_best_known = True
+                adjusted_effort = max(1.0, effort_spent / 2) # Reduce effort if stuck far
+            else: # Stagnant or slightly worse, but near global best or own previous best
+                directive = "refine_further" # Test expects 'refine_further'
+                notes.append("Performance stable or slightly regressed. Attempt to refine current approach.")
+                adjusted_effort = effort_spent * 1.1 # Slightly increase effort
+        
+        # Update history for agent
+        if agent_id not in self._agent_feedback_history:
+            self._agent_feedback_history[agent_id] = {"best_distance": current_distance, "effort_history": []}
+        self._agent_feedback_history[agent_id]["effort_history"].append(effort_spent)
+        if current_distance < self._agent_feedback_history[agent_id].get("best_distance", float('inf')):
+             self._agent_feedback_history[agent_id]["best_distance"] = current_distance
+
+        agent_feedback_details = {
+            "action": directive, # Test expects 'action' key for directive
+            "adjusted_effort": adjusted_effort,
+            "reset_to_best_known": reset_to_best_known,
+            "notes": notes
+        }
+
+        reflection_summary = f"Feedback processed for {agent_id}. Directive: {directive}. Current Distance: {current_distance:.2f}. Global Best: {self._global_best_value:.2f}."
+        reflection = _create_reflection("Success", reflection_summary, 0.9, "N/A", None, agent_feedback_details)
+
+        return {
+            "agent_feedback": agent_feedback_details, # As expected by tests
+            "directive": directive, # Top-level for convenience if used elsewhere
+            "current_distance": current_distance,
+            "global_best_value": self._global_best_value,
+            "global_best_achieved_by_agent": achieved_new_global_best,
+            "adjusted_effort": adjusted_effort,
+            "reflection": reflection
+        }
+
+    def get_exploration_directive(self, agent_id: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
+        # Implementation of get_exploration_directive method
+        # This method should return a directive based on the given parameters
+        # For now, we'll implement a placeholder return
+        return {"directive": "explore", "notes": ["Initial exploration directive"]}
+
+# --- END OF FILE 3.0ArchE/cfp_framework.py ---

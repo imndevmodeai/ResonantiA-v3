@@ -54,7 +54,7 @@ def test_train_timeseries_model_success(sample_time_series_data):
         "operation": "train_model",
         "data": sample_time_series_data.to_dict(orient='list'), # Pass data as dict
         "model_type": "ARIMA", # Or config.PREDICTIVE_DEFAULT_TIMESERIES_MODEL
-        "target": "value", # Renamed from target for clarity
+        "target": "value", # Corrected from target_column
         "timestamp_column": "timestamp", # Specify timestamp column
         "model_id": "test_arima_model"
         # Add ARIMA order if needed: "model_params": {"order": (1,1,0)}
@@ -88,30 +88,30 @@ def test_train_timeseries_model_success(sample_time_series_data):
 @pytest.mark.skipif(run_prediction is None, reason="run_prediction not imported")
 def test_forecast_success(sample_time_series_data):
     """Test successful forecasting using a trained model."""
-    # 1. Train a model first to ensure the artifact exists
-    model_id_to_test = "test_forecast_model_" + pd.Timestamp.now().strftime("%Y%m%d%H%M%S") # Use unique ID
+    # 1. Train a model first
+    training_model_id = "tests_forecast_test_model_" + pd.Timestamp.now().strftime("%Y%m%d%H%M%S%f")
     train_inputs = {
         "operation": "train_model",
         "data": sample_time_series_data.to_dict(orient='list'),
         "model_type": "ARIMA",
-        "target": "value", # Ensure this matches expected key
+        "target": "value",
         "timestamp_column": "timestamp",
-        "model_id": model_id_to_test
+        "model_id": training_model_id 
     }
-    if run_prediction is None:
-        pytest.skip("run_prediction function not available")
-
     train_result = run_prediction(**train_inputs)
-    assert train_result.get("error") is None, f"Training failed before forecast: {train_result.get('error')}"
-    assert train_result.get("model_id") == model_id_to_test
+    assert train_result.get("error") is None, f"Training failed: {train_result.get('error')}"
+    assert train_result.get("model_id") == training_model_id, "Model ID from training mismatch"
 
-    # 2. Now test forecasting with the trained model_id
+    # 2. Forecast using the trained model
     steps_to_forecast = 10
     forecast_inputs = {
         "operation": "forecast_future_states",
-        "model_id": model_id_to_test, # Use the ID from the training step
-        "steps_to_forecast": steps_to_forecast
+        "model_id": training_model_id, # Use the ID from the training step
+        "steps_to_forecast": steps_to_forecast,
     }
+    # Skip if the run_prediction function itself failed to import
+    if run_prediction is None:
+        pytest.skip("run_prediction function not available")
 
     forecast_result = run_prediction(**forecast_inputs)
 

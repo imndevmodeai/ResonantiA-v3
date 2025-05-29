@@ -1,0 +1,50 @@
+{
+  "name": "ReSSyD Session Context Restore Workflow (v3.0)",
+  "description": "Loads and presents a previously captured session context capsule.",
+  "version": "3.0",
+  "tasks": {
+    "load_capsule_file": {
+      "description": "Load the session context capsule from the specified file.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport os\\n\\ncapsule_filepath = context.get('initial_context', {}).get('capsule_filepath')\\nif not capsule_filepath or not os.path.exists(capsule_filepath):\\n    raise FileNotFoundError(f'Session Context Capsule file not found at: {capsule_filepath}')\\n\\nwith open(capsule_filepath, 'r', encoding='utf-8') as f:\\n    session_capsule_data = json.load(f)\\n\\nprint(f'Successfully loaded session context capsule from: {capsule_filepath}')\\nresult = {'session_capsule_data': session_capsule_data}"
+      },
+      "outputs": {"session_capsule_data": "dict", "reflection": "dict"},
+      "dependencies": []
+    },
+    "display_loaded_context": {
+      "description": "Display the loaded session context for review.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "{{ load_capsule_file.session_capsule_data }}",
+        "format": "json"
+      },
+      "dependencies": ["load_capsule_file"],
+      "condition": "{{ load_capsule_file.reflection.status == 'Success' }}"
+    },
+    "prime_arche_with_context": {
+      "description": "Use LLM to summarize the capsule and prime current session (Conceptual).",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "The following is a 'Session Context Capsule' from a previous ResonantiA development session. Please summarize the key Keyholder notes, Arche's operational context (especially recent IAR highlights or active SPRs if mentioned), and suggest 1-2 immediate focus points for re-engaging with that development state.\\n\\nSession Context Capsule:\\n```json\\n{{ load_capsule_file.session_capsule_data }}\\n```\\n\\nSummary and Priming Points:",
+        "max_tokens": 500
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["load_capsule_file"],
+      "condition": "{{ load_capsule_file.reflection.status == 'Success' }}"
+    },
+    "display_priming_summary": {
+        "description": "Display the LLM-generated priming summary.",
+        "action_type": "display_output",
+        "inputs": {
+            "content": {
+                "message": "Session context restored. LLM priming summary:",
+                "summary": "{{ prime_arche_with_context.response_text }}"
+            }
+        },
+        "dependencies": ["prime_arche_with_context"],
+        "condition": "{{ prime_arche_with_context.reflection.status == 'Success' }}"
+    }
+  }
+} 

@@ -1,0 +1,47 @@
+{
+  "name": "Traveling Salesman Optimization (Placeholder)",
+  "description": "A placeholder workflow for TSP.",
+  "version": "1.0",
+  "tasks": {
+    "load_tsp_data": {
+      "description": "Load and validate TSP city data from initial_context.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport sys\nprint(sys.stdin.read())",
+        "input_data": {
+          "initial_cities": "{{ initial_context.tsp_data }}"
+        }
+      },
+      "outputs": {
+        "tsp_cities_json_from_stdout": "string",
+        "reflection": "dict"
+      },
+      "dependencies": []
+    },
+    "tsp_simulation": {
+      "description": "Run TSP simulation (placeholder).",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "tsp_optimizer",
+        "model": {"simulation_type": "placeholder_tsp"},
+        "parameters": {
+          "num_iterations": 10,
+          "population_size": 5
+        },
+        "data_input_task": "load_tsp_data",
+        "data_input_variable": "tsp_cities"
+      },
+      "dependencies": ["load_tsp_data"]
+    },
+    "analyze_results": {
+      "description": "Analyze TSP results (placeholder).",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "TSP analysis results: {{ tsp_simulation.result }}"
+      },
+      "dependencies": ["tsp_simulation"]
+    }
+  }
+} 

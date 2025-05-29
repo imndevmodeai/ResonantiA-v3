@@ -36,15 +36,22 @@
         "reflection": "dict"
       },
       "dependencies": ["perform_search"],
-      "condition": "{{ perform_search.reflection.status == 'Success' }}"
+      "condition": "{{ perform_search.reflection.status }} == 'Success'"
     },
     "display_summary": {
       "description": "Format and display the final summary including IAR status.",
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import json\n\nsearch_status = context.get('perform_search', {}).get('reflection', {}).get('status', 'N/A')\nsearch_conf = context.get('perform_search', {}).get('reflection', {}).get('confidence', 'N/A')\nsummary_status = context.get('summarize_results', {}).get('reflection', {}).get('status', 'N/A')\nsummary_conf = context.get('summarize_results', {}).get('reflection', {}).get('confidence', 'N/A')\nsummary_text = context.get('summarize_results', {}).get('response_text', 'Summary generation failed or skipped.')\n\noutput = f\"\"\"--- Analysis Summary (ResonantiA v3.0) ---\nUser Query: {context.get('initial_context',{}).get('user_query','N/A')}\n\nSearch Status: {search_status} (Confidence: {search_conf})\nSummary Status: {summary_status} (Confidence: {summary_conf})\n\nSummary:\n{summary_text}\n---------------------------------------\"\"\"\n\nprint(output)\n# Return the formatted string as primary output for potential further use\nresult = {'formatted_summary': output}\n",
-        "input_data": ""
+        "code": "import json\\nimport sys\\n\\n# Load context variables from stdin\\ninput_vars_str = sys.stdin.read()\\nctx = json.loads(input_vars_str) if input_vars_str else {}\\n\\nsearch_status = ctx.get('search_reflection_status', 'N/A')\\nsearch_conf = ctx.get('search_reflection_confidence', 'N/A')\\nsummary_status = ctx.get('summary_reflection_status', 'N/A')\\nsummary_conf = ctx.get('summary_reflection_confidence', 'N/A')\\nsummary_text = ctx.get('summary_response_text', 'Summary generation failed or skipped.')\\nuser_query = ctx.get('user_query', 'N/A')\\n\\noutput = f\\\"\\\"\\\"--- Analysis Summary (ResonantiA v3.0) ---\\nUser Query: {user_query}\\n\\nSearch Status: {search_status} (Confidence: {search_conf})\\nSummary Status: {summary_status} (Confidence: {summary_conf})\\n\\nSummary:\\n{summary_text}\\n---------------------------------------\\\"\\\"\\\"\\n\\nprint(output)\\n# For now, primary output is via print(). Reflection should capture this.\\nresult = {'formatted_summary': output}\\n",
+        "input_data": {
+          "user_query": "{{ initial_context.user_query }}",
+          "search_reflection_status": "{{ perform_search.reflection.status }}",
+          "search_reflection_confidence": "{{ perform_search.reflection.confidence }}",
+          "summary_reflection_status": "{{ summarize_results.reflection.status }}",
+          "summary_reflection_confidence": "{{ summarize_results.reflection.confidence }}",
+          "summary_response_text": "{{ summarize_results.response_text }}"
+        }
       },
       "outputs": {
         "stdout": "string",

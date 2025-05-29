@@ -17,7 +17,7 @@ LLM_PROVIDERS = {
     "openai": {
         "api_key": os.environ.get("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY_HERE"), # Use env var
         "base_url": os.environ.get("OPENAI_BASE_URL", None), # Optional: For custom endpoints/proxies
-        "default_model": "gpt-4-turbo-preview", # Recommended default
+        "default_model": "gpt-3.5-turbo", # Recommended default
         "backup_model": "gpt-3.5-turbo" # Fallback model
     },
     "google": {
@@ -32,7 +32,7 @@ LLM_PROVIDERS = {
     #     "default_model": "claude-3-opus-20240229",
     # },
 }
-DEFAULT_LLM_PROVIDER = "openai" # Select the default provider to use
+DEFAULT_LLM_PROVIDER = "google" # Select the default provider to use
 DEFAULT_LLM_MODEL = None # If None, uses the provider's specified 'default_model'
 LLM_DEFAULT_MAX_TOKENS = 2048 # Default maximum tokens for LLM generation (adjust as needed)
 LLM_DEFAULT_TEMP = 0.6 # Default temperature for LLM generation (0.0=deterministic, >1.0=more random)
@@ -84,11 +84,14 @@ SPR_JSON_FILE = os.path.join(KNOWLEDGE_GRAPH_DIR, "spr_definitions_tv.json") # P
 LOG_FILE = os.path.join(LOG_DIR, "arche_v3_log.log") # Default log filename
 
 # --- Logging Configuration (See logging_config.py Section 7.24) ---
-LOG_LEVEL = logging.INFO # Default logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+LOG_LEVEL = logging.DEBUG # Default logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s' # Format for console logs
 LOG_DETAILED_FORMAT = '%(asctime)s - %(name)s:%(lineno)d - %(levelname)s - %(module)s - %(message)s' # Format for file logs
 LOG_MAX_BYTES = 15*1024*1024 # Max size of log file before rotation (15MB)
 LOG_BACKUP_COUNT = 5 # Number of backup log files to keep
+
+# --- Debugging ---
+DEBUG_MODE = False # Set to True for more verbose output or debug-specific behaviors
 
 # --- Workflow Engine Configuration (Section 7.3) ---
 MAX_RECURSION_DEPTH = 10 # Safety limit for nested workflow calls (conceptual)

@@ -1,0 +1,23 @@
+{
+  "name": "Sample Workflow",
+  "description": "A minimal workflow for testing purposes.",
+  "version": "1.0",
+  "tasks": {
+    "start_task": {
+      "description": "Initial task.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Sample workflow started."
+      },
+      "dependencies": []
+    },
+    "end_task": {
+      "description": "Final task.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Sample workflow ended."
+      },
+      "dependencies": ["start_task"]
+    }
+  }
+} 

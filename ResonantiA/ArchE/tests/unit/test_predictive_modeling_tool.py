@@ -54,7 +54,7 @@ def test_train_timeseries_model_success(sample_time_series_data):
         "operation": "train_model",
         "data": sample_time_series_data.to_dict(orient='list'), # Pass data as dict
         "model_type": "ARIMA", # Or config.PREDICTIVE_DEFAULT_TIMESERIES_MODEL
-        "target_column": "value", # Renamed from target for clarity
+        "target": "value", # Corrected from target_column
         "timestamp_column": "timestamp", # Specify timestamp column
         "model_id": "test_arima_model"
         # Add ARIMA order if needed: "model_params": {"order": (1,1,0)}
@@ -88,22 +88,33 @@ def test_train_timeseries_model_success(sample_time_series_data):
 @pytest.mark.skipif(run_prediction is None, reason="run_prediction not imported")
 def test_forecast_success(sample_time_series_data):
     """Test successful forecasting using a trained model."""
-    # This test would likely need multiple steps or fixtures:
-    # 1. Train a model (or mock the training step / load a pre-saved simulated model)
-    #    For this example, we assume the model exists or training is mocked internally by run_prediction
-    model_id_trained = "test_arima_model_trained_for_forecast" # Assume this exists from a prior step/fixture
+    # 1. Train a model first
+    training_model_id = "arch_forecast_test_model_" + pd.Timestamp.now().strftime("%Y%m%d%H%M%S%f")
+    train_inputs = {
+        "operation": "train_model",
+        "data": sample_time_series_data.to_dict(orient='list'),
+        "model_type": "ARIMA",
+        "target": "value",
+        "timestamp_column": "timestamp",
+        "model_id": training_model_id 
+    }
+    train_result = run_prediction(**train_inputs)
+    assert train_result.get("error") is None, f"Training failed: {train_result.get('error')}"
+    # Ensure the model_id returned is the one we tried to save with
+    assert train_result.get("model_id") == training_model_id, "Model ID from training mismatch"
+
+    # 2. Forecast using the trained model
     steps_to_forecast = 10
-    inputs = {
+    forecast_inputs = {
         "operation": "forecast_future_states",
-        "model_id": model_id_trained,
+        "model_id": training_model_id, # Use the ID from the training step
         "steps_to_forecast": steps_to_forecast,
-        # "data": sample_time_series_data.to_dict(orient='list') # Pass original data if model needs it (depends on impl)
     }
     # Skip if the run_prediction function itself failed to import
     if run_prediction is None:
         pytest.skip("run_prediction function not available")
 
-    result = run_prediction(**inputs)
+    result = run_prediction(**forecast_inputs)
 
     assert result is not None
     assert result.get("error") is None

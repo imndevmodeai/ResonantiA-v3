@@ -87,7 +87,7 @@ def simple_workflow_def() -> Dict:
             "inputs": {},
             "outputs": {"out_c": "string", "reflection": "dict"},
             "dependencies": ["task_a"],
-            "condition": "{{ task_a.reflection.confidence > 0.8 }}"
+            "condition": "{{ task_a.reflection.confidence }} > 0.8"
         }
     },
     "start_tasks": ["task_a"] # Explicitly define start task(s) if needed by engine logic
@@ -157,15 +157,16 @@ def test_workflow_engine_evaluate_condition_iar(engine: WorkflowEngine):
         "task_a": {"reflection": {"confidence": 0.9, "status": "Success", "potential_issues": ["Minor issue"]}},
         "task_b": {"reflection": {"confidence": 0.5, "status": "Failure"}}
     }
-    assert engine._evaluate_condition("{{ task_a.reflection.confidence > 0.8 }}", context) is True
-    assert engine._evaluate_condition("{{ task_a.reflection.confidence < 0.8 }}", context) is False
-    assert engine._evaluate_condition("{{ task_b.reflection.confidence <= 0.5 }}", context) is True
-    assert engine._evaluate_condition("{{ task_a.reflection.status == 'Success' }}", context) is True
-    assert engine._evaluate_condition("{{ task_b.reflection.status != 'Success' }}", context) is True
-    # Adjusted condition string format for 'in' check
-    assert engine._evaluate_condition("'Minor issue' in task_a.reflection.potential_issues", context) is True
-    assert engine._evaluate_condition("'Critical issue' not in task_a.reflection.potential_issues", context) is True
-    assert engine._evaluate_condition("task_b.reflection.confidence * 2 == 1.0", context) is True # Math expression
+    assert engine._evaluate_condition("{{ task_a.reflection.confidence }} > 0.8", context) is True
+    assert engine._evaluate_condition("{{ task_a.reflection.confidence }} < 0.95", context) is True
+    assert engine._evaluate_condition("{{ task_b.reflection.confidence }} < 0.7", context) is True
+    assert engine._evaluate_condition("{{ task_a.reflection.status }} == \"Success\"", context) is True
+    assert engine._evaluate_condition("{{ task_b.reflection.status }} == \"Failure\"", context) is True
+    assert engine._evaluate_condition("\"Minor issue\" in {{ task_a.reflection.potential_issues }}", context) is True
+    assert engine._evaluate_condition("\"Critical\" not in {{ task_a.reflection.potential_issues }}", context) is True
+    # Test non-existent path and false conditions
+    assert engine._evaluate_condition("{{ task_c.non_existent }} > 0", context) is False
+    assert engine._evaluate_condition("{{ task_a.reflection.confidence }} > 0.95", context) is False
 
 # Mock the execute_action function from action_registry
 MOCK_REFLECTION_SUCCESS = {
@@ -221,7 +222,9 @@ else:
 def test_workflow_engine_run_simple_workflow(mock_execute_action: MagicMock, engine: WorkflowEngine, simple_workflow_file: str):
     """Test running a simple workflow with mocked actions and checking context/IAR."""
     # Configure mock return values for each action type
-    def side_effect(action_type, inputs, context): # Add context argument
+    # Signature must match action_registry.execute_action: (self, action_type, inputs, task_id, current_workflow_context, workflow_id)
+    # Since it's a bound method on a mock, 'self' is handled by the mock object itself.
+    def side_effect(action_type, inputs):
         if action_type == "mock_action_a":
             return {"out_a": f"output_a_for_{inputs.get('in_a')}", "reflection": MOCK_REFLECTION_LOW_CONF} # Task A returns low confidence
         elif action_type == "mock_action_b":
@@ -262,8 +265,8 @@ def test_workflow_engine_run_simple_workflow(mock_execute_action: MagicMock, eng
 
     # Check that mock_action_a and mock_action_b were called once
     assert mock_execute_action.call_count == 2
-    # Note: execute_action is called with context, so adjust assertion
-    mock_execute_action.assert_any_call("mock_action_a", {"in_a": "initial"}, final_results) # Context passed
-    mock_execute_action.assert_any_call("mock_action_b", {"in_b": "output_a_for_initial", "in_b_reflect_status": "Success"}, final_results) # Context passed
+    # Note: execute_action is now called with only action_type and inputs
+    mock_execute_action.assert_any_call("mock_action_a", {"in_a": "initial"})
+    mock_execute_action.assert_any_call("mock_action_b", {"in_b": "output_a_for_initial", "in_b_reflect_status": "Success"})
 
 # --- END OF FILE tests/integration/test_workflow_engine_integration.py --- 
