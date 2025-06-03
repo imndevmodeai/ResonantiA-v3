@@ -14,6 +14,7 @@ try:
     from . import config # Access configuration settings
     from .llm_providers import get_llm_provider, get_model_for_provider, LLMProviderError # Import LLM helpers
     from .action_context import ActionContext # Import ActionContext from new file
+    from .spr_manager import SPRManager # Added import for SPRManager
     LLM_AVAILABLE = True
 except ImportError as e:
     # Handle cases where imports might fail (e.g., missing dependencies)
@@ -28,15 +29,36 @@ import subprocess
 import os
 import shutil # For file operations
 import uuid # For unique temp dir names
+import traceback
 
 # --- Tool-Specific Configuration ---
 # Get search provider settings from config
 SEARCH_PROVIDER = getattr(config, 'SEARCH_PROVIDER', 'simulated_google').lower()
 SEARCH_API_KEY = getattr(config, 'SEARCH_API_KEY', None) # API key needed if not using simulation
 # Define path to the Node.js search script
-NODE_SEARCH_SCRIPT_PATH = os.path.join(config.BASE_DIR, "ResonantiA", "browser_automation", "search.js")
+NODE_SEARCH_SCRIPT_PATH = getattr(config, 'NODE_SEARCH_SCRIPT_PATH', None) # Use the new config variable
 
 logger = logging.getLogger(__name__)
+
+# --- Global Singleton for SPR Manager (Conceptual) ---
+# This is a placeholder. In a real system, this might be initialized once globally
+# or passed via dependency injection.
+_GLOBAL_SPR_MANAGER_INSTANCE = None
+
+def get_global_spr_manager():
+    """ Returns a global instance of SPRManager, initializing if needed. """
+    global _GLOBAL_SPR_MANAGER_INSTANCE
+    if _GLOBAL_SPR_MANAGER_INSTANCE is None:
+        try:
+            # Use the explicit path for the tv-specific SPR definitions.
+            specific_spr_file = "knowledge_graph/spr_definitions_tv.json"
+            # SPRManager.__init__ takes spr_filepath.
+            _GLOBAL_SPR_MANAGER_INSTANCE = SPRManager(spr_filepath=specific_spr_file)
+            logger.info(f"Initialized global SPRManager from explicit path '{specific_spr_file}'. Loaded {len(_GLOBAL_SPR_MANAGER_INSTANCE.get_all_sprs())} SPRs.")
+        except Exception as e:
+            logger.error(f"Failed to initialize global SPRManager from '{specific_spr_file if 'specific_spr_file' in locals() else 'configured/default path'}': {e}", exc_info=True)
+            raise RuntimeError(f"Could not initialize SPRManager: {e}") from e
+    return _GLOBAL_SPR_MANAGER_INSTANCE
 
 # --- IAR Helper Function ---
 # (Reused for consistency)
@@ -91,21 +113,25 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
     # --- Execute Search (Simulation or Actual) ---
     try:
         if provider_used == "puppeteer_nodejs":
-            if not os.path.exists(NODE_SEARCH_SCRIPT_PATH):
-                primary_result["error"] = f"Node.js search script not found at {NODE_SEARCH_SCRIPT_PATH}"
+            if not NODE_SEARCH_SCRIPT_PATH or not os.path.exists(NODE_SEARCH_SCRIPT_PATH):
+                error_msg = f"Node.js search script path not configured or not found. Expected at: {NODE_SEARCH_SCRIPT_PATH}"
+                primary_result["error"] = error_msg
                 reflection_issues.append(primary_result["error"])
-                reflection_summary = "Configuration error: Node.js search script missing."
+                reflection_summary = "Configuration error: Node.js search script missing or path not set."
             else:
                 # Create a unique base temporary directory for the Node.js script to use for its run-specific archives
                 # This will be cleaned up by this Python function.
                 # The Node script will create a sub-directory within this.
-                search_tool_temp_base_dir = os.path.join(config.OUTPUT_DIR, "search_tool_temp")
+                search_tool_temp_base_dir = os.path.join(config.OUTPUT_DIR, "search_tool_temp", f"run_{uuid.uuid4().hex[:8]}")
                 os.makedirs(search_tool_temp_base_dir, exist_ok=True)
-                # Pass this base dir to Node.js script so it knows where to create its unique run folder
                 
-                cmd = ["node", NODE_SEARCH_SCRIPT_PATH, query, str(num_results), "duckduckgo", search_tool_temp_base_dir]
-                # TODO: Allow overriding search engine via inputs["search_engine_js"]
+                # Determine search engine for Node.js script
+                search_engine_js = inputs.get("search_engine_js", "duckduckgo") # Default to duckduckgo, allow override
                 
+                cmd = ["node", NODE_SEARCH_SCRIPT_PATH, query, str(num_results), search_engine_js, search_tool_temp_base_dir]
+                if inputs.get("debug_js", False): # Changed from debug_js_search to debug_js
+                    cmd.append("--debug")
+
                 logger.info(f"Executing Node.js search script: {' '.join(cmd)}")
                 process = subprocess.run(cmd, capture_output=True, text=True, check=False, timeout=180) # Increased timeout for scraping/screenshots
 
@@ -142,14 +168,12 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                             # Resolve archive paths and copy files
                             for key_suffix in ["html_path", "screenshot_path"]:
                                 archive_key = f"archived_{key_suffix}"
-                                relative_path_from_node = item.get(archive_key)
-                                # js_temp_archive_dir_abs is the specific run folder like .../search_archives/run-XXXXXX
-                                # relative_path_from_node as returned by search.js is like search_archives/run-XXXXXX/file.html
-                                # search_tool_temp_base_dir is .../search_tool_temp
+                                relative_path_from_node = item.get(archive_key) # This is relative to search_tool_temp_base_dir
                                 
-                                if relative_path_from_node and search_tool_temp_base_dir: # Check search_tool_temp_base_dir also
-                                    # Construct absolute source path using the base dir given to Node and the relative path it returned
-                                    abs_source_path = os.path.abspath(os.path.join(search_tool_temp_base_dir, relative_path_from_node))
+                                if relative_path_from_node and js_temp_archive_dir_abs: # js_temp_archive_dir_abs is the actual run-XXXXXX dir
+                                    # Construct absolute source path using the unique run directory identified from script's stderr
+                                    # and the relative path it returned (which should be relative to that unique run dir)
+                                    abs_source_path = os.path.abspath(os.path.join(js_temp_archive_dir_abs, os.path.basename(relative_path_from_node)))
                                     
                                     if os.path.exists(abs_source_path):
                                         file_basename = os.path.basename(abs_source_path)
@@ -196,12 +220,39 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                     logger.error(f"Node.js search script stderr: {process.stderr}")
                 
                 # Cleanup the temporary directory created by the Node.js script, if identified
+                # This is js_temp_archive_dir_abs which is like .../search_tool_temp/run-XXXXXX/run-YYYYYY
+                # The parent search_tool_temp_base_dir (e.g. .../search_tool_temp/run_abc123) should be cleaned up instead
+                # as the node script creates its own sub-sub-folder.
+                # Actually, search.js creates 'run-...' inside the passed outputDirArg.
+                # So js_temp_archive_dir_abs is what we want to clean up, it's the 'run-...' dir.
                 if js_temp_archive_dir_abs and os.path.exists(js_temp_archive_dir_abs):
                     try:
                         shutil.rmtree(js_temp_archive_dir_abs)
                         logger.info(f"Cleaned up Node.js temporary archive directory: {js_temp_archive_dir_abs}")
                     except Exception as e_cleanup:
-                        logger.error(f"Failed to clean up Node.js temporary archive directory {js_temp_archive_dir_abs}: {e_cleanup}")
+                        logger.warning(f"Failed to clean up Node.js temporary archive directory {js_temp_archive_dir_abs}: {e_cleanup}")
+                
+                # Also clean up the base temp dir we created if it's empty or if the node script failed to create its own.
+                if os.path.exists(search_tool_temp_base_dir):
+                    try:
+                        if not os.listdir(search_tool_temp_base_dir): # only remove if empty
+                             shutil.rmtree(search_tool_temp_base_dir)
+                             logger.info(f"Cleaned up empty base temporary directory: {search_tool_temp_base_dir}")
+                        else:
+                            # If it's not empty, it means js_temp_archive_dir_abs might not have been identified correctly,
+                            # or the script put files directly in search_tool_temp_base_dir.
+                            # This part of cleanup might need refinement based on exact search.js behavior.
+                            # For now, if js_temp_archive_dir_abs was cleaned, this might be redundant or clean up other strays.
+                            # Let's be cautious and only remove search_tool_temp_base_dir if js_temp_archive_dir_abs was NOT cleaned
+                            # and search_tool_temp_base_dir IS js_temp_archive_dir_abs (meaning node script used the dir directly).
+                            if not js_temp_archive_dir_abs or js_temp_archive_dir_abs != search_tool_temp_base_dir :
+                                pass # Handled by js_temp_archive_dir_abs cleanup or has unexpected content
+                            # If js_temp_archive_dir_abs IS search_tool_temp_base_dir and wasn't cleaned (e.g. error before), try cleaning.
+                            elif js_temp_archive_dir_abs == search_tool_temp_base_dir:
+                                shutil.rmtree(search_tool_temp_base_dir)
+                                logger.info(f"Cleaned up base temporary directory (used directly by script): {search_tool_temp_base_dir}")
+                    except Exception as e_base_cleanup:
+                        logger.warning(f"Error during cleanup of base temporary directory {search_tool_temp_base_dir}: {e_base_cleanup}")
 
         elif provider_used.startswith("simulated"):
             # --- Simulation Logic ---
@@ -285,55 +336,107 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
         return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
 
     # --- Input Extraction ---
-    prompt = inputs.get("prompt") # For single-turn completion
-    messages = inputs.get("messages") # For chat-based completion (list of dicts)
-    provider_name_override = inputs.get("provider") # Optional override for provider
-    model_name_override = inputs.get("model") # Optional override for model
-    # Get generation parameters, using config defaults if not provided
+    prompt_template_str = inputs.get("prompt") 
+    if not prompt_template_str:
+        prompt_template_str = inputs.get("prompt_text")
+
+    messages = inputs.get("messages")
+    prompt_vars = inputs.get("prompt_vars")
+    provider_name_override = inputs.get("provider") 
+    model_name_override = inputs.get("model") 
     max_tokens = inputs.get("max_tokens", getattr(config, 'LLM_DEFAULT_MAX_TOKENS', 1024))
     temperature = inputs.get("temperature", getattr(config, 'LLM_DEFAULT_TEMP', 0.7))
-    # Collect any other inputs to pass as extra parameters to the provider's API call
-    standard_keys = ['prompt', 'messages', 'provider', 'model', 'max_tokens', 'temperature']
+    standard_keys = ['prompt', 'prompt_text', 'messages', 'prompt_vars', 'provider', 'model', 'max_tokens', 'temperature']
     extra_params = {k: v for k, v in inputs.items() if k not in standard_keys}
 
+    final_prompt_str = None
+    if prompt_template_str and isinstance(prompt_template_str, str):
+        if isinstance(prompt_vars, dict) and prompt_vars:
+            try:
+                final_prompt_str = prompt_template_str.format(**prompt_vars)
+                logger.info(f"Substituted prompt_vars into prompt_text. Original: '{prompt_template_str[:100]}...', Vars: {prompt_vars}")
+            except KeyError as e_key:
+                logger.warning(f"KeyError during .format() in invoke_llm: {e_key}. Using prompt_template as is. Ensure placeholders in prompt_text match keys in prompt_vars.")
+                final_prompt_str = prompt_template_str # Fallback to original template
+            except Exception as e_fmt:
+                logger.error(f"Unexpected error during .format() in invoke_llm: {e_fmt}. Using prompt_template as is.", exc_info=True)
+                final_prompt_str = prompt_template_str # Fallback
+        else:
+            final_prompt_str = prompt_template_str # No vars to substitute
+
     # --- Input Validation ---
-    if not prompt and not messages:
-        primary_result["error"] = "LLM invocation requires either 'prompt' (string) or 'messages' (list of dicts) input."
+    if not final_prompt_str and not messages:
+        primary_result["error"] = "LLM invocation requires either 'prompt' (string, after var substitution) or 'messages' (list of dicts) input."
         reflection_issues = ["Missing required input ('prompt' or 'messages')."]
         reflection_summary = "Input validation failed: Missing prompt/messages."
         return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
-    if prompt and messages:
-        logger.warning("Both 'prompt' and 'messages' provided to invoke_llm. Prioritizing 'messages' for chat completion.")
-        prompt = None # Clear prompt if messages are present
+    
+    if final_prompt_str and messages:
+        logger.warning("Both 'prompt' (after var substitution) and 'messages' provided to invoke_llm. Prioritizing 'messages' for chat completion.")
+        final_prompt_str = None # Clear prompt if messages are present, messages take precedence
 
     # --- Execute LLM Call ---
     try:
-        # Get the appropriate LLM provider instance (handles config lookup, key errors)
         provider = get_llm_provider(provider_name_override)
-        provider_name_used = provider._provider_name # Get actual provider name used
+        provider_name_used = provider._provider_name
         primary_result["provider_used"] = provider_name_used
-
-        # Get the appropriate model name for the provider
         model_to_use = model_name_override or get_model_for_provider(provider_name_used)
         primary_result["model_used"] = model_to_use
 
         logger.info(f"Invoking LLM: Provider='{provider_name_used}', Model='{model_to_use}'")
-        # Prepare common API arguments
         api_kwargs = {"max_tokens": max_tokens, "temperature": temperature, **extra_params}
-
-        # Call the appropriate provider method
         response_text = ""
         start_time = time.time()
+
         if messages:
-            # Use generate_chat for message lists
             response_text = provider.generate_chat(messages=messages, model=model_to_use, **api_kwargs)
-        elif prompt:
-            # Use generate for single prompts
-            response_text = provider.generate(prompt=prompt, model=model_to_use, **api_kwargs)
+        elif final_prompt_str:
+            response_text = provider.generate(prompt=final_prompt_str, model=model_to_use, **api_kwargs)
+        # If both are None (e.g. prompt became None due to messages taking precedence, or was never there)
+        # the input validation above should have caught it. This path implies one was valid.
+
         duration = time.time() - start_time
 
         # --- Process Successful Response ---
         primary_result["response_text"] = response_text
+        parsing_type = inputs.get("parsing_type", "text").lower()
+
+        if parsing_type == "json" and response_text:
+            try:
+                # Ensure response_text is not just whitespace or empty before trying to parse
+                if response_text.strip():
+                    # Attempt to strip common markdown code fences if present
+                    cleaned_response_text = response_text.strip()
+                    if cleaned_response_text.startswith("```json"): # Handle ```json ... ```
+                        cleaned_response_text = cleaned_response_text[7:]
+                        if cleaned_response_text.endswith("```"):
+                            cleaned_response_text = cleaned_response_text[:-3]
+                    elif cleaned_response_text.startswith("```") and cleaned_response_text.endswith("```"): # Handle ``` ... ```
+                         cleaned_response_text = cleaned_response_text[3:-3]
+
+                    parsed_data = json.loads(cleaned_response_text.strip())
+                    if isinstance(parsed_data, dict):
+                        for key, value in parsed_data.items():
+                            if key not in primary_result: # Prioritize existing keys like 'response_text'
+                                primary_result[key] = value
+                            else:
+                                primary_result[f"parsed_{key}"] = value 
+                                logger.warning(f"Key '{key}' from parsed JSON already exists in primary_result. Stored as 'parsed_{key}'.")
+                        logger.info("Successfully parsed JSON response and merged into primary_result.")
+                    else:
+                        primary_result["parsed_json_output"] = parsed_data
+                        logger.info("Successfully parsed JSON response (non-dict) into 'parsed_json_output'.")
+                else:
+                    logger.warning("Response_text is empty or whitespace; skipping JSON parsing.")
+                    # Potentially add to reflection_issues if JSON was expected but got empty response
+                    if "reflection_issues" not in locals(): reflection_issues = [] # Ensure reflection_issues exists
+                    reflection_issues.append("LLM response was empty/whitespace, expected JSON.")
+
+            except json.JSONDecodeError as e_json:
+                logger.warning(f"Failed to parse response_text as JSON: {e_json}. LLM output (raw) was: {response_text[:500]}...")
+                if "reflection_issues" not in locals(): reflection_issues = [] # Ensure reflection_issues exists
+                reflection_issues.append(f"Output Parsing Error: Failed to parse LLM response as JSON. Error: {e_json}")
+        
         reflection_status = "Success"
         reflection_summary = f"LLM call to {model_to_use} via {provider_name_used} completed successfully in {duration:.2f}s."
         # Confidence: LLMs can hallucinate, so confidence is inherently moderate unless further vetted
@@ -553,5 +656,154 @@ def calculate_math(inputs: Dict[str, Any], action_context: Optional[ActionContex
         reflection_confidence = 0.1 # Low confidence on failure
 
     return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
+
+# --- Placeholder for Codebase Search Tool ---
+def placeholder_codebase_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
+    """
+    [IAR Enabled] Placeholder for actual codebase search functionality.
+    Returns an empty result set and a note that it's not implemented.
+    """
+    query = inputs.get("query", "N/A")
+    logger.info(f"Executing PLACEHOLDER codebase search for query: '{query}'")
+
+    summary_text = f"Placeholder: Codebase search for '{query}' - Actual implementation pending."
+    primary_result = {
+        "search_results": [],
+        "summary": summary_text,
+        "stdout": summary_text,
+        "error": None
+    }
+
+    reflection = _create_reflection(
+        status="Success", # The placeholder itself ran successfully
+        summary="Placeholder codebase search executed. No actual search performed.",
+        confidence=0.1, # Low confidence as it's a placeholder
+        alignment="Partially aligned - acknowledges request but provides no data.",
+        issues=["Actual codebase search functionality is not implemented. This is a placeholder."],
+        preview=summary_text
+    )
+    return {**primary_result, "reflection": reflection}
+
+# --- Helper for display_output ---
+def _format_output_content(content: Any) -> str:
+    """Formats content for display, handling dicts/lists with JSON."""
+    if isinstance(content, (dict, list)):
+        try:
+            return json.dumps(content, indent=2, default=str) # pretty print
+        except TypeError:
+            return str(content) # fallback for non-serializable
+    return str(content)
+
+# Tool function for retrieving SPR definitions
+# Placeholder for retrieve_spr_definitions
+def retrieve_spr_definitions(inputs: Dict[str, Any], context_for_action: ActionContext) -> Dict[str, Any]:
+    """
+    Retrieves detailed definitions for a list of SPR IDs from the SPRManager.
+    Uses the ActionContext for logging and context awareness.
+    Input: {"spr_ids": ["SPR_ID_1", "SPR_ID_2"]}
+    Output: {"spr_details": {"SPR_ID_1": {...}, ...}, "errors": {...}, "reflection": {...}}
+    """
+    task_key = context_for_action.task_key
+    action_name = context_for_action.action_name
+    logger.info(f"Task '{task_key}' (Action: {action_name}) - Starting SPR retrieval.")
+
+    spr_ids_input = inputs.get("spr_ids")
+    spr_details_output: Dict[str, Any] = {}
+    retrieval_errors: Dict[str, str] = {}
+    all_found = True
+
+    # Initialize reflection structure
+    reflection = {
+        "status": "Failure", # Default to Failure
+        "summary": "SPR retrieval pending.",
+        "confidence": 0.5,
+        "alignment_check": "Aligned with fetching SPR data based on IDs.",
+        "potential_issues": [],
+        "raw_output_preview": None
+    }
+
+    try:
+        spr_manager_instance = get_global_spr_manager() # Use the global instance
+
+        if not spr_ids_input or not isinstance(spr_ids_input, list):
+            logger.warning(f"Task '{task_key}': 'spr_ids' must be a non-empty list.")
+            return {
+                "spr_details": {},
+                "errors": {"input_error": "'spr_ids' must be a non-empty list."},
+                "reflection": default_failure_reflection("Input validation failed: 'spr_ids' missing or not a list.")
+            }
+
+        for spr_id in spr_ids_input:
+            if spr_id is None: # Explicit check for None
+                logger.warning(f"Task '{task_key}': Encountered a None SPR ID in list, skipping.")
+                retrieval_errors["None_ID_Skipped"] = retrieval_errors.get("None_ID_Skipped", "") + "Skipped one None ID; "
+                all_found = False
+                continue
+            
+            if not isinstance(spr_id, str):
+                logger.warning(f"Task '{task_key}': Invalid SPR ID type '{type(spr_id)}' (value: {repr(spr_id)}) in list, skipping.")
+                retrieval_errors[str(spr_id)] = f"Invalid ID type {type(spr_id)}, must be string."
+                all_found = False
+                continue
+            
+            spr_detail = spr_manager_instance.get_spr(spr_id)
+            if spr_detail:
+                spr_details_output[spr_id] = spr_detail
+                logger.debug(f"Task '{task_key}': Successfully retrieved SPR '{spr_id}'.")
+            else:
+                retrieval_errors[spr_id] = "SPR not found."
+                logger.warning(f"Task '{task_key}': SPR with ID '{spr_id}' not found.")
+                all_found = False
+
+        if not spr_details_output and retrieval_errors: # If nothing was found and there were errors
+            summary = "Failed to retrieve any specified SPRs."
+        elif not all_found:
+            summary = "Retrieved some SPRs, but some were not found or had errors."
+        else:
+            summary = "Successfully retrieved all specified SPRs."
+
+        logger.info(f"Task '{task_key}' (Action: retrieve_spr_definitions) - Retrieval complete. Found: {len(spr_details_output)}, Errors: {len(retrieval_errors)}.")
+        return {
+            "spr_details": spr_details_output,
+            "errors": retrieval_errors,
+            "reflection": {
+                "status": "Success" if spr_details_output else "Failure", # Success if at least one SPR found, or even if list was empty but no errors
+                "summary": summary,
+                "confidence": 0.9 if spr_details_output else 0.5,
+                "alignment_check": "High",
+                "potential_issues": ["SPR ID typos", "SPR not yet defined in KG"] if retrieval_errors else [],
+                "raw_output_preview": f"Retrieved: {list(spr_details_output.keys())}, Errors: {list(retrieval_errors.keys())}"
+            }
+        }
+
+    except Exception as e_retrieval:
+        # Catch unexpected errors during retrieval
+        logger.error(f"Unexpected error during SPR retrieval: {e_retrieval}", exc_info=True)
+        return {
+            "spr_details": {},
+            "errors": {"retrieval_error": f"Failed to retrieve SPRs: {e_retrieval}"},
+            "reflection": default_failure_reflection(f"Failed to retrieve SPRs: {e_retrieval}")
+        }
+
+# --- MAIN FUNCTION ROUTER (Conceptual, used by Action Registry) ---
+# This dictionary maps action_type strings to their respective tool functions.
+# It's a conceptual guide for how the Action Registry might dispatch calls.
+# The actual registration happens in action_registry.py.
+TOOL_FUNCTIONS = {
+    # Example: "execute_code": execute_code_sandboxed,
+    # "generate_text_llm": invoke_llm,
+    # etc. Will be populated by action_registry.py based on registrations.
+}
+
+# --- Utility for default reflections ---
+def default_failure_reflection(summary: str) -> Dict[str, Any]:
+    return _create_reflection(
+        status="Failure",
+        summary=summary,
+        confidence=0.0,
+        alignment="N/A",
+        issues=["System Error: Default failure reflection"],
+        preview=None
+    )
 
 # --- END OF FILE 3.0ArchE/tools.py --- 

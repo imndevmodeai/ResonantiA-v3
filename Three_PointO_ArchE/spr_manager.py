@@ -275,53 +275,65 @@ class SPRManager:
 
     def is_spr(self, text: Optional[str]) -> Tuple[bool, Optional[str]]:
         """
-        Checks if a given text string strictly matches the SPR format (Guardian Points)
-        based on user-defined rules:
-        - Min length 3.
-        - First char: Alphanumeric; if letter, must be UPPERCASE.
-        - Last char: Alphanumeric; if letter, must be UPPERCASE.
-        - Middle chars (if any): ONLY lowercase letters or spaces. No uppercase.
-        - No leading/trailing spaces globally.
-        - Word-based interpretation: Not strictly enforced here, but the pattern should
-          allow for forms like "ExamplE" or "Word WordY".
-          The core check is on character types at positions.
+        Checks if a given text string strictly matches the SPR format (Guardian Points).
+        An SPR consists of one or more words separated by single spaces.
+        Each word must:
+        - Be at least 3 characters long.
+        - Start with an uppercase letter (if alphabetic, otherwise alphanumeric).
+        - End with an uppercase letter (if alphabetic, otherwise alphanumeric).
+        - Have all middle characters as lowercase letters (if any).
+        The overall SPR phrase must:
+        - Be at least 3 characters long.
+        - Not have leading or trailing spaces.
+        - Not have multiple spaces between words.
         """
         if not text or not isinstance(text, str):
             return False, "SPR text must be a non-empty string."
 
-        # Rule: Min length 3
-        if len(text) < 3:
-            return False, f"SPR '{text}' is too short (min 3 chars required)."
-
-        # Rule: No leading/trailing spaces globally (already implicitly handled by char checks if they fail on space)
-        # but good to be explicit if we change logic later.
         if text.strip() != text:
             return False, f"SPR '{text}' must not have leading or trailing spaces."
 
-        first_char = text[0]
-        last_char = text[-1]
-        middle_chars = text[1:-1] # This will be empty if len(text) == 2, handled by min length 3
+        if len(text) < 3:
+            return False, f"SPR '{text}' is too short (min 3 chars overall required)."
 
-        # Rule: First character
-        if not first_char.isalnum():
-            return False, f"SPR '{text}': First character '{first_char}' must be alphanumeric."
-        if first_char.isalpha() and not first_char.isupper():
-            return False, f"SPR '{text}': First alphabetic character '{first_char}' must be uppercase."
+        if "  " in text: # Check for multiple spaces between words
+            return False, f"SPR '{text}' must not contain multiple spaces between words."
 
-        # Rule: Last character
-        if not last_char.isalnum():
-            return False, f"SPR '{text}': Last character '{last_char}' must be alphanumeric."
-        if last_char.isalpha() and not last_char.isupper():
-            return False, f"SPR '{text}': Last alphabetic character '{last_char}' must be uppercase."
+        words = text.split(' ')
+        if not words: # Should not happen if text is non-empty and stripped
+            return False, "SPR text split into no words."
 
-        # Rule: Middle characters (if any)
-        if middle_chars: # Only check if middle_chars is not an empty string
-            for char_idx, char_val in enumerate(middle_chars):
-                if not (char_val.islower() or char_val.isspace()):
-                    return False, f"SPR '{text}': Middle character '{char_val}' (at index {char_idx + 1}) must be lowercase or a space."
-                if char_val.isupper(): # This is a stronger condition than the previous one, kept for clarity
-                    return False, f"SPR '{text}': Middle character '{char_val}' (at index {char_idx + 1}) must not be uppercase."
-        # If we made it here, all rules passed.
+        for i, word in enumerate(words):
+            if not word: # Handles cases like "Word  Word" if not caught by "  " check, or accidental empty string in list
+                 return False, f"SPR '{text}': Contains an empty word segment at word index {i}."
+            
+            if len(word) < 3:
+                return False, f"SPR '{text}': Word '{word}' (at index {i}) is too short (min 3 chars per word required)."
+
+            first_char = word[0]
+            last_char = word[-1]
+            middle_chars = word[1:-1]
+
+            # Rule: First character of word
+            if not first_char.isalnum():
+                return False, f"SPR '{text}': Word '{word}' (index {i}): First character '{first_char}' must be alphanumeric."
+            if first_char.isalpha() and not first_char.isupper():
+                return False, f"SPR '{text}': Word '{word}' (index {i}): First alphabetic character '{first_char}' must be uppercase."
+
+            # Rule: Last character of word
+            if not last_char.isalnum():
+                return False, f"SPR '{text}': Word '{word}' (index {i}): Last character '{last_char}' must be alphanumeric."
+            if last_char.isalpha() and not last_char.isupper():
+                return False, f"SPR '{text}': Word '{word}' (index {i}): Last alphabetic character '{last_char}' must be uppercase."
+
+            # Rule: Middle characters of word (if any)
+            if middle_chars:
+                for char_idx, char_val in enumerate(middle_chars):
+                    if not char_val.islower() or not char_val.isalpha(): # Must be a letter and lowercase
+                        return False, f"SPR '{text}': Word '{word}' (index {i}): Middle character '{char_val}' (at char index {char_idx + 1} of word) must be a lowercase letter."
+            # If middle_chars is empty (word length is 2), this is caught by len(word) < 3.
+            # If word length is 3, middle_chars has 1 char. If 4, middle_chars has 2, etc.
+            
         return True, None
 
     # --- Conceptual SPR Writer/Decompressor Interface Methods ---

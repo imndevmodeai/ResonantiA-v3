@@ -291,7 +291,7 @@ class GoogleProvider(BaseLLMProvider):
             try:
                 # Try direct access to text, which works for simple, unblocked responses
                 if hasattr(response, 'text') and response.text:
-                text_response = response.text
+                    text_response = response.text
                     finish_reason = "N/A" # .text doesn't directly expose finish_reason
                     try:
                         if response.candidates:
@@ -311,10 +311,9 @@ class GoogleProvider(BaseLLMProvider):
                     logger.debug(f"Google generation successful (via candidates). Finish Reason: {finish_reason}")
                     if finish_reason == "MAX_TOKENS":
                         logger.warning(f"Google response may be truncated due to max_output_tokens.")
-                return text_response
+                    return text_response
                 else:
                     logger.error("Google response missing candidates or content parts for detailed parsing.")
-                    # Attempt to get block reason from prompt_feedback if available
                     block_reason_msg = "Unknown reason."
                     if hasattr(response, 'prompt_feedback') and response.prompt_feedback:
                         block_reason = response.prompt_feedback.block_reason
@@ -439,7 +438,7 @@ class GoogleProvider(BaseLLMProvider):
             # --- Process Google Response (same as generate method) ---
             try:
                 if hasattr(response, 'text') and response.text:
-                text_response = response.text
+                    text_response = response.text
                     finish_reason = "N/A"
                     try:
                         if response.candidates:
@@ -454,7 +453,7 @@ class GoogleProvider(BaseLLMProvider):
                     text_response = first_candidate.content.parts[0].text
                     finish_reason = first_candidate.finish_reason
                     logger.debug(f"Google chat generation successful (via candidates). Finish Reason: {finish_reason}")
-                return text_response
+                    return text_response
                 else:
                     logger.error("Google chat response missing candidates or content parts for detailed parsing.")
                     block_reason_msg = "Unknown reason."

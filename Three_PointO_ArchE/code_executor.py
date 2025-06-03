@@ -198,40 +198,52 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
         reflection_summary = f"Code execution failed for language '{language}': {error}"
         reflection_confidence = 0.0
         reflection_alignment = "Failed to execute code."
-        if error not in reflection_issues: reflection_issues.append(f"Execution/Setup Error: {error}")
-        reflection_preview = stderr if stderr else stdout # Preview error or output if available
-    elif exit_code == 0: # Successful execution (code ran and returned 0)
-        reflection_status = "Success"
-        reflection_summary = f"Code executed successfully (Exit Code: 0) using '{primary_result['sandbox_method_used']}' sandbox."
-        reflection_confidence = 0.95 # High confidence in successful execution
-        reflection_alignment = "Assumed aligned with computational goal (code ran successfully)."
-        if stderr: # Add stderr content as a potential issue if present, even on success
-            reflection_issues.append(f"Stderr generated (may contain warnings): {stderr[:100]}...")
-        reflection_preview = stdout # Preview standard output
-    # Handle specific exit code for timeout if possible (depends on subprocess/docker implementation)
-    # Example: Check if exit code is specific timeout signal or if error message indicates timeout
-    elif "Timeout" in (error or stderr or ""): # Check if timeout was explicitly reported
+        reflection_issues.append(f"Execution setup/runtime error: {error}") # Add specific error to issues
+        reflection_preview = stderr[:150] + "..." if stderr else None
+    elif exit_code != 0:
         reflection_status = "Failure"
-        reflection_summary = f"Code execution timed out after ~{TIMEOUT_SECONDS}s."
-        reflection_confidence = 0.0
-        reflection_alignment = "Failed due to timeout."
-        if "Timeout" not in reflection_issues: reflection_issues.append("Execution Timeout")
-        reflection_issues.append("Code may be inefficient, stuck in loop, or timeout too short.")
-        reflection_preview = stderr if stderr else stdout
-    else: # Non-zero exit code indicates runtime error *within* the user's code
-        reflection_status = "Failure" # Treat non-zero exit as failure of the code's objective
         reflection_summary = f"Code execution finished with non-zero exit code: {exit_code}."
-        reflection_confidence = 0.3 # Code ran but failed internally
-        reflection_alignment = "Code failed to execute as intended (runtime error)."
+        reflection_confidence = 0.3 # Higher than setup error, code ran but failed
+        reflection_alignment = "Code executed but resulted in an error."
         reflection_issues.append(f"Runtime Error (Exit Code: {exit_code})")
-        if stderr: reflection_issues.append(f"Check stderr for details: {stderr[:100]}...")
-        else: reflection_issues.append("No stderr captured.")
-        reflection_preview = stderr if stderr else stdout # Prefer stderr for errors
+        # Include a preview of stderr if available, truncated for brevity
+        stderr_preview = (stderr[:70] + "...") if stderr and len(stderr) > 70 else stderr
+        reflection_issues.append(f"Check stderr for details: {stderr_preview}") 
+        reflection_preview = stdout[:150] + "..." if stdout else None
+    else: # Successful execution (exit code 0)
+        reflection_status = "Success"
+        reflection_summary = f"Code executed successfully for language '{language}'."
+        reflection_confidence = 0.95 # High confidence for successful run
+        reflection_alignment = "Code executed as expected."
+        reflection_preview = stdout[:150] + "..." if stdout else None
+        
+        # Attempt to parse stdout as JSON if it's not empty
+        if stdout:
+            try:
+                parsed_stdout = json.loads(stdout)
+                if isinstance(parsed_stdout, dict):
+                    logger.info("Successfully parsed stdout as JSON and merged into results.")
+                    primary_result["raw_stdout"] = stdout # Store original stdout
+                    primary_result["stdout"] = parsed_stdout # Replace stdout with parsed dict
+                    # Merge the parsed dictionary into the primary_result
+                    # This makes its keys directly accessible (e.g., result['actual_output_key'])
+                    for key, value in parsed_stdout.items():
+                        if key not in primary_result: # Avoid overwriting standard keys like 'exit_code'
+                            primary_result[key] = value
+                        else:
+                            logger.warning(f"Key '{key}' from parsed stdout conflicts with standard result key. Not overwriting.")
+                    reflection_summary += " Output parsed as JSON."
+                    reflection_issues.append("Output successfully parsed as JSON.") # Add as an issue/note
+                else:
+                    # Stdout was valid JSON, but not a dictionary. Keep stdout as string.
+                    logger.info("Stdout parsed as JSON, but was not a dictionary. Storing as raw string.")
+                    reflection_issues.append("Output was valid JSON but not an object, stored as string.")
+            except json.JSONDecodeError:
+                logger.info("Stdout was not valid JSON. Storing as raw string.")
+                reflection_issues.append("Output was not valid JSON.") # Add as an issue/note
 
-    # Final reflection generation
-    final_reflection = _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)
-
-    return {**primary_result, "reflection": final_reflection}
+    primary_result["reflection"] = _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)
+    return primary_result
 
 # --- Internal Helper: Docker Execution ---
 def _execute_with_docker(language: str, code: str, input_data: str) -> Dict[str, Any]:
@@ -335,43 +347,30 @@ def _execute_with_docker(language: str, code: str, input_data: str) -> Dict[str,
 
 # --- Internal Helper: Subprocess Execution ---
 def _execute_with_subprocess(language: str, code: str, input_data: str) -> Dict[str, Any]:
-    """Executes code using a local subprocess. Less secure. Returns partial result dict."""
-    cmd: Optional[List[str]] = None
-    interpreter_path: Optional[str] = None
-    # Find interpreter path - requires interpreters to be in system PATH
-    try: import shutil # Import here as it's only needed for this method
-    except ImportError: shutil = None
-
+    """Executes code using a direct subprocess call. Returns partial result dict."""
+    # Map language to interpreter command
+    # Ensure these interpreters are available in the PATH
+    interpreter_cmd: Optional[List[str]] = None
     if language == 'python':
-        # Use the same Python executable that's running Arche if possible
-        interpreter_path = sys.executable
-        if not interpreter_path or not os.path.exists(interpreter_path):
-            # Fallback to just 'python' hoping it's in PATH
-            interpreter_path = "python" if platform.system() != "Windows" else "python.exe"
-            logger.warning(f"Could not find sys.executable, attempting '{interpreter_path}'.")
-        # Use '-c' to pass code directly as command line argument
-        cmd = [interpreter_path, "-c", code]
+        # Unescape \n to actual newlines for python -c
+        processed_code = code.replace('\\n', '\n').replace('\\r', '\r')
+        interpreter_cmd = [sys.executable or "python3", "-c", processed_code]
     elif language == 'javascript':
-        # Find 'node' executable using shutil.which (cross-platform PATH search)
-        if shutil: interpreter_path = shutil.which('node')
-        if interpreter_path:
-            # Use '-e' to pass code directly
-            cmd = [interpreter_path, "-e", code]
-        else:
-            return {"error": "Node.js interpreter ('node') not found in system PATH.", "exit_code": -1, "stdout": "", "stderr": ""}
-    # Add other languages here (e.g., bash using 'bash -c')
-    # elif language == 'bash':
-    #     interpreter_path = shutil.which('bash')
-    #     if interpreter_path: cmd = [interpreter_path, "-c", code]
-    #     else: return {"error": "Bash interpreter ('bash') not found.", "exit_code": -1, "stdout": "", "stderr": ""}
-    else:
+        processed_code = code.replace('\\n', '\n').replace('\\r', '\r') # Node.js also benefits from this
+        interpreter_cmd = ["node", "-e", processed_code] # node -e executes string
+    elif language == 'bash':
+        # Bash doesn't typically need \n unescaping for a script string passed to -c
+        interpreter_cmd = ["bash", "-c", code]
+    # Add other languages here if needed
+
+    if not interpreter_cmd:
         return {"error": f"Unsupported language for subprocess execution: {language}", "exit_code": -1, "stdout": "", "stderr": ""}
 
-    logger.debug(f"Executing subprocess command: {' '.join(cmd)}")
+    logger.debug(f"Executing subprocess command: {' '.join(interpreter_cmd)}")
     try:
         # Run the command as a subprocess
         process = subprocess.run(
-            cmd,
+            interpreter_cmd,
             input=input_data.encode('utf-8'), # Pass input data as stdin
             capture_output=True, # Capture stdout/stderr
             timeout=TIMEOUT_SECONDS, # Apply timeout
@@ -396,8 +395,8 @@ def _execute_with_subprocess(language: str, code: str, input_data: str) -> Dict[
         return {"error": f"TimeoutExpired: Execution exceeded {TIMEOUT_SECONDS}s limit.", "exit_code": -1, "stdout": "", "stderr": "Timeout Error"}
     except FileNotFoundError:
         # Error if the interpreter itself wasn't found
-        logger.error(f"Interpreter for '{language}' ('{interpreter_path or language}') not found.")
-        return {"error": f"Interpreter not found: {interpreter_path or language}", "exit_code": -1, "stdout": "", "stderr": ""}
+        logger.error(f"Interpreter for '{language}' ('{interpreter_cmd[0] if interpreter_cmd else language}') not found.")
+        return {"error": f"Interpreter not found: {interpreter_cmd[0] if interpreter_cmd else language}", "exit_code": -1, "stdout": "", "stderr": ""}
     except OSError as e_os:
         # Catch OS-level errors during process creation (e.g., permissions)
         logger.error(f"OS error during subprocess execution: {e_os}", exc_info=True)

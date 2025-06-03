@@ -1,0 +1,92 @@
+{
+  "workflow_id": "spr_cognitive_unfolding_workflow",
+  "description": "Identifies SPRs in a user query, then retrieves their details from the KG to prime cognitive unfolding.",
+  "version": "1.0",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "raw_user_query": {
+        "type": "string",
+        "description": "The initial user query."
+      }
+    },
+    "required": ["raw_user_query"]
+  },
+  "tasks": {
+    "identify_sprs_in_query": {
+      "action": "execute_code",
+      "description": "Scans the raw user query to identify potential SPRs using an external script.",
+      "inputs": {
+        "language": "shell",
+        "code": "python scripts/identify_sprs.py",
+        "prompt_vars": {
+          "INPUT_QUERY": "{{context.raw_user_query}}"
+        }
+      },
+      "outputs": {
+        "identified_spr_list": "{{identified_spr_list}}"
+      },
+      "error_handling": {
+        "strategy": "retry_then_reflect_and_continue",
+        "max_attempts": 2
+      }
+    },
+    "retrieve_details_for_identified_sprs": {
+      "action": "get_spr_details",
+      "description": "Fetches the full definitions and context for the identified SPRs from the Knowledge Graph.",
+      "inputs": {
+        "spr_ids": "{{identify_sprs_in_query.identified_spr_list}}"
+      }
+    },
+    "prime_cognitive_unfolding_with_spr_details": {
+      "action": "generate_text_llm",
+      "description": "Uses an LLM to synthesize the retrieved SPR details in the context of the original query, generating a 'cognitively primed state'.",
+      "inputs": {
+        "prompt_name": "spr_cognitive_unfolding_prompt",
+        "prompt_text": "You are ArchE, commencing Cognitive Unfolding for a user query.\nOriginal User Query: \"{{p_query}}\"\n\nThe following Sparse Priming Representations (SPRs) were identified in the query, and their details (if found in the Knowledge Graph) are listed below. If an SPR from the query was not found, it will be absent from the details.\nIdentified SPRs from Query: {{p_id_list}}\nSPR Details from Knowledge Graph:\n{{p_details_json}}\n\nBased on these SPRs (especially those found in the Knowledge Graph) and their context, and considering the original query:\n1. Synthesize the core activated concepts and knowledge pathways. Focus on the SPRs that were successfully retrieved.\n2. Identify key implications and connections between these retrieved SPRs relevant to the original query.\n3. Formulate a \"cognitively primed state\" summary that will guide the next phase of Mental Blueprinting.\n4. If no valid SPRs were found or retrieved, state that and suggest the query might not contain recognized SPRs or requires clarification.\nOutput as a JSON object with keys: \"activated_concepts\" (list of strings), \"key_implications\" (list of strings), \"primed_state_summary\" (string), and \"retrieval_status\" (string, e.g., 'Details found for X SPRs', 'No SPR details retrieved').",
+        "prompt_vars": {
+          "p_query": "{{context.raw_user_query}}",
+          "p_id_list": "{{identify_sprs_in_query.identified_spr_list | default([]) | toJson}}",
+          "p_details_json": "{{retrieve_details_for_identified_sprs.spr_details | default({}) | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 1500,
+        "temperature": 0.2
+      }
+    },
+    "log_cognitive_unfolding_result": {
+      "action": "display_output",
+      "description": "Logs the results of the cognitive unfolding process.",
+      "inputs": {
+        "content": "Cognitive Unfolding Process Report:\n--- Query --- {{context.raw_user_query}}\n--- Identified Potential SPRs in Query --- {{identify_sprs_in_query.identified_spr_list | default([]) | toJson}}\n--- Retrieved SPR Details from KG --- {{retrieve_details_for_identified_sprs.spr_details | default({}) | toJson}}\n--- SPR Retrieval Errors --- {{retrieve_details_for_identified_sprs.errors | default({}) | toJson}}\n--- LLM Primed State --- {{prime_cognitive_unfolding_with_spr_details | toJson}}"
+      },
+      "depends_on": [
+        "identify_sprs_in_query",
+        "retrieve_details_for_identified_sprs",
+        "prime_cognitive_unfolding_with_spr_details"
+      ]
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "identified_sprs_from_query": {
+        "type": "array",
+        "description": "List of SPR strings identified in the raw query.",
+        "items": { "type": "string" }
+      },
+      "retrieved_spr_definitions": {
+        "type": "object",
+        "description": "Detailed information for SPRs successfully retrieved from the Knowledge Graph."
+      },
+      "spr_retrieval_errors": {
+        "type": "object",
+        "description": "Errors encountered during SPR retrieval."
+      },
+      "cognitive_primed_state": {
+        "type": "object",
+        "description": "The LLM-generated cognitively primed state, including activated concepts, implications, and summary."
+      }
+    }
+  }
+} 

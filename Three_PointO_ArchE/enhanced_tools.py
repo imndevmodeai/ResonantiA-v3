@@ -1,7 +1,6 @@
---- START OF FILE 3.0ArchE/enhanced_tools.py ---
 # ResonantiA Protocol v3.0 - enhanced_tools.py
-# Defines more complex or specialized tools/actions for the framework.
-# CRITICAL: All functions intended as actions MUST implement and return the IAR dictionary.
+# This module contains more advanced or specialized tools for the Arche system.
+# These tools might interact with external APIs, databases, or perform complex computations.
 
 import logging
 import requests # For call_api

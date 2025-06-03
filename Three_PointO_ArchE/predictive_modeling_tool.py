@@ -24,16 +24,17 @@ except ImportError:
 PREDICTIVE_LIBS_AVAILABLE = False
 try:
     # --- UNCOMMENT AND IMPORT THE LIBRARIES YOU CHOOSE TO IMPLEMENT WITH ---
-    # import statsmodels.api as sm # For ARIMA, VAR etc.
-    # from statsmodels.tsa.arima.model import ARIMA
-    # from sklearn.model_selection import train_test_split # For evaluation
-    # from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score # Example metrics
-    # import joblib # For saving/loading trained models (e.g., sklearn models)
+    import statsmodels.api as sm # For ARIMA, VAR etc.
+    from statsmodels.tsa.arima.model import ARIMA
+    from sklearn.model_selection import train_test_split # For evaluation
+    from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score # Example metrics
+    import joblib # For saving/loading trained models (e.g., sklearn models)
     # import prophet # Requires separate installation (potentially complex)
-    # from prophet import Prophet
+    from prophet import Prophet
+    from sklearn.linear_model import LinearRegression # Added for linear regression
 
     # <<< SET FLAG TO TRUE IF LIBS ARE SUCCESSFULLY IMPORTED >>>
-    # PREDICTIVE_LIBS_AVAILABLE = True
+    PREDICTIVE_LIBS_AVAILABLE = True
 
     if PREDICTIVE_LIBS_AVAILABLE:
         logging.getLogger(__name__).info("Actual predictive modeling libraries (statsmodels, sklearn, etc.) loaded successfully.")
@@ -151,21 +152,96 @@ def run_prediction(operation: str, **kwargs) -> Dict[str, Any]:
 # --- Internal Helper Functions for Operations (Require Implementation) ---
 
 def _train_model(**kwargs) -> Dict[str, Any]:
-    """[Requires Implementation] Trains a predictive model."""
-    # <<< INSERT ACTUAL MODEL TRAINING CODE HERE >>>
-    # 1. Extract parameters: data, model_type, target, features, model_id, etc. from kwargs
-    # 2. Validate inputs (data format, required columns, model type supported)
-    # 3. Preprocess data if needed (e.g., handle timestamps, scaling)
-    # 4. Instantiate the chosen model (ARIMA, Prophet, LinearRegression, etc.)
-    # 5. Train the model using the data
-    # 6. Optionally evaluate model on training or validation set
-    # 7. Save the trained model artifact (e.g., using joblib or model-specific save methods) to MODEL_SAVE_DIR using model_id
-    # 8. Prepare primary_result dict (e.g., model_id, evaluation_score, parameters_used)
-    # 9. Generate IAR reflection (status, summary, confidence based on fit/eval, issues like convergence warnings, alignment)
-    # 10. Return combined dict {**primary_result, "reflection": reflection}
-    error_msg = "Actual model training ('train_model') not implemented."
-    logger.error(error_msg)
-    return {"error": error_msg, "reflection": _create_reflection("Failure", error_msg, 0.0, "N/A", ["Not Implemented"], None)}
+    """[Requires Implementation -> Implemented for Linear Regression] Trains a predictive model."""
+    primary_result: Dict[str, Any] = {"error": None, "model_path": None, "training_summary": {}}
+    status = "Failure"; summary = "Model training init failed."; confidence = 0.0; alignment = "N/A"; issues = ["Initialization error."]; preview = None
+
+    try:
+        model_type = str(kwargs.get("model_type", "")).lower()
+        features_data = kwargs.get("features")
+        target_data = kwargs.get("target")
+        model_params = kwargs.get("model_params", {})
+        save_model_path_relative = kwargs.get("save_model_path") # Relative to OUTPUT_DIR
+
+        if not model_type:
+            primary_result["error"] = "Missing 'model_type' for training."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+        
+        if features_data is None or target_data is None:
+            primary_result["error"] = "Missing 'features' or 'target' data for training."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        if not save_model_path_relative:
+            primary_result["error"] = "Missing 'save_model_path' for saving the model."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        # Ensure features_data and target_data are numpy arrays or pandas DataFrames
+        # For sklearn, list of lists for features and list for target is fine.
+        try:
+            X = pd.DataFrame(features_data) # Handles list of lists
+            y = pd.Series(target_data)    # Handles list
+            if X.shape[0] != y.shape[0]:
+                raise ValueError(f"Features (rows: {X.shape[0]}) and target (rows: {y.shape[0]}) must have the same number of samples.")
+            if X.empty or y.empty:
+                raise ValueError("Features or target data is empty after conversion.")
+        except Exception as e_data:
+            primary_result["error"] = f"Data conversion/validation error: {e_data}"; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        logger.info(f"Starting model training for type: {model_type}. Features shape: {X.shape}, Target shape: {y.shape}")
+
+        if model_type == "linear_regression":
+            model = LinearRegression(**model_params)
+            model.fit(X, y)
+            
+            # Construct absolute save path
+            # MODEL_SAVE_DIR is already an absolute path based on config.OUTPUT_DIR
+            # save_model_path_relative is like "models/my_model.joblib" (relative to config.OUTPUT_DIR)
+            # So, we want MODEL_SAVE_DIR to be the parent of save_model_path_relative if save_model_path_relative includes "models/"
+            # Or, if save_model_path_relative is just "my_model.joblib", it should go into MODEL_SAVE_DIR.
+            
+            # The workflow provides "outputs/models/test_linear_model.joblib"
+            # config.OUTPUT_DIR is /media/dev2025/3626C55326C514B1/Happier/outputs
+            # MODEL_SAVE_DIR is /media/dev2025/3626C55326C514B1/Happier/outputs/models
+
+            # If save_model_path_relative starts with config.OUTPUT_DIR, strip it.
+            # Then join with config.OUTPUT_DIR
+            if save_model_path_relative.startswith(config.OUTPUT_DIR):
+                 # This case should not happen if paths are consistently relative to OUTPUT_DIR in workflow
+                logger.warning(f"save_model_path seems absolute or incorrectly prefixed: {save_model_path_relative}")
+                abs_save_model_path = save_model_path_relative
+            elif save_model_path_relative.startswith("outputs/"):
+                 abs_save_model_path = os.path.join(config.BASE_DIR, save_model_path_relative)
+            else: # Assumed relative to MODEL_SAVE_DIR or just a filename
+                 abs_save_model_path = os.path.join(MODEL_SAVE_DIR, os.path.basename(save_model_path_relative))
+
+
+            os.makedirs(os.path.dirname(abs_save_model_path), exist_ok=True)
+            joblib.dump(model, abs_save_model_path)
+            
+            primary_result["model_path"] = os.path.relpath(abs_save_model_path, config.BASE_DIR) # Store path relative to base for portability
+            primary_result["training_summary"] = {
+                "model_type": "linear_regression",
+                "parameters_used": model.get_params(),
+                "n_features_in": model.n_features_in_ if hasattr(model, 'n_features_in_') else X.shape[1],
+                "intercept": model.intercept_ if hasattr(model, 'intercept_') else None,
+                "coefficients": model.coef_.tolist() if hasattr(model, 'coef_') else None,
+                "note": "Basic linear regression training complete."
+            }
+            status = "Success"; summary = f"Linear regression model trained and saved to {primary_result['model_path']}."; confidence = 0.85
+            alignment = "Aligned with model training objective."; issues = []
+            preview = {"model_path": primary_result["model_path"], "n_features": primary_result["training_summary"]["n_features_in"]}
+            logger.info(summary)
+        else:
+            primary_result["error"] = f"Model type '{model_type}' not implemented for training."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            status = "Failure"; confidence = 0.1
+
+    except Exception as e:
+        logger.error(f"Error during model training ('{model_type}'): {e}", exc_info=True)
+        primary_result["error"] = f"Training failed: {e}"; issues.append(str(e)); summary = primary_result["error"]
+        status = "Failure"; confidence = 0.05
+        
+    return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
 
 def _forecast_future_states(**kwargs) -> Dict[str, Any]:
     """[Requires Implementation] Generates forecasts using a trained time series model."""
@@ -182,18 +258,53 @@ def _forecast_future_states(**kwargs) -> Dict[str, Any]:
     return {"error": error_msg, "reflection": _create_reflection("Failure", error_msg, 0.0, "N/A", ["Not Implemented"], None)}
 
 def _predict(**kwargs) -> Dict[str, Any]:
-    """[Requires Implementation] Generates predictions using a trained non-time series model."""
-    # <<< INSERT ACTUAL PREDICTION CODE HERE >>>
-    # 1. Extract parameters: model_id, data (new data to predict on)
-    # 2. Load the trained model artifact
-    # 3. Validate model type and data compatibility
-    # 4. Generate predictions for the input data
-    # 5. Prepare primary_result dict (predictions list/array)
-    # 6. Generate IAR reflection (status, summary, confidence, issues, alignment)
-    # 7. Return combined dict {**primary_result, "reflection": reflection}
-    error_msg = "Actual prediction ('predict') not implemented."
-    logger.error(error_msg)
-    return {"error": error_msg, "reflection": _create_reflection("Failure", error_msg, 0.0, "N/A", ["Not Implemented"], None)}
+    """[Requires Implementation -> Implemented for joblib models] Generates predictions using a trained non-time series model."""
+    primary_result: Dict[str, Any] = {"error": None, "predictions": None}
+    status = "Failure"; summary = "Prediction init failed."; confidence = 0.0; alignment = "N/A"; issues = ["Initialization error."]; preview = None
+
+    try:
+        # model_path is relative to config.BASE_DIR as returned by _train_model
+        model_path_from_train = kwargs.get("model_path") 
+        features_data = kwargs.get("features")
+
+        if not model_path_from_train:
+            primary_result["error"] = "Missing 'model_path' to load the model for prediction."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+        
+        if features_data is None:
+            primary_result["error"] = "Missing 'features' data for prediction."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        abs_model_path = os.path.join(config.BASE_DIR, model_path_from_train)
+        if not os.path.exists(abs_model_path):
+            primary_result["error"] = f"Model file not found at expected path: {abs_model_path} (from relative: {model_path_from_train})"; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        try:
+            X_predict = pd.DataFrame(features_data)
+            if X_predict.empty:
+                raise ValueError("Features data for prediction is empty after conversion.")
+        except Exception as e_data:
+            primary_result["error"] = f"Prediction data conversion/validation error: {e_data}"; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        logger.info(f"Loading model from {abs_model_path} for prediction. Features shape: {X_predict.shape}")
+        model = joblib.load(abs_model_path)
+
+        predictions_array = model.predict(X_predict)
+        primary_result["predictions"] = predictions_array.tolist()
+
+        status = "Success"; summary = f"Predictions generated successfully using model from {model_path_from_train}."; confidence = 0.9
+        alignment = "Aligned with prediction objective."; issues = []
+        preview = {"num_predictions": len(primary_result["predictions"]), "first_prediction": primary_result["predictions"][0] if primary_result["predictions"] else None}
+        logger.info(summary)
+
+    except Exception as e:
+        logger.error(f"Error during prediction: {e}", exc_info=True)
+        primary_result["error"] = f"Prediction failed: {e}"; issues.append(str(e)); summary = primary_result["error"]
+        status = "Failure"; confidence = 0.05
+
+    return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
 
 def _evaluate_model(**kwargs) -> Dict[str, Any]:
     """[Requires Implementation] Evaluates a trained model on test data."""

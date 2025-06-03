@@ -1,5 +1,5 @@
-# --- START OF FILE 3.0ArchE/agent_based_modeling_tool.py ---
-# ResonantiA Protocol v3.0 - agent_based_modeling_tool.py
+# --- START OF FILE Three_PointO_ArchE/agent_based_modeling_tool.py ---
+# ResonantiA Protocol Three_PointO_ArchE - agent_based_modeling_tool.py
 # Implements Agent-Based Modeling (ABM) capabilities using Mesa (if available).
 # Includes enhanced temporal analysis of results and mandatory IAR output.
 
@@ -19,7 +19,7 @@ except ImportError:
     class FallbackConfig: OUTPUT_DIR = 'outputs'; ABM_VISUALIZATION_ENABLED = True; ABM_DEFAULT_ANALYSIS_TYPE='basic'; MODEL_SAVE_DIR='outputs/models' # Added model save dir
     config = FallbackConfig(); logging.warning("config.py not found for abm tool, using fallback configuration.")
 
-# --- Import Mesa and Visualization/Analysis Libraries (Set flag based on success) ---
+# --- Import Mesa and Visualization Libraries (Set flag based on success) ---
 MESA_AVAILABLE = False
 VISUALIZATION_LIBS_AVAILABLE = False
 SCIPY_AVAILABLE = False # For advanced pattern analysis
@@ -42,20 +42,18 @@ try:
         logger_abm_imp.warning("Matplotlib/NetworkX not found. ABM visualization will be disabled.")
     try:
         from scipy import ndimage # For pattern detection example
-        from scipy.stats import entropy as scipy_entropy # For spatial entropy
-        from scipy.signal import find_peaks # For oscillation detection
         SCIPY_AVAILABLE = True
         logger_abm_imp.info("SciPy library loaded successfully for ABM analysis.")
     except ImportError:
-        ndimage = None; scipy_entropy = None; find_peaks = None
-        logger_abm_imp.warning("SciPy not found. Advanced ABM pattern analysis and entropy/oscillation detection will be disabled.")
+        ndimage = None
+        logger_abm_imp.warning("SciPy not found. Advanced ABM pattern analysis will be disabled.")
 
 except ImportError as e_mesa:
     # Define dummy classes if Mesa is not installed
-    mesa = None; Agent = object; Model = object; RandomActivation = object; SimultaneousActivation = object; StagedActivation = object; MultiGrid = object; NetworkGrid = object; DataCollector = object; plt = None; nx = None; ndimage = None; scipy_entropy = None; find_peaks = None
+    mesa = None; Agent = object; Model = object; RandomActivation = object; SimultaneousActivation = object; StagedActivation = object; MultiGrid = object; NetworkGrid = object; DataCollector = object; plt = None; nx = None; ndimage = None
     logging.getLogger(__name__).warning(f"Mesa library import failed: {e_mesa}. ABM Tool will run in SIMULATION MODE.")
 except Exception as e_mesa_other:
-    mesa = None; Agent = object; Model = object; RandomActivation = object; SimultaneousActivation = object; StagedActivation = object; MultiGrid = object; NetworkGrid = object; DataCollector = object; plt = None; nx = None; ndimage = None; scipy_entropy = None; find_peaks = None
+    mesa = None; Agent = object; Model = object; RandomActivation = object; SimultaneousActivation = object; StagedActivation = object; MultiGrid = object; NetworkGrid = object; DataCollector = object; plt = None; nx = None; ndimage = None
     logging.getLogger(__name__).error(f"Unexpected error importing Mesa/visualization libs: {e_mesa_other}. ABM Tool simulating.")
 
 
@@ -68,11 +66,9 @@ def _create_reflection(status: str, summary: str, confidence: Optional[float], a
     if confidence is not None: confidence = max(0.0, min(1.0, confidence))
     issues_list = issues if issues else None
     try:
-        preview_str = json.dumps(preview, default=str) if isinstance(preview, (dict, list)) else str(preview)
+        preview_str = str(preview) if preview is not None else None
         if preview_str and len(preview_str) > 150: preview_str = preview_str[:150] + "..."
-    except Exception:
-        try: preview_str = str(preview); preview_str = preview_str[:150] + "..." if len(preview_str) > 150 else preview_str
-        except Exception: preview_str = "[Preview Error]"
+    except Exception: preview_str = "[Preview Error]"
     return {"status": status, "summary": summary, "confidence": confidence, "alignment_check": alignment if alignment else "N/A", "potential_issues": issues_list, "raw_output_preview": preview_str}
 
 # --- Default Agent and Model Implementations ---
@@ -89,8 +85,6 @@ class BasicGridAgent(Agent if MESA_AVAILABLE else object):
         self.state = int(state) # Ensure state is integer
         self.next_state = self.state
         self.params = kwargs # Store any extra parameters
-        # Example: Use activation_prob from params if provided
-        self.activation_prob = float(self.params.get('activation_prob', 0.1)) # Default 0.1 if not passed
 
     def step(self):
         """ Defines agent behavior within a simulation step. """
@@ -99,26 +93,17 @@ class BasicGridAgent(Agent if MESA_AVAILABLE else object):
             self.next_state = self.state
             return
         try:
-            # Example logic: Activate based on probability and neighbor state
+            # Example logic: Activate if enough neighbors are active
             neighbors = self.model.grid.get_neighbors(self.pos, moore=True, include_center=False)
             active_neighbors = sum(1 for a in neighbors if hasattr(a, 'state') and a.state > 0)
             # Use activation_threshold from the model if available, else default
             threshold = getattr(self.model, 'activation_threshold', 2)
 
             # Determine next state based on logic
-            if self.state == 0:
-                # Activate if enough neighbors OR randomly based on activation_prob
-                if active_neighbors >= threshold or self.random.random() < self.activation_prob:
-                    self.next_state = 1
-                else:
-                    self.next_state = 0
-            elif self.state == 1:
-                 # Example deactivation: deactivate if few neighbors OR randomly
-                 deactivation_prob = self.params.get('deactivation_prob', 0.05) # Example param
-                 if active_neighbors < threshold - 1 or self.random.random() < deactivation_prob:
-                    self.next_state = 0
-                 else:
-                    self.next_state = 1
+            if self.state == 0 and active_neighbors >= threshold:
+                self.next_state = 1
+            elif self.state == 1 and active_neighbors < threshold -1 : # Example deactivation
+                self.next_state = 0
             else:
                 self.next_state = self.state # Maintain current state otherwise
 
@@ -236,9 +221,7 @@ class BasicGridModel(Model if MESA_AVAILABLE else object):
                                 neighbor = next((a for a in self.schedule if hasattr(a,'pos') and a.pos == (nx, ny)), None)
                                 if neighbor and hasattr(neighbor, 'state') and neighbor.state > 0: active_neighbors_sim += 1
                 current_state = getattr(agent, 'state', 0)
-                activation_prob = getattr(agent, 'activation_prob', 0.1) # Use agent param if exists
-                if current_state == 0 and (active_neighbors_sim >= self.activation_threshold or self.random.random() < activation_prob):
-                     next_states[agent.unique_id] = 1
+                if current_state == 0 and active_neighbors_sim >= self.activation_threshold: next_states[agent.unique_id] = 1
                 else: next_states[agent.unique_id] = current_state
             # Update states
             for agent in self.schedule:
@@ -293,7 +276,7 @@ class ABMTool:
             model_type (str): Type of model to create (e.g., "basic", "network"). Default "basic".
             agent_class (Type[Agent], optional): Custom agent class to use. Defaults to BasicGridAgent.
             **kwargs: Parameters for the model constructor (e.g., width, height, density,
-                      model_params dict, agent_params dict).
+                    model_params dict, agent_params dict).
 
         Returns:
             Dict containing 'model' instance (or config if simulated), metadata, and IAR reflection.
@@ -360,8 +343,7 @@ class ABMTool:
                 "dimensions": [getattr(model,'width',None), getattr(model,'height',None)] if hasattr(model,'grid') and isinstance(model.grid, MultiGrid) else None,
                 "agent_count": getattr(model,'num_agents',0),
                 "params": {**getattr(model,'model_params',{}), "scheduler": scheduler, "seed": seed, "torus": torus },
-                "agent_params_used": getattr(model,'custom_agent_params',{})
-            })
+                "agent_params_used": getattr(model,'custom_agent_params',{})})
             reflection_status = "Success"
             reflection_summary = f"Mesa model '{model_type}' (Run ID: {getattr(model,'run_id','N/A')}) created successfully."
             reflection_confidence = 0.95 # High confidence in successful creation
@@ -516,8 +498,7 @@ class ABMTool:
             reflection_preview = {
                 "steps_run": final_step_count,
                 "final_active": primary_result.get("active_count"),
-                "viz_path": primary_result.get("visualization_path")
-            }
+                "viz_path": primary_result.get("visualization_path") }
 
         except Exception as e_run:
             # Catch errors during the simulation loop or data collection
@@ -569,7 +550,7 @@ class ABMTool:
                         ax1.set_xlabel("X Coordinate")
                         ax1.set_ylabel("Y Coordinate")
                         # Add colorbar, customize ticks if state values are discrete/few
-                        unique_states = np.unique(grid_array[grid_array != -1]) # Exclude empty cell marker if used
+                        unique_states = np.unique(grid_array)
                         cbar_ticks = unique_states if len(unique_states) < 10 and np.all(np.mod(unique_states, 1) == 0) else None
                         fig.colorbar(im, ax=ax1, label='Agent State', ticks=cbar_ticks)
                     else: ax1.text(0.5, 0.5, f'Grid data not 2D\n(Shape: {grid_array.shape})', ha='center', va='center', transform=ax1.transAxes); ax1.set_title("Final Grid State")
@@ -614,7 +595,6 @@ class ABMTool:
                 except Exception: pass
             return None
 
-    # --- analyze_results method should be at this indentation level ---
     def analyze_results(self, results: Dict[str, Any], analysis_type: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """
         [IAR Enabled] Analyzes results from an ABM simulation run.
@@ -727,14 +707,14 @@ class ABMTool:
                 ts_analysis["error"] = "'Active' agent count not found in model_data steps."
                 return ts_analysis
 
-            active_series_numeric = np.array([float(x) for x in active_series]) # Convert to numpy float array
+            active_series_numeric = [float(x) for x in active_series] # Convert to float
             num_steps = len(active_series_numeric)
             ts_analysis["num_steps"] = num_steps
             ts_analysis["final_active"] = active_count if active_count is not None else active_series_numeric[-1]
             ts_analysis["final_inactive"] = inactive_count if inactive_count is not None else (total_agents - ts_analysis["final_active"] if total_agents is not None and ts_analysis["final_active"] is not None else None)
-            ts_analysis["max_active"] = float(np.max(active_series_numeric)) if active_series_numeric.size > 0 else None
-            ts_analysis["min_active"] = float(np.min(active_series_numeric)) if active_series_numeric.size > 0 else None
-            ts_analysis["avg_active"] = float(np.mean(active_series_numeric)) if num_steps > 0 else None
+            ts_analysis["max_active"] = float(max(active_series_numeric)) if active_series_numeric else None
+            ts_analysis["min_active"] = float(min(active_series_numeric)) if active_series_numeric else None
+            ts_analysis["avg_active"] = float(sum(active_series_numeric) / num_steps) if num_steps > 0 else None
 
             # Temporal Pattern Detection
             ts_analysis["convergence_step"] = self._detect_convergence(active_series_numeric) # Returns step index or -1
@@ -764,15 +744,14 @@ class ABMTool:
                 return sp_analysis
 
             sp_analysis["grid_dimensions"] = list(grid.shape)
-            active_mask = grid > 0.5 # Example: define active state
-            sp_analysis["active_cell_count"] = int(np.sum(active_mask))
-            sp_analysis["active_ratio"] = float(np.mean(active_mask)) if grid.size > 0 else 0.0
+            sp_analysis["active_cell_count"] = int(np.sum(grid > 0.5)) # Example: count cells with state > 0.5
+            sp_analysis["active_ratio"] = float(np.mean(grid > 0.5)) if grid.size > 0 else 0.0
 
             # Calculate spatial metrics (examples)
-            sp_analysis["clustering_coefficient"] = self._calculate_clustering(grid, active_mask) # Avg local similarity
+            sp_analysis["clustering_coefficient"] = self._calculate_clustering(grid) # Avg local similarity
             sp_analysis["spatial_entropy"] = self._calculate_entropy(grid) # Shannon entropy of grid states
 
-            logger.debug(f"Spatial analysis complete. Clustering: {sp_analysis.get('clustering_coefficient'):.4f}, Entropy: {sp_analysis.get('spatial_entropy'):.4f}")
+            logger.debug(f"Spatial analysis complete. Clustering: {sp_analysis['clustering_coefficient']:.4f}, Entropy: {sp_analysis['spatial_entropy']:.4f}")
 
         except Exception as e_sp:
             logger.error(f"Error during spatial analysis: {e_sp}", exc_info=True)
@@ -808,7 +787,7 @@ class ABMTool:
 
             if num_features > 0:
                 logger.info(f"Detected {num_features} active spatial clusters.")
-                cluster_indices = np.arange(1, num_features + 1) # Indices used by ndimage functions
+                cluster_indices = range(1, num_features + 1) # Indices used by ndimage functions
                 # Calculate properties for each cluster
                 cluster_sizes = ndimage.sum_labels(active_cells, labeled_clusters, index=cluster_indices)
                 centroids = ndimage.center_of_mass(active_cells, labeled_clusters, index=cluster_indices) # Returns list of (row, col) tuples
@@ -816,8 +795,7 @@ class ABMTool:
                 avg_values = ndimage.mean(grid, labeled_clusters, index=cluster_indices)
 
                 for i in range(num_features):
-                    # Ensure centroid is list/tuple even if only one feature
-                    centroid_coords = centroids[i] if isinstance(centroids, list) else centroids
+                    centroid_coords = centroids[i] if isinstance(centroids, list) else centroids # Handle single cluster case
                     patterns.append({
                         "type": "active_cluster",
                         "id": int(cluster_indices[i]),
@@ -910,18 +888,18 @@ class ABMTool:
             # --- Final Processing & Normalization ---
             if error_msg:
                 primary_result["error"] = error_msg
-                state_vector_final = np.array([0.0, 0.0]) # Default error state vector
+                state_vector = np.array([0.0, 0.0]) # Default error state vector
             elif state_vector.size == 0:
                 logger.warning(f"Resulting state vector for type '{representation_type}' is empty. Using default error state.")
-                state_vector_final = np.array([0.0, 0.0]) # Handle empty vector case
+                state_vector = np.array([0.0, 0.0]) # Handle empty vector case
 
-            # Normalize the final state vector (L2 norm) - optional, depends on CFP use case
-            norm = np.linalg.norm(state_vector_final)
+            # Normalize the final state vector (L2 norm)
+            norm = np.linalg.norm(state_vector)
             if norm > 1e-15:
-                state_vector_normalized = state_vector_final / norm
+                state_vector_normalized = state_vector / norm
             else:
                 logger.warning(f"State vector for type '{representation_type}' has zero norm. Not normalizing.")
-                state_vector_normalized = state_vector_final # Avoid division by zero
+                state_vector_normalized = state_vector # Avoid division by zero
 
             state_vector_list = state_vector_normalized.tolist()
             dimensions = len(state_vector_list)
@@ -952,7 +930,7 @@ class ABMTool:
         """Simulates model creation when Mesa is not available."""
         logger.info(f"Simulating creation of {model_type} model")
         width=kwargs.get('width',10); height=kwargs.get('height',10); density=kwargs.get('density',0.5)
-        model_params=kwargs.get('model_params',{}); agent_params=kwargs.get('agent_params',{})
+        model_params=kwargs.get('model_params',{}); agent_params=kwargs.get('agent_params',{})        
         # Return a dictionary representing the simulated model's configuration
         sim_model_config = {
             "simulated": True, "type": model_type, "width": width, "height": height, "density": density,
@@ -1045,107 +1023,80 @@ class ABMTool:
 
         return {"analysis": analysis, "error": analysis.get("error")}
 
-
-    # --- Internal Analysis Helpers (Implemented) ---
     def _get_total_agents(self, results: Dict[str, Any]) -> Optional[int]:
-        """Helper to get total agent count, handling different result structures."""
-        if 'agent_count' in results: return results['agent_count']
-        if 'params' in results and isinstance(results['params'], dict):
-            dims = results['params'].get('dimensions')
-            density = results['params'].get('density')
-            if isinstance(dims, list) and len(dims) == 2 and isinstance(density, (float, int)):
-                return int(dims[0] * dims[1] * density)
-        if 'final_state_grid' in results and isinstance(results['final_state_grid'], list):
-            try: return int(np.sum(np.array(results['final_state_grid']) != -1)) # Count non-empty cells
-            except Exception: pass
+        """Helper to get total agent count from results, if available."""
+        active_count = results.get("active_count")
+        inactive_count = results.get("inactive_count")
+        if active_count is not None and inactive_count is not None:
+            return int(active_count + inactive_count)
+        # Fallback: Try to infer from grid dimensions if available
+        final_grid = results.get("final_state_grid")
+        if isinstance(final_grid, list) and final_grid:
+            try: return np.array(final_grid).size # Approx if not all cells have agents
+            except: pass
+        # Fallback: Try agent_data_last_step
+        agent_data = results.get("agent_data_last_step")
+        if isinstance(agent_data, list): return len(agent_data)
+        # Fallback: from original model params (if passed through)
+        # This requires model object or its params to be in results, which is not standard for run_simulation output alone.
         return None
 
-    def _detect_convergence(self, series: Union[List[float], np.ndarray], window: int = 10, threshold_ratio: float = 0.01) -> int:
-        """Detects convergence in a time series (variance stabilizes). Returns step index or -1."""
+    def _detect_convergence(self, series: List[float], window: int = 10, threshold: float = 0.01) -> int:
+        """Detects if a time series has converged. Returns step index or -1."""
         if len(series) < window * 2: return -1 # Not enough data
-        series_arr = np.array(series)
+        # Check if the standard deviation of the last `window` points is below threshold
+        # And if the mean of the last `window` is close to the mean of the `window` before it
         try:
-            # Calculate rolling variance
-            rolling_var = pd.Series(series_arr).rolling(window=window).var().to_numpy()
-            # Check if variance in the last window is small relative to overall variance or mean
-            last_window_var = rolling_var[-1]
-            overall_mean = np.mean(series_arr[-window:]) # Mean of last window
-            threshold = abs(overall_mean * threshold_ratio) if overall_mean != 0 else threshold_ratio
+            last_segment = np.array(series[-window:])
+            prev_segment = np.array(series[-window*2:-window])
+            if last_segment.std() < threshold and np.abs(last_segment.mean() - prev_segment.mean()) < threshold:
+                return len(series) - window # Approximate step of convergence start
+        except Exception: pass # Handle empty segments or other errors
+        return -1
 
-            if not np.isnan(last_window_var) and last_window_var < threshold:
-                # Find first point where rolling variance drops below threshold (approx convergence start)
-                converged_indices = np.where(rolling_var < threshold)[0]
-                # Return first index or approx end (ensure index is valid)
-                return int(converged_indices[0]) if len(converged_indices) > 0 else len(series_arr) - window
-        except Exception as e_conv:
-            logger.warning(f"Convergence detection failed: {e_conv}")
-        return -1 # Return -1 if no convergence detected or error
-
-    def _detect_oscillation(self, series: Union[List[float], np.ndarray], prominence_threshold: float = 0.1) -> bool:
-        """Detects oscillation using peak finding (requires SciPy). Returns boolean."""
-        if not SCIPY_AVAILABLE or find_peaks is None or len(series) < 10: return False
-        series_arr = np.array(series)
+    def _detect_oscillation(self, series: List[float], window: int = 10, threshold_std_dev: float = 0.1, threshold_peaks: int = 3) -> bool:
+        """Detects if a time series is oscillating. Returns boolean."""
+        if len(series) < window * 2: return False # Not enough data
         try:
-            # Calculate relative prominence threshold based on data range
-            data_range = np.ptp(series_arr) # Peak-to-peak range
-            if data_range < 1e-6: return False # Avoid issues with flat series
-            prominence = data_range * prominence_threshold
-            # Find peaks with minimum prominence
-            peaks, _ = find_peaks(series_arr, prominence=prominence)
-            # Simple check: If multiple significant peaks exist, assume oscillation
-            return len(peaks) > 2 # Require at least 3 peaks for oscillation signal
-        except Exception as e_osc:
-            logger.warning(f"Oscillation detection failed: {e_osc}")
+            # Check if there are enough peaks/troughs in the recent segment
+            # And if the standard deviation is above a certain level (not flat)
+            segment = np.array(series[-window*2:]) # Analyze a larger recent window for oscillation
+            if segment.std() < threshold_std_dev: return False # Likely flat
+            # Simple peak detection (could use SciPy find_peaks for more robustness)
+            peaks = sum(1 for i in range(1, len(segment)-1) if segment[i-1] < segment[i] > segment[i+1])
+            troughs = sum(1 for i in range(1, len(segment)-1) if segment[i-1] > segment[i] < segment[i+1])
+            if peaks >= threshold_peaks or troughs >= threshold_peaks: return True
+        except Exception: pass
         return False
 
-    def _calculate_clustering(self, grid: np.ndarray, active_mask: np.ndarray) -> float:
-        """Calculates a simple spatial clustering coefficient (avg neighbor similarity)."""
-        if grid.size == 0 or active_mask.size == 0: return 0.0
-        rows, cols = grid.shape
-        total_similarity = 0.0
-        active_count = np.sum(active_mask)
-        if active_count == 0: return 0.0
-
-        active_grid_range = np.ptp(grid[active_mask]) if np.any(active_mask) else 1.0
-        if active_grid_range < 1e-9: active_grid_range = 1.0 # Avoid division by zero
-
-        for r in range(rows):
+    def _calculate_clustering(self, grid: np.ndarray, threshold: float = 0.5) -> float:
+        """Calculates a simple spatial clustering coefficient (average local similarity)."""
+        if grid.size == 0: return 0.0
+        active_grid = (grid > threshold).astype(int)
+        rows, cols = active_grid.shape
+        total_similarity = 0; count = 0
+        for r in range(rows): # Iterate over each cell
             for c in range(cols):
-                if active_mask[r, c]: # Only calculate for active cells
-                    cell_state = grid[r, c]
-                    neighbor_similarity_sum = 0.0
-                    neighbor_count = 0
-                    # Check 8 neighbors (Moore neighborhood)
-                    for dr in [-1, 0, 1]:
-                        for dc in [-1, 0, 1]:
-                            if dr == 0 and dc == 0: continue
-                            nr, nc = r + dr, c + dc
-                            # Check bounds
-                            if 0 <= nr < rows and 0 <= nc < cols:
-                                neighbor_state = grid[nr, nc]
-                                # Simple similarity: 1 - normalized difference
-                                similarity = 1.0 - abs(cell_state - neighbor_state) / active_grid_range
-                                neighbor_similarity_sum += similarity
-                                neighbor_count += 1
-                    if neighbor_count > 0:
-                        total_similarity += (neighbor_similarity_sum / neighbor_count)
-
-        return float(total_similarity / active_count) if active_count > 0 else 0.0
+                cell_state = active_grid[r, c]
+                # Get 8-Moore neighbors
+                local_sum = 0; num_neighbors = 0
+                for dr in [-1, 0, 1]:
+                    for dc in [-1, 0, 1]:
+                        if dr == 0 and dc == 0: continue
+                        nr, nc = r + dr, c + dc
+                        if 0 <= nr < rows and 0 <= nc < cols:
+                            num_neighbors += 1
+                            if active_grid[nr, nc] == cell_state: local_sum +=1 # Count neighbors with same state
+                if num_neighbors > 0: total_similarity += (local_sum / num_neighbors); count +=1
+        return total_similarity / count if count > 0 else 0.0
 
     def _calculate_entropy(self, grid: np.ndarray) -> float:
-        """Calculates spatial Shannon entropy based on state distribution."""
-        if not SCIPY_AVAILABLE or scipy_entropy is None or grid.size == 0: return 0.0
-        try:
-            # Get unique states and their counts (excluding potential empty cell markers like -1)
-            states, counts = np.unique(grid[grid != -1], return_counts=True)
-            if counts.sum() == 0: return 0.0 # Entropy is 0 if no valid states
-            # Calculate probabilities
-            probabilities = counts / counts.sum()
-            # Calculate Shannon entropy using scipy.stats.entropy (base 2)
-            return float(scipy_entropy(probabilities, base=2))
-        except Exception as e_ent:
-            logger.warning(f"Spatial entropy calculation failed: {e_ent}")
-            return 0.0
+        """Calculates Shannon entropy of the grid states (assumes discrete states)."""
+        if grid.size == 0: return 0.0
+        _, counts = np.unique(grid, return_counts=True)
+        probabilities = counts / grid.size
+        entropy = -np.sum(probabilities * np.log2(probabilities + 1e-12)) # Add epsilon to avoid log(0)
+        return float(entropy)
 
 
 # --- Main Wrapper Function (Handles Operations & IAR) ---
@@ -1225,4 +1176,4 @@ def perform_abm(inputs: Dict[str, Any]) -> Dict[str, Any]:
         result["reflection"] = _create_reflection("Failure", f"Critical failure in wrapper: {e_wrapper}", 0.0, "N/A", reflection_issues, None)
         return result
 
-# --- END OF FILE 3.0ArchE/agent_based_modeling_tool.py ---
+# --- END OF FILE 3.0ArchE/agent_based_modeling_tool.py --- 

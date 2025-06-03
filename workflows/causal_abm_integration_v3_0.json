@@ -8,7 +8,7 @@
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import pandas as pd\nimport numpy as np\nnp.random.seed(123)\nn_steps = 100\ndates = pd.date_range(start='2024-01-01', periods=n_steps, freq='D')\nx = np.random.normal(0, 1, n_steps).cumsum() # Treatment (e.g., intervention level)\nz = np.sin(np.arange(n_steps) / 10) * 5 # Confounder (e.g., seasonality)\n# Lagged effect of x on y\ny_lagged_effect = 0.6 * np.roll(x, 2) # x impacts y with a lag of 2\ny_lagged_effect[:2] = 0 # Set initial lags to 0\ny = y_lagged_effect + 0.4 * z + np.random.normal(0, 0.5, n_steps)\ndata = pd.DataFrame({'timestamp': dates, 'X_treatment': x, 'Y_outcome': y, 'Z_confounder': z})\nprint(f'Prepared data with {len(data)} steps.')\nresult = {'prepared_data': data.to_dict(orient='list')}"
+        "code": "import pandas as pd\\nimport numpy as np\\nnp.random.seed(123)\\nn_steps = 100\\ndates = pd.date_range(start='2024-01-01', periods=n_steps, freq='D')\\nx = np.random.normal(0, 1, n_steps).cumsum() # Treatment (e.g., intervention level)\\nz = np.sin(np.arange(n_steps) / 10) * 5 # Confounder (e.g., seasonality)\\n# Lagged effect of x on y\\ny_lagged_effect = 0.6 * np.roll(x, 2) # x impacts y with a lag of 2\\ny_lagged_effect[:2] = 0 # Set initial lags to 0\\ny = y_lagged_effect + 0.4 * z + np.random.normal(0, 0.5, n_steps)\\ndata = pd.DataFrame({'timestamp': dates, 'X_treatment': x, 'Y_outcome': y, 'Z_confounder': z})\\nprint(f'Prepared data with {len(data)} steps.')\\nresult = {'prepared_data': data.to_dict(orient='list')}"
       },
       "outputs": {"prepared_data": "dict", "stdout": "string", "reflection": "dict"},
       "dependencies": []
@@ -32,8 +32,7 @@
         "action_type": "execute_code",
         "inputs": {
             "language": "python",
-            "code": "# Simulation: Extract effect size to influence agent behavior\ncausal_results = context.get('temporal_causal_analysis', {}).get('lagged_effects', {})
-# Example: Look for coefficient of X_treatment at lag 2 on Y_outcome\n# This requires parsing the specific output structure of estimate_lagged_effects\n# For simulation, let's assume we found an effect size\nsimulated_effect_size = 0.6 # Based on data generation\n# Derive an ABM parameter (e.g., agent activation probability based on treatment effect)\nabm_activation_prob = 0.1 + abs(simulated_effect_size) * 0.5 # Example calculation\nprint(f'Derived ABM activation probability based on causal effect: {abm_activation_prob:.3f}')\nresult = {'abm_agent_params': {'activation_prob': abm_activation_prob}}"
+            "code": "# Simulation: Extract effect size to influence agent behavior\\ncausal_results = context.get('temporal_causal_analysis', {}).get('lagged_effects', {})\\n# Example: Look for coefficient of X_treatment at lag 2 on Y_outcome\\n# This requires parsing the specific output structure of estimate_lagged_effects\\n# For simulation, let's assume we found an effect size\\nsimulated_effect_size = 0.6 # Based on data generation\\n# Derive an ABM parameter (e.g., agent activation probability based on treatment effect)\\nabm_activation_prob = 0.1 + abs(simulated_effect_size) * 0.5 # Example calculation\\nprint(f'Derived ABM activation probability based on causal effect: {abm_activation_prob:.3f}')\\nresult = {'abm_agent_params': {'activation_prob': abm_activation_prob}}"
         },
         "outputs": {"abm_agent_params": "dict", "stdout": "string", "reflection": "dict"},
         "dependencies": ["temporal_causal_analysis"],

@@ -54,45 +54,229 @@ async function search(page, query, searchEngine = "duckduckgo", debug = false) {
  */
 async function handleGoogleSearch(page, query, debug) {
   try {
-    console.error("Handling Google search...");
+    console.error(`Handling Google search... Debug mode is: ${debug}`); 
 
-    // Wait for search results to load
-    const selectors = [
-      "div.g",
-      "div.tF2Cxc",
-      "div[data-sokoban-container]",
-      "div.v7W49e",
-      "div.MjjYud"
+    // Expose a function to Node.js environment to capture click details
+    await page.exposeFunction('reportClickDetailsToNode', (details) => {
+      console.error('--- CLICK DETECTED (Learning Mode) ---');
+      console.error(`Coordinates: X=${details.x}, Y=${details.y}`);
+      console.error(`Target ID: ${details.id}`);
+      console.error(`Target TagName: ${details.tagName}`);
+      console.error(`Basic Selector: ${details.basicSelector}`);
+      console.error(`OuterHTML (first 100 chars): ${details.outerHTML.substring(0,100)}`);
+      console.error('--------------------------------------');
+      // In a real scenario, you'd save this to a file or database
+    });
+
+    // --- Attempt to handle consent pop-ups ---
+    if (debug) console.error("Attempting to find and click consent buttons using CSS selectors...");
+    const consentButtonSelectorsCSS = [
+      "button[jsname='higCR']", 
+      "button[aria-label*='Accept all']",
+      "button[aria-label*='Agree']",
+      "button[aria-label*='I agree']",
+      "button#L2AGLb", 
+      "button.QS5gu.sy4vM", 
+      "form[action*='consent.google.com'] button", 
+      "div[aria-modal=\"true\"] button:not([aria-label*='Settings']):not([aria-label*='options']):not([aria-label*='Customize'])"
     ];
 
-    let resultsFound = false;
-    for (const selector of selectors) {
+    let consentClicked = false;
+    for (const selector of consentButtonSelectorsCSS) {
       try {
-        console.error(`Waiting for selector: ${selector}`);
-        await page.waitForSelector(selector, { timeout: 5000 });
-        console.error(`Found results with selector: ${selector}`);
-        resultsFound = true;
-        break;
-      } catch (e) {
-        console.error(`Selector ${selector} not found: ${e.message}`);
+        if (debug) console.error(`Trying CSS consent selector: ${selector}`);
+        const element = await page.$(selector);
+        
+        if (element && typeof element.click === 'function') {
+          if (debug) console.error(`Found consent element with CSS selector: ${selector}. Clicking...`);
+          await element.click();
+          await page.waitForTimeout(2500); 
+          if (debug) console.error("Consent button clicked (CSS). Taking screenshot...");
+          const timestamp = new Date().toISOString().replace(/:/g, '-');
+          await page.screenshot({ path: path.join(__dirname, `google-after-css-consent-click-${timestamp}.png`), fullPage: true });
+          consentClicked = true;
+          break; 
+        } else if (element) {
+          if (debug) console.error(`Found element with CSS selector ${selector}, but it does not have a click function.`);
+        }
+      } catch (consentError) {
+        if (debug) console.error(`Error or element not found for CSS consent selector ${selector}: ${consentError.message}`);
       }
     }
+    // --- End of consent handling ---
 
-    if (!resultsFound) {
-      console.error("Could not find search results with any selector");
+    // --- Attempt to handle reCAPTCHA (basic detection, no click yet in this version of the code) ---
+    let onCaptchaPage = false;
+    try {
+      const recaptchaFrame = await page.$('iframe[title="reCAPTCHA"], iframe[src*="recaptcha"]');
+      if (recaptchaFrame) {
+        if (debug) console.error("reCAPTCHA iframe found. Assuming CAPTCHA page for learning.");
+        onCaptchaPage = true;
+      } else {
+         // Check if we are on the "About this page" (unusual traffic) page
+        const aboutPageTitle = await page.evaluate(() => {
+          const h1 = document.querySelector('h1');
+          return h1 ? h1.textContent.includes('About this page') : false;
+        });
+        if(aboutPageTitle) {
+            console.error("Detected 'About this page' (unusual traffic). Assuming CAPTCHA or block page for learning.");
+            onCaptchaPage = true; // Treat as a page where learning might be needed
+        }
+      }
+    } catch (e) {
+      if (debug) console.error("Error checking for reCAPTCHA iframe or 'About this page': " + e.message);
+    }
+
+
+    // Wait for search results to load OR if on a CAPTCHA page, enter learning mode
+    const primarySelector = "div.MjjYud"; // Changed to the more reliable selector
+    const fallbackSelector1 = "div#search div.g";
+    const fallbackSelector2 = "div.g";
+    
+    console.error(`Waiting for Google results with primary selector: ${primarySelector}`);
+    const timestamp = new Date().toISOString().replace(/:/g, '-');
+
+    try {
+      await page.waitForSelector(primarySelector, { timeout: 7000 }); // Adjusted timeout slightly
+      console.error(`Found Google results with primary selector: ${primarySelector}`);
       if (debug) {
-        const screenshotPath = path.join(__dirname, 'search-results.png');
+        const screenshotPath = path.join(__dirname, `google-search-found-${timestamp}.png`);
         await page.screenshot({ path: screenshotPath, fullPage: true });
-        console.error(`Results page screenshot saved to ${screenshotPath}`);
+        console.error(`Google results page screenshot saved to ${screenshotPath}`);
       }
-      return [];
+       return await extractGoogleResults(page, primarySelector, debug);
+
+    } catch (e) {
+      console.error(`Primary selector ${primarySelector} not found: ${e.message}`);
+      console.error(`Trying fallback selector 1 for Google: ${fallbackSelector1}`);
+      try {
+        await page.waitForSelector(fallbackSelector1, { timeout: 5000});
+        console.error(`Found Google results with fallback selector 1: ${fallbackSelector1}`);
+        return await extractGoogleResults(page, fallbackSelector1, debug);
+      } catch (e2) {
+        console.error(`Fallback selector 1 ${fallbackSelector1} also not found: ${e2.message}`);
+        console.error(`Trying fallback selector 2 for Google: ${fallbackSelector2}`);
+        try {
+            await page.waitForSelector(fallbackSelector2, { timeout: 5000 });
+            console.error(`Found Google results with fallback selector 2: ${fallbackSelector2}`);
+            return await extractGoogleResults(page, fallbackSelector2, debug);
+        } catch (e3) {
+            console.error(`Fallback selector 2 ${fallbackSelector2} also not found: ${e3.message}`);
+            // If all selectors fail, then check for CAPTCHA and enter learning mode if applicable
+            if (onCaptchaPage) {
+                console.error("LEARNING MODE ACTIVATED: Main results not found and on potential CAPTCHA/block page.");
+                console.error("Please click the element you want the script to target in the browser window.");
+                console.error("The script will log details of your click and then wait for 30 seconds before exiting.");
+        
+                try {
+                    console.error("Attempting to set up click listener for learning mode...");
+                    const recaptchaFrameElement = await page.$('iframe[title="reCAPTCHA"], iframe[src*="recaptcha"]');
+                    let targetFrame = page.mainFrame(); 
+        
+                    if (recaptchaFrameElement) {
+                        console.error("reCAPTCHA iframe element found. Trying to get its content frame.");
+                        const frame = await recaptchaFrameElement.contentFrame();
+                        if (frame) {
+                            console.error("Successfully got content frame of reCAPTCHA iframe. Will attach listener there.");
+                            targetFrame = frame;
+                        } else {
+                            console.error("Could not get content frame of reCAPTCHA iframe. Listener will be on main page.");
+                        }
+                    } else {
+                        console.error("No reCAPTCHA iframe element explicitly found by selector for listener attachment. Listener will be on main page.");
+                    }
+        
+                    if (typeof page.exposeFunction === 'function') {
+                        await page.exposeFunction('reportClickDetailsToNodeGlobal', (details) => {
+                            console.error('--- CLICK DETECTED (Learning Mode via reportClickDetailsToNodeGlobal) ---');
+                            console.error(`Coordinates: X=${details.x}, Y=${details.y}`);
+                            console.error(`Target ID: ${details.id}`);
+                            console.error(`Target TagName: ${details.tagName}`);
+                            console.error(`Basic Selector: ${details.basicSelector}`);
+                            console.error(`OuterHTML (first 100 chars): ${details.outerHTML ? details.outerHTML.substring(0,100) : 'N/A'}`);
+                            console.error('--------------------------------------------------------------------');
+                        }).catch(expErr => console.error("Error exposing function reportClickDetailsToNodeGlobal: " + expErr.message));
+                    } else {
+                         console.error("page.exposeFunction is not available. Cannot set up global click reporting function.");
+                    }
+        
+                    await targetFrame.evaluate(() => {
+                      console.log('[LEARN CLICK LISTENER]: Adding click listener to document (this context).');
+                      document.addEventListener('click', (event) => {
+                        console.log('[LEARN CLICK LISTENER]: Click event detected in browser context.');
+                        const target = event.target;
+                        const details = {
+                          x: event.clientX,
+                          y: event.clientY,
+                          id: target.id || null,
+                          tagName: target.tagName,
+                          basicSelector: target.tagName.toLowerCase() + 
+                                         (target.id ? '#' + target.id : 
+                                         (target.className && typeof target.className === 'string' ? '.' + target.className.trim().split(/\s+/).join('.') : '')),
+                          outerHTML: target.outerHTML || ''
+                        };
+                        if (typeof window.reportClickDetailsToNodeGlobal === 'function') {
+                          console.log('[LEARN CLICK LISTENER]: Calling reportClickDetailsToNodeGlobal...');
+                          window.reportClickDetailsToNodeGlobal(details);
+                        } else if (typeof opener !== 'undefined' && opener && typeof opener.reportClickDetailsToNodeGlobal === 'function') {
+                          console.log('[LEARN CLICK LISTENER]: Calling opener.reportClickDetailsToNodeGlobal...');
+                          opener.reportClickDetailsToNodeGlobal(details);
+                        } else {
+                          console.error('[LEARN CLICK LISTENER]: reportClickDetailsToNodeGlobal is not accessible. Logging details to browser console only.');
+                          console.log('[LEARN CLICK - BROWSER LOG]', JSON.stringify(details));
+                        }
+                      }, { once: true, capture: true }); 
+                      console.log('[LEARN CLICK LISTENER]: Click listener added.');
+                    }).catch(evalErr => console.error("Error evaluating page/frame to add click listener: " + evalErr.message));
+        
+                } catch (listenerSetupError) {
+                    console.error(`Error setting up click listener: ${listenerSetupError.message}`);
+                }
+                
+                if (debug) {
+                    const learnPath = path.join(__dirname, `google-learn-mode-active-${timestamp}.png`);
+                    try {
+                        await page.screenshot({ path: learnPath, fullPage: true });
+                        console.error(`Screenshot for 'learn mode active' saved to ${learnPath}`);
+                    } catch (ssError) {
+                        console.error(`Failed to take 'learn mode active' screenshot: ${ssError.message}`);
+                    }
+                }
+                
+                console.error("Learning mode: Waiting for 30 seconds for manual click...");
+                try {
+                    await new Promise(resolve => setTimeout(resolve, 30000)); 
+                } catch (timeoutError) {
+                    console.error(`Error during manual wait: ${timeoutError.message}. Continuing...`);
+                }
+        
+                console.error("Learning mode finished waiting. Script will now exit (no results returned).");
+                return []; 
+            } else {
+                // All selectors failed, and not on a CAPTCHA page (or CAPTCHA detection failed)
+                if (debug) {
+                    const screenshotPathFallback = path.join(__dirname, `google-search-all-fallbacks-failed-${timestamp}.png`);
+                    await page.screenshot({ path: screenshotPathFallback, fullPage: true });
+                    console.error(`Google results page screenshot (all fallbacks failed) saved to ${screenshotPathFallback}`);
+                }
+                return [];
+            }
+        }
+      }
     }
-
-    // Extract search results
-    return await extractGoogleResults(page);
-
   } catch (error) {
     console.error(`Google search error: ${error.message}`);
+    if (debug && page) {
+        try {
+            const timestamp = new Date().toISOString().replace(/:/g, '-');
+            const screenshotPath = path.join(__dirname, `google-search-error-${timestamp}.png`);
+            console.error(`Debug: Attempting to save error screenshot to: ${screenshotPath}`);
+            await page.screenshot({ path: screenshotPath, fullPage: true });
+            console.error(`Google search error screenshot saved to ${screenshotPath}`);
+        } catch (ssError){
+            console.error(`Debug: FAILED to save error screenshot: ${ssError.message}`);
+        }
+    }
     return [];
   }
 }
@@ -141,67 +325,60 @@ async function handleDuckDuckGoSearch(page, query, debug) {
  * @param {Page} page - Puppeteer page object
  * @returns {Promise<Array>} - Array of search results
  */
-async function extractGoogleResults(page) {
-  console.error("Extracting Google search results...");
+async function extractGoogleResults(page, resultsSelector = "div#search div.g", debug = false) {
+  console.error(`Extracting Google search results using selector: ${resultsSelector}...`);
 
   try {
-    return await page.evaluate(() => {
+    return await page.evaluate((selectorToUse, isDebug) => {
       let items = [];
-
-      // Try multiple selectors for Google
-      const selectors = [
-        "div.g",
-        "div.tF2Cxc",
-        "div[data-sokoban-container]",
-        "div.v7W49e",
-        "div.MjjYud"
-      ];
-
-      for (const selector of selectors) {
-        const elements = document.querySelectorAll(selector);
-        if (elements && elements.length > 0) {
-          items = Array.from(elements);
-          break;
-        }
-      }
-
-      // If still no results, try a more generic approach
-      if (items.length === 0) {
-        // Look for any div containing an h3 (likely a search result)
-        const h3Elements = document.querySelectorAll("h3");
-        if (h3Elements && h3Elements.length > 0) {
-          items = Array.from(h3Elements).map(h3 => h3.closest('div'));
-          items = items.filter(item => item !== null);
-        }
-      }
-
-      return items.slice(0, 5).map(item => {
-        let title = "N/A";
-        let link = "N/A";
-        let description = "N/A";
-
+      console.error(`Attempting to select elements with: ${selectorToUse}`); // Browser-side log
+      document.querySelectorAll(selectorToUse).forEach(item => {
         try {
-          // Try multiple selectors for Google result components
-          const titleElement = item.querySelector("h3") ||
-                              item.querySelector(".LC20lb");
-
+          const titleElement = item.querySelector("h3");
           const linkElement = item.querySelector("a");
+          // Google often uses spans for snippets, sometimes within a div.
+          // This tries a few common patterns for the description.
+          const descElement = item.querySelector("div[data-sncf='pd']") || // Common for rich snippets
+                              item.querySelector("div[role='web_search_result'] span[role='text']") || // More specific span
+                              item.querySelector("div.VwiC3b span") || // Older structure
+                              item.querySelector("span.st") || // Even older
+                              item.querySelector("div.IsZvec") || // Another known one
+                              item.querySelector("div.kb0PBd"); // One more observation
 
-          const descElement = item.querySelector("div[data-content-feature='1']") ||
-                             item.querySelector(".VwiC3b") ||
-                             item.querySelector(".IsZvec") ||
-                             item.querySelector(".lEBKkf");
+          const title = titleElement ? titleElement.textContent.trim() : "N/A";
+          const link = linkElement ? linkElement.href : "N/A";
+          let description = "N/A";
+          if (descElement) {
+            description = Array.from(descElement.childNodes)
+                               .map(node => node.textContent)
+                               .join('')
+                               .trim();
+          } else {
+            // Fallback if specific description selectors fail, try to get any text within the result block
+            // excluding the title and link URL if possible, though this is harder.
+            // For now, if specific description not found, mark N/A.
+          }
+          
+          if (isDebug) {
+            console.log(`Found item: Title - ${title}, Link - ${link.substring(0,50)}...`);
+          }
 
-          title = titleElement ? titleElement.textContent.trim() : "N/A";
-          link = linkElement ? linkElement.href : "N/A";
-          description = descElement ? descElement.textContent.trim() : "N/A";
+          // Basic filter: ensure we have at least a title and a valid-looking link
+          if (title !== "N/A" && link !== "N/A" && link.startsWith("http")) {
+            items.push({ title, link, description });
+          }
         } catch (e) {
-          // If there\'s an error extracting data from this item, return what we have
+          if (isDebug) {
+            console.error(`Error processing a Google result item: ${e.message}`);
+          }
         }
-
-        return { title, link, description };
       });
-    });
+
+      if (items.length === 0 && isDebug) {
+          console.warn("No Google results extracted. The page structure might have changed or results were not found.");
+      }
+      return items.slice(0, 10); // Return up to 10 results
+    }, resultsSelector, debug); // Pass the selector and debug flag to page.evaluate
   } catch (error) {
     console.error(`Error extracting Google results: ${error.message}`);
     return [];
@@ -252,7 +429,7 @@ async function extractDuckDuckGoResults(page) {
     console.error(`Error extracting DuckDuckGo results: ${error.message}`);
     return [];
   }
-  }
+}
 
 /**
  * Scrape content from a given URL.
@@ -329,111 +506,127 @@ async function scrapePageContent(page, url) {
  * Main function to orchestrate the search and scraping process.
  */
 async function main() {
-  let browser = null;
-  let tempDir = null;
+  const args = process.argv.slice(2);
+  if (args.length < 1) {
+    console.error("Usage: node search.js <query> [numResults] [searchEngine] [outputDir] [--debug] [--text-content-dir <dir>] [--include-text-content]");
+    process.exit(1);
+  }
+
+  const query = args[0];
+  const numResults = parseInt(args[1], 10) || 5;
+  const searchEngine = args[2] || "google";
+  const outputDir = args[3] || ".";
+  const debug = args.includes("--debug");
+  
+  const textContentDirArgIndex = args.indexOf("--text-content-dir");
+  const textContentDir = textContentDirArgIndex !== -1 && args[textContentDirArgIndex + 1] ? args[textContentDirArgIndex + 1] : null;
+
+  const includeTextContent = args.includes("--include-text-content");
+
+  // FOR TESTING CLICK LEARNING: Force headless: false and debug if searchEngine is google
+  let effectiveDebug = debug;
+  let effectiveHeadless = "new"; // Default to new headless
+  if (searchEngine === "google") { // Only do this for google for now
+      console.error("INFO: Google search detected, forcing headless:false and debug:true for potential click learning test.");
+      effectiveDebug = true; 
+      effectiveHeadless = false; 
+  }
+
+
+  console.error(`Script arguments: query='${query}', numResults=${numResults}, searchEngine='${searchEngine}', outputDir='${outputDir}', debug=${effectiveDebug}, textContentDir='${textContentDir}', includeTextContent=${includeTextContent}`);
+
+  let browser;
   try {
-    const query = process.argv[2];
-    const numResults = parseInt(process.argv[3] || '3', 10);
-    const searchEngine = process.argv[4] || "duckduckgo"; // Default to duckduckgo
-    const outputDirArg = process.argv[5]; // Optional base directory for archives from Python
-    const debug = process.argv.includes('--debug');
+    const defaultChromePath = "/usr/bin/google-chrome"; 
+    const executablePath = process.env.CHROME_BIN || defaultChromePath;
 
-    if (!query) {
-      console.error("Usage: node search.js <query> [numResults] [searchEngine] [outputDir] [--debug]");
-      process.exit(1);
-    }
-
-    // Create a unique temporary directory for this run's archives
-    // This temp dir will be created inside the script's own directory or a system temp if outputDirArg is not specified
-    const baseTempPath = outputDirArg ? path.join(outputDirArg, 'search_archives') : os.tmpdir();
-    fs.mkdirSync(baseTempPath, { recursive: true }); // Ensure base archive dir exists
-    tempDir = fs.mkdtempSync(path.join(baseTempPath, 'run-'));
-    console.error(`Archives for this run will be stored in: ${tempDir}`);
-
-    // const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(); // Let puppeteer-extra handle this
-    // console.error(`Using browser executable: ${executablePath}`);
-
-    browser = await puppeteerExtra.launch({
-      headless: true, // Consider 'new' for future Puppeteer versions
-      // executablePath: executablePath, // Removed to let puppeteer-extra find it
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
-    });
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1280, height: 800 });
-
-    const searchResults = await search(page, query, searchEngine, debug);
-    const processedResults = [];
-
-    for (let i = 0; i < Math.min(searchResults.length, numResults); i++) {
-      const result = searchResults[i];
-      if (!result.link || result.link === "N/A" || result.link.startsWith('javascript:')) continue;
-
-      console.error(`Processing URL (${i+1}/${Math.min(searchResults.length, numResults)}): ${result.link}`);
-      const pageData = await scrapePageContent(page, result.link);
-      
-      let archived_html_path = null;
-      let archived_screenshot_path = null;
-
-      if (pageData.fullHtml) {
-        const urlHash = crypto.createHash('md5').update(result.link).digest('hex');
-        const htmlFilename = `page_${urlHash}_${i}.html`;
-        archived_html_path = path.join(tempDir, htmlFilename);
-        try {
-          fs.writeFileSync(archived_html_path, pageData.fullHtml);
-          console.error(`Saved HTML for ${result.link} to ${archived_html_path}`);
-        } catch (e) {
-          console.error(`Error saving HTML for ${result.link}: ${e.message}`);
-          archived_html_path = null; // Reset path if save failed
-        }
-      }
-
-      try {
-        const screenshotFilename = `screenshot_${crypto.createHash('md5').update(result.link).digest('hex')}_${i}.png`;
-        archived_screenshot_path = path.join(tempDir, screenshotFilename);
-        await page.screenshot({ path: archived_screenshot_path, fullPage: true });
-        console.error(`Saved screenshot for ${result.link} to ${archived_screenshot_path}`);
-      } catch (e) {
-        console.error(`Error taking/saving screenshot for ${result.link}: ${e.message}`);
-        archived_screenshot_path = null;
-      }
-
-      processedResults.push({
-        title: result.title,
-        link: result.link,
-        description: result.description,
-        result_date_snippet: result.result_date_snippet, // From initial search result page
-        content: pageData.content, // Main text from scraped page
-        publication_date: pageData.publication_date, // From scraped page
-        archived_html_path: archived_html_path ? path.relative(outputDirArg || process.cwd(), archived_html_path) : null, // Relative path
-        archived_screenshot_path: archived_screenshot_path ? path.relative(outputDirArg || process.cwd(), archived_screenshot_path) : null, // Relative path
-        error_scraping: pageData.error || null
+    if (!fs.existsSync(executablePath)) {
+      console.warn(`Warning: Chrome executable not found at ${executablePath}. Puppeteer might try to download Chromium. Set CHROME_BIN if you have Chrome installed elsewhere or ensure it's at ${defaultChromePath}.`);
+      browser = await puppeteerExtra.launch({
+        headless: effectiveHeadless, // Use effectiveHeadless
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+        userDataDir: path.join(__dirname, '.chrome_dev_session'), 
+        ignoreHTTPSErrors: true,
+      });
+    } else {
+      browser = await puppeteerExtra.launch({
+        executablePath: executablePath,
+        headless: effectiveHeadless, // Use effectiveHeadless
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--window-size=1920,1080'], // Added window size
+        userDataDir: path.join(__dirname, '.chrome_dev_session'),
+        ignoreHTTPSErrors: true,
       });
     }
 
-    console.log(JSON.stringify(processedResults, null, 2));
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1920, height: 1080 }); 
+
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36'); // Slightly updated UA
+
+    // Pass effectiveDebug to the search function
+    const results = await search(page, query, searchEngine, effectiveDebug); 
+    let finalResults = results.slice(0, numResults);
+
+    if (includeTextContent && finalResults.length > 0) {
+      console.error("Fetching text content for results...");
+      finalResults = await Promise.all(finalResults.map(async (result, index) => {
+        if (result.link && result.link !== "N/A" && result.link.startsWith("http")) {
+          try {
+            const content = await scrapePageContent(page, result.link);
+            result.content = content; 
+
+            if (textContentDir) {
+                const safeQuery = query.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
+                const domain = new URL(result.link).hostname.replace(/[^a-zA-Z0-9]/g, '_');
+                const contentFileName = `content_${safeQuery}_${index}_${domain}.txt`;
+                const contentFilePath = path.join(textContentDir, contentFileName);
+                
+                if (!fs.existsSync(textContentDir)) {
+                    fs.mkdirSync(textContentDir, { recursive: true });
+                }
+                fs.writeFileSync(contentFilePath, content);
+                result.content_file = contentFilePath;
+                console.error(`Saved text content for ${result.link} to ${contentFilePath}`);
+            }
+
+          } catch (scrapeError) {
+            console.error(`Error scraping content for ${result.link}: ${scrapeError.message}`);
+            result.content = "Error scraping content.";
+          }
+        } else {
+          result.content = "Invalid or missing link, skipping content scraping.";
+        }
+        return result;
+      }));
+    }
+
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+
+    const timestamp = new Date().toISOString().replace(/:/g, '-');
+    const randomSuffix = crypto.randomBytes(4).toString('hex');
+    const resultsFilename = path.join(outputDir, `search_results_${searchEngine}_${timestamp}_${randomSuffix}.json`);
+
+    fs.writeFileSync(resultsFilename, JSON.stringify(finalResults, null, 2));
+    console.error(`Search results saved to ${resultsFilename}`);
+    console.log(JSON.stringify(finalResults)); 
 
   } catch (error) {
-    console.error(`Critical error in main: ${error.message}\nStack: ${error.stack}`);
-    // Output an empty array or error structure in case of critical failure before/during processing results
-    console.log(JSON.stringify([{ error: "Main process_failed", details: error.message }], null, 2));
-    process.exitCode = 1; // Indicate failure
+    console.error(`Error in main: ${error.message}`);
+    if (debug) {
+        console.error(error.stack);
+    }
+    process.exit(1); 
   } finally {
     if (browser) {
-      try {
       await browser.close();
-      } catch (e) {
-        console.error(`Error closing browser: ${e.message}`);
-      }
     }
-    // Do not delete tempDir here; Python side will be responsible for cleanup after copying.
-    // if (tempDir) {
-    //   fs.rmSync(tempDir, { recursive: true, force: true });
-    //   console.error(`Cleaned up temporary archive directory: ${tempDir}`);
-    // }
   }
 }
 
-// Ensure OS module is required if not already (for os.tmpdir())
-const os = require('os');
+if (require.main === module) {
+  main();
+}
 
-main();
+module.exports = { search, scrapePageContent, handleGoogleSearch, handleDuckDuckGoSearch, extractGoogleResults, extractDuckDuckGoResults };

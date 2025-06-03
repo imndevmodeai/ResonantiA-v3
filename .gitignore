@@ -100,11 +100,19 @@ tests/logs/    # Exclude test-specific logs
 # Jupyter Notebook Checkpoints
 .ipynb_checkpoints
 
+# Cursor IDE specific files
+.cursor/
+
 # Temporary Files
 *~
 *.bak
 *.tmp
 *.swp
+# Project-specific temporary files at root
+temp_*.json
+
+# Browser session data (often contains private info and cache)
+ResonantiA/browser_automation/.chrome_dev_session/
 
 # Dependencies (if managed locally, though venv is preferred)
 # node_modules/

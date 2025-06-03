@@ -10,7 +10,19 @@ import argparse
 import sys
 import time
 import uuid # For unique workflow run IDs
-from typing import Optional, Dict, Any # Added for type hinting clarity
+from typing import Optional, Dict, Any, Union # Added for type hinting clarity
+
+# --- Helper function to truncate values for summary ---
+def truncate_value(value: Any, max_len: int = 70) -> str:
+    """Converts a value to string and truncates it if too long."""
+    try:
+        s_value = str(value)
+        if len(s_value) > max_len:
+            return s_value[:max_len-3] + "..."
+        return s_value
+    except Exception:
+        return "[Unrepresentable Value]"
+# --- End helper function ---
 
 # Setup logging FIRST using the centralized configuration
 try:
@@ -113,6 +125,9 @@ def main(workflow_to_run: str, initial_context_json: Optional[str] = None):
 
     # --- Prepare Initial Context ---
     initial_context: Dict[str, Any] = {}
+
+    # initial_context_json = "{\"raw_user_query\": \"Can you provide an InnovativE SolutioN for energy crisis?\", \"user_id\": \"cli_keyholder_IMnDEVmode\", \"protocol_version\": \"3.0\"}" # HARCODED FOR TEST
+
     if initial_context_json:
         try:
             # Load context from JSON string argument
@@ -181,14 +196,29 @@ def main(workflow_to_run: str, initial_context_json: Optional[str] = None):
             summary['task_summary'] = {}
             for task_id, status in task_statuses.items():
                 task_result = final_result.get(task_id, {})
-                # Safely access reflection data, handling cases where task might not have run or failed early
                 reflection = task_result.get('reflection', {}) if isinstance(task_result, dict) else {}
+                
+                inputs_preview = {}
+                if isinstance(task_result, dict) and 'resolved_inputs' in task_result and isinstance(task_result['resolved_inputs'], dict):
+                    for k, v in task_result['resolved_inputs'].items():
+                        inputs_preview[k] = truncate_value(v)
+                
+                outputs_preview = {}
+                if isinstance(task_result, dict):
+                    # Exclude known meta-keys and reflection from outputs preview
+                    excluded_output_keys = ['reflection', 'resolved_inputs', 'error', 'status', 'start_time', 'end_time', 'duration_sec', 'attempt_number']
+                    for k, v in task_result.items():
+                        if k not in excluded_output_keys:
+                            outputs_preview[k] = truncate_value(v)
+
                 summary['task_summary'][task_id] = {
                     "status": status,
+                    "inputs_preview": inputs_preview if inputs_preview else "N/A",
+                    "outputs_preview": outputs_preview if outputs_preview else "N/A",
                     "reflection_status": reflection.get('status', 'N/A'),
                     "reflection_confidence": reflection.get('confidence', 'N/A'),
                     "reflection_issues": reflection.get('potential_issues', None),
-                    "error": task_result.get('error', None) # Show task-level error if present
+                    "error": truncate_value(task_result.get('error', None)) # Also truncate error messages
                 }
             # Print the summary dict as formatted JSON
             print(json.dumps(summary, indent=2, default=str))
@@ -215,31 +245,81 @@ def main(workflow_to_run: str, initial_context_json: Optional[str] = None):
 
     logger.info("--- Arche System Shutdown ---")
 
-if __name__ == "__main__":
-    # Ensure the package can be found if running the script directly
-    package_dir = os.path.dirname(__file__) # Directory of main.py (e.g., .../ResonantiA/3.0ArchE)
-    project_root = os.path.abspath(os.path.join(package_dir, '..')) # Project root (e.g., .../ResonantiA)
-    if project_root not in sys.path:
-        sys.path.insert(0, project_root) # Add project root to Python path
+# Ensure the package can be found if running the script directly
+# This might be less necessary when running with `python -m` but kept for broader compatibility
+package_dir = os.path.dirname(__file__) # Directory of main.py (e.g., .../ResonantiA/3.0ArchE)
+project_root = os.path.abspath(os.path.join(package_dir, '..')) # Project root (e.g., .../ResonantiA)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root) # Add project root to Python path
 
-    # --- Command Line Argument Parsing ---
-    parser = argparse.ArgumentParser(description="Run Arche (ResonantiA Protocol v3.0) Workflow Engine.")
-    parser.add_argument(
-        "workflow",
-        help="Name of the workflow file to execute (e.g., basic_analysis.json) relative to the configured workflows directory."
-    )
-    parser.add_argument(
-        "-c", "--context",
-        type=str,
-        default=None,
-        help="JSON string representing the initial context (e.g., '{\"user_query\": \"Analyze data X\"}'). Ensure proper shell escaping for complex JSON."
-    )
+# --- Command Line Argument Parsing ---
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="ResonantiA Protocol v3.0 - Arche System")
+    subparsers = parser.add_subparsers(dest="command", help="Available commands", required=True)
+
+    # --- run-workflow sub-command ---
+    run_parser = subparsers.add_parser("run-workflow", help="Run a specified workflow JSON file.")
+    run_parser.add_argument("workflow_file", help="Path to the workflow JSON file to execute.")
+    input_group = run_parser.add_mutually_exclusive_group()
+    input_group.add_argument("--inputs", "-i", help="JSON string of initial context data for the workflow.", type=str, default=None)
+    input_group.add_argument("--context-file", "-cf", help="Path to a JSON file containing initial context data.", type=str, default=None)
+    # Optional: For running a single task from a workflow for debugging/testing
+    run_parser.add_argument("--task-id", help="(Optional) Specific task ID to run within the workflow.", default=None)
+
+    # --- (Future sub-commands can be added here, e.g., manage-spr, etc.) ---
+    # spr_parser = subparsers.add_parser("manage-spr", help="Manage Strategic Processing Routines.")
+    # ... add arguments for manage-spr
+
     args = parser.parse_args()
 
-    # --- Execute Main Function ---
-    # Note: Running this script directly (`python Three_PointO_ArchE/main.py ...`) might cause issues with relative imports
-    # within the package. It's recommended to run as a module from the project root:
-    # `python -m Three_PointO_ArchE.main workflows/your_workflow.json ...`
-    main(workflow_to_run=args.workflow, initial_context_json=args.context)
+    initial_context_data_json: Optional[str] = None
+    if args.command == "run-workflow":
+        if args.context_file:
+            logger.info(f"Loading initial context from file: {args.context_file}")
+            try:
+                with open(args.context_file, 'r', encoding='utf-8') as f_context:
+                    initial_context_data_json = f_context.read()
+                # Basic validation of the JSON string read
+                json.loads(initial_context_data_json) 
+            except FileNotFoundError:
+                logger.error(f"Context file not found: {args.context_file}")
+                print(f"ERROR: Context file not found: {args.context_file}")
+                sys.exit(1)
+            except json.JSONDecodeError as e_json_ctx:
+                logger.error(f"Invalid JSON in context file {args.context_file}: {e_json_ctx}")
+                print(f"ERROR: Invalid JSON in context file {args.context_file}: {e_json_ctx}")
+                sys.exit(1)
+            except Exception as e_ctx_file:
+                logger.error(f"Error reading context file {args.context_file}: {e_ctx_file}")
+                print(f"ERROR: Could not read context file {args.context_file}: {e_ctx_file}")
+                sys.exit(1)
+        elif args.inputs:
+            initial_context_data_json = args.inputs
+            # Basic validation of the JSON string provided
+            try:
+                json.loads(initial_context_data_json)
+            except json.JSONDecodeError as e_json_inputs:
+                logger.error(f"Invalid JSON string provided via --inputs: {e_json_inputs}")
+                print(f"ERROR: Invalid JSON string for --inputs: {e_json_inputs}")
+                sys.exit(1)
+
+        # Call the existing main function, potentially adapting it if --task-id is used
+        # For now, --task-id is parsed but not directly used by the main() call here.
+        # The main() function itself would need modification to handle single task runs,
+        # or WorkflowEngine.run_workflow would need a task_id parameter.
+        if args.task_id:
+            logger.warning(f"--task-id '{args.task_id}' was specified, but current main() does not directly support single task execution. Will run full workflow.")
+            # If you want to support single task runs, you'd modify how main() or workflow_engine.run_workflow is called here.
+        
+        main(workflow_to_run=os.path.basename(args.workflow_file), initial_context_json=initial_context_data_json)
+    
+    # --- Handle other commands if/when added ---
+    # elif args.command == "manage-spr":
+    #    logger.info("Executing manage-spr command...")
+    #    # Call a function to handle SPR management with args
+    else:
+        logger.error(f"Unrecognized command: {args.command}")
+        parser.print_help()
+        sys.exit(1)
 
 # --- END OF FILE Three_PointO_ArchE/main.py --- 

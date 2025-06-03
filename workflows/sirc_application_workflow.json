@@ -1,0 +1,120 @@
+{
+  "workflow_id": "sirc_application_workflow",
+  "description": "Applies the SIRC process (ResonantiA Protocol Section 3.11) to a grounded objective and its actionable sub-tasks to achieve deeper refinement and strategic alignment.",
+  "version": "1.0",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "final_grounded_objective": {
+        "type": "string",
+        "description": "The final grounded objective from the DeconstructPrimeTemporal (RP 8.2) workflow."
+      },
+      "actionable_sub_queries_or_tasks": {
+        "type": "array",
+        "items": {"type": "object"},
+        "description": "The list of actionable sub-queries or tasks from the DeconstructPrimeTemporal (RP 8.2) workflow."
+      }
+    },
+    "required": ["final_grounded_objective", "actionable_sub_queries_or_tasks"]
+  },
+  "tasks": {
+    "sirc_meta_cognitive_review": {
+      "action": "generate_text_llm",
+      "description": "SIRC Step 1: Meta-cognitive review to identify critical ambiguities, gaps, and assumptions for SIRC focus.",
+      "inputs": {
+        "prompt_text": "You are Arche, operating under ResonantiA Protocol v3.0. Your current task is SIRC (Strategic Insight Refinement Cycle) - Step 1: Meta-Cognitive Review.\\n\\nAnalyze the provided 'Final Grounded Objective' and its 'Actionable Sub-queries/Tasks'. Identify the most critical ambiguities, unaddressed information gaps, underlying assumptions that warrant deeper scrutiny, and potential misalignments or areas where strategic clarity could be significantly improved by SIRC. Focus on elements that, if not addressed, could hinder progress or lead to suboptimal outcomes.\\n\\nInput Final Grounded Objective:\\n'''{input_final_grounded_objective}'''\\n\\nInput Actionable Sub-queries/Tasks (JSON array string):\\n'''{input_actionable_sub_queries_or_tasks_json_string}'''\\n\\nOutput your analysis as a JSON object with a key 'critical_points_for_sirc'. This key should contain a list of objects, each with 'point_id', 'type' (e.g., Ambiguity, Information Gap, Assumption, Misalignment, Strategic Clarification Needed), 'description' (detailing the point), and 'affected_elements' (list of task_ids or parts of the objective it relates to).\\n\\nExample for a critical point:\\n{{\\n  \\\"point_id\\\": \\\"SIRC_CP_001\\\",\\n  \\\"type\\\": \\\"Ambiguity\\\",\\n  \\\"description\\\": \\\"The term 'enhanced user engagement' in SUBTASK_003 lacks specific metrics. How will this be measured before and after the intervention?\\\",\\n  \\\"affected_elements\\\": [\\\"SUBTASK_003\\\"]\\n}}\\n\\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_final_grounded_objective": "{{context.final_grounded_objective}}",
+          "input_actionable_sub_queries_or_tasks_json_string": "{{context.actionable_sub_queries_or_tasks | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 2000,
+        "temperature": 0.3
+      },
+      "outputs": {
+        "sirc_critical_points": "{{parsed_json_output.critical_points_for_sirc}}"
+      }
+    },
+    "sirc_probing_question_formulation": {
+      "action": "generate_text_llm",
+      "description": "SIRC Step 2: Formulates insightful probing questions and hypotheses to address the identified critical points.",
+      "inputs": {
+        "prompt_text": "You are Arche (ResonantiA Protocol v3.0). Task: SIRC - Step 2: Probing Question Formulation.\\n\\nBased on the 'Critical Points for SIRC' identified in Step 1, formulate specific and insightful probing questions or testable hypotheses. These should be designed to directly address each critical point and elicit the information or clarification needed for strategic refinement. For each critical point, generate one or more targeted questions/hypotheses.\\n\\nInput Critical Points for SIRC (JSON object from Step 1):\\n'''{input_sirc_critical_points_json_string}'''\\n\\nIf the 'Input Critical Points for SIRC' string is literally 'null' or represents an empty JSON structure (e.g., '[]', '{}'), output a JSON object like: {{\"probing_questions_hypotheses\\\": [], \\\"notes\\\": \\\"Prerequisite critical points from SIRC Step 1 were not available or were empty.\\\"}}. Otherwise, proceed with generating questions.\\n\\nOutput your analysis as a JSON object with a key 'probing_questions_hypotheses'. This should be a list of objects, where each object has 'point_id_ref' (referencing SIRC_CP_XXX from Step 1), 'question_or_hypothesis_id', 'text' (the question or hypothesis), and 'intended_outcome' (what answering this question or testing this hypothesis should achieve).\\n\\nExample (if input is valid):\\n{{\\n  \\\"point_id_ref\\\": \\\"SIRC_CP_001\\\",\\n  \\\"question_or_hypothesis_id\\\": \\\"SIRC_PQ_001\\\",\\n  \\\"text\\\": \\\"What are 3-5 quantifiable metrics that can define 'enhanced user engagement' for SUBTASK_003, considering baseline and target values?\\\",\\n  \\\"intended_outcome\\\": \\\"To establish clear, measurable success criteria for user engagement related to SUBTASK_003.\\\"\\n}}\\n\\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_sirc_critical_points_json_string": "{{sirc_meta_cognitive_review.sirc_critical_points | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 2500,
+        "temperature": 0.4
+      },
+      "outputs": {
+        "sirc_probing_questions": "{{parsed_json_output.probing_questions_hypotheses}}",
+        "sirc_probing_notes": "{{parsed_json_output.notes}}"
+      },
+      "depends_on": ["sirc_meta_cognitive_review"]
+    },
+    "sirc_information_acquisition_strategy": {
+      "action": "generate_text_llm",
+      "description": "SIRC Step 3: Suggests strategies for acquiring information to answer the probing questions.",
+      "inputs": {
+        "prompt_text": "You are Arche (ResonantiA Protocol v3.0). Task: SIRC - Step 3: Information Acquisition Strategy.\\n\\nFor each 'Probing Question/Hypothesis' formulated in Step 2, outline potential strategies for acquiring the necessary information or data to answer it. Consider diverse methods such as further LLM-driven research, targeted queries to external knowledge bases (if available), proposing small experiments, Keyholder dialogues, or analyzing existing (simulated or real) data.\\n\\nInput Probing Questions/Hypotheses (JSON object from Step 2):\\n'''{input_sirc_probing_questions_json_string}'''\\n\\nIf the 'Input Probing Questions/Hypotheses' string is literally 'null' or represents an empty JSON structure (e.g., '[]', '{}'), output a JSON object like: {{\"acquisition_strategies\\\": [], \\\"notes\\\": \\\"Prerequisite probing questions from SIRC Step 2 were not available or were empty.\\\"}}. Otherwise, proceed with generating strategies.\\n\\nOutput as a JSON object with a key 'acquisition_strategies'. This should be a list of objects, where each object has 'question_or_hypothesis_id_ref' (referencing SIRC_PQ_XXX from Step 2), 'suggested_strategy_id', 'strategy_description' (detailing the approach), and 'potential_tools_or_methods' (list of strings, e.g., Web Search, Data Analysis, User Survey, LLM Refinement Query).\\n\\nExample (if input is valid):\\n{{\\n  \\\"question_or_hypothesis_id_ref\\\": \\\"SIRC_PQ_001\\\",\\n  \\\"suggested_strategy_id\\\": \\\"SIRC_AS_001\\\",\\n  \\\"strategy_description\\\": \\\"Conduct a literature review on common user engagement metrics for similar software, then hold a focused dialogue with the Keyholder to select and adapt relevant metrics for SUBTASK_003.\\\",\\n  \\\"potential_tools_or_methods\\\": [\\\"Web Search (for literature)\\\", \\\"LLM Synthesis (of review)\\\", \\\"Keyholder Dialogue\\\"]\\n}}\\n\\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_sirc_probing_questions_json_string": "{{sirc_probing_question_formulation.sirc_probing_questions | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 2500,
+        "temperature": 0.4
+      },
+      "outputs": {
+        "sirc_acquisition_strategies": "{{parsed_json_output.acquisition_strategies}}",
+        "sirc_acquisition_notes": "{{parsed_json_output.notes}}"
+      },
+      "depends_on": ["sirc_probing_question_formulation"]
+    },
+    "sirc_synthesis_and_refinement_suggestions": {
+      "action": "generate_text_llm",
+      "description": "SIRC Step 4 & 5: Synthesizes insights and suggests concrete refinements to the original objective and tasks.",
+      "inputs": {
+        "prompt_text": "You are Arche (ResonantiA Protocol v3.0). Task: SIRC - Steps 4 & 5: Synthesis & Refinement Suggestions.\\n\\nSynthesize all insights derived from the SIRC process (Critical Points, Probing Questions, Acquisition Strategies) with the original 'Final Grounded Objective' and 'Actionable Sub-queries/Tasks'. Based on this synthesis, propose concrete refinements. This may include: modifications to the wording of the objective or sub-tasks, addition of new sub-tasks, re-prioritization, or clearer definitions for ambiguous terms. Explicitly state how the SIRC process has led to these suggestions.\\n\\nInput Final Grounded Objective:\\n'''{input_final_grounded_objective}'''\\nInput Actionable Sub-queries/Tasks (JSON array string):\\n'''{input_actionable_sub_queries_or_tasks_json_string}'''\\nInput Critical Points for SIRC (JSON object):\\n'''{input_sirc_critical_points_json_string}'''\\nInput Probing Questions/Hypotheses (JSON object):\\n'''{input_sirc_probing_questions_json_string}'''\\nInput Acquisition Strategies (JSON object):\\n'''{input_sirc_acquisition_strategies_json_string}'''\\n\\nIf any of the input SIRC data strings ('Input Critical Points for SIRC', 'Input Probing Questions/Hypotheses', 'Input Acquisition Strategies') are literally 'null' or represent empty JSON structures, note this limitation in your output. In such cases, your primary focus should be on refining the 'Final Grounded Objective' and 'Actionable Sub-queries/Tasks' based on the available information, and clearly state that full SIRC-driven refinement was not possible due to missing prerequisite SIRC step outputs. Your output JSON should still conform to the specified structure, with notes explaining any missing SIRC contributions.\\n\\nOutput as a JSON object with two main keys: 'sirc_refined_objective' (string, the potentially refined objective) and 'sirc_refined_tasks_suggestions' (a list of objects, where each object represents an original or new task and includes its original 'task_id' (if applicable, or new like SIRC_NEW_TASK_001), 'original_description' (if applicable), a 'suggested_refined_description', 'refinement_rationale_from_sirc' (explaining the change based on SIRC findings, or noting lack of SIRC input), and any 'new_temporal_considerations_summary'). If an original task needs no refinement, state that in the rationale. An optional 'sirc_process_notes' field can be added if SIRC inputs were incomplete.\\n\\nExample for a refined task suggestion (if SIRC inputs are valid):\\n{{\\n  \\\"task_id\\\": \\\"SUBTASK_003\\\",\\n  \\\"original_description\\\": \\\"Enhance user engagement through UI improvements.\\\",\\n  \\\"suggested_refined_description\\\": \\\"Enhance user engagement, as measured by [Metric A, Metric B defined via SIRC_PQ_001], through targeted UI improvements identified in user feedback. Aim for a 20% increase in Metric A within 3 months post-deployment.\\\",\\n  \\\"refinement_rationale_from_sirc\\\": \\\"SIRC process (SIRC_CP_001, SIRC_PQ_001) highlighted the ambiguity of 'enhanced user engagement' and the need for specific metrics. Acquisition strategy SIRC_AS_001 provided a path to define these.\\\",\\n  \\\"new_temporal_considerations_summary\\\": \\\"Metrics A & B to be finalized in 2 weeks. UI changes implemented in Sprint X (1 month). Post-deployment measurement over 3 months.\\\"\\n}}\\n\\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_final_grounded_objective": "{{context.final_grounded_objective}}",
+          "input_actionable_sub_queries_or_tasks_json_string": "{{context.actionable_sub_queries_or_tasks | toJson}}",
+          "input_sirc_critical_points_json_string": "{{sirc_meta_cognitive_review.sirc_critical_points | toJson}}",
+          "input_sirc_probing_questions_json_string": "{{sirc_probing_question_formulation.sirc_probing_questions | toJson}}",
+          "input_sirc_acquisition_strategies_json_string": "{{sirc_information_acquisition_strategy.sirc_acquisition_strategies | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 4000,
+        "temperature": 0.4
+      },
+      "outputs": {
+        "sirc_final_output_obj": "{{parsed_json_output}}"
+      },
+      "depends_on": ["sirc_information_acquisition_strategy"]
+    },
+    "log_sirc_output": {
+      "action": "execute_code",
+      "description": "Logs the final SIRC refined objective and task suggestions.",
+      "inputs": {
+        "code": "import logging\\nimport json\\nlogger = logging.getLogger(\\\"workflow_task_log\\\")\\nsirc_results_raw_str = \\\"\\\"\\\"{{sirc_synthesis_and_refinement_suggestions.sirc_final_output_obj | toJson}}\\\"\\\"\\\"\\nlogger.info(f\\\"SIRC FINAL OUTPUT (raw template string): {sirc_results_raw_str}\\\")\\nprint(f\\\"SIRC FINAL OUTPUT (raw template string):\\\\\\\\n{sirc_results_raw_str}\\\")\\ntry:\\n    cleaned_str = sirc_results_raw_str.strip()\\n    if cleaned_str.startswith(\\\"```json\\\") and cleaned_str.endswith(\\\"```\\\"):\\n        cleaned_str = cleaned_str[7:-3].strip()\\n    elif cleaned_str.startswith(\\\"```\\\") and cleaned_str.endswith(\\\"```\\\"):\\n        cleaned_str = cleaned_str[3:-3].strip()\\n\\n    if cleaned_str.lower() == \\\"null\\\":\\n        sirc_results_dict = None\\n        logger.info(\\\"SIRC results evaluated to None (JSON null).\\\")\\n    elif not cleaned_str: # Empty string\\n        sirc_results_dict = None\\n        logger.warning(\\\"SIRC results string was empty after cleaning.\\\")\\n    else:\\n        sirc_results_dict = json.loads(cleaned_str) # This is the actual parsed dict or None\\n\\n    if sirc_results_dict is not None:\\n        pretty_sirc_results = json.dumps(sirc_results_dict, indent=2)\\n        logger.info(f\\\"SIRC FINAL OUTPUT (parsed & pretty JSON):\\\\\\n{pretty_sirc_results}\\\")\\n        print(f\\\"SIRC FINAL OUTPUT (parsed & pretty JSON):\\\\\\n{pretty_sirc_results}\\\")\\n        print(json.dumps({{\\\"sirc_refined_outputs\\\": sirc_results_dict}})) # Final output for workflow engine\\n    else:\\n        logger.warning(\\\"SIRC final output was None or empty after parsing.\\\")\\n        print(json.dumps({{\\\"sirc_refined_outputs\\\": None, \\\"message\\\": \\\"SIRC output was null or empty after parsing.\\\"}}))\\nexcept Exception as e:\\n    logger.error(f\\\"Could not parse or pretty print sirc_final_output. Raw string was: {sirc_results_raw_str}. Error: {e}\\\")\\n    print(json.dumps({{\\\"error\\\": \\\"Failed to process SIRC output for logging\\\", \\\"details\\\": str(e), \\\"raw_output\\\": sirc_results_raw_str}}))\\n",
+        "language": "python",
+        "sandbox": "none"
+      },
+      "depends_on": ["sirc_synthesis_and_refinement_suggestions"]
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "sirc_refined_objective": {
+        "type": "string",
+        "description": "The SIRC-refined primary objective."
+      },
+      "sirc_refined_tasks_suggestions": {
+        "type": "array",
+        "items": {"type": "object"},
+        "description": "A list of SIRC-refined task suggestions, including rationale and new temporal considerations."
+      }
+    }
+  }
+} 

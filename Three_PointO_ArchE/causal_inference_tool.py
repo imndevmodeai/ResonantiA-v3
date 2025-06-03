@@ -11,6 +11,7 @@ import numpy as np
 import time
 import networkx as nx # For graph representation if needed
 from typing import Dict, Any, Optional, List, Union, Tuple # Expanded type hints
+import re
 # Use relative imports for configuration
 try:
     from . import config
@@ -224,7 +225,6 @@ def _estimate_effect(**kwargs) -> Dict[str, Any]:
         result["error"] = f"Outcome '{outcome_name}' not found in data columns."
         issues = [result["error"]]; summary = result["error"]
         return {**result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
-    # Validate confounders are in df columns
     missing_confounders = [c for c in confounder_names if c not in df.columns]
     if missing_confounders:
         result["error"] = f"Confounder(s) not found in data: {missing_confounders}"
@@ -233,63 +233,133 @@ def _estimate_effect(**kwargs) -> Dict[str, Any]:
 
     # --- DoWhy Estimation --- 
     try:
-        # Create CausalModel: data, treatment, outcome, and graph (or common_causes if no graph)
-        # If graph is not provided, DoWhy infers one or uses common_causes
         model_args = {"data": df, "treatment": treatment_name, "outcome": outcome_name}
         if graph_dot_str:
             model_args["graph"] = graph_dot_str
             logger.info(f"Using provided causal graph for DoWhy model.")
-        elif confounder_names: # If no graph, but confounders are given
+        elif confounder_names:
             model_args["common_causes"] = confounder_names
             logger.info(f"Using provided common_causes (confounders) for DoWhy model as no graph was given.")
         else:
-            # No graph and no confounders - DoWhy will try to infer graph or proceed without adjustment
             logger.warning("No causal graph or explicit confounders provided for DoWhy. Estimation might be biased if unobserved confounders exist.")
             issues.append("Warning: No graph or confounders specified; results may be biased.")
 
         model = CausalModel(**model_args)
-        identified_estimand = model.identify_effect(proceed_when_unidentifiable=True) # Allow proceeding if unidentifiable (gets reported)
+        
+        identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
+        logger.info(f"DoWhy identified estimand object: {identified_estimand}")
+        logger.info(f"DoWhy identified_estimand attributes: {dir(identified_estimand)}")
+
         estimate = model.estimate_effect(
             identified_estimand,
             method_name=estimation_method,
-            test_significance=True # Get p-values if method supports
+            test_significance=True,
+            confidence_intervals=True
         )
+        logger.debug(f"DoWhy estimate object: {estimate}")
+        logger.debug(f"dir(estimate): {dir(estimate)}") # Log attributes of estimate object
+        
+        # Attempt to get p-value from test_stat_significance
+        p_val = None
+        if hasattr(estimate, "test_stat_significance"):
+            sig_results = estimate.test_stat_significance
+            logger.debug(f"estimate.test_stat_significance: {sig_results} (type: {type(sig_results)})")
+            if isinstance(sig_results, dict) and "p_value" in sig_results:
+                try:
+                    p_val_raw = sig_results["p_value"]
+                    # p_value might be an array/list or a scalar
+                    if isinstance(p_val_raw, (list, np.ndarray)) and len(p_val_raw) > 0:
+                        p_val = float(p_val_raw[0])
+                    elif isinstance(p_val_raw, (float, int)):
+                        p_val = float(p_val_raw)
+                    logger.debug(f"P-value from test_stat_significance: {p_val}")
+                except (TypeError, ValueError, IndexError) as e:
+                    logger.warning(f"Could not extract/convert p-value from test_stat_significance: {e}")
+        else:
+            logger.debug("estimate has no attribute 'test_stat_significance'")
 
-        # --- Process & Store Results --- 
+        # Fallback: Parse from string representation if p_val is still None
+        if p_val is None:
+            logger.debug("P-value not found via test_stat_significance, trying to parse from str(estimate).")
+            try:
+                estimate_str = str(estimate)
+                match = re.search(r"p-value: \s*\[?([0-9\.eE\-]+)\s*\]?", estimate_str) # handle optional brackets
+                if match:
+                    p_val_str = match.group(1)
+                    p_val = float(p_val_str)
+                    logger.info(f"Successfully parsed p-value ({p_val}) from string representation of estimate object.")
+                else:
+                    logger.warning(f"Could not find p-value pattern in str(estimate): {estimate_str[:500]}") # Log part of string if pattern fails
+            except Exception as e_parse:
+                logger.warning(f"Failed to parse p-value from string representation: {e_parse}")
+
+        result["p_value"] = p_val
+        logger.debug(f"Final p_value set in result: {result['p_value']}")
+        
         result["estimated_effect"] = estimate.value
-        result["estimand_type"] = identified_estimand.estimand_type
-        result["estimand_expression"] = str(identified_estimand.estimand_expression) # String representation
+        result["estimand_type"] = identified_estimand.estimand_type.name
+        
+        estimand_str = "N/A"
+        if hasattr(identified_estimand, 'estimands') and 'backdoor' in identified_estimand.estimands and identified_estimand.estimands['backdoor']:
+            if isinstance(identified_estimand.estimands['backdoor'], dict) and 'estimand' in identified_estimand.estimands['backdoor']:
+                estimand_str = str(identified_estimand.estimands['backdoor']['estimand'])
+            elif hasattr(identified_estimand.estimands['backdoor'], 'estimand_expression'):
+                 estimand_str = str(identified_estimand.estimands['backdoor'].estimand_expression)
+            else:
+                estimand_str = str(identified_estimand.estimands['backdoor'])
+        elif hasattr(identified_estimand, 'estimand_expression'):
+             estimand_str = str(identified_estimand.estimand_expression)
+        else:
+            estimand_str = str(identified_estimand)
+            if "Estimand expression:" in estimand_str:
+                try:
+                    estimand_str = estimand_str.split("Estimand expression:")[1].split("\\n\\n")[0].strip()
+                except IndexError:
+                    pass 
+        result["estimand_expression"] = estimand_str
+
         result["method_used"] = estimation_method
-        # Extract details from estimate object
-        if hasattr(estimate, 'params') and estimate.params is not None:
-            # Try to serialize params, fallback if it's too complex or has issues
-            try: result["estimator_params"] = json.loads(json.dumps(estimate.params, default=str)) # Make it JSON serializable
-            except: result["estimator_params"] = str(estimate.params) # Fallback
+        if hasattr(estimate, 'params'):
+            try: result["estimator_params"] = json.loads(json.dumps(estimate.params, default=str))
+            except: result["estimator_params"] = str(estimate.params)
         if hasattr(estimate, 'control_value'): result["control_value"] = estimate.control_value
         if hasattr(estimate, 'treatment_value'): result["treatment_value"] = estimate.treatment_value
-        # Significance test results (p-value)
-        if hasattr(estimate, 'test_significance_results') and estimate.test_significance_results is not None:
-            test_res = estimate.test_significance_results
-            if isinstance(test_res, dict) and 'p_value' in test_res:
-                result["p_value"] = test_res['p_value']
+        
+        # Corrected confounder logic
+        confounders_used_set = set()
+        if hasattr(identified_estimand, 'backdoor_variables') and identified_estimand.backdoor_variables:
+            bv = identified_estimand.backdoor_variables
+            logger.debug(f"Raw identified_estimand.backdoor_variables: {bv} (type: {type(bv)})")
+            if isinstance(bv, dict):
+                for val_list in bv.values():
+                    if isinstance(val_list, list):
+                        for item in val_list:
+                            confounders_used_set.add(str(item))
+                    else:
+                        confounders_used_set.add(str(val_list))
+            elif isinstance(bv, list):
+                for item in bv:
+                    if isinstance(item, (list, tuple)):
+                        confounders_used_set.update([str(i) for i in item])
+                    else:
+                        confounders_used_set.add(str(item))
+            else:
+                 confounders_used_set.add(str(bv))
+        elif hasattr(identified_estimand, 'common_causes') and identified_estimand.common_causes: # Fallback
+            cc_vars = identified_estimand.common_causes
+            logger.debug(f"Raw identified_estimand.common_causes: {cc_vars} (type: {type(cc_vars)})")
+            confounders_used_set.update([str(cc) for cc in cc_vars])
+        result["confounders_identified_used"] = sorted(list(confounders_used_set))
+        logger.debug(f"Processed confounders_identified_used: {result['confounders_identified_used']}")
 
-        # Add identified confounders from the model (if any)
-        if identified_estimand.common_causes: # These are the names of common causes used
-            result["identified_confounders"] = [str(cc) for cc in identified_estimand.common_causes]
-
-        # Optional: Refutation tests (can be computationally intensive)
-        # Example: Random common cause refutation
-        # try:
-        #     refute_random = model.refute_estimate(identified_estimand, estimate, method_name="random_common_cause")
-        #     result["refutation_random_common_cause"] = {"p_value": refute_random.refutation_result['p_value']}
-        # except Exception as e_refute:
-        #     logger.warning(f"DoWhy refutation (random_common_cause) failed: {e_refute}")
-        #     result["refutation_random_common_cause"] = {"error": str(e_refute)}
-
+        result["assumptions"] = str(identified_estimand.assumptions) if hasattr(identified_estimand, 'assumptions') else "N/A"
+        
+        result["confidence_intervals"] = estimate.confidence_interval if hasattr(estimate, "confidence_interval") else None
+        
         status = "Success"
         summary = f"DoWhy causal effect estimation completed for {treatment_name} -> {outcome_name}."
-        confidence = 0.75 # Base confidence, adjust based on p-value or refutations if available
-        if result.get("p_value") is not None and result["p_value"] > 0.05: confidence = max(0.3, confidence - 0.2)
+        confidence = 0.75 
+        if p_val is not None and p_val > 0.05: confidence = max(0.3, confidence - 0.2)
         alignment = "Aligned with causal effect estimation goal."
         preview = {"estimated_effect": result["estimated_effect"], "p_value": result.get("p_value")} 
 
@@ -363,40 +433,44 @@ def _run_granger_causality(**kwargs) -> Dict[str, Any]:
     # --- Perform Granger Causality Tests --- 
     test_results_dict: Dict[str, Any] = {}
     any_significant = False
+    # Ensure the specific exception is importable or defined
+    try:
+        from statsmodels.tools.sm_exceptions import InfeasibleTestError
+    except ImportError:
+        # Define a placeholder if not importable, so `except` block doesn't fail
+        class InfeasibleTestError(Exception):
+            pass
+
     try:
         for pred_col in predictor_columns:
             if pred_col == target_column: continue # Skip testing column against itself
 
             logger.info(f"Running Granger causality: '{pred_col}' -> '{target_column}' (max_lag={max_lag}) Session ID: {getattr(config, 'SESSION_ID', 'N/A')[:8]}")
-            # Prepare data for this pair (target first for some statsmodels versions, but grangercausalitytests takes [y,x])
-            # Ensure no NaNs in the pair of series being tested, as statsmodels might error or give misleading results
             pair_df = df[[target_column, pred_col]].dropna()
             if len(pair_df) < max_lag + 5: # Heuristic: Need enough data points relative to lag
                 logger.warning(f"Skipping Granger test for {pred_col} -> {target_column} due to insufficient data after dropna (len={len(pair_df)}, max_lag={max_lag}).")
-                test_results_dict[f"{pred_col}_to_{target_column}"] = {"skipped": True, "reason": "Insufficient data after dropna for max_lag.", "p_value": None, "is_significant": False}
+                test_results_dict[f"{pred_col}_to_{target_column}"] = {"skipped": True, "reason": "Insufficient data after dropna for max_lag.", "p_value": None, "is_significant": False, "error": None}
                 continue
 
-            # Perform the test (expects [endog, exog])
-            # The first series (endog) is the one being caused (target_column)
-            # The second series (exog) is the one causing (pred_col)
-            # So, for X -> Y, data is [Y, X]
-            granger_test_output = grangercausalitytests(pair_df[[target_column, pred_col]], maxlag=[max_lag], verbose=False)
-
-            # Extract p-value for the chosen test type at the specified max_lag
-            # The structure of granger_test_output is a dict where keys are lags
-            # Each lag value is a tuple: (test_stats_dict, [params_for_internals...])
-            # test_stats_dict contains keys like 'ssr_chi2test', 'ssr_ftest', etc.
-            # Each of those keys holds a tuple: (test_statistic, p_value, degrees_of_freedom_numerator)
             p_value = None
-            if max_lag in granger_test_output and len(granger_test_output[max_lag]) > 0:
-                lag_results_dict = granger_test_output[max_lag][0]
-                if granger_test_type in lag_results_dict:
-                    p_value = lag_results_dict[granger_test_type][1]
-                else:
-                    # Fallback if chosen test_type is not available for some reason
-                    logger.warning(f"Chosen Granger test_type '{granger_test_type}' not found in results for {pred_col} -> {target_column} at lag {max_lag}. Trying F-test.")
-                    if "ssr_ftest" in lag_results_dict:
-                        p_value = lag_results_dict["ssr_ftest"][1]
+            current_pair_error = None
+            lag_results_dict = {} # Initialize here
+            try:
+                granger_test_output = grangercausalitytests(pair_df[[target_column, pred_col]], maxlag=[max_lag], verbose=False)
+                if max_lag in granger_test_output and len(granger_test_output[max_lag]) > 0:
+                    lag_results_dict = granger_test_output[max_lag][0]
+                    if granger_test_type in lag_results_dict:
+                        p_value = lag_results_dict[granger_test_type][1]
+                    else:
+                        logger.warning(f"Chosen Granger test_type '{granger_test_type}' not found in results for {pred_col} -> {target_column} at lag {max_lag}. Trying F-test.")
+                        if "ssr_ftest" in lag_results_dict:
+                            p_value = lag_results_dict["ssr_ftest"][1]
+            except InfeasibleTestError as e_infeasible:
+                logger.warning(f"Granger test infeasible for {pred_col} -> {target_column}: {e_infeasible}")
+                current_pair_error = f"InfeasibleTestError: {e_infeasible}"
+            except Exception as e_pair_test:
+                logger.error(f"Error during Granger test for {pred_col} -> {target_column}: {e_pair_test}", exc_info=True)
+                current_pair_error = str(e_pair_test)
 
             is_significant = p_value is not None and p_value < significance_level
             if is_significant: any_significant = True
@@ -405,7 +479,8 @@ def _run_granger_causality(**kwargs) -> Dict[str, Any]:
                 "p_value": p_value,
                 "is_significant_at_{significance_level}": is_significant,
                 "max_lag_tested": max_lag,
-                "test_type_used": granger_test_type if p_value is not None else ("ssr_ftest" if "ssr_ftest" in lag_results_dict else "N/A")
+                "test_type_used": granger_test_type if p_value is not None else ("ssr_ftest" if "ssr_ftest" in lag_results_dict and not current_pair_error else "N/A"),
+                "error": current_pair_error
             }
 
         result["granger_results"] = test_results_dict
@@ -464,8 +539,11 @@ def _estimate_lagged_effects(**kwargs) -> Dict[str, Any]:
         non_numeric_cols = [c for c in var_columns if c in df.columns and not pd.api.types.is_numeric_dtype(df[c])]
         if missing_cols: result["error"] = f"Column(s) for VAR not found: {missing_cols}"
         elif non_numeric_cols: result["error"] = f"Column(s) for VAR must be numeric: {non_numeric_cols}"
-        if result["error"]: issues = [result["error"]]; summary = result["error"]
-        return {**result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+        if result["error"]:
+            issues = [result["error"]]
+            summary = result["error"] # Update summary with specific error
+            # status, confidence, alignment, preview remain as initialized for failure
+            return {**result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
 
     df_var = df[var_columns].dropna() # Use only selected columns and drop NaNs
     if len(df_var) < (max_lag_var if max_lag_var else 10) + 10: # Heuristic for sufficient data
@@ -489,7 +567,7 @@ def _estimate_lagged_effects(**kwargs) -> Dict[str, Any]:
             var_results = var_model.fit(ic=lag_selection_criterion)
             optimal_lag_selected = var_results.k_ar
 
-        result["var_model_summary"] = var_results.summary().as_text() # Full model summary
+        result["var_model_summary"] = str(var_results.summary()) # Full model summary
         result["optimal_lag"] = optimal_lag_selected
 
         # Extract lagged coefficients (effects)

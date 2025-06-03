@@ -79,6 +79,7 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "outputs") # Path for generated outputs (res
 MODEL_SAVE_DIR = os.path.join(OUTPUT_DIR, "models") # Path specifically for saved models
 SPR_JSON_FILE = os.path.join(KNOWLEDGE_GRAPH_DIR, "spr_definitions_tv.json") # Path to SPR definitions
 LOG_FILE = os.path.join(LOG_DIR, "arche_v3_log.log") # Default log filename
+NODE_SEARCH_SCRIPT_PATH = os.path.join(BASE_DIR, "ResonantiA", "browser_automation", "search.js") # Path to the Node.js search script
 
 # --- Logging Configuration (See logging_config.py Section 7.24) ---
 LOG_LEVEL = logging.DEBUG # Default logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)

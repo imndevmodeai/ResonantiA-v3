@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "spr_id": "InnovativE SolutioN",
+    "text": "InnovativE SolutioN",
+    "term": "InnovativE SolutioN",
+    "definition": "A novel approach, method, product, or idea that effectively addresses a specific challenge or creates new opportunities, often characterized by its originality, practicality, and impact.",
+    "context_areas": [
+      "Problem Solving",
+      "Product Development",
+      "Strategic Planning",
+      "Technological Advancement",
+      "Process Optimization"
+    ],
+    "related_spr_ids": [
+      "CreativE ThinkinG",
+      "DisruptivE TechnologY",
+      "StrategiC PlanninG"
+    ],
+    "keywords": [
+      "innovation",
+      "solution",
+      "novelty",
+      "breakthrough",
+      "originality",
+      "invention"
+    ],
+    "example_application": "Developing a new algorithm that significantly reduces energy consumption in data centers.",
+    "activation_prompts": {
+      "expand": "Elaborate on the core principles and potential applications of an '{text}'.",
+      "ideate": "Generate three novel concepts that embody an '{text}' for {domain_variable}.",
+      "critique": "What are the potential challenges and limitations when implementing an '{text}'?"
+    },
+    "metadata": {
+      "version": "1.0",
+      "status": "active",
+      "created_by": "MasterMind_AI_Bootstrap",
+      "created_date": "2025-06-01",
+      "last_modified_date": "2025-06-01"
+    }
+  }
+]

@@ -1,4 +1,3 @@
-# --- START OF FILE 3.0ArchE/agent_based_modeling_tool.py ---
 # ResonantiA Protocol v3.0 - agent_based_modeling_tool.py
 # Implements Agent-Based Modeling (ABM) capabilities using Mesa (if available).
 # Includes enhanced temporal analysis of results and mandatory IAR output.
@@ -26,8 +25,8 @@ SCIPY_AVAILABLE = False # For advanced pattern analysis
 try:
     import mesa
     from mesa import Agent, Model
-    from mesa.time import RandomActivation, SimultaneousActivation, StagedActivation
-    from mesa.space import MultiGrid, NetworkGrid # Include different space types
+    # from mesa.scheduler import RandomActivation, SimultaneousActivation, StagedActivation # Removed these unused imports
+    from mesa.space import MultiGrid, NetworkGrid
     from mesa.datacollection import DataCollector
     MESA_AVAILABLE = True
     logger_abm_imp = logging.getLogger(__name__)
@@ -50,10 +49,14 @@ try:
 
 except ImportError as e_mesa:
     # Define dummy classes if Mesa is not installed
-    mesa = None; Agent = object; Model = object; RandomActivation = object; SimultaneousActivation = object; StagedActivation = object; MultiGrid = object; NetworkGrid = object; DataCollector = object; plt = None; nx = None; ndimage = None
+    mesa = None; Agent = object; Model = object
+    # RandomActivation = object; SimultaneousActivation = object; StagedActivation = object # Removed dummy objects
+    MultiGrid = object; NetworkGrid = object; DataCollector = object; plt = None; nx = None; ndimage = None
     logging.getLogger(__name__).warning(f"Mesa library import failed: {e_mesa}. ABM Tool will run in SIMULATION MODE.")
 except Exception as e_mesa_other:
-    mesa = None; Agent = object; Model = object; RandomActivation = object; SimultaneousActivation = object; StagedActivation = object; MultiGrid = object; NetworkGrid = object; DataCollector = object; plt = None; nx = None; ndimage = None
+    mesa = None; Agent = object; Model = object
+    # RandomActivation = object; SimultaneousActivation = object; StagedActivation = object # Removed dummy objects
+    MultiGrid = object; NetworkGrid = object; DataCollector = object; plt = None; nx = None; ndimage = None
     logging.getLogger(__name__).error(f"Unexpected error importing Mesa/visualization libs: {e_mesa_other}. ABM Tool simulating.")
 
 
@@ -122,128 +125,181 @@ class BasicGridModel(Model if MESA_AVAILABLE else object):
     def __init__(self, width=10, height=10, density=0.5, activation_threshold=2, agent_class: Type[Agent] = BasicGridAgent, scheduler_type='random', torus=True, seed=None, **model_params):
         self._step_count = 0
         self.run_id = uuid.uuid4().hex[:8] # Assign a unique ID for this model run
+        self._scheduler_type = scheduler_type.lower() # Store for use in step()
+
         if not MESA_AVAILABLE: # Simulation mode init
             self.random = np.random.RandomState(seed if seed is not None else int(time.time()))
             self.width = width; self.height = height; self.density = density; self.activation_threshold = activation_threshold; self.num_agents = 0
             self.agent_class = agent_class; self.custom_agent_params = model_params.get('agent_params', {})
-            self.model_params = model_params; self.grid = None; self.schedule = []; self._create_agents_sim()
-            self.num_agents = len(self.schedule)
+            self.model_params = model_params; self.grid = None; 
+            self.agents_sim = [] # Use a list for simulated agents
+            self._create_agents_sim()
+            self.num_agents = len(self.agents_sim)
             logger.info(f"Initialized SIMULATED BasicGridModel (Run ID: {self.run_id})")
             return
+        
         # Mesa init
         super().__init__(seed=seed) # Pass seed to Mesa's base Model for reproducibility
         self.width = int(width); self.height = int(height); self.density = float(density); self.activation_threshold = int(activation_threshold)
-        self.num_agents = 0
+        self.num_agents = 0 # Will be updated after agent creation
         self.agent_class = agent_class if issubclass(agent_class, Agent) else BasicGridAgent
         self.custom_agent_params = model_params.pop('agent_params', {}) # Extract agent params
         self.model_params = model_params # Store remaining model-level params
 
-        # Setup grid and scheduler
+        # Setup grid
         self.grid = MultiGrid(self.width, self.height, torus=torus)
-        scheduler_type_lower = scheduler_type.lower()
-        if scheduler_type_lower == 'simultaneous':
-            self.schedule = SimultaneousActivation(self)
-        elif scheduler_type_lower == 'staged':
-            # StagedActivation requires defining stages, complex setup, fallback to Random
-            logger.warning("StagedActivation requested but requires stage functions definition. Using RandomActivation as fallback.")
-            self.schedule = RandomActivation(self)
-        else: # Default to RandomActivation
-            if scheduler_type_lower != 'random': logger.warning(f"Unknown scheduler_type '{scheduler_type}'. Using RandomActivation.")
-            self.schedule = RandomActivation(self)
+        
+        # Note: In Mesa 3.0+, explicit scheduler instantiation (RandomActivation, etc.)
+        # is replaced by AgentSet methods. The Model base class provides `self.agents` (an AgentSet).
+        # We store the intended scheduler_type to be used by the step() method.
+        if self._scheduler_type not in ['random', 'simultaneous', 'staged']:
+            logger.warning(f"Unknown scheduler_type '{scheduler_type}'. Defaulting to 'random' behavior in step().")
+            self._scheduler_type = 'random'
 
         # Setup data collection
-        # Collect model-level variables (e.g., counts of active/inactive agents)
         model_reporters = {
             "Active": lambda m: self.count_active_agents(),
             "Inactive": lambda m: self.count_inactive_agents()
-            # Add other model-level reporters here if needed
         }
-        # Collect agent-level variables (e.g., state)
-        agent_reporters = {"State": "state"} # Assumes agents have a 'state' attribute
+        agent_reporters = {"State": "state"}
         self.datacollector = DataCollector(model_reporters=model_reporters, agent_reporters=agent_reporters)
 
-        # Create agents and place them
-        self._create_agents_mesa()
-        self.num_agents = len(self.schedule.agents)
+        # Create agents and place them. Agents are automatically added to self.agents (AgentSet)
+        self._create_agents_mesa() 
+        self.num_agents = len(self.agents) # self.agents is the AgentSet from Mesa's Model base class
 
-        self.running = True # Flag for conditional stopping
-        self.datacollector.collect(self) # Collect initial state (step 0)
-        logger.info(f"Initialized Mesa BasicGridModel (Run ID: {self.run_id}) with {self.num_agents} agents.")
+        self.running = True
+        self.datacollector.collect(self)
+        logger.info(f"Initialized Mesa BasicGridModel (Run ID: {self.run_id}) with {self.num_agents} agents using '{self._scheduler_type}' activation style.")
 
     def _create_agents_mesa(self):
-        """ Helper method to create agents for Mesa model. """
-        agent_id_counter = 0
+        """ Helper method to create agents for Mesa model. Agents are added to self.agents AgentSet. """
+        agent_id_counter = 0 # unique_id is now auto-assigned by Mesa Model when adding to AgentSet
         initial_active_count = 0
-        # Iterate through grid cells
         for x in range(self.width):
             for y in range(self.height):
-                # Place agent based on density
                 if self.random.random() < self.density:
-                    # Example: Initialize state randomly (e.g., 10% active)
                     initial_state = 1 if self.random.random() < 0.1 else 0
                     if initial_state == 1: initial_active_count += 1
-                    # Create agent instance, passing model-defined custom params
-                    agent = self.agent_class(agent_id_counter, self, state=initial_state, **self.custom_agent_params)
-                    agent_id_counter += 1
-                    # Add agent to scheduler and place on grid
-                    self.schedule.add(agent)
+                    # Create agent instance. Pass self (the model) for auto-assignment of unique_id.
+                    agent = self.agent_class(self, state=initial_state, **self.custom_agent_params) 
+                    # No need to explicitly call self.schedule.add(agent) or assign unique_id from counter
+                    # The Model base class handles adding the agent to self.agents.
                     self.grid.place_agent(agent, (x, y))
-        logger.info(f"Created {agent_id_counter} agents for Mesa model. Initial active: {initial_active_count}")
+        # num_agents will be len(self.agents) after this method, set in __init__
+        logger.info(f"Created agents for Mesa model. Initial active: {initial_active_count}. Total agents in AgentSet: {len(self.agents)}")
 
     def _create_agents_sim(self):
         """ Helper method to create agents for simulation mode. """
         agent_id_counter = 0; initial_active_count = 0
+        self.agents_sim = [] # Ensure it's a list for simulation
         for x in range(self.width):
             for y in range(self.height):
                 if self.random.random() < self.density:
                         initial_state = 1 if self.random.random() < 0.1 else 0
                         if initial_state == 1: initial_active_count += 1
-                        agent = self.agent_class(agent_id_counter, self, state=initial_state, **self.custom_agent_params); agent_id_counter += 1
-                        agent.pos = (x, y); self.schedule.append(agent)
-        logger.info(f"Created {agent_id_counter} agents for SIMULATED model. Initial active: {initial_active_count}")
+                        # For simulation, manually assign unique_id and store in a list
+                        agent = self.agent_class(agent_id_counter, self, state=initial_state, **self.custom_agent_params); 
+                        agent.unique_id = agent_id_counter # Explicit for sim
+                        agent_id_counter += 1
+                        agent.pos = (x, y); self.agents_sim.append(agent)
+        logger.info(f"Created {len(self.agents_sim)} agents for SIMULATED model. Initial active: {initial_active_count}")
 
     def step(self):
         """ Advances the model by one step. """
-        self._step_count += 1
+        self._step_count += 1 # Mesa 3.0+ Model.steps auto-increments, but this can be model's internal counter
         if MESA_AVAILABLE:
-            self.schedule.step() # Execute step() and advance() methods of agents via scheduler
-            self.datacollector.collect(self) # Collect data after the step
-        else: # Simulate step for non-Mesa mode
+            # Use AgentSet activation methods based on the stored scheduler type
+            if self._scheduler_type == 'random':
+                self.agents.shuffle_do("step") # Executes step() and then advance() for each agent in random order
+                # In Mesa 3.0, shuffle_do typically handles both step and advance logic if agents define them.
+                # If BasicGridAgent only has `step` to determine `next_state` and `advance` to apply it, this is fine.
+                # For more complex agents that might have separate advance logic called by SimultaneousActivation, 
+                # ensure shuffle_do covers it or adjust agent/model logic.
+                # The default Agent.step() in Mesa 3.0 is a placeholder. Our BasicGridAgent.step() calculates next_state.
+                # Our BasicGridAgent.advance() applies next_state. So, we need both.
+                # However, `shuffle_do` calls the method passed to it. If we need sequential step then advance, it's more complex.
+                # Let's assume for `BasicGridAgent`, `step` computes next_state and `advance` applies it.
+                # Mesa's `shuffle_do("step")` calls `agent.step()`. Then `shuffle_do("advance")` would call `agent.advance()`.
+                # For RandomActivation, the typical pattern is: each agent steps, then each agent advances.
+                # It seems `shuffle_do` is for a single method call per agent. 
+                # If RandomActivation implies step then advance for *each agent individually* before the next agent steps, 
+                # then shuffle_do("step") might be enough if BasicGridAgent.step() calls self.advance() internally at the end.
+                # Our current BasicGridAgent does not do that. So we need two passes for RandomActivation style.
+                
+                # According to Mesa 3.0 migration for RandomActivation:
+                # Replace self.schedule.step() with self.agents.shuffle_do("step")
+                # This implies shuffle_do("step") should be enough if the agent's step method does all its work for the turn.
+                # Let's assume BasicGridAgent.step calculates next_state, and BasicGridAgent.advance applies it.
+                # For random activation, usually all agents compute their next state, then all agents apply it.
+                # So, it would be: self.agents.shuffle_do("step") and then self.agents.shuffle_do("advance")
+                self.agents.do("step") # All agents determine their next_state
+                self.agents.do("advance") # All agents apply their next_state (order for advance may not matter for BasicGridAgent)
+                                        # Using `do` instead of `shuffle_do` for advance as order might not be critical for advance phase here.
+
+            elif self._scheduler_type == 'simultaneous':
+                # All agents compute their next state based on the *current* state of others
+                self.agents.do("step") 
+                # Then all agents apply their new state simultaneously
+                self.agents.do("advance")
+            elif self._scheduler_type == 'staged':
+                # Assuming stage_list is defined, e.g., ["step", "advance"] or custom stages
+                # For BasicGridAgent, the stages are effectively "step" (calculate) and "advance" (apply)
+                stage_list = ["step", "advance"] # Default for BasicGridAgent
+                # One could pass stage_list as a model parameter if models have more complex staging
+                for stage_method_name in stage_list:
+                    self.agents.do(stage_method_name)
+            else: # Fallback, should have been defaulted in __init__
+                logger.warning(f"Undefined scheduler type '{self._scheduler_type}' in step(), defaulting to random-like activation.")
+                self.agents.do("step")
+                self.agents.do("advance")
+
+            self.datacollector.collect(self)
+        else: # Simulate step for non-Mesa mode (simulation)
+            # Simulation logic for self.agents_sim
             next_states = {}
-            for agent in self.schedule: # Simulate agent logic roughly
+            for agent in self.agents_sim: 
                 active_neighbors_sim = 0
                 if hasattr(agent, 'pos') and agent.pos is not None:
                     for dx in [-1, 0, 1]:
                             for dy in [-1, 0, 1]:
                                 if dx == 0 and dy == 0: continue
                                 nx, ny = agent.pos[0] + dx, agent.pos[1] + dy
-                                # Simple check for neighbors (inefficient for large grids)
-                                neighbor = next((a for a in self.schedule if hasattr(a,'pos') and a.pos == (nx, ny)), None)
+                                neighbor = next((a for a in self.agents_sim if hasattr(a,'pos') and a.pos == (nx, ny)), None)
                                 if neighbor and hasattr(neighbor, 'state') and neighbor.state > 0: active_neighbors_sim += 1
                 current_state = getattr(agent, 'state', 0)
-                if current_state == 0 and active_neighbors_sim >= self.activation_threshold: next_states[agent.unique_id] = 1
-                else: next_states[agent.unique_id] = current_state
-            # Update states
-            for agent in self.schedule:
-                if agent.unique_id in next_states: setattr(agent, 'state', next_states[agent.unique_id])
+                # Using agent.params.get for activation_threshold if it was passed via agent_params to BasicGridAgent
+                # Otherwise, using model's activation_threshold for simulation consistency
+                sim_activation_threshold = agent.params.get('activation_threshold', self.activation_threshold)
+
+                if current_state == 0 and active_neighbors_sim >= sim_activation_threshold: 
+                    next_states[agent.unique_id] = 1
+                # Example deactivation for simulation, matching BasicGridAgent logic roughly
+                elif current_state == 1 and active_neighbors_sim < sim_activation_threshold -1: 
+                    next_states[agent.unique_id] = 0
+                else: 
+                    next_states[agent.unique_id] = current_state
+            
+            for agent in self.agents_sim:
+                if agent.unique_id in next_states:
+                    setattr(agent, 'state', next_states[agent.unique_id])
             logger.debug(f"Simulated step {self._step_count} completed.")
 
     # Helper methods for data collection reporters
     def count_active_agents(self):
         """ Counts agents with state > 0. """
-        return sum(1 for agent in self.schedule.agents if hasattr(agent, 'state') and agent.state > 0) if MESA_AVAILABLE else sum(1 for agent in self.schedule if hasattr(agent, 'state') and agent.state > 0)
+        return sum(1 for agent in self.agents if hasattr(agent, 'state') and agent.state > 0) if MESA_AVAILABLE else sum(1 for agent in self.agents_sim if hasattr(agent, 'state') and agent.state > 0)
     def count_inactive_agents(self):
         """ Counts agents with state <= 0. """
-        return sum(1 for agent in self.schedule.agents if hasattr(agent, 'state') and agent.state <= 0) if MESA_AVAILABLE else sum(1 for agent in self.schedule if hasattr(agent, 'state') and agent.state <= 0)
+        return sum(1 for agent in self.agents if hasattr(agent, 'state') and agent.state <= 0) if MESA_AVAILABLE else sum(1 for agent in self.agents_sim if hasattr(agent, 'state') and agent.state <= 0)
 
     def get_agent_states(self) -> np.ndarray:
         """ Returns a 2D NumPy array representing the state of each agent on the grid. """
-        # Initialize grid with a default value (e.g., -1 for empty)
         states = np.full((self.width, self.height), -1.0)
-        schedule_list = self.schedule.agents if MESA_AVAILABLE else self.schedule
-        if not schedule_list: return states # Return empty grid if no agents
+        agent_list_to_iterate = self.agents if MESA_AVAILABLE else self.agents_sim
+        if not agent_list_to_iterate: return states
 
-        for agent in schedule_list:
+        for agent in agent_list_to_iterate:
             # Check if agent has position and state attributes
             if hasattr(agent, 'pos') and agent.pos is not None and hasattr(agent, 'state'):
                 try:
@@ -307,21 +363,35 @@ class ABMTool:
             scheduler = kwargs.get('scheduler', 'random') # Scheduler type
             torus = kwargs.get('torus', True) # Grid topology
 
+            # Ensure model_params_for_splatting doesn't contain keys handled by explicit signature args
+            model_params_from_workflow = kwargs.get('model_params', {})
+            explicit_args_keys = ['width', 'height', 'density', 'activation_threshold', 
+                                  'agent_class', 'scheduler_type', 'torus', 'seed', 'agent_params']
+            
+            # activation_threshold is handled separately below, so ensure it's not in model_params_for_splatting either way
+            # It's usually part of model_params in the workflow, but passed explicitly to BasicGridModel
+            activation_threshold_val = model_params_from_workflow.get('activation_threshold', 2)
+
+            model_params_for_splatting = { 
+                k: v for k, v in model_params_from_workflow.items() 
+                if k not in explicit_args_keys and k != 'activation_threshold'
+            }
+
             selected_agent_class = agent_class or BasicGridAgent # Use provided or default agent
             if not issubclass(selected_agent_class, Agent):
                 raise ValueError(f"Provided agent_class '{selected_agent_class.__name__}' is not a subclass of mesa.Agent.")
 
             model: Optional[Model] = None
             # --- Model Type Dispatcher ---
-            if model_type.lower() == "basic":
+            if model_type.lower() == "basicgridmodel": # Changed "basic" to "basicgridmodel"
                 # Pass relevant args to BasicGridModel constructor
                 model = BasicGridModel(
                     width=width, height=height, density=density,
-                    activation_threshold=model_params.get('activation_threshold', 2),
+                    activation_threshold=activation_threshold_val, # Use extracted value
                     agent_class=selected_agent_class,
                     scheduler_type=scheduler, torus=torus, seed=seed,
                     agent_params=agent_params, # Pass agent params dict
-                    **model_params # Pass other model params
+                    **model_params_for_splatting # Pass only remaining model params
                 )
             # --- Add other model types here ---
             # elif model_type.lower() == "network_example":
@@ -718,7 +788,7 @@ class ABMTool:
 
             # Temporal Pattern Detection
             ts_analysis["convergence_step"] = self._detect_convergence(active_series_numeric) # Returns step index or -1
-            ts_analysis["oscillating"] = self._detect_oscillation(active_series_numeric) # Returns boolean
+            ts_analysis["oscillating"] = bool(self._detect_oscillation(active_series_numeric)) # Returns boolean
 
             logger.debug(f"Time series analysis complete. Convergence: {ts_analysis['convergence_step']}, Oscillation: {ts_analysis['oscillating']}")
 
@@ -996,7 +1066,7 @@ class ABMTool:
                 "max_active": float(final_active * np.random.uniform(1.1, 1.5)),
                 "avg_active": float(final_active * np.random.uniform(0.8, 1.1)),
                 "convergence_step": int(results.get('simulation_steps_run', 50) * np.random.uniform(0.6, 0.9)) if results else int(30 + np.random.rand()*20),
-                "oscillating": np.random.choice([True, False], p=[0.3, 0.7])
+                "oscillating": bool(np.random.choice([True, False], p=[0.3, 0.7]))
             }
             analysis["spatial"] = {
                 "grid_dimensions": results.get('dimensions', [10,10]) if results else [10,10],
@@ -1061,13 +1131,13 @@ class ABMTool:
             # Check if there are enough peaks/troughs in the recent segment
             # And if the standard deviation is above a certain level (not flat)
             segment = np.array(series[-window*2:]) # Analyze a larger recent window for oscillation
-            if segment.std() < threshold_std_dev: return False # Likely flat
+            if segment.std() < threshold_std_dev: return bool(False) # Likely flat
             # Simple peak detection (could use SciPy find_peaks for more robustness)
             peaks = sum(1 for i in range(1, len(segment)-1) if segment[i-1] < segment[i] > segment[i+1])
             troughs = sum(1 for i in range(1, len(segment)-1) if segment[i-1] > segment[i] < segment[i+1])
-            if peaks >= threshold_peaks or troughs >= threshold_peaks: return True
+            if peaks >= threshold_peaks or troughs >= threshold_peaks: return bool(True)
         except Exception: pass
-        return False
+        return bool(False)
 
     def _calculate_clustering(self, grid: np.ndarray, threshold: float = 0.5) -> float:
         """Calculates a simple spatial clustering coefficient (average local similarity)."""
@@ -1138,16 +1208,120 @@ def perform_abm(inputs: Dict[str, Any]) -> Dict[str, Any]:
             op_result = tool.create_model(**kwargs)
         elif operation == "run_simulation":
             model_input = kwargs.get('model')
-            if model_input is None: op_result = {"error": "Missing 'model' input for run_simulation."}
-            else: op_result = tool.run_simulation(**kwargs) # Pass all kwargs including model
+            created_model_internally = False
+            if model_input is None:
+                # Attempt to create model implicitly
+                logger.info(f"No pre-existing model provided for run_simulation. Attempting to create one with type: {kwargs.get('model_type', 'N/A')}")
+                # Prepare kwargs for model creation from the general kwargs
+                # Keys for create_model: model_type, agent_class, width, height, density, model_params, agent_params, seed, scheduler, torus
+                creation_args = {
+                    k: v for k, v in kwargs.items() 
+                    if k in ['model_type', 'agent_class', 'width', 'height', 'density', 'model_params', 'agent_params', 'seed', 'scheduler', 'torus']
+                }
+                # model_type is essential for create_model, ensure it's present or default
+                if 'model_type' not in creation_args and 'model_type' in kwargs: # Ensure model_type from original inputs is used
+                    creation_args['model_type'] = kwargs['model_type']
+                elif 'model_type' not in creation_args: # Default if not specified anywhere
+                     creation_args['model_type'] = 'basic' # or some other sensible default
+
+                create_result = tool.create_model(**creation_args)
+                model_input = create_result.get('model') # Get the model instance
+                
+                if create_result.get("error") or not model_input:
+                    op_result = create_result # Propagate error from creation
+                    op_result["error"] = op_result.get("error", "Implicit model creation failed.")
+                    # Ensure a reflection is present if create_model failed to provide one (should not happen with IAR)
+                    if "reflection" not in op_result:
+                         op_result["reflection"] = _create_reflection("Failure", op_result["error"], 0.0, "N/A", [op_result["error"]], None)
+                else:
+                    logger.info(f"Implicitly created model (Run ID: {getattr(model_input, 'run_id', 'N/A')}) for simulation.")
+                    created_model_internally = True # Flag that model was created here
+            
+            if model_input and not op_result.get("error"): # If model exists (either passed or created) and no prior error
+                # Prepare kwargs for run_simulation
+                # Keys for run_simulation: model, steps, visualize
+                run_args = {'model': model_input}
+                if 'steps' in kwargs: run_args['steps'] = kwargs['steps']
+                if 'visualize' in kwargs: run_args['visualize'] = kwargs['visualize']
+                
+                op_result = tool.run_simulation(**run_args)
+                if created_model_internally and op_result.get("model_run_id") is None and hasattr(model_input, "run_id"):
+                    # Ensure the run_id from the internally created model is in the output if run_simulation didn't set one
+                    op_result["model_run_id"] = model_input.run_id
+            elif not model_input and not op_result.get("error"): # Should be caught by create_result.get("error") check
+                 op_result = {"error": "Missing 'model' input for run_simulation and implicit creation failed silently."}
+
+
         elif operation == "analyze_results":
             results_input = kwargs.get('results')
             if results_input is None: op_result = {"error": "Missing 'results' input for analyze_results."}
             else: op_result = tool.analyze_results(**kwargs) # Pass all kwargs including results
         elif operation == "convert_to_state":
-            abm_result_input = kwargs.get('abm_result') # Use 'abm_result' for clarity? Or stick to 'results'? Let's assume 'abm_result' for now.
+            abm_result_input = kwargs.get('abm_result') 
             if abm_result_input is None: op_result = {"error": "Missing 'abm_result' input for convert_to_state."}
-            else: op_result = tool.convert_to_state_vector(**kwargs) # Pass all kwargs including abm_result
+            else: op_result = tool.convert_to_state_vector(**kwargs) 
+        elif operation == "generate_visualization":
+            # This operation expects the full result dictionary from a 'run_simulation' operation
+            # as input, plus an 'output_filename'
+            simulation_results_input = kwargs.get('simulation_results')
+            output_filename = kwargs.get('output_filename')
+
+            if simulation_results_input is None or not isinstance(simulation_results_input, dict):
+                op_result = {"error": "Missing or invalid 'simulation_results' dictionary input for generate_visualization."}
+            elif output_filename is None or not isinstance(output_filename, str):
+                op_result = {"error": "Missing or invalid 'output_filename' string input for generate_visualization."}
+            else:
+                # The _generate_visualization method needs: model (or its name/ID for filename), 
+                # final_step_count, results_dict (which is simulation_results_input), 
+                # model_df (optional), agent_df (optional)
+                # We may not have the live model object here, or dataframes, if just passing results around.
+                # Let's adapt _generate_visualization or how we call it.
+                # For now, assume _generate_visualization can work with what's in simulation_results_input.
+                
+                # Simplification: _generate_visualization needs a model-like object for name, and results_dict.
+                # We will pass a simple object for model_name_part and the results dict.
+                class MinimalModelInfo:
+                    def __init__(self, name, run_id):
+                        self.__class__ = type(name, (object,), {})
+                        self.run_id = run_id
+
+                model_run_id_for_viz = simulation_results_input.get('model_run_id', 'sim_viz')
+                model_name_for_viz = simulation_results_input.get('type', 'UnknownModel') # type from create_model
+                if not model_name_for_viz and simulation_results_input.get('model') and isinstance(simulation_results_input.get('model'), dict):
+                    model_name_for_viz = simulation_results_input.get('model',{}).get('type', 'UnknownModel') # from create_model if model is dict
+                
+                minimal_model = MinimalModelInfo(name=model_name_for_viz, run_id=model_run_id_for_viz)
+                final_steps = simulation_results_input.get('simulation_steps_run', 0)
+                
+                # _generate_visualization expects model_df and agent_df. If not present in simulation_results, pass None.
+                # This might happen if these were not collected or if only a subset of results are passed.
+                model_df_input = None
+                if 'model_data' in simulation_results_input and isinstance(simulation_results_input['model_data'], list):
+                    try: model_df_input = pd.DataFrame(simulation_results_input['model_data']).set_index('Step')
+                    except: model_df_input = None # Silently handle if conversion fails
+                
+                # agent_df is not typically part of run_simulation output directly, only agent_data_last_step
+                # so it will be None here.
+
+                viz_path = tool._generate_visualization(
+                    model=minimal_model, # Pass the minimal info object
+                    final_step_count=final_steps,
+                    results_dict=simulation_results_input, # This contains final_state_grid, etc.
+                    model_df=model_df_input, 
+                    agent_df=None # Agent DataFrame for all steps not usually passed, only last step data
+                )
+                if viz_path:
+                    op_result = {"visualization_path": viz_path, "error": None}
+                else:
+                    op_result = {"error": "Visualization generation failed (see logs).", "visualization_path": None}
+
+                # This operation must also return a full IAR reflection
+                vis_status = "Success" if op_result.get("visualization_path") else "Failure"
+                vis_summary = f"Visualization generated at {op_result.get('visualization_path')}" if vis_status == "Success" else op_result.get("error", "Visualization failed")
+                vis_confidence = 0.9 if vis_status == "Success" else 0.2
+                vis_issues = [op_result["error"]] if op_result.get("error") else None
+                op_result["reflection"] = _create_reflection(vis_status, vis_summary, vis_confidence, "Aligned with visualizing results.", vis_issues, op_result.get("visualization_path"))
+
         else:
             op_result = {"error": f"Unknown ABM operation specified: {operation}"}
 
@@ -1176,4 +1350,4 @@ def perform_abm(inputs: Dict[str, Any]) -> Dict[str, Any]:
         result["reflection"] = _create_reflection("Failure", f"Critical failure in wrapper: {e_wrapper}", 0.0, "N/A", reflection_issues, None)
         return result
 
-# --- END OF FILE 3.0ArchE/agent_based_modeling_tool.py --- 
+# --- END OF FILE Three_PointO_ArchE/agent_based_modeling_tool.py --- 
