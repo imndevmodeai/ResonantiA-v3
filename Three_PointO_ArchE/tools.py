@@ -9,55 +9,102 @@ import requests # For potential real search implementation
 import time
 import numpy as np # For math tool, potentially simulations
 from typing import Dict, Any, List, Optional, Union # Expanded type hints
+import os # For os.getcwd()
+import sys # For sys.path
+
+# Initialize logger early for use in import blocks
+# Using a more specific name for this logger to avoid clashes if 'tools' is a common name
+logger_tools_diag = logging.getLogger(__name__ + "_tools_diag") # Unique logger name
+# Basic config for diagnostics if not already configured by the system
+if not logger_tools_diag.handlers:
+    handler_td = logging.StreamHandler()
+    formatter_td = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler_td.setFormatter(formatter_td)
+    logger_tools_diag.addHandler(handler_td)
+    logger_tools_diag.setLevel(logging.DEBUG)
+
+logger_tools_diag.info(f"TOOLS.PY: Module execution started.")
+logger_tools_diag.info(f"TOOLS.PY: __name__ is {__name__}, __file__ is {globals().get('__file__')}")
+logger_tools_diag.info(f"TOOLS.PY: Current working directory: {os.getcwd()}")
+logger_tools_diag.info(f"TOOLS.PY: sys.path: {sys.path}")
+
+# Attempt to import SPRManager with diagnostics
+SPRManager_Class_Holder = None # Use a different name to avoid confusion
+
+try:
+    logger_tools_diag.info("TOOLS.PY: Attempting to import SPRManager from .spr_manager as ActualSPRManagerClass")
+    # Attempt to import with a more specific alias
+    from .spr_manager import SPRManager as ActualSPRManagerClass
+    SPRManager_Class_Holder = ActualSPRManagerClass
+    logger_tools_diag.info(f"TOOLS.PY: Successfully imported SPRManager as ActualSPRManagerClass. Type: {type(ActualSPRManagerClass)}, Value: {str(ActualSPRManagerClass)}")
+except ImportError as e_imp:
+    logger_tools_diag.error(f"TOOLS.PY: Failed to import SPRManager class from .spr_manager due to ImportError: {e_imp}. SPR functionality will be unavailable.", exc_info=True)
+    # SPRManager_Class_Holder remains None
+except Exception as e_other_import:
+    logger_tools_diag.error(f"TOOLS.PY: An unexpected error occurred during import of SPRManager from .spr_manager: {e_other_import}", exc_info=True)
+    # SPRManager_Class_Holder might remain None or be in an indeterminate state
+
 # Use relative imports for internal modules
 try:
     from . import config # Access configuration settings
     from .llm_providers import get_llm_provider, get_model_for_provider, LLMProviderError # Import LLM helpers
     from .action_context import ActionContext # Import ActionContext from new file
-    from .spr_manager import SPRManager # Added import for SPRManager
     LLM_AVAILABLE = True
+    logger_tools_diag.info("TOOLS.PY: Successfully imported .config, .llm_providers, .action_context.")
 except ImportError as e:
-    # Handle cases where imports might fail (e.g., missing dependencies)
-    logging.getLogger(__name__).error(f"Failed import for tools.py (config or llm_providers): {e}. LLM tool may be unavailable.")
+    logger_tools_diag.error(f"TOOLS.PY: Failed import for other tools.py dependencies (config, llm_providers, or action_context): {e}. LLM tool may be unavailable.", exc_info=True)
     LLM_AVAILABLE = False
-    # Define fallback exception and config for basic operation
-    class LLMProviderError(Exception): pass
-    class FallbackConfig: SEARCH_PROVIDER='simulated_google'; SEARCH_API_KEY=None; LLM_DEFAULT_MAX_TOKENS=1024; LLM_DEFAULT_TEMP=0.7
-    config = FallbackConfig()
+    if 'LLMProviderError' not in globals():
+        class LLMProviderError(Exception): pass
+    if 'config' not in globals():
+        class FallbackConfig: SEARCH_PROVIDER='simulated_google'; SEARCH_API_KEY=None; LLM_DEFAULT_MAX_TOKENS=1024; LLM_DEFAULT_TEMP=0.7
+        config = FallbackConfig()
 
 import subprocess
-import os
 import shutil # For file operations
 import uuid # For unique temp dir names
 import traceback
 
 # --- Tool-Specific Configuration ---
-# Get search provider settings from config
 SEARCH_PROVIDER = getattr(config, 'SEARCH_PROVIDER', 'simulated_google').lower()
-SEARCH_API_KEY = getattr(config, 'SEARCH_API_KEY', None) # API key needed if not using simulation
-# Define path to the Node.js search script
-NODE_SEARCH_SCRIPT_PATH = getattr(config, 'NODE_SEARCH_SCRIPT_PATH', None) # Use the new config variable
-
-logger = logging.getLogger(__name__)
+SEARCH_API_KEY = getattr(config, 'SEARCH_API_KEY', None)
+NODE_SEARCH_SCRIPT_PATH = getattr(config, 'NODE_SEARCH_SCRIPT_PATH', None)
 
 # --- Global Singleton for SPR Manager (Conceptual) ---
-# This is a placeholder. In a real system, this might be initialized once globally
-# or passed via dependency injection.
 _GLOBAL_SPR_MANAGER_INSTANCE = None
 
-def get_global_spr_manager():
-    """ Returns a global instance of SPRManager, initializing if needed. """
+def get_global_spr_manager(specific_spr_file: Optional[str] = None) -> Any: # Parameter specific_spr_file is not used in current logic, SPRManager path is hardcoded.
     global _GLOBAL_SPR_MANAGER_INSTANCE
+    logger_tools_diag.debug(f"TOOLS.PY: Entering get_global_spr_manager. _GLOBAL_SPR_MANAGER_INSTANCE is type: {type(_GLOBAL_SPR_MANAGER_INSTANCE)}")
+    
     if _GLOBAL_SPR_MANAGER_INSTANCE is None:
+        logger_tools_diag.info(f"TOOLS.PY: Attempting to initialize SPRManager. SPRManager_Class_Holder is type: {type(SPRManager_Class_Holder)}, Value: {str(SPRManager_Class_Holder)}")
+        if SPRManager_Class_Holder is None:
+            logger_tools_diag.error("TOOLS.PY: SPRManager_Class_Holder is None. Import must have failed or an error occurred during import of SPRManager from .spr_manager.")
+            raise RuntimeError("SPRManager class (SPRManager_Class_Holder) is not available. Check logs for import errors from .spr_manager.")
+        
+        # Determine the SPR file path for instantiation
+        # The original code used a hardcoded path "knowledge_graph/spr_definitions_tv.json"
+        # If specific_spr_file argument is intended to be used, it should be prioritized.
+        # For now, let's assume the original logic's intent or use config.
+        instantiation_spr_filepath = getattr(config, 'SPR_JSON_FILE', "knowledge_graph/spr_definitions_tv.json") # Defaulting to config or hardcoded
+        if specific_spr_file: # Allow override if argument is provided
+             instantiation_spr_filepath = specific_spr_file
+        logger_tools_diag.info(f"TOOLS.PY: SPR file path for instantiation will be: {instantiation_spr_filepath}")
+
         try:
-            # Use the explicit path for the tv-specific SPR definitions.
-            specific_spr_file = "knowledge_graph/spr_definitions_tv.json"
-            # SPRManager.__init__ takes spr_filepath.
-            _GLOBAL_SPR_MANAGER_INSTANCE = SPRManager(spr_filepath=specific_spr_file)
-            logger.info(f"Initialized global SPRManager from explicit path '{specific_spr_file}'. Loaded {len(_GLOBAL_SPR_MANAGER_INSTANCE.get_all_sprs())} SPRs.")
-        except Exception as e:
-            logger.error(f"Failed to initialize global SPRManager from '{specific_spr_file if 'specific_spr_file' in locals() else 'configured/default path'}': {e}", exc_info=True)
-            raise RuntimeError(f"Could not initialize SPRManager: {e}") from e
+            logger_tools_diag.info(f"TOOLS.PY: Instantiating SPRManager_Class_Holder with spr_filepath: {instantiation_spr_filepath}")
+            # Use the aliased name for instantiation
+            _GLOBAL_SPR_MANAGER_INSTANCE = SPRManager_Class_Holder(spr_filepath=instantiation_spr_filepath)
+            logger_tools_diag.info(f"TOOLS.PY: Successfully initialized _GLOBAL_SPR_MANAGER_INSTANCE. Type: {type(_GLOBAL_SPR_MANAGER_INSTANCE)}. Loaded SPRs: {len(_GLOBAL_SPR_MANAGER_INSTANCE.get_all_sprs()) if hasattr(_GLOBAL_SPR_MANAGER_INSTANCE, 'get_all_sprs') else 'N/A'}")
+        except NameError as ne: # Catch NameError specifically here
+            logger_tools_diag.error(f"TOOLS.PY: NameError during SPRManager_Class_Holder instantiation: {ne}. SPRManager_Class_Holder current value was: {str(SPRManager_Class_Holder)} (Type: {type(SPRManager_Class_Holder)})", exc_info=True)
+            # Re-raise as a more informative RuntimeError
+            raise RuntimeError(f"NameError encountered during SPRManager instantiation: '{ne}'. Check if SPRManager_Class_Holder was correctly defined and accessible.") from ne
+        except Exception as e_inst:
+            logger_tools_diag.error(f"TOOLS.PY: Exception during SPRManager_Class_Holder instantiation with path '{instantiation_spr_filepath}': {e_inst}", exc_info=True)
+            raise RuntimeError(f"Could not initialize SPRManager due to: {e_inst}") from e_inst
+            
     return _GLOBAL_SPR_MANAGER_INSTANCE
 
 # --- IAR Helper Function ---
@@ -104,11 +151,11 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
         return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
     try: # Ensure num_results is a sensible integer
         num_results = int(num_results)
-        if num_results <= 0: num_results = 5; logger.warning("num_results must be positive, defaulting to 5.")
+        if num_results <= 0: num_results = 5; logger_tools_diag.warning("num_results must be positive, defaulting to 5.")
     except (ValueError, TypeError):
-        num_results = 5; logger.warning(f"Invalid num_results value, defaulting to 5.")
+        num_results = 5; logger_tools_diag.warning(f"Invalid num_results value, defaulting to 5.")
 
-    logger.info(f"Performing web search via '{provider_used}' for query: '{query}' (max {num_results} results)")
+    logger_tools_diag.info(f"Performing web search via '{provider_used}' for query: '{query}' (max {num_results} results)")
 
     # --- Execute Search (Simulation or Actual) ---
     try:
@@ -132,16 +179,16 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                 if inputs.get("debug_js", False): # Changed from debug_js_search to debug_js
                     cmd.append("--debug")
 
-                logger.info(f"Executing Node.js search script: {' '.join(cmd)}")
+                logger_tools_diag.info(f"Executing Node.js search script: {' '.join(cmd)}")
                 process = subprocess.run(cmd, capture_output=True, text=True, check=False, timeout=180) # Increased timeout for scraping/screenshots
 
                 js_temp_archive_dir_abs = None
                 if process.stderr:
-                    logger.debug(f"Node.js script stderr:\n{process.stderr}")
+                    logger_tools_diag.debug(f"Node.js script stderr:\n{process.stderr}")
                     for line in process.stderr.splitlines():
                         if "Archives for this run will be stored in:" in line:
                             js_temp_archive_dir_abs = line.split("Archives for this run will be stored in:")[-1].strip()
-                            logger.info(f"Node.js script created archives in: {js_temp_archive_dir_abs}")
+                            logger_tools_diag.info(f"Node.js script created archives in: {js_temp_archive_dir_abs}")
                             break
                 
                 if process.returncode == 0:
@@ -182,15 +229,15 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                                             shutil.copy2(abs_source_path, abs_dest_path)
                                             # Store path relative to OUTPUT_DIR for cleaner context
                                             item[archive_key] = os.path.relpath(abs_dest_path, config.OUTPUT_DIR)
-                                            logger.debug(f"Copied {abs_source_path} to {abs_dest_path}. Stored rel path: {item[archive_key]}")
+                                            logger_tools_diag.debug(f"Copied {abs_source_path} to {abs_dest_path}. Stored rel path: {item[archive_key]}")
                                         except Exception as e_copy:
-                                            logger.error(f"Failed to copy archive file {abs_source_path} to {abs_dest_path}: {e_copy}")
+                                            logger_tools_diag.error(f"Failed to copy archive file {abs_source_path} to {abs_dest_path}: {e_copy}")
                                             item[archive_key] = None # Nullify if copy failed
                                     else:
-                                        logger.warning(f"Archived file reported by Node.js script not found at {abs_source_path} (original relative: {relative_path_from_node})")
+                                        logger_tools_diag.warning(f"Archived file reported by Node.js script not found at {abs_source_path} (original relative: {relative_path_from_node})")
                                         item[archive_key] = None
                                 elif relative_path_from_node:
-                                    logger.warning(f"Could not resolve absolute path for {relative_path_from_node} as search_tool_temp_base_dir was not found.")
+                                    logger_tools_diag.warning(f"Could not resolve absolute path for {relative_path_from_node} as search_tool_temp_base_dir was not found.")
                                     item[archive_key] = None
                             processed_script_results.append(item)
                         
@@ -209,7 +256,7 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                         reflection_issues.append("JSON parsing error from script.")
                         reflection_summary = "Script output parsing error."
                     except Exception as e_processing_results: # Catch errors during result processing (like path issues)
-                        logger.error(f"Error processing results from Node.js script: {e_processing_results}", exc_info=True)
+                        logger_tools_diag.error(f"Error processing results from Node.js script: {e_processing_results}", exc_info=True)
                         primary_result["error"] = f"Error processing results from Node.js script: {str(e_processing_results)}"
                         reflection_issues.append("Result processing error.")
                         reflection_summary = "Error processing script results."
@@ -217,7 +264,7 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                     primary_result["error"] = f"Node.js search script failed (Code {process.returncode}): {process.stderr[:500]}"
                     reflection_issues.append(f"Node.js script execution error: {process.stderr[:100]}")
                     reflection_summary = "Node.js script execution failed."
-                    logger.error(f"Node.js search script stderr: {process.stderr}")
+                    logger_tools_diag.error(f"Node.js search script stderr: {process.stderr}")
                 
                 # Cleanup the temporary directory created by the Node.js script, if identified
                 # This is js_temp_archive_dir_abs which is like .../search_tool_temp/run-XXXXXX/run-YYYYYY
@@ -228,16 +275,16 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                 if js_temp_archive_dir_abs and os.path.exists(js_temp_archive_dir_abs):
                     try:
                         shutil.rmtree(js_temp_archive_dir_abs)
-                        logger.info(f"Cleaned up Node.js temporary archive directory: {js_temp_archive_dir_abs}")
+                        logger_tools_diag.info(f"Cleaned up Node.js temporary archive directory: {js_temp_archive_dir_abs}")
                     except Exception as e_cleanup:
-                        logger.warning(f"Failed to clean up Node.js temporary archive directory {js_temp_archive_dir_abs}: {e_cleanup}")
+                        logger_tools_diag.warning(f"Failed to clean up Node.js temporary archive directory {js_temp_archive_dir_abs}: {e_cleanup}")
                 
                 # Also clean up the base temp dir we created if it's empty or if the node script failed to create its own.
                 if os.path.exists(search_tool_temp_base_dir):
                     try:
                         if not os.listdir(search_tool_temp_base_dir): # only remove if empty
                              shutil.rmtree(search_tool_temp_base_dir)
-                             logger.info(f"Cleaned up empty base temporary directory: {search_tool_temp_base_dir}")
+                             logger_tools_diag.info(f"Cleaned up empty base temporary directory: {search_tool_temp_base_dir}")
                         else:
                             # If it's not empty, it means js_temp_archive_dir_abs might not have been identified correctly,
                             # or the script put files directly in search_tool_temp_base_dir.
@@ -250,9 +297,9 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                             # If js_temp_archive_dir_abs IS search_tool_temp_base_dir and wasn't cleaned (e.g. error before), try cleaning.
                             elif js_temp_archive_dir_abs == search_tool_temp_base_dir:
                                 shutil.rmtree(search_tool_temp_base_dir)
-                                logger.info(f"Cleaned up base temporary directory (used directly by script): {search_tool_temp_base_dir}")
+                                logger_tools_diag.info(f"Cleaned up base temporary directory (used directly by script): {search_tool_temp_base_dir}")
                     except Exception as e_base_cleanup:
-                        logger.warning(f"Error during cleanup of base temporary directory {search_tool_temp_base_dir}: {e_base_cleanup}")
+                        logger_tools_diag.warning(f"Error during cleanup of base temporary directory {search_tool_temp_base_dir}: {e_base_cleanup}")
 
         elif provider_used.startswith("simulated"):
             # --- Simulation Logic ---
@@ -297,7 +344,7 @@ def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
 
     except Exception as e_search:
         # Catch unexpected errors during search execution
-        logger.error(f"Unexpected error during search operation: {e_search}", exc_info=True)
+        logger_tools_diag.error(f"Unexpected error during search operation: {e_search}", exc_info=True)
         primary_result["error"] = f"Unexpected search error: {e_search}"
         reflection_issues.append(f"System Error: {e_search}")
         reflection_summary = f"Unexpected error during search: {e_search}"
@@ -354,12 +401,12 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
         if isinstance(prompt_vars, dict) and prompt_vars:
             try:
                 final_prompt_str = prompt_template_str.format(**prompt_vars)
-                logger.info(f"Substituted prompt_vars into prompt_text. Original: '{prompt_template_str[:100]}...', Vars: {prompt_vars}")
+                logger_tools_diag.info(f"Substituted prompt_vars into prompt_text. Original: '{prompt_template_str[:100]}...', Vars: {prompt_vars}")
             except KeyError as e_key:
-                logger.warning(f"KeyError during .format() in invoke_llm: {e_key}. Using prompt_template as is. Ensure placeholders in prompt_text match keys in prompt_vars.")
+                logger_tools_diag.warning(f"KeyError during .format() in invoke_llm: {e_key}. Using prompt_template as is. Ensure placeholders in prompt_text match keys in prompt_vars.")
                 final_prompt_str = prompt_template_str # Fallback to original template
             except Exception as e_fmt:
-                logger.error(f"Unexpected error during .format() in invoke_llm: {e_fmt}. Using prompt_template as is.", exc_info=True)
+                logger_tools_diag.error(f"Unexpected error during .format() in invoke_llm: {e_fmt}. Using prompt_template as is.", exc_info=True)
                 final_prompt_str = prompt_template_str # Fallback
         else:
             final_prompt_str = prompt_template_str # No vars to substitute
@@ -372,7 +419,7 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
         return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
     
     if final_prompt_str and messages:
-        logger.warning("Both 'prompt' (after var substitution) and 'messages' provided to invoke_llm. Prioritizing 'messages' for chat completion.")
+        logger_tools_diag.warning("Both 'prompt' (after var substitution) and 'messages' provided to invoke_llm. Prioritizing 'messages' for chat completion.")
         final_prompt_str = None # Clear prompt if messages are present, messages take precedence
 
     # --- Execute LLM Call ---
@@ -383,7 +430,7 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
         model_to_use = model_name_override or get_model_for_provider(provider_name_used)
         primary_result["model_used"] = model_to_use
 
-        logger.info(f"Invoking LLM: Provider='{provider_name_used}', Model='{model_to_use}'")
+        logger_tools_diag.info(f"Invoking LLM: Provider='{provider_name_used}', Model='{model_to_use}'")
         api_kwargs = {"max_tokens": max_tokens, "temperature": temperature, **extra_params}
         response_text = ""
         start_time = time.time()
@@ -421,19 +468,19 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
                                 primary_result[key] = value
                             else:
                                 primary_result[f"parsed_{key}"] = value 
-                                logger.warning(f"Key '{key}' from parsed JSON already exists in primary_result. Stored as 'parsed_{key}'.")
-                        logger.info("Successfully parsed JSON response and merged into primary_result.")
+                                logger_tools_diag.warning(f"Key '{key}' from parsed JSON already exists in primary_result. Stored as 'parsed_{key}'.")
+                        logger_tools_diag.info("Successfully parsed JSON response and merged into primary_result.")
                     else:
                         primary_result["parsed_json_output"] = parsed_data
-                        logger.info("Successfully parsed JSON response (non-dict) into 'parsed_json_output'.")
+                        logger_tools_diag.info("Successfully parsed JSON response (non-dict) into 'parsed_json_output'.")
                 else:
-                    logger.warning("Response_text is empty or whitespace; skipping JSON parsing.")
+                    logger_tools_diag.warning("Response_text is empty or whitespace; skipping JSON parsing.")
                     # Potentially add to reflection_issues if JSON was expected but got empty response
                     if "reflection_issues" not in locals(): reflection_issues = [] # Ensure reflection_issues exists
                     reflection_issues.append("LLM response was empty/whitespace, expected JSON.")
 
             except json.JSONDecodeError as e_json:
-                logger.warning(f"Failed to parse response_text as JSON: {e_json}. LLM output (raw) was: {response_text[:500]}...")
+                logger_tools_diag.warning(f"Failed to parse response_text as JSON: {e_json}. LLM output (raw) was: {response_text[:500]}...")
                 if "reflection_issues" not in locals(): reflection_issues = [] # Ensure reflection_issues exists
                 reflection_issues.append(f"Output Parsing Error: Failed to parse LLM response as JSON. Error: {e_json}")
         
@@ -449,12 +496,12 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
             reflection_issues.append("LLM response may have been blocked or filtered by provider.")
             reflection_confidence = max(0.1, reflection_confidence - 0.3) # Lower confidence if filtered
         reflection_preview = (response_text[:100] + '...') if isinstance(response_text, str) and len(response_text) > 100 else response_text
-        logger.info(f"LLM invocation successful (Duration: {duration:.2f}s).")
+        logger_tools_diag.info(f"LLM invocation successful (Duration: {duration:.2f}s).")
 
     # --- Handle LLM Provider Errors ---
     except (ValueError, LLMProviderError) as e_llm: # Catch validation errors or specific provider errors
         error_msg = f"LLM invocation failed: {e_llm}"
-        logger.error(error_msg, exc_info=True if isinstance(e_llm, LLMProviderError) else False)
+        logger_tools_diag.error(error_msg, exc_info=True if isinstance(e_llm, LLMProviderError) else False)
         primary_result["error"] = error_msg
         reflection_status = "Failure"
         reflection_summary = f"LLM call failed: {e_llm}"
@@ -466,7 +513,7 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
     except Exception as e_generic:
         # Catch any other unexpected errors
         error_msg = f"Unexpected error during LLM invocation: {e_generic}"
-        logger.error(error_msg, exc_info=True)
+        logger_tools_diag.error(error_msg, exc_info=True)
         primary_result["error"] = error_msg
         reflection_status = "Failure"
         reflection_summary = f"Unexpected error during LLM call: {e_generic}"
@@ -517,7 +564,7 @@ def display_output(inputs: Dict[str, Any], action_context: Optional[ActionContex
         reflection_preview = display_str # Use the formatted string for preview (truncated later)
 
         # Print formatted content to standard output
-        logger.info("Displaying output content via print().")
+        logger_tools_diag.info("Displaying output content via print().")
         # Add header/footer for clarity in console logs
         print("\n--- Arche Display Output (v3.0) ---")
         print(display_str)
@@ -534,7 +581,7 @@ def display_output(inputs: Dict[str, Any], action_context: Optional[ActionContex
     except Exception as e_display:
         # Catch errors during formatting or printing
         error_msg = f"Failed to format or display output: {e_display}"
-        logger.error(error_msg, exc_info=True)
+        logger_tools_diag.error(error_msg, exc_info=True)
         primary_result["error"] = error_msg
         reflection_status = "Failure"
         reflection_summary = f"Display output failed: {error_msg}"
@@ -549,7 +596,7 @@ def display_output(inputs: Dict[str, Any], action_context: Optional[ActionContex
             primary_result["status"] = "Displayed (Fallback)"
             reflection_issues.append("Used fallback repr() for display.")
         except Exception as fallback_e:
-            logger.critical(f"Fallback display using repr() also failed: {fallback_e}")
+            logger_tools_diag.critical(f"Fallback display using repr() also failed: {fallback_e}")
             primary_result["error"] = f"Primary display failed: {e_display}. Fallback display failed: {fallback_e}"
 
     # --- Final Return ---
@@ -566,7 +613,7 @@ def run_cfp(inputs: Dict[str, Any], action_context: Optional[ActionContext] = No
     This function should ideally not be called directly if using the registry.
     Returns an error indicating it should be called via the registry.
     """
-    logger.error("Direct call to tools.run_cfp detected. Action 'run_cfp' should be executed via the action registry using the run_cfp_action wrapper.")
+    logger_tools_diag.error("Direct call to tools.run_cfp detected. Action 'run_cfp' should be executed via the action registry using the run_cfp_action wrapper.")
     error_msg = "Placeholder tools.run_cfp called directly. Use 'run_cfp' action type via registry/WorkflowEngine."
     return {
         "error": error_msg,
@@ -613,7 +660,7 @@ def calculate_math(inputs: Dict[str, Any], action_context: Optional[ActionContex
         try:
             # Import numexpr dynamically to check availability per call
             import numexpr
-            logger.debug(f"Attempting to evaluate expression using numexpr: '{expression}'")
+            logger_tools_diag.debug(f"Attempting to evaluate expression using numexpr: '{expression}'")
             # Evaluate the expression using numexpr.evaluate()
             # Use casting='safe' and potentially truedivide=True
             # Consider local_dict={} for safety if needed, though numexpr aims to be safe
@@ -633,18 +680,18 @@ def calculate_math(inputs: Dict[str, Any], action_context: Optional[ActionContex
 
         except ImportError:
             primary_result["error"] = "Required library 'numexpr' not installed. Cannot perform safe evaluation."
-            logger.error(primary_result["error"])
+            logger_tools_diag.error(primary_result["error"])
             reflection_issues.append("Missing dependency: numexpr.")
             reflection_summary = primary_result["error"]
         except SyntaxError as e_syntax:
             primary_result["error"] = f"Syntax error in mathematical expression: {e_syntax}"
-            logger.warning(f"Syntax error evaluating '{expression}': {e_syntax}")
+            logger_tools_diag.warning(f"Syntax error evaluating '{expression}': {e_syntax}")
             reflection_issues.append(f"Invalid expression syntax: {e_syntax}")
             reflection_summary = primary_result["error"]
         except Exception as e_eval:
             # Catch other errors during numexpr evaluation (e.g., invalid names, unsupported functions)
             primary_result["error"] = f"Failed to evaluate expression using numexpr: {e_eval}"
-            logger.error(f"Error evaluating expression '{expression}' with numexpr: {e_eval}", exc_info=True)
+            logger_tools_diag.error(f"Error evaluating expression '{expression}' with numexpr: {e_eval}", exc_info=True)
             reflection_issues.append(f"Numexpr evaluation error: {e_eval}.")
             reflection_summary = primary_result["error"]
 
@@ -664,7 +711,7 @@ def placeholder_codebase_search(inputs: Dict[str, Any], action_context: Optional
     Returns an empty result set and a note that it's not implemented.
     """
     query = inputs.get("query", "N/A")
-    logger.info(f"Executing PLACEHOLDER codebase search for query: '{query}'")
+    logger_tools_diag.info(f"Executing PLACEHOLDER codebase search for query: '{query}'")
 
     summary_text = f"Placeholder: Codebase search for '{query}' - Actual implementation pending."
     primary_result = {
@@ -695,94 +742,72 @@ def _format_output_content(content: Any) -> str:
     return str(content)
 
 # Tool function for retrieving SPR definitions
-# Placeholder for retrieve_spr_definitions
 def retrieve_spr_definitions(inputs: Dict[str, Any], context_for_action: ActionContext) -> Dict[str, Any]:
-    """
-    Retrieves detailed definitions for a list of SPR IDs from the SPRManager.
-    Uses the ActionContext for logging and context awareness.
-    Input: {"spr_ids": ["SPR_ID_1", "SPR_ID_2"]}
-    Output: {"spr_details": {"SPR_ID_1": {...}, ...}, "errors": {...}, "reflection": {...}}
-    """
     task_key = context_for_action.task_key
     action_name = context_for_action.action_name
-    logger.info(f"Task '{task_key}' (Action: {action_name}) - Starting SPR retrieval.")
+    logger_tools_diag.info(f"TOOLS.PY: Task '{task_key}' (Action: {action_name}) - Starting SPR retrieval.")
 
     spr_ids_input = inputs.get("spr_ids")
     spr_details_output: Dict[str, Any] = {}
     retrieval_errors: Dict[str, str] = {}
     all_found = True
-
-    # Initialize reflection structure
-    reflection = {
-        "status": "Failure", # Default to Failure
-        "summary": "SPR retrieval pending.",
-        "confidence": 0.5,
-        "alignment_check": "Aligned with fetching SPR data based on IDs.",
-        "potential_issues": [],
-        "raw_output_preview": None
-    }
+    
+    # Default reflection (updated from original provided snippet)
+    def default_failure_reflection_local(summary: str) -> Dict[str, Any]: # Renamed to avoid conflict
+        return _create_reflection("Failure",summary,0.0,"N/A",["System Error: Default failure reflection"],None)
 
     try:
-        spr_manager_instance = get_global_spr_manager() # Use the global instance
+        spr_manager_instance = get_global_spr_manager() 
 
         if not spr_ids_input or not isinstance(spr_ids_input, list):
-            logger.warning(f"Task '{task_key}': 'spr_ids' must be a non-empty list.")
+            logger_tools_diag.warning(f"TOOLS.PY: Task '{task_key}': 'spr_ids' must be a non-empty list.")
             return {
                 "spr_details": {},
                 "errors": {"input_error": "'spr_ids' must be a non-empty list."},
-                "reflection": default_failure_reflection("Input validation failed: 'spr_ids' missing or not a list.")
+                "reflection": default_failure_reflection_local("Input validation failed: 'spr_ids' missing or not a list.")
             }
 
         for spr_id in spr_ids_input:
-            if spr_id is None: # Explicit check for None
-                logger.warning(f"Task '{task_key}': Encountered a None SPR ID in list, skipping.")
-                retrieval_errors["None_ID_Skipped"] = retrieval_errors.get("None_ID_Skipped", "") + "Skipped one None ID; "
-                all_found = False
-                continue
-            
-            if not isinstance(spr_id, str):
-                logger.warning(f"Task '{task_key}': Invalid SPR ID type '{type(spr_id)}' (value: {repr(spr_id)}) in list, skipping.")
+            if not isinstance(spr_id, str): # Simplified validation
                 retrieval_errors[str(spr_id)] = f"Invalid ID type {type(spr_id)}, must be string."
                 all_found = False
                 continue
             
-            spr_detail = spr_manager_instance.get_spr(spr_id)
+            spr_detail = spr_manager_instance.get_spr(spr_id) # get_spr is a method of SPRManager
             if spr_detail:
                 spr_details_output[spr_id] = spr_detail
-                logger.debug(f"Task '{task_key}': Successfully retrieved SPR '{spr_id}'.")
             else:
                 retrieval_errors[spr_id] = "SPR not found."
-                logger.warning(f"Task '{task_key}': SPR with ID '{spr_id}' not found.")
                 all_found = False
+        
+        summary = "Successfully retrieved all specified SPRs." if all_found and spr_details_output else "Completed SPR retrieval with some issues or no results."
+        if retrieval_errors: summary += f" Errors: {len(retrieval_errors)}"
 
-        if not spr_details_output and retrieval_errors: # If nothing was found and there were errors
-            summary = "Failed to retrieve any specified SPRs."
-        elif not all_found:
-            summary = "Retrieved some SPRs, but some were not found or had errors."
-        else:
-            summary = "Successfully retrieved all specified SPRs."
 
-        logger.info(f"Task '{task_key}' (Action: retrieve_spr_definitions) - Retrieval complete. Found: {len(spr_details_output)}, Errors: {len(retrieval_errors)}.")
         return {
             "spr_details": spr_details_output,
             "errors": retrieval_errors,
-            "reflection": {
-                "status": "Success" if spr_details_output else "Failure", # Success if at least one SPR found, or even if list was empty but no errors
-                "summary": summary,
-                "confidence": 0.9 if spr_details_output else 0.5,
-                "alignment_check": "High",
-                "potential_issues": ["SPR ID typos", "SPR not yet defined in KG"] if retrieval_errors else [],
-                "raw_output_preview": f"Retrieved: {list(spr_details_output.keys())}, Errors: {list(retrieval_errors.keys())}"
-            }
+            "reflection": _create_reflection(
+                status="Success" if spr_details_output else "Failure",
+                summary=summary,
+                confidence=0.9 if spr_details_output else 0.4,
+                alignment="High",
+                potential_issues=list(retrieval_errors.keys()),
+                raw_output_preview=f"Retrieved: {list(spr_details_output.keys())}"
+            )
         }
 
-    except Exception as e_retrieval:
-        # Catch unexpected errors during retrieval
-        logger.error(f"Unexpected error during SPR retrieval: {e_retrieval}", exc_info=True)
+    except RuntimeError as rne: # Catch the specific RuntimeError we expect from get_global_spr_manager
+        logger_tools_diag.error(f"TOOLS.PY: Task '{task_key}': Runtime error during SPR retrieval (likely from get_global_spr_manager): {rne}", exc_info=True)
         return {
-            "spr_details": {},
-            "errors": {"retrieval_error": f"Failed to retrieve SPRs: {e_retrieval}"},
-            "reflection": default_failure_reflection(f"Failed to retrieve SPRs: {e_retrieval}")
+            "spr_details": {}, "errors": {"initialization_error": str(rne)},
+            "reflection": default_failure_reflection_local(f"SPRManager initialization failed: {rne}")
+        }
+    except Exception as e_retrieval:
+        logger_tools_diag.error(f"TOOLS.PY: Task '{task_key}': Unexpected error during SPR retrieval: {e_retrieval}", exc_info=True)
+        return {
+            "spr_details": {}, "errors": {"retrieval_error": f"Failed to retrieve SPRs: {e_retrieval}"},
+            "reflection": default_failure_reflection_local(f"Unexpected error in SPR retrieval: {e_retrieval}")
         }
 
 # --- MAIN FUNCTION ROUTER (Conceptual, used by Action Registry) ---

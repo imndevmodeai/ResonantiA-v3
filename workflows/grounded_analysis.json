@@ -1,0 +1,104 @@
+{
+  "name": "Grounded Analysis Workflow (v3.0)",
+  "description": "Performs evidence-based analysis with proper source citation, data grounding, and credibility assessment for transparent decision-making.",
+  "version": "3.0",
+  "tasks": {
+    "initial_query_display": {
+      "description": "Display the user query and analysis requirements.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "=== GROUNDED ANALYSIS SYSTEM ===\\nQuery: {{ initial_context.user_query }}\\nRequirements: Evidence-based analysis with full source citation and credibility assessment\\n================================"
+      },
+      "dependencies": []
+    },
+    "comprehensive_search": {
+      "description": "Perform comprehensive web search for evidence gathering.",
+      "action_type": "search_web",
+      "inputs": {
+        "query": "{{ initial_context.user_query }}",
+        "num_results": 5,
+        "provider": "puppeteer_nodejs"
+      },
+      "outputs": {
+        "results": "list",
+        "reflection": "dict"
+      },
+      "dependencies": ["initial_query_display"]
+    },
+    "source_credibility_assessment": {
+      "description": "Assess the credibility and reliability of each source found.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport sys\\nfrom datetime import datetime\\nimport re\\n\\ninput_data = sys.stdin.read()\\ndata = json.loads(input_data)\\n\\n# Handle case where data might be a list directly\\nif isinstance(data, list):\\n    search_results = {'results': data}\\nelse:\\n    search_results = data\\n\\n# Source credibility scoring framework\\ndef assess_source_credibility(source):\\n    score = 0\\n    factors = []\\n    \\n    # Domain authority assessment\\n    domain = source.get('link', '').lower()\\n    if any(x in domain for x in ['.edu', '.gov', '.org']):\\n        score += 30\\n        factors.append('Academic/Government/Non-profit domain (+30)')\\n    elif any(x in domain for x in ['nature.com', 'science.org', 'pubmed', 'scholar.google']):\\n        score += 40\\n        factors.append('Scientific publication domain (+40)')\\n    elif any(x in domain for x in ['wikipedia', 'britannica']):\\n        score += 20\\n        factors.append('Encyclopedia source (+20)')\\n    elif any(x in domain for x in ['reddit', 'quora', 'yahoo']):\\n        score -= 20\\n        factors.append('Social media/Q&A platform (-20)')\\n    \\n    # Content quality indicators\\n    content = source.get('content', '').lower()\\n    title = source.get('title', '').lower()\\n    \\n    # Look for academic indicators\\n    if any(x in content for x in ['peer review', 'methodology', 'statistical', 'study', 'research']):\\n        score += 25\\n        factors.append('Academic content indicators (+25)')\\n    \\n    # Look for expert credentials\\n    if any(x in content for x in ['phd', 'professor', 'dr.', 'researcher', 'expert']):\\n        score += 20\\n        factors.append('Expert credentials mentioned (+20)')\\n    \\n    # Look for data and citations\\n    if any(x in content for x in ['citation', 'reference', 'bibliography', 'source']):\\n        score += 15\\n        factors.append('Contains citations/references (+15)')\\n    \\n    # Check for quantitative data\\n    if re.search(r'\\\\d+%|\\\\d+\\\\.\\\\d+|statistics|data|measurement', content):\\n        score += 15\\n        factors.append('Contains quantitative data (+15)')\\n    \\n    # Publication recency (if available)\\n    pub_date = source.get('publication_date')\\n    if pub_date:\\n        try:\\n            # Simple year extraction\\n            year_match = re.search(r'20(\\\\d{2})', pub_date)\\n            if year_match:\\n                year = int('20' + year_match.group(1))\\n                current_year = datetime.now().year\\n                age = current_year - year\\n                if age <= 2:\\n                    score += 10\\n                    factors.append(f'Recent publication ({year}) (+10)')\\n                elif age <= 5:\\n                    score += 5\\n                    factors.append(f'Moderately recent ({year}) (+5)')\\n                else:\\n                    factors.append(f'Older publication ({year}) (0)')\\n        except:\\n            factors.append('Publication date unclear (0)')\\n    \\n    # Content length and depth\\n    content_length = len(content)\\n    if content_length > 5000:\\n        score += 10\\n        factors.append('Comprehensive content length (+10)')\\n    elif content_length > 2000:\\n        score += 5\\n        factors.append('Moderate content length (+5)')\\n    \\n    # Bias indicators (negative scoring)\\n    if any(x in content for x in ['opinion', 'i think', 'i believe', 'personally']):\\n        score -= 10\\n        factors.append('Opinion-based language (-10)')\\n    \\n    return {\\n        'credibility_score': max(0, min(100, score)),\\n        'assessment_factors': factors,\\n        'reliability_tier': 'High' if score >= 70 else 'Medium' if score >= 40 else 'Low'\\n    }\\n\\n# Process each source\\nresults = []\\nfor i, source in enumerate(search_results.get('results', [])):\\n    assessment = assess_source_credibility(source)\\n    \\n    result = {\\n        'source_id': i + 1,\\n        'title': source.get('title', 'Unknown'),\\n        'url': source.get('link', 'Unknown'),\\n        'domain': source.get('link', '').split('/')[2] if source.get('link') else 'Unknown',\\n        'credibility_score': assessment['credibility_score'],\\n        'reliability_tier': assessment['reliability_tier'],\\n        'assessment_factors': assessment['assessment_factors'],\\n        'content_preview': source.get('content', '')[:500] + '...' if len(source.get('content', '')) > 500 else source.get('content', ''),\\n        'publication_date': source.get('publication_date', 'Unknown')\\n    }\\n    results.append(result)\\n\\n# Sort by credibility score\\nresults.sort(key=lambda x: x['credibility_score'], reverse=True)\\n\\noutput = {\\n    'source_assessments': results,\\n    'total_sources': len(results),\\n    'high_credibility_count': len([r for r in results if r['reliability_tier'] == 'High']),\\n    'medium_credibility_count': len([r for r in results if r['reliability_tier'] == 'Medium']),\\n    'low_credibility_count': len([r for r in results if r['reliability_tier'] == 'Low']),\\n    'average_credibility': sum(r['credibility_score'] for r in results) / len(results) if results else 0\\n}\\n\\nprint(json.dumps(output, indent=2))",
+        "input_data": "{{ comprehensive_search.results | toJson }}"
+      },
+      "outputs": {
+        "stdout": "string",
+        "source_assessments": "list",
+        "reflection": "dict"
+      },
+      "dependencies": ["comprehensive_search"],
+      "condition": "{{ comprehensive_search.reflection.status == 'Success' }}"
+    },
+    "extract_grounded_evidence": {
+      "description": "Extract specific claims and evidence with direct source attribution.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are an evidence extraction specialist. Your task is to extract specific, citable claims from the provided sources and create a grounded evidence base.\\n\\nUser Query: {{ initial_context.user_query }}\\n\\nSource Assessment Results:\\n{{ source_credibility_assessment.stdout }}\\n\\nOriginal Search Results:\\n{{ comprehensive_search.results | toJson }}\\n\\nINSTRUCTIONS:\\n1. Extract ONLY factual claims that can be directly attributed to sources\\n2. For each claim, provide: [Source ID], [Author/Expert if mentioned], [Specific quote], [Page/Section if available]\\n3. Categorize claims by: QUANTITATIVE DATA, EXPERT OPINIONS, RESEARCH FINDINGS, METHODOLOGICAL DETAILS\\n4. Flag any conflicting information between sources\\n5. Identify gaps where claims lack sufficient evidence\\n6. Rate each claim's evidence strength: STRONG/MODERATE/WEAK\\n\\nFormat your response as structured evidence with clear source attribution for every claim.",
+        "max_tokens": 1000
+      },
+      "outputs": {
+        "response_text": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["source_credibility_assessment"],
+      "condition": "{{ source_credibility_assessment.reflection.status == 'Success' }}"
+    },
+    "synthesize_grounded_analysis": {
+      "description": "Create final analysis with full source citation and evidence grounding.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are a research analyst creating a final evidence-based report. You must ground every claim in cited sources.\\n\\nUser Query: {{ initial_context.user_query }}\\n\\nExtracted Evidence Base:\\n{{ extract_grounded_evidence.response_text }}\\n\\nSource Credibility Assessment:\\n{{ source_credibility_assessment.stdout }}\\n\\nINSTRUCTIONS:\\n1. Create a comprehensive analysis that answers the user's query\\n2. EVERY factual claim must include [Source ID] citation\\n3. Clearly distinguish between HIGH, MEDIUM, and LOW credibility sources\\n4. Acknowledge limitations and gaps in the evidence\\n5. Provide confidence levels for different aspects of your analysis\\n6. Include a 'Methodology Transparency' section explaining your reasoning\\n7. Flag any assumptions or extrapolations clearly\\n8. Include a 'Source Quality Summary' at the end\\n\\nFormat: Use academic-style citations and maintain complete transparency about evidence quality.",
+        "max_tokens": 1500
+      },
+      "outputs": {
+        "response_text": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["extract_grounded_evidence"],
+      "condition": "{{ extract_grounded_evidence.reflection.status == 'Success' }}"
+    },
+    "create_citation_bibliography": {
+      "description": "Generate formal bibliography and citation index.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport sys\\nfrom datetime import datetime\\n\\ninput_data = sys.stdin.read()\\ndata = json.loads(input_data)\\n\\nsource_assessments = data.get('source_assessments', [])\\n\\n# Create formal bibliography\\nbibliography = []\\nfor i, source in enumerate(source_assessments, 1):\\n    # Extract domain and create citation\\n    domain = source.get('domain', 'Unknown')\\n    title = source.get('title', 'Unknown Title')\\n    url = source.get('url', 'Unknown URL')\\n    pub_date = source.get('publication_date', 'Date Unknown')\\n    credibility = source.get('credibility_score', 0)\\n    tier = source.get('reliability_tier', 'Unknown')\\n    \\n    # Format citation\\n    citation = {\\n        'source_id': i,\\n        'citation_format': f'[{i}] {title}. {domain}. {pub_date}. Retrieved from {url}',\\n        'credibility_score': credibility,\\n        'reliability_tier': tier,\\n        'assessment_summary': f'Credibility: {credibility}/100 ({tier} reliability)',\\n        'url': url\\n    }\\n    bibliography.append(citation)\\n\\n# Create citation index\\ncitation_index = {\\n    'total_sources': len(bibliography),\\n    'source_quality_distribution': {\\n        'high_credibility': len([s for s in source_assessments if s.get('reliability_tier') == 'High']),\\n        'medium_credibility': len([s for s in source_assessments if s.get('reliability_tier') == 'Medium']),\\n        'low_credibility': len([s for s in source_assessments if s.get('reliability_tier') == 'Low'])\\n    },\\n    'average_credibility': sum(s.get('credibility_score', 0) for s in source_assessments) / len(source_assessments) if source_assessments else 0\\n}\\n\\noutput = {\\n    'bibliography': bibliography,\\n    'citation_index': citation_index,\\n    'methodology_note': 'Sources assessed using multi-factor credibility framework including domain authority, expert credentials, content quality, recency, and bias indicators.'\\n}\\n\\nprint(json.dumps(output, indent=2))",
+        "input_data": "{{ source_credibility_assessment.stdout }}"
+      },
+      "outputs": {
+        "stdout": "string",
+        "bibliography": "list",
+        "reflection": "dict"
+      },
+      "dependencies": ["source_credibility_assessment"],
+      "condition": "{{ source_credibility_assessment.reflection.status == 'Success' }}"
+    },
+    "display_grounded_results": {
+      "description": "Display the final grounded analysis with full citations and transparency.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport sys\\n\\ninput_data = sys.stdin.read()\\ndata = json.loads(input_data)\\n\\nanalysis = data.get('analysis', 'Analysis not available')\\nbibliography_data = data.get('bibliography_data', {})\\nsource_summary = data.get('source_summary', {})\\n\\noutput = '''\\n=== GROUNDED ANALYSIS REPORT ===\\nQuery: ''' + str(data.get('user_query', 'Unknown')) + '''\\nGenerated: ''' + str(data.get('timestamp', 'Unknown')) + '''\\n\\n''' + str(analysis) + '''\\n\\n=== SOURCE QUALITY ASSESSMENT ===\\nTotal Sources Analyzed: ''' + str(source_summary.get('total_sources', 0)) + '''\\nHigh Credibility Sources: ''' + str(source_summary.get('high_credibility', 0)) + '''\\nMedium Credibility Sources: ''' + str(source_summary.get('medium_credibility', 0)) + '''\\nLow Credibility Sources: ''' + str(source_summary.get('low_credibility', 0)) + '''\\nAverage Credibility Score: ''' + str(round(source_summary.get('average_credibility', 0), 1)) + '''/100\\n\\n=== BIBLIOGRAPHY ===\\n''' + '\\n'.join([bib.get('citation_format', '') + ' [Credibility: ' + str(bib.get('credibility_score', 0)) + '/100]' for bib in bibliography_data.get('bibliography', [])]) + '''\\n\\n=== METHODOLOGY TRANSPARENCY ===\\n- Multi-source evidence gathering via web search\\n- Automated credibility assessment using domain authority, expert credentials, content quality metrics\\n- Evidence extraction with direct source attribution\\n- Confidence scoring based on source reliability and evidence strength\\n- Full citation tracking for transparency and verification\\n\\n=== LIMITATIONS ===\\n- Analysis limited to publicly available web sources\\n- Automated credibility assessment may not capture all nuances\\n- Real-time data may have changed since source publication\\n- Some claims may require additional peer-reviewed validation\\n\\n================================\\n'''\\n\\nprint(output)",
+        "input_data": "{\\n  \\\"analysis\\\": \\\"{{ synthesize_grounded_analysis.response_text | replace('\\\"', '\\\\\\\"') | replace('\\\\n', '\\\\\\\\n') }}\\\",\\n  \\\"bibliography_data\\\": {{ create_citation_bibliography.stdout }},\\n  \\\"source_summary\\\": {{ source_credibility_assessment.stdout }},\\n  \\\"user_query\\\": \\\"{{ initial_context.user_query | replace('\\\"', '\\\\\\\"') }}\\\",\\n  \\\"timestamp\\\": \\\"{{ 'now' }}\\\"\\n}"
+      },
+      "outputs": {
+        "stdout": "string",
+        "formatted_report": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["synthesize_grounded_analysis", "create_citation_bibliography"]
+    }
+  }
+} 

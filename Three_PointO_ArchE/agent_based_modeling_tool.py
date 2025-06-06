@@ -18,6 +18,16 @@ except ImportError:
     class FallbackConfig: OUTPUT_DIR = 'outputs'; ABM_VISUALIZATION_ENABLED = True; ABM_DEFAULT_ANALYSIS_TYPE='basic'; MODEL_SAVE_DIR='outputs/models' # Added model save dir
     config = FallbackConfig(); logging.warning("config.py not found for abm tool, using fallback configuration.")
 
+# --- Import ScalableAgent ---
+try:
+    from .scalable_framework import ScalableAgent
+    SCALABLE_AGENT_AVAILABLE = True
+except ImportError:
+    ScalableAgent = None
+    SCALABLE_AGENT_AVAILABLE = False
+    logging.getLogger(__name__).warning("scalable_framework.py not found. The 'scalable_agent' model type will not be available.")
+
+
 # --- Import Mesa and Visualization Libraries (Set flag based on success) ---
 MESA_AVAILABLE = False
 VISUALIZATION_LIBS_AVAILABLE = False
@@ -119,6 +129,47 @@ class BasicGridAgent(Agent if MESA_AVAILABLE else object):
         # Check if next_state was calculated and differs from current state
         if hasattr(self, 'next_state') and self.state != self.next_state:
             self.state = self.next_state
+
+class ScalableAgentModel(Model if MESA_AVAILABLE else object):
+    """
+    A Mesa model designed to run a simulation with multiple ScalableAgents.
+    """
+    def __init__(self, num_agents=10, agent_params: dict = None, **model_params):
+        if not MESA_AVAILABLE or not SCALABLE_AGENT_AVAILABLE:
+            self.run_id = uuid.uuid4().hex[:8]
+            logger.warning(f"SIMULATING ScalableAgentModel (Run ID: {self.run_id}) as Mesa or ScalableAgent is not available.")
+            return
+
+        super().__init__()
+        self.run_id = uuid.uuid4().hex[:8]
+        self.num_agents = num_agents
+        agent_params = agent_params or {}
+
+        # Create agents
+        for i in range(self.num_agents):
+            # Create a unique initial state and operators for each agent
+            # This is a placeholder; real scenarios would have more complex setup
+            initial_state = agent_params.get('initial_state', np.random.rand(2))
+            operators = agent_params.get('operators', {'default': np.eye(2)})
+            
+            agent = ScalableAgent(
+                agent_id=f"scalable_{i}",
+                initial_state=initial_state,
+                operators=operators,
+                action_registry=agent_params.get('action_registry', {}),
+                workflow_modes=agent_params.get('workflow_modes', {}),
+                operator_selection_strategy=agent_params.get('operator_selection_strategy', lambda a: next(iter(a.operators)))
+            )
+            self.schedule.add(agent)
+
+        self.datacollector = DataCollector(
+            agent_reporters={"State": "current_state", "Entropy": "current_entropy"}
+        )
+
+    def step(self):
+        """Advance the model by one step."""
+        self.schedule.step()
+        self.datacollector.collect(self)
 
 class BasicGridModel(Model if MESA_AVAILABLE else object):
     """ A simple grid-based model using BasicGridAgent. """
@@ -326,111 +377,53 @@ class ABMTool:
 
     def create_model(self, model_type: str = "basic", agent_class: Optional[Type[Agent]] = None, **kwargs) -> Dict[str, Any]:
         """
-        [IAR Enabled] Creates an instance of an agent-based model.
-
-        Args:
-            model_type (str): Type of model to create (e.g., "basic", "network"). Default "basic".
-            agent_class (Type[Agent], optional): Custom agent class to use. Defaults to BasicGridAgent.
-            **kwargs: Parameters for the model constructor (e.g., width, height, density,
-                    model_params dict, agent_params dict).
-
-        Returns:
-            Dict containing 'model' instance (or config if simulated), metadata, and IAR reflection.
+        Creates an ABM model instance based on specified type and parameters.
+        Returns a dictionary containing the model instance and reflection.
         """
-        # --- Initialize Results & Reflection ---
-        primary_result = {"model": None, "type": model_type, "error": None, "note": ""}
-        reflection_status = "Failure"; reflection_summary = f"Model creation init failed for type '{model_type}'."; reflection_confidence = 0.0; reflection_alignment = "N/A"; reflection_issues = []; reflection_preview = None
-
-        # --- Simulation Mode ---
-        if not self.is_available:
-            primary_result["note"] = "SIMULATED model - Mesa library not available"
-            logger.warning(f"Simulating ABM model creation: '{model_type}' (Mesa unavailable).")
-            sim_result = self._simulate_model_creation(model_type, agent_class=agent_class, **kwargs)
-            primary_result.update(sim_result) # Merge simulation dict
-            primary_result["error"] = sim_result.get("error") # Capture simulation error
-            if primary_result["error"]: reflection_issues = [primary_result["error"]]
-            else: reflection_status = "Success"; reflection_summary = f"Simulated model '{model_type}' created."; reflection_confidence = 0.6; reflection_alignment = "Aligned with model creation goal (simulated)."; reflection_issues = ["Model is simulated."]; reflection_preview = {k:v for k,v in primary_result.items() if k!='model'} # Preview metadata, not model obj
-            return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
-
-        # --- Actual Mesa Model Creation ---
+        model_type = model_type.lower()
+        logger.info(f"Attempting to create ABM model of type: '{model_type}'")
+        # IAR setup
+        reflection = _create_reflection("Failure", f"Model creation failed for type '{model_type}'.", 0.0, "N/A", ["Initialization error."], None)
+        model = None
+        
         try:
-            logger.info(f"Creating Mesa ABM model of type: '{model_type}'...")
-            # Extract common parameters or pass all kwargs
-            width = kwargs.get('width', 10); height = kwargs.get('height', 10); density = kwargs.get('density', 0.5)
-            model_params = kwargs.get('model_params', {}) # Specific params for the model itself
-            agent_params = kwargs.get('agent_params', {}) # Specific params for the agents
-            seed = kwargs.get('seed') # Optional random seed
-            scheduler = kwargs.get('scheduler', 'random') # Scheduler type
-            torus = kwargs.get('torus', True) # Grid topology
+            if model_type == "basic":
+                # For BasicGridModel, we expect grid dimensions and density
+                width = kwargs.get('width', 10)
+                height = kwargs.get('height', 10)
+                density = kwargs.get('density', 0.5)
+                model = BasicGridModel(width=width, height=height, density=density, agent_class=agent_class or BasicGridAgent, **kwargs)
 
-            # Ensure model_params_for_splatting doesn't contain keys handled by explicit signature args
-            model_params_from_workflow = kwargs.get('model_params', {})
-            explicit_args_keys = ['width', 'height', 'density', 'activation_threshold', 
-                                  'agent_class', 'scheduler_type', 'torus', 'seed', 'agent_params']
-            
-            # activation_threshold is handled separately below, so ensure it's not in model_params_for_splatting either way
-            # It's usually part of model_params in the workflow, but passed explicitly to BasicGridModel
-            activation_threshold_val = model_params_from_workflow.get('activation_threshold', 2)
+            elif model_type == "scalable_agent":
+                if not SCALABLE_AGENT_AVAILABLE:
+                    raise ImportError("ScalableAgent framework is not available. Cannot create 'scalable_agent' model.")
+                
+                num_agents = kwargs.get('num_agents', 10)
+                agent_params = kwargs.get('agent_params', {}) # Pass complex agent params here
+                model = ScalableAgentModel(num_agents=num_agents, agent_params=agent_params, **kwargs)
 
-            model_params_for_splatting = { 
-                k: v for k, v in model_params_from_workflow.items() 
-                if k not in explicit_args_keys and k != 'activation_threshold'
-            }
-
-            selected_agent_class = agent_class or BasicGridAgent # Use provided or default agent
-            if not issubclass(selected_agent_class, Agent):
-                raise ValueError(f"Provided agent_class '{selected_agent_class.__name__}' is not a subclass of mesa.Agent.")
-
-            model: Optional[Model] = None
-            # --- Model Type Dispatcher ---
-            if model_type.lower() == "basicgridmodel": # Changed "basic" to "basicgridmodel"
-                # Pass relevant args to BasicGridModel constructor
-                model = BasicGridModel(
-                    width=width, height=height, density=density,
-                    activation_threshold=activation_threshold_val, # Use extracted value
-                    agent_class=selected_agent_class,
-                    scheduler_type=scheduler, torus=torus, seed=seed,
-                    agent_params=agent_params, # Pass agent params dict
-                    **model_params_for_splatting # Pass only remaining model params
-                )
-            # --- Add other model types here ---
-            # elif model_type.lower() == "network_example":
-            #     # Requires NetworkGrid, different agent logic, graph input etc.
-            #     # graph = kwargs.get('graph') # e.g., a NetworkX graph
-            #     # if not graph: raise ValueError("Network model requires a 'graph' input.")
-            #     # model = NetworkModel(graph=graph, agent_class=selected_agent_class, ...)
-            #     raise NotImplementedError("Network model type not fully implemented.")
+            # ... (potential for other model types like "network")
             else:
-                raise NotImplementedError(f"ABM model type '{model_type}' is not implemented.")
+                raise ValueError(f"Unknown model_type '{model_type}'. Supported types: 'basic', 'scalable_agent'.")
 
-            if model is None: # Should be caught by NotImplementedError, but safeguard
-                raise ValueError("Model creation failed for unknown reason.")
-
-            # --- Success Case ---
-            primary_result["model"] = model # Store the actual Mesa model instance
-            # Include relevant metadata in the primary result
-            primary_result.update({
-                "dimensions": [getattr(model,'width',None), getattr(model,'height',None)] if hasattr(model,'grid') and isinstance(model.grid, MultiGrid) else None,
-                "agent_count": getattr(model,'num_agents',0),
-                "params": {**getattr(model,'model_params',{}), "scheduler": scheduler, "seed": seed, "torus": torus },
-                "agent_params_used": getattr(model,'custom_agent_params',{})})
-            reflection_status = "Success"
-            reflection_summary = f"Mesa model '{model_type}' (Run ID: {getattr(model,'run_id','N/A')}) created successfully."
-            reflection_confidence = 0.95 # High confidence in successful creation
-            reflection_alignment = "Aligned with model creation goal."
-            reflection_issues = None # Clear issues on success
-            reflection_preview = {"type": model_type, "dims": primary_result["dimensions"], "agents": primary_result["agent_count"]}
-
+            if model:
+                reflection = _create_reflection(
+                    "Success", f"Successfully created ABM model '{model_type}' (Run ID: {getattr(model, 'run_id', 'N/A')}).",
+                    0.95, "Model instantiated as per specification.", None,
+                    f"Model: {model.__class__.__name__}, Agents: {getattr(model, 'num_agents', 'N/A')}"
+                )
         except Exception as e_create:
-            # Catch errors during model initialization
             logger.error(f"Error creating ABM model '{model_type}': {e_create}", exc_info=True)
-            primary_result["error"] = str(e_create)
-            reflection_issues = [f"Model creation error: {e_create}"]
-            reflection_summary = f"Model creation failed: {e_create}"
+            reflection = _create_reflection("Failure", f"Model creation failed: {e_create}", 0.0, "N/A", [f"Model creation error: {e_create}"], None)
 
-        # Return combined result and reflection
-        return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
-
+        return {
+            "model": model, "type": model_type,
+            "dimensions": [getattr(model,'width',None), getattr(model,'height',None)] if hasattr(model,'grid') and isinstance(model.grid, MultiGrid) else None,
+            "agent_count": getattr(model,'num_agents',0),
+            "params": {**getattr(model,'model_params',{}), "scheduler": getattr(model, 'scheduler_type', 'random'), "seed": getattr(model, 'seed', None), "torus": getattr(model, 'torus', True)},
+            "agent_params_used": getattr(model,'custom_agent_params',{}),
+            "reflection": reflection
+        }
 
     def run_simulation(self, model: Any, steps: int = 100, visualize: bool = False, **kwargs) -> Dict[str, Any]:
         """

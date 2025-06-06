@@ -11,25 +11,27 @@ import logging
 import copy
 import time
 import re
-import uuid # Added for workflow_run_id generation consistency
-from typing import Dict, Any, List, Optional, Set, Union, Tuple # Expanded type hints
-# Use relative imports within the package
+import uuid
+from typing import Dict, Any, List, Optional, Set, Union, Tuple
 from . import config
-from .action_registry import execute_action # Imports the function that calls specific tools
-from .spr_manager import SPRManager # May be used for SPR-related context or validation
-from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS # Imports error handling logic
-from .action_context import ActionContext # Import from new file
+from .action_registry import execute_action
+from .spr_manager import SPRManager
+from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
+from .action_context import ActionContext
 import ast
-from datetime import datetime # Added import
+from datetime import datetime
 
-# Attempt to import numpy for numeric type checking in _compare_values, optional
 try:
     import numpy as np
 except ImportError:
-    np = None # Set to None if numpy is not available
+    np = None
     logging.info("Numpy not found, some numeric type checks in _compare_values might be limited.")
 
 logger = logging.getLogger(__name__)
+
+class IARComplianceError(Exception):
+    """Custom exception raised when a tool's output fails IAR validation."""
+    pass
 
 class WorkflowEngine:
     """
@@ -825,6 +827,22 @@ class WorkflowEngine:
         task_results["workflow_status"] = overall_status
         task_results["task_statuses"] = task_status # Include final status of each task
         task_results["workflow_run_duration_sec"] = round(run_duration, 2)
+
+        # --- IAR COMPLIANCE VETTING (SIRC_ACTUALIZATION_DIRECTIVE_001) ---
+        is_compliant = False
+        if isinstance(action_result, dict) and "reflection" in action_result:
+            reflection = action_result.get("reflection")
+            if isinstance(reflection, dict) and all(k in reflection for k in ["status", "summary", "confidence"]):
+                is_compliant = True
+
+        if not is_compliant:
+            error_message = f"IAR Compliance Error: Tool '{action_type}' in task '{task_id}' returned a non-compliant result."
+            logger.error(f"[Workflow: {workflow_name}, ID: {run_id}] {error_message} Result: {str(action_result)[:500]}")
+            # This specific error should halt the workflow.
+            raise IARComplianceError(error_message)
+        
+        logger.debug(f"[Workflow: {workflow_name}, ID: {run_id}] Task '{task_id}' completed with compliant IAR. Status: {action_result.get('reflection', {}).get('status')}")
+        # --- END IAR VETTING ---
 
         # Return the complete context, including initial context, task results (with IAR), and final status info
         return task_results

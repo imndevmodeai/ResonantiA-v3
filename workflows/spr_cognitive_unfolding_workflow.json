@@ -15,10 +15,10 @@
   "tasks": {
     "identify_sprs_in_query": {
       "action": "execute_code",
-      "description": "Scans the raw user query to identify potential SPRs using an external script.",
+      "description": "Scans the raw user query to identify potential SPRs using an external Python script.",
       "inputs": {
-        "language": "shell",
-        "code": "python scripts/identify_sprs.py",
+        "language": "python_script",
+        "code": "scripts/identify_sprs.py",
         "prompt_vars": {
           "INPUT_QUERY": "{{context.raw_user_query}}"
         }
@@ -43,12 +43,8 @@
       "description": "Uses an LLM to synthesize the retrieved SPR details in the context of the original query, generating a 'cognitively primed state'.",
       "inputs": {
         "prompt_name": "spr_cognitive_unfolding_prompt",
-        "prompt_text": "You are ArchE, commencing Cognitive Unfolding for a user query.\nOriginal User Query: \"{{p_query}}\"\n\nThe following Sparse Priming Representations (SPRs) were identified in the query, and their details (if found in the Knowledge Graph) are listed below. If an SPR from the query was not found, it will be absent from the details.\nIdentified SPRs from Query: {{p_id_list}}\nSPR Details from Knowledge Graph:\n{{p_details_json}}\n\nBased on these SPRs (especially those found in the Knowledge Graph) and their context, and considering the original query:\n1. Synthesize the core activated concepts and knowledge pathways. Focus on the SPRs that were successfully retrieved.\n2. Identify key implications and connections between these retrieved SPRs relevant to the original query.\n3. Formulate a \"cognitively primed state\" summary that will guide the next phase of Mental Blueprinting.\n4. If no valid SPRs were found or retrieved, state that and suggest the query might not contain recognized SPRs or requires clarification.\nOutput as a JSON object with keys: \"activated_concepts\" (list of strings), \"key_implications\" (list of strings), \"primed_state_summary\" (string), and \"retrieval_status\" (string, e.g., 'Details found for X SPRs', 'No SPR details retrieved').",
-        "prompt_vars": {
-          "p_query": "{{context.raw_user_query}}",
-          "p_id_list": "{{identify_sprs_in_query.identified_spr_list | default([]) | toJson}}",
-          "p_details_json": "{{retrieve_details_for_identified_sprs.spr_details | default({}) | toJson}}"
-        },
+        "prompt_text": "You are ArchE, commencing Cognitive Unfolding for a user query.\nOriginal User Query: \"{{context.raw_user_query}}\"\n\nThe following Sparse Priming Representations (SPRs) were identified in the query, and their details (if found in the Knowledge Graph) are listed below. If an SPR from the query was not found, it will be absent from the details.\nIdentified SPRs from Query: {{identify_sprs_in_query.identified_spr_list | default([]) | toJson}}\nSPR Details from Knowledge Graph:\n{{retrieve_details_for_identified_sprs.spr_details | default({}) | toJson}}\n\nBased on these SPRs (especially those found in the Knowledge Graph) and their context, and considering the original query:\n1. Synthesize the core activated concepts and knowledge pathways. Focus on the SPRs that were successfully retrieved.\n2. Identify key implications and connections between these retrieved SPRs relevant to the original query.\n3. Formulate a \"cognitively primed state\" summary that will guide the next phase of Mental Blueprinting.\n4. If no valid SPRs were found or retrieved, state that and suggest the query might not contain recognized SPRs or requires clarification.\nOutput as a JSON object with keys: \"activated_concepts\" (list of strings), \"key_implications\" (list of strings), \"primed_state_summary\" (string), and \"retrieval_status\" (string, e.g., 'Details found for X SPRs', 'No SPR details retrieved').",
+        "prompt_vars": {},
         "parsing_type": "json",
         "max_tokens": 1500,
         "temperature": 0.2

@@ -12,6 +12,7 @@ import json
 import platform # Potentially useful for platform-specific commands/paths
 import sys # To find python executable for subprocess fallback
 import time # For timeouts and potentially timestamps
+import shutil # Added for script copying
 from typing import Dict, Any, Optional, List, Tuple # Expanded type hints
 # Use relative imports for configuration
 try:
@@ -82,16 +83,17 @@ if sandbox_method_resolved == 'docker':
 # --- Main Execution Function ---
 def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """
-    [IAR Enabled] Executes a code snippet using the configured sandbox method.
+    [IAR Enabled] Executes a code snippet or script using the configured sandbox method.
     Validates inputs, selects execution strategy (Docker, subprocess, none),
     runs the code, and returns results including stdout, stderr, exit code,
     error messages, and a detailed IAR reflection.
 
     Args:
         inputs (Dict[str, Any]): Dictionary containing:
-            language (str): The programming language (e.g., 'python', 'javascript'). Required.
-            code (str): The code snippet to execute. Required.
+            language (str): The programming language (e.g., 'python', 'javascript', 'python_script'). Required.
+            code (str): The code snippet or script path to execute. Required.
             input_data (str, optional): Data to be passed as standard input to the code. Defaults to "".
+            prompt_vars (Dict[str, str], optional): Environment variables to set for the execution.
 
     Returns:
         Dict[str, Any]: Dictionary containing execution results and IAR reflection:
@@ -106,6 +108,7 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
     code = inputs.get("code")
     # Preserve the original input_data for logging/type checking, create new var for stdin
     original_input_data_val = inputs.get("input_data", "")
+    prompt_vars = inputs.get("prompt_vars", None) # Get prompt_vars
     input_data_for_stdin: str
 
     logger.debug(f"Code Executor: Received original_input_data_val type: {type(original_input_data_val)}, value (first 200 chars): {str(original_input_data_val)[:200]}")
@@ -157,27 +160,40 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
 
     logger.info(f"Attempting to execute '{language}' code using sandbox method: '{method_to_use}'")
 
+    # Prepare environment variables for the execution
+    effective_env = os.environ.copy()
+    if prompt_vars:
+        if isinstance(prompt_vars, dict):
+            # Ensure all prompt_vars are strings
+            str_prompt_vars = {str(k): str(v) for k, v in prompt_vars.items()}
+            effective_env.update(str_prompt_vars)
+            logger.debug(f"Updated effective_env with prompt_vars: {str_prompt_vars}")
+        else:
+            logger.warning(f"prompt_vars were provided but not a dict: {type(prompt_vars)}. Ignoring.")
+
     # --- Select Execution Strategy ---
     exec_result: Dict[str, Any] = {} # Dictionary to store results from internal execution functions
     if method_to_use == 'docker':
         if DOCKER_AVAILABLE:
-            exec_result = _execute_with_docker(language, code, input_data_for_stdin)
+            # Pass only prompt_vars for Docker -e flags for clarity, not the whole effective_env
+            docker_env_vars = {str(k): str(v) for k, v in prompt_vars.items()} if prompt_vars and isinstance(prompt_vars, dict) else None
+            exec_result = _execute_with_docker(language, code, input_data_for_stdin, docker_env_vars)
         else:
             # Fallback if Docker configured but unavailable
             logger.warning("Docker configured but unavailable. Falling back to 'subprocess' (less secure).")
             primary_result["sandbox_method_used"] = 'subprocess' # Update actual method used
             reflection_issues.append("Docker unavailable, fell back to subprocess.")
-            exec_result = _execute_with_subprocess(language, code, input_data_for_stdin)
+            exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env) # Pass full env
             if exec_result.get("error"): # If subprocess also failed (e.g., interpreter missing)
                 reflection_issues.append(f"Subprocess fallback failed: {exec_result.get('error')}")
     elif method_to_use == 'subprocess':
         logger.warning("Executing code via 'subprocess' sandbox. This provides limited isolation and is less secure than Docker.")
-        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin)
+        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env) # Pass full env
     elif method_to_use == 'none':
         logger.critical("Executing code with NO SANDBOX ('none'). This is EXTREMELY INSECURE and should only be used in trusted debugging environments with full awareness of risks.")
         reflection_issues.append("CRITICAL SECURITY RISK: Code executed without sandbox.")
         # Use subprocess logic for actual execution, but flag clearly that no sandbox was intended
-        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin)
+        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env) # Pass full env
         exec_result["note"] = "Executed with NO SANDBOX ('none' method)." # Add note to result
     else: # Should not happen due to resolution logic, but safeguard
         exec_result = {"error": f"Internal configuration error: Unsupported sandbox method '{method_to_use}' resolved.", "exit_code": -1}
@@ -246,54 +262,65 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
     return primary_result
 
 # --- Internal Helper: Docker Execution ---
-def _execute_with_docker(language: str, code: str, input_data: str) -> Dict[str, Any]:
+def _execute_with_docker(language: str, code: str, input_data: str, env_vars: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
     """Executes code inside a Docker container. Returns partial result dict."""
-    # Map language to interpreter command and filename within container
-    # Ensure image specified in config.py has these interpreters installed
+    # Define language-specific interpreters and script filenames within the container
     exec_details: Dict[str, Tuple[str, str]] = {
-        'python': ('python', 'script.py'),
+        'python': ('python', 'script.py'),         # For executing Python code strings
+        'python_script': ('python', 'script.py'),  # For executing Python script files
         'javascript': ('node', 'script.js'),
-        # Add other languages here (e.g., 'bash': ('bash', 'script.sh'))
+        # Future: 'bash': ('bash', 'script.sh')
     }
+
     if language not in exec_details:
         return {"error": f"Docker execution unsupported for language: '{language}'.", "exit_code": -1, "stdout": "", "stderr": ""}
 
-    interpreter, script_filename = exec_details[language]
-    temp_dir_obj = None # To ensure cleanup happens
+    interpreter, script_filename_in_container = exec_details[language]
+    temp_dir_obj = None # For ensuring cleanup with try/finally
 
     try:
-        # Create a temporary directory on the host to mount into the container
         temp_dir_obj = tempfile.TemporaryDirectory(prefix="resonatia_docker_exec_")
         temp_dir = temp_dir_obj.name
-        code_filepath = os.path.join(temp_dir, script_filename)
+        
+        code_filepath_in_temp = os.path.join(temp_dir, script_filename_in_container)
 
-        # Write the user's code to the temporary file
-        try:
-            with open(code_filepath, 'w', encoding='utf-8') as f:
-                f.write(code)
-        except IOError as e_write:
-            return {"error": f"Failed to write temporary code file: {e_write}", "exit_code": -1, "stdout": "", "stderr": ""}
+        if language.endswith('_script'): # e.g. 'python_script'
+            host_script_path = code # 'code' parameter is the host path to the script
+            if not os.path.isfile(host_script_path):
+                logger.error(f"Script file for Docker execution not found on host: {host_script_path}")
+                return {"error": f"Script file not found on host: {host_script_path}", "exit_code": -1, "stdout": "", "stderr": ""}
+            try:
+                shutil.copy2(host_script_path, code_filepath_in_temp)
+                logger.debug(f"Copied script '{host_script_path}' to temporary Docker mount target '{code_filepath_in_temp}'.")
+            except Exception as e_copy:
+                logger.error(f"Failed to copy script '{host_script_path}' to temp dir '{temp_dir}': {e_copy}")
+                return {"error": f"Failed to copy script to temp dir for Docker: {e_copy}", "exit_code": -1, "stdout": "", "stderr": ""}
+        else: # For language == 'python', 'javascript' (code strings)
+            try:
+                with open(code_filepath_in_temp, 'w', encoding='utf-8') as f:
+                    f.write(code)
+            except IOError as e_write:
+                logger.error(f"Failed to write temporary code file for Docker: {e_write}")
+                return {"error": f"Failed to write temporary code file: {e_write}", "exit_code": -1, "stdout": "", "stderr": ""}
 
-        # Construct the Docker command
-        # --rm: Remove container automatically after exit
-        # --network none: Disable networking inside container (increases security)
-        # --memory/--cpus: Resource limits from config
-        # --security-opt=no-new-privileges: Prevent privilege escalation
-        # -v ...:/sandbox:ro: Mount temp dir read-only into /sandbox inside container
-        # -w /sandbox: Set working directory inside container
-        # DOCKER_IMAGE: The container image (e.g., python:3.11-slim)
-        # interpreter script_filename: Command to run inside container
-        abs_temp_dir = os.path.abspath(temp_dir) # Docker needs absolute path for volume mount
+        abs_temp_dir = os.path.abspath(temp_dir)
+        
         docker_command = [
             "docker", "run", "--rm", "--network", "none",
-            "--memory", DOCKER_MEM_LIMIT, "--memory-swap", DOCKER_MEM_LIMIT, # Limit memory
-            "--cpus", DOCKER_CPU_LIMIT, # Limit CPU
-            "--security-opt=no-new-privileges", # Enhance security
+            "--memory", DOCKER_MEM_LIMIT, "--memory-swap", DOCKER_MEM_LIMIT, # Enforce memory limits
+            "--cpus", DOCKER_CPU_LIMIT, # Enforce CPU limits
+            "--security-opt=no-new-privileges", # Prevent privilege escalation
             "-v", f"{abs_temp_dir}:/sandbox:ro", # Mount code read-only
-            "-w", "/sandbox", # Set working directory
-            DOCKER_IMAGE,
-            interpreter, script_filename
+            "-w", "/sandbox", # Set working directory inside container
         ]
+        
+        # Add environment variables from prompt_vars
+        if env_vars:
+            for key, value in env_vars.items():
+                docker_command.extend(["-e", f"{key}={value}"])
+
+        docker_command.extend([DOCKER_IMAGE, interpreter, script_filename_in_container])
+
         logger.debug(f"Executing Docker command: {' '.join(docker_command)}")
 
         # Run the Docker container process
@@ -346,57 +373,66 @@ def _execute_with_docker(language: str, code: str, input_data: str) -> Dict[str,
                 logger.error(f"Error cleaning up temporary directory '{getattr(temp_dir_obj,'name','N/A')}': {cleanup_e}")
 
 # --- Internal Helper: Subprocess Execution ---
-def _execute_with_subprocess(language: str, code: str, input_data: str) -> Dict[str, Any]:
-    """Executes code using a direct subprocess call. Returns partial result dict."""
-    # Map language to interpreter command
-    # Ensure these interpreters are available in the PATH
-    interpreter_cmd: Optional[List[str]] = None
-    if language == 'python':
-        # Unescape \n to actual newlines for python -c
-        processed_code = code.replace('\\n', '\n').replace('\\r', '\r')
-        interpreter_cmd = [sys.executable or "python3", "-c", processed_code]
+def _execute_with_subprocess(language: str, code: str, input_data: str, env_vars: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+    """Executes code using a local subprocess. Returns partial result dict."""
+    # Determine interpreter path (sys.executable for Python, 'node' for JavaScript)
+    interpreter_path = ""
+    if language == 'python' or language == 'python_script': # For both python code strings and scripts
+        interpreter_path = sys.executable
     elif language == 'javascript':
-        processed_code = code.replace('\\n', '\n').replace('\\r', '\r') # Node.js also benefits from this
-        interpreter_cmd = ["node", "-e", processed_code] # node -e executes string
-    elif language == 'bash':
-        # Bash doesn't typically need \n unescaping for a script string passed to -c
-        interpreter_cmd = ["bash", "-c", code]
-    # Add other languages here if needed
+        interpreter_path = "node"
+    else:
+        return {"error": f"Unsupported language for subprocess execution: {language}", "exit_code": -1, "stdout": "", "stderr": f"Unsupported language: {language}"}
 
-    if not interpreter_cmd:
+    if not interpreter_path:
+        return {"error": "Interpreter path could not be determined.", "exit_code": -1, "stdout": "", "stderr": "Interpreter path missing."}
+
+    # Construct the command
+    command: List[str]
+    input_data_for_python_execution: Optional[str] = None # Specifically for piping python code
+
+    if language == 'python_script':
+        script_path = os.path.abspath(code) # Ensure absolute path for security/consistency
+        if not os.path.isfile(script_path):
+            return {"error": f"Python script not found: {script_path}", "exit_code": -1, "stdout": "", "stderr": f"Script not found: {script_path}"}
+        command = [interpreter_path, script_path]
+        logger.debug(f"Subprocess: Executing Python script. Command: {' '.join(command)}")
+        input_data_for_python_execution = input_data # Regular input_data for scripts
+    elif language == 'python':
+        # For Python code strings, execute the interpreter and pipe the code to stdin
+        command = [interpreter_path]
+        input_data_for_python_execution = code # The code string itself will be piped to stdin
+        logger.debug(f"Subprocess: Executing Python code via stdin. Command: {interpreter_path}. Input code (first 100 chars): {code[:100].replace('\n', '\\n')}")
+    elif language == 'javascript':
+        command = [interpreter_path, "-e", code]
+    else:
+        # Explicitly prevent 'shell' due to original error context, though it should be caught by 'unsupported' anyway.
+        if language == 'shell':
+             logger.error(f"Language 'shell' is not directly supported for security reasons via subprocess. Use 'bash' or a script language like 'python_script'.")
+             return {"error": f"Language 'shell' is not directly supported for security reasons via subprocess. Use 'bash' or script language.", "exit_code": -1, "stdout": "", "stderr": ""}
+        logger.error(f"Unsupported language for subprocess execution: {language}")
         return {"error": f"Unsupported language for subprocess execution: {language}", "exit_code": -1, "stdout": "", "stderr": ""}
 
-    logger.debug(f"Executing subprocess command: {' '.join(interpreter_cmd)}")
+    # Actual execution
     try:
-        # Run the command as a subprocess
+        logger.debug(f"Executing subprocess command: {' '.join(command)} with env: {env_vars is not None}")
         process = subprocess.run(
-            interpreter_cmd,
-            input=input_data.encode('utf-8'), # Pass input data as stdin
-            capture_output=True, # Capture stdout/stderr
-            timeout=TIMEOUT_SECONDS, # Apply timeout
-            check=False, # Do not raise exception on non-zero exit
-            shell=False, # DO NOT use shell=True for security
-            env=os.environ.copy() # Pass environment variables (consider scrubbing sensitive ones)
+            command,
+            input=input_data_for_python_execution if language == 'python' else input_data, # Use specific input for python direct execution
+            capture_output=True,
+            text=True,
+            timeout=TIMEOUT_SECONDS,
+            check=False, # Do not raise CalledProcessError, handle exit code manually
+            env=env_vars # Pass the prepared environment variables
         )
-        # Decode stdout/stderr
-        stdout = process.stdout.decode('utf-8', errors='replace').strip()
-        stderr = process.stderr.decode('utf-8', errors='replace').strip()
-        exit_code = process.returncode
-
-        if exit_code != 0:
-            logger.warning(f"Subprocess execution finished with non-zero exit code {exit_code}. Stderr:\n{stderr}")
-        else:
-            logger.debug(f"Subprocess execution successful (Exit Code: 0). Stdout:\n{stdout}")
-
-        return {"stdout": stdout, "stderr": stderr, "exit_code": exit_code, "error": None}
-
+        return {"stdout": process.stdout, "stderr": process.stderr, "exit_code": process.returncode}
     except subprocess.TimeoutExpired:
         logger.error(f"Subprocess execution timed out after {TIMEOUT_SECONDS}s.")
         return {"error": f"TimeoutExpired: Execution exceeded {TIMEOUT_SECONDS}s limit.", "exit_code": -1, "stdout": "", "stderr": "Timeout Error"}
     except FileNotFoundError:
         # Error if the interpreter itself wasn't found
-        logger.error(f"Interpreter for '{language}' ('{interpreter_cmd[0] if interpreter_cmd else language}') not found.")
-        return {"error": f"Interpreter not found: {interpreter_cmd[0] if interpreter_cmd else language}", "exit_code": -1, "stdout": "", "stderr": ""}
+        logger.error(f"Interpreter for '{language}' ('{interpreter_path if interpreter_path else language}') not found.")
+        return {"error": f"Interpreter not found: {interpreter_path if interpreter_path else language}", "exit_code": -1, "stdout": "", "stderr": ""}
     except OSError as e_os:
         # Catch OS-level errors during process creation (e.g., permissions)
         logger.error(f"OS error during subprocess execution: {e_os}", exc_info=True)

@@ -1,0 +1,31 @@
+{
+  "code_manifest": [
+    "__init__.py",
+    "action_context.py",
+    "action_handlers.py",
+    "action_registry.py",
+    "advanced_Agent_based_Modeling_tool.py",
+    "agent_based_modeling_tool.py",
+    "causal_inference_tool.py",
+    "cfp_framework.py",
+    "cfp_implementation_example.py",
+    "code_executor.py",
+    "config.py",
+    "enhanced_tools.py",
+    "error_handler.py",
+    "llm_providers.py",
+    "logging_config.py",
+    "main.py",
+    "predictive_modeling_tool.py",
+    "quantum_utils.py",
+    "spr_manager.py",
+    "system_representation.py",
+    "tools.py",
+    "vetting_prompts.py",
+    "workflow_engine.py"
+  ],
+  "source_package_dir": "/media/dev2025/3626C55326C514B1/Happier/Three_PointO_ArchE",
+  "status_message": "Generated manifest of 23 .py files from /media/dev2025/3626C55326C514B1/Happier/Three_PointO_ArchE",
+  "total_files": 23,
+  "generated_timestamp": "20250605_190902"
+} 

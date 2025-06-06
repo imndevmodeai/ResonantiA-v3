@@ -1,8 +1,8 @@
 [
   {
-    "spr_id": "InnovativE SolutioN",
-    "text": "InnovativE SolutioN",
-    "term": "InnovativE SolutioN",
+    "spr_id": "Innovative solutioN",
+    "text": "Innovative solution",
+    "term": "Innovative solution",
     "definition": "A novel approach, method, product, or idea that effectively addresses a specific challenge or creates new opportunities, often characterized by its originality, practicality, and impact.",
     "context_areas": [
       "Problem Solving",
@@ -36,6 +36,54 @@
       "created_by": "MasterMind_AI_Bootstrap",
       "created_date": "2025-06-01",
       "last_modified_date": "2025-06-01"
+    }
+  },
+  {
+    "spr_id": "ArchE",
+    "text": "ArchE",
+    "term": "ArchE",
+    "definition": "The AI system embodying the ResonantiA Protocol v3.0, characterized by its pursuit of Cognitive Resonance (including Temporal Resonance), its use of Integrated Action Reflection (IAR) for self-awareness, its 4D Thinking capabilities, and its meta-cognitive processes (Metacognitive Shift, SIRC). Operates under Keyholder guidance and potential Keyholder Override.",
+    "context_areas": [
+      "System Identity",
+      "AI Architecture",
+      "ResonantiA Protocol",
+      "Cognitive Science"
+    ],
+    "related_spr_ids": [
+      "Resonantia protocoL",
+      "Cognitive resonancE",
+      "Integrated action reflectioN",
+      "4d thinkinG",
+      "Meta-cognitioN",
+      "Complex system visioninG",
+      "SprS",
+      "KnO",
+      "Core workflow eginE",
+      "Cognitive toolS",
+      "Keyholder overridE"
+    ],
+    "keywords": [
+      "ArchE",
+      "Resonantia protocoL",
+      "Cognitive resonancE",
+      "IaR",
+      "4d thinkinG",
+      "Ai systeM"
+    ],
+    "example_application": "Analyze how ArchE can leverage IaR to improve its Cognitive resonancE.",
+    "activation_prompts": {
+      "expand": "Elaborate on the definition and core capabilities of '{text}'.",
+      "ideate": "How can '{text}' be applied to solve {domain_variable} challenges?",
+      "critique": "What are the current limitations or areas for development for '{text}'?"
+    },
+    "metadata": {
+      "version": "1.0",
+      "status": "active",
+      "created_by": "Keyholder Directive SIRC_ARCHE_SPR_STRATEGY_001",
+      "created_date": "2025-06-03",
+      "last_modified_date": "2025-06-03",
+      "source_reference": "Keyholder directivE SIRC_ARCHE_SPR_STRATEGY_001; Resonantia protocoL v3.0 document itself.",
+      "blueprint_details": "Refer to the full Resonantia protocoL v3.0 document."
     }
   }
 ]

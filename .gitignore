@@ -114,6 +114,13 @@ temp_*.json
 # Browser session data (often contains private info and cache)
 ResonantiA/browser_automation/.chrome_dev_session/
 
+# Python files from conversation ingestion
+conv2injest*.py
+
+# Browser automation outputs
+ResonantiA/browser_automation/*.txt
+ResonantiA/browser_automation/*.png
+
 # Dependencies (if managed locally, though venv is preferred)
 # node_modules/
 
