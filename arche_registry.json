@@ -1,0 +1,87 @@
+{
+  "last_updated": "2025-06-07T11:12:04.394985+00:00",
+  "instances": [
+    {
+      "instance_id": "engineering_2834a17c",
+      "instance_type": "engineering",
+      "name": "Cursor ArchE",
+      "description": "Engineering Instance specialized in direct code manipulation, workflow debugging, and implementation resonance",
+      "capabilities": [
+        {
+          "name": "file_manipulation",
+          "level": "advanced",
+          "specializations": [
+            "python",
+            "json",
+            "markdown",
+            "text_files"
+          ],
+          "last_validated": "2025-06-07T11:12:04.394881+00:00",
+          "success_rate": 0.98
+        },
+        {
+          "name": "code_execution",
+          "level": "advanced",
+          "specializations": [
+            "python",
+            "bash",
+            "subprocess"
+          ],
+          "last_validated": "2025-06-07T11:12:04.394903+00:00",
+          "success_rate": 0.95
+        },
+        {
+          "name": "workflow_debugging",
+          "level": "master",
+          "specializations": [
+            "json_workflows",
+            "inter_task_data_flow",
+            "error_analysis"
+          ],
+          "last_validated": "2025-06-07T11:12:04.394908+00:00",
+          "success_rate": 1.0
+        },
+        {
+          "name": "terminal_access",
+          "level": "advanced",
+          "specializations": [
+            "linux",
+            "command_line",
+            "process_management"
+          ],
+          "last_validated": "2025-06-07T11:12:04.394910+00:00",
+          "success_rate": 0.97
+        },
+        {
+          "name": "implementation_resonance",
+          "level": "master",
+          "specializations": [
+            "strategic_to_tactical",
+            "iterative_refinement",
+            "solution_crystallization"
+          ],
+          "last_validated": "2025-06-07T11:12:04.394913+00:00",
+          "success_rate": 1.0
+        }
+      ],
+      "status": "active",
+      "last_active": "2025-06-07T11:12:04.394917+00:00",
+      "total_tasks_completed": 0,
+      "success_rate": 1.0,
+      "current_load": 0,
+      "max_concurrent_tasks": 3,
+      "metadata": {
+        "environment": "cursor_ide",
+        "operating_system": "linux",
+        "python_version": "3.12",
+        "validated_workflows": [
+          "ASASF_Persistent_Parallel_ArchE"
+        ],
+        "specialization_focus": "engineering_implementation",
+        "collaboration_history": [
+          "ai_studio_arche_strategic_analysis"
+        ]
+      }
+    }
+  ]
+}

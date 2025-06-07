@@ -1,0 +1,27 @@
+[
+  {
+    "title": "The Leading Multi-Agent Platform",
+    "link": "https://www.crewai.com/",
+    "description": "Multi-Agent Platform. Streamline workflows across industries with powerful AI agents. Build and deploy automated workflows using any LLM and cloud platform."
+  },
+  {
+    "title": "How to Build a Multi-Agent AI System : In-Depth Guide",
+    "link": "https://www.aalpha.net/blog/how-to-build-multi-agent-ai-system/",
+    "description": "May 9, 2025 —"
+  },
+  {
+    "title": "Comparing Multi-agent AI frameworks: CrewAI, LangGraph ...",
+    "link": "https://www.concision.ai/blog/comparing-multi-agent-ai-frameworks-crewai-langgraph-autogpt-autogen",
+    "description": "Apr 24, 2024 —"
+  },
+  {
+    "title": "Which AI Agent framework should i use? (CrewAI ...",
+    "link": "https://medium.com/@aydinKerem/which-ai-agent-framework-i-should-use-crewai-langgraph-majestic-one-and-pure-code-e16a6e4d9252",
+    "description": "crewAI is an open source multiagent orchestration framework created by João Moura. This Python-based framework leverages role-playing autonomous ..."
+  },
+  {
+    "title": "\"The Rise of AI Multi-Agent Systems: How LangChain, Auto ...",
+    "link": "https://www.linkedin.com/pulse/rise-ai-multi-agent-systems-how-langchain-auto-gpt-crewai-dutt-yvahc",
+    "description": "A Multi-Agent AI System (MAS) is an architecture where multiple autonomous AI agents interact to solve tasks collaboratively or ..."
+  }
+]

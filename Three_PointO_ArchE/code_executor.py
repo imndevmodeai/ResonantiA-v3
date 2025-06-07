@@ -13,7 +13,11 @@ import platform # Potentially useful for platform-specific commands/paths
 import sys # To find python executable for subprocess fallback
 import time # For timeouts and potentially timestamps
 import shutil # Added for script copying
-from typing import Dict, Any, Optional, List, Tuple # Expanded type hints
+from typing import Dict, Any, Optional, List, Tuple, TYPE_CHECKING # Expanded type hints
+
+if TYPE_CHECKING:
+    from .action_context import ActionContext
+
 # Use relative imports for configuration
 try:
     from . import config
@@ -81,7 +85,7 @@ if sandbox_method_resolved == 'docker':
         logger.warning(f"Unexpected error checking Docker status: {e_docker_check}. Assuming Docker unavailable.")
 
 # --- Main Execution Function ---
-def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
+def execute_code(inputs: Dict[str, Any], action_context: Optional['ActionContext'] = None) -> Dict[str, Any]:
     """
     [IAR Enabled] Executes a code snippet or script using the configured sandbox method.
     Validates inputs, selects execution strategy (Docker, subprocess, none),
@@ -94,6 +98,7 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
             code (str): The code snippet or script path to execute. Required.
             input_data (str, optional): Data to be passed as standard input to the code. Defaults to "".
             prompt_vars (Dict[str, str], optional): Environment variables to set for the execution.
+        action_context (Optional[ActionContext]): The workflow context containing runtime state.
 
     Returns:
         Dict[str, Any]: Dictionary containing execution results and IAR reflection:
@@ -110,6 +115,22 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
     original_input_data_val = inputs.get("input_data", "")
     prompt_vars = inputs.get("prompt_vars", None) # Get prompt_vars
     input_data_for_stdin: str
+
+    # Extract context from action_context if available
+    workflow_context = None
+    if action_context and hasattr(action_context, 'runtime_context'):
+        workflow_context = action_context.runtime_context
+        logger.debug(f"Code Executor: action_context.runtime_context available with keys: {list(workflow_context.keys()) if workflow_context else 'None'}")
+    else:
+        logger.debug(f"Code Executor: action_context: {action_context}, has runtime_context: {hasattr(action_context, 'runtime_context') if action_context else 'N/A'}")
+        if action_context:
+            logger.debug(f"Code Executor: action_context attributes: {dir(action_context)}")
+            logger.debug(f"Code Executor: action_context type: {type(action_context)}")
+            # Try to access the context directly if it's stored differently
+            if hasattr(action_context, '__dict__'):
+                logger.debug(f"Code Executor: action_context.__dict__: {action_context.__dict__}")
+    
+    logger.debug(f"Code Executor: Final workflow_context: {workflow_context is not None}")
 
     logger.debug(f"Code Executor: Received original_input_data_val type: {type(original_input_data_val)}, value (first 200 chars): {str(original_input_data_val)[:200]}")
 
@@ -183,17 +204,17 @@ def execute_code(inputs: Dict[str, Any]) -> Dict[str, Any]:
             logger.warning("Docker configured but unavailable. Falling back to 'subprocess' (less secure).")
             primary_result["sandbox_method_used"] = 'subprocess' # Update actual method used
             reflection_issues.append("Docker unavailable, fell back to subprocess.")
-            exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env) # Pass full env
+            exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env, workflow_context) # Pass context
             if exec_result.get("error"): # If subprocess also failed (e.g., interpreter missing)
                 reflection_issues.append(f"Subprocess fallback failed: {exec_result.get('error')}")
     elif method_to_use == 'subprocess':
         logger.warning("Executing code via 'subprocess' sandbox. This provides limited isolation and is less secure than Docker.")
-        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env) # Pass full env
+        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env, workflow_context) # Pass context
     elif method_to_use == 'none':
         logger.critical("Executing code with NO SANDBOX ('none'). This is EXTREMELY INSECURE and should only be used in trusted debugging environments with full awareness of risks.")
         reflection_issues.append("CRITICAL SECURITY RISK: Code executed without sandbox.")
         # Use subprocess logic for actual execution, but flag clearly that no sandbox was intended
-        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env) # Pass full env
+        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env, workflow_context) # Pass context
         exec_result["note"] = "Executed with NO SANDBOX ('none' method)." # Add note to result
     else: # Should not happen due to resolution logic, but safeguard
         exec_result = {"error": f"Internal configuration error: Unsupported sandbox method '{method_to_use}' resolved.", "exit_code": -1}
@@ -373,7 +394,7 @@ def _execute_with_docker(language: str, code: str, input_data: str, env_vars: Op
                 logger.error(f"Error cleaning up temporary directory '{getattr(temp_dir_obj,'name','N/A')}': {cleanup_e}")
 
 # --- Internal Helper: Subprocess Execution ---
-def _execute_with_subprocess(language: str, code: str, input_data: str, env_vars: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+def _execute_with_subprocess(language: str, code: str, input_data: str, env_vars: Optional[Dict[str, str]] = None, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """Executes code using a local subprocess. Returns partial result dict."""
     # Determine interpreter path (sys.executable for Python, 'node' for JavaScript)
     interpreter_path = ""
@@ -401,8 +422,78 @@ def _execute_with_subprocess(language: str, code: str, input_data: str, env_vars
     elif language == 'python':
         # For Python code strings, execute the interpreter and pipe the code to stdin
         command = [interpreter_path]
-        input_data_for_python_execution = code # The code string itself will be piped to stdin
-        logger.debug(f"Subprocess: Executing Python code via stdin. Command: {interpreter_path}. Input code (first 100 chars): {code[:100].replace('\n', '\\n')}")
+        
+        # If we have context and this is Python code, prepend context injection
+        if context and language == 'python':
+            try:
+                logger.debug(f"Subprocess: Context available with keys: {list(context.keys()) if context else 'None'}")
+                
+                # Serialize context without truncation - use ensure_ascii=False for better handling of unicode
+                # and separators for compact representation while maintaining readability
+                context_json = json.dumps(context, default=str, ensure_ascii=False, separators=(',', ':'))
+                
+                # Use base64 encoding to safely handle any special characters or large content
+                # This completely avoids any string escaping issues
+                import base64
+                context_b64 = base64.b64encode(context_json.encode('utf-8')).decode('ascii')
+                
+                # Use a robust context injection that handles large contexts and special characters
+                context_injection = f"""import json
+import sys
+import base64
+
+# Full workflow context - never truncated
+# Using base64 encoding to safely handle any special characters or large content
+try:
+    # Decode the context from base64 encoding
+    context_b64 = "{context_b64}"
+    context_json_str = base64.b64decode(context_b64).decode('utf-8')
+    context = json.loads(context_json_str)
+    
+    # Verify context was loaded successfully
+    if not isinstance(context, dict):
+        raise ValueError("Context is not a dictionary")
+        
+    # Make context available globally for any code that needs it
+    globals()['context'] = context
+    
+    # Also make it available in locals for immediate use
+    locals()['context'] = context
+    
+except (json.JSONDecodeError, ValueError, UnicodeDecodeError, Exception) as e:
+    print(f"ERROR: Failed to parse workflow context: {{e}}", file=sys.stderr)
+    print(f"Context base64 length: {len(context_b64)}", file=sys.stderr)
+    # Provide empty context as fallback but don't fail silently
+    context = {{}}
+    globals()['context'] = context
+    locals()['context'] = context
+
+"""
+                
+                code_with_context = context_injection + code
+                input_data_for_python_execution = code_with_context
+                
+                logger.debug(f"Subprocess: Injected context into Python code. Context keys: {list(context.keys())}")
+                logger.debug(f"Subprocess: Context JSON size: {len(context_json)} characters")
+                logger.debug(f"Subprocess: Base64 encoded size: {len(context_b64)} characters")
+                logger.debug(f"Subprocess: Total injected code size: {len(code_with_context)} characters")
+                
+                # Log a preview of the context structure without truncating sensitive data
+                context_preview = {k: f"<{type(v).__name__}>" for k, v in context.items()}
+                logger.debug(f"Subprocess: Context structure preview: {context_preview}")
+                
+                # Warn if context is very large (but don't truncate)
+                if len(context_json) > 1000000:  # 1MB
+                    logger.warning(f"Very large context detected ({len(context_json)} chars). This may impact performance but will not be truncated.")
+                
+            except Exception as e:
+                logger.error(f"Failed to inject context into Python code: {e}. Running without context.", exc_info=True)
+                input_data_for_python_execution = code
+        else:
+            logger.debug(f"Subprocess: No context injection. Context available: {context is not None}, Language: {language}")
+            input_data_for_python_execution = code # The code string itself will be piped to stdin
+            
+        logger.debug(f"Subprocess: Executing Python code via stdin. Command: {interpreter_path}. Input code (first 100 chars): {input_data_for_python_execution[:100].replace(chr(10), '\\n')}")
     elif language == 'javascript':
         command = [interpreter_path, "-e", code]
     else:

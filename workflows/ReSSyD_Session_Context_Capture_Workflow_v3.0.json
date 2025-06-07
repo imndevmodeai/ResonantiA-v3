@@ -1,1 +1,59 @@
-{\n  \"name\": \"ReSSyD Session Context Capture Workflow (v3.0)\",\n  \"description\": \"Captures Keyholder\'s summary and Arche\'s relevant context at the end of a session.\",\n  \"version\": \"3.0\",\n  \"tasks\": {\n    \"start_capture\": {\n      \"description\": \"Initiate session context capture.\",\n      \"action_type\": \"display_output\",\n      \"inputs\": {\n        \"content\": \"ReSSyD: Preparing to capture session context. Please provide your summary in the \'keyholder_session_summary\' initial context variable.\"\n      },\n      \"dependencies\": []\n    },\n    \"get_keyholder_summary\": {\n      \"description\": \"Retrieve Keyholder\'s session summary.\",\n      \"action_type\": \"execute_code\",\n      \"inputs\": {\n        \"language\": \"python\",\n        \"code\": \"summary = context.get(\'initial_context\', {}).get(\'keyholder_session_summary\', \'No summary provided by Keyholder.\')\\\\nresult = {\'keyholder_summary\': summary}\"\n      },\n      \"outputs\": {\"keyholder_summary\": \"string\", \"reflection\": \"dict\"},\n      \"dependencies\": [\"start_capture\"]\n    },\n    \"snapshot_arche_context\": {\n      \"description\": \"Simulate snapshotting relevant Arche operational context (e.g., recent IARs - conceptual).\",\n      \"action_type\": \"execute_code\",\n      \"inputs\": {\n        \"language\": \"python\",\n        \"code\": \"# Simulation: A real implementation would need access to Arche\'s internal state/logs.\\\\n# For now, we\'ll create placeholder context.\\\\nimport json\\\\nimport time\\\\n\\\\n# Example: Get last few entries from a conceptual ThoughtTrail if available in context\\\\n# For simulation, we\'ll just create a placeholder.\\\\nthought_trail_recent_iar = []\\\\nif context.get(\'task_results_list\'):\\\\n    for task_res in context.get(\'task_results_list\', [])[-3:]:\\\\n        if isinstance(task_res, dict) and \'reflection\' in task_res:\\\\n            thought_trail_recent_iar.append(task_res.get(\'reflection\'))\\\\n\\\\narche_context_snapshot = {\\\\n    \'timestamp\': time.strftime(\'%Y-%m-%d %H:%M:%S\'),\\\\n    \'last_active_workflow\': context.get(\'workflow_name\', \'N/A\'),\\\\n    \'conceptual_active_sprs\': [\'SPR_Example1\', \'IAR_Focus\'],\\\\n    \'recent_iar_highlights\': thought_trail_recent_iar if thought_trail_recent_iar else [\'No specific IARs captured in this simulation.\']\\\\n}\\\\nresult = {\'arche_context_snapshot\': arche_context_snapshot}\\\\nprint(f\'Simulated Arche context snapshot: {json.dumps(arche_context_snapshot, default=str)}\')\\\\n\"\n      },\n      \"outputs\": {\"arche_context_snapshot\": \"dict\", \"reflection\": \"dict\"},\n      \"dependencies\": [\"start_capture\"]\n    },\n    \"combine_and_save_capsule\": {\n      \"description\": \"Combine Keyholder summary and Arche context into a session capsule file.\",\n      \"action_type\": \"execute_code\",\n      \"inputs\": {\n        \"language\": \"python\",\n        \"code\": \"import json\\\\nimport os\\\\nimport time\\\\n\\\\nkeyholder_summary = context.get(\'get_keyholder_summary\', {}).get(\'keyholder_summary\', \'N/A\')\\\\narche_context = context.get(\'snapshot_arche_context\', {}).get(\'arche_context_snapshot\', {})\ ইহাদেরn\\\\nsession_capsule = {\\\\n    \'capture_timestamp\': time.strftime(\'%Y-%m-%d %H:%M:%S\'),\\\\n    \'keyholder_notes\': keyholder_summary,\\\\n    \'arche_context_snapshot\': arche_context\\\\n}\\\\n\\\\noutput_dir = context.get(\'initial_context\', {}).get(\'ressyd_capsule_output_dir\', \'outputs/ReSSyD_Capsules\')\\\\nos.makedirs(output_dir, exist_ok=True)\\\\ntimestamp_file_str = time.strftime(\'%Y%m%d_%H%M%S\')\\\\nfilename = f\'SessionContextCapsule_{timestamp_file_str}.json\'\\\\nfilepath = os.path.join(output_dir, filename)\\\\n\\\\ntry:\\\\n    with open(filepath, \'w\', encoding=\'utf-8\') as f:\\\\n        json.dump(session_capsule, f, indent=2, default=str)\\\\n    print(f\'Session Context Capsule saved to: {filepath}\')\\\\n    result = {\'capsule_filepath\': filepath, \'status_message\': \'Session context captured.\'}\\\\nexcept Exception as e:\\\\n    print(f\'Error saving session capsule: {e}\')\\\\n    result = {\'capsule_filepath\': None, \'status_message\': f\'Error saving capsule: {e}\', \'error\': str(e)}\\\\n\"\n      },\n      \"outputs\": {\"capsule_filepath\": \"string\", \"status_message\": \"string\", \"error\": \"string\", \"reflection\": \"dict\"},\n      \"dependencies\": [\"get_keyholder_summary\", \"snapshot_arche_context\"],\n      \"condition\": \"{{ get_keyholder_summary.reflection.status == \'Success\' and snapshot_arche_context.reflection.status == \'Success\' }}\"\n    },\n    \"display_capture_confirmation\":{\n        \"description\": \"Confirm session capture.\",\n        \"action_type\": \"display_output\",\n        \"inputs\": {\n            \"content\": {\n                \"capture_status\": \"{{ combine_and_save_capsule.reflection.status }}\",\n                \"capsule_file\": \"{{ combine_and_save_capsule.capsule_filepath }}\",\n                \"message\": \"{{ combine_and_save_capsule.status_message }}\"\n            },\n            \"format\": \"json\"\n        },\n        \"dependencies\": [\"combine_and_save_capsule\"]\n    }\n  }\n} 
+{
+  "name": "ReSSyD Session Context Capture Workflow (v3.0)",
+  "description": "Captures Keyholder's summary and Arche's relevant context at the end of a session.",
+  "version": "3.0",
+  "tasks": {
+    "start_capture": {
+      "description": "Initiate session context capture.",
+      "action": "display_output",
+      "inputs": {
+        "content": "ReSSyD: Preparing to capture session context. Please provide your summary in the 'keyholder_session_summary' initial context variable."
+      },
+      "dependencies": []
+    },
+    "get_keyholder_summary": {
+      "description": "Retrieve Keyholder's session summary.",
+      "action": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "summary = context.get('initial_context', {}).get('keyholder_session_summary', 'No summary provided by Keyholder.')\nresult = {'keyholder_summary': summary}"
+      },
+      "outputs": {"keyholder_summary": "string", "reflection": "dict"},
+      "dependencies": ["start_capture"]
+    },
+    "snapshot_arche_context": {
+      "description": "Simulate snapshotting relevant Arche operational context (e.g., recent IARs - conceptual).",
+      "action": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "# Simulation: A real implementation would need access to Arche's internal state/logs.\n# For now, we'll create placeholder context.\nimport json\nimport time\n\n# Example: Get last few entries from a conceptual ThoughtTrail if available in context\n# For simulation, we'll just create a placeholder.\nthought_trail_recent_iar = []\nif context.get('task_results_list'):\n    for task_res in context.get('task_results_list', [])[-3:]:\n        if isinstance(task_res, dict) and 'reflection' in task_res:\n            thought_trail_recent_iar.append(task_res.get('reflection'))\n\narche_context_snapshot = {\n    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),\n    'last_active_workflow': context.get('workflow_name', 'N/A'),\n    'conceptual_active_sprs': ['SPR_Example1', 'IAR_Focus'],\n    'recent_iar_highlights': thought_trail_recent_iar if thought_trail_recent_iar else ['No specific IARs captured in this simulation.']\n}\nresult = {'arche_context_snapshot': arche_context_snapshot}\nprint(f\"Simulated Arche context snapshot: {json.dumps(arche_context_snapshot, default=str)}\")\n"
+      },
+      "outputs": {"arche_context_snapshot": "dict", "reflection": "dict"},
+      "dependencies": ["start_capture"]
+    },
+    "combine_and_save_capsule": {
+      "description": "Combine Keyholder summary and Arche context into a session capsule file.",
+      "action": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport os\nimport time\n\nkeyholder_summary = context.get('get_keyholder_summary', {}).get('keyholder_summary', 'N/A')\narche_context = context.get('snapshot_arche_context', {}).get('arche_context_snapshot', {})\n\nsession_capsule = {\n    'capture_timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),\n    'keyholder_notes': keyholder_summary,\n    'arche_context_snapshot': arche_context\n}\n\noutput_dir = context.get('initial_context', {}).get('ressyd_capsule_output_dir', 'outputs/ReSSyD_Capsules')\nos.makedirs(output_dir, exist_ok=True)\ntimestamp_file_str = time.strftime('%Y%m%d_%H%M%S')\nfilename = f'SessionContextCapsule_{timestamp_file_str}.json'\nfilepath = os.path.join(output_dir, filename)\n\ntry:\n    with open(filepath, 'w', encoding='utf-8') as f:\n        json.dump(session_capsule, f, indent=2, default=str)\n    print(f'Session Context Capsule saved to: {filepath}')\n    result = {'capsule_filepath': filepath, 'status_message': 'Session context captured.'}\nexcept Exception as e:\n    print(f'Error saving session capsule: {e}')\n    result = {'capsule_filepath': None, 'status_message': f'Error saving capsule: {e}', 'error': str(e)}\n"
+      },
+      "outputs": {"capsule_filepath": "string", "status_message": "string", "error": "string", "reflection": "dict"},
+      "dependencies": ["get_keyholder_summary", "snapshot_arche_context"],
+      "condition": "{{ get_keyholder_summary.reflection.status == 'Success' and snapshot_arche_context.reflection.status == 'Success' }}"
+    },
+    "display_capture_confirmation":{
+        "description": "Confirm session capture.",
+        "action": "display_output",
+        "inputs": {
+            "content": {
+                "capture_status": "{{ combine_and_save_capsule.reflection.status }}",
+                "capsule_file": "{{ combine_and_save_capsule.capsule_filepath }}",
+                "message": "{{ combine_and_save_capsule.status_message }}"
+            },
+            "format": "json"
+        },
+        "dependencies": ["combine_and_save_capsule"]
+    }
+  }
+} 

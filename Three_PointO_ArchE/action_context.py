@@ -13,8 +13,9 @@ class ActionContext:
     attempt_number: int
     max_attempts: int
     execution_start_time: datetime
+    runtime_context: Dict[str, Any] = field(default_factory=dict)
     # Potentially add other useful context items here later
-    # e.g., full_workflow_context, access_to_global_resources, etc.
+    # e.g., access_to_global_resources, etc.
     # For now, keeping it minimal with info available at action call time.
     # _workflow_meta could be passed here too, or parts of it.
 

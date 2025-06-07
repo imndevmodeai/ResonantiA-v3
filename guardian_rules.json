@@ -1,0 +1,43 @@
+[
+  {
+    "rule_name": "On Any Workflow Failure, Run Diagnostics",
+    "enabled": true,
+    "trigger": {
+      "type": "on_workflow_completion",
+      "config": {
+        "watch_status": "Failed"
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "diagnostic_workflow.json",
+      "context_template": {
+        "source_run_id": "{{ trigger.run_id }}",
+        "source_workflow_file": "{{ trigger.workflow_file }}",
+        "reason": "Triggered automatically by the Guardian due to a failure status in a previous workflow run.",
+        "failed_task_summary": "{{ trigger.failed_task_summary }}"
+      }
+    }
+  },
+  {
+    "rule_name": "On High System Divergence, Trigger Self-Reflection",
+    "enabled": false,
+    "trigger": {
+      "type": "on_system_divergence",
+      "config": {
+        "system_to_monitor": "arche_self_state.json",
+        "baseline_system": "arche_ideal_state.json",
+        "divergence_method": "kld",
+        "threshold": 2.5
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "self_reflection_workflow.json",
+      "context_template": {
+        "reason": "Triggered by high divergence ({{ trigger.divergence_score }}) from baseline operational state.",
+        "divergence_details": "{{ trigger.divergence_details }}"
+      }
+    }
+  }
+] 

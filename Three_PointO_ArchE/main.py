@@ -88,6 +88,125 @@ def ensure_directories():
     else:
         logger.warning("SPR_JSON_FILE not configured or invalid in config.py.")
 
+def find_last_successful_run_id(output_dir: str) -> Optional[str]:
+    """Finds the most recent successfully completed workflow run ID."""
+    try:
+        result_files = [f for f in os.listdir(output_dir) if f.startswith("result_") and f.endswith(".json")]
+        result_files.sort(key=lambda f: os.path.getmtime(os.path.join(output_dir, f)), reverse=True)
+
+        for filename in result_files:
+            filepath = os.path.join(output_dir, filename)
+            with open(filepath, 'r') as f:
+                result_data = json.load(f)
+                if result_data.get("workflow_status") == "Completed Successfully":
+                    run_id = result_data.get("workflow_run_id")
+                    if run_id:
+                        logger.info(f"Found last successful run_id: {run_id} from file {filename}")
+                        return run_id
+    except Exception as e:
+        logger.error(f"Could not determine last successful run ID: {e}", exc_info=True)
+    return None
+
+def handle_run_workflow(args):
+    """Handler for the 'run-workflow' command."""
+    logger.info(f"--- Received command to run workflow: {args.workflow_name} ---")
+    initial_context = {}
+    if args.context_file:
+        try:
+            with open(args.context_file, 'r') as f:
+                initial_context = json.load(f)
+            logger.info(f"Loaded initial context from: {args.context_file}")
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            logger.error(f"Error loading context file {args.context_file}: {e}")
+            # Decide if you want to exit or run with an empty context
+            return 
+
+    try:
+        engine = WorkflowEngine()
+        final_context = engine.run_workflow(args.workflow_name, initial_context)
+        
+        # Determine the final status for logging
+        final_status = final_context.get("workflow_status", "Unknown")
+
+        # Save the final context to a file
+        output_dir = config.OUTPUT_DIR
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Sanitize workflow name for the filename and add run_id
+        sanitized_name = os.path.splitext(os.path.basename(args.workflow_name))[0].replace(" ", "_")
+        run_id = final_context.get('workflow_run_id', 'no_run_id')
+        output_filename = os.path.join(output_dir, f"result_{sanitized_name}_{run_id}.json")
+
+        try:
+            with open(output_filename, 'w', encoding='utf-8') as f:
+                # Use default=str to handle potential non-serializable types gracefully (e.g., numpy types)
+                json.dump(final_context, f, indent=2, default=str)
+            logger.info(f"Final result saved successfully to {output_filename}")
+        except TypeError as json_err:
+            # Handle cases where the result dictionary contains objects JSON can't serialize directly
+            logger.error(f"Could not serialize final result to JSON: {json_err}. Result likely contains non-standard objects (e.g., complex numbers, custom classes). Saving string representation as fallback.", exc_info=True)
+            fallback_filename = output_filename.replace('.json', '_error_repr.txt')
+            try:
+                with open(fallback_filename, 'w', encoding='utf-8') as f:
+                    f.write(f"Original JSON serialization error: {json_err}\n\n")
+                    f.write("--- Full Result (repr) ---\n")
+                    f.write(repr(final_context)) # Write the Python representation
+                logger.info(f"String representation saved to {fallback_filename}")
+            except Exception as write_err:
+                logger.error(f"Could not write fallback string representation: {write_err}")
+        except IOError as io_err:
+            logger.error(f"Could not write final result to {output_filename}: {io_err}")
+        except Exception as save_err:
+            logger.error(f"Unexpected error saving final result: {save_err}", exc_info=True)
+
+        # --- Print Summary to Console ---
+        # Provides a quick overview of the execution outcome
+        print("\n--- Workflow Final Result Summary (v3.0) ---")
+        try:
+            summary = {}
+            summary['workflow_name'] = args.workflow_name
+            summary['workflow_run_id'] = run_id
+            summary['overall_status'] = final_status
+            summary['run_duration_sec'] = final_context.get('workflow_run_duration_sec', 'N/A')
+
+            # Summarize status and IAR reflection highlights for each task
+            task_statuses = final_context.get('task_statuses', {})
+            summary['task_summary'] = {}
+            for task_id, status in task_statuses.items():
+                task_result = final_context.get(task_id, {})
+                reflection = task_result.get('reflection', {}) if isinstance(task_result, dict) else {}
+                
+                inputs_preview = {}
+                if isinstance(task_result, dict) and 'resolved_inputs' in task_result and isinstance(task_result['resolved_inputs'], dict):
+                    for k, v in task_result['resolved_inputs'].items():
+                        inputs_preview[k] = truncate_value(v)
+                
+                outputs_preview = {}
+                if isinstance(task_result, dict):
+                    # Exclude known meta-keys and reflection from outputs preview
+                    excluded_output_keys = ['reflection', 'resolved_inputs', 'error', 'status', 'start_time', 'end_time', 'duration_sec', 'attempt_number']
+                    for k, v in task_result.items():
+                        if k not in excluded_output_keys:
+                            outputs_preview[k] = truncate_value(v)
+
+                summary['task_summary'][task_id] = {
+                    "status": status,
+                    "inputs_preview": inputs_preview if inputs_preview else "N/A",
+                    "outputs_preview": outputs_preview if outputs_preview else "N/A",
+                    "reflection_status": reflection.get('status', 'N/A'),
+                    "reflection_confidence": reflection.get('confidence', 'N/A'),
+                    "reflection_issues": reflection.get('potential_issues', None),
+                    "error": truncate_value(task_result.get('error', None)) # Also truncate error messages
+                }
+            # Print the summary dict as formatted JSON
+            print(json.dumps(summary, indent=2, default=str))
+        except Exception as summary_e:
+            print(f"(Could not generate summary: {summary_e})")
+            print(f"Full results saved to {output_filename} (or fallback file).")
+        print("---------------------------------------------\n")
+
+    except Exception as e:
+        logger.critical(f"A critical error occurred in the main execution block: {e}", exc_info=True)
 
 def main(workflow_to_run: str, initial_context_json: Optional[str] = None):
     """
@@ -144,6 +263,11 @@ def main(workflow_to_run: str, initial_context_json: Optional[str] = None):
     initial_context["user_id"] = initial_context.get("user_id", "cli_keyholder_IMnDEVmode") # Example user ID
     initial_context["workflow_run_id"] = initial_context.get("workflow_run_id", f"run_{uuid.uuid4().hex}") # Unique ID for this run
     initial_context["protocol_version"] = "3.0" # Stamp the protocol version
+    
+    # Find and inject the last successful run ID for analysis workflows
+    last_run_id = find_last_successful_run_id(config.OUTPUT_DIR)
+    if last_run_id:
+        initial_context["last_successful_run_id"] = last_run_id
 
     # --- Execute Workflow ---
     logger.info(f"Attempting to execute workflow: '{workflow_to_run}' (Run ID: {initial_context['workflow_run_id']})")
@@ -254,71 +378,37 @@ if project_root not in sys.path:
 
 # --- Command Line Argument Parsing ---
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="ResonantiA Protocol v3.0 - Arche System")
-    subparsers = parser.add_subparsers(dest="command", help="Available commands", required=True)
+    # Setup command-line argument parsing
+    parser = argparse.ArgumentParser(description="ResonantiA v3.0 Arche System - Main Executor")
+    
+    # Using subparsers for different commands like 'run-workflow'
+    subparsers = parser.add_subparsers(dest="command", required=True, help="Available commands")
+    
+    # --- run-workflow Sub-parser ---
+    parser_run = subparsers.add_parser("run-workflow", help="Execute a specified workflow.")
+    parser_run.add_argument(
+        "workflow_name", 
+        type=str,
+        help="The filename of the workflow to execute (e.g., 'quality_assurance_workflow.json'). Must be located in the configured WORKFLOW_DIR."
+    )
+    parser_run.add_argument(
+        "--context-file",
+        type=str,
+        default=None,
+        help="Path to a JSON file containing the initial context for the workflow run."
+    )
+    # Register the handler for the 'run-workflow' command
+    parser_run.set_defaults(func=handle_run_workflow)
 
-    # --- run-workflow sub-command ---
-    run_parser = subparsers.add_parser("run-workflow", help="Run a specified workflow JSON file.")
-    run_parser.add_argument("workflow_file", help="Path to the workflow JSON file to execute.")
-    input_group = run_parser.add_mutually_exclusive_group()
-    input_group.add_argument("--inputs", "-i", help="JSON string of initial context data for the workflow.", type=str, default=None)
-    input_group.add_argument("--context-file", "-cf", help="Path to a JSON file containing initial context data.", type=str, default=None)
-    # Optional: For running a single task from a workflow for debugging/testing
-    run_parser.add_argument("--task-id", help="(Optional) Specific task ID to run within the workflow.", default=None)
-
-    # --- (Future sub-commands can be added here, e.g., manage-spr, etc.) ---
-    # spr_parser = subparsers.add_parser("manage-spr", help="Manage Strategic Processing Routines.")
-    # ... add arguments for manage-spr
+    # --- Other sub-parsers for different commands can be added here ---
+    # For example, a future 'manage-spr' command
 
     args = parser.parse_args()
 
-    initial_context_data_json: Optional[str] = None
-    if args.command == "run-workflow":
-        if args.context_file:
-            logger.info(f"Loading initial context from file: {args.context_file}")
-            try:
-                with open(args.context_file, 'r', encoding='utf-8') as f_context:
-                    initial_context_data_json = f_context.read()
-                # Basic validation of the JSON string read
-                json.loads(initial_context_data_json) 
-            except FileNotFoundError:
-                logger.error(f"Context file not found: {args.context_file}")
-                print(f"ERROR: Context file not found: {args.context_file}")
-                sys.exit(1)
-            except json.JSONDecodeError as e_json_ctx:
-                logger.error(f"Invalid JSON in context file {args.context_file}: {e_json_ctx}")
-                print(f"ERROR: Invalid JSON in context file {args.context_file}: {e_json_ctx}")
-                sys.exit(1)
-            except Exception as e_ctx_file:
-                logger.error(f"Error reading context file {args.context_file}: {e_ctx_file}")
-                print(f"ERROR: Could not read context file {args.context_file}: {e_ctx_file}")
-                sys.exit(1)
-        elif args.inputs:
-            initial_context_data_json = args.inputs
-            # Basic validation of the JSON string provided
-            try:
-                json.loads(initial_context_data_json)
-            except json.JSONDecodeError as e_json_inputs:
-                logger.error(f"Invalid JSON string provided via --inputs: {e_json_inputs}")
-                print(f"ERROR: Invalid JSON string for --inputs: {e_json_inputs}")
-                sys.exit(1)
-
-        # Call the existing main function, potentially adapting it if --task-id is used
-        # For now, --task-id is parsed but not directly used by the main() call here.
-        # The main() function itself would need modification to handle single task runs,
-        # or WorkflowEngine.run_workflow would need a task_id parameter.
-        if args.task_id:
-            logger.warning(f"--task-id '{args.task_id}' was specified, but current main() does not directly support single task execution. Will run full workflow.")
-            # If you want to support single task runs, you'd modify how main() or workflow_engine.run_workflow is called here.
-        
-        main(workflow_to_run=os.path.basename(args.workflow_file), initial_context_json=initial_context_data_json)
-    
-    # --- Handle other commands if/when added ---
-    # elif args.command == "manage-spr":
-    #    logger.info("Executing manage-spr command...")
-    #    # Call a function to handle SPR management with args
+    # Execute the function associated with the chosen command
+    if hasattr(args, 'func'):
+        args.func(args)
     else:
-        logger.error(f"Unrecognized command: {args.command}")
         parser.print_help()
         sys.exit(1)
 

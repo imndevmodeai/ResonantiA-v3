@@ -174,9 +174,8 @@ class WorkflowEngine:
             raise TypeError("workflow_name must be a string.")
 
         # Construct full path, handling relative paths and '.json' extension
-        filepath = workflow_name
-        if not os.path.isabs(filepath) and not filepath.startswith(self.workflows_dir):
-            filepath = os.path.join(self.workflows_dir, filepath)
+        filepath = os.path.join(self.workflows_dir, os.path.basename(workflow_name))
+
         # Auto-append .json if missing and file exists or likely intended
         if not filepath.lower().endswith(".json"):
             potential_json_path = filepath + ".json"
@@ -297,6 +296,8 @@ class WorkflowEngine:
                         current_value_for_placeholder = current_value_for_placeholder.replace(old_val, new_val)
                     else:
                         logger.warning(f"Task '{task_key}': Filter 'replace' expects 2 arguments (old, new), got {len(f_spec['args'])}. Skipping.")
+                elif f_spec['name'] == 'trim':
+                    current_value_for_placeholder = str(current_value_for_placeholder).strip()
                 else:
                     logger.warning(f"Task '{task_key}': Unknown filter '{f_spec['name']}' in template '{original_template_for_logging}'. Skipping filter.")
             
@@ -356,6 +357,8 @@ class WorkflowEngine:
                                 current_value_for_placeholder_inner = current_value_for_placeholder_inner.replace(old_val_inner, new_val_inner)
                             else:
                                 logger.warning(f"Task '{task_key}': Filter 'replace' expects 2 arguments (old, new), got {len(f_spec_inner['args'])}. Skipping.")
+                        elif f_spec_inner['name'] == 'trim':
+                            current_value_for_placeholder_inner = str(current_value_for_placeholder_inner).strip()
                         else:
                             logger.warning(f"Task '{task_key}': Unknown filter '{f_spec_inner['name']}' in template '{original_template_for_logging}'. Skipping filter.")
                     resolved_placeholder_value_after_filters = current_value_for_placeholder_inner
@@ -514,373 +517,171 @@ class WorkflowEngine:
         logger.warning(f"Operator '{operator}' invalid or comparison failed for types {type(actual)} and {type(expected)}. Evaluating to False.")
         return False
 
+    def _sanitize_for_json(self, data: Any) -> Any:
+        """Recursively sanitizes data to ensure it's JSON serializable."""
+        if isinstance(data, (str, int, float, bool, type(None))):
+            return data
+        if isinstance(data, dict):
+            return {str(k): self._sanitize_for_json(v) for k, v in data.items()}
+        if isinstance(data, list):
+            return [self._sanitize_for_json(v) for v in data]
+        if hasattr(data, 'isoformat'): # Handle datetime objects
+            return data.isoformat()
+        # Fallback for other types (like numpy floats, etc.)
+        return str(data)
+
     def run_workflow(self, workflow_name: str, initial_context: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Executes a loaded workflow using a topological sort approach.
-        Manages context, dependencies, conditions, action calls (via registry),
-        stores the full action result (including IAR 'reflection'), and handles errors.
+        Main entry point to run a workflow.
+        Initializes context, manages the task queue, and returns the final results.
+        Now includes detailed event logging for each action.
         """
-        run_start_time = time.time()
         try:
-            # Load and validate the workflow definition
-            workflow = self.load_workflow(workflow_name)
-            workflow_display_name = self.last_workflow_name # Use name stored during load
+            workflow_definition = self.load_workflow(workflow_name)
         except (FileNotFoundError, ValueError, TypeError) as e:
-            logger.error(f"Failed to load or validate workflow '{workflow_name}': {e}")
-            # Return an error structure consistent with normal results
-            return {"error": f"Failed to load/validate workflow: {e}", "workflow_status": "Failed", "final_results": initial_context}
-        except Exception as e_load:
-            logger.critical(f"Unexpected critical error loading workflow {workflow_name}: {e_load}", exc_info=True)
-            return {"error": f"Unexpected critical error loading workflow: {e_load}", "workflow_status": "Failed", "final_results": initial_context}
+            logger.critical(f"Workflow execution failed during loading: {e}", exc_info=True)
+            return self._summarize_run(workflow_name, "N/A", "Failed", 0, {}, {}, str(e))
 
-        tasks = workflow.get("tasks", {})
-        if not tasks:
-            logger.warning(f"Workflow '{workflow_display_name}' contains no tasks.")
-            run_duration_empty = time.time() - run_start_time
-            return {
-                "workflow_name": workflow_display_name,
-                "workflow_status": "Completed (No Tasks)",
-                "task_statuses": {},
-                "workflow_run_duration_sec": round(run_duration_empty, 2),
+        run_id = initial_context.get("workflow_run_id", f"run_{uuid.uuid4().hex}")
+        initial_context["workflow_run_id"] = run_id
+        
+        event_log = []
+        runtime_context = {
                 "initial_context": initial_context,
-                "workflow_definition": workflow
-            }
+            "workflow_run_id": run_id,
+            "workflow_definition": workflow_definition,
+        }
+        
+        tasks = workflow_definition.get('tasks', {})
+        task_statuses = {key: "pending" for key in tasks}
+        
+        ready_tasks = {key for key, task in tasks.items() if not task.get('dependencies')}
+        running_tasks = {}
+        completed_tasks = set()
+        
+        logger.info(f"Starting workflow '{self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {list(ready_tasks)}")
 
-        # --- Initialize Execution State ---
-        # task_results stores the full output dictionary (result + reflection) for each task
-        task_results: Dict[str, Any] = {"initial_context": copy.deepcopy(initial_context)}
-        run_id = initial_context.get("workflow_run_id", f"run_{uuid.uuid4().hex}") # Ensure run_id is set
-        task_results["workflow_run_id"] = run_id
-        task_results['workflow_definition'] = workflow # Store definition for reference
-        # task_status tracks the state of each task (pending, queued, running, completed, failed, skipped, incomplete)
-        task_status: Dict[str, str] = {task_id: 'pending' for task_id in tasks}
+        start_time = time.time()
+        
+        while ready_tasks or running_tasks:
+            
+            if not ready_tasks:
+                if running_tasks:
+                    time.sleep(0.1) 
+                    continue
+                else:
+                    break 
 
-        # --- Build Dependency Graph & Validate ---
-        # adj: adjacency list (task -> list of tasks depending on it)
-        # in_degree: count of dependencies for each task
-        adj: Dict[str, List[str]] = {task_id: [] for task_id in tasks}
-        in_degree: Dict[str, int] = {task_id: 0 for task_id in tasks}
-        valid_workflow_structure = True
-        validation_errors: List[str] = []
+            task_key = ready_tasks.pop()
+            task_info = tasks[task_key]
+            action_type = task_info.get("action")
+            
+            attempt_count = 1 
+            max_attempts = task_info.get('retries', 0) + 1
+            
+            condition = task_info.get('condition')
+            if condition and not self._evaluate_condition(condition, runtime_context, initial_context):
+                logger.info(f"Skipping task '{task_key}' due to unmet condition: {condition}")
+                task_statuses[task_key] = "skipped"
+                completed_tasks.add(task_key) # Treat as 'completed' for dependency checking
+                # Check for newly ready tasks after skipping
+                for next_task_key, next_task_info in tasks.items():
+                    if next_task_key not in completed_tasks and next_task_key not in ready_tasks and next_task_key not in running_tasks:
+                        dependencies = next_task_info.get('dependencies', [])
+                        if all(dep in completed_tasks for dep in dependencies):
+                            ready_tasks.add(next_task_key)
+                continue
 
-        for task_id, task_data in tasks.items():
-            # Validate dependencies list
-            deps = task_data.get("dependencies", [])
-            if not isinstance(deps, list):
-                validation_errors.append(f"Task '{task_id}' dependencies must be a list, got {type(deps)}.")
-                valid_workflow_structure = False; continue
-            if task_id in deps: # Check for self-dependency
-                validation_errors.append(f"Task '{task_id}' cannot depend on itself.")
-                valid_workflow_structure = False
+            running_tasks[task_key] = time.time()
+            
+            action_context_obj = ActionContext(
+                task_key=task_key, action_name=task_key, action_type=action_type,
+                workflow_name=self.last_workflow_name, run_id=run_id,
+                attempt_number=attempt_count, max_attempts=max_attempts,
+                execution_start_time=datetime.utcnow(),
+                runtime_context=runtime_context
+            )
 
-            in_degree[task_id] = len(deps) # Set initial in-degree
+            resolved_inputs = self._resolve_inputs(task_info.get('inputs'), runtime_context, initial_context, task_key)
+            
+            # Resolve and merge prompt_vars if they exist for the task
+            prompt_vars = task_info.get('prompt_vars')
+            if prompt_vars:
+                resolved_prompt_vars = self._resolve_value(prompt_vars, runtime_context, initial_context, task_key)
+                if isinstance(resolved_prompt_vars, dict) and isinstance(resolved_inputs, dict):
+                    resolved_inputs['initial_context'] = {**resolved_inputs.get('initial_context', {}), **resolved_prompt_vars}
 
-            # Build adjacency list and check if dependencies exist
-            for dep in deps:
-                if dep not in tasks:
-                    validation_errors.append(f"Task '{task_id}' has unmet dependency: '{dep}'.")
-                    valid_workflow_structure = False
-                elif dep in adj:
-                    adj[dep].append(task_id) # Add edge from dependency to current task
-                else: # Should not happen if dep exists, but safeguard
-                    validation_errors.append(f"Internal error building graph for dependency '{dep}' of task '{task_id}'.")
-                    valid_workflow_structure = False
+            result = execute_action(
+                task_key=task_key, action_name=task_key, action_type=action_type,
+                inputs=resolved_inputs, context_for_action=action_context_obj,
+                max_attempts=max_attempts, attempt_number=attempt_count
+            )
+            
+            task_duration = round(time.time() - running_tasks[task_key], 4)
 
-        if not valid_workflow_structure:
-            logger.error(f"Workflow '{workflow_display_name}' has structural errors: {'; '.join(validation_errors)}")
-            return {
-                "error": f"Workflow definition invalid: {'; '.join(validation_errors)}",
-                "workflow_status": "Failed",
-                "task_statuses": task_status,
-                "final_results": task_results # Return partial context
-            }
+            event_log.append({
+                "timestamp": action_context_obj.execution_start_time.isoformat() + "Z",
+                "run_id": run_id, "workflow_name": self.last_workflow_name, "task_key": task_key,
+                "action_type": action_type, "attempt": attempt_count, "duration_sec": task_duration,
+                "inputs": self._sanitize_for_json(resolved_inputs), 
+                "result": self._sanitize_for_json(result)
+            })
 
-        # --- Initialize Execution Queue ---
-        # Start with tasks that have no dependencies (in-degree is 0)
-        task_queue: List[str] = [task_id for task_id, degree in in_degree.items() if degree == 0]
-        for task_id in task_queue: task_status[task_id] = 'queued' # Mark initial tasks as ready
-        logger.info(f"Starting workflow '{workflow_display_name}' (Run ID: {run_id}). Initial ready tasks: {task_queue}")
+            del running_tasks[task_key]
+            completed_tasks.add(task_key)
+            runtime_context[task_key] = result
+            
+            is_success = "error" not in result or result.get("error") is None
+            task_statuses[task_key] = "completed" if is_success else "failed"
+            
+            if is_success:
+                for next_task_key, next_task_info in tasks.items():
+                    if next_task_key not in completed_tasks and next_task_key not in ready_tasks and next_task_key not in running_tasks:
+                        dependencies = next_task_info.get('dependencies', [])
+                        if all(dep in completed_tasks for dep in dependencies):
+                             ready_tasks.add(next_task_key)
 
-        # --- Execution Loop (Topological Sort) ---
-        executed_task_ids: Set[str] = set()
-        executed_step_count = 0
-        # Safety break to prevent infinite loops in case of unexpected graph state
-        max_steps_safety_limit = len(tasks) * 2 + 10 # Allow for retries etc.
+        end_time = time.time()
+        run_duration = round(end_time - start_time, 2)
+        
+        final_status = "Completed Successfully"
+        if any(status == "failed" for status in task_statuses.values()):
+            final_status = "Completed with Errors"
+        elif len(completed_tasks) < len(tasks):
+            final_status = "Stalled"
+        
+        logger.info(f"Workflow '{self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
 
-        while task_queue: # Continue as long as there are tasks ready to run
-            if executed_step_count >= max_steps_safety_limit:
-                logger.error(f"Workflow execution safety limit ({max_steps_safety_limit} steps) reached. Potential infinite loop or complex retries. Halting.")
-                task_results["workflow_error"] = "Execution step limit reached."; break
+        event_log_path = os.path.join(config.OUTPUT_DIR, f"run_events_{run_id}.jsonl")
+        try:
+            with open(event_log_path, 'w', encoding='utf-8') as f:
+                for event in event_log:
+                    f.write(json.dumps(event, default=str) + '\n')
+            logger.info(f"Detailed event log saved to: {event_log_path}")
+        except Exception as e:
+            logger.error(f"Failed to save event log to {event_log_path}: {e}")
 
-            # Get the next task from the queue (FIFO)
-            task_id = task_queue.pop(0)
-            task_data = tasks[task_id]
-            task_status[task_id] = 'running'
-            executed_step_count += 1
-            logger.info(f"Executing task: {task_id} (Step {executed_step_count}) - Action: {task_data.get('action')} - Desc: {task_data.get('description', 'No description')}")
+        final_results = self._summarize_run(
+            workflow_name=self.last_workflow_name, run_id=run_id, status=final_status,
+            duration=run_duration, task_statuses=task_statuses, runtime_context=runtime_context
+        )
+        return final_results
 
-            # --- Evaluate Task Condition ---
-            condition = task_data.get("condition")
-            should_execute = self._evaluate_condition(condition, task_results, initial_context)
-
-            if not should_execute:
-                logger.info(f"Task '{task_id}' skipped due to condition not met: '{condition}'")
-                task_status[task_id] = 'skipped'
-                # Store a basic result indicating skipped status and reason, including a default IAR reflection
-                task_results[task_id] = {
-                    "status": "skipped",
-                    "reason": f"Condition not met: {condition}",
-                    "reflection": { # Provide default IAR for skipped tasks
-                        "status": "Skipped",
-                        "summary": "Task skipped because its execution condition was not met.",
-                        "confidence": None, # Confidence not applicable
-                        "alignment_check": "N/A", # Alignment not applicable
-                        "potential_issues": [],
-                        "raw_output_preview": None
-                    }
-                }
-                executed_task_ids.add(task_id)
-                # Update downstream dependencies as if completed successfully
-                for dependent_task in adj.get(task_id, []):
-                    if dependent_task in in_degree:
-                        in_degree[dependent_task] -= 1
-                        if in_degree[dependent_task] == 0 and task_status.get(dependent_task) == 'pending':
-                                task_queue.append(dependent_task)
-                                task_status[dependent_task] = 'queued'
-                continue # Move to the next task in the queue
-
-            # --- Execute Task Action with Error Handling & Retries ---
-            task_failed_definitively = False
-            action_error_details: Dict[str, Any] = {} # Store final error if task fails
-            current_attempt = 1
-            # Determine max attempts for this specific task (use task override or config default)
-            max_action_attempts = task_data.get("retry_attempts", DEFAULT_RETRY_ATTEMPTS) + 1
-
-            action_result: Optional[Dict[str, Any]] = None # Initialize action_result
-
-            while current_attempt <= max_action_attempts:
-                logger.debug(f"Task '{task_id}' - Attempt {current_attempt}/{max_action_attempts}")
-                try:
-                    # Resolve dynamic inputs from the 'inputs' field of the task definition
-                    resolved_dynamic_inputs = self._resolve_inputs(task_data.get("inputs"), task_results, initial_context, task_id)
-                    
-                    # Get action_config, which usually contains static parameters like language/code for execute_code
-                    # Resolve it as well, in case it contains simple templates (though less common for action_config)
-                    action_config_template = task_data.get("action_config", {})
-                    resolved_action_config = self._resolve_inputs(action_config_template, task_results, initial_context, task_id)
-
-                    # Merge resolved_dynamic_inputs and resolved_action_config
-                    # Create the final inputs dictionary for the action.
-                    # Keys from resolved_action_config will overwrite any same-named keys from resolved_dynamic_inputs.
-                    inputs_for_action = resolved_dynamic_inputs.copy()
-                    inputs_for_action.update(resolved_action_config)
-
-                    action_type = task_data.get("action")
-                    if not action_type: raise ValueError("Task action is missing.")
-
-                    # Construct ActionContext for this specific action call
-                    current_action_context = ActionContext(
-                        task_key=task_id,
-                        action_name=task_data.get("action_name", task_id),
-                        action_type=action_type,
-                        workflow_name=workflow.get('name', self.last_workflow_name or "UnknownWorkflow"),
-                        run_id=run_id,
-                        attempt_number=current_attempt,
-                        max_attempts=max_action_attempts,
-                        execution_start_time=datetime.now() # Added missing field
-                    )
-                    logger.debug(f"Constructed ActionContext: {current_action_context}")
-
-                    # Execute action via Action Registry, passing all required arguments
-                    action_result = execute_action(
-                        task_key=task_id,
-                        action_name=task_data.get("action_name", task_id),
-                        action_type=action_type,
-                        inputs=inputs_for_action,  # Use the merged inputs_for_action
-                        context_for_action=current_action_context,
-                        max_attempts=max_action_attempts,
-                        attempt_number=current_attempt
-                    )
-
-                    # --- IAR Compliance Vetting (New as per ResonantiA Protocol v3.0) ---
-                    is_compliant = True
-                    compliance_issues = []
-                    if not isinstance(action_result, dict):
-                        is_compliant = False
-                        compliance_issues.append("Tool output (action_result) is not a dictionary.")
-                    elif "reflection" not in action_result:
-                        is_compliant = False
-                        compliance_issues.append("Tool output is missing the 'reflection' key.")
-                    elif not isinstance(action_result.get("reflection"), dict):
-                        is_compliant = False
-                        compliance_issues.append("The 'reflection' value is not a dictionary.")
-                    else:
-                        mandatory_keys = ["status", "summary", "confidence"]
-                        missing_keys = [key for key in mandatory_keys if key not in action_result["reflection"]]
-                        if missing_keys:
-                            is_compliant = False
-                            compliance_issues.append(f"The 'reflection' dictionary is missing mandatory keys: {missing_keys}.")
-
-                    if not is_compliant:
-                        error_summary = f"IAR Compliance Error in action '{action_type}' for task '{task_id}': {', '.join(compliance_issues)}"
-                        logger.critical(error_summary)
-                        action_error_details = {
-                            "error": "IARComplianceError",
-                            "details": error_summary,
-                            "faulty_action_result": action_result,
-                            "reflection": {
-                                "status": "Failure",
-                                "summary": error_summary,
-                                "confidence": 0.0,
-                                "alignment_check": "N/A",
-                                "potential_issues": ["IAR Compliance Error", "Metacognitive Shift Recommended"],
-                                "raw_output_preview": str(action_result)[:200]
-                            }
-                        }
-                        # This is a critical protocol violation, handle it as a definitive failure for this attempt.
-                        # We will use the error handling logic, which might trigger a metacognitive shift.
-                        error_handling_outcome = handle_action_error(
-                            task_id,
-                            action_type,
-                            action_error_details,
-                            task_results,
-                            current_attempt,
-                            error_type="IARComplianceError" # Pass specific error type
-                        )
-                        if error_handling_outcome['status'] == 'retry' and current_attempt < max_action_attempts:
-                            logger.info(f"Retrying task '{task_id}' after IARComplianceError.")
-                            current_attempt += 1; time.sleep(0.2 * current_attempt)
-                            continue # Retry the loop
-                        else:
-                            task_failed_definitively = True; break
-                    # --- End of IAR Compliance Vetting ---
-
-                    task_execution_successful = True # If execute_action returns without raising an exception
-
-                    # --- Post-Processing Step (if defined and action_result is a dict) ---
-                    if task_execution_successful and isinstance(action_result, dict) and "post_processing" in task_data:
-                        post_processing_config = task_data["post_processing"]
-                        script_to_execute = post_processing_config.get("script")
-                        if script_to_execute:
-                            logger.info(f"Task '{task_id}' - Running post-processing script.")
-                            # The script is expected to modify the 'action_result' (as 'outputs') in place.
-                            script_globals = {'json': json, 're': re, 'ast': ast, 'datetime': datetime, 'uuid': uuid} 
-                            script_locals = {'outputs': action_result} # Pass action_result as 'outputs'
-                            try:
-                                exec(script_to_execute, script_globals, script_locals)
-                                # action_result is modified in-place by the script via script_locals['outputs']
-                                logger.info(f"Task '{task_id}' - Post-processing script executed successfully.")
-                            except Exception as pp_exc:
-                                logger.error(f"Task '{task_id}' - Error during post-processing script: {pp_exc}", exc_info=True)
-                                # Optionally, could treat this as a task failure or log and continue with original action_result
-                                # For now, log and continue; the original action_result will be used.
-                                # To make it a failure, you would set task_failed_definitively = True and fill action_error_details here.
-                                # For example:
-                                # action_error_details = {"error": f"Post-processing failed: {pp_exc}", "reflection": default_failure_reflection()}
-                                # task_failed_definitively = True; break # Break from retry loop, task will be marked failed.
-                                # Consider how to handle this; for now, it logs and proceeds.
-                    # --- End of Post-Processing ---
-                    
-                    # Check for explicit error key in the result first
-                    if isinstance(action_result, dict) and action_result.get("error"):
-                        logger.warning(f"Action '{action_type}' for task '{task_id}' returned explicit error on attempt {current_attempt}: {action_result.get('error')}")
-                        action_error_details = action_result # Use the full result as error details
-                        # Decide whether to retry based on error handler logic
-                        error_handling_outcome = handle_action_error(task_id, action_type, action_error_details, task_results, current_attempt)
-                        if error_handling_outcome['status'] == 'retry' and current_attempt < max_action_attempts:
-                                logger.info(f"Workflow engine retrying task '{task_id}' (attempt {current_attempt + 1}) after action error.")
-                                current_attempt += 1; time.sleep(0.2 * current_attempt) # Simple backoff
-                                continue # Retry the loop
-                        else: # Fail definitively if no retry or max attempts reached
-                                task_failed_definitively = True; break
-                    else:
-                        # Success - Store the COMPLETE result (including reflection)
-                        task_results[task_id] = action_result
-                        logger.info(f"Task '{task_id}' action '{action_type}' executed successfully on attempt {current_attempt}.")
-                        task_failed_definitively = False; break # Exit retry loop on success
-
-                except Exception as exec_exception:
-                    # Catch critical exceptions during input resolution or action execution call
-                    logger.error(f"Critical exception during task '{task_id}' action '{action_type}' (attempt {current_attempt}): {exec_exception}", exc_info=True)
-                    # Create a standard error structure with a default reflection
-                    action_error_details = {
-                        "error": f"Critical execution exception: {str(exec_exception)}",
-                        "reflection": {
-                                "status": "Failure", "summary": f"Critical exception: {exec_exception}",
-                                "confidence": 0.0, "alignment_check": "N/A",
-                                "potential_issues": ["System Error during execution."], "raw_output_preview": None
-                        }
-                    }
-                    # Decide whether to retry based on error handler logic
-                    error_handling_outcome = handle_action_error(task_id, action_type, action_error_details, task_results, current_attempt)
-                    if error_handling_outcome['status'] == 'retry' and current_attempt < max_action_attempts:
-                        logger.info(f"Workflow engine retrying task '{task_id}' (attempt {current_attempt + 1}) after critical exception.")
-                        current_attempt += 1; time.sleep(0.2 * current_attempt) # Simple backoff
-                        continue # Retry the loop
-                    else: # Fail definitively if no retry or max attempts reached
-                        task_failed_definitively = True; break
-
-            # --- Update Workflow State After Task Execution Attempt(s) ---
-            executed_task_ids.add(task_id)
-            if task_failed_definitively:
-                task_status[task_id] = 'failed'
-                # Store the final error details (which should include a reflection dict)
-                task_results[task_id] = action_error_details
-                logger.error(f"Task '{task_id}' marked as failed after {current_attempt} attempt(s). Error: {action_error_details.get('error')}")
-                # Note: Failed tasks do not decrement in-degree of dependents, halting that path
-            else:
-                # Task completed successfully (or was skipped earlier)
-                task_status[task_id] = 'completed' # Mark as completed
-                # Decrement in-degree for all tasks that depend on this one
-                for dependent_task in adj.get(task_id, []):
-                    if dependent_task in in_degree:
-                        in_degree[dependent_task] -= 1
-                        # If a dependent task now has all its dependencies met and is pending, add it to the queue
-                        if in_degree[dependent_task] == 0 and task_status.get(dependent_task) == 'pending':
-                            task_queue.append(dependent_task)
-                            task_status[dependent_task] = 'queued' # Mark as ready
-                            logger.debug(f"Task '{dependent_task}' now ready and added to queue.")
-
-            # Check if workflow stalled (no tasks ready, but some pending) - indicates cycle or logic error
-            if not task_queue and len(executed_task_ids) < len(tasks):
-                remaining_pending = [tid for tid, status in task_status.items() if status == 'pending']
-                if remaining_pending:
-                    logger.error(f"Workflow stalled: No tasks in queue, but tasks {remaining_pending} are still pending. Cycle detected or unmet dependency in logic.")
-                    task_results["workflow_error"] = "Cycle detected or unmet dependency."
-                    for tid in remaining_pending: task_status[tid] = 'incomplete' # Mark stalled tasks
-                    break # Exit main loop
-
-        # --- Final Workflow State Calculation ---
-        run_duration = time.time() - run_start_time
-        logger.info(f"Workflow '{workflow_display_name}' processing loop finished in {run_duration:.2f} seconds.")
-
-        # Check for any remaining issues after the loop finishes
-        if "workflow_error" not in task_results and len(executed_task_ids) < len(tasks):
-            # If loop finished but not all tasks executed (and no prior error), mark incomplete
-            incomplete_tasks = [tid for tid, status in task_status.items() if status not in ['completed', 'failed', 'skipped']]
-            if incomplete_tasks:
-                logger.warning(f"Workflow finished, but tasks {incomplete_tasks} did not complete (status: { {t: task_status.get(t) for t in incomplete_tasks} }).")
-                task_results["workflow_error"] = "Incomplete tasks remain at workflow end."
-                for task_id in incomplete_tasks:
-                    if task_id not in task_results: task_results[task_id] = {"error": "Task did not complete (cycle/dependency issue?).", "reflection": {"status": "Incomplete", "summary": "Task did not run.", "confidence": None, "alignment_check": "N/A", "potential_issues": ["Workflow structure/logic issue?"], "raw_output_preview": None}}
-                    if task_status.get(task_id) not in ['failed', 'skipped']: task_status[task_id] = 'incomplete'
-
-        # Determine final overall status
-        final_failed_tasks = [tid for tid, status in task_status.items() if status == 'failed']
-        final_incomplete_tasks = [tid for tid, status in task_status.items() if status == 'incomplete']
-        if final_failed_tasks: overall_status = "Completed with Errors"
-        elif final_incomplete_tasks: overall_status = "Incomplete"
-        elif "workflow_error" in task_results: overall_status = "Failed" # e.g., step limit
-        else: overall_status = "Completed Successfully"
-
-        logger.info(f"Workflow '{workflow_display_name}' finished with overall status: {overall_status}")
-
-        # Add final status information to the results dictionary
-        task_results["workflow_status"] = overall_status
-        task_results["task_statuses"] = task_status # Include final status of each task
-        task_results["workflow_run_duration_sec"] = round(run_duration, 2)
-
-        # Return the complete context, including initial context, task results (with IAR), and final status info
-        return task_results
+    def _summarize_run(self, workflow_name, run_id, status, duration, task_statuses, runtime_context, error=None):
+        """Helper to create the final results dictionary."""
+        summary = {
+            "workflow_name": workflow_name,
+            "workflow_run_id": run_id,
+            "workflow_status": status,
+            "workflow_run_duration_sec": duration,
+            "task_statuses": task_statuses,
+        }
+        if error:
+            summary["error"] = error
+        
+        # Add the rest of the runtime context, which includes task outputs
+        summary.update(runtime_context)
+        
+        return summary
 
 # --- END OF FILE 3.0ArchE/workflow_engine.py --- 

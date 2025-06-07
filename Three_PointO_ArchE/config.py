@@ -38,7 +38,7 @@ LLM_DEFAULT_TEMP = 0.6 # Default temperature for LLM generation (0.0=determinist
 
 # Search Tool (Section 7.12)
 SEARCH_API_KEY = os.environ.get("SEARCH_API_KEY", "YOUR_SEARCH_API_KEY_HERE") # Use env var if using real search API
-SEARCH_PROVIDER = "simulated_google" # Options: 'simulated_google', 'serpapi', 'google_custom_search', etc. Needs implementation in tools.py if not simulated.
+SEARCH_PROVIDER = "puppeteer_nodejs" # Options: 'simulated_google', 'serpapi', 'google_custom_search', etc. Needs implementation in tools.py if not simulated.
 
 # Code Executor (Section 7.10) - CRITICAL SECURITY SETTINGS
 CODE_EXECUTOR_TIMEOUT = 60 # Max execution time in seconds (increased slightly)
@@ -79,7 +79,7 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "outputs") # Path for generated outputs (res
 MODEL_SAVE_DIR = os.path.join(OUTPUT_DIR, "models") # Path specifically for saved models
 SPR_JSON_FILE = os.path.join(KNOWLEDGE_GRAPH_DIR, "spr_definitions_tv.json") # Path to SPR definitions
 LOG_FILE = os.path.join(LOG_DIR, "arche_v3_log.log") # Default log filename
-NODE_SEARCH_SCRIPT_PATH = os.path.join(BASE_DIR, "ResonantiA", "browser_automation", "search.js") # Path to the Node.js search script
+NODE_SEARCH_SCRIPT_PATH = os.path.join(BASE_DIR, "browser_automation", "search.js") # Path to the Node.js search script
 
 # --- Logging Configuration (See logging_config.py Section 7.24) ---
 LOG_LEVEL = logging.DEBUG # Default logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)

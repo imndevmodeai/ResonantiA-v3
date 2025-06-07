@@ -1,0 +1,92 @@
+[
+  {
+    "shift_id": "metacognitive_shift_1749295009",
+    "start_time": "2025-06-07T11:16:49.986224+00:00",
+    "end_time": "2025-06-07T11:16:49.990262+00:00",
+    "duration_seconds": 0.004038,
+    "current_state": {
+      "registry_stats": {
+        "total_instances": 1,
+        "active_instances": 1,
+        "busy_instances": 0,
+        "instance_types": {
+          "engineering": 1,
+          "analytical": 0,
+          "interface": 0,
+          "specialized": 0
+        },
+        "total_tasks_completed": 0,
+        "average_success_rate": 1.0
+      },
+      "knowledge_stats": {
+        "total_insights": 2,
+        "total_patterns": 1,
+        "insights_by_category": {
+          "workflow_engineering": 1,
+          "debugging_patterns": 1,
+          "implementation_resonance": 0,
+          "protocol_enhancement": 0,
+          "capability_evolution": 0
+        },
+        "insights_by_validation": {
+          "pending": 0,
+          "validated": 2,
+          "rejected": 0,
+          "deprecated": 0
+        },
+        "average_reusability": 0.925,
+        "total_applications": 6,
+        "average_pattern_success_rate": 1.0
+      },
+      "readiness_factors": {
+        "active_instances": 1.0,
+        "validated_insights": 1.0,
+        "crystallized_patterns": 1.0,
+        "average_success_rate": 1.0
+      },
+      "readiness_score": 1.0,
+      "assessment_timestamp": "2025-06-07T11:16:49.986569+00:00"
+    },
+    "transformation_results": {
+      "completed_phases": [
+        "individual_to_collective",
+        "isolated_to_crystallized",
+        "single_to_distributed",
+        "reactive_to_proactive"
+      ],
+      "phase_success_rate": 1.0,
+      "transformation_timestamp": "2025-06-07T11:16:49.986768+00:00"
+    },
+    "validation_results": {
+      "validation_tests": {
+        "knowledge_retrieval": true,
+        "pattern_application": true,
+        "cross_instance_communication": true,
+        "collective_problem_solving": true
+      },
+      "successful_tests": 4,
+      "total_tests": 4,
+      "shift_success_rate": 1.0,
+      "validation_timestamp": "2025-06-07T11:16:49.987047+00:00"
+    },
+    "solidification_results": {
+      "new_insights_captured": 1,
+      "patterns_created": 1,
+      "shift_insight_id": "insight_implementation_resonance_47ee04f9",
+      "solidification_timestamp": "2025-06-07T11:16:49.989726+00:00"
+    },
+    "shift_metrics": {
+      "individual_to_collective": 1.0,
+      "isolated_to_crystallized": 1.0,
+      "single_to_distributed": 1.0,
+      "reactive_to_proactive": 1.0,
+      "collective_intelligence_emergence": 1.0,
+      "knowledge_crystallization_rate": 0.6666666666666666,
+      "distributed_capability_utilization": 1.0,
+      "pattern_reusability_score": 1.0,
+      "overall_shift_score": 0.9583333333333334
+    },
+    "collective_intelligence_level": 0.6933333333333334,
+    "status": "COMPLETE"
+  }
+]

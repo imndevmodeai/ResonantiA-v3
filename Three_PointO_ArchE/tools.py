@@ -17,6 +17,8 @@ from .spr_manager import SPRManager
 from . import config # Access configuration settings
 from .llm_providers import get_llm_provider, get_model_for_provider, LLMProviderError # Import LLM helpers
 from .action_context import ActionContext # Import ActionContext from new file
+from .predictive_modeling_tool import run_prediction # Predictive tool main function
+from .system_representation import System, GaussianDistribution, HistogramDistribution, StringParam # Import the system representation classes
 
 # Initialize logger early for use in import blocks
 # Using a more specific name for this logger to avoid clashes if 'tools' is a common name
@@ -501,76 +503,36 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
 # --- Display Tool ---
 def display_output(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
     """
-    [IAR Enabled] Displays content provided in the 'content' input key to the
-    primary output stream (typically the console). Handles basic formatting.
+    [IAR Enabled] Displays content to the console/log.
+    Returns a reflection of the display action.
     """
     # --- Input Extraction ---
-    content = inputs.get("content", "<No Content Provided to Display>")
-    display_format = inputs.get("format", "auto").lower() # e.g., auto, json, text
+    content_to_display = inputs.get("content", "[No content provided]")
 
-    # --- Initialize Results & Reflection ---
-    primary_result = {"status": "Error", "error": None} # Default to error
-    reflection_status = "Failure"
-    reflection_summary = "Display output initialization failed."
-    reflection_confidence = 0.0
-    reflection_alignment = "N/A"
-    reflection_issues: List[str] = ["Initialization error."]
-    reflection_preview = None
+    # --- Initialize Reflection ---
+    reflection_status = "Success"
+    reflection_summary = "Content displayed successfully."
+    reflection_confidence = 1.0
+    reflection_alignment = "Aligned with output/display goal."
+    reflection_issues: List[str] = []
 
-    # --- Format and Display ---
-    try:
-        display_str: str
-        # Format content based on type or specified format
-        if display_format == 'json' or (display_format == 'auto' and isinstance(content, (dict, list))):
-            try:
-                # Pretty-print JSON
-                display_str = json.dumps(content, indent=2, default=str) # Use default=str for safety
-            except TypeError as json_err:
-                display_str = f"[JSON Formatting Error: {json_err}]\nFallback Representation:\n{repr(content)}"
-                reflection_issues.append(f"JSON serialization failed: {json_err}")
-        else: # Default to string conversion
-            display_str = str(content)
+    # --- Execute Display ---
+    logger_tools_diag.info("Displaying output content via print().")
+    # A more structured output format
+    display_str = f"\n--- Arche Display Output (v3.0) ---\n{_format_output_content(content_to_display)}\n-----------------------------------\n"
+    print(display_str) # Print to standard output
 
-        reflection_preview = display_str # Use the formatted string for preview (truncated later)
-
-        # Print formatted content to standard output
-        logger_tools_diag.info("Displaying output content via print().")
-        # Add header/footer for clarity in console logs
-        print("\n--- Arche Display Output (v3.0) ---")
-        print(display_str)
-        print("-----------------------------------\n")
-
-        primary_result["status"] = "Displayed"
-        reflection_status = "Success"
-        reflection_summary = "Content successfully formatted and printed to standard output."
-        reflection_confidence = 1.0 # High confidence in successful display action
-        reflection_alignment = "Aligned with goal of presenting information."
-        # Clear initial issue if successful, keep formatting issue if it occurred
-        reflection_issues = [iss for iss in reflection_issues if "JSON serialization failed" in iss] if reflection_issues else None
-
-    except Exception as e_display:
-        # Catch errors during formatting or printing
-        error_msg = f"Failed to format or display output: {e_display}"
-        logger_tools_diag.error(error_msg, exc_info=True)
-        primary_result["error"] = error_msg
-        reflection_status = "Failure"
-        reflection_summary = f"Display output failed: {error_msg}"
-        reflection_confidence = 0.1
-        reflection_alignment = "Failed to present information."
-        reflection_issues = [f"Display Error: {e_display}"]
-        # Attempt fallback display using repr()
-        try:
-            print("\n--- Arche Display Output (Fallback Repr) ---")
-            print(repr(content))
-            print("--------------------------------------------\n")
-            primary_result["status"] = "Displayed (Fallback)"
-            reflection_issues.append("Used fallback repr() for display.")
-        except Exception as fallback_e:
-            logger_tools_diag.critical(f"Fallback display using repr() also failed: {fallback_e}")
-            primary_result["error"] = f"Primary display failed: {e_display}. Fallback display failed: {fallback_e}"
-
-    # --- Final Return ---
-    return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
+    # --- Finalize and Return ---
+    primary_result = {"status": "displayed", "content_preview": str(content_to_display)[:75] + "..."}
+    reflection = _create_reflection(
+        status=reflection_status,
+        summary=reflection_summary,
+        confidence=reflection_confidence,
+        alignment=reflection_alignment,
+        issues=reflection_issues,
+        preview=content_to_display
+    )
+    return {**primary_result, "reflection": reflection}
 
 # --- RunCFP Tool Wrapper ---
 # This function exists only to be registered. The actual logic is in the wrapper
@@ -804,5 +766,364 @@ def default_failure_reflection(summary: str) -> Dict[str, Any]:
         issues=["System Error: Default failure reflection"],
         preview=None
     )
+
+# --- Tool for System Divergence Analysis ---
+
+def _create_system_from_json(config: Dict[str, Any]) -> System:
+    """Helper function to build a System object from a JSON config."""
+    system = System(system_id=config['system_id'], name=config['name'])
+    for param_conf in config.get('parameters', []):
+        param_type = param_conf.pop('type', None)
+        if param_type == "Gaussian":
+            system.add_parameter(GaussianDistribution(**param_conf))
+        elif param_type == "Histogram":
+            system.add_parameter(HistogramDistribution(**param_conf))
+        elif param_type == "String":
+            system.add_parameter(StringParam(**param_conf))
+    
+    # If there's historical data, update the distributions
+    if 'history_data' in config:
+        for param_name, values in config['history_data'].items():
+            if param_name in system.parameters:
+                for value in values:
+                    system.parameters[param_name].update(value)
+    
+    return system
+
+def analyze_system_divergence(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
+    """
+    [IAR Enabled] Analyzes the divergence between two systems defined in JSON files.
+    """
+    system_a_path = inputs.get("system_a_path")
+    system_b_path = inputs.get("system_b_path")
+    method = inputs.get("method", "kld")
+
+    if not system_a_path or not system_b_path:
+        # Handle missing input error
+        error_msg = "Input error: Both 'system_a_path' and 'system_b_path' are required."
+        logger_tools_diag.error(error_msg)
+        reflection = _create_reflection(
+            status="Failure",
+            summary=error_msg,
+            confidence=0.0,
+            alignment="N/A",
+            issues=["Missing required input arguments."],
+            preview=None
+        )
+        return {"error": error_msg, "reflection": reflection}
+
+    try:
+        with open(system_a_path, 'r') as f:
+            config_a = json.load(f)
+        with open(system_b_path, 'r') as f:
+            config_b = json.load(f)
+
+        system_a = _create_system_from_json(config_a)
+        system_b = _create_system_from_json(config_b)
+
+        divergence_score = system_a.calculate_divergence(system_b, method=method)
+        
+        analysis_summary = f"Divergence ({method.upper()}) between '{system_a.name}' and '{system_b.name}': {divergence_score:.4f}\\n"
+        
+        primary_result = {
+            "divergence_score": divergence_score,
+            "analysis_summary": analysis_summary
+        }
+        
+        reflection = _create_reflection(
+            status="Success",
+            summary="Divergence analysis completed successfully.",
+            confidence=0.95,
+            alignment="Aligned with system comparison goal.",
+            issues=None,
+            preview=analysis_summary
+        )
+        return {**primary_result, "reflection": reflection}
+
+    except Exception as e:
+        error_msg = f"Failed to analyze system divergence: {e}"
+        logger_tools_diag.error(error_msg, exc_info=True)
+        reflection = _create_reflection(
+            status="Failure",
+            summary=error_msg,
+            confidence=0.0,
+            alignment="N/A",
+            issues=[f"System Error: {e}"],
+            preview=None
+        )
+        return {"error": error_msg, "reflection": reflection}
+
+def compare_system_factors(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
+    """
+    [IAR Enabled] Provides a detailed, parameter-by-parameter comparison between two systems.
+    """
+    system_a_path = inputs.get("system_a_path")
+    system_b_path = inputs.get("system_b_path")
+    # Default methods; could be made configurable via inputs
+    comparison_methods = ["kld", "emd", "value_diff"] 
+
+    if not system_a_path or not system_b_path:
+        error_msg = "Input error: Both 'system_a_path' and 'system_b_path' are required."
+        logger_tools_diag.error(error_msg)
+        return {"error": error_msg, "reflection": _create_reflection(status="Failure", summary=error_msg, issues=["Missing required inputs."])}
+
+    try:
+        with open(system_a_path, 'r') as f:
+            config_a = json.load(f)
+        with open(system_b_path, 'r') as f:
+            config_b = json.load(f)
+
+        system_a = _create_system_from_json(config_a)
+        system_b = _create_system_from_json(config_b)
+
+        parameter_comparison = []
+        overall_kld = system_a.calculate_divergence(system_b, method='kld')
+        overall_emd = system_a.calculate_divergence(system_b, method='emd')
+
+        all_param_names = set(system_a.parameters.keys()) | set(system_b.parameters.keys())
+
+        for name in sorted(list(all_param_names)):
+            param_a = system_a.get_parameter(name)
+            param_b = system_b.get_parameter(name)
+            
+            param_details = {"parameter_name": name}
+
+            if param_a and param_b and type(param_a) == type(param_b):
+                param_details.update({
+                    "type": param_a.__class__.__name__,
+                    "system_a_value": param_a.get_value(),
+                    "system_b_value": param_b.get_value(),
+                    "kld": param_a.kl_divergence(param_b),
+                    "emd": param_a.earth_movers_distance(param_b)
+                })
+                if isinstance(param_a.get_value(), (int, float)) and isinstance(param_b.get_value(), (int, float)):
+                    param_details["value_difference"] = param_a.get_value() - param_b.get_value()
+                
+            elif param_a and not param_b:
+                param_details.update({"status": "unique_to_system_a", "value": param_a.get_value()})
+            elif not param_a and param_b:
+                param_details.update({"status": "unique_to_system_b", "value": param_b.get_value()})
+            else:
+                 param_details.update({"status": "type_mismatch", "system_a_type": type(param_a).__name__, "system_b_type": type(param_b).__name__})
+
+            parameter_comparison.append(param_details)
+        
+        primary_result = {
+            "comparison_summary": {
+                "system_a_name": system_a.name,
+                "system_b_name": system_b.name,
+                "overall_kld": overall_kld,
+                "overall_emd": overall_emd
+            },
+            "parameter_comparison": parameter_comparison
+        }
+        
+        reflection = _create_reflection(
+            status="Success",
+            summary=f"Factor comparison between '{system_a.name}' and '{system_b.name}' complete.",
+            confidence=0.98,
+            alignment="Aligned with detailed system analysis goal.",
+            issues=None,
+            preview=f"Compared {len(parameter_comparison)} parameters. Overall KLD: {overall_kld:.4f}"
+        )
+        return {**primary_result, "reflection": reflection}
+
+    except Exception as e:
+        error_msg = f"Failed to compare system factors: {e}"
+        logger_tools_diag.error(error_msg, exc_info=True)
+        return {"error": error_msg, "reflection": _create_reflection(
+            status="Failure", 
+            summary=error_msg, 
+            issues=[f"System Error: {e}"],
+            confidence=0.0,
+            alignment="N/A",
+            preview=None
+            )
+        }
+
+def analyze_workflow_impact(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
+    """
+    [IAR Enabled] Analyzes a workflow event log to identify root causes for changes in a specific system parameter.
+    """
+    run_id = inputs.get("run_id")
+    parameter_name = inputs.get("parameter_name")
+
+    if not run_id or not parameter_name:
+        error_msg = "Input error: Both 'run_id' and 'parameter_name' are required."
+        logger_tools_diag.error(error_msg)
+        return {"error": error_msg, "reflection": _create_reflection(status="Failure", summary=error_msg, issues=["Missing required inputs."], confidence=0.0, alignment="N/A", preview=None)}
+
+    event_log_path = os.path.join(config.OUTPUT_DIR, f"run_events_{run_id}.jsonl")
+    if not os.path.exists(event_log_path):
+        error_msg = f"Event log not found for run_id '{run_id}' at path '{event_log_path}'."
+        logger_tools_diag.error(error_msg)
+        return {"error": error_msg, "reflection": _create_reflection(status="Failure", summary=error_msg, issues=[f"Event log file not found."], confidence=0.1, alignment="N/A", preview=None)}
+
+    try:
+        events = []
+        with open(event_log_path, 'r') as f:
+            for line in f:
+                events.append(json.loads(line))
+
+        analysis = {}
+        if parameter_name == "seconds_per_task":
+            runtimes = {}
+            for event in events:
+                action = event.get("action_type")
+                duration = event.get("duration_sec", 0)
+                if action not in runtimes:
+                    runtimes[action] = []
+                runtimes[action].append(duration)
+            
+            analysis["type"] = "runtime_analysis"
+            analysis["details"] = [{"action": k, "average_duration": np.mean(v), "count": len(v)} for k, v in runtimes.items()]
+            analysis["summary"] = f"Analyzed runtimes for {len(events)} events across {len(runtimes)} unique actions."
+
+        elif parameter_name == "tool_success_rate":
+            statuses = {}
+            for event in events:
+                action = event.get("action_type")
+                status = event.get("result", {}).get("reflection", {}).get("status", "Failure")
+                if action not in statuses:
+                    statuses[action] = {"Success": 0, "Failure": 0}
+                statuses[action][status] += 1
+
+            analysis["type"] = "success_rate_analysis"
+            details = []
+            for action, counts in statuses.items():
+                total = counts["Success"] + counts["Failure"]
+                rate = counts["Success"] / total if total > 0 else 0
+                details.append({"action": action, "success_rate": rate, "success_count": counts["Success"], "failure_count": counts["Failure"]})
+            analysis["details"] = details
+            analysis["summary"] = f"Analyzed success rates for {len(events)} events across {len(statuses)} unique actions."
+        
+        else:
+            analysis["type"] = "unsupported_parameter"
+            analysis["summary"] = f"Analysis for parameter '{parameter_name}' is not currently supported."
+
+        reflection = _create_reflection(
+            status="Success",
+            summary=f"Workflow impact analysis for '{parameter_name}' completed.",
+            confidence=0.95,
+            alignment="Aligned with root cause analysis goal.",
+            issues=None,
+            preview=analysis.get("summary")
+        )
+        return {"analysis": analysis, "reflection": reflection}
+
+    except Exception as e:
+        error_msg = f"Failed during workflow impact analysis: {e}"
+        logger_tools_diag.error(error_msg, exc_info=True)
+        return {"error": error_msg, "reflection": _create_reflection(status="Failure", summary=error_msg, issues=[f"System Error: {e}"], confidence=0.0, alignment="N/A", preview=None)}
+
+def run_code_linter(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
+    """
+    [IAR Enabled] Runs a linter (flake8) on the project directory and returns the output.
+    """
+    target_directory = inputs.get("directory", "Three_PointO_ArchE")
+    logger_tools_diag.info(f"Running linter on directory: {target_directory}")
+    try:
+        process = subprocess.run(
+            ['flake8', target_directory],
+            capture_output=True,
+            text=True,
+            check=False 
+        )
+        
+        issues_found = process.stdout.strip().split('\\n') if process.stdout.strip() else []
+        status = "Completed with issues" if issues_found else "Completed successfully"
+        summary = f"Linter run complete. Found {len(issues_found)} issues."
+
+        reflection = _create_reflection("Success", summary, 0.99, "Aligned with code quality goal.", issues_found, f"Found {len(issues_found)} issues.")
+        return {"linter_report": {"status": status, "issues": issues_found}, "reflection": reflection}
+
+    except FileNotFoundError:
+        error_msg = "Linter tool 'flake8' not found. Please ensure it is installed."
+        logger_tools_diag.error(error_msg)
+        reflection = _create_reflection("Failure", error_msg, 0.1, "Misaligned, dependency missing.", [error_msg], None)
+        return {"error": error_msg, "reflection": reflection}
+    except Exception as e:
+        error_msg = f"An unexpected error occurred during linting: {e}"
+        logger_tools_diag.error(error_msg, exc_info=True)
+        reflection = _create_reflection("Failure", error_msg, 0.1, "Misaligned, unexpected error.", [str(e)], None)
+        return {"error": error_msg, "reflection": reflection}
+
+def run_workflow_suite(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
+    """
+    [IAR Enabled] Discovers and runs all workflows in the specified directory.
+    """
+    # Moved import here to break the circular dependency
+    from .workflow_engine import WorkflowEngine 
+
+    workflows_dir = inputs.get("directory", config.WORKFLOW_DIR)
+    test_cases_file = inputs.get("test_cases_file")
+    exclude_file = inputs.get("exclude_workflow_file")
+    logger_tools_diag.info(f"Starting workflow suite run for directory: {workflows_dir}")
+
+    test_cases = {}
+    default_context = {}
+    if test_cases_file and os.path.exists(test_cases_file):
+        try:
+            with open(test_cases_file, 'r') as f:
+                test_config = json.load(f)
+                test_cases = test_config.get("test_cases", {})
+                default_context = test_config.get("default_context", {})
+            logger_tools_diag.info(f"Loaded {len(test_cases)} specific test cases from {test_cases_file}.")
+        except (json.JSONDecodeError, FileNotFoundError) as e:
+            logger_tools_diag.error(f"Failed to load or parse test cases file {test_cases_file}: {e}")
+
+    try:
+        # Get all .json files from the directory, excluding the one running the suite and the test case config
+        all_workflow_files = [
+            f for f in os.listdir(workflows_dir) 
+            if f.endswith(".json") and f != exclude_file and (not test_cases_file or f != os.path.basename(test_cases_file))
+        ]
+        if exclude_file:
+            logger_tools_diag.info(f"Excluding '{exclude_file}' from the test suite.")
+
+        suite_summary = {
+            "total_run": 0,
+            "successful": [],
+            "failed": [],
+            "success_details": [],
+            "failure_details": []
+        }
+
+        # Iterate through all found workflow files, not just the ones in test_cases
+        for wf_file in all_workflow_files:
+            logger_tools_diag.info(f"--- Running workflow: {wf_file} ---")
+            suite_summary["total_run"] += 1
+            
+            # Determine the initial context for this specific workflow
+            # Use the specific test case if available, otherwise use the default
+            initial_context = test_cases.get(wf_file, default_context).copy()
+            initial_context["workflow_run_id"] = f"suite_run_{uuid.uuid4().hex}"
+
+            try:
+                # Each workflow needs its own engine instance
+                workflow_engine = WorkflowEngine(config)
+                # We only need the filename, as the engine knows the directory
+                final_context = workflow_engine.run_workflow(wf_file, initial_context)
+                
+                suite_summary["successful"].append(wf_file)
+                suite_summary["success_details"].append({
+                    "workflow": wf_file,
+                    "final_status": final_context.get("workflow_status", "Unknown")
+                })
+                logger_tools_diag.info(f"--- Finished workflow: {wf_file} (Success) ---")
+            except Exception as e:
+                logger_tools_diag.error(f"Critical error running workflow {wf_file}: {e}", exc_info=True)
+                suite_summary["failed"].append(wf_file)
+                suite_summary["failure_details"].append({"file": wf_file, "reason": f"Critical engine error: {e}"})
+
+        summary_text = f"Workflow suite run complete. Passed: {len(suite_summary['successful'])}. Failed: {len(suite_summary['failed'])}."
+        reflection = _create_reflection("Success", summary_text, 1.0, "Aligned with testing goal.", None, summary_text)
+        
+        return {"suite_summary": suite_summary, "reflection": reflection}
+
+    except Exception as e:
+        error_msg = f"Failed during workflow suite run: {e}"
+        logger_tools_diag.error(error_msg, exc_info=True)
+        return {"error": error_msg, "reflection": _create_reflection(status="Failure", summary=error_msg, issues=[f"System Error: {e}"], confidence=0.0, alignment="N/A", preview=None)}
 
 # --- END OF FILE 3.0ArchE/tools.py --- 

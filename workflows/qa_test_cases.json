@@ -1,0 +1,25 @@
+{
+  "default_context": {
+    "user_query": "Generic test query: What is the primary purpose and function of this workflow?"
+  },
+  "test_cases": {
+    "spr_cognitive_unfolding_workflow.json": {
+      "user_query": "Unfold the cognitive steps required to analyze the impact of a new feature on user engagement."
+    },
+    "sirc_application_workflow.json": {
+      "user_query": "Generate a SIRC report for a hypothetical security incident involving a phishing attack that compromised an employee's credentials."
+    },
+    "root_cause_analysis_workflow.json": {
+      "user_query": "The latest software update has resulted in a 15% increase in application crash rates. Analyze the root cause of this issue."
+    },
+    "self_reflection_workflow.json": {
+      "user_query": "Reflect on the system's performance over the last quarter, identifying key successes and areas for improvement in processing efficiency."
+    },
+    "diagnostic_workflow.json": {
+        "user_query": "A user is reporting that their dashboard is not loading. Diagnose the potential causes."
+    },
+    "query_refinement_workflow.json": {
+        "user_query": "refine this query: 'how to fix bug'"
+    }
+  }
+} 

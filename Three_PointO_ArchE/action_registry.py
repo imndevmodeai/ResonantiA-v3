@@ -11,7 +11,7 @@ from typing import Dict, Any, Callable, Optional, List
 from . import config
 # Import action functions from various tool modules
 # Ensure these imported functions are implemented to return the IAR dictionary
-from .tools import run_search, invoke_llm, display_output, calculate_math, placeholder_codebase_search, retrieve_spr_definitions # Basic tools
+from .tools import run_search, invoke_llm, display_output, calculate_math, placeholder_codebase_search, retrieve_spr_definitions, analyze_system_divergence, compare_system_factors, analyze_workflow_impact, run_code_linter, run_workflow_suite # Basic tools
 from .enhanced_tools import call_api, perform_complex_data_analysis, interact_with_database # Enhanced tools
 from .code_executor import execute_code # Code execution tool
 from .cfp_framework import CfpframeworK # Import the class for the wrapper
@@ -136,6 +136,11 @@ ACTION_REGISTRY: Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]] = {
     "generate_text_llm": invoke_llm, # Example IAR implementation shown in tools.py
     "display_output": display_output,
     "calculate_math": calculate_math,
+    "analyze_system_divergence": analyze_system_divergence,
+    "compare_system_factors": compare_system_factors,
+    "analyze_workflow_impact": analyze_workflow_impact,
+    "run_code_linter": run_code_linter,
+    "run_workflow_suite": run_workflow_suite,
 
     # Enhanced Tools (from enhanced_tools.py - assumed updated for IAR)
     "call_external_api": call_api,
@@ -246,54 +251,18 @@ def execute_action(
         # Keep the old check for other tools that might use "action_context"
         expects_action_context = "action_context" in func_signature.parameters
 
-        tool_kwargs = {**inputs}
-        operation_val = tool_kwargs.pop("operation", None)
-        first_param_name = list(func_signature.parameters.keys())[0] if func_signature.parameters else None
+        # Now, make the call to the tool function
+        # The tool function receives the inputs dictionary and, if it expects it, the action context
+        
+        # This revised call passes the 'inputs' dictionary as a single argument
+        # and adds the context if the tool's signature includes 'action_context'
+        final_call_kwargs = {}
+        if expects_context_for_action:
+             final_call_kwargs['context_for_action'] = context_for_action
+        elif expects_action_context:
+             final_call_kwargs['action_context'] = context_for_action
 
-        if operation_val is not None and first_param_name == "operation":
-            final_call_kwargs = {**tool_kwargs}
-            if expects_context_for_action:
-                final_call_kwargs["context_for_action"] = context_for_action
-            elif expects_action_context:
-                final_call_kwargs["action_context"] = context_for_action
-            tool_result = actual_tool_function(operation_val, **final_call_kwargs)
-        else:
-            final_call_args = {}
-            final_call_kwargs = {}
-            # Populate kwargs based on actual parameter names found
-            if expects_context_for_action: # For retrieve_spr_definitions
-                final_call_kwargs["context_for_action"] = context_for_action
-            elif expects_action_context: # For other tools potentially using this name
-                final_call_kwargs["action_context"] = context_for_action
-            
-            # Compare actual_tool_function with imported function objects directly
-            # Ensure all functions compared here are imported at the top of the file.
-            if actual_tool_function is execute_code or \
-               actual_tool_function is display_output or \
-               actual_tool_function is perform_abm or \
-               actual_tool_function is perform_causal_inference or \
-               actual_tool_function is run_prediction or \
-               actual_tool_function is invoke_llm or \
-               actual_tool_function is retrieve_spr_definitions:
-                actual_inputs_for_tool = {**tool_kwargs}
-                if operation_val is not None:
-                    actual_inputs_for_tool["operation"] = operation_val
-                final_call_args['inputs'] = actual_inputs_for_tool
-                tool_result = actual_tool_function(inputs=final_call_args['inputs'], **final_call_kwargs)
-            else:
-                # Default for other tools (e.g. run_cfp_action which takes **tool_kwargs directly after operation)
-                # This path might need review if other tools have specific signature needs.
-                # For now, assuming they take individual kwargs or a single operation arg + kwargs.
-                actual_inputs_for_tool = {**tool_kwargs}
-                if operation_val is not None:
-                     # If operation_val exists and the first param is 'operation', it's passed positionally.
-                    if first_param_name == "operation":
-                        tool_result = actual_tool_function(operation_val, **{**actual_inputs_for_tool, **final_call_kwargs})
-                    else: # Pass operation as a kwarg if not the first positional, or if no first_param_name
-                        actual_inputs_for_tool["operation"] = operation_val
-                        tool_result = actual_tool_function(**{**actual_inputs_for_tool, **final_call_kwargs})
-                else: # No operation_val
-                    tool_result = actual_tool_function(**{**actual_inputs_for_tool, **final_call_kwargs})
+        tool_result = actual_tool_function(inputs=inputs, **final_call_kwargs)
 
         # Validate tool_result structure (must be dict, should have 'reflection')
         if not isinstance(tool_result, dict):
@@ -335,6 +304,8 @@ def execute_action(
         return tool_result
 
     except Exception as e:
+        # Catch any exception during the tool's execution (e.g., network error, file not found)
+        # This is a critical failure of the action itself.
         logger.error(f"Critical error during execution of action '{action_type}': {e}", exc_info=True)
         error_msg = f"System error in action '{action_type}': {e}"
         # Construct reflection directly for this exception case
