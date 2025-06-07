@@ -127,3 +127,5 @@ ResonantiA/browser_automation/*.png
 # --- End of .gitignore ---
 
 # Test commit for snapshot hook (attempt 2) 
+tags
+tags.zip

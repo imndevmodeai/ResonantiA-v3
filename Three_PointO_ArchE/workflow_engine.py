@@ -11,27 +11,25 @@ import logging
 import copy
 import time
 import re
-import uuid
-from typing import Dict, Any, List, Optional, Set, Union, Tuple
+import uuid # Added for workflow_run_id generation consistency
+from typing import Dict, Any, List, Optional, Set, Union, Tuple # Expanded type hints
+# Use relative imports within the package
 from . import config
-from .action_registry import execute_action
-from .spr_manager import SPRManager
-from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
-from .action_context import ActionContext
+from .action_registry import execute_action # Imports the function that calls specific tools
+from .spr_manager import SPRManager # May be used for SPR-related context or validation
+from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS # Imports error handling logic
+from .action_context import ActionContext # Import from new file
 import ast
-from datetime import datetime
+from datetime import datetime # Added import
 
+# Attempt to import numpy for numeric type checking in _compare_values, optional
 try:
     import numpy as np
 except ImportError:
-    np = None
+    np = None # Set to None if numpy is not available
     logging.info("Numpy not found, some numeric type checks in _compare_values might be limited.")
 
 logger = logging.getLogger(__name__)
-
-class IARComplianceError(Exception):
-    """Custom exception raised when a tool's output fails IAR validation."""
-    pass
 
 class WorkflowEngine:
     """
@@ -703,6 +701,60 @@ class WorkflowEngine:
                         max_attempts=max_action_attempts,
                         attempt_number=current_attempt
                     )
+
+                    # --- IAR Compliance Vetting (New as per ResonantiA Protocol v3.0) ---
+                    is_compliant = True
+                    compliance_issues = []
+                    if not isinstance(action_result, dict):
+                        is_compliant = False
+                        compliance_issues.append("Tool output (action_result) is not a dictionary.")
+                    elif "reflection" not in action_result:
+                        is_compliant = False
+                        compliance_issues.append("Tool output is missing the 'reflection' key.")
+                    elif not isinstance(action_result.get("reflection"), dict):
+                        is_compliant = False
+                        compliance_issues.append("The 'reflection' value is not a dictionary.")
+                    else:
+                        mandatory_keys = ["status", "summary", "confidence"]
+                        missing_keys = [key for key in mandatory_keys if key not in action_result["reflection"]]
+                        if missing_keys:
+                            is_compliant = False
+                            compliance_issues.append(f"The 'reflection' dictionary is missing mandatory keys: {missing_keys}.")
+
+                    if not is_compliant:
+                        error_summary = f"IAR Compliance Error in action '{action_type}' for task '{task_id}': {', '.join(compliance_issues)}"
+                        logger.critical(error_summary)
+                        action_error_details = {
+                            "error": "IARComplianceError",
+                            "details": error_summary,
+                            "faulty_action_result": action_result,
+                            "reflection": {
+                                "status": "Failure",
+                                "summary": error_summary,
+                                "confidence": 0.0,
+                                "alignment_check": "N/A",
+                                "potential_issues": ["IAR Compliance Error", "Metacognitive Shift Recommended"],
+                                "raw_output_preview": str(action_result)[:200]
+                            }
+                        }
+                        # This is a critical protocol violation, handle it as a definitive failure for this attempt.
+                        # We will use the error handling logic, which might trigger a metacognitive shift.
+                        error_handling_outcome = handle_action_error(
+                            task_id,
+                            action_type,
+                            action_error_details,
+                            task_results,
+                            current_attempt,
+                            error_type="IARComplianceError" # Pass specific error type
+                        )
+                        if error_handling_outcome['status'] == 'retry' and current_attempt < max_action_attempts:
+                            logger.info(f"Retrying task '{task_id}' after IARComplianceError.")
+                            current_attempt += 1; time.sleep(0.2 * current_attempt)
+                            continue # Retry the loop
+                        else:
+                            task_failed_definitively = True; break
+                    # --- End of IAR Compliance Vetting ---
+
                     task_execution_successful = True # If execute_action returns without raising an exception
 
                     # --- Post-Processing Step (if defined and action_result is a dict) ---
@@ -827,22 +879,6 @@ class WorkflowEngine:
         task_results["workflow_status"] = overall_status
         task_results["task_statuses"] = task_status # Include final status of each task
         task_results["workflow_run_duration_sec"] = round(run_duration, 2)
-
-        # --- IAR COMPLIANCE VETTING (SIRC_ACTUALIZATION_DIRECTIVE_001) ---
-        is_compliant = False
-        if isinstance(action_result, dict) and "reflection" in action_result:
-            reflection = action_result.get("reflection")
-            if isinstance(reflection, dict) and all(k in reflection for k in ["status", "summary", "confidence"]):
-                is_compliant = True
-
-        if not is_compliant:
-            error_message = f"IAR Compliance Error: Tool '{action_type}' in task '{task_id}' returned a non-compliant result."
-            logger.error(f"[Workflow: {workflow_name}, ID: {run_id}] {error_message} Result: {str(action_result)[:500]}")
-            # This specific error should halt the workflow.
-            raise IARComplianceError(error_message)
-        
-        logger.debug(f"[Workflow: {workflow_name}, ID: {run_id}] Task '{task_id}' completed with compliant IAR. Status: {action_result.get('reflection', {}).get('status')}")
-        # --- END IAR VETTING ---
 
         # Return the complete context, including initial context, task results (with IAR), and final status info
         return task_results

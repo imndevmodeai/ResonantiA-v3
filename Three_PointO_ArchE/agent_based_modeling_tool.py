@@ -418,8 +418,8 @@ class ABMTool:
 
         return {
             "model": model, "type": model_type,
-            "dimensions": [getattr(model,'width',None), getattr(model,'height',None)] if hasattr(model,'grid') and isinstance(model.grid, MultiGrid) else None,
-            "agent_count": getattr(model,'num_agents',0),
+                "dimensions": [getattr(model,'width',None), getattr(model,'height',None)] if hasattr(model,'grid') and isinstance(model.grid, MultiGrid) else None,
+                "agent_count": getattr(model,'num_agents',0),
             "params": {**getattr(model,'model_params',{}), "scheduler": getattr(model, 'scheduler_type', 'random'), "seed": getattr(model, 'seed', None), "torus": getattr(model, 'torus', True)},
             "agent_params_used": getattr(model,'custom_agent_params',{}),
             "reflection": reflection

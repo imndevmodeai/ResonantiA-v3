@@ -12,6 +12,12 @@ from typing import Dict, Any, List, Optional, Union # Expanded type hints
 import os # For os.getcwd()
 import sys # For sys.path
 
+# --- Custom Imports & Setup ---
+from .spr_manager import SPRManager
+from . import config # Access configuration settings
+from .llm_providers import get_llm_provider, get_model_for_provider, LLMProviderError # Import LLM helpers
+from .action_context import ActionContext # Import ActionContext from new file
+
 # Initialize logger early for use in import blocks
 # Using a more specific name for this logger to avoid clashes if 'tools' is a common name
 logger_tools_diag = logging.getLogger(__name__ + "_tools_diag") # Unique logger name
@@ -28,27 +34,8 @@ logger_tools_diag.info(f"TOOLS.PY: __name__ is {__name__}, __file__ is {globals(
 logger_tools_diag.info(f"TOOLS.PY: Current working directory: {os.getcwd()}")
 logger_tools_diag.info(f"TOOLS.PY: sys.path: {sys.path}")
 
-# Attempt to import SPRManager with diagnostics
-SPRManager_Class_Holder = None # Use a different name to avoid confusion
-
-try:
-    logger_tools_diag.info("TOOLS.PY: Attempting to import SPRManager from .spr_manager as ActualSPRManagerClass")
-    # Attempt to import with a more specific alias
-    from .spr_manager import SPRManager as ActualSPRManagerClass
-    SPRManager_Class_Holder = ActualSPRManagerClass
-    logger_tools_diag.info(f"TOOLS.PY: Successfully imported SPRManager as ActualSPRManagerClass. Type: {type(ActualSPRManagerClass)}, Value: {str(ActualSPRManagerClass)}")
-except ImportError as e_imp:
-    logger_tools_diag.error(f"TOOLS.PY: Failed to import SPRManager class from .spr_manager due to ImportError: {e_imp}. SPR functionality will be unavailable.", exc_info=True)
-    # SPRManager_Class_Holder remains None
-except Exception as e_other_import:
-    logger_tools_diag.error(f"TOOLS.PY: An unexpected error occurred during import of SPRManager from .spr_manager: {e_other_import}", exc_info=True)
-    # SPRManager_Class_Holder might remain None or be in an indeterminate state
-
 # Use relative imports for internal modules
 try:
-    from . import config # Access configuration settings
-    from .llm_providers import get_llm_provider, get_model_for_provider, LLMProviderError # Import LLM helpers
-    from .action_context import ActionContext # Import ActionContext from new file
     LLM_AVAILABLE = True
     logger_tools_diag.info("TOOLS.PY: Successfully imported .config, .llm_providers, .action_context.")
 except ImportError as e:
@@ -70,41 +57,24 @@ SEARCH_PROVIDER = getattr(config, 'SEARCH_PROVIDER', 'simulated_google').lower()
 SEARCH_API_KEY = getattr(config, 'SEARCH_API_KEY', None)
 NODE_SEARCH_SCRIPT_PATH = getattr(config, 'NODE_SEARCH_SCRIPT_PATH', None)
 
-# --- Global Singleton for SPR Manager (Conceptual) ---
+# --- Global Singleton for SPR Manager ---
 _GLOBAL_SPR_MANAGER_INSTANCE = None
 
-def get_global_spr_manager(specific_spr_file: Optional[str] = None) -> Any: # Parameter specific_spr_file is not used in current logic, SPRManager path is hardcoded.
+def get_global_spr_manager() -> SPRManager:
+    """
+    Initializes and returns a global singleton instance of the SPRManager.
+    The path to the SPR definitions file is retrieved from config.
+    """
     global _GLOBAL_SPR_MANAGER_INSTANCE
-    logger_tools_diag.debug(f"TOOLS.PY: Entering get_global_spr_manager. _GLOBAL_SPR_MANAGER_INSTANCE is type: {type(_GLOBAL_SPR_MANAGER_INSTANCE)}")
-    
     if _GLOBAL_SPR_MANAGER_INSTANCE is None:
-        logger_tools_diag.info(f"TOOLS.PY: Attempting to initialize SPRManager. SPRManager_Class_Holder is type: {type(SPRManager_Class_Holder)}, Value: {str(SPRManager_Class_Holder)}")
-        if SPRManager_Class_Holder is None:
-            logger_tools_diag.error("TOOLS.PY: SPRManager_Class_Holder is None. Import must have failed or an error occurred during import of SPRManager from .spr_manager.")
-            raise RuntimeError("SPRManager class (SPRManager_Class_Holder) is not available. Check logs for import errors from .spr_manager.")
-        
-        # Determine the SPR file path for instantiation
-        # The original code used a hardcoded path "knowledge_graph/spr_definitions_tv.json"
-        # If specific_spr_file argument is intended to be used, it should be prioritized.
-        # For now, let's assume the original logic's intent or use config.
-        instantiation_spr_filepath = getattr(config, 'SPR_JSON_FILE', "knowledge_graph/spr_definitions_tv.json") # Defaulting to config or hardcoded
-        if specific_spr_file: # Allow override if argument is provided
-             instantiation_spr_filepath = specific_spr_file
-        logger_tools_diag.info(f"TOOLS.PY: SPR file path for instantiation will be: {instantiation_spr_filepath}")
-
         try:
-            logger_tools_diag.info(f"TOOLS.PY: Instantiating SPRManager_Class_Holder with spr_filepath: {instantiation_spr_filepath}")
-            # Use the aliased name for instantiation
-            _GLOBAL_SPR_MANAGER_INSTANCE = SPRManager_Class_Holder(spr_filepath=instantiation_spr_filepath)
-            logger_tools_diag.info(f"TOOLS.PY: Successfully initialized _GLOBAL_SPR_MANAGER_INSTANCE. Type: {type(_GLOBAL_SPR_MANAGER_INSTANCE)}. Loaded SPRs: {len(_GLOBAL_SPR_MANAGER_INSTANCE.get_all_sprs()) if hasattr(_GLOBAL_SPR_MANAGER_INSTANCE, 'get_all_sprs') else 'N/A'}")
-        except NameError as ne: # Catch NameError specifically here
-            logger_tools_diag.error(f"TOOLS.PY: NameError during SPRManager_Class_Holder instantiation: {ne}. SPRManager_Class_Holder current value was: {str(SPRManager_Class_Holder)} (Type: {type(SPRManager_Class_Holder)})", exc_info=True)
-            # Re-raise as a more informative RuntimeError
-            raise RuntimeError(f"NameError encountered during SPRManager instantiation: '{ne}'. Check if SPRManager_Class_Holder was correctly defined and accessible.") from ne
-        except Exception as e_inst:
-            logger_tools_diag.error(f"TOOLS.PY: Exception during SPRManager_Class_Holder instantiation with path '{instantiation_spr_filepath}': {e_inst}", exc_info=True)
-            raise RuntimeError(f"Could not initialize SPRManager due to: {e_inst}") from e_inst
-            
+            spr_file_path = getattr(config, 'SPR_JSON_FILE', "knowledge_graph/spr_definitions_tv.json")
+            logger_tools_diag.info(f"Initializing global SPRManager with definition file: {spr_file_path}")
+            _GLOBAL_SPR_MANAGER_INSTANCE = SPRManager(spr_filepath=spr_file_path)
+            logger_tools_diag.info(f"SPRManager initialized successfully. Loaded {len(_GLOBAL_SPR_MANAGER_INSTANCE.get_all_sprs())} SPRs.")
+        except Exception as e:
+            logger_tools_diag.error(f"Failed to initialize global SPRManager: {e}", exc_info=True)
+            raise RuntimeError(f"Could not initialize SPRManager: {e}") from e
     return _GLOBAL_SPR_MANAGER_INSTANCE
 
 # --- IAR Helper Function ---
@@ -752,36 +722,40 @@ def retrieve_spr_definitions(inputs: Dict[str, Any], context_for_action: ActionC
     retrieval_errors: Dict[str, str] = {}
     all_found = True
     
-    # Default reflection (updated from original provided snippet)
-    def default_failure_reflection_local(summary: str) -> Dict[str, Any]: # Renamed to avoid conflict
+    def default_failure_reflection_local(summary: str) -> Dict[str, Any]:
         return _create_reflection("Failure",summary,0.0,"N/A",["System Error: Default failure reflection"],None)
 
     try:
         spr_manager_instance = get_global_spr_manager() 
 
-        if not spr_ids_input or not isinstance(spr_ids_input, list):
-            logger_tools_diag.warning(f"TOOLS.PY: Task '{task_key}': 'spr_ids' must be a non-empty list.")
+        if not spr_ids_input or (not isinstance(spr_ids_input, list) and spr_ids_input != "ALL"):
+            logger_tools_diag.warning(f"Task '{task_key}': 'spr_ids' must be a non-empty list or 'ALL'.")
             return {
                 "spr_details": {},
-                "errors": {"input_error": "'spr_ids' must be a non-empty list."},
-                "reflection": default_failure_reflection_local("Input validation failed: 'spr_ids' missing or not a list.")
+                "errors": {"input_error": "'spr_ids' must be a non-empty list or the string 'ALL'."},
+                "reflection": default_failure_reflection_local("Input validation failed: 'spr_ids' missing or invalid type.")
             }
 
-        for spr_id in spr_ids_input:
-            if not isinstance(spr_id, str): # Simplified validation
-                retrieval_errors[str(spr_id)] = f"Invalid ID type {type(spr_id)}, must be string."
-                all_found = False
-                continue
-            
-            spr_detail = spr_manager_instance.get_spr(spr_id) # get_spr is a method of SPRManager
-            if spr_detail:
-                spr_details_output[spr_id] = spr_detail
-            else:
-                retrieval_errors[spr_id] = "SPR not found."
-                all_found = False
+        if spr_ids_input == "ALL":
+            all_sprs = spr_manager_instance.get_all_sprs()
+            spr_details_output = {spr.spr_id: spr.to_dict() for spr in all_sprs}
+        else:
+            for spr_id in spr_ids_input:
+                if not isinstance(spr_id, str):
+                    retrieval_errors[str(spr_id)] = f"Invalid ID type {type(spr_id)}, must be string."
+                    all_found = False
+                    continue
+                
+                spr_detail = spr_manager_instance.get_spr(spr_id)
+                if spr_detail:
+                    spr_details_output[spr_id] = spr_detail.to_dict() if hasattr(spr_detail, 'to_dict') else spr_detail
+                else:
+                    retrieval_errors[spr_id] = "SPR not found."
+                    all_found = False
         
         summary = "Successfully retrieved all specified SPRs." if all_found and spr_details_output else "Completed SPR retrieval with some issues or no results."
         if retrieval_errors: summary += f" Errors: {len(retrieval_errors)}"
+        if spr_ids_input == "ALL": summary = f"Successfully retrieved all {len(spr_details_output)} SPRs from the Knowledge Graph."
 
 
         return {
@@ -790,21 +764,21 @@ def retrieve_spr_definitions(inputs: Dict[str, Any], context_for_action: ActionC
             "reflection": _create_reflection(
                 status="Success" if spr_details_output else "Failure",
                 summary=summary,
-                confidence=0.9 if spr_details_output else 0.4,
+                confidence=0.95 if spr_details_output else 0.4,
                 alignment="High",
-                potential_issues=list(retrieval_errors.keys()),
-                raw_output_preview=f"Retrieved: {list(spr_details_output.keys())}"
+                potential_issues=list(retrieval_errors.values()),
+                raw_output_preview=f"Retrieved: {list(spr_details_output.keys())[:5]}"
             )
         }
 
-    except RuntimeError as rne: # Catch the specific RuntimeError we expect from get_global_spr_manager
-        logger_tools_diag.error(f"TOOLS.PY: Task '{task_key}': Runtime error during SPR retrieval (likely from get_global_spr_manager): {rne}", exc_info=True)
+    except RuntimeError as rne:
+        logger_tools_diag.error(f"Task '{task_key}': Runtime error during SPR retrieval (likely from get_global_spr_manager): {rne}", exc_info=True)
         return {
             "spr_details": {}, "errors": {"initialization_error": str(rne)},
             "reflection": default_failure_reflection_local(f"SPRManager initialization failed: {rne}")
         }
     except Exception as e_retrieval:
-        logger_tools_diag.error(f"TOOLS.PY: Task '{task_key}': Unexpected error during SPR retrieval: {e_retrieval}", exc_info=True)
+        logger_tools_diag.error(f"Task '{task_key}': Unexpected error during SPR retrieval: {e_retrieval}", exc_info=True)
         return {
             "spr_details": {}, "errors": {"retrieval_error": f"Failed to retrieve SPRs: {e_retrieval}"},
             "reflection": default_failure_reflection_local(f"Unexpected error in SPR retrieval: {e_retrieval}")
