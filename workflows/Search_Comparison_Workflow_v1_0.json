@@ -1,0 +1,93 @@
+{
+  "name": "Search_Comparison_Workflow_v1_0",
+  "description": "Workflow to compare Puppeteer search results with DuckDuckGo search results for R&D insights.",
+  "version": "1.0",
+  "tasks": {
+    "initiate_search_comparison": {
+      "description": "Log the start of the search comparison process.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "--- Search Comparison Workflow (v1.0) Initiated for: {{ initial_context.user_query }} ---"
+      },
+      "dependencies": []
+    },
+    "perform_external_search": {
+      "description": "Perform an external search using Puppeteer (headless browser) to gather publicly available information (Google).",
+      "action_type": "puppeteer_search_web",
+      "inputs": {
+        "query": "{{ initial_context.user_query }}",
+        "explanation": "{{ initial_context.search_topic_context }}",
+        "provider": "google"
+      },
+      "outputs": {
+        "results": "list",
+        "external_summary": "string",
+        "stdout": "string",
+        "reflection": "dict"
+      },
+      "dependencies": [
+        "initiate_search_comparison"
+      ]
+    },
+    "perform_duckduckgo_search": {
+      "description": "Perform a search using DuckDuckGo to provide an alternative external search perspective.",
+      "action_type": "search_web",
+      "inputs": {
+        "query": "{{ initial_context.user_query }}",
+        "explanation": "To gather an alternative perspective on the search topic from DuckDuckGo: {{ initial_context.search_topic_context }}",
+        "num_results": 10,
+        "provider": "duckduckgo"
+      },
+      "outputs": {
+        "results": "list",
+        "summary": "string",
+        "stdout": "string",
+        "reflection": "dict"
+      },
+      "dependencies": [
+        "initiate_search_comparison"
+      ]
+    },
+    "compare_search_results": {
+      "description": "Analyze and compare Puppeteer (Google) and DuckDuckGo search results to identify insights and opportunities.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "input_data": {
+          "puppeteer_search_results": "{{ perform_external_search.results }}",
+          "puppeteer_search_reflection": "{{ perform_external_search.reflection }}",
+          "duckduckgo_search_results": "{{ perform_duckduckgo_search.results }}",
+          "duckduckgo_search_reflection": "{{ perform_duckduckgo_search.reflection }}"
+        },
+        "code": "\nimport sys\nimport json\n\n# Initialize IAR-related variables with defaults\npuppeteer_confidence = 'N/A'\npuppeteer_status = 'N/A'\npuppeteer_issues = []\nduckduckgo_confidence = 'N/A'\nduckduckgo_status = 'N/A'\nduckduckgo_issues = []\n\ninput_json_str = sys.stdin.read()\ndata = json.loads(input_json_str)\n\npuppeteer_data = data.get('puppeteer_search_results', [])\npuppeteer_reflection_data = data.get('puppeteer_search_reflection', {})\nif isinstance(puppeteer_reflection_data, str) and puppeteer_reflection_data:\n    try:\n        puppeteer_reflection_data = json.loads(puppeteer_reflection_data)\n    except json.JSONDecodeError:\n        puppeteer_reflection_data = {}\nelif not isinstance(puppeteer_reflection_data, dict):\n     puppeteer_reflection_data = {}\n\nduckduckgo_data = data.get('duckduckgo_search_results', [])\nduckduckgo_reflection_data = data.get('duckduckgo_search_reflection', {})\nif isinstance(duckduckgo_reflection_data, str) and duckduckgo_reflection_data:\n    try:\n        duckduckgo_reflection_data = json.loads(duckduckgo_reflection_data)\n    except json.JSONDecodeError:\n        duckduckgo_reflection_data = {}\nelif not isinstance(duckduckgo_reflection_data, dict):\n    duckduckgo_reflection_data = {}\n\n# Extract IAR details\npuppeteer_confidence = puppeteer_reflection_data.get('confidence', 'N/A')\npuppeteer_status = puppeteer_reflection_data.get('status', 'N/A')\npuppeteer_issues = puppeteer_reflection_data.get('potential_issues', [])\nif puppeteer_issues is None: puppeteer_issues = []\n\nduckduckgo_confidence = duckduckgo_reflection_data.get('confidence', 'N/A')\nduckduckgo_status = duckduckgo_reflection_data.get('status', 'N/A')\nduckduckgo_issues = duckduckgo_reflection_data.get('potential_issues', [])\nif duckduckgo_issues is None: duckduckgo_issues = []\n\npuppeteer_results_count = len(puppeteer_data) if puppeteer_data is not None else 0\nduckduckgo_results_count = len(duckduckgo_data) if duckduckgo_data is not None else 0\n\npuppeteer_summary_text = f'Puppeteer (Google) search returned {puppeteer_results_count} items.'\nduckduckgo_summary_text = f'DuckDuckGo search returned {duckduckgo_results_count} items.'\n\ncomparison_notes = []\nif puppeteer_results_count > 0 and duckduckgo_results_count > 0:\n    comparison_notes.append(f'Both Puppeteer ({puppeteer_results_count}) and DuckDuckGo ({duckduckgo_results_count}) searches found relevant data.')\nelif puppeteer_results_count > 0:\n    comparison_notes.append(f'Puppeteer search ({puppeteer_results_count}) found results, DuckDuckGo yielded none.')\nelif duckduckgo_results_count > 0:\n    comparison_notes.append(f'DuckDuckGo search ({duckduckgo_results_count}) found results, Puppeteer yielded none.')\nelse:\n    comparison_notes.append(\"Neither Puppeteer nor DuckDuckGo searches yielded results.\")\n\nif puppeteer_results_count > duckduckgo_results_count:\n    comparison_notes.append('Puppeteer (Google) appears to have found a broader set of results.')\nelif duckduckgo_results_count > duckduckgo_results_count:\n    comparison_notes.append('DuckDuckGo found more direct hits, suggesting a more focused result set.')\nelse:\n    if puppeteer_results_count > 0 : comparison_notes.append('Comparable number of results from both search engines.')\n\n# Add IAR-informed notes\niar_notes = []\niar_notes.append(f\"Puppeteer Search IAR: Status='{puppeteer_status}', Confidence={puppeteer_confidence}.\")\nif puppeteer_issues:\n    iar_notes.append(f\"Puppeteer Search Potential Issues: {'; '.join(map(str,puppeteer_issues))}.\")\nif isinstance(puppeteer_confidence, (float, int)) and puppeteer_confidence < 0.7:\n    iar_notes.append(\"Note: Puppeteer search confidence is moderate/low, results should be cross-verified.\")\n\niar_notes.append(f\"DuckDuckGo Search IAR: Status='{duckduckgo_status}', Confidence={duckduckgo_confidence}.\")\nif duckduckgo_issues:\n    iar_notes.append(f\"DuckDuckGo Search Potential Issues: {'; '.join(map(str,duckduckgo_issues))}.\")\nif isinstance(duckduckgo_confidence, (float, int)) and duckduckgo_confidence < 0.7:\n    iar_notes.append(\"Note: DuckDuckGo search confidence is moderate/low, results should be cross-verified.\")\n\n# Combine all notes\nall_notes = comparison_notes + iar_notes\ninsight_text = ' '.join(all_notes)\nfull_comparison_summary = f'{puppeteer_summary_text} {duckduckgo_summary_text} Comparison Insight & IAR Assessment: {insight_text}'\n\nprint(full_comparison_summary)\n"
+      },
+      "outputs": {
+        "comparison_summary": "string",
+        "external_count": "int",
+        "internal_count": "int",
+        "actionable_insights": "list",
+        "stdout": "string",
+        "reflection": "dict"
+      },
+      "dependencies": [
+        "perform_external_search",
+        "perform_duckduckgo_search"
+      ]
+    },
+    "feed_into_rd_process": {
+      "description": "Generate a report or directive for the next R&D process based on comparison insights.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "comparison_summary": "{{ compare_search_results.stdout | default('Comparison did not produce stdout.') }}",
+          "actionable_insights": "{{ compare_search_results.actionable_insights | default([]) }}",
+          "next_steps_message": "Based on the comparison, the next R&D process should prioritize the identified insights. Standing by for Keyholder directive on implementation."
+        },
+        "format": "json"
+      },
+      "dependencies": [
+        "compare_search_results"
+      ]
+    }
+  }
+}

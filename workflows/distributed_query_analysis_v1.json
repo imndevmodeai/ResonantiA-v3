@@ -1,0 +1,97 @@
+{
+  "name": "distributed_query_analysis_v1",
+  "description": "Example distributed workflow from user query to answer with IAR-driven branching and optional knowledge crystallization.",
+  "tasks": {
+    "parse_intent": {
+      "action": "generate_text_llm",
+      "description": "Deconstruct the raw user query, identify key entities, temporal scope, and expected outputs.",
+      "inputs": {
+        "prompt": "You are the Conductor ArchE instance. Deconstruct the following Keyholder query into core entities, desired outcome, and temporal horizon. Return JSON with keys: entities, outcome, horizon, requires_temporal_modeling.\nQuery: {{user_query}}"
+      },
+      "metadata": {
+        "target_capability": "intent_deconstrucT",
+        "target_instance_type": "interface"
+      }
+    },
+
+    "puppeteer_search": {
+      "action": "puppeteer_search_web",        
+      "description": "Ground the analysis with headless-browser (Puppeteer) searches for authoritative sources.",
+      "inputs": {
+        "query": "{{parse_intent.results.entities}} {{parse_intent.results.outcome}} site:.gov OR site:.edu",
+        "num_results": 10
+      },
+      "dependencies": ["parse_intent"],
+      "metadata": {
+        "target_capability": "headless_web_scrapinG",
+        "target_instance_type": "analytical"
+      }
+    },
+
+    "vet_search": {
+      "action": "generate_text_llm",
+      "description": "VettingAgenT reviews search snippets for reliability and relevance using IAR from puppeteer_search.",
+      "inputs": {
+        "prompt": "You are VettingAgenT. Rate the reliability and relevance of these search results given the user intent. Return JSON keys: curated_sources, vetting_summary, overall_reliability.\nResults: {{puppeteer_search.results}}\nIAR: {{puppeteer_search.reflection}}"
+      },
+      "dependencies": ["puppeteer_search"]
+    },
+
+    "predictive_modeling": {
+      "action": "run_prediction",
+      "description": "If temporal horizon present, run forecasting models.",
+      "condition": "{{parse_intent.results.requires_temporal_modeling == true}}",
+      "inputs": {
+        "action": "forecast_future_states",
+        "data_path": "data/auto_ingested.csv",        
+        "target_column": "target_metric",
+        "model_type": "Prophet",
+        "steps_to_forecast": 12
+      },
+      "dependencies": ["vet_search"],
+      "metadata": {
+        "target_capability": "temporal_forecasting_workflow",
+        "target_instance_type": "analytical"
+      }
+    },
+
+    "synthesize_answer": {
+      "action": "generate_text_llm",
+      "description": "Compose final answer for Keyholder integrating all previous outputs.",
+      "inputs": {
+        "prompt": "Draft a concise, well-structured answer to the user based on the intent breakdown, curated sources, and any forecast results.\nIntent: {{parse_intent.results}}\nSources: {{vet_search.results.curated_sources}}\nForecast: {{predictive_modeling.results}}"
+      },
+      "dependencies": ["predictive_modeling"],
+      "metadata": {
+        "target_capability": "generate_text_llm",
+        "target_instance_type": "interface"
+      }
+    },
+
+    "display_output": {
+      "action": "display_output",
+      "description": "Return the final synthesized answer to the Keyholder UI.",
+      "inputs": {
+        "data_to_display": "{{synthesize_answer.results}}"
+      },
+      "dependencies": ["synthesize_answer"]
+    },
+
+    "trigger_crystallization": {
+      "action": "run_sub_workflow",
+      "description": "Automatically solidify insights if crystallization_potential is high.",
+      "condition": "{{synthesize_answer.reflection.crystallization_potential >= 0.85}}",
+      "inputs": {
+        "workflow_name": "insight_solidification.json",
+        "context": {
+          "core_concept": "{{synthesize_answer.results}}",
+          "source_iar": "{{synthesize_answer.reflection}}"
+        }
+      },
+      "dependencies": ["synthesize_answer"],
+      "metadata": {
+        "conceptual_only": true
+      }
+    }
+  }
+} 

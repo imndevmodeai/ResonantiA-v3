@@ -1,0 +1,17 @@
+[
+  {
+    "task_id": "task_1749426473362_0",
+    "description": "Analyze user sentiment from logs",
+    "required_capability": "data_analysis",
+    "status": "completed",
+    "assigned_to": "instance-001",
+    "created_at": 1749426473.3623493,
+    "completed_at": 1749426566.4944258,
+    "result": "Completed via CLI",
+    "iar": {
+      "insight": "User sentiment is trending positive",
+      "action": "No immediate action required",
+      "reflection": "Model confidence is high"
+    }
+  }
+]
