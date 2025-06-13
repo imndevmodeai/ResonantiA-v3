@@ -5,7 +5,7 @@
     "tasks": {
       "extract_parameters_for_simulation_and_narrative": {
         "description": "Parse the user query to extract/define parameters for ABM simulation and narrative generation.",
-        "action_type": "generate_text_llm",
+        "action": "generate_text_llm",
         "inputs": {
           "provider": "google",
           "model": "gemini-1.5-pro-latest",
@@ -25,20 +25,20 @@
       },
       "run_human_group_simulation": {
         "description": "Run an ABM simulation for the human group's initial dynamics.",
-        "action_type": "perform_abm",
+        "action": "perform_abm",
         "inputs": {
           "operation": "run_simulation",
-          "model_type": "BasicGridModel",
+          "model_type": "basic",
           "model_params": {
-            "width": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_grid_width }}",
-            "height": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_grid_height }}",
-            "density": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_density }}",
-            "seed": "{{ context.task_id }}",
+            "width": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_grid_width | default(7) }}",
+            "height": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_grid_height | default(7) }}",
+            "density": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_density | default(0.6) }}",
+            "seed": "{{ context.task_id | default('gorilla_abm') }}",
             "agent_params": {
               "behavior_mode": "cautious_explorers"
             }
           },
-          "num_steps": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_simulation_steps }}"
+          "num_steps": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_simulation_steps | default(30) }}"
         },
         "outputs": {
           "model_run_id": "str",
@@ -57,7 +57,7 @@
       },
       "analyze_abm_simulation_output": {
         "description": "Analyze the ABM simulation output for patterns and metrics.",
-        "action_type": "perform_abm",
+        "action": "perform_abm",
         "inputs": {
           "operation": "analyze_results",
           "results": "{{ run_human_group_simulation }}",
@@ -76,7 +76,7 @@
       },
       "generate_gorilla_encounter_narrative": {
         "description": "Generate a detailed play-by-play narrative of the encounter, incorporating ABM insights and human ingenuity.",
-        "action_type": "generate_text_llm",
+        "action": "generate_text_llm",
         "inputs": {
           "provider": "google",
           "model": "gemini-1.5-pro-latest",
@@ -95,7 +95,7 @@
       },
       "display_final_report": {
         "description": "Display the final generated narrative.",
-        "action_type": "display_output",
+        "action": "display_output",
         "inputs": {
           "content": "Gorilla Encounter Narrative ({{ context.task_id }}):\n-----------------------------------------------------\n{{ generate_gorilla_encounter_narrative.response_text }}"
         },

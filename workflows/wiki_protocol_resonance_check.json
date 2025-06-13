@@ -1,6 +1,24 @@
 {
-  "id": "wiki_protocol_resonance_check",
+  "name": "wiki_protocol_resonance_check",
   "description": "Checks if specified wiki pages are in sync with their corresponding sections in the master ResonantiA Protocol document to maintain 'As Above, So Below' integrity.",
+  "tasks": {
+    "read_protocol_file": {
+      "action": "read_file",
+      "description": "Reads the entire content of the master protocol file.",
+      "inputs": {
+        "path": "{{inputs.protocol_file_path}}"
+      }
+    },
+    "check_resonance": {
+      "action": "execute_code",
+      "description": "Executes a Python script to compare each wiki file with its corresponding section in the protocol.",
+      "dependencies": ["read_protocol_file"],
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport re\n\nprotocol_content = {{read_protocol_file.result}}\nwiki_files = {{inputs.wiki_files_to_check}}\n\ndef extract_section(content, header):\n    clean_header = header.lstrip('# ').strip()\n    header_level = len(header) - len(header.lstrip('#'))\n    start_pattern = re.compile(f\"^#+ {re.escape(clean_header)}.*$\", re.MULTILINE)\n    match = start_pattern.search(content)\n    if not match:\n        return None\n    start_pos = match.end()\n    end_pattern = re.compile(f\"^#{{1,{header_level}}} .*$\", re.MULTILINE)\n    next_match = end_pattern.search(content, start_pos)\n    end_pos = next_match.start() if next_match else len(content)\n    section_content = content[match.start():end_pos].strip()\n    return section_content\n\nreport = []\nfor file_info in wiki_files:\n    wiki_path = file_info['path']\n    header = file_info['corresponding_section_header']\n    try:\n        with open(wiki_path, 'r', encoding='utf-8') as f:\n            wiki_content = f.read().strip()\n    except Exception as e:\n        report.append({\n            \"file_path\": wiki_path,\n            \"is_in_sync\": False,\n            \"discrepancy_summary\": f\"Error reading file: {e}\"\n        })\n        continue\n    protocol_section = extract_section(protocol_content, header)\n    if not protocol_section:\n        report.append({\n            \"file_path\": wiki_path,\n            \"is_in_sync\": False,\n            \"discrepancy_summary\": f\"Section with header matching '{header}' not found in protocol document.\"\n        })\n        continue\n    normalized_wiki = \"\\n\".join(line.strip() for line in wiki_content.strip().splitlines())\n    normalized_protocol = \"\\n\".join(line.strip() for line in protocol_section.strip().splitlines())\n    if normalized_wiki == normalized_protocol:\n        is_in_sync = True\n        discrepancy = \"In sync.\"\n    else:\n        is_in_sync = False\n        discrepancy = \"Content mismatch detected. Wiki file is not in sync with the protocol section.\"\n    report.append({\n        \"file_path\": wiki_path,\n        \"is_in_sync\": is_in_sync,\n        \"discrepancy_summary\": discrepancy\n    })\n\nprint(json.dumps({\"resonance_report\": report}))"
+      }
+    }
+  },
   "inputs": {
     "protocol_file_path": {
       "description": "The path to the master ResonantiA Protocol markdown file.",
@@ -29,28 +47,5 @@
         }
       ]
     }
-  },
-  "tasks": [
-    {
-      "id": "read_protocol_file",
-      "type": "read_file",
-      "description": "Reads the entire content of the master protocol file.",
-      "inputs": {
-        "path": "{{inputs.protocol_file_path}}"
-      }
-    },
-    {
-      "id": "check_resonance",
-      "type": "execute_code",
-      "description": "Executes a Python script to compare each wiki file with its corresponding section in the protocol.",
-      "dependencies": ["read_protocol_file"],
-      "inputs": {
-        "language": "python",
-        "code": "import json\nimport re\n\nprotocol_content = {{read_protocol_file.result}}\nwiki_files = {{inputs.wiki_files_to_check}}\n\ndef extract_section(content, header):\n    clean_header = header.lstrip('# ').strip()\n    header_level = len(header) - len(header.lstrip('#'))\n    start_pattern = re.compile(f\"^#+ {re.escape(clean_header)}.*$\", re.MULTILINE)\n    match = start_pattern.search(content)\n    if not match:\n        return None\n    start_pos = match.end()\n    end_pattern = re.compile(f\"^#{{1,{header_level}}} .*$\", re.MULTILINE)\n    next_match = end_pattern.search(content, start_pos)\n    end_pos = next_match.start() if next_match else len(content)\n    section_content = content[match.start():end_pos].strip()\n    return section_content\n\nreport = []\nfor file_info in wiki_files:\n    wiki_path = file_info['path']\n    header = file_info['corresponding_section_header']\n    try:\n        with open(wiki_path, 'r', encoding='utf-8') as f:\n            wiki_content = f.read().strip()\n    except Exception as e:\n        report.append({\n            \"file_path\": wiki_path,\n            \"is_in_sync\": False,\n            \"discrepancy_summary\": f\"Error reading file: {e}\"\n        })\n        continue\n    protocol_section = extract_section(protocol_content, header)\n    if not protocol_section:\n        report.append({\n            \"file_path\": wiki_path,\n            \"is_in_sync\": False,\n            \"discrepancy_summary\": f\"Section with header matching '{header}' not found in protocol document.\"\n        })\n        continue\n    normalized_wiki = \"\\n\".join(line.strip() for line in wiki_content.strip().splitlines())\n    normalized_protocol = \"\\n\".join(line.strip() for line in protocol_section.strip().splitlines())\n    if normalized_wiki == normalized_protocol:\n        is_in_sync = True\n        discrepancy = \"In sync.\"\n    else:\n        is_in_sync = False\n        discrepancy = \"Content mismatch detected. Wiki file is not in sync with the protocol section.\"\n    report.append({\n        \"file_path\": wiki_path,\n        \"is_in_sync\": is_in_sync,\n        \"discrepancy_summary\": discrepancy\n    })\n\nprint(json.dumps({\"resonance_report\": report}))"
-      }
-    }
-  ],
-  "output": {
-    "resonance_report": "{{check_resonance.result.resonance_report}}"
   }
 } 

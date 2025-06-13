@@ -88,13 +88,15 @@ def _create_reflection(status: str, summary: str, confidence: Optional[float], a
 # (Provide basic examples that can be overridden or extended)
 class BasicGridAgent(Agent if MESA_AVAILABLE else object):
     """ A simple agent for grid-based models with a binary state. """
-    def __init__(self, unique_id, model, state=0, **kwargs):
+    def __init__(self, model, state=0, **kwargs):
         if not MESA_AVAILABLE: # Simulation mode init
-            self.unique_id = unique_id; self.model = model; self.pos = None
+            self.model = model; self.pos = None
             self.state = state; self.next_state = state; self.params = kwargs
             return
         # Mesa init
-        super().__init__(unique_id, model)
+        super().__init__(model)
+        # Mesa auto-assigns a unique_id via AgentSet; store for convenience
+        self.unique_id = getattr(self, 'unique_id', None)
         self.state = int(state) # Ensure state is integer
         self.next_state = self.state
         self.params = kwargs # Store any extra parameters
@@ -232,8 +234,8 @@ class BasicGridModel(Model if MESA_AVAILABLE else object):
                 if self.random.random() < self.density:
                     initial_state = 1 if self.random.random() < 0.1 else 0
                     if initial_state == 1: initial_active_count += 1
-                    # Create agent instance. Pass self (the model) for auto-assignment of unique_id.
-                    agent = self.agent_class(self, state=initial_state, **self.custom_agent_params) 
+                    # Create agent instance; Mesa auto-assigns unique_id when only model is passed.
+                    agent = self.agent_class(self, state=initial_state, **self.custom_agent_params)
                     # No need to explicitly call self.schedule.add(agent) or assign unique_id from counter
                     # The Model base class handles adding the agent to self.agents.
                     self.grid.place_agent(agent, (x, y))
@@ -250,7 +252,7 @@ class BasicGridModel(Model if MESA_AVAILABLE else object):
                         initial_state = 1 if self.random.random() < 0.1 else 0
                         if initial_state == 1: initial_active_count += 1
                         # For simulation, manually assign unique_id and store in a list
-                        agent = self.agent_class(agent_id_counter, self, state=initial_state, **self.custom_agent_params); 
+                        agent = self.agent_class(self, state=initial_state, **self.custom_agent_params); 
                         agent.unique_id = agent_id_counter # Explicit for sim
                         agent_id_counter += 1
                         agent.pos = (x, y); self.agents_sim.append(agent)
@@ -402,9 +404,32 @@ class ABMTool:
                 agent_params = kwargs.get('agent_params', {}) # Pass complex agent params here
                 model = ScalableAgentModel(num_agents=num_agents, agent_params=agent_params, **kwargs)
 
+            elif model_type == "combat":
+                from .combat_abm import GorillaCombatModel
+                num_humans = kwargs.get('num_humans', 30)
+                width = kwargs.get('width', 20)
+                height = kwargs.get('height', 20)
+                seed = kwargs.get('seed', None)
+                model = GorillaCombatModel(width=width, height=height, num_humans=num_humans, seed=seed)
+
+            elif model_type == "generic_dsl":
+                from .abm_dsl_engine import create_model_from_schema
+                schema = kwargs.get('schema') or kwargs.get('dsl_schema')
+                if schema is None and 'model_params' in kwargs:
+                    schema = kwargs['model_params'].get('schema') or kwargs['model_params'].get('dsl_schema')
+                if schema is None:
+                    raise ValueError("Missing 'schema' parameter for generic_dsl model.")
+                if isinstance(schema, str):
+                    try:
+                        schema = json.loads(schema)
+                    except Exception:
+                        raise ValueError("Schema string for generic_dsl could not be parsed as JSON.")
+                seed = kwargs.get('seed', None)
+                model = create_model_from_schema(schema, seed=seed)
+
             # ... (potential for other model types like "network")
             else:
-                raise ValueError(f"Unknown model_type '{model_type}'. Supported types: 'basic', 'scalable_agent'.")
+                raise ValueError(f"Unknown model_type '{model_type}'. Supported types: 'basic', 'scalable_agent', 'combat', 'generic_dsl'.")
 
             if model:
                 reflection = _create_reflection(
@@ -527,6 +552,11 @@ class ABMTool:
                     # Calculate final counts directly from model methods if available
                     if hasattr(model, 'count_active_agents'): primary_result["active_count"] = model.count_active_agents()
                     if hasattr(model, 'count_inactive_agents'): primary_result["inactive_count"] = model.count_inactive_agents()
+                    # Capture special combat model metric
+                    if hasattr(model, 'gorilla') and hasattr(model.gorilla, 'health'):
+                        primary_result["gorilla_health"] = model.gorilla.health
+                    if hasattr(model, 'last_body_attrs'):
+                        primary_result["body_attrs_final"] = model.last_body_attrs
                     logger.debug("Retrieved final agent state grid.")
                 else: logger.warning("Model does not have a 'get_agent_states' method.")
             except Exception as state_error:
@@ -1234,7 +1264,12 @@ def perform_abm(inputs: Dict[str, Any]) -> Dict[str, Any]:
                 # Prepare kwargs for run_simulation
                 # Keys for run_simulation: model, steps, visualize
                 run_args = {'model': model_input}
-                if 'steps' in kwargs: run_args['steps'] = kwargs['steps']
+                # Handle both 'steps' and 'num_steps' for compatibility
+                if 'steps' in kwargs:
+                    run_args['steps'] = kwargs['steps']
+                elif 'num_steps' in kwargs:
+                    run_args['steps'] = kwargs['num_steps'] # Map num_steps to steps
+                
                 if 'visualize' in kwargs: run_args['visualize'] = kwargs['visualize']
                 
                 op_result = tool.run_simulation(**run_args)

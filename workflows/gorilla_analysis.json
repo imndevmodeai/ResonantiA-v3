@@ -1,0 +1,50 @@
+{
+  "name": "gorilla_analysis",
+  "version": "1.0",
+  "description": "Analysis of battle scenario between 30 unarmed men and a silverback gorilla",
+  "tasks": {
+    "physical_analysis": {
+      "action": "analyze_physical_capabilities",
+      "description": "Analyze physical capabilities of both sides",
+      "inputs": {
+        "scenario": "Battle between 30 unarmed men and a silverback gorilla",
+        "constraints": ["no_retreat", "no_weapons", "no_tools"],
+        "allowances": ["human_ingenuity", "natural_environment"]
+      }
+    },
+    "tactical_analysis": {
+      "action": "analyze_tactical_advantages",
+      "description": "Analyze tactical advantages and disadvantages",
+      "inputs": {
+        "scenario": "Battle between 30 unarmed men and a silverback gorilla",
+        "constraints": ["no_retreat", "no_weapons", "no_tools"],
+        "allowances": ["human_ingenuity", "natural_environment"]
+      },
+      "dependencies": ["physical_analysis"]
+    },
+    "battle_simulation": {
+      "action": "simulate_battle",
+      "description": "Simulate battle progression and outcome",
+      "inputs": {
+        "scenario": "Battle between 30 unarmed men and a silverback gorilla",
+        "constraints": ["no_retreat", "no_weapons", "no_tools"],
+        "allowances": ["human_ingenuity", "natural_environment"],
+        "simulation_type": "battle_progression",
+        "detail_level": "high"
+      },
+      "dependencies": ["tactical_analysis"]
+    },
+    "outcome_prediction": {
+      "action": "predict_outcome",
+      "description": "Predict final outcome and key factors",
+      "inputs": {
+        "scenario": "Battle between 30 unarmed men and a silverback gorilla",
+        "constraints": ["no_retreat", "no_weapons", "no_tools"],
+        "allowances": ["human_ingenuity", "natural_environment"],
+        "prediction_type": "battle_outcome",
+        "detail_level": "high"
+      },
+      "dependencies": ["battle_simulation"]
+    }
+  }
+} 

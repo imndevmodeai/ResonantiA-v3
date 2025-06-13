@@ -1,0 +1,23 @@
+{
+  "schema": {
+    "world": { "type": "pk", "hours": 72, "step_hours": 1 },
+    "agents": [
+      {
+        "name": "Body",
+        "count": 1,
+        "attrs": { "MAMP": 0, "AMP": 0, "pH": 7.0 },
+        "behaviour": [
+          "FirstOrderDecaypH(MAMP, t_half_ref=12, sensitivity=0.8, ref_pH=7.0)",
+          "FirstOrderDecaypH(AMP, t_half_ref=10, sensitivity=0.8, ref_pH=7.0)",
+          "Metabolise(MAMP, AMP, 30)",
+          "ScheduleDose(MAMP, 500, at_hour=-40)",
+          "ScheduleDose(AMP, 15, at_hour=-48)",
+          "ScheduleDose(AMP, 15, at_hour=-24)",
+          "pHShift(-0.3, window=[-72,-18])",
+          "pHShift(+0.6, window=[-24,0])"
+        ]
+      }
+    ],
+    "victory_condition": null
+  }
+} 

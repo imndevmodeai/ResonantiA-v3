@@ -1,0 +1,10 @@
+{
+  "schema": {
+    "world": {"type": "grid", "width": 15, "height": 15, "torus": false},
+    "agents": [
+      {"name": "Drone", "count": 3, "attrs": {"battery": 100}, "behaviour": ["MoveRandom"]},
+      {"name": "Package", "count": 10, "attrs": {}, "behaviour": []}
+    ],
+    "victory_condition": null
+  }
+} 

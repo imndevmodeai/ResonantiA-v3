@@ -1,0 +1,54 @@
+{
+  "name": "abm_enhancement_research",
+  "version": "1.0",
+  "description": "A workflow that implements the Cognitive Resonance Amplification pattern to improve the PK/PD ABM. It compares external web search results, internal codebase artifacts, and the LLM's own embodied knowledge to generate actionable development steps.",
+  "tasks": {
+    "initiate_research": {
+      "action": "display_output",
+      "inputs": {
+        "content": "--- ABM Enhancement Research Workflow (Cognitive Resonance Amplification) Initiated ---"
+      }
+    },
+    "perform_external_search": {
+      "action": "search_web",
+      "dependencies": ["initiate_research"],
+      "inputs": {
+        "query": "pharmacokinetic modeling methamphetamine amphetamine urinary pH renal clearance half-life",
+        "provider": "puppeteer_nodejs",
+        "explanation": "To gather current, external scientific literature (K_ext) on the target problem."
+      }
+    },
+    "perform_internal_search": {
+      "action": "search_codebase",
+      "dependencies": ["initiate_research"],
+      "inputs": {
+        "query": "pharmacokinetic modeling agent based model DSL engine",
+        "explanation": "To identify relevant internal project files (K_int) like the DSL engine and existing schemas."
+      }
+    },
+    "probe_embodied_knowledge": {
+      "action": "generate_text_llm",
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "You are a scientific expert in pharmacology and computational modeling. The user is trying to improve an agent-based model for drug metabolism. An external search has returned the following JSON data with key concepts: {{ perform_external_search.results }}. Based on your pre-existing, embodied knowledge, provide a detailed explanation of the mechanisms by which urinary and oral fluid pH affects the pharmacokinetics (especially renal clearance and half-life) of weak bases like methamphetamine and amphetamine, using the titles from the search results to guide your explanation. Reference the core scientific principles and equations involved (e.g., Henderson-Hasselbalch). Assess your confidence in this explanation."
+      },
+      "dependencies": ["perform_external_search"]
+    },
+    "synthesize_and_compare": {
+      "action": "execute_code",
+      "dependencies": ["perform_external_search", "perform_internal_search", "probe_embodied_knowledge"],
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport sys\n\nnull = None\ntrue = True\nfalse = False\n\nk_ext_data = {{ perform_external_search.results }}\nk_int_data = {{ perform_internal_search.search_results }}\nk_emb_data = \"\"\"{{ probe_embodied_knowledge.response_text }}\"\"\"\n\ndata = {\n    \"k_ext\": k_ext_data,\n    \"k_int\": k_int_data,\n    \"k_emb\": k_emb_data\n}\n\nk_ext = data.get('k_ext', [])\nk_int = data.get('k_int', [])\nk_emb = data.get('k_emb', '')\ninsight = ''\nrecommendation = ''\nresonance_events = []\n\nif any(kw in k_emb.lower() for kw in ['henderson-hasselbalch', 'ion trapping', 'pka']):\n    resonance_events.append({\n        'cue': 'keywords from external search',\n        'response': 'Detailed PK/PD mechanism involving Henderson-Hasselbalch.'\n    })\n    insight += 'Embodied knowledge (K_emb) successfully recalled core scientific principles (Henderson-Hasselbalch) when cued by external search results. '\nelse:\n    insight += 'Embodied knowledge did not surface core scientific principles. '\n\ndsl_engine_found = any('abm_dsl_engine.py' in item.get('file_path', '') for item in k_int)\nif dsl_engine_found:\n    insight += 'Internal search (K_int) located the abm_dsl_engine.py, which currently lacks pH-dependent logic. '\nelse:\n    insight += 'Internal search did not locate the primary DSL engine. '\n\nrecommendation = 'Modify abm_dsl_engine.py to make clearance rates dependent on the Body.pH attribute, using the formula recalled from embodied knowledge.'\n\nprint(json.dumps({\n    'insight': insight,\n    'recommendation': recommendation,\n    'resonance_events': resonance_events\n}))"
+      }
+    },
+    "log_resonance_pattern_and_conclude": {
+      "action": "display_output",
+      "dependencies": ["synthesize_and_compare"],
+      "inputs": {
+        "content": "Workflow Complete. Synthesis: {{ synthesize_and_compare.stdout }}. This resonance event will be logged to improve future autonomous focusing."
+      }
+    }
+  }
+} 

@@ -14,6 +14,15 @@ The project Wiki serves as an essential, dynamic, and user-centric knowledge bas
 *   **Development Roadmap & Contribution**: Outline future development plans, track progress on tool implementations (e.g., advanced causal discovery, ODE solvers for CFP), define coding standards, detail the process for contributing (issues, pull requests, emphasizing IAR compliance and testing), and foster a collaborative development environment (even if initially just for the Keyholder).
 *   **Living Knowledge Base**: Act as a central, up-to-date repository for usage examples, best practices, FAQs, and evolving understanding of the framework, allowing for more frequent updates than formal protocol version releases. This includes documenting insights gained from applying Metacognitive shifT or SIRC.
 
+## Latest Updates (v3.0 - "Temporal Resonance & IAR")
+
+* **Integrated Action Reflection (IAR)**: Mandatory implementation across all tools with standardized reflection dictionary
+* **Temporal Resonance & 4D Thinking**: New capabilities for analyzing system evolution over time
+* **Enhanced Tools**: Functional implementations of PredictivE ModelinG TooL, CausalInferenceTool, and AgentBasedModelingTool
+* **New Workflows**: Added temporal forecasting, causal analysis, and comparative future scenario workflows
+* **System Representation**: Enhanced with timestamp-based history tracking for temporal analysis
+* **Resonance Tracking**: New ResonanceTracker for monitoring tactical resonance and crystallization metrics
+
 ## Table of Contents
 
 *   [I. ResonantiA Protocol v3.0 (The Guiding Framework)](./01_ResonantiA_Protocol_v3_0/README.md)
@@ -27,4 +36,4 @@ The project Wiki serves as an essential, dynamic, and user-centric knowledge bas
 *   [IX. Appendices](./09_Appendices/README.md)
 
 This Wiki is a living document for ResonantiA Protocol v3.0 & Arche.
-Last Updated: [AUTO_DATE_OR_MANUAL] 
+Last Updated: March 2024 

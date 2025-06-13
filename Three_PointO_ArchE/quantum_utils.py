@@ -9,12 +9,17 @@ import numpy as np
 from scipy.linalg import logm, sqrtm, LinAlgError # Used for Von Neumann entropy (logm, sqrtm not strictly needed for VN but useful for other metrics)
 from math import log2, sqrt # Use log base 2 for information measures
 import logging
-from typing import Union, List, Optional, Tuple, cast # Expanded type hints
+from typing import Union, List, Optional, Tuple, cast, Dict, Any # Expanded type hints
+from scipy.linalg import expm
+from scipy.constants import hbar
 
 logger = logging.getLogger(__name__)
 # Basic logging config if running standalone or logger not configured externally
 if not logger.hasHandlers():
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - QuantumUtils - %(levelname)s - %(message)s')
+
+# Use natural units for stability
+hbar = 1.0
 
 # --- State Vector Manipulation ---
 
@@ -428,5 +433,129 @@ def calculate_shannon_entropy(quantum_state_vector: np.ndarray) -> float:
 
     logger.debug(f"Calculated Shannon Entropy: {entropy:.6f}")
     return float(entropy)
+
+def entangling_hamiltonian(J: float = 1.0, K: float = 0.5) -> np.ndarray:
+    """
+    Creates a 4x4 entangling Hamiltonian for two qubits using the Heisenberg interaction and controlled-phase term.
+    Args:
+        J: Coupling strength for the Heisenberg interaction.
+        K: Local field strength.
+    Returns:
+        A complex NumPy array representing the entangling Hamiltonian.
+    """
+    # Heisenberg interaction
+    sx = np.array([[0, 1], [1, 0]], dtype=complex)
+    sy = np.array([[0, -1j], [1j, 0]], dtype=complex)
+    sz = np.array([[1, 0], [0, -1]], dtype=complex)
+    H_int = J * (np.kron(sx, sx) + np.kron(sy, sy) + np.kron(sz, sz))
+    # Local field term
+    H_local = K * (np.kron(sz, np.eye(2)) + np.kron(np.eye(2), sz))
+    # Controlled-phase term (CZ)
+    CZ = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, -1]], dtype=complex)
+    H_cz = J * CZ
+    return H_int + H_local + H_cz
+
+def hamiltonian_pulsed(time: float, pulse_period: float, dim: int = 2, J: float = 1.0, K: float = 0.5) -> np.ndarray:
+    """
+    Creates a time-dependent Hamiltonian with a Gaussian pulse modulation.
+    Args:
+        time: Current time point in the simulation.
+        pulse_period: Period of the Gaussian pulse.
+        dim: Dimension of the system (2 for single qubit, 4 for two-qubit/entangled).
+        J: Coupling strength for the entangling Hamiltonian (used if dim=4).
+        K: Local field strength for the entangling Hamiltonian (used if dim=4).
+    Returns:
+        A complex NumPy array representing the time-dependent Hamiltonian.
+    """
+    if time < 0 or pulse_period <= 0:
+        raise ValueError("Time and pulse period must be non-negative.")
+    H0 = np.array([[1.0, 0.5], [0.5, 1.0]], dtype=complex)
+    pulse = np.exp(-(time - pulse_period/2)**2 / (2 * (pulse_period/4)**2))
+    H_base = H0 * (1 + pulse)
+    if dim == 2:
+        return H_base
+    elif dim == 4:
+        return entangling_hamiltonian(J=J, K=K)
+    else:
+        raise ValueError("Only 2 or 4 dimensional systems are supported.")
+
+def evolve_quantum_state(psi: np.ndarray, H: np.ndarray, dt: float) -> np.ndarray:
+    """
+    Evolves a quantum state using the time-dependent Schrödinger equation.
+    Args:
+        psi: Current state vector.
+        H: Hamiltonian matrix.
+        dt: Time step.
+    Returns:
+        Evolved state vector.
+    Raises:
+        ValueError: If inputs are invalid.
+    """
+    if psi.ndim != 1:
+        raise ValueError("State vector must be 1-dimensional.")
+    if H.shape[0] != H.shape[1] or H.shape[0] != len(psi):
+        raise ValueError("Hamiltonian dimensions must match state vector.")
+    # Time evolution operator
+    U = expm(-1j * H * dt / hbar)
+    # Evolve state
+    psi_new = U @ psi
+    # Normalize
+    norm = np.linalg.norm(psi_new)
+    if not np.isfinite(norm) or norm < 1e-12:
+        raise ValueError("Quantum state norm became zero or NaN during evolution.")
+    psi_new = psi_new / norm
+    return psi_new
+
+def run_quantum_simulation(
+    time_horizon: float,
+    pulse_amplitude: float,
+    pulse_width: float,
+    pulse_periods: np.ndarray,
+    initial_state: Optional[np.ndarray] = None,
+    visualize: bool = False,
+    J: float = 1.0,
+    K: float = 0.5  # Add local field strength parameter
+) -> Dict[str, Any]:
+    if time_horizon <= 0:
+        raise ValueError("Time horizon must be positive.")
+    if pulse_amplitude <= 0:
+        raise ValueError("Pulse amplitude must be positive.")
+    if pulse_width <= 0:
+        raise ValueError("Pulse width must be positive.")
+    if initial_state is None:
+        initial_state = np.array([1.0, 0.0], dtype=complex)
+    else:
+        initial_state = superposition_state(initial_state)
+    dim = len(initial_state)
+    state_evolution = []
+    entropy_evolution = []
+    times = np.linspace(0, time_horizon, len(pulse_periods))
+    current_state = initial_state.copy()
+    for t, period in zip(times, pulse_periods):
+        H = hamiltonian_pulsed(t, period, dim=dim, J=J, K=K)  # Pass K here
+        dt = time_horizon / len(pulse_periods)
+        current_state = evolve_quantum_state(current_state, H, dt)
+        state_evolution.append(current_state)
+        entropy = calculate_shannon_entropy(current_state)
+        entropy_evolution.append(entropy)
+    results = {
+        'state_evolution': state_evolution,
+        'entropy_evolution': entropy_evolution,
+        'final_state': current_state,
+        'times': times.tolist()
+    }
+    if visualize:
+        results['visualization_data'] = {
+            'state_plot': {
+                'times': times.tolist(),
+                'states': [state.tolist() for state in state_evolution]
+            },
+            'entropy_plot': {
+                'times': times.tolist(),
+                'entropy': entropy_evolution
+            }
+        }
+    logger.info(f"Quantum simulation completed with {len(pulse_periods)} time steps")
+    return results
 
 # --- END OF FILE 3.0ArchE/quantum_utils.py --- 
