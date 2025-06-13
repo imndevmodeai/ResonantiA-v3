@@ -18,6 +18,10 @@ from .cfp_framework import CfpframeworK # Import the class for the wrapper
 from .causal_inference_tool import perform_causal_inference # Causal tool main function
 from .agent_based_modeling_tool import perform_abm # ABM tool main function
 from .predictive_modeling_tool import run_prediction # Predictive tool main function
+from .system_genesis_tool import perform_system_genesis_action # System Genesis tool main function
+from .web_search_tool import search_web
+from .llm_tool import generate_text_llm
+from .self_interrogate_tool import self_interrogate
 import inspect
 from .action_context import ActionContext # Import from new file
 from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
@@ -154,20 +158,20 @@ ACTION_REGISTRY: Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]] = {
     "perform_predictive_modeling": run_prediction,
 
     # --- ResonantiA Protocol v3.0 Tools ---
-    "get_spr_details": {
-        "tool_function": retrieve_spr_definitions, # New tool function
-        "description": "Retrieves detailed information for one or more SPRs from the Knowledge Graph.",
-        "input_schema": {
-            "spr_ids": "(list of strings) A list of SPR IDs to retrieve."
-        },
-        "output_schema": {
-            "spr_details": "(dict) A dictionary where keys are SPR IDs and values are the SPR definition objects.",
-            "errors": "(dict) A dictionary of errors encountered, keyed by SPR ID or a general error key."
-        }
-    },
+    "get_spr_details": retrieve_spr_definitions,  # Use the function directly
 
-    # Add other custom actions here
-    # "my_custom_action": my_custom_action_function,
+    # System Genesis and Evolution Workflow Tools
+    "perform_system_genesis_action": perform_system_genesis_action,
+    "insight_solidification_sgew": perform_system_genesis_action,  # Maps to the same function with different operation
+
+    # Web and search tools
+    "search_web": search_web,
+    
+    # LLM and text generation tools
+    "generate_text_llm": generate_text_llm,
+    
+    # Self-interrogation tools
+    "self_interrogate": self_interrogate
 }
 
 def register_action(action_type: str, function: Callable[[Dict[str, Any]], Dict[str, Any]], force: bool = False):
@@ -191,135 +195,60 @@ def register_action(action_type: str, function: Callable[[Dict[str, Any]], Dict[
     return True
 
 def execute_action(
-    task_key: str, 
-    action_name: str, 
-    action_type: str, 
+    task_key: str,
+    action_name: str,
+    action_type: str,
     inputs: Dict[str, Any],
-    context_for_action: ActionContext, 
-    max_attempts: int, 
-    attempt_number: int 
+    context_for_action: Any,
+    max_attempts: int = 1,
+    attempt_number: int = 1
 ) -> Dict[str, Any]:
     """
-    Core function to execute a registered action (tool) with IAR handling.
+    Execute an action using the appropriate handler from the action registry.
+    Returns a dictionary containing both the primary result and the IAR reflection.
     """
-    if not isinstance(action_type, str) or action_type not in ACTION_REGISTRY:
-        error_msg = f"Unknown or invalid action type: '{action_type}'"
+    if action_type not in ACTION_REGISTRY:
+        error_msg = f"Unknown action type: {action_type}"
         logger.error(error_msg)
         return {
             "error": error_msg,
             "reflection": {
-                "status": "Failure", "summary": "Action type not found in registry.",
-                "confidence": 0.0, "alignment_check": "N/A",
-                "potential_issues": ["Invalid workflow definition or unregistered action."],
-                "raw_output_preview": None
+                "status": "Failed",
+                "confidence": 0.0,
+                "insight": "Action type not found in registry",
+                "action": "None",
+                "reflection": error_msg
             }
         }
-
-    action_definition_or_callable = ACTION_REGISTRY[action_type]
-    actual_tool_function: Optional[Callable] = None
-
-    if callable(action_definition_or_callable):
-        actual_tool_function = action_definition_or_callable
-    elif isinstance(action_definition_or_callable, dict):
-        func = action_definition_or_callable.get("tool_function")
-        if callable(func):
-            actual_tool_function = func
     
-    if not actual_tool_function:
-        error_msg = f"Tool function for action '{action_type}' is not defined or not callable in ACTION_REGISTRY."
-        logger.error(error_msg)
-        # Return IAR error structure
+    try:
+        handler = ACTION_REGISTRY[action_type]
+        result = handler(**inputs)
+        
+        # Ensure result includes IAR reflection
+        if isinstance(result, dict) and "reflection" not in result:
+            result["reflection"] = {
+                "status": "Success",
+                "confidence": 1.0,
+                "insight": "Action completed successfully",
+                "action": action_type,
+                "reflection": "No issues encountered"
+            }
+        
+        return result
+    
+    except Exception as e:
+        error_msg = f"Error executing action {action_type}: {str(e)}"
+        logger.error(error_msg, exc_info=True)
         return {
             "error": error_msg,
             "reflection": {
-                "status": "Failure", "summary": f"Action '{action_type}' configuration error.",
-                "confidence": 0.0, "alignment_check": "N/A",
-                "potential_issues": ["Action registration issue or invalid workflow definition."],
-                "raw_output_preview": None
+                "status": "Failed",
+                "confidence": 0.0,
+                "insight": f"Error in {action_type}",
+                "action": "None",
+                "reflection": error_msg
             }
-        }
-
-    logger.debug(f"Executing action '{action_type}' with resolved function '{getattr(actual_tool_function, '__name__', repr(actual_tool_function))}'")
-
-    try:
-        # This log line directly uses .__name__ which is safe now.
-        logger.debug(f"Calling resolved tool function '{actual_tool_function.__name__}' with inputs: {str(inputs)[:200]}... and action_context")
-        
-        func_signature = inspect.signature(actual_tool_function)
-        # Check for the specific parameter name used by retrieve_spr_definitions
-        expects_context_for_action = "context_for_action" in func_signature.parameters 
-        # Keep the old check for other tools that might use "action_context"
-        expects_action_context = "action_context" in func_signature.parameters
-
-        # Now, make the call to the tool function
-        # The tool function receives the inputs dictionary and, if it expects it, the action context
-        
-        # This revised call passes the 'inputs' dictionary as a single argument
-        # and adds the context if the tool's signature includes 'action_context'
-        final_call_kwargs = {}
-        if expects_context_for_action:
-             final_call_kwargs['context_for_action'] = context_for_action
-        elif expects_action_context:
-             final_call_kwargs['action_context'] = context_for_action
-
-        tool_result = actual_tool_function(inputs=inputs, **final_call_kwargs)
-
-        # Validate tool_result structure (must be dict, should have 'reflection')
-        if not isinstance(tool_result, dict):
-            error_msg = f"Action '{action_type}' returned non-dict result: {type(tool_result)}. Expected dict with 'reflection'."
-            logger.error(error_msg)
-            return {
-                "error": error_msg,
-                "original_result": tool_result, 
-                "reflection": {
-                    "status": "Failure", "summary": "Action implementation error: Returned non-dict.",
-                    "confidence": 0.0, "alignment_check": "Non-compliant with IAR.",
-                    "potential_issues": ["Action needs code update for IAR v3.0 compliance."],
-                    "raw_output_preview": str(tool_result)[:150]+"..."
-                }
-            }
-        elif "reflection" not in tool_result:
-            error_msg = f"Action '{action_type}' result dictionary missing mandatory 'reflection' key."
-            logger.error(error_msg)
-            # Add error to tool_result if not already present, then build a reflection
-            if "error" not in tool_result: tool_result["error"] = error_msg
-            tool_result["reflection"] = {
-                "status": "Failure", 
-                "summary": "Action implementation error: Missing 'reflection' key.",
-                "confidence": 0.1, 
-                "potential_issues": ["Action missing IAR v3.0 reflection structure."],
-                "raw_output_preview": json.dumps({k:v for k,v in tool_result.items() if k not in ['reflection', 'error']}, default=str)[:150]+"..."
-            }
-        
-        # ActionContext is for providing context TO the action, not for storing its results.
-        # The reflection comes FROM the tool_result. No need to set things on context_for_action here.
-
-        # Log success/failure based on reflection status
-        reflection_data = tool_result.get("reflection", {}) # Get the reflection from the tool's result
-        if reflection_data.get("status") == "Failure":
-            logger.error(f"Action '{action_type}' completed with reflection status: {reflection_data.get('status')}. Error: {tool_result.get('error')}. Summary: {reflection_data.get('summary')}")
-        else:
-            logger.debug(f"Action '{action_type}' completed successfully (Reflection Status: {reflection_data.get('status', 'N/A')}).")
-
-        return tool_result
-
-    except Exception as e:
-        # Catch any exception during the tool's execution (e.g., network error, file not found)
-        # This is a critical failure of the action itself.
-        logger.error(f"Critical error during execution of action '{action_type}': {e}", exc_info=True)
-        error_msg = f"System error in action '{action_type}': {e}"
-        # Construct reflection directly for this exception case
-        critical_failure_reflection = {
-            "status": "Failure",
-            "summary": f"Action '{action_type}' failed due to system error: {e}",
-            "confidence": 0.0,
-            "alignment_check": "N/A",
-            "potential_issues": [f"System Error: {e}"],
-            "raw_output_preview": None
-        }
-        return {
-            "error": error_msg,
-            "reflection": critical_failure_reflection
         }
 
 # --- END OF FILE 3.0ArchE/action_registry.py --- 

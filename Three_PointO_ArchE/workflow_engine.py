@@ -12,15 +12,25 @@ import copy
 import time
 import re
 import uuid # Added for workflow_run_id generation consistency
-from typing import Dict, Any, List, Optional, Set, Union, Tuple # Expanded type hints
+from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable # Expanded type hints
 # Use relative imports within the package
 from . import config
-from .action_registry import execute_action # Imports the function that calls specific tools
+from .action_registry import execute_action, ACTION_REGISTRY, register_action # Imports the function that calls specific tools and centralized registry
 from .spr_manager import SPRManager # May be used for SPR-related context or validation
 from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS # Imports error handling logic
 from .action_context import ActionContext # Import from new file
 import ast
 from datetime import datetime # Added import
+from .workflow_recovery import WorkflowRecoveryHandler
+from .recovery_actions import (
+    analyze_failure,
+    fix_template,
+    fix_action,
+    validate_workflow,
+    validate_action
+)
+from .tools import display_output
+from .system_genesis_tool import perform_system_genesis_action
 
 # Attempt to import numpy for numeric type checking in _compare_values, optional
 try:
@@ -171,193 +181,133 @@ class ResonanceTracker:
         # Weighted compliance score
         compliance_score = (success_rate * 0.4) + (avg_confidence * 0.3) + (avg_resonance * 0.3)
         return min(compliance_score, 1.0)
-class WorkflowEngine:
-    """
-    Executes workflows defined in JSON (Process Blueprints) according to ResonantiA v3.0.
-    Manages task execution order based on dependencies, resolves inputs using context
-    (including nested access into results and IAR reflections), evaluates conditions,
-    invokes actions via the action registry, stores the complete action result
-    (primary output + IAR reflection dict) in the context, and integrates with
-    error handling strategies (retry, fail_fast, trigger_metacog).
-    Acknowledges Keyholder Override conceptually for potential bypasses.
-    """
-    def __init__(self, spr_manager: Optional[SPRManager] = None):
-        # Initialize with paths and settings from config
-        self.workflows_dir = getattr(config, 'WORKFLOW_DIR', 'workflows')
-        self.max_recursion_depth = getattr(config, 'MAX_RECURSION_DEPTH', 10) # Safety limit
-        self.spr_manager = spr_manager # Store SPR manager if provided
-        self.last_workflow_name: Optional[str] = None # Store name of last loaded workflow
-        logger.info(f"Workflow Engine (v3.0) initialized. Workflows expected in: '{self.workflows_dir}'")
-        if not os.path.isdir(self.workflows_dir):
-            # Log warning if configured workflow directory doesn't exist
-            logger.warning(f"Workflows directory '{self.workflows_dir}' does not exist or is not a directory.")
 
-    def _extract_var_path(self, template_content: str) -> str:
-        """Extracts the variable path from the template content (e.g., 'var.path' from 'var.path | filter')."""
-        return template_content.split('|')[0].strip()
+class IARCompliantWorkflowEngine:
+    """Enhanced workflow engine with IAR compliance and recovery support."""
+    
+    def __init__(self, workflows_dir: str = "workflows", spr_manager = None):
+        self.workflows_dir = workflows_dir
+        self.spr_manager = spr_manager
+        self.last_workflow_name = None
+        self.action_registry = ACTION_REGISTRY.copy()  # Use centralized registry
+        self.recovery_handler = None
+        self.current_run_id = None
+        self.current_workflow = None
+        self.iar_validator = IARValidator()
+        self.resonance_tracker = ResonanceTracker()
+        
+        # Register standard actions
+        self.register_action("display_output", display_output)
+        self.register_action("perform_system_genesis_action", perform_system_genesis_action)
+        
+        # Register recovery actions
+        self.register_recovery_actions()
+        logger.info("IARCompliantWorkflowEngine initialized with full vetting capabilities")
 
-    def _parse_filters(self, template_content: str) -> List[Dict[str, Any]]:
-        """Parses filter specifications from the template content."""
-        parts = template_content.split('|')[1:]
-        filters = []
-        if not parts:
-            return filters
+    def register_action(self, action_type: str, action_func: Callable) -> None:
+        """Register an action function with the engine."""
+        register_action(action_type, action_func, force=True)  # Use centralized registration
+        self.action_registry = ACTION_REGISTRY.copy()  # Update local copy
+        logger.debug(f"Registered action: {action_type}")
 
-        for part in parts:
-            part = part.strip()
-            if not part:
-                continue
-            
-            filter_spec = {'name': '', 'args': []}
-            if '(' in part and part.endswith(')'):
-                name_part, args_part_str = part[:-1].split('(', 1)
-                filter_spec['name'] = name_part.strip()
-                raw_args_content = args_part_str.strip()
-                logger.debug(f"_parse_filters: Filter '{filter_spec['name']}', raw_args_content: '{raw_args_content}'") # DEBUG LOG
-                if raw_args_content:
-                    # Regex to find comma-separated arguments, respecting quotes.
-                    # Matches: a double-quoted string (allowing escaped quotes ""),
-                    # OR a single-quoted string (allowing escaped quotes ''),
-                    # OR any sequence of characters not containing a comma.
-                    # This is applied to the content *between* the filter parentheses.
-                    # arg_pattern = re.compile(r'\s*("(?:\\"|[^\\"])*"|'(?:\\'|[^\\'])*'|[^,\s][^,]*[^,\s]|[^\n,\s])\s*')
-                    
-                    # We want to split by comma, but not commas inside quotes.
-                    # A direct split is hard. Instead, find all valid arguments.
-                    # The regex above is designed to capture one valid argument at a time.
-                    # However, findall with that regex will give tuples if capturing groups are used.
-                    # A better approach for splitting CSV-like strings is often iterative or using a dedicated parser.
+    def register_recovery_actions(self) -> None:
+        """Register recovery-related actions."""
+        self.register_action("analyze_failure", analyze_failure)
+        self.register_action("fix_template", fix_template)
+        self.register_action("fix_action", fix_action)
+        self.register_action("validate_workflow", validate_workflow)
+        self.register_action("validate_action", validate_action)
 
-                    # Let's try a simpler split approach for now, assuming ast.literal_eval can handle the parts.
-                    # This is a known tricky problem. A full robust CSV parser is complex.
-                    # For now, we'll assume arguments are simple enough that splitting by comma
-                    # and then stripping whitespace from each part before ast.literal_eval might work
-                    # for many common cases, especially if arguments don't contain literal commas.
-                    # If an argument is supposed to be a string literal containing a comma, it MUST be quoted.
-                    # E.g., filter('arg1', "string, with comma", 'arg3')
-
-                    # Attempt 1: Simplistic split by comma, then strip and eval.
-                    # This will FAIL if string literals themselves contain unquoted commas meant to be part of the string.
-                    potential_args_str = raw_args_content.split(',')
-                    arg_matches = [s.strip() for s in potential_args_str]
-
-                    logger.debug(f"_parse_filters: Filter '{filter_spec['name']}', (simplified split) arg_matches: {arg_matches}") # DEBUG LOG
-                    
-                    parsed_args = []
-                    for i, arg_str in enumerate(arg_matches):
-                        arg_str = arg_str.strip()
-                        logger.debug(f"_parse_filters: Filter '{filter_spec['name']}', pre-eval arg {i}: '{arg_str}'") # DEBUG LOG
-                        # Try ast.literal_eval for quoted strings, then specific keywords, then numbers, then fallback to string
-                        if (arg_str.startswith('"') and arg_str.endswith('"')) or \
-                           (arg_str.startswith("'") and arg_str.endswith("'")):
-                            try:
-                                parsed_args.append(ast.literal_eval(arg_str))
-                            except (ValueError, SyntaxError): # Fallback if not a valid Python literal
-                                parsed_args.append(arg_str[1:-1]) # Simple unquoting as last resort
-                        elif arg_str.lower() == 'true':
-                            parsed_args.append(True)
-                        elif arg_str.lower() == 'false':
-                            parsed_args.append(False)
-                        elif arg_str.lower() == 'null' or arg_str.lower() == 'none':
-                            parsed_args.append(None)
-                        else:
-                            try:
-                                if '.' in arg_str or 'e' in arg_str.lower(): # Handle floats/scientific notation
-                                    parsed_args.append(float(arg_str))
-                                else:
-                                    parsed_args.append(int(arg_str))
-                            except ValueError:
-                                parsed_args.append(arg_str) # Fallback to string if not number/keyword
-                    filter_spec['args'] = parsed_args
-            else:
-                filter_spec['name'] = part
-            filters.append(filter_spec)
-        return filters
-
-    def _get_value_from_path(self, path: str, context: Dict[str, Any]) -> Any:
-        logger.debug(f"_get_value_from_path: Attempting to get path '{path}' from context with keys: {list(context.keys()) if isinstance(context, dict) else 'Not a dict'}. Context: {str(context)[:500]}...")
-        """Retrieves a value from a nested dictionary using a dot-separated path."""
-        if not path: # Handle cases where path might be empty (e.g. {{ | default('foo') }})
-            return None
-            
-        keys = path.split('.')
-        value = context
-        for key_idx, key in enumerate(keys):
-            if path == "raw_user_query" and key == "raw_user_query":
-                logger.debug(f"_get_value_from_path: SPECIAL CHECK for path='{path}', key='{key}'. Context type: {type(value)}. Key in context: {'raw_user_query' in value if isinstance(value, dict) else 'N/A'}. Value of context['{key}']: {value.get(key) if isinstance(value, dict) else 'N/A'}")
-            if isinstance(value, dict) and key in value:
-                value = value[key]
-            elif isinstance(value, list):
-                try:
-                    idx = int(key)
-                    if 0 <= idx < len(value):
-                        value = value[idx]
-                    else:
-                        logger.debug(f"Index '{idx}' out of bounds for path '{path}' (list length {len(value)}). Returning None.")
-                        return None # Index out of bounds
-                except ValueError:
-                    logger.debug(f"Invalid list index '{key}' in path '{path}'. Expected integer. Returning None.")
-                    return None # Invalid index format
-            else:
-                # Path leads to a non-dict/non-list item, or key not found
-                logger.debug(f"Key '{key}' not found or invalid access in path '{path}'. Current value type: {type(value)}. Returning None.")
-                return None
-        return value
-
-    def load_workflow(self, workflow_name: str) -> Dict[str, Any]:
-        """
-        Loads and validates a workflow definition from a JSON file.
-        Handles relative paths based on configured workflows_dir.
-        Performs basic structural validation (presence of 'tasks' dictionary).
-        """
-        if not isinstance(workflow_name, str):
-            raise TypeError("workflow_name must be a string.")
-
-        # Construct full path, handling relative paths and '.json' extension
-        filepath = os.path.join(self.workflows_dir, os.path.basename(workflow_name))
-
-        # Auto-append .json if missing and file exists or likely intended
-        if not filepath.lower().endswith(".json"):
-            potential_json_path = filepath + ".json"
-            if os.path.exists(potential_json_path):
-                filepath = potential_json_path
-            elif not os.path.exists(filepath): # If original path also doesn't exist, assume .json was intended
-                filepath += ".json"
-
-        logger.info(f"Attempting to load workflow definition from: {filepath}")
-        if not os.path.exists(filepath):
-            logger.error(f"Workflow file not found: {filepath}")
-            raise FileNotFoundError(f"Workflow file not found: {filepath}")
-        if not os.path.isfile(filepath):
-            logger.error(f"Workflow path is not a file: {filepath}")
-            raise ValueError(f"Workflow path is not a file: {filepath}")
-
+    def _execute_task(self, task: Dict[str, Any], results: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute a single task with proper action type handling."""
+        action_type = task.get("action_type")
+        if not action_type:
+            raise ValueError("Task must specify action_type")
+        
+        if action_type not in self.action_registry:
+            raise ValueError(f"Unknown action type: {action_type}")
+        
+        action_func = self.action_registry[action_type]
+        inputs = self._resolve_template_variables(task.get("inputs", {}), results)
+        
         try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                workflow = json.load(f)
-
-            # Basic structural validation
-            if not isinstance(workflow, dict):
-                raise ValueError("Workflow file content must be a JSON object (dictionary).")
-            if "tasks" not in workflow or not isinstance(workflow.get("tasks"), dict):
-                raise ValueError("Workflow file must contain a 'tasks' dictionary.")
-            # Validate individual task structure (basic)
-            for task_id, task_data in workflow["tasks"].items():
-                if not isinstance(task_data, dict):
-                    raise ValueError(f"Task definition for '{task_id}' must be a dictionary.")
-                if "action" not in task_data:
-                    raise ValueError(f"Task '{task_id}' is missing required 'action'.")
-
-            loaded_name = workflow.get('name', os.path.basename(filepath))
-            self.last_workflow_name = loaded_name # Store name for logging/results
-            logger.info(f"Successfully loaded and validated workflow: '{loaded_name}'")
-            return workflow
-        except json.JSONDecodeError as e:
-            logger.error(f"Error decoding JSON from workflow file {filepath}: {e}")
-            raise ValueError(f"Invalid JSON in workflow file: {filepath}")
+            result = action_func(inputs)
+            if not isinstance(result, dict):
+                result = {"output": result}
+            return result
         except Exception as e:
-            logger.error(f"Unexpected error loading workflow file {filepath}: {e}", exc_info=True)
-            raise # Re-raise other unexpected errors
+            logger.error(f"Task execution failed: {str(e)}")
+            raise
+
+    def _resolve_template_variables(self, inputs: Dict[str, Any], results: Dict[str, Any]) -> Dict[str, Any]:
+        """Resolve template variables in task inputs."""
+        resolved = {}
+        for key, value in inputs.items():
+            if isinstance(value, str) and "{{" in value and "}}" in value:
+                # Extract task and field from template
+                template = value.strip("{} ")
+                parts = template.split(".", 1)
+                if len(parts) == 2:
+                    task_id, field_path = parts
+                else:
+                    task_id, field_path = parts[0], ""
+                # Support nested field resolution (e.g., result.patterns)
+                if task_id in results:
+                    field_value = results[task_id]
+                    if field_path:
+                        for subfield in field_path.split('.'):
+                            if isinstance(field_value, dict) and subfield in field_value:
+                                field_value = field_value[subfield]
+                            else:
+                                field_value = None
+                                break
+                    resolved[key] = field_value
+                else:
+                    resolved[key] = value
+            else:
+                resolved[key] = value
+        return resolved
+
+    def get_resonance_dashboard(self) -> Dict[str, Any]:
+        """Get the current resonance dashboard."""
+        return {
+            "run_id": self.current_run_id,
+            "workflow": self.last_workflow_name,
+            "resonance_report": self.resonance_tracker.get_resonance_report(),
+            "iar_validation": self.iar_validator.get_validation_status() if hasattr(self.iar_validator, 'get_validation_status') else None
+        }
+
+    def load_workflow(self, workflow_path: str) -> Dict[str, Any]:
+        """Load workflow definition from file."""
+        try:
+            logger.info(f"Attempting to load workflow definition from: {workflow_path}")
+            with open(workflow_path, 'r') as f:
+                workflow = json.load(f)
+            
+            # Validate workflow structure
+            if "tasks" not in workflow:
+                raise ValueError("Workflow must contain 'tasks' section")
+            
+            # Validate each task
+            for task_id, task in workflow["tasks"].items():
+                if "action_type" not in task:
+                    raise ValueError(f"Task '{task_id}' is missing required 'action_type'")
+                if "description" not in task:
+                    raise ValueError(f"Task '{task_id}' is missing required 'description'")
+                if "inputs" not in task:
+                    raise ValueError(f"Task '{task_id}' is missing required 'inputs'")
+                
+                # Verify action is registered
+                action_type = task["action_type"]
+                if action_type not in self.action_registry:
+                    raise ValueError(f"Action type '{action_type}' is not registered in the engine")
+            
+            self.last_workflow_name = workflow.get("name", "Unnamed Workflow")
+            return workflow
+            
+        except Exception as e:
+            logger.error(f"Unexpected error loading workflow file {workflow_path}: {str(e)}")
+            raise
 
     def _resolve_value(self, value: Any, runtime_context: Dict[str, Any], initial_context: Dict[str, Any], task_key: Optional[str] = None) -> Any:
         """
@@ -714,7 +664,7 @@ class WorkflowEngine:
 
             task_key = ready_tasks.pop()
             task_info = tasks[task_key]
-            action_type = task_info.get("action")
+            action_type = task_info.get("action_type")
             
             attempt_count = 1 
             max_attempts = task_info.get('retries', 0) + 1
@@ -824,139 +774,88 @@ class WorkflowEngine:
         
         return summary
 
-# --- END OF FILE 3.0ArchE/workflow_engine.py --- 
-
-class IARCompliantWorkflowEngine(WorkflowEngine):
-    """Enhanced workflow engine with complete IAR compliance vetting"""
-    
-    def __init__(self, spr_manager=None):
-        super().__init__(spr_manager)
-        self.iar_validator = IARValidator()
-        self.resonance_tracker = ResonanceTracker()
-        logger.info("IARCompliantWorkflowEngine initialized with full vetting capabilities")
-    
-    def execute_task(self, task_definition, context):
-        """Execute task with mandatory IAR compliance validation"""
-        
-        # Pre-execution validation
-        if not self.validate_task_iar_capability(task_definition):
-            raise ValueError("Task must support IAR output structure")
-        
-        # Execute with IAR capture
+    def execute_workflow(self, workflow_path: str, initial_context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Execute a workflow with recovery support."""
         try:
-            # Use parent class execution logic
-            task_key = task_definition.get('id', 'unknown_task')
-            action_type = task_definition.get('action')
+            logger.info("Executing workflow with recovery support...")
             
-            # Create action context
-            action_context_obj = ActionContext(
-                task_key=task_key,
-                action_name=task_key,
-                action_type=action_type,
-                workflow_name=getattr(self, 'last_workflow_name', 'unknown'),
-                run_id=context.get('workflow_run_id', 'unknown'),
-                attempt_number=1,
-                max_attempts=1,
-                execution_start_time=datetime.utcnow(),
-                runtime_context=context
-            )
+            # Load workflow
+            workflow = self.load_workflow(workflow_path)
+            self.current_workflow = workflow
+            self.current_run_id = str(uuid.uuid4())
             
-            # Resolve inputs using parent method
-            resolved_inputs = self._resolve_inputs(
-                task_definition.get('inputs'), 
-                context, 
-                context.get('initial_context', {}), 
-                task_key
-            )
+            # Initialize recovery handler
+            self.recovery_handler = WorkflowRecoveryHandler(workflow, self.current_run_id)
             
-            # Execute action
-            from .action_registry import execute_action
-            result = execute_action(
-                task_key=task_key,
-                action_name=task_key,
-                action_type=action_type,
-                inputs=resolved_inputs,
-                context_for_action=action_context_obj,
-                max_attempts=1,
-                attempt_number=1
-            )
+            # Initialize context
+            initial_context = initial_context or {}
+            runtime_context = {}
             
-            # Validate IAR structure
-            reflection = result.get('reflection', {})
-            is_valid, issues = self.iar_validator.validate_structure(reflection)
+            # Execute tasks
+            results = {}
+            iar_failures = []  # Track IAR insights during execution
             
-            if not is_valid:
-                raise ValueError(f"Invalid IAR structure: {issues}")
+            for task_id, task in workflow["tasks"].items():
+                try:
+                    # Execute task
+                    task_result = self._execute_task(task, results)
+                    
+                    # Validate IAR structure
+                    is_valid, issues = self.iar_validator.validate_structure(task_result.get("reflection", {}))
+                    if not is_valid:
+                        iar_failures.append({
+                            "task_id": task_id,
+                            "issues": issues
+                        })
+                    
+                    # Record execution for resonance tracking
+                    self.resonance_tracker.record_execution(task_id, task_result.get("reflection", {}), runtime_context)
+                    
+                    # Store result
+                    results[task_id] = task_result
+                    runtime_context[task_id] = task_result
+                    
+                except Exception as e:
+                    logger.error(f"Task {task_id} failed: {str(e)}")
+                    
+                    # Analyze failure
+                    failure_context = {
+                        "failed_task": task_id,
+                        "error_type": type(e).__name__,
+                        "error_message": str(e)
+                    }
+                    failure_analysis = self.recovery_handler.analyze_failure(failure_context)
+                    
+                    if failure_analysis.get("output", {}).get("status") == "recoverable":
+                        # Append recovery flow
+                        recovery_result = self.recovery_handler.append_recovery_flow(failure_analysis)
+                        if recovery_result["output"]["status"] == "success":
+                            workflow = recovery_result["output"]["modified_workflow"]
+                            self.current_workflow = workflow
+                            
+                            # Retry task with recovery
+                            task_result = self._execute_task(task, results)
+                            results[task_id] = task_result
+                            runtime_context[task_id] = task_result
+                        else:
+                            raise
+                    else:
+                        raise
             
-            # Validate enhanced fields if present
-            enhanced_valid, enhanced_issues = self.iar_validator.validate_enhanced_fields(reflection)
-            if not enhanced_valid:
-                logger.warning(f"Enhanced IAR field issues: {enhanced_issues}")
+            # Generate final report
+            final_report = {
+                "workflow_name": workflow.get("name", "Unnamed Workflow"),
+                "run_id": self.current_run_id,
+                "status": "Success",
+                "results": results,
+                "iar_failures": iar_failures,
+                "resonance_report": self.resonance_tracker.get_resonance_report()
+            }
             
-            # Track resonance metrics
-            execution_record = self.resonance_tracker.record_execution(
-                task_id=task_key,
-                iar_data=reflection,
-                context=context
-            )
-            
-            # Add execution tracking to result
-            result['execution_tracking'] = execution_record
-            
-            return result
+            return final_report
             
         except Exception as e:
-            return self.handle_error_with_iar(e, task_definition, context)
-    
-    def validate_task_iar_capability(self, task_definition):
-        """Ensure task can return proper IAR structure"""
-        required_fields = [
-            'status', 'summary', 'confidence', 
-            'alignment_check', 'potential_issues',
-            'raw_output_preview'
-        ]
-        
-        # Check if task definition includes expected IAR requirements
-        output_structure = task_definition.get('output_structure', {})
-        reflection_structure = output_structure.get('reflection', {})
-        
-        if not reflection_structure:
-            # If not explicitly defined, assume compliance (legacy support)
-            logger.debug(f"Task {task_definition.get('id')} has no explicit IAR structure definition - assuming compliance")
-            return True
-        
-        # Validate task definition includes IAR requirements
-        return all(
-            field in reflection_structure
-            for field in required_fields
-        )
-    
-    def handle_error_with_iar(self, error, task_definition, context):
-        """Handle errors with proper IAR structure"""
-        return {
-            "error": str(error),
-            "reflection": {
-                "status": "Failed",
-                "summary": f"Task execution failed: {error}",
-                "confidence": 0.0,
-                "alignment_check": "Failed due to execution error",
-                "potential_issues": [f"Execution error: {error}"],
-                "raw_output_preview": None,
-                "tactical_resonance": 0.0,
-                "crystallization_potential": 0.0
-            }
-        }
-    
-    def get_resonance_dashboard(self):
-        """Get comprehensive resonance and compliance dashboard"""
-        resonance_report = self.resonance_tracker.get_resonance_report()
-        
-        return {
-            "iar_compliance_status": "FULL_COMPLIANCE_ACTIVE",
-            "resonance_metrics": resonance_report['current_metrics'],
-            "resonance_trend": resonance_report['recent_trend'],
-            "compliance_score": resonance_report['compliance_score'],
-            "validator_status": "ACTIVE",
-            "total_validations": len(self.resonance_tracker.execution_history),
-            "last_updated": datetime.utcnow().isoformat()
-        }
+            logger.error(f"Workflow execution failed: {str(e)}")
+            raise
+
+# --- END OF FILE 3.0ArchE/workflow_engine.py --- 
