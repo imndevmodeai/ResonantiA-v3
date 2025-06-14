@@ -36,6 +36,13 @@ from .recovery_actions import (
 from .tools import display_output
 from .system_genesis_tool import perform_system_genesis_action
 from .qa_tools import run_code_linter, run_workflow_suite
+from .output_handler import (
+    display_task_result,
+    display_workflow_progress,
+    display_workflow_start,
+    display_workflow_complete,
+    display_workflow_error
+)
 
 # Attempt to import numpy for numeric type checking in _compare_values,
 # optional
@@ -1032,88 +1039,107 @@ class IARCompliantWorkflowEngine:
         
         return summary
 
-    def execute_workflow(self, workflow_path: str, initial_context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """Execute a workflow with recovery support."""
+    def _display_task_result(self, task_name: str, result: Dict[str, Any]) -> None:
+        """Display task execution result in a formatted way."""
+        print("\n" + "="*80)
+        print(f"Task: {task_name}")
+        print("-"*80)
+        
+        # Display status
+        status = result.get("status", "Unknown")
+        print(f"Status: {status}")
+        
+        # Display summary if available
+        if "summary" in result:
+            print(f"\nSummary:\n{result['summary']}")
+        
+        # Display confidence if available
+        if "confidence" in result:
+            print(f"\nConfidence: {result['confidence']:.2f}")
+        
+        # Display raw output preview if available
+        if "raw_output_preview" in result:
+            print("\nOutput Preview:")
+            print("-"*40)
+            print(result["raw_output_preview"])
+            print("-"*40)
+        
+        print("="*80 + "\n")
+
+    def _display_workflow_progress(self, task_name: str, status: str) -> None:
+        """Display workflow execution progress."""
+        print(f"\n[{datetime.now().strftime('%H:%M:%S')}] {task_name}: {status}")
+
+    def execute_workflow(self, workflow: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute a workflow with enhanced terminal output."""
+        display_workflow_start(workflow.get('name', 'Unnamed Workflow'))
+        
+        start_time = datetime.now()
+        run_id = str(uuid.uuid4())
+        
         try:
-            logger.info("Executing workflow with recovery support...")
-
-            # Load workflow
-            workflow = self.load_workflow(workflow_path)
-            self.current_workflow = workflow
-            self.current_run_id = str(uuid.uuid4())
-
-            # Initialize recovery handler
-            self.recovery_handler = WorkflowRecoveryHandler(workflow, self.current_run_id)
-
-            # Initialize context
-            initial_context = initial_context or {}
-            runtime_context = {}
-
-            # Execute tasks
-            results = {}
-            iar_failures = []  # Track IAR insights during execution
-
-            for task_id, task in workflow["tasks"].items():
-                try:
-                    # Execute task
-                    task_result = self._execute_task(task, results)
+            # Validate workflow
+            if not self._validate_workflow(workflow):
+                raise ValueError("Workflow validation failed")
             
-                    # Validate IAR structure
-                    is_valid, issues = self.iar_validator.validate_structure(task_result.get("reflection", {}))
-                    if not is_valid:
-                        iar_failures.append({
-                            "task_id": task_id,
-                            "issues": issues
-                        })
-
-                    # Record execution for resonance tracking
-                    self.resonance_tracker.record_execution(task_id, task_result.get("reflection", {}), runtime_context)
-                    
-                    # Store result
-                    results[task_id] = task_result
-                    runtime_context[task_id] = task_result
-                except Exception as e:
-                    logger.error(f"Task {task_id} failed: {str(e)}")
-                    
-                    # Analyze failure
-                    failure_context = {
-                        "failed_task": task_id,
-                        "error_type": type(e).__name__,
-                        "error_message": str(e)
-                    }
-                    failure_analysis = self.recovery_handler.analyze_failure(failure_context)
-                    
-                    if failure_analysis.get("output", {}).get("status") == "recoverable":
-                        # Append recovery flow
-                        recovery_result = self.recovery_handler.append_recovery_flow(failure_analysis)
-                        if recovery_result["output"]["status"] == "success":
-                            workflow = recovery_result["output"]["modified_workflow"]
-                            self.current_workflow = workflow
-                            
-                            # Retry task with recovery
-                            task_result = self._execute_task(task, results)
-                            results[task_id] = task_result
-                            runtime_context[task_id] = task_result
-                        else:
-                            raise
-                    else:
-                        raise
-
-            # Generate final report
-            final_report = {
-                "workflow_name": workflow.get("name", "Unnamed Workflow"),
-                "run_id": self.current_run_id,
-                "status": "Success",
-                "results": results,
-                "iar_failures": iar_failures,
-                "resonance_report": self.resonance_tracker.get_resonance_report()
+            # Initialize results
+            results = {
+                "workflow_name": workflow.get("name", "unknown"),
+                "run_id": run_id,
+                "start_time": start_time.isoformat(),
+                "tasks": {}
             }
             
-            return final_report
+            # Execute tasks
+            for task_name, task in workflow.get("tasks", {}).items():
+                display_workflow_progress(task_name, "Starting")
+                
+                # Check dependencies
+                dependencies = task.get("dependencies", [])
+                for dep in dependencies:
+                    if dep not in results["tasks"]:
+                        raise ValueError(f"Missing dependency: {dep}")
+                
+                # Execute task
+                try:
+                    task_result = self._execute_task(task, results)
+                    results["tasks"][task_name] = task_result
+                    display_task_result(task_name, task_result)
+                    display_workflow_progress(task_name, "Completed")
+                except Exception as e:
+                    error_msg = f"Task {task_name} failed: {str(e)}"
+                    display_workflow_progress(task_name, f"Failed: {error_msg}")
+                    results["tasks"][task_name] = {
+                        "status": "Failed",
+                        "error": error_msg
+                    }
+                    raise
+            
+            # Workflow completed successfully
+            end_time = datetime.now()
+            results["end_time"] = end_time.isoformat()
+            results["workflow_status"] = "Completed Successfully"
+            results["execution_time_seconds"] = (end_time - start_time).total_seconds()
+            
+            # Save and display final result
+            output_path = self._save_workflow_result(results)
+            display_workflow_complete(results, output_path)
+            
+            return results
             
         except Exception as e:
-            logger.error(f"Workflow execution failed: {str(e)}")
-            raise
+            # Workflow failed
+            end_time = datetime.now()
+            results["end_time"] = end_time.isoformat()
+            results["workflow_status"] = "Failed"
+            results["error"] = str(e)
+            results["execution_time_seconds"] = (end_time - start_time).total_seconds()
+            
+            # Save and display error
+            output_path = self._save_workflow_result(results)
+            display_workflow_error(str(e), output_path)
+            
+            return results
 
     def _save_workflow_result(self, result: Dict[str, Any]) -> str:
         """Save workflow result to a file with timestamp."""
