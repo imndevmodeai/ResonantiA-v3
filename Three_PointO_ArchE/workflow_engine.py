@@ -35,7 +35,7 @@ from .recovery_actions import (
 )
 from .tools import display_output
 from .system_genesis_tool import perform_system_genesis_action
-from .qa_tools import run_code_linter
+from .qa_tools import run_code_linter, run_workflow_suite
 
 # Attempt to import numpy for numeric type checking in _compare_values,
 # optional
@@ -223,10 +223,10 @@ class IARCompliantWorkflowEngine:
 
         # Register standard actions
         self.register_action("display_output", display_output)
-        self.register_action(
-    "perform_system_genesis_action",
+        self.register_action("perform_system_genesis_action",
      perform_system_genesis_action)
         self.register_action("run_code_linter", run_code_linter)
+        self.register_action("run_workflow_suite", run_workflow_suite)
 
         # Register recovery actions
         self.register_recovery_actions()
@@ -1114,5 +1114,22 @@ class IARCompliantWorkflowEngine:
         except Exception as e:
             logger.error(f"Workflow execution failed: {str(e)}")
             raise
+
+    def _save_workflow_result(self, result: Dict[str, Any]) -> str:
+        """Save workflow result to a file with timestamp."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        workflow_name = result.get("workflow_name", "unknown_workflow")
+        run_id = result.get("run_id", str(uuid.uuid4()))
+        filename = f"result_{workflow_name}_run_{run_id}_{timestamp}.json"
+        
+        # Add timestamp to the result data
+        result["timestamp"] = timestamp
+        
+        output_path = os.path.join("outputs", filename)
+        os.makedirs("outputs", exist_ok=True)
+        
+        with open(output_path, "w") as f:
+            json.dump(result, f, indent=2)
+        return output_path
 
 # --- END OF FILE 3.0ArchE/workflow_engine.py ---

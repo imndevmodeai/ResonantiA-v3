@@ -12,10 +12,14 @@
       "dependencies": []
     },
     "test_workflow_suite": {
-      "action_type": "display_output",
-      "description": "Runs a suite of workflow tests. (Placeholder)",
+      "action_type": "run_workflow_suite",
+      "description": "Runs a suite of test workflows to verify system functionality.",
       "inputs": {
-        "content": "Executing placeholder for: run_workflow_suite"
+        "workflow_files": [
+          "workflows/system_genesis_workflow.json",
+          "workflows/as_above_so_below_workflow.json",
+          "workflows/recovery_workflow.json"
+        ]
       },
       "dependencies": []
     },

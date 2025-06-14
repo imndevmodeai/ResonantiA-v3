@@ -81,4 +81,106 @@ def run_code_linter(directory: str, **kwargs) -> Dict[str, Any]:
                 summary=f"An unexpected error occurred while running pylint: {str(e)}",
                 confidence=0.0
             )
-        } 
+        }
+
+def run_workflow_suite(workflow_files: list, **kwargs) -> Dict[str, Any]:
+    """
+    Runs a suite of workflows and generates a comprehensive report.
+    
+    Args:
+        workflow_files: List of paths to workflow JSON files to execute
+        **kwargs: Additional arguments passed by the workflow engine
+    
+    Returns:
+        Dict containing:
+        - suite_report: Detailed report of all workflow executions
+        - summary: Brief summary of the suite execution
+        - reflection: IAR-compliant reflection object
+    """
+    from .workflow_engine import IARCompliantWorkflowEngine
+    from datetime import datetime
+    
+    if not workflow_files:
+        return {
+            "error": "No workflow files specified",
+            "reflection": _create_reflection(
+                status="Failed",
+                summary="No workflow files provided for testing",
+                confidence=0.0
+            )
+        }
+    
+    suite_results = []
+    total_workflows = len(workflow_files)
+    successful_workflows = 0
+    failed_workflows = 0
+    
+    for workflow_file in workflow_files:
+        try:
+            # Create a new engine instance for each workflow
+            engine = IARCompliantWorkflowEngine()
+            
+            # Load and validate the workflow
+            workflow = engine.load_workflow(workflow_file)
+            if not workflow:
+                raise ValueError(f"Failed to load workflow: {workflow_file}")
+            
+            # Execute the workflow
+            start_time = datetime.now()
+            result = engine.execute_workflow(workflow)
+            end_time = datetime.now()
+            
+            # Add timing information
+            execution_time = (end_time - start_time).total_seconds()
+            result["execution_time_seconds"] = execution_time
+            result["start_time"] = start_time.isoformat()
+            result["end_time"] = end_time.isoformat()
+            
+            # Track success/failure
+            if result.get("workflow_status") == "Completed Successfully":
+                successful_workflows += 1
+            else:
+                failed_workflows += 1
+            
+            suite_results.append({
+                "workflow_file": workflow_file,
+                "result": result
+            })
+            
+        except Exception as e:
+            failed_workflows += 1
+            suite_results.append({
+                "workflow_file": workflow_file,
+                "error": str(e),
+                "status": "Failed"
+            })
+    
+    # Generate summary
+    summary = (
+        f"Workflow Suite Results:\n"
+        f"Total Workflows: {total_workflows}\n"
+        f"Successful: {successful_workflows}\n"
+        f"Failed: {failed_workflows}\n"
+        f"Success Rate: {(successful_workflows/total_workflows)*100:.1f}%"
+    )
+    
+    # Create detailed report
+    suite_report = {
+        "timestamp": datetime.now().isoformat(),
+        "total_workflows": total_workflows,
+        "successful_workflows": successful_workflows,
+        "failed_workflows": failed_workflows,
+        "success_rate": (successful_workflows/total_workflows)*100,
+        "workflow_results": suite_results
+    }
+    
+    return {
+        "suite_report": suite_report,
+        "summary": summary,
+        "reflection": _create_reflection(
+            status="Success" if failed_workflows == 0 else "Partial Success",
+            summary=summary,
+            confidence=1.0 if failed_workflows == 0 else 0.8,
+            raw_output_preview=json.dumps(suite_report, indent=2)
+        )
+    } 
