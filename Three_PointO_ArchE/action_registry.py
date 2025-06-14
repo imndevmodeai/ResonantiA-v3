@@ -195,9 +195,9 @@ def register_action(action_type: str, function: Callable[[Dict[str, Any]], Dict[
     return True
 
 def execute_action(
-    task_key: str,
-    action_name: str,
-    action_type: str,
+    task_key: str, 
+    action_name: str, 
+    action_type: str, 
     inputs: Dict[str, Any],
     context_for_action: Any,
     max_attempts: int = 1,
@@ -236,7 +236,7 @@ def execute_action(
             }
         
         return result
-    
+
     except Exception as e:
         error_msg = f"Error executing action {action_type}: {str(e)}"
         logger.error(error_msg, exc_info=True)

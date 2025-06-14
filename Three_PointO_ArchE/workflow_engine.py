@@ -1,9 +1,9 @@
-# --- START OF FILE 3.0ArchE/workflow_engine.py ---
 # ResonantiA Protocol v3.0 - workflow_engine.py
 # Orchestrates the execution of defined workflows (Process Blueprints).
 # Manages context, dependencies, conditions, action execution, and error handling.
 # Critically handles Integrated Action Reflection (IAR) results by storing
-# the complete action output dictionary (including 'reflection') in the context.
+# the complete action output dictionary (including 'reflection') in the
+# context.
 
 import json
 import os
@@ -11,16 +11,20 @@ import logging
 import copy
 import time
 import re
-import uuid # Added for workflow_run_id generation consistency
-from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable # Expanded type hints
+import uuid  # Added for workflow_run_id generation consistency
+# Expanded type hints
+from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable
 # Use relative imports within the package
 from . import config
-from .action_registry import execute_action, ACTION_REGISTRY, register_action # Imports the function that calls specific tools and centralized registry
-from .spr_manager import SPRManager # May be used for SPR-related context or validation
-from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS # Imports error handling logic
-from .action_context import ActionContext # Import from new file
+# Imports the function that calls specific tools and centralized registry
+from .action_registry import execute_action, ACTION_REGISTRY, register_action
+# May be used for SPR-related context or validation
+from .spr_manager import SPRManager
+# Imports error handling logic
+from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
+from .action_context import ActionContext  # Import from new file
 import ast
-from datetime import datetime # Added import
+from datetime import datetime  # Added import
 from .workflow_recovery import WorkflowRecoveryHandler
 from .recovery_actions import (
     analyze_failure,
@@ -31,13 +35,16 @@ from .recovery_actions import (
 )
 from .tools import display_output
 from .system_genesis_tool import perform_system_genesis_action
+from .qa_tools import run_code_linter
 
-# Attempt to import numpy for numeric type checking in _compare_values, optional
+# Attempt to import numpy for numeric type checking in _compare_values,
+# optional
 try:
     import numpy as np
 except ImportError:
-    np = None # Set to None if numpy is not available
-    logging.info("Numpy not found, some numeric type checks in _compare_values might be limited.")
+    np = None  # Set to None if numpy is not available
+    logging.info(
+        "Numpy not found, some numeric type checks in _compare_values might be limited.")
 
 logger = logging.getLogger(__name__)
 
@@ -70,12 +77,15 @@ class IARValidator:
         
         issues = []
         if missing_fields:
-            issues.extend([f"Missing required field: {field}" for field in missing_fields])
+            issues.extend(
+                [f"Missing required field: {field}" for field in missing_fields])
         
         # Validate confidence is float between 0-1
         confidence = iar_data.get('confidence')
         if confidence is not None:
-            if not isinstance(confidence, (int, float)) or not (0.0 <= confidence <= 1.0):
+            if not isinstance(
+    confidence, (int, float)) or not (
+        0.0 <= confidence <= 1.0):
                 issues.append("Confidence must be float between 0.0 and 1.0")
         
         # Validate status is valid
@@ -92,10 +102,14 @@ class IARValidator:
         for field in self.enhanced_fields:
             if field in iar_data:
                 value = iar_data[field]
-                if not isinstance(value, (int, float)) or not (0.0 <= value <= 1.0):
-                    enhanced_issues.append(f"{field} must be float between 0.0 and 1.0")
+                if not isinstance(
+    value, (int, float)) or not (
+        0.0 <= value <= 1.0):
+                    enhanced_issues.append(
+    f"{field} must be float between 0.0 and 1.0")
         
         return len(enhanced_issues) == 0, enhanced_issues
+
 
 class ResonanceTracker:
     """Tracks tactical resonance and crystallization metrics"""
@@ -129,10 +143,15 @@ class ResonanceTracker:
         if not self.execution_history:
             return
         
-        recent_executions = self.execution_history[-100:]  # Last 100 executions
-        
-        tactical_scores = [ex.get('tactical_resonance', 0.0) for ex in recent_executions]
-        crystallization_scores = [ex.get('crystallization_potential', 0.0) for ex in recent_executions]
+        # Last 100 executions
+        recent_executions = self.execution_history[-100:]
+
+        tactical_scores = [ex.get('tactical_resonance', 0.0)
+                                  for ex in recent_executions]
+        crystallization_scores = [
+    ex.get(
+        'crystallization_potential',
+         0.0) for ex in recent_executions]
         
         self.resonance_metrics = {
             'avg_tactical_resonance': sum(tactical_scores) / len(tactical_scores),
@@ -156,8 +175,10 @@ class ResonanceTracker:
         recent_10 = self.execution_history[-10:]
         older_10 = self.execution_history[-20:-10]
         
-        recent_avg = sum(ex.get('tactical_resonance', 0.0) for ex in recent_10) / 10
-        older_avg = sum(ex.get('tactical_resonance', 0.0) for ex in older_10) / 10
+        recent_avg = sum(ex.get('tactical_resonance', 0.0)
+                         for ex in recent_10) / 10
+        older_avg = sum(ex.get('tactical_resonance', 0.0)
+                        for ex in older_10) / 10
         
         if recent_avg > older_avg + 0.05:
             return "improving"
@@ -172,20 +193,24 @@ class ResonanceTracker:
             return 0.0
         
         recent_executions = self.execution_history[-50:]
-        successful_executions = [ex for ex in recent_executions if ex.get('status') == 'Success']
+        successful_executions = [
+    ex for ex in recent_executions if ex.get('status') == 'Success']
         
         success_rate = len(successful_executions) / len(recent_executions)
-        avg_confidence = sum(ex.get('confidence', 0.0) for ex in successful_executions) / max(len(successful_executions), 1)
+        avg_confidence = sum(ex.get('confidence', 0.0)
+                             for ex in successful_executions) / max(len(successful_executions), 1)
         avg_resonance = self.resonance_metrics['avg_tactical_resonance']
         
         # Weighted compliance score
-        compliance_score = (success_rate * 0.4) + (avg_confidence * 0.3) + (avg_resonance * 0.3)
+        compliance_score = (success_rate * 0.4) + \
+                            (avg_confidence * 0.3) + (avg_resonance * 0.3)
         return min(compliance_score, 1.0)
+
 
 class IARCompliantWorkflowEngine:
     """Enhanced workflow engine with IAR compliance and recovery support."""
-    
-    def __init__(self, workflows_dir: str = "workflows", spr_manager = None):
+
+    def __init__(self, workflows_dir: str = "workflows", spr_manager=None):
         self.workflows_dir = workflows_dir
         self.spr_manager = spr_manager
         self.last_workflow_name = None
@@ -195,18 +220,25 @@ class IARCompliantWorkflowEngine:
         self.current_workflow = None
         self.iar_validator = IARValidator()
         self.resonance_tracker = ResonanceTracker()
-        
+
         # Register standard actions
         self.register_action("display_output", display_output)
-        self.register_action("perform_system_genesis_action", perform_system_genesis_action)
-        
+        self.register_action(
+    "perform_system_genesis_action",
+     perform_system_genesis_action)
+        self.register_action("run_code_linter", run_code_linter)
+
         # Register recovery actions
         self.register_recovery_actions()
-        logger.info("IARCompliantWorkflowEngine initialized with full vetting capabilities")
+        logger.info(
+            "IARCompliantWorkflowEngine initialized with full vetting capabilities")
 
     def register_action(self, action_type: str, action_func: Callable) -> None:
         """Register an action function with the engine."""
-        register_action(action_type, action_func, force=True)  # Use centralized registration
+        register_action(
+    action_type,
+    action_func,
+     force=True)  # Use centralized registration
         self.action_registry = ACTION_REGISTRY.copy()  # Update local copy
         logger.debug(f"Registered action: {action_type}")
 
@@ -218,18 +250,20 @@ class IARCompliantWorkflowEngine:
         self.register_action("validate_workflow", validate_workflow)
         self.register_action("validate_action", validate_action)
 
-    def _execute_task(self, task: Dict[str, Any], results: Dict[str, Any]) -> Dict[str, Any]:
+    def _execute_task(self, task: Dict[str, Any],
+                      results: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a single task with proper action type handling."""
         action_type = task.get("action_type")
         if not action_type:
             raise ValueError("Task must specify action_type")
-        
+
         if action_type not in self.action_registry:
             raise ValueError(f"Unknown action type: {action_type}")
-        
+
         action_func = self.action_registry[action_type]
-        inputs = self._resolve_template_variables(task.get("inputs", {}), results)
-        
+        inputs = self._resolve_template_variables(
+            task.get("inputs", {}), results)
+
         try:
             result = action_func(inputs)
             if not isinstance(result, dict):
@@ -283,11 +317,11 @@ class IARCompliantWorkflowEngine:
             logger.info(f"Attempting to load workflow definition from: {workflow_path}")
             with open(workflow_path, 'r') as f:
                 workflow = json.load(f)
-            
+
             # Validate workflow structure
             if "tasks" not in workflow:
                 raise ValueError("Workflow must contain 'tasks' section")
-            
+
             # Validate each task
             for task_id, task in workflow["tasks"].items():
                 if "action_type" not in task:
@@ -296,20 +330,65 @@ class IARCompliantWorkflowEngine:
                     raise ValueError(f"Task '{task_id}' is missing required 'description'")
                 if "inputs" not in task:
                     raise ValueError(f"Task '{task_id}' is missing required 'inputs'")
-                
+
                 # Verify action is registered
                 action_type = task["action_type"]
                 if action_type not in self.action_registry:
                     raise ValueError(f"Action type '{action_type}' is not registered in the engine")
-            
+
             self.last_workflow_name = workflow.get("name", "Unnamed Workflow")
             return workflow
-            
+
         except Exception as e:
             logger.error(f"Unexpected error loading workflow file {workflow_path}: {str(e)}")
             raise
 
-    def _resolve_value(self, value: Any, runtime_context: Dict[str, Any], initial_context: Dict[str, Any], task_key: Optional[str] = None) -> Any:
+    def _extract_var_path(self, template_content: str) -> str:
+        """Extracts the core variable path from a template string, ignoring filters."""
+        # The variable path is the part before the first pipe '|'
+        return template_content.split('|', 1)[0].strip()
+
+    def _parse_filters(self, template_content: str) -> list:
+        """Parses filter syntax (e.g., | filter(arg1, 'arg2')) from a template string."""
+        parts = template_content.split('|')[1:] # Get all parts after the variable path
+        filters = []
+        filter_regex = re.compile(r"^\s*(\w+)\s*(?:\((.*?)\))?\s*$") # Matches 'filter(args)' or 'filter'
+
+        for part in parts:
+            match = filter_regex.match(part)
+            if match:
+                name, args_str = match.groups()
+                args = []
+                if args_str:
+                    # This is a simplified arg parser; it splits by comma and handles basic quotes
+                    # A more robust solution might use shlex or a dedicated parsing library
+                    try:
+                        # Attempt to parse as a JSON list to handle quotes and types
+                        args = json.loads(f'[{args_str}]')
+                    except json.JSONDecodeError:
+                        # Fallback for non-standard JSON arguments
+                        args = [a.strip() for a in args_str.split(',')]
+                filters.append({"name": name, "args": args})
+        return filters
+
+    def _get_value_from_path(self, path: str, context: Dict[str, Any]) -> Any:
+        """Gets a value from a nested dictionary using a dot-separated path."""
+        keys = path.split('.')
+        value = context
+        for key in keys:
+            if isinstance(value, dict) and key in value:
+                value = value[key]
+            else:
+                return None # Path does not exist
+        return value
+
+    def _resolve_value(self,
+    value: Any,
+    runtime_context: Dict[str,
+    Any],
+    initial_context: Dict[str,
+    Any],
+     task_key: Optional[str] = None) -> Any:
         """
         Resolves a value that might be a template string, a direct value, or a nested structure.
         Handles template syntax {{ placeholder | filter1 | filter2(arg) | default(\"fallback\") }}.
@@ -320,53 +399,78 @@ class IARCompliantWorkflowEngine:
 
         if isinstance(value, dict):
             resolved_dict = {}
-            for k, v_item in value.items(): # Changed v to v_item to avoid conflict
-                resolved_dict[k] = self._resolve_value(v_item, runtime_context, initial_context, task_key)
+            for k, v_item in value.items(
+            ):  # Changed v to v_item to avoid conflict
+                resolved_dict[k] = self._resolve_value(
+    v_item, runtime_context, initial_context, task_key)
             return resolved_dict
         elif isinstance(value, list):
             resolved_list = []
             for item in value:
-                resolved_list.append(self._resolve_value(item, runtime_context, initial_context, task_key))
+                resolved_list.append(
+    self._resolve_value(
+        item,
+        runtime_context,
+        initial_context,
+         task_key))
             return resolved_list
         elif not isinstance(value, str) or not ("{{" in value and "}}" in value):
             return value
 
-        logger.debug(f"Resolving template string: {original_template_for_logging} with initial_context keys: {list(initial_context.keys()) if initial_context else []}")
+        logger.debug(
+    f"Resolving template string: {original_template_for_logging} with initial_context keys: {
+        list(
+            initial_context.keys()) if initial_context else []}")
         
         matches = re.findall(r"(\{\{(.*?)\}\})", value, re.DOTALL)
-        if not matches: # Should not happen if "{{" and "}}" are present, but as a safeguard
+        # Should not happen if "{{" and "}}" are present, but as a safeguard
+        if not matches:
             return value
 
-        # Case 1: The entire template string is a single placeholder (e.g., "{{ my_variable }}")
+        # Case 1: The entire template string is a single placeholder (e.g., "{{
+        # my_variable }}")
         if len(matches) == 1 and value.strip() == matches[0][0]:
             full_match_tag, template_content = matches[0]
             template_content = template_content.strip()
-            if not template_content: return "" # Handle empty braces {{}}
+            if not template_content: return ""  # Handle empty braces {{}}
 
             var_path_str = self._extract_var_path(template_content)
             filters = self._parse_filters(template_content)
             
             default_value_from_filter = None
             has_default_filter = False
-            default_filter_spec = next((f for f in filters if f['name'] == 'default'), None)
+            default_filter_spec = next(
+    (f for f in filters if f['name'] == 'default'), None)
             if default_filter_spec:
                 has_default_filter = True
-                default_value_from_filter = default_filter_spec['args'][0] if default_filter_spec['args'] else None
-                filters.remove(default_filter_spec) # Process default first, then remove
+                default_value_from_filter = default_filter_spec[
+                    'args'][0] if default_filter_spec['args'] else None
+                # Process default first, then remove
+                filters.remove(default_filter_spec)
 
             resolved_var_from_context = None
             if var_path_str.startswith("context."):
                 actual_path = var_path_str[len("context."):]
-                logger.debug(f"Attempting to get value for path: '{actual_path}' from initial_context. Keys: {list(initial_context.keys()) if isinstance(initial_context, dict) else 'Not a dict'}. Initial context itself: {initial_context}")
-                retrieved_value = self._get_value_from_path(actual_path, initial_context)
+                logger.debug(
+    f"Attempting to get value for path: '{actual_path}' from initial_context. Keys: {
+        list(
+            initial_context.keys()) if isinstance(
+                initial_context,
+                 dict) else 'Not a dict'}. Initial context itself: {initial_context}")
+                retrieved_value = self._get_value_from_path(
+                    actual_path, initial_context)
                 resolved_var_from_context = retrieved_value
-                logger.debug(f"Resolved (single) '{var_path_str}' to: {resolved_var_from_context} (from initial_context)")
+                logger.debug(
+    f"Resolved (single) '{var_path_str}' to: {resolved_var_from_context} (from initial_context)")
             elif task_key and var_path_str == task_key:
-                logger.warning(f"Template (single) '{value}' in task '{task_key}' references itself ('{var_path_str}').")
+                logger.warning(
+    f"Template (single) '{value}' in task '{task_key}' references itself ('{var_path_str}').")
                 resolved_var_from_context = runtime_context.get(task_key)
             else:
-                resolved_var_from_context = self._get_value_from_path(var_path_str, runtime_context)
-                logger.debug(f"Resolved (single) '{var_path_str}' to: {resolved_var_from_context} (from runtime_context)")
+                resolved_var_from_context = self._get_value_from_path(
+                    var_path_str, runtime_context)
+                logger.debug(
+    f"Resolved (single) '{var_path_str}' to: {resolved_var_from_context} (from runtime_context)")
 
             current_value_for_placeholder = None
             if resolved_var_from_context is None and has_default_filter:
@@ -375,59 +479,89 @@ class IARCompliantWorkflowEngine:
                 current_value_for_placeholder = resolved_var_from_context
             
             # Apply other filters
-            for f_spec in filters: # default_filter_spec already removed
+            for f_spec in filters:  # default_filter_spec already removed
                 if f_spec['name'] == 'toJson':
-                    current_value_for_placeholder = json.dumps(current_value_for_placeholder)
+                    current_value_for_placeholder = json.dumps(
+                        current_value_for_placeholder)
                 elif f_spec['name'] == 'replace':
                     if not isinstance(current_value_for_placeholder, str):
-                        current_value_for_placeholder = str(current_value_for_placeholder)
+                        current_value_for_placeholder = str(
+                            current_value_for_placeholder)
                     if len(f_spec['args']) == 2:
-                        old_val, new_val = str(f_spec['args'][0]), str(f_spec['args'][1])
-                        current_value_for_placeholder = current_value_for_placeholder.replace(old_val, new_val)
+                        old_val, new_val = str(
+    f_spec['args'][0]), str(
+        f_spec['args'][1])
+                        current_value_for_placeholder = current_value_for_placeholder.replace(
+                            old_val, new_val)
                     else:
-                        logger.warning(f"Task '{task_key}': Filter 'replace' expects 2 arguments (old, new), got {len(f_spec['args'])}. Skipping.")
+                        logger.warning(
+    f"Task '{task_key}': Filter 'replace' expects 2 arguments (old, new), got {
+        len(
+            f_spec['args'])}. Skipping.")
                 elif f_spec['name'] == 'trim':
-                    current_value_for_placeholder = str(current_value_for_placeholder).strip()
+                    current_value_for_placeholder = str(
+                        current_value_for_placeholder).strip()
                 else:
-                    logger.warning(f"Task '{task_key}': Unknown filter '{f_spec['name']}' in template '{original_template_for_logging}'. Skipping filter.")
+                    logger.warning(
+    f"Task '{task_key}': Unknown filter '{
+        f_spec['name']}' in template '{original_template_for_logging}'. Skipping filter.")
             
-            logger.debug(f"Resolved single placeholder '{value}' to: {str(current_value_for_placeholder)[:200]}")
+            logger.debug(
+    f"Resolved single placeholder '{value}' to: {
+        str(current_value_for_placeholder)[
+            :200]}")
             return current_value_for_placeholder
 
-        # Case 2: The template string has one or more embedded placeholders (e.g., "Value is {{my_var}} and {{another.path}}")
+        # Case 2: The template string has one or more embedded placeholders
+        # (e.g., "Value is {{my_var}} and {{another.path}}")
         else:
             processed_template_string = value
             for full_match_tag, template_content_inner in matches:
                 template_content_inner = template_content_inner.strip()
                 
-                resolved_placeholder_value_after_filters = None # Initialize
-                if not template_content_inner: # Handle {{}}
+                resolved_placeholder_value_after_filters = None  # Initialize
+                if not template_content_inner:  # Handle {{}}
                     resolved_placeholder_value_after_filters = ""
                 else:
-                    var_path_str_inner = self._extract_var_path(template_content_inner)
+                    var_path_str_inner = self._extract_var_path(
+                        template_content_inner)
                     filters_inner = self._parse_filters(template_content_inner)
                     
                     default_value_from_filter_inner = None
                     has_default_filter_inner = False
-                    default_filter_spec_inner = next((f for f in filters_inner if f['name'] == 'default'), None)
+                    default_filter_spec_inner = next(
+    (f for f in filters_inner if f['name'] == 'default'), None)
                     if default_filter_spec_inner:
                         has_default_filter_inner = True
-                        default_value_from_filter_inner = default_filter_spec_inner['args'][0] if default_filter_spec_inner['args'] else None
+                        default_value_from_filter_inner = default_filter_spec_inner[
+                            'args'][0] if default_filter_spec_inner['args'] else None
                         filters_inner.remove(default_filter_spec_inner)
 
                     resolved_var_from_context_inner = None
                     if var_path_str_inner.startswith("context."):
-                        actual_path_inner = var_path_str_inner[len("context."):]
-                        logger.debug(f"Attempting to get value for path: '{actual_path_inner}' from initial_context. Keys: {list(initial_context.keys()) if isinstance(initial_context, dict) else 'Not a dict'}. Initial context itself: {initial_context}")
-                        retrieved_value = self._get_value_from_path(actual_path_inner, initial_context)
+                        actual_path_inner = var_path_str_inner[len(
+                            "context."):]
+                        logger.debug(
+    f"Attempting to get value for path: '{actual_path_inner}' from initial_context. Keys: {
+        list(
+            initial_context.keys()) if isinstance(
+                initial_context,
+                 dict) else 'Not a dict'}. Initial context itself: {initial_context}")
+                        retrieved_value = self._get_value_from_path(
+                            actual_path_inner, initial_context)
                         resolved_var_from_context_inner = retrieved_value
-                        logger.debug(f"Resolved (embedded) '{var_path_str_inner}' to: {resolved_var_from_context_inner} (from initial_context)")
+                        logger.debug(
+    f"Resolved (embedded) '{var_path_str_inner}' to: {resolved_var_from_context_inner} (from initial_context)")
                     elif task_key and var_path_str_inner == task_key:
-                        logger.warning(f"Template (embedded) '{value}' in task '{task_key}' references itself ('{var_path_str_inner}').")
-                        resolved_var_from_context_inner = runtime_context.get(task_key)
+                        logger.warning(
+    f"Template (embedded) '{value}' in task '{task_key}' references itself ('{var_path_str_inner}').")
+                        resolved_var_from_context_inner = runtime_context.get(
+                            task_key)
                     else:
-                        resolved_var_from_context_inner = self._get_value_from_path(var_path_str_inner, runtime_context)
-                        logger.debug(f"Resolved (embedded) '{var_path_str_inner}' to: {resolved_var_from_context_inner} (from runtime_context)")
+                        resolved_var_from_context_inner = self._get_value_from_path(
+                            var_path_str_inner, runtime_context)
+                        logger.debug(
+    f"Resolved (embedded) '{var_path_str_inner}' to: {resolved_var_from_context_inner} (from runtime_context)")
                     
                     current_value_for_placeholder_inner = None
                     if resolved_var_from_context_inner is None and has_default_filter_inner:
@@ -435,50 +569,88 @@ class IARCompliantWorkflowEngine:
                     else:
                         current_value_for_placeholder_inner = resolved_var_from_context_inner
 
-                    # Apply other filters to current_value_for_placeholder_inner
+                    # Apply other filters to
+                    # current_value_for_placeholder_inner
                     for f_spec_inner in filters_inner:
                         if f_spec_inner['name'] == 'toJson':
-                            current_value_for_placeholder_inner = json.dumps(current_value_for_placeholder_inner)
+                            current_value_for_placeholder_inner = json.dumps(
+                                current_value_for_placeholder_inner)
                         elif f_spec_inner['name'] == 'replace':
-                            if not isinstance(current_value_for_placeholder_inner, str):
-                                current_value_for_placeholder_inner = str(current_value_for_placeholder_inner)
+                            if not isinstance(
+    current_value_for_placeholder_inner, str):
+                                current_value_for_placeholder_inner = str(
+                                    current_value_for_placeholder_inner)
                             if len(f_spec_inner['args']) == 2:
-                                old_val_inner, new_val_inner = str(f_spec_inner['args'][0]), str(f_spec_inner['args'][1])
-                                current_value_for_placeholder_inner = current_value_for_placeholder_inner.replace(old_val_inner, new_val_inner)
+                                old_val_inner, new_val_inner = str(
+    f_spec_inner['args'][0]), str(
+        f_spec_inner['args'][1])
+                                current_value_for_placeholder_inner = current_value_for_placeholder_inner.replace(
+                                    old_val_inner, new_val_inner)
                             else:
-                                logger.warning(f"Task '{task_key}': Filter 'replace' expects 2 arguments (old, new), got {len(f_spec_inner['args'])}. Skipping.")
+                                logger.warning(
+    f"Task '{task_key}': Filter 'replace' expects 2 arguments (old, new), got {
+        len(
+            f_spec_inner['args'])}. Skipping.")
                         elif f_spec_inner['name'] == 'trim':
-                            current_value_for_placeholder_inner = str(current_value_for_placeholder_inner).strip()
+                            current_value_for_placeholder_inner = str(
+                                current_value_for_placeholder_inner).strip()
                         else:
-                            logger.warning(f"Task '{task_key}': Unknown filter '{f_spec_inner['name']}' in template '{original_template_for_logging}'. Skipping filter.")
+                            logger.warning(
+    f"Task '{task_key}': Unknown filter '{
+        f_spec_inner['name']}' in template '{original_template_for_logging}'. Skipping filter.")
                     resolved_placeholder_value_after_filters = current_value_for_placeholder_inner
 
-                # Convert the resolved placeholder value to string for embedding
+                # Convert the resolved placeholder value to string for
+                # embedding
                 string_to_insert = ""
                 if isinstance(resolved_placeholder_value_after_filters, str):
                     string_to_insert = resolved_placeholder_value_after_filters
                 elif isinstance(resolved_placeholder_value_after_filters, (list, dict, tuple)):
-                    string_to_insert = json.dumps(resolved_placeholder_value_after_filters)
+                    string_to_insert = json.dumps(
+                        resolved_placeholder_value_after_filters)
                 elif isinstance(resolved_placeholder_value_after_filters, bool):
-                    string_to_insert = str(resolved_placeholder_value_after_filters).lower()
+                    string_to_insert = str(
+                        resolved_placeholder_value_after_filters).lower()
                 elif resolved_placeholder_value_after_filters is None:
-                    string_to_insert = "null" # Or "" or "None" depending on context, "null" seems reasonable.
-                else: # numbers, etc.
-                    string_to_insert = str(resolved_placeholder_value_after_filters)
-                
-                processed_template_string = processed_template_string.replace(full_match_tag, string_to_insert)
-            
-            logger.debug(f"Resolved embedded template '{original_template_for_logging}' to: {processed_template_string[:200]}")
+                    # Or "" or "None" depending on context, "null" seems
+                    # reasonable.
+                    string_to_insert = "null"
+                else:  # numbers, etc.
+                    string_to_insert = str(
+                        resolved_placeholder_value_after_filters)
+
+                processed_template_string = processed_template_string.replace(
+                    full_match_tag, string_to_insert)
+
+            logger.debug(
+                f"Resolved embedded template '{original_template_for_logging}' to: {processed_template_string[:200]}")
             return processed_template_string
 
-    def _resolve_inputs(self, inputs: Optional[Dict[str, Any]], runtime_context: Dict[str, Any], initial_context: Dict[str, Any], task_key: Optional[str] = None) -> Dict[str, Any]:
+    def _resolve_inputs(self,
+    inputs: Optional[Dict[str,
+    Any]],
+    runtime_context: Dict[str,
+    Any],
+    initial_context: Dict[str,
+    Any],
+    task_key: Optional[str] = None) -> Dict[str,
+     Any]:
         """Resolves all template strings within a task's input dictionary."""
         if inputs is None:
             return {}
         # Pass both contexts to _resolve_value
-        return self._resolve_value(inputs, runtime_context, initial_context, task_key)
+        return self._resolve_value(
+    inputs,
+    runtime_context,
+    initial_context,
+     task_key)
 
-    def _evaluate_condition(self, condition_str: Optional[str], runtime_context: Dict[str, Any], initial_context: Dict[str, Any]) -> bool:
+    def _evaluate_condition(self,
+    condition_str: Optional[str],
+    runtime_context: Dict[str,
+    Any],
+    initial_context: Dict[str,
+     Any]) -> bool:
         """
         Evaluates a condition string (e.g., "{{ task_output.status }} == \"Success\"").
         Supports basic comparisons (==, !=, >, <, >=, <=), truthiness checks,
@@ -487,7 +659,7 @@ class IARCompliantWorkflowEngine:
         Returns True if condition is met or if condition_str is empty/None.
         """
         if not condition_str or not isinstance(condition_str, str):
-            return True # No condition means execute
+            return True  # No condition means execute
         condition_str = condition_str.strip()
         logger.debug(f"Evaluating condition: '{condition_str}'")
 
@@ -498,51 +670,82 @@ class IARCompliantWorkflowEngine:
             if condition_lower == 'false': return False
 
             # Regex for comparison: {{ var.path OP value }} (e.g., {{ task_A.reflection.confidence > 0.7 }})
-            # Handle both formats: "{{ var.path }} OP value" and "{{ var.path OP value }}"
-            comp_match = re.match(r"^{{\s*([\w\.\-]+)\s*(==|!=|>|<|>=|<=)\s*(.*?)\s*}}$", condition_str)
+            # Handle both formats: "{{ var.path }} OP value" and "{{ var.path
+            # OP value }}"
+            comp_match = re.match(
+    r"^{{\s*([\w\.\-]+)\s*(==|!=|>|<|>=|<=)\s*(.*?)\s*}}$",
+     condition_str)
             if not comp_match:
                 # Try the old format: {{ var.path }} OP value
-                comp_match = re.match(r"^{{\s*([\w\.\-]+)\s*}}\s*(==|!=|>|<|>=|<=)\s*(.*)$", condition_str)
+                comp_match = re.match(
+    r"^{{\s*([\w\.\-]+)\s*}}\s*(==|!=|>|<|>=|<=)\s*(.*)$",
+     condition_str)
             
             if comp_match:
                 var_path, operator, value_str = comp_match.groups()
-                actual_value = self._resolve_value(f"{{{{ {var_path} }}}}", runtime_context, initial_context) # Resolve the variable
-                expected_value = self._parse_condition_value(value_str) # Parse the literal value
-                result = self._compare_values(actual_value, operator, expected_value)
-                logger.debug(f"Condition '{condition_str}' evaluated to {result} (Actual: {repr(actual_value)}, Op: {operator}, Expected: {repr(expected_value)})")
+                actual_value = self._resolve_value(
+                    # Resolve the variable
+                    f"{{{{ {var_path} }}}}", runtime_context, initial_context)
+                expected_value = self._parse_condition_value(
+                    value_str)  # Parse the literal value
+                result = self._compare_values(
+    actual_value, operator, expected_value)
+                logger.debug(
+    f"Condition '{condition_str}' evaluated to {result} (Actual: {
+        repr(actual_value)}, Op: {operator}, Expected: {
+            repr(expected_value)})")
                 return result
 
-            # Regex for membership: value IN/NOT IN {{ var.path }} (e.g., "Error" in {{task_B.reflection.potential_issues}})
-            in_match = re.match(r"^(.+?)\s+(in|not in)\s+{{\s*([\w\.\-]+)\s*}}$", condition_str, re.IGNORECASE)
+            # Regex for membership: value IN/NOT IN {{ var.path }} (e.g.,
+            # "Error" in {{task_B.reflection.potential_issues}})
+            in_match = re.match(
+    r"^(.+?)\s+(in|not in)\s+{{\s*([\w\.\-]+)\s*}}$",
+    condition_str,
+     re.IGNORECASE)
             if in_match:
                 value_str, operator, var_path = in_match.groups()
-                value_to_check = self._parse_condition_value(value_str.strip()) # Parse the literal value
-                container = self._resolve_value(f"{{{{{{var_path}}}}}}", runtime_context) # Resolve the container
+                value_to_check = self._parse_condition_value(
+                    value_str.strip())  # Parse the literal value
+                container = self._resolve_value(
+                    # Resolve the container
+                    f"{{{{ {var_path} }}}}", runtime_context, initial_context)
                 operator_lower = operator.lower()
-                if isinstance(container, (list, str, dict, set)): # Check if container type supports 'in'
+                if isinstance(container, (list, str, dict, set)
+                              ):  # Check if container type supports 'in'
                         is_in = value_to_check in container
                         result = is_in if operator_lower == 'in' else not is_in
-                        logger.debug(f"Condition '{condition_str}' evaluated to {result}")
+                        logger.debug(
+    f"Condition '{condition_str}' evaluated to {result}")
                         return result
                 else:
-                        logger.warning(f"Container for '{operator}' check ('{var_path}') is not a list/str/dict/set: {type(container)}. Evaluating to False.")
+                        logger.warning(
+    f"Container for '{operator}' check ('{var_path}') is not a list/str/dict/set: {
+        type(container)}. Evaluating to False.")
                         return False
 
-            # Regex for simple truthiness/existence: {{ var.path }} or !{{ var.path }}
-            truth_match = re.match(r"^(!)?\s*{{\s*([\w\.\-]+)\s*}}$", condition_str)
+            # Regex for simple truthiness/existence: {{ var.path }} or !{{
+            # var.path }}
+            truth_match = re.match(
+    r"^(!)?\s*{{\s*([\w\.\-]+)\s*}}$",
+     condition_str)
             if truth_match:
                 negated, var_path = truth_match.groups()
-                actual_value = self._resolve_value(f"{{{{{{var_path}}}}}}", runtime_context)
+                actual_value = self._resolve_value(
+                    f"{{{{ {var_path} }}}}", runtime_context, initial_context)
                 result = bool(actual_value)
                 if negated: result = not result
-                logger.debug(f"Condition '{condition_str}' (truthiness/existence) evaluated to {result}")
+                logger.debug(
+    f"Condition '{condition_str}' (truthiness/existence) evaluated to {result}")
                 return result
 
             # If no pattern matches
-            logger.error(f"Unsupported condition format: {condition_str}. Defaulting evaluation to False.")
+            logger.error(
+    f"Unsupported condition format: {condition_str}. Defaulting evaluation to False.")
             return False
         except Exception as e:
-            logger.error(f"Error evaluating condition '{condition_str}': {e}. Defaulting to False.", exc_info=True)
+            logger.error(
+    f"Error evaluating condition '{condition_str}': {e}. Defaulting to False.",
+     exc_info=True)
             return False
 
     def _parse_condition_value(self, value_str: str) -> Any:
@@ -559,12 +762,17 @@ class IARCompliantWorkflowEngine:
             else: return int(val_str_cleaned)
         except ValueError:
             # Handle quoted strings
-            if len(val_str_cleaned) >= 2 and val_str_cleaned.startswith(('"', "'")) and val_str_cleaned.endswith(val_str_cleaned[0]):
+            if len(val_str_cleaned) >= 2 and val_str_cleaned.startswith(
+                ('"', "'")) and val_str_cleaned.endswith(val_str_cleaned[0]):
                 return val_str_cleaned[1:-1]
             # Otherwise, return as unquoted string
             return val_str_cleaned
 
-    def _compare_values(self, actual: Any, operator: str, expected: Any) -> bool:
+    def _compare_values(
+    self,
+    actual: Any,
+    operator: str,
+     expected: Any) -> bool:
         """Performs comparison between actual and expected values based on operator."""
         logger.debug(f"Comparing: {repr(actual)} {operator} {repr(expected)}")
         try:
@@ -578,10 +786,17 @@ class IARCompliantWorkflowEngine:
                 numeric_types_list.append(np.number)
             numeric_types = tuple(numeric_types_list)
 
-            if isinstance(actual, numeric_types) and isinstance(expected, numeric_types):
-                # Convert numpy types to standard Python types for comparison if needed
-                actual_cmp = float(actual) if np and isinstance(actual, np.number) else actual
-                expected_cmp = float(expected) if np and isinstance(expected, np.number) else expected
+            if isinstance(
+    actual,
+    numeric_types) and isinstance(
+        expected,
+         numeric_types):
+                # Convert numpy types to standard Python types for comparison
+                # if needed
+                actual_cmp = float(actual) if np and isinstance(
+                    actual, np.number) else actual
+                expected_cmp = float(expected) if np and isinstance(
+                    expected, np.number) else expected
                 if operator == '>': return actual_cmp > expected_cmp
                 if operator == '<': return actual_cmp < expected_cmp
                 if operator == '>=': return actual_cmp >= expected_cmp
@@ -594,17 +809,27 @@ class IARCompliantWorkflowEngine:
                 if operator == '<=': return actual <= expected
             else:
                 # Type mismatch for ordered comparison
-                logger.warning(f"Type mismatch or unsupported type for ordered comparison '{operator}': actual={type(actual)}, expected={type(expected)}. Evaluating to False.")
+                logger.warning(
+    f"Type mismatch or unsupported type for ordered comparison '{operator}': actual={
+        type(actual)}, expected={
+            type(expected)}. Evaluating to False.")
                 return False
         except TypeError as e:
             # Catch potential errors during comparison (e.g., comparing None)
-            logger.warning(f"TypeError during comparison '{operator}' between {type(actual)} and {type(expected)}: {e}. Evaluating to False.")
+            logger.warning(
+    f"TypeError during comparison '{operator}' between {
+        type(actual)} and {
+            type(expected)}: {e}. Evaluating to False.")
             return False
         except Exception as e_cmp:
-            logger.error(f"Unexpected error during value comparison: {e_cmp}. Evaluating condition to False.")
+            logger.error(
+    f"Unexpected error during value comparison: {e_cmp}. Evaluating condition to False.")
             return False
         # Should not be reached if operator is valid
-        logger.warning(f"Operator '{operator}' invalid or comparison failed for types {type(actual)} and {type(expected)}. Evaluating to False.")
+        logger.warning(
+    f"Operator '{operator}' invalid or comparison failed for types {
+        type(actual)} and {
+            type(expected)}. Evaluating to False.")
         return False
 
     def _sanitize_for_json(self, data: Any) -> Any:
@@ -612,15 +837,17 @@ class IARCompliantWorkflowEngine:
         if isinstance(data, (str, int, float, bool, type(None))):
             return data
         if isinstance(data, dict):
-            return {str(k): self._sanitize_for_json(v) for k, v in data.items()}
+            return {str(k): self._sanitize_for_json(v)
+                        for k, v in data.items()}
         if isinstance(data, list):
             return [self._sanitize_for_json(v) for v in data]
-        if hasattr(data, 'isoformat'): # Handle datetime objects
+        if hasattr(data, 'isoformat'):  # Handle datetime objects
             return data.isoformat()
         # Fallback for other types (like numpy floats, etc.)
         return str(data)
 
-    def run_workflow(self, workflow_name: str, initial_context: Dict[str, Any]) -> Dict[str, Any]:
+    def run_workflow(self, workflow_name: str,
+                     initial_context: Dict[str, Any]) -> Dict[str, Any]:
         """
         Main entry point to run a workflow.
         Initializes context, manages the task queue, and returns the final results.
@@ -629,10 +856,15 @@ class IARCompliantWorkflowEngine:
         try:
             workflow_definition = self.load_workflow(workflow_name)
         except (FileNotFoundError, ValueError, TypeError) as e:
-            logger.critical(f"Workflow execution failed during loading: {e}", exc_info=True)
-            return self._summarize_run(workflow_name, "N/A", "Failed", 0, {}, {}, str(e))
+            logger.critical(
+    f"Workflow execution failed during loading: {e}",
+     exc_info=True)
+            return self._summarize_run(
+    workflow_name, "N/A", "Failed", 0, {}, {}, str(e))
 
-        run_id = initial_context.get("workflow_run_id", f"run_{uuid.uuid4().hex}")
+        run_id = initial_context.get(
+    "workflow_run_id", f"run_{
+        uuid.uuid4().hex}")
         initial_context["workflow_run_id"] = run_id
         
         event_log = []
@@ -645,11 +877,16 @@ class IARCompliantWorkflowEngine:
         tasks = workflow_definition.get('tasks', {})
         task_statuses = {key: "pending" for key in tasks}
         
-        ready_tasks = {key for key, task in tasks.items() if not task.get('dependencies')}
+        ready_tasks = {
+    key for key,
+     task in tasks.items() if not task.get('dependencies')}
         running_tasks = {}
         completed_tasks = set()
         
-        logger.info(f"Starting workflow '{self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {list(ready_tasks)}")
+        logger.info(
+    f"Starting workflow '{
+        self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {
+            list(ready_tasks)}")
 
         start_time = time.time()
         
@@ -670,10 +907,13 @@ class IARCompliantWorkflowEngine:
             max_attempts = task_info.get('retries', 0) + 1
             
             condition = task_info.get('condition')
-            if condition and not self._evaluate_condition(condition, runtime_context, initial_context):
-                logger.info(f"Skipping task '{task_key}' due to unmet condition: {condition}")
+            if condition and not self._evaluate_condition(
+                condition, runtime_context, initial_context):
+                logger.info(
+    f"Skipping task '{task_key}' due to unmet condition: {condition}")
                 task_statuses[task_key] = "skipped"
-                completed_tasks.add(task_key) # Treat as 'completed' for dependency checking
+                # Treat as 'completed' for dependency checking
+                completed_tasks.add(task_key)
                 # Check for newly ready tasks after skipping
                 for next_task_key, next_task_info in tasks.items():
                     if next_task_key not in completed_tasks and next_task_key not in ready_tasks and next_task_key not in running_tasks:
@@ -692,14 +932,21 @@ class IARCompliantWorkflowEngine:
                 runtime_context=runtime_context
             )
 
-            resolved_inputs = self._resolve_inputs(task_info.get('inputs'), runtime_context, initial_context, task_key)
+            resolved_inputs = self._resolve_inputs(
+    task_info.get('inputs'), runtime_context, initial_context, task_key)
             
             # Resolve and merge prompt_vars if they exist for the task
             prompt_vars = task_info.get('prompt_vars')
             if prompt_vars:
-                resolved_prompt_vars = self._resolve_value(prompt_vars, runtime_context, initial_context, task_key)
-                if isinstance(resolved_prompt_vars, dict) and isinstance(resolved_inputs, dict):
-                    resolved_inputs['initial_context'] = {**resolved_inputs.get('initial_context', {}), **resolved_prompt_vars}
+                resolved_prompt_vars = self._resolve_value(
+    prompt_vars, runtime_context, initial_context, task_key)
+                if isinstance(
+    resolved_prompt_vars,
+    dict) and isinstance(
+        resolved_inputs,
+         dict):
+                    resolved_inputs['initial_context'] = {
+                        **resolved_inputs.get('initial_context', {}), **resolved_prompt_vars}
 
             result = execute_action(
                 task_key=task_key, action_name=task_key, action_type=action_type,
@@ -740,9 +987,12 @@ class IARCompliantWorkflowEngine:
         elif len(completed_tasks) < len(tasks):
             final_status = "Stalled"
         
-        logger.info(f"Workflow '{self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
+        logger.info(
+    f"Workflow '{
+        self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
 
-        event_log_path = os.path.join(config.OUTPUT_DIR, f"run_events_{run_id}.jsonl")
+        event_log_path = os.path.join(
+    config.OUTPUT_DIR, f"run_events_{run_id}.jsonl")
         try:
             with open(event_log_path, 'w', encoding='utf-8') as f:
                 for event in event_log:
@@ -757,7 +1007,15 @@ class IARCompliantWorkflowEngine:
         )
         return final_results
 
-    def _summarize_run(self, workflow_name, run_id, status, duration, task_statuses, runtime_context, error=None):
+    def _summarize_run(
+    self,
+    workflow_name,
+    run_id,
+    status,
+    duration,
+    task_statuses,
+    runtime_context,
+     error=None):
         """Helper to create the final results dictionary."""
         summary = {
             "workflow_name": workflow_name,
@@ -778,28 +1036,28 @@ class IARCompliantWorkflowEngine:
         """Execute a workflow with recovery support."""
         try:
             logger.info("Executing workflow with recovery support...")
-            
+
             # Load workflow
             workflow = self.load_workflow(workflow_path)
             self.current_workflow = workflow
             self.current_run_id = str(uuid.uuid4())
-            
+
             # Initialize recovery handler
             self.recovery_handler = WorkflowRecoveryHandler(workflow, self.current_run_id)
-            
+
             # Initialize context
             initial_context = initial_context or {}
             runtime_context = {}
-            
+
             # Execute tasks
             results = {}
             iar_failures = []  # Track IAR insights during execution
-            
+
             for task_id, task in workflow["tasks"].items():
                 try:
                     # Execute task
                     task_result = self._execute_task(task, results)
-                    
+            
                     # Validate IAR structure
                     is_valid, issues = self.iar_validator.validate_structure(task_result.get("reflection", {}))
                     if not is_valid:
@@ -807,14 +1065,13 @@ class IARCompliantWorkflowEngine:
                             "task_id": task_id,
                             "issues": issues
                         })
-                    
+
                     # Record execution for resonance tracking
                     self.resonance_tracker.record_execution(task_id, task_result.get("reflection", {}), runtime_context)
                     
                     # Store result
                     results[task_id] = task_result
                     runtime_context[task_id] = task_result
-                    
                 except Exception as e:
                     logger.error(f"Task {task_id} failed: {str(e)}")
                     
@@ -841,7 +1098,7 @@ class IARCompliantWorkflowEngine:
                             raise
                     else:
                         raise
-            
+
             # Generate final report
             final_report = {
                 "workflow_name": workflow.get("name", "Unnamed Workflow"),
@@ -858,4 +1115,4 @@ class IARCompliantWorkflowEngine:
             logger.error(f"Workflow execution failed: {str(e)}")
             raise
 
-# --- END OF FILE 3.0ArchE/workflow_engine.py --- 
+# --- END OF FILE 3.0ArchE/workflow_engine.py ---

@@ -501,38 +501,39 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
     return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
 
 # --- Display Tool ---
-def display_output(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
-    """
-    [IAR Enabled] Displays content to the console/log.
-    Returns a reflection of the display action.
-    """
-    # --- Input Extraction ---
-    content_to_display = inputs.get("content", "[No content provided]")
-
-    # --- Initialize Reflection ---
-    reflection_status = "Success"
-    reflection_summary = "Content displayed successfully."
-    reflection_confidence = 1.0
-    reflection_alignment = "Aligned with output/display goal."
-    reflection_issues: List[str] = []
-
-    # --- Execute Display ---
-    logger_tools_diag.info("Displaying output content via print().")
-    # A more structured output format
-    display_str = f"\n--- Arche Display Output (v3.0) ---\n{_format_output_content(content_to_display)}\n-----------------------------------\n"
-    print(display_str) # Print to standard output
-
-    # --- Finalize and Return ---
-    primary_result = {"status": "displayed", "content_preview": str(content_to_display)[:75] + "..."}
-    reflection = _create_reflection(
-        status=reflection_status,
-        summary=reflection_summary,
-        confidence=reflection_confidence,
-        alignment=reflection_alignment,
-        issues=reflection_issues,
-        preview=content_to_display
-    )
-    return {**primary_result, "reflection": reflection}
+def display_output(*args, **kwargs):
+    """Display content to the console/log and return a reflection of the display action."""
+    content = None
+    # Try to extract from positional args
+    if args:
+        content = args[0]
+        print(f"[DEBUG] display_output extracted content from args: {content}")
+    # Try to extract from keyword arguments
+    if content is None and 'content' in kwargs:
+        content = kwargs['content']
+        print(f"[DEBUG] display_output extracted content from kwargs: {content}")
+    # Try to extract from 'inputs' dict
+    if content is None and 'inputs' in kwargs and isinstance(kwargs['inputs'], dict):
+        content = kwargs['inputs'].get('content')
+        print(f"[DEBUG] display_output extracted content from inputs dict: {content}")
+    # Fallback
+    if content is None:
+        print(f"[DEBUG] display_output could not find content, defaulting to None.")
+    
+    # Format and print
+    print("\n--- Arche Display Output (v3.0) ---")
+    print(content)
+    print("-----------------------------------\n")
+    
+    reflection = {
+        "status": "Success" if content else "Failure",
+        "summary": "Displayed output content" if content else "No content to display",
+        "confidence": 1.0 if content else 0.0,
+        "alignment_check": "Aligned",
+        "potential_issues": None if content else ["No content provided to display_output"],
+        "raw_output_preview": str(content)[:150] if content else None
+    }
+    return {"output": content, "reflection": reflection}
 
 # --- RunCFP Tool Wrapper ---
 # This function exists only to be registered. The actual logic is in the wrapper

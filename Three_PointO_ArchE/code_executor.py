@@ -85,202 +85,99 @@ if sandbox_method_resolved == 'docker':
         logger.warning(f"Unexpected error checking Docker status: {e_docker_check}. Assuming Docker unavailable.")
 
 # --- Main Execution Function ---
-def execute_code(inputs: Dict[str, Any], action_context: Optional['ActionContext'] = None) -> Dict[str, Any]:
+def execute_code(
+    code: str,
+    language: str = "python",
+    timeout: int = 30,
+    environment: Optional[Dict[str, str]] = None
+) -> Dict[str, Any]:
     """
-    [IAR Enabled] Executes a code snippet or script using the configured sandbox method.
-    Validates inputs, selects execution strategy (Docker, subprocess, none),
-    runs the code, and returns results including stdout, stderr, exit code,
-    error messages, and a detailed IAR reflection.
+    Execute code in the specified language and return results with IAR reflection.
 
     Args:
-        inputs (Dict[str, Any]): Dictionary containing:
-            language (str): The programming language (e.g., 'python', 'javascript', 'python_script'). Required.
-            code (str): The code snippet or script path to execute. Required.
-            input_data (str, optional): Data to be passed as standard input to the code. Defaults to "".
-            prompt_vars (Dict[str, str], optional): Environment variables to set for the execution.
-        action_context (Optional[ActionContext]): The workflow context containing runtime state.
+        code: The code to execute
+        language: Programming language (default: python)
+        timeout: Execution timeout in seconds
+        environment: Optional environment variables
 
     Returns:
-        Dict[str, Any]: Dictionary containing execution results and IAR reflection:
-            stdout (str): Standard output from the executed code.
-            stderr (str): Standard error output from the executed code.
-            exit_code (int): Exit code of the executed process (-1 on setup/timeout error).
-            error (Optional[str]): Error message if execution failed before running code.
-            sandbox_method_used (str): The actual sandbox method employed ('docker', 'subprocess', 'none').
-            reflection (Dict[str, Any]): Standardized IAR dictionary.
+        Dict containing execution results and IAR reflection
     """
-    language = inputs.get("language")
-    code = inputs.get("code")
-    # Preserve the original input_data for logging/type checking, create new var for stdin
-    original_input_data_val = inputs.get("input_data", "")
-    prompt_vars = inputs.get("prompt_vars", None) # Get prompt_vars
-    input_data_for_stdin: str
-
-    # Extract context from action_context if available
-    workflow_context = None
-    if action_context and hasattr(action_context, 'runtime_context'):
-        workflow_context = action_context.runtime_context
-        logger.debug(f"Code Executor: action_context.runtime_context available with keys: {list(workflow_context.keys()) if workflow_context else 'None'}")
-    else:
-        logger.debug(f"Code Executor: action_context: {action_context}, has runtime_context: {hasattr(action_context, 'runtime_context') if action_context else 'N/A'}")
-        if action_context:
-            logger.debug(f"Code Executor: action_context attributes: {dir(action_context)}")
-            logger.debug(f"Code Executor: action_context type: {type(action_context)}")
-            # Try to access the context directly if it's stored differently
-            if hasattr(action_context, '__dict__'):
-                logger.debug(f"Code Executor: action_context.__dict__: {action_context.__dict__}")
-    
-    logger.debug(f"Code Executor: Final workflow_context: {workflow_context is not None}")
-
-    logger.debug(f"Code Executor: Received original_input_data_val type: {type(original_input_data_val)}, value (first 200 chars): {str(original_input_data_val)[:200]}")
-
-    # --- Initialize Results & Reflection ---
-    primary_result = {"stdout": "", "stderr": "", "exit_code": -1, "error": None, "sandbox_method_used": "N/A"}
-    reflection_status = "Failure"
-    reflection_summary = "Code execution initialization failed."
-    reflection_confidence = 0.0
-    reflection_alignment = "N/A"
-    reflection_issues: List[str] = [] # Use list for potential issues
-    reflection_preview = None
-
-    # --- Input Validation ---
-    if not language or not isinstance(language, str):
-        primary_result["error"] = "Missing or invalid 'language' string input."; reflection_issues.append(primary_result["error"])
-    elif not code or not isinstance(code, str):
-        primary_result["error"] = "Missing or invalid 'code' string input."; reflection_issues.append(primary_result["error"])
-
-    # Process input_data specifically for stdin
-    if isinstance(original_input_data_val, dict):
-        logger.debug(f"Code Executor: original_input_data_val is a dict. Attempting json.dumps.")
-        try:
-            input_data_for_stdin = json.dumps(original_input_data_val)
-            logger.debug(f"Code Executor: input_data_for_stdin after json.dumps (first 200 chars): {input_data_for_stdin[:200]}")
-        except TypeError as e_json:
-            primary_result["error"] = f"Invalid 'input_data' dictionary: Cannot serialize to JSON ({e_json})."
-            reflection_issues.append(primary_result["error"])
-            input_data_for_stdin = "" # Fallback to empty string on error
-    elif isinstance(original_input_data_val, str):
-        input_data_for_stdin = original_input_data_val
-        logger.debug(f"Code Executor: original_input_data_val was already a string (first 200 chars): {input_data_for_stdin[:200]}")
-    else: # Not a dict, not a string
-        logger.warning(f"Code Executor: original_input_data_val type is {type(original_input_data_val)}. Attempting str() conversion for stdin.")
-        try:
-            input_data_for_stdin = str(original_input_data_val)
-        except Exception as e_str_conv:
-            primary_result["error"] = f"Could not convert input_data of type {type(original_input_data_val)} to string for stdin: {e_str_conv}"
-            reflection_issues.append(primary_result["error"])
-            input_data_for_stdin = "" # Fallback
-
-    if primary_result["error"]: # Check if any error occurred during input validation or input_data processing
-        reflection_summary = f"Input processing failed: {primary_result['error']}"
-        return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}
-
-    language = language.lower() # Normalize language name
-    method_to_use = sandbox_method_resolved # Use the resolved method based on config and checks
-    primary_result["sandbox_method_used"] = method_to_use # Record the method being attempted
-
-    logger.info(f"Attempting to execute '{language}' code using sandbox method: '{method_to_use}'")
-
-    # Prepare environment variables for the execution
-    effective_env = os.environ.copy()
-    if prompt_vars:
-        if isinstance(prompt_vars, dict):
-            # Ensure all prompt_vars are strings
-            str_prompt_vars = {str(k): str(v) for k, v in prompt_vars.items()}
-            effective_env.update(str_prompt_vars)
-            logger.debug(f"Updated effective_env with prompt_vars: {str_prompt_vars}")
-        else:
-            logger.warning(f"prompt_vars were provided but not a dict: {type(prompt_vars)}. Ignoring.")
-
-    # --- Select Execution Strategy ---
-    exec_result: Dict[str, Any] = {} # Dictionary to store results from internal execution functions
-    if method_to_use == 'docker':
-        if DOCKER_AVAILABLE:
-            # Pass only prompt_vars for Docker -e flags for clarity, not the whole effective_env
-            docker_env_vars = {str(k): str(v) for k, v in prompt_vars.items()} if prompt_vars and isinstance(prompt_vars, dict) else None
-            exec_result = _execute_with_docker(language, code, input_data_for_stdin, docker_env_vars)
-        else:
-            # Fallback if Docker configured but unavailable
-            logger.warning("Docker configured but unavailable. Falling back to 'subprocess' (less secure).")
-            primary_result["sandbox_method_used"] = 'subprocess' # Update actual method used
-            reflection_issues.append("Docker unavailable, fell back to subprocess.")
-            exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env, workflow_context) # Pass context
-            if exec_result.get("error"): # If subprocess also failed (e.g., interpreter missing)
-                reflection_issues.append(f"Subprocess fallback failed: {exec_result.get('error')}")
-    elif method_to_use == 'subprocess':
-        logger.warning("Executing code via 'subprocess' sandbox. This provides limited isolation and is less secure than Docker.")
-        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env, workflow_context) # Pass context
-    elif method_to_use == 'none':
-        logger.critical("Executing code with NO SANDBOX ('none'). This is EXTREMELY INSECURE and should only be used in trusted debugging environments with full awareness of risks.")
-        reflection_issues.append("CRITICAL SECURITY RISK: Code executed without sandbox.")
-        # Use subprocess logic for actual execution, but flag clearly that no sandbox was intended
-        exec_result = _execute_with_subprocess(language, code, input_data_for_stdin, effective_env, workflow_context) # Pass context
-        exec_result["note"] = "Executed with NO SANDBOX ('none' method)." # Add note to result
-    else: # Should not happen due to resolution logic, but safeguard
-        exec_result = {"error": f"Internal configuration error: Unsupported sandbox method '{method_to_use}' resolved.", "exit_code": -1}
-
-    # --- Process Execution Result and Generate IAR ---
-    # Update primary result fields from the execution outcome
-    primary_result.update({k: v for k, v in exec_result.items() if k in primary_result})
-    primary_result["error"] = exec_result.get("error", primary_result.get("error")) # Prioritize error from execution
-
-    # Determine final IAR based on outcome
-    exit_code = primary_result["exit_code"]
-    stderr = primary_result["stderr"]
-    stdout = primary_result["stdout"]
-    error = primary_result["error"]
-
-    if error: # Indicates failure *before* or *during* execution setup (e.g., Docker error, timeout, interpreter not found)
-        reflection_status = "Failure"
-        reflection_summary = f"Code execution failed for language '{language}': {error}"
-        reflection_confidence = 0.0
-        reflection_alignment = "Failed to execute code."
-        reflection_issues.append(f"Execution setup/runtime error: {error}") # Add specific error to issues
-        reflection_preview = stderr[:150] + "..." if stderr else None
-    elif exit_code != 0:
-        reflection_status = "Failure"
-        reflection_summary = f"Code execution finished with non-zero exit code: {exit_code}."
-        reflection_confidence = 0.3 # Higher than setup error, code ran but failed
-        reflection_alignment = "Code executed but resulted in an error."
-        reflection_issues.append(f"Runtime Error (Exit Code: {exit_code})")
-        # Include a preview of stderr if available, truncated for brevity
-        stderr_preview = (stderr[:70] + "...") if stderr and len(stderr) > 70 else stderr
-        reflection_issues.append(f"Check stderr for details: {stderr_preview}") 
-        reflection_preview = stdout[:150] + "..." if stdout else None
-    else: # Successful execution (exit code 0)
-        reflection_status = "Success"
-        reflection_summary = f"Code executed successfully for language '{language}'."
-        reflection_confidence = 0.95 # High confidence for successful run
-        reflection_alignment = "Code executed as expected."
-        reflection_preview = stdout[:150] + "..." if stdout else None
+    try:
+        # Create temporary file for code
+        temp_file = f"temp_execution.{language}"
+        with open(temp_file, "w") as f:
+            f.write(code)
         
-        # Attempt to parse stdout as JSON if it's not empty
-        if stdout:
-            try:
-                parsed_stdout = json.loads(stdout)
-                if isinstance(parsed_stdout, dict):
-                    logger.info("Successfully parsed stdout as JSON and merged into results.")
-                    primary_result["raw_stdout"] = stdout # Store original stdout
-                    primary_result["stdout"] = parsed_stdout # Replace stdout with parsed dict
-                    # Merge the parsed dictionary into the primary_result
-                    # This makes its keys directly accessible (e.g., result['actual_output_key'])
-                    for key, value in parsed_stdout.items():
-                        if key not in primary_result: # Avoid overwriting standard keys like 'exit_code'
-                            primary_result[key] = value
-                        else:
-                            logger.warning(f"Key '{key}' from parsed stdout conflicts with standard result key. Not overwriting.")
-                    reflection_summary += " Output parsed as JSON."
-                    reflection_issues.append("Output successfully parsed as JSON.") # Add as an issue/note
-                else:
-                    # Stdout was valid JSON, but not a dictionary. Keep stdout as string.
-                    logger.info("Stdout parsed as JSON, but was not a dictionary. Storing as raw string.")
-                    reflection_issues.append("Output was valid JSON but not an object, stored as string.")
-            except json.JSONDecodeError:
-                logger.info("Stdout was not valid JSON. Storing as raw string.")
-                reflection_issues.append("Output was not valid JSON.") # Add as an issue/note
-
-    primary_result["reflection"] = _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)
-    return primary_result
+        # Set up environment
+        env = os.environ.copy()
+        if environment:
+            env.update(environment)
+        
+        # Execute code based on language
+        if language == "python":
+            result = subprocess.run(
+                ["python", temp_file],
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                env=env
+            )
+        else:
+            raise ValueError(f"Unsupported language: {language}")
+        
+        # Clean up temp file
+        os.remove(temp_file)
+        
+        # Process results
+        if result.returncode == 0:
+            return {
+                "output": result.stdout,
+                "reflection": {
+                    "status": "Success",
+                    "confidence": 1.0,
+                    "insight": "Code executed successfully",
+                    "action": "execute_code",
+                    "reflection": "No errors encountered"
+                }
+            }
+        else:
+            return {
+                "error": result.stderr,
+                "output": result.stdout,
+                "reflection": {
+                    "status": "Failed",
+                    "confidence": 0.0,
+                    "insight": f"Code execution failed with return code {result.returncode}",
+                    "action": "execute_code",
+                    "reflection": result.stderr
+                }
+            }
+            
+    except subprocess.TimeoutExpired:
+        return {
+            "error": f"Execution timed out after {timeout} seconds",
+            "reflection": {
+                "status": "Failed",
+                "confidence": 0.0,
+                "insight": "Code execution timed out",
+                "action": "execute_code",
+                "reflection": f"Timeout after {timeout} seconds"
+            }
+        }
+    except Exception as e:
+        error_msg = f"Error executing code: {str(e)}"
+        logger.error(error_msg, exc_info=True)
+        return {
+            "error": error_msg,
+            "reflection": {
+                "status": "Failed",
+                "confidence": 0.0,
+                "insight": "Error during code execution",
+                "action": "execute_code",
+                "reflection": error_msg
+            }
+        }
 
 # --- Internal Helper: Docker Execution ---
 def _execute_with_docker(language: str, code: str, input_data: str, env_vars: Optional[Dict[str, str]] = None) -> Dict[str, Any]:

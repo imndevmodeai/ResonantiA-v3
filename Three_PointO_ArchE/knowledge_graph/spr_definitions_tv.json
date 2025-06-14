@@ -1,0 +1,47 @@
+[
+  {
+    "spr_id": "Resonantia protocoL",
+    "term": "Resonantia Protocol",
+    "definition": "The comprehensive framework defining Arche's architecture, operational principles, cognitive tools, and interaction patterns (v3.0). Emphasizes Cognitive Resonance, Temporal Reasoning, IAR, and Meta-Cognition.",
+    "category": "CoreConcept",
+    "relationships": {
+      "type": "FrameworkDefinition",
+      "defines": ["Arche", "Cognitive resonancE", "IntegratedActionReflectioN", "Temporal Resonance"]
+    },
+    "blueprint_details": "Refers to the entirety of this document."
+  },
+  {
+    "spr_id": "Cognitive resonancE",
+    "term": "Cognitive Resonance",
+    "definition": "The primary objective state: a dynamic, harmonious alignment between data perception, deep internal analysis (including temporal aspects), strategic intent, and outcome assessment, evaluated across time (Temporal Resonance).",
+    "category": "CoreConcept",
+    "relationships": {
+      "type": "OperationalGoal",
+      "achieved_through": ["Temporal Resonance", "IntegratedActionReflectioN", "Meta-Cognition"]
+    },
+    "blueprint_details": "See Preamble, Section 1.1, Section 5.1."
+  },
+  {
+    "spr_id": "IntegratedActionReflectioN",
+    "term": "Integrated Action Reflection (IAR)",
+    "definition": "Mandatory v3.0 mechanism where every action returns a standardized 'reflection' dictionary (status, summary, confidence, alignment_check, potential_issues, raw_output_preview) alongside its primary output, enabling continuous self-assessment.",
+    "category": "CoreMechanism",
+    "relationships": {
+      "type": "OperationalPrinciple",
+      "enables": ["Meta-Cognition", "VettingAgenT Analysis"],
+      "implemented_by": ["All Action Functions"]
+    },
+    "blueprint_details": "See Section 3.14."
+  },
+  {
+    "spr_id": "Temporal Resonance",
+    "term": "Temporal Resonance",
+    "definition": "The state of Cognitive Resonance evaluated dynamically across the dimension of time, ensuring consistency between historical understanding, current analysis, strategic goals, and projected future states.",
+    "category": "CoreConcept",
+    "relationships": {
+      "type": "AspectOfCognitiveResonance",
+      "achieved_through": ["4D Thinking"]
+    },
+    "blueprint_details": "See Section 2.9, 5.1."
+  }
+] 

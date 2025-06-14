@@ -40,7 +40,7 @@ except Exception as log_setup_e:
 
 # Now import other core ResonantiA modules AFTER logging is configured
 try:
-    from .workflow_engine import WorkflowEngine
+    from .workflow_engine import IARCompliantWorkflowEngine as WorkflowEngine
     from .spr_manager import SPRManager
     # config already imported above
 except ImportError as import_err:
