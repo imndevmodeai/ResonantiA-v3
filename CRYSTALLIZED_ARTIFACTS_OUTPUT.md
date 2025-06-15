@@ -46,12 +46,7 @@ def enhanced_iar_structure():
             "raw_output_preview": "First 200 chars of primary output",
             "tactical_resonance": float,  # NEW: Strategic-tactical alignment score
             "crystallization_potential": float  # NEW: Learning value assessment
-        }
-    }
-
-# IMPLEMENTATION EXAMPLE
-def workflow_task_with_iar(task_data):
-    try:
+        }s
         result = execute_core_logic(task_data)
         
         # Calculate tactical resonance

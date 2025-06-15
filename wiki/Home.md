@@ -29,11 +29,8 @@ The project Wiki serves as an essential, dynamic, and user-centric knowledge bas
 *   [II. Getting Started with Arche](./02_Getting_Started_with_Arche/README.md)
 *   [III. Using Arche: Workflows & Tools](./03_Using_Arche_Workflows_And_Tools/README.md)
 *   [IV. Arche Architecture & Internals](./04_Arche_Architecture_And_Internals/README.md)
-*   [V. Development & Contribution](./05_Development_And_Contribution/README.md)
-*   [VI. Troubleshooting & FAQ](./06_Troubleshooting_And_FAQ/README.md)
-*   [VII. Security & Ethics](./07_Security_And_Ethics/README.md)
-*   [VIII. Repository & Licensing](./08_Repository_And_Licensing/README.md)
-*   [IX. Appendices](./09_Appendices/README.md)
+*   [V. Developer Guide](./05_Developer_Guide/README.md)
+*   [VI. Appendix](./06_Appendix/README.md)
 
 This Wiki is a living document for ResonantiA Protocol v3.0 & Arche.
-Last Updated: March 2024 
+Last Updated: June 2024 

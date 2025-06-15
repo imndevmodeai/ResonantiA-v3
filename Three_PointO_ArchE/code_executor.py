@@ -14,6 +14,9 @@ import sys # To find python executable for subprocess fallback
 import time # For timeouts and potentially timestamps
 import shutil # Added for script copying
 from typing import Dict, Any, Optional, List, Tuple, TYPE_CHECKING # Expanded type hints
+import asyncio
+from dataclasses import dataclass
+from .iar_components import IARValidator, ResonanceTracker
 
 if TYPE_CHECKING:
     from .action_context import ActionContext
@@ -431,3 +434,134 @@ except (json.JSONDecodeError, ValueError, UnicodeDecodeError, Exception) as e:
         return {"error": f"Subprocess execution failed: {e_subproc}", "exit_code": -1, "stdout": "", "stderr": str(e_subproc)}
 
 # --- END OF FILE 3.0ArchE/code_executor.py --- 
+
+@dataclass
+class ExecutionResult:
+    """Result of code execution."""
+    output: str
+    error: Optional[str]
+    execution_time: float
+    sandbox_method: str
+    iar_data: Dict[str, Any]
+
+class CodeExecutor:
+    """Code executor with native Gemini API integration."""
+    
+    def __init__(self):
+        self.iar_validator = IARValidator()
+        self.resonance_tracker = ResonanceTracker()
+    
+    async def execute_code(
+        self,
+        code: str,
+        context: Dict[str, Any],
+        provider: str = "gemini_native"
+    ) -> ExecutionResult:
+        """Execute code using the specified provider."""
+        if provider == "gemini_native":
+            return await self._execute_with_gemini_native(code, context)
+        else:
+            # Fallback to other providers (e.g., Docker)
+            return await self._execute_with_fallback(code, context, provider)
+    
+    async def _execute_with_gemini_native(
+        self,
+        code: str,
+        context: Dict[str, Any]
+    ) -> ExecutionResult:
+        """Execute code using native Gemini API."""
+        try:
+            # Prepare execution context
+            execution_context = {
+                "code": code,
+                "context": context,
+                "sandbox_method": "gemini_native"
+            }
+            
+            # Execute code using Gemini API
+            # Note: This is a placeholder for the actual Gemini API call
+            # The actual implementation would use the Gemini API's code execution feature
+            result = await self._call_gemini_code_execution(execution_context)
+            
+            # Generate IAR data
+            iar_data = {
+                "status": "Success" if not result.get("error") else "Error",
+                "confidence": 0.9,  # High confidence for native execution
+                "summary": "Code execution completed",
+                "potential_issues": [],
+                "alignment_check": {
+                    "code_safety": 0.9,
+                    "execution_success": 0.9 if not result.get("error") else 0.0
+                },
+                "sandbox_method_used": "gemini_native"
+            }
+            
+            # Track resonance
+            self.resonance_tracker.record_execution(
+                "code_execution",
+                iar_data,
+                execution_context
+            )
+            
+            return ExecutionResult(
+                output=result.get("output", ""),
+                error=result.get("error"),
+                execution_time=result.get("execution_time", 0.0),
+                sandbox_method="gemini_native",
+                iar_data=iar_data
+            )
+            
+        except Exception as e:
+            # Handle execution errors
+            error_iar = {
+                "status": "Error",
+                "confidence": 0.0,
+                "summary": f"Code execution failed: {str(e)}",
+                "potential_issues": [str(e)],
+                "alignment_check": {
+                    "code_safety": 0.0,
+                    "execution_success": 0.0
+                },
+                "sandbox_method_used": "gemini_native"
+            }
+            
+            return ExecutionResult(
+                output="",
+                error=str(e),
+                execution_time=0.0,
+                sandbox_method="gemini_native",
+                iar_data=error_iar
+            )
+    
+    async def _execute_with_fallback(
+        self,
+        code: str,
+        context: Dict[str, Any],
+        provider: str
+    ) -> ExecutionResult:
+        """Execute code using fallback provider (e.g., Docker)."""
+        # Implementation for other providers
+        # This would be the existing Docker/subprocess implementation
+        pass
+    
+    async def _call_gemini_code_execution(
+        self,
+        execution_context: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Call Gemini API for code execution."""
+        # Placeholder for actual Gemini API call
+        # This would be replaced with the actual API implementation
+        return {
+            "output": "Execution result",
+            "error": None,
+            "execution_time": 0.1
+        }
+    
+    def validate_execution(self, result: ExecutionResult) -> bool:
+        """Validate execution result."""
+        is_valid, _ = self.iar_validator.validate_content(result.iar_data)
+        return is_valid
+    
+    def get_execution_summary(self) -> Dict[str, Any]:
+        """Get execution summary."""
+        return self.resonance_tracker.get_execution_summary() 

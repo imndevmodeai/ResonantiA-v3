@@ -226,18 +226,24 @@ class OpenAIProvider(BaseLLMProvider):
 # --- Google Provider Implementation ---
 class GoogleProvider(BaseLLMProvider):
     """LLM Provider implementation for Google Generative AI models (Gemini)."""
-    def _initialize_client(self) -> Optional[Any]: # Returns the genai module/object
+    def _initialize_client(self) -> Optional[Any]:
         """Configures the Google Generative AI client using the 'google-generativeai' library."""
         if not GOOGLE_AVAILABLE:
             raise LLMProviderError("Google Generative AI library not installed.", provider="google")
         try:
             # Configuration is typically done once via genai.configure
             genai.configure(api_key=self.api_key)
-            # Optional: Add transport, client_options from provider_kwargs if needed
-            # genai.configure(api_key=self.api_key, **self.provider_kwargs)
-            logger.info("Google Generative AI client configured successfully.")
-            # Return the configured module itself or a specific client object if the library provides one
-            return genai # Return the module as the 'client'
+            # Enable code execution and other advanced features
+            genai.configure(
+                api_key=self.api_key,
+                transport="rest",  # Use REST transport for better compatibility
+                client_options={
+                    "api_endpoint": "generativelanguage.googleapis.com",
+                    "quota_project_id": self.provider_kwargs.get("quota_project_id")
+                }
+            )
+            logger.info("Google Generative AI client configured successfully with advanced capabilities.")
+            return genai
         except GoogleApiExceptions.GoogleAPIError as e:
             raise LLMProviderError(f"Google API configuration failed", provider="google", original_exception=e)
         except Exception as e_init:
@@ -245,245 +251,235 @@ class GoogleProvider(BaseLLMProvider):
 
     def _prepare_google_config(self, max_tokens: int, temperature: float, kwargs: Dict[str, Any]) -> Tuple[Optional[Any], Optional[List[Dict[str, str]]]]:
         """Helper to create GenerationConfig and safety_settings for Google API calls."""
-        if not GOOGLE_AVAILABLE: return None, None # Should not happen if initialized
+        if not GOOGLE_AVAILABLE: return None, None
 
-        # Generation Config (temperature, max tokens, top_p, top_k)
-        gen_config_args = {"temperature": temperature}
+        # Enhanced Generation Config with new capabilities
+        gen_config_args = {
+            "temperature": temperature,
+            "candidate_count": kwargs.get("candidate_count", 1),
+            "stop_sequences": kwargs.get("stop_sequences", []),
+            "top_p": kwargs.get("top_p", 0.95),
+            "top_k": kwargs.get("top_k", 40)
+        }
         if max_tokens is not None: gen_config_args["max_output_tokens"] = max_tokens
-        if 'top_p' in kwargs: gen_config_args["top_p"] = kwargs['top_p']
-        if 'top_k' in kwargs: gen_config_args["top_k"] = kwargs['top_k']
-        # Add stop_sequences if needed: gen_config_args["stop_sequences"] = kwargs.get('stop_sequences')
+        
+        # Add structured output configuration if specified
+        if "output_schema" in kwargs:
+            gen_config_args["output_schema"] = kwargs["output_schema"]
+            
         generation_config = self._client.types.GenerationConfig(**gen_config_args)
 
-        # Safety Settings (customize or disable as needed)
-        # Default: Block most harmful content at medium threshold
+        # Safety Settings with configurable thresholds
         safety_settings = kwargs.get('safety_settings')
-        if safety_settings is None: # Apply default safety if not overridden
+        if safety_settings is None:
             safety_settings = [
-                {"category": c, "threshold": "BLOCK_MEDIUM_AND_ABOVE"} for c in [
-                        "HARM_CATEGORY_HARASSMENT", "HARM_CATEGORY_HATE_SPEECH",
-                        "HARM_CATEGORY_SEXUALLY_EXPLICIT", "HARM_CATEGORY_DANGEROUS_CONTENT"
+                {"category": c, "threshold": kwargs.get("safety_threshold", "BLOCK_MEDIUM_AND_ABOVE")} 
+                for c in [
+                    "HARM_CATEGORY_HARASSMENT", 
+                    "HARM_CATEGORY_HATE_SPEECH",
+                    "HARM_CATEGORY_SEXUALLY_EXPLICIT", 
+                    "HARM_CATEGORY_DANGEROUS_CONTENT"
                 ]
             ]
-        # Example to disable safety: safety_settings = [{"category": c, "threshold": "BLOCK_NONE"} for c in [...]]
-        # Note: Disabling safety might violate terms of service.
 
         return generation_config, safety_settings
 
+    def _prepare_tools_config(self, kwargs: Dict[str, Any]) -> Optional[List[Dict[str, Any]]]:
+        """Prepare tools configuration for function calling."""
+        tools = kwargs.get("tools", [])
+        if not tools:
+            return None
+            
+        formatted_tools = []
+        for tool in tools:
+            formatted_tool = {
+                "name": tool.get("name"),
+                "description": tool.get("description"),
+                "parameters": tool.get("parameters", {})
+            }
+            formatted_tools.append(formatted_tool)
+        return formatted_tools
+
+    def _prepare_grounding_config(self, kwargs: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """Prepare grounding configuration for source-based responses."""
+        grounding = kwargs.get("grounding")
+        if not grounding:
+            return None
+            
+        return {
+            "sources": grounding.get("sources", []),
+            "citation_style": grounding.get("citation_style", "default"),
+            "citation_format": grounding.get("citation_format", "text")
+        }
+
     def generate(self, prompt: str, model: str, max_tokens: int = 500, temperature: float = 0.7, **kwargs) -> str:
-        """Generates text using the Google GenerativeModel generate_content method."""
-        if not self._client: raise LLMProviderError("Google client not configured.", provider="google")
-        logger.debug(f"Calling Google generate_content for model '{model}'")
+        """Enhanced text generation with support for code execution, grounding, and function calling."""
+        if not self._client: 
+            raise LLMProviderError("Google client not configured.", provider="google")
+        logger.debug(f"Calling Google generate_content for model '{model}' with enhanced capabilities")
 
         try:
+            # Prepare configurations
             generation_config, safety_settings = self._prepare_google_config(max_tokens, temperature, kwargs)
+            tools_config = self._prepare_tools_config(kwargs)
+            grounding_config = self._prepare_grounding_config(kwargs)
+            
             # Get the generative model instance
-            llm = self._client.GenerativeModel(model_name=model)
-            # Make the API call
-            response = llm.generate_content(
-                prompt,
+            llm = self._client.GenerativeModel(
+                model_name=model,
                 generation_config=generation_config,
-                safety_settings=safety_settings
-                # Add stream=False if needed, tools=... for function calling
+                safety_settings=safety_settings,
+                tools=tools_config
             )
 
-            # --- Process Google Response ---
+            # Prepare content parts
+            content_parts = [prompt]
+            
+            # Add file content if provided
+            if "file_content" in kwargs:
+                content_parts.append(kwargs["file_content"])
+                
+            # Add grounding sources if provided
+            if grounding_config and grounding_config.get("sources"):
+                content_parts.extend(grounding_config["sources"])
+
+            # Make the API call with enhanced capabilities
+            response = llm.generate_content(
+                content_parts,
+                generation_config=generation_config,
+                safety_settings=safety_settings,
+                tools=tools_config,
+                grounding=grounding_config
+            )
+
+            # Process response with enhanced error handling
             try:
-                # Try direct access to text, which works for simple, unblocked responses
+                # Handle function calls if present
+                if hasattr(response, 'candidates') and response.candidates:
+                    candidate = response.candidates[0]
+                    if hasattr(candidate, 'content') and candidate.content:
+                        # Check for function calls
+                        if hasattr(candidate.content, 'parts'):
+                            for part in candidate.content.parts:
+                                if hasattr(part, 'function_call'):
+                                    return {
+                                        "type": "function_call",
+                                        "function": part.function_call.name,
+                                        "arguments": part.function_call.args
+                                    }
+
+                # Handle regular text response
                 if hasattr(response, 'text') and response.text:
                     text_response = response.text
-                    finish_reason = "N/A" # .text doesn't directly expose finish_reason
-                    try:
-                        if response.candidates:
-                            finish_reason = response.candidates[0].finish_reason
-                    except (AttributeError, IndexError):
-                        pass # Silently ignore if we can't get finish_reason here
-                    logger.debug(f"Google generation successful (via .text). Finish Reason: {finish_reason}")
-                    if finish_reason == "MAX_TOKENS":
-                        logger.warning(f"Google response may be truncated due to max_output_tokens.")
+                    finish_reason = getattr(response.candidates[0], 'finish_reason', 'N/A') if response.candidates else 'N/A'
+                    logger.debug(f"Google generation successful. Finish Reason: {finish_reason}")
+                    
+                    # Add citations if present
+                    if hasattr(response, 'citations') and response.citations:
+                        text_response += "\n\nCitations:\n" + "\n".join(
+                            f"- {citation.text}: {citation.url}" 
+                            for citation in response.citations
+                        )
+                    
                     return text_response
 
-                # Fallback to detailed parsing if .text is not available or empty (e.g. blocked, complex)
+                # Fallback to detailed parsing
                 if response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
                     first_candidate = response.candidates[0]
                     text_response = first_candidate.content.parts[0].text
                     finish_reason = first_candidate.finish_reason
                     logger.debug(f"Google generation successful (via candidates). Finish Reason: {finish_reason}")
-                    if finish_reason == "MAX_TOKENS":
-                        logger.warning(f"Google response may be truncated due to max_output_tokens.")
                     return text_response
-                else:
-                    logger.error("Google response missing candidates or content parts for detailed parsing.")
-                    block_reason_msg = "Unknown reason."
-                    if hasattr(response, 'prompt_feedback') and response.prompt_feedback:
-                        block_reason = response.prompt_feedback.block_reason
-                        block_reason_msg = f"Reason: {block_reason}. Message: {response.prompt_feedback.block_reason_message}"
-                        logger.error(f"Google generation blocked/empty. {block_reason_msg}")
-                    raise LLMProviderError(f"Google response format unexpected or blocked. {block_reason_msg}", provider="google")
+                    
+                raise LLMProviderError("Google response format unexpected or empty", provider="google")
 
             except ValueError as e_resp_val:
-                # This typically indicates the response was blocked due to safety or other reasons
-                logger.warning(f"ValueError accessing Google response text (likely blocked or empty): {e_resp_val}")
-                try:
-                    # Attempt to get block reason from prompt_feedback
+                logger.warning(f"ValueError accessing Google response: {e_resp_val}")
+                if hasattr(response, 'prompt_feedback'):
                     block_reason = response.prompt_feedback.block_reason
                     block_message = response.prompt_feedback.block_reason_message
-                    logger.error(f"Google generation blocked. Reason: {block_reason}. Message: {block_message}")
-                    raise LLMProviderError(f"Content blocked by Google API. Reason: {block_reason}", provider="google")
-                except AttributeError:
-                    # If prompt_feedback or block_reason isn't available
-                    logger.error(f"Google generation failed. Could not access response text and no block reason found. Response: {response}")
-                    raise LLMProviderError("Google response blocked or invalid, reason unavailable.", provider="google")
-            except AttributeError as e_attr:
-                # Handle cases where the response structure is missing expected attributes like '.text'
-                logger.error(f"Google response object missing expected attribute '.text'. Response structure: {response}. Error: {e_attr}")
-                raise LLMProviderError("Google response format unexpected (missing .text).", provider="google")
+                    raise LLMProviderError(
+                        f"Content blocked by Google API. Reason: {block_reason}. Message: {block_message}", 
+                        provider="google"
+                    )
+                raise LLMProviderError("Google response blocked or invalid", provider="google")
 
-        # --- Handle Google API Specific Errors ---
-        except GoogleApiExceptions.PermissionDenied as e:
-            logger.error(f"Google API Permission Denied: {e}. Check API key and project permissions.")
-            raise LLMProviderError(f"Google API Permission Denied", provider="google", original_exception=e)
-        except GoogleApiExceptions.ResourceExhausted as e: # Rate limiting
-            logger.error(f"Google API Resource Exhausted (Rate Limit): {e}.")
-            raise LLMProviderError(f"Google API Resource Exhausted (Rate Limit)", provider="google", original_exception=e)
-        except GoogleApiExceptions.InvalidArgument as e: # Errors in request parameters
-            logger.error(f"Google API Invalid Argument: {e}. Check model name, parameters, prompt format.")
-            raise LLMProviderError(f"Google API Invalid Argument", provider="google", original_exception=e)
-        except GoogleApiExceptions.GoogleAPIError as e: # Catch other general Google API errors
+        except GoogleApiExceptions.GoogleAPIError as e:
             logger.error(f"Google API error: {e}")
-            raise LLMProviderError(f"Google API error", provider="google", original_exception=e)
+            raise LLMProviderError(f"Google API error: {str(e)}", provider="google", original_exception=e)
         except Exception as e_unexp:
-            # Catch any other unexpected exceptions
             logger.error(f"Unexpected error during Google generation: {e_unexp}", exc_info=True)
             raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
 
-    def generate_chat(self, messages: List[Dict[str, str]], model: str, max_tokens: int = 500, temperature: float = 0.7, **kwargs) -> str:
-        """Generates text using the Google GenerativeModel chat session (start_chat/send_message)."""
-        if not self._client: raise LLMProviderError("Google client not configured.", provider="google")
-        logger.debug(f"Calling Google generate_chat (using chat session) for model '{model}'")
-
-        # Validate message format
-        if not isinstance(messages, list) or not messages:
-            raise ValueError("Input 'messages' must be a non-empty list of dictionaries.")
-
-        # Convert ResonantiA roles ('user', 'assistant') to Google roles ('user', 'model')
-        history = []
-        for msg in messages:
-            role = msg.get("role")
-            content = msg.get("content")
-            if role and content is not None:
-                google_role = 'model' if role == 'assistant' else 'user'
-                # Google expects content as a list of parts (usually just one text part)
-                history.append({'role': google_role, 'parts': [content]})
-            else:
-                logger.warning(f"Skipping invalid message format in chat history: {msg}")
-        if not history: raise ValueError("Chat history is empty after processing messages.")
-
-        # Google's chat requires the last message to be from the 'user'
-        if history[-1]['role'] != 'user':
-            # Option 1: Raise error if last message isn't user (strict)
-            # raise ValueError("Last message in chat history must have role 'user' for Google API.")
-            # Option 2: Send the whole history as context if last is 'model' (less conversational)
-            logger.warning("Last chat message role is 'model'. Sending full history as context to generate_content instead of chat.")
-            try:
-                generation_config, safety_settings = self._prepare_google_config(max_tokens, temperature, kwargs)
-                llm = self._client.GenerativeModel(model_name=model)
-                response = llm.generate_content(history, generation_config=generation_config, safety_settings=safety_settings)
-                # Process response (same logic as in generate method)
-                try:
-                    if hasattr(response, 'text') and response.text:
-                        text_response = response.text
-                        finish_reason = "N/A"
-                        try:
-                            if response.candidates:
-                                finish_reason = response.candidates[0].finish_reason
-                        except (AttributeError, IndexError):
-                            pass
-                        logger.debug(f"Google chat generation (via .text, in generate_content fallback) successful. Finish Reason: {finish_reason}")
-                        return text_response
-                    
-                    if response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
-                        first_candidate = response.candidates[0]
-                        text_response = first_candidate.content.parts[0].text
-                        finish_reason = first_candidate.finish_reason 
-                        logger.debug(f"Google chat generation (via candidates, in generate_content fallback) successful. Finish Reason: {finish_reason}")
-                        return text_response
-                    else:
-                        logger.error("Google chat response (via generate_content fallback) missing candidates or content parts.")
-                        block_reason_msg = "Unknown reason."
-                        if hasattr(response, 'prompt_feedback') and response.prompt_feedback:
-                            block_reason = response.prompt_feedback.block_reason
-                            block_reason_msg = f"Reason: {block_reason}. Message: {response.prompt_feedback.block_reason_message}"
-                            logger.error(f"Google chat (fallback) generation blocked/empty. {block_reason_msg}")
-                        raise LLMProviderError(f"Google chat response format unexpected or blocked (fallback). {block_reason_msg}", provider="google")
-                except ValueError as e_resp_val: raise LLMProviderError(f"Content blocked by Google API. Reason: {getattr(response.prompt_feedback, 'block_reason', 'Unknown')}", provider="google") from e_resp_val
-                except AttributeError as e_attr: raise LLMProviderError("Google response format unexpected. Error: {e_attr}", provider="google")
-            except Exception as e_gen_cont: raise LLMProviderError("Failed to generate content from history.", provider="google", original_exception=e_gen_cont) from e_gen_cont
-
-
+    def execute_code(self, code: str, **kwargs) -> Dict[str, Any]:
+        """Execute Python code using Gemini's built-in code interpreter."""
+        if not self._client:
+            raise LLMProviderError("Google client not configured.", provider="google")
+            
         try:
-            generation_config, safety_settings = self._prepare_google_config(max_tokens, temperature, kwargs)
-            llm = self._client.GenerativeModel(model_name=model)
-
-            # Start chat session with history *excluding* the last user message
-            chat_session = llm.start_chat(history=history[:-1])
-            # Send the last user message
-            response = chat_session.send_message(
-                history[-1]['parts'], # Send content of the last user message
-                generation_config=generation_config,
-                safety_settings=safety_settings
-                # stream=False
+            llm = self._client.GenerativeModel(model_name="gemini-1.5-pro-latest")
+            response = llm.generate_content(
+                f"Execute the following Python code and return the results:\n```python\n{code}\n```",
+                generation_config=self._client.types.GenerationConfig(
+                    temperature=0.0,  # Use 0 temperature for code execution
+                    max_output_tokens=kwargs.get("max_tokens", 1000)
+                )
             )
+            
+            if hasattr(response, 'text'):
+                return {
+                    "output": response.text,
+                    "status": "success",
+                    "error": None
+                }
+            else:
+                return {
+                    "output": None,
+                    "status": "error",
+                    "error": "Failed to get execution results"
+                }
+                
+        except Exception as e:
+            return {
+                "output": None,
+                "status": "error",
+                "error": str(e)
+            }
 
-            # --- Process Google Response (same as generate method) ---
-            try:
-                if hasattr(response, 'text') and response.text:
-                    text_response = response.text
-                    finish_reason = "N/A"
-                    try:
-                        if response.candidates:
-                            finish_reason = response.candidates[0].finish_reason
-                    except (AttributeError, IndexError):
-                        pass
-                    logger.debug(f"Google chat generation successful (via .text). Finish Reason: {finish_reason}")
-                    return text_response
-
-                if response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
-                    first_candidate = response.candidates[0]
-                    text_response = first_candidate.content.parts[0].text
-                    finish_reason = first_candidate.finish_reason
-                    logger.debug(f"Google chat generation successful (via candidates). Finish Reason: {finish_reason}")
-                    return text_response
-                else:
-                    logger.error("Google chat response missing candidates or content parts for detailed parsing.")
-                    block_reason_msg = "Unknown reason."
-                    if hasattr(response, 'prompt_feedback') and response.prompt_feedback:
-                        block_reason = response.prompt_feedback.block_reason
-                        block_reason_msg = f"Reason: {block_reason}. Message: {response.prompt_feedback.block_reason_message}"
-                        logger.error(f"Google chat generation blocked/empty. {block_reason_msg}")
-                    raise LLMProviderError(f"Google chat response format unexpected or blocked. {block_reason_msg}", provider="google")
-
-            except ValueError as e_resp_val:
-                logger.warning(f"ValueError accessing Google chat response text (likely blocked): {e_resp_val}")
-                try:
-                    block_reason = response.prompt_feedback.block_reason
-                    block_message = response.prompt_feedback.block_reason_message
-                    logger.error(f"Google chat generation blocked. Reason: {block_reason}. Message: {block_message}")
-                    raise LLMProviderError(f"Chat content blocked by Google API. Reason: {block_reason}", provider="google")
-                except AttributeError:
-                    logger.error(f"Google chat generation failed. Could not access response text and no block reason found. Response: {response}")
-                    raise LLMProviderError("Google chat response blocked or invalid, reason unavailable.", provider="google")
-            except AttributeError as e_attr:
-                logger.error(f"Google chat response object missing expected attribute '.text'. Response structure: {response}. Error: {e_attr}")
-                raise LLMProviderError("Google chat response format unexpected (missing .text).", provider="google")
-
-        # --- Handle Google API Specific Errors (same as generate method) ---
-        except GoogleApiExceptions.PermissionDenied as e: raise LLMProviderError(f"Google API Permission Denied", provider="google", original_exception=e)
-        except GoogleApiExceptions.ResourceExhausted as e: raise LLMProviderError(f"Google API Resource Exhausted (Rate Limit)", provider="google", original_exception=e)
-        except GoogleApiExceptions.InvalidArgument as e: raise LLMProviderError(f"Google API Invalid Argument", provider="google", original_exception=e)
-        except GoogleApiExceptions.GoogleAPIError as e: raise LLMProviderError(f"Google API error", provider="google", original_exception=e)
-        except Exception as e_unexp: raise LLMProviderError(f"Unexpected Google chat generation error", provider="google", original_exception=e_unexp)
-
+    def process_file(self, file_url: str, **kwargs) -> Dict[str, Any]:
+        """Process a file from a URL using Gemini's file handling capabilities."""
+        if not self._client:
+            raise LLMProviderError("Google client not configured.", provider="google")
+            
+        try:
+            llm = self._client.GenerativeModel(model_name="gemini-1.5-pro-latest")
+            response = llm.generate_content(
+                f"Process and analyze the content of this file: {file_url}",
+                generation_config=self._client.types.GenerationConfig(
+                    temperature=kwargs.get("temperature", 0.7),
+                    max_output_tokens=kwargs.get("max_tokens", 1000)
+                )
+            )
+            
+            if hasattr(response, 'text'):
+                return {
+                    "content": response.text,
+                    "status": "success",
+                    "error": None
+                }
+            else:
+                return {
+                    "content": None,
+                    "status": "error",
+                    "error": "Failed to process file"
+                }
+                
+        except Exception as e:
+            return {
+                "content": None,
+                "status": "error",
+                "error": str(e)
+            }
 
 # --- Provider Factory ---
 # Maps provider names (lowercase) to their implementation classes.

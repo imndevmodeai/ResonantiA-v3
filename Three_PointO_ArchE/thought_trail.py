@@ -1,6 +1,19 @@
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Callable
 import json
+import logging
+from enum import Enum
+
+logger = logging.getLogger(__name__)
+
+class TriggerType(Enum):
+    """Types of triggers that can activate Thought traiL analysis."""
+    DISSONANCE = "dissonance"  # When IAR indicates potential issues
+    LOW_CONFIDENCE = "low_confidence"  # When confidence falls below threshold
+    PATTERN_DETECTED = "pattern_detected"  # When specific patterns are detected
+    METACOGNITIVE_SHIFT = "metacognitive_shift"  # When Metacognitive shifT is triggered
+    SIRC_ACTIVATION = "sirc_activation"  # When SIRC is activated
+    INSIGHT_SOLIDIFICATION = "insight_solidification"  # When Insight solidificatioN occurs
 
 class ThoughtTrail:
     """
@@ -13,6 +26,11 @@ class ThoughtTrail:
         self.trail: List[Dict[str, Any]] = []
         self.max_history = max_history
         self.current_context: Dict[str, Any] = {}
+        self.triggers: Dict[TriggerType, List[Callable]] = {
+            trigger_type: [] for trigger_type in TriggerType
+        }
+        self.confidence_threshold = 0.7
+        self.pattern_detectors: List[Callable[[Dict[str, Any]], bool]] = []
     
     def add_entry(self, 
                  task_id: str,
@@ -23,17 +41,7 @@ class ThoughtTrail:
                  context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Add a new entry to the ThoughtTraiL with full IAR data.
-        
-        Args:
-            task_id: Unique identifier for the task
-            action_type: Type of action performed
-            inputs: Input parameters for the action
-            outputs: Results from the action
-            iar_reflection: IAR reflection dictionary
-            context: Additional context data
-            
-        Returns:
-            The complete trail entry
+        Automatically checks for triggers and executes associated handlers.
         """
         entry = {
             'timestamp': datetime.utcnow().isoformat(),
@@ -47,7 +55,59 @@ class ThoughtTrail:
         
         self.trail.append(entry)
         self._trim_history()
+        
+        # Check for triggers
+        self._check_triggers(entry)
+        
         return entry
+    
+    def register_trigger_handler(self, 
+                               trigger_type: TriggerType, 
+                               handler: Callable[[Dict[str, Any]], None]) -> None:
+        """Register a handler function for a specific trigger type."""
+        if trigger_type not in self.triggers:
+            raise ValueError(f"Unknown trigger type: {trigger_type}")
+        self.triggers[trigger_type].append(handler)
+        logger.info(f"Registered handler for trigger type: {trigger_type}")
+    
+    def register_pattern_detector(self, detector: Callable[[Dict[str, Any]], bool]) -> None:
+        """Register a pattern detector function."""
+        self.pattern_detectors.append(detector)
+        logger.info("Registered new pattern detector")
+    
+    def _check_triggers(self, entry: Dict[str, Any]) -> None:
+        """Check for triggers and execute associated handlers."""
+        iar = entry['iar_reflection']
+        
+        # Check for dissonance
+        if iar.get('potential_issues'):
+            self._execute_trigger_handlers(TriggerType.DISSONANCE, entry)
+        
+        # Check for low confidence
+        if iar.get('confidence', 1.0) < self.confidence_threshold:
+            self._execute_trigger_handlers(TriggerType.LOW_CONFIDENCE, entry)
+        
+        # Check for patterns
+        for detector in self.pattern_detectors:
+            if detector(entry):
+                self._execute_trigger_handlers(TriggerType.PATTERN_DETECTED, entry)
+                break
+        
+        # Check for specific action types that trigger analysis
+        if entry['action_type'] == 'metacognitive_shift':
+            self._execute_trigger_handlers(TriggerType.METACOGNITIVE_SHIFT, entry)
+        elif entry['action_type'] == 'sirc_activation':
+            self._execute_trigger_handlers(TriggerType.SIRC_ACTIVATION, entry)
+        elif entry['action_type'] == 'insight_solidification':
+            self._execute_trigger_handlers(TriggerType.INSIGHT_SOLIDIFICATION, entry)
+    
+    def _execute_trigger_handlers(self, trigger_type: TriggerType, entry: Dict[str, Any]) -> None:
+        """Execute all handlers registered for a trigger type."""
+        for handler in self.triggers[trigger_type]:
+            try:
+                handler(entry)
+            except Exception as e:
+                logger.error(f"Error executing trigger handler for {trigger_type}: {str(e)}")
     
     def get_recent_entries(self, count: int = 5) -> List[Dict[str, Any]]:
         """Get the most recent entries from the trail."""
@@ -61,7 +121,7 @@ class ThoughtTrail:
         """Get entries where IAR indicates potential issues or low confidence."""
         return [
             entry for entry in self.trail
-            if (entry['iar_reflection'].get('confidence', 1.0) < 0.7 or
+            if (entry['iar_reflection'].get('confidence', 1.0) < self.confidence_threshold or
                 entry['iar_reflection'].get('potential_issues'))
         ]
     

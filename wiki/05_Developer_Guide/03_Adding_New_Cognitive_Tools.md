@@ -12,7 +12,7 @@ This page provides a step-by-step guide for developers on how to add a new cogni
     *   Identify its inputs and expected primary outputs.
     *   Consider how it will contribute to the overall capabilities of Arche.
 *   **Step 2: Create the Tool's Python Function**
-    *   Create a new Python function for your tool. This can be in an existing module (e.g., `tools.py`, `enhanced_tools.py`) or a new module within the `3.0ArchE` package.
+    *   Create a new Python function for your tool. This can be in an existing module (e.g., `tools.py`, `enhanced_tools.py`) or a new module within the `Three_PointO_ArchE` package.
     *   **Adhere to [Coding Standards & Style](./02_Coding_Standards_And_Style.md):**
         *   Use type hints for all arguments and the return value.
         *   Write a comprehensive docstring (Google Style).
@@ -34,7 +34,7 @@ This page provides a step-by-step guide for developers on how to add a new cogni
         6.  Optionally include `raw_output_preview`, `error_message`, `execution_time_ms`, etc.
     *   **Include the IAR Comment Block** in your function's docstring or as a leading comment, as described in [Coding Standards & Style](./02_Coding_Standards_And_Style.md#integrated-action-reflection-iar-comment-block).
 *   **Step 5: Register the Tool in `action_registry.py`**
-    *   Open `3.0ArchE/action_registry.py`.
+    *   Open `Three_PointO_ArchE/action_registry.py`.
     *   Import your new tool function if it's in a new module.
     *   Add a new entry to the `ACTION_REGISTRY` dictionary:
         ```python
@@ -58,7 +58,7 @@ This page provides a step-by-step guide for developers on how to add a new cogni
             "action_type": "your_new_tool_action_type",
             "inputs": {
                 "param1_name": "some_value",
-                "param2_name": "{{another_task.results.output_key}}"
+                "param2_name": "{{another_task.result.output_key}}"
             },
             "dependencies": ["another_task"] // If applicable
         }
@@ -80,7 +80,7 @@ This page provides a step-by-step guide for developers on how to add a new cogni
 **Example (Conceptual):**
 
 ```python
-# In 3.0ArchE/my_custom_tools.py
+# In Three_PointO_ArchE/my_custom_tools.py
 from typing import Dict, Any, List
 
 def analyze_sentiment(text_input: str, language: str = "en") -> Dict[str, Any]:

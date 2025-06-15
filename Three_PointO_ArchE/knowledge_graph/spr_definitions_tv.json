@@ -43,5 +43,79 @@
       "achieved_through": ["4D Thinking"]
     },
     "blueprint_details": "See Section 2.9, 5.1."
+  },
+  {
+    "spr_id": "Knowledge crystallizatioN",
+    "term": "Knowledge Crystallization",
+    "definition": "The process of transforming insights into persistent, reusable knowledge patterns",
+    "category": "CoreConcept",
+    "relationships": {
+      "type": "OperationalGoal",
+      "achieved_through": ["Insight solidificatioN", "Pattern crystallizatioN", "Knowledge tapestrY"]
+    },
+    "progression": {
+      "initial_form": "Knowledge crystallizatioN",
+      "acronym_form": "KC",
+      "advanced_form": "KNOWLEDGE CRYSTALLIZATION",
+      "current_stage": "initial_form"
+    },
+    "related_sprs": [
+      "Insight solidificatioN",
+      "Pattern crystallizatioN",
+      "Knowledge tapestrY"
+    ],
+    "blueprint_details": {
+      "implementation": "knowledge_crystallization_system.py",
+      "workflow": "knowledge_crystallization_workflow.json"
+    }
+  },
+  {
+    "spr_id": "Complex system visioninG",
+    "term": "Complex System Visioning",
+    "definition": "Advanced system visualization capabilities incorporating environmental and agent-level dynamics",
+    "category": "CoreConcept",
+    "relationships": {
+      "type": "OperationalGoal",
+      "achieved_through": ["Agent based modelinG", "Human factor modelinG", "Future state analysiS"]
+    },
+    "progression": {
+      "initial_form": "Complex system visioninG",
+      "acronym_form": "CSV",
+      "advanced_form": "COMPLEX SYSTEM VISIONING",
+      "current_stage": "initial_form"
+    },
+    "related_sprs": [
+      "Agent based modelinG",
+      "Human factor modelinG",
+      "Future state analysiS"
+    ],
+    "blueprint_details": {
+      "implementation": "complex_system_visioning.py",
+      "workflow": "complex_system_visioning_workflow.json"
+    }
+  },
+  {
+    "spr_id": "Human factor modelinG",
+    "term": "Human Factor Modeling",
+    "definition": "Modeling of human factors and behaviors in system simulations",
+    "category": "CoreConcept",
+    "relationships": {
+      "type": "OperationalGoal",
+      "achieved_through": ["Complex system visioninG", "Agent based modelinG"]
+    },
+    "progression": {
+      "initial_form": "Human factor modelinG",
+      "acronym_form": "HFM",
+      "advanced_form": "HUMAN FACTOR MODELING",
+      "current_stage": "initial_form"
+    },
+    "related_sprs": [
+      "Complex system visioninG",
+      "Agent based modelinG"
+    ],
+    "blueprint_details": {
+      "implementation": "human_factor_modeling.py",
+      "workflow": "human_factor_modeling_workflow.json"
+    }
   }
 ] 

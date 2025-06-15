@@ -207,34 +207,18 @@ class ResonantOrchestrator:
     
     def _identify_parallel_groups(self, dep_graph: nx.DiGraph) -> List[List[str]]:
         """
-        Identify groups of tools that can run in parallel.
+        Identify groups of tools that can run in parallel using topological layers.
         """
-        # Get all paths in the graph
-        all_paths = list(nx.all_simple_paths(dep_graph))
-        
-        # Group tools by their position in paths
-        path_positions = {}
-        for path in all_paths:
-            for pos, tool in enumerate(path):
-                if tool not in path_positions:
-                    path_positions[tool] = set()
-                path_positions[tool].add(pos)
-        
-        # Group tools that can run in parallel
         parallel_groups = []
-        current_group = set()
-        
-        for tool, positions in path_positions.items():
-            if len(positions) == 1:  # Tool appears in same position in all paths
-                current_group.add(tool)
-            else:
-                if current_group:
-                    parallel_groups.append(list(current_group))
-                current_group = {tool}
-        
-        if current_group:
-            parallel_groups.append(list(current_group))
-        
+        graph = dep_graph.copy()
+        while graph:
+            # Find nodes with no incoming edges (ready to run)
+            ready = [node for node, degree in graph.in_degree() if degree == 0]
+            if not ready:
+                break  # Cycle or done
+            parallel_groups.append(ready)
+            # Remove these nodes for the next layer
+            graph.remove_nodes_from(ready)
         return parallel_groups
     
     def _build_sequential_steps(self, dep_graph: nx.DiGraph, parallel_groups: List[List[str]]) -> List[Dict[str, Any]]:

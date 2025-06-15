@@ -5,18 +5,24 @@ import time
 import json
 import logging
 
-# --- CONFIGURABLE PATHS ---
-ARCHETYPE_DIR = os.path.join('ResonantiA', 'ArchE')
-WORKFLOWS_DIR = os.path.join('ResonantiA', 'workflows')
-KNOWLEDGE_GRAPH_FILE = os.path.join(ARCHETYPE_DIR, 'knowledge_graph', 'spr_definitions_tv.json')
-PROTOCOL_DOC_PATH = os.path.join(ARCHETYPE_DIR, 'docs', 'resonantiA_protocol_v3.md')
+# --- GET SCRIPT'S DIRECTORY TO BUILD ROBUST PATHS ---
+# This makes the script runnable from any location
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR) # Assumes script is in a top-level dir like 'scripts' or root. Adjust if nested deeper.
+# If the script is in the project root, use: PROJECT_ROOT = SCRIPT_DIR
+
+# --- CONFIGURABLE PATHS (NOW ROBUST) ---
+ARCHETYPE_DIR = os.path.join(PROJECT_ROOT, 'Three_PointO_ArchE') # Corrected path
+WORKFLOWS_DIR = os.path.join(PROJECT_ROOT, 'workflows')
+# The knowledge graph and protocol docs seem to be in different locations based on the project structure
+KNOWLEDGE_GRAPH_FILE = os.path.join(PROJECT_ROOT, 'knowledge_graph', 'spr_definitions_tv.json')
+PROTOCOL_DOC_PATH = os.path.join(PROJECT_ROOT, 'wiki', '01_ResonantiA_Protocol_v3_0', '01_Introduction_to_ResonantiA_v3_0.md') # Example path, adjust to actual location
 
 # --- SNAPSHOT OUTPUT BASE ---
-SNAPSHOT_BASE = os.path.join('outputs', 'ResonantiA_Self_Defined_Snapshots_ReSSyD')
+SNAPSHOT_BASE = os.path.join(PROJECT_ROOT, 'outputs', 'ResonantiA_Self_Defined_Snapshots_ReSSyD')
 
 # --- LOGGING SETUP ---
-# Ensure the outputs directory exists for the log file
-LOG_DIR = 'outputs'
+LOG_DIR = os.path.join(PROJECT_ROOT, 'outputs')
 os.makedirs(LOG_DIR, exist_ok=True)
 
 LOG_FILE = os.path.join(LOG_DIR, 'arche_snapshot.log')
@@ -103,21 +109,30 @@ def create_snapshot():
         os.makedirs(os.path.join(package_dir, 'Packaged_Code'), exist_ok=True)
 
         # 1. Copy all workflow JSONs
-        for file in os.listdir(WORKFLOWS_DIR):
-            if file.endswith('.json'):
-                shutil.copy2(os.path.join(WORKFLOWS_DIR, file), os.path.join(package_dir, 'Packaged_Workflows', file))
+        if not os.path.exists(WORKFLOWS_DIR):
+            logging.error(f"Workflows directory not found at: {WORKFLOWS_DIR}")
+        else:
+            for file in os.listdir(WORKFLOWS_DIR):
+                if file.endswith('.json'):
+                    shutil.copy2(os.path.join(WORKFLOWS_DIR, file), os.path.join(package_dir, 'Packaged_Workflows', file))
 
         # 2. Copy SPR definitions
-        shutil.copy2(KNOWLEDGE_GRAPH_FILE, os.path.join(package_dir, 'Packaged_KnowledgeGraph', 'spr_definitions_tv.json'))
+        if not os.path.exists(KNOWLEDGE_GRAPH_FILE):
+             logging.error(f"Knowledge graph file not found at: {KNOWLEDGE_GRAPH_FILE}")
+        else:
+            shutil.copy2(KNOWLEDGE_GRAPH_FILE, os.path.join(package_dir, 'Packaged_KnowledgeGraph', 'spr_definitions_tv.json'))
 
-        # 3. Generate code manifest
+        # 3. Generate code manifest from the correct ArchE directory
         manifest = []
-        for file in os.listdir(ARCHETYPE_DIR):
-            if file.endswith('.py'):
-                manifest.append(file)
-        manifest.sort()
-        with open(os.path.join(package_dir, 'Packaged_Code', 'ArchE_Manifest.json'), 'w') as f:
-            json.dump({'modules': manifest}, f, indent=2)
+        if not os.path.exists(ARCHETYPE_DIR):
+            logging.error(f"ArchE code directory not found at: {ARCHETYPE_DIR}")
+        else:
+            for file in os.listdir(ARCHETYPE_DIR):
+                if file.endswith('.py'):
+                    manifest.append(file)
+            manifest.sort()
+            with open(os.path.join(package_dir, 'Packaged_Code', 'ArchE_Manifest.json'), 'w') as f:
+                json.dump({'modules': manifest}, f, indent=2)
 
         # 4. Dynamically generate protocol and HowTo files
         protocol_target = os.path.join(package_dir, f'ResonantiA_Protocol_v3.0_Canonical_{timestamp}.md')

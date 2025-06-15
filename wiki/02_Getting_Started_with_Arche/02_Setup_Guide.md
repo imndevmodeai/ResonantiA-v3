@@ -21,5 +21,10 @@ This guide provides a detailed walkthrough for setting up the Arche project envi
     *   Command: `pip install -r requirements.txt`
     *   Explanation: How this command installs the libraries listed in `requirements.txt`.
 *   **Directory Structure Explained**
-    *   Provide an overview of the key directories and their purpose (e.g., `3.0ArchE/`, `workflows/`, `knowledge_graph/`, `outputs/`, `logs/`).
+    *   Provide an overview of the key directories and their purpose:
+        *   `Three_PointO_ArchE/`: The core Python package containing all of Arche's logic.
+        *   `workflows/`: Contains workflow definitions (`Process blueprintS`) in JSON format.
+        *   `Three_PointO_ArchE/knowledge_graph/`: Contains the `Knowledge tapestrY` (`spr_definitions_tv.json`).
+        *   `outputs/`: Default directory for all generated files, including results, models, and visualizations.
+        *   `logs/`: Contains execution logs (`arche_v3_log.log`).
     *   (Link back to Section 4.2 of the Protocol for the canonical structure if desired). 

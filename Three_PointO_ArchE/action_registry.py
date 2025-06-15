@@ -169,7 +169,7 @@ ACTION_REGISTRY: Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]] = {
     
     # LLM and text generation tools
     "generate_text_llm": generate_text_llm,
-    
+
     # Self-interrogation tools
     "self_interrogate": self_interrogate
 }
@@ -220,7 +220,7 @@ def execute_action(
                 "reflection": error_msg
             }
         }
-    
+
     try:
         handler = ACTION_REGISTRY[action_type]
         result = handler(**inputs)
@@ -251,4 +251,77 @@ def execute_action(
             }
         }
 
-# --- END OF FILE 3.0ArchE/action_registry.py --- 
+class ActionRegistry:
+    """Registry for workflow actions with dependency tracking."""
+    
+    def __init__(self):
+        """Initialize the action registry."""
+        self.actions: Dict[str, Callable] = {}
+        self.dependencies: Dict[str, set] = {}
+    
+    def register_action(self, action_name: str, action_func: Callable) -> None:
+        """
+        Register a new action with the registry.
+        
+        Args:
+            action_name: Name of the action
+            action_func: Function implementing the action
+        """
+        self.actions[action_name] = action_func
+        self.dependencies[action_name] = set(getattr(action_func, "dependencies", []))
+        logger.info(f"Registered action: {action_name}")
+    
+    def get_action(self, action_name: str) -> Optional[Callable]:
+        """
+        Get an action by name.
+        
+        Args:
+            action_name: Name of the action to retrieve
+            
+        Returns:
+            The action function if found, None otherwise
+        """
+        return self.actions.get(action_name)
+    
+    def get_dependencies(self, action_name: str) -> set:
+        """
+        Get dependencies for an action.
+        
+        Args:
+            action_name: Name of the action
+            
+        Returns:
+            Set of dependency names
+        """
+        return self.dependencies.get(action_name, set())
+    
+    def execute_action(self, action_name: str, inputs: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Execute an action with the given inputs.
+        
+        Args:
+            action_name: Name of the action to execute
+            inputs: Input parameters for the action
+            
+        Returns:
+            Result of the action execution
+            
+        Raises:
+            ValueError: If the action is not found
+        """
+        action = self.get_action(action_name)
+        if not action:
+            raise ValueError(f"Action not found: {action_name}")
+        
+        try:
+            result = action(**inputs)
+            return result
+    except Exception as e:
+            logger.error(f"Error executing action {action_name}: {str(e)}")
+            raise
+
+# Create a singleton instance
+action_registry = ActionRegistry()
+
+# Export the class and instance
+__all__ = ["ActionRegistry", "action_registry"] 

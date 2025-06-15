@@ -290,7 +290,7 @@ class IARCompliantWorkflowEngine:
                 parts = template.split(".", 1)
                 if len(parts) == 2:
                     task_id, field_path = parts
-                else:
+                        else:
                     task_id, field_path = parts[0], ""
                 # Support nested field resolution (e.g., result.patterns)
                 if task_id in results:
@@ -299,11 +299,11 @@ class IARCompliantWorkflowEngine:
                         for subfield in field_path.split('.'):
                             if isinstance(field_value, dict) and subfield in field_value:
                                 field_value = field_value[subfield]
-                            else:
+                                else:
                                 field_value = None
                                 break
                     resolved[key] = field_value
-                else:
+            else:
                     resolved[key] = value
             else:
                 resolved[key] = value

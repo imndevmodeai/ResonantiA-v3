@@ -11,6 +11,8 @@ import numpy as np # For math tool, potentially simulations
 from typing import Dict, Any, List, Optional, Union # Expanded type hints
 import os # For os.getcwd()
 import sys # For sys.path
+import asyncio
+from dataclasses import dataclass
 
 # --- Custom Imports & Setup ---
 from .spr_manager import SPRManager
@@ -19,6 +21,7 @@ from .llm_providers import get_llm_provider, get_model_for_provider, LLMProvider
 from .action_context import ActionContext # Import ActionContext from new file
 from .predictive_modeling_tool import run_prediction # Predictive tool main function
 from .system_representation import System, GaussianDistribution, HistogramDistribution, StringParam # Import the system representation classes
+from .iar_components import IARValidator, ResonanceTracker
 
 # Initialize logger early for use in import blocks
 # Using a more specific name for this logger to avoid clashes if 'tools' is a common name
@@ -1128,3 +1131,293 @@ def run_workflow_suite(inputs: Dict[str, Any], action_context: Optional[ActionCo
         return {"error": error_msg, "reflection": _create_reflection(status="Failure", summary=error_msg, issues=[f"System Error: {e}"], confidence=0.0, alignment="N/A", preview=None)}
 
 # --- END OF FILE 3.0ArchE/tools.py --- 
+
+@dataclass
+class SearchResult:
+    """Result of web search."""
+    results: List[Dict[str, Any]]
+    citations: List[Dict[str, Any]]
+    confidence: float
+    iar_data: Dict[str, Any]
+
+@dataclass
+class LLMResult:
+    """Result of LLM invocation."""
+    response: str
+    structured_output: Optional[Dict[str, Any]]
+    confidence: float
+    iar_data: Dict[str, Any]
+
+class Tools:
+    """Tools with native Gemini API integration."""
+    
+    def __init__(self):
+        self.iar_validator = IARValidator()
+        self.resonance_tracker = ResonanceTracker()
+    
+    async def search_web(
+        self,
+        query: str,
+        context: Dict[str, Any],
+        provider: str = "gemini_grounded_search"
+    ) -> SearchResult:
+        """Search the web using the specified provider."""
+        if provider == "gemini_grounded_search":
+            return await self._search_with_gemini_grounded(query, context)
+        else:
+            # Fallback to other providers
+            return await self._search_with_fallback(query, context, provider)
+    
+    async def _search_with_gemini_grounded(
+        self,
+        query: str,
+        context: Dict[str, Any]
+    ) -> SearchResult:
+        """Search using Gemini's grounded search capability."""
+        try:
+            # Prepare search context
+            search_context = {
+                "query": query,
+                "context": context,
+                "search_method": "gemini_grounded"
+            }
+            
+            # Execute search using Gemini API
+            result = await self._call_gemini_grounded_search(search_context)
+            
+            # Generate IAR data
+            iar_data = {
+                "status": "Success",
+                "confidence": result.get("confidence", 0.9),
+                "summary": "Web search completed",
+                "potential_issues": [],
+                "alignment_check": {
+                    "result_relevance": 0.9,
+                    "citation_quality": 0.9
+                },
+                "search_method_used": "gemini_grounded"
+            }
+            
+            # Track resonance
+            self.resonance_tracker.record_execution(
+                "web_search",
+                iar_data,
+                search_context
+            )
+            
+            return SearchResult(
+                results=result.get("results", []),
+                citations=result.get("citations", []),
+                confidence=result.get("confidence", 0.9),
+                iar_data=iar_data
+            )
+            
+        except Exception as e:
+            # Handle search errors
+            error_iar = {
+                "status": "Error",
+                "confidence": 0.0,
+                "summary": f"Web search failed: {str(e)}",
+                "potential_issues": [str(e)],
+                "alignment_check": {
+                    "result_relevance": 0.0,
+                    "citation_quality": 0.0
+                },
+                "search_method_used": "gemini_grounded"
+            }
+            
+            return SearchResult(
+                results=[],
+                citations=[],
+                confidence=0.0,
+                iar_data=error_iar
+            )
+    
+    async def invoke_llm(
+        self,
+        prompt: str,
+        context: Dict[str, Any],
+        response_schema: Optional[Dict[str, Any]] = None,
+        provider: str = "gemini"
+    ) -> LLMResult:
+        """Invoke LLM with optional response schema."""
+        try:
+            # Prepare LLM context
+            llm_context = {
+                "prompt": prompt,
+                "context": context,
+                "response_schema": response_schema,
+                "provider": provider
+            }
+            
+            # Execute LLM call
+            result = await self._call_gemini_llm(llm_context)
+            
+            # Generate IAR data
+            iar_data = {
+                "status": "Success",
+                "confidence": result.get("confidence", 0.9),
+                "summary": "LLM invocation completed",
+                "potential_issues": [],
+                "alignment_check": {
+                    "response_quality": 0.9,
+                    "schema_compliance": 0.9 if response_schema else None
+                },
+                "provider_used": provider
+            }
+            
+            # Track resonance
+            self.resonance_tracker.record_execution(
+                "llm_invocation",
+                iar_data,
+                llm_context
+            )
+            
+            return LLMResult(
+                response=result.get("response", ""),
+                structured_output=result.get("structured_output"),
+                confidence=result.get("confidence", 0.9),
+                iar_data=iar_data
+            )
+            
+        except Exception as e:
+            # Handle LLM errors
+            error_iar = {
+                "status": "Error",
+                "confidence": 0.0,
+                "summary": f"LLM invocation failed: {str(e)}",
+                "potential_issues": [str(e)],
+                "alignment_check": {
+                    "response_quality": 0.0,
+                    "schema_compliance": 0.0 if response_schema else None
+                },
+                "provider_used": provider
+            }
+            
+            return LLMResult(
+                response="",
+                structured_output=None,
+                confidence=0.0,
+                iar_data=error_iar
+            )
+    
+    async def analyze_url_content(
+        self,
+        url: str,
+        context: Dict[str, Any],
+        provider: str = "gemini"
+    ) -> LLMResult:
+        """Analyze URL content using Gemini's URL context capability."""
+        try:
+            # Prepare URL analysis context
+            analysis_context = {
+                "url": url,
+                "context": context,
+                "provider": provider
+            }
+            
+            # Execute URL analysis
+            result = await self._call_gemini_url_analysis(analysis_context)
+            
+            # Generate IAR data
+            iar_data = {
+                "status": "Success",
+                "confidence": result.get("confidence", 0.9),
+                "summary": "URL content analysis completed",
+                "potential_issues": [],
+                "alignment_check": {
+                    "content_quality": 0.9,
+                    "analysis_depth": 0.9
+                },
+                "provider_used": provider
+            }
+            
+            # Track resonance
+            self.resonance_tracker.record_execution(
+                "url_analysis",
+                iar_data,
+                analysis_context
+            )
+            
+            return LLMResult(
+                response=result.get("analysis", ""),
+                structured_output=result.get("structured_output"),
+                confidence=result.get("confidence", 0.9),
+                iar_data=iar_data
+            )
+            
+        except Exception as e:
+            # Handle analysis errors
+            error_iar = {
+                "status": "Error",
+                "confidence": 0.0,
+                "summary": f"URL analysis failed: {str(e)}",
+                "potential_issues": [str(e)],
+                "alignment_check": {
+                    "content_quality": 0.0,
+                    "analysis_depth": 0.0
+                },
+                "provider_used": provider
+            }
+            
+            return LLMResult(
+                response="",
+                structured_output=None,
+                confidence=0.0,
+                iar_data=error_iar
+            )
+    
+    async def _search_with_fallback(
+        self,
+        query: str,
+        context: Dict[str, Any],
+        provider: str
+    ) -> SearchResult:
+        """Search using fallback provider."""
+        # Implementation for other providers
+        pass
+    
+    async def _call_gemini_grounded_search(
+        self,
+        search_context: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Call Gemini API for grounded search."""
+        # Placeholder for actual Gemini API call
+        return {
+            "results": [],
+            "citations": [],
+            "confidence": 0.9
+        }
+    
+    async def _call_gemini_llm(
+        self,
+        llm_context: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Call Gemini API for LLM invocation."""
+        # Placeholder for actual Gemini API call
+        return {
+            "response": "LLM response",
+            "structured_output": None,
+            "confidence": 0.9
+        }
+    
+    async def _call_gemini_url_analysis(
+        self,
+        analysis_context: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Call Gemini API for URL content analysis."""
+        # Placeholder for actual Gemini API call
+        return {
+            "analysis": "URL content analysis",
+            "structured_output": None,
+            "confidence": 0.9
+        }
+    
+    def validate_result(self, result: Union[SearchResult, LLMResult]) -> bool:
+        """Validate result."""
+        is_valid, _ = self.iar_validator.validate_content(result.iar_data)
+        return is_valid
+    
+    def get_execution_summary(self) -> Dict[str, Any]:
+        """Get execution summary."""
+        return self.resonance_tracker.get_execution_summary() 
