@@ -1,7 +1,7 @@
 # --- START OF FILE Three_PointO_ArchE/main.py ---
 # ResonantiA Protocol v3.0 - main.py
 # Example entry point demonstrating initialization and execution of the Arche system.
-# Handles workflow execution via WorkflowEngine and manages IAR-inclusive results.
+# Handles workflow execution via IARCompliantWorkflowEngine and manages IAR-inclusive results.
 
 import logging
 import os
@@ -40,11 +40,11 @@ except Exception as log_setup_e:
 
 # Now import other core ResonantiA modules AFTER logging is configured
 try:
-    from .workflow_engine import IARCompliantWorkflowEngine as WorkflowEngine
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
     from .spr_manager import SPRManager
     # config already imported above
 except ImportError as import_err:
-    logging.critical(f"Failed to import core ResonantiA modules (WorkflowEngine, SPRManager): {import_err}. Check installation and paths.", exc_info=True)
+    logging.critical(f"Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager): {import_err}. Check installation and paths.", exc_info=True)
     sys.exit(1) # Critical failure if core components cannot be imported
 
 logger = logging.getLogger(__name__) # Get logger specifically for this module
@@ -122,7 +122,7 @@ def handle_run_workflow(args):
             return 
 
     try:
-        engine = WorkflowEngine()
+        engine = IARCompliantWorkflowEngine()
         final_context = engine.run_workflow(args.workflow_name, initial_context)
         
         # Determine the final status for logging
@@ -236,7 +236,7 @@ def main(workflow_to_run: str, initial_context_json: Optional[str] = None):
 
     try:
         # Pass the initialized SPR manager to the engine if needed (e.g., for SPR context)
-        workflow_engine = WorkflowEngine(spr_manager=spr_manager)
+        workflow_engine = IARCompliantWorkflowEngine(spr_manager=spr_manager)
         logger.info("Workflow Engine initialized.")
     except Exception as wf_e:
         logger.critical(f"Failed to initialize Workflow Engine: {wf_e}. Exiting.", exc_info=True)

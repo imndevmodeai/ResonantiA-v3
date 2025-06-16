@@ -168,10 +168,10 @@ class ResonanceTracker:
         return min(compliance_score, 1.0)
 '''
     
-    # 4. Create enhanced WorkflowEngine class
+    # 4. Create enhanced IARCompliantWorkflowEngine class
     enhanced_engine_code = '''
 
-class IARCompliantWorkflowEngine(WorkflowEngine):
+class IARCompliantWorkflowEngine(IARCompliantWorkflowEngine):
     """Enhanced workflow engine with complete IAR compliance vetting"""
     
     def __init__(self, spr_manager=None):
@@ -307,13 +307,13 @@ class IARCompliantWorkflowEngine(WorkflowEngine):
         }
 '''
     
-    # 5. Insert the new code before the existing WorkflowEngine class
-    insertion_point = current_content.find("class WorkflowEngine:")
+    # 5. Insert the new code before the existing IARCompliantWorkflowEngine class
+    insertion_point = current_content.find("class IARCompliantWorkflowEngine:")
     if insertion_point == -1:
-        print("❌ Could not find WorkflowEngine class definition")
+        print("❌ Could not find IARCompliantWorkflowEngine class definition")
         return False
     
-    # Insert IAR compliance code before WorkflowEngine class
+    # Insert IAR compliance code before IARCompliantWorkflowEngine class
     enhanced_content = (
         current_content[:insertion_point] + 
         iar_compliance_code + 
@@ -330,10 +330,10 @@ class IARCompliantWorkflowEngine(WorkflowEngine):
     # 7. Create usage example
     usage_example = '''
 # === USAGE EXAMPLE ===
-# Replace WorkflowEngine with IARCompliantWorkflowEngine
+# Replace IARCompliantWorkflowEngine with IARCompliantWorkflowEngine
 
 # OLD:
-# engine = WorkflowEngine(spr_manager)
+# engine = IARCompliantWorkflowEngine(spr_manager)
 
 # NEW:
 engine = IARCompliantWorkflowEngine(spr_manager)

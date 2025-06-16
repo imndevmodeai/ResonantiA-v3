@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 import pytest
 import numpy as np
-from ResonantiA.ArchE.cfp_framework import CFPFramework
+from Three_PointO_ArchE.cfp_framework import CfpframeworK
 
 # Helper to create a default CFPFramework instance for tests that don't need specific quantum setups
 @pytest.fixture
@@ -10,13 +10,12 @@ def cfp_default_instance():
     # Initialize with minimal valid quantum system_configs for testing classical/general methods
     mock_system_config = {
         'quantum_state': [1.0, 0.0], # Minimal valid state
-        # Add other keys if CFPFramework init or tested methods require them
+        # Add other keys if CfpframeworK init or tested methods require them
     }
-    return CFPFramework(
+    return CfpframeworK(
         system_a_config=mock_system_config,
         system_b_config=mock_system_config,
-        evolution_model_type='placeholder', # Override to avoid needing Hamiltonians for these tests
-        config_override={'log_level': 'ERROR'} # This was from original, keep if still relevant or handled by kwargs
+        evolution_model_type='placeholder' # Override to avoid needing Hamiltonians for these tests
     )
 
 class TestCFPFrameworkClassicalMethods:

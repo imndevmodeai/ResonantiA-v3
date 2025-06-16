@@ -1,6 +1,6 @@
 import json
 import logging
-from Three_PointO_ArchE.workflow_engine import WorkflowEngine
+from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
 from Three_PointO_ArchE.workflow_validator import WorkflowValidator
 from Three_PointO_ArchE.action_registry import ACTION_REGISTRY
 
@@ -31,7 +31,7 @@ def main():
             context = json.load(f)
         
         # Initialize workflow engine
-        engine = WorkflowEngine()
+        engine = IARCompliantWorkflowEngine()
         
         # Execute workflow
         logger.info("Starting workflow execution...")

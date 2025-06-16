@@ -6,8 +6,8 @@ from typing import Dict # Import Dict
 
 # Attempt to import necessary modules with error handling
 try:
-    from ResonantiA.ArchE.predictive_modeling_tool import run_prediction, PREDICTIVE_LIBS_AVAILABLE # Assumes flag exists
-    from ResonantiA.ArchE.config import PREDICTIVE_DEFAULT_TIMESERIES_MODEL # Use config
+    from Three_PointO_ArchE.predictive_modeling_tool import run_prediction, PREDICTIVE_LIBS_AVAILABLE # Assumes flag exists
+    from Three_PointO_ArchE.config import PREDICTIVE_DEFAULT_TIMESERIES_MODEL # Use config
 except ImportError:
     try:
         from ...ArchE.predictive_modeling_tool import run_prediction, PREDICTIVE_LIBS_AVAILABLE

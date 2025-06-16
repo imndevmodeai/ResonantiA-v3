@@ -10,7 +10,7 @@ import os
 
 # Assuming config and IAR helper are available
 from . import config
-from .utils import _create_reflection  # Or define it locally if not in a shared util
+from .utils.reflection_utils import _create_reflection
 
 logger = logging.getLogger(__name__)
 

@@ -45,7 +45,7 @@ try:
         import matplotlib.pyplot as plt
         # import networkx as nx # Import if network models/analysis are used
         VISUALIZATION_LIBS_AVAILABLE = True
-        logger_abm_imp.info("Matplotlib library loaded successfully for ABM visualization.")
+        logger_abm_imp.info("Matplotlib/NetworkX library loaded successfully for ABM visualization.")
     except ImportError:
         plt = None; nx = None
         logger_abm_imp.warning("Matplotlib/NetworkX not found. ABM visualization will be disabled.")
@@ -74,6 +74,10 @@ logger = logging.getLogger(__name__) # Logger for this module
 
 # --- IAR Helper Function ---
 # (Reused for consistency)
+from .utils.reflection_utils import _create_reflection # Canonical import
+
+# --- Default Agent and Model Implementations ---
+# (Provide basic examples that can be overridden or extended)
 def _create_reflection(status: str, summary: str, confidence: Optional[float], alignment: Optional[str], issues: Optional[List[str]], preview: Any) -> Dict[str, Any]:
     """Helper function to create the standardized IAR reflection dictionary."""
     if confidence is not None: confidence = max(0.0, min(1.0, confidence))

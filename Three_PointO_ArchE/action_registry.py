@@ -6,6 +6,7 @@
 import logging
 import time
 import json
+import traceback
 from typing import Dict, Any, Callable, Optional, List
 # Use relative imports for components within the package
 from . import config
@@ -221,35 +222,75 @@ def execute_action(
             }
         }
 
+    start_time = time.time()
     try:
         handler = ACTION_REGISTRY[action_type]
-        result = handler(**inputs)
         
-        # Ensure result includes IAR reflection
-        if isinstance(result, dict) and "reflection" not in result:
-            result["reflection"] = {
-                "status": "Success",
-                "confidence": 1.0,
-                "insight": "Action completed successfully",
-                "action": action_type,
-                "reflection": "No issues encountered"
-            }
+        # Original logic for finding and executing the action:
+        # This typically involves calling a method on action_registry_instance,
+        # for example:
+        # result_payload = action_registry_instance.execute_action(action_name, params, context, config)
+
+        # IMPORTANT: Replace the comment above with your actual action execution logic.
+        # The key is that if an error occurs *within this try block*, the except block below handles it.
+        # For this example, we assume the main call is to handler(**inputs)
         
-        return result
+        result_payload = handler(**inputs)
+
+        # If result_payload is already a full IAR, ensure exec_time is present or added.
+        # This top-level function might be responsible for adding overall timing if not done by the instance method.
+        if isinstance(result_payload, dict) and "reflection" in result_payload:
+            if "exec_time" not in result_payload["reflection"]:
+                 result_payload["reflection"]["exec_time"] = time.time() - start_time
+        # If result_payload is not a dict or not full IAR, this indicates a deeper issue
+        # or that this function has more responsibility in formatting the success response.
+        # For now, we assume handler(**inputs) provides a compliant structure on success.
+
+        return result_payload
 
     except Exception as e:
-        error_msg = f"Error executing action {action_type}: {str(e)}"
-        logger.error(error_msg, exc_info=True)
-        return {
-            "error": error_msg,
-            "reflection": {
-                "status": "Failed",
+        # This is the critical block for the IAR-compliant error return
+        exec_time = time.time() - start_time
+        
+        # Attempt to get workflow_id and step_id from context if available
+        # Ensure context is a dictionary before attempting to use .get()
+        current_workflow_id = "N/A"
+        current_step_id = "N/A"
+        # The context_for_action parameter is passed to this function. Use it.
+        if isinstance(context_for_action, dict):
+            current_workflow_id = context_for_action.get("workflow_id", "N/A")
+            current_step_id = context_for_action.get("step_id", "N/A")
+
+        error_details_for_iar = {
+            "action_name": action_name, # This is the action_name parameter of this execute_action function
+            "action_type": action_type, # This is the action_type parameter of this execute_action function
+            "inputs_provided": inputs, # Parameters provided to the action handler
+            "workflow_id": current_workflow_id,
+            "step_id": current_step_id,
+            "error_type": type(e).__name__,
+            "error_message": str(e),
+            "traceback": traceback.format_exc(),
                 "confidence": 0.0,
-                "insight": f"Error in {action_type}",
-                "action": "None",
-                "reflection": error_msg
-            }
+            "potential_issues": [
+                f"Action execution failed due to an internal error: {type(e).__name__}.",
+                "The system was unable to complete the requested action."
+            ],
+            "suggestions_for_improvement": [
+                "Review the traceback and error message for the root cause.",
+                "Verify action parameters and context.",
+                "Ensure the action's internal logic handles all edge cases."
+            ],
+            "exec_time": exec_time
         }
+        
+        # Construct the final IAR error object
+        iar_error_response = {
+            "output": None,
+            "error": str(e), # Simple error message for quick view
+            "success": False,
+            "reflection": error_details_for_iar
+        }
+        return iar_error_response
 
 class ActionRegistry:
     """Registry for workflow actions with dependency tracking."""
@@ -316,7 +357,7 @@ class ActionRegistry:
         try:
             result = action(**inputs)
             return result
-    except Exception as e:
+        except Exception as e:
             logger.error(f"Error executing action {action_name}: {str(e)}")
             raise
 

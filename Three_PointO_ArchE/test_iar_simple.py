@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Simple test for IAR compliance implementation"""
 
-from workflow_engine import IARCompliantWorkflowEngine, IARValidator, ResonanceTracker
+from .workflow_engine import IARCompliantWorkflowEngine, IARValidator, ResonanceTracker
 
 print('✅ IARCompliantWorkflowEngine imported successfully')
 print('✅ IARValidator imported successfully') 

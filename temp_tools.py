@@ -19,7 +19,7 @@ from .llm_providers import get_llm_provider, get_model_for_provider, LLMProvider
 from .action_context import ActionContext # Import ActionContext from new file
 from .predictive_modeling_tool import run_prediction # Predictive tool main function
 from .system_representation import System, GaussianDistribution, HistogramDistribution, StringParam # Import the system representation classes
-from .workflow_engine import WorkflowEngine
+from .workflow_engine import IARCompliantWorkflowEngine
 
 # Initialize logger early for use in import blocks
 # Using a more specific name for this logger to avoid clashes if 'tools' is a common name
@@ -514,7 +514,7 @@ def placeholder_codebase_search(inputs: Dict[str, Any], action_context: Optional
 
     primary_result = {
         "results": [
-            {"file": "Three_PointO_ArchE/workflow_engine.py", "line": 123, "match": "class WorkflowEngine:", "score": 0.92},
+            {"file": "Three_PointO_ArchE/workflow_engine.py", "line": 123, "match": "class IARCompliantWorkflowEngine:", "score": 0.92},
             {"file": "Three_PointO_ArchE/tools.py", "line": 50, "match": "def run_workflow_suite(...)", "score": 0.85},
             {"file": "workflows/quality_assurance_workflow.json", "line": 5, "match": "\"name\": \"quality_assurance_workflow\"", "score": 0.78}
         ]
@@ -894,9 +894,9 @@ def run_workflow_suite(inputs: Dict[str, Any], action_context: Optional[ActionCo
 
     # Initialize a workflow engine instance to run the sub-workflows
     try:
-        engine = WorkflowEngine(spr_manager=get_global_spr_manager())
+        engine = IARCompliantWorkflowEngine(spr_manager=get_global_spr_manager())
     except Exception as e:
-        error_msg = f"Failed to initialize WorkflowEngine for suite: {e}"
+        error_msg = f"Failed to initialize IARCompliantWorkflowEngine for suite: {e}"
         logger_tools_diag.error(error_msg, exc_info=True)
         return {"error": error_msg, "suite_results": [], "reflection": default_failure_reflection(error_msg)}
 
