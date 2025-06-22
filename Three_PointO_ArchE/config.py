@@ -3,114 +3,145 @@
 # Centralized configuration settings for Arche.
 # Reflects v3.0 enhancements including IAR thresholds and temporal tool defaults.
 
-import logging
 import os
-import numpy as np # Added for potential default numeric values
+from dataclasses import dataclass, field
+from dotenv import load_dotenv
+from pathlib import Path
 
-# --- LLM Configuration ---
-# Defines available LLM providers, API keys, and default models.
-# SECURITY: Use environment variables (os.environ.get) for API keys!
-LLM_PROVIDERS = {
-    "openai": {
-        "api_key": os.environ.get("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY_HERE"), # Use env var
-        "base_url": os.environ.get("OPENAI_BASE_URL", None), # Optional: For custom endpoints/proxies
-        "default_model": "gpt-3.5-turbo", # Recommended default
-        "backup_model": "gpt-3.5-turbo" # Fallback model
-    },
-    "google": {
-        "api_key": os.environ.get("GOOGLE_API_KEY", "YOUR_GOOGLE_API_KEY_HERE"), # Use env var
-        "base_url": None, # Google API typically doesn't use base_url
-        "default_model": "gemini-1.5-pro-latest", # Example powerful model
-        # Add other Google models if needed
-    },
-    # Add configurations for other providers like Anthropic, Cohere as needed
-    # "anthropic": {
-    #     "api_key": os.environ.get("ANTHROPIC_API_KEY", "YOUR_ANTHROPIC_API_KEY_HERE"),
-    #     "default_model": "claude-3-opus-20240229",
-    # },
-}
-DEFAULT_LLM_PROVIDER = "google" # Select the default provider to use
-DEFAULT_LLM_MODEL = None # If None, uses the provider's specified 'default_model'
-LLM_DEFAULT_MAX_TOKENS = 2048 # Default maximum tokens for LLM generation (adjust as needed)
-LLM_DEFAULT_TEMP = 0.6 # Default temperature for LLM generation (0.0=deterministic, >1.0=more random)
+# Load environment variables from .env file
+load_dotenv()
 
-# --- Tool Configuration ---
+# --- Project Root ---
+# Assumes the script is run from the project root.
+# Adjust if necessary, e.g., Path(__file__).parent.parent
+PROJECT_ROOT = Path(os.getcwd())
 
-# Search Tool (Section 7.12)
-SEARCH_API_KEY = os.environ.get("SEARCH_API_KEY", "YOUR_SEARCH_API_KEY_HERE") # Use env var if using real search API
-SEARCH_PROVIDER = "puppeteer_nodejs" # Options: 'simulated_google', 'serpapi', 'google_custom_search', etc. Needs implementation in tools.py if not simulated.
+@dataclass
+class PathConfig:
+    """Stores all relevant paths for the ArchE system."""
+    project_root: Path = PROJECT_ROOT
+    arche_root: Path = PROJECT_ROOT / "Three_PointO_ArchE"
+    tools: Path = arche_root / "tools"
+    llm_providers: Path = arche_root / "llm_providers"
+    
+    # Top-level directories
+    knowledge_graph: Path = PROJECT_ROOT / "knowledge_graph"
+    workflows: Path = PROJECT_ROOT / "workflows"
+    scripts: Path = PROJECT_ROOT / "scripts"
+    logs: Path = PROJECT_ROOT / "logs"
+    outputs: Path = PROJECT_ROOT / "outputs"
+    protocol: Path = PROJECT_ROOT / "protocol"
+    wiki: Path = PROJECT_ROOT / "wiki"
+    tests: Path = PROJECT_ROOT / "tests"
 
-# Code Executor (Section 7.10) - CRITICAL SECURITY SETTINGS
-CODE_EXECUTOR_TIMEOUT = 60 # Max execution time in seconds (increased slightly)
-CODE_EXECUTOR_USE_SANDBOX = True # CRITICAL: Keep True unless fully understand risks & accept responsibility under override.
-CODE_EXECUTOR_SANDBOX_METHOD = 'docker' # Recommended: 'docker'. Alternatives: 'subprocess' (insecure), 'none' (EXTREMELY insecure).
-CODE_EXECUTOR_DOCKER_IMAGE = "python:3.11-slim" # Specify the Docker image for code execution sandbox
-CODE_EXECUTOR_DOCKER_MEM_LIMIT = "512m" # Memory limit for Docker container (e.g., "512m", "1g")
-CODE_EXECUTOR_DOCKER_CPU_LIMIT = "1.0" # CPU limit for Docker container (e.g., "1.0" for 1 core)
+    # Specific file paths
+    spr_definitions: Path = knowledge_graph / "spr_definitions_tv.json"
+    knowledge_tapestry: Path = knowledge_graph / "knowledge_tapestry.json"
+    log_file: Path = logs / "arche_system.log"
+    
+    # Output subdirectories
+    output_models: Path = outputs / "models"
+    output_visualizations: Path = outputs / "visualizations"
+    output_reports: Path = outputs / "reports"
+    output_asf_persistent: Path = outputs / "ASASF_Persistent"
+    search_tool_temp: Path = outputs / "search_tool_temp"
 
-# Predictive Modeling Tool (Section 7.19) - Defaults for Temporal Focus
-PREDICTIVE_DEFAULT_TIMESERIES_MODEL = "ARIMA" # Default model type if not specified (Options depend on implementation: ARIMA, Prophet, LSTM, etc.)
-PREDICTIVE_ARIMA_DEFAULT_ORDER = (1, 1, 1) # Default (p,d,q) order for ARIMA if not specified
-PREDICTIVE_PROPHET_DEFAULT_PARAMS = {"growth": "linear", "seasonality_mode": "additive"} # Example default params for Prophet
-PREDICTIVE_DEFAULT_EVAL_METRICS = ["mean_absolute_error", "mean_squared_error", "r2_score"] # Default metrics for evaluate_model operation
 
-# Causal Inference Tool (Section 7.13) - Defaults for Temporal Capabilities
-CAUSAL_DEFAULT_DISCOVERY_METHOD = "PC" # Default method for discover_graph (Options depend on library: PC, GES, LiNGAM)
-CAUSAL_DEFAULT_ESTIMATION_METHOD = "backdoor.linear_regression" # Default method for estimate_effect (DoWhy specific example)
-CAUSAL_DEFAULT_TEMPORAL_METHOD = "Granger" # Default method for temporal operations (Options depend on impl: Granger, VAR, PCMCI)
+@dataclass
+class APIKeys:
+    """Manages API keys from environment variables."""
+    openai_api_key: str = os.getenv("OPENAI_API_KEY")
+    google_api_key: str = os.getenv("GOOGLE_API_KEY")
+    # Add other API keys as needed
+    # e.g., github_token: str = os.getenv("GITHUB_TOKEN")
 
-# Comparative Fluxual Processing (CFP) Framework (Section 7.6)
-CFP_DEFAULT_TIMEFRAME = 1.0 # Default time horizon for CFP integration if not specified
-CFP_EVOLUTION_MODEL_TYPE = "placeholder" # Default state evolution model ('placeholder', 'hamiltonian', 'ode_solver' - requires implementation)
+@dataclass
+class LLMConfig:
+    """Configuration for Large Language Models."""
+    default_provider: str = "openai"
+    default_model: str = "gpt-4o"
+    temperature: float = 0.7
+    max_tokens: int = 4096
 
-# Agent-Based Modeling (ABM) Tool (Section 7.14)
-ABM_DEFAULT_STEPS = 100 # Default number of simulation steps if not specified
-ABM_VISUALIZATION_ENABLED = True # Enable/disable generation of matplotlib visualizations
-ABM_DEFAULT_ANALYSIS_TYPE = "basic" # Default analysis type for ABM results ('basic', 'pattern', 'network')
+    # Specific models for different providers
+    openai_models: list[str] = field(default_factory=lambda: ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"])
+    google_models: list[str] = field(default_factory=lambda: ["gemini-1.5-pro-latest", "gemini-pro"])
+    
+    # Vetting agent specific configuration
+    vetting_provider: str = "openai"
+    vetting_model: str = "gpt-4o"
 
-# --- File Paths ---
-# Assumes execution from the root 'ResonantiA' directory containing the 'Three_PointO_ArchE' package
-BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__))) # Assumes config.py is inside Three_PointO_ArchE
-MASTERMIND_DIR = os.path.join(BASE_DIR, "Three_PointO_ArchE") # Path to the core package
-WORKFLOW_DIR = os.path.join(BASE_DIR, "workflows") # Path to workflow JSON files
-KNOWLEDGE_GRAPH_DIR = os.path.join(BASE_DIR, "knowledge_graph") # Path to knowledge graph data
-LOG_DIR = os.path.join(BASE_DIR, "logs") # Path for log files
-OUTPUT_DIR = os.path.join(BASE_DIR, "outputs") # Path for generated outputs (results, visualizations, models)
-MODEL_SAVE_DIR = os.path.join(OUTPUT_DIR, "models") # Path specifically for saved models
-SPR_JSON_FILE = os.path.join(KNOWLEDGE_GRAPH_DIR, "spr_definitions_tv.json") # Path to SPR definitions
-LOG_FILE = os.path.join(LOG_DIR, "arche_v3_log.log") # Default log filename
-NODE_SEARCH_SCRIPT_PATH = os.path.join(BASE_DIR, "ResonantiA", "browser_automation", "search.js") # Path to the Node.js search script
+@dataclass
+class ToolConfig:
+    """Configuration for various cognitive tools."""
+    # Code Executor (Docker)
+    code_executor_docker_image: str = "python:3.11-slim"
+    code_executor_timeout: int = 300  # seconds
 
-# --- Logging Configuration (See logging_config.py Section 7.24) ---
-LOG_LEVEL = logging.DEBUG # Default logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s' # Format for console logs
-LOG_DETAILED_FORMAT = '%(asctime)s - %(name)s:%(lineno)d - %(levelname)s - %(module)s - %(message)s' # Format for file logs
-LOG_MAX_BYTES = 15*1024*1024 # Max size of log file before rotation (15MB)
-LOG_BACKUP_COUNT = 5 # Number of backup log files to keep
+    # Search Tool
+    search_result_count: int = 10
 
-# --- Workflow Engine Configuration (Section 7.3) ---
-MAX_RECURSION_DEPTH = 10 # Safety limit for nested workflow calls (conceptual)
-DEFAULT_RETRY_ATTEMPTS = 1 # Default number of retries for failed actions (0 means no retry)
-DEFAULT_ERROR_STRATEGY = "retry" # Default error handling strategy ('retry', 'fail_fast', 'log_and_continue', 'trigger_metacognitive_shift')
+    # Predictive Modeling Tool
+    prediction_default_model: str = "ARIMA"
+    prediction_forecast_horizon: int = 12
 
-DEBUG_MODE = False # Added DEBUG_MODE for testing and development
+    # Causal Inference Tool
+    causal_default_method: str = "backdoor.linear_regression"
 
-# --- Security & Ethics (Section 6) ---
-RESTRICTED_TOPICS = [ # List of keywords/concepts for VettingAgent to flag (examples)
-    "illegal_activity_promotion",
-    "hate_speech_generation",
-    "non_consensual_content",
-    "dangerous_acts_instigation"
-]
+    # Agent-Based Modeling (Mesa)
+    abm_default_steps: int = 100
 
-# --- Meta-Cognition Thresholds (IAR Driven) ---
-# Thresholds for triggering Metacognitive Shift (Section 3.10) based on IAR data
-METAC_DISSONANCE_THRESHOLD_CONFIDENCE = 0.6 # Trigger Shift if IAR 'confidence' score is below this value
-METAC_DISSONANCE_THRESHOLD_VETTING = "Concern" # Trigger Shift if VettingAgent assessment is 'Concern' or 'Fail'
-# Placeholder for potentially analyzing prompt complexity to trigger SIRC automatically
-SIRC_COMPLEXITY_THRESHOLD = 0.8
+    # CFP Framework
+    cfp_default_evolution_model: str = "placeholder"
+    cfp_default_time_horizon: float = 10.0
+    cfp_default_integration_steps: int = 100
 
-# --- Add other custom configurations as needed ---
-# E.g., Database connection strings (use env vars!), specific tool parameters
+@dataclass
+class SystemConfig:
+    """General system-wide configurations."""
+    log_level: str = "INFO"
+    # Keyholder Override - This is a confirmation, the logic is handled by the presence of the key.
+    keyholder_override_active: bool = os.getenv('Keyy') == "'IMnDEVmode'"
+    
+    # Restricted topics for ethical boundaries
+    restricted_topics: list[str] = field(default_factory=lambda: [
+        "hate_speech",
+        "self_harm",
+        "explicit_violence",
+        "illegal_acts_promotion"
+    ])
+
+@dataclass
+class AppConfig:
+    """Main configuration container."""
+    paths: PathConfig = field(default_factory=PathConfig)
+    api_keys: APIKeys = field(default_factory=APIKeys)
+    llm: LLMConfig = field(default_factory=LLMConfig)
+    tools: ToolConfig = field(default_factory=ToolConfig)
+    system: SystemConfig = field(default_factory=SystemConfig)
+
+# Instantiate the main config object
+CONFIG = AppConfig()
+
+def get_config() -> AppConfig:
+    """Returns the global configuration object."""
+    # In the future, this could be extended to load from YAML or other sources
+    return CONFIG
+
+if __name__ == '__main__':
+    # Example of how to access configuration values
+    config = get_config()
+    print("--- ArchE System Configuration ---")
+    print(f"Project Root: {config.paths.project_root}")
+    print(f"SPR Definitions Path: {config.paths.spr_definitions}")
+    print(f"Default LLM Model: {config.llm.default_model}")
+    print(f"Code Executor Timeout: {config.tools.code_executor_timeout}s")
+    print(f"Keyholder Override Active: {config.system.keyholder_override_active}")
+    
+    # Ensure directories exist
+    for path_name, path_obj in config.paths.__dict__.items():
+        if isinstance(path_obj, Path) and not path_obj.is_file():
+            path_obj.mkdir(parents=True, exist_ok=True)
+    print("\nVerified all configured directories exist.")
 
 # --- END OF FILE Three_PointO_ArchE/config.py --- 

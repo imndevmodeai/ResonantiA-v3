@@ -12,6 +12,7 @@ import copy
 import time
 import re
 import uuid  # Added for workflow_run_id generation consistency
+import tempfile
 # Expanded type hints
 from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable
 # Use relative imports within the package
@@ -33,7 +34,6 @@ from .recovery_actions import (
     validate_workflow,
     validate_action
 )
-from .tools import display_output
 from .system_genesis_tool import perform_system_genesis_action
 from .qa_tools import run_code_linter, run_workflow_suite
 from .output_handler import (
@@ -41,8 +41,21 @@ from .output_handler import (
     display_workflow_progress,
     display_workflow_start,
     display_workflow_complete,
-    display_workflow_error
+    display_workflow_error,
+    display_output
 )
+from .custom_json import dumps, loads # Use custom JSON encoder/decoder
+from .knowledge_graph_manager import KnowledgeGraphManager
+from .ias_manager import IASManager
+from .logging_config import setup_logging
+from .config import get_config
+from .comparison_manager import ComparisonManager
+from .reflection_manager import ReflectionManager
+from .synthesis_manager import SynthesisManager
+from .execution_manager import ExecutionManager
+from .task_manager import TaskManager
+from .context_manager import ContextManager
+from .pattern_manager import PatternManager
 
 # Attempt to import numpy for numeric type checking in _compare_values,
 # optional
@@ -214,6 +227,78 @@ class ResonanceTracker:
         return min(compliance_score, 1.0)
 
 
+def _execute_standalone_workflow(workflow_definition: Dict[str, Any], initial_context: Dict[str, Any], parent_run_id: str, action_registry: Dict[str, Callable]) -> Dict[str, Any]:
+    """
+    Executes a workflow definition in-memory, for use by meta-actions like for_each.
+    This is a simplified version of the main run_workflow loop, moved outside the class
+    to prevent circular dependencies.
+    """
+    run_id = f"{parent_run_id}_sub_{uuid.uuid4().hex[:8]}"
+    initial_context["workflow_run_id"] = run_id
+    
+    runtime_context = {
+        "initial_context": initial_context,
+        "workflow_run_id": run_id,
+        "workflow_definition": workflow_definition,
+    }
+    
+    tasks = workflow_definition.get('tasks', {})
+    task_statuses = {key: "pending" for key in tasks}
+    
+    sorted_tasks = list(tasks.keys()) 
+
+    logger.info(f"Starting standalone sub-workflow (Run ID: {run_id}).")
+    start_time = time.time()
+
+    for task_key in sorted_tasks:
+        task_info = tasks[task_key]
+        action_type = task_info.get("action_type")
+        
+        # This is a critical simplification: we can't use the full resolver here
+        # without re-introducing the dependency. We'll manually resolve for now.
+        resolved_inputs = {}
+        for k, v in task_info.get('inputs', {}).items():
+            if isinstance(v, str) and v == "{{ item }}":
+                resolved_inputs[k] = initial_context.get('item')
+            else:
+                resolved_inputs[k] = v
+
+        action_func = action_registry.get(action_type)
+        if not action_func:
+            error_result = {"error": f"Sub-workflow failed: Action type '{action_type}' not found."}
+            runtime_context[task_key] = error_result
+            task_statuses[task_key] = "failed"
+            break
+
+        try:
+            result = action_func(**resolved_inputs)
+            if not isinstance(result, dict):
+                result = {"output": result}
+            runtime_context[task_key] = result
+            task_statuses[task_key] = "completed"
+        except Exception as e:
+            error_msg = f"Sub-workflow task '{task_key}' failed: {e}"
+            logger.error(error_msg, exc_info=True)
+            runtime_context[task_key] = {"error": error_msg}
+            task_statuses[task_key] = "failed"
+            break
+
+    end_time = time.time()
+    run_duration = round(end_time - start_time, 2)
+    
+    final_status = "Completed" if all(s == "completed" for s in task_statuses.values()) else "Failed"
+    
+    # Can't call _summarize_run directly, so construct a simplified summary
+    return {
+        "workflow_name": workflow_definition.get("name", "sub-workflow"),
+        "run_id": run_id,
+        "status": final_status,
+        "duration": run_duration,
+        "task_statuses": task_statuses,
+        "results": runtime_context
+    }
+
+
 class IARCompliantWorkflowEngine:
     """Enhanced workflow engine with IAR compliance and recovery support."""
 
@@ -256,7 +341,47 @@ class IARCompliantWorkflowEngine:
         self.register_action("fix_action", fix_action)
         self.register_action("validate_workflow", validate_workflow)
         self.register_action("validate_action", validate_action)
+        # Register the new for_each meta-action
+        self.register_action("for_each", self._execute_for_each_task)
 
+    def _execute_for_each_task(self, inputs: Dict[str, Any], context_for_action: ActionContext) -> Dict[str, Any]:
+        """
+        Executes a sub-workflow for each item in a list.
+        This is a meta-action handled directly by the engine.
+        """
+        logger.info(f"Executing for_each task in workflow '{context_for_action.workflow_name}'")
+        
+        items_list = inputs.get('items')
+        sub_workflow_def = inputs.get('workflow')
+
+        if not isinstance(items_list, list):
+            return {"error": f"Input 'items' for for_each must be a list, but got {type(items_list)}."}
+        if not isinstance(sub_workflow_def, dict) or 'tasks' not in sub_workflow_def:
+            return {"error": "Input 'workflow' for for_each must be a valid workflow definition with a 'tasks' section."}
+
+        all_results = []
+        
+        for index, item in enumerate(items_list):
+            logger.info(f"Executing for_each iteration {index + 1}/{len(items_list)}.")
+            
+            # The initial context for the sub-workflow includes the main context
+            # plus the current item.
+            sub_initial_context = copy.deepcopy(context_for_action.runtime_context.get('initial_context', {}))
+            sub_initial_context['item'] = item
+            sub_initial_context['loop_index'] = index
+            
+            # Run the sub-workflow directly without creating a new engine instance
+            sub_workflow_result = _execute_standalone_workflow(
+                workflow_definition=sub_workflow_def,
+                initial_context=sub_initial_context,
+                parent_run_id=context_for_action.run_id,
+                action_registry=self.action_registry
+            )
+            all_results.append(sub_workflow_result)
+        
+        logger.info("Completed all for_each iterations.")
+        return {"results": all_results}
+    
     def _execute_task(self, task: Dict[str, Any],
                       results: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a single task with proper action type handling."""
@@ -303,6 +428,8 @@ class IARCompliantWorkflowEngine:
                                 field_value = None
                                 break
                     resolved[key] = field_value
+                else:
+                    resolved[key] = value
             else:
                 resolved[key] = value
         return resolved
@@ -425,7 +552,7 @@ class IARCompliantWorkflowEngine:
         logger.debug(
     f"Resolving template string: {original_template_for_logging} with initial_context keys: {
         list(
-            initial_context.keys()) if initial_context else []}. Initial context itself: {initial_context}")
+            initial_context.keys()) if initial_context else []}")
         
         matches = re.findall(r"(\{\{(.*?)\}\})", value, re.DOTALL)
         # Should not happen if "{{" and "}}" are present, but as a safeguard
@@ -508,8 +635,8 @@ class IARCompliantWorkflowEngine:
                         current_value_for_placeholder).strip()
                 else:
                     logger.warning(
-    f"Task '{task_key}': Unknown filter '{}' in template '{}'. Skipping filter.".format(
-        f_spec['name'], original_template_for_logging))
+    f"Task '{task_key}': Unknown filter '{
+        f_spec['name']}' in template '{original_template_for_logging}'. Skipping filter.")
             
             logger.debug(
     f"Resolved single placeholder '{value}' to: {
@@ -601,8 +728,8 @@ class IARCompliantWorkflowEngine:
                                 current_value_for_placeholder_inner).strip()
                         else:
                             logger.warning(
-    f"Task '{task_key}': Unknown filter '{}' in template '{}'. Skipping filter.".format(
-        f_spec_inner['name'], original_template_for_logging))
+    f"Task '{task_key}': Unknown filter '{
+        f_spec_inner['name']}' in template '{original_template_for_logging}'. Skipping filter.")
                     resolved_placeholder_value_after_filters = current_value_for_placeholder_inner
 
                 # Convert the resolved placeholder value to string for
@@ -678,18 +805,18 @@ class IARCompliantWorkflowEngine:
             # Handle both formats: "{{ var.path }} OP value" and "{{ var.path
             # OP value }}"
             comp_match = re.match(
-    r"^{{\s*([\\w\\.\\-]+)\\s*(==|!=|>|<|>=|<=)\\s*(.*?)\\s*}}$",
+    r"^{{\s*([\w\.\-]+)\s*(==|!=|>|<|>=|<=)\s*(.*?)\s*}}$",
      condition_str)
             if not comp_match:
                 # Try the old format: {{ var.path }} OP value
                 comp_match = re.match(
-    r"^{{\s*([\\w\\.\\-]+)\\s*}}\\s*(==|!=|>|<|>=|<=)\\s*(.*)$",
+    r"^{{\s*([\w\.\-]+)\s*}}\s*(==|!=|>|<|>=|<=)\s*(.*)$",
      condition_str)
             
             if comp_match:
                 var_path, operator, value_str = comp_match.groups()
                 actual_value = self._resolve_value(
-                    # Resolve the variable using correct f-string escaping
+                    # Resolve the variable
                     f"{{{{ {var_path} }}}}", runtime_context, initial_context)
                 expected_value = self._parse_condition_value(
                     value_str)  # Parse the literal value
@@ -704,7 +831,7 @@ class IARCompliantWorkflowEngine:
             # Regex for membership: value IN/NOT IN {{ var.path }} (e.g.,
             # "Error" in {{task_B.reflection.potential_issues}})
             in_match = re.match(
-    r"^(.+?)\\s+(in|not in)\\s*{{\\s*([\\w\\.\\-]+)\\s*}}$", # Corrected regex pattern
+    r"^(.+?)\s+(in|not in)\s+{{\s*([\w\.\-]+)\s*}}$",
     condition_str,
      re.IGNORECASE)
             if in_match:
@@ -712,33 +839,35 @@ class IARCompliantWorkflowEngine:
                 value_to_check = self._parse_condition_value(
                     value_str.strip())  # Parse the literal value
                 container = self._resolve_value(
-                    # Resolve the container using correct f-string escaping
+                    # Resolve the container
                     f"{{{{ {var_path} }}}}", runtime_context, initial_context)
                 operator_lower = operator.lower()
                 if isinstance(container, (list, str, dict, set)
-                              ):  # Check if container type supports \'in\'
+                              ):  # Check if container type supports 'in'
                         is_in = value_to_check in container
-                        result = is_in if operator_lower == \'in\' else not is_in
+                        result = is_in if operator_lower == 'in' else not is_in
                         logger.debug(
-    f"Condition '{condition_str}' evaluated to {result}\")
+    f"Condition '{condition_str}' evaluated to {result}")
                         return result
                 else:
                         logger.warning(
-    f"Container for '{operator}' check ('{var_path}') is not a list/str/dict/set: {\n        type(container)}. Evaluating to False.\")
+    f"Container for '{operator}' check ('{var_path}') is not a list/str/dict/set: {
+        type(container)}. Evaluating to False.")
                         return False
 
-            # Regex for simple truthiness/existence: {{ var.path }} or !{{\n            # var.path }}
+            # Regex for simple truthiness/existence: {{ var.path }} or !{{
+            # var.path }}
             truth_match = re.match(
-    r"^(!)?\\s*{{\\s*([\\w\\.\\-]+)\\s*}}$", # Corrected regex pattern
+    r"^(!)?\s*{{\s*([\w\.\-]+)\s*}}$",
      condition_str)
             if truth_match:
                 negated, var_path = truth_match.groups()
                 actual_value = self._resolve_value(
-                    f"{{{{ {var_path} }}}}", runtime_context, initial_context) # Corrected f-string escaping
+                    f"{{{{ {var_path} }}}}", runtime_context, initial_context)
                 result = bool(actual_value)
                 if negated: result = not result
                 logger.debug(
-    f"Condition '{condition_str}' (truthiness/existence) evaluated to {result}\")
+    f"Condition '{condition_str}' (truthiness/existence) evaluated to {result}")
                 return result
 
             # If no pattern matches
@@ -887,7 +1016,9 @@ class IARCompliantWorkflowEngine:
         completed_tasks = set()
         
         logger.info(
-    f"Starting workflow '{self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {list(ready_tasks)}")
+    f"Starting workflow '{
+        self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {
+            list(ready_tasks)}")
 
         start_time = time.time()
         
@@ -989,10 +1120,11 @@ class IARCompliantWorkflowEngine:
             final_status = "Stalled"
         
         logger.info(
-    f"Workflow '{self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
+    f"Workflow '{
+        self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
 
         event_log_path = os.path.join(
-    config.OUTPUT_DIR, f"run_events_{run_id}.jsonl")
+    config.CONFIG.paths.outputs, f"run_events_{run_id}.jsonl")
         try:
             with open(event_log_path, 'w', encoding='utf-8') as f:
                 for event in event_log:
@@ -1066,17 +1198,23 @@ class IARCompliantWorkflowEngine:
     def execute_workflow(self, workflow: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a workflow with enhanced terminal output."""
         display_workflow_start(workflow.get('name', 'Unnamed Workflow'))
-
+        
         start_time = datetime.now()
         run_id = str(uuid.uuid4())
-        results = {
-            "workflow_name": workflow.get("name", "unknown"),
-            "run_id": run_id,
-            "start_time": start_time.isoformat(),
-            "tasks": {}
-        }
-
+        
         try:
+            # Validate workflow
+            if not self._validate_workflow(workflow):
+                raise ValueError("Workflow validation failed")
+            
+            # Initialize results
+            results = {
+                "workflow_name": workflow.get("name", "unknown"),
+                "run_id": run_id,
+                "start_time": start_time.isoformat(),
+                "tasks": {}
+            }
+            
             # Execute tasks
             for task_name, task in workflow.get("tasks", {}).items():
                 display_workflow_progress(task_name, "Starting")

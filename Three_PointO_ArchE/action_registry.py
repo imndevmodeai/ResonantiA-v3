@@ -6,13 +6,13 @@
 import logging
 import time
 import json
-import traceback
+import os
 from typing import Dict, Any, Callable, Optional, List
+import inspect
 # Use relative imports for components within the package
 from . import config
 # Import action functions from various tool modules
 # Ensure these imported functions are implemented to return the IAR dictionary
-from .tools import run_search, invoke_llm, display_output, calculate_math, placeholder_codebase_search, retrieve_spr_definitions, analyze_system_divergence, compare_system_factors, analyze_workflow_impact, run_code_linter, run_workflow_suite # Basic tools
 from .enhanced_tools import call_api, perform_complex_data_analysis, interact_with_database # Enhanced tools
 from .code_executor import execute_code # Code execution tool
 from .cfp_framework import CfpframeworK # Import the class for the wrapper
@@ -23,11 +23,39 @@ from .system_genesis_tool import perform_system_genesis_action # System Genesis 
 from .web_search_tool import search_web
 from .llm_tool import generate_text_llm
 from .self_interrogate_tool import self_interrogate
-import inspect
 from .action_context import ActionContext # Import from new file
 from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
+from .qa_tools import run_code_linter, run_workflow_suite
+from .tools.search_tool import SearchTool
 
 logger = logging.getLogger(__name__)
+
+def _create_reflection(status: str, summary: str, confidence: Optional[float], alignment: Optional[str], issues: Optional[List[str]], preview: Any) -> Dict[str, Any]:
+    """Helper function to create the standardized IAR reflection dictionary."""
+    if confidence is not None: confidence = max(0.0, min(1.0, confidence))
+    issues_list = issues if issues else None
+    try:
+        preview_str = json.dumps(preview, default=str) if isinstance(preview, (dict, list)) else str(preview)
+        if preview_str and len(preview_str) > 150: preview_str = preview_str[:150] + "..."
+    except Exception:
+        try: preview_str = str(preview); preview_str = preview_str[:150] + "..." if len(preview_str) > 150 else preview_str
+        except Exception: preview_str = "[Preview Error]"
+    return {"status": status, "summary": summary, "confidence": confidence, "alignment_check": alignment if alignment else "N/A", "potential_issues": issues_list, "raw_output_preview": preview_str}
+
+def list_directory(inputs: Dict[str, Any]) -> Dict[str, Any]:
+    """Lists the contents of a specified directory."""
+    directory = inputs.get("directory", ".")
+    try:
+        files = os.listdir(directory)
+        return {
+            "files": files,
+            "reflection": _create_reflection("Success", f"Listed contents of '{directory}'.", 1.0, "Aligned", None, files)
+        }
+    except Exception as e:
+        return {
+            "error": str(e),
+            "reflection": _create_reflection("Failure", f"Failed to list directory '{directory}'.", 0.0, "Misaligned", [str(e)], None)
+        }
 
 # --- Action Function Wrapper Example (CFP) ---
 # Wrappers adapt underlying classes/functions to the expected action signature
@@ -59,9 +87,9 @@ def run_cfp_action(inputs: Dict[str, Any]) -> Dict[str, Any]:
             raise ValueError("Missing or invalid 'system_b_config' (must be dict with 'quantum_state').")
 
         observable = inputs.get('observable', 'position')
-        time_horizon = float(inputs.get('timeframe', inputs.get('time_horizon', config.CFP_DEFAULT_TIMEFRAME)))
-        integration_steps = int(inputs.get('integration_steps', 100))
-        evolution_model = inputs.get('evolution_model', config.CFP_EVOLUTION_MODEL_TYPE)
+        time_horizon = float(inputs.get('timeframe', inputs.get('time_horizon', config.CONFIG.tools.cfp_default_time_horizon)))
+        integration_steps = int(inputs.get('integration_steps', config.CONFIG.tools.cfp_default_integration_steps))
+        evolution_model = inputs.get('evolution_model', config.CONFIG.tools.cfp_default_evolution_model)
         hamiltonian_a = inputs.get('hamiltonian_a') # Optional Hamiltonian matrix (e.g., numpy array)
         hamiltonian_b = inputs.get('hamiltonian_b') # Optional Hamiltonian matrix
 
@@ -130,49 +158,51 @@ def run_cfp_action(inputs: Dict[str, Any]) -> Dict[str, Any]:
     # Combine primary results and the generated reflection
     return {**primary_result, "reflection": reflection}
 
-# --- Action Registry Dictionary ---
-# Maps action_type strings (used in workflows) to the corresponding callable function.
-# Assumes all registered functions adhere to the IAR return structure (dict with 'reflection').
-ACTION_REGISTRY: Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]] = {
-    # Core Tools (from tools.py - assumed updated for IAR)
+def search_tool_action(query: str, num_results: int = 5, provider: str = "google") -> Dict[str, Any]:
+    """
+    Wrapper for executing a search using the SearchTool.
+    """
+    try:
+        if not query:
+            raise ValueError("Input 'query' is required for the search tool.")
+
+        search_tool = SearchTool()
+        result = search_tool.search(query=query, num_results=num_results, provider=provider)
+        
+        return result
+
+    except Exception as e:
+        return {
+            "error": str(e),
+            "reflection": {
+                "tool_name": "SearchTool",
+                "success": False,
+                "message": f"An unexpected error occurred in search_tool_action: {e}",
+                "data": {"query": query, "num_results": num_results}
+            }
+        }
+
+# Centralized Action Registry
+ACTION_REGISTRY: Dict[str, Callable] = {
+    # Foundational Actions
     "execute_code": execute_code,
-    "search_web": run_search,
-    "search_codebase": placeholder_codebase_search,
-    "generate_text_llm": invoke_llm, # Example IAR implementation shown in tools.py
-    "display_output": display_output,
-    "calculate_math": calculate_math,
-    "analyze_system_divergence": analyze_system_divergence,
-    "compare_system_factors": compare_system_factors,
-    "analyze_workflow_impact": analyze_workflow_impact,
-    "run_code_linter": run_code_linter,
-    "run_workflow_suite": run_workflow_suite,
-
-    # Enhanced Tools (from enhanced_tools.py - assumed updated for IAR)
-    "call_external_api": call_api,
-    "perform_complex_data_analysis": perform_complex_data_analysis, # Simulation needs full IAR
-    "interact_with_database": interact_with_database, # Simulation needs full IAR
-
-    # Specialized Analytical Tools
-    "run_cfp": run_cfp_action, # Use the wrapper defined above
-    "perform_causal_inference": perform_causal_inference, 
-    "perform_abm": perform_abm, 
-    "perform_predictive_modeling": run_prediction,
-
-    # --- ResonantiA Protocol v3.0 Tools ---
-    "get_spr_details": retrieve_spr_definitions,  # Use the function directly
-
-    # System Genesis and Evolution Workflow Tools
-    "perform_system_genesis_action": perform_system_genesis_action,
-    "insight_solidification_sgew": perform_system_genesis_action,  # Maps to the same function with different operation
-
-    # Web and search tools
-    "search_web": search_web,
-    
-    # LLM and text generation tools
+    "list_directory": list_directory,
+    "search_web": search_tool_action,
     "generate_text_llm": generate_text_llm,
+    
+    # External Interaction
+    "call_external_api": call_api,
+    "perform_complex_data_analysis": perform_complex_data_analysis,
+    "interact_with_database": interact_with_database,
 
-    # Self-interrogation tools
-    "self_interrogate": self_interrogate
+    # Advanced Agentic & Metacognitive Actions
+    "run_cfp": run_cfp_action,
+    "perform_causal_inference": perform_causal_inference,
+    "perform_abm": perform_abm,
+    "perform_predictive_modeling": run_prediction,
+    "perform_system_genesis_action": perform_system_genesis_action,
+    "insight_solidification_sgew": perform_system_genesis_action,
+    "self_interrogate": self_interrogate,
 }
 
 def register_action(action_type: str, function: Callable[[Dict[str, Any]], Dict[str, Any]], force: bool = False):
@@ -222,75 +252,35 @@ def execute_action(
             }
         }
 
-    start_time = time.time()
     try:
         handler = ACTION_REGISTRY[action_type]
+        result = handler(**inputs)
         
-        # Original logic for finding and executing the action:
-        # This typically involves calling a method on action_registry_instance,
-        # for example:
-        # result_payload = action_registry_instance.execute_action(action_name, params, context, config)
-
-        # IMPORTANT: Replace the comment above with your actual action execution logic.
-        # The key is that if an error occurs *within this try block*, the except block below handles it.
-        # For this example, we assume the main call is to handler(**inputs)
+        # Ensure result includes IAR reflection
+        if isinstance(result, dict) and "reflection" not in result:
+            result["reflection"] = {
+                "status": "Success",
+                "confidence": 1.0,
+                "insight": "Action completed successfully",
+                "action": action_type,
+                "reflection": "No issues encountered"
+            }
         
-        result_payload = handler(**inputs)
-
-        # If result_payload is already a full IAR, ensure exec_time is present or added.
-        # This top-level function might be responsible for adding overall timing if not done by the instance method.
-        if isinstance(result_payload, dict) and "reflection" in result_payload:
-            if "exec_time" not in result_payload["reflection"]:
-                 result_payload["reflection"]["exec_time"] = time.time() - start_time
-        # If result_payload is not a dict or not full IAR, this indicates a deeper issue
-        # or that this function has more responsibility in formatting the success response.
-        # For now, we assume handler(**inputs) provides a compliant structure on success.
-
-        return result_payload
+        return result
 
     except Exception as e:
-        # This is the critical block for the IAR-compliant error return
-        exec_time = time.time() - start_time
-        
-        # Attempt to get workflow_id and step_id from context if available
-        # Ensure context is a dictionary before attempting to use .get()
-        current_workflow_id = "N/A"
-        current_step_id = "N/A"
-        # The context_for_action parameter is passed to this function. Use it.
-        if isinstance(context_for_action, dict):
-            current_workflow_id = context_for_action.get("workflow_id", "N/A")
-            current_step_id = context_for_action.get("step_id", "N/A")
-
-        error_details_for_iar = {
-            "action_name": action_name, # This is the action_name parameter of this execute_action function
-            "action_type": action_type, # This is the action_type parameter of this execute_action function
-            "inputs_provided": inputs, # Parameters provided to the action handler
-            "workflow_id": current_workflow_id,
-            "step_id": current_step_id,
-            "error_type": type(e).__name__,
-            "error_message": str(e),
-            "traceback": traceback.format_exc(),
+        error_msg = f"Error executing action {action_type}: {str(e)}"
+        logger.error(error_msg, exc_info=True)
+        return {
+            "error": error_msg,
+            "reflection": {
+                "status": "Failed",
                 "confidence": 0.0,
-            "potential_issues": [
-                f"Action execution failed due to an internal error: {type(e).__name__}.",
-                "The system was unable to complete the requested action."
-            ],
-            "suggestions_for_improvement": [
-                "Review the traceback and error message for the root cause.",
-                "Verify action parameters and context.",
-                "Ensure the action's internal logic handles all edge cases."
-            ],
-            "exec_time": exec_time
+                "insight": f"Error in {action_type}",
+                "action": "None",
+                "reflection": error_msg
+            }
         }
-        
-        # Construct the final IAR error object
-        iar_error_response = {
-            "output": None,
-            "error": str(e), # Simple error message for quick view
-            "success": False,
-            "reflection": error_details_for_iar
-        }
-        return iar_error_response
 
 class ActionRegistry:
     """Registry for workflow actions with dependency tracking."""
@@ -360,6 +350,20 @@ class ActionRegistry:
         except Exception as e:
             logger.error(f"Error executing action {action_name}: {str(e)}")
             raise
+
+    def get_registered_actions_summary(self) -> str:
+        """
+        Returns a string summary of all registered actions.
+        """
+        if not self.actions:
+            return "No actions registered."
+        
+        summary_lines = ["Available Tools:"]
+        for name, func in self.actions.items():
+            doc = inspect.getdoc(func)
+            first_line = doc.split('\\n')[0] if doc else "No description."
+            summary_lines.append(f"- {name}: {first_line}")
+        return "\\n".join(summary_lines)
 
 # Create a singleton instance
 action_registry = ActionRegistry()

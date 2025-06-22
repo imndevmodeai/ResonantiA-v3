@@ -1,58 +1,62 @@
 {
   "name": "Basic Analysis Workflow (v3.0 Enhanced)",
   "description": "Performs a web search based on a user query, summarizes the results using an LLM (considering search confidence), and displays a formatted summary including IAR status.",
-  "version": "3.0",
+  "version": "3.1",
   "tasks": {
     "start_display": {
       "description": "Display the initial user query.",
-      "action": "display_output",
+      "action_type": "display_output",
       "inputs": {
         "content": "Starting Basic Analysis for query: {{ initial_context.user_query }}"
       },
       "dependencies": []
     },
     "perform_search": {
-      "description": "Perform web search using the user query.",
-      "action": "search_web",
+      "description": "Perform web search using the puppeteer script.",
+      "action_type": "execute_code",
       "inputs": {
-        "query": "{{ initial_context.user_query }}",
-        "num_results": 3,
-        "provider": "puppeteer_nodejs"
+        "language": "bash",
+        "code": "cd ResonantiA/browser_automation && node search.js --engine=duckduckgo --query='{{ initial_context.user_query }}' --output='workflow_search_results.json'"
       },
-      "outputs": {
-        "results": "list",
-        "reflection": "dict"
-      },
-      "dependencies": ["start_display"]
+      "dependencies": [
+        "start_display"
+      ]
+    },
+    "read_search_results": {
+        "description": "Read the search results from the puppeteer output file.",
+        "action_type": "execute_code",
+        "inputs": {
+            "language": "python",
+            "code": "import json; import os; results_path = 'ResonantiA/browser_automation/workflow_search_results.json';\nif os.path.exists(results_path):\n    with open(results_path, 'r') as f:\n        results = json.load(f)\n    os.environ['SEARCH_RESULTS_JSON'] = json.dumps(results)\nelse:\n    os.environ['SEARCH_RESULTS_JSON'] = '[]'"
+        },
+        "outputs": {
+            "search_results_json": "{{ env.SEARCH_RESULTS_JSON }}"
+        },
+        "dependencies": ["perform_search"]
     },
     "summarize_results": {
-      "description": "Summarize search results using LLM, noting search confidence.",
-      "action": "generate_text_llm",
+      "description": "Summarize search results using LLM.",
+      "action_type": "generate_text_llm",
       "inputs": {
-        "prompt": "User Query: {{ initial_context.user_query }}\n\nSearch Results (Confidence: {{ perform_search.reflection.confidence }}):\n```json\n{{ perform_search.results }}\n```\n\nPlease provide a concise summary of these search results relevant to the user query. Acknowledge the search confidence score in your assessment if it's low (e.g., below 0.7).",
+        "prompt": "User Query: {{ initial_context.user_query }}\\n\\nSearch Results:\\n```json\\n{{ read_search_results.response.search_results_json }}\\n```\\n\\nPlease provide a concise summary of these search results relevant to the user query.",
         "max_tokens": 500
       },
       "outputs": {
         "response_text": "string",
         "reflection": "dict"
       },
-      "dependencies": ["perform_search"],
-      "condition": "{{ perform_search.reflection.status }} == 'Success'"
+      "dependencies": ["read_search_results"]
     },
     "display_summary": {
-      "description": "Format and display the final summary including IAR status.",
-      "action": "execute_code",
+      "description": "Format and display the final summary.",
+      "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import json\nimport sys\n\ninput_json_str = sys.stdin.read()\ncontext_data = json.loads(input_json_str)\n\nsearch_status = context_data.get('search_status', 'N/A')\nsearch_conf = context_data.get('search_conf', 'N/A')\nsummary_status = context_data.get('summary_status', 'N/A')\nsummary_conf = context_data.get('summary_conf', 'N/A')\nsummary_text = context_data.get('summary_text', 'Summary generation failed or skipped.')\nuser_query = context_data.get('user_query', 'N/A')\n\noutput = f\"\"\"--- Analysis Summary (ResonantiA v3.0) ---\\nUser Query: {user_query}\\n\\nSearch Status: {search_status} (Confidence: {search_conf})\\nSummary Status: {summary_status} (Confidence: {summary_conf})\\n\\nSummary:\\n{summary_text}\\n---------------------------------------\"\"\"\n\nprint(output)\nresult = {'formatted_summary': output}\n",
-        "input_data": "{\n  \"search_status\": \"{{ perform_search.reflection.status | default('N/A') }}\",\n  \"search_conf\": \"{{ perform_search.reflection.confidence | default('N/A') }}\",\n  \"summary_status\": \"{{ summarize_results.reflection.status | default('N/A') }}\",\n  \"summary_conf\": \"{{ summarize_results.reflection.confidence | default('N/A') }}\",\n  \"summary_text\": \"{{ summarize_results.response_text | default('Summary generation failed or skipped.') |replace('\"', '\\\"') |replace('\\n', '\\\\n') }}\",\n  \"user_query\": \"{{ initial_context.user_query | default('N/A') |replace('\"', '\\\"') |replace('\\n', '\\\\n') }}\"\n}"
-      },
-      "outputs": {
-        "stdout": "string",
-        "stderr": "string",
-        "exit_code": "int",
-        "formatted_summary": "string",
-        "reflection": "dict"
+        "code": "import os; print(f'''--- Analysis Summary ---\\nUser Query: {os.environ.get('USER_QUERY')}\\n\\nSummary:\\n{os.environ.get('SUMMARY_TEXT')}\\n------------------''')",
+        "environment": {
+          "SUMMARY_TEXT": "{{ summarize_results.response.response_text | default('Summary generation failed or skipped.') }}",
+          "USER_QUERY": "{{ initial_context.user_query | default('N/A') }}"
+        }
       },
       "dependencies": ["summarize_results"]
     }

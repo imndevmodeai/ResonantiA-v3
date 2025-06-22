@@ -3,58 +3,20 @@
     "description": "Manages and analyzes the IAR-enriched processing history (ThoughtTraiL) for ArchE.",
     "version": "3.0",
     "tasks": {
-        "initialize_trail": {
-            "description": "Initialize or load an existing ThoughtTraiL.",
+        "generate_and_export_trail": {
+            "description": "Initialize a ThoughtTraiL, add a dummy entry, analyze it, and export the result to a file.",
             "action_type": "execute_code",
             "inputs": {
                 "language": "python",
-                "code": "from Three_PointO_ArchE.thought_trail import ThoughtTrail\n\ntrail = ThoughtTrail()\nif context.get('load_existing'):\n    trail.import_trail(context['trail_filepath'])\nresult = {'trail_initialized': True}\nprint(f\"ThoughtTraiL initialized: {json.dumps(result)}\")"
-            },
-            "outputs": {
-                "trail_initialized": "boolean",
-                "reflection": "dict"
-            },
-            "dependencies": []
-        },
-        "record_processing_step": {
-            "description": "Record a new processing step in the ThoughtTraiL with IAR data.",
-            "action_type": "execute_code",
-            "inputs": {
-                "language": "python",
-                "code": "from Three_PointO_ArchE.thought_trail import ThoughtTrail\n\nentry = trail.add_entry(\n    task_id=context['task_id'],\n    action_type=context['action_type'],\n    inputs=context['inputs'],\n    outputs=context['outputs'],\n    iar_reflection=context['iar_reflection'],\n    context=context.get('additional_context')\n)\nresult = {'entry_recorded': entry}\nprint(f\"Processing step recorded: {json.dumps(result)}\")"
-            },
-            "outputs": {
-                "entry_recorded": "dict",
-                "reflection": "dict"
-            },
-            "dependencies": ["initialize_trail"]
-        },
-        "analyze_trail_patterns": {
-            "description": "Analyze patterns in the ThoughtTraiL, focusing on IAR data and potential dissonance.",
-            "action_type": "execute_code",
-            "inputs": {
-                "language": "python",
-                "code": "from Three_PointO_ArchE.thought_trail import ThoughtTrail\n\n# Get entries with potential issues\nproblematic_entries = trail.get_entries_with_dissonance()\n\n# Analyze patterns in recent entries\nrecent_entries = trail.get_recent_entries(count=10)\n\nanalysis = {\n    'problematic_entries_count': len(problematic_entries),\n    'recent_entries_analysis': {\n        'total_entries': len(recent_entries),\n        'avg_confidence': sum(e['iar_reflection'].get('confidence', 1.0) for e in recent_entries) / len(recent_entries),\n        'issues_detected': sum(1 for e in recent_entries if e['iar_reflection'].get('potential_issues'))\n    }\n}\n\nresult = {'trail_analysis': analysis}\nprint(f\"Trail analysis completed: {json.dumps(result)}\")"
-            },
-            "outputs": {
-                "trail_analysis": "dict",
-                "reflection": "dict"
-            },
-            "dependencies": ["record_processing_step"]
-        },
-        "export_trail": {
-            "description": "Export the current ThoughtTraiL to a file.",
-            "action_type": "execute_code",
-            "inputs": {
-                "language": "python",
-                "code": "from Three_PointO_ArchE.thought_trail import ThoughtTrail\n\nfilepath = context['export_filepath']\ntrail.export_trail(filepath)\nresult = {'trail_exported': True, 'filepath': filepath}\nprint(f\"ThoughtTraiL exported: {json.dumps(result)}\")"
+                "code": "import json\nfrom Three_PointO_ArchE.thought_trail import ThoughtTrail\n\n# --- Initialization ---\ntrail = ThoughtTrail()\n\n# --- Record a step ---\ncontext = {\n    'task_id': 'standalone_test',\n    'action_type': 'test_action',\n    'inputs': {'test_input': 'value'},\n    'outputs': {'test_output': 'result'},\n    'iar_reflection': {'status': 'Success', 'confidence': 0.99}\n}\nentry = trail.add_entry(\n    task_id=context['task_id'],\n    action_type=context['action_type'],\n    inputs=context['inputs'],\n    outputs=context['outputs'],\n    iar_reflection=context['iar_reflection']\n)\n\n# --- Analyze the trail ---\nproblematic_entries = trail.get_entries_with_dissonance()\nrecent_entries = trail.get_recent_entries(count=10)\navg_confidence = 0\nif recent_entries:\n    avg_confidence = sum(e['iar_reflection'].get('confidence', 1.0) for e in recent_entries) / len(recent_entries)\n\nanalysis = {\n    'problematic_entries_count': len(problematic_entries),\n    'recent_entries_analysis': {\n        'total_entries': len(recent_entries),\n        'avg_confidence': avg_confidence,\n        'issues_detected': sum(1 for e in recent_entries if e['iar_reflection'].get('potential_issues'))\n    }\n}\n\n# --- Export the trail ---\nfilepath = 'outputs/thought_trail_export.json'\ntrail.export_trail(filepath)\n\nresult = {'trail_exported': True, 'filepath': filepath, 'analysis': analysis}\nprint(f\"ThoughtTraiL generated and exported: {json.dumps(result)}\")"
             },
             "outputs": {
                 "trail_exported": "boolean",
                 "filepath": "string",
+                "analysis": "dict",
                 "reflection": "dict"
             },
-            "dependencies": ["analyze_trail_patterns"]
+            "dependencies": []
         }
     }
 } 

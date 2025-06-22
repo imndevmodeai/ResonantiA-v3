@@ -3,6 +3,7 @@
 # Provides utility functions for quantum state vector manipulation, density matrix
 # calculations, and information-theoretic measures (entropy, mutual information)
 # primarily supporting the CfpframeworK (Section 7.6).
+# Forcing a cache refresh.
 
 import numpy as np
 # Import necessary math functions from scipy and standard math library
@@ -249,56 +250,53 @@ def von_neumann_entropy(density_matrix: np.ndarray) -> float:
     Raises:
         ValueError: If the input is not a square matrix.
     """
-    rho = np.asarray(density_matrix, dtype=complex)
-    # Validate shape
-    if rho.ndim != 2 or rho.shape[0] != rho.shape[1]:
-        raise ValueError(f"Density matrix must be square, got shape {rho.shape}.")
-
-    # Calculate eigenvalues. Use eigvalsh for Hermitian matrices (faster, real eigenvalues).
-    # Add small identity matrix perturbation for numerical stability if matrix is singular? Maybe not needed.
-    try:
-        # Ensure matrix is Hermitian for eigvalsh, otherwise use eigvals
-        # Add tolerance check for Hermitian property
-        # if not np.allclose(rho, rho.conj().T, atol=1e-8):
-        #     logger.warning("Input matrix for Von Neumann entropy is not Hermitian. Using general eigenvalue solver.")
-        #     eigenvalues_complex = np.linalg.eigvals(rho)
-        #     eigenvalues = np.real(eigenvalues_complex) # Entropy uses real part
-        # else:
-        eigenvalues = np.linalg.eigvalsh(rho) # Assumes Hermitian
-    except LinAlgError as e_eig:
-        logger.error(f"Eigenvalue computation failed for Von Neumann entropy: {e_eig}. Returning NaN.")
-        return np.nan
-
-    # Filter out zero or negative eigenvalues (log2 is undefined for them)
-    # Use a small tolerance epsilon > 0
-    tolerance = 1e-15
-    positive_eigenvalues = eigenvalues[eigenvalues > tolerance]
-
-    # If no positive eigenvalues (e.g., zero matrix), entropy is 0
-    if len(positive_eigenvalues) == 0:
-        return 0.0
+    if not isinstance(density_matrix, np.ndarray) or density_matrix.ndim != 2 or density_matrix.shape[0] != density_matrix.shape[1]:
+        raise ValueError("Input must be a square 2D NumPy array.")
 
     try:
-        # Calculate entropy: S = -sum(lambda_i * log2(lambda_i))
-        entropy = -np.sum(positive_eigenvalues * np.log2(positive_eigenvalues))
-    except FloatingPointError as e_fp:
-        # Catch potential issues like log2(very small number)
-        logger.error(f"Floating point error during Von Neumann entropy calculation: {e_fp}. Returning NaN.")
+        # Calculate eigenvalues of the density matrix
+        # Since rho is Hermitian, eigenvalues are real. Use eigh for efficiency and stability.
+        eigenvalues = np.linalg.eigh(density_matrix)[0]
+
+        # Filter out zero or near-zero eigenvalues to avoid log(0)
+        # and handle potential small negative values from numerical errors.
+        eigenvalues = eigenvalues[eigenvalues > 1e-15] # Use a small positive epsilon
+
+        # Calculate entropy using the formula S = -sum(lambda * log2(lambda))
+        if eigenvalues.size == 0:
+            return 0.0 # Entropy is 0 if there's only one non-zero eigenvalue (which was 1)
+
+        entropy = -np.sum(eigenvalues * np.log2(eigenvalues))
+        return float(entropy) if entropy > 0 else 0.0 # Ensure non-negative result
+    except LinAlgError as e:
+        logger.error(f"Linear algebra error computing eigenvalues for Von Neumann entropy: {e}", exc_info=True)
+        return np.nan # Return NaN on numerical failure
+    except Exception as e_gen:
+        logger.error(f"Unexpected error in von_neumann_entropy: {e_gen}", exc_info=True)
         return np.nan
 
-    # Ensure entropy is non-negative (within tolerance) and not NaN
-    if entropy < -1e-12: # Allow for small numerical errors
-        logger.warning(f"Calculated negative Von Neumann entropy ({entropy:.4g}). Clamping to 0.0.")
-        entropy = 0.0
-    elif np.isnan(entropy):
-        logger.warning("Calculated NaN Von Neumann entropy. Returning 0.0.")
-        entropy = 0.0
-    else:
-        # Ensure non-negativity strictly
-        entropy = max(0.0, entropy)
+def get_quaternion_for_state(state_vector: np.ndarray) -> np.ndarray:
+    """
+    Converts a 2D quantum state vector (qubit) into a real 4D quaternion.
+    |psi> = a + bi, c + di  ->  q = (a, b, c, d)
+    Note: This is a direct mapping, not a rotational conversion.
 
-    logger.debug(f"Calculated Von Neumann Entropy: {entropy:.6f}")
-    return float(entropy)
+    Args:
+        state_vector: A 2D NumPy array with complex numbers representing the qubit state.
+
+    Returns:
+        A 4D real NumPy array representing the quaternion.
+    """
+    if state_vector.shape != (2,):
+        raise ValueError("Input state vector must be of shape (2,).")
+    
+    # Extract real and imaginary parts of the two components
+    a = np.real(state_vector[0])
+    b = np.imag(state_vector[0])
+    c = np.real(state_vector[1])
+    d = np.imag(state_vector[1])
+    
+    return np.array([a, b, c, d])
 
 def compute_multipartite_mutual_information(state_vector: np.ndarray, dims: List[int]) -> float:
     """

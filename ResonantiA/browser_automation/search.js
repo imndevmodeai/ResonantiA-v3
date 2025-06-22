@@ -1,8 +1,7 @@
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer-core'); // Using puppeteer-core as it's likely intended for a package
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
-const CaptureManager = require('./capture_manager');
 
 // Import puppeteer-extra and plugins
 const puppeteerExtra = require('puppeteer-extra');
@@ -11,6 +10,7 @@ puppeteerExtra.use(StealthPlugin());
 
 const AnonymizeUaPlugin = require('puppeteer-extra-plugin-anonymize-ua');
 puppeteerExtra.use(AnonymizeUaPlugin());
+
 
 /**
  * Performs a search on a given search engine and extracts the results.
@@ -438,234 +438,82 @@ async function extractDuckDuckGoResults(page) {
  * @returns {Promise<string>} - Scraped content
  */
 async function scrapePageContent(page, url) {
-  let attempts = 0;
-  const maxAttempts = 2;
-  let lastError = null;
-
-  while (attempts < maxAttempts) {
     try {
-      console.error(`Scraping content from ${url} (Attempt ${attempts + 1}/${maxAttempts})`);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-
-      // Wait for a bit to let dynamic content load, if any (optional, adjust as needed)
-      // await new Promise(resolve => setTimeout(resolve, 1000));
-
-      const pageData = await page.evaluate(() => {
-        let content = document.body.innerText || "N/A";
-        let publication_date = null;
-        const metaSelectors = [
-          'meta[property="article:published_time"]',
-          'meta[name="date"]',
-          'meta[name="Date"]',
-          'meta[name="pubdate"]',
-          'meta[name="publishdate"]',
-          'meta[name="article.created"]',
-          'meta[name="article.published"]',
-          'meta[itemprop="datePublished"]',
-        ];
-        for (const selector of metaSelectors) {
-          const el = document.querySelector(selector);
-          if (el && el.content) {
-            publication_date = el.content;
-            break;
-          }
-        }
-        if (!publication_date) {
-          const timeEl = document.querySelector('time[datetime]');
-          if (timeEl && timeEl.getAttribute('datetime')) {
-            publication_date = timeEl.getAttribute('datetime');
-          }
-        }
-        // Add more sophisticated date extraction logic here if needed (e.g., JSON-LD)
-
-        const fullHtml = document.documentElement.outerHTML;
-        return { content, publication_date, fullHtml };
-      });
-      
-      console.error(`Successfully scraped ${url}`);
-      return pageData; // Return object with content, publication_date, fullHtml
-
-  } catch (error) {
-      lastError = error;
-      console.error(`Error scraping ${url} (Attempt ${attempts + 1}): ${error.message}`);
-      attempts++;
-      if (attempts < maxAttempts) {
-        console.error(`Retrying in 2 seconds...`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } else {
-        console.error(`Failed to scrape ${url} after ${maxAttempts} attempts.`);
-        return { content: "Error: Could not scrape content.", publication_date: null, fullHtml: "", error: error.message };
-  }
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        const content = await page.evaluate(() => document.body.innerText);
+        return content;
+    } catch (error) {
+        console.error(`Error scraping content from ${url}: ${error.message}`);
+        return null;
     }
-  }
-  // Should not be reached if loop logic is correct, but as a fallback:
-  return { content: "Error: Max retries reached, unknown error.", publication_date: null, fullHtml: "", error: lastError ? lastError.message : "Unknown error" };
 }
 
 /**
- * Main function to orchestrate the search and scraping process.
+ * Main function
  */
 async function main() {
-  const args = process.argv.slice(2);
-  if (args.length < 1) {
-    console.error("Usage: node search.js <query> [numResults] [searchEngine] [outputDir] [--debug] [--text-content-dir <dir>] [--include-text-content] [--capture-all] [--capture-dir <dir>]");
-    process.exit(1);
-  }
+    const yargs = require('yargs/yargs');
+    const { hideBin } = require('yargs/helpers');
+    const argv = yargs(hideBin(process.argv))
+        .option('query', {
+            alias: 'q',
+            type: 'string',
+            description: 'Search query',
+            demandOption: true,
+        })
+        .option('engine', {
+            alias: 'e',
+            type: 'string',
+            default: 'google',
+            description: 'Search engine (google or duckduckgo)',
+        })
+        .option('output', {
+            alias: 'o',
+            type: 'string',
+            description: 'Output file path for search results JSON',
+            demandOption: true,
+        })
+        .option('debug', {
+            type: 'boolean',
+            default: false,
+            description: 'Enable debug mode (saves screenshots)',
+        })
+        .help()
+        .alias('help', 'h')
+        .argv;
 
-  const query = args[0];
-  const numResults = parseInt(args[1], 10) || 5;
-  const searchEngine = args[2] || "google";
-  const outputDir = args[3] || ".";
-  const debug = args.includes("--debug");
-  
-  const textContentDirArgIndex = args.indexOf("--text-content-dir");
-  const textContentDir = textContentDirArgIndex !== -1 && args[textContentDirArgIndex + 1] ? args[textContentDirArgIndex + 1] : null;
+    const { query, engine, output, debug } = argv;
 
-  const includeTextContent = args.includes("--include-text-content");
-  const captureAll = args.includes("--capture-all");
-  
-  const captureDirArgIndex = args.indexOf("--capture-dir");
-  const captureDir = captureDirArgIndex !== -1 && args[captureDirArgIndex + 1] ? args[captureDirArgIndex + 1] : path.join(outputDir, 'captures');
+    let browser;
+    try {
+        console.error(`Initializing Puppeteer...`);
+        browser = await puppeteerExtra.launch({
+            headless: !debug, // Run in headful mode when debugging
+            executablePath: '/usr/bin/google-chrome-stable', 
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--window-size=1920,1080'],
+        });
 
-  console.error(`Script arguments: query='${query}', numResults=${numResults}, searchEngine='${searchEngine}', outputDir='${outputDir}', debug=${debug}, textContentDir='${textContentDir}', includeTextContent=${includeTextContent}, captureAll=${captureAll}, captureDir='${captureDir}'`);
+        const page = await browser.newPage();
+        await page.setViewport({ width: 1920, height: 1080 });
 
-  let browser;
-  try {
-    const defaultChromePath = "/usr/bin/google-chrome"; 
-    const executablePath = process.env.CHROME_BIN || defaultChromePath;
+        // Add a more human-like user agent
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36');
+        
+        const results = await search(page, query, engine, debug);
 
-    // Initialize capture manager
-    const captureManager = new CaptureManager({
-      screenshotDir: path.join(captureDir, 'screenshots'),
-      htmlDir: path.join(captureDir, 'html'),
-      pdfDir: path.join(captureDir, 'pdf')
-    });
+        console.error(`Search completed. Saving ${results.length} results to ${output}...`);
+        fs.writeFileSync(output, JSON.stringify(results, null, 2));
+        console.error(`Results saved successfully.`);
 
-    if (!fs.existsSync(executablePath)) {
-      console.warn(`Warning: Chrome executable not found at ${executablePath}. Puppeteer might try to download Chromium. Set CHROME_BIN if you have Chrome installed elsewhere or ensure it's at ${defaultChromePath}.`);
-      browser = await puppeteer.launch({
-        headless: "new",
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-gpu'
-        ],
-        userDataDir: path.join(__dirname, '.chrome_dev_session'),
-        ignoreHTTPSErrors: true,
-      });
-    } else {
-      browser = await puppeteer.launch({
-        executablePath: executablePath,
-        headless: "new",
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-gpu',
-          '--window-size=1920,1080'
-        ],
-        userDataDir: path.join(__dirname, '.chrome_dev_session'),
-        ignoreHTTPSErrors: true,
-      });
-    }
-
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1920, height: 1080 });
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36');
-
-    const results = await search(page, query, searchEngine, debug);
-    let finalResults = results.slice(0, numResults);
-
-    if (includeTextContent && finalResults.length > 0) {
-      console.error("Fetching text content for results...");
-      finalResults = await Promise.all(finalResults.map(async (result, index) => {
-        if (result.link && result.link !== "N/A" && result.link.startsWith("http")) {
-          try {
-            const content = await scrapePageContent(page, result.link);
-            result.content = content;
-
-            if (textContentDir) {
-              const safeQuery = query.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
-              const domain = new URL(result.link).hostname.replace(/[^a-zA-Z0-9]/g, '_');
-              const contentFileName = `content_${safeQuery}_${index}_${domain}.txt`;
-              const contentFilePath = path.join(textContentDir, contentFileName);
-              
-              if (!fs.existsSync(textContentDir)) {
-                fs.mkdirSync(textContentDir, { recursive: true });
-              }
-              fs.writeFileSync(contentFilePath, content);
-              result.content_file = contentFilePath;
-              console.error(`Saved text content for ${result.link} to ${contentFilePath}`);
-            }
-
-            // Capture screenshots and HTML if requested
-            if (captureAll) {
-              try {
-                const captures = await captureManager.captureAll(page, {
-                  screenshot: true,
-                  html: true,
-                  pdf: true,
-                  screenshotOptions: {
-                    fullPage: true,
-                    quality: 80
-                  },
-                  htmlOptions: {
-                    includeStyles: true,
-                    includeScripts: true,
-                    format: true
-                  },
-                  pdfOptions: {
-                    format: 'A4',
-                    printBackground: true
-                  }
-                });
-
-                result.captures = captures;
-                console.error(`Captured screenshots and HTML for ${result.link}`);
-              } catch (captureError) {
-                console.error(`Error capturing content for ${result.link}: ${captureError.message}`);
-                result.capture_error = captureError.message;
-              }
-            }
-          } catch (scrapeError) {
-            console.error(`Error scraping content for ${result.link}: ${scrapeError.message}`);
-            result.content = "Error scraping content.";
-          }
-        } else {
-          result.content = "Invalid or missing link, skipping content scraping.";
+    } catch (error) {
+        console.error(`An error occurred in the main function: ${error.message}`);
+    } finally {
+        if (browser) {
+            await browser.close();
         }
-        return result;
-      }));
     }
-
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    const timestamp = new Date().toISOString().replace(/:/g, '-');
-    const randomSuffix = crypto.randomBytes(4).toString('hex');
-    const resultsFilename = path.join(outputDir, `search_results_${searchEngine}_${timestamp}_${randomSuffix}.json`);
-
-    fs.writeFileSync(resultsFilename, JSON.stringify(finalResults, null, 2));
-    console.error(`Search results saved to ${resultsFilename}`);
-    console.log(JSON.stringify(finalResults));
-
-  } catch (error) {
-    console.error(`Error in main: ${error.message}`);
-    if (debug) {
-      console.error(error.stack);
-    }
-    process.exit(1);
-  } finally {
-    if (browser) {
-      await browser.close();
-    }
-  }
 }
 
-if (require.main === module) {
-  main();
-}
+main();
 
 module.exports = { search, scrapePageContent, handleGoogleSearch, handleDuckDuckGoSearch, extractGoogleResults, extractDuckDuckGoResults };

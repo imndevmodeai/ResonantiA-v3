@@ -763,188 +763,99 @@ TOOL_FUNCTIONS = {
 
 # --- Utility for default reflections ---
 def default_failure_reflection(summary: str) -> Dict[str, Any]:
-    return _create_reflection(
-        status="Failure",
-        summary=summary,
-        confidence=0.0,
-        alignment="N/A",
-        issues=["System Error: Default failure reflection"],
-        preview=None
-    )
+    return _create_reflection("Failure", summary, 0.0, "Misaligned", [summary], None)
 
 # --- Tool for System Divergence Analysis ---
 
 def _create_system_from_json(config: Dict[str, Any]) -> System:
-    """Helper function to build a System object from a JSON config."""
-    system = System(system_id=config['system_id'], name=config['name'])
-    for param_conf in config.get('parameters', []):
-        param_type = param_conf.pop('type', None)
-        if param_type == "Gaussian":
-            system.add_parameter(GaussianDistribution(**param_conf))
-        elif param_type == "Histogram":
-            system.add_parameter(HistogramDistribution(**param_conf))
-        elif param_type == "String":
-            system.add_parameter(StringParam(**param_conf))
-    
-    # If there's historical data, update the distributions
-    if 'history_data' in config:
-        for param_name, values in config['history_data'].items():
-            if param_name in system.parameters:
-                for value in values:
-                    system.parameters[param_name].update(value)
-    
-    return system
+    """Helper to create a System object from a JSON/dict configuration."""
+    system_id = config.get("id", "UnnamedSystem")
+    name = config.get("name", system_id) # Default name to system_id if not provided
+    new_system = System(system_id=system_id, name=name)
+    for p_conf in config.get("parameters", []):
+        p_type = p_conf.get("type", "string").lower() # Default to string for simplicity
+        param_name = p_conf.get("name")
+        if not param_name: continue # Skip if parameter has no name
 
-def analyze_system_divergence(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
+        if p_type == "gaussian":
+            param = GaussianDistribution(name=param_name, mean=p_conf.get("mean", 0), std_dev=p_conf.get("std", 1))
+        elif p_type == "histogram":
+            param = HistogramDistribution(name=param_name, bins=p_conf.get("bins", 10), range_min=p_conf.get("range_min",0), range_max=p_conf.get("range_max",1))
+        else: # Default to simple string parameter
+            param = StringParam(name=param_name, value=str(p_conf.get("value", "")))
+        new_system.add_parameter(param)
+    return new_system
+
+def analyze_system_divergence(system_a: Dict[str, Any], system_b: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
     """
-    [IAR Enabled] Analyzes the divergence between two systems defined in JSON files.
+    [IAR Enabled] Analyzes the divergence between two system configurations.
+    This is a simplified analysis focusing on parameter differences.
     """
-    system_a_path = inputs.get("system_a_path")
-    system_b_path = inputs.get("system_b_path")
-    method = inputs.get("method", "kld")
-
-    if not system_a_path or not system_b_path:
-        # Handle missing input error
-        error_msg = "Input error: Both 'system_a_path' and 'system_b_path' are required."
-        logger_tools_diag.error(error_msg)
-        reflection = _create_reflection(
-            status="Failure",
-            summary=error_msg,
-            confidence=0.0,
-            alignment="N/A",
-            issues=["Missing required input arguments."],
-            preview=None
-        )
-        return {"error": error_msg, "reflection": reflection}
-
     try:
-        with open(system_a_path, 'r') as f:
-            config_a = json.load(f)
-        with open(system_b_path, 'r') as f:
-            config_b = json.load(f)
-
-        system_a = _create_system_from_json(config_a)
-        system_b = _create_system_from_json(config_b)
-
-        divergence_score = system_a.calculate_divergence(system_b, method=method)
+        sys_a = _create_system_from_json(system_a)
+        sys_b = _create_system_from_json(system_b)
         
-        analysis_summary = f"Divergence ({method.upper()}) between '{system_a.name}' and '{system_b.name}': {divergence_score:.4f}\\n"
+        divergence_report = sys_a.compare(sys_b)
         
-        primary_result = {
-            "divergence_score": divergence_score,
-            "analysis_summary": analysis_summary
-        }
-        
-        reflection = _create_reflection(
-            status="Success",
-            summary="Divergence analysis completed successfully.",
-            confidence=0.95,
-            alignment="Aligned with system comparison goal.",
-            issues=None,
-            preview=analysis_summary
-        )
-        return {**primary_result, "reflection": reflection}
+        # Check for significant divergence to enhance the summary
+        significant_changes = [d for d in divergence_report if d.get('comparison_type') != 'IDENTICAL']
+        if significant_changes:
+            summary = f"Divergence found between {sys_a.system_id} and {sys_b.system_id} in {len(significant_changes)} parameter(s)."
+        else:
+            summary = f"No divergence detected between systems {sys_a.system_id} and {sys_b.system_id}."
 
-    except Exception as e:
-        error_msg = f"Failed to analyze system divergence: {e}"
-        logger_tools_diag.error(error_msg, exc_info=True)
-        reflection = _create_reflection(
-            status="Failure",
-            summary=error_msg,
-            confidence=0.0,
-            alignment="N/A",
-            issues=[f"System Error: {e}"],
-            preview=None
-        )
-        return {"error": error_msg, "reflection": reflection}
-
-def compare_system_factors(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
-    """
-    [IAR Enabled] Provides a detailed, parameter-by-parameter comparison between two systems.
-    """
-    system_a_path = inputs.get("system_a_path")
-    system_b_path = inputs.get("system_b_path")
-    # Default methods; could be made configurable via inputs
-    comparison_methods = ["kld", "emd", "value_diff"] 
-
-    if not system_a_path or not system_b_path:
-        error_msg = "Input error: Both 'system_a_path' and 'system_b_path' are required."
-        logger_tools_diag.error(error_msg)
-        return {"error": error_msg, "reflection": _create_reflection(status="Failure", summary=error_msg, issues=["Missing required inputs."])}
-
-    try:
-        with open(system_a_path, 'r') as f:
-            config_a = json.load(f)
-        with open(system_b_path, 'r') as f:
-            config_b = json.load(f)
-
-        system_a = _create_system_from_json(config_a)
-        system_b = _create_system_from_json(config_b)
-
-        parameter_comparison = []
-        overall_kld = system_a.calculate_divergence(system_b, method='kld')
-        overall_emd = system_a.calculate_divergence(system_b, method='emd')
-
-        all_param_names = set(system_a.parameters.keys()) | set(system_b.parameters.keys())
-
-        for name in sorted(list(all_param_names)):
-            param_a = system_a.get_parameter(name)
-            param_b = system_b.get_parameter(name)
-            
-            param_details = {"parameter_name": name}
-
-            if param_a and param_b and type(param_a) == type(param_b):
-                param_details.update({
-                    "type": param_a.__class__.__name__,
-                    "system_a_value": param_a.get_value(),
-                    "system_b_value": param_b.get_value(),
-                    "kld": param_a.kl_divergence(param_b),
-                    "emd": param_a.earth_movers_distance(param_b)
-                })
-                if isinstance(param_a.get_value(), (int, float)) and isinstance(param_b.get_value(), (int, float)):
-                    param_details["value_difference"] = param_a.get_value() - param_b.get_value()
-                
-            elif param_a and not param_b:
-                param_details.update({"status": "unique_to_system_a", "value": param_a.get_value()})
-            elif not param_a and param_b:
-                param_details.update({"status": "unique_to_system_b", "value": param_b.get_value()})
-            else:
-                 param_details.update({"status": "type_mismatch", "system_a_type": type(param_a).__name__, "system_b_type": type(param_b).__name__})
-
-            parameter_comparison.append(param_details)
-        
-        primary_result = {
-            "comparison_summary": {
-                "system_a_name": system_a.name,
-                "system_b_name": system_b.name,
-                "overall_kld": overall_kld,
-                "overall_emd": overall_emd
-            },
-            "parameter_comparison": parameter_comparison
-        }
-        
-        reflection = _create_reflection(
-            status="Success",
-            summary=f"Factor comparison between '{system_a.name}' and '{system_b.name}' complete.",
-            confidence=0.98,
-            alignment="Aligned with detailed system analysis goal.",
-            issues=None,
-            preview=f"Compared {len(parameter_comparison)} parameters. Overall KLD: {overall_kld:.4f}"
-        )
-        return {**primary_result, "reflection": reflection}
-
-    except Exception as e:
-        error_msg = f"Failed to compare system factors: {e}"
-        logger_tools_diag.error(error_msg, exc_info=True)
-        return {"error": error_msg, "reflection": _create_reflection(
-            status="Failure", 
-            summary=error_msg, 
-            issues=[f"System Error: {e}"],
-            confidence=0.0,
-            alignment="N/A",
-            preview=None
+        return {
+            "divergence_report": divergence_report,
+            "reflection": _create_reflection(
+                status="Success",
+                summary=summary,
+                confidence=0.9,
+                alignment="Aligned with system comparison goal.",
+                issues=None,
+                preview=divergence_report[:2] if divergence_report else "No divergence."
             )
         }
+    except Exception as e:
+        logger_tools_diag.error(f"Error in analyze_system_divergence: {e}", exc_info=True)
+        return {"error": str(e), "reflection": default_failure_reflection(f"Failed to analyze system divergence: {e}")}
+
+def compare_system_factors(systems: List[Dict[str, Any]], factor_name: str, action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
+    """
+    [IAR Enabled] Compares a specific factor (parameter) across multiple system configurations.
+    """
+    try:
+        comparison_results = []
+        for sys_conf in systems:
+            system = _create_system_from_json(sys_conf)
+            param = system.get_parameter(factor_name)
+            if param:
+                comparison_results.append({
+                    "system_id": system.system_id,
+                    "factor_name": factor_name,
+                    "value": param.to_dict().get('value', str(param)) # Get value or representation
+                })
+            else:
+                comparison_results.append({
+                    "system_id": system.system_id,
+                    "factor_name": factor_name,
+                    "value": None,
+                    "error": "Factor not found in this system."
+                })
+        
+        return {
+            "comparison": comparison_results,
+            "reflection": _create_reflection(
+                status="Success",
+                summary=f"Compared factor '{factor_name}' across {len(systems)} systems.",
+                confidence=0.9,
+                alignment="Aligned with factor comparison goal.",
+                issues=None,
+                preview=comparison_results[:2]
+            )
+        }
+    except Exception as e:
+        logger_tools_diag.error(f"Error in compare_system_factors: {e}", exc_info=True)
+        return {"error": str(e), "reflection": default_failure_reflection(f"Failed to compare system factors: {e}")}
 
 def analyze_workflow_impact(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
     """

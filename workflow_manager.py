@@ -6,6 +6,7 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
 import logging
 from correction_handler import CorrectionHandler
+from knowledge_crystallization_system import KnowledgeCrystallizationSystem
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -32,6 +33,7 @@ class WorkflowManager:
         self.tasks: Dict[str, Task] = {}
         self.capabilities: Dict[str, Any] = {}
         self.correction_handler = CorrectionHandler()
+        self.knowledge_system = KnowledgeCrystallizationSystem()
         
     def register_capability(self, name: str, handler: Any):
         """Register a capability handler for task execution"""
@@ -71,6 +73,16 @@ class WorkflowManager:
             return False
             
         try:
+            # --- Knowledge System Integration ---
+            # Find applicable patterns before execution
+            problem_description = f"{task.description} which requires {task.required_capability}"
+            applicable_patterns = self.knowledge_system.find_applicable_patterns(problem_description)
+            if applicable_patterns:
+                top_pattern = applicable_patterns[0]
+                logger.info(f"Found applicable knowledge pattern: '{top_pattern.name}' (Success Rate: {top_pattern.success_rate:.2%})")
+                # In a full implementation, these patterns would modify the execution strategy or parameters.
+                # For now, we will just log the finding.
+
             # Check dependencies
             for dep_id in task.dependencies:
                 dep_task = self.tasks.get(dep_id)
@@ -94,12 +106,24 @@ class WorkflowManager:
                 "reflection": "Task execution met expectations"
             }
             
+            # --- Knowledge System Integration ---
+            # Upon success, this could potentially be captured as an insight.
+            # For now, we will just log the successful application of any found patterns.
+            if applicable_patterns:
+                self.knowledge_system.apply_pattern(applicable_patterns[0].pattern_id, "workflow_manager_instance", success=True)
+                logger.info(f"Successfully applied pattern '{applicable_patterns[0].name}' to task {task.task_id}")
+
             logger.info(f"Task completed: {task_id}")
             return True
             
         except Exception as e:
             logger.error(f"Task failed: {task_id}, Error: {str(e)}")
             task.status = "failed"
+            # --- Knowledge System Integration ---
+            # Log pattern application failure
+            if applicable_patterns:
+                self.knowledge_system.apply_pattern(applicable_patterns[0].pattern_id, "workflow_manager_instance", success=False)
+                logger.info(f"Failed application of pattern '{applicable_patterns[0].name}' to task {task.task_id}")
             self._handle_task_failure(task, str(e))
             return False
     
@@ -131,6 +155,7 @@ class WorkflowManager:
         )
         if correction_plan:
             # Apply correction to parameters
+            original_parameters = task.parameters.copy()
             updated_parameters = self.correction_handler.apply_correction(
                 task.parameters,
                 correction_plan
@@ -144,8 +169,26 @@ class WorkflowManager:
             # Automatically re-execute the task if retries remain
             if task.retry_count < task.max_retries:
                 logger.info(f"Automatically retrying task: {task.task_id} (retry {task.retry_count})")
-                self.execute_task(task.task_id)
-    
+                
+                # We need to capture the result of the retry attempt
+                retry_successful = self.execute_task(task.task_id)
+
+                # --- Knowledge System Integration: Capture Learning ---
+                if retry_successful:
+                    problem_desc = f"Task '{task.description}' failed with error: {error_message}"
+                    solution_desc = f"Applied correction plan. Original params: {original_parameters}. Corrected params: {updated_parameters}."
+                    
+                    self.knowledge_system.capture_insight(
+                        title=f"Correction for: {task.description}",
+                        category="DEBUGGING_PATTERNS",
+                        problem_pattern=problem_desc,
+                        solution_pattern=solution_desc,
+                        validation_evidence=[f"Correction successful on retry for task {task.task_id}"],
+                        applicability=[task.required_capability],
+                        source_instance="workflow_manager_instance"
+                    )
+                    logger.info(f"Captured new knowledge insight from successful correction of task {task.task_id}.")
+
     def get_task_status(self, task_id: str) -> Optional[Dict]:
         """Get detailed status of a task"""
         task = self.tasks.get(task_id)
@@ -162,6 +205,64 @@ class WorkflowManager:
             "pending_tasks": len([t for t in self.tasks.values() if t.status == "pending"]),
             "corrections_applied": len(self.correction_handler.get_correction_history())
         }
+
+    def execute_json_workflow(self, workflow_path: str, initial_context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """
+        Loads and executes a declarative JSON workflow file.
+        This method adapts the declarative, step-based workflow into the manager's dynamic, task-based system.
+        """
+        logger.info(f"Executing JSON workflow from: {workflow_path}")
+        try:
+            with open(workflow_path, 'r') as f:
+                workflow_def = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            logger.error(f"Failed to load or parse JSON workflow: {e}")
+            return {"status": "FAILED", "error": f"Failed to load or parse JSON workflow: {e}"}
+
+        workflow_tasks = workflow_def.get("tasks", {})
+        if not workflow_tasks:
+            logger.error("No 'tasks' found in the JSON workflow definition.")
+            return {"status": "FAILED", "error": "No 'tasks' found in JSON definition."}
+
+        # Create all tasks first
+        task_map = {} # Maps step_id from JSON to our internal task_id
+        for step_id, task_def in workflow_tasks.items():
+            dependencies = task_def.get("dependencies", [])
+            # We will map these step_id dependencies to internal task_ids later
+            
+            task = self.create_task(
+                description=task_def.get("description", "No description"),
+                required_capability=task_def.get("action_type", "default_action"),
+                parameters=task_def.get("inputs", {}),
+                dependencies=dependencies # Keep original dependency names for now
+            )
+            task_map[step_id] = task.task_id
+
+        # Now update dependencies to use internal task_ids
+        for step_id, internal_task_id in task_map.items():
+            task = self.tasks[internal_task_id]
+            task.dependencies = [task_map[dep_id] for dep_id in task.dependencies]
+
+        # Execute tasks in an order that respects dependencies
+        executed_tasks = set()
+        while len(executed_tasks) < len(workflow_tasks):
+            tasks_to_run = [
+                task for task in self.tasks.values() 
+                if task.task_id in task_map.values() and 
+                   task.task_id not in executed_tasks and
+                   all(dep_id in executed_tasks for dep_id in task.dependencies)
+            ]
+            
+            if not tasks_to_run:
+                logger.error("Could not determine next task to run. Check for circular dependencies.")
+                return {"status": "FAILED", "error": "Circular dependency or unresolved dependency in workflow."}
+
+            for task in tasks_to_run:
+                self.execute_task(task.task_id)
+                executed_tasks.add(task.task_id)
+        
+        logger.info(f"JSON workflow '{workflow_def.get('name', 'Untitled')}' completed.")
+        return self.get_workflow_status()
 
 # Example usage
 if __name__ == "__main__":

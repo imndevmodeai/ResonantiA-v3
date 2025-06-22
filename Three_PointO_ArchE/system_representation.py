@@ -248,16 +248,64 @@ class System:
         self.last_update_time = current_time # Update last update time
 
     def get_state(self) -> Dict[str, Any]:
-        """Returns the current representative value of each parameter."""
+        """Returns the current state of the system as a dictionary of values."""
         return {name: param.get_value() for name, param in self.parameters.items()}
 
     def get_parameter(self, name: str) -> Optional[Distribution]:
-        """Gets a specific parameter distribution by name."""
+        """Retrieves a parameter by name."""
         return self.parameters.get(name)
 
     def get_history(self) -> List[Tuple[float, Dict[str, Distribution]]]:
-        """Returns the recorded state history (list of (timestamp, state_dict))."""
+        """Returns the recorded state history."""
         return self.history
+
+    def compare(self, other_system: 'System') -> List[Dict[str, Any]]:
+        """
+        Compares this system with another, parameter by parameter.
+        Returns a list of dictionaries detailing the comparison.
+        """
+        comparison_report = []
+        all_param_names = set(self.parameters.keys()) | set(other_system.parameters.keys())
+
+        for name in sorted(list(all_param_names)):
+            param_a = self.get_parameter(name)
+            param_b = other_system.get_parameter(name)
+            
+            report_item = {"parameter": name}
+
+            if param_a and param_b:
+                if type(param_a) is not type(param_b):
+                    report_item.update({
+                        "comparison_type": "TYPE_MISMATCH",
+                        "system_a_type": param_a.__class__.__name__,
+                        "system_b_type": param_b.__class__.__name__,
+                    })
+                else:
+                    val_a = param_a.get_value()
+                    val_b = param_b.get_value()
+                    if val_a == val_b:
+                        report_item.update({
+                            "comparison_type": "IDENTICAL",
+                            "value": val_a
+                        })
+                    else:
+                        report_item.update({
+                            "comparison_type": "VALUE_DIFFERENCE",
+                            "system_a_value": val_a,
+                            "system_b_value": val_b
+                        })
+            elif param_a and not param_b:
+                report_item.update({
+                    "comparison_type": "ONLY_IN_A",
+                    "system_a_value": param_a.get_value()
+                })
+            elif not param_a and param_b:
+                report_item.update({
+                    "comparison_type": "ONLY_IN_B",
+                    "system_b_value": param_b.get_value()
+                })
+            comparison_report.append(report_item)
+        return comparison_report
 
     def calculate_divergence(self, other_system: 'System', method: str = 'kld', num_bins: int = 10) -> float:
         """Calculates aggregate divergence between this system and another."""

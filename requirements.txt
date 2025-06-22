@@ -19,3 +19,6 @@ beautifulsoup4
 redis
 rich
 mesa
+google-search-results
+python-dotenv
+duckduckgo-search

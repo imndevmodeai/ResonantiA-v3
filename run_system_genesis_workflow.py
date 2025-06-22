@@ -1,8 +1,6 @@
 import json
 import logging
-from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
-from Three_PointO_ArchE.workflow_validator import WorkflowValidator
-from Three_PointO_ArchE.action_registry import ACTION_REGISTRY
+from Three_PointO_ArchE.workflow_manager import WorkflowManager
 
 # Configure logging
 logging.basicConfig(
@@ -13,29 +11,32 @@ logger = logging.getLogger(__name__)
 
 def main():
     try:
-        # Load workflow
-        with open('workflows/system_genesis_and_evolution_workflow.json', 'r') as f:
-            workflow = json.load(f)
+        # The WorkflowManager now handles validation and capability registration internally.
+        # For this to work, we need to register the capabilities the genesis workflow uses.
         
-        # Validate workflow using WorkflowValidator class
-        validator = WorkflowValidator(ACTION_REGISTRY)
-        validation_result = validator.validate_workflow(workflow)
-        if not validation_result.is_valid:
-            logger.error("Workflow validation failed:")
-            for error in validation_result.errors:
-                logger.error(f"- {error}")
-            return
+        # In a real scenario, these handlers would be more sophisticated.
+        def perform_system_genesis_action(**kwargs):
+            logger.info(f"Performing system genesis action with params: {kwargs}")
+            return {"status": "success", "details": f"Executed operation {kwargs.get('operation')}"}
+
+        def display_output(**kwargs):
+            logger.info("--- DISPLAY OUTPUT ---")
+            logger.info(kwargs.get('content', 'No content to display.'))
+            logger.info("----------------------")
+            return {"status": "success"}
+
+        # Initialize workflow manager and register capabilities
+        manager = WorkflowManager()
+        manager.register_capability("perform_system_genesis_action", perform_system_genesis_action)
+        manager.register_capability("display_output", display_output)
         
-        # Load context
-        with open('knowledge_crystallization_context.json', 'r') as f:
-            context = json.load(f)
-        
-        # Initialize workflow engine
-        engine = IARCompliantWorkflowEngine()
+        # Load context if needed (though the new engine doesn't use it in the same way)
+        # with open('knowledge_crystallization_context.json', 'r') as f:
+        #     context = json.load(f)
         
         # Execute workflow
-        logger.info("Starting workflow execution...")
-        results = engine.run_workflow('system_genesis_and_evolution_workflow.json', context)
+        logger.info("Starting system genesis workflow execution with the unified WorkflowManager...")
+        results = manager.execute_json_workflow('workflows/system_genesis_and_evolution_workflow.json')
         
         # Save results
         with open('workflow_results.json', 'w') as f:

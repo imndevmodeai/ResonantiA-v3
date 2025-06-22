@@ -89,48 +89,62 @@ if sandbox_method_resolved == 'docker':
 
 # --- Main Execution Function ---
 def execute_code(
-    code: str,
+    code: str = None,
     language: str = "python",
     timeout: int = 30,
-    environment: Optional[Dict[str, str]] = None
+    environment: Optional[Dict[str, str]] = None,
+    code_path: str = None,
+    input_data: str = None
 ) -> Dict[str, Any]:
     """
     Execute code in the specified language and return results with IAR reflection.
 
     Args:
-        code: The code to execute
+        code: The code to execute as a string
         language: Programming language (default: python)
         timeout: Execution timeout in seconds
         environment: Optional environment variables
-
-    Returns:
-        Dict containing execution results and IAR reflection
+        code_path: Path to a file containing the code to execute
+        input_data: Optional string to pass to the script's stdin
     """
+    if code is None and code_path is None:
+        return {
+            "error": "Either 'code' or 'code_path' must be provided.",
+            "reflection": _create_reflection("Failed", "Input validation failed", 0.0, "Misaligned", ["Missing code input."], None)
+        }
+    
+    temp_file = None
     try:
-        # Create temporary file for code
-        temp_file = f"temp_execution.{language}"
-        with open(temp_file, "w") as f:
-            f.write(code)
+        if code_path:
+            if not os.path.exists(code_path):
+                raise FileNotFoundError(f"The specified code_path does not exist: {code_path}")
+            exec_file = code_path
+        else:
+            # Create temporary file for code
+            with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix=f".{language}") as f:
+                f.write(code)
+                temp_file = f.name
+            exec_file = temp_file
         
-        # Set up environment
+        # Set up environment, ensuring all values are strings
         env = os.environ.copy()
         if environment:
-            env.update(environment)
+            # Robustly convert all provided env values to strings
+            safe_env = {str(k): str(v) for k, v in environment.items()}
+            env.update(safe_env)
         
         # Execute code based on language
         if language == "python":
             result = subprocess.run(
-                ["python", temp_file],
+                [sys.executable, exec_file],
                 capture_output=True,
                 text=True,
                 timeout=timeout,
-                env=env
+                env=env,
+                input=input_data
             )
         else:
             raise ValueError(f"Unsupported language: {language}")
-        
-        # Clean up temp file
-        os.remove(temp_file)
         
         # Process results
         if result.returncode == 0:
@@ -181,6 +195,10 @@ def execute_code(
                 "reflection": error_msg
             }
         }
+    finally:
+        # Clean up temp file if it was created
+        if temp_file and os.path.exists(temp_file):
+            os.remove(temp_file)
 
 # --- Internal Helper: Docker Execution ---
 def _execute_with_docker(language: str, code: str, input_data: str, env_vars: Optional[Dict[str, str]] = None) -> Dict[str, Any]:

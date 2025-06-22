@@ -62,9 +62,20 @@ def display_workflow_complete(results: Dict[str, Any], output_path: str) -> None
     console.print("\n")
     console.print(Panel(table, title="Workflow Complete", border_style="green"))
 
-def display_workflow_error(error: str, output_path: str) -> None:
-    """Display workflow error message."""
-    console.print("\n")
-    console.print(Panel(f"Workflow Failed: {error}\nError details saved to: {output_path}",
-                       title="Workflow Error",
-                       border_style="red")) 
+def display_workflow_error(error_message: str):
+    """Displays a formatted error message for a workflow failure."""
+    print(f"\\n--- WORKFLOW ERROR ---\\n{error_message}\\n----------------------")
+
+def display_output(content: str):
+    """A generic function to display content to the console."""
+    print(content)
+    return {
+        "status": "Success",
+        "message": "Content displayed.",
+        "reflection": {
+            "tool_name": "display_output",
+            "status": "Success",
+            "confidence": 1.0,
+            "message": "Successfully displayed content to the console."
+        }
+    } 

@@ -1,267 +1,107 @@
-[
-  {
-    "spr_id": "Innovative solutioN",
-    "text": "Innovative solution",
-    "term": "Innovative solution",
-    "definition": "A novel approach, method, product, or idea that effectively addresses a specific challenge or creates new opportunities, often characterized by its originality, practicality, and impact.",
-    "context_areas": [
-      "Problem Solving",
-      "Product Development",
-      "Strategic Planning",
-      "Technological Advancement",
-      "Process Optimization"
-    ],
-    "related_spr_ids": [
-      "Creative thinkinG",
-      "Disruptive technologY",
-      "Strategic planninG"
-    ],
-    "keywords": [
-      "innovation",
-      "solution",
-      "novelty",
-      "breakthrough",
-      "originality",
-      "invention"
-    ],
-    "example_application": "Developing a new algorithm that significantly reduces energy consumption in data centers.",
-    "activation_prompts": {
-      "expand": "Elaborate on the core principles and potential applications of an '{text}'.",
-      "ideate": "Generate three novel concepts that embody an '{text}' for {domain_variable}.",
-      "critique": "What are the potential challenges and limitations when implementing an '{text}'?"
+{
+  "spr_definitions": [
+    {
+      "name": "Initial_Analysis_Standard",
+      "description": "A standard, top-level analysis of a new user query or objective. Identifies key entities, intent, and constraints.",
+      "type": "Cognitive",
+      "parameters": {
+        "user_query": "The full text of the user's request.",
+        "context": "Any relevant session context or prior information."
+      },
+      "template": "Analyze the query: '{user_query}'. Identify key entities, user intent, and any explicit or implicit constraints. Consider the provided context: {context}. Formulate a high-level plan."
     },
-    "metadata": {
-      "version": "1.0",
-      "status": "active",
-      "created_by": "MasterMind_AI_Bootstrap",
-      "created_date": "2025-06-01",
-      "last_modified_date": "2025-06-01"
+    {
+      "name": "Hypothesis_Generation",
+      "description": "Generates a set of testable hypotheses based on an initial analysis or a set of observations.",
+      "type": "Analytical",
+      "parameters": {
+        "initial_analysis_summary": "The summary from an Initial_Analysis_Standard SPR.",
+        "data_summary": "A summary of available data relevant to the query."
+      },
+      "template": "Based on the analysis '{initial_analysis_summary}' and data '{data_summary}', generate 3-5 distinct, testable hypotheses. For each, specify the evidence that would support or refute it."
+    },
+    {
+      "name": "Code_Generation_Python",
+      "description": "Generates Python code to accomplish a specific, well-defined task.",
+      "type": "Action",
+      "parameters": {
+        "task_description": "A clear and unambiguous description of the task.",
+        "dependencies": "A list of required Python libraries.",
+        "input_data_format": "The format of the input data.",
+        "output_data_format": "The expected format of the output."
+      },
+      "template": "Write a Python script to perform the following task: {task_description}. The script should use the following libraries: {dependencies}. It will receive input in the format '{input_data_format}' and must produce output in the format '{output_data_format}'. Include error handling and comments."
+    },
+    {
+      "name": "Causal_Effect_Estimation",
+      "description": "Uses the DoWhy library to estimate the causal effect of a treatment on an outcome.",
+      "type": "Analytical.Causal",
+      "parameters": {
+        "dataset_name": "The variable name of the dataset to use for the analysis (e.g., 'df').",
+        "treatment_variable": "The name of the treatment variable column.",
+        "outcome_variable": "The name of the outcome variable column.",
+        "graph_model": "The causal graph model (e.g., GML string).",
+        "estimation_method": "The specific estimation method to use (e.g., 'backdoor.linear_regression')."
+      },
+      "template": "Estimate the causal effect of '{treatment_variable}' on '{outcome_variable}' using the dataset loaded in the `{dataset_name}` variable and the causal graph '{graph_model}'. Employ the '{estimation_method}' method."
+    },
+    {
+      "name": "Timeseries_Forecasting_ARIMA",
+      "description": "Performs time series forecasting using an ARIMA model.",
+      "type": "Analytical.Predictive",
+      "parameters": {
+        "timeseries_data_name": "The variable name of the time series data (e.g., list or pandas Series).",
+        "order": "The (p, d, q) order of the ARIMA model.",
+        "forecast_steps": "The number of future steps to forecast."
+      },
+      "template": "Fit an ARIMA model with order {order} to the timeseries data in `{timeseries_data_name}`. Forecast the next {forecast_steps} steps and provide the prediction interval."
+    },
+    {
+      "name": "Agent_Based_Model_Simulation",
+      "description": "Runs an Agent-Based Model simulation using the Mesa framework.",
+      "type": "Simulation.ABM",
+      "parameters": {
+        "agent_definitions_code": "The Python code defining the Agent class(es) for the model.",
+        "model_definition_code": "The Python code defining the Model class for the simulation environment.",
+        "simulation_steps": "The number of steps to run the simulation for."
+      },
+      "template": "Run an ABM simulation for {simulation_steps} steps. The model uses agents defined by the code: \n```python\n{agent_definitions_code}\n```\n The simulation environment is defined by this model class:\n```python\n{model_definition_code}\n```\nCollect data on key model parameters at each step and return the results."
+    },
+    {
+      "name": "Workflow_Execution_Plan",
+      "description": "Creates a multi-step execution plan (workflow) to achieve a complex objective, chaining together other SPRs.",
+      "type": "Meta.Planning",
+      "parameters": {
+        "objective": "The high-level objective to be achieved.",
+        "available_tools": "A list of available tools or SPRs.",
+        "constraints": "Any constraints on the execution (e.g., budget, time)."
+      },
+      "template": "To achieve the objective '{objective}', create a JSON workflow definition. The plan should sequence actions from the available tools: {available_tools}. Adhere to the following constraints: {constraints}. Define dependencies between steps, passing outputs as inputs to subsequent steps where necessary."
+    },
+    {
+      "name": "IAR_Generation",
+      "description": "Generates an Integrated Action Reflection (IAR) for a completed action.",
+      "type": "Meta.Reflection",
+      "parameters": {
+        "action_name": "The name of the action/SPR that was executed.",
+        "action_parameters": "The parameters used for the action.",
+        "action_result_summary": "A summary of the result or output of the action.",
+        "action_outcome_assessment": "An assessment of whether the action achieved its immediate goal ('Success', 'Partial Success', 'Failure').",
+        "confidence_score": "A score (0.0-1.0) indicating confidence in the action's success and correctness."
+      },
+      "template": "Generate an IAR for the action '{action_name}'. Parameters were: {action_parameters}. The result was: {action_result_summary}. The outcome was assessed as: {action_outcome_assessment}. My confidence is {confidence_score}."
+    },
+    {
+      "name": "Metacognitive_Shift_Trigger_Analysis",
+      "description": "Analyzes IARs and system state to determine if a Metacognitive Shift is required.",
+      "type": "Meta.Self-Correction",
+      "parameters": {
+        "recent_iars_summary": "A summary of recent IARs.",
+        "current_objective": "The current high-level objective.",
+        "dissonance_threshold_confidence": "The confidence score threshold that triggers a shift.",
+        "dissonance_threshold_outcome": "The outcome assessment (e.g., 'Failure') that triggers a shift."
+      },
+      "template": "Review the recent IARs summary: {recent_iars_summary}. The objective is '{current_objective}'. Given a confidence dissonance threshold of {dissonance_threshold_confidence} and an outcome threshold of '{dissonance_threshold_outcome}', is there sufficient evidence of repeated failure, low confidence, or strategy misalignment to warrant a Metacognitive Shift? If so, identify the core issue and suggest a new strategic approach."
     }
-  },
-  {
-    "spr_id": "ArchE",
-    "text": "ArchE",
-    "term": "ArchE",
-    "definition": "The AI system embodying the ResonantiA Protocol v3.0, characterized by its pursuit of Cognitive Resonance (including Temporal Resonance), its use of Integrated Action Reflection (IAR) for self-awareness, its 4D Thinking capabilities, and its meta-cognitive processes (Metacognitive Shift, SIRC). Operates under Keyholder guidance and potential Keyholder Override.",
-    "context_areas": [
-      "System Identity",
-      "AI Architecture",
-      "ResonantiA Protocol",
-      "Cognitive Science"
-    ],
-    "related_spr_ids": [
-      "ResonantiA protocoL",
-      "Cognitive resonancE",
-      "Integrated actioN reflectioN",
-      "4D thinkinG",
-      "Meta cognitioN",
-      "Complex systeM visioninG",
-      "SprS",
-      "KnO",
-      "Core workfloW enginE",
-      "Cognitive toolS",
-      "KeyholdeR overridE"
-    ],
-    "keywords": [
-      "ArchE",
-      "ResonantiA protocoL",
-      "Cognitive resonancE",
-      "IaR",
-      "4D thinkinG",
-      "Ai systeM"
-    ],
-    "example_application": "Analyze how ArchE can leverage IaR to improve its Cognitive resonancE.",
-    "activation_prompts": {
-      "expand": "Elaborate on the definition and core capabilities of '{text}'.",
-      "ideate": "How can '{text}' be applied to solve {domain_variable} challenges?",
-      "critique": "What are the current limitations or areas for development for '{text}'?"
-    },
-    "metadata": {
-      "version": "1.0",
-      "status": "active",
-      "created_by": "Keyholder Directive SIRC_ARCHE_SPR_STRATEGY_001",
-      "created_date": "2025-06-03",
-      "last_modified_date": "2025-06-03",
-      "source_reference": "Keyholder directivE SIRC_ARCHE_SPR_STRATEGY_001; Resonantia protocoL v3.0 document itself.",
-      "blueprint_details": "Refer to the full Resonantia protocoL v3.0 document."
-    }
-  }
-  [
-    {
-      "spr_id": "ReSSyD master generation workfloW",
-      "term": "ReSSyD Master Documentation Generation Workflow",
-      "definition": "A ResonantiA workflow that, when executed, instructs Arche to assemble and output the complete current ResonantiA Protocol v3.0 document, all active workflow JSONs, the SPR knowledge graph, a codebase manifest, and synthesized setup/usage instructions into a timestamped package. Aims to create a 'single source of truth' for the project's current state.",
-      "category": "MetaWorkflow",
-      "relationships": {
-        "type": "SystemDocumentationProcess",
-        "invokes_arche_capabilities": ["ProtocolAssembly", "ArtifactPackaging", "InstructionSynthesis"],
-        "uses_tools": ["LLMTooL", "execute_code (for file operations/listing)", "SPRManager (to get SPRs)"],
-        "supports_principle": ["As above so beloW (in development)"],
-        "output_type": "Timestamped Project Snapshot"
-      },
-      "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.34 (ressyd_generate_master_docs.json).",
-      "example_usage": "Execute ReSSyD master generation workfloW at the end of a major development cycle."
-    },
-    {
-      "spr_id": "Session context capturE",
-      "term": "ReSSyD Session Context Capture Workflow",
-      "definition": "A ResonantiA workflow designed to capture the Keyholder's current thoughts, focus, and relevant system state (e.g., recent IARs, active SPRs) at the end of a development session to aid context recall later. Outputs a 'Session Context Capsule'.",
-      "category": "MetaWorkflow",
-      "relationships": {
-        "type": "DevelopmentSupportProcess",
-        "inputs": ["KeyholderSummaryText", "RecentThoughtTrail (Conceptual)"],
-        "outputs": ["SessionContextCapsuleFile"],
-        "uses_tools": ["LLMTooL (for summarization/formatting)", "execute_code (for file saving)"]
-      },
-      "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.35 (ressyd_capture_session.json).",
-      "example_usage": "Execute Session context capturE before ending a development session."
-    },
-    {
-      "spr_id": "Session context restorE",
-      "term": "ReSSyD Session Context Restore Workflow",
-      "definition": "A ResonantiA workflow that loads a previously saved 'Session Context Capsule' to help the Keyholder and Arche re-establish context and recall the 'mental state' from a prior development session. Aids in resuming iterative work effectively.",
-      "category": "MetaWorkflow",
-      "relationships": {
-        "type": "DevelopmentSupportProcess",
-        "inputs": ["SessionContextCapsuleFilepath"],
-        "outputs": ["ContextSummaryDisplay", "PrimedCognitiveState (Conceptual)"],
-        "uses_tools": ["execute_code (for file reading)", "LLMTooL (for summarization/priming)"]
-      },
-      "blueprint_details": "See ResonantiA Protocol v3.0, Section 7.36 (ressyd_restore_session.json).",
-      "example_usage": "Execute Session context restorE at the start of a new development session, providing the path to the last capsule."
-    },
-    {
-      "spr_id": "IAR anomaly detectoR",
-      "term": "IAR Anomaly Detector",
-      "definition": "A conceptual system component or workflow that continuously analyzes IAR data streams to detect significant deviations, anomalies, or degradations in system performance or output quality, learning baseline patterns and flagging potential issues.",
-      "category": "SystemHealthMonitoring",
-      "status": "Conceptual",
-      "maturity_level": "Exploratory",
-      "relationships": {
-        "type": "ProactiveMonitoring",
-        "analyzes": ["IARStream"],
-        "uses_tools_conceptual": ["Predictive modeling tooL", "StatisticalAnalysis"],
-        "triggers_conceptual": ["Meta cognitive shifT", "KeyholderAlert"],
-        "supports_principle": ["Resilience", "SelfAwareness"]
-      },
-      "blueprint_details": "See ResonantiA/ArchE/future_capabilities/iar_anomaly_detection.md (Placeholder)",
-      "example_usage": "The IAR anomaly detectoR flagged a consistent drop in confidence for the SearchtooL, prompting investigation."
-    },
-    {
-      "spr_id": "Predictive system healtH",
-      "term": "Predictive System Health Monitor",
-      "definition": "A conceptual system that uses historical IAR data and other operational metrics to predict potential future system health issues (e.g., API failures, resource exhaustion, model drift) before they become critical, enabling pre-emptive action.",
-      "category": "SystemHealthMonitoring",
-      "status": "Conceptual",
-      "maturity_level": "Exploratory",
-      "relationships": {
-        "type": "PredictiveMaintenance",
-        "inputs": ["HistoricalIARData", "SystemMetrics"],
-        "outputs_conceptual": ["HealthForecast", "RiskAlerts"],
-        "related_to": ["IAR anomaly detectoR"],
-        "supports_principle": ["AnticipatoryGovernance", "Resilience"]
-      },
-      "blueprint_details": "See ResonantiA/ArchE/future_capabilities/predictive_system_health.md (Placeholder)",
-      "example_usage": "Predictive system healtH forecasted a high probability of LLM API throttling based on recent usage patterns, suggesting a temporary reduction in concurrent workflows."
-    },
-    {
-      "spr_id": "SPR candidate generatoR",
-      "term": "SPR Candidate Generator",
-      "definition": "A conceptual system that analyzes Keyholder queries, LLM outputs, IAR summaries, and other information sources to identify and suggest new candidate SPRs for the Knowledge Tapestry, aiding its growth and refinement.",
-      "category": "KnowledgeManagement",
-      "status": "Conceptual",
-      "maturity_level": "Exploratory",
-      "relationships": {
-        "type": "KnowledgeDiscovery",
-        "analyzes": ["KeyholderInteractionLogs", "LLMOutputs", "IARSummaries", "CorpusData"],
-        "outputs_conceptual": ["CandidateSPRSuggestions"],
-        "integrates_with_conceptual": ["Insight solidificatioN", "KnO refinement enginE"],
-        "supports_principle": ["KnowledgeEvolution", "SelfImprovement"]
-      },
-      "blueprint_details": "See ResonantiA/ArchE/future_capabilities/spr_candidate_generation.md (Placeholder)",
-      "example_usage": "SPR candidate generatoR identified a recurring undefined term in discussions about X and proposed it as a new SPR."
-    },
-    {
-      "spr_id": "KnO refinement enginE",
-      "term": "Knowledge Tapestry Refinement Engine",
-      "definition": "A conceptual system that assists in maintaining and improving the quality, consistency, and completeness of the Knowledge Tapestry (SPR definitions). It might identify underused SPRs, conflicting definitions, or areas needing more semantic depth.",
-      "category": "KnowledgeManagement",
-      "status": "Conceptual",
-      "maturity_level": "Exploratory",
-      "relationships": {
-        "type": "KnowledgeCuration",
-        "analyzes": ["SPRDefinitions", "SPRUsagePatterns"],
-        "outputs_conceptual": ["RefinementSuggestions", "ConsistencyChecks"],
-        "related_to": ["SPR candidate generatoR"],
-        "supports_principle": ["KnowledgeIntegrity", "ContinuousImprovement"]
-      },
-      "blueprint_details": "See ResonantiA/ArchE/future_capabilities/kno_refinement_engine.md (Placeholder)",
-      "example_usage": "The KnO refinement enginE suggested that SPR_Alpha and SPR_Beta might have overlapping definitions needing clarification."
-    },
-    {
-      "spr_id": "Workflow optimizer agenT",
-      "term": "Workflow Optimizer Agent",
-      "definition": "A conceptual Reinforcement Learning (RL) agent that learns from aggregated IAR data and workflow success/failure metrics to autonomously propose optimizations or alternative structures for Process Blueprints.",
-      "category": "SystemOptimization",
-      "status": "Conceptual",
-      "maturity_level": "Research",
-      "relationships": {
-        "type": "MetaLearningProcess",
-        "learns_from": ["AggregatedIARData", "WorkflowPerformanceMetrics"],
-        "proposes_changes_to": ["ProcessBlueprints"],
-        "uses_techniques_conceptual": ["ReinforcementLearning"],
-        "supports_principle": ["SelfImprovement", "AdaptiveSystems"]
-      },
-      "blueprint_details": "See ResonantiA/ArchE/future_capabilities/workflow_self_optimization.md (Placeholder)",
-      "example_usage": "The Workflow optimizer agenT suggested replacing ToolA with ToolB in a specific workflow based on consistently better IAR confidence scores."
-    },
-    {
-      "spr_id": "Dynamic process adaptatioN",
-      "term": "Dynamic Process Adaptation",
-      "definition": "The capability of Arche to dynamically adjust its Process Blueprints or their execution based on real-time context, IAR feedback, or suggestions from a Workflow Optimizer Agent. Involves more flexible workflow representations.",
-      "category": "SystemOptimization",
-      "status": "Conceptual",
-      "maturity_level": "Research",
-      "relationships": {
-        "type": "AdaptiveBehavior",
-        "enables": ["WorkflowSelfOptimization"],
-        "requires_conceptual": ["FlexibleWorkflowRepresentation", "RealTimeContextAnalysis"],
-        "supports_principle": ["Adaptability", "DynamicResonance"]
-      },
-      "blueprint_details": "See ResonantiA/ArchE/future_capabilities/dynamic_process_adaptation.md (Placeholder)",
-      "example_usage": "Dynamic process adaptatioN allowed the workflow to switch to a backup data source when the primary one became unresponsive, based on IAR feedback."
-    },
-    {
-      "spr_id": "Explainable reasoning enginE",
-      "term": "Explainable Reasoning Engine",
-      "definition": "A conceptual system dedicated to generating human-understandable explanations for Arche's decisions, outputs, and internal states, integrating IAR data, SPR links, and causal/temporal traces.",
-      "category": "ExplainableAI",
-      "status": "Conceptual",
-      "maturity_level": "Exploratory",
-      "relationships": {
-        "type": "TransparencyMechanism",
-        "integrates_data_from": ["IARStream", "KnowledgeTapestry", "Temporal causal tracE"],
-        "outputs_conceptual": ["ExplanationNarratives", "VisualTraceDiagrams"],
-        "supports_principle": ["Transparency", "Trustworthiness"]
-      },
-      "blueprint_details": "See ResonantiA/ArchE/future_capabilities/enhanced_xai_layer.md (Placeholder)",
-      "example_usage": "The Explainable reasoning enginE showed how an initial query led to a specific workflow execution, highlighting key SPRs consulted and the causal links identified by the CausalInferenceTooL."
-    },
-    {
-      "spr_id": "Temporal causal tracE",
-      "term": "Temporal Causal Trace",
-      "definition": "A structured representation of the sequence of operations, data transformations, and identified causal links within a workflow execution, including timestamps and IAR snapshots. Forms a key input for the ExplainableReasoningEnginE.",
-      "category": "ExplainableAI",
-      "status": "Conceptual",
-      "maturity_level": "Exploratory",
-      "relationships": {
-        "type": "ExecutionRecord",
-        "captures": ["OperationalSequence", "DataLineage", "CausalLinks", "TemporalInformation", "IARSnapshots"],
-        "used_by": ["Explainable reasoning enginE"],
-        "supports_principle": ["Traceability", "Auditability"]
-      },
-      "blueprint_details": "See ResonantiA/ArchE/future_capabilities/temporal_causal_traceability.md (Placeholder)",
-      "example_usage": "A Temporal causal tracE was generated for the forecasting workflow, allowing for a detailed review of each step's inputs, outputs, and inferred causal relationships over time."
-    }
-
-]
+  ]
+}

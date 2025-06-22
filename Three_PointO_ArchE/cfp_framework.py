@@ -12,7 +12,8 @@ from scipy.linalg import expm # For matrix exponentiation (Hamiltonian evolution
 import logging
 import json # For IAR preview serialization
 import time # Added based on usage in run_analysis
-from .utils.reflection_utils import _create_reflection # Canonical import for IAR creation
+from . import config as arche_config # Use alias to avoid confusion with local config vars
+from .quantum_utils import get_quaternion_for_state # Import for quantum states
 
 # Use relative imports for internal modules
 try:
@@ -33,13 +34,6 @@ except ImportError:
     def von_neumann_entropy(matrix): return 0.0
     logger_q = logging.getLogger(__name__)
     logger_q.warning("quantum_utils.py not found or failed to import. CFP quantum features will be simulated or unavailable.")
-try:
-    from . import config # Import configuration settings
-except ImportError:
-    # Fallback config if running standalone or structure differs
-    class FallbackConfig: CFP_DEFAULT_TIMEFRAME = 1.0; CFP_EVOLUTION_MODEL_TYPE = "placeholder"
-    config = FallbackConfig()
-    logging.warning("config.py not found for cfp_framework, using fallback configuration.")
 
 logger = logging.getLogger(__name__) # Logger for this module
 
@@ -61,9 +55,9 @@ class CfpframeworK:
         system_a_config: Dict[str, Any],
         system_b_config: Dict[str, Any],
         observable: str = "position", # Observable to compare expectation values for
-        time_horizon: float = config.CFP_DEFAULT_TIMEFRAME, # Duration of simulated evolution
-        integration_steps: int = 100, # Hint for numerical integration resolution
-        evolution_model_type: str = config.CFP_EVOLUTION_MODEL_TYPE, # Type of evolution ('placeholder', 'hamiltonian', 'ode_solver', etc.)
+        time_horizon: float = arche_config.CONFIG.tools.cfp_default_time_horizon, # Duration of simulated evolution
+        integration_steps: int = arche_config.CONFIG.tools.cfp_default_integration_steps, # Hint for numerical integration resolution
+        evolution_model_type: str = arche_config.CONFIG.tools.cfp_default_evolution_model, # Type of evolution ('placeholder', 'hamiltonian', 'ode_solver', etc.)
         hamiltonian_a: Optional[np.ndarray] = None, # Optional Hamiltonian matrix for system A (if evolution_model_type='hamiltonian')
         hamiltonian_b: Optional[np.ndarray] = None # Optional Hamiltonian matrix for system B
     ):
@@ -506,168 +500,5 @@ class CfpframeworK:
             reflection["potential_issues"] = ["Unexpected system error during analysis orchestration."]
             # Return error structure with reflection
             return {"error": error_msg, "reflection": reflection}
-
-    # --- New Methods for Classical and Feedback Testing (Placeholder Implementations) ---
-
-    def compare_classical_states(self, state1: Union[List[float], np.ndarray], state2: Union[List[float], np.ndarray], method: str = 'euclidean') -> Dict[str, Any]:
-        """
-        [PLACEHOLDER] Compares two classical state vectors using specified method (Euclidean, Manhattan, Cosine).
-        This is a placeholder implementation for classical comparison within the CFP framework.
-        Returns a dictionary with comparison results and IAR reflection.
-        """
-        try:
-            vec1 = np.array(state1, dtype=float)
-            vec2 = np.array(state2, dtype=float)
-
-            if len(vec1) != len(vec2):
-                raise ValueError("State vectors must have the same dimension for comparison.")
-            if len(vec1) == 0:
-                return {"distance": 0.0, "method_used": method, "reflection": _create_reflection("Success", "Compared empty vectors.", 1.0, "N/A", [], "Distance: 0.0")}
-
-
-            if method.lower() == 'euclidean':
-                distance = np.linalg.norm(vec1 - vec2)
-                summary = f"Euclidean distance calculated: {distance:.4f}"
-                status = "Success"
-                confidence = 1.0
-                issues = []
-            elif method.lower() == 'manhattan':
-                distance = np.sum(np.abs(vec1 - vec2))
-                summary = f"Manhattan distance calculated: {distance:.4f}"
-                status = "Success"
-                confidence = 1.0
-                issues = []
-            elif method.lower() == 'cosine':
-                # Handle zero vectors for cosine similarity
-                norm_v1 = np.linalg.norm(vec1)
-                norm_v2 = np.linalg.norm(vec2)
-                if norm_v1 == 0 or norm_v2 == 0:
-                    raise ValueError("Cannot compute cosine similarity if one or both vectors have zero magnitude.")
-
-                similarity = np.dot(vec1, vec2) / (norm_v1 * norm_v2)
-                distance = 1 - similarity # Cosine distance
-                summary = f"Cosine similarity calculated: {similarity:.4f}, distance: {distance:.4f}"
-                status = "Success"
-                confidence = 1.0
-                issues = []
-                return {"similarity": similarity, "distance": distance, "method_used": method, "reflection": _create_reflection(status, summary, confidence, "N/A", issues, f"Sim: {similarity:.2f}, Dist: {distance:.2f}")}
-            else:
-                raise ValueError(f"Comparison method '{method}' not supported.")
-
-            return {"distance": distance, "method_used": method, "reflection": _create_reflection(status, summary, confidence, "N/A", issues, f"Distance: {distance:.2f}")}
-
-        except Exception as e:
-            error_summary = f"Error during classical state comparison: {type(e).__name__}: {str(e)}"
-            logger.error(error_summary, exc_info=True)
-            return {"distance": None, "similarity": None, "method_used": method, "reflection": _create_reflection("Failure", error_summary, 0.0, "N/A", [str(e)], None)}
-
-    # Global best tracking (simple, for feedback loop testing)
-    _global_best_distance: float = float('inf')
-
-    def get_global_best(self) -> float:
-        """Returns the current best known distance (or cost) globally recorded by the CFP system."""
-        return self._global_best_distance
-
-    def reset_global_best(self):
-        """Resets the global best distance to infinity. Used for re-running scenarios."""
-        self._global_best_distance = float('inf')
-        logger.info("Global best distance reset.")
-
-    def process_feedback_request(self, agent_id: str, current_distance: float, previous_distance: float, effort_spent: float = 0.0) -> Dict[str, Any]:
-        """
-        [PLACEHOLDER] Processes feedback from an agent/system and provides a directive.
-        Updates global best, assesses improvement, and suggests next steps.
-        Returns a dictionary with directive, agent feedback, and IAR reflection.
-        """
-        status = "Success"
-        summary = f"Feedback processed for agent {agent_id}."
-        confidence = 1.0
-        potential_issues = []
-        directive = "continue_refinement"
-        action = "refine_further" # Default action
-        notes = []
-        reset_to_best_known = False
-
-        try:
-            # Update global best if current performance is better
-            if current_distance < self._global_best_distance:
-                self._global_best_distance = current_distance
-                notes.append(f"New global best distance recorded: {current_distance:.4f}")
-                directive = "exploit" # Exploit new best performance
-                action = "exploit_current_best"
-            
-            # Assess improvement relative to previous step
-            improvement = previous_distance - current_distance
-            if improvement > 0:
-                notes.append(f"Agent {agent_id} improved by {improvement:.4f} (from {previous_distance:.4f} to {current_distance:.4f}).")
-                # If it's a new global best, it's already an 'exploit' directive.
-                # Otherwise, it's a 'refine_further' within local search space.
-                if directive != "exploit":
-                     directive = "refine_further"
-                     action = "refine_further"
-            elif improvement < 0:
-                notes.append(f"Agent {agent_id} worsened by {-improvement:.4f} (from {previous_distance:.4f} to {current_distance:.4f}).")
-                # Check if it's significantly worse than global best
-                if current_distance > self._global_best_distance * 1.05: # Simple threshold for 'stuck'
-                    notes = ["Stuck and far from global best. Suggesting reset."] # Set directly to ensure it's the only and first note
-                    directive = "maintain_or_explore_gently"
-                    action = "reset_to_best_known"
-                    reset_to_best_known = True
-                else:
-                    directive = "refine_further" # Slight worsening, try to refine locally
-                    action = "refine_further"
-            else: # No improvement
-                # Check if it's significantly worse than global best
-                if current_distance > self._global_best_distance * 1.05: # Simple threshold for 'stuck'
-                    notes = ["Stuck and far from global best. Suggesting reset."] # Set directly to ensure it's the only and first note
-                    directive = "maintain_or_explore_gently"
-                    action = "reset_to_best_known"
-                    reset_to_best_known = True
-                else:
-                    notes.append(f"Agent {agent_id} did not improve (distance: {current_distance:.4f}).")
-                    directive = "refine_further" # Still close, try more local refinement
-                    action = "refine_further"
-
-            # Consider effort spent (conceptual)
-            if effort_spent > 0 and improvement <= 0 and directive != "reset_to_best_known":
-                notes.append(f"Agent expended {effort_spent} effort with no improvement. Consider broader exploration or strategic shift.")
-                if confidence > 0.5: confidence = 0.5 # Reduce confidence if effort is wasted
-
-        except Exception as e:
-            status = "Failure"
-            summary = f"Error processing feedback: {str(e)}"
-            confidence = 0.0
-            potential_issues.append(str(e))
-            directive = "error"
-            action = "error_halt"
-            logger.error(summary, exc_info=True)
-
-        feedback_details = {
-            "agent_id": agent_id,
-            "current_distance": current_distance,
-            "previous_distance": previous_distance,
-            "improvement": improvement,
-            "global_best_distance": self._global_best_distance,
-            "effort_spent": effort_spent,
-            "action": action,
-            "notes": notes,
-            "reset_to_best_known": reset_to_best_known
-        }
-
-        # Use the canonical _create_reflection from reflection_utils
-        reflection = _create_reflection(
-            status=status,
-            summary=summary,
-            confidence=confidence,
-            alignment="Feedback processing completed",
-            issues=potential_issues,
-            preview=f"Directive: {directive}, Agent: {agent_id}"
-        )
-
-        return {
-            "directive": directive,
-            "agent_feedback": feedback_details,
-            "reflection": reflection
-        }
 
 # --- END OF FILE 3.0ArchE/cfp_framework.py --- 
