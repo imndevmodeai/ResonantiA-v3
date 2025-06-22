@@ -9,45 +9,45 @@ from functools import wraps
 
 # Attempt to import necessary modules with error handling
 try:
-    from ResonantiA.ArchE.workflow_engine import WorkflowEngine
-    from ResonantiA.ArchE.spr_manager import SPRManager
-    from ResonantiA.ArchE import config
+    from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
+    from Three_PointO_ArchE.spr_manager import SPRManager
+    from Three_PointO_ArchE import config
     # Specific tool functions to patch
-    from ResonantiA.ArchE.tools import run_search, invoke_llm, display_output
-    from ResonantiA.ArchE.code_executor import execute_code
+    from Three_PointO_ArchE.tools import run_search, invoke_llm, display_output
+    from Three_PointO_ArchE.code_executor import execute_code
 except ImportError:
     try:
-        from ...ArchE.workflow_engine import WorkflowEngine
+        from ...ArchE.workflow_engine import IARCompliantWorkflowEngine
         from ...ArchE.spr_manager import SPRManager
         from ...ArchE import config
         from ...ArchE.tools import run_search, invoke_llm, display_output
         from ...ArchE.code_executor import execute_code
     except ImportError:
         try:
-            from ArchE.workflow_engine import WorkflowEngine
+            from ArchE.workflow_engine import IARCompliantWorkflowEngine
             from ArchE.spr_manager import SPRManager
             from ArchE import config
             from ArchE.tools import run_search, invoke_llm, display_output
             from ArchE.code_executor import execute_code
         except ImportError:
             try:
-                from ..ArchE.workflow_engine import WorkflowEngine
+                from ..ArchE.workflow_engine import IARCompliantWorkflowEngine
                 from ..ArchE.spr_manager import SPRManager
                 from ..ArchE import config
                 from ..ArchE.tools import run_search, invoke_llm, display_output
                 from ..ArchE.code_executor import execute_code
             except ImportError:
-                print("Failed to import WorkflowEngine, SPRManager, config or tool functions. Ensure PYTHONPATH is set or tests run correctly.")
-                WorkflowEngine, SPRManager, config = None, None, None
+                print("Failed to import IARCompliantWorkflowEngine, SPRManager, config or tool functions. Ensure PYTHONPATH is set or tests run correctly.")
+                IARCompliantWorkflowEngine, SPRManager, config = None, None, None
                 run_search, invoke_llm, execute_code, display_output = None, None, None, None
 
 
 # Fixture for engine, similar to integration test but potentially using real config paths
 @pytest.fixture
-def e2e_engine(tmp_path: Path, monkeypatch) -> WorkflowEngine:
+def e2e_engine(tmp_path: Path, monkeypatch) -> IARCompliantWorkflowEngine:
     """Provides engine configured for E2E tests (might use actual config paths)."""
-    if not all([WorkflowEngine, SPRManager, config]):
-        pytest.skip("Required modules (WorkflowEngine, SPRManager, config) not imported.")
+    if not all([IARCompliantWorkflowEngine, SPRManager, config]):
+        pytest.skip("Required modules (IARCompliantWorkflowEngine, SPRManager, config) not imported.")
 
     # For E2E, we might want to use the actual configured paths,
     # but ensure outputs/logs go to temp dir for cleanup.
@@ -71,7 +71,7 @@ def e2e_engine(tmp_path: Path, monkeypatch) -> WorkflowEngine:
         pytest.skip(f"SPR file not found at configured path: {spr_filepath}")
 
     spr_manager = SPRManager(config.SPR_JSON_FILE) # Use actual SPR file
-    return WorkflowEngine(spr_manager=spr_manager)
+    return IARCompliantWorkflowEngine(spr_manager=spr_manager)
 
 # Mock data for successful tool calls with IAR reflection
 MOCK_REFLECTION_SUCCESS = {"status": "Success", "summary": "Mocked tool executed successfully.", "confidence": 0.95, "alignment_check": "Aligned", "potential_issues": None, "raw_output_preview": "Mock success"}
@@ -81,8 +81,8 @@ MOCK_SEARCH_RESULTS = [{"title": "Mock Result 1", "url": "http://mock.com/1", "s
 MOCK_LLM_SUMMARY = "This is a mock LLM summary of the search results."
 
 # This test will use mocker fixture for patching directly
-@pytest.mark.skipif(WorkflowEngine is None or config is None, reason="WorkflowEngine or config not imported.")
-def test_basic_analysis_workflow_e2e(e2e_engine: WorkflowEngine, mocker):
+@pytest.mark.skipif(IARCompliantWorkflowEngine is None or config is None, reason="IARCompliantWorkflowEngine or config not imported.")
+def test_basic_analysis_workflow_e2e(e2e_engine: IARCompliantWorkflowEngine, mocker):
     """
     Runs the basic_analysis.json workflow end-to-end with mocked external calls.
     Verifies final status and presence of key results and IAR data.

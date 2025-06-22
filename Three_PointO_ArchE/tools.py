@@ -84,17 +84,18 @@ def get_global_spr_manager() -> SPRManager:
 
 # --- IAR Helper Function ---
 # (Reused for consistency)
-def _create_reflection(status: str, summary: str, confidence: Optional[float], alignment: Optional[str], issues: Optional[List[str]], preview: Any) -> Dict[str, Any]:
-    """Helper function to create the standardized IAR reflection dictionary."""
-    if confidence is not None: confidence = max(0.0, min(1.0, confidence))
-    issues_list = issues if issues else None
-    try:
-        preview_str = json.dumps(preview, default=str) if isinstance(preview, (dict, list)) else str(preview)
-        if preview_str and len(preview_str) > 150: preview_str = preview_str[:150] + "..."
-    except Exception:
-        try: preview_str = str(preview); preview_str = preview_str[:150] + "..." if len(preview_str) > 150 else preview_str
-        except Exception: preview_str = "[Preview Error]"
-    return {"status": status, "summary": summary, "confidence": confidence, "alignment_check": alignment if alignment else "N/A", "potential_issues": issues_list, "raw_output_preview": preview_str}
+# This function has been moved to Three_PointO_ArchE/utils/reflection_utils.py
+# def _create_reflection(status: str, summary: str, confidence: Optional[float], alignment: Optional[str], issues: Optional[List[str]], preview: Any) -> Dict[str, Any]:
+#     """Helper function to create the standardized IAR reflection dictionary."""
+#     if confidence is not None: confidence = max(0.0, min(1.0, confidence))
+#     issues_list = issues if issues else None
+#     try:
+#         preview_str = json.dumps(preview, default=str) if isinstance(preview, (dict, list)) else str(preview)
+#         if preview_str and len(preview_str) > 150: preview_str = preview_str[:150] + "..."
+#     except Exception:
+#         try: preview_str = str(preview); preview_str = preview_str[:150] + "..." if len(preview_str) > 150 else preview_str
+#         except Exception: preview_str = "[Preview Error]"
+#     return {"status": status, "summary": summary, "confidence": confidence, "alignment_check": alignment if alignment else "N/A", "potential_issues": issues_list, "raw_output_preview": preview_str}
 
 # --- Search Tool ---
 def run_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
@@ -550,7 +551,7 @@ def run_cfp(inputs: Dict[str, Any], action_context: Optional[ActionContext] = No
     Returns an error indicating it should be called via the registry.
     """
     logger_tools_diag.error("Direct call to tools.run_cfp detected. Action 'run_cfp' should be executed via the action registry using the run_cfp_action wrapper.")
-    error_msg = "Placeholder tools.run_cfp called directly. Use 'run_cfp' action type via registry/WorkflowEngine."
+    error_msg = "Placeholder tools.run_cfp called directly. Use 'run_cfp' action type via registry/IARCompliantWorkflowEngine."
     return {
         "error": error_msg,
         "reflection": _create_reflection(
@@ -1057,7 +1058,7 @@ def run_workflow_suite(inputs: Dict[str, Any], action_context: Optional[ActionCo
     [IAR Enabled] Discovers and runs all workflows in the specified directory.
     """
     # Moved import here to break the circular dependency
-    from .workflow_engine import WorkflowEngine 
+    from .workflow_engine import IARCompliantWorkflowEngine 
 
     workflows_dir = inputs.get("directory", config.WORKFLOW_DIR)
     test_cases_file = inputs.get("test_cases_file")
@@ -1105,7 +1106,7 @@ def run_workflow_suite(inputs: Dict[str, Any], action_context: Optional[ActionCo
 
             try:
                 # Each workflow needs its own engine instance
-                workflow_engine = WorkflowEngine(config)
+                workflow_engine = IARCompliantWorkflowEngine(config)
                 # We only need the filename, as the engine knows the directory
                 final_context = workflow_engine.run_workflow(wf_file, initial_context)
                 

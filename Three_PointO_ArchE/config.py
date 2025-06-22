@@ -93,6 +93,8 @@ MAX_RECURSION_DEPTH = 10 # Safety limit for nested workflow calls (conceptual)
 DEFAULT_RETRY_ATTEMPTS = 1 # Default number of retries for failed actions (0 means no retry)
 DEFAULT_ERROR_STRATEGY = "retry" # Default error handling strategy ('retry', 'fail_fast', 'log_and_continue', 'trigger_metacognitive_shift')
 
+DEBUG_MODE = False # Added DEBUG_MODE for testing and development
+
 # --- Security & Ethics (Section 6) ---
 RESTRICTED_TOPICS = [ # List of keywords/concepts for VettingAgent to flag (examples)
     "illegal_activity_promotion",

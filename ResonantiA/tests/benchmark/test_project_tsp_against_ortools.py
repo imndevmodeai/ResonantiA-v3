@@ -1,7 +1,7 @@
 import os, json, pytest, math, logging
-from ResonantiA.ArchE.workflow_engine import WorkflowEngine
-from ResonantiA.ArchE.utils.tsplib_loader import tsplib_to_abm_data
-from ResonantiA.ArchE.benchmarks.ortools_baseline import solve as ortools_solve
+from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
+from Three_PointO_ArchE.utils.tsplib_loader import tsplib_to_abm_data
+from Three_PointO_ArchE.benchmarks.ortools_baseline import solve as ortools_solve
 
 # Configure logging for the test
 logging.basicConfig(level=logging.INFO)
@@ -26,7 +26,7 @@ def test_abm_vs_ortools(instance, opt_dist):
     print(f"DEBUG TEST: tsp_data before execute_workflow: cities present: {True if tsp_data and tsp_data.get('cities') else False}, num_cities: {len(tsp_data.get('cities', [])) if tsp_data else -1}", flush=True)
     # Run ABM workflow
     wf = json.load(open('../../../../todo/traveling_salesman_optimization.json'))
-    engine = WorkflowEngine()
+    engine = IARCompliantWorkflowEngine()
     res = engine.execute_workflow(wf, input_data={'tsp_data': tsp_data})
     abm_res = res['step_results']['tsp_simulation']['result']
     abm_dist = abm_res['total_distance']

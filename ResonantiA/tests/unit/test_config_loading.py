@@ -9,15 +9,15 @@ ERROR_MESSAGE = ""
 CONFIG_DIRECT_LOADED = False
 
 try:
-    from ResonantiA.ArchE import config
+    from Three_PointO_ArchE import config
     # Try accessing a known variable to confirm it's loaded correctly
     _ = config.MASTERMIND_DIR 
     CONFIG_MODULE_FOUND = True
     CONFIG_VALUES_LOADED = True
     CONFIG_DIRECT_LOADED = True
-    print(f"Successfully loaded config via: from ResonantiA.ArchE import config. MASTERMIND_DIR: {config.MASTERMIND_DIR}")
+    print(f"Successfully loaded config via: from Three_PointO_ArchE import config. MASTERMIND_DIR: {config.MASTERMIND_DIR}")
 except ImportError as e:
-    ERROR_MESSAGE = f"Primary import (from ResonantiA.ArchE import config) failed: {e}"
+    ERROR_MESSAGE = f"Primary import (from Three_PointO_ArchE import config) failed: {e}"
     print(ERROR_MESSAGE)
     print(f"sys.path was: {sys.path}")
     # If this fails, the test 'test_config_module_found_and_loaded' will catch it.

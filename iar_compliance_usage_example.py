@@ -1,9 +1,9 @@
 
 # === USAGE EXAMPLE ===
-# Replace WorkflowEngine with IARCompliantWorkflowEngine
+# Replace IARCompliantWorkflowEngine with IARCompliantWorkflowEngine
 
 # OLD:
-# engine = WorkflowEngine(spr_manager)
+# engine = IARCompliantWorkflowEngine(spr_manager)
 
 # NEW:
 engine = IARCompliantWorkflowEngine(spr_manager)

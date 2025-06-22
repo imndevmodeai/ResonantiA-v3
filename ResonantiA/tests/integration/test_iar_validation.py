@@ -3,25 +3,9 @@ import pytest
 from unittest.mock import patch, MagicMock
 from typing import Dict # Import Dict
 
-# Attempt to import necessary modules with error handling
-try:
-    from ResonantiA.ArchE.action_registry import execute_action, register_action, ACTION_REGISTRY
-    from ResonantiA.ArchE.tools import _create_reflection # Import helper for creating valid reflections
-except ImportError:
-    try:
-        from ...ArchE.action_registry import execute_action, register_action, ACTION_REGISTRY
-        from ...ArchE.tools import _create_reflection
-    except ImportError:
-        try:
-            from ArchE.action_registry import execute_action, register_action, ACTION_REGISTRY
-            from ArchE.tools import _create_reflection
-        except ImportError:
-            try:
-                from ..ArchE.action_registry import execute_action, register_action, ACTION_REGISTRY
-                from ..ArchE.tools import _create_reflection
-            except ImportError:
-                print("Failed to import action_registry or _create_reflection. Ensure PYTHONPATH is set or tests run correctly relative to the project structure.")
-                execute_action, register_action, ACTION_REGISTRY, _create_reflection = None, None, None, None
+# Canonical imports for action_registry and reflection_utils
+from Three_PointO_ArchE.action_registry import execute_action, register_action, ACTION_REGISTRY
+from Three_PointO_ArchE.utils.reflection_utils import _create_reflection # Canonical import
 
 # --- Mock Action Functions for Testing IAR Validation ---
 
@@ -85,7 +69,7 @@ def test_execute_action_correct_iar():
     if not callable(mock_action_returns_correct_iar):
         pytest.skip("Dependent mock function was skipped.")
 
-    result = execute_action("correct_iar", {})
+    result = execute_action("test_task_key", "test_action_name", "correct_iar", {}, {}) # Added task_key and action_name
     assert isinstance(result, dict)
     assert "reflection" in result
     assert isinstance(result["reflection"], dict)
@@ -96,7 +80,7 @@ def test_execute_action_correct_iar():
 @pytest.mark.skipif(execute_action is None, reason="execute_action not imported.")
 def test_execute_action_no_reflection():
     """Test execute_action when action returns dict without reflection key."""
-    result = execute_action("no_reflection", {})
+    result = execute_action("test_task_key", "test_action_name", "no_reflection", {}, {}) # Added task_key and action_name
     assert isinstance(result, dict)
     assert "reflection" in result # execute_action should add a default error reflection
     assert isinstance(result["reflection"], dict)
@@ -109,7 +93,7 @@ def test_execute_action_no_reflection():
 @pytest.mark.skipif(execute_action is None, reason="execute_action not imported.")
 def test_execute_action_non_dict_return():
     """Test execute_action when action returns a non-dictionary type."""
-    result = execute_action("non_dict_return", {})
+    result = execute_action("test_task_key", "test_action_name", "non_dict_return", {}, {}) # Added task_key and action_name
     assert isinstance(result, dict) # execute_action should wrap it in a dict
     assert "reflection" in result
     assert isinstance(result["reflection"], dict)
@@ -122,7 +106,7 @@ def test_execute_action_non_dict_return():
 @pytest.mark.skipif(execute_action is None, reason="execute_action not imported.")
 def test_execute_action_bad_reflection_type():
     """Test execute_action when action returns 'reflection' but it's not a dict."""
-    result = execute_action("bad_reflection_type", {})
+    result = execute_action("test_task_key", "test_action_name", "bad_reflection_type", {}, {}) # Added task_key and action_name
     assert isinstance(result, dict)
     assert "reflection" in result
     assert isinstance(result["reflection"], dict) # execute_action replaces the bad one
@@ -139,7 +123,7 @@ def test_execute_action_error_with_reflection():
     if not callable(mock_action_returns_error_with_reflection):
         pytest.skip("Dependent mock function was skipped.")
 
-    result = execute_action("error_with_reflection", {})
+    result = execute_action("test_task_key", "test_action_name", "error_with_reflection", {}, {}) # Added task_key and action_name
     assert isinstance(result, dict)
     assert "reflection" in result
     assert isinstance(result["reflection"], dict)

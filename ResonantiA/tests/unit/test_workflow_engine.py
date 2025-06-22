@@ -1,20 +1,20 @@
 # ResonantiA Protocol v3.0 - Unit Test for Workflow Engine
-# Tests the core functionality of the WorkflowEngine class.
+# Tests the core functionality of the IARCompliantWorkflowEngine class.
 
 import os
 import json
 import pytest
 from unittest.mock import MagicMock, patch, mock_open
-from ResonantiA.ArchE.workflow_engine import WorkflowEngine
-from ResonantiA.ArchE import config # For config.WORKFLOW_DIR
+from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
+from Three_PointO_ArchE import config # For config.WORKFLOW_DIR
 
 # Minimal valid reflection for mocked actions
 MOCK_REFLECTION = {"status": "Success", "summary": "Mocked action executed.", "confidence": 0.99, "alignment_check": "N/A", "potential_issues": None, "raw_output_preview": "mock"}
 
 @pytest.fixture
 def workflow_engine():
-    """Provides a WorkflowEngine instance."""
-    return WorkflowEngine()
+    """Provides a IARCompliantWorkflowEngine instance."""
+    return IARCompliantWorkflowEngine()
 
 @pytest.fixture
 def sample_workflow_abs_path():

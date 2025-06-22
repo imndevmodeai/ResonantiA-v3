@@ -1,0 +1,31 @@
+{
+    "name": "Traveling Salesman Optimization (Placeholder)",
+    "description": "A placeholder workflow for TSP. Needs full implementation.",
+    "version": "1.0",
+    "tasks": {
+        "load_tsp_data": {
+            "action_type": "load_data",
+            "inputs": {
+                "source": "context.tsp_data",
+                "format": "json"
+            },
+            "output_key": "raw_tsp_data"
+        },
+        "optimize_route": {
+            "action_type": "optimize_tsp_route",
+            "inputs": {
+                "cities": "{{raw_tsp_data}}",
+                "model_type": "placeholder_tsp"
+            },
+            "output_key": "optimized_route_results"
+        },
+        "report_results": {
+            "action_type": "generate_report",
+            "inputs": {
+                "report_data": "{{optimized_route_results}}",
+                "report_type": "tsp_summary"
+            },
+            "output_key": "final_report"
+        }
+    }
+} 

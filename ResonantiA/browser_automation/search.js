@@ -1,7 +1,8 @@
-const puppeteer = require('puppeteer-core'); // Using puppeteer-core as it's likely intended for a package
+const puppeteer = require('puppeteer-core');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+const CaptureManager = require('./capture_manager');
 
 // Import puppeteer-extra and plugins
 const puppeteerExtra = require('puppeteer-extra');
@@ -10,7 +11,6 @@ puppeteerExtra.use(StealthPlugin());
 
 const AnonymizeUaPlugin = require('puppeteer-extra-plugin-anonymize-ua');
 puppeteerExtra.use(AnonymizeUaPlugin());
-
 
 /**
  * Performs a search on a given search engine and extracts the results.
@@ -508,7 +508,7 @@ async function scrapePageContent(page, url) {
 async function main() {
   const args = process.argv.slice(2);
   if (args.length < 1) {
-    console.error("Usage: node search.js <query> [numResults] [searchEngine] [outputDir] [--debug] [--text-content-dir <dir>] [--include-text-content]");
+    console.error("Usage: node search.js <query> [numResults] [searchEngine] [outputDir] [--debug] [--text-content-dir <dir>] [--include-text-content] [--capture-all] [--capture-dir <dir>]");
     process.exit(1);
   }
 
@@ -522,49 +522,59 @@ async function main() {
   const textContentDir = textContentDirArgIndex !== -1 && args[textContentDirArgIndex + 1] ? args[textContentDirArgIndex + 1] : null;
 
   const includeTextContent = args.includes("--include-text-content");
+  const captureAll = args.includes("--capture-all");
+  
+  const captureDirArgIndex = args.indexOf("--capture-dir");
+  const captureDir = captureDirArgIndex !== -1 && args[captureDirArgIndex + 1] ? args[captureDirArgIndex + 1] : path.join(outputDir, 'captures');
 
-  // FOR TESTING CLICK LEARNING: Force headless: false and debug if searchEngine is google
-  let effectiveDebug = debug;
-  let effectiveHeadless = "new"; // Default to new headless
-  if (searchEngine === "google") { // Only do this for google for now
-      console.error("INFO: Google search detected, forcing headless:false and debug:true for potential click learning test.");
-      effectiveDebug = true; 
-      effectiveHeadless = false; 
-  }
-
-
-  console.error(`Script arguments: query='${query}', numResults=${numResults}, searchEngine='${searchEngine}', outputDir='${outputDir}', debug=${effectiveDebug}, textContentDir='${textContentDir}', includeTextContent=${includeTextContent}`);
+  console.error(`Script arguments: query='${query}', numResults=${numResults}, searchEngine='${searchEngine}', outputDir='${outputDir}', debug=${debug}, textContentDir='${textContentDir}', includeTextContent=${includeTextContent}, captureAll=${captureAll}, captureDir='${captureDir}'`);
 
   let browser;
   try {
     const defaultChromePath = "/usr/bin/google-chrome"; 
     const executablePath = process.env.CHROME_BIN || defaultChromePath;
 
+    // Initialize capture manager
+    const captureManager = new CaptureManager({
+      screenshotDir: path.join(captureDir, 'screenshots'),
+      htmlDir: path.join(captureDir, 'html'),
+      pdfDir: path.join(captureDir, 'pdf')
+    });
+
     if (!fs.existsSync(executablePath)) {
       console.warn(`Warning: Chrome executable not found at ${executablePath}. Puppeteer might try to download Chromium. Set CHROME_BIN if you have Chrome installed elsewhere or ensure it's at ${defaultChromePath}.`);
-      browser = await puppeteerExtra.launch({
-        headless: effectiveHeadless, // Use effectiveHeadless
-        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
-        userDataDir: path.join(__dirname, '.chrome_dev_session'), 
+      browser = await puppeteer.launch({
+        headless: "new",
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu'
+        ],
+        userDataDir: path.join(__dirname, '.chrome_dev_session'),
         ignoreHTTPSErrors: true,
       });
     } else {
-      browser = await puppeteerExtra.launch({
+      browser = await puppeteer.launch({
         executablePath: executablePath,
-        headless: effectiveHeadless, // Use effectiveHeadless
-        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--window-size=1920,1080'], // Added window size
+        headless: "new",
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--window-size=1920,1080'
+        ],
         userDataDir: path.join(__dirname, '.chrome_dev_session'),
         ignoreHTTPSErrors: true,
       });
     }
 
     const page = await browser.newPage();
-    await page.setViewport({ width: 1920, height: 1080 }); 
+    await page.setViewport({ width: 1920, height: 1080 });
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36');
 
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36'); // Slightly updated UA
-
-    // Pass effectiveDebug to the search function
-    const results = await search(page, query, searchEngine, effectiveDebug); 
+    const results = await search(page, query, searchEngine, debug);
     let finalResults = results.slice(0, numResults);
 
     if (includeTextContent && finalResults.length > 0) {
@@ -573,22 +583,51 @@ async function main() {
         if (result.link && result.link !== "N/A" && result.link.startsWith("http")) {
           try {
             const content = await scrapePageContent(page, result.link);
-            result.content = content; 
+            result.content = content;
 
             if (textContentDir) {
-                const safeQuery = query.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
-                const domain = new URL(result.link).hostname.replace(/[^a-zA-Z0-9]/g, '_');
-                const contentFileName = `content_${safeQuery}_${index}_${domain}.txt`;
-                const contentFilePath = path.join(textContentDir, contentFileName);
-                
-                if (!fs.existsSync(textContentDir)) {
-                    fs.mkdirSync(textContentDir, { recursive: true });
-                }
-                fs.writeFileSync(contentFilePath, content);
-                result.content_file = contentFilePath;
-                console.error(`Saved text content for ${result.link} to ${contentFilePath}`);
+              const safeQuery = query.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
+              const domain = new URL(result.link).hostname.replace(/[^a-zA-Z0-9]/g, '_');
+              const contentFileName = `content_${safeQuery}_${index}_${domain}.txt`;
+              const contentFilePath = path.join(textContentDir, contentFileName);
+              
+              if (!fs.existsSync(textContentDir)) {
+                fs.mkdirSync(textContentDir, { recursive: true });
+              }
+              fs.writeFileSync(contentFilePath, content);
+              result.content_file = contentFilePath;
+              console.error(`Saved text content for ${result.link} to ${contentFilePath}`);
             }
 
+            // Capture screenshots and HTML if requested
+            if (captureAll) {
+              try {
+                const captures = await captureManager.captureAll(page, {
+                  screenshot: true,
+                  html: true,
+                  pdf: true,
+                  screenshotOptions: {
+                    fullPage: true,
+                    quality: 80
+                  },
+                  htmlOptions: {
+                    includeStyles: true,
+                    includeScripts: true,
+                    format: true
+                  },
+                  pdfOptions: {
+                    format: 'A4',
+                    printBackground: true
+                  }
+                });
+
+                result.captures = captures;
+                console.error(`Captured screenshots and HTML for ${result.link}`);
+              } catch (captureError) {
+                console.error(`Error capturing content for ${result.link}: ${captureError.message}`);
+                result.capture_error = captureError.message;
+              }
+            }
           } catch (scrapeError) {
             console.error(`Error scraping content for ${result.link}: ${scrapeError.message}`);
             result.content = "Error scraping content.";
@@ -610,14 +649,14 @@ async function main() {
 
     fs.writeFileSync(resultsFilename, JSON.stringify(finalResults, null, 2));
     console.error(`Search results saved to ${resultsFilename}`);
-    console.log(JSON.stringify(finalResults)); 
+    console.log(JSON.stringify(finalResults));
 
   } catch (error) {
     console.error(`Error in main: ${error.message}`);
     if (debug) {
-        console.error(error.stack);
+      console.error(error.stack);
     }
-    process.exit(1); 
+    process.exit(1);
   } finally {
     if (browser) {
       await browser.close();

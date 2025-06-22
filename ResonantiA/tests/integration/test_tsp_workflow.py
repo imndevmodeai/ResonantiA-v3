@@ -7,9 +7,9 @@ import time
 import pytest
 import unittest
 from unittest.mock import MagicMock, patch, mock_open
-from ResonantiA.ArchE.workflow_engine import WorkflowEngine
+from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
 import logging
-from ResonantiA.ArchE import config # For config.WORKFLOW_DIR
+from Three_PointO_ArchE import config # For config.WORKFLOW_DIR
 
 # Mock reflection for successful operations
 MOCK_REFLECTION_SUCCESS = {
@@ -23,7 +23,7 @@ MOCK_REFLECTION_SUCCESS = {
 
 @pytest.fixture
 def workflow_engine():
-    return WorkflowEngine()
+    return IARCompliantWorkflowEngine()
 
 @pytest.fixture
 def tsp_workflow_data():
@@ -66,7 +66,7 @@ def tsp_data():
 
 def test_tsp_workflow_execution_original(workflow_engine, tsp_workflow_data, tsp_data):
     """Test the execution of the TSP optimization workflow."""
-    workflow_filename = 'traveling_salesman_optimization.json'
+    workflow_filename = 'workflows/traveling_salesman_optimization.json'
 
     # Log input data for debugging
     logging.info(f"Input TSP data for original test: {str(tsp_data)[:100]}...")
@@ -123,8 +123,8 @@ def test_tsp_workflow_execution_original(workflow_engine, tsp_workflow_data, tsp
 
 @pytest.fixture
 def engine_for_tsp():
-    """Provides a WorkflowEngine instance for TSP tests."""
-    return WorkflowEngine()
+    """Provides a IARCompliantWorkflowEngine instance for TSP tests."""
+    return IARCompliantWorkflowEngine()
 
 @pytest.fixture
 def tsp_workflow_file_path():
@@ -155,7 +155,7 @@ def tsp_initial_context():
         'output_options': {'include_distance_matrix': False}
     }
 
-@pytest.mark.skipif(WorkflowEngine is None or config is None, reason="WorkflowEngine or config not available.")
+@pytest.mark.skipif(IARCompliantWorkflowEngine is None or config is None, reason="IARCompliantWorkflowEngine or config not available.")
 def test_tsp_workflow_execution_and_iar(engine_for_tsp, tsp_workflow_file_path, tsp_initial_context, mocker, caplog):
     caplog.set_level(logging.INFO)
     start_time = time.time()
@@ -200,7 +200,7 @@ def test_tsp_workflow_execution_and_iar(engine_for_tsp, tsp_workflow_file_path, 
         return {"error": f"Mock for {action_type} not implemented", "reflection": {"status": "Failure", "summary":"Mock missing"}}
 
     # Patch the action_registry's execute_action, which is used internally by run_workflow
-    # The WorkflowEngine imports execute_action into its own module's namespace,
+    # The IARCompliantWorkflowEngine imports execute_action into its own module's namespace,
     # or calls it via the action_registry module. The actual callable is in action_registry.
     # Let's try patching where it's most likely looked up by the engine instance if not directly imported.
     # Based on other tests, patching it within the workflow_engine module scope seems to work.
@@ -242,4 +242,35 @@ def test_tsp_workflow_execution_and_iar(engine_for_tsp, tsp_workflow_file_path, 
     else:
         logging.warning("Could not identify TSP solver task_id by action_type for specific output validation.")
 
-    logging.info(f"TSP workflow execution and IAR test passed. Execution time: {execution_time:.2f}s") 
+    logging.info(f"TSP workflow execution and IAR test passed. Execution time: {execution_time:.2f}s")
+
+def test_tsp_workflow_execution_and_iar(workflow_engine, tsp_workflow_data, tsp_data):
+    """Test the execution of the TSP optimization workflow with IAR validation."""
+    workflow_filename = 'workflows/traveling_salesman_optimization.json'
+    tsp_data_file = "data/tsp_cities.json" # This file needs to exist if this test is not mocked
+
+    # Ensure the data directory exists and the file is present if not mocked
+    # In a real scenario, this would involve mocking file access or ensuring setup creates this.
+    if not os.path.exists(tsp_data_file):
+        # For now, let's create a dummy file if it doesn't exist to allow tests to proceed
+        # In a proper test setup, this would be part of a fixture or proper test data management
+        os.makedirs(os.path.dirname(tsp_data_file), exist_ok=True)
+        with open(tsp_data_file, 'w') as f:
+            json.dump(tsp_data, f)
+
+    logging.info(f"Input TSP data file for IAR test: {tsp_data_file}")
+
+    initial_context = {'tsp_data_file': tsp_data_file}
+    results = workflow_engine.run_workflow(workflow_filename, initial_context=initial_context)
+
+    logging.info(f"Workflow execution results for IAR test: {results}")
+
+    assert results is not None, "Workflow execution returned None results"
+    assert results.get("workflow_status") == "Completed Successfully", f"Workflow did not complete successfully: {results.get('workflow_status')}"
+    assert "reflection" in results # Top-level workflow reflection
+    assert results["reflection"]["status"] == "Success"
+    assert "tasks" in results
+    assert "load_tsp_data" in results["tasks"]
+    assert "optimize_route" in results["tasks"]
+    assert results["tasks"]["load_tsp_data"]["reflection"]["status"] == "Success"
+    assert results["tasks"]["optimize_route"]["reflection"]["status"] == "Success" 

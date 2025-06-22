@@ -6,7 +6,7 @@ from pathlib import Path
 # Assuming ResonantiA root is discoverable or added to PYTHONPATH
 # Adjust import path if needed. We assume the structure allows this relative import.
 try:
-    from ResonantiA.ArchE.spr_manager import SPRManager, DEFAULT_SPR_FILE_PATH
+    from Three_PointO_ArchE.spr_manager import SPRManager, DEFAULT_SPR_FILE_PATH
 except ImportError:
     # Attempt relative import if the first fails (common in package testing)
     try:

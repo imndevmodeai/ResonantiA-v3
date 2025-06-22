@@ -1,0 +1,19 @@
+{
+    "proxyList": [
+        {
+            "url": "http://127.0.0.1:8080",
+            "type": "http"
+        }
+    ],
+    "rotationInterval": 300000,
+    "healthCheckInterval": 60000,
+    "maxRetries": 3,
+    "timeout": 10000,
+    "healthCheckUrl": "https://www.google.com",
+    "logLevel": "info",
+    "metrics": {
+        "enabled": true,
+        "saveInterval": 3600000,
+        "metricsPath": "./metrics"
+    }
+} 

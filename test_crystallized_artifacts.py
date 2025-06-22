@@ -186,7 +186,7 @@ class TestImplementationResonancePattern(unittest.TestCase):
 # ARTIFACT 4 TESTS: TECHNICAL INTEGRATION
 # ==================================================
 
-class TestWorkflowEngineIARCompliance(unittest.TestCase):
+class TestIARCompliantWorkflowEngineIARCompliance(unittest.TestCase):
     """Test Workflow Engine IAR Compliance"""
     
     def test_iar_compliant_execution(self):
@@ -413,7 +413,7 @@ class CrystallizedArtifactsValidator:
             TestDistributedCoordinationSPR,
             TestWorkflowDebuggingPattern,
             TestImplementationResonancePattern,
-            TestWorkflowEngineIARCompliance,
+            TestIARCompliantWorkflowEngineIARCompliance,
             TestCrossInstanceCommunication
         ]
         

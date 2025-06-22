@@ -290,7 +290,7 @@ class IARCompliantWorkflowEngine:
                 parts = template.split(".", 1)
                 if len(parts) == 2:
                     task_id, field_path = parts
-                        else:
+                else:
                     task_id, field_path = parts[0], ""
                 # Support nested field resolution (e.g., result.patterns)
                 if task_id in results:
@@ -299,12 +299,10 @@ class IARCompliantWorkflowEngine:
                         for subfield in field_path.split('.'):
                             if isinstance(field_value, dict) and subfield in field_value:
                                 field_value = field_value[subfield]
-                                else:
+                            else:
                                 field_value = None
                                 break
                     resolved[key] = field_value
-            else:
-                    resolved[key] = value
             else:
                 resolved[key] = value
         return resolved
@@ -427,7 +425,7 @@ class IARCompliantWorkflowEngine:
         logger.debug(
     f"Resolving template string: {original_template_for_logging} with initial_context keys: {
         list(
-            initial_context.keys()) if initial_context else []}")
+            initial_context.keys()) if initial_context else []}. Initial context itself: {initial_context}")
         
         matches = re.findall(r"(\{\{(.*?)\}\})", value, re.DOTALL)
         # Should not happen if "{{" and "}}" are present, but as a safeguard
@@ -510,8 +508,8 @@ class IARCompliantWorkflowEngine:
                         current_value_for_placeholder).strip()
                 else:
                     logger.warning(
-    f"Task '{task_key}': Unknown filter '{
-        f_spec['name']}' in template '{original_template_for_logging}'. Skipping filter.")
+    f"Task '{task_key}': Unknown filter '{}' in template '{}'. Skipping filter.".format(
+        f_spec['name'], original_template_for_logging))
             
             logger.debug(
     f"Resolved single placeholder '{value}' to: {
@@ -603,8 +601,8 @@ class IARCompliantWorkflowEngine:
                                 current_value_for_placeholder_inner).strip()
                         else:
                             logger.warning(
-    f"Task '{task_key}': Unknown filter '{
-        f_spec_inner['name']}' in template '{original_template_for_logging}'. Skipping filter.")
+    f"Task '{task_key}': Unknown filter '{}' in template '{}'. Skipping filter.".format(
+        f_spec_inner['name'], original_template_for_logging))
                     resolved_placeholder_value_after_filters = current_value_for_placeholder_inner
 
                 # Convert the resolved placeholder value to string for
@@ -680,18 +678,18 @@ class IARCompliantWorkflowEngine:
             # Handle both formats: "{{ var.path }} OP value" and "{{ var.path
             # OP value }}"
             comp_match = re.match(
-    r"^{{\s*([\w\.\-]+)\s*(==|!=|>|<|>=|<=)\s*(.*?)\s*}}$",
+    r"^{{\s*([\\w\\.\\-]+)\\s*(==|!=|>|<|>=|<=)\\s*(.*?)\\s*}}$",
      condition_str)
             if not comp_match:
                 # Try the old format: {{ var.path }} OP value
                 comp_match = re.match(
-    r"^{{\s*([\w\.\-]+)\s*}}\s*(==|!=|>|<|>=|<=)\s*(.*)$",
+    r"^{{\s*([\\w\\.\\-]+)\\s*}}\\s*(==|!=|>|<|>=|<=)\\s*(.*)$",
      condition_str)
             
             if comp_match:
                 var_path, operator, value_str = comp_match.groups()
                 actual_value = self._resolve_value(
-                    # Resolve the variable
+                    # Resolve the variable using correct f-string escaping
                     f"{{{{ {var_path} }}}}", runtime_context, initial_context)
                 expected_value = self._parse_condition_value(
                     value_str)  # Parse the literal value
@@ -706,7 +704,7 @@ class IARCompliantWorkflowEngine:
             # Regex for membership: value IN/NOT IN {{ var.path }} (e.g.,
             # "Error" in {{task_B.reflection.potential_issues}})
             in_match = re.match(
-    r"^(.+?)\s+(in|not in)\s+{{\s*([\w\.\-]+)\s*}}$",
+    r"^(.+?)\\s+(in|not in)\\s*{{\\s*([\\w\\.\\-]+)\\s*}}$", # Corrected regex pattern
     condition_str,
      re.IGNORECASE)
             if in_match:
@@ -714,35 +712,33 @@ class IARCompliantWorkflowEngine:
                 value_to_check = self._parse_condition_value(
                     value_str.strip())  # Parse the literal value
                 container = self._resolve_value(
-                    # Resolve the container
+                    # Resolve the container using correct f-string escaping
                     f"{{{{ {var_path} }}}}", runtime_context, initial_context)
                 operator_lower = operator.lower()
                 if isinstance(container, (list, str, dict, set)
-                              ):  # Check if container type supports 'in'
+                              ):  # Check if container type supports \'in\'
                         is_in = value_to_check in container
-                        result = is_in if operator_lower == 'in' else not is_in
+                        result = is_in if operator_lower == \'in\' else not is_in
                         logger.debug(
-    f"Condition '{condition_str}' evaluated to {result}")
+    f"Condition '{condition_str}' evaluated to {result}\")
                         return result
                 else:
                         logger.warning(
-    f"Container for '{operator}' check ('{var_path}') is not a list/str/dict/set: {
-        type(container)}. Evaluating to False.")
+    f"Container for '{operator}' check ('{var_path}') is not a list/str/dict/set: {\n        type(container)}. Evaluating to False.\")
                         return False
 
-            # Regex for simple truthiness/existence: {{ var.path }} or !{{
-            # var.path }}
+            # Regex for simple truthiness/existence: {{ var.path }} or !{{\n            # var.path }}
             truth_match = re.match(
-    r"^(!)?\s*{{\s*([\w\.\-]+)\s*}}$",
+    r"^(!)?\\s*{{\\s*([\\w\\.\\-]+)\\s*}}$", # Corrected regex pattern
      condition_str)
             if truth_match:
                 negated, var_path = truth_match.groups()
                 actual_value = self._resolve_value(
-                    f"{{{{ {var_path} }}}}", runtime_context, initial_context)
+                    f"{{{{ {var_path} }}}}", runtime_context, initial_context) # Corrected f-string escaping
                 result = bool(actual_value)
                 if negated: result = not result
                 logger.debug(
-    f"Condition '{condition_str}' (truthiness/existence) evaluated to {result}")
+    f"Condition '{condition_str}' (truthiness/existence) evaluated to {result}\")
                 return result
 
             # If no pattern matches
@@ -891,9 +887,7 @@ class IARCompliantWorkflowEngine:
         completed_tasks = set()
         
         logger.info(
-    f"Starting workflow '{
-        self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {
-            list(ready_tasks)}")
+    f"Starting workflow '{self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {list(ready_tasks)}")
 
         start_time = time.time()
         
@@ -995,8 +989,7 @@ class IARCompliantWorkflowEngine:
             final_status = "Stalled"
         
         logger.info(
-    f"Workflow '{
-        self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
+    f"Workflow '{self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
 
         event_log_path = os.path.join(
     config.OUTPUT_DIR, f"run_events_{run_id}.jsonl")
@@ -1073,23 +1066,17 @@ class IARCompliantWorkflowEngine:
     def execute_workflow(self, workflow: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a workflow with enhanced terminal output."""
         display_workflow_start(workflow.get('name', 'Unnamed Workflow'))
-        
+
         start_time = datetime.now()
         run_id = str(uuid.uuid4())
-        
+        results = {
+            "workflow_name": workflow.get("name", "unknown"),
+            "run_id": run_id,
+            "start_time": start_time.isoformat(),
+            "tasks": {}
+        }
+
         try:
-            # Validate workflow
-            if not self._validate_workflow(workflow):
-                raise ValueError("Workflow validation failed")
-            
-            # Initialize results
-            results = {
-                "workflow_name": workflow.get("name", "unknown"),
-                "run_id": run_id,
-                "start_time": start_time.isoformat(),
-                "tasks": {}
-            }
-            
             # Execute tasks
             for task_name, task in workflow.get("tasks", {}).items():
                 display_workflow_progress(task_name, "Starting")
