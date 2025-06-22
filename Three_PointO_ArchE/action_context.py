@@ -24,4 +24,13 @@ class ActionContext:
 
     def __post_init__(self):
         if not all([self.task_key, self.action_name, self.action_type, self.workflow_name, self.run_id]):
-            raise ValueError("Core ActionContext fields cannot be empty.") 
+            raise ValueError("Core ActionContext fields cannot be empty.")
+
+    def __init__(self, task_key: str, action_name: str, action_type: str, workflow_name: str, run_id: str, runtime_context: Dict[str, Any], **kwargs):
+        self.task_key = task_key
+        self.action_name = action_name
+        self.action_type = action_type
+        self.workflow_name = workflow_name
+        self.run_id = run_id
+        self.execution_start_time = datetime.utcnow()
+        self.runtime_context = runtime_context 

@@ -6,7 +6,8 @@ logger = logging.getLogger(__name__)
 
 def display_output(
     content: Any,
-    format: str = "text"
+    format: str = "text",
+    context: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     """
     Display output content with specified format.
@@ -14,6 +15,7 @@ def display_output(
     Args:
         content: Content to display
         format: Output format ("text", "json", "markdown")
+        context: The action context (not directly used but required by execute_action signature).
         
     Returns:
         Dictionary containing display result and IAR reflection
@@ -33,12 +35,18 @@ def display_output(
         # Log the output
         logger.info(f"Display output ({format}):\n{formatted_content}")
         
+        # Truncate content for raw_output_preview in IAR
+        raw_output_preview = formatted_content[:200] + "..." if len(formatted_content) > 200 else formatted_content
+
         return {
             "output": formatted_content,
             "reflection": {
                 "status": "Success",
                 "confidence": 1.0,
-                "insight": "Output displayed successfully",
+                "summary": "Content successfully displayed.",
+                "alignment_check": "Aligned with display objective.",
+                "potential_issues": [],
+                "raw_output_preview": raw_output_preview,
                 "action": "display_output",
                 "reflection": f"Content formatted as {format}"
             }
@@ -47,13 +55,20 @@ def display_output(
     except Exception as e:
         error_msg = f"Error displaying output: {str(e)}"
         logger.error(error_msg, exc_info=True)
+        
+        # Truncate error message for raw_output_preview in IAR
+        raw_output_preview = error_msg[:200] + "..." if len(error_msg) > 200 else error_msg
+
         return {
             "error": error_msg,
             "output": "",
             "reflection": {
                 "status": "Failed",
                 "confidence": 0.0,
-                "insight": "Output display failed",
+                "summary": "Failed to display content due to an error.",
+                "alignment_check": "Failed to align with display objective.",
+                "potential_issues": [error_msg],
+                "raw_output_preview": raw_output_preview,
                 "action": "display_output",
                 "reflection": error_msg
             }

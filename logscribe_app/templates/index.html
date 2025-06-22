@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogScribe AI - Changelog & Repo Summary</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .section-header {
+            background-color: #e8f0fe;
+            color: #2c3e50;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-header svg {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        form {
+            background-color: #fcfcfc;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 40px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to LogScribe AI</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 40px;">
+            Harnessing the power of AI to generate insightful changelogs and repository summaries from your GitHub projects.
+        </p>
+
+        <div class="section-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-pull-request-draft"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 18V9.5a7.5 7.5 0 0 1 10.74-6.41"/><path d="M6 12v2"/><path d="M13 18h2"/></svg>
+            Generate Changelog
+        </div>
+        <form action="/generate_changelog_route" method="post">
+            <label for="repo_url_changelog">GitHub Repository URL:</label>
+            <input type="text" id="repo_url_changelog" name="repo_url_changelog" placeholder="e.g., https://github.com/owner/repo" required>
+
+            <label for="days_ago_changelog">Commits from last X days:</label>
+            <input type="number" id="days_ago_changelog" name="days_ago_changelog" value="7" min="1" required>
+
+            <button type="submit">Get Changelog</button>
+        </form>
+
+        <div class="section-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-tree"><path d="M10 20a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2Z"/><path d="M18 10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H12a2 2 0 0 0-2 2v3"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M12 18h.01"/><path d="M10 5V3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v7"/><path d="M10 10h.01"/><path d="M10 14h.01"/><path d="M10 18h.01"/></svg>
+            Get Repository Structure Summary
+        </div>
+        <form action="/get_repo_summary_route" method="post">
+            <label for="repo_url_summary">GitHub Repository URL:</label>
+            <input type="text" id="repo_url_summary" name="repo_url_summary" placeholder="e.g., https://github.com/owner/repo" required>
+
+            <button type="submit">Get Repository Summary</button>
+        </form>
+
+        <div class="footer">
+            &copy; 2024 LogScribe AI. Powered by <a href="https://gemini.google.com/" target="_blank">Google Gemini</a>.
+        </div>
+    </div>
+</body>
+</html> 

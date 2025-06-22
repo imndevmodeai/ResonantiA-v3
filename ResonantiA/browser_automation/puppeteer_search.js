@@ -295,31 +295,40 @@ async function handleDuckDuckGoSearch(page, query, debug) {
   try {
     console.error("Handling DuckDuckGo search...");
 
-    // Type search query and submit
-    await page.type("input[name=\"q\"]", query);
-    await page.keyboard.press("Enter");
+    await page.goto("https://duckduckgo.com/?q=" + encodeURIComponent(query), { waitUntil: 'domcontentloaded', timeout: 30000 });
+    console.error("handleDuckDuckGoSearch: DuckDuckGo page loaded.");
 
-    // Wait for results to load, ensuring visibility
-    try {
-      // Use the more common '.result' selector, and ensure it's visible.
-      await page.waitForSelector(".result", { visible: true, timeout: 30000 }); // Increased timeout for robustness
-    } catch (e) {
-      console.error(`Error waiting for DuckDuckGo results (.result selector): ${e.message}`);
-      return [];
+    // Capture screenshot and HTML immediately after page load if in debug mode
+    if (debug) {
+      const initialScreenshotPath = path.join(__dirname, 'duckduckgo-initial-page.png');
+      await page.screenshot({ path: initialScreenshotPath, fullPage: true });
+      console.error(`Initial screenshot saved to ${initialScreenshotPath}`);
+
+      const initialHtmlContent = await page.content();
+      const initialHtmlPath = path.join(__dirname, 'duckduckgo-initial-page.html');
+      fs.writeFileSync(initialHtmlPath, initialHtmlContent);
+      console.error(`Initial HTML content saved to ${initialHtmlPath}`);
     }
+
+    console.error("handleDuckDuckGoSearch: Waiting for main results selector '.result'...");
+    await page.waitForSelector(".result", { timeout: 30000 }); // Increased timeout
+    console.error("handleDuckDuckGoSearch: '.result' selector found.");
 
     // Take screenshot if debugging
     if (debug) {
-      const screenshotPath = path.join(__dirname, 'search-results.png');
+      const screenshotPath = path.join(__dirname, 'search-results-after-wait.png');
       await page.screenshot({ path: screenshotPath, fullPage: true });
-      console.error(`Results screenshot saved to ${screenshotPath}`);
+      console.error(`Screenshot of DuckDuckGo results page saved to ${screenshotPath}`);
+
+      const htmlContent = await page.content();
+      const htmlPath = path.join(__dirname, 'duckduckgo-page-content.html');
+      fs.writeFileSync(htmlPath, htmlContent);
+      console.error(`Full HTML content of DuckDuckGo page saved to ${htmlPath}`);
     }
 
-    console.error("handleDuckDuckGoSearch: Calling extractDuckDuckGoResults...");
     return await extractDuckDuckGoResults(page);
-
-  } catch (error) {
-    console.error(`DuckDuckGo search error in handleDuckDuckGoSearch: ${error.message}`);
+  } catch (e) {
+    console.error(`Error in handleDuckDuckGoSearch: ${e.message}`);
     return [];
   }
 }
@@ -397,123 +406,33 @@ async function extractGoogleResults(page, resultsSelector = "div#search div.g", 
  * @returns {Promise<Array>} - Array of search results
  */
 async function extractDuckDuckGoResults(page) {
-  console.error("extractDuckDuckGoResults: Starting extraction...");
+  console.error("extractDuckDuckGoResults: Starting extraction.");
+  const results = await page.evaluate(() => {
+    const data = [];
+    const mainResultItems = document.querySelectorAll('article[data-testid="result"]'); // New Main Result Item selector
 
-  try {
-    return await page.evaluate(() => {
-      // Use '.result' consistently for querying all result items
-      console.error("extractDuckDuckGoResults (browser context): Querying for '.result' elements.");
-      const items = Array.from(document.querySelectorAll(".result")); // Changed selector back to .result
-      console.error(`extractDuckDuckGoResults (browser context): Found ${items.length} .result items.`);
+    mainResultItems.forEach(item => {
+      let titleElement = item.querySelector('a[data-testid="result-title-a"]'); // New Title selector
+      let linkElement = item.querySelector('a[data-testid="result-url-a"]');   // New Link selector
+      let snippetElement = item.querySelector('span[data-testid="result-snippet"]'); // New Snippet selector
 
-      return items.slice(0, 15).map(item => {
-        let title = "N/A";
-        let link = "N/A";
-        let description = "N/A";
-        let result_date_snippet = null; // New field
+      const title = titleElement ? titleElement.innerText.trim() : null;
+      const link = linkElement ? linkElement.href : null;
+      const snippet = snippetElement ? snippetElement.innerText.trim() : null;
 
-        try {
-          const titleElement = item.querySelector(".result__title a");
-          const linkElement = item.querySelector("a[href]") || item.querySelector(".result__url a");
-          const descElement = item.querySelector(".result__snippet");
-
-          // Attempt to find a date snippet associated with the result
-          // This is highly dependent on DDG's structure and might need refinement
-          const dateSnippetElement = item.querySelector(".result__timestamp") || 
-                                     item.querySelector(".result__age"); // Hypothetical selectors
-
-          title = titleElement ? titleElement.textContent.trim() : "N/A";
-          link = linkElement ? linkElement.href : "N/A";
-          description = descElement ? descElement.textContent.trim() : "N/A";
-          result_date_snippet = dateSnippetElement ? dateSnippetElement.textContent.trim() : null;
-
-          console.error(`extractDuckDuckGoResults (browser context): Processed item - Title: ${title.substring(0, 150)}... Link: ${link.substring(0, 150)}...`);
-
-        } catch (e) {
-          console.error(`extractDuckDuckGoResults (browser context): Error processing item: ${e.message}`);
-          // If there's an error extracting data from this item, return what we have
-        }
-
-        return { title, link, description, result_date_snippet }; // Added result_date_snippet
-      });
-    });
-  } catch (error) {
-    console.error(`Error extracting DuckDuckGo results in extractDuckDuckGoResults: ${error.message}`);
-    return [];
-  }
-}
-
-/**
- * Scrapes image URLs from the current page.
- * @param {Page} page - Puppeteer page object.
- * @returns {Promise<Array<string>>} - Array of image URLs.
- */
-async function scrapeImageUrls(page) {
-    return await page.evaluate(() => {
-        const imageUrls = Array.from(document.querySelectorAll('img'))
-            .map(img => img.src)
-            .filter(src => src && src.startsWith('http') && !src.startsWith('data:')); // Filter out data URIs
-        return [...new Set(imageUrls)]; // Return unique URLs
-    });
-}
-
-/**
- * Scrapes video URLs from the current page.
- * @param {Page} page - Puppeteer page object.
- * @returns {Promise<Array<string>>} - Array of video URLs.
- */
-async function scrapeVideoUrls(page) {
-    return await page.evaluate(() => {
-        const videoUrls = [];
-        // Look for <video> sources
-        Array.from(document.querySelectorAll('video source')).forEach(source => {
-            if (source.src && source.src.startsWith('http')) {
-                videoUrls.push(source.src);
-            }
+      if (title && link) { // Only add if we have at least a title and a link
+        data.push({
+          title: title,
+          link: link,
+          snippet: snippet,
+          source: 'DuckDuckGo'
         });
-        // Look for <video> src attribute directly
-        Array.from(document.querySelectorAll('video')).forEach(video => {
-            if (video.src && video.src.startsWith('http')) {
-                videoUrls.push(video.src);
-            }
-        });
-        // You might need to look at <a href> tags if they link directly to .mp4, .mov etc.
-        // This is more complex and usually involves pattern matching on href.
-        return [...new Set(videoUrls)]; // Return unique URLs
+      }
     });
-}
-
-/**
- * Downloads a file from a URL to a specified filepath.
- * @param {string} url - The URL of the file to download.
- * @param {string} filepath - The local path to save the file.
- * @returns {Promise<void>}
- */
-async function downloadFile(url, filepath) {
-    return new Promise((resolve, reject) => {
-        const dir = path.dirname(filepath);
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-        }
-
-        const file = fs.createWriteStream(filepath);
-        https.get(url, response => {
-            if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
-                // Handle redirects
-                console.error(`Redirecting to ${response.headers.location}`);
-                return downloadFile(response.headers.location, filepath).then(resolve).catch(reject);
-            } else if (response.statusCode !== 200) {
-                return reject(new Error(`Failed to download ${url}, status code: ${response.statusCode}`));
-            }
-            response.pipe(file);
-            file.on('finish', () => {
-                file.close(() => resolve());
-            });
-        }).on('error', err => {
-            fs.unlink(filepath, () => {}); // Delete the file asynchronously
-            reject(err);
-        });
-    });
+    return data;
+  });
+  console.error(`extractDuckDuckGoResults: Found ${results.length} results.`);
+  return results;
 }
 
 /**
@@ -593,7 +512,7 @@ async function scrapePageContent(page, url) {
 async function main() {
   const args = process.argv.slice(2);
   if (args.length < 1) {
-    console.error("Usage: node search.js <query> [numResults] [searchEngine] [outputDir] [--debug] [--include-text-content] [--download-media] [--media-dir <dir>]");
+    console.error("Usage: node search.js <query> [numResults] [searchEngine] [outputDir] [--debug] [--text-content-dir <dir>] [--include-text-content] [--capture-all] [--capture-dir <dir>]");
     process.exit(1);
   }
 
@@ -602,24 +521,33 @@ async function main() {
   const searchEngine = args[2] || "google";
   const outputDir = args[3] || ".";
   const debug = args.includes("--debug");
-  const includeTextContent = args.includes("--include-text-content");
-  const downloadMedia = args.includes("--download-media");
   
-  const mediaDirArgIndex = args.indexOf("--media-dir");
-  const mediaDir = mediaDirArgIndex !== -1 && args[mediaDirArgIndex + 1] ? args[mediaDirArgIndex + 1] : path.join(outputDir, 'media');
+  console.error(`DEBUG: Parsed debug flag: ${debug}`);
+
+  const textContentDirArgIndex = args.indexOf("--text-content-dir");
+  const textContentDir = textContentDirArgIndex !== -1 && args[textContentDirArgIndex + 1] ? args[textContentDirArgIndex + 1] : null;
+
+  const includeTextContent = args.includes("--include-text-content");
+  const captureAll = args.includes("--capture-all");
+  
+  const captureDirArgIndex = args.indexOf("--capture-dir");
+  const captureDir = captureDirArgIndex !== -1 && args[captureDirArgIndex + 1] ? args[captureDirArgIndex + 1] : path.join(outputDir, 'captures');
+
+  console.error(`Script arguments: query='${query}', numResults=${numResults}, searchEngine='${searchEngine}', outputDir='${outputDir}', debug=${debug}, textContentDir='${textContentDir}', includeTextContent=${includeTextContent}, captureAll=${captureAll}, captureDir='${captureDir}'`);
 
   let browser;
-  let page;
   try {
     const defaultChromePath = "/usr/bin/google-chrome"; 
     const executablePath = process.env.CHROME_BIN || defaultChromePath;
 
     // Initialize capture manager
     const captureManager = new CaptureManager({
-      screenshotDir: path.join(mediaDir, 'screenshots'),
-      htmlDir: path.join(mediaDir, 'html'),
-      pdfDir: path.join(mediaDir, 'pdf')
+      screenshotDir: path.join(captureDir, 'screenshots'),
+      htmlDir: path.join(captureDir, 'html'),
+      pdfDir: path.join(captureDir, 'pdf')
     });
+
+    console.error(`DEBUG: Attempting to launch browser. Executable path: ${executablePath}`);
 
     if (!fs.existsSync(executablePath)) {
       console.warn(`Warning: Chrome executable not found at ${executablePath}. Puppeteer might try to download Chromium. Set CHROME_BIN if you have Chrome installed elsewhere or ensure it's at ${defaultChromePath}.`);
@@ -650,62 +578,70 @@ async function main() {
       });
     }
 
-    page = await browser.newPage();
+    console.error(`DEBUG: Browser launched successfully.`);
+
+    const page = await browser.newPage();
+    console.error(`DEBUG: New page created.`);
+
     await page.setViewport({ width: 1920, height: 1080 });
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36');
 
     const results = await search(page, query, searchEngine, debug);
     let finalResults = results.slice(0, numResults);
 
-    if ((includeTextContent || downloadMedia) && finalResults.length > 0) {
-      console.error("Fetching additional content for results...");
+    if (includeTextContent && finalResults.length > 0) {
+      console.error("Fetching text content for results...");
       finalResults = await Promise.all(finalResults.map(async (result, index) => {
         if (result.link && result.link !== "N/A" && result.link.startsWith("http")) {
           try {
-            // Scrape the content first (this navigates the page to the result's link)
-            const pageData = await scrapePageContent(page, result.link);
-            result.content = pageData.content;
-            result.publication_date = pageData.publication_date;
-            
-            // --- ADD THIS BLOCK TO HANDLE MEDIA DOWNLOADS ---
-            if (downloadMedia) {
-                console.error(`Downloading media for: ${result.link}`);
-                result.downloaded_media = { images: [], videos: [] };
+            const content = await scrapePageContent(page, result.link);
+            result.content = content;
 
-                const imageUrls = await scrapeImageUrls(page);
-                const videoUrls = await scrapeVideoUrls(page);
-                
-                // Create a unique subdirectory for this result's media
-                const safeDomain = new URL(result.link).hostname.replace(/[^a-zA-Z0-9]/g, '_');
-                const resultMediaDir = path.join(mediaDir, `result_${index}_${safeDomain}`);
-
-                // Download images
-                for (const [i, imageUrl] of imageUrls.entries()) {
-                    try {
-                        const filename = path.basename(new URL(imageUrl).pathname) || `image_${i}.jpg`;
-                        const filepath = path.join(resultMediaDir, filename);
-                        await downloadFile(imageUrl, filepath);
-                        result.downloaded_media.images.push(filepath);
-                    } catch (downloadError) {
-                        console.error(`Failed to download image ${imageUrl}: ${downloadError.message}`);
-                    }
-                }
-                // Download videos
-                for (const [i, videoUrl] of videoUrls.entries()) {
-                    try {
-                        const filename = path.basename(new URL(videoUrl).pathname) || `video_${i}.mp4`;
-                        const filepath = path.join(resultMediaDir, filename);
-                        await downloadFile(videoUrl, filepath);
-                        result.downloaded_media.videos.push(filepath);
-                    } catch (downloadError) {
-                        console.error(`Failed to download video ${videoUrl}: ${downloadError.message}`);
-                    }
-                }
+            if (textContentDir) {
+              const safeQuery = query.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
+              const domain = new URL(result.link).hostname.replace(/[^a-zA-Z0-9]/g, '_');
+              const contentFileName = `content_${safeQuery}_${index}_${domain}.txt`;
+              const contentFilePath = path.join(textContentDir, contentFileName);
+              
+              if (!fs.existsSync(textContentDir)) {
+                fs.mkdirSync(textContentDir, { recursive: true });
+              }
+              fs.writeFileSync(contentFilePath, content);
+              result.content_file = contentFilePath;
+              console.error(`Saved text content for ${result.link} to ${contentFilePath}`);
             }
-            // --- END OF MEDIA DOWNLOAD BLOCK ---
 
+            // Capture screenshots and HTML if requested
+            if (captureAll) {
+              try {
+                const captures = await captureManager.captureAll(page, {
+                  screenshot: true,
+                  html: true,
+                  pdf: true,
+                  screenshotOptions: {
+                    fullPage: true,
+                    quality: 80
+                  },
+                  htmlOptions: {
+                    includeStyles: true,
+                    includeScripts: true,
+                    format: true
+                  },
+                  pdfOptions: {
+                    format: 'A4',
+                    printBackground: true
+                  }
+                });
+
+                result.captures = captures;
+                console.error(`Captured screenshots and HTML for ${result.link}`);
+              } catch (captureError) {
+                console.error(`Error capturing content for ${result.link}: ${captureError.message}`);
+                result.capture_error = captureError.message;
+              }
+            }
           } catch (scrapeError) {
-            console.error(`Error processing link ${result.link}: ${scrapeError.message}`);
+            console.error(`Error scraping content for ${result.link}: ${scrapeError.message}`);
             result.content = "Error scraping content.";
           }
         } else {
@@ -715,13 +651,23 @@ async function main() {
       }));
     }
 
-    const outputFilePath = path.join(outputDir, `search_results_${searchEngine}_${new Date().toISOString().replace(/:/g, '-')}_${Math.random().toString(36).substring(2, 10)}.json`);
-    fs.writeFileSync(outputFilePath, JSON.stringify(finalResults, null, 2));
-    console.log(`Search results saved to ${outputFilePath}`);
-    console.log(JSON.stringify(finalResults)); // Output final results as JSON
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+
+    const timestamp = new Date().toISOString().replace(/:/g, '-');
+    const randomSuffix = crypto.randomBytes(4).toString('hex');
+    const resultsFilename = path.join(outputDir, `search_results_${searchEngine}_${timestamp}_${randomSuffix}.json`);
+
+    fs.writeFileSync(resultsFilename, JSON.stringify(finalResults, null, 2));
+    console.error(`Search results saved to ${resultsFilename}`);
+    console.log(JSON.stringify(finalResults));
 
   } catch (error) {
     console.error(`Error in main: ${error.message}`);
+    if (debug) {
+      console.error(error.stack);
+    }
     process.exit(1);
   } finally {
     if (browser) {
@@ -734,4 +680,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { search, scrapePageContent, handleGoogleSearch, handleDuckDuckGoSearch, extractGoogleResults, extractDuckDuckGoResults, scrapeImageUrls, scrapeVideoUrls, downloadFile };
+module.exports = { search, scrapePageContent, handleGoogleSearch, handleDuckDuckGoSearch, extractGoogleResults, extractDuckDuckGoResults };

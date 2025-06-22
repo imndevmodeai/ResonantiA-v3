@@ -42,7 +42,7 @@ Apply the full spectrum of ResonantiA Protocol v3.0 capabilities, including deep
 ->|DirectiveSequence|<-
 ->|Directive step="1" name="DeconstructPrimeTemporal"|<-
 ->|Instruction|<-Rigorously identify core concepts (e.g., UBI policy Z, region Alpha), entities, explicit and implicit temporal scope (5-year projection), key metrics (economic, social consequences), assumptions, and potential ambiguities within the ->|QueryText|<-. Use generate_text_llm to rephrase the core objective precisely, quantifying the temporal aspect and listing key analytical dimensions.->|/Instruction|<-
-->|Output expected_format="Detailed deconstruction: concepts, entities, explicit 5-year temporal scope, key metrics (economic/social), assumptions, ambiguities. Rephrased objective." reflection_required="true"|<- ->|/Output|<-
+->|Output expected_format="Detailed deconstruction: concepts, entities, eg."explicit 5-year temporal scope", key metrics (economic/social), assumptions, ambiguities. Rephrased objective [insert here] reflection_required="true"|<- ->|/Output|<-
 ->|/Directive|<-
 
 ->|Directive step="2" name="MultiSourceResearchValidateTemporal"|<-

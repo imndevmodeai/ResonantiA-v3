@@ -2,6 +2,7 @@
   "dependencies": {
     "http-proxy-agent": "^7.0.2",
     "https-proxy-agent": "^7.0.6",
+    "puppeteer": "^24.10.1",
     "socks-proxy-agent": "^8.0.5"
   }
 }

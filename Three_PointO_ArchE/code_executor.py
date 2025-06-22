@@ -92,7 +92,8 @@ def execute_code(
     code: str,
     language: str = "python",
     timeout: int = 30,
-    environment: Optional[Dict[str, str]] = None
+    environment: Optional[Dict[str, str]] = None,
+    input_data: Optional[str] = None
 ) -> Dict[str, Any]:
     """
     Execute code in the specified language and return results with IAR reflection.
@@ -102,84 +103,112 @@ def execute_code(
         language: Programming language (default: python)
         timeout: Execution timeout in seconds
         environment: Optional environment variables
+        input_data: Optional string data to pass to the script's stdin (for Python scripts)
 
     Returns:
         Dict containing execution results and IAR reflection
     """
     try:
         # Create temporary file for code
-        temp_file = f"temp_execution.{language}"
-        with open(temp_file, "w") as f:
-            f.write(code)
+        # Use tempfile.NamedTemporaryFile to ensure unique names and proper cleanup
+        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix=f'.{language}') as temp_script_file:
+            temp_script_file.write(code)
+        temp_file_path = temp_script_file.name
         
+        process_input = None
+        if input_data and language == "python": # Only pass input_data for python scripts via stdin
+            process_input = input_data
+            logger.debug(f"Passing input_data to python script via stdin: {input_data[:100]}...")
+
         # Set up environment
         env = os.environ.copy()
         if environment:
             env.update(environment)
         
-        # Execute code based on language
-        if language == "python":
-            result = subprocess.run(
-                ["python", temp_file],
-                capture_output=True,
-                text=True,
-                timeout=timeout,
-                env=env
-            )
-        else:
-            raise ValueError(f"Unsupported language: {language}")
-        
-        # Clean up temp file
-        os.remove(temp_file)
+        result = None # Initialize result outside try block
+        try:
+            # Execute code based on language
+            if language == "python":
+                result = subprocess.run(
+                    ["python3", temp_file_path], # Use python3 for consistency
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                    env=env,
+                    input=process_input # Pass input_data here
+                )
+            else:
+                raise ValueError(f"Unsupported language: {language}")
+        finally:
+            # Ensure temp file is cleaned up
+            if os.path.exists(temp_file_path):
+                os.remove(temp_file_path)
         
         # Process results
-        if result.returncode == 0:
+        if result and result.returncode == 0:
             return {
                 "output": result.stdout,
-                "reflection": {
-                    "status": "Success",
-                    "confidence": 1.0,
-                    "insight": "Code executed successfully",
-                    "action": "execute_code",
-                    "reflection": "No errors encountered"
-                }
+                "reflection": _create_reflection(
+                    status="Success",
+                    summary="Code executed successfully",
+                    confidence=1.0,
+                    alignment="High",
+                    issues=None,
+                    preview=result.stdout
+                )
             }
         else:
+            # If result is None, it means subprocess.run was not called successfully
+            # This case should ideally be caught by outer try/except, but good for robustness
+            if result is None:
+                 error_msg = "Code execution process could not be started."
+                 output_content = ""
+                 stderr_content = ""
+            else:
+                error_msg = result.stderr or f"Execution failed with return code {result.returncode}"
+                output_content = result.stdout
+                stderr_content = result.stderr
+
             return {
-                "error": result.stderr,
-                "output": result.stdout,
-                "reflection": {
-                    "status": "Failed",
-                    "confidence": 0.0,
-                    "insight": f"Code execution failed with return code {result.returncode}",
-                    "action": "execute_code",
-                    "reflection": result.stderr
-                }
+                "error": error_msg,
+                "output": output_content,
+                "stderr": stderr_content, # Include stderr for more info
+                "reflection": _create_reflection(
+                    status="Failed",
+                    summary=f"Code execution failed: {error_msg}",
+                    confidence=0.0,
+                    alignment="Low",
+                    issues=[error_msg],
+                    preview=f"STDOUT: {output_content[:100]}... STDERR: {stderr_content[:100]}..."
+                )
             }
             
-    except subprocess.TimeoutExpired:
+    except subprocess.TimeoutExpired as e:
+        # The `e` object for TimeoutExpired has stdout and stderr properties
         return {
-            "error": f"Execution timed out after {timeout} seconds",
-            "reflection": {
-                "status": "Failed",
-                "confidence": 0.0,
-                "insight": "Code execution timed out",
-                "action": "execute_code",
-                "reflection": f"Timeout after {timeout} seconds"
-            }
+            "error": f"Execution timed out after {timeout} seconds. Output: {e.stdout.decode('utf-8', errors='ignore')} Error: {e.stderr.decode('utf-8', errors='ignore')}",
+            "reflection": _create_reflection(
+                status="Failed",
+                summary=f"Code execution timed out after {timeout} seconds",
+                confidence=0.0,
+                alignment="Low",
+                issues=["TimeoutExpired"],
+                preview=f"STDOUT: {e.stdout.decode('utf-8', errors='ignore')[:100]}... STDERR: {e.stderr.decode('utf-8', errors='ignore')[:100]}..."
+            )
         }
     except Exception as e:
         error_msg = f"Error executing code: {str(e)}"
         logger.error(error_msg, exc_info=True)
         return {
             "error": error_msg,
-            "reflection": {
-                "status": "Failed",
-                "confidence": 0.0,
-                "insight": "Error during code execution",
-                "action": "execute_code",
-                "reflection": error_msg
-            }
+            "reflection": _create_reflection(
+                status="Failed",
+                summary="Error during code execution",
+                confidence=0.0,
+                alignment="Low",
+                issues=[error_msg],
+                preview=error_msg
+            )
         }
 
 # --- Internal Helper: Docker Execution ---

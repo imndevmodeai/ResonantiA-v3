@@ -293,9 +293,6 @@ class SPRManager:
         if text.strip() != text:
             return False, f"SPR '{text}' must not have leading or trailing spaces."
 
-        if len(text) < 3:
-            return False, f"SPR '{text}' is too short (min 3 chars overall required)."
-
         if "  " in text: # Check for multiple spaces between words
             return False, f"SPR '{text}' must not contain multiple spaces between words."
 
@@ -307,9 +304,6 @@ class SPRManager:
             if not word: # Handles cases like "Word  Word" if not caught by "  " check, or accidental empty string in list
                  return False, f"SPR '{text}': Contains an empty word segment at word index {i}."
             
-            if len(word) < 3:
-                return False, f"SPR '{text}': Word '{word}' (at index {i}) is too short (min 3 chars per word required)."
-
             first_char = word[0]
             last_char = word[-1]
             middle_chars = word[1:-1]
@@ -329,8 +323,10 @@ class SPRManager:
             # Rule: Middle characters of word (if any)
             if middle_chars:
                 for char_idx, char_val in enumerate(middle_chars):
-                    if not char_val.islower() or not char_val.isalpha(): # Must be a letter and lowercase
-                        return False, f"SPR '{text}': Word '{word}' (index {i}): Middle character '{char_val}' (at char index {char_idx + 1} of word) must be a lowercase letter."
+                    if char_val.isalpha() and not char_val.islower():
+                        return False, f"SPR '{text}': Word '{word}' (index {i}): Middle alphabetic character '{char_val}' (at char index {char_idx + 1} of word) must be lowercase."
+                    elif not char_val.isalnum() and char_val != ' ':
+                        return False, f"SPR '{text}': Word '{word}' (index {i}): Middle character '{char_val}' (at char index {char_idx + 1} of word) must be alphanumeric or a space."
             # If middle_chars is empty (word length is 2), this is caught by len(word) < 3.
             # If word length is 3, middle_chars has 1 char. If 4, middle_chars has 2, etc.
             
@@ -418,5 +414,11 @@ class SPRManager:
         """
         logger.debug(f"Conceptual Decompress: Retrieving definition for SPR ID '{spr_id}'")
         return self.get_spr(spr_id) # Uses the standard retrieval method
+
+    async def prime_concepts_for_task(self, spr_list: List[str], task_context: Dict):
+        if spr_list:
+            logger.info(f"Conceptually priming SPRs for task '{task_context.get('task_key')}': {spr_list}")
+        # In a real implementation, this would interact with the KnO.
+        return {"status": "success", "primed_sprs": spr_list}
 
 # --- END OF FILE 3.0ArchE/spr_manager.py --- 

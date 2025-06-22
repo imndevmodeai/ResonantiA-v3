@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogScribe AI - Automated Changelog Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body { padding: 2rem; }
+        .changelog-output { margin-top: 2rem; border: 1px solid var(--muted-border-color); padding: 1.5rem; border-radius: var(--border-radius); }
+        .error { color: var(--form-element-invalid-active-border-color); }
+        h1, h2 { text-align: center; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>✍️ LogScribe AI</h1>
+            <p style="text-align: center;">Instantly generate beautiful, human-readable changelogs from your GitHub commits.</p>
+        </header>
+
+        <form method="POST" id="changelog-form">
+            <label for="repo_url">GitHub Repository URL</label>
+            <input type="url" id="repo_url" name="repo_url" placeholder="e.g., https://github.com/imndevmodeai/ResonantiA-v3" value="{{ repo_url_form }}" required>
+            
+            <label for="days_ago">Days Ago</label>
+            <input type="number" id="days_ago" name="days_ago" value="{{ days_ago_form }}" min="1" max="90" required>
+            <small>How many days of commit history to analyze (max 90).</small>
+
+            <button type="submit" id="submit-btn">Generate Changelog</button>
+        </form>
+
+        {% if error_message %}
+            <article class="error">
+                <strong>Error:</strong> {{ error_message }}
+            </article>
+        {% endif %}
+
+        {% if changelog_html %}
+            <article class="changelog-output">
+                <h2>Generated Changelog</h2>
+                <hr>
+                {{ changelog_html|safe }}
+            </article>
+        {% endif %}
+    </main>
+
+    <script>
+        const form = document.getElementById('changelog-form');
+        const submitBtn = document.getElementById('submit-btn');
+        form.addEventListener('submit', () => {
+            submitBtn.setAttribute('aria-busy', 'true');
+            submitBtn.textContent = 'Generating...';
+        });
+    </script>
+</body>
+</html> 
