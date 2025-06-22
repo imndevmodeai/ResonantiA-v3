@@ -42,9 +42,10 @@ except Exception as log_setup_e:
 try:
     from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
     from .spr_manager import SPRManager
+    from .sirc_intake_handler import SIRCIntakeHandler
     # config already imported above
 except ImportError as import_err:
-    logging.critical(f"Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager): {import_err}. Check installation and paths.", exc_info=True)
+    logging.critical(f"Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): {import_err}. Check installation and paths.", exc_info=True)
     sys.exit(1) # Critical failure if core components cannot be imported
 
 logger = logging.getLogger(__name__) # Get logger specifically for this module
@@ -106,6 +107,57 @@ def find_last_successful_run_id(output_dir: str) -> Optional[str]:
     except Exception as e:
         logger.error(f"Could not determine last successful run ID: {e}", exc_info=True)
     return None
+
+def handle_sirc_directive(args):
+    """Handler for SIRC directive processing with DirectiveClarificationProtocoL."""
+    logger.info(f"--- Processing SIRC directive: {args.directive[:100]}... ---")
+    
+    try:
+        # Initialize SPR Manager for SIRC handler
+        spr_manager = SPRManager(getattr(config, 'SPR_JSON_FILE', None))
+        
+        # Initialize SIRC Intake Handler
+        sirc_handler = SIRCIntakeHandler(spr_manager=spr_manager)
+        
+        # Process directive through clarification protocol
+        clarification_result = sirc_handler.process_directive(args.directive)
+        
+        # Display results
+        print("\n=== SIRC DIRECTIVE CLARIFICATION RESULT ===")
+        print(f"Original Directive: {clarification_result['original_directive']}")
+        print(f"Finalized Objective: {clarification_result['finalized_objective']}")
+        print(f"Clarity Score: {clarification_result['clarity_score']:.2f}")
+        print(f"Clarification Needed: {clarification_result['clarification_needed']}")
+        
+        if 'resonance_validation' in clarification_result:
+            print("\nResonance Validation:")
+            for key, value in clarification_result['resonance_validation'].items():
+                print(f"  {key}: {value}")
+        
+        # Save results
+        output_dir = config.OUTPUT_DIR
+        os.makedirs(output_dir, exist_ok=True)
+        output_filename = os.path.join(output_dir, f"sirc_clarification_{uuid.uuid4().hex[:8]}.json")
+        
+        with open(output_filename, 'w', encoding='utf-8') as f:
+            json.dump(clarification_result, f, indent=2, default=str)
+        logger.info(f"SIRC clarification result saved to {output_filename}")
+        
+        # If clarification successful and execution ready, offer to proceed with SIRC
+        if clarification_result.get('clarity_score', 0) > 0.85:
+            print(f"\n✓ Objective clarity threshold met (score: {clarification_result['clarity_score']:.2f})")
+            print("Ready for SIRC Phase 3: Harmonization Check")
+            
+            # Here we would normally proceed to full SIRC processing
+            # For now, we'll just log the readiness
+            logger.info("Directive successfully clarified and ready for SIRC continuation")
+        else:
+            print(f"\n⚠ Objective clarity below threshold (score: {clarification_result['clarity_score']:.2f})")
+            print("Additional clarification may be needed before SIRC processing")
+            
+    except Exception as e:
+        logger.error(f"Error processing SIRC directive: {e}", exc_info=True)
+        print(f"ERROR: Failed to process SIRC directive: {e}")
 
 def handle_run_workflow(args):
     """Handler for the 'run-workflow' command."""
@@ -399,6 +451,16 @@ if __name__ == "__main__":
     )
     # Register the handler for the 'run-workflow' command
     parser_run.set_defaults(func=handle_run_workflow)
+
+    # --- sirc-directive Sub-parser ---
+    parser_sirc = subparsers.add_parser("sirc-directive", help="Process a strategic directive through SIRC intake handler with DirectiveClarificationProtocoL.")
+    parser_sirc.add_argument(
+        "directive",
+        type=str,
+        help="The strategic directive to process (equivalent to keyy=('IMnDEVmode') directive input)"
+    )
+    # Register the handler for the 'sirc-directive' command
+    parser_sirc.set_defaults(func=handle_sirc_directive)
 
     # --- Other sub-parsers for different commands can be added here ---
     # For example, a future 'manage-spr' command

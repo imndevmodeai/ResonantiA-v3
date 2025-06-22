@@ -1,0 +1,300 @@
+[
+  {
+    "spr_id": "ObjectiveClarificationProtocoL",
+    "term": "Objective Clarification Protocol",
+    "definition": "A comprehensive framework within ResonantiA Protocol v3.1-CA that systematically transforms ambiguous strategic directives into clear, quantifiable, and resonant objectives through structured intake, contextual suggestion generation, and confirmation-based clarification processes.",
+    "category": "CoreMechanism",
+    "relationships": {
+      "type": "ProcessFramework",
+      "orchestrates": [
+        "AmbiguityDetectioN",
+        "ContextualSuggestionGeneratioN", 
+        "LeadingQueryFormulationN",
+        "PreferenceOverrideHandlinG",
+        "FinalizeResonantObjective"
+      ],
+      "triggered_by": [
+        "keyy=('IMnDEVmode')",
+        "SIRC_Intake_Handler"
+      ],
+      "addresses_deficiency": [
+        "ObjectiveClaritY_deficiency"
+      ],
+      "integrates_with": [
+        "CognitiveresonancE",
+        "KnowledgecrystallizationsysteM",
+        "SIRC"
+      ],
+      "primary_causal_fixes": [
+        "Clarification_Feedback_Loop",
+        "Success_Criteria_Extraction", 
+        "Structured_Directive_Intake"
+      ]
+    },
+    "supporting_attributes": [
+      "EffortlessKeyholder",
+      "ConfirmationBased",
+      "QuantifiableMetrics",
+      "IterativeRefinement",
+      "CognitiveLoadOptimized"
+    ],
+    "example_application": "Keyholder directive 'improve system performance' is transformed into 'Reduce API response time by 30% (from 200ms to 140ms) within 2 weeks using database optimization and caching strategies' through structured clarification with leading questions.",
+    "activation_prompts": {
+      "detect": "Scan directive for ambiguous terms requiring clarification",
+      "suggest": "Generate 3-4 specific alternatives with quantifiable metrics",
+      "confirm": "Present leading questions requiring only confirmation"
+    },
+    "metadata": {
+      "version": "1.0",
+      "status": "draft",
+      "created_by": "PROJECT_CHIMERA_Phase_B",
+      "created_date": "2025-06-22",
+      "last_modified_date": "2025-06-22",
+      "source_reference": "Causal analysis findings: -0.35 impact from clarification loop absence",
+      "blueprint_details": "directive_clarification_protocol_v1.md"
+    }
+  },
+  {
+    "spr_id": "AmbiguityDetectioN",
+    "term": "Ambiguity Detection",
+    "definition": "A cognitive scanning capability that systematically identifies vague action verbs, undefined scope, missing success criteria, temporal ambiguity, and quantitative gaps within strategic directives to trigger appropriate clarification protocols.",
+    "category": "AnalyticalTechnique",
+    "relationships": {
+      "type": "DetectionMechanism",
+      "part_of": [
+        "ObjectiveClarificationProtocoL"
+      ],
+      "identifies": [
+        "VagueActionVerbs",
+        "UndefinedScope", 
+        "MissingSuccessCriteria",
+        "TemporalAmbiguity",
+        "QuantitativeGaps"
+      ],
+      "triggers": [
+        "ContextualSuggestionGeneratioN"
+      ],
+      "informed_by": [
+        "PROJECT_CHIMERA_causal_analysis"
+      ]
+    },
+    "supporting_attributes": [
+      "PatternRecognition",
+      "LinguisticAnalysis",
+      "ContextualAwareness",
+      "ComplexityAssessment"
+    ],
+    "example_application": "Detects 'improve market presence' contains vague action verb 'improve' and undefined scope 'market presence', triggering clarification with specific alternatives like geographic expansion or engagement metrics.",
+    "activation_prompts": {
+      "scan": "Identify ambiguous terms in directive: {directive_text}",
+      "assess": "Evaluate complexity level of detected ambiguities",
+      "categorize": "Classify ambiguity types for targeted clarification"
+    },
+    "metadata": {
+      "version": "1.0",
+      "status": "draft",
+      "created_by": "PROJECT_CHIMERA_Phase_B",
+      "created_date": "2025-06-22",
+      "last_modified_date": "2025-06-22",
+      "source_reference": "Historical directive analysis patterns from Phase A.1",
+      "blueprint_details": "Pattern matching algorithms for linguistic ambiguity detection"
+    }
+  },
+  {
+    "spr_id": "ContextualSuggestionGeneratioN",
+    "term": "Contextual Suggestion Generation",
+    "definition": "An intelligent recommendation system that creates 3-4 concrete, quantifiable alternatives for ambiguous directive components by analyzing domain context, historical success patterns, and available SPR capabilities to provide specific options with metrics, scope, and success criteria.",
+    "category": "CognitiveCapability",
+    "relationships": {
+      "type": "RecommendationEngine",
+      "part_of": [
+        "ObjectiveClarificationProtocoL"
+      ],
+      "triggered_by": [
+        "AmbiguityDetectioN"
+      ],
+      "leverages": [
+        "KnowledgecrystallizationsysteM",
+        "SPR_Action_Bridge",
+        "HistoricalSuccessPatterns"
+      ],
+      "outputs_to": [
+        "LeadingQueryFormulationN"
+      ],
+      "informed_by": [
+        "crystallized_knowledge",
+        "iar_confidence_patterns"
+      ]
+    },
+    "supporting_attributes": [
+      "DomainAwareness",
+      "QuantifiableMetrics",
+      "ScopeSpecificity",
+      "TechnicalPrecision",
+      "HistoricalValidation"
+    ],
+    "example_application": "For 'enhance user experience', generates: A) Reduce page load time by 40% (2.5s to 1.5s), B) Increase user satisfaction score by 25% via UX testing, C) Decrease bounce rate by 30% through navigation optimization, D) Other specific UX metric.",
+    "activation_prompts": {
+      "analyze": "Determine domain context for ambiguous term: {ambiguous_term}",
+      "generate": "Create 3-4 specific alternatives with quantifiable metrics",
+      "validate": "Ensure suggestions align with available capabilities"
+    },
+    "metadata": {
+      "version": "1.0",
+      "status": "draft",
+      "created_by": "PROJECT_CHIMERA_Phase_B",
+      "created_date": "2025-06-22",
+      "last_modified_date": "2025-06-22",
+      "source_reference": "Keyholder refinement: leading questions with examples",
+      "blueprint_details": "Context analysis algorithms and suggestion template generation"
+    }
+  },
+  {
+    "spr_id": "LeadingQueryFormulationN",
+    "term": "Leading Query Formulation",
+    "definition": "A structured communication framework that transforms contextual suggestions into effortless confirmation-based questions for the Keyholder, minimizing cognitive load by presenting specific options requiring only yes/no responses rather than creative input.",
+    "category": "CommunicationProtocol",
+    "relationships": {
+      "type": "InteractionFramework",
+      "part_of": [
+        "ObjectiveClarificationProtocoL"
+      ],
+      "receives_input_from": [
+        "ContextualSuggestionGeneratioN"
+      ],
+      "optimizes_for": [
+        "KeyholderCognitiveLoad",
+        "ConfirmationEfficiency",
+        "DecisionSimplification"
+      ],
+      "outputs_to": [
+        "PreferenceOverrideHandlinG"
+      ],
+      "implements": [
+        "Keyholder_strategic_refinement"
+      ]
+    },
+    "supporting_attributes": [
+      "CognitiveLoadOptimization",
+      "ConfirmationBased",
+      "StructuredPresentation",
+      "RecommendationPrioritization",
+      "EscapeHatchProvision"
+    ],
+    "example_application": "Presents: 'For system performance, I suggest: A) Reduce API response time by 30% within 2 weeks, B) Optimize database queries for 25% efficiency gain, C) Enhance UI load speed by 40%. Would you like to proceed with option A, or prefer a different approach?'",
+    "activation_prompts": {
+      "format": "Structure suggestions into confirmation-based query format",
+      "prioritize": "Order options by historical success probability",
+      "present": "Display leading question with recommended option highlighted"
+    },
+    "metadata": {
+      "version": "1.0",
+      "status": "draft",
+      "created_by": "PROJECT_CHIMERA_Phase_B",
+      "created_date": "2025-06-22",
+      "last_modified_date": "2025-06-22",
+      "source_reference": "Keyholder directive: confirmation vs creation approach",
+      "blueprint_details": "Question template system with cognitive load optimization"
+    }
+  },
+  {
+    "spr_id": "PreferenceOverrideHandlinG",
+    "term": "Preference Override Handling",
+    "definition": "A flexible response processing system that handles Keyholder feedback to leading questions, managing option selections, custom alternatives, modification requests, and rejections while maintaining iterative refinement within cognitive load limits.",
+    "category": "ResponseProcessor",
+    "relationships": {
+      "type": "FeedbackProcessor",
+      "part_of": [
+        "ObjectiveClarificationProtocoL"
+      ],
+      "receives_input_from": [
+        "LeadingQueryFormulationN"
+      ],
+      "handles": [
+        "OptionSelection",
+        "CustomAlternatives",
+        "ModificationRequests",
+        "RejectionResponses"
+      ],
+      "outputs_to": [
+        "FinalizeResonantObjective",
+        "ContextualSuggestionGeneratioN"
+      ],
+      "implements": [
+        "IterativeRefinement",
+        "AnalysisParalysisPreventioN"
+      ]
+    },
+    "supporting_attributes": [
+      "FlexibleResponseHandling",
+      "IterativeRefinement",
+      "AdaptiveProcessing",
+      "CommitmentEnforcement",
+      "EscalationManagement"
+    ],
+    "example_application": "Handles 'Like option A but make it 25% instead of 30%' by adapting the suggestion and confirming: 'Reduce API response time by 25% (200ms to 150ms) within 2 weeks - proceed with this refined target?'",
+    "activation_prompts": {
+      "process": "Analyze Keyholder response type and intent",
+      "adapt": "Modify suggestions based on preference feedback",
+      "iterate": "Manage refinement rounds within cognitive limits"
+    },
+    "metadata": {
+      "version": "1.0",
+      "status": "draft",
+      "created_by": "PROJECT_CHIMERA_Phase_B",
+      "created_date": "2025-06-22",
+      "last_modified_date": "2025-06-22",
+      "source_reference": "Flexibility requirement for user preference accommodation",
+      "blueprint_details": "Response parsing and iterative refinement algorithms"
+    }
+  },
+  {
+    "spr_id": "FinalizeResonantObjective",
+    "term": "Finalize Resonant Objective",
+    "definition": "A synthesis capability that combines original directive intent with clarified specifics to create a final, measurable, and resonant objective that meets ObjectiveClaritY standards (>0.85 score) and provides clear execution parameters for SIRC continuation.",
+    "category": "SynthesisCapability",
+    "relationships": {
+      "type": "ObjectiveSynthesizer",
+      "part_of": [
+        "ObjectiveClarificationProtocoL"
+      ],
+      "receives_input_from": [
+        "PreferenceOverrideHandlinG"
+      ],
+      "validates_with": [
+        "CognitiveresonancE"
+      ],
+      "outputs_to": [
+        "SIRC_Phase_3",
+        "CoreworkflowenginE"
+      ],
+      "ensures": [
+        "ObjectiveClaritY_threshold",
+        "ExecutionReadiness",
+        "MeasurableOutcomes"
+      ]
+    },
+    "supporting_attributes": [
+      "IntentPreservation",
+      "SpecificityIntegration",
+      "MeasurabilityEnforcement",
+      "ResonanceValidation",
+      "ExecutionReadiness"
+    ],
+    "example_application": "Synthesizes 'improve system performance' + clarified specifics into: 'Reduce API response time by 30% (from 200ms to 140ms) within 2 weeks using database query optimization and Redis caching implementation, validated through load testing with 95% confidence interval.'",
+    "activation_prompts": {
+      "synthesize": "Combine original intent with clarified specifications",
+      "validate": "Ensure objective meets clarity threshold (>0.85)",
+      "finalize": "Prepare resonant objective for execution handoff"
+    },
+    "metadata": {
+      "version": "1.0",
+      "status": "draft",
+      "created_by": "PROJECT_CHIMERA_Phase_B",
+      "created_date": "2025-06-22",
+      "last_modified_date": "2025-06-22",
+      "source_reference": "TARGET: ObjectiveClaritY >0.85 score requirement",
+      "blueprint_details": "Objective synthesis and resonance validation algorithms"
+    }
+  }
+] 

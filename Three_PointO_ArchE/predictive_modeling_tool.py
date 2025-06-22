@@ -244,18 +244,128 @@ def _train_model(**kwargs) -> Dict[str, Any]:
     return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
 
 def _forecast_future_states(**kwargs) -> Dict[str, Any]:
-    """[Requires Implementation] Generates forecasts using a trained time series model."""
-    # <<< INSERT ACTUAL FORECASTING CODE HERE >>>
-    # 1. Extract parameters: model_id, steps_to_forecast, data (optional, for context), etc.
-    # 2. Load the trained model artifact using model_id from MODEL_SAVE_DIR
-    # 3. Validate model type is appropriate for forecasting
-    # 4. Generate the forecast for the specified number of steps (including confidence intervals if possible)
-    # 5. Prepare primary_result dict (forecast values list, confidence intervals list)
-    # 6. Generate IAR reflection (status, summary, confidence based on model properties/CI width, issues, alignment)
-    # 7. Return combined dict {**primary_result, "reflection": reflection}
-    error_msg = "Actual forecasting ('forecast_future_states') not implemented."
-    logger.error(error_msg)
-    return {"error": error_msg, "reflection": _create_reflection("Failure", error_msg, 0.0, "N/A", ["Not Implemented"], None)}
+    """[Implementation] Generates forecasts using ARIMA time series model."""
+    primary_result: Dict[str, Any] = {"error": None, "forecast": None, "confidence_intervals": None}
+    status = "Failure"; summary = "Forecast init failed."; confidence = 0.0; alignment = "N/A"; issues = ["Initialization error."]; preview = None
+
+    try:
+        # Extract parameters
+        data = kwargs.get("data")
+        model_type = kwargs.get("model_type", "arima").lower()
+        model_order = kwargs.get("model_order", (2, 1, 1))
+        steps = kwargs.get("steps", 10)
+        confidence_level = kwargs.get("confidence_level", 0.95)
+
+        if data is None:
+            primary_result["error"] = "Missing 'data' for forecasting."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        # Convert data to pandas Series
+        try:
+            if isinstance(data, list):
+                ts_data = pd.Series(data)
+            elif isinstance(data, dict):
+                ts_data = pd.Series(list(data.values()))
+            else:
+                ts_data = pd.Series(data)
+            
+            if len(ts_data) < 10:
+                raise ValueError(f"Insufficient data for forecasting. Need at least 10 points, got {len(ts_data)}")
+                
+        except Exception as e_data:
+            primary_result["error"] = f"Data conversion error: {e_data}"; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        logger.info(f"Starting {model_type} forecast with {len(ts_data)} data points, order {model_order}, {steps} steps")
+
+        if model_type == "arima":
+            # Fit ARIMA model
+            model = ARIMA(ts_data, order=model_order)
+            fitted_model = model.fit()
+            
+            # Generate forecast
+            forecast_result = fitted_model.forecast(steps=steps, alpha=1-confidence_level)
+            forecast_values = forecast_result.tolist()
+            
+            # Get confidence intervals
+            forecast_ci = fitted_model.get_forecast(steps=steps, alpha=1-confidence_level)
+            ci_df = forecast_ci.conf_int()
+            confidence_intervals = [[float(ci_df.iloc[i, 0]), float(ci_df.iloc[i, 1])] for i in range(len(ci_df))]
+            
+            primary_result["forecast"] = forecast_values
+            primary_result["confidence_intervals"] = confidence_intervals
+            primary_result["model_type"] = "arima"
+            primary_result["model_order"] = model_order
+            primary_result["forecast_steps"] = steps
+            
+            # Calculate forecast quality metrics
+            aic = fitted_model.aic
+            forecast_mean_ci_width = np.mean([ci[1] - ci[0] for ci in confidence_intervals])
+            
+            status = "Success"
+            summary = f"ARIMA{model_order} forecast generated for {steps} steps. AIC: {aic:.2f}, Mean CI width: {forecast_mean_ci_width:.2f}"
+            confidence = max(0.6, min(0.95, 1.0 - (forecast_mean_ci_width / np.mean(forecast_values))))  # Higher confidence for narrower CIs
+            alignment = "Aligned with time series forecasting objective."
+            issues = []
+            preview = {
+                "forecast_sample": forecast_values[:3],
+                "model_aic": aic,
+                "mean_ci_width": forecast_mean_ci_width
+            }
+            
+            logger.info(summary)
+            
+        elif model_type == "prophet":
+            # Create Prophet model
+            df = pd.DataFrame({
+                'ds': pd.date_range(start='2020-01-01', periods=len(ts_data), freq='D'),
+                'y': ts_data.values
+            })
+            
+            model = Prophet()
+            model.fit(df)
+            
+            # Create future dataframe
+            future = model.make_future_dataframe(periods=steps)
+            forecast_df = model.predict(future)
+            
+            # Extract forecast values (last 'steps' predictions)
+            forecast_values = forecast_df['yhat'].tail(steps).tolist()
+            
+            # Extract confidence intervals
+            ci_lower = forecast_df['yhat_lower'].tail(steps).tolist()
+            ci_upper = forecast_df['yhat_upper'].tail(steps).tolist()
+            confidence_intervals = [[lower, upper] for lower, upper in zip(ci_lower, ci_upper)]
+            
+            primary_result["forecast"] = forecast_values
+            primary_result["confidence_intervals"] = confidence_intervals
+            primary_result["model_type"] = "prophet"
+            primary_result["forecast_steps"] = steps
+            
+            forecast_mean_ci_width = np.mean([ci[1] - ci[0] for ci in confidence_intervals])
+            
+            status = "Success"
+            summary = f"Prophet forecast generated for {steps} steps. Mean CI width: {forecast_mean_ci_width:.2f}"
+            confidence = max(0.7, min(0.95, 1.0 - (forecast_mean_ci_width / np.mean(forecast_values))))
+            alignment = "Aligned with time series forecasting objective."
+            issues = []
+            preview = {
+                "forecast_sample": forecast_values[:3],
+                "mean_ci_width": forecast_mean_ci_width
+            }
+            
+            logger.info(summary)
+            
+        else:
+            primary_result["error"] = f"Model type '{model_type}' not implemented for forecasting."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            status = "Failure"; confidence = 0.1
+
+    except Exception as e:
+        logger.error(f"Error during forecasting ('{model_type}'): {e}", exc_info=True)
+        primary_result["error"] = f"Forecasting failed: {e}"; issues.append(str(e)); summary = primary_result["error"]
+        status = "Failure"; confidence = 0.05
+        
+    return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
 
 def _predict(**kwargs) -> Dict[str, Any]:
     """[Requires Implementation -> Implemented for joblib models] Generates predictions using a trained non-time series model."""

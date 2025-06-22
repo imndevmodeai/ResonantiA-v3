@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 # Define the path to the workflow file
 workflow_path = 'workflows/Search_Comparison_Workflow_v1_0.json'
@@ -148,4 +149,77 @@ except FileNotFoundError:
 except json.JSONDecodeError as e:
     print(f"Error decoding JSON from {workflow_path}: {e}")
 except Exception as e:
-    print(f"An unexpected error occurred: {e}") 
+    print(f"An unexpected error occurred: {e}")
+
+def fix_and_merge_spr_definitions(file_path):
+    """
+    Reads a malformed SPR definitions file that contains multiple lists,
+    merges them correctly, and overwrites the file with the clean data.
+    """
+    try:
+        with open(file_path, 'r') as f:
+            # The file is not valid JSON, so we read it as text
+            content = f.read()
+    except FileNotFoundError:
+        print(f"Error: File not found at {file_path}")
+        return
+
+    # This is a brittle way to parse, but it targets the specific known malformation.
+    # It finds the top-level list openings '[' and closings ']'
+    
+    # Clean up the string to make it more parsable
+    # Remove the outer container to isolate the lists of objects
+    content = content.strip()
+    if content.startswith('{"spr_definitions":'):
+        inner_content = content[len('{"spr_definitions":'):-1].strip()
+    else:
+        inner_content = content
+
+    # Use regex to find all distinct JSON objects (e.g., {...})
+    json_objects_str = re.findall(r'\{[^{}]*\}', inner_content.replace('\n', ''))
+    
+    all_defs = []
+    for obj_str in json_objects_str:
+        try:
+            # A bit of a hack: some objects might be nested. We only want top-level SPR defs.
+            # A simple heuristic: if it has "spr_id" or "name", it's likely a definition.
+            # A more robust check might be needed for more complex cases.
+            temp_obj = json.loads(obj_str)
+            if temp_obj.get('spr_id') or temp_obj.get('name') or temp_obj.get('term'):
+                 all_defs.append(temp_obj)
+        except json.JSONDecodeError:
+            # This will fail for parts of larger objects, which we can ignore for this specific fix.
+            pass
+
+    # Now, perform the intelligent merge on the extracted definitions
+    merged_defs = []
+    lookup = {} # Use name/id as key for uniqueness
+
+    for definition in all_defs:
+        # Use spr_id as the primary key, fall back to name or term
+        key = definition.get('spr_id') or definition.get('name') or definition.get('term')
+        if key:
+            # If key exists, the new definition overwrites the old one.
+            # By iterating through all found objects, the last one with a given key wins.
+            lookup[key] = definition
+
+    merged_defs = list(lookup.values())
+
+    # Create the final, correctly structured JSON object
+    final_data = {"spr_definitions": merged_defs}
+
+    # Write the corrected and merged data back to the file
+    try:
+        with open(file_path, 'w') as f:
+            json.dump(final_data, f, indent=2)
+        print(f"Successfully fixed, merged, and overwrote {file_path}")
+        print(f"Total SPRs in tapestry: {len(merged_defs)}")
+    except IOError as e:
+        print(f"Error writing to file {file_path}: {e}")
+
+# --- Main execution ---
+if __name__ == "__main__":
+    # This script is designed for a specific recovery task.
+    # The file path is hardcoded for this corrective action.
+    target_file = 'knowledge_graph/spr_definitions_tv.json'
+    fix_and_merge_spr_definitions(target_file) 

@@ -27,8 +27,16 @@ from .action_context import ActionContext # Import from new file
 from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
 from .qa_tools import run_code_linter, run_workflow_suite
 from .tools.search_tool import SearchTool
+# SPR Action Bridge imports
+from .spr_action_bridge import invoke_spr, SPRBridgeLoader
 
 logger = logging.getLogger(__name__)
+
+# --- SPR Bridge Initialization ---
+# Initialize the SPR Bridge Loader at module level for efficient caching
+CONFIG = config.get_config()
+SPR_TAPESTRY_PATH = CONFIG.paths.arche_root / "knowledge_graph" / "spr_definitions_tv.json"
+SPR_LOADER = SPRBridgeLoader(tapestry_path=str(SPR_TAPESTRY_PATH))
 
 def _create_reflection(status: str, summary: str, confidence: Optional[float], alignment: Optional[str], issues: Optional[List[str]], preview: Any) -> Dict[str, Any]:
     """Helper function to create the standardized IAR reflection dictionary."""
@@ -182,6 +190,49 @@ def search_tool_action(query: str, num_results: int = 5, provider: str = "google
             }
         }
 
+def invoke_spr_action(spr_id: str, **kwargs) -> Dict[str, Any]:
+    """
+    Action registry wrapper for the SPR bridge.
+    Accepts an spr_id and dynamic keyword arguments for parameters.
+    
+    This is the critical bridge that enables workflows to directly invoke
+    SPR-defined capabilities through the action registry system.
+    """
+    try:
+        # The 'parameters' for invoke_spr is the dictionary of kwargs
+        result = invoke_spr(spr_id=spr_id, parameters=kwargs, bridge_loader=SPR_LOADER)
+        
+        # Ensure the result has the wrapper metadata
+        if "reflection" not in result:
+            # If the underlying implementation didn't return proper IAR, wrap it
+            result = {
+                "primary_result": result,
+                "reflection": {
+                    "status": "partial_success",
+                    "summary": f"SPR '{spr_id}' executed but returned incomplete IAR structure",
+                    "confidence": 0.5,
+                    "alignment_check": "degraded",
+                    "potential_issues": ["Underlying implementation missing IAR compliance"],
+                    "raw_output_preview": str(result)[:150] + "..."
+                }
+            }
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Error in invoke_spr_action for SPR '{spr_id}': {e}", exc_info=True)
+        return {
+            "error": str(e),
+            "reflection": {
+                "status": "error",
+                "summary": f"Failed to invoke SPR '{spr_id}' through action registry",
+                "confidence": 0.0,
+                "alignment_check": "failed",
+                "potential_issues": [f"Action registry wrapper error: {str(e)}"],
+                "raw_output_preview": None
+            }
+        }
+
 # Centralized Action Registry
 ACTION_REGISTRY: Dict[str, Callable] = {
     # Foundational Actions
@@ -198,6 +249,9 @@ ACTION_REGISTRY: Dict[str, Callable] = {
     # Advanced Agentic & Metacognitive Actions
     "run_cfp": run_cfp_action,
     "perform_causal_inference": perform_causal_inference,
+    
+    # SPR Bridge Action - The Universal SPR Invoker
+    "invoke_spr": invoke_spr_action,
     "perform_abm": perform_abm,
     "perform_predictive_modeling": run_prediction,
     "perform_system_genesis_action": perform_system_genesis_action,

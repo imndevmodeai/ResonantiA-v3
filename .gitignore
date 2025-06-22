@@ -180,6 +180,7 @@ venv.bak
 /ResonantiA/browser_automation/workflow_search_results.json
 /ResonantiA/browser_automation/search_results.json
 *.png
+outputs/
 
 # --- End of .gitignore ---
 

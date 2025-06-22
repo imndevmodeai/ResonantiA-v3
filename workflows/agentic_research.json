@@ -1,0 +1,67 @@
+{
+  "name": "Agentic Research Workflow",
+  "description": "Deconstructs a complex user query into a multi-step research plan, executes parallel searches, and synthesizes the findings into a comprehensive answer. This workflow embodies the principles of the missing Section 8 of the ResonantiA Protocol.",
+  "version": "1.0",
+  "tasks": {
+    "deconstruct_query": {
+      "description": "Use an LLM to analyze the user's query and break it down into a structured research plan.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are a world-class research analyst. A user has a complex query. Your task is to deconstruct this query into a series of precise, targeted search engine queries that will gather the necessary information. You must also identify the key pieces of information to be extracted for the final answer. Respond with ONLY a JSON object with two keys: 'search_queries' (a list of strings) and 'information_to_extract' (a descriptive string). Do not include any other text or markdown. User Query: '{{ initial_context.user_query }}'",
+        "provider": "gemini"
+      },
+      "outputs": {
+        "research_plan_json": "string"
+      },
+      "next_step": "execute_searches"
+    },
+    "execute_searches": {
+      "description": "Dynamically execute a web search for each query identified in the research plan.",
+      "action_type": "for_each",
+      "inputs": {
+        "items": "{{ deconstruct_query.response.research_plan_json | from_json | map(attribute='search_queries') | first }}",
+        "workflow": {
+          "steps": {
+            "search_step": {
+              "action_type": "search_web",
+              "inputs": {
+                "query": "{{ item }}",
+                "provider": "google"
+              },
+              "outputs": {
+                "search_results": "list"
+              }
+            }
+          }
+        }
+      },
+      "outputs": {
+        "all_search_results": "list"
+      },
+      "next_step": "synthesize_results"
+    },
+    "synthesize_results": {
+      "description": "Use an LLM to synthesize the aggregated search results into a final answer.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are a world-class research analyst. You have been given a user's original query and a collection of search results from multiple targeted searches. Your task is to synthesize all of this information into a single, comprehensive, and well-written answer that directly addresses the user's original question. Be thorough and precise. \\n\\nOriginal Query: '{{ initial_context.user_query }}' \\n\\nAggregated Search Results (JSON):\\n{{ execute_searches.results | to_json }}",
+        "provider": "gemini"
+      },
+      "outputs": {
+        "final_answer": "string"
+      },
+      "next_step": "display_final_answer"
+    },
+    "display_final_answer": {
+      "description": "Format and display the final synthesized answer.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "print('--- Agentic Research Summary ---\\n')\nprint(os.environ.get('FINAL_ANSWER'))",
+        "environment": {
+            "FINAL_ANSWER": "{{ synthesize_results.response.final_answer }}"
+        }
+      }
+    }
+  }
+} 

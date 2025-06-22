@@ -21,6 +21,7 @@ class PathConfig:
     """Stores all relevant paths for the ArchE system."""
     project_root: Path = PROJECT_ROOT
     arche_root: Path = PROJECT_ROOT / "Three_PointO_ArchE"
+    mastermind_dir: Path = PROJECT_ROOT / "mastermind"
     tools: Path = arche_root / "tools"
     llm_providers: Path = arche_root / "llm_providers"
     
