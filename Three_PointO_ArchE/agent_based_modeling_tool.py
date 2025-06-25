@@ -73,8 +73,8 @@ except Exception as e_mesa_other:
 logger = logging.getLogger(__name__) # Logger for this module
 
 # --- IAR Helper Function ---
-# (Reused for consistency)
-from .utils.reflection_utils import _create_reflection # Canonical import
+# Use the canonical, centralized reflection utility from reflection_utils
+from .utils.reflection_utils import create_reflection, ExecutionStatus
 
 # --- Default Agent and Model Implementations ---
 # (Provide basic examples that can be overridden or extended)

@@ -1313,5 +1313,142 @@
     "blueprint_details": "Reference: Power Electronics PR Controller Theory applied to cognitive architecture. Key components: ωo (target frequency/domain), Kp (general error correction), Ki (specialized high-gain response), wc (operational flexibility). Successfully demonstrated elimination of Implementation Resonance query oscillatory error from complete failure to precise definition extraction.",
     "usage_context": "Apply when system exhibits oscillatory errors in specific conceptual domains. Create domain-specific detection logic, implement high-gain specialized extraction for that domain, maintain general proportional control for other queries. Monitor error reduction and tune gains as needed.",
     "success_metrics": "Error magnitude reduction from maximum to near-zero, successful extraction of fragmented information across multiple chunks, elimination of external tool fallback requirements for domain-specific queries."
+  },
+  {
+    "spr_id": "GeminiCodeExecutoR",
+    "term": "Gemini Code Executor",
+    "definition": "The capability to execute sandboxed Python code via the Gemini API's code interpreter. This provides a powerful, secure, and integrated way to run arbitrary code as part of a workflow.",
+    "category": "CognitiveTool",
+    "relationships": {
+      "type": "ExternalAPICapability",
+      "provided_by": "EnhancedCapabilities",
+      "replaces_potential": "SandboxedCodeExecutor"
+    },
+    "blueprint_details": {
+      "action_to_invoke": "execute_gemini_code",
+      "parameter_mapping": {
+        "code_to_run": "code"
+      }
+    },
+    "example_application": "Use the GeminiCodeExecutoR to perform a complex data analysis task written in Python without needing a local interpreter.",
+    "metadata": {
+      "version": "1.0",
+      "status": "active",
+      "created_by": "Keyholder_Directive_EnhancedCapabilities_Integration",
+      "created_date": "2025-01-27",
+      "source_reference": "EnhancedCapabilities Integration SIRC",
+      "confidence": 0.95,
+      "evidence_strength": 0.9
+    }
+  },
+  {
+    "spr_id": "GeminiFileProcessoR",
+    "term": "Gemini File Processor",
+    "definition": "The capability to process files from URLs using the Gemini API. This allows ArchE to directly ingest and understand content from various online sources.",
+    "category": "CognitiveTool",
+    "relationships": {
+      "type": "ExternalAPICapability",
+      "provided_by": "EnhancedCapabilities"
+    },
+    "blueprint_details": {
+      "action_to_invoke": "process_gemini_file",
+      "parameter_mapping": {
+        "file_url_to_process": "file_url"
+      }
+    },
+    "example_application": "Use the GeminiFileProcessoR to read and summarize a research paper hosted on a public URL.",
+    "metadata": {
+      "version": "1.0",
+      "status": "active",
+      "created_by": "Keyholder_Directive_EnhancedCapabilities_Integration",
+      "created_date": "2025-01-27",
+      "source_reference": "EnhancedCapabilities Integration SIRC",
+      "confidence": 0.95,
+      "evidence_strength": 0.9
+    }
+  },
+  {
+    "spr_id": "GroundedGeneratioN",
+    "term": "Grounded Generation",
+    "definition": "The capability to generate text that is factually grounded in a specific set of provided source materials. This enhances the reliability and accuracy of LLM-generated content by preventing hallucination.",
+    "category": "CognitiveTool",
+    "relationships": {
+      "type": "ExternalAPICapability",
+      "provided_by": "EnhancedCapabilities",
+      "enhances": "LLMTool"
+    },
+    "blueprint_details": {
+      "action_to_invoke": "generate_with_grounding",
+      "parameter_mapping": {
+        "prompt": "prompt",
+        "sources_list": "sources"
+      }
+    },
+    "example_application": "Use GroundedGeneratioN to write a summary of a topic, ensuring all claims are backed by the provided list of academic articles.",
+    "metadata": {
+      "version": "1.0",
+      "status": "active",
+      "created_by": "Keyholder_Directive_EnhancedCapabilities_Integration",
+      "created_date": "2025-01-27",
+      "source_reference": "EnhancedCapabilities Integration SIRC",
+      "confidence": 0.95,
+      "evidence_strength": 0.9
+    }
+  },
+  {
+    "spr_id": "GeminiFunctionCallinG",
+    "term": "Gemini Function Calling",
+    "definition": "The capability for the Gemini LLM to intelligently request the execution of predefined functions (tools) based on the context of a prompt. This allows the LLM to interact with external systems and data sources.",
+    "category": "CognitiveTool",
+    "relationships": {
+      "type": "ExternalAPICapability",
+      "provided_by": "EnhancedCapabilities",
+      "enhances": "LLMTool"
+    },
+    "blueprint_details": {
+      "action_to_invoke": "generate_with_function_calling",
+      "parameter_mapping": {
+        "prompt": "prompt",
+        "tools_definition": "tools"
+      }
+    },
+    "example_application": "Provide the GeminiFunctionCallinG capability a set of database query tools, and ask it a question about sales data to have it automatically generate and request the correct query.",
+    "metadata": {
+      "version": "1.0",
+      "status": "active",
+      "created_by": "Keyholder_Directive_EnhancedCapabilities_Integration",
+      "created_date": "2025-01-27",
+      "source_reference": "EnhancedCapabilities Integration SIRC",
+      "confidence": 0.95,
+      "evidence_strength": 0.9
+    }
+  },
+  {
+    "spr_id": "StructuredOutputGeneratoR",
+    "term": "Structured Output Generator",
+    "definition": "The capability to force LLM output to conform to a specific JSON schema. This ensures that the LLM's output is predictable, machine-readable, and can be reliably used in downstream automated processes.",
+    "category": "CognitiveTool",
+    "relationships": {
+      "type": "ExternalAPICapability",
+      "provided_by": "EnhancedCapabilities",
+      "enhances": "LLMTool"
+    },
+    "blueprint_details": {
+      "action_to_invoke": "generate_with_structured_output",
+      "parameter_mapping": {
+        "prompt": "prompt",
+        "schema": "output_schema"
+      }
+    },
+    "example_application": "Use the StructuredOutputGeneratoR to extract key information from an unstructured text and format it into a clean JSON object with predefined fields.",
+    "metadata": {
+      "version": "1.0",
+      "status": "active",
+      "created_by": "Keyholder_Directive_EnhancedCapabilities_Integration",
+      "created_date": "2025-01-27",
+      "source_reference": "EnhancedCapabilities Integration SIRC",
+      "confidence": 0.95,
+      "evidence_strength": 0.9
+    }
   }
 ]

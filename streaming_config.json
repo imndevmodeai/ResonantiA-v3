@@ -1,0 +1,66 @@
+{
+  "camera_device": 0,
+  "resolution_width": 1280,
+  "resolution_height": 720,
+  "fps": 30,
+  "virtual_cam_name": "ArchE_Webcam",
+  "enable_effects": true,
+  "enable_privacy_mode": false,
+  "enable_background_blur": true,
+  "enable_face_beauty": true,
+  "enable_noise_reduction": false,
+  "streaming_quality": "high",
+  
+  "platforms": {
+    "chaturbate": {
+      "rtmp_url": "rtmp://edge-us-east.live.chaturbate.com/live",
+      "stream_key": "YOUR_CHATURBATE_STREAM_KEY_HERE",
+      "resolution": "1280x720",
+      "bitrate": 3000,
+      "enabled": false,
+      "notes": "Get stream key from Chaturbate broadcaster settings"
+    },
+    "onlyfans": {
+      "rtmp_url": "rtmp://live.onlyfans.com/live",
+      "stream_key": "YOUR_ONLYFANS_STREAM_KEY_HERE", 
+      "resolution": "1920x1080",
+      "bitrate": 4000,
+      "enabled": false,
+      "notes": "OnlyFans live streaming (if available in your region)"
+    },
+    "obs_studio": {
+      "rtmp_url": "rtmp://localhost:1935/live",
+      "stream_key": "obs_stream",
+      "resolution": "1920x1080",
+      "bitrate": 6000,
+      "enabled": true,
+      "notes": "Local OBS Studio integration"
+    },
+    "youtube": {
+      "rtmp_url": "rtmp://a.rtmp.youtube.com/live2",
+      "stream_key": "YOUR_YOUTUBE_STREAM_KEY_HERE",
+      "resolution": "1920x1080", 
+      "bitrate": 4500,
+      "enabled": false,
+      "notes": "YouTube Live streaming"
+    },
+    "twitch": {
+      "rtmp_url": "rtmp://live.twitch.tv/live",
+      "stream_key": "YOUR_TWITCH_STREAM_KEY_HERE",
+      "resolution": "1920x1080",
+      "bitrate": 6000,
+      "enabled": false,
+      "notes": "Twitch streaming"
+    }
+  },
+  
+  "advanced_settings": {
+    "beauty_filter_strength": 0.7,
+    "background_blur_intensity": 21,
+    "noise_reduction_level": 10,
+    "frame_buffer_size": 3,
+    "enable_hardware_acceleration": true,
+    "auto_exposure": true,
+    "auto_white_balance": true
+  }
+} 

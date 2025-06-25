@@ -1,0 +1,49 @@
+{
+  "cameras": [
+    {
+      "camera_id": "cam_001",
+      "name": "Front Entrance",
+      "url": "http://192.168.1.100:8080/videofeed",
+      "location": "entrance",
+      "protocol": "mjpeg",
+      "resolution": "1280x720",
+      "fps": 30,
+      "enabled": true,
+      "ai_enabled": true,
+      "recording_enabled": true
+    },
+    {
+      "camera_id": "cam_002", 
+      "name": "Sales Floor Main",
+      "url": "http://192.168.1.101:8080/videofeed",
+      "location": "sales_floor",
+      "protocol": "mjpeg",
+      "resolution": "1920x1080",
+      "fps": 25,
+      "enabled": true,
+      "ai_enabled": true,
+      "recording_enabled": true
+    },
+    {
+      "camera_id": "cam_003",
+      "name": "Warehouse Back",
+      "url": "rtsp://admin:password@192.168.1.102:554/stream1",
+      "location": "warehouse",
+      "protocol": "rtsp",
+      "resolution": "1280x720",
+      "fps": 20,
+      "enabled": true,
+      "ai_enabled": false,
+      "recording_enabled": true
+    }
+  ],
+  "output_directory": "./recordings",
+  "max_concurrent_streams": 4,
+  "ai_confidence_threshold": 0.75,
+  "recording_duration_minutes": 60,
+  "web_interface_port": 8080,
+  "enable_motion_detection": true,
+  "enable_object_detection": true,
+  "enable_face_detection": false,
+  "log_level": "INFO"
+} 

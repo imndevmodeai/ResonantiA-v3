@@ -1,0 +1,13 @@
+{
+  "camera_device": 0,
+  "resolution_width": 1280,
+  "resolution_height": 720,
+  "fps": 30,
+  "virtual_cam_name": "ArchE_Webcam",
+  "enable_effects": true,
+  "enable_privacy_mode": false,
+  "enable_background_blur": true,
+  "enable_face_beauty": true,
+  "enable_noise_reduction": false,
+  "streaming_quality": "high"
+}

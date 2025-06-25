@@ -426,3 +426,41 @@ Regular assessment via:
 - ObjectiveClaritY score measurement
 - Performance validation
 - Production deployment
+```
+
+## ProportionalResonantControlPatterN (Enhanced Cognitive Architecture)
+
+The Proportional Resonant (PR) Controller is a specialized control algorithm designed to eliminate oscillatory errors in frequency domain systems. In the context of ArchE's cognitive architecture, this pattern represents the ability to identify and eliminate recurring cognitive errors through resonant gain amplification at specific "cognitive frequencies."
+
+### Key Principles:
+- **Resonant Gain (Ki)**: High amplification at the target frequency (error pattern)
+- **Proportional Control (Kp)**: General error correction across all frequencies  
+- **Damping Factor (wc)**: Prevents over-correction and instability
+
+### Cognitive Translation:
+In cognitive terms, this translates to:
+- Identifying recurring query patterns that fail (target frequency)
+- Applying specialized processing for those patterns (resonant gain)
+- Maintaining general processing capabilities (proportional control)
+- Preventing over-specialization that breaks general functionality (damping)
+
+### Implementation in CRCS:
+Each FrequencyDomainController implements a PR controller for its specific cognitive frequency domain, providing specialized extraction while maintaining system stability through careful parameter tuning.
+
+### Performance Metrics:
+- **Success Rate**: Percentage of queries successfully processed by specialized controllers
+- **Response Time**: Average time for domain detection and context extraction
+- **Resonant Gain Effectiveness**: Measured improvement over general TF-IDF methods
+- **System Stability**: Maintained through damping factor optimization
+
+### Multi-Domain Architecture:
+The PR Controller pattern has been successfully generalized into a Multi-Domain Cognitive Resonant Controller (MDCRC) system, enabling:
+- Automatic domain detection and routing
+- Specialized extraction for Implementation Resonance, SPR queries, and Proportional Resonant queries
+- Adaptive parameter tuning based on performance metrics
+- Hierarchical control with meta-cognitive orchestration
+
+### Research Foundations:
+This implementation draws from control theory research on proportional-resonant controllers in power electronics, adapted for cognitive architecture through the principles of Implementation Resonance and Temporal Resonance as defined in the ResonantiA Protocol v3.1-CA.
+
+# ... existing code ...

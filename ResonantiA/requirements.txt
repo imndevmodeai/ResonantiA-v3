@@ -1,6 +1,6 @@
 # Core Python utilities often used in analysis and tools
 numpy             # Fundamental package for numerical computing
-scipy             # Scientific computing library (stats, optimization, linear algebra)
+scipy==1.13.1     # Scientific computing library (stats, optimization, linear algebra)
 pandas            # Data manipulation and analysis (DataFrames)
 requests          # For making HTTP requests (used by ApiTool, SearchTool concepts)
 networkx          # For graph manipulation (potentially used in Causal Discovery, KnO visualization)
@@ -23,7 +23,7 @@ matplotlib        # For generating visualizations of ABM results
 statsmodels       # Comprehensive stats models, including ARIMA, VAR (for prediction & causality)
 scikit-learn      # General ML library (regression, classification, metrics - used for evaluation)
 joblib            # For saving/loading trained models (e.g., statsmodels/sklearn models)
-# prophet         # Optional: Facebook's forecasting library (often requires C++ compiler setup)
+prophet           # Optional: Facebook's forecasting library (often requires C++ compiler setup)
 # pmdarima        # Optional: For automatic ARIMA order selection
 
 # OR-Tools (for TSP baseline and other optimization)
@@ -43,4 +43,11 @@ numexpr           # For safe evaluation of mathematical strings (used in calcula
 
 # Testing Framework
 pytest
-pytest-mock 
+pytest-mock
+
+# Added to fix ModuleNotFoundError during interact.py execution
+streamlit
+python-dotenv
+duckduckgo-search
+google-search-results # For SerpApi integration in SearchTool
+Jinja2

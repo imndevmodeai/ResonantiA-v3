@@ -17,6 +17,7 @@ from typing import Dict, Any, Optional, List, Tuple, TYPE_CHECKING # Expanded ty
 import asyncio
 from dataclasses import dataclass
 from .iar_components import IARValidator, ResonanceTracker
+from .utils.reflection_utils import create_reflection, ExecutionStatus
 
 if TYPE_CHECKING:
     from .action_context import ActionContext
@@ -34,19 +35,8 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-# --- IAR Helper Function ---
-# (Reused for consistency)
-def _create_reflection(status: str, summary: str, confidence: Optional[float], alignment: Optional[str], issues: Optional[List[str]], preview: Any) -> Dict[str, Any]:
-    """Helper function to create the standardized IAR reflection dictionary."""
-    if confidence is not None: confidence = max(0.0, min(1.0, confidence))
-    issues_list = issues if issues else None
-    try:
-        preview_str = str(preview) if preview is not None else None
-        if preview_str and len(preview_str) > 150:
-            preview_str = preview_str[:150] + "..."
-    except Exception:
-        preview_str = "[Preview Error]"
-    return {"status": status, "summary": summary, "confidence": confidence, "alignment_check": alignment if alignment else "N/A", "potential_issues": issues_list, "raw_output_preview": preview_str}
+# --- IAR Helper Function (DEPRECATED) ---
+# The local _create_reflection is now deprecated in favor of the centralized utility.
 
 # --- Sandboxing Configuration & Checks ---
 # Read configuration settings, providing defaults if missing
@@ -89,28 +79,41 @@ if sandbox_method_resolved == 'docker':
 
 # --- Main Execution Function ---
 def execute_code(
-    code: str = None,
-    language: str = "python",
-    timeout: int = 30,
-    environment: Optional[Dict[str, str]] = None,
-    code_path: str = None,
-    input_data: str = None
+    inputs: Dict[str, Any]
 ) -> Dict[str, Any]:
     """
     Execute code in the specified language and return results with IAR reflection.
+    This action is now compliant with ResonantiA Protocol v3.1-CA IAR standards.
 
     Args:
-        code: The code to execute as a string
-        language: Programming language (default: python)
-        timeout: Execution timeout in seconds
-        environment: Optional environment variables
-        code_path: Path to a file containing the code to execute
-        input_data: Optional string to pass to the script's stdin
+        inputs (Dict): A dictionary containing:
+            - code (str): The code to execute.
+            - language (str): Programming language (default: python).
+            - timeout (int): Execution timeout in seconds.
+            - environment (Dict[str, str]): Optional environment variables.
+            - code_path (str): Path to a file containing the code.
+            - input_data (str): Optional string to pass to the script's stdin.
     """
+    start_time = time.time()
+    action_name = "execute_code"
+    
+    code = inputs.get("code")
+    code_path = inputs.get("code_path")
+    language = inputs.get("language", "python")
+    timeout = inputs.get("timeout", 30)
+    environment = inputs.get("environment")
+    input_data = inputs.get("input_data")
+
     if code is None and code_path is None:
         return {
             "error": "Either 'code' or 'code_path' must be provided.",
-            "reflection": _create_reflection("Failed", "Input validation failed", 0.0, "Misaligned", ["Missing code input."], None)
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.FAILURE,
+                message="Input validation failed: 'code' or 'code_path' must be provided.",
+                inputs=inputs,
+                execution_time=time.time() - start_time
+            )
         }
     
     temp_file = None
@@ -120,83 +123,90 @@ def execute_code(
                 raise FileNotFoundError(f"The specified code_path does not exist: {code_path}")
             exec_file = code_path
         else:
-            # Create temporary file for code
             with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix=f".{language}") as f:
                 f.write(code)
                 temp_file = f.name
             exec_file = temp_file
         
-        # Set up environment, ensuring all values are strings
         env = os.environ.copy()
         if environment:
-            # Robustly convert all provided env values to strings
             safe_env = {str(k): str(v) for k, v in environment.items()}
             env.update(safe_env)
         
-        # Execute code based on language
-        if language == "python":
-            result = subprocess.run(
-                [sys.executable, exec_file],
-                capture_output=True,
-                text=True,
-                timeout=timeout,
-                env=env,
-                input=input_data
-            )
-        else:
-            raise ValueError(f"Unsupported language: {language}")
+        if language != "python":
+             raise ValueError(f"Unsupported language: {language}")
+
+        result = subprocess.run(
+            [sys.executable, exec_file],
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            env=env,
+            input=input_data
+        )
         
-        # Process results
+        execution_time = time.time() - start_time
+        
         if result.returncode == 0:
+            outputs = {"output": result.stdout, "stderr": result.stderr}
             return {
-                "output": result.stdout,
-                "reflection": {
-                    "status": "Success",
-                    "confidence": 1.0,
-                    "insight": "Code executed successfully",
-                    "action": "execute_code",
-                    "reflection": "No errors encountered"
-                }
+                "result": outputs,
+                "reflection": create_reflection(
+                    action_name=action_name,
+                    status=ExecutionStatus.SUCCESS,
+                    message="Code executed successfully.",
+                    inputs=inputs,
+                    outputs=outputs,
+                    confidence=1.0,
+                    execution_time=execution_time
+                )
             }
         else:
+            outputs = {"output": result.stdout, "error": result.stderr}
             return {
-                "error": result.stderr,
-                "output": result.stdout,
-                "reflection": {
-                    "status": "Failed",
-                    "confidence": 0.0,
-                    "insight": f"Code execution failed with return code {result.returncode}",
-                    "action": "execute_code",
-                    "reflection": result.stderr
-                }
+                "result": outputs,
+                "reflection": create_reflection(
+                    action_name=action_name,
+                    status=ExecutionStatus.FAILURE,
+                    message=f"Code execution failed with return code {result.returncode}.",
+                    inputs=inputs,
+                    outputs=outputs,
+                    confidence=0.1,
+                    potential_issues=[f"Return Code: {result.returncode}", result.stderr],
+                    execution_time=execution_time
+                )
             }
             
     except subprocess.TimeoutExpired:
-        return {
-            "error": f"Execution timed out after {timeout} seconds",
-            "reflection": {
-                "status": "Failed",
-                "confidence": 0.0,
-                "insight": "Code execution timed out",
-                "action": "execute_code",
-                "reflection": f"Timeout after {timeout} seconds"
-            }
-        }
-    except Exception as e:
-        error_msg = f"Error executing code: {str(e)}"
-        logger.error(error_msg, exc_info=True)
+        execution_time = time.time() - start_time
+        error_msg = f"Execution timed out after {timeout} seconds"
         return {
             "error": error_msg,
-            "reflection": {
-                "status": "Failed",
-                "confidence": 0.0,
-                "insight": "Error during code execution",
-                "action": "execute_code",
-                "reflection": error_msg
-            }
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.FAILURE,
+                message=error_msg,
+                inputs=inputs,
+                potential_issues=["TimeoutExpired"],
+                execution_time=execution_time
+            )
+        }
+    except Exception as e:
+        execution_time = time.time() - start_time
+        error_msg = f"An unexpected error occurred: {str(e)}"
+        logger.error(f"Error executing code for action '{action_name}': {error_msg}", exc_info=True)
+        return {
+            "error": error_msg,
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.CRITICAL_FAILURE,
+                message=error_msg,
+                inputs=inputs,
+                potential_issues=[str(e)],
+                execution_time=execution_time
+            )
         }
     finally:
-        # Clean up temp file if it was created
         if temp_file and os.path.exists(temp_file):
             os.remove(temp_file)
 

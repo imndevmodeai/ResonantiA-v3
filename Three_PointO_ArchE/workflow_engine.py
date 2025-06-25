@@ -18,7 +18,7 @@ from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable
 # Use relative imports within the package
 from . import config
 # Imports the function that calls specific tools and centralized registry
-from .action_registry import execute_action, ACTION_REGISTRY, register_action
+from .action_registry import execute_action, main_action_registry, register_action
 # May be used for SPR-related context or validation
 from .spr_manager import SPRManager
 # Imports error handling logic
@@ -306,7 +306,7 @@ class IARCompliantWorkflowEngine:
         self.workflows_dir = workflows_dir
         self.spr_manager = spr_manager
         self.last_workflow_name = None
-        self.action_registry = ACTION_REGISTRY.copy()  # Use centralized registry
+        self.action_registry = main_action_registry.actions.copy()  # Use centralized registry
         self.recovery_handler = None
         self.current_run_id = None
         self.current_workflow = None
@@ -331,7 +331,7 @@ class IARCompliantWorkflowEngine:
     action_type,
     action_func,
      force=True)  # Use centralized registration
-        self.action_registry = ACTION_REGISTRY.copy()  # Update local copy
+        self.action_registry = main_action_registry.actions.copy()  # Update local copy
         logger.debug(f"Registered action: {action_type}")
 
     def register_recovery_actions(self) -> None:

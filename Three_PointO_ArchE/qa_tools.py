@@ -2,7 +2,7 @@
 import subprocess
 import json
 from typing import Dict, Any
-from .utils.reflection_utils import _create_reflection
+from .utils.reflection_utils import create_reflection, ExecutionStatus
 
 def run_code_linter(directory: str, **kwargs) -> Dict[str, Any]:
     """
@@ -12,9 +12,10 @@ def run_code_linter(directory: str, **kwargs) -> Dict[str, Any]:
     if not directory:
         return {
             "error": "Input 'directory' is required.",
-            "reflection": _create_reflection(
-                status="Failed",
-                summary="Missing required input: directory.",
+            "reflection": create_reflection(
+                action_name="run_code_linter",
+                status=ExecutionStatus.FAILURE,
+                message="Missing required input: directory.",
                 confidence=0.0
             )
         }
@@ -43,11 +44,12 @@ def run_code_linter(directory: str, **kwargs) -> Dict[str, Any]:
                 "linter_report": linter_report_json,
                 "summary": summary,
                 "score": score,
-                "reflection": _create_reflection(
-                    status="Success",
-                    summary=summary,
+                "reflection": create_reflection(
+                    action_name="run_code_linter",
+                    status=ExecutionStatus.SUCCESS,
+                    message=summary,
                     confidence=1.0,
-                    raw_output_preview=raw_report
+                    outputs={"linter_report": linter_report_json, "score": score}
                 )
             }
         except json.JSONDecodeError:
@@ -55,30 +57,33 @@ def run_code_linter(directory: str, **kwargs) -> Dict[str, Any]:
             return {
                 "error": "Failed to parse pylint JSON output.",
                 "raw_output": raw_report,
-                "reflection": _create_reflection(
-                    status="Failed",
-                    summary=summary,
+                "reflection": create_reflection(
+                    action_name="run_code_linter",
+                    status=ExecutionStatus.FAILURE,
+                    message=summary,
                     confidence=0.5,
-                    potential_issues="Pylint output was not valid JSON. This can happen with fatal errors.",
-                    raw_output_preview=raw_report
+                    potential_issues=["Pylint output was not valid JSON. This can happen with fatal errors."],
+                    outputs={"raw_output": raw_report}
                 )
             }
 
     except FileNotFoundError:
         return {
             "error": "pylint command not found. Please ensure it is installed and in the system's PATH.",
-            "reflection": _create_reflection(
-                status="Failed",
-                summary="Pylint executable not found.",
+            "reflection": create_reflection(
+                action_name="run_code_linter",
+                status=ExecutionStatus.CRITICAL_FAILURE,
+                message="Pylint executable not found.",
                 confidence=0.0
             )
         }
     except Exception as e:
         return {
             "error": f"An unexpected error occurred: {str(e)}",
-            "reflection": _create_reflection(
-                status="Error",
-                summary=f"An unexpected error occurred while running pylint: {str(e)}",
+            "reflection": create_reflection(
+                action_name="run_code_linter",
+                status=ExecutionStatus.CRITICAL_FAILURE,
+                message=f"An unexpected error occurred while running pylint: {str(e)}",
                 confidence=0.0
             )
         }
@@ -103,9 +108,10 @@ def run_workflow_suite(workflow_files: list, **kwargs) -> Dict[str, Any]:
     if not workflow_files:
         return {
             "error": "No workflow files specified",
-            "reflection": _create_reflection(
-                status="Failed",
-                summary="No workflow files provided for testing",
+            "reflection": create_reflection(
+                action_name="run_workflow_suite",
+                status=ExecutionStatus.FAILURE,
+                message="No workflow files provided for testing",
                 confidence=0.0
             )
         }
@@ -177,10 +183,11 @@ def run_workflow_suite(workflow_files: list, **kwargs) -> Dict[str, Any]:
     return {
         "suite_report": suite_report,
         "summary": summary,
-        "reflection": _create_reflection(
-            status="Success" if failed_workflows == 0 else "Partial Success",
-            summary=summary,
+        "reflection": create_reflection(
+            action_name="run_workflow_suite",
+            status=ExecutionStatus.SUCCESS if failed_workflows == 0 else ExecutionStatus.WARNING,
+            message=summary,
             confidence=1.0 if failed_workflows == 0 else 0.8,
-            raw_output_preview=json.dumps(suite_report, indent=2)
+            outputs={"suite_report": suite_report}
         )
     } 

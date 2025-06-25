@@ -4,6 +4,8 @@ import json
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
+from .utils.reflection_utils import create_reflection, ExecutionStatus
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -18,75 +20,99 @@ try:
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable not set.")
     genai.configure(api_key=api_key)
-except ValueError as e:
-    logger.warning(f"Gemini API key not configured: {e}. The LLM tool will not work.")
+except (ValueError, ImportError) as e:
+    logger.warning(f"Gemini API key not configured or library not available: {e}. The LLM tool will not work.")
     # Allow the module to be imported, but the function will fail if called.
     pass
 
 
 def generate_text_llm(
-    prompt: str,
-    max_tokens: int = 2048, # Increased for complex synthesis
-    temperature: float = 0.5,
-    provider: str = "gemini",
-    model: str = "gemini-1.5-flash-latest" 
+    inputs: Dict[str, Any]
 ) -> Dict[str, Any]:
     """
     Generate text using a real LLM (Gemini) and return results with IAR reflection.
     
     Args:
-        prompt: Input prompt for text generation
-        max_tokens: Maximum number of tokens to generate (Note: ignored by this Gemini model)
-        temperature: Sampling temperature (0.0 to 1.0)
-        provider: The LLM provider to use (currently only 'gemini' is implemented)
-        model: Model to use for generation
+        inputs (Dict): A dictionary containing:
+            - prompt (str): Input prompt for text generation.
+            - max_tokens (int): Maximum tokens (Note: Gemini API may have its own limits).
+            - temperature (float): Sampling temperature (0.0 to 1.0).
+            - provider (str): The LLM provider (default: 'gemini').
+            - model (str): The model to use.
         
     Returns:
-        Dictionary containing generated text and IAR reflection
+        Dictionary containing generated text and a compliant IAR reflection.
     """
-    if provider != "gemini":
-        not_implemented_msg = f"LLM provider '{provider}' is not implemented."
+    start_time = time.time()
+    action_name = "generate_text"
+
+    prompt = inputs.get("prompt")
+    provider = inputs.get("provider", "gemini")
+    model = inputs.get("model", "gemini-1.5-flash-latest")
+    temperature = inputs.get("temperature", 0.5)
+
+    if not prompt:
         return {
-            "error": not_implemented_msg,
-            "response_text": "",
-            "reflection": {
-                "status": "Failed",
-                "confidence": 0.0,
-                "insight": not_implemented_msg,
-                "action": "generate_text_llm",
-                "reflection": "Configuration error."
-            }
+            "error": "Input 'prompt' is required.",
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.FAILURE,
+                message="Input validation failed: 'prompt' is required.",
+                inputs=inputs,
+                execution_time=time.time() - start_time
+            )
+        }
+
+    if provider != "gemini":
+        error_msg = f"LLM provider '{provider}' is not implemented."
+        return {
+            "error": error_msg,
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.FAILURE,
+                message=error_msg,
+                inputs=inputs,
+                potential_issues=["ConfigurationError"],
+                execution_time=time.time() - start_time
+            )
         }
         
     try:
         gemini_model = genai.GenerativeModel(model)
-        response = gemini_model.generate_content(prompt, generation_config=genai.types.GenerationConfig(temperature=temperature))
+        response = gemini_model.generate_content(
+            prompt, 
+            generation_config=genai.types.GenerationConfig(temperature=temperature)
+        )
         
-        # The API returns the response in `response.text`
         response_text = response.text.strip()
+        execution_time = time.time() - start_time
+        outputs = {"response_text": response_text}
         
         return {
-            "response_text": response_text,
-            "reflection": {
-                "status": "Success",
-                "confidence": 0.9, # High confidence as it's a direct API call
-                "insight": f"Text generation completed successfully using {model}.",
-                "action": "generate_text_llm",
-                "reflection": "Generated response meets requirements"
-            }
+            "result": outputs,
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.SUCCESS,
+                message=f"Text generation completed successfully using {model}.",
+                inputs=inputs,
+                outputs=outputs,
+                confidence=0.9,
+                execution_time=execution_time
+            )
         }
         
     except Exception as e:
         error_msg = f"Error generating text with Gemini: {str(e)}"
         logger.error(error_msg, exc_info=True)
+        execution_time = time.time() - start_time
         return {
             "error": error_msg,
-            "response_text": "",
-            "reflection": {
-                "status": "Failed",
-                "confidence": 0.0,
-                "insight": "Text generation failed during API call.",
-                "action": "generate_text_llm",
-                "reflection": error_msg
-            }
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.CRITICAL_FAILURE,
+                message=error_msg,
+                inputs=inputs,
+                potential_issues=[str(e)],
+                execution_time=execution_time
+            )
         } 

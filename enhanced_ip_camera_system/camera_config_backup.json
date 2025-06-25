@@ -1,0 +1,49 @@
+{
+  "cameras": [
+    {
+      "camera_id": "cam_001",
+      "name": "Primary IP Camera",
+      "url": "http://192.168.13.37:6969/videofeed",
+      "location": "primary",
+      "protocol": "mjpeg",
+      "resolution": "1280x720",
+      "fps": 30,
+      "enabled": true,
+      "ai_enabled": true,
+      "recording_enabled": true
+    },
+    {
+      "camera_id": "cam_002", 
+      "name": "Secondary Camera",
+      "url": "http://192.168.13.37:6969/stream",
+      "location": "secondary",
+      "protocol": "mjpeg",
+      "resolution": "1920x1080",
+      "fps": 25,
+      "enabled": false,
+      "ai_enabled": true,
+      "recording_enabled": false
+    },
+    {
+      "camera_id": "cam_003",
+      "name": "RTSP Stream",
+      "url": "rtsp://192.168.13.37:6969/stream1",
+      "location": "rtsp",
+      "protocol": "rtsp",
+      "resolution": "1280x720",
+      "fps": 20,
+      "enabled": false,
+      "ai_enabled": false,
+      "recording_enabled": false
+    }
+  ],
+  "output_directory": "./recordings",
+  "max_concurrent_streams": 4,
+  "ai_confidence_threshold": 0.75,
+  "recording_duration_minutes": 60,
+  "web_interface_port": 8080,
+  "enable_motion_detection": true,
+  "enable_object_detection": true,
+  "enable_face_detection": false,
+  "log_level": "INFO"
+}

@@ -2,125 +2,146 @@ import logging
 from typing import Dict, Any, List, Optional
 import requests
 from bs4 import BeautifulSoup
-import json
-import subprocess
-import tempfile
-import os
+import time
+from urllib.parse import quote_plus
+
+from .utils.reflection_utils import create_reflection, ExecutionStatus
 
 logger = logging.getLogger(__name__)
 
-def search_web(
-    query: str,
-    num_results: int = 10,
-    provider: str = "google"
-) -> Dict[str, Any]:
+def search_web(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Perform a web search using the search.js browser automation script.
+    Perform a web search using direct HTTP requests and return results with IAR reflection.
     
     Args:
-        query: Search query string
-        num_results: Number of results to return (Note: the script may return more)
-        provider: The search provider to use ('google' or 'duckduckgo').
+        inputs (Dict): A dictionary containing:
+            - query (str): Search query string.
+            - num_results (int): Number of results to return.
+            - provider (str): The search provider ('duckduckgo' is the reliable default).
         
     Returns:
-        Dictionary containing search results and IAR reflection
+        Dictionary containing search results and a compliant IAR reflection.
     """
-    result = None # Initialize result to avoid UnboundLocalError
-    try:
-        # Create a temporary file to store the search results
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix=".json") as temp_output:
-            output_filename = temp_output.name
-        
-        # Define the path to the search script's directory robustly
-        # Hardcoding the root for stability in this specific environment.
-        project_root = "/media/dev2025/3626C55326C514B1/Happier"
-        script_dir = os.path.join(project_root, 'ResonantiA', 'browser_automation')
-        
-        # Construct the command to run the Node.js script
-        command = [
-            "node",
-            "search.js",
-            "--query",
-            query,
-            "--engine",
-            provider,
-            "--output",
-            output_filename
-        ]
-        
-        # Execute the script from its own directory
-        logger.info(f"Executing browser automation script in '{script_dir}': {' '.join(command)}")
-        result = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            timeout=120,
-            cwd=script_dir
-        )
+    start_time = time.time()
+    action_name = "web_search"
+    
+    query = inputs.get("query")
+    num_results = inputs.get("num_results", 10)
+    provider = inputs.get("provider", "duckduckgo")
 
-        if result.returncode != 0:
-            error_msg = f"Browser automation script failed with exit code {result.returncode}. Stderr: {result.stderr}"
-            logger.error(error_msg)
-            raise RuntimeError(error_msg)
-
-        # Read the results from the temporary file, with extra error handling
-        search_results = []
-        try:
-            with open(output_filename, 'r') as f:
-                search_results = json.load(f)
-        except json.JSONDecodeError:
-            # This is the critical error: the script ran but produced an empty or invalid file.
-            # We log the stderr from the script to find out why.
-            error_msg = f"Browser automation script produced invalid or empty JSON. Stderr: {result.stderr}"
-            logger.error(error_msg)
-            raise RuntimeError(error_msg)
-            
-        # The script returns an array of objects with title, url, snippet
-        # We can limit the number of results here if needed
-        formatted_results = search_results[:num_results]
-
+    if not query:
         return {
-            "results": formatted_results,
-            "reflection": {
-                "status": "Success",
-                "confidence": 0.95, # High confidence as it's from a live browser session
-                "insight": f"Found {len(formatted_results)} results for query using {provider} via browser automation.",
-                "action": "web_search",
-                "reflection": "Search completed successfully using browser automation."
-            }
+            "error": "Input 'query' is required.",
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.FAILURE,
+                message="Input validation failed: 'query' is required.",
+                inputs=inputs,
+                execution_time=time.time() - start_time
+            )
+        }
+
+    if provider != "duckduckgo":
+        # For now, only support DuckDuckGo to avoid dealing with Google's bot detection
+        return {
+            "error": "Unsupported provider. Only 'duckduckgo' is currently supported for direct requests.",
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.FAILURE,
+                message=f"Provider '{provider}' is not supported.",
+                inputs=inputs,
+                potential_issues=["ConfigurationError"],
+                execution_time=time.time() - start_time
+            )
         }
         
-    except FileNotFoundError:
-        # This will catch if the results file wasn't created
-        stderr_output = result.stderr if result else "N/A (subprocess did not run)"
-        error_msg = f"Search script did not produce an output file at {output_filename}. Stderr: {stderr_output}"
+    search_url = f"https://duckduckgo.com/html/?q={quote_plus(query)}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
+
+    try:
+        response = requests.get(search_url, headers=headers, timeout=15)
+        response.raise_for_status()  # Raise an exception for bad status codes
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        
+        results = []
+        # Find all result divs
+        result_divs = soup.find_all('div', class_='result')
+        
+        for div in result_divs[:num_results]:
+            title_tag = div.find('a', class_='result__a')
+            snippet_tag = div.find('a', class_='result__snippet')
+            url_tag = div.find('a', class_='result__url')
+
+            if title_tag and snippet_tag and url_tag:
+                title = title_tag.get_text(strip=True)
+                snippet = snippet_tag.get_text(strip=True)
+                # Clean up the URL from DDG's tracking link
+                url = url_tag['href']
+                cleaned_url = url.split('uddg=')[-1]
+                if cleaned_url.startswith('https'):
+                    results.append({
+                        "title": title,
+                        "url": requests.utils.unquote(cleaned_url),
+                        "snippet": snippet
+                    })
+
+        if not results:
+            return {
+                "result": {"results": []},
+                "reflection": create_reflection(
+                    action_name=action_name,
+                    status=ExecutionStatus.WARNING,
+                    message="Search completed but found no results.",
+                    inputs=inputs,
+                    outputs={"results_count": 0},
+                    confidence=0.7,
+                    potential_issues=["No results found for query."],
+                    execution_time=time.time() - start_time
+                )
+            }
+
+        outputs = {"results": results}
+        return {
+            "result": outputs,
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.SUCCESS,
+                message=f"Found {len(results)} results for query using {provider}.",
+                inputs=inputs,
+                outputs={"results_count": len(results)},
+                confidence=0.9,
+                execution_time=time.time() - start_time
+            )
+        }
+        
+    except requests.exceptions.RequestException as e:
+        error_msg = f"Network error during web search: {str(e)}"
         logger.error(error_msg, exc_info=True)
         return {
             "error": error_msg,
-            "results": [],
-            "reflection": {
-                "status": "Failed",
-                "confidence": 0.0,
-                "insight": "Browser automation script failed to produce output.",
-                "action": "web_search",
-                "reflection": error_msg
-            }
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.FAILURE,
+                message=error_msg,
+                inputs=inputs,
+                potential_issues=[type(e).__name__],
+                execution_time=time.time() - start_time
+            )
         }
     except Exception as e:
-        error_msg = f"Error processing browser automation search: {str(e)}"
+        error_msg = f"An unexpected error occurred during web search: {str(e)}"
         logger.error(error_msg, exc_info=True)
         return {
             "error": error_msg,
-            "results": [],
-            "reflection": {
-                "status": "Failed",
-                "confidence": 0.0,
-                "insight": "Web search failed during execution or processing.",
-                "action": "web_search",
-                "reflection": error_msg
-            }
-        }
-    finally:
-        # Clean up the temporary file
-        if 'output_filename' in locals() and os.path.exists(output_filename):
-            os.remove(output_filename) 
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.CRITICAL_FAILURE,
+                message=error_msg,
+                inputs=inputs,
+                potential_issues=[type(e).__name__],
+                execution_time=time.time() - start_time
+            )
+        } 

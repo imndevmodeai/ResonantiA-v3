@@ -1,297 +1,265 @@
 #!/usr/bin/env python3
 """
-ArchE Interactive Agent - Enhanced with Cognitive Resonant Controller System
-Now powered by multi-domain PR Controllers for systematic error elimination.
+ArchE Interactive Agent - IAR Compliant Workflow Engine Interface
+This script provides a command-line interface to execute workflows using
+the IARCompliantWorkflowEngine, ensuring adherence to the ResonantiA Protocol.
 """
 
 import sys
 import os
 import logging
-import time
+import json
 from pathlib import Path
+from typing import Dict, Any, List
+import argparse
 
-# Add the Three_PointO_ArchE directory to the path
-sys.path.insert(0, str(Path(__file__).parent.parent / "Three_PointO_ArchE"))
+# Add the project root to the path to allow direct imports
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
-try:
-    from cognitive_resonant_controller import CognitiveResonantControllerSystem
-    CRCS_AVAILABLE = True
-except ImportError:
-    CRCS_AVAILABLE = False
-    print("⚠️  CRCS not available, falling back to legacy system")
+from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
+from Three_PointO_ArchE.utils.reflection_utils import ExecutionStatus
 
-import google.generativeai as genai
+# --- PTRF Integration: Import real dependencies ---
+from Three_PointO_ArchE.proactive_truth_system import ProactiveTruthSystem
+from Three_PointO_ArchE.llm_providers import OpenAIProvider # Assuming OpenAI as default
+from Three_PointO_ArchE.tools.search_tool import SearchTool
+from Three_PointO_ArchE.spr_manager import SPRManager
+# --- End PTRF Integration ---
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger("ArchE_Agent")
+logger = logging.getLogger("ArchE_Workflow_CLI")
 
-class ArchEAgent:
+class ArchEWorkflowCLI:
     """
-    Enhanced ArchE Agent powered by Cognitive Resonant Controller System
-    Implements multi-domain error elimination via Proportional Resonant Controllers
+    A command-line interface for interacting with ArchE's IARCompliantWorkflowEngine.
     """
     
     def __init__(self):
-        self.model = None
-        self.protocol_chunks = []
-        self.crcs = None  # Cognitive Resonant Controller System
-        self.legacy_mode = False
-        
-        # Initialize Gemini
-        api_key = os.getenv("GEMINI_API_KEY")
-        if api_key:
-            try:
-                genai.configure(api_key=api_key)
-                self.model = genai.GenerativeModel('gemini-1.5-flash')
-                logger.info("[Gemini] Initialized successfully")
-            except Exception as e:
-                logger.error(f"[Gemini] Initialization failed: {e}")
-        else:
-            logger.warning("[Gemini] API key not found")
-        
-        # Load protocol and initialize CRCS
-        self._load_protocol()
-        self._initialize_crcs()
-    
-    def _load_protocol(self):
-        """Load the ResonantiA Protocol document"""
-        protocol_path = Path(__file__).parent.parent / "protocol" / "ResonantiA_Protocol_v3.1-CA.md"
-        
-        if protocol_path.exists():
-            try:
-                with open(protocol_path, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                
-                # Split into chunks (paragraphs)
-                self.protocol_chunks = [chunk.strip() for chunk in content.split('\n\n') if chunk.strip()]
-                logger.info(f"[Protocol] Loaded {len(self.protocol_chunks)} chunks from v3.1-CA")
-                
-            except Exception as e:
-                logger.error(f"[Protocol] Failed to load: {e}")
-                self.protocol_chunks = ["CRITICAL ERROR: Protocol document could not be loaded."]
-        else:
-            logger.error(f"[Protocol] File not found: {protocol_path}")
-            self.protocol_chunks = ["CRITICAL ERROR: Protocol document not found."]
-    
-    def _initialize_crcs(self):
-        """Initialize the Cognitive Resonant Controller System"""
-        if CRCS_AVAILABLE and self.protocol_chunks and not self.protocol_chunks[0].startswith("CRITICAL ERROR"):
-            try:
-                self.crcs = CognitiveResonantControllerSystem(self.protocol_chunks)
-                logger.info("[CRCS] Cognitive Resonant Controller System initialized")
-                logger.info(f"[CRCS] Active domains: {list(self.crcs.domain_controllers.keys())}")
-            except Exception as e:
-                logger.error(f"[CRCS] Initialization failed: {e}")
-                self.legacy_mode = True
-        else:
-            logger.warning("[CRCS] Falling back to legacy mode")
-            self.legacy_mode = True
-    
-    def process_query(self, query: str) -> str:
-        """
-        Process query using the Cognitive Resonant Controller System
-        Falls back to legacy mode if CRCS unavailable
-        """
-        if not self.legacy_mode and self.crcs:
-            return self._process_with_crcs(query)
-        else:
-            return self._process_legacy(query)
-    
-    def _process_with_crcs(self, query: str) -> str:
-        """Process query using the advanced CRCS system"""
-        logger.info(f"[CRCS] Processing query: '{query}'")
-        
-        # Use CRCS to extract context
-        context, metrics = self.crcs.process_query(query)
-        
-        if context:
-            logger.info(f"[CRCS] ✅ Domain controller activated: {metrics.get('active_domain', 'Unknown')}")
-            logger.info(f"[CRCS] Response time: {metrics.get('response_time', 0):.3f}s")
-            
-            # Generate response using extracted context
-            if self.model:
-                response = self._generate_response(query, context)
-                
-                # Log CRCS diagnostics
-                diagnostics = self.crcs.get_system_diagnostics()
-                logger.info(f"[CRCS] System metrics: {diagnostics['system_metrics']}")
-                
-                return response
-            else:
-                return f"Context found via {metrics.get('active_domain', 'Unknown')} controller:\n\n{context}"
-        else:
-            logger.warning(f"[CRCS] ❌ No context extracted - Domain: {metrics.get('active_domain', 'None')}")
-            return "The Cognitive Resonant Controller System could not extract relevant context for this query. This indicates a potential new domain that requires controller development."
-    
-    def _process_legacy(self, query: str) -> str:
-        """Legacy processing method (original TF-IDF approach)"""
-        logger.info(f"[Legacy] Processing query: '{query}'")
-        
-        # Use the original Implementation Resonance pattern as fallback
-        context = self._legacy_retrieve_context(query)
-        
-        if context and self.model:
-            return self._generate_response(query, context)
-        elif context:
-            return f"Legacy context found:\n\n{context}"
-        else:
-            return "No relevant context found in legacy mode."
-    
-    def _legacy_retrieve_context(self, query: str) -> str:
-        """Legacy context retrieval with Implementation Resonance pattern"""
-        if not self.protocol_chunks or self.protocol_chunks[0].startswith("CRITICAL ERROR"):
-            return None
-        
-        query_lower = query.lower()
-        
-        # Implementation Resonance domain detection (legacy PR controller)
-        if any(term in query_lower for term in ['implementation resonance', 'jedi principle 6', 'bridge the worlds']):
-            logger.info("[Legacy] Implementation Resonance domain detected")
-            relevant_chunks = []
-            for chunk in self.protocol_chunks:
-                chunk_lower = chunk.lower()
-                if any(pattern in chunk_lower for pattern in [
-                    'implementation resonance', 'jedi principle 6', 'bridge the worlds', 
-                    'as above so below'
-                ]):
-                    relevant_chunks.append(chunk)
-            
-            if relevant_chunks:
-                logger.info(f"[Legacy] Found {len(relevant_chunks)} Implementation Resonance chunks")
-                return "\n\n".join(relevant_chunks)
-        
-        # Fallback to basic TF-IDF
-        return self._basic_tfidf_search(query)
-    
-    def _basic_tfidf_search(self, query: str) -> str:
-        """Basic TF-IDF search as final fallback"""
-        import math
-        
-        query_words = set(word.lower() for word in query.replace('?', '').split())
-        num_chunks = len(self.protocol_chunks)
-        
-        if num_chunks == 0:
-            return None
-        
-        # Calculate IDF
-        idf = {}
-        for word in query_words:
-            doc_count = sum(1 for chunk in self.protocol_chunks if word in chunk.lower())
-            idf[word] = math.log(num_chunks / max(1, doc_count))
-        
-        # Find best chunk
-        best_chunk = None
-        max_score = 0
-        
-        for chunk in self.protocol_chunks:
-            words_in_chunk = chunk.lower().split()
-            chunk_word_count = len(words_in_chunk)
-            
-            if chunk_word_count == 0:
-                continue
-            
-            # Calculate TF-IDF score
-            tfidf_score = sum(
-                (words_in_chunk.count(word) / chunk_word_count) * idf[word] 
-                for word in query_words
-            )
-            
-            if tfidf_score > max_score:
-                max_score = tfidf_score
-                best_chunk = chunk
-        
-        if best_chunk and max_score > 0.01:
-            logger.info(f"[Legacy] TF-IDF found context (Score: {max_score:.4f})")
-            return best_chunk
-        
-        return None
-    
-    def _generate_response(self, query: str, context: str) -> str:
-        """Generate response using Gemini with extracted context"""
-        if not self.model:
-            return f"Context extracted but no language model available:\n\n{context}"
-        
-        prompt = f"""You are an expert on the ResonantiA Protocol v3.1-CA framework. Answer the user's query based on the provided context.
+        """Initialize the CLI and the workflow engine."""
+        self.workflows_dir = project_root / "workflows"
+        self.available_workflows = self._discover_workflows()
+        self.engine = IARCompliantWorkflowEngine()
+        logger.info(f"ArchE Workflow CLI initialized. Found {len(self.available_workflows)} workflows.")
 
-Context from ResonantiA Protocol:
-{context}
-
-User Query: {query}
-
-Provide a comprehensive answer based on the context. If the context doesn't fully answer the query, explain what information is available and what might be missing."""
-        
+        # --- PTRF Integration: Instantiate the live PTRF engine and its dependencies ---
         try:
-            response = self.model.generate_content(prompt)
-            return response.text
+            logger.info("Initializing Proactive Truth Resonance Framework engine...")
+            # Note: This assumes default initializations are sufficient.
+            # A real system would pull config from a file (e.g., for API keys).
+            llm_provider = OpenAIProvider() # This would need an API key in environment
+            web_search_tool = SearchTool() # This might need an API key
+            spr_manager = SPRManager() # Assumes default KG path
+            
+            self.truth_seeker = ProactiveTruthSystem(
+                workflow_engine=self.engine,
+                llm_provider=llm_provider,
+                web_search_tool=web_search_tool,
+                spr_manager=spr_manager
+            )
+            self.ptrf_enabled = True
+            logger.info("Proactive Truth Resonance Framework engine is ONLINE.")
         except Exception as e:
-            logger.error(f"[Gemini] Generation failed: {e}")
-            return f"Error generating response: {e}\n\nRaw context:\n{context}"
-    
-    def get_system_status(self) -> dict:
-        """Get comprehensive system status"""
-        status = {
-            'crcs_available': CRCS_AVAILABLE,
-            'legacy_mode': self.legacy_mode,
-            'protocol_chunks_loaded': len(self.protocol_chunks),
-            'gemini_available': self.model is not None
-        }
+            self.truth_seeker = None
+            self.ptrf_enabled = False
+            logger.error(f"Failed to initialize PTRF engine: {e}. The 'truth_seek' command will be disabled.", exc_info=True)
+            print("\nWARNING: Could not initialize the Proactive Truth Engine. The 'truth_seek' command will be disabled. Check logs and API key configurations.\n")
+        # --- End PTRF Integration ---
+
+    def _discover_workflows(self) -> List[str]:
+        """Scans the workflows directory for available .json files."""
+        if not self.workflows_dir.is_dir():
+            logger.warning(f"Workflows directory not found at: {self.workflows_dir}")
+            return []
+        return sorted([f.name for f in self.workflows_dir.glob("*.json")])
+
+    def list_workflows(self):
+        """Prints the list of available workflows."""
+        print("\nAvailable Workflows:")
+        if not self.available_workflows:
+            print("  No workflows found.")
+            return
+        for i, wf_name in enumerate(self.available_workflows, 1):
+            print(f"  {i}. {wf_name}")
+        print()
+
+    def select_workflow(self) -> str | None:
+        """Prompts the user to select a workflow and returns the chosen file name."""
+        self.list_workflows()
+        if not self.available_workflows:
+            return None
         
-        if self.crcs and not self.legacy_mode:
-            status['crcs_diagnostics'] = self.crcs.get_system_diagnostics()
+        while True:
+            try:
+                choice_str = input(f"Select a workflow by number (1-{len(self.available_workflows)}) or 'exit': ")
+                if choice_str.lower() == 'exit':
+                    return None
+                choice = int(choice_str) - 1
+                if 0 <= choice < len(self.available_workflows):
+                    return self.available_workflows[choice]
+                else:
+                    print("Invalid number. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+
+    def run(self):
+        """The main interactive loop for the CLI."""
+        print("Welcome to the ArchE Workflow CLI.")
+        available_commands = "list, run, exit"
+        if self.ptrf_enabled:
+            available_commands = "list, run, truth_seek, exit"
         
-        return status
+        print(f"Type '{available_commands}'")
+
+        while True:
+            try:
+                prompt_text = f"\n> Enter command ({available_commands}): "
+                command = input(prompt_text).lower().strip()
+
+                if command == 'exit':
+                    print("Exiting ArchE Workflow CLI. Goodbye!")
+                    break
+                elif command == 'list':
+                    self.list_workflows()
+                elif command == 'run':
+                    workflow_name = self.select_workflow()
+                    if workflow_name:
+                        workflow_path = self.workflows_dir / workflow_name
+                        print(f"\nExecuting workflow: {workflow_name}")
+                        try:
+                            # For now, we run with an empty initial context.
+                            # A more advanced version could prompt for context.
+                            initial_context = {}
+                            final_result = self.engine.run_workflow(str(workflow_path), initial_context)
+                            
+                            print("\n--- Workflow Execution Complete ---")
+                            print(json.dumps(final_result, indent=2, default=str))
+                            print("---------------------------------")
+                            
+                            final_reflection = final_result.get("reflection", {})
+                            if final_reflection.get("status") == ExecutionStatus.CRITICAL_FAILURE:
+                                logger.error("Workflow ended with CRITICAL_FAILURE.")
+                            
+                        except Exception as e:
+                            logger.error(f"An error occurred while running the workflow '{workflow_name}': {e}", exc_info=True)
+                            print(f"An error occurred. Check the logs for details.")
+                elif command == 'truth_seek':
+                    if not self.ptrf_enabled:
+                        print("The 'truth_seek' command is disabled due to an initialization error. Please check the logs.")
+                        continue
+                    
+                    query = input("Enter the factual query you want to verify: ")
+                    if not query:
+                        print("Query cannot be empty.")
+                        continue
+                        
+                    print(f"\nInitiating Proactive Truth Resonance for: \"{query}\"")
+                    print("This may take a moment as it involves live web searches and analysis...")
+                    
+                    try:
+                        # Call the PTRF engine
+                        stp = self.truth_seeker.seek_truth(query)
+                        
+                        # Convert dataclass to dict for clean JSON printing
+                        stp_dict = {
+                            "final_answer": stp.final_answer,
+                            "confidence_score": stp.confidence_score,
+                            "source_consensus": stp.source_consensus.value,
+                            "transparency_note": stp.transparency_note,
+                            "conflicting_information": stp.conflicting_information,
+                            "crystallization_ready": stp.crystallization_ready,
+                            "verification_trail": stp.verification_trail
+                        }
+
+                        print("\n--- Solidified Truth Packet ---")
+                        print(json.dumps(stp_dict, indent=2))
+                        print("-----------------------------")
+
+                    except Exception as e:
+                        logger.error(f"An error occurred during truth seeking for query '{query}': {e}", exc_info=True)
+                        print(f"An error occurred during truth seeking. See logs for details.")
+                else:
+                    print(f"Unknown command. Available commands: {available_commands}")
+
+            except KeyboardInterrupt:
+                print("\nExiting ArchE Workflow CLI. Goodbye!")
+                break
+            except Exception as e:
+                logger.error(f"An unexpected error occurred in the CLI main loop: {e}", exc_info=True)
+                print("An unexpected error occurred. Check the logs.")
 
 def main():
-    """Main entry point for the ArchE Agent"""
-    if len(sys.argv) < 2:
-        print("Usage: python interact.py \"Your question here\"")
-        print("Example: python interact.py \"What is Implementation Resonance?\"")
-        return
+    """Main function to run the ArchE Workflow CLI."""
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(
+        description="ArchE Interactive Agent - IAR Compliant Workflow Engine Interface",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python3 -m mastermind.interact                    # Interactive mode
+  python3 -m mastermind.interact "What is AI?"      # Direct query mode
+  python3 -m mastermind.interact --truth-seek "Is the Earth round?"  # Truth-seeking mode
+        """
+    )
+    parser.add_argument(
+        'query', 
+        nargs='?', 
+        help='Query to process directly (non-interactive mode)'
+    )
+    parser.add_argument(
+        '--truth-seek', 
+        action='store_true',
+        help='Use the Proactive Truth Resonance Framework to verify the query'
+    )
     
-    query = sys.argv[1]
+    args = parser.parse_args()
     
-    print("🚀 ArchE Agent - Cognitive Resonant Controller System")
-    print("=" * 60)
+    cli = ArchEWorkflowCLI()
     
-    # Initialize agent
-    agent = ArchEAgent()
+    # Non-interactive mode: process the query directly
+    if args.query:
+        if args.truth_seek:
+            if not cli.ptrf_enabled:
+                print("ERROR: The Proactive Truth Resonance Framework is not available.")
+                print("Check logs and API key configurations.")
+                sys.exit(1)
+            
+            print(f"Initiating Proactive Truth Resonance for: \"{args.query}\"")
+            print("This may take a moment as it involves live web searches and analysis...")
+            
+            try:
+                stp = cli.truth_seeker.seek_truth(args.query)
+                
+                # Convert dataclass to dict for clean JSON printing
+                stp_dict = {
+                    "final_answer": stp.final_answer,
+                    "confidence_score": stp.confidence_score,
+                    "source_consensus": stp.source_consensus.value,
+                    "transparency_note": stp.transparency_note,
+                    "conflicting_information": stp.conflicting_information,
+                    "crystallization_ready": stp.crystallization_ready,
+                    "verification_trail": stp.verification_trail
+                }
+
+                print("\n--- Solidified Truth Packet ---")
+                print(json.dumps(stp_dict, indent=2))
+                print("-----------------------------")
+                
+            except Exception as e:
+                logger.error(f"An error occurred during truth seeking for query '{args.query}': {e}", exc_info=True)
+                print(f"ERROR: An error occurred during truth seeking. See logs for details.")
+                sys.exit(1)
+        else:
+            # For now, we'll treat a direct query as a request for general processing
+            # In a more advanced system, this might trigger a specific workflow or LLM interaction
+            print(f"Processing query: \"{args.query}\"")
+            print("Note: Direct query processing is not yet fully implemented.")
+            print("The query has been received and logged. For full functionality, use interactive mode or --truth-seek.")
     
-    # Show system status
-    status = agent.get_system_status()
-    print(f"📊 System Status:")
-    print(f"   CRCS Available: {'✅' if status['crcs_available'] else '❌'}")
-    print(f"   Legacy Mode: {'⚠️ Yes' if status['legacy_mode'] else '✅ No'}")
-    print(f"   Protocol Chunks: {status['protocol_chunks_loaded']}")
-    print(f"   Gemini Available: {'✅' if status['gemini_available'] else '❌'}")
-    
-    if status.get('crcs_diagnostics'):
-        crcs_diag = status['crcs_diagnostics']
-        print(f"   Active Controllers: {len(crcs_diag['domain_controllers'])}")
-        print(f"   Total Queries: {crcs_diag['system_metrics']['total_queries']}")
-    
-    print()
-    print(f"🔍 Query: {query}")
-    print("-" * 40)
-    
-    # Process query
-    start_time = time.time()
-    response = agent.process_query(query)
-    processing_time = time.time() - start_time
-    
-    print(response)
-    print()
-    print(f"⏱️  Processing time: {processing_time:.3f}s")
-    
-    # Show final diagnostics if CRCS was used
-    if not agent.legacy_mode and agent.crcs:
-        final_status = agent.get_system_status()
-        if 'crcs_diagnostics' in final_status:
-            print("\n📈 CRCS Performance:")
-            for domain, data in final_status['crcs_diagnostics']['domain_controllers'].items():
-                perf = data['performance']
-                print(f"   {domain}: {perf['queries_processed']} queries, "
-                      f"{perf['success_rate']:.1%} success rate")
+    # Interactive mode: run the normal CLI loop
+    else:
+        cli.run()
 
 if __name__ == "__main__":
     main() 
