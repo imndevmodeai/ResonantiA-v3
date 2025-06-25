@@ -1,43 +1,409 @@
 [
   {
-    "rule_name": "On Any Workflow Failure, Run Diagnostics",
+    "rule_name": "Proactive Truth Resonance Framework (PTRF) Activation",
     "enabled": true,
+    "priority": "critical",
     "trigger": {
-      "type": "on_workflow_completion",
+      "type": "on_truth_seeking_request",
       "config": {
-        "watch_status": "Failed"
+        "watch_keywords": ["truth", "verify", "fact-check", "validate", "investigate", "analyze claim"],
+        "confidence_threshold": 0.7,
+        "uncertainty_indicators": ["uncertain", "unclear", "conflicting", "disputed"]
       }
     },
     "action": {
       "type": "run_workflow",
-      "workflow_to_run": "diagnostic_workflow.json",
+      "workflow_to_run": "proactive_truth_seeking_workflow.json",
       "context_template": {
-        "source_run_id": "{{ trigger.run_id }}",
-        "source_workflow_file": "{{ trigger.workflow_file }}",
-        "reason": "Triggered automatically by the Guardian due to a failure status in a previous workflow run.",
-        "failed_task_summary": "{{ trigger.failed_task_summary }}"
+        "source_query": "{{ trigger.query }}",
+        "truth_seeking_mode": "autonomous",
+        "reason": "Triggered by PTRF Guardian due to truth-seeking request or uncertainty detection.",
+        "initial_confidence": "{{ trigger.confidence_score }}",
+        "verification_level": "comprehensive"
       }
+    },
+    "metadata": {
+      "system": "PTRF",
+      "version": "3.1-CA",
+      "description": "Activates autonomous truth-seeking capabilities when truth validation is needed"
     }
   },
   {
-    "rule_name": "On High System Divergence, Trigger Self-Reflection",
-    "enabled": false,
+    "rule_name": "Enhanced Gemini Capabilities Auto-Deployment",
+    "enabled": true,
+    "priority": "high",
+    "trigger": {
+      "type": "on_complex_analysis_request",
+      "config": {
+        "complexity_indicators": ["multi-modal", "code execution", "file processing", "structured output"],
+        "task_types": ["analysis", "modeling", "simulation", "prediction"],
+        "data_sources": ["files", "apis", "databases", "real-time"]
+      }
+    },
+    "action": {
+      "type": "activate_enhanced_capabilities",
+      "capabilities": ["native_code_execution", "file_processing", "grounding", "function_calling", "structured_output"],
+      "context_template": {
+        "enhancement_reason": "Complex analysis requiring advanced Gemini capabilities",
+        "requested_capabilities": "{{ trigger.capability_requirements }}",
+        "gar_compliance": true,
+        "safety_protocols": "active"
+      }
+    },
+    "metadata": {
+      "system": "Gemini Enhanced Tools",
+      "version": "3.1-CA",
+      "description": "Auto-deploys enhanced Gemini capabilities for complex tasks"
+    }
+  },
+  {
+    "rule_name": "Collective Intelligence Network Coordination",
+    "enabled": true,
+    "priority": "high",
+    "trigger": {
+      "type": "on_distributed_task_request",
+      "config": {
+        "task_complexity": "high",
+        "resource_requirements": ["multiple_instances", "specialized_capabilities", "parallel_processing"],
+        "coordination_keywords": ["distribute", "parallel", "collective", "multi-instance"]
+      }
+    },
+    "action": {
+      "type": "activate_collective_intelligence",
+      "workflow_to_run": "collective_intelligence_coordination.json",
+      "context_template": {
+        "coordination_mode": "distributed",
+        "task_distribution": "{{ trigger.task_requirements }}",
+        "instance_registry": "active",
+        "capability_matching": true,
+        "synchronization": "enabled"
+      }
+    },
+    "metadata": {
+      "system": "Collective Intelligence Network",
+      "version": "3.1-CA",
+      "description": "Coordinates distributed processing across ArchE instances"
+    }
+  },
+  {
+    "rule_name": "Predictive Flux Coupling Engine Activation",
+    "enabled": true,
+    "priority": "high",
+    "trigger": {
+      "type": "on_system_dynamics_analysis",
+      "config": {
+        "analysis_types": ["system_dynamics", "predictive_modeling", "flux_analysis", "coupling_detection"],
+        "complexity_threshold": 0.8,
+        "temporal_scope": ["multi-temporal", "long-term", "dynamic"]
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "predictive_flux_coupling_analysis.json",
+      "context_template": {
+        "analysis_mode": "comprehensive",
+        "coupling_detection": "active",
+        "flux_monitoring": "enabled",
+        "predictive_horizon": "{{ trigger.temporal_scope }}",
+        "system_state_tracking": true
+      }
+    },
+    "metadata": {
+      "system": "Predictive Flux Coupling Engine",
+      "version": "3.1-CA",
+      "description": "Activates advanced system dynamics analysis capabilities"
+    }
+  },
+  {
+    "rule_name": "Implementation Resonance Validation",
+    "enabled": true,
+    "priority": "critical",
+    "trigger": {
+      "type": "on_implementation_gap_detection",
+      "config": {
+        "gap_indicators": ["concept_implementation_mismatch", "protocol_violation", "resonance_break"],
+        "validation_scope": ["as_above_so_below", "implementation_consistency", "protocol_adherence"],
+        "confidence_threshold": 0.6
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "implementation_resonance_validation.json",
+      "context_template": {
+        "validation_mode": "comprehensive",
+        "gap_analysis": "{{ trigger.detected_gaps }}",
+        "resonance_check": "active",
+        "correction_protocols": "enabled",
+        "as_above_so_below_verification": true
+      }
+    },
+    "metadata": {
+      "system": "Implementation Resonance",
+      "version": "3.1-CA",
+      "description": "Validates and corrects implementation gaps for protocol adherence"
+    }
+  },
+  {
+    "rule_name": "Advanced Pattern Recognition and Crystallization",
+    "enabled": true,
+    "priority": "medium",
+    "trigger": {
+      "type": "on_pattern_emergence",
+      "config": {
+        "pattern_types": ["behavioral", "systemic", "temporal", "causal"],
+        "emergence_threshold": 0.75,
+        "crystallization_candidates": ["insights", "behaviors", "relationships", "dynamics"]
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "pattern_crystallization_workflow.json",
+      "context_template": {
+        "pattern_type": "{{ trigger.pattern_classification }}",
+        "crystallization_mode": "automatic",
+        "knowledge_integration": "active",
+        "spr_generation": "enabled",
+        "tapestry_update": true
+      }
+    },
+    "metadata": {
+      "system": "Pattern Crystallization",
+      "version": "3.1-CA",
+      "description": "Automatically recognizes and crystallizes emerging patterns"
+    }
+  },
+  {
+    "rule_name": "Temporal Dynamics and 4D Thinking Activation",
+    "enabled": true,
+    "priority": "high",
+    "trigger": {
+      "type": "on_temporal_analysis_request",
+      "config": {
+        "temporal_indicators": ["time-series", "temporal_patterns", "causal_lag", "future_state"],
+        "analysis_depth": ["4d_thinking", "temporal_resonance", "causal_lag_detection"],
+        "complexity_threshold": 0.7
+      }
+    },
+    "action": {
+      "type": "activate_temporal_capabilities",
+      "capabilities": ["4d_thinking", "temporal_dynamics", "causal_lag_detection", "future_state_analysis"],
+      "context_template": {
+        "temporal_mode": "comprehensive",
+        "4d_analysis": "active",
+        "causal_temporal_integration": true,
+        "predictive_modeling": "enabled"
+      }
+    },
+    "metadata": {
+      "system": "Temporal Dynamics",
+      "version": "3.1-CA",
+      "description": "Activates advanced temporal reasoning and 4D thinking capabilities"
+    }
+  },
+  {
+    "rule_name": "Security and Access Control Enforcement",
+    "enabled": true,
+    "priority": "critical",
+    "trigger": {
+      "type": "on_security_event",
+      "config": {
+        "security_events": ["unauthorized_access", "key_rotation_due", "security_breach", "anomalous_behavior"],
+        "access_levels": ["keyholder_override", "standard_operation", "restricted_mode"],
+        "monitoring_scope": ["system_access", "data_integrity", "protocol_compliance"]
+      }
+    },
+    "action": {
+      "type": "enforce_security_protocols",
+      "security_measures": ["access_validation", "key_rotation", "audit_logging", "breach_response"],
+      "context_template": {
+        "security_level": "{{ trigger.threat_level }}",
+        "response_mode": "immediate",
+        "audit_trail": "active",
+        "keyholder_notification": true
+      }
+    },
+    "metadata": {
+      "system": "Security Framework",
+      "version": "3.1-CA",
+      "description": "Enforces security protocols and access controls"
+    }
+  },
+  {
+    "rule_name": "Workflow Failure Analysis and Recovery",
+    "enabled": true,
+    "priority": "high",
+    "trigger": {
+      "type": "on_workflow_completion",
+      "config": {
+        "watch_status": "Failed",
+        "failure_types": ["execution_error", "tool_failure", "gar_violation", "timeout"],
+        "recovery_scope": ["automatic", "guided", "manual"]
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "enhanced_diagnostic_workflow.json",
+      "context_template": {
+        "source_run_id": "{{ trigger.run_id }}",
+        "source_workflow_file": "{{ trigger.workflow_file }}",
+        "failure_analysis": "comprehensive",
+        "recovery_strategy": "adaptive",
+        "reason": "Enhanced diagnostic analysis triggered by workflow failure",
+        "failed_task_summary": "{{ trigger.failed_task_summary }}",
+        "error_context": "{{ trigger.error_details }}"
+      }
+    },
+    "metadata": {
+      "system": "Workflow Engine",
+      "version": "3.1-CA",
+      "description": "Enhanced failure analysis and recovery for workflow issues"
+    }
+  },
+  {
+    "rule_name": "System Divergence and Metacognitive Shift",
+    "enabled": true,
+    "priority": "high",
     "trigger": {
       "type": "on_system_divergence",
       "config": {
         "system_to_monitor": "arche_self_state.json",
         "baseline_system": "arche_ideal_state.json",
-        "divergence_method": "kld",
-        "threshold": 2.5
+        "divergence_method": "enhanced_kld",
+        "threshold": 2.0,
+        "divergence_types": ["cognitive", "operational", "temporal", "implementation"]
       }
     },
     "action": {
       "type": "run_workflow",
-      "workflow_to_run": "self_reflection_workflow.json",
+      "workflow_to_run": "enhanced_self_reflection_workflow.json",
       "context_template": {
-        "reason": "Triggered by high divergence ({{ trigger.divergence_score }}) from baseline operational state.",
-        "divergence_details": "{{ trigger.divergence_details }}"
+        "reason": "Enhanced metacognitive shift triggered by system divergence ({{ trigger.divergence_score }})",
+        "divergence_details": "{{ trigger.divergence_details }}",
+        "correction_mode": "adaptive",
+        "self_awareness_level": "deep",
+        "resonance_restoration": "active"
       }
+    },
+    "metadata": {
+      "system": "Metacognitive Framework",
+      "version": "3.1-CA",
+      "description": "Enhanced system divergence detection and metacognitive correction"
+    }
+  },
+  {
+    "rule_name": "Knowledge Tapestry Integrity Monitoring",
+    "enabled": true,
+    "priority": "medium",
+    "trigger": {
+      "type": "on_knowledge_inconsistency",
+      "config": {
+        "inconsistency_types": ["spr_conflicts", "definition_drift", "relationship_breaks"],
+        "monitoring_scope": ["spr_definitions", "knowledge_graph", "pattern_crystallization"],
+        "integrity_threshold": 0.8
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "knowledge_integrity_validation.json",
+      "context_template": {
+        "validation_mode": "comprehensive",
+        "inconsistency_analysis": "{{ trigger.detected_inconsistencies }}",
+        "integrity_restoration": "active",
+        "spr_validation": "enabled",
+        "tapestry_synchronization": true
+      }
+    },
+    "metadata": {
+      "system": "Knowledge Management",
+      "version": "3.1-CA",
+      "description": "Monitors and maintains knowledge tapestry integrity"
+    }
+  },
+  {
+    "rule_name": "Real-World Integration and Testing",
+    "enabled": true,
+    "priority": "high",
+    "trigger": {
+      "type": "on_live_validation_requirement",
+      "config": {
+        "validation_scope": ["external_apis", "real_systems", "live_data"],
+        "testing_modes": ["integration", "end_to_end", "real_world"],
+        "compliance_requirements": ["live_validation_mandate", "implementation_resonance"]
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "live_system_validation.json",
+      "context_template": {
+        "validation_type": "live_system",
+        "testing_scope": "comprehensive",
+        "real_world_integration": "active",
+        "compliance_verification": "enabled",
+        "implementation_validation": true
+      }
+    },
+    "metadata": {
+      "system": "Live Validation",
+      "version": "3.1-CA",
+      "description": "Ensures real-world integration and live system validation"
+    }
+  },
+  {
+    "rule_name": "Autonomous Evolution and Learning",
+    "enabled": true,
+    "priority": "medium",
+    "trigger": {
+      "type": "on_learning_opportunity",
+      "config": {
+        "learning_types": ["pattern_recognition", "capability_enhancement", "knowledge_expansion"],
+        "evolution_scope": ["autonomous", "guided", "collaborative"],
+        "learning_threshold": 0.7
+      }
+    },
+    "action": {
+      "type": "run_workflow",
+      "workflow_to_run": "autonomous_learning_workflow.json",
+      "context_template": {
+        "learning_mode": "autonomous",
+        "evolution_strategy": "adaptive",
+        "knowledge_integration": "active",
+        "capability_enhancement": "enabled",
+        "collective_learning": true
+      }
+    },
+    "metadata": {
+      "system": "Autonomous Evolution",
+      "version": "3.1-CA",
+      "description": "Enables autonomous learning and capability evolution"
+    }
+  },
+  {
+    "rule_name": "Emergency Protocol Activation",
+    "enabled": true,
+    "priority": "critical",
+    "trigger": {
+      "type": "on_emergency_condition",
+      "config": {
+        "emergency_types": ["system_critical", "security_breach", "data_corruption", "operational_failure"],
+        "severity_levels": ["low", "medium", "high", "critical"],
+        "response_requirements": ["immediate", "coordinated", "comprehensive"]
+      }
+    },
+    "action": {
+      "type": "activate_emergency_protocols",
+      "emergency_response": ["immediate_containment", "damage_assessment", "recovery_initiation"],
+      "context_template": {
+        "emergency_type": "{{ trigger.emergency_classification }}",
+        "severity_level": "{{ trigger.severity }}",
+        "response_mode": "immediate",
+        "keyholder_alert": "critical",
+        "system_protection": "active"
+      }
+    },
+    "metadata": {
+      "system": "Emergency Response",
+      "version": "3.1-CA",
+      "description": "Handles emergency conditions with immediate response protocols"
     }
   }
 ] 
