@@ -188,3 +188,8 @@ outputs/
 tags
 tags.zip
 voice_typing/
+
+# Ignore all node_modules and chrome artifacts
+**/node_modules/
+**/chrome/
+
