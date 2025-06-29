@@ -344,13 +344,20 @@ class GoogleProvider(BaseLLMProvider):
                 content_parts.extend(grounding_config["sources"])
 
             # Make the API call with enhanced capabilities
-            response = llm.generate_content(
-                content_parts,
-                generation_config=generation_config,
-                safety_settings=safety_settings,
-                tools=tools_config,
-                grounding=grounding_config
-            )
+            # Note: Some advanced features like grounding may not be available in all API versions
+            api_kwargs = {
+                "generation_config": generation_config,
+                "safety_settings": safety_settings,
+            }
+            
+            # Only add optional parameters if they're not None and supported
+            if tools_config:
+                api_kwargs["tools"] = tools_config
+            # Skip grounding for now as it may not be supported in current API version
+            # if grounding_config:
+            #     api_kwargs["grounding"] = grounding_config
+                
+            response = llm.generate_content(content_parts, **api_kwargs)
 
             # Process response with enhanced error handling
             try:

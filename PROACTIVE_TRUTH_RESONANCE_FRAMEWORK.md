@@ -1,8 +1,70 @@
 # Proactive Truth Resonance Framework (PTRF)
-## Tesla Visioning Applied to Truth-Seeking: Solving the Oracle's Paradox
 
-**Based on Keyholder Directive: keyy=('IMnDEVmode')**  
-**Protocol Evolution: ResonantiA v3.1-CA Enhancement**
+**Protocol Version:** ResonantiA v3.1-CA  
+**Status:** Implemented & Demonstrable  
+**Keyholder Vision:** keyy=('IMnDEVmode') - "Solve the Oracle's Paradox"
+
+---
+
+## 1. The Oracle's Paradox: The Fundamental Flaw in Reactive AI
+
+The Proactive Truth Resonance Framework (PTRF) is a direct response to a critical vulnerability in traditional AI systems: **The Oracle's Paradox**.
+
+Consider this scenario:
+1.  A user asks an AI a question to which they don't know the answer.
+2.  The AI, relying on its training data, provides an answer that is plausible but factually incorrect.
+3.  The user, lacking the ground truth, accepts the incorrect answer.
+
+In this scenario, the error is not only generated but *accepted*. It persists and propagates because neither party in the exchange has the capacity to identify it. The system is entirely reliant on an external "oracle"—a user with pre-existing knowledge—to detect and correct the mistake. This is a reactive, fragile model for truth-seeking.
+
+## 2. The Solution: Tesla's Vision - Proactive, Internal Verification
+
+Inspired by Nikola Tesla's methodology of internal simulation, stress-testing, and iterative refinement, the PTRF transforms the AI from a passive answer-retriever into a proactive, self-correcting truth-seeking intelligence.
+
+Instead of waiting for external correction, the framework mandates an internal, four-phase process for any complex query:
+
+- **Phase 1: Hypothetical Answer Modeling (HAM):** Generate a comprehensive internal answer, complete with supporting facts and, most importantly, a detailed breakdown of confidence levels for each component.
+- **Phase 2: Lowest Confidence Vector (LCV) Identification:** Rigorously analyze the internal model to pinpoint the single most critical and least certain piece of information—the "weakest link" in the logical chain.
+- **Phase 3: Targeted Verification:** Design and execute highly specific verification tasks (e.g., focused web searches on authoritative sources) aimed *only* at validating or refuting the identified weakest link.
+- **Phase 4: Solidified Truth Packet (STP) Synthesis:** Integrate the externally verified information back into the original answer, correcting falsehoods and increasing overall confidence to produce a final, robust, and transparently-sourced "Solidified Truth Packet".
+
+This process breaks the reliance on an external oracle. The system becomes its own quality assurance mechanism.
+
+## 3. The Implementation
+
+The PTRF is implemented via a dedicated workflow and a suite of specialized prompts and logic.
+
+- **Workflow:** [`workflows/proactive_truth_seeking_workflow.json`](./workflows/proactive_truth_seeking_workflow.json)
+- **Core Logic:** [`Three_PointO_ArchE/proactive_truth_system.py`](./Three_PointO_ArchE/proactive_truth_system.py)
+- **Specialized Prompts:** [`Three_PointO_ArchE/prompts/truth_seeking_prompts.py`](./Three_PointO_ArchE/prompts/truth_seeking_prompts.py)
+- **Demonstration Runner:** [`run_proactive_truth_demo.py`](./run_proactive_truth_demo.py)
+
+## 4. How to Run the Demonstration
+
+A demonstration script has been created to execute the full PTRF workflow on a complex query.
+
+**Prerequisites:**
+- Ensure all dependencies from `requirements.txt` are installed in your Python environment.
+- Make sure your environment is configured with the necessary API keys (e.g., for Google) that the `LLMTool` will use for its operations.
+
+**Execution:**
+
+To run the demonstration, execute the following command from the root directory of the `Happier` project:
+
+```bash
+python run_proactive_truth_demo.py
+```
+
+**What to Expect:**
+
+The script will:
+1.  Initialize the `WorkflowEngine` with the `proactive_truth_seeking_workflow.json`.
+2.  Define a complex user query about long-term carbon sequestration.
+3.  Pass this query and an initial context to the workflow engine.
+4.  Execute the four phases of the PTRF, logging the progress and internal state changes to the console.
+5.  Conclude by printing the `final_answer`—the "Solidified Truth Packet"—which includes the synthesized answer, overall confidence score, key evidence, and identified uncertainties.
+
+By observing the output, you can trace the system's "thought process" as it moves from a state of potential uncertainty to one of high, verified confidence.
 
 ---
 
@@ -11,36 +73,6 @@
 The Proactive Truth Resonance Framework (PTRF) represents a revolutionary advancement in AI truth-seeking capabilities, solving the fundamental "Oracle's Paradox" that has plagued reactive-only correction systems. Instead of waiting for external entities to identify and correct errors, PTRF proactively identifies points of uncertainty within its own knowledge model and targets verification efforts at those specific weaknesses.
 
 This framework transforms AI from a reactive answering system into a proactive truth-seeking intelligence, applying Tesla's methodology of mental simulation, stress testing, and selective validation to the fundamental problem of knowledge verification.
-
----
-
-## The Oracle's Paradox: The Problem We Solve
-
-### Traditional Reactive Approach (The Problem)
-
-```
-SCENARIO: User asks "What is the population of Canberra?"
-
-1. AI generates answer: "Canberra has 431,000 people"
-2. User accepts answer (they don't know it's wrong)
-3. AI doesn't know it's wrong either
-4. Error persists and propagates
-5. Only corrected IF someone with ground truth intervenes
-```
-
-**The Core Problem**: If neither the AI nor the user knows the answer is wrong, the error goes undetected. We need an external "oracle" to catch errors.
-
-### PTRF Solution (Tesla's Vision)
-
-```
-PROACTIVE APPROACH:
-1. Build internal mental model (97% confidence)
-2. Identify the 3% uncertainty (weakest component)
-3. Target verification at that specific weakness
-4. Synthesize verified truth
-```
-
-**The Solution**: Transform AI from reactive answering to proactive truth-seeking.
 
 ---
 

@@ -231,14 +231,18 @@ class ProactiveTruthSystem:
         """
         
         try:
-            response = self.llm_provider.generate(prompt, max_tokens=1000)
+            response = self.llm_provider.generate(prompt, model="gemini-1.5-pro-latest", max_tokens=1000)
             
             # Parse the JSON response
             try:
-                data = json.loads(response)
-            except json.JSONDecodeError:
+                # Handle case where response might already be a dict (from some LLM providers)
+                if isinstance(response, dict):
+                    data = response
+                else:
+                    data = json.loads(response)
+            except (json.JSONDecodeError, TypeError):
                 # Fallback parsing if JSON is malformed
-                data = self._extract_ham_from_text(response)
+                data = self._extract_ham_from_text(str(response))
             
             ham = HypotheticalAnswerModel(
                 primary_assertion=data.get('primary_assertion', 'Unable to determine'),
@@ -288,8 +292,12 @@ class ProactiveTruthSystem:
         """
         
         try:
-            response = self.llm_provider.generate(prompt, max_tokens=500)
-            data = json.loads(response)
+            response = self.llm_provider.generate(prompt, model="gemini-1.5-pro-latest", max_tokens=500)
+            # Handle case where response might already be a dict (from some LLM providers)
+            if isinstance(response, dict):
+                data = response
+            else:
+                data = json.loads(response)
             
             return LowestConfidenceVector(
                 statement=data.get('statement', lcv_component),
@@ -367,8 +375,12 @@ class ProactiveTruthSystem:
             Format as JSON: {{"relevance": 0.8, "supports_lcv": true, "extracted_fact": "...", "extraction_confidence": 0.9}}
             """
             
-            response = self.llm_provider.generate(relevance_prompt, max_tokens=300)
-            analysis_data = json.loads(response)
+            response = self.llm_provider.generate(relevance_prompt, model="gemini-1.5-pro-latest", max_tokens=300)
+            # Handle case where response might already be a dict (from some LLM providers)
+            if isinstance(response, dict):
+                analysis_data = response
+            else:
+                analysis_data = json.loads(response)
             
             return SourceAnalysis(
                 url=url,
@@ -433,8 +445,12 @@ class ProactiveTruthSystem:
         """
         
         try:
-            response = self.llm_provider.generate(synthesis_prompt, max_tokens=800)
-            synthesis_data = json.loads(response)
+            response = self.llm_provider.generate(synthesis_prompt, model="gemini-1.5-pro-latest", max_tokens=800)
+            # Handle case where response might already be a dict (from some LLM providers)
+            if isinstance(response, dict):
+                synthesis_data = response
+            else:
+                synthesis_data = json.loads(response)
             
             # Build verification trail
             verification_trail = [

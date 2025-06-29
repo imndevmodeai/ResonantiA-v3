@@ -1,0 +1,61 @@
+{
+  "timestamp": "2025-06-25T19:50:39.312849",
+  "status": {
+    "guardian_rules": {
+      "loaded": true,
+      "count": 14,
+      "rules": [
+        "Proactive Truth Resonance Framework (PTRF) Activation",
+        "Enhanced Gemini Capabilities Auto-Deployment",
+        "Collective Intelligence Network Coordination",
+        "Predictive Flux Coupling Engine Activation",
+        "Implementation Resonance Validation",
+        "Advanced Pattern Recognition and Crystallization",
+        "Temporal Dynamics and 4D Thinking Activation",
+        "Security and Access Control Enforcement",
+        "Workflow Failure Analysis and Recovery",
+        "System Divergence and Metacognitive Shift",
+        "Knowledge Tapestry Integrity Monitoring",
+        "Real-World Integration and Testing",
+        "Autonomous Evolution and Learning",
+        "Emergency Protocol Activation"
+      ]
+    },
+    "cursor_rules": {
+      "loaded": true,
+      "count": 12,
+      "files": [
+        "automatic_rules_activation",
+        "critical_mandates_integration",
+        "directive_clarification_integration",
+        "everytime",
+        "guardian_integration",
+        "ResonantiA.AdvancedInteractionPatterns",
+        "ResonantiA.chronical",
+        "ResonantiA.Four-siX",
+        "ResonantiA.OnE-ThreE",
+        "rule number 1",
+        "setup",
+        "spr_format_integration"
+      ]
+    },
+    "spr_format": {
+      "active": true,
+      "patterns_loaded": 59
+    },
+    "critical_mandates": {
+      "active": true
+    },
+    "directive_clarification": {
+      "active": true
+    }
+  },
+  "compliance": {
+    "score": 0.875,
+    "last_validation": "2025-06-25T19:50:39.310800",
+    "threshold_met": true
+  },
+  "recommendations": [
+    "All rule integrations active - maintain continuous monitoring"
+  ]
+}
