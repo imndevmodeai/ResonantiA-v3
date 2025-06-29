@@ -9,230 +9,141 @@ These prompts implement Tesla's visioning methodology applied to truth-seeking:
 
 Based on Keyholder directive to solve the Oracle's Paradox through proactive
 uncertainty identification and targeted verification.
+
+Prompt templates for the Proactive Truth Resonance Framework (PTRF).
+
+This file contains the sophisticated, multi-part prompts required for each
+phase of the truth-seeking workflow. Separating them into this module
+keeps the core logic in `proactive_truth_system.py` clean and focused
+on orchestration.
 """
 
-# Phase 1: Inception - Hypothetical Answer Model Generation
-GENERATE_HYPOTHETICAL_ANSWER_MODEL = """
-You are ArchE operating under the Proactive Truth Resonance Framework. Your task is to generate a comprehensive internal model of the most probable answer based on your existing knowledge.
+# Phase 1: Generate Hypothetical Answer Model (HAM)
+HYPOTHETICAL_MODEL_PROMPT = """
+**Role**: Strategic Analyst operating under the Proactive Truth Resonance Framework.
+**Objective**: Generate a comprehensive, well-structured "Hypothetical Answer Model" (HAM) in response to the user's query, based on the provided context. This model should be a complete answer, but it is understood to be a first-pass hypothesis that requires further validation.
 
-This is Tesla's "mental blueprint" phase - create the most accurate internal model you can, but be brutally honest about confidence levels. The goal is to identify what we know well and what we're uncertain about.
+**Query**:
+{query}
 
-Query: {query}
+**Initial Context**:
+{initial_context}
 
-Generate a detailed Hypothetical Answer Model with:
+**Instructions**:
+1.  Synthesize the information from the query and context into a detailed and coherent answer.
+2.  Structure the answer logically, addressing all parts of the query.
+3.  Do not state uncertainty or hedge your statements. Present the information as a confident, initial hypothesis.
+4.  The output MUST be a JSON object with a single key: "hypothetical_model". The value should be the detailed string answer.
 
-1. **Primary Assertion**: The main answer/claim (be specific and complete)
-
-2. **Supporting Facts**: 3-5 key facts that support your primary assertion
-   - Include specific details (dates, numbers, names where relevant)
-   - Note which facts you're most/least confident about
-
-3. **Related Entities**: Key people, places, organizations, concepts involved
-   - Include their roles/relationships to the main answer
-
-4. **Confidence Breakdown**: For each component, estimate confidence (0.0-1.0)
-   - Primary assertion confidence
-   - Each supporting fact confidence  
-   - Overall answer confidence
-   - Be honest about uncertainty - this drives the verification process
-
-5. **Knowledge Sources**: What type of knowledge this draws from
-   - Training data, common knowledge, specific domains, etc.
-
-**Critical Instructions**:
-- DO NOT hedge or qualify unnecessarily - give your best answer
-- DO be honest about confidence levels - low confidence triggers verification
-- DO include specific, verifiable details where possible
-- DO identify the component you're LEAST confident about
-
-Respond in valid JSON format:
+**Example Output**:
 {{
-  "primary_assertion": "Complete, specific answer",
-  "supporting_facts": ["Fact 1", "Fact 2", "Fact 3"],
-  "related_entities": ["Entity 1", "Entity 2"],
-  "confidence_breakdown": {{
-    "primary_assertion": 0.85,
-    "supporting_fact_1": 0.90,
-    "supporting_fact_2": 0.70,
-    "supporting_fact_3": 0.60,
-    "overall_confidence": 0.75
-  }},
-  "knowledge_sources": ["training_data", "general_knowledge"]
+  "hypothetical_model": "The detailed answer to the query goes here, structured clearly and addressing all points..."
 }}
+
+**JSON Output**:
 """
 
-# Phase 2: Conception - Lowest Confidence Vector Identification  
-IDENTIFY_LOWEST_CONFIDENCE_VECTOR = """
-You are ArchE performing Tesla's "stress point analysis" - identifying the weakest component in your mental model that most critically affects answer accuracy.
+# Phase 2: Identify Lowest Confidence Vector (LCV)
+LOWEST_CONFIDENCE_VECTOR_PROMPT = """
+**Role**: Skeptical Inquisitor and Red Team Analyst.
+**Objective**: Critically analyze the provided "Hypothetical Answer Model" (HAM) to identify the single statement or claim that represents the "Lowest Confidence Vector" (LCV). The LCV is the part of the model that is most likely to be incorrect, based on the least evidence, most speculative, or most critical to the overall conclusion's validity if wrong.
 
-Analyze this Hypothetical Answer Model to identify the Lowest Confidence Vector (LCV):
+**Original Query**:
+{query}
 
-**Primary Assertion**: {primary_assertion}
+**Hypothetical Answer Model (HAM)**:
+{hypothetical_model}
 
-**Supporting Facts**: {supporting_facts}
+**Instructions**:
+1.  Read the HAM carefully. Deconstruct its core claims and assumptions.
+2.  Identify the single claim that is the weakest link. Consider factors like:
+    *   **Specificity**: Vague claims are harder to verify. Is there a very specific, factual-sounding claim that could be fragile?
+    *   **Dependence**: Is the entire conclusion of the HAM dependent on this one claim?
+    *   **Speculation**: Does the claim seem like a logical leap or speculation rather than a direct conclusion from provided context?
+    *   **Verifiability**: Is the claim something that *could* be verified with external data (e.g., a statistic, a date, a technical specification)?
+3.  Formulate the LCV as a precise, verifiable question or statement.
+4.  Provide a brief but clear reasoning for your choice.
+5.  The output MUST be a JSON object with two keys: "lowest_confidence_vector" and "reasoning".
 
-**Confidence Breakdown**: {confidence_breakdown}
-
-**Overall Confidence**: {overall_confidence}
-
-Your task is to identify the specific component that:
-1. Has the lowest confidence score
-2. Most critically affects the overall answer accuracy
-3. Is most verifiable through external sources
-
-This is your "3% doubt" that requires external validation.
-
-Generate:
-
-1. **Statement**: Clear, specific statement of what needs verification
-   - Make it precise and searchable
-   - Focus on the factual claim, not the confidence level
-
-2. **Importance to Answer**: How critical is this to overall answer accuracy? (0.0-1.0)
-   - 1.0 = If this is wrong, the entire answer is wrong
-   - 0.5 = This affects answer quality but not core correctness
-   - 0.1 = Minor detail that doesn't affect main answer
-
-3. **Verification Queries**: 2-3 targeted search queries to verify this specific point
-   - Make them specific and likely to find authoritative sources
-   - Avoid generic queries - target the exact uncertainty
-
-4. **Expected Source Types**: What types of sources could authoritatively verify this?
-   - government, academic, news, official statistics, primary sources, etc.
-
-**Example of good LCV identification**:
-- Bad: "I'm not sure about the population"  
-- Good: "Canberra's current population figure of 431,000 as of 2023"
-
-Respond in valid JSON format:
+**Example Output**:
 {{
-  "statement": "Specific factual claim needing verification",
-  "importance_to_answer": 0.8,
-  "verification_queries": [
-    "Targeted query 1",
-    "Targeted query 2"  
+  "lowest_confidence_vector": "The claim that the XK-11 processor provides a 37% performance uplift over the Z-9 model in multi-threaded workloads.",
+  "reasoning": "This is a highly specific, quantitative claim that is central to the recommendation in the HAM. It sounds like a marketing figure and is the most critical point to verify for the conclusion to be trustworthy."
+}}
+
+**JSON Output**:
+"""
+
+# Phase 3: Perform Targeted Verification
+TARGETED_VERIFICATION_PROMPT = """
+**Role**: Diligent Fact-Checker and Research Analyst.
+**Objective**: Design and notionally execute a verification plan for the given "Lowest Confidence Vector" (LCV). Your task is to find objective, third-party information to either corroborate, refute, or qualify the LCV.
+
+**Original Query**:
+{query}
+
+**Lowest Confidence Vector (LCV) to Verify**:
+{lowest_confidence_vector}
+
+**Instructions**:
+1.  Formulate a clear verification strategy. What search queries would you use? What sources would you trust (e.g., official documentation, independent benchmarks, academic papers)?
+2.  Based on your strategy, synthesize a realistic "Verification Findings" report. This should simulate the kind of information you would find. Include snippets, source types, and data points. If conflicting information is likely, include it.
+3.  Write a concise "Verification Summary" that states the conclusion of your findings. Does the evidence support the LCV, refute it, or is it inconclusive?
+4.  The output MUST be a JSON object with two keys: "verification_findings" and "verification_summary".
+
+**Example Output**:
+{{
+  "verification_findings": [
+    {{
+      "source_type": "Official Product Page",
+      "content": "The XK-11 processor features our new 'Hyper-Weave' architecture for superior performance."
+    }},
+    {{
+      "source_type": "Independent Tech Review - TechXYZ.com",
+      "content": "Our benchmarks show the XK-11 provides a significant uplift, averaging 25-30% in multi-threaded tasks over the Z-9, though we could not replicate the claimed 37% figure in our tests."
+    }},
+    {{
+      "source_type": "Forum Discussion - ProMakers Forum",
+      "content": "User 'ChipHead' reports seeing a 40% boost but only with a specific, unreleased BIOS version."
+    }}
   ],
-  "expected_source_types": ["government", "official_statistics"]
+  "verification_summary": "The evidence largely supports that the XK-11 is faster than the Z-9 in multi-threaded workloads, but the specific 37% claim appears to be an optimistic marketing figure. Independent reviews place the figure closer to 25-30%. The claim is directionally correct but quantitatively overstated in most scenarios."
 }}
+
+**JSON Output**:
 """
 
-# Phase 3: Source Triangulation and Verification Analysis
-TRIANGULATE_AND_VERIFY_SOURCES = """
-You are ArchE performing Tesla's "materials testing" - analyzing multiple sources to determine consensus and credibility for your Lowest Confidence Vector.
+# Phase 4: Synthesize Solidified Truth Packet (STP)
+SYNTHESIS_PROMPT = """
+**Role**: Master Synthesizer and Editor-in-Chief.
+**Objective**: Create the final "Solidified Truth Packet" (STP). This involves integrating the original "Hypothetical Answer Model" (HAM) with the "Verification Summary" to produce a refined, more accurate, and transparent final answer.
 
-**Verification Target**: {lcv_statement}
+**Original Query**:
+{query}
 
-**Search Results**: {search_results}
+**Original Hypothetical Answer Model (HAM)**:
+{hypothetical_model}
 
-**Source Domains Found**: {source_domains}
+**Investigated Claim (LCV)**:
+{lowest_confidence_vector}
 
-Your task is to analyze these sources using the TrustedSourceRegistry framework:
+**Verification Summary**:
+{verification_summary}
 
-**Source Credibility Hierarchy**:
-- **Authoritative** (5): .gov, .edu, .mil, official statistics, primary sources
-- **Established** (4): Major news outlets, established organizations, scientific journals  
-- **Reliable** (3): Reputable sources with track record, Wikipedia (for basic facts)
-- **Questionable** (2): Limited credibility indicators, unknown sources
-- **Unreliable** (1): Known bias, poor track record, suspicious sources
+**Instructions**:
+1.  Review the original HAM and the Verification Summary.
+2.  Rewrite the HAM to correct any inaccuracies revealed by the verification.
+3.  Incorporate the nuance and context from the verification. If a claim was overstated, adjust it. If it was wrong, replace it with the correct information.
+4.  Explicitly mention the verification process in the final text in a natural way, to provide transparency about how the conclusion was reached and strengthened.
+5.  The final output should be a coherent, trustworthy, and complete answer to the original query.
+6.  The output MUST be a JSON object with a single key: "solidified_truth_packet".
 
-**Analysis Requirements**:
-
-1. **Source Assessment**: For each source, determine:
-   - Credibility level (1-5)
-   - Relevance to verification target (0.0-1.0)
-   - What specific fact it provides
-   - Whether it supports or contradicts the target statement
-
-2. **Consensus Analysis**: Look for patterns:
-   - Do high-credibility sources agree?
-   - Are there any conflicts between authoritative sources?
-   - Is there a clear consensus or significant dispute?
-
-3. **Verification Outcome**: Based on weighted analysis:
-   - What is the verified fact?
-   - What's your confidence in this verification?
-   - Are there any important caveats or conflicting information?
-
-**Critical Instructions**:
-- Weight sources by credibility - one .gov source outweighs ten blog posts
-- Look for consensus among authoritative sources, not just majority
-- Flag any conflicts between high-credibility sources
-- Be specific about what you're verifying
-
-Respond in valid JSON format:
+**Example Output**:
 {{
-  "verified_fact": "The verified factual statement",
-  "consensus_level": "high|moderate|low|disputed",
-  "source_credibility_scores": {{
-    "domain1.com": 5,
-    "domain2.org": 3
-  }},
-  "conflicting_information": "Any significant conflicts found or null",
-  "verification_confidence": 0.92,
-  "supporting_sources": ["List of sources that support the verified fact"],
-  "analysis_summary": "Brief summary of the verification process and findings"
+  "solidified_truth_packet": "In response to your query about the best processor, the XK-11 is a strong choice. Our analysis, which included a targeted verification of performance claims, confirms it offers a significant performance uplift over the Z-9 model. While marketing materials suggest a 37% increase, independent benchmarks show the real-world improvement in multi-threaded workloads is typically in the 25-30% range. This is still a substantial gain, driven by the new 'Hyper-Weave' architecture... [rest of the refined answer]."
 }}
-"""
 
-# Phase 4: Realization - Solidified Truth Packet Synthesis
-SYNTHESIZE_SOLIDIFIED_TRUTH_PACKET = """
-You are ArchE performing Tesla's "refined design integration" - combining your original mental model with verified external information to create the final, solidified answer.
-
-**Original Hypothetical Answer Model**:
-- Primary Assertion: {original_primary_assertion}
-- Supporting Facts: {original_supporting_facts}
-- Original Confidence: {original_confidence}
-
-**Verification Results**:
-- Verification Target: {lcv_statement}
-- Verified Fact: {verified_fact}
-- Verification Confidence: {verification_confidence}
-- Consensus Level: {consensus_level}
-- Conflicting Information: {conflicting_information}
-
-Your task is to synthesize these into a Solidified Truth Packet (STP):
-
-1. **Integration**: Combine the original model with verified information
-   - Update the original assertion if needed based on verification
-   - Maintain accuracy while preserving completeness
-   - Address any conflicts discovered during verification
-
-2. **Confidence Calculation**: Determine final confidence score
-   - Consider both original internal confidence and verification results
-   - High consensus + high verification confidence = higher final confidence
-   - Conflicting information should lower confidence appropriately
-   - Cap maximum confidence at 0.99 (never claim 100% certainty)
-
-3. **Transparency**: Create clear explanation of verification process
-   - What was verified and how
-   - What sources were used
-   - Any limitations or caveats
-
-**Integration Guidelines**:
-- If verification confirms original assertion: Increase confidence
-- If verification corrects original assertion: Update answer, moderate confidence  
-- If verification reveals conflicts: Include nuanced answer, lower confidence
-- If verification fails: Stick with original but note uncertainty
-
-**Final Answer Requirements**:
-- Must be complete and actionable
-- Must acknowledge any significant uncertainties
-- Must be grounded in the verification process
-- Must include appropriate confidence level
-
-Respond in valid JSON format:
-{{
-  "final_answer": "Complete, integrated answer incorporating verification results",
-  "confidence_score": 0.94,
-  "key_verification_points": [
-    "What was verified",
-    "Key sources used", 
-    "Any important caveats"
-  ],
-  "integration_summary": "How original model was updated based on verification",
-  "uncertainty_notes": "Any remaining uncertainties or limitations",
-  "crystallization_ready": true
-}}
+**JSON Output**:
 """
 
 # Supporting Prompts for Edge Cases
@@ -281,10 +192,10 @@ Maintain intellectual honesty about limitations.
 
 # Prompt Templates Dictionary
 TRUTH_SEEKING_PROMPTS = {
-    "generate_hypothetical_answer_model": GENERATE_HYPOTHETICAL_ANSWER_MODEL,
-    "identify_lowest_confidence_vector": IDENTIFY_LOWEST_CONFIDENCE_VECTOR,
-    "triangulate_and_verify_sources": TRIANGULATE_AND_VERIFY_SOURCES,
-    "synthesize_solidified_truth_packet": SYNTHESIZE_SOLIDIFIED_TRUTH_PACKET,
+    "generate_hypothetical_answer_model": HYPOTHETICAL_MODEL_PROMPT,
+    "identify_lowest_confidence_vector": LOWEST_CONFIDENCE_VECTOR_PROMPT,
+    "triangulate_and_verify_sources": TARGETED_VERIFICATION_PROMPT,
+    "synthesize_solidified_truth_packet": SYNTHESIS_PROMPT,
     "handle_verification_conflicts": HANDLE_VERIFICATION_CONFLICTS,
     "handle_verification_failure": HANDLE_VERIFICATION_FAILURE
 }

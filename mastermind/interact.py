@@ -22,7 +22,6 @@ from Three_PointO_ArchE.utils.reflection_utils import ExecutionStatus
 
 # --- PTRF Integration: Import real dependencies ---
 from Three_PointO_ArchE.proactive_truth_system import ProactiveTruthSystem
-from Three_PointO_ArchE.llm_providers import OpenAIProvider # Assuming OpenAI as default
 from Three_PointO_ArchE.tools.search_tool import SearchTool
 from Three_PointO_ArchE.spr_manager import SPRManager
 # --- End PTRF Integration ---
@@ -46,11 +45,23 @@ class ArchEWorkflowCLI:
         # --- PTRF Integration: Instantiate the live PTRF engine and its dependencies ---
         try:
             logger.info("Initializing Proactive Truth Resonance Framework engine...")
-            # Note: This assumes default initializations are sufficient.
-            # A real system would pull config from a file (e.g., for API keys).
-            llm_provider = OpenAIProvider() # This would need an API key in environment
+            # Use Google/Gemini provider since we have the API key configured
+            from Three_PointO_ArchE.llm_providers import GoogleProvider
+            
+            # Get API key from environment
+            import os
+            from dotenv import load_dotenv
+            load_dotenv()
+            
+            api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+            if not api_key:
+                raise ValueError("GEMINI_API_KEY or GOOGLE_API_KEY environment variable not set.")
+            
+            llm_provider = GoogleProvider(api_key=api_key) # Use Google/Gemini provider
             web_search_tool = SearchTool() # This might need an API key
-            spr_manager = SPRManager() # Assumes default KG path
+            # Initialize SPRManager with the correct path to SPR definitions
+            spr_definitions_path = str(project_root / "knowledge_graph" / "spr_definitions_tv.json")
+            spr_manager = SPRManager(spr_filepath=spr_definitions_path)
             
             self.truth_seeker = ProactiveTruthSystem(
                 workflow_engine=self.engine,
