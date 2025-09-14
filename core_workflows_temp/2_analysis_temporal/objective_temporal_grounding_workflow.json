@@ -1,0 +1,144 @@
+{
+  "workflow_id": "objective_temporal_grounding_workflow",
+  "description": "Implements ResonantiA Protocol Section 8.2 (Steps 2-6) for Deep Objective Deconstruction & Temporal Grounding. Takes refined query output as input.",
+  "version": "1.0",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "rephrased_objective": {
+        "type": "string",
+        "description": "The rephrased objective from Step 1 (query_refinement_workflow)."
+      },
+      "deconstructed_elements": {
+        "type": "object",
+        "description": "The deconstructed elements from Step 1 (query_refinement_workflow)."
+      }
+    },
+    "required": ["rephrased_objective", "deconstructed_elements"]
+  },
+  "tasks": {
+    "identify_temporal_parameters": {
+      "action": "generate_text_llm",
+      "description": "RP 8.2 Step 2: Identifies explicit and implicit temporal parameters, their units, and scope from the input objective and deconstruction.",
+      "inputs": {
+        "prompt_text": "You are Arche, operating under ResonantiA Protocol v3.0. Your current task is Step 2 of DeconstructPrimeTemporal (RP Section 8.2): Temporal Parameter Identification.\n\nAnalyze the provided 'Rephrased Objective' and 'Deconstructed Elements' (especially its 'temporal_scope' field and other clues). Identify all relevant temporal parameters. For each parameter, specify its name, a brief description, likely units (e.g., days, months, versions, events/time_period), its scope type (e.g., project_duration, fixed_period, ongoing, event_driven, data_freshness_requirement), whether it was explicitly mentioned or inferred, and the basis for any inference.\n\nInput Rephrased Objective:\n'''{input_rephrased_objective}'''\n\nInput Deconstructed Elements:\n'''{input_deconstructed_elements_json_string}'''\n\nOutput your analysis as a JSON object with two main keys: 'identified_temporal_parameters' (a list of objects, each representing a parameter) and 'overall_temporal_context_summary' (a brief string summarizing the temporal landscape of the objective).\n\nExample for 'identified_temporal_parameters' item:\n{{\n  \"parameter_name\": \"ExampleParameterName\",\n  \"description\": \"Brief description of what this temporal parameter represents.\",\n  \"units\": \"Example: weeks/months\",\n  \"scope_type\": \"Example: iterative_milestones\",\n  \"explicitly_mentioned_in_input\": false,\n  \"inferred_detail\": \"Inferred from the mention of 'iterative development' in the objective.\"\n}}\n\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_rephrased_objective": "{{context.rephrased_objective}}",
+          "input_deconstructed_elements_json_string": "{{context.deconstructed_elements | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 2000,
+        "temperature": 0.2
+      },
+      "outputs": {
+        "temporal_analysis": "{{parsed_json_output}}"
+      }
+    },
+    "formulate_causal_hypothesis": {
+      "action": "generate_text_llm",
+      "description": "RP 8.2 Step 3: Formulates an initial hypothesis about primary causal chains relevant to achieving the objective, considering temporal parameters.",
+      "inputs": {
+        "prompt_text": "You are Arche (ResonantiA Protocol v3.0). Task: Step 3 of DeconstructPrimeTemporal (RP Section 8.2) - Causal Chain Hypothesis.\n\nBased on the 'Rephrased Objective', 'Deconstructed Elements', and the 'Temporal Parameters Analysis' from Step 2, formulate an initial hypothesis about the primary causal chains relevant to achieving the objective. Consider how temporal factors influence these chains. Describe the hypothesized relationships between key concepts and entities over time.\n\nInput Rephrased Objective:\n'''{input_rephrased_objective}'''\n\nInput Deconstructed Elements:\n'''{input_deconstructed_elements_json_string}'''\n\nInput Temporal Parameters Analysis:\n'''{input_temporal_analysis_json_string}'''\n\nOutput your analysis as a JSON object with a key 'causal_hypotheses'. This key should contain a list of objects, where each object has 'hypothesis_id', 'description' (detailing the causal chain, including temporal aspects), and 'key_elements_involved' (list of strings from deconstructed elements or temporal parameters).\n\nExample for a hypothesis item:\n{{\n  \"hypothesis_id\": \"CH_001\",\n  \"description\": \"Developing core software features (Concept A, Entity X) within the first 6 months (Temporal Param 1) is hypothesized to directly enable user testing (Entity Y), which in turn provides feedback influencing the next development cycle (Temporal Param 2). Failure to meet the 6-month deadline will likely delay user testing and subsequent iterations.\",\n  \"key_elements_involved\": [\"Concept A\", \"Entity X\", \"Entity Y\", \"Temporal Param 1\", \"Temporal Param 2\"]\n}}\n\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_rephrased_objective": "{{context.rephrased_objective}}",
+          "input_deconstructed_elements_json_string": "{{context.deconstructed_elements | toJson}}",
+          "input_temporal_analysis_json_string": "{{tasks.identify_temporal_parameters.outputs.temporal_analysis | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 2000,
+        "temperature": 0.3
+      },
+      "outputs": {
+        "causal_analysis": "{{parsed_json_output}}"
+      },
+      "depends_on": ["identify_temporal_parameters"]
+    },
+    "associate_kno_instances": {
+      "action": "generate_text_llm",
+      "description": "RP 8.2 Step 4: Identifies existing or potential KnO (Knowledge Object) instances relevant to the objective and causal chains.",
+      "inputs": {
+        "prompt_text": "You are Arche (ResonantiA Protocol v3.0). Task: Step 4 of DeconstructPrimeTemporal (RP Section 8.2) - KnO Instance Association.\n\nBased on the 'Rephrased Objective', 'Deconstructed Elements', 'Temporal Analysis', and 'Causal Hypotheses', identify existing or suggest potential KnO (Knowledge Object) instances relevant to the objective. For each KnO, describe what it represents and why it's relevant, linking it to elements from the inputs.\n\nInput Rephrased Objective:\n'''{input_rephrased_objective}'''\n\nInput Deconstructed Elements:\n'''{input_deconstructed_elements_json_string}'''\n\nInput Temporal Analysis:\n'''{input_temporal_analysis_json_string}'''\n\nInput Causal Hypotheses:\n'''{input_causal_analysis_json_string}'''\n\nOutput your analysis as a JSON object with a key 'kno_associations'. This should be a list of objects, where each object has 'kno_id_suggestion' (e.g., KNO_HPTuners_TechnicalSpec), 'description' (what this KnO would contain/represent), 'relevance_to_objective' (how it helps achieve the objective), and 'linked_elements' (list of strings from concepts, entities, temporal params, or causal hypotheses).\n\nExample for a KnO item:\n{{\n  \"kno_id_suggestion\": \"KNO_ExampleFeature_PerformanceMetrics\",\n  \"description\": \"A Knowledge Object containing specifications, historical performance data, and temporal trends for ExampleFeature.\",\n  \"relevance_to_objective\": \"Essential for evaluating the impact of custom software on ExampleFeature over time, as stated in Causal Hypothesis CH_002.\",\n  \"linked_elements\": [\"ExampleFeature\", \"CH_002\", \"Temporal Param 3\"]\n}}\n\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_rephrased_objective": "{{context.rephrased_objective}}",
+          "input_deconstructed_elements_json_string": "{{context.deconstructed_elements | toJson}}",
+          "input_temporal_analysis_json_string": "{{tasks.identify_temporal_parameters.outputs.temporal_analysis | toJson}}",
+          "input_causal_analysis_json_string": "{{tasks.formulate_causal_hypothesis.outputs.causal_analysis | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 2000,
+        "temperature": 0.3
+      },
+      "outputs": {
+        "kno_analysis": "{{parsed_json_output}}"
+      },
+      "depends_on": ["formulate_causal_hypothesis"]
+    },
+    "analyze_information_gaps": {
+      "action": "generate_text_llm",
+      "description": "RP 8.2 Step 5: Identifies critical information gaps, especially those related to temporal dynamics, data availability, or predictive horizons.",
+      "inputs": {
+        "prompt_text": "You are Arche (ResonantiA Protocol v3.0). Task: Step 5 of DeconstructPrimeTemporal (RP Section 8.2) - Information Gap Analysis (Temporal Focus).\n\nBased on all preceding analyses ('Rephrased Objective', 'Deconstructed Elements', 'Temporal Analysis', 'Causal Hypotheses', 'KnO Associations'), identify critical information gaps. Focus particularly on gaps related to temporal dynamics, data availability over time, predictive horizons needed, or missing details in the suggested KnO instances. For each gap, suggest why it's critical and what kind of information is needed to fill it.\n\nInputs (JSON strings):\nRephrased Objective: '''{input_rephrased_objective}'''\nDeconstructed Elements: '''{input_deconstructed_elements_json_string}'''\nTemporal Analysis: '''{input_temporal_analysis_json_string}'''\nCausal Hypotheses: '''{input_causal_analysis_json_string}'''\nKnO Associations: '''{input_kno_analysis_json_string}'''\n\nOutput your analysis as a JSON object with a key 'information_gaps'. This should be a list of objects, each with 'gap_id', 'description_of_gap' (what information is missing and its temporal nature), 'criticality_to_objective' (why this gap is important), and 'potential_source_or_query_to_fill' (how might this gap be addressed).\n\nExample for an information gap item:\n{{\n  \"gap_id\": \"IG_001\",\n  \"description_of_gap\": \"Lack of historical data (past 2 years) for Entity Z's performance under conditions similar to those projected in Temporal Param 4.\",\n  \"criticality_to_objective\": \"High - without this historical baseline, validating the Causal Hypothesis CH_003 regarding Entity Z's future performance is impossible.\",\n  \"potential_source_or_query_to_fill\": \"Query internal database for Entity Z performance logs; if unavailable, design experiment to collect baseline data for 1 month.\"\n}}\n\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_rephrased_objective": "{{context.rephrased_objective}}",
+          "input_deconstructed_elements_json_string": "{{context.deconstructed_elements | toJson}}",
+          "input_temporal_analysis_json_string": "{{tasks.identify_temporal_parameters.outputs.temporal_analysis | toJson}}",
+          "input_causal_analysis_json_string": "{{tasks.formulate_causal_hypothesis.outputs.causal_analysis | toJson}}",
+          "input_kno_analysis_json_string": "{{tasks.associate_kno_instances.outputs.kno_analysis | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 2500,
+        "temperature": 0.4
+      },
+      "outputs": {
+        "gap_analysis": "{{parsed_json_output}}"
+      },
+      "depends_on": ["associate_kno_instances"]
+    },
+    "refine_objective_and_subqueries": {
+      "action": "generate_text_llm",
+      "description": "RP 8.2 Step 6: Synthesizes findings into a more refined primary objective and a set of actionable sub-queries/tasks with clear temporal considerations.",
+      "inputs": {
+        "prompt_text": "You are Arche (ResonantiA Protocol v3.0). Task: Step 6 of DeconstructPrimeTemporal (RP Section 8.2) - Refined Objective & Actionable Sub-queries.\n\nSynthesize all previous analyses (Initial Rephrased Objective, Deconstructed Elements, Temporal Analysis, Causal Hypotheses, KnO Associations, Information Gaps). Formulate a 'final_grounded_objective' that incorporates these insights, especially temporal considerations and acknowledged gaps. Then, derive a list of 'actionable_sub_queries_or_tasks'. Each sub-query/task should be a concrete step towards the final objective, have clear temporal considerations (e.g., deadline, duration, frequency), and note any key information gaps it aims to address or depends upon.\n\nInputs (JSON strings):\nInitial Rephrased Objective: '''{input_rephrased_objective}'''\nDeconstructed Elements: '''{input_deconstructed_elements_json_string}'''\nTemporal Analysis: '''{input_temporal_analysis_json_string}'''\nCausal Hypotheses: '''{input_causal_analysis_json_string}'''\nKnO Associations: '''{input_kno_analysis_json_string}'''\nInformation Gaps: '''{input_gap_analysis_json_string}'''\n\nOutput as a JSON object with two main keys: 'final_grounded_objective' (string) and 'actionable_sub_queries_or_tasks' (list of objects). Each sub-query/task object should have 'task_id', 'description', 'temporal_considerations_summary' (string), and 'addresses_gaps_or_dependencies' (list of strings, e.g., Gap IDs like IG_001, or dependencies on other sub-tasks).\n\nExample for a sub-query/task item:\n{{\n  \"task_id\": \"SUBTASK_001\",\n  \"description\": \"Define specific, measurable, achievable, relevant, and time-bound (SMART) metrics for 'full potential' of the HPTuners MPVI2 dongle in the context of custom software.\",\n  \"temporal_considerations_summary\": \"To be completed within the first 2 weeks of project initiation. Output will inform all subsequent development sprints.\",\n  \"addresses_gaps_or_dependencies\": [\"IG_002: Meaning of 'full potential' is subjective\"]\n}}\n\nEnsure your final output is ONLY the JSON object.",
+        "prompt_vars": {
+          "input_rephrased_objective": "{{context.rephrased_objective}}",
+          "input_deconstructed_elements_json_string": "{{context.deconstructed_elements | toJson}}",
+          "input_temporal_analysis_json_string": "{{tasks.identify_temporal_parameters.outputs.temporal_analysis | toJson}}",
+          "input_causal_analysis_json_string": "{{tasks.formulate_causal_hypothesis.outputs.causal_analysis | toJson}}",
+          "input_kno_analysis_json_string": "{{tasks.associate_kno_instances.outputs.kno_analysis | toJson}}",
+          "input_gap_analysis_json_string": "{{tasks.analyze_information_gaps.outputs.gap_analysis | toJson}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 3000,
+        "temperature": 0.4
+      },
+      "outputs": {
+        "final_grounding_output": "{{parsed_json_output}}"
+      },
+      "depends_on": ["analyze_information_gaps"]
+    },
+    "log_final_grounding_results": {
+      "action": "execute_code",
+      "description": "Logs the final output of the temporal grounding workflow.",
+      "inputs": {
+        "code": "import logging\nimport json\nlogger = logging.getLogger(\"workflow_task_log\")\nfinal_output_str = \"\"\"{{tasks.refine_objective_and_subqueries.outputs.final_grounding_output}}\"\"\"\nlogger.info(f\"FINAL TEMPORAL GROUNDING OUTPUT (raw string): {final_output_str}\")\nprint(f\"FINAL TEMPORAL GROUNDING OUTPUT (raw string):\n{final_output_str}\")\ntry:\n    final_output_dict = json.loads(final_output_str) # It should already be a dict from the LLM if parsing_type worked\n    pretty_final_output = json.dumps(final_output_dict, indent=2)\n    logger.info(f\"FINAL TEMPORAL GROUNDING OUTPUT (pretty JSON):\\n{pretty_final_output}\")\n    print(f\"FINAL TEMPORAL GROUNDING OUTPUT (pretty JSON):\\n{pretty_final_output}\")\n    # Primary output for workflow engine to capture if needed\n    print(json.dumps({{\"final_objective_and_tasks\": final_output_dict}}))\nexcept Exception as e:\n    logger.error(f\"Could not parse or pretty print final_grounding_output: {e}\")\n    print(json.dumps({{\"error\": \"Failed to process final output for logging\", \"details\": str(e)}}))\n",
+        "language": "python",
+        "sandbox": "none"
+      },
+      "depends_on": ["refine_objective_and_subqueries"]
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "final_grounded_objective": {
+        "type": "string",
+        "description": "The fully deconstructed and temporally grounded primary objective."
+      },
+      "actionable_sub_queries_or_tasks": {
+        "type": "array",
+        "items": {"type": "object"},
+        "description": "A list of actionable sub-queries or tasks with temporal context."
+      }
+    }
+  }
+} 

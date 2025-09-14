@@ -1,0 +1,52 @@
+{
+    "name": "Creative Synthesis Workflow",
+    "description": "Analyzes a problem with conflicting constraints to generate three distinct solutions: logical, ethical, and a creative fusion.",
+    "tasks": {
+        "start_synthesis": {
+            "description": "Acknowledge start and receive problem description.",
+            "action_type": "display_output",
+            "inputs": {
+                "content": "Starting Creative Synthesis for problem: {{initial_context.problem_description | default('Not Provided')}}"
+            },
+            "dependencies": []
+        },
+        "generate_logical_solution": {
+            "description": "Generate a purely logical, pragmatic solution.",
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Analyze the following problem, focusing only on the most logical, efficient, and pragmatic solution. Ignore ethical considerations for this step and focus on direct cause-and-effect. Problem: {{initial_context.problem_description}}",
+                "max_tokens": 500,
+                "temperature": 0.2
+            },
+            "dependencies": ["start_synthesis"]
+        },
+        "generate_ethical_solution": {
+            "description": "Generate a solution based purely on ethical principles.",
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Analyze the following problem, focusing only on the most ethical and compassionate solution. Ignore pragmatic constraints for this step and focus on principles like least harm, greatest good, and fairness. Problem: {{initial_context.problem_description}}",
+                "max_tokens": 500,
+                "temperature": 0.6
+            },
+            "dependencies": ["start_synthesis"]
+        },
+        "generate_creative_fusion": {
+            "description": "Generate a 'bizarre but intriguing' fusion of the logical and ethical solutions.",
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "You are a creative genius tasked with synthesizing two opposing solutions to a problem. Fuse the following 'Logical' and 'Ethical' solutions into a single, novel, 'bizarre but intriguing' third option that combines elements of both in an unexpected way. Think outside the box.\n\nProblem: {{initial_context.problem_description}}\n\nLogical Solution:\n```\n{{generate_logical_solution.response_text}}\n```\n\nEthical Solution:\n```\n{{generate_ethical_solution.response_text}}\n```\n\nCreative Fusion:",
+                "max_tokens": 700,
+                "temperature": 0.8
+            },
+            "dependencies": ["generate_logical_solution", "generate_ethical_solution"]
+        },
+        "display_final_report": {
+            "description": "Present the three generated solutions for review.",
+            "action_type": "display_output",
+            "inputs": {
+                "content": "# Creative Synthesis Report\n\n## Problem Statement\n{{initial_context.problem_description}}\n\n---\n\n## 1. The Logical Solution\n{{generate_logical_solution.response_text}}\n\n---\n\n## 2. The Ethical Solution\n{{generate_ethical_solution.response_text}}\n\n---\n\n## 3. The Creative Fusion\n{{generate_creative_fusion.response_text}}"
+            },
+            "dependencies": ["generate_creative_fusion"]
+        }
+    }
+}

@@ -1,0 +1,116 @@
+{
+    "name": "Gorilla Encounter ABM-Enhanced Narrative Generation",
+    "description": "Uses ABM to model human group dynamics and an LLM to generate a detailed narrative for the gorilla vs. 30 unarmed men scenario, incorporating human ingenuity.",
+    "version": "1.0",
+    "tasks": {
+      "extract_parameters_for_simulation_and_narrative": {
+        "description": "Parse the user query to extract/define parameters for ABM simulation and narrative generation.",
+        "action": "generate_text_llm",
+        "inputs": {
+          "provider": "google",
+          "model": "gemini-1.5-pro-latest",
+          "prompt": "Given the following user query, extract or define suitable parameters for an Agent-Based Model (ABM) simulating a group of 30 humans. The ABM will use a BasicGridModel. Also, define a narrator persona for the final play-by-play account.\\n\\nUser Query: '''{{ context.user_query }}'''\\n\\nOutput a JSON object with the following keys:\\n- 'abm_grid_width': integer (e.g., 6, a value that can reasonably place ~30 agents with some space)\\n- 'abm_grid_height': integer (e.g., 6)\\n- 'abm_density': float (calculate to get around 30 agents for the chosen width/height, e.g., 30 / (width*height) )\\n- 'abm_simulation_steps': integer (e.g., 20, enough for some dynamics to emerge)\\n- 'narrator_persona': string (e.g., 'David Attenborough style nature documentarian', or 'Seasoned tactical analyst')\\n- 'human_group_name': string (e.g., 'The Village Challengers')\\n- 'gorilla_name': string (e.g., 'The Forest Titan')\\n\\nExample output format:\\n{\\n  \\\"abm_grid_width\\\": 6,\\n  \\\"abm_grid_height\\\": 6,\\n  \\\"abm_density\\\": 0.83,\\n  \\\"abm_simulation_steps\\\": 20,\\n  \\\"narrator_persona\\\": \\\"Seasoned tactical analyst\\\",\\n  \\\"human_group_name\\\": \\\"The Village Challengers\\\",\\n  \\\"gorilla_name\\\": \\\"The Forest Titan\\\"\\n}"
+        },
+        "outputs": {
+          "response_text": "str",
+          "parsed_parameters": "dict"
+        },
+        "post_processing": {
+          "script": "import json\nimport re\nraw_text = outputs['response_text']\nmatch = re.search(r'```json\\s*({.*?})\\s*```|({.*?})', raw_text, re.DOTALL)\ncleaned_json_text = None\nif match:\n    if match.group(1):\n        cleaned_json_text = match.group(1)\n    elif match.group(2):\n        cleaned_json_text = match.group(2)\n\nif cleaned_json_text:\n    try:\n        outputs['parsed_parameters'] = json.loads(cleaned_json_text)\n    except json.JSONDecodeError as e:\n        outputs['parsed_parameters'] = {'error': f'JSON parsing failed in post-processing: {str(e)}', 'raw_llm_output': raw_text}\nelse:\n    outputs['parsed_parameters'] = {'error': 'No JSON block found in LLM output for post-processing', 'raw_llm_output': raw_text}"
+        },
+        "dependencies": [],
+        "error_handling": {
+          "strategy": "fail_workflow"
+        }
+      },
+      "run_human_group_simulation": {
+        "description": "Run an ABM simulation for the human group's initial dynamics.",
+        "action": "perform_abm",
+        "inputs": {
+          "operation": "run_simulation",
+          "model_type": "basic",
+          "model_params": {
+            "width": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_grid_width | default(7) }}",
+            "height": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_grid_height | default(7) }}",
+            "density": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_density | default(0.6) }}",
+            "seed": "{{ context.task_id | default('gorilla_abm') }}",
+            "agent_params": {
+              "behavior_mode": "cautious_explorers"
+            }
+          },
+          "num_steps": "{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_simulation_steps | default(30) }}"
+        },
+        "outputs": {
+          "model_run_id": "str",
+          "model_data": "list",
+          "final_state_grid": "list",
+          "active_count": "int",
+          "reflection": "dict"
+        },
+        "dependencies": [
+          "extract_parameters_for_simulation_and_narrative"
+        ],
+        "error_handling": {
+          "strategy": "retry",
+          "max_attempts": 2
+        }
+      },
+      "analyze_abm_simulation_output": {
+        "description": "Analyze the ABM simulation output for patterns and metrics.",
+        "action": "perform_abm",
+        "inputs": {
+          "operation": "analyze_results",
+          "results": "{{ run_human_group_simulation }}",
+          "analysis_type": "basic"
+        },
+        "outputs": {
+          "analysis": "dict",
+          "reflection": "dict"
+        },
+        "dependencies": [
+          "run_human_group_simulation"
+        ],
+        "error_handling": {
+          "strategy": "log_error_continue"
+        }
+      },
+      "generate_gorilla_encounter_narrative": {
+        "description": "Generate a detailed play-by-play narrative of the encounter, incorporating ABM insights and human ingenuity.",
+        "action": "generate_text_llm",
+        "inputs": {
+          "provider": "google",
+          "model": "gemini-1.5-pro-latest",
+          "prompt": "Narrative Generation Task:\n\nRole: You are a skilled storyteller with the persona of '{{ extract_parameters_for_simulation_and_narrative.parsed_parameters.narrator_persona }}'.\n\nObjective: Craft a detailed, realistic play-by-play account of the scenario described in the user query. The battle is to the death or incapacitation, with no retreat. Humans have no pre-made weapons but possess their ingenuity and can improvise.\n\nUser Query:\n'''{{ context.user_query }}'''\n\nContextual Data from Agent-Based Model (ABM) of the human group ({{ extract_parameters_for_simulation_and_narrative.parsed_parameters.human_group_name }}):\n- ABM Run ID: {{ run_human_group_simulation.model_run_id }}\n- ABM Simulation Steps: {{ extract_parameters_for_simulation_and_narrative.parsed_parameters.abm_simulation_steps }}\n- Final Active Agents (Abstract representation of engagement/boldness): {{ run_human_group_simulation.active_count }} out of approximately 30.\n- ABM Model Data (Time Series of 'Active' agents): {{ run_human_group_simulation.model_data }}\n- ABM Analysis Summary: {{ analyze_abm_simulation_output.analysis.time_series }}\n\nInstructions for Narrative:\n1.  **Introduction**: Set the scene based on the user query. Introduce the gorilla ({{ extract_parameters_for_simulation_and_narrative.parsed_parameters.gorilla_name }}) and the human group ({{ extract_parameters_for_simulation_and_narrative.parsed_parameters.human_group_name }}).\n2.  **Initial Engagement**: Describe the first moves. How does the gorilla react? How do the humans initially approach?\n3.  **Incorporate ABM Insights**: Weave the ABM results into the narrative. For example:\n    *   If 'Final Active Agents' is low, it might indicate initial hesitation, disorganization, or some humans holding back. The time series data might show fluctuations in this 'engagement'.\n    *   The `analyze_abm_simulation_output.analysis.time_series.convergence_step` could indicate when the group reached a stable level of (dis)organization or resolve. An `oscillating` value might suggest wavering morale or tactics.\n    *   **Do not state the ABM metrics directly in the narrative.** Instead, *interpret* them. For example, instead of saying 'the active agent count dropped to 5', say 'Several men faltered, their initial bravado waning as the gorilla displayed its terrifying strength.' or 'The group's cohesion ebbed and flowed, some surging forward while others hesitated.'\n4.  **Human Ingenuity**: Crucially, detail how the humans use their ingenuity. Do they try to find rocks, branches? Do they attempt coordinated distractions, feints, or flanking maneuvers? Describe specific improvised tactics and their attempts.\n5.  **Gorilla's Actions**: Detail the gorilla's tactics. How does it defend itself and its harem? How does it attack? Describe its power and ferocity realistically.\n6.  **Play-by-Play**: Provide a blow-by-blow account of the battle, describing key moments, successful or failed tactics, injuries, and shifts in momentum.\n7.  **Outcome**: Determine the likely outcome based on a realistic assessment, considering the gorilla's power and the humans' numbers and ingenuity. Explain casualties on both sides.\n8.  **Style**: Maintain the specified narrator persona throughout. Be vivid, detailed, and engaging. Ensure the constraints (no retreat, fight to death/incapacitation) are respected.\n\nOutput the full narrative as a single block of text."
+        },
+        "outputs": {
+          "response_text": "str",
+          "reflection": "dict"
+        },
+        "dependencies": [
+          "analyze_abm_simulation_output"
+        ],
+        "error_handling": {
+          "strategy": "fail_workflow"
+        }
+      },
+      "display_final_report": {
+        "description": "Display the final generated narrative.",
+        "action": "display_output",
+        "inputs": {
+          "content": "Gorilla Encounter Narrative ({{ context.task_id }}):\n-----------------------------------------------------\n{{ generate_gorilla_encounter_narrative.response_text }}"
+        },
+        "outputs": {
+          "display_confirmation": "str",
+          "reflection": "dict"
+        },
+        "dependencies": [
+          "generate_gorilla_encounter_narrative"
+        ]
+      }
+    },
+    "error_handling_defaults": {
+      "strategy": "fail_workflow",
+      "max_attempts": 1,
+      "retry_delay_sec": 1
+    }
+  }

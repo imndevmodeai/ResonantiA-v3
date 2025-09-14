@@ -1,0 +1,42 @@
+{
+  "name": "Test Bonnie Rotten Search Tool",
+  "description": "Tests the search_web tool with a specific query about Bonnie Rotten.",
+  "version": "1.0",
+  "tasks": {
+    "start_test": {
+      "description": "Display the initial search query.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Initiating search for: Bonnie Rotten real name most recent video social media posts"
+      },
+      "dependencies": []
+    },
+    "perform_bonnie_rotten_search": {
+      "description": "Perform web search for Bonnie Rotten's real name, most recent video, and social media posts.",
+      "action_type": "execute_web_task",
+      "inputs": {
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "Bonnie Rotten real name most recent video social media posts",
+        }
+        "search_engine": "google"
+      },
+      "outputs": {
+        "results": "list",
+        "reflection": "dict"
+      },
+      "dependencies": ["start_test"]
+    },
+    "display_search_results": {
+      "description": "Display the raw search results and their IAR.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "search_query": "Bonnie Rotten real name most recent video social media posts",
+          "search_results": "{{ perform_bonnie_rotten_search.results }}",
+          "search_reflection": "{{ perform_bonnie_rotten_search.reflection }}"
+        },
+        "format": "json"
+      },
+      "dependencies": ["perform_bonnie_rotten_search"]
+    }
+  }
+} 

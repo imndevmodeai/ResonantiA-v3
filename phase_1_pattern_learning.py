@@ -378,7 +378,7 @@ class Phase1PatternLearningOrchestrator:
     def __init__(self, aco: AdaptiveCognitiveOrchestrator):
         self.aco = aco
         self.pattern_classifier = EnhancedPatternClassifier()
-        self.knowledge_expander = KnowledgeExpansionEngine("protocol/ResonantiA_Protocol_v3.1-CA.md")
+        self.knowledge_expander = KnowledgeExpansionEngine("ResonantiA_Protocol_v3.1-CA.md")
         
         self.phase1_metrics = {
             'deployment_time': datetime.now().isoformat(),

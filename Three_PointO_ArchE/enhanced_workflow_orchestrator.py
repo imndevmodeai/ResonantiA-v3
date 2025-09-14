@@ -18,7 +18,7 @@ tools_dir = Path(__file__).parent / "tools"
 sys.path.insert(0, str(tools_dir))
 
 from .workflow_engine import IARCompliantWorkflowEngine
-from .action_registry import register_action, main_action_registry
+from .action_registry import main_action_registry
 from .utils.reflection_utils import create_reflection, ExecutionStatus
 
 try:

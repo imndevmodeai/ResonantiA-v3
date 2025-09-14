@@ -1,0 +1,80 @@
+{
+  "name": "Temporal Causal Analysis Workflow (v3.0)",
+  "description": "Fetches time series data, discovers temporal graph, estimates lagged effects, and displays results including IAR status.",
+  "version": "3.0",
+  "tasks": {
+    "fetch_multivariate_data": {
+      "description": "Fetch multivariate time series data (Simulated).",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import pandas as pd\nimport numpy as np\n# Simulate fetching data\nnp.random.seed(123)\nn_steps = 100\ndates = pd.date_range(start='2024-01-01', periods=n_steps, freq='D')\nx1 = np.random.normal(0, 1, n_steps).cumsum()\nx2 = np.sin(np.arange(n_steps) / 5) * 2 + np.random.normal(0, 0.5, n_steps)\ny = 0.4 * np.roll(x1, 3) + 0.3 * np.roll(x2, 1) + np.random.normal(0, 0.3, n_steps)\ny[:3] = np.nan # Introduce missing values due to lags\ndata = pd.DataFrame({'timestamp': dates.strftime('%Y-%m-%d'), 'X1': x1, 'X2': x2, 'Y_target': y})\nprint(f'Fetched {len(data)} multivariate data points.')\nresult = {'multivariate_data': data.to_dict(orient='list')}"
+      },
+      "outputs": {"multivariate_data": "dict", "stdout": "string", "reflection": "dict"},
+      "dependencies": []
+    },
+    "preprocess_temporal_data": {
+      "description": "Preprocess data (e.g., handle missing values - Simulated).",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import pandas as pd\n# Simulate preprocessing\ndata_dict = context.get('fetch_multivariate_data', {}).get('multivariate_data', {})
+if not data_dict:\n    raise ValueError('Input data missing for preprocessing')\ndf = pd.DataFrame(data_dict)\ndf['timestamp'] = pd.to_datetime(df['timestamp'])\ndf = df.set_index('timestamp')\ndf = df.interpolate(method='linear').fillna(method='bfill') # Example: Interpolate and backfill NaNs\nprint(f'Preprocessed data. Shape: {df.shape}, Nulls remaining: {df.isnull().sum().sum()}')\nresult = {'processed_temporal_data': df.to_dict(orient='list')}"
+      },
+      "outputs": {"processed_temporal_data": "dict", "stdout": "string", "reflection": "dict"},
+      "dependencies": ["fetch_multivariate_data"],
+      "condition": "{{ fetch_multivariate_data.reflection.status == 'Success' }}"
+    },
+    "discover_temporal_causal_graph": {
+      "description": "Discover temporal causal relationships.",
+      "action_type": "perform_causal_inference",
+      "inputs": {
+        "operation": "discover_temporal_graph",
+        "data": "{{ preprocess_temporal_data.processed_temporal_data }}",
+        "max_lag": "{{ initial_context.max_lag | default(5) }}",
+        "method": "{{ initial_context.discovery_method | default('PCMCI') }}"
+      },
+      "outputs": {"temporal_graph": "dict", "error": "string", "note": "string", "reflection": "dict"},
+      "dependencies": ["preprocess_temporal_data"],
+      "condition": "{{ preprocess_temporal_data.reflection.status == 'Success' }}"
+    },
+    "estimate_temporal_lagged_effects": {
+      "description": "Estimate lagged effects between variables.",
+      "action_type": "perform_causal_inference",
+      "inputs": {
+        "operation": "estimate_lagged_effects",
+        "data": "{{ preprocess_temporal_data.processed_temporal_data }}",
+        "target_column": "{{ initial_context.target_column | default('Y_target') }}",
+        "regressor_columns": "{{ initial_context.regressor_columns | default(['X1', 'X2']) }}",
+        "max_lag": "{{ initial_context.max_lag | default(5) }}"
+      },
+      "outputs": {"lagged_effects": "dict", "error": "string", "note": "string", "reflection": "dict"},
+      "dependencies": ["preprocess_temporal_data"],
+      "condition": "{{ preprocess_temporal_data.reflection.status == 'Success' }}"
+    },
+    "display_temporal_causal_results": {
+      "description": "Display the temporal causal analysis results with IAR status.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "temporal_graph_discovery": {
+            "status": "{{ discover_temporal_causal_graph.reflection.status if 'discover_temporal_causal_graph' in context else 'Skipped' }}",
+            "confidence": "{{ discover_temporal_causal_graph.reflection.confidence if 'discover_temporal_causal_graph' in context else 'N/A' }}",
+            "note": "{{ discover_temporal_causal_graph.note if 'discover_temporal_causal_graph' in context else '' }}",
+            "graph_results": "{{ discover_temporal_causal_graph.temporal_graph if 'discover_temporal_causal_graph' in context else 'N/A' }}",
+            "error": "{{ discover_temporal_causal_graph.error if 'discover_temporal_causal_graph' in context else None }}"
+          },
+          "lagged_effect_estimation": {
+            "status": "{{ estimate_temporal_lagged_effects.reflection.status if 'estimate_temporal_lagged_effects' in context else 'Skipped' }}",
+            "confidence": "{{ estimate_temporal_lagged_effects.reflection.confidence if 'estimate_temporal_lagged_effects' in context else 'N/A' }}",
+            "note": "{{ estimate_temporal_lagged_effects.note if 'estimate_temporal_lagged_effects' in context else '' }}",
+            "lagged_effects_summary": "{{ estimate_temporal_lagged_effects.lagged_effects if 'estimate_temporal_lagged_effects' in context else 'N/A' }}",
+            "error": "{{ estimate_temporal_lagged_effects.error if 'estimate_temporal_lagged_effects' in context else None }}"
+          }
+        },
+        "format": "json"
+      },
+      "dependencies": ["discover_temporal_causal_graph", "estimate_temporal_lagged_effects"]
+    }
+  }
+} 

@@ -1,0 +1,113 @@
+{
+  "name": "Complex Workflow Chaining",
+  "description": "Demonstrates advanced workflow chaining patterns with IAR integration, conditional execution, and parallel processing",
+  "version": "3.0",
+  "tasks": {
+    "initialize_context": {
+      "description": "Initialize the workflow context and validate inputs",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "initialize_context",
+        "parameters": "{{initial_context}}"
+      },
+      "dependencies": []
+    },
+    "analyze_system_state": {
+      "description": "Analyze current system state and identify integration points",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "analyze_system",
+        "context": "{{initialize_context.result}}"
+      },
+      "dependencies": ["initialize_context"]
+    },
+    "extract_patterns": {
+      "description": "Extract patterns from system analysis",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "extract_patterns",
+        "analysis": "{{analyze_system_state.result}}"
+      },
+      "dependencies": ["analyze_system_state"]
+    },
+    "parallel_processing": {
+      "description": "Execute parallel processing tasks",
+      "action_type": "perform_parallel_action",
+      "inputs": {
+        "tasks": [
+          {
+            "name": "process_patterns",
+            "action": "process_extracted_patterns",
+            "data": "{{extract_patterns.result}}"
+          },
+          {
+            "name": "validate_patterns",
+            "action": "validate_patterns",
+            "data": "{{extract_patterns.result}}"
+          }
+        ]
+      },
+      "dependencies": ["extract_patterns"]
+    },
+    "synthesize_results": {
+      "description": "Synthesize results from parallel processing",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "synthesize_results",
+        "processed_data": "{{parallel_processing.result.processed_patterns}}",
+        "validation_data": "{{parallel_processing.result.validated_patterns}}"
+      },
+      "dependencies": ["parallel_processing"]
+    },
+    "conditional_execution": {
+      "description": "Execute conditional tasks based on synthesis results",
+      "action_type": "perform_conditional_action",
+      "inputs": {
+        "conditions": [
+          {
+            "condition": "{{synthesize_results.result.confidence}} > 0.8",
+            "action": "high_confidence_processing",
+            "data": "{{synthesize_results.result}}"
+          },
+          {
+            "condition": "{{synthesize_results.result.confidence}} <= 0.8",
+            "action": "low_confidence_processing",
+            "data": "{{synthesize_results.result}}"
+          }
+        ]
+      },
+      "dependencies": ["synthesize_results"]
+    },
+    "metacognitive_shift": {
+      "description": "Perform metacognitive shift if needed",
+      "action_type": "perform_metacognitive_shift",
+      "inputs": {
+        "context": "{{conditional_execution.result}}",
+        "threshold": 0.7
+      },
+      "dependencies": ["conditional_execution"],
+      "condition": "{{conditional_execution.result.needs_shift}}"
+    },
+    "final_integration": {
+      "description": "Integrate all results and generate final output",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "integrate_results",
+        "conditional_results": "{{conditional_execution.result}}",
+        "shift_results": "{{metacognitive_shift.result}}",
+        "context": "{{initialize_context.result}}"
+      },
+      "dependencies": ["conditional_execution", "metacognitive_shift"]
+    },
+    "generate_report": {
+      "description": "Generate comprehensive workflow report",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "generate_report",
+        "integration_results": "{{final_integration.result}}",
+        "format": "markdown"
+      },
+      "dependencies": ["final_integration"]
+    }
+  }
+} 

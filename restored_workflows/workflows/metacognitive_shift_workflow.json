@@ -1,0 +1,58 @@
+{
+    "Process blueprintS": "Metacognitive_Shift_v1_0",
+    "description": "A reactive workflow to pause execution, analyze dissonance using IAR-enriched context, and formulate a correction.",
+    "metadata": {
+        "primed_by_spr": "Metacognitive shifT",
+        "protocol_section": "3.10"
+    },
+    "tasks": [
+        {
+            "task_id": "pause_and_gather_context",
+            "action": "core.pause_and_reflect",
+            "inputs": {
+                "reason": "Dissonance detected. Initiating Metacognitive Shift.",
+                "context_depth": 5
+            },
+            "description": "Pause the originating workflow and gather the last 5 steps of the IAR-enriched ThoughtTraiL."
+        },
+        {
+            "task_id": "identify_root_cause_of_dissonance",
+            "action": "llm.invoke_llm",
+            "inputs": {
+                "prompt_template_file": "prompts/identify_dissonance_prompt.py",
+                "context": "{{pause_and_gather_context.result}}"
+            },
+            "description": "Analyze the ThoughtTraiL to pinpoint the root cause of the failure, explicitly referencing protocol principles. (IdentifyDissonancE)"
+        },
+        {
+            "task_id": "formulate_corrective_action_plan",
+            "action": "llm.invoke_llm",
+            "inputs": {
+                "prompt_template_file": "prompts/formulate_correction_prompt.py",
+                "dissonance_analysis": "{{identify_root_cause_of_dissonance.result}}",
+                "original_context": "{{pause_and_gather_context.result}}"
+            },
+            "description": "Propose a specific, actionable plan to correct the identified dissonance."
+        },
+        {
+            "task_id": "vet_proposed_correction",
+            "action": "core.vetting_agent",
+            "inputs": {
+                "target": "{{formulate_corrective_action_plan.result}}",
+                "context": "{{identify_root_cause_of_dissonance.result}}"
+            },
+            "description": "Use the VettingAgenT to ensure the proposed correction is logical, safe, and aligned with the ResonantiA Protocol."
+        },
+        {
+            "task_id": "present_for_keyholder_approval",
+            "action": "io.present_for_approval",
+            "inputs": {
+                "message": "Metacognitive Shift Complete. The following dissonance was identified and a corrective action has been formulated. Please approve to resume.",
+                "analysis": "{{identify_root_cause_of_dissonance.result}}",
+                "proposed_correction": "{{formulate_corrective_action_plan.result}}",
+                "vetting_result": "{{vet_proposed_correction.result}}"
+            },
+            "description": "Present the full analysis and the vetted correction to the Keyholder for final approval before execution."
+        }
+    ]
+} 

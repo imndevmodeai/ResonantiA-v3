@@ -13,5 +13,18 @@
       "action": "No immediate action required",
       "reflection": "Model confidence is high"
     }
+  },
+  {
+    "task_id": "task_1754801268919_0",
+    "description": "Smoke test task",
+    "required_capability": "Code executoR",
+    "status": "completed",
+    "assigned_to": null,
+    "created_at": 1754801268.9191563,
+    "completed_at": 1754801374.4526548,
+    "result": "smoke-output",
+    "iar": {
+      "confidence": 0.9
+    }
   }
 ]

@@ -27,7 +27,7 @@ class PathConfig:
     
     # Top-level directories
     knowledge_graph: Path = PROJECT_ROOT / "knowledge_graph"
-    workflows: Path = PROJECT_ROOT / "workflows"
+    workflows: Path = PROJECT_ROOT / "core_workflows"
     scripts: Path = PROJECT_ROOT / "scripts"
     logs: Path = PROJECT_ROOT / "logs"
     outputs: Path = PROJECT_ROOT / "outputs"
@@ -59,25 +59,51 @@ class APIKeys:
 @dataclass
 class LLMConfig:
     """Configuration for Large Language Models."""
-    default_provider: str = "openai"
-    default_model: str = "gpt-4o"
+    # Switch default to Google/Gemini
+    default_provider: str = "google"
+    default_model: str = "gemini-1.5-pro-latest"
     temperature: float = 0.7
     max_tokens: int = 4096
 
     # Specific models for different providers
     openai_models: list[str] = field(default_factory=lambda: ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"])
-    google_models: list[str] = field(default_factory=lambda: ["gemini-1.5-pro-latest", "gemini-pro"])
+    google_models: list[str] = field(default_factory=lambda: ["gemini-1.5-pro-latest", "gemini-1.5-flash-latest", "gemini-pro"])
     
     # Vetting agent specific configuration
-    vetting_provider: str = "openai"
-    vetting_model: str = "gpt-4o"
+    vetting_provider: str = "google"
+    vetting_model: str = "gemini-1.5-pro-latest"
+
+# Legacy compatibility attributes for llm_providers.py
+DEFAULT_LLM_PROVIDER = "google"
+LLM_PROVIDERS = {
+    "openai": {
+        "api_key": os.getenv("OPENAI_API_KEY"),
+        "base_url": None,
+        "default_model": "gpt-4o",
+        "temperature": 0.7,
+        "max_tokens": 4096
+    },
+    "google": {
+        # Prefer GOOGLE_API_KEY; fall back to GEMINI_API_KEY for convenience
+        "api_key": os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY"),
+        "base_url": None,
+        "default_model": "gemini-1.5-pro-latest",
+        "temperature": 0.7,
+        "max_tokens": 4096
+    }
+}
+
+# Legacy compatibility attributes for error_handler.py
+DEFAULT_ERROR_STRATEGY = "retry"
+DEFAULT_RETRY_ATTEMPTS = 1
+METAC_DISSONANCE_THRESHOLD_CONFIDENCE = 0.6
 
 @dataclass
 class ToolConfig:
     """Configuration for various cognitive tools."""
     # Code Executor (Docker)
     code_executor_docker_image: str = "python:3.11-slim"
-    code_executor_timeout: int = 300  # seconds
+    code_executor_timeout: int = 900  # seconds
 
     # Search Tool
     search_result_count: int = 10

@@ -1,0 +1,96 @@
+{
+  "query": "machine learning tutorials",
+  "engines": [
+    "google",
+    "duckduckgo"
+  ],
+  "timestamp": "2025-07-19T20-53-30.749Z",
+  "results": {
+    "google": {
+      "error": "Google search failed: net::ERR_ABORTED at https://www.google.com/search?q=machine%20learning%20tutorials",
+      "results": []
+    },
+    "duckduckgo": {
+      "engine": "duckduckgo",
+      "query": "machine learning tutorials",
+      "results": [
+        {
+          "title": "Machine Learning Tutorial - GeeksforGeeks",
+          "link": "https://www.geeksforgeeks.org/machine-learning/machine-learning/",
+          "description": "Machine learning is a branch of Artificial Intelligence that focuses on developing models and algorithms that let computers learn from data without being explicitly programmed for every task. In simple words, ML teaches the systems to think and understand like humans by learning from the data."
+        },
+        {
+          "title": "Machine Learning Tutorial - Online Tutorials Library",
+          "link": "https://www.tutorialspoint.com/machine_learning/index.htm",
+          "description": "Learn the basics and advances of machine learning, a branch of artificial intelligence that allows computers to learn from data and make predictions or decisions. This tutorial covers the stages, types, and examples of machine learning, as well as the common algorithms and libraries used in ML."
+        },
+        {
+          "title": "Machine Learning | Google for Developers",
+          "link": "https://developers.google.com/machine-learning/crash-course",
+          "description": "A fast-paced, practical introduction to machine learning, featuring animated videos, interactive visualizations, and hands-on exercises. Learn the fundamentals of ML models, data, advanced architectures, and real-world considerations."
+        },
+        {
+          "title": "Start Here with Machine Learning",
+          "link": "https://machinelearningmastery.com/start-here/",
+          "description": "Learn how to get started, practice, and improve your machine learning skills with these comprehensive tutorials. Covering foundations, algorithms, tools, datasets, and real-world problems, you can master applied machine learning with this site."
+        },
+        {
+          "title": "Tutorials | TensorFlow Core",
+          "link": "https://www.tensorflow.org/tutorials",
+          "description": "An open source machine learning library for research and production."
+        },
+        {
+          "title": "The Ultimate Machine Learning Tutorial for 2025 - Simplilearn",
+          "link": "https://www.simplilearn.com/tutorials/machine-learning-tutorial",
+          "description": "Learn machine learning basics, applications, and skills with this comprehensive tutorial. Cover topics from linear regression to decision tree, Naive Bayes, k-means, and more with Python examples."
+        },
+        {
+          "title": "Machine Learning - Coursera",
+          "link": "https://www.coursera.org/learn/machine-learning-1",
+          "description": "This Course Machine Learning offers a comprehensive, hands-on introduction to building and deploying machine learning models using Python. It is designed for learners with a foundational understanding of Python programming and familiarity with basic data analysis concepts."
+        },
+        {
+          "title": "Machine Learning Tutorials - How to Learn Machine Learning",
+          "link": "https://howtolearnmachinelearning.com/tutorials/",
+          "description": "The best online tutorials to learn about Machine Learning: Neural Networks, Natural Language Processing, Interpret-ability, and a lot more!"
+        },
+        {
+          "title": "Python Machine Learning - W3Schools",
+          "link": "https://www.w3schools.com/python/python_ml_getting_started.asp",
+          "description": "Learn how to make computers learn from data and statistics using Python modules. This tutorial covers the basics of machine learning, data types, and how to predict outcomes."
+        },
+        {
+          "title": "Machine Learning Tutorial for Beginners: What is, Basics of ML",
+          "link": "https://www.guru99.com/machine-learning-tutorial.html",
+          "description": "Machine learning is a field of computer science that gives computer systems the ability to \"learn\" (i.e., progressively improve performance on a specific task) with data, without being explicitly prog"
+        }
+      ],
+      "count": 10,
+      "status": "success",
+      "timestamp": "2025-07-19T20:53:30.748Z"
+    }
+  },
+  "metadata": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "options": {
+      "headless": false,
+      "debug": true,
+      "timeout": 30000,
+      "maxResults": 10,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "chromePath": "/usr/bin/google-chrome-stable",
+      "enableStealth": true,
+      "enableHumanHandoff": true,
+      "handoffTimeout": 300000,
+      "resultsDir": "/media/newbu/3626C55326C514B1/Happier/ResonantiA/browser_automation/search_results"
+    }
+  }
+}

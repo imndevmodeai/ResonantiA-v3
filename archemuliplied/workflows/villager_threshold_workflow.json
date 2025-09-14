@@ -1,0 +1,95 @@
+{
+  "name": "Villager Count Threshold Estimation",
+  "version": "1.0",
+  "description": "Runs ABM simulations at different villager counts to approximate 50% success probability against a silverback gorilla.",
+  "tasks": {
+    "sim_300": {
+      "action": "perform_abm",
+      "description": "Run simulation with ~300 villagers",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "basic",
+        "model_params": {
+          "width": 25,
+          "height": 25,
+          "density": 0.48,
+          "activation_threshold": 2,
+          "seed": "sim300",
+          "agent_params": {"behavior_mode": "cautious_explorers"}
+        },
+        "num_steps": 50
+      }
+    },
+    "sim_350": {
+      "action": "perform_abm",
+      "description": "Run simulation with ~350 villagers",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "basic",
+        "model_params": {
+          "width": 25,
+          "height": 25,
+          "density": 0.56,
+          "activation_threshold": 2,
+          "seed": "sim350",
+          "agent_params": {"behavior_mode": "cautious_explorers"}
+        },
+        "num_steps": 50
+      }
+    },
+    "sim_400": {
+      "action": "perform_abm",
+      "description": "Run simulation with ~400 villagers",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "basic",
+        "model_params": {
+          "width": 25,
+          "height": 25,
+          "density": 0.64,
+          "activation_threshold": 2,
+          "seed": "sim400",
+          "agent_params": {"behavior_mode": "cautious_explorers"}
+        },
+        "num_steps": 50
+      }
+    },
+    "sim_450": {
+      "action": "perform_abm",
+      "description": "Run simulation with ~450 villagers",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "basic",
+        "model_params": {
+          "width": 25,
+          "height": 25,
+          "density": 0.72,
+          "activation_threshold": 2,
+          "seed": "sim450",
+          "agent_params": {"behavior_mode": "cautious_explorers"}
+        },
+        "num_steps": 50
+      }
+    },
+    "summarize_results": {
+      "action": "generate_text_llm",
+      "description": "Summarize simulation outputs and estimate threshold.",
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "You are an analytical assistant. We ran four ABM simulations of villagers vs a silverback gorilla. Here are the final active counts (proxy for surviving engaged villagers):\n\n- 300 villagers density 0.48 → {{ sim_300.active_count }}\n- 350 villagers density 0.56 → {{ sim_350.active_count }}\n- 400 villagers density 0.64 → {{ sim_400.active_count }}\n- 450 villagers density 0.72 → {{ sim_450.active_count }}\n\nA success is defined as at least 20 active villagers at step 50. Using these data, estimate the approximate villager count that would yield a 50% success probability. State assumptions and provide a concise explanation."
+      },
+      "dependencies": ["sim_300", "sim_350", "sim_400", "sim_450"]
+    },
+    "display": {
+      "action": "display_output",
+      "inputs": {
+        "content": "Villager threshold summary:\n{{ summarize_results.response_text }}"
+      },
+      "dependencies": ["summarize_results"]
+    }
+  },
+  "error_handling_defaults": {
+    "strategy": "fail_workflow"
+  }
+} 

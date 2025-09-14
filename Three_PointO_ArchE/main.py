@@ -135,7 +135,11 @@ def handle_sirc_directive(args):
                 print(f"  {key}: {value}")
         
         # Save results
-        output_dir = config.OUTPUT_DIR
+        # Use new config container if present
+        try:
+            output_dir = config.CONFIG.paths.outputs.as_posix()
+        except Exception:
+            output_dir = getattr(config, 'OUTPUT_DIR', 'outputs')
         os.makedirs(output_dir, exist_ok=True)
         output_filename = os.path.join(output_dir, f"sirc_clarification_{uuid.uuid4().hex[:8]}.json")
         
@@ -175,13 +179,21 @@ def handle_run_workflow(args):
 
     try:
         engine = IARCompliantWorkflowEngine()
-        final_context = engine.run_workflow(args.workflow_name, initial_context)
+
+        # Construct the full path to the workflow file
+        workflow_dir = getattr(config, 'WORKFLOW_DIR', 'workflows')
+        workflow_path = os.path.join(workflow_dir, args.workflow_name)
+        
+        final_context = engine.run_workflow(workflow_path, initial_context)
         
         # Determine the final status for logging
         final_status = final_context.get("workflow_status", "Unknown")
 
         # Save the final context to a file
-        output_dir = config.OUTPUT_DIR
+        try:
+            output_dir = config.CONFIG.paths.outputs.as_posix()
+        except Exception:
+            output_dir = getattr(config, 'OUTPUT_DIR', 'outputs')
         os.makedirs(output_dir, exist_ok=True)
         
         # Sanitize workflow name for the filename and add run_id

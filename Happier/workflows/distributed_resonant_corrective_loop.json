@@ -1,0 +1,161 @@
+{
+  "name": "Distributed Resonant Corrective Loop (DRCL)",
+  "description": "Applies Enhance→Broaden→Critique→Deepen→Envision loop with ground-truth audit and correction across map/territory.",
+  "tasks": {
+    "intent_intake": {
+      "description": "Normalize user request into Task Envelope",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nctx={{initial_context | default({})}}\nout={\n 'goal': ctx.get('goal') or ctx.get('user_query') or '',\n 'constraints': ctx.get('constraints', {}),\n 'desired_outputs': ctx.get('desired_outputs', [])\n}\nprint(json.dumps({'task_envelope': out}))"
+      },
+      "outputs": {"task_envelope": "dict"},
+      "dependencies": []
+    },
+    "conceptual_map": {
+      "description": "Produce Conceptual Map (SPRs, abstract workflow, territory assumptions)",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Generate a JSON Conceptual Map for the following task envelope. Include: sprs, abstract_workflow (array of steps with name+summary), territory_assumptions (paths + expectations). Output strictly as JSON.\n```json\n{{intent_intake.task_envelope}}\n```",
+        "max_tokens": 600,
+        "temperature": 0.3
+      },
+      "outputs": {"response_text": "string"},
+      "dependencies": ["intent_intake"]
+    },
+    "parse_conceptual_map": {
+      "description": "Parse LLM JSON payload",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nraw={{conceptual_map.response_text | default('{}')}}\ntry:\n  cm=json.loads(raw)\nexcept Exception as e:\n  cm={'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'conceptual_map_json': cm}))"
+      },
+      "outputs": {"conceptual_map_json": "dict"},
+      "dependencies": ["conceptual_map"]
+    },
+    "rise_decision": {
+      "description": "Decide whether to use RISE (embedded|parallel|separate) and why.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Given the Conceptual Map JSON and task envelope, output a compact JSON with keys: mode (embedded|parallel|separate), reason (string).\nConceptual Map: ```json\n{{parse_conceptual_map.conceptual_map_json}}\n```\nTask: ```json\n{{intent_intake.task_envelope}}\n```",
+        "max_tokens": 200,
+        "temperature": 0.2
+      },
+      "outputs": {"response_text": "string"},
+      "dependencies": ["parse_conceptual_map"]
+    },
+    "parse_rise_decision": {
+      "description": "Parse RISE decision JSON",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nraw={{rise_decision.response_text | default('{"mode":"separate","reason":"default"}')}}\ntry:\n  d=json.loads(raw)\nexcept Exception as e:\n  d={"mode":"separate","reason":f"parse_error:{e}"}\nprint(json.dumps({'rise_decision_json': d}))"
+      },
+      "outputs": {"rise_decision_json": "dict"},
+      "dependencies": ["rise_decision"]
+    },
+    "rise_blueprint": {
+      "description": "If mode != separate, draft a brief RISE outline to inform correction plan.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Draft a minimal JSON outline for RISE phases (scaffold, insight, synthesis) with steps aligned to the task. Keep under 10 steps total.\nTask: ```json\n{{intent_intake.task_envelope}}\n```",
+        "max_tokens": 300,
+        "temperature": 0.4
+      },
+      "outputs": {"response_text": "string"},
+      "dependencies": ["parse_rise_decision"],
+      "condition": "{{parse_rise_decision.rise_decision_json.mode != 'separate'}}"
+    },
+    "parse_rise_blueprint": {
+      "description": "Parse RISE outline JSON (optional)",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nraw={{rise_blueprint.response_text | default('null')}}\ntry:\n  bp=json.loads(raw) if raw not in (None, 'null') else None\nexcept Exception as e:\n  bp={'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'rise_outline_json': bp}))"
+      },
+      "outputs": {"rise_outline_json": "dict"},
+      "dependencies": ["rise_blueprint"],
+      "condition": "{{parse_rise_decision.rise_decision_json.mode != 'separate'}}"
+    },
+    "ground_truth_audit": {
+      "description": "Audit repository against territory assumptions",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import os, json\ncm={{parse_conceptual_map.conceptual_map_json | default({})}}\nassumptions=cm.get('territory_assumptions', []) or []\nmissing=[]; mismatch=[]\nfor a in assumptions:\n  path=a.get('path')\n  if not path: continue\n  if not os.path.exists(path): missing.append(path)\nprint(json.dumps({'missing': missing, 'mismatch': mismatch}))"
+      },
+      "outputs": {"missing": "list", "mismatch": "list"},
+      "dependencies": ["parse_conceptual_map"]
+    },
+    "critique_deepen_envision": {
+      "description": "Generate Correction Plan based on dissonance and (optional) RISE outline",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Given the Conceptual Map, Audit, and (optional) RISE decision/outline, generate a JSON array Correction Plan of atomic edits: [{action:create|update|remove, path, content?, acceptance:[...]}]. Focus on minimal viable changes.\nConceptual Map: ```json\n{{parse_conceptual_map.conceptual_map_json}}\n```\nAudit: ```json\n{ \"missing\": {{ground_truth_audit.missing}}, \"mismatch\": {{ground_truth_audit.mismatch}} }\n```\nRISE: ```json\n{ \"decision\": {{parse_rise_decision.rise_decision_json}}, \"outline\": {{parse_rise_blueprint.rise_outline_json | default(null)}} }\n```",
+        "max_tokens": 900,
+        "temperature": 0.35
+      },
+      "outputs": {"response_text": "string"},
+      "dependencies": ["ground_truth_audit", "parse_rise_decision"]
+    },
+    "parse_correction_plan": {
+      "description": "Parse Correction Plan JSON",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nraw={{critique_deepen_envision.response_text | default('[]')}}\ntry:\n  plan=json.loads(raw)\nexcept Exception as e:\n  plan={'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'correction_plan': plan}))"
+      },
+      "outputs": {"correction_plan": "list"},
+      "dependencies": ["critique_deepen_envision"]
+    },
+    "reforge_apply": {
+      "description": "(Manual/assisted) Apply correction plan – placeholder gate",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "DRCL Correction Plan ready. Apply edits per items and rerun workflow if needed.\nPlan: {{parse_correction_plan.correction_plan}}"
+      },
+      "outputs": {"status": "string"},
+      "dependencies": ["parse_correction_plan"]
+    },
+    "synchronize_blueprint": {
+      "description": "Emit final Synced Blueprint reference",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nprint(json.dumps({'synced_blueprint': {'workflow': 'Happier/workflows/distributed_resonant_corrective_loop.json', 'post_checks': ['no missing files']}}))"
+      },
+      "outputs": {"synced_blueprint": "dict"},
+      "dependencies": ["reforge_apply"]
+    },
+    "assemble_envelope": {
+      "description": "Assemble DRCL envelope from prior artifacts",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json, time\ncm={{parse_conceptual_map.conceptual_map_json | default({})}}\nmissing={{ground_truth_audit.missing | default([])}}\nmismatch={{ground_truth_audit.mismatch | default([])}}\nplan={{parse_correction_plan.correction_plan | default([])}}\nsync={{synchronize_blueprint.synced_blueprint | default({})}}\nrise_dec={{parse_rise_decision.rise_decision_json | default({})}}\nrise_bp={{parse_rise_blueprint.rise_outline_json | default(null)}}\ninteraction_id=f'drcl-{int(time.time())}'\nenvelope={\n  'archE_meta':{\n    'protocol':'DRCL.v1',\n    'interaction_id': interaction_id,\n    'phase':'execute',\n    'confidence':0.9,\n    'issues':[]\n  },\n  'conceptual_map': cm,\n  'dissonance_report': {'missing': missing, 'mismatch': mismatch},\n  'correction_plan': plan if isinstance(plan, list) else [],\n  'synced_blueprint': sync,\n  'iar': {'status':'ok', 'notes':'assembled'},\n  'rise': {'mode': rise_dec.get('mode','separate'), 'reason': rise_dec.get('reason'), 'outline': rise_bp}\n}\nprint(json.dumps({'envelope': envelope}))"
+      },
+      "outputs": {"envelope": "dict"},
+      "dependencies": ["synchronize_blueprint"]
+    },
+    "validate_envelope": {
+      "description": "Validate envelope against JSON Schema (best-effort)",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json, sys\nfrom pathlib import Path\nenv={{assemble_envelope.envelope | default({})}}\nschema_path=Path('protocol/drcl_envelope.schema.json')\nresult={'valid': True, 'errors': []}\ntry:\n  import jsonschema\n  if schema_path.exists():\n    with schema_path.open('r', encoding='utf-8') as f:\n      schema=json.load(f)\n    jsonschema.validate(instance=env, schema=schema)\n  else:\n    result['valid']=True\n    result['errors']=['schema file not found, skipped validation']\nexcept Exception as e:\n  result['valid']=False\n  result['errors']=[str(e)]\nprint(json.dumps({'validation': result}))"
+      },
+      "outputs": {"validation": "dict"},
+      "dependencies": ["assemble_envelope"]
+    },
+    "display_envelope": {
+      "description": "Display final envelope and validation result",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "DRCL Envelope Validation: {{validate_envelope.validation}}\n\nEnvelope:\n```json\n{{assemble_envelope.envelope}}\n```"
+      },
+      "outputs": {"status": "string"},
+      "dependencies": ["validate_envelope", "assemble_envelope"]
+    }
+  },
+  "start_tasks": ["intent_intake"]
+}

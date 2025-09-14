@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 import networkx as nx
 from rich.console import Console
 from .workflow_engine import IARCompliantWorkflowEngine
-from .action_registry import ActionRegistry
+from .action_registry import main_action_registry
 from .output_handler import display_workflow_progress
 
 console = Console()
@@ -22,7 +22,7 @@ class ResonantOrchestrator:
     def __init__(self):
         """Initialize the Resonant Orchestrator with its core components."""
         self.workflow_engine = IARCompliantWorkflowEngine()
-        self.action_registry = ActionRegistry()
+        self.action_registry = main_action_registry
         self.execution_graph = nx.DiGraph()  # For tracking execution dependencies
         self.execution_history = []  # For learning from past executions
         self.tool_capabilities = {}  # For storing tool metadata and capabilities

@@ -1,0 +1,20 @@
+{
+  "name": "Genesis ArchE Test",
+  "description": "Test workflow to verify the generated ArchE instance is functional",
+  "tasks": {
+    "test_llm_generation": {
+      "description": "Test that the generated LLM tool works",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Hello! Please confirm that you are working correctly by responding with: 'Generated ArchE instance is operational!'",
+        "model": "gemini-1.5-flash-latest",
+        "temperature": 0.1,
+        "max_tokens": 100
+      },
+      "outputs": {
+        "response_text": "string"
+      },
+      "dependencies": []
+    }
+  }
+}

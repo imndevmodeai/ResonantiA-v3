@@ -11,9 +11,12 @@ from typing import Dict, Any, Optional, List, Type, Tuple # Expanded type hints
 try:
     from . import config
 except ImportError:
-    # Fallback config if running standalone or package structure differs
-    class FallbackConfig: DEFAULT_LLM_PROVIDER = 'openai'; LLM_PROVIDERS = {'openai': {}, 'google': {}}
-    config = FallbackConfig(); logging.warning("config.py not found for llm_providers, using fallback configuration.")
+    try:
+        import config
+    except ImportError:
+        # Fallback config if running standalone or package structure differs
+        class FallbackConfig: DEFAULT_LLM_PROVIDER = 'openai'; LLM_PROVIDERS = {'openai': {}, 'google': {}}
+        config = FallbackConfig(); logging.warning("config.py not found for llm_providers, using fallback configuration.")
 
 # --- Import Provider-Specific SDKs ---
 # Import libraries only if they are intended to be used and installed.
@@ -321,15 +324,16 @@ class GoogleProvider(BaseLLMProvider):
         try:
             # Prepare configurations
             generation_config, safety_settings = self._prepare_google_config(max_tokens, temperature, kwargs)
-            tools_config = self._prepare_tools_config(kwargs)
-            grounding_config = self._prepare_grounding_config(kwargs)
+            
+            # --- FORCE DISABLE FUNCTION CALLING ---
+            tool_config = {'function_calling_config': {'mode': 'none'}}
             
             # Get the generative model instance
             llm = self._client.GenerativeModel(
                 model_name=model,
                 generation_config=generation_config,
                 safety_settings=safety_settings,
-                tools=tools_config
+                tool_config=tool_config # Explicitly set tool config
             )
 
             # Prepare content parts
@@ -340,28 +344,28 @@ class GoogleProvider(BaseLLMProvider):
                 content_parts.append(kwargs["file_content"])
                 
             # Add grounding sources if provided
+            grounding_config = self._prepare_grounding_config(kwargs)
             if grounding_config and grounding_config.get("sources"):
                 content_parts.extend(grounding_config["sources"])
 
-            # Make the API call with enhanced capabilities
-            # Note: Some advanced features like grounding may not be available in all API versions
-            api_kwargs = {
-                "generation_config": generation_config,
-                "safety_settings": safety_settings,
-            }
-            
-            # Only add optional parameters if they're not None and supported
-            if tools_config:
-                api_kwargs["tools"] = tools_config
-            # Skip grounding for now as it may not be supported in current API version
-            # if grounding_config:
-            #     api_kwargs["grounding"] = grounding_config
-                
-            response = llm.generate_content(content_parts, **api_kwargs)
+            # Make the API call with detailed error handling
+            try:
+                logger.info(f"Sending request to Google API. Prompt: '{str(prompt)[:100]}...'")
+                # Add a request timeout to prevent indefinite hanging
+                request_options = {"timeout": 60} # 60 second timeout
+                response = llm.generate_content(
+                    content_parts,
+                    request_options=request_options
+                )
+                logger.info("Received response from Google API.")
+            except Exception as api_call_error:
+                logger.error(f"Direct exception during llm.generate_content call: {api_call_error}", exc_info=True)
+                raise LLMProviderError("Exception during API call to Google.", provider="google", original_exception=api_call_error)
+
 
             # Process response with enhanced error handling
             try:
-                # Handle function calls if present
+                # Handle function calls if present (normalize to string)
                 if hasattr(response, 'candidates') and response.candidates:
                     candidate = response.candidates[0]
                     if hasattr(candidate, 'content') and candidate.content:
@@ -369,11 +373,9 @@ class GoogleProvider(BaseLLMProvider):
                         if hasattr(candidate.content, 'parts'):
                             for part in candidate.content.parts:
                                 if hasattr(part, 'function_call'):
-                                    return {
-                                        "type": "function_call",
-                                        "function": part.function_call.name,
-                                        "arguments": part.function_call.args
-                                    }
+                                    fn = getattr(part.function_call, 'name', '')
+                                    args = getattr(part.function_call, 'args', None)
+                                    return f"[function_call:{fn}] {json.dumps(args) if args is not None else ''}"
 
                 # Handle regular text response
                 if hasattr(response, 'text') and response.text:
@@ -397,14 +399,32 @@ class GoogleProvider(BaseLLMProvider):
                     finish_reason = first_candidate.finish_reason
                     logger.debug(f"Google generation successful (via candidates). Finish Reason: {finish_reason}")
                     return text_response
+                
+                # Additional fallback for empty responses
+                if response.candidates and response.candidates[0]:
+                    candidate = response.candidates[0]
+                    finish_reason = getattr(candidate, 'finish_reason', 'N/A')
+                    logger.warning(f"Google response has no text content. Finish Reason: {finish_reason}")
+                    
+                    # Return a helpful message based on finish reason
+                    if finish_reason == 1:  # SAFETY
+                        return "I apologize, but I cannot provide a response to that request due to safety concerns."
+                    elif finish_reason == 2:  # RECITATION
+                        return "I apologize, but I cannot provide a response to that request."
+                    else:
+                        return "I received your message, but I am unable to generate a response at this time."
                     
                 raise LLMProviderError("Google response format unexpected or empty", provider="google")
 
             except ValueError as e_resp_val:
                 logger.warning(f"ValueError accessing Google response: {e_resp_val}")
                 if hasattr(response, 'prompt_feedback'):
-                    block_reason = response.prompt_feedback.block_reason
-                    block_message = response.prompt_feedback.block_reason_message
+                    block_reason = getattr(response.prompt_feedback, 'block_reason', 'unknown')
+                    # block_reason_message might not exist in all versions
+                    try:
+                        block_message = getattr(response.prompt_feedback, 'block_reason_message', 'No additional details')
+                    except AttributeError:
+                        block_message = 'No additional details'
                     raise LLMProviderError(
                         f"Content blocked by Google API. Reason: {block_reason}. Message: {block_message}", 
                         provider="google"
@@ -535,15 +555,20 @@ def get_llm_provider(provider_name: Optional[str] = None) -> BaseLLMProvider:
     # Get API key (prefer config value, fallback to env var based on convention)
     api_key = provider_config.get("api_key")
     if not api_key or "YOUR_" in api_key or "_HERE" in api_key:
-        # Construct conventional environment variable name (e.g., OPENAI_API_KEY)
-        env_var_name = f"{provider_name_lower.upper()}_API_KEY"
-        api_key_env = os.environ.get(env_var_name)
+        # Environment variable resolution with Gemini alias
+        env_names = [f"{provider_name_lower.upper()}_API_KEY"]
+        if provider_name_lower == "google":
+            env_names.append("GEMINI_API_KEY")
+        api_key_env = None
+        for env_var_name in env_names:
+            api_key_env = os.environ.get(env_var_name)
+            if api_key_env:
+                logger.info(f"Using API key for '{provider_name_lower}' from environment variable {env_var_name}.")
+                break
         if api_key_env:
-            logger.info(f"Using API key for '{provider_name_lower}' from environment variable {env_var_name}.")
             api_key = api_key_env
         else:
-            # If key is missing/placeholder in config AND not found in env var, raise error
-            raise ValueError(f"API key for '{provider_name_lower}' is missing or placeholder in config and not found in environment variable {env_var_name}.")
+            raise ValueError(f"API key for '{provider_name_lower}' not found. Checked: {env_names}.")
 
     # Get optional base_url
     base_url = provider_config.get("base_url") # Will be None if not present

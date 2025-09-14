@@ -1,0 +1,46 @@
+{
+  "name": "RISE - Cognitive Scaffolding and Temporal Grounding Master Workflow",
+  "description": "Orchestrates the initial phase of the RISE engine. It takes a raw user query, refines it into a structured objective, and then performs deep temporal and causal grounding to produce actionable sub-queries. This serves as the 'Knowledge Scaffolding' phase.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "user_query": {
+        "type": "string",
+        "description": "The raw, high-level query or objective from the user."
+      }
+    },
+    "required": ["user_query"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "final_grounded_objective": {
+        "type": "string",
+        "description": "The fully refined and contextually grounded objective after analysis."
+      },
+      "actionable_sub_queries_or_tasks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "task_id": {"type": "string"},
+            "description": {"type": "string"},
+            "required_analysis": {"type": "string", "enum": ["causal_analysis", "forecasting", "data_collection", "synthesis", "other"]},
+            "inputs": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "description": "A structured list of sub-queries or tasks for the next phase of RISE (Insight Generation)."
+      }
+    }
+  },
+  "tasks": {
+    "placeholder": {
+      "description": "This is a conceptual master workflow. The actual execution logic is now handled by the invoke_rise_script.py, which runs the 'query_refinement_workflow' and 'objective_temporal_grounding_workflow' in sequence.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "This workflow is a placeholder. See invoke_rise_script.py for implementation."
+      }
+    }
+  },
+  "start_tasks": ["placeholder"]
+}

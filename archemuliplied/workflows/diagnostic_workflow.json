@@ -1,0 +1,55 @@
+{
+  "name": "Automated Diagnostic Workflow",
+  "description": "Triggered by the Guardian to analyze a failed workflow run. It reads logs and results, then uses an LLM to summarize the failure.",
+  "version": "1.0",
+  "tasks": {
+    "start_analysis": {
+      "action": "display_output",
+      "inputs": {
+        "content": "--- Starting Automated Diagnosis for failed run: {{ initial_context.source_run_id }} ---"
+      },
+      "dependencies": []
+    },
+    "read_failed_result_file": {
+      "action": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json; import os; from Three_PointO_ArchE import config; run_id = '{{ initial_context.source_run_id }}'; wf_file = '{{ initial_context.source_workflow_file }}'; base_name = os.path.basename(wf_file).replace('.json', ''); file_path = os.path.join(config.OUTPUT_DIR, f'result_{base_name}_{run_id}.json'); print(f'Reading result file: {file_path}'); result_data = {'error': 'File not found'}; try: with open(file_path, 'r') as f: result_data = json.load(f); except Exception as e: result_data['error'] = str(e); print(json.dumps(result_data))"
+      },
+      "outputs": {
+        "stdout": "string",
+        "result_data": "json"
+      },
+      "dependencies": ["start_analysis"]
+    },
+    "read_main_log_file": {
+        "action": "execute_code",
+        "inputs": {
+          "language": "python",
+          "code": "import os; from Three_PointO_ArchE import config; run_id = '{{ initial_context.source_run_id }}'; log_file_path = config.LOG_FILE; relevant_lines = []; try: with open(log_file_path, 'r') as f: for line in f: if run_id in line: relevant_lines.append(line.strip()); except Exception as e: relevant_lines.append(f'Error reading log file: {e}'); print('\\n'.join(relevant_lines[-50:]))"
+        },
+        "outputs": {
+          "stdout": "string"
+        },
+        "dependencies": ["start_analysis"]
+    },
+    "summarize_failure": {
+      "action": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are a senior DevOps engineer AI. A workflow has failed. Based on the workflow's final result JSON and the relevant log entries, provide a brief, clear summary of the root cause and suggest a next step for debugging.\\n\\n--- FAILED WORKFLOW RESULT ---\\n```json\\n{{ read_failed_result_file.stdout }}\\n```\\n\\n--- RELEVANT LOG ENTRIES ---\\n```\\n{{ read_main_log_file.stdout }}\\n```\\n\\n--- ANALYSIS ---\\nRoot Cause Summary:",
+        "max_tokens": 400
+      },
+      "outputs": {
+        "response_text": "string"
+      },
+      "dependencies": ["read_failed_result_file", "read_main_log_file"]
+    },
+    "display_diagnosis": {
+        "action": "display_output",
+        "inputs": {
+            "content": "--- Automated Diagnosis Complete ---\\n\\n{{ summarize_failure.response_text }}\\n\\nRelevant Logs Checked:\\n{{ read_main_log_file.stdout }}\\n"
+        },
+        "dependencies": ["summarize_failure"]
+    }
+  }
+} 

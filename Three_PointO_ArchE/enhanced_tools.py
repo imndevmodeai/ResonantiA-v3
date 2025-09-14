@@ -13,9 +13,12 @@ import time # For simulated delays or timestamps
 try:
     from . import config
 except ImportError:
-    # Fallback config if running standalone or package structure differs
-    class FallbackConfig: pass # Minimal fallback for basic operation
-    config = FallbackConfig(); logging.warning("config.py not found for enhanced_tools, using fallback configuration.")
+    try:
+        import config
+    except ImportError:
+        # Fallback config if running standalone or package structure differs
+        class FallbackConfig: pass # Minimal fallback for basic operation
+        config = FallbackConfig(); logging.warning("config.py not found for enhanced_tools, using fallback configuration.")
 
 logger = logging.getLogger(__name__)
 

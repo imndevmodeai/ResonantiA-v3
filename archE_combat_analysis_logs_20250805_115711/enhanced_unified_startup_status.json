@@ -1,0 +1,81 @@
+{
+  "timestamp": "2025-08-05T22:28:07.220472",
+  "system_type": "ArchE Enhanced Unified Startup System",
+  "status": "FULLY OPERATIONAL",
+  "architecture": {
+    "description": "Single Entry Point - All Services with Centralized Port Management",
+    "components": [
+      "Enhanced ArchE Backend with Predictive Modeling",
+      "Simplified WebSocket Server (No Missing Dependencies)",
+      "Next.js UI with Protocol Integration",
+      "Automatic Port Management and Conflict Resolution"
+    ]
+  },
+  "service_status": {
+    "arche_backend": {
+      "status": "RUNNING",
+      "process_id": 72976,
+      "capabilities": [
+        "RISE Orchestrator with Synergistic Fusion Protocol",
+        "Predictive Modeling Tool (ARIMA, Prophet, Linear Regression)",
+        "Vetting Agent with Scope Limitation Detection",
+        "Enhanced Ethical Assessment with Axiom Activation"
+      ],
+      "mode": "Enhanced Mode with All Capabilities Active"
+    },
+    "websocket_server": {
+      "status": "RUNNING",
+      "process_id": 73056,
+      "port": 3013,
+      "url": "ws://localhost:3013",
+      "type": "Simplified Server (No Missing Dependencies)",
+      "capabilities": [
+        "Real-time bidirectional communication",
+        "Protocol compliance tracking",
+        "Message processing and routing",
+        "Heartbeat monitoring"
+      ]
+    },
+    "nextjs_ui": {
+      "status": "RUNNING",
+      "process_id": 73152,
+      "port": 3000,
+      "url": "http://localhost:3000",
+      "capabilities": [
+        "Real-time chat interface",
+        "Visual cognitive debugging with ReactFlow",
+        "Protocol status monitoring",
+        "Dark mode support",
+        "Responsive design"
+      ]
+    }
+  },
+  "port_configuration": {
+    "arche_python": 3012,
+    "websocket": 3013,
+    "nextjs": 3000,
+    "arche_interface": 5001,
+    "status": "All ports properly configured and operational"
+  },
+  "enhanced_capabilities": {
+    "predictive_modeling": "Real ARIMA, Prophet, and Linear Regression capabilities",
+    "vetting_agent": "Scope limitation detection with axiom activation",
+    "rise_orchestrator": "Enhanced with Synergistic Fusion Protocol",
+    "synergistic_fusion": "Human Dignity and Collective Well-being integration",
+    "protocol_integration": "Full ResonantiA Protocol v3.1-CA compliance"
+  },
+  "access_information": {
+    "primary_interface": "http://localhost:3000",
+    "websocket_endpoint": "ws://localhost:3013",
+    "backend_status": "Enhanced capabilities active",
+    "recommendation": "Open http://localhost:3000 in your browser to access the interface"
+  },
+  "unified_startup_features": {
+    "single_command_startup": "node scripts/unified-startup-enhanced.js start",
+    "automatic_port_management": "Conflict detection and resolution",
+    "service_dependency_management": "Proper startup order",
+    "graceful_shutdown": "Ctrl+C stops all services",
+    "health_monitoring": "Real-time status tracking",
+    "error_handling": "Comprehensive error management"
+  }
+}

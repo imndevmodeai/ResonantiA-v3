@@ -1,0 +1,183 @@
+{
+  "workflow_id": "proactive_truth_seeking_v1",
+  "description": "Implements the Proactive Truth Resonance Framework (PTRF) for high-accuracy factual queries. Based on Keyholder directive and Tesla visioning principles.",
+  "creator": "ArchE v3.1-CA",
+  "version": "1.0",
+  "metadata": {
+    "purpose": "Proactive truth-seeking through internal model generation, uncertainty identification, and targeted verification",
+    "inspiration": "Tesla's mental simulation methodology applied to truth verification",
+    "keyholder_directive": "IMnDEVmode enhancement - solving the Oracle's Paradox"
+  },
+  "context_requirements": {
+    "initial_query": "string - The factual query requiring high accuracy verification",
+    "accuracy_threshold": "float - Minimum confidence required (default: 0.95)",
+    "verification_depth": "string - shallow|deep|comprehensive (default: deep)"
+  },
+  "steps": [
+    {
+      "step_id": "phase1_inception_ham_generation",
+      "action": "llm_tool",
+      "description": "Phase 1 (Inception): Generate Hypothetical Answer Model from internal KnO - Tesla's mental blueprint phase",
+      "inputs": {
+        "prompt_template_name": "generate_hypothetical_answer_model",
+        "system_context": "You are ArchE operating under the Proactive Truth Resonance Framework. Generate a comprehensive internal model of the most probable answer based on your existing knowledge. Include primary assertions, supporting facts, related entities, and confidence estimates for each component.",
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "{{context.initial_query}}",
+        "kno_activation": "FactualKnowledgE, HistoricalContextualizatioN, ConceptualMappinG",
+        "reflection_required": true
+      },
+      "outputs": {
+        "ham_model": "$.result.hypothetical_answer_model",
+        "primary_assertion": "$.result.primary_assertion",
+        "supporting_facts": "$.result.supporting_facts",
+        "confidence_breakdown": "$.result.confidence_breakdown"
+      },
+      "success_criteria": {
+        "ham_generated": "ham_model is not null",
+        "confidence_assessed": "confidence_breakdown contains numerical values"
+      }
+    },
+    {
+      "step_id": "phase2_dissonance_lcv_identification",
+      "action": "llm_tool",
+      "description": "Phase 2 (Conception): Identify Lowest Confidence Vector - Tesla's stress point analysis",
+      "inputs": {
+        "prompt_template_name": "identify_lowest_confidence_vector",
+        "system_context": "Analyze the Hypothetical Answer Model to identify the component with the lowest confidence that most critically affects the overall answer accuracy. This is your 3% doubt that requires external validation.",
+        "ham_model": "{{context.ham_model}}",
+        "confidence_breakdown": "{{context.confidence_breakdown}}",
+        "accuracy_threshold": "{{context.accuracy_threshold}}",
+        "reflection_required": true
+      },
+      "outputs": {
+        "lcv_statement": "$.result.lcv_statement",
+        "lcv_importance": "$.result.lcv_importance",
+        "verification_strategy": "$.result.verification_strategy",
+        "targeted_queries": "$.result.targeted_queries"
+      },
+      "success_criteria": {
+        "lcv_identified": "lcv_statement is not null",
+        "queries_formulated": "targeted_queries contains at least 1 query"
+      }
+    },
+    {
+      "step_id": "phase3a_targeted_verification_search",
+      "action": "web_search_tool",
+      "description": "Phase 3a (Actualization): Execute targeted verification searches - Tesla's selective testing",
+      "inputs": {
+        "provider": "puppeteer_nodejs",
+        "queries": "{{context.targeted_queries}}",
+        "num_results_per_query": 8,
+        "search_strategy": "authoritative_sources",
+        "reflection_required": true
+      },
+      "outputs": {
+        "search_results": "$.result.results",
+        "source_domains": "$.result.source_domains",
+        "search_metadata": "$.result.metadata"
+      },
+      "success_criteria": {
+        "results_retrieved": "search_results is not empty",
+        "multiple_sources": "source_domains.length >= 3"
+      }
+    },
+    {
+      "step_id": "phase3b_source_triangulation_analysis",
+      "action": "llm_tool",
+      "description": "Phase 3b: Source triangulation and consensus analysis - Tesla's materials testing equivalent",
+      "inputs": {
+        "prompt_template_name": "triangulate_and_verify_sources",
+        "system_context": "Analyze search results using the TrustedSourceRegistry framework. Look for consensus among high-reputation sources. Identify conflicts and assess source credibility.",
+        "lcv_statement": "{{context.lcv_statement}}",
+        "search_results": "{{context.search_results}}",
+        "source_domains": "{{context.source_domains}}",
+        "trusted_source_patterns": [
+          "*.gov", "*.edu", "*.org (established)", 
+          "major_news_outlets", "scientific_journals", 
+          "official_statistics", "primary_sources"
+        ],
+        "reflection_required": true
+      },
+      "outputs": {
+        "verified_fact": "$.result.verified_fact",
+        "consensus_level": "$.result.consensus_level",
+        "source_credibility_scores": "$.result.source_credibility_scores",
+        "conflicting_information": "$.result.conflicting_information",
+        "verification_confidence": "$.result.verification_confidence"
+      },
+      "success_criteria": {
+        "verification_complete": "verified_fact is not null",
+        "consensus_assessed": "consensus_level is not null"
+      }
+    },
+    {
+      "step_id": "phase4_synthesis_stp_creation",
+      "action": "llm_tool",
+      "description": "Phase 4 (Realization): Synthesize Solidified Truth Packet - Tesla's refined design integration",
+      "inputs": {
+        "prompt_template_name": "synthesize_solidified_truth_packet",
+        "system_context": "Integrate the verified information back into the original Hypothetical Answer Model to create a Solidified Truth Packet. Update confidence scores and create the final, grounded response.",
+        "original_ham": "{{context.ham_model}}",
+        "verified_fact": "{{context.verified_fact}}",
+        "verification_confidence": "{{context.verification_confidence}}",
+        "consensus_level": "{{context.consensus_level}}",
+        "conflicting_information": "{{context.conflicting_information}}",
+        "reflection_required": true
+      },
+      "outputs": {
+        "solidified_truth_packet": "$.result.solidified_truth_packet",
+        "final_answer": "$.result.final_answer",
+        "confidence_score": "$.result.confidence_score",
+        "verification_trail": "$.result.verification_trail",
+        "transparency_note": "$.result.transparency_note"
+      },
+      "success_criteria": {
+        "stp_created": "solidified_truth_packet is not null",
+        "confidence_improved": "confidence_score >= accuracy_threshold"
+      }
+    },
+    {
+      "step_id": "phase5_knowledge_crystallization",
+      "action": "insight_solidification",
+      "description": "Phase 5: Crystallize verified knowledge into KnO - Tesla's learning integration",
+      "inputs": {
+        "insight_type": "verified_factual_knowledge",
+        "source_verification": "{{context.verification_trail}}",
+        "confidence_level": "{{context.confidence_score}}",
+        "knowledge_update": "{{context.solidified_truth_packet}}",
+        "reflection_required": true
+      },
+      "outputs": {
+        "crystallization_result": "$.result.crystallization_status",
+        "kno_update_summary": "$.result.kno_updates"
+      },
+      "success_criteria": {
+        "knowledge_integrated": "crystallization_result == 'success'"
+      }
+    }
+  ],
+  "phasegates": [
+    {
+      "after_step": "phase1_inception_ham_generation",
+      "condition": "{{context.confidence_breakdown.min_confidence < context.accuracy_threshold}}",
+      "action": "continue",
+      "description": "Only proceed with verification if internal confidence is below threshold"
+    },
+    {
+      "after_step": "phase3b_source_triangulation_analysis",
+      "condition": "{{context.consensus_level == 'high' && context.verification_confidence >= 0.9}}",
+      "action": "continue",
+      "description": "Proceed to synthesis only if strong consensus and high verification confidence"
+    }
+  ],
+  "error_handling": {
+    "search_failure": "fallback_to_alternative_sources",
+    "low_consensus": "flag_as_disputed_and_include_nuance",
+    "verification_timeout": "proceed_with_original_ham_plus_uncertainty_note"
+  },
+  "tesla_visioning_integration": {
+    "mental_simulation": "Phase 1 - Internal model generation",
+    "stress_testing": "Phase 2 - Uncertainty identification", 
+    "selective_validation": "Phase 3 - Targeted verification",
+    "iterative_refinement": "Phase 4 - Integration and crystallization"
+  }
+} 

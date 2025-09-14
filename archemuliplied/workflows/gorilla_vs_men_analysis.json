@@ -1,0 +1,23 @@
+{
+  "name": "Hypothetical Combat Analysis: Gorilla vs. Unarmed Men",
+  "description": "Uses a Large Language Model to provide a detailed, play-by-play analysis of a hypothetical battle to the death.",
+  "version": "1.0",
+  "tasks": {
+    "analyze_scenario_with_llm": {
+      "description": "Send the user's detailed scenario to the LLM for tactical analysis and narrative generation.",
+      "action_type": "invoke_llm",
+      "inputs": {
+        "prompt": "if there was the biggest gorilla that's known to man a silver-back that's not King Kong just in a real gorilla that's been the size of something observed in the wild and it lived in its natural atmosphere and its own environment with its harem of females and let's just say 30 men from a local village decided they were going to try and capture this gorilla or take it down they had nothing they didn't have any weapons they weren't allowed to bring any weapons or anything like that they just had to use their bare hands who would win assuming the gorilla did not run away and the men have no weapons or tools. the battle is a battle to death no one can run away run give the play by play and all must be explained be detailed in the tactics and results of attempts"
+      },
+      "outputs": {"llm_response": "{{ self.response }}"}
+    },
+    "display_analysis": {
+      "description": "Display the final analysis from the LLM.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "{{ analyze_scenario_with_llm.llm_response }}"
+      },
+      "dependencies": ["analyze_scenario_with_llm"]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "use_gemini_pro": {
+    "description": "Switch to Gemini Pro (less resource-intensive than Pro-Latest)",
+    "implementation": "Set model to 'gemini-1.5-pro' instead of 'gemini-1.5-pro-latest'",
+    "savings": "~30% token reduction"
+  },
+  "enable_caching": {
+    "description": "Cache responses to avoid duplicate API calls",
+    "implementation": "Implement response caching with TTL",
+    "savings": "~50% reduction for repeated queries"
+  },
+  "batch_requests": {
+    "description": "Batch multiple requests when possible",
+    "implementation": "Group related queries into single API call",
+    "savings": "~40% reduction for grouped queries"
+  },
+  "use_streaming": {
+    "description": "Use streaming responses for long queries",
+    "implementation": "Enable streaming mode for better resource management",
+    "savings": "~20% reduction for long responses"
+  }
+}

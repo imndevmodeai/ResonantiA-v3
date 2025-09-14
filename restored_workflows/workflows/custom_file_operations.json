@@ -1,0 +1,76 @@
+{
+  "workflow_name": "Custom File Operations Workflow (Base64)",
+  "workflow_description": "Demonstrates reading and editing files using custom Base64-enabled tools.",
+  "tasks": [
+    {
+      "task_key": "read_original_file",
+      "action_type": "read_file_custom",
+      "inputs": {
+        "target_file": "README.md",
+        "should_read_entire_file": true
+      },
+      "outputs": {
+        "content_base64": "{{task_result.content}}"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.8
+      }
+    },
+    {
+      "task_key": "decode_and_modify_content",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "The following is Base64 encoded content from a file. Decode it, add the line \'--- This content was added by ArchE custom file operations workflow! ---\' to the end, and then re-encode the entire modified content back to Base64. Ensure the output is ONLY the Base64 string, no other text or formatting.\n\n{{tasks.read_original_file.outputs.content_base64}}",
+        "model": "gemini-1.5-flash-latest"
+      },
+      "outputs": {
+        "modified_content_base64": "{{task_result.text}}"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.7
+      }
+    },
+    {
+      "task_key": "write_modified_file",
+      "action_type": "edit_file_custom",
+      "inputs": {
+        "target_file": "custom_readme_modified.md",
+        "code_edit_base64": "{{tasks.decode_and_modify_content.outputs.modified_content_base64}}",
+        "instructions": "Writing Base64-encoded modified content to custom_readme_modified.md"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.9
+      }
+    },
+    {
+      "task_key": "confirm_modified_file",
+      "action_type": "read_file_custom",
+      "inputs": {
+        "target_file": "custom_readme_modified.md",
+        "should_read_entire_file": true
+      },
+      "outputs": {
+        "confirmed_content_base64": "{{task_result.content}}"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.8
+      }
+    },
+    {
+      "task_key": "display_final_content",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "## Confirmed Content of custom_readme_modified.md (Base64 decoded):\n```\n{{tasks.confirm_modified_file.outputs.confirmed_content_base64 | base64_decode_and_to_string}}\n```",
+        "format": "markdown"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.9
+      }
+    }
+  ]
+} 

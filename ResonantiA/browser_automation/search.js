@@ -298,9 +298,15 @@ async function handleDuckDuckGoSearch(page, query, debug) {
 
     // Wait for results to load
     try {
-      await page.waitForSelector(".result", { timeout: 10000 });
+      // Use a more stable container selector for waiting
+      await page.waitForSelector("#links", { timeout: 15000 });
     } catch (e) {
-      console.error(`Error waiting for DuckDuckGo results: ${e.message}`);
+      console.error(`Error waiting for DuckDuckGo results container #links: ${e.message}`);
+      if (debug) {
+        const screenshotPath = path.join(__dirname, `ddg-error-wait-${new Date().toISOString().replace(/:/g, '-')}.png`);
+        await page.screenshot({ path: screenshotPath, fullPage: true });
+        console.error(`DDG error screenshot saved to ${screenshotPath}`);
+      }
       return [];
     }
 
@@ -395,34 +401,34 @@ async function extractDuckDuckGoResults(page) {
 
   try {
     return await page.evaluate(() => {
-      const items = Array.from(document.querySelectorAll(".result"));
+      // Use the modern, more specific selectors for DDG HTML results
+      const items = Array.from(document.querySelectorAll("div.result.results_links_deep.highlight_d"));
 
-      return items.slice(0, 5).map(item => {
+      return items.slice(0, 10).map(item => { // Increased slice to 10
         let title = "N/A";
         let link = "N/A";
         let description = "N/A";
-        let result_date_snippet = null; // New field
+        let result_date_snippet = null;
 
         try {
-          const titleElement = item.querySelector(".result__title a");
-          const linkElement = item.querySelector("a[href]") || item.querySelector(".result__url a");
-          const descElement = item.querySelector(".result__snippet");
-
-          // Attempt to find a date snippet associated with the result
-          // This is highly dependent on DDG's structure and might need refinement
-          const dateSnippetElement = item.querySelector(".result__timestamp") || 
-                                     item.querySelector(".result__age"); // Hypothetical selectors
+          // Correct selectors for title, link, and snippet
+          const titleElement = item.querySelector("h2.result-title > a.result-link");
+          const linkElement = item.querySelector("a.result-link");
+          const descElement = item.querySelector("a.result-snippet");
 
           title = titleElement ? titleElement.textContent.trim() : "N/A";
           link = linkElement ? linkElement.href : "N/A";
           description = descElement ? descElement.textContent.trim() : "N/A";
+          
+          // Date snippet logic remains speculative
+          const dateSnippetElement = item.querySelector(".result__timestamp") || item.querySelector(".result__age");
           result_date_snippet = dateSnippetElement ? dateSnippetElement.textContent.trim() : null;
 
         } catch (e) {
-          // If there's an error extracting data from this item, return what we have
+          // Error handling for a single item remains
         }
 
-        return { title, link, description, result_date_snippet }; // Added result_date_snippet
+        return { title, link, description, result_date_snippet };
       });
     });
   } catch (error) {

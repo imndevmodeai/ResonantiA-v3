@@ -1,0 +1,78 @@
+{
+  "name": "Detailed Tactical Playbook Workflow (v1.0)",
+  "description": "Provides comprehensive tactical play-by-play analysis with specific movements, casualty projections, and realistic combat progression for complex scenarios.",
+  "version": "1.0",
+  "tasks": {
+    "scenario_setup": {
+      "description": "Establish detailed scenario parameters and constraints.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport sys\\nfrom datetime import datetime\\n\\ninput_data = sys.stdin.read()\\ndata = json.loads(input_data)\\n\\nuser_query = data.get('user_query', '')\\n\\n# Extract scenario parameters\\nscenario = {\\n    'combatants': {\\n        'humans': {\\n            'count': 30,\\n            'equipment': 'None (unarmed, clothed only)',\\n            'average_weight': '180 lbs',\\n            'average_height': '5\\'9\\\"',\\n            'coordination_level': 'Village group (moderate familiarity)',\\n            'motivation': 'Capture/kill gorilla (high stakes)'\\n        },\\n        'gorilla': {\\n            'type': 'Largest known silverback',\\n            'weight': '500-600 lbs (extreme specimen)',\\n            'height': '6 feet standing',\\n            'arm_span': '9 feet',\\n            'bite_force': '1300 PSI',\\n            'strength_multiplier': '9-10x human strength'\\n        }\\n    },\\n    'environment': {\\n        'setting': 'Natural gorilla habitat',\\n        'terrain': 'Mixed forest floor with trees, rocks, vegetation',\\n        'space': 'Open clearing approximately 50x50 feet',\\n        'escape_routes': 'Blocked (no retreat allowed)',\\n        'weather': 'Clear, moderate temperature'\\n    },\\n    'constraints': {\\n        'no_weapons': True,\\n        'no_tools': False,  # Can use environment\\n        'fight_to_death': True,\\n        'no_retreat': True,\\n        'human_ingenuity': True\\n    }\\n}\\n\\nprint(json.dumps({\\n    'scenario_parameters': scenario,\\n    'analysis_focus': 'Detailed tactical play-by-play with specific movements and realistic outcomes',\\n    'timestamp': datetime.now().isoformat()\\n}, indent=2))",
+        "input_data": "{{ initial_context | toJson }}"
+      },
+      "outputs": {
+        "stdout": "string",
+        "scenario_parameters": "dict",
+        "reflection": "dict"
+      },
+      "dependencies": []
+    },
+    "tactical_formation_analysis": {
+      "description": "Analyze optimal human formations and tactical approaches.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are a military tactical analyst specializing in asymmetric warfare. Analyze the optimal tactical formations and approaches for 30 unarmed men against a 600-lb silverback gorilla.\\n\\nScenario Parameters:\\n{{ scenario_setup.stdout }}\\n\\nProvide detailed analysis of:\\n1. INITIAL FORMATION: How should the 30 men position themselves?\\n2. APPROACH VECTORS: Multiple simultaneous attack angles\\n3. ROLE ASSIGNMENTS: Specific jobs for different groups\\n4. COORDINATION SIGNALS: How they communicate during battle\\n5. CONTINGENCY PLANS: What happens when initial plan fails\\n\\nBe specific about positioning, timing, and individual responsibilities. Consider the gorilla's reach, speed, and likely defensive responses.",
+        "max_tokens": 800
+      },
+      "outputs": {
+        "response_text": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["scenario_setup"]
+    },
+    "detailed_playbook_generation": {
+      "description": "Generate comprehensive minute-by-minute tactical playbook with specific movements and casualties.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are a combat simulation specialist. Create a detailed, realistic play-by-play of the 30 men vs gorilla battle. Be specific about:\\n\\nTactical Formation Analysis:\\n{{ tactical_formation_analysis.response_text }}\\n\\nScenario Parameters:\\n{{ scenario_setup.stdout }}\\n\\nProvide a DETAILED MINUTE-BY-MINUTE PLAYBOOK including:\\n\\n**PHASE 1: INITIAL ENGAGEMENT (0-3 minutes)**\\n- Exact positioning of each group\\n- First contact scenarios\\n- Specific injury descriptions\\n- Gorilla's initial response patterns\\n- Which men get injured first and how\\n\\n**PHASE 2: ADAPTATION & REGROUPING (3-8 minutes)**\\n- How survivors reorganize\\n- New tactical approaches\\n- Specific grappling attempts\\n- Environmental tool usage\\n- Casualty management\\n\\n**PHASE 3: DECISIVE ACTION (8-15 minutes)**\\n- Final coordinated assault\\n- Restraint techniques\\n- Finishing moves\\n- Final casualty count\\n\\nBe brutally realistic about injuries, deaths, and the physical toll. Include specific details about:\\n- WHO does WHAT at each moment\\n- HOW injuries occur (bites, crushing, throwing)\\n- WHERE each group positions themselves\\n- WHEN tactical shifts happen\\n- WHY certain approaches succeed/fail\\n\\nUse realistic combat terminology and acknowledge the extreme violence involved.",
+        "max_tokens": 1500
+      },
+      "outputs": {
+        "response_text": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["tactical_formation_analysis"]
+    },
+    "casualty_assessment": {
+      "description": "Provide detailed casualty analysis with medical realism.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport sys\\n\\ninput_data = sys.stdin.read()\\ndata = json.loads(input_data)\\n\\nplaybook = data.get('playbook', '')\\n\\n# Realistic casualty assessment based on gorilla capabilities\\ncasualty_analysis = {\\n    'total_human_force': 30,\\n    'projected_casualties': {\\n        'killed_in_action': {\\n            'count': '8-12',\\n            'causes': [\\n                'Crushing injuries from gorilla strikes (3-5)',\\n                'Fatal bite wounds to neck/head (2-3)',\\n                'Thrown against trees/rocks (2-3)',\\n                'Trampling/stomping (1-2)'\\n            ]\\n        },\\n        'severely_wounded': {\\n            'count': '10-15',\\n            'injuries': [\\n                'Broken bones (ribs, arms, legs)',\\n                'Deep lacerations from claws',\\n                'Concussions from blunt force',\\n                'Dislocated joints',\\n                'Internal bleeding'\\n            ]\\n        },\\n        'lightly_wounded': {\\n            'count': '5-8',\\n            'injuries': [\\n                'Bruising and contusions',\\n                'Minor cuts and scrapes',\\n                'Sprains and strains',\\n                'Exhaustion and shock'\\n            ]\\n        },\\n        'combat_effective_remaining': '3-7'\\n    },\\n    'gorilla_condition': {\\n        'likely_outcome': 'Severely injured but potentially alive',\\n        'injuries': [\\n            'Exhaustion from prolonged combat',\\n            'Multiple contusions from human strikes',\\n            'Possible suffocation if successfully restrained',\\n            'Stress-induced cardiac issues'\\n        ],\\n        'survival_probability': '20-40% depending on restraint success'\\n    },\\n    'battle_duration': '12-20 minutes',\\n    'decisive_factors': [\\n        'Human coordination under extreme stress',\\n        'Gorilla\\'s endurance vs human persistence',\\n        'Environmental factors (terrain, obstacles)',\\n        'Psychological impact of casualties on remaining fighters'\\n    ]\\n}\\n\\nprint(json.dumps(casualty_analysis, indent=2))",
+        "input_data": "{{ detailed_playbook_generation.response_text | toJson }}"
+      },
+      "outputs": {
+        "stdout": "string",
+        "casualty_analysis": "dict",
+        "reflection": "dict"
+      },
+      "dependencies": ["detailed_playbook_generation"]
+    },
+    "final_tactical_report": {
+      "description": "Compile comprehensive tactical report with all analysis components.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\\nimport sys\\nfrom datetime import datetime\\n\\ninput_data = sys.stdin.read()\\ndata = json.loads(input_data)\\n\\nformation_analysis = data.get('formation_analysis', '')\\nplaybook = data.get('playbook', '')\\ncasualty_data = data.get('casualty_data', {})\\nscenario_params = data.get('scenario_params', {})\\n\\nreport = f'''\\n=== DETAILED TACTICAL PLAYBOOK REPORT ===\\nScenario: 30 Unarmed Men vs. Largest Known Silverback Gorilla\\nGenerated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\\n\\n=== SCENARIO PARAMETERS ===\\n{json.dumps(scenario_params, indent=2)}\\n\\n=== TACTICAL FORMATION ANALYSIS ===\\n{formation_analysis}\\n\\n=== DETAILED MINUTE-BY-MINUTE PLAYBOOK ===\\n{playbook}\\n\\n=== CASUALTY ASSESSMENT ===\\n{json.dumps(casualty_data, indent=2)}\\n\\n=== CONCLUSION ===\\nThis analysis provides the detailed tactical play-by-play requested, acknowledging the extreme violence and high casualty rate inherent in such a confrontation. The scenario represents a theoretical exercise in asymmetric combat dynamics.\\n\\n=== DISCLAIMER ===\\nThis analysis is purely theoretical and educational. No actual violence against animals or humans is endorsed or encouraged.\\n\\n================================\\n'''\\n\\nprint(report)",
+        "input_data": "{\\n  \\\"formation_analysis\\\": \\\"{{ tactical_formation_analysis.response_text | replace('\\\"', '\\\\\\\"') | replace('\\\\n', '\\\\\\\\n') }}\\\",\\n  \\\"playbook\\\": \\\"{{ detailed_playbook_generation.response_text | replace('\\\"', '\\\\\\\"') | replace('\\\\n', '\\\\\\\\n') }}\\\",\\n  \\\"casualty_data\\\": {{ casualty_assessment.stdout }},\\n  \\\"scenario_params\\\": {{ scenario_setup.stdout }}\\n}"
+      },
+      "outputs": {
+        "stdout": "string",
+        "final_report": "string",
+        "reflection": "dict"
+      },
+      "dependencies": ["tactical_formation_analysis", "detailed_playbook_generation", "casualty_assessment"]
+    }
+  }
+} 

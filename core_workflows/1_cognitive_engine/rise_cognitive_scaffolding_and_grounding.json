@@ -1,0 +1,79 @@
+{
+  "name": "RISE - Cognitive Scaffolding and Temporal Grounding Master Workflow",
+  "description": "Orchestrates the initial phase of the RISE engine. It takes a raw user query, refines it into a structured objective, and then performs deep temporal and causal grounding to produce actionable sub-queries. This serves as the 'Knowledge Scaffolding' phase.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "user_query": {
+        "type": "string",
+        "description": "The raw, high-level query or objective from the user."
+      }
+    },
+    "required": ["user_query"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "final_grounded_objective": {
+        "type": "string",
+        "description": "The fully refined and contextually grounded objective after analysis."
+      },
+      "actionable_sub_queries_or_tasks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "task_id": {"type": "string"},
+            "description": {"type": "string"},
+            "required_analysis": {"type": "string", "enum": ["causal_analysis", "forecasting", "data_collection", "synthesis", "other"]},
+            "inputs": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "description": "A structured list of sub-queries or tasks for the next phase of RISE (Insight Generation)."
+      }
+    }
+  },
+  "tasks": {
+    "phase1_query_refinement": {
+      "description": "Executes the query refinement workflow to deconstruct the raw user query.",
+      "action_type": "run_workflow",
+      "inputs": {
+        "workflow_name": "query_refinement_workflow.json",
+        "initial_context": {
+          "user_query": "{{initial_context.user_query}}"
+        }
+      },
+      "outputs": {
+        "rephrased_objective": "string",
+        "deconstructed_elements": "object"
+      },
+      "dependencies": []
+    },
+    "phase2_temporal_grounding": {
+      "description": "Executes the temporal grounding workflow using the refined objective.",
+      "action_type": "run_workflow",
+      "inputs": {
+        "workflow_name": "objective_temporal_grounding_workflow.json",
+        "initial_context": {
+          "rephrased_objective": "{{phase1_query_refinement.rephrased_objective}}",
+          "deconstructed_elements": "{{phase1_query_refinement.deconstructed_elements}}"
+        }
+      },
+      "outputs": {
+        "final_grounded_objective": "string",
+        "actionable_sub_queries_or_tasks": "array"
+      },
+      "dependencies": ["phase1_query_refinement"],
+      "condition": "{{ 'error' not in phase1_query_refinement or phase1_query_refinement.error == None }}"
+    },
+    "log_final_output": {
+      "description": "Logs the final grounded objective and actionable sub-queries.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "RISE Knowledge Scaffolding Complete. Final Grounded Objective: {{phase2_temporal_grounding.final_grounded_objective}}. Actionable Sub-Queries: {{phase2_temporal_grounding.actionable_sub_queries_or_tasks}}"
+      },
+      "dependencies": ["phase2_temporal_grounding"]
+    }
+  },
+  "start_tasks": ["phase1_query_refinement"]
+}

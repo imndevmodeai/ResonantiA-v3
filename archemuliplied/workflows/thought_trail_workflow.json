@@ -1,0 +1,22 @@
+{
+    "name": "Thought traiL Workflow",
+    "description": "Manages and analyzes the IAR-enriched processing history (ThoughtTraiL) for ArchE.",
+    "version": "3.0",
+    "tasks": {
+        "generate_and_export_trail": {
+            "description": "Initialize a ThoughtTraiL, add a dummy entry, analyze it, and export the result to a file.",
+            "action_type": "execute_code",
+            "inputs": {
+                "language": "python",
+                "code": "import json\nfrom Three_PointO_ArchE.thought_trail import ThoughtTrail\n\n# --- Initialization ---\ntrail = ThoughtTrail()\n\n# --- Record a step ---\ncontext = {\n    'task_id': 'standalone_test',\n    'action_type': 'test_action',\n    'inputs': {'test_input': 'value'},\n    'outputs': {'test_output': 'result'},\n    'iar_reflection': {'status': 'Success', 'confidence': 0.99}\n}\nentry = trail.add_entry(\n    task_id=context['task_id'],\n    action_type=context['action_type'],\n    inputs=context['inputs'],\n    outputs=context['outputs'],\n    iar_reflection=context['iar_reflection']\n)\n\n# --- Analyze the trail ---\nproblematic_entries = trail.get_entries_with_dissonance()\nrecent_entries = trail.get_recent_entries(count=10)\navg_confidence = 0\nif recent_entries:\n    avg_confidence = sum(e['iar_reflection'].get('confidence', 1.0) for e in recent_entries) / len(recent_entries)\n\nanalysis = {\n    'problematic_entries_count': len(problematic_entries),\n    'recent_entries_analysis': {\n        'total_entries': len(recent_entries),\n        'avg_confidence': avg_confidence,\n        'issues_detected': sum(1 for e in recent_entries if e['iar_reflection'].get('potential_issues'))\n    }\n}\n\n# --- Export the trail ---\nfilepath = 'outputs/thought_trail_export.json'\ntrail.export_trail(filepath)\n\nresult = {'trail_exported': True, 'filepath': filepath, 'analysis': analysis}\nprint(f\"ThoughtTraiL generated and exported: {json.dumps(result)}\")"
+            },
+            "outputs": {
+                "trail_exported": "boolean",
+                "filepath": "string",
+                "analysis": "dict",
+                "reflection": "dict"
+            },
+            "dependencies": []
+        }
+    }
+} 

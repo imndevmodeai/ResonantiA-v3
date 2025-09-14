@@ -4,7 +4,7 @@ from unittest.mock import patch, MagicMock
 from typing import Dict # Import Dict
 
 # Canonical imports for action_registry and reflection_utils
-from Three_PointO_ArchE.action_registry import execute_action, register_action, ACTION_REGISTRY
+from Three_PointO_ArchE.action_registry import execute_action, main_action_registry, ACTION_REGISTRY
 from Three_PointO_ArchE.utils.reflection_utils import _create_reflection # Canonical import
 
 # --- Mock Action Functions for Testing IAR Validation ---
@@ -54,7 +54,7 @@ def register_mock_actions_fixture():
     for name, func in actions_to_register.items():
         # Check if function exists before registering (handles skipped functions)
         if callable(func):
-             register_action(name, func, force=True) # Use force=True in tests is okay
+             main_action_registry.register_action(name, func) # Use main_action_registry for proper registration
     yield # Run the tests
     # Teardown: Restore original registry
     ACTION_REGISTRY.clear()

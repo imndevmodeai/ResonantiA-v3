@@ -1,0 +1,38 @@
+{
+  "development": {
+    "nextPort": 3000,
+    "archePort": 3005,
+    "websocketPort": 3004,
+    "archeServerPath": "./arche_persistent_server.py",
+    "pythonPath": "./.venv/bin/python3",
+    "checkInterval": 2000,
+    "maxRetries": 10,
+    "healthCheckTimeout": 3000,
+    "gracefulShutdownTimeout": 5000
+  },
+  "production": {
+    "nextPort": 3000,
+    "archePort": 3005,
+    "websocketPort": 3004,
+    "archeServerPath": "./arche_persistent_server.py",
+    "pythonPath": "./.venv/bin/python3",
+    "checkInterval": 5000,
+    "maxRetries": 5,
+    "healthCheckTimeout": 5000,
+    "gracefulShutdownTimeout": 10000
+  },
+  "features": {
+    "enableHealthCheck": true,
+    "enablePortManagement": true,
+    "enableGracefulShutdown": true,
+    "enableColorOutput": true,
+    "enableAutoRestart": false
+  },
+  "logging": {
+    "level": "info",
+    "enableTimestamps": true,
+    "enableColors": true,
+    "logToFile": false,
+    "logFilePath": "./logs/dev-server.log"
+  }
+} 

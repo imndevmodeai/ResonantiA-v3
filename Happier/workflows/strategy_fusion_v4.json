@@ -1,0 +1,64 @@
+{
+    "name": "Strategy Fusion v4 with IAR Branching",
+    "description": "V4 workflow demonstrating IAR-driven branching. Executes analytical actions and chooses a synthesis path based on specialist agent confidence.",
+    "tasks": {
+        "run_causal_analysis_v4": {
+            "action": "perform_causal_inference",
+            "inputs": {
+                "data": "{{ context.causal_data }}",
+                "treatment": "intervention",
+                "outcome": "target_metric"
+            }
+        },
+        "run_abm_v4": {
+            "action": "perform_abm",
+            "inputs": {
+                "model_type": "{{ context.abm_model }}",
+                "steps": 150
+            }
+        },
+        "run_cfp_v4": {
+            "action": "run_cfp",
+            "inputs": {
+                "system_a_config": "{{ context.system_a }}",
+                "system_b_config": "{{ context.system_b }}"
+            }
+        },
+        "run_specialist_agent_v4": {
+            "action": "invoke_specialist_agent",
+            "inputs": {
+                "url": "http://example.com/specialist"
+            }
+        },
+        "confidence_gate": {
+            "type": "gate",
+            "dependencies": [
+                "run_causal_analysis_v4", 
+                "run_abm_v4", 
+                "run_cfp_v4", 
+                "run_specialist_agent_v4"
+            ],
+            "condition": "{{ tasks.run_specialist_agent_v4.iar.confidence > 0.7 }}",
+            "if_true": "synthesis_high_confidence",
+            "if_false": "synthesis_low_confidence"
+        },
+        "synthesis_high_confidence": {
+            "action": "native.aggregate_results",
+            "inputs": {
+                "status": "High confidence synthesis",
+                "causal_result": "{{ tasks.run_causal_analysis_v4.result }}",
+                "abm_result": "{{ tasks.run_abm_v4.result }}",
+                "cfp_result": "{{ tasks.run_cfp_v4.result }}",
+                "specialist_result": "{{ tasks.run_specialist_agent_v4.result }}"
+            }
+        },
+        "synthesis_low_confidence": {
+            "action": "native.aggregate_results",
+            "inputs": {
+                "status": "Low confidence synthesis. Specialist agent had low confidence.",
+                "causal_result": "{{ tasks.run_causal_analysis_v4.result }}",
+                "abm_result": "{{ tasks.run_abm_v4.result }}"
+            }
+        }
+    }
+}

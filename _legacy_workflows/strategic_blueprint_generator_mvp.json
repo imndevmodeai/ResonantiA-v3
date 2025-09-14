@@ -1,0 +1,123 @@
+{
+  "name": "Strategic Blueprint Generator MVP",
+  "description": "MVP workflow to draft a Business Model Canvas, identify a key customer segment, research it, and compile a report.",
+  "version": "0.1",
+  "tasks": {
+    "draft_initial_bmc": {
+      "description": "Draft an initial Business Model Canvas based on the user's idea.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "User Business Idea: '''{{ context.user_business_idea }}'''\n\nBased on the user's business idea above, generate a comprehensive Business Model Canvas. Output the canvas as a JSON object with the following 9 keys: 'customer_segments', 'value_propositions', 'channels', 'customer_relationships', 'revenue_streams', 'key_activities', 'key_resources', 'key_partnerships', 'cost_structure'. Each key should have a string value describing that part of the canvas. Ensure the output is only the JSON object."
+      },
+      "outputs": {
+        "response_text": "str",
+        "draft_bmc_json": "dict"
+      },
+      "post_processing": {
+        "script": "import json\nimport re\nraw_text = outputs['response_text']\nmatch = re.search(r'```json\\s*({.*?})\\s*```|({.*?})', raw_text, re.DOTALL)\ncleaned_json_text = None\nif match:\n    if match.group(1):\n        cleaned_json_text = match.group(1)\n    elif match.group(2):\n        cleaned_json_text = match.group(2)\n\nif cleaned_json_text:\n    try:\n        outputs['draft_bmc_json'] = json.loads(cleaned_json_text)\n    except json.JSONDecodeError as e:\n        outputs['draft_bmc_json'] = {'error': f'JSON parsing failed in draft_initial_bmc: {str(e)}', 'raw_llm_output': raw_text}\nelse:\n    outputs['draft_bmc_json'] = {'error': 'No JSON block found in LLM output for draft_initial_bmc', 'raw_llm_output': raw_text}"
+      },
+      "dependencies": []
+    },
+    "identify_key_customer_segment": {
+      "description": "Identify the key customer segment from the drafted BMC.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "Given the following Business Model Canvas JSON: '''{{ draft_initial_bmc.draft_bmc_json }}'''\n\nIdentify and extract the single most prominent or primary customer segment described. Output only the name or a brief description of this customer segment as a short string."
+      },
+      "outputs": {
+        "response_text": "str",
+        "key_customer_segment": "str" 
+      },
+      "post_processing": {
+        "script": "outputs['key_customer_segment'] = outputs['response_text'].strip()"
+      },
+      "dependencies": ["draft_initial_bmc"]
+    },
+    "generate_segment_research_queries": {
+      "description": "Generate a single, effective web search query for the key customer segment.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "The key customer segment identified for a new business idea is: '''{{ identify_key_customer_segment.key_customer_segment }}'''\n\nGenerate a single, effective web search query to gather initial validation data for this customer segment. Focus on understanding market size, needs, or existing challenges for this segment. The query should be a simple string of keywords and NOT use any special characters like double quotes for exact phrase matching. Output only the search query string."
+      },
+      "outputs": {
+        "response_text": "str",
+        "search_query": "str"
+      },
+      "post_processing": {
+        "script": "outputs['search_query'] = outputs['response_text'].strip()"
+      },
+      "dependencies": ["identify_key_customer_segment"]
+    },
+    "research_customer_segment_validation": {
+      "description": "Perform a web search to validate the customer segment.",
+      "action_type": "execute_web_task",
+      "inputs": {
+        "provider": "puppeteer_nodejs",
+        "search_engine_js": "google",
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "{{ generate_segment_research_queries.search_query }}",
+        }
+        "debug_js": true
+      },
+      "outputs": {
+        "search_results_summary": "str",
+        "search_results_raw": "list"
+      },
+      "post_processing": {
+        "script": "import json\nif isinstance(outputs.get('results'), list):\n    # Limit to top 3 for summary, include key details\n    limited_results = []\n    for res in outputs['results'][:3]:\n        limited_results.append({'title': res.get('title'), 'link': res.get('link'), 'description': res.get('description'), 'content_preview': (res.get('content')[:200] + '...') if res.get('content') else None})\n    outputs['search_results_summary'] = json.dumps(limited_results, indent=2)\n    outputs['search_results_raw'] = outputs['results'] # Keep full raw results too\nelif outputs.get('error'):\n    outputs['search_results_summary'] = f\"Search failed: {outputs['error']}\"\n    outputs['search_results_raw'] = []\nelse:\n    outputs['search_results_summary'] = 'No results found or unexpected format.'\n    outputs['search_results_raw'] = []"
+      },
+      "dependencies": ["generate_segment_research_queries"]
+    },
+    "summarize_segment_validation_research": {
+      "description": "Summarize the web search findings for the customer segment.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "Key Customer Segment: '''{{ identify_key_customer_segment.key_customer_segment }}'''\n\nWeb Search Results for this segment:\n'''{{ research_customer_segment_validation.search_results_summary }}'''\n\nBased on the provided web search results, write a concise summary (2-3 sentences) about the potential validity, market size, or needs of this customer segment. Highlight any supporting data or significant challenges mentioned."
+      },
+      "outputs": {
+        "response_text": "str",
+        "segment_research_summary": "str"
+      },
+      "post_processing": {
+        "script": "outputs['segment_research_summary'] = outputs['response_text'].strip()"
+      },
+      "dependencies": ["research_customer_segment_validation"]
+    },
+    "compile_mvp_report": {
+      "description": "Compile the MVP blueprint report.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "Original Business Idea: '''{{ context.user_business_idea }}'''\n\nDraft Business Model Canvas:\n'''{{ draft_initial_bmc.draft_bmc_json }}'''\n\nIdentified Key Customer Segment: '''{{ identify_key_customer_segment.key_customer_segment }}'''\n\nCustomer Segment Validation Research Summary:\n'''{{ summarize_segment_validation_research.segment_research_summary }}'''\n\nIAR for BMC Drafting (Task: draft_initial_bmc): Status={{ draft_initial_bmc.reflection.status }}, Confidence={{ draft_initial_bmc.reflection.confidence }}, Reflection='''{{ draft_initial_bmc.reflection.summary }}'''\nIAR for Segment Identification (Task: identify_key_customer_segment): Status={{ identify_key_customer_segment.reflection.status }}, Confidence={{ identify_key_customer_segment.reflection.confidence }}, Reflection='''{{ identify_key_customer_segment.reflection.summary }}'''\nIAR for Web Search (Task: research_customer_segment_validation): Status={{ research_customer_segment_validation.reflection.status }}, Confidence={{ research_customer_segment_validation.reflection.confidence }}, Reflection='''{{ research_customer_segment_validation.reflection.summary }}'''\nIAR for Segment Research Summary (Task: summarize_segment_validation_research): Status={{ summarize_segment_validation_research.reflection.status }}, Confidence={{ summarize_segment_validation_research.reflection.confidence }}, Reflection='''{{ summarize_segment_validation_research.reflection.summary }}'''\n\nCompile a structured MVP Strategic Blueprint Report including all the information above. Start with a title. Use clear headings for each section. Be concise and informative."
+      },
+      "outputs": {
+        "response_text": "str",
+        "mvp_report": "str"
+      },
+      "post_processing": {
+        "script": "outputs['mvp_report'] = outputs['response_text']"
+      },
+      "dependencies": [
+        "draft_initial_bmc",
+        "identify_key_customer_segment",
+        "summarize_segment_validation_research"
+      ]
+    },
+    "display_mvp_report": {
+      "description": "Display the compiled MVP report.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "{{ compile_mvp_report.mvp_report }}"
+      },
+      "dependencies": ["compile_mvp_report"]
+    }
+  }
+} 
