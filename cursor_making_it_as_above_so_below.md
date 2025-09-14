@@ -2414,7 +2414,7 @@ Now I'll enhance the GoogleProvider class to implement the new Gemini API capabi
 
 
 ```python
-// ... existing code ...
+
 
 class GoogleProvider(BaseLLMProvider):
     """LLM Provider implementation for Google Generative AI models (Gemini)."""
@@ -2673,7 +2673,7 @@ class GoogleProvider(BaseLLMProvider):
                 "error": str(e)
             }
 
-// ... existing code ...
+
 ```
 
 Now I'll create a new file to implement the enhanced capabilities in the workflow engine:

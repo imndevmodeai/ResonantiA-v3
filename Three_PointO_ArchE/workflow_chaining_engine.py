@@ -28,7 +28,36 @@ class WorkflowChainingEngine:
         self.parallel_executor = ThreadPoolExecutor(max_workers=4)
         self.iar_manager = IARManager()
     
-    async def execute_workflow(self, workflow: Dict[str, Any], initial_context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def _validate_workflow(self, workflow: Dict[str, Any]) -> bool:
+        """Validate the structure of a workflow definition."""
+        if not isinstance(workflow, dict):
+            console.print("[red]Workflow is not a dictionary.[/red]")
+            return False
+        
+        required_keys = ["name", "description", "version", "tasks"]
+        for key in required_keys:
+            if key not in workflow:
+                console.print(f"[red]Missing required workflow key: {key}[/red]")
+                return False
+        
+        if not isinstance(workflow['tasks'], dict):
+            console.print("[red]'tasks' must be a dictionary.[/red]")
+            return False
+            
+        for task_name, task_def in workflow['tasks'].items():
+            if not isinstance(task_def, dict):
+                console.print(f"[red]Task definition for '{task_name}' is not a dictionary.[/red]")
+                return False
+            
+            required_task_keys = ["description", "action_type", "inputs", "dependencies"]
+            for key in required_task_keys:
+                if key not in task_def:
+                    console.print(f"[red]Task '{task_name}' is missing required key: {key}[/red]")
+                    return False
+        
+        return True
+    
+    async def execute_workflow(self, workflow: Dict, initial_context: Optional[Dict] = None) -> Dict:
         """
         Execute a workflow with complex chaining patterns.
         
@@ -42,6 +71,10 @@ class WorkflowChainingEngine:
         # Initialize execution context
         context = initial_context or {}
         context['workflow_start_time'] = datetime.now().isoformat()
+        
+        # Validate workflow before execution
+        if not self._validate_workflow(workflow):
+            raise ValueError("Invalid workflow definition")
         
         # Build execution graph
         self._build_execution_graph(workflow)
@@ -76,7 +109,7 @@ class WorkflowChainingEngine:
                 
                 # Check for conditional execution
                 if 'condition' in workflow['tasks'][task_name]:
-                    if not self._evaluate_condition(workflow['tasks'][task_name]['condition'], results):
+                    if not self._evaluate_condition(workflow['tasks'][task_name]['condition'], context, results):
                         continue
                 
                 # Handle parallel processing
@@ -138,47 +171,53 @@ class WorkflowChainingEngine:
             display_workflow_progress(task['description'], f"Failed: {str(e)}")
             raise
     
+    def _resolve_path(self, path: str, context: Dict[str, Any], results: Dict[str, Any]) -> Any:
+        """Resolve a dot-notation path from context or results."""
+        components = path.split('.')
+        
+        if components[0] == 'context':
+            current = context
+            path_components = components[1:]
+        elif components[0] in results:
+            current = results
+            path_components = components
+        else:
+            return None
+
+        for comp in path_components:
+            if isinstance(current, dict):
+                current = current.get(comp)
+            else:
+                return None
+        
+        return current
+
     def _resolve_inputs(self, inputs: Dict[str, Any], context: Dict[str, Any], results: Dict[str, Any]) -> Dict[str, Any]:
         """Resolve input values from context and previous results."""
         resolved = {}
-        
         for key, value in inputs.items():
             if isinstance(value, str) and value.startswith('{{') and value.endswith('}}'):
-                # Extract reference path
-                ref_path = value[2:-2].strip()
-                
-                # Split into components
-                components = ref_path.split('.')
-                
-                # Resolve value
-                if components[0] in results:
-                    current = results[components[0]]
-                    for comp in components[1:]:
-                        current = current.get(comp, {})
-                    resolved[key] = current
-                elif components[0] in context:
-                    current = context[components[0]]
-                    for comp in components[1:]:
-                        current = current.get(comp, {})
-                    resolved[key] = current
-                else:
-                    resolved[key] = None
+                path = value[2:-2].strip()
+                resolved[key] = self._resolve_path(path, context, results)
             else:
                 resolved[key] = value
-        
         return resolved
     
-    def _evaluate_condition(self, condition: str, results: Dict[str, Any]) -> bool:
+    def _evaluate_condition(self, condition: str, context: Dict[str, Any], results: Dict[str, Any]) -> bool:
         """Evaluate a condition string against results."""
+        import re
         try:
-            # Replace references with actual values
-            for key, value in results.items():
-                if key in condition:
-                    condition = condition.replace(key, str(value))
+            eval_condition = condition
+            placeholders = re.findall(r"{{(.*?)}}", condition)
             
-            # Evaluate condition
-            return eval(condition)
-        
+            for placeholder in placeholders:
+                path = placeholder.strip()
+                resolved_value = self._resolve_path(path, context, results)
+                
+                # Use repr() to get a string representation that works with eval()
+                eval_condition = eval_condition.replace(f"{{{{{placeholder}}}}}", repr(resolved_value))
+            
+            return bool(eval(eval_condition))
         except Exception as e:
             console.print(f"[yellow]Warning: Failed to evaluate condition: {str(e)}[/yellow]")
             return False
@@ -245,4 +284,36 @@ class IARManager:
             context['iar_history'] = []
         context['iar_history'].append(result)
         
-        return result 
+        return result
+
+class IARValidator:
+    """Validates the structure and content of IAR data."""
+    
+    def validate_structure(self, iar_data: Dict[str, Any]) -> (bool, List[str]):
+        """Validate the structure of IAR data."""
+        issues = []
+        if not isinstance(iar_data, dict):
+            issues.append("IAR data is not a dictionary.")
+            return False, issues
+        
+        required_keys = ['action_name', 'inputs', 'outputs', 'status', 'timestamp']
+        for key in required_keys:
+            if key not in iar_data:
+                issues.append(f"Missing required key: {key}")
+        
+        return not issues, issues
+
+class ResonanceTracker:
+    """Tracks the resonance of workflow execution."""
+    
+    def __init__(self):
+        self.resonance_history = []
+    
+    def record_execution(self, task_id: str, result: Dict[str, Any], context: Dict[str, Any]) -> None:
+        """Record the execution details for resonance tracking."""
+        self.resonance_history.append({
+            'task_id': task_id,
+            'result': result,
+            'context': context,
+            'timestamp': datetime.now().isoformat()
+        }) 

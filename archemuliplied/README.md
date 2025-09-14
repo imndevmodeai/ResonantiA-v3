@@ -67,7 +67,7 @@ resonatia_arche/
 
 Detailed setup instructions can be found in **Section 4** of the `ResonantiA Protocol v2.9.5` document. Summary:
 1.  Clone/Download.
-# ... existing code ...
+2.  Create a `.env` file for your API keys and other secrets.
 3.  Create & activate virtual environment (`python -m venv .venv`, `source .venv/bin/activate` or `.venv\\Scripts\\activate`).
 4.  Install dependencies: `pip install -r requirements.txt`.
 5.  Configure: **Edit `mastermind_ai_v2_9/config.py`** - ADD API KEYS (use environment variables recommended), review sandbox settings.
@@ -94,7 +94,7 @@ The system is now invoked through the `ResonantiaMaestro` via `main.py`. You can
 ## Advanced Usage
 
 *   **SPRs:** Define custom SPRs in `knowledge_graph/spr_definitions_tv.json`. Use them in prompts to trigger internal cognitive unfolding.
-# ... existing code ...
+*   **Tesla Visioning:** For complex, novel problems, use the `Tesla Visioning Workflow` to guide the system through a structured process of deconstruction, analysis, and synthesis.
 
 
 

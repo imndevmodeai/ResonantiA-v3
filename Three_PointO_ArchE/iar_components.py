@@ -5,6 +5,7 @@ from typing import Dict, Any, Tuple, List
 from datetime import datetime
 import numpy as np
 from dataclasses import dataclass
+from typing import get_origin, get_args
 
 @dataclass
 class IARValidationResult:
@@ -26,7 +27,7 @@ class IARValidator:
             'alignment_check': Dict[str, Any]
         }
     
-    def validate_structure(self, iar_data: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    def validate_structure(self, iar_data: Dict) -> Tuple[bool, List[str]]:
         """
         Validate the structure of IAR data.
         
@@ -42,8 +43,13 @@ class IARValidator:
         for field, field_type in self.required_fields.items():
             if field not in iar_data:
                 issues.append(f"Missing required field: {field}")
-            elif not isinstance(iar_data[field], field_type):
-                issues.append(f"Invalid type for field {field}: expected {field_type}, got {type(iar_data[field])}")
+            else:
+                origin = get_origin(field_type)
+                if origin:
+                    if not isinstance(iar_data[field], origin):
+                        issues.append(f"Invalid type for field {field}: expected {field_type}, got {type(iar_data[field])}")
+                elif not isinstance(iar_data[field], field_type):
+                    issues.append(f"Invalid type for field {field}: expected {field_type}, got {type(iar_data[field])}")
         
         # Validate confidence range
         if 'confidence' in iar_data:

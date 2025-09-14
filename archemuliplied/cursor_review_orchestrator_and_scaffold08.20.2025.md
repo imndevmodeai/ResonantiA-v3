@@ -179,7 +179,28 @@ I will now enhance `Three_PointO_ArchE/resonantia_maestro.py` to serve as the ma
 I am modifying `Three_PointO_ArchE/resonantia_maestro.py`.
 
 ```python
-# ... existing code ...
+import json
+import logging
+from typing import Dict, Any
+
+from .spr_manager import SPRManager
+from .workflow_engine import WorkflowEngine
+from .rise_orchestrator import RISEOrchestrator
+# Import the AdaptiveCognitiveOrchestrator conceptually
+# from .adaptive_cognitive_orchestrator import AdaptiveCognitiveOrchestrator
+from .config import config
+
+logger = logging.getLogger(__name__)
+
+class ResonantiaMaestro:
+    """
+    The master orchestrator for the ResonantiA Protocol (v3.5).
+
+    This class is the central nervous system of Arche, responsible for
+    receiving user intent, assessing its complexity and nature, and commissioning
+    the appropriate cognitive engine (ACO, RISE) or direct workflow to
+    achieve the most robust and resonant result.
+    """
 from .spr_manager import SPRManager
 from .workflow_engine import WorkflowEngine
 from .rise_orchestrator import RISEOrchestrator
@@ -310,6 +331,72 @@ class ResonantiaMaestro:
         return final_result
 
 if __name__ == '__main__':
+    # This is for demonstration and testing of the Maestro itself.
+    # The actual application entry point will be main.py.
+    from .logging_config import setup_logging
+    setup_logging()
+
+    logger.info("--- Running ResonantiaMaestro Standalone Test ---")
+    
+    # Initialize
+    maestro = ResonantiaMaestro()
+    
+    # Define a complex query that should trigger RISE
+    complex_query = "Analyze the causal impact of interest rate changes on consumer spending and propose a predictive model for the next quarter."
+    
+    # Orchestrate the query
+    results = maestro.orchestrate_query(complex_query)
+    
+    logger.info("--- Maestro Standalone Test Finished ---")
+    # A full run would produce significant output and save a result file.
+    # This just confirms the orchestration logic can be called.
+    print("\n--- Maestro Test Final Result (Summary) ---")
+    print(results.get('workflow_status', 'Execution resulted in an error or did not complete.'))
+    print("-----------------------------------------")
+    # This is for demonstration and testing of the Maestro itself.
+    # The actual application entry point will be main.py.
+    from .logging_config import setup_logging
+    setup_logging()
+
+    logger.info("--- Running ResonantiaMaestro Standalone Test ---")
+    
+    # Initialize
+    maestro = ResonantiaMaestro()
+    
+    # Define a complex query that should trigger RISE
+    complex_query = "Analyze the causal impact of interest rate changes on consumer spending and propose a predictive model for the next quarter."
+    
+    # Orchestrate the query
+    results = maestro.orchestrate_query(complex_query)
+    
+    logger.info("--- Maestro Standalone Test Finished ---")
+    # A full run would produce significant output and save a result file.
+    # This just confirms the orchestration logic can be called.
+    print("\n--- Maestro Test Final Result (Summary) ---")
+    print(results.get('workflow_status', 'Execution resulted in an error or did not complete.'))
+    print("-----------------------------------------")
+    # This is for demonstration and testing of the Maestro itself.
+    # The actual application entry point will be main.py.
+    from .logging_config import setup_logging
+    setup_logging()
+
+    logger.info("--- Running ResonantiaMaestro Standalone Test ---")
+    
+    # Initialize
+    maestro = ResonantiaMaestro()
+    
+    # Define a complex query that should trigger RISE
+    complex_query = "Analyze the causal impact of interest rate changes on consumer spending and propose a predictive model for the next quarter."
+    
+    # Orchestrate the query
+    results = maestro.orchestrate_query(complex_query)
+    
+    logger.info("--- Maestro Standalone Test Finished ---")
+    # A full run would produce significant output and save a result file.
+    # This just confirms the orchestration logic can be called.
+    print("\n--- Maestro Test Final Result (Summary) ---")
+    print(results.get('workflow_status', 'Execution resulted in an error or did not complete.'))
+    print("-----------------------------------------")
     # This is for demonstration and testing of the Maestro itself.
     # The actual application entry point will be main.py.
     from .logging_config import setup_logging
@@ -1812,7 +1899,7 @@ The `ResonantiaMaestro` is now equipped with its core orchestration logic. The n
 I am adding a standalone test block to `Three_PointO_ArchE/resonantia_maestro.py` and then refactoring `Three_PointO_ArchE/main.py` to use the `ResonantiaMaestro`.
 
 ```python
-# ... existing code ...
+
             
         return final_result
 
@@ -1848,7 +1935,7 @@ It appears the edit timed out again. I will proceed with the changes incremental
 I am adding the `if __name__ == '__main__':` block to `Three_PointO_ArchE/resonantia_maestro.py`.
 
 ```python
-# ... existing code ...
+
         return final_result
 
 if __name__ == '__main__':
@@ -1884,7 +1971,7 @@ I am adding the `if __name__ == '__main__':` block with logging setup to `Three_
 PointO_ArchE/resonantia_maestro.py`.
 
 ```python
-# ... existing code ...
+
         return final_result
 
 if __name__ == '__main__':

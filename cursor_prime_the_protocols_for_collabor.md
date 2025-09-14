@@ -15730,7 +15730,7 @@ Let me fix these issues:
 // components/Chat.tsx
 // ResonantiA Protocol v3.1-CA Enhanced Chat Interface
 
-// ... existing code ...
+
 ```
 
 ```typescriptreact
@@ -15739,7 +15739,7 @@ Let me fix these issues:
 // components/visualization/ThoughtTrailGraph.tsx
 import React, { useCallback, useEffect } from 'react';
 
-// ... existing code ...
+
 ```
 
 Now let me also fix the next.config.js to remove the deprecated `appDir` option and restart the system:
