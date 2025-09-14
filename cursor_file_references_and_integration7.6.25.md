@@ -907,7 +907,7 @@ First, I will update the protocol document to reflect this new capability. I wil
 I will now edit the `protocol/ResonantiA_Protocol_v3.1-CA.md` file.
 
 ```markdown
-... existing code ...
+
 (End of Segment for Section 2 of ResonantiA Protocol v3.1-CA)
 
 (8.9: DirectiveClarificationProtocoL - Enhanced Objective Clarity Framework (ResonantiA v3.1-CA))
@@ -915,7 +915,7 @@ I will now edit the `protocol/ResonantiA_Protocol_v3.1-CA.md` file.
 ## 8.9.1 Introduction & Strategic Context
 
 The DirectiveClarificationProtocoL represents a critical evolution in ResonantiA Protocol v3.1-CA, addressing the identified ObjectiveClaritY deficiency (baseline: 0.40) through systematic transformation of ambiguous strategic directives into clear, quantifiable, and resonant objectives.
-... existing code ...
+
 - **Test directive processing**
 - **ObjectiveClaritY score measurement**
 - **Performance validation**
@@ -943,7 +943,7 @@ Initiate and execute the full "Resonant Insight & Strategy Engine" (resonant_ins
 ->|/Directive|<-
 ->|/RISE_Request|<-
 ->|/RISE_Invocation_Pattern|<-
-... existing code ...
+
 
 ```
 
@@ -1256,7 +1256,7 @@ I will now edit `workflows/resonant_insight_and_strategy_engine.json` to correct
   "tasks": [
     {
       "task_id": "A.1.0_Initial_Problem_Deconstruction",
-// ... existing code ...
+
       "dependencies": ["C.1.0_Final_Strategy_Synthesis"]
     }
   ]
@@ -1338,7 +1338,7 @@ I have analyzed the traceback from the execution attempt. The error is clear and
 I will now modify `Three_PointO_ArchE/workflow_engine.py` to resolve the schema conflict.
 
 ```python
-... existing code ...
+
     def load_workflow(self, workflow_path: str) -> Dict[str, Any]:
         """Load workflow definition from file."""
         try:
@@ -1378,14 +1378,14 @@ I will now modify `Three_PointO_ArchE/workflow_engine.py` to resolve the schema 
             raise
 
     def _extract_var_path(self, template_content: str) -> str:
-... existing code ...
+
         if any(status == "failed" for status in task_statuses.values()):
             final_status = "Completed with Errors"
         elif len(completed_tasks) < len(tasks):
             final_status = "Stalled"
         
         logger.info(
-... existing code ...
+
         initial_context["workflow_run_id"] = run_id
         
         event_log = []
@@ -1405,7 +1405,7 @@ I will now modify `Three_PointO_ArchE/workflow_engine.py` to resolve the schema 
         running_tasks = {}
         completed_tasks = set()
         
-... existing code ...
+
         while ready_tasks or running_tasks:
             
             if not ready_tasks:
@@ -1420,7 +1420,7 @@ I will now modify `Three_PointO_ArchE/workflow_engine.py` to resolve the schema 
             action_type = task_info.get("action_type")
             
             attempt_count = 1 
-... existing code ...
+
                 # Treat as 'completed' for dependency checking
                 completed_tasks.add(task_key)
                 # Check for newly ready tasks after skipping
@@ -1433,7 +1433,7 @@ I will now modify `Three_PointO_ArchE/workflow_engine.py` to resolve the schema 
 
             running_tasks[task_key] = time.time()
             
-... existing code ...
+
             is_success = "error" not in result or result.get("error") is None
             task_statuses[task_key] = "completed" if is_success else "failed"
             
@@ -1455,7 +1455,7 @@ I will now modify `Three_PointO_ArchE/workflow_engine.py` to resolve the schema 
         
         logger.info(
     f"Workflow '{
-... existing code ...
+
             results["tasks"] = {}
             
             # Execute tasks
@@ -1467,7 +1467,7 @@ I will now modify `Three_PointO_ArchE/workflow_engine.py` to resolve the schema 
                 display_workflow_progress(task_name, "Starting")
                 
                 # Check dependencies
-... existing code ...
+
 
 ```
 
@@ -1504,7 +1504,7 @@ The execution has revealed another failure of `Implementation resonancE`.
 I will now modify `Three_PointO_ArchE/tools.py` to add the missing functions.
 
 ```python
-... existing code ...
+
     # This is a placeholder and should be replaced with a real implementation
     logger.info(f"Running search with query: '{query}'")
     return {"results": [{"title": "Example Search Result", "snippet": "This is a snippet."}]}
@@ -1591,7 +1591,7 @@ def search_and_summarize(queries: List[str]) -> Dict[str, Any]:
         "results": {"summary": summary_result.get("results")},
         "reflection": final_reflection
     }
-... existing code ...
+
 
 ```
 
@@ -1604,7 +1604,7 @@ The new actions have been implemented. Now I must register them with the `Action
 I will now edit `Three_PointO_ArchE/action_registry.py`.
 
 ```python
-... existing code ...
+
 from .system_genesis_tool import perform_system_genesis_action
 from .qa_tools import run_code_linter, run_workflow_suite
 from .output_handler import display_output
@@ -1617,7 +1617,7 @@ from .tools import (
 )
 from .code_executor import CodeExecutor
 from .llm_tool import invoke_llm
-... existing code ...
+
         self.register_action("run_code_linter", run_code_linter, force=True)
         self.register_action("run_workflow_suite", run_workflow_suite, force=True)
 
@@ -1628,7 +1628,7 @@ from .llm_tool import invoke_llm
         # Potentially register other tools from enhanced_tools.py if they exist
         try:
             from . import enhanced_tools
-... existing code ...
+
 
 ```
 
@@ -1674,7 +1674,7 @@ The traceback shows that the import `from .tools import (calculate_math, ...)` i
 First, I will update `requirements.txt` to include `numexpr`.
 
 ```pip-requirements
-... existing code ...
+
 # For interacting with SQL databases beyond basic simulation
 # sqlalchemy  
 
@@ -1684,14 +1684,14 @@ numexpr
 # Testing Framework
 pytest
 pytest-mock
-... existing code ...
+
 
 ```
 
 The `requirements.txt` file has been updated. I will now re-implement the `calculate_math` function in `Three_PointO_ArchE/tools.py`.
 
 ```python
-... existing code ...
+
         "reflection": final_reflection
     }
 
@@ -1745,7 +1745,7 @@ def calculate_math(expression: str) -> Dict[str, Any]:
                 "raw_output_preview": ""
             }
         }
-... existing code ...
+
 
 ```
 
@@ -1936,7 +1936,7 @@ def execute_action(action_type: str, inputs: Dict[str, Any]) -> Dict[str, Any]:
 I have refactored the action registry. Now I will refactor `Three_PointO_ArchE/tools.py` to use the new self-registration pattern.
 
 ```python
-... existing code ...
+
 from .llm_providers import get_llm_provider, get_model_for_provider, LLMProviderError # Import LLM helpers
 from .action_context import ActionContext # Import ActionContext from new file
 from .predictive_modeling_tool import run_prediction # Predictive tool main function
@@ -1946,14 +1946,14 @@ from .action_registry import main_action_registry
 
 # Initialize logger early for use in import blocks
 # Using a more specific name for this logger to avoid clashes if 'tools' is a common name
-... existing code ...
+
         "reflection": final_reflection
     }
 
 def calculate_math(expression: str) -> Dict[str, Any]:
     """
     Safely evaluates a mathematical expression using numexpr.
-... existing code ...
+
                 "raw_output_preview": ""
             }
         }
@@ -1981,7 +1981,7 @@ Finally, I will modify `Three_PointO_ArchE/workflow_engine.py` to trigger the po
 ->|/execution|<-
 
 ```python
-... existing code ...
+
 class IARCompliantWorkflowEngine:
     """Enhanced workflow engine with IAR compliance and recovery support."""
 
@@ -1997,7 +1997,7 @@ class IARCompliantWorkflowEngine:
         self.recovery_handler = None
         self.current_run_id = None
         self.current_workflow = None
-... existing code ...
+
 
 ```
 
@@ -2406,7 +2406,7 @@ from .tools import (
 ```
 
 ```python
-// ... existing code ...
+
 from .output_handler import display_output
 from .tools.search_tool import SearchTool
 from .tools.real_time_tool import get_current_datetime
@@ -2415,10 +2415,10 @@ from .llm_tool import invoke_llm
 
 # --- Gemini Enhanced Tools Initialization ---
 try:
-// ... existing code ...
+
 def run_predictive_flux_coupling(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """Wrapper for executing Predictive Flux Coupling (PFC) analysis."""
-// ... existing code ...
+
     except Exception as e:
         logger.error(f"PFC action failed: {e}", exc_info=True)
         return handle_action_error("run_predictive_flux_coupling", e, inputs)
@@ -2429,17 +2429,17 @@ def execute_gemini_code_wrapper(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """Action wrapper for Gemini Code Executor."""
     if not GEMINI_TOOLS_AVAILABLE:
         return handle_action_error("execute_gemini_code", "Gemini tools are not available.", inputs)
-// ... existing code ...
+
     except Exception as e:
         return handle_action_error("execute_gemini_code", e, inputs)
 
 def process_gemini_file(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """Action wrapper for Gemini File Processor."""
-// ... existing code ...
+
 # --- Registry Instantiation and Population ---
 
 class ActionRegistry:
-// ... existing code ...
+
     def populate(self):
         """A method to populate the registry, ensuring tools are imported and registered."""
         # This method's purpose is to trigger the imports of tool modules,
@@ -2500,7 +2500,7 @@ main_action_registry.populate()
 def execute_action(action_type: str, inputs: Dict[str, Any]) -> Dict[str, Any]:
     """
     Executes a registered action.
-// ... existing code ...
+
 def register_action(action_type: str, function: Callable[[Dict[str, Any]], Dict[str, Any]], force: bool = False):
     """This function is deprecated. Use main_action_registry.register_action() instead."""
     logger.warning("The standalone 'register_action' function is deprecated. Use main_action_registry.register_action().")
@@ -2554,7 +2554,7 @@ I will once again edit `Three_PointO_ArchE/action_registry.py` to:
 I will be very precise.
 
 ```python
-// ... existing code ...
+
 from .output_handler import display_output
 from .tools.search_tool import SearchTool
 from .tools.real_time_tool import get_current_datetime
@@ -2563,10 +2563,10 @@ from .llm_tool import invoke_llm
 
 # --- Gemini Enhanced Tools Initialization ---
 try:
-// ... existing code ...
+
 def run_predictive_flux_coupling(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """Wrapper for executing Predictive Flux Coupling (PFC) analysis."""
-// ... existing code ...
+
     except Exception as e:
         logger.error(f"PFC action failed: {e}", exc_info=True)
         return handle_action_error("run_predictive_flux_coupling", e, inputs)
@@ -2577,17 +2577,17 @@ def execute_gemini_code_wrapper(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """Action wrapper for Gemini Code Executor."""
     if not GEMINI_TOOLS_AVAILABLE:
         return handle_action_error("execute_gemini_code", "Gemini tools are not available.", inputs)
-// ... existing code ...
+
     except Exception as e:
         return handle_action_error("execute_gemini_code", e, inputs)
 
 def process_gemini_file(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """Action wrapper for Gemini File Processor."""
-// ... existing code ...
+
 # --- Registry Instantiation and Population ---
 
 class ActionRegistry:
-// ... existing code ...
+
     def populate(self):
         """A method to populate the registry, ensuring tools are imported and registered."""
         # This method's purpose is to trigger the imports of tool modules,
@@ -2648,7 +2648,7 @@ main_action_registry.populate()
 def execute_action(action_type: str, inputs: Dict[str, Any]) -> Dict[str, Any]:
     """
     Executes a registered action.
-// ... existing code ...
+
 def register_action(action_type: str, function: Callable[[Dict[str, Any]], Dict[str, Any]], force: bool = False):
     """This function is deprecated. Use main_action_registry.register_action() instead."""
     logger.warning("The standalone 'register_action' function is deprecated. Use main_action_registry.register_action().")

@@ -26,10 +26,10 @@ class PatternProcessor:
         """Process pattern data."""
         raise NotImplementedError
     
-    def validate_iar(self, iar_data: Dict[str, Any]) -> bool:
+    def validate_iar(self, iar_data: Dict[str, Any], context: Dict[str, Any]) -> bool:
         """Validate IAR data."""
-        is_valid, _ = self.iar_validator.validate_content(iar_data)
-        return is_valid
+        result = self.iar_validator.validate_content(iar_data, context)
+        return result.is_valid
     
     def track_resonance(self, pattern_type: str, iar_data: Dict[str, Any], context: Dict[str, Any]) -> None:
         """Track resonance for pattern processing."""
@@ -66,6 +66,15 @@ class EnhancementPatternProcessor(PatternProcessor):
                 resonance_score=iar_data["alignment_check"]["enhancement_quality"]
             )
             
+        except ValueError as e:
+            return PatternProcessingResult(
+                pattern_type="enhancement",
+                processed_data={},
+                confidence=0.0,
+                issues=[str(e)],
+                resonance_score=0.0
+            )
+            
         except Exception as e:
             return PatternProcessingResult(
                 pattern_type="enhancement",
@@ -77,10 +86,15 @@ class EnhancementPatternProcessor(PatternProcessor):
     
     async def _process_enhancement(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Process enhancement pattern data."""
-        # Implementation for enhancement processing
+        if 'data' not in data:
+            raise ValueError("Enhancement data must contain a 'data' key.")
+        
+        # Simulate enhancement process
+        enhanced_data = {k: f"{v}_enhanced" for k, v in data['data'].items()}
+        
         return {
-            "enhanced_data": data.get("data", {}),
-            "confidence": 0.9
+            "enhanced_data": enhanced_data,
+            "confidence": 0.95
         }
 
 class MetacognitivePatternProcessor(PatternProcessor):
@@ -114,6 +128,15 @@ class MetacognitivePatternProcessor(PatternProcessor):
                 resonance_score=iar_data["alignment_check"]["metacognitive_quality"]
             )
             
+        except ValueError as e:
+            return PatternProcessingResult(
+                pattern_type="metacognitive",
+                processed_data={},
+                confidence=0.0,
+                issues=[str(e)],
+                resonance_score=0.0
+            )
+            
         except Exception as e:
             return PatternProcessingResult(
                 pattern_type="metacognitive",
@@ -125,10 +148,15 @@ class MetacognitivePatternProcessor(PatternProcessor):
     
     async def _process_metacognitive(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Process metacognitive pattern data."""
-        # Implementation for metacognitive processing
+        if 'data' not in data:
+            raise ValueError("Metacognitive data must contain a 'data' key.")
+        
+        # Simulate metacognitive correction
+        corrected_data = {k: f"{v}_corrected" for k, v in data['data'].items()}
+        
         return {
-            "corrected_data": data.get("data", {}),
-            "confidence": 0.9
+            "corrected_data": corrected_data,
+            "confidence": 0.98
         }
 
 class InsightPatternProcessor(PatternProcessor):
@@ -162,6 +190,15 @@ class InsightPatternProcessor(PatternProcessor):
                 resonance_score=iar_data["alignment_check"]["insight_quality"]
             )
             
+        except ValueError as e:
+            return PatternProcessingResult(
+                pattern_type="insight",
+                processed_data={},
+                confidence=0.0,
+                issues=[str(e)],
+                resonance_score=0.0
+            )
+            
         except Exception as e:
             return PatternProcessingResult(
                 pattern_type="insight",
@@ -173,10 +210,15 @@ class InsightPatternProcessor(PatternProcessor):
     
     async def _process_insight(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Process insight pattern data."""
-        # Implementation for insight processing
+        if 'data' not in data:
+            raise ValueError("Insight data must contain a 'data' key.")
+        
+        # Simulate insight solidification
+        solidified_insight = {k: f"{v}_solidified" for k, v in data['data'].items()}
+        
         return {
-            "solidified_insight": data.get("data", {}),
-            "confidence": 0.9
+            "solidified_insight": solidified_insight,
+            "confidence": 0.96
         }
 
 class CFPPatternProcessor(PatternProcessor):
@@ -210,6 +252,15 @@ class CFPPatternProcessor(PatternProcessor):
                 resonance_score=iar_data["alignment_check"]["cfp_quality"]
             )
             
+        except ValueError as e:
+            return PatternProcessingResult(
+                pattern_type="cfp",
+                processed_data={},
+                confidence=0.0,
+                issues=[str(e)],
+                resonance_score=0.0
+            )
+            
         except Exception as e:
             return PatternProcessingResult(
                 pattern_type="cfp",
@@ -221,10 +272,15 @@ class CFPPatternProcessor(PatternProcessor):
     
     async def _process_cfp(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Process CFP pattern data."""
-        # Implementation for CFP processing
+        if 'data' not in data:
+            raise ValueError("CFP data must contain a 'data' key.")
+        
+        # Simulate CFP scenario definition
+        defined_scenario = {k: f"{v}_defined" for k, v in data['data'].items()}
+        
         return {
-            "defined_scenario": data.get("data", {}),
-            "confidence": 0.9
+            "defined_scenario": defined_scenario,
+            "confidence": 0.94
         }
 
 class CausalABMPatternProcessor(PatternProcessor):
@@ -258,6 +314,15 @@ class CausalABMPatternProcessor(PatternProcessor):
                 resonance_score=iar_data["alignment_check"]["causal_abm_quality"]
             )
             
+        except ValueError as e:
+            return PatternProcessingResult(
+                pattern_type="causal_abm",
+                processed_data={},
+                confidence=0.0,
+                issues=[str(e)],
+                resonance_score=0.0
+            )
+            
         except Exception as e:
             return PatternProcessingResult(
                 pattern_type="causal_abm",
@@ -269,10 +334,15 @@ class CausalABMPatternProcessor(PatternProcessor):
     
     async def _process_causal_abm(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Process Causal-ABM pattern data."""
-        # Implementation for Causal-ABM processing
+        if 'data' not in data:
+            raise ValueError("Causal-ABM data must contain a 'data' key.")
+        
+        # Simulate Causal-ABM integration
+        integrated_model = {k: f"{v}_integrated" for k, v in data['data'].items()}
+        
         return {
-            "integrated_model": data.get("data", {}),
-            "confidence": 0.9
+            "integrated_model": integrated_model,
+            "confidence": 0.93
         }
 
 class TeslaPatternProcessor(PatternProcessor):
@@ -306,6 +376,15 @@ class TeslaPatternProcessor(PatternProcessor):
                 resonance_score=iar_data["alignment_check"]["tesla_quality"]
             )
             
+        except ValueError as e:
+            return PatternProcessingResult(
+                pattern_type="tesla",
+                processed_data={},
+                confidence=0.0,
+                issues=[str(e)],
+                resonance_score=0.0
+            )
+            
         except Exception as e:
             return PatternProcessingResult(
                 pattern_type="tesla",
@@ -317,10 +396,15 @@ class TeslaPatternProcessor(PatternProcessor):
     
     async def _process_tesla(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Process Tesla pattern data."""
-        # Implementation for Tesla processing
+        if 'data' not in data:
+            raise ValueError("Tesla data must contain a 'data' key.")
+        
+        # Simulate Tesla visioning process
+        visioned_future = {k: f"{v}_visioned" for k, v in data['data'].items()}
+        
         return {
-            "visioned_future": data.get("data", {}),
-            "confidence": 0.9
+            "visioned_future": visioned_future,
+            "confidence": 0.97
         }
 
 class KNOPatternProcessor(PatternProcessor):
@@ -354,6 +438,15 @@ class KNOPatternProcessor(PatternProcessor):
                 resonance_score=iar_data["alignment_check"]["kno_quality"]
             )
             
+        except ValueError as e:
+            return PatternProcessingResult(
+                pattern_type="kno",
+                processed_data={},
+                confidence=0.0,
+                issues=[str(e)],
+                resonance_score=0.0
+            )
+            
         except Exception as e:
             return PatternProcessingResult(
                 pattern_type="kno",
@@ -362,13 +455,18 @@ class KNOPatternProcessor(PatternProcessor):
                 issues=[str(e)],
                 resonance_score=0.0
             )
-    
+
     async def _process_kno(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Process KnO pattern data."""
-        # Implementation for KnO processing
+        if 'data' not in data:
+            raise ValueError("KnO data must contain a 'data' key.")
+
+        # Simulate KnO harmonization
+        harmonized_concepts = {k: f"{v}_harmonized" for k, v in data['data'].items()}
+
         return {
-            "harmonized_concepts": data.get("data", {}),
-            "confidence": 0.9
+            "harmonized_concepts": harmonized_concepts,
+            "confidence": 0.92
         }
 
 class PatternProcessorFactory:

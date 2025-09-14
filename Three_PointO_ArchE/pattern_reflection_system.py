@@ -15,10 +15,10 @@ class PatternReflectionSystem:
     def __init__(self, knowledge_tapestry_path: str):
         self.knowledge_tapestry_path = knowledge_tapestry_path
         self.levels = ["cosmic", "systemic", "local", "micro"]
-        self.patterns: Dict[str, List[Pattern]] = {level: [] for level in self.levels}
+        self.patterns: Dict = {level: [] for level in self.levels}
         self.logger = logging.getLogger(__name__)
 
-    def initialize_hierarchy(self, bidirectional: bool = True) -> Dict[str, Any]:
+    def initialize_hierarchy(self, bidirectional: bool = True) -> Dict:
         """Initialize the hierarchical system with bidirectional pattern reflection capability."""
         try:
             with open(self.knowledge_tapestry_path, 'r') as f:
@@ -53,7 +53,7 @@ class PatternReflectionSystem:
             self.patterns[level] = patterns
             return {
                 "status": "success",
-                "patterns": [p.__dict__ for p in patterns],
+                "patterns": patterns,
                 "level": level
             }
         except Exception as e:
@@ -75,7 +75,7 @@ class PatternReflectionSystem:
 
             return {
                 "status": "success",
-                "reflected_patterns": reflected_patterns,
+                "patterns": reflected_patterns,
                 "direction": direction,
                 "levels": levels
             }
@@ -174,13 +174,13 @@ class PatternReflectionSystem:
 
             return {
                 "status": "success",
-                "synthesized_patterns": synthesized
+                "patterns": synthesized
             }
         except Exception as e:
             self.logger.error(f"Failed to synthesize patterns: {str(e)}")
             return {"status": "error", "message": str(e)}
 
-    def _merge_patterns(self, up_patterns: List[Dict], down_patterns: List[Dict]) -> List[Dict]:
+    def _merge_patterns(self, up_patterns: List, down_patterns: List) -> List:
         """Merge patterns from both directions, combining their strengths."""
         merged = {}
         
@@ -196,7 +196,7 @@ class PatternReflectionSystem:
         
         return list(merged.values())
 
-    def validate_coherence(self, synthesized_patterns: Dict[str, List[Dict]], threshold: float) -> Dict[str, Any]:
+    def validate_coherence(self, synthesized_patterns: Dict, threshold: float) -> Dict[str, Any]:
         """Validate the coherence of patterns across all levels."""
         try:
             coherence_scores = {}
@@ -215,20 +215,23 @@ class PatternReflectionSystem:
             return {
                 "status": "success",
                 "is_valid": is_valid,
-                "coherence_scores": coherence_scores,
+                "patterns": coherence_scores,
                 "threshold": threshold
             }
         except Exception as e:
             self.logger.error(f"Failed to validate coherence: {str(e)}")
             return {"status": "error", "message": str(e)}
 
-    def _calculate_level_coherence(self, patterns: List[Dict]) -> float:
+    def _calculate_level_coherence(self, patterns: List) -> float:
         """Calculate the coherence score for a level's patterns."""
         if not patterns:
             return 0.0
         
         # Calculate average reflection strength
-        avg_strength = sum(p["reflection_strength"] for p in patterns) / len(patterns)
+        if isinstance(patterns[0], Pattern):
+            avg_strength = sum(p.reflection_strength for p in patterns) / len(patterns)
+        else:
+            avg_strength = sum(p["reflection_strength"] for p in patterns) / len(patterns)
         
         # Calculate pattern similarity
         similarity_scores = []
@@ -242,18 +245,22 @@ class PatternReflectionSystem:
         # Combine scores
         return (avg_strength + avg_similarity) / 2
 
-    def _calculate_pattern_similarity(self, p1: Dict, p2: Dict) -> float:
+    def _calculate_pattern_similarity(self, p1: Any, p2: Any) -> float:
         """Calculate similarity between two patterns."""
         # Simple content-based similarity
-        content1 = set(str(p1["content"]).split())
-        content2 = set(str(p2["content"]).split())
+        if isinstance(p1, Pattern):
+            content1 = set(str(p1.content).split())
+            content2 = set(str(p2.content).split())
+        else:
+            content1 = set(str(p1["content"]).split())
+            content2 = set(str(p2["content"]).split())
         
         intersection = len(content1.intersection(content2))
         union = len(content1.union(content2))
         
         return intersection / union if union > 0 else 0.0
 
-    def integrate_patterns(self, validated_patterns: Dict[str, List[Dict]], target_system: str) -> Dict[str, Any]:
+    def integrate_patterns(self, validated_patterns: Dict, target_system: str) -> Dict[str, Any]:
         """Integrate validated patterns into the system architecture."""
         try:
             integration_results = {}
@@ -264,14 +271,14 @@ class PatternReflectionSystem:
 
             return {
                 "status": "success",
-                "integration_results": integration_results,
+                "patterns": integration_results,
                 "target_system": target_system
             }
         except Exception as e:
             self.logger.error(f"Failed to integrate patterns: {str(e)}")
             return {"status": "error", "message": str(e)}
 
-    def _create_level_integration(self, level: str, patterns: List[Dict], target_system: str) -> Dict:
+    def _create_level_integration(self, level: str, patterns: List, target_system: str) -> Dict:
         """Create integration for a specific level's patterns."""
         return {
             "level": level,
@@ -332,7 +339,7 @@ class PatternReflectionSystem:
 
             return {
                 "status": "success",
-                "report": report_content,
+                "patterns": report_content,
                 "format": format
             }
         except Exception as e:
@@ -363,7 +370,7 @@ class PatternReflectionSystem:
     def _generate_integration_section(self, integration_results: Dict[str, Any]) -> str:
         """Generate the integration results section of the report."""
         integration = "\n## Integration Results\n\n"
-        for level, results in integration_results.get("integration_results", {}).items():
+        for level, results in integration_results.get("patterns", {}).items():
             integration += f"### {level.title()} Level Integration\n"
             for point in results.get("integration_points", []):
                 integration += f"- Pattern integrated into {point['target_component']}\n"

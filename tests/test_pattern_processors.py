@@ -235,7 +235,7 @@ class TestPatternProcessors(unittest.TestCase):
                 }
             }
             
-            self.assertTrue(processor.validate_iar(valid_iar))
+            self.assertTrue(processor.validate_iar(valid_iar, self.test_context))
             
             # Test invalid IAR data
             invalid_iar = {
@@ -248,7 +248,7 @@ class TestPatternProcessors(unittest.TestCase):
                 }
             }
             
-            self.assertFalse(processor.validate_iar(invalid_iar))
+            self.assertFalse(processor.validate_iar(invalid_iar, self.test_context))
         
         asyncio.run(run_test())
     
@@ -276,7 +276,7 @@ class TestPatternProcessors(unittest.TestCase):
             self.assertIsInstance(summary, dict)
             self.assertIn("total_executions", summary)
             self.assertIn("average_resonance", summary)
-            self.assertIn("detected_issues", summary)
+            self.assertIn("issues_detected", summary)
         
         asyncio.run(run_test())
 

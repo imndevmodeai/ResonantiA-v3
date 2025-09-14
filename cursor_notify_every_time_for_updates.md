@@ -1091,7 +1091,7 @@ class GladiatorMini:
         return response
 
 class KnO:
-// ... existing code ...
+
     def __init__(self, graph):
         self.graph = graph
         self.reasoning_engine = None
@@ -1102,26 +1102,26 @@ class KnO:
                 self.reasoning_engine = GladiatorMini(node.get('spr'))
                 break
         
-// ... existing code ...
+
         print(f"\n[KnO] Query received via user interface: '{query}'")
         print("[KnO] Delegating to task-specific engine via 'task_delegation' edge...")
         time.sleep(0.5) # Simulate dispatch
         
         response = self.reasoning_engine.reason(query)
-// ... existing code ...
-// ... existing code ...
+
+
     print("Initializing Mastermind_AI Interaction Interface")
     print("==============================================")
 
     try:
-// ... existing code ...
-// ... existing code ...
+
+
     # Initialize the orchestrator
     orchestrator = KnO(graph)
     
     # Handle the user's query
-// ... existing code ...
-// ... existing code ...
+
+
     print(final_response)
     print("----------------------------------------------")
 
@@ -1288,20 +1288,20 @@ class KnO:
 
 
 def main():
-// ... existing code ...
+
         "The query or problem to submit to the Gladiator-Mini engine."
     )
     args = parser.parse_args()
 
     print("==============================================")
-// ... existing code ...
-// ... existing code ...
+
+
     # Initialize the orchestrator
     orchestrator = KnO(graph)
     
     # Handle the user's query
-// ... existing code ...
-// ... existing code ...
+
+
     print(final_response)
     print("----------------------------------------------")
 
@@ -1332,7 +1332,7 @@ I will update `_retrieve_context` in `mastermind/interact.py` to specifically lo
 Refactoring the context retrieval logic in `mastermind/interact.py` to be more precise by searching for specific function definitions, ensuring more accurate RAG results.
 
 ```python
-// ... existing code ...
+
         print(f"[KnO] Knowledge index built. {len(self.knowledge_index)} files indexed.")
 
     def _retrieve_context(self, query):
@@ -1371,12 +1371,12 @@ Refactoring the context retrieval logic in `mastermind/interact.py` to be more p
         return ""
 
     def handle_query(self, query):
-// ... existing code ...
-// ... existing code ...
+
+
 class GladiatorMini:
-// ... existing code ...
+
     def reason(self, query, context=""):
-// ... existing code ...
+
         print(f"[Gladiator-Mini] Reasoning on query: '{query}' with {len(context)} characters of context.")
         time.sleep(1) # Simulate cognitive work
         
@@ -1399,7 +1399,7 @@ class GladiatorMini:
                  response += "**Synthesis:** The provided file content appears relevant to your query. Please review the excerpt for more details."
 
         else:
-// ... existing code ...
+
 
 ```
 
@@ -1420,7 +1420,7 @@ I will now apply a more precise regular expression to the `_retrieve_context` fu
 Applying a more precise regular expression to the `_retrieve_context` function in `mastermind/interact.py` to correctly identify the function name from the user's query and avoid false positives.
 
 ```python
-// ... existing code ...
+
         print(f"[KnO] Knowledge index built. {len(self.knowledge_index)} files indexed.")
 
     def _retrieve_context(self, query):
@@ -1456,7 +1456,7 @@ Applying a more precise regular expression to the `_retrieve_context` function i
         return ""
 
     def handle_query(self, query):
-// ... existing code ...
+
 
 ```
 
@@ -1472,7 +1472,7 @@ I need to correct the regex pattern to properly isolate the function name. This 
 I am fixing the regular expression in `mastermind/interact.py` one last time to correctly extract the function name.
 
 ```python
-// ... existing code ...
+
         print("[KnO] Knowledge index built. {len(self.knowledge_index)} files indexed.")
 
     def _retrieve_context(self, query):
@@ -1490,7 +1490,7 @@ I am fixing the regular expression in `mastermind/interact.py` one last time to 
         search_term = ""
         is_function_query = bool(match)
 
-// ... existing code ...
+
 
 ```
 
@@ -1537,7 +1537,7 @@ I will now upgrade the `KnO`'s `_scan_project_files` method to include these new
 Refactoring `_scan_project_files` in `mastermind/interact.py` to include all relevant `ArchE` and protocol directories, massively expanding its self-knowledge base.
 
 ```python
-// ... existing code ...
+
         if not self.reasoning_engine:
             raise Exception("Could not find 'Gladiator-Mini' reasoning engine in the knowledge graph.")
 
@@ -1565,11 +1565,11 @@ Refactoring `_scan_project_files` in `mastermind/interact.py` to include all rel
                 print(f"  - Warning: Core directory not found, skipping: {directory}")
 
         for file_path in files_to_scan:
-// ... existing code ...
+
         print(f"[KnO] Knowledge index built. {len(self.knowledge_index)} files indexed.")
 
     def _retrieve_context(self, query):
-// ... existing code ...
+
 
 ```
 
@@ -1602,7 +1602,7 @@ I will now implement this scoring mechanism.
 Implementing a term-frequency scoring mechanism in `_retrieve_context` to dramatically improve the relevance of retrieved documents for RAG.
 
 ```python
-// ... existing code ...
+
         print(f"[KnO] Knowledge index built. {len(self.knowledge_index)} files indexed.")
 
     def _retrieve_context(self, query):
@@ -1642,7 +1642,7 @@ Implementing a term-frequency scoring mechanism in `_retrieve_context` to dramat
         return ""
 
     def handle_query(self, query):
-// ... existing code ...
+
 
 ```
 
@@ -1667,7 +1667,7 @@ This is the final step to fully realize a system that understands its own core p
 Implementing a high-precision override in `_retrieve_context` to directly load `everytime.mdc` when queried about the "ResonantiA Protocol," bypassing the flawed file search for this critical case.
 
 ```python
-// ... existing code ...
+
         print(f"[KnO] Knowledge index built. {len(self.knowledge_index)} files indexed.")
 
     def _retrieve_context(self, query):
@@ -1690,13 +1690,13 @@ Implementing a high-precision override in `_retrieve_context` to directly load `
         print("[KnO] Searching knowledge index for relevant context using term frequency scoring...")
         
         # Define common stop words to ignore
-// ... existing code ...
+
         # Process query into keywords
         query_words = {word for word in query_lower.replace('?', '').split() if word not in stop_words}
         print(f"  -> Searching for keywords: {query_words}")
 
         best_score = 0
-// ... existing code ...
+
 
 ```
 
@@ -1726,7 +1726,7 @@ This is the final necessary correction.
 Correcting the filename in the high-precision override to point to the actual protocol document.
 
 ```python
-// ... existing code ...
+
         query_lower = query.lower()
         
         # High-precision override for the most critical query
@@ -1741,7 +1741,7 @@ Correcting the filename in the high-precision override to point to the actual pr
                 # Fall through to the scoring mechanism as a backup
         
         print("[KnO] Searching knowledge index for relevant context using term frequency scoring...")
-// ... existing code ...
+
 
 ```
 
@@ -2638,7 +2638,7 @@ The final step in this `CRDSP` execution is to refactor `mastermind/interact.py`
 Refactoring `mastermind/interact.py` to load and search the new canonical protocol document, making the system's interactive component aware of its own definition.
 
 ```python
-# ... existing code ...
+
 # In-memory knowledge base (as a fallback or for specific contexts)
 KNOWLEDGE_BASE = {
     "what is your purpose?": "I am Gladiator-Mini, a reasoning engine. My purpose is to analyze information and provide solutions based on my training data and configured knowledge.",
@@ -2666,7 +2666,7 @@ def answer_query_with_rag(query, protocol_content):
     Answers a query by retrieving relevant information from the protocol content.
     This is a simple term-frequency based retrieval method.
     """
-    # ... existing code ...
+    
     if not protocol_content.startswith("Error:"):
         # A simple scoring mechanism: score paragraphs based on word overlap.
         paragraphs = protocol_content.split('\n\n')
@@ -2700,7 +2700,7 @@ def answer_query_with_rag(query, protocol_content):
 
 
 def handle_adversarial_query(query):
-# ... existing code ...
+
 def main():
     """Main function to handle command-line arguments and run the reasoning engine."""
     if len(sys.argv) < 2:
@@ -2768,7 +2768,7 @@ This will restore the script to a functional state while successfully achieving 
 Performing a surgical edit on `mastermind/interact.py` to fix the broken logic and correctly align it with the new protocol.
 
 ```python
-# ... existing code ...
+
 import glob
 import re
 
@@ -2777,14 +2777,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 class GladiatorMini:
     """
-# ... existing code ...
+
     def __init__(self, spr_data):
         self.spr = spr_data
         print(f"[Gladiator-Mini] RAG Engine Initialized. SPR: '{self.spr}'")
 
     def reason(self, query, context=""):
-# ... existing code ...
-# ... existing code ...
+
+
         return response
 
 class KnO:
@@ -2841,8 +2841,8 @@ class KnO:
         return ""
 
     def handle_query(self, query):
-# ... existing code ...
-# ... existing code ...
+
+
         response = self.reasoning_engine.reason(query, context)
         
         print("[KnO] Response generated and returned to interface.")
@@ -2948,7 +2948,7 @@ I will begin with Phase 1: Implementing Smarter Chunking.
 Refactoring `mastermind/interact.py` to implement a more intelligent document chunking mechanism based on Markdown headers.
 
 ```python
-# ... existing code ...
+
 class KnO:
     """
     The Knowledge Navigator Operator, now simplified to be protocol-centric.
@@ -2994,7 +2994,7 @@ class KnO:
             return [{'header': 'ERROR', 'content': f"CRITICAL ERROR: {e}"}]
 
     def _retrieve_context(self, query):
-# ... existing code ...
+
         Retrieves relevant context SOLELY from the loaded ResonantiA Protocol.
         """
         print("[KnO] Searching ResonantiA Protocol for relevant context...")
@@ -3026,7 +3026,7 @@ class KnO:
         return ""
 
     def handle_query(self, query):
-# ... existing code ...
+
 
 ```
 
@@ -3040,15 +3040,15 @@ I will replace the simple keyword-matching score with a more sophisticated TF-ID
 Refactoring `mastermind/interact.py` to replace the basic search with a more accurate TF-IDF retrieval algorithm.
 
 ```python
-# ... existing code ...
+
 import glob
 import re
 import math
 
 # Adjust path to allow importing from the parent 'mastermind' directory
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# ... existing code ...
-# ... existing code ...
+
+
     def _retrieve_context(self, query):
         """
         Retrieves relevant context SOLELY from the protocol chunks using TF-IDF.
@@ -3104,7 +3104,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
     def handle_query(self, query):
         """
-# ... existing code ...
+
 
 ```
 
@@ -3118,7 +3118,7 @@ I will modify the `GladiatorMini.reason` method. Instead of returning the entire
 Refactoring `mastermind/interact.py` to perform an extractive summary, providing a more focused answer.
 
 ```python
-# ... existing code ...
+
     def reason(self, query, context=""):
         """
         Processes a query using an extractive summary of the provided context.
@@ -3163,7 +3163,7 @@ Refactoring `mastermind/interact.py` to perform an extractive summary, providing
         return response
 
 class KnO:
-# ... existing code ...
+
 
 ```
 
@@ -3191,7 +3191,7 @@ I will correct the regex in `_load_and_chunk_protocol` to properly segment the p
 Correcting the faulty regex in `mastermind/interact.py` to ensure the protocol document is chunked correctly.
 
 ```python
-# ... existing code ...
+
             # Use regex to split the document by headers (lines starting with #)
             # We capture the header and the content that follows it.
             # FIX: The previous regex was too simple. This one is more robust.
@@ -3215,7 +3215,7 @@ Correcting the faulty regex in `mastermind/interact.py` to ensure the protocol d
             return chunks
 
         except FileNotFoundError:
-# ... existing code ...
+
 
 ```
 
@@ -3251,7 +3251,7 @@ Analysis of the raw file content is complete. The problem is now glaringly obvio
 Reverting the chunking logic in `mastermind/interact.py` to a simple, reliable paragraph-based method to fix the critical parsing failure.
 
 ```python
-# ... existing code ...
+
     def _load_and_chunk_protocol(self):
         """
         Loads the ResonantiA Protocol and chunks it by paragraphs.
@@ -3333,7 +3333,7 @@ Reverting the chunking logic in `mastermind/interact.py` to a simple, reliable p
         return ""
 
     def handle_query(self, query):
-# ... existing code ...
+
 
 ```
 
@@ -3435,7 +3435,7 @@ I will begin by upgrading the project's dependencies.
 Adding the `google-generativeai` library to `requirements.txt` to enable the new generative synthesis capability.
 
 ```pip-requirements
-# ... existing code ...
+
 torch
 transformers
 scikit-learn
@@ -3453,7 +3453,7 @@ Now, I will proceed with Phase 2, the core architectural evolution. I will refac
 Refactoring `mastermind/interact.py` to integrate the Gemini Pro model, turning the `GladiatorMini` reasoning engine into a true generative synthesist.
 
 ```python
-# ... existing code ...
+
 import re
 import math
 import os
@@ -3530,7 +3530,7 @@ class GladiatorMini:
         return "An unknown error occurred in the reasoning process."
 
 class KnO:
-# ... existing code ...
+
 
 ```
 
@@ -3640,7 +3640,7 @@ Executing the final verification test to demonstrate the system's new generative
 Updating the model name in `mastermind/interact.py` to a currently available version to fix the "model not found" error.
 
 ```python
-# ... existing code ...
+
                 print("Please set the key to enable generative synthesis.")
                 print("----------------------------------------\n")
                 return
@@ -3650,7 +3650,7 @@ Updating the model name in `mastermind/interact.py` to a currently available ver
             print(f"[Gladiator-Mini] Generative Synthesist Initialized. SPR: '{self.spr}'")
         except Exception as e:
             print(f"\n--- [Gladiator-Mini] FAILED TO INITIALIZE ---")
-# ... existing code ...
+
 
 ```
 
@@ -3726,7 +3726,7 @@ This multi-step "Chain of Thought" process, as described conceptually in the pro
 Beginning the architectural refactor of `mastermind/interact.py` to implement a multi-step, iterative reasoning workflow (`Tesla visioning workfloW`).
 
 ```python
-# ... existing code ...
+
         return "An unknown error occurred in the reasoning process."
 
 class KnO:
@@ -3760,8 +3760,8 @@ class KnO:
         return sub_queries
 
     def _load_and_chunk_protocol(self):
-# ... existing code ...
-# ... existing code ...
+
+
         print("  -> No specific context found in protocol.")
         return ""
 
@@ -3800,7 +3800,7 @@ class KnO:
         return response
 
 def main():
-# ... existing code ...
+
 
 ```
 
@@ -3834,7 +3834,7 @@ This "priming" will give the LLM the necessary conceptual hooks to correctly int
 Refactoring `GladiatorMini` to implement an SPR priming mechanism, giving the generative model the necessary conceptual hooks to correctly interpret the protocol.
 
 ```python
-# ... existing code ...
+
             print(f"------------------------------------------\n")
 
 
@@ -3888,7 +3888,7 @@ Refactoring `GladiatorMini` to implement an SPR priming mechanism, giving the ge
             """
             
             try:
-# ... existing code ...
+
 
 ```
 
@@ -4249,7 +4249,7 @@ Analysis of `action_registry.py` is complete. The syntax error is now clear. The
 Fixing the `SyntaxError` in `action_registry.py` to allow the new agentic system to initialize correctly.
 
 ```python
-# ... existing code ...
+
         action = self.get_action(action_name)
         if not action:
             raise ValueError(f"Action not found: {action_name}")
@@ -4263,7 +4263,7 @@ Fixing the `SyntaxError` in `action_registry.py` to allow the new agentic system
 
 # Create a singleton instance
 action_registry = ActionRegistry()
-# ... existing code ...
+
 
 ```
 
@@ -4422,7 +4422,7 @@ Analysis of `config.py` is complete. It uses a structured `dataclass` approach. 
 I am fixing the `AttributeError` by correcting the variable name in `cfp_framework.py` to match what is defined in the `config.py` file.
 
 ```python
-# ... existing code ...
+
 import numpy as np
 from . import config as arche_config # Use alias to avoid confusion with local config vars
 from .quantum_utils import get_quaternion_for_state # Import for quantum states
@@ -4439,7 +4439,7 @@ class CfpframeworK:
                  evolution_model: str = 'quaternion_slerp'):
         """
         Initializes the CFP Framework.
-# ... existing code ...
+
 
 ```
 
@@ -4469,7 +4469,7 @@ Analysis of `cfp_framework.py` is complete. As suspected, it contains multiple i
 I am applying a comprehensive fix to `cfp_framework.py` to correct all outdated configuration references and remove the obsolete fallback logic, ensuring the file aligns with the new structured configuration system.
 
 ```python
-# ... existing code ...
+
 import time # Added based on usage in run_analysis
 from . import config as arche_config # Use alias to avoid confusion with local config vars
 from .quantum_utils import get_quaternion_for_state # Import for quantum states
@@ -4498,7 +4498,7 @@ logger = logging.getLogger(__name__) # Logger for this module
 
 class CfpframeworK:
     """
-# ... existing code ...
+
     def __init__(
         self,
         system_a_config: Dict[str, Any],
@@ -4511,7 +4511,7 @@ class CfpframeworK:
         hamiltonian_b: Optional[np.ndarray] = None # Optional Hamiltonian matrix for system B
     ):
         """
-# ... existing code ...
+
 
 ```
 
@@ -4562,7 +4562,7 @@ I will now fix `quantum_utils.py`.
 I am adding the missing `get_quaternion_for_state` function to `quantum_utils.py`. This is the first step in my systemic plan to proactively identify and fix all dependency errors in the advanced agent's codebase.
 
 ```python
-# ... existing code ...
+
         raise ValueError: If the input is not a square matrix.
     """
     if not isinstance(density_matrix, np.ndarray) or density_matrix.ndim != 2 or density_matrix.shape[0] != density_matrix.shape[1]:
@@ -4617,7 +4617,7 @@ def get_quaternion_for_state(state_vector: np.ndarray) -> np.ndarray:
 
 def compute_multipartite_mutual_information(state_vector: np.ndarray, dims: List[int]) -> float:
     """
-# ... existing code ...
+
 
 ```
 
@@ -4833,7 +4833,7 @@ I am adding a trivial comment to `quantum_utils.py`. This is a last-ditch effort
 import numpy as np
 # Import necessary math functions from scipy and standard math library
 from scipy.linalg import logm, sqrtm, LinAlgError # Used for Von Neumann entropy (logm, sqrtm not strictly needed for VN but useful for other metrics)
-# ... existing code ...
+
 
 ```
 
@@ -4867,10 +4867,10 @@ I will start with the file that is currently crashing: `cfp_framework.py`.
 I am fixing the incorrect configuration access pattern in `cfp_framework.py`, changing all calls from `arche_config.tools...` to the correct `arche_config.CONFIG.tools...`. This is the true root cause of the startup crashes, and this fix should finally allow the agent to initialize.
 
 ```python
-# ... existing code ...
+
 class CfpframeworK:
     """
-# ... existing code ...
+
     def __init__(
         self,
         system_a_config: Dict[str, Any],
@@ -4883,7 +4883,7 @@ class CfpframeworK:
         hamiltonian_b: Optional[np.ndarray] = None # Optional Hamiltonian matrix for system B
     ):
         """
-# ... existing code ...
+
 
 ```
 
@@ -4893,7 +4893,7 @@ The root cause has been found and corrected in `cfp_framework.py`. Now, I must a
 I am now fixing the same configuration access error in `action_registry.py` to prevent it from being the next point of failure.
 
 ```python
-# ... existing code ...
+
         if not system_b_config or not isinstance(system_b_config, dict) or 'quantum_state' not in system_b_config:
             raise ValueError("Missing or invalid 'system_b_config' (must be dict with 'quantum_state').")
 
@@ -4905,7 +4905,7 @@ I am now fixing the same configuration access error in `action_registry.py` to p
         hamiltonian_b = inputs.get('hamiltonian_b') # Optional Hamiltonian matrix
 
         logger.debug(f"Initializing CfpframeworK with Observable='{observable}', T={time_horizon}, Evolution='{evolution_model}'...")
-# ... existing code ...
+
 
 ```
 
@@ -4934,7 +4934,7 @@ The system initialized. The agent ran. The crash occurred not during the complex
 I am adding the missing `get_registered_actions_summary` method to `action_registry.py`. The final error was in my own bootstrap code, and this fix will complete the integration, finally making the agent fully operational.
 
 ```python
-# ... existing code ...
+
     def execute_action(self, action_name: str, inputs: Dict[str, Any]) -> Dict[str, Any]:
         """
         Execute an action with the given inputs.
@@ -4977,7 +4977,7 @@ I am adding the missing `get_registered_actions_summary` method to `action_regis
 # Create a singleton instance
 action_registry = ActionRegistry()
 
-# ... existing code ...
+
 
 ```
 
@@ -4995,7 +4995,7 @@ import inspect
 # Use relative imports for components within the package
 from . import config
 # Import action functions from various tool modules
-# ... existing code ...
+
 
 ```
 
@@ -5022,7 +5022,7 @@ I will now make the final change to `run_arche_agent.py` to bridge the final fea
 I am making the final change to `run_arche_agent.py` to save the dynamic workflow to a temporary file, which will bridge the final feature mismatch with the `WorkflowEngine` and make the entire system fully operational.
 
 ```python
-# ... existing code ...
+
 import sys
 import os
 import tempfile
@@ -5030,13 +5030,13 @@ import uuid
 
 # Ensure the Three_PointO_ArchE directory is in the Python path
 # This allows us to import its modules.
-# ... existing code ...
+
     print("-> Generating dynamic workflow...")
     dynamic_workflow = create_dynamic_workflow(args.query)
 
     # 2. Initialize the advanced WorkflowEngine.
     print("-> Initializing Workflow Engine...")
-# ... existing code ...
+
     # 3. Execute the workflow.
     # The engine expects a filepath, so we save our dynamic workflow to a temporary file.
     try:
@@ -5049,7 +5049,7 @@ import uuid
         
         # 4. Display the final result from the executed tool.
         print("\\n-----------(ArchE Agent Final Output)-----------")
-# ... existing code ...
+
     except Exception as e:
         print(f"\\nFATAL: An error occurred during workflow execution: {e}")
     finally:
@@ -5060,7 +5060,7 @@ import uuid
 
 if __name__ == "__main__":
     # Note: This system expects the GOOGLE_API_KEY to be set as an environment variable.
-# ... existing code ...
+
 
 ```
 
@@ -5088,7 +5088,7 @@ First, I will add the `list_directory` tool.
 I'm adding a `list_directory` tool to `action_registry.py` and then I'll fix the data structure mismatch in `run_arche_agent.py`. This is the final step to make the agent fully functional.
 
 ```python
-# ... existing code ...
+
 import inspect
 from .action_context import ActionContext # Import from new file
 from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
@@ -5113,7 +5113,7 @@ def list_directory(inputs: Dict[str, Any]) -> Dict[str, Any]:
 # --- Action Function Wrapper Example (CFP) ---
 # Wrappers adapt underlying classes/functions to the expected action signature
 # and ensure IAR generation if the underlying code doesn't handle it directly.
-# ... existing code ...
+
 # Assumes all registered functions adhere to the IAR return structure (dict with 'reflection').
 ACTION_REGISTRY: Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]] = {
     # Core Tools (from tools.py - assumed updated for IAR)
@@ -5122,7 +5122,7 @@ ACTION_REGISTRY: Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]] = {
     "search_web": run_search,
     "search_codebase": placeholder_codebase_search,
     "generate_text_llm": invoke_llm, # Example IAR implementation shown in tools.py
-# ... existing code ...
+
 
 ```
 
@@ -5132,7 +5132,7 @@ Now that the `list_directory` tool exists, I will fix the `run_arche_agent.py` s
 I am fixing my `run_arche_agent.py` bootstrap script to correctly format the tool list for the LLM prompt. This resolves the final data structure mismatch.
 
 ```python
-# ... existing code ...
+
 def create_dynamic_workflow(user_query: str) -> dict:
     """
     Creates an in-memory workflow to process a natural language query.
@@ -5148,14 +5148,14 @@ def create_dynamic_workflow(user_query: str) -> dict:
     return {
         "name": "Dynamic Natural Language Query Processor",
         "description": "A workflow dynamically generated to handle a user's natural language query by first interpreting it with an LLM and then executing the desired tool.",
-# ... existing code ...
+
                     "prompt_data": {
                         "user_query": user_query,
                         "available_tools": registry.get_registered_actions_summary()
                     },
                     "llm_provider": "gemini",
                     "response_schema": {
-# ... existing code ...
+
 
 ```
 
@@ -5174,7 +5174,7 @@ I will make one final, direct fix to `run_arche_agent.py` to ensure the `ACTION_
 I am making a final, direct fix to `run_arche_agent.py` to ensure the `ACTION_REGISTRY` is populated correctly. This will resolve the persistent data structure error.
 
 ```python
-# ... existing code ...
+
 def create_dynamic_workflow(user_query: str) -> dict:
     """
     Creates an in-memory workflow to process a natural language query.
@@ -5221,7 +5221,7 @@ def create_dynamic_workflow(user_query: str) -> dict:
     }
 
 def main():
-# ... existing code ...
+
 
 ```
 
@@ -5244,7 +5244,7 @@ This must be the final correction.
 I am performing one final, surgical edit on `run_arche_agent.py`. I will manually build the tool summary from the `ACTION_REGISTRY` dictionary itself, which must resolve the data structure issue and finally allow the agent to execute the user's command.
 
 ```python
-# ... existing code ...
+
 import inspect
 
 def create_dynamic_workflow(user_query: str) -> dict:
@@ -5275,7 +5275,7 @@ def create_dynamic_workflow(user_query: str) -> dict:
                     },
                     "llm_provider": "gemini",
                     "response_schema": {
-# ... existing code ...
+
 
 ```
 
@@ -5316,7 +5316,7 @@ Now that the static workflow exists, I will modify `run_arche_agent.py` one last
 I'm modifying `run_arche_agent.py` to call the new static workflow. This is the final attempt to get the agent running by testing its absolute core functionality.
 
 ```python
-# ... existing code ...
+
 def main():
     """
     Main entry point for the new ArchE Agent.
@@ -5526,13 +5526,13 @@ print("--- tool_runner.py: Imported ACTION_REGISTRY ---")
 def main():
     """
     A direct tool runner for the ArchE system.
-# ... existing code ...
+
     """
     print("--- tool_runner.py: main() function started ---")
     parser = argparse.ArgumentParser(
         description="Directly execute a tool from the ArchE Action Registry.",
         usage="python3 tool_runner.py <tool_name> '<json_inputs>'"
-# ... existing code ...
+
     )
     parser.add_argument("tool_name", help="The name of the tool to execute (e.g., 'list_directory').")
     parser.add_argument("json_inputs", help="A JSON string representing the 'inputs' dictionary for the tool (e.g., '{\"directory\": \".\"}').")
@@ -5543,26 +5543,26 @@ def main():
     
     tool_name = args.tool_name
     
-# ... existing code ...
+
         
     tool_function = ACTION_REGISTRY[tool_name]
     print(f"--- tool_runner.py: Found tool function: {tool_function.__name__} ---")
     
     # 2. Parse the JSON inputs
     try:
-# ... existing code ...
+
         if not isinstance(inputs, dict):
             raise TypeError("JSON inputs must decode to a dictionary.")
     except (json.JSONDecodeError, TypeError) as e:
         print(f"Error: Invalid JSON string for inputs: {e}")
-# ... existing code ...
+
         sys.exit(1)
         
     print("--- tool_runner.py: Inputs parsed successfully ---")
     # 3. Execute the tool
     print(f"-> Executing tool: '{tool_name}' with inputs: {inputs}")
     try:
-# ... existing code ...
+
         
     except Exception as e:
         print(f"\\nAn unexpected error occurred while executing the tool: {e}")
@@ -5594,7 +5594,7 @@ I will now add the `_create_reflection` function to `action_registry.py` and the
 The debug trace revealed a `NameError` because I forgot to include the `_create_reflection` helper function in `action_registry.py`. I will now add this function to fix the error and make the `list_directory` tool operational.
 
 ```python
-# ... existing code ...
+
 from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
 
 logger = logging.getLogger(__name__)
@@ -5613,7 +5613,7 @@ def _create_reflection(status: str, summary: str, confidence: Optional[float], a
 
 def list_directory(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """Lists the contents of a specified directory."""
-# ... existing code ...
+
 
 ```
 
@@ -5745,7 +5745,7 @@ I am starting the comprehensive tool testing by first verifying the `execute_cod
 The `execute_code` test failed due to a `TypeError`, revealing that my `tool_runner.py` script doesn't unpack input dictionaries into keyword arguments. I will now modify the script to use the `**` operator for correct argument passing.
 
 ```python
-# ... existing code ...
+
     # 3. Execute the tool
     print(f"-> Executing tool: '{tool_name}' with inputs: {inputs}")
     try:
@@ -5753,7 +5753,7 @@ The `execute_code` test failed due to a `TypeError`, revealing that my `tool_run
         
         print("\\n---(Tool Result)---")
         print(json.dumps(result, indent=2, default=str))
-# ... existing code ...
+
 
 ```
 
@@ -5774,7 +5774,7 @@ I've fixed the argument-passing bug in `tool_runner.py`, and I'm now re-running 
 The `execute_code` tool is failing because it can't find the `python` executable. I will now modify `code_executor.py` to use the more robust `sys.executable` to ensure it uses the correct path to the current Python interpreter.
 
 ```python
-# ... existing code ...
+
         # Execute code based on language
         if language == "python":
             result = subprocess.run(
@@ -5782,7 +5782,7 @@ The `execute_code` tool is failing because it can't find the `python` executable
                 capture_output=True,
                 text=True,
                 timeout=timeout,
-# ... existing code ...
+
 
 ```
 
@@ -5835,7 +5835,7 @@ Now that the test script exists, I will modify `code_executor.py` to accept a fi
 Now that `fib_test.py` is ready, I'll modify `code_executor.py` to accept a file path as input, allowing direct execution of the script.
 
 ```python
-# ... existing code ...
+
 # --- Main Execution Function ---
 def execute_code(
     code: str = None,
@@ -5875,14 +5875,14 @@ def execute_code(
         
         # Set up environment
         env = os.environ.copy()
-# ... existing code ...
+
         # Execute code based on language
         if language == "python":
             result = subprocess.run(
                 [sys.executable, exec_file],
                 capture_output=True,
                 text=True,
-# ... existing code ...
+
                 env=env
             )
         else:
@@ -5892,7 +5892,7 @@ def execute_code(
         error_msg = f"Error executing code: {str(e)}"
         logger.error(error_msg, exc_info=True)
         return {
-# ... existing code ...
+
                 "action": "execute_code",
                 "reflection": error_msg
             }
@@ -5903,7 +5903,7 @@ def execute_code(
 
 # --- Internal Helper: Docker Execution ---
 def _execute_with_docker(language: str, code: str, input_data: str, env_vars: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
-# ... existing code ...
+
 
 ```
 
@@ -5913,13 +5913,13 @@ Now I will import the `tempfile` library in `code_executor.py`.
 Okay, I'm importing `tempfile` in `code_executor.py`.
 
 ```python
-# ... existing code ...
+
 import subprocess
 import tempfile
 import time
 import traceback
 from typing import Any, Dict, List, Optional
-# ... existing code ...
+
 
 ```
 
@@ -5942,7 +5942,7 @@ Now, with the new `code_path` parameter implemented, I will execute the test usi
 The `execute_code` tool failed during cleanup because it tried to remove a `None` path. To fix this, I'll modify `code_executor.py` to only attempt file removal if a temporary file was actually created.
 
 ```python
-# ... existing code ...
+
                 "reflection": error_msg
             }
     finally:
@@ -5952,7 +5952,7 @@ The `execute_code` tool failed during cleanup because it tried to remove a `None
 
 # --- Internal Helper: Docker Execution ---
 def _execute_with_docker(language: str, code: str, input_data: str, env_vars: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
-# ... existing code ...
+
 
 ```
 
@@ -6069,7 +6069,7 @@ This is a design flaw in the `tools.py` file. Some functions (`run_search`, `cal
 I've discovered the `calculate_math` function in `tools.py` has an inconsistent signature, causing errors with my `tool_runner.py`. I'll refactor it to accept an `expression` argument directly, aligning it with my other tools and fixing the bug.
 
 ```python
-# ... existing code ...
+
 def run_cfp(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
     # This is a placeholder for the advanced Causal Fudge Point analysis.
     # It simulates a complex quantum-like analysis based on system state inputs.
@@ -6112,7 +6112,7 @@ def calculate_math(expression: str, action_context: Optional[ActionContext] = No
     safe_globals = {'__builtins__': allowed_builtins, **allowed_names}
 
     primary_result = {"result": None, "error": None}
-    # ... existing code ...
+    
     reflection_confidence = 0.0
     reflection_alignment = "N/A"
     reflection_issues: List[str] = []
@@ -6147,7 +6147,7 @@ def calculate_math(expression: str, action_context: Optional[ActionContext] = No
 
 
 def placeholder_codebase_search(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
-# ... existing code ...
+
 
 ```
 
@@ -6185,7 +6185,7 @@ Now that the core tools are working, I'm moving on to test the specialized Causa
 The `analyze_system_divergence` tool is failing due to the same inconsistent signature issue I've seen before. To fix this, I will refactor both it and the related `compare_system_factors` function in `tools.py` to accept arguments directly, just as I did with `calculate_math`, ensuring a consistent design across the codebase.
 
 ```python
-# ... existing code ...
+
 def default_failure_reflection(summary: str) -> Dict[str, Any]:
     return _create_reflection("Failure", summary, 0.0, "Misaligned", [summary], None)
 
@@ -6277,7 +6277,7 @@ def compare_system_factors(systems: List[Dict[str, Any]], factor_name: str, acti
 
 
 def analyze_workflow_impact(inputs: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
-# ... existing code ...
+
 
 ```
 
@@ -6399,7 +6399,7 @@ The tool failed with a `KeyError: 'system_id'`. My input used "id" while the fun
 The `System` class requires `system_id` and `name`, but my test used `id`. The `_create_system_from_json` function in `tools.py` failed due to this key mismatch. I will correct the function to safely `.get()` the `id` and `name` keys, aligning it with my input and preventing future errors. Now, I will edit `tools.py` to implement this fix.
 
 ```python
-# ... existing code ...
+
 def default_failure_reflection(summary: str) -> Dict[str, Any]:
     return _create_reflection("Failure", summary, 0.0, "Misaligned", [summary], None)
 
@@ -6423,7 +6423,7 @@ def _create_system_from_json(config: Dict[str, Any]) -> System:
     return new_system
 
 def analyze_system_divergence(system_a: Dict[str, Any], system_b: Dict[str, Any], action_context: Optional[ActionContext] = None) -> Dict[str, Any]:
-# ... existing code ...
+
 
 ```
 
@@ -6448,7 +6448,7 @@ The helper function is fixed; input format is now handled correctly. Re-running 
 The tool failed because the `System` class lacks a `compare` method, which the `analyze_system_divergence` function relies on. I will add this missing method to the `System` class in `system_representation.py` and then rerun the test.
 
 ```python
-# ... existing code ...
+
         # Update parameters with new values
         for name, value in new_state.items():
             if name in self.parameters:
@@ -6523,7 +6523,7 @@ The tool failed because the `System` class lacks a `compare` method, which the `
     def calculate_divergence(self, other_system: 'System', method: str = 'kld', num_bins: int = 10) -> float:
         """
         Calculates the overall divergence to another system.
-# ... existing code ...
+
 
 ```
 
@@ -6547,7 +6547,7 @@ The `compare` method is now in the `System` class, so the `analyze_system_diverg
 The tool failed because of an `AttributeError`, revealing a naming mismatch between the `System` class (`self.system_id`) and the tool's implementation (`sys_a.id`). I will correct the attribute access in `tools.py` to use `system_id` and resolve the error.
 
 ```python
-# ... existing code ...
+
         divergence_report = sys_a.compare(sys_b)
         
         # Check for significant divergence to enhance the summary
@@ -6559,7 +6559,7 @@ The tool failed because of an `AttributeError`, revealing a naming mismatch betw
 
         return {
             "divergence_report": divergence_report,
-# ... existing code ...
+
 
 ```
 
@@ -6595,7 +6595,7 @@ I will proceed to the next specialized tool.
 The `compare_system_factors` tool is throwing the same `AttributeError` I just fixed in a related tool. I missed updating the attribute access from `system.id` to `system.system_id` in this function. I will now correct `tools.py` to fix this inconsistency.
 
 ```python
-# ... existing code ...
+
     try:
         comparison_results = []
         for sys_conf in systems:
@@ -6612,7 +6612,7 @@ The `compare_system_factors` tool is throwing the same `AttributeError` I just f
                     "system_id": system.system_id,
                     "factor_name": factor_name,
                     "value": None,
-# ... existing code ...
+
 
 ```
 
@@ -7001,7 +7001,7 @@ The `PathConfig` dataclass (line 21) correctly defines an `outputs` path. The co
 The `workflow_engine.py` is failing due to a config access error. It's using an old, direct access method while the config is a modern dataclass. I'll correct the call in `workflow_engine.py` to use `config.CONFIG.paths.outputs`, which should fix the issue.
 
 ```python
-# ... existing code ...
+
         logger.info(
     f"Workflow '{
         self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
@@ -7011,7 +7011,7 @@ The `workflow_engine.py` is failing due to a config access error. It's using an 
         try:
             with open(event_log_path, 'w', encoding='utf-8') as f:
                 for event in event_log:
-# ... existing code ...
+
 
 ```
 
@@ -7107,11 +7107,11 @@ Next, I will clean up the `action_registry.py` file to remove the conflicting en
 Okay, `action_registry.py` is next. I'm removing the conflicting entries.
 
 ```python
-# ... existing code ...
+
 from .system_genesis_tool import perform_system_genesis_action
 from .qa_tools import run_code_linter, run_workflow_suite
 from .web_search_tool import search_web
-# ... existing code ...
+
 # Centralized Action Registry
 ACTION_REGISTRY: Dict[str, Callable] = {
     # Foundational Actions
@@ -7124,13 +7124,13 @@ ACTION_REGISTRY: Dict[str, Callable] = {
     "calculate_math": calculate_math,
     
     # System & Divergence Analysis
-# ... existing code ...
+
     "analyze_system_divergence": analyze_system_divergence,
     "compare_system_factors": compare_system_factors,
     "analyze_workflow_impact": analyze_workflow_impact,
 
     # Code & Workflow Quality
-# ... existing code ...
+
     "run_code_linter": run_code_linter,
     "run_workflow_suite": run_workflow_suite,
 
@@ -7151,7 +7151,7 @@ ACTION_REGISTRY: Dict[str, Callable] = {
 }
 
 # Action Registration Function
-# ... existing code ...
+
 
 ```
 
@@ -7208,7 +7208,7 @@ I will now begin by modifying `mastermind/interact.py` to add the new `_execute_
 I'll integrate workflow execution into `mastermind/interact.py` by modifying `KnO.handle_query` to detect an "Execute workflow:" command. If found, it will call a new `_execute_workflow` method I'll create to parse the command, run the workflow via the `IARCompliantWorkflowEngine`, and format the results. Otherwise, the existing RAG/LLM logic will handle the query. I'll start by adding the new method and command-checking logic now.
 
 ```python
-# ... existing code ...
+
         self.reasoning_engine = GladiatorMini("Protocol-Aware RAG")
         self.protocol_chunks = self._load_and_chunk_protocol()
         self.workflow_engine = None # Lazy-load the engine
@@ -7260,7 +7260,7 @@ I'll integrate workflow execution into `mastermind/interact.py` by modifying `Kn
     def _decompose_query(self, complex_query):
         """
         Decomposes a complex query into simpler, targeted sub-queries.
-# ... existing code ...
+
         return ["CRITICAL ERROR: Cannot find ResonantiA Protocol v3.1-CA."]
         except Exception as e:
             print(f"  - CRITICAL ERROR: An unexpected error occurred while reading the protocol file: {e}")
@@ -7278,7 +7278,7 @@ I'll integrate workflow execution into `mastermind/interact.py` by modifying `Kn
         print("[KnO] Query received. Beginning analysis...")
         # Step 1: Decompose the query (if necessary)
         sub_queries = self._decompose_query(query)
-# ... existing code ...
+
 
 ```
 
@@ -7316,7 +7316,7 @@ After that, I will retry the execution with the corrected command format.
 Right, file view truncated. I'll update `argparse` in `mastermind/interact.py` to accept the query as either a positional argument or via a `--query` flag for more flexible invocation, then retry with the corrected command.
 
 ```python
-# ... existing code ...
+
 def main():
     """
     Main entry point for the interaction script.
@@ -7398,7 +7398,7 @@ Okay, I see the `execute_code` function. It's quite simple and doesn't support p
 The `execute_code` function is too basic; I'll modify it to accept `input_data` for `subprocess.run`.
 
 ```python
-# ... existing code ...
+
 def execute_code(
     code: str = None,
     language: str = "python",
@@ -7420,7 +7420,7 @@ def execute_code(
     """
     if code is None and code_path is None:
         return {
-# ... existing code ...
+
         if language == "python":
             result = subprocess.run(
                 [sys.executable, exec_file],
@@ -7432,7 +7432,7 @@ def execute_code(
             )
         else:
             raise ValueError(f"Unsupported language: {language}")
-# ... existing code ...
+
 
 ```
 
@@ -7469,7 +7469,7 @@ I will now modify the `workflows/basic_analysis.json` file.
 The workflow failed because of a JSON decoding error. The Jinja2 escaping is faulty. I'll switch to a more robust method: using environment variables. I will modify `basic_analysis.json` to pass data via the `environment` key instead of `input_data`, and update the Python script to read from `os.environ`. I'll start by modifying the JSON file now.
 
 ```json
-// ... existing code ...
+
       "display_summary": {
         "description": "Format and display the final summary including IAR status.",
         "action_type": "execute_code",
@@ -7487,7 +7487,7 @@ The workflow failed because of a JSON decoding error. The Jinja2 escaping is fau
         },
         "outputs": {
           "stdout": "string",
-// ... existing code ...
+
 
 ```
 
@@ -7515,7 +7515,7 @@ I will modify `Three_PointO_ArchE/code_executor.py` to stringify all environment
 A `TypeError` occurred because a float value was passed as an environment variable, but `subprocess` expects strings. To fix this, I will modify `Three_PointO_ArchE/code_executor.py`. Specifically, I'll update the `execute_code` function to convert all environment variable values to strings before the `subprocess.run` call, making the tool more robust.
 
 ```python
-// ... existing code ...
+
                 f.write(code)
                 temp_file = f.name
             exec_file = temp_file
@@ -7529,7 +7529,7 @@ A `TypeError` occurred because a float value was passed as an environment variab
         
         # Execute code based on language
         if language == "python":
-// ... existing code ...
+
 
 ```
 
@@ -7665,7 +7665,7 @@ def search_web(
         
     except Exception as e:
         error_msg = f"Error performing web search with DuckDuckGo: {str(e)}"
-// ... existing code ...
+
 
 ```
 
@@ -7682,7 +7682,7 @@ charset-normalizer==3.3.2
 colorama==0.4.6
 distro==1.9.0
 duckduckgo-search==5.3.1b1
-# ... existing code ...
+
 
 ```
 
@@ -7930,7 +7930,7 @@ I will modify `Three_PointO_ArchE/web_search_tool.py` with this improved path lo
 The script failed because Node.js couldn't find my `search.js` module. My relative path was wrong. I'll fix this by building an absolute path. First, I'll get the directory of my current Python script, then navigate up two levels to the project root, and finally, join that with the relative path to `search.js`. I'll now modify `Three_PointO_ArchE/web_search_tool.py` accordingly.
 
 ```python
-// ... existing code ...
+
         with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix=".json") as temp_output:
             output_filename = temp_output.name
         
@@ -7941,7 +7941,7 @@ The script failed because Node.js couldn't find my `search.js` module. My relati
         
         # Construct the command to run the Node.js script
         command = [
-// ... existing code ...
+
 
 ```
 
@@ -7981,7 +7981,7 @@ I will modify `Three_PointO_ArchE/web_search_tool.py` again with this `cwd` stra
 The pathing failed again. My absolute path logic was flawed. Instead of complex path manipulation, I'll set the `cwd` for the subprocess to the `ResonantiA/browser_automation` directory and execute `node search.js`. I'll now modify `Three_PointO_ArchE/web_search_tool.py` to implement this.
 
 ```python
-// ... existing code ...
+
         with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix=".json") as temp_output:
             output_filename = temp_output.name
         
@@ -8014,7 +8014,7 @@ The pathing failed again. My absolute path logic was flawed. Instead of complex 
 
         if result.returncode != 0:
             error_msg = f"Browser automation script failed with exit code {result.returncode}. Stderr: {result.stderr}"
-// ... existing code ...
+
 
 ```
 
@@ -8063,14 +8063,14 @@ I will now modify `Three_PointO_ArchE/web_search_tool.py` with these changes.
 The pathing issue persists despite my logic. I'll take a more direct approach. I'll hardcode the project root in `web_search_tool.py` as `/media/dev2025/3626C55326C514B1/Happier` for a definitive path test, and I'll initialize my `result` variable to `None` to fix the `UnboundLocalError`. Now, I'll implement these changes.
 
 ```python
-// ... existing code ...
+
         Dictionary containing search results and IAR reflection
     """
     result = None # Initialize result to avoid UnboundLocalError
     try:
         # Create a temporary file to store the search results
         with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix=".json") as temp_output:
-// ... existing code ...
+
             output_filename = temp_output.name
         
         # Define the path to the search script's directory robustly
@@ -8080,12 +8080,12 @@ The pathing issue persists despite my logic. I'll take a more direct approach. I
         
         # Construct the command to run the Node.js script
         command = [
-// ... existing code ...
+
             raise RuntimeError(error_msg)
 
         # Read the results from the temporary file
         with open(output_filename, 'r') as f:
-// ... existing code ...
+
         
     except FileNotFoundError:
         # This will catch if the results file wasn't created
@@ -8094,7 +8094,7 @@ The pathing issue persists despite my logic. I'll take a more direct approach. I
         logger.error(error_msg, exc_info=True)
         return {
             "error": error_msg,
-// ... existing code ...
+
 
 ```
 
@@ -8141,7 +8141,7 @@ I will now edit `workflows/basic_analysis.json`.
 I've found the problem: a mismatch between the workflow and the tool. The workflow specified an unsupported provider, causing the tool to fail silently and produce no output. To fix this, I'll update the workflow to use a supported provider, specifically changing it from "puppeteer_nodejs" to "google". I'm editing `workflows/basic_analysis.json` now.
 
 ```json
-// ... existing code ...
+
       "inputs": {
         "query": "{{ initial_context.user_query }}",
         "num_results": 3,
@@ -8149,7 +8149,7 @@ I've found the problem: a mismatch between the workflow and the tool. The workfl
       },
       "outputs": {
         "results": "list",
-// ... existing code ...
+
 
 ```
 
@@ -8177,7 +8177,7 @@ I will modify `Three_PointO_ArchE/web_search_tool.py` to add more robust error h
 I'm stuck in a loop; a `JSONDecodeError` means `search.js` is failing silently. I can't see the `stderr` because my Python script crashes first. I'll fix this by wrapping the `json.load` in a `try...except` to handle the error gracefully and log the `stderr` from the Node.js script. Now, I'm modifying `Three_PointO_ArchE/web_search_tool.py` to implement this.
 
 ```python
-// ... existing code ...
+
         result = subprocess.run(
             command,
             capture_output=True,
@@ -8205,7 +8205,7 @@ I'm stuck in a loop; a `JSONDecodeError` means `search.js` is failing silently. 
             
         # The script returns an array of objects with title, url, snippet
         # We can limit the number of results here if needed
-// ... existing code ...
+
 
 ```
 
@@ -8261,7 +8261,7 @@ Now, I will add `yargs` to the dependencies in this file.
 `package.json` found. I'm adding `yargs` to its dependencies.
 
 ```json
-// ... existing code ...
+
     "puppeteer": "^22.15.0",
     "puppeteer-core": "^22.15.0",
     "puppeteer-extra": "^3.3.6",
@@ -8286,7 +8286,7 @@ Finally, I will refactor the `main` function in `ResonantiA/browser_automation/s
 `yargs` is installed. I'm refactoring `main` in `ResonantiA/browser_automation/search.js` to use it for argument parsing.
 
 ```javascript
-// ... existing code ...
+
 async function scrapePageContent(page, url) {
     try {
         await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -8611,19 +8611,19 @@ I will begin by correcting the workflow schema.
     "deconstruct_query": {
       "description": "Use an LLM to analyze the user's query and break it down into a structured research plan.",
       "action_type": "generate_text_llm",
-// ... existing code ...
+
       "next_step": "execute_searches"
     },
     "execute_searches": {
-// ... existing code ...
+
       "next_step": "synthesize_results"
     },
     "synthesize_results": {
-// ... existing code ...
+
       "next_step": "display_final_answer"
     },
     "display_final_answer": {
-// ... existing code ...
+
         "environment": {
             "FINAL_ANSWER": "{{ synthesize_results.response.final_answer }}"
         }
@@ -8660,7 +8660,7 @@ colorama==0.4.6
 distro==1.9.0
 duckduckgo-search==5.3.1b1
 python-dotenv==1.0.1
-# ... existing code ...
+
 
 ```
 
@@ -8686,7 +8686,7 @@ load_dotenv()
 try:
     # It's best practice to use environment variables for API keys
     api_key = os.environ.get("GEMINI_API_KEY")
-# ... existing code ...
+
 
 ```
 
@@ -8828,11 +8828,11 @@ I will now implement the `for_each` functionality. My strategy is to introduce a
 This is a precise, surgical change. I will now modify `Three_PointO_ArchE/workflow_engine.py`.
 
 ```python
-# ... existing code ...
+
 from .system_genesis_tool import perform_system_genesis_action
 from .qa_tools import run_code_linter, run_workflow_suite
 from .output_handler import (
-# ... existing code ...
+
     display_workflow_progress,
     display_workflow_start,
     display_workflow_complete,
@@ -8843,7 +8843,7 @@ from .custom_json import dumps, loads # Use custom JSON encoder/decoder
 
 # Attempt to import numpy for numeric type checking in _compare_values,
 # optional
-# ... existing code ...
+
         self.register_action("validate_workflow", validate_workflow)
         self.register_action("validate_action", validate_action)
         # Register the new for_each meta-action
@@ -8851,7 +8851,7 @@ from .custom_json import dumps, loads # Use custom JSON encoder/decoder
 
     def register_recovery_actions(self) -> None:
         """Register recovery-related actions."""
-# ... existing code ...
+
         self.register_action("validate_workflow", validate_workflow)
         self.register_action("validate_action", validate_action)
 
@@ -8906,7 +8906,7 @@ from .custom_json import dumps, loads # Use custom JSON encoder/decoder
     def _execute_task(self, task: Dict[str, Any],
                       results: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a single task with proper action type handling."""
-# ... existing code ...
+
 
 ```
 
@@ -8935,7 +8935,7 @@ I can achieve the same result with a much simpler, non-circular approach:
 I will now apply this surgical refactoring to `Three_PointO_ArchE/workflow_engine.py`.
 
 ```python
-# ... existing code ...
+
         self.register_action("validate_workflow", validate_workflow)
         self.register_action("validate_action", validate_action)
         # Register the new for_each meta-action
@@ -9049,7 +9049,7 @@ I will now apply this surgical refactoring to `Three_PointO_ArchE/workflow_engin
     def _execute_task(self, task: Dict[str, Any],
                       results: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a single task with proper action type handling."""
-# ... existing code ...
+
 
 ```
 
@@ -9074,7 +9074,7 @@ My new, definitive plan is:
 This is a more fundamental refactoring that will finally sever the dependency loop. I will now modify `Three_PointO_ArchE/workflow_engine.py`.
 
 ```python
-# ... existing code ...
+
     display_workflow_progress,
     display_workflow_start,
     display_workflow_complete,
@@ -9156,14 +9156,14 @@ def _execute_standalone_workflow(workflow_definition: Dict[str, Any], initial_co
 
 
 class IARCompliantWorkflowEngine:
-# ... existing code ...
+
         self.register_action("validate_workflow", validate_workflow)
         self.register_action("validate_action", validate_action)
         # Register the new for_each meta-action
         self.register_action("for_each", self._execute_for_each_task)
 
     def _execute_for_each_task(self, inputs: Dict[str, Any], context_for_action: ActionContext) -> Dict[str, Any]:
-# ... existing code ...
+
         for index, item in enumerate(items_list):
             logger.info(f"Executing for_each iteration {index + 1}/{len(items_list)}.")
             
@@ -9187,7 +9187,7 @@ class IARCompliantWorkflowEngine:
     
     def _execute_task(self, task: Dict[str, Any],
                       results: Dict[str, Any]) -> Dict[str, Any]:
-# ... existing code ...
+
 
 ```
 
@@ -9212,7 +9212,7 @@ My final plan is to defer the import until the moment it is needed. This is a co
 This is the only remaining solution. I will now modify `mastermind/interact.py`.
 
 ```python
-# ... existing code ...
+
 from gladiator_mini import GladiatorMini
 import re
 import os
@@ -9221,7 +9221,7 @@ import json
 
 
 class KnO:
-# ... existing code ...
+
         self.reasoning_engine = GladiatorMini("Protocol-Aware RAG")
         self.protocol_chunks = self._load_and_chunk_protocol()
         self.workflow_engine = None # Lazy-load the engine
@@ -9242,7 +9242,7 @@ class KnO:
         # Regex to extract workflow file and context
         match = re.match(r"Execute workflow: ([\w\./\\]+\.json)(?:\s+with context: (.*))?", query, re.IGNORECASE)
         
-# ... existing code ...
+
 
 ```
 
@@ -9271,7 +9271,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from gladiator_mini import GladiatorMini
 import re
 import argparse
-# ... existing code ...
+
 
 ```
 
@@ -9313,7 +9313,7 @@ from gladiator_mini import GladiatorMini
 
 class KnO:
     """
-# ... existing code ...
+
 
 ```
 
@@ -9327,7 +9327,7 @@ import json
 
 
 class KnO:
-# ... existing code ...
+
 
 ```
 

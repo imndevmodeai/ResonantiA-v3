@@ -22003,7 +22003,7 @@ Now I will create the missing critical SPRs to complete the Knowledge Tapestry:
 
 ```json
 [
-  // ... existing code ...
+  
   {
     "spr_id": "MasterMind_AI",
     "term": "MasterMind AI",

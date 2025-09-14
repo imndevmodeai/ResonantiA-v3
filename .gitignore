@@ -111,6 +111,9 @@ tests/logs/    # Exclude test-specific logs
 *.bak
 *.tmp
 *.swp
+
+nextjs-chat_backup_quarantine/
+
 # Project-specific temporary files at root
 temp_*.json
 
