@@ -15,10 +15,10 @@ class PatternReflectionSystem:
     def __init__(self, knowledge_tapestry_path: str):
         self.knowledge_tapestry_path = knowledge_tapestry_path
         self.levels = ["cosmic", "systemic", "local", "micro"]
-        self.patterns: Dict = {level: [] for level in self.levels}
+        self.patterns: Dict[str, List[Pattern]] = {level: [] for level in self.levels}
         self.logger = logging.getLogger(__name__)
 
-    def initialize_hierarchy(self, bidirectional: bool = True) -> Dict:
+    def initialize_hierarchy(self, bidirectional: bool = True) -> Dict[str, Any]:
         """Initialize the hierarchical system with bidirectional pattern reflection capability."""
         try:
             with open(self.knowledge_tapestry_path, 'r') as f:
@@ -180,7 +180,7 @@ class PatternReflectionSystem:
             self.logger.error(f"Failed to synthesize patterns: {str(e)}")
             return {"status": "error", "message": str(e)}
 
-    def _merge_patterns(self, up_patterns: List, down_patterns: List) -> List:
+    def _merge_patterns(self, up_patterns: List[Dict], down_patterns: List[Dict]) -> List[Dict]:
         """Merge patterns from both directions, combining their strengths."""
         merged = {}
         
@@ -196,7 +196,7 @@ class PatternReflectionSystem:
         
         return list(merged.values())
 
-    def validate_coherence(self, synthesized_patterns: Dict, threshold: float) -> Dict[str, Any]:
+    def validate_coherence(self, synthesized_patterns: Dict[str, List[Dict]], threshold: float) -> Dict[str, Any]:
         """Validate the coherence of patterns across all levels."""
         try:
             coherence_scores = {}
@@ -222,7 +222,7 @@ class PatternReflectionSystem:
             self.logger.error(f"Failed to validate coherence: {str(e)}")
             return {"status": "error", "message": str(e)}
 
-    def _calculate_level_coherence(self, patterns: List) -> float:
+    def _calculate_level_coherence(self, patterns: List[Any]) -> float:
         """Calculate the coherence score for a level's patterns."""
         if not patterns:
             return 0.0
@@ -260,7 +260,7 @@ class PatternReflectionSystem:
         
         return intersection / union if union > 0 else 0.0
 
-    def integrate_patterns(self, validated_patterns: Dict, target_system: str) -> Dict[str, Any]:
+    def integrate_patterns(self, validated_patterns: Dict[str, List[Dict]], target_system: str) -> Dict[str, Any]:
         """Integrate validated patterns into the system architecture."""
         try:
             integration_results = {}
@@ -278,7 +278,7 @@ class PatternReflectionSystem:
             self.logger.error(f"Failed to integrate patterns: {str(e)}")
             return {"status": "error", "message": str(e)}
 
-    def _create_level_integration(self, level: str, patterns: List, target_system: str) -> Dict:
+    def _create_level_integration(self, level: str, patterns: List[Dict], target_system: str) -> Dict:
         """Create integration for a specific level's patterns."""
         return {
             "level": level,

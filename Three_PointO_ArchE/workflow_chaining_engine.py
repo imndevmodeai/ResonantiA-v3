@@ -57,7 +57,7 @@ class WorkflowChainingEngine:
         
         return True
     
-    async def execute_workflow(self, workflow: Dict, initial_context: Optional[Dict] = None) -> Dict:
+    async def execute_workflow(self, workflow: Dict[str, Any], initial_context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Execute a workflow with complex chaining patterns.
         
