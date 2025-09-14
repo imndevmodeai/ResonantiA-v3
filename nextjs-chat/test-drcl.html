@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DRCL Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .result { background: #f5f5f5; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; margin: 10px; }
+        pre { background: #f0f0f0; padding: 10px; overflow: auto; }
+    </style>
+</head>
+<body>
+    <h1>DRCL API Test</h1>
+    
+    <div class="test-section">
+        <h2>Test DRCL API</h2>
+        <button onclick="testDRCL()">Run DRCL Test</button>
+        <div id="result" class="result" style="display: none;">
+            <h3>Result:</h3>
+            <pre id="result-content"></pre>
+        </div>
+    </div>
+
+    <script>
+        async function testDRCL() {
+            const resultDiv = document.getElementById('result');
+            const contentDiv = document.getElementById('result-content');
+            
+            try {
+                resultDiv.style.display = 'block';
+                contentDiv.textContent = 'Loading...';
+                
+                const response = await fetch('/api/drcl', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        initial_context: { 
+                            goal: 'Test DRCL from standalone page' 
+                        } 
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                contentDiv.textContent = JSON.stringify(data, null, 2);
+                
+            } catch (error) {
+                contentDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,72 @@
+{
+  "name": "Test Predictive Modeling Tool - Train and Predict",
+  "description": "Tests train_model and predict_from_model operations of the predictive modeling tool.",
+  "version": "1.0",
+  "tasks": {
+    "generate_train_data": {
+      "description": "Generate sample training data for prediction.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json, random; print(json.dumps({\"features\": [[i + random.uniform(-0.5, 0.5) for _ in range(2)] for i in range(20)], \"target\": [2*i + 3 + random.uniform(-1,1) for i in range(20)]}))"
+      },
+      "outputs": {
+        "features": "list",
+        "target": "list"
+      },
+      "dependencies": []
+    },
+    "train_linear_model": {
+      "description": "Train a linear regression model.",
+      "action_type": "perform_predictive_modeling",
+      "inputs": {
+        "operation": "train_model",
+        "model_type": "linear_regression", 
+        "features": "{{ generate_train_data.features }}",
+        "target": "{{ generate_train_data.target }}",
+        "model_params": {},
+        "save_model_path": "outputs/models/test_linear_model.joblib"
+      },
+      "outputs": {
+        "model_path": "str",
+        "training_summary": "dict",
+        "reflection": "dict"
+      },
+      "dependencies": ["generate_train_data"]
+    },
+    "generate_predict_data": {
+      "description": "Generate sample data for prediction.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json, random; print(json.dumps({\"new_features\": [[i + random.uniform(-0.5, 0.5) for _ in range(2)] for i in range(20, 25)]}))"
+      },
+      "outputs": {
+        "new_features": "list"
+      },
+      "dependencies": []
+    },
+    "predict_with_trained_model": {
+      "description": "Predict using the trained linear model.",
+      "action_type": "perform_predictive_modeling",
+      "inputs": {
+        "operation": "predict",
+        "model_path": "{{ train_linear_model.model_path }}",
+        "features": "{{ generate_predict_data.new_features }}"
+      },
+      "outputs": {
+        "predictions": "list",
+        "reflection": "dict"
+      },
+      "dependencies": ["train_linear_model", "generate_predict_data"]
+    },
+    "display_predictions": {
+      "description": "Display the prediction results.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Predictive Modeling Test Results:\nTraining Summary: {{ train_linear_model.training_summary | toJson }}\nPredictions: {{ predict_with_trained_model.predictions | toJson }}\nPrediction Reflection: {{ predict_with_trained_model.reflection | toJson }}"
+      },
+      "dependencies": ["predict_with_trained_model"]
+    }
+  }
+} 

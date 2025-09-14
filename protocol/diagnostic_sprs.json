@@ -1,0 +1,69 @@
+[
+    {
+        "spr_id": "Cognitive resonancE",
+        "term": "Cognitive Resonance",
+        "definition": "The optimal alignment between data, analysis, strategic objectives, and potential outcomes; the primary goal of the ResonantiA Protocol.",
+        "category": "CoreConcept",
+        "relationships": {
+            "type": "SystemGoal",
+            "achieved_through": [
+                "Structured Workflows",
+                "MetaCognition",
+                "Vetting",
+                "CFP",
+                "Causal InferencE",
+                "Agent Based ModelinG"
+            ],
+            "related_to": [
+                "KnO",
+                "As Above So BeloW"
+            ]
+        },
+        "blueprint_details": "Points to ResonantiA Protocol v3.1-CA, Preamble, Section 1.1, Section 5.1.",
+        "example_usage": "The ultimate measure of successful operation and understanding."
+    },
+    {
+        "spr_id": "Implementation resonancE",
+        "term": "Implementation Resonance",
+        "definition": "The principle of ensuring perfect, verifiable alignment between the conceptual understanding of a system ('As Above') and its real-world, operational implementation ('So Below'). This is a core tenet of the ResonantiA Protocol, enforced by the CRDSP and validated by the DRCL.",
+        "category": "CoreConcept",
+        "relationships": {
+            "type": "FundamentalPrinciple",
+            "enforced_by": [
+                "CRDSP",
+                "DRCL",
+                "Live Validation Mandate"
+            ],
+            "related_to": [
+                "Cognitive resonancE",
+                "As Above So BeloW"
+            ]
+        },
+        "blueprint_details": "Points to ResonantiA Protocol v3.1-CA, Section 5, and the Live Validation Mandate.",
+        "example_usage": "Validating that the behavior of a tool in `Cursor ArchE` exactly matches its specification in `AI Studio ArchE`."
+    },
+    {
+        "spr_id": "Distributed Resonant Corrective LooP",
+        "term": "Distributed Resonant Corrective Loop (DRCL)",
+        "definition": "The master protocol for co-evolution between ArchE instances. It is a formal, five-phase, cross-instance workflow that uses the dissonance between the 'map' (AI Studio's conceptual plan) and the 'territory' (Cursor's actual codebase) to drive precise, self-correcting evolution.",
+        "category": "CoreWorkflow",
+        "relationships": {
+            "type": "MetaCognitiveProcess",
+            "orchestrates": [
+                "Conceptual Map",
+                "Dissonance Report",
+                "Correction Plan",
+                "Synced Blueprint"
+            ],
+            "enforces": [
+                "Implementation resonancE"
+            ],
+            "related_to": [
+                "Resonant Corrective Loop",
+                "SIRC"
+            ]
+        },
+        "blueprint_details": "Defined in `protocol/Distributed_Resonant_Corrective_Loop.md` and executed via `Happier/workflows/distributed_resonant_corrective_loop.json`.",
+        "example_usage": "The primary interaction model for all tasks, ensuring that every action begins with a validation of assumptions against the real-world codebase."
+    }
+]

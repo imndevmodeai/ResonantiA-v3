@@ -1,0 +1,50 @@
+{
+  "google_search": {
+    "name": "Google Search",
+    "description": "Standard Google web search.",
+    "base_url": "https://www.google.com",
+    "tasks": {
+      "search": {
+        "steps": [
+          {
+            "action": "navigate",
+            "url": "https://www.google.com/search?q={query}"
+          },
+          {
+            "action": "wait_for",
+            "selector": "#search"
+          },
+          {
+            "action": "extract_text",
+            "selector": "body",
+            "description": "Extract the text from the search results page."
+          }
+        ]
+      }
+    }
+  },
+  "hacker_news_search": {
+    "name": "Hacker News Search",
+    "description": "Search stories on Hacker News via Algolia.",
+    "base_url": "https://hn.algolia.com/",
+    "tasks": {
+      "search": {
+        "steps": [
+          {
+            "action": "navigate",
+            "url": "https://hn.algolia.com/?q={query}"
+          },
+          {
+            "action": "wait_for",
+            "selector": ".Story_container"
+          },
+          {
+            "action": "extract_text",
+            "selector": ".Story_container",
+            "description": "Extract text from the story results."
+          }
+        ]
+      }
+    }
+  }
+}

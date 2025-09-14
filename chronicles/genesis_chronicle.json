@@ -1,0 +1,57 @@
+{
+  "entries": [
+    {
+      "entry_id": "GC_001",
+      "timestamp": "2024-01-01T00:00:00Z",
+      "category": "System Genesis",
+      "title": "ArchE System Initialization",
+      "content": "The ArchE system has been initialized with the ResonantiA Protocol v3.1-CA. This marks the beginning of the system's operational history.",
+      "tags": ["system", "genesis", "initialization"],
+      "relationships": [],
+      "confidence": 1.0,
+      "source": "system",
+      "metadata": {
+        "version": "3.1-CA",
+        "protocol": "ResonantiA"
+      }
+    },
+    {
+      "entry_id": "GC_002",
+      "timestamp": "2024-01-01T00:00:01Z",
+      "category": "Knowledge Base",
+      "title": "SPR Definitions Loaded",
+      "content": "Strategic Pattern Recognition (SPR) definitions have been loaded into the Knowledge Tapestry.",
+      "tags": ["spr", "knowledge", "tapestry"],
+      "relationships": ["GC_001"],
+      "confidence": 1.0,
+      "source": "system",
+      "metadata": {
+        "spr_count": 0,
+        "status": "initialized"
+      }
+    }
+  ],
+  "cases": {
+    "BL_001": {
+      "case_id": "BL_001",
+      "case_name": "Benjamin Lewis Domestic Violence Case",
+      "parties": ["Benjamin Lewis", "Complainant"],
+      "charges": ["Domestic Violence"],
+      "timeline": [
+        {
+          "date": "2024-12-15",
+          "event": "Initial incident reported",
+          "description": "Complainant alleges domestic violence incident"
+        }
+      ],
+      "evidence": [],
+      "strategy_elements": [],
+      "key_insights": [
+        "Case requires careful analysis of evidence and witness testimony",
+        "Legal strategy should focus on due process and fair representation"
+      ],
+      "confidence": 0.8,
+      "last_updated": "2024-01-01T00:00:00Z"
+    }
+  }
+} 

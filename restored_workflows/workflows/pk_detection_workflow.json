@@ -1,0 +1,24 @@
+{
+  "name": "pk_detection_workflow",
+  "version": "1.0",
+  "tasks": {
+    "run_pk": {
+      "action": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "generic_dsl",
+        "num_steps": 72,
+        "model_params": {
+          "dsl_schema": "{{ context.schema | tojson }}"
+        }
+      }
+    },
+    "display": {
+      "action": "display_output",
+      "dependencies": ["run_pk"],
+      "inputs": {
+        "content": "PK Simulation complete. Final levels: MAMP={{ run_pk.body_attrs_final.MAMP | default('N/A') }} ng/mL; AMP={{ run_pk.body_attrs_final.AMP | default('N/A') }} ng/mL"
+      }
+    }
+  }
+} 

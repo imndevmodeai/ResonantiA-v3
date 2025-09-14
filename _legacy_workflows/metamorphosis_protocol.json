@@ -1,0 +1,77 @@
+{
+  "name": "Metamorphosis Protocol",
+  "description": "Phase A.2 of RISE v2.0: Transform the specialist agent through deep learning and adaptation",
+  "version": "2.0",
+  "tasks": {
+    "analyze_specialization_requirements": {
+      "action_type": "generate_text_llm",
+      "description": "Analyze what specialized capabilities are needed for this problem",
+      "inputs": {
+        "prompt": "Based on the problem deconstruction and domain knowledge, analyze what specialized capabilities and expertise are required:\n\nProblem: {problem_description}\nDeconstruction: {deconstruct_problem.output}\nDomain Knowledge: {acquire_domain_knowledge.output}\n\nIdentify:\n1. Required specialized knowledge areas\n2. Critical analytical capabilities\n3. Strategic thinking patterns\n4. Risk assessment frameworks\n5. Implementation expertise",
+        "model": "gemini-1.5-flash-latest",
+        "max_tokens": 2000,
+        "temperature": 0.4
+      },
+      "dependencies": []
+    },
+    "design_metamorphosis_curriculum": {
+      "action_type": "generate_text_llm",
+      "description": "Design a metamorphosis curriculum for the specialist agent",
+      "inputs": {
+        "prompt": "Design a comprehensive metamorphosis curriculum to transform the specialist agent:\n\nRequirements: {analyze_specialization_requirements.output}\n\nCreate:\n1. Learning objectives and milestones\n2. Knowledge integration exercises\n3. Analytical framework training\n4. Strategic thinking development\n5. Risk assessment practice scenarios\n6. Implementation simulation exercises",
+        "model": "gemini-1.5-flash-latest",
+        "max_tokens": 2500,
+        "temperature": 0.3
+      },
+      "dependencies": ["analyze_specialization_requirements"]
+    },
+    "execute_knowledge_integration": {
+      "action_type": "generate_text_llm",
+      "description": "Execute deep knowledge integration for the specialist agent",
+      "inputs": {
+        "prompt": "Execute deep knowledge integration for the specialist agent:\n\nCurriculum: {design_metamorphosis_curriculum.output}\nDomain Knowledge: {acquire_domain_knowledge.output}\n\nIntegrate:\n1. Core domain principles into agent's thinking\n2. Analytical frameworks into decision-making\n3. Strategic patterns into problem-solving\n4. Risk assessment into planning\n5. Implementation expertise into execution",
+        "model": "gemini-1.5-flash-latest",
+        "max_tokens": 3000,
+        "temperature": 0.2
+      },
+      "dependencies": ["design_metamorphosis_curriculum"]
+    },
+    "develop_analytical_frameworks": {
+      "action_type": "generate_text_llm",
+      "description": "Develop specialized analytical frameworks for the agent",
+      "inputs": {
+        "prompt": "Develop specialized analytical frameworks for the metamorphosed agent:\n\nProblem: {problem_description}\nRequirements: {analyze_specialization_requirements.output}\n\nCreate:\n1. Problem decomposition frameworks\n2. Strategic analysis methodologies\n3. Risk assessment models\n4. Decision-making protocols\n5. Implementation planning tools\n6. Success validation metrics",
+        "model": "gemini-1.5-flash-latest",
+        "max_tokens": 2500,
+        "temperature": 0.3
+      },
+      "dependencies": ["execute_knowledge_integration"]
+    },
+    "validate_metamorphosis": {
+      "action_type": "generate_text_llm",
+      "description": "Validate the metamorphosis process and agent transformation",
+      "inputs": {
+        "prompt": "Validate the metamorphosis process and agent transformation:\n\nOriginal Requirements: {analyze_specialization_requirements.output}\nMetamorphosed Agent: {execute_knowledge_integration.output}\nAnalytical Frameworks: {develop_analytical_frameworks.output}\n\nAssess:\n1. Transformation completeness\n2. Capability alignment\n3. Expertise integration\n4. Strategic readiness\n5. Implementation preparedness",
+        "model": "gemini-1.5-flash-latest",
+        "max_tokens": 2000,
+        "temperature": 0.2
+      },
+      "dependencies": ["develop_analytical_frameworks"]
+    }
+  },
+  "outputs": {
+    "metamorphosed_agent": {
+      "description": "The fully transformed specialist agent",
+      "source": "validate_metamorphosis"
+    },
+    "analytical_frameworks": {
+      "description": "Specialized analytical frameworks for the problem domain",
+      "source": "develop_analytical_frameworks"
+    },
+    "metamorphosis_metrics": {
+      "description": "Metrics on the metamorphosis process effectiveness",
+      "source": "validate_metamorphosis"
+    }
+  }
+} 
+

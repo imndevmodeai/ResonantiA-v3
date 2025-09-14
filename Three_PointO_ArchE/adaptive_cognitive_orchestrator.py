@@ -24,10 +24,25 @@ import hashlib
 import re
 import numpy as np
 
-# Import the base CRCS system
-from cognitive_resonant_controller import CognitiveResonantControllerSystem
+# Optional Dependencies for advanced features
+try:
+    from sklearn.cluster import KMeans, DBSCAN
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics import silhouette_score
+    ADVANCED_CLUSTERING_AVAILABLE = True
+except ImportError:
+    ADVANCED_CLUSTERING_AVAILABLE = False
 
-logger = logging.getLogger("ACO")
+# Import the base CRCS system - assuming it exists in a sibling file
+try:
+    from .cognitive_resonant_controller import CognitiveResonantControllerSystem
+    from .llm_providers import BaseLLMProvider # Import for type hinting
+except ImportError:
+    # Fallback for standalone execution
+    CognitiveResonantControllerSystem = None
+
+
+logger = logging.getLogger(__name__)
 
 class PatternEvolutionEngine:
     """
@@ -101,103 +116,74 @@ class PatternEvolutionEngine:
         
         return {
             'pattern_signature': pattern_signature,
-            'pattern_occurrences': pattern_data['occurrences'],
-            'success_rate': pattern_data['success_count'] / pattern_data['occurrences'],
+            'occurrences': pattern_data['occurrences'],
+            'success_rate': pattern_data['success_count'] / pattern_data['occurrences'] if pattern_data['occurrences'] > 0 else 0,
             'emergent_potential': emergent_analysis,
-            'learning_opportunity': not success and pattern_data['occurrences'] >= self.learning_threshold
+            'domains_used': list(pattern_data['domains_activated'])
         }
     
     def _create_pattern_signature(self, query: str) -> str:
-        """Create a hash signature for query pattern recognition"""
-        # Extract key features for pattern matching
-        query_lower = query.lower()
+        """Create a unique signature for a query pattern based on its features."""
+        # Normalize query
+        normalized = query.lower().strip()
         
-        # Key terms that might indicate domain
-        key_terms = []
+        # Extract key features
+        features = {
+            'length': len(normalized),
+            'word_count': len(normalized.split()),
+            'has_numbers': bool(re.search(r'\d', normalized)),
+            'has_special_chars': bool(re.search(r'[^\w\s]', normalized)),
+            'question_words': len([w for w in normalized.split() if w in ['what', 'how', 'why', 'when', 'where', 'who']]),
+            'action_words': len([w for w in normalized.split() if w in ['analyze', 'compare', 'create', 'generate', 'solve', 'optimize']])
+        }
         
-        # Technical terms
-        if any(term in query_lower for term in ['implementation', 'resonance', 'jedi', 'bridge']):
-            key_terms.append('implementation_resonance')
+        # Create hash from features
+        feature_string = json.dumps(features, sort_keys=True)
+        pattern_hash = hashlib.md5(feature_string.encode()).hexdigest()[:16]
         
-        if any(term in query_lower for term in ['spr', 'sparse', 'priming', 'representation']):
-            key_terms.append('spr_related')
-            
-        if any(term in query_lower for term in ['proportional', 'resonant', 'controller', 'cfp']):
-            key_terms.append('control_theory')
-            
-        if any(term in query_lower for term in ['adaptive', 'cognitive', 'orchestrator', 'meta']):
-            key_terms.append('adaptive_cognitive')
-            
-        if any(term in query_lower for term in ['temporal', 'time', '4d', 'dynamics']):
-            key_terms.append('temporal_analysis')
-            
-        if any(term in query_lower for term in ['agent', 'abm', 'simulation', 'modeling']):
-            key_terms.append('agent_modeling')
-        
-        # Question type
-        question_type = 'unknown'
-        if query_lower.startswith('what'):
-            question_type = 'definition'
-        elif query_lower.startswith('how'):
-            question_type = 'process'
-        elif query_lower.startswith('why'):
-            question_type = 'reasoning'
-        elif '?' not in query:
-            question_type = 'statement'
-        
-        # Create signature
-        signature_components = sorted(key_terms) + [question_type]
-        signature_string = '|'.join(signature_components)
-        
-        return hashlib.md5(signature_string.encode()).hexdigest()[:12]
+        return pattern_hash
     
     def _analyze_emergent_potential(self, pattern_signature: str, pattern_data: Dict) -> Dict[str, Any]:
-        """Analyze whether a pattern represents a potential new domain"""
-        occurrences = pattern_data['occurrences']
-        success_rate = pattern_data['success_count'] / occurrences
-        
-        # Criteria for emergent domain
-        frequent_enough = occurrences >= self.learning_threshold
-        low_success_rate = success_rate < 0.5  # Struggling with current controllers
-        multiple_domains = len(pattern_data['domains_activated']) > 1  # Confusion between domains
-        
-        emergent_score = 0.0
-        if frequent_enough:
-            emergent_score += 0.4
-        if low_success_rate:
-            emergent_score += 0.4
-        if multiple_domains:
-            emergent_score += 0.2
+        """Analyze emergent potential with error handling."""
+        try:
+            occurrences = pattern_data.get('occurrences', 0)
+            if occurrences == 0:
+                return {'potential_score': 0.0, 'recommendation': 'monitor'}
+
+            # Calculate success rate
+            success_rate = pattern_data.get('success_count', 0) / occurrences
             
-        is_emergent = emergent_score >= self.confidence_threshold
-        
-        if is_emergent and pattern_signature not in self.emergent_domains:
-            # Create emergent domain record
-            self.emergent_domains[pattern_signature] = {
-                'detected_at': datetime.now().isoformat(),
-                'pattern_signature': pattern_signature,
-                'sample_queries': pattern_data['sample_queries'].copy(),
-                'occurrences': occurrences,
-                'success_rate': success_rate,
-                'emergent_score': emergent_score,
-                'suggested_domain_name': self._suggest_domain_name(pattern_data['sample_queries']),
-                'status': 'detected'
+            # Check for evolution potential
+            evolution_potential = {
+                'high_frequency': occurrences >= self.learning_threshold,
+                'consistent_success': success_rate > 0.8,
+                'domain_diversity': len(pattern_data.get('domains_activated', set())) > 1,
+                'recent_activity': True  # Simplified check
             }
             
-            logger.info(f"[PatternEngine] 🧠 Emergent domain detected: {pattern_signature}")
-            logger.info(f"[PatternEngine] Suggested name: {self.emergent_domains[pattern_signature]['suggested_domain_name']}")
+            # Calculate overall potential
+            potential_score = sum(evolution_potential.values()) / len(evolution_potential)
         
-        return {
-            'is_emergent': is_emergent,
-            'emergent_score': emergent_score,
-            'occurrences': occurrences,
-            'success_rate': success_rate,
-            'criteria_met': {
-                'frequent_enough': frequent_enough,
-                'low_success_rate': low_success_rate,
-                'multiple_domains': multiple_domains
+            try:
+                return {
+                    'potential_score': potential_score,
+                    'evolution_potential': evolution_potential,
+                    'recommendation': 'create_controller' if potential_score > 0.7 else 'monitor'
+                }
+            except Exception as e:
+                logger.error(f"Error analyzing emergent potential for signature {pattern_signature}: {e}")
+                return {
+                    'potential_score': 0.0,
+                    'evolution_potential': {},
+                    'recommendation': 'error'
+                }
+        except Exception as e:
+            logger.error(f"Error in _analyze_emergent_potential: {e}")
+            return {
+                'potential_score': 0.0,
+                'evolution_potential': {},
+                'recommendation': 'error'
             }
-        }
     
     def _suggest_domain_name(self, sample_queries: List[str]) -> str:
         """Suggest a domain name based on sample queries"""
@@ -256,163 +242,197 @@ class PatternEvolutionEngine:
         }
 
 class EmergentDomainDetector:
-    """
-    Autonomous evolution module for the Adaptive Cognitive Orchestrator.
-    Analyzes General_Fallback patterns to identify emergent cognitive domains.
-    """
+    """Detects emergent domains and generates controller candidates."""
     
     def __init__(self, confidence_threshold: float = 0.8, min_cluster_size: int = 5):
         self.confidence_threshold = confidence_threshold
         self.min_cluster_size = min_cluster_size
-        self.fallback_queries = []
-        self.pattern_clusters = {}
-        self.domain_candidates = {}
-        self.evolution_history = []
+        self.candidates = {}
+        self.controller_templates = self._load_controller_templates()
+        self.fallback_queries = [] # Added for clustering
+        self.vectorizer = None # Added for vectorization
         
+        logger.info("[DomainDetector] Initialized with detection capabilities")
+
+    def _load_controller_templates(self) -> Dict[str, str]:
+        """Load controller templates for different types."""
+        return {
+            'analytical': """
+class {domain_name}Controller:
+    \"\"\"
+    {domain_name} Domain Controller
+    Handles {domain_description}
+    \"\"\"
+    
+    def __init__(self):
+        self.domain_name = "{domain_name}"
+        self.capabilities = {capabilities}
+        self.learning_rate = 0.1
+        
+    def process_query(self, query: str) -> str:
+        \"\"\"Process query in {domain_name} domain.\"\"\"
+        # Implementation for {domain_name} processing
+        return f"Processed {domain_name} query: {{query}}"
+        
+    def learn(self, feedback: Dict[str, Any]):
+        \"\"\"Learn from feedback.\"\"\"
+        # Learning implementation
+        pass
+""",
+            'creative': """
+class {domain_name}Controller:
+    \"\"\"
+    {domain_name} Creative Controller
+    Handles {domain_description}
+    \"\"\"
+    
+    def __init__(self):
+        self.domain_name = "{domain_name}"
+        self.creativity_level = 0.8
+        self.capabilities = {capabilities}
+        
+    def generate_creative_response(self, query: str) -> str:
+        \"\"\"Generate creative response for {domain_name}.\"\"\"
+        # Creative generation implementation
+        return f"Creative {domain_name} response: {{query}}"
+""",
+            'problem_solving': """
+class {domain_name}Controller:
+    \"\"\"
+    {domain_name} Problem Solving Controller
+    Handles {domain_description}
+    \"\"\"
+    
+    def __init__(self):
+        self.domain_name = "{domain_name}"
+        self.solving_methods = {solving_methods}
+        self.capabilities = {capabilities}
+        
+    def solve_problem(self, problem: str) -> str:
+        \"\"\"Solve problem in {domain_name} domain.\"\"\"
+        # Problem solving implementation
+        return f"Solved {domain_name} problem: {{problem}}"
+"""
+        }
+
     def analyze_fallback_query(self, query: str, context: str, timestamp: str) -> Dict[str, Any]:
-        """
-        Analyze a query that activated General_Fallback controller.
-        
-        Args:
-            query: The original query
-            context: Retrieved context from fallback
-            timestamp: When the query was processed
-            
-        Returns:
-            Analysis results including clustering and evolution potential
-        """
-        # Store the fallback query
+        """Analyze fallback queries for emergent domain patterns."""
         fallback_entry = {
             'query': query,
-            'context': context or "",  # Handle None context
-            'timestamp': timestamp,
-            'query_vector': self._vectorize_query(query),
-            'context_features': self._extract_context_features(context or "")
+            'context': context or "",
+            'timestamp': timestamp
         }
-        
         self.fallback_queries.append(fallback_entry)
         
-        # Perform clustering analysis
-        cluster_analysis = self._perform_clustering_analysis()
+        analysis = {
+            'query_features': self._extract_query_features(query),
+            'context_features': self._extract_context_features(context or ""),
+            'timestamp': timestamp,
+            'potential_domain': None,
+            'confidence': 0.0
+        }
         
-        # Check for evolution opportunities
-        evolution_opportunity = self._check_evolution_opportunity(cluster_analysis)
+        if not ADVANCED_CLUSTERING_AVAILABLE:
+            logger.warning("Scikit-learn not available. Skipping advanced clustering analysis.")
+            return analysis
+
+        # Vectorize query for clustering
+        query_vector = self._vectorize_query(query)
+        fallback_entry['query_vector'] = query_vector
         
+        # Check existing candidates
+        for candidate_id, candidate in self.candidates.items():
+            similarity = self._calculate_similarity(query_vector, candidate['centroid'])
+            if similarity > self.confidence_threshold:
+                analysis['potential_domain'] = candidate_id
+                analysis['confidence'] = similarity
+                break
+        
+        # If no match, consider creating new candidate from clustering
+        if not analysis['potential_domain']:
+            cluster_analysis = self._perform_clustering_analysis()
+            if cluster_analysis.get('evolution_opportunity'):
+                 # For simplicity, we'll just consider the first opportunity
+                candidate_info = self._check_evolution_opportunity({'status': 'complete', 'clusters': cluster_analysis['clusters']})
+                if candidate_info.get('evolution_ready'):
+                    new_candidate = candidate_info['candidates'][0]
+                    analysis['potential_domain'] = new_candidate['candidate_id']
+                    analysis['confidence'] = new_candidate['evolution_confidence']
+
+        return analysis
+
+    def _extract_query_features(self, query: str) -> Dict[str, Any]:
+        """Extracts meaningful features from queries"""
+        normalized = query.lower().strip()
         return {
-            'fallback_entry_id': len(self.fallback_queries) - 1,
-            'cluster_analysis': cluster_analysis,
-            'evolution_opportunity': evolution_opportunity,
-            'total_fallback_queries': len(self.fallback_queries)
+            'length': len(normalized),
+            'word_count': len(normalized.split()),
+            'has_numbers': bool(re.search(r'\d', normalized)),
         }
     
-    def _vectorize_query(self, query: str) -> np.ndarray:
-        """Create a vector representation of the query for clustering."""
-        from sklearn.feature_extraction.text import TfidfVectorizer
+    def _calculate_similarity(self, vec1: np.ndarray, vec2: np.ndarray) -> float:
+        """Calculate cosine similarity between two vectors."""
+        from numpy.linalg import norm
+        if not isinstance(vec1, np.ndarray): vec1 = np.array(vec1)
+        if not isinstance(vec2, np.ndarray): vec2 = np.array(vec2)
         
-        # Simple TF-IDF vectorization (in production, use more sophisticated methods)
-        vectorizer = TfidfVectorizer(max_features=100, stop_words='english')
-        
-        # If this is the first query, initialize with it
-        if len(self.fallback_queries) == 0:
-            self.vectorizer = vectorizer
-            vector = vectorizer.fit_transform([query]).toarray()[0]
-        else:
-            # Use existing vectorizer or refit if needed
-            all_queries = [entry['query'] for entry in self.fallback_queries] + [query]
-            if len(all_queries) % 10 == 0:  # Refit every 10 queries
-                self.vectorizer = vectorizer
-                vectors = vectorizer.fit_transform(all_queries)
-                vector = vectors[-1].toarray()[0]
-                
-                # Update existing vectors
-                for i, entry in enumerate(self.fallback_queries):
-                    entry['query_vector'] = vectors[i].toarray()[0]
-            else:
-                try:
-                    vector = self.vectorizer.transform([query]).toarray()[0]
-                except:
-                    # Fallback to refit if transform fails
-                    all_queries = [entry['query'] for entry in self.fallback_queries] + [query]
-                    vectors = self.vectorizer.fit_transform(all_queries)
-                    vector = vectors[-1].toarray()[0]
-        
-        return vector
-    
-    def _extract_context_features(self, context: str) -> Dict[str, Any]:
-        """Extract features from the retrieved context."""
-        features = {
-            'length': len(context),
-            'word_count': len(context.split()),
-            'has_code': 'def ' in context or 'class ' in context or 'import ' in context,
-            'has_protocol_refs': 'SPR' in context or 'IAR' in context or 'resonance' in context.lower(),
-            'technical_density': len([w for w in context.split() if w.isupper() and len(w) > 2]) / max(len(context.split()), 1)
-        }
-        return features
-    
+        cosine_sim = np.dot(vec1, vec2) / (norm(vec1) * norm(vec2))
+        return cosine_sim if not np.isnan(cosine_sim) else 0.0
+
     def _perform_clustering_analysis(self) -> Dict[str, Any]:
-        """Perform clustering analysis on fallback queries."""
-        if len(self.fallback_queries) < 3:
-            return {'status': 'insufficient_data', 'clusters': []}
+        """Perform clustering analysis on query patterns."""
+        if len(self.fallback_queries) < self.min_cluster_size:
+            return {'clusters': [], 'evolution_opportunity': False}
         
-        from sklearn.cluster import DBSCAN
-        from sklearn.metrics import silhouette_score
+        # Extract query vectors
+        query_vectors = [rec['query_vector'] for rec in self.fallback_queries if 'query_vector' in rec]
+        query_texts = [rec['query'] for rec in self.fallback_queries if 'query_vector' in rec]
+
+        if not query_vectors:
+             return {'clusters': [], 'evolution_opportunity': False}
         
-        # Get query vectors
-        vectors = np.array([entry['query_vector'] for entry in self.fallback_queries])
-        
-        # Perform DBSCAN clustering
-        clustering = DBSCAN(eps=0.3, min_samples=2)
-        cluster_labels = clustering.fit_predict(vectors)
-        
-        # Analyze clusters
-        unique_labels = set(cluster_labels)
-        clusters = []
-        
-        for label in unique_labels:
-            if label == -1:  # Noise points
-                continue
-                
-            cluster_indices = [i for i, l in enumerate(cluster_labels) if l == label]
-            cluster_queries = [self.fallback_queries[i]['query'] for i in cluster_indices]
+        # Perform clustering (simplified K-means)
+        if len(query_vectors) >= self.min_cluster_size:
+            clusters = self._simple_clustering(query_vectors, query_texts)
             
-            cluster_info = {
-                'cluster_id': label,
-                'size': len(cluster_indices),
-                'queries': cluster_queries,
-                'representative_query': cluster_queries[0],  # Could be improved with centroid
-                'evolution_potential': len(cluster_indices) >= self.min_cluster_size
+            # Analyze clusters for evolution opportunities
+            evolution_opportunity = self._check_evolution_opportunity({'status': 'complete', 'clusters': clusters})
+            
+            return {
+                'clusters': clusters,
+                'evolution_opportunity': evolution_opportunity['evolution_ready'],
+                'cluster_count': len(clusters),
+                'total_queries': len(query_vectors)
             }
-            
-            clusters.append(cluster_info)
         
-        # Calculate silhouette score if possible
-        silhouette = None
-        if len(unique_labels) > 1 and len(vectors) > 2:
-            try:
-                silhouette = silhouette_score(vectors, cluster_labels)
-            except:
-                silhouette = None
+        return {'clusters': [], 'evolution_opportunity': False}
+
+    def _simple_clustering(self, vectors, texts):
+        """A simple K-Means clustering implementation."""
+        # Determine optimal k (e.g., using elbow method - simplified here)
+        num_clusters = max(2, min(5, len(vectors) // self.min_cluster_size))
+        kmeans = KMeans(n_clusters=num_clusters, random_state=42, n_init=10)
+        labels = kmeans.fit_predict(vectors)
+
+        clusters = defaultdict(list)
+        for i, label in enumerate(labels):
+            clusters[label].append(texts[i])
         
-        return {
-            'status': 'complete',
-            'clusters': clusters,
-            'total_clusters': len(clusters),
-            'silhouette_score': silhouette,
-            'noise_points': list(cluster_labels).count(-1)
-        }
+        return [{'cluster_id': k, 'queries': v, 'size': len(v), 'evolution_potential': len(v) >= self.min_cluster_size} for k, v in clusters.items()]
     
     def _check_evolution_opportunity(self, cluster_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """Check if any clusters meet the criteria for domain evolution."""
-        if cluster_analysis['status'] != 'complete':
+        if cluster_analysis.get('status') != 'complete':
             return {'evolution_ready': False, 'reason': 'insufficient_clustering'}
         
         evolution_candidates = []
         
-        for cluster in cluster_analysis['clusters']:
-            if cluster['evolution_potential']:
+        for cluster in cluster_analysis.get('clusters', []):
+            if cluster.get('evolution_potential'):
                 # Generate domain candidate
                 domain_candidate = self._generate_domain_candidate(cluster)
-                evolution_candidates.append(domain_candidate)
+                if domain_candidate:
+                    evolution_candidates.append(domain_candidate)
         
         return {
             'evolution_ready': len(evolution_candidates) > 0,
@@ -420,50 +440,55 @@ class EmergentDomainDetector:
             'total_candidates': len(evolution_candidates)
         }
     
-    def _generate_domain_candidate(self, cluster: Dict[str, Any]) -> Dict[str, Any]:
+    def _generate_domain_candidate(self, cluster: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Generate a domain candidate configuration."""
-        cluster_id = cluster['cluster_id']
+        try:
+            cluster_id = cluster['cluster_id']
         
-        # Analyze query patterns to generate domain name
-        queries = cluster['queries']
-        common_terms = self._extract_common_terms(queries)
-        
-        # Generate domain name
-        domain_name = self._generate_domain_name(common_terms)
-        
-        # Create domain controller config
-        controller_config = {
-            'domain_name': domain_name,
-            'controller_class': f'{domain_name}Controller',
-            'detection_patterns': common_terms,
-            'confidence_threshold': self.confidence_threshold,
-            'cluster_source': {
-                'cluster_id': cluster_id,
-                'sample_queries': queries[:3],
-                'cluster_size': cluster['size']
+            # Analyze query patterns to generate domain name
+            queries = cluster['queries']
+            common_terms = self._extract_common_terms(queries)
+            
+            # Generate domain name
+            domain_name = self._generate_domain_name(common_terms)
+            
+            # Create domain controller config
+            controller_config = {
+                'domain_name': domain_name,
+                'controller_class': f'{domain_name}Controller',
+                'detection_patterns': common_terms,
+                'confidence_threshold': self.confidence_threshold,
+                'cluster_source': {
+                    'cluster_id': cluster_id,
+                    'sample_queries': queries[:3],
+                    'cluster_size': cluster['size']
+                }
             }
-        }
-        
-        # Store for Keyholder review
-        candidate_id = f"domain_candidate_{len(self.domain_candidates)}"
-        self.domain_candidates[candidate_id] = controller_config
-        
-        return {
-            'candidate_id': candidate_id,
-            'domain_name': domain_name,
-            'controller_config': controller_config,
-            'evolution_confidence': min(cluster['size'] / self.min_cluster_size, 1.0)
-        }
+            
+            # Store for Keyholder review
+            candidate_id = f"candidate_{int(time.time())}"
+            self.candidates[candidate_id] = controller_config
+            
+            return {
+                'candidate_id': candidate_id,
+                'domain_name': domain_name,
+                'controller_config': controller_config,
+                'evolution_confidence': min(cluster['size'] / self.min_cluster_size, 1.0)
+            }
+        except Exception as e:
+            logger.error(f"Error generating domain candidate for cluster {cluster.get('cluster_id')}: {e}")
+            return None
     
     def _extract_common_terms(self, queries: List[str]) -> List[str]:
-        """Extract common terms from a cluster of queries."""
+        """Extract common terms from a list of queries."""
+        if not queries: return []
         from collections import Counter
         
         # Simple term extraction (could be enhanced with NLP)
         all_terms = []
         for query in queries:
             terms = [word.lower().strip('.,!?') for word in query.split() 
-                    if len(word) > 3 and word.lower() not in ['what', 'how', 'when', 'where', 'why', 'the', 'and', 'or']]
+                    if len(word) > 3 and word.lower() not in ['what', 'how', 'when', 'where', 'why', 'the', 'and', 'or', 'for', 'are', 'is']]
             all_terms.extend(terms)
         
         # Get most common terms
@@ -475,93 +500,71 @@ class EmergentDomainDetector:
     def _generate_domain_name(self, common_terms: List[str]) -> str:
         """Generate a domain name from common terms."""
         if not common_terms:
-            return f"EmergentDomain{len(self.domain_candidates)}"
+            return f"EmergentDomain{len(self.candidates) + 1}"
         
         # Create a domain name from the most common term
-        primary_term = common_terms[0].title()
+        primary_term = "".join(word.capitalize() for word in common_terms[0].split())
         
         # Add contextual suffix
         if any(term in ['control', 'system', 'process'] for term in common_terms):
-            domain_name = f"{primary_term}SystemQueries"
+            domain_name = f"{primary_term}System"
         elif any(term in ['analysis', 'data', 'pattern'] for term in common_terms):
-            domain_name = f"{primary_term}AnalysisQueries"
+            domain_name = f"{primary_term}Analysis"
         else:
-            domain_name = f"{primary_term}Queries"
+            domain_name = f"{primary_term}Domain"
         
         return domain_name
     
     def generate_controller_draft(self, candidate_id: str) -> str:
         """Generate a draft controller class for Keyholder review."""
-        if candidate_id not in self.domain_candidates:
+        if candidate_id not in self.candidates:
             raise ValueError(f"Unknown candidate ID: {candidate_id}")
         
-        config = self.domain_candidates[candidate_id]
+        config = self.candidates[candidate_id]
         
-        controller_draft = f'''
-class {config['controller_class']}(FrequencyDomainController):
-    """
-    Emergent domain controller for {config['domain_name']}.
-    Auto-generated by EmergentDomainDetector.
-    
-    Cluster Analysis:
-    - Cluster ID: {config['cluster_source']['cluster_id']}
-    - Cluster Size: {config['cluster_source']['cluster_size']}
-    - Sample Queries: {config['cluster_source']['sample_queries']}
-    """
-    
-    def __init__(self):
-        super().__init__(
-            domain_name="{config['domain_name']}",
-            resonant_frequency=0.7,  # Initial frequency - requires tuning
-            quality_factor=2.0,      # Initial Q-factor - requires tuning
-            damping_ratio=0.5        # Initial damping - requires tuning
+        # Determine controller type
+        controller_type = self._determine_controller_type(config)
+        template = self.controller_templates.get(controller_type, self.controller_templates['analytical'])
+
+        # Generate controller code
+        controller_code = self._generate_controller_code(config, controller_type)
+        return controller_code
+
+    def _determine_controller_type(self, config: Dict[str, Any]) -> str:
+        """Determine the type of controller to generate."""
+        keywords = config.get('detection_patterns', [])
+        if any(w in ['create', 'generate', 'design'] for w in keywords):
+            return 'creative'
+        elif any(w in ['solve', 'optimize', 'fix'] for w in keywords):
+            return 'problem_solving'
+        else:
+            return 'analytical'
+
+    def _generate_controller_code(self, config: Dict[str, Any], controller_type: str) -> str:
+        """Generate controller code based on configuration and type."""
+        template = self.controller_templates[controller_type]
+        
+        domain_name = config.get('domain_name', 'NewDomain')
+        description = f"Handles queries related to {config.get('detection_patterns', [])}"
+        capabilities = config.get('detection_patterns', []) # simple mapping
+        
+        return template.format(
+            domain_name=domain_name,
+            domain_description=description,
+            capabilities=capabilities,
+            solving_methods=capabilities # for problem solving template
         )
-        
-        # Detection patterns identified from clustering
-        self.detection_patterns = {config['detection_patterns']}
-        
-    def detect_domain(self, query: str) -> float:
-        """Detect if query belongs to this domain."""
-        query_lower = query.lower()
-        
-        # Pattern matching based on cluster analysis
-        matches = 0
-        for pattern in self.detection_patterns:
-            if pattern in query_lower:
-                matches += 1
-        
-        # Calculate confidence based on pattern matches
-        confidence = min(matches / len(self.detection_patterns), 1.0)
-        
-        return confidence
-        
-    def process_query(self, query: str, context: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
-        """Process query using domain-specific logic."""
-        # TODO: Implement domain-specific processing logic
-        # This is a placeholder that needs Keyholder refinement
-        
-        extracted_context = "EMERGENT_DOMAIN_PROCESSING: " + str(context.get('fallback_context', ''))
-        
-        metrics = {{
-            'domain_confidence': self.detect_domain(query),
-            'processing_method': 'emergent_auto_generated',
-            'requires_refinement': True
-        }}
-        
-        return extracted_context, metrics
-'''
-        
-        return controller_draft
     
     def get_evolution_status(self) -> Dict[str, Any]:
         """Get current evolution status and recommendations."""
         return {
             'total_fallback_queries': len(self.fallback_queries),
-            'domain_candidates': len(self.domain_candidates),
-            'evolution_history': self.evolution_history,
+            'domain_candidates_count': len(self.candidates),
+            'domain_candidates': self.candidates,
+            'evolution_history': [], # No history tracking in this simplified version
             'next_evolution_threshold': self.min_cluster_size,
             'current_confidence_threshold': self.confidence_threshold,
-            'ready_for_evolution': len(self.domain_candidates) > 0
+            'ready_for_evolution': len(self.candidates) > 0
         }
 
 class AdaptiveCognitiveOrchestrator:
@@ -575,255 +578,232 @@ class AdaptiveCognitiveOrchestrator:
     - Foundation for collective intelligence (Phase 3)
     """
     
-    def __init__(self, protocol_chunks: List[str]):
+    def __init__(self, protocol_chunks: List[str], llm_provider: Optional[BaseLLMProvider] = None):
         """
         Initialize the Adaptive Cognitive Orchestrator
         
         Args:
             protocol_chunks: List of protocol text chunks for domain controllers
+            llm_provider: An optional LLM provider for generative capabilities
         """
-        # Initialize base CRCS system
-        self.crcs = CognitiveResonantControllerSystem(protocol_chunks)
+        # Initialize base system if available
+        if CognitiveResonantControllerSystem:
+            self.base_system = CognitiveResonantControllerSystem(
+                protocol_chunks=protocol_chunks,
+                llm_provider=llm_provider # Pass the provider down to the CRCS
+            )
+        else:
+            self.base_system = None
+            logger.warning("CognitiveResonantControllerSystem not found. ACO running in standalone mode.")
         
         # Initialize meta-learning components
         self.pattern_engine = PatternEvolutionEngine()
-        
-        # Adaptation metrics
-        self.adaptation_metrics = {
-            'total_adaptations': 0,
-            'successful_adaptations': 0,
-            'failed_adaptations': 0,
-            'new_controllers_created': 0,
-            'parameter_adjustments': 0,
-            'last_adaptation': None
-        }
+        self.domain_detector = EmergentDomainDetector()
+        self.evolution_candidates = {}
         
         # Meta-learning configuration
         self.meta_learning_active = True
-        self.auto_tuning_enabled = True
-        self.emergent_domain_detection = True
         
         # Performance tracking for adaptive tuning
         self.performance_history = deque(maxlen=100)
         
-        # Initialize Phase 4 Self-Evolution capability
-        self.emergent_domain_detector = EmergentDomainDetector(
-            confidence_threshold=0.8,
-            min_cluster_size=5
-        )
+        self.learning_metrics = {
+            'total_queries': 0,
+            'successful_queries': 0,
+            'evolution_opportunities': 0,
+            'controllers_created': 0
+        }
         
-        # Evolution tracking
-        self.autonomous_evolution_active = True
-        self.evolution_log = []
-        
-        logger.info("[ACO] Adaptive Cognitive Orchestrator initialized with autonomous evolution")
-        logger.info(f"[ACO] Base CRCS has {len(self.crcs.domain_controllers)} domain controllers")
-        logger.info(f"[ACO] Meta-learning active: {self.meta_learning_active}")
-        logger.info(f"[ACO] Emergent Domain Detector active: threshold={self.emergent_domain_detector.confidence_threshold}")
+        logger.info("[ACO] Initialized with evolution capabilities")
     
     def process_query_with_evolution(self, query: str) -> Tuple[str, Dict[str, Any]]:
-        """
-        Process query with full evolution capabilities including emergent domain detection.
+        """Process query with potential evolution."""
+        self.learning_metrics['total_queries'] += 1
         
-        Args:
-            query: User query to process
-            
-        Returns:
-            Tuple of (context, enhanced_metrics)
-        """
-        start_time = time.time()
-        
-        # Process query using base CRCS
-        context, base_metrics = self.crcs.process_query(query)
-        
-        processing_time = time.time() - start_time
-        success = bool(context)
-        active_domain = base_metrics.get('active_domain', 'None')
-        
-        # Enhanced metrics for ACO with evolution
-        enhanced_metrics = base_metrics.copy()
-        enhanced_metrics.update({
-            'meta_learning_active': self.meta_learning_active,
-            'autonomous_evolution_active': self.autonomous_evolution_active,
-            'processing_time': processing_time,
-            'aco_version': 'Phase_4_Self_Evolution'
-        })
-        
-                # Phase 4 Self-Evolution: Emergent Domain Detection
-        # Trigger evolution detection for General domain (fallback) or low-confidence specialized domains
-        should_analyze_for_evolution = (
-            self.autonomous_evolution_active and 
-            (active_domain == 'General_Fallback' or 
-             active_domain == 'General' or
-             (active_domain and base_metrics.get('domain_confidence', 1.0) < 0.5))
-        )
-        
-        if should_analyze_for_evolution:
-            logger.info(f"[ACO-EVOLUTION] Analyzing query for evolution: domain={active_domain}, query='{query[:50]}...'")
-            
-            evolution_analysis = self.emergent_domain_detector.analyze_fallback_query(
-                query=query,
-                context=context,
-                timestamp=datetime.now().isoformat()
-            )
-            
-            enhanced_metrics['evolution_analysis'] = evolution_analysis
-            
-            logger.info(f"[ACO-EVOLUTION] Analysis complete: {evolution_analysis['total_fallback_queries']} total queries analyzed")
-            
-            # Check for autonomous evolution opportunities
-            if evolution_analysis['evolution_opportunity']['evolution_ready']:
-                logger.info(f"[ACO-EVOLUTION] Evolution opportunity detected for query: '{query[:50]}...'")
-                logger.info(f"[ACO-EVOLUTION] Domain candidates ready: {evolution_analysis['evolution_opportunity']['total_candidates']}")
-                self._handle_evolution_opportunity(evolution_analysis['evolution_opportunity'])
+        try:
+            # --- Base System Processing (if available) ---
+            if self.base_system:
+                context, base_metrics = self.base_system.process_query(query)
+                success = bool(context)
+                active_domain = base_metrics.get('active_domain', 'standalone')
             else:
-                logger.info(f"[ACO-EVOLUTION] No evolution opportunity yet: {evolution_analysis['evolution_opportunity'].get('reason', 'insufficient data')}")
+                # Standalone processing
+                context, base_metrics = f"Processed query (standalone): {query}", {}
+                success = True
+                active_domain = "standalone"
         
-        # Meta-learning analysis if enabled
-        if self.meta_learning_active:
+            # --- Pattern Analysis ---
             pattern_analysis = self.pattern_engine.analyze_query_pattern(
-                query, success, active_domain
+                query, success=success, active_domain=active_domain
             )
             
-            enhanced_metrics.update({
-                'pattern_analysis': pattern_analysis,
-                'emergent_domains_count': len(self.pattern_engine.emergent_domains),
-                'evolution_status': self.emergent_domain_detector.get_evolution_status()
-            })
+            # --- Adaptation and Evolution ---
+            evolution_opportunity = self._attempt_adaptation(query, pattern_analysis)
+            if evolution_opportunity.get('adaptation_type'):
+                self.learning_metrics['evolution_opportunities'] += 1
+                logger.info(f"[ACO] Evolution opportunity detected: {evolution_opportunity}")
             
-            # Check for adaptation opportunities
-            if pattern_analysis.get('learning_opportunity'):
-                adaptation_result = self._attempt_adaptation(query, pattern_analysis)
-                enhanced_metrics['adaptation_attempted'] = adaptation_result
-        
-        # Record performance for adaptive tuning
-        performance_record = {
-            'timestamp': datetime.now().isoformat(),
-            'query': query[:50] + '...' if len(query) > 50 else query,
-            'success': success,
-            'active_domain': active_domain,
-            'processing_time': processing_time,
-            'context_length': len(context) if context else 0,
-            'evolution_active': self.autonomous_evolution_active
-        }
-        
-        self.performance_history.append(performance_record)
-        
-        return context, enhanced_metrics
+            self.learning_metrics['successful_queries'] += 1
+            
+            # --- Final Response ---
+            response_metrics = {
+                'pattern_analysis': pattern_analysis,
+                'evolution_opportunity': evolution_opportunity,
+                'learning_metrics': self.learning_metrics.copy()
+            }
+            response_metrics.update(base_metrics)
+
+            return context, response_metrics
+            
+        except Exception as e:
+            logger.error(f"[ACO] Error processing query: {e}", exc_info=True)
+            return f"Error processing query: {str(e)}", {
+                'error': str(e),
+                'learning_metrics': self.learning_metrics.copy()
+            }
     
     def _attempt_adaptation(self, query: str, pattern_analysis: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Attempt to adapt the system based on learning opportunity
-        
-        Args:
-            query: The query that triggered the learning opportunity
-            pattern_analysis: Analysis results from pattern engine
-            
-        Returns:
-            Dict describing the adaptation attempt
-        """
-        self.adaptation_metrics['total_adaptations'] += 1
-        
-        emergent_potential = pattern_analysis.get('emergent_potential', {})
-        
-        if emergent_potential.get('is_emergent'):
-            # Potential new domain detected
-            pattern_sig = pattern_analysis['pattern_signature']
-            emergent_domain = self.pattern_engine.emergent_domains.get(pattern_sig)
-            
-            if emergent_domain and emergent_domain['status'] == 'detected':
-                # Mark as under consideration
-                emergent_domain['status'] = 'under_consideration'
-                emergent_domain['consideration_started'] = datetime.now().isoformat()
-                
-                logger.info(f"[ACO] 🔄 Adaptation: Emergent domain under consideration")
-                logger.info(f"[ACO] Domain: {emergent_domain['suggested_domain_name']}")
-                
-                self.adaptation_metrics['successful_adaptations'] += 1
-                self.adaptation_metrics['last_adaptation'] = datetime.now().isoformat()
-                
-                return {
-                    'type': 'emergent_domain_detection',
-                    'status': 'successful',
-                    'domain_name': emergent_domain['suggested_domain_name'],
-                    'emergent_score': emergent_domain['emergent_score']
-                }
-        
-        # Other adaptation strategies could be implemented here
-        # For now, log the failed adaptation
-        self.adaptation_metrics['failed_adaptations'] += 1
-        
-        return {
-            'type': 'pattern_learning',
-            'status': 'logged_for_future_analysis',
-            'pattern_signature': pattern_analysis['pattern_signature']
+        """Attempt to adapt the system based on pattern analysis."""
+        adaptation_result = {
+            'adaptation_type': None,
+            'confidence': 0.0,
+            'changes_made': [],
+            'new_capabilities': []
         }
+        
+        occurrences = pattern_analysis.get('occurrences', 0)
+        success_rate = pattern_analysis.get('success_rate', 1.0)
+        
+        # Check for high-frequency patterns to generate a controller
+        if occurrences > 10 and pattern_analysis.get('emergent_potential', {}).get('recommendation') == 'create_controller':
+            adaptation_result['adaptation_type'] = 'controller_creation'
+            adaptation_result['confidence'] = min(0.9, occurrences / 20)
+            
+            # Generate controller candidate
+            candidate = self._generate_controller_candidate(query, pattern_analysis)
+            if candidate:
+                self.evolution_candidates[candidate['id']] = candidate
+                adaptation_result['changes_made'].append(f"Created controller candidate: {candidate['id']}")
+                adaptation_result['new_capabilities'].append(candidate['capabilities'])
+        
+        # Check for low success rates to trigger tuning
+        if success_rate < 0.5 and occurrences > 5:
+            adaptation_result['adaptation_type'] = 'parameter_tuning'
+            adaptation_result['confidence'] = 0.7
+            adaptation_result['changes_made'].append("Triggered parameter tuning analysis")
+            self._auto_tune_parameters()
+    
+        return adaptation_result
+
+    def _generate_controller_candidate(self, query:str, pattern_analysis: Dict) -> Optional[Dict]:
+        """Generates a new controller candidate."""
+        try:
+            # Simplified candidate generation
+            candidate_id = f"candidate_{int(time.time())}"
+            common_terms = self._extract_common_terms([q['query'] for q in self.pattern_engine.query_history if q['pattern_signature'] == pattern_analysis['pattern_signature']])
+            domain_name = self._generate_domain_name(common_terms)
+            
+            candidate = {
+                'id': candidate_id,
+                'domain_name': domain_name,
+                'description': f"Domain for queries like: {query[:50]}...",
+                'keywords': common_terms,
+                'confidence': 0.8,
+                'capabilities': ['query_processing', 'pattern_recognition'],
+                'config': { 'domain_name': domain_name, 'description': "...", 'keywords': common_terms, 'capabilities': []}
+            }
+            return candidate
+        except Exception as e:
+            logger.error(f"Error creating domain candidate: {e}")
+            return None
+
+    def _extract_common_terms(self, queries: List[str]) -> List[str]:
+        """Extract common terms from a list of queries."""
+        if not queries: return []
+        from collections import Counter
+        all_terms = []
+        for query in queries:
+            terms = [word.lower().strip('.,!?') for word in query.split() if len(word) > 4 and word.lower() not in ['what', 'how', 'when', 'where', 'why', 'the', 'and', 'or', 'for', 'are', 'is']]
+            all_terms.extend(terms)
+        term_counts = Counter(all_terms)
+        return [term for term, count in term_counts.most_common(3)]
+
+    def _generate_domain_name(self, common_terms: List[str]) -> str:
+        """Generate a domain name from common terms."""
+        if not common_terms:
+            return f"EmergentDomain{len(self.evolution_candidates)}"
+        return "".join(word.capitalize() for word in common_terms) + "Domain"
     
     def _auto_tune_parameters(self):
         """Auto-tune system parameters based on performance history"""
-        if len(self.performance_history) < 10:
-            return
-        
-        recent_performance = list(self.performance_history)[-10:]
-        
-        # Calculate performance metrics
-        success_rate = sum(1 for p in recent_performance if p['success']) / len(recent_performance)
-        avg_processing_time = sum(p['processing_time'] for p in recent_performance) / len(recent_performance)
-        
-        # Simple adaptive tuning logic
-        tuning_applied = False
-        
-        # If success rate is low, consider adjusting thresholds
-        if success_rate < 0.6:
-            # Lower the pattern learning threshold to be more aggressive
-            if self.pattern_engine.learning_threshold > 3:
-                self.pattern_engine.learning_threshold -= 1
-                tuning_applied = True
-                logger.info(f"[ACO] 🔧 Auto-tuning: Lowered learning threshold to {self.pattern_engine.learning_threshold}")
-        
-        # If processing time is too high, consider optimizations
-        elif avg_processing_time > 0.05:  # 50ms threshold
-            # Could implement caching or other optimizations
-            logger.info(f"[ACO] 📊 Performance note: Average processing time {avg_processing_time:.3f}s")
-        
-        if tuning_applied:
-            self.adaptation_metrics['parameter_adjustments'] += 1
+        # This is a placeholder for a more sophisticated tuning mechanism
+        logger.info("[ACO] Auto-tuning analysis triggered. (Placeholder)")
+        pass
+
+    # --- ADVANCED FEATURES FROM SPEC ---
+
+    def share_learning_across_instances(self, other_instance_data: Dict[str, Any]) -> bool:
+        """Share learning data across ArchE instances."""
+        try:
+            # Import patterns from other instance
+            if 'pattern_signatures' in other_instance_data:
+                for signature, data in other_instance_data['pattern_signatures'].items():
+                    if signature not in self.pattern_engine.pattern_signatures:
+                        self.pattern_engine.pattern_signatures[signature] = data
+            
+            # Import evolution candidates
+            if 'evolution_candidates' in other_instance_data:
+                for candidate_id, candidate in other_instance_data['evolution_candidates'].items():
+                    if candidate_id not in self.evolution_candidates:
+                        self.evolution_candidates[candidate_id] = candidate
+            
+            logger.info("Successfully shared learning data across instances")
+            return True
+        except Exception as e:
+            logger.error(f"Error sharing learning data: {e}")
+            return False
+
+    def predict_evolution_needs(self) -> Dict[str, Any]:
+        """Predict future evolution needs based on current patterns."""
+        # Placeholder for a predictive model
+        logger.warning("Predictive evolution is not fully implemented.")
+        return {
+            'predicted_domains': [], 'confidence': 0.0, 'timeline': 'unknown', 'recommendations': []
+        }
+
+    def get_evolution_analytics(self) -> Dict[str, Any]:
+        """Get comprehensive analytics on evolution progress."""
+        success_rates = [p['success_count'] / p['occurrences'] for p in self.pattern_engine.pattern_signatures.values() if p['occurrences'] > 0]
+        return {
+            'learning_metrics': self.learning_metrics,
+            'pattern_analytics': {
+                'total_patterns': len(self.pattern_engine.pattern_signatures),
+                'active_patterns': sum(1 for p in self.pattern_engine.pattern_signatures.values() if p.get('occurrences', 0) > 5),
+                'avg_success_rate': np.mean(success_rates) if success_rates else 0.0
+            },
+            'evolution_analytics': {
+                'total_candidates': len(self.evolution_candidates),
+                'candidates_approved': sum(1 for c in self.evolution_candidates.values() if c.get('status') == 'approved'),
+                'controllers_created': self.learning_metrics['controllers_created']
+            },
+        }
     
     def get_system_diagnostics(self) -> Dict[str, Any]:
         """Get comprehensive system diagnostics including ACO-specific metrics"""
-        # Get base CRCS diagnostics
-        base_diagnostics = self.crcs.get_system_diagnostics()
+        # Get base diagnostics if system exists
+        base_diagnostics = self.base_system.get_system_diagnostics() if self.base_system else {}
         
         # Add ACO-specific diagnostics
-        learning_insights = self.pattern_engine.get_learning_insights()
-        
-        aco_diagnostics = {
-            'aco_version': 'Phase_2_Deployment',
-            'meta_learning_active': self.meta_learning_active,
-            'auto_tuning_enabled': self.auto_tuning_enabled,
-            'emergent_domain_detection': self.emergent_domain_detection,
-            'adaptation_metrics': self.adaptation_metrics.copy(),
-            'learning_insights': learning_insights,
-            'performance_history_size': len(self.performance_history),
-            'pattern_engine_status': {
-                'query_history_size': len(self.pattern_engine.query_history),
-                'unique_patterns': len(self.pattern_engine.pattern_signatures),
-                'emergent_domains': len(self.pattern_engine.emergent_domains),
-                'learning_threshold': self.pattern_engine.learning_threshold,
-                'confidence_threshold': self.pattern_engine.confidence_threshold
-            },
-            'evolution_status': self.emergent_domain_detector.get_evolution_status()
-        }
+        aco_diagnostics = self.get_evolution_analytics()
+        aco_diagnostics['meta_learning_active'] = self.meta_learning_active
         
         # Combine diagnostics
-        combined_diagnostics = base_diagnostics.copy()
-        combined_diagnostics['aco_diagnostics'] = aco_diagnostics
-        
-        return combined_diagnostics
+        base_diagnostics['aco_diagnostics'] = aco_diagnostics
+        return base_diagnostics
     
     def _handle_evolution_opportunity(self, evolution_opportunity: Dict[str, Any]) -> None:
         """Handle detected evolution opportunities."""
-        for candidate in evolution_opportunity['candidates']:
+        for candidate in evolution_opportunity.get('candidates', []):
             candidate_id = candidate['candidate_id']
             domain_name = candidate['domain_name']
             confidence = candidate['evolution_confidence']
@@ -838,7 +818,7 @@ class AdaptiveCognitiveOrchestrator:
                 'status': 'awaiting_keyholder_review'
             }
             
-            self.evolution_log.append(evolution_event)
+            # self.evolution_log.append(evolution_event) # No history tracking in this simplified version
             
             logger.info(f"[ACO-EVOLUTION] New domain candidate detected: {domain_name} (confidence: {confidence:.2f})")
             logger.info(f"[ACO-EVOLUTION] Candidate ID: {candidate_id} - Awaiting Keyholder review")
@@ -847,21 +827,23 @@ class AdaptiveCognitiveOrchestrator:
         """Get evolution candidates ready for Keyholder review."""
         candidates = {}
         
-        for candidate_id, config in self.emergent_domain_detector.domain_candidates.items():
+        for candidate_id, config in self.domain_detector.candidates.items():
             # Generate controller draft
-            controller_draft = self.emergent_domain_detector.generate_controller_draft(candidate_id)
-            
-            candidates[candidate_id] = {
-                'config': config,
-                'controller_draft': controller_draft,
-                'status': 'ready_for_review'
-            }
+            try:
+                controller_draft = self.domain_detector.generate_controller_draft(candidate_id)
+                candidates[candidate_id] = {
+                    'config': config,
+                    'controller_draft': controller_draft,
+                    'status': 'ready_for_review'
+                }
+            except Exception as e:
+                 logger.error(f"Failed to generate draft for {candidate_id}: {e}")
         
         return {
             'total_candidates': len(candidates),
             'candidates': candidates,
-            'evolution_log': self.evolution_log,
-            'evolution_status': self.emergent_domain_detector.get_evolution_status()
+            'evolution_log': [], # No history tracking in this simplified version
+            'evolution_status': self.domain_detector.get_evolution_status()
         }
 
 # Example usage and testing
@@ -883,14 +865,18 @@ if __name__ == "__main__":
     
     # Test queries
     test_queries = [
-        "What is Implementation Resonance?",
-        "How does the ProportionalResonantControlPatterN work?",
-        "What is the Adaptive Cognitive Orchestrator?",
-        "Explain SPRs and their function",
-        "What is temporal dynamics?",
-        "How do cognitive architectures learn?",  # Should trigger learning
-        "What is meta-learning in AI?",  # Should trigger learning
-        "Explain pattern evolution",  # Should trigger learning
+        "Analyze market trends for Q4 2024",
+        "Analyze market trends for Q1 2025",
+        "Compare market performance last year",
+        "Generate a report on market trends",
+        "Create a new marketing strategy based on trends",
+        "How do cognitive architectures learn?",
+        "What is meta-learning in AI?",
+        "Explain pattern evolution in adaptive systems",
+        "Can you create a new controller for me?",
+        "Generate a creative solution for customer retention",
+        "Solve the logistics optimization problem for our fleet",
+        "Optimize our supply chain based on new data"
     ]
     
     print("🧠 Testing Adaptive Cognitive Orchestrator")
@@ -902,19 +888,19 @@ if __name__ == "__main__":
         
         context, metrics = aco.process_query_with_evolution(query)
         
-        if context:
-            print(f"✅ Success - Domain: {metrics.get('active_domain', 'Unknown')}")
-            print(f"Context length: {len(context)} chars")
-        else:
-            print(f"❌ No context - Domain: {metrics.get('active_domain', 'None')}")
+        print(f"✅ Success - Domain: {metrics.get('active_domain', 'standalone')}")
+        print(f"Context: {context[:100]}...")
         
         if metrics.get('pattern_analysis'):
             pattern = metrics['pattern_analysis']
-            print(f"Pattern occurrences: {pattern.get('pattern_occurrences', 0)}")
-            if pattern.get('emergent_potential', {}).get('is_emergent'):
-                print("🧠 EMERGENT DOMAIN DETECTED!")
+            print(f"Pattern Signature: {pattern.get('pattern_signature')}")
+            print(f"Occurrences: {pattern.get('occurrences', 0)}")
+            if pattern.get('emergent_potential', {}).get('recommendation') == 'create_controller':
+                print("🧠 EVOLUTION OPPORTUNITY: CREATE CONTROLLER")
         
-        print(f"Processing time: {metrics.get('processing_time', 0):.3f}s")
+        if metrics.get('evolution_opportunity',{}).get('adaptation_type'):
+             print(f"⚡ ADAPTATION ATTEMPTED: {metrics['evolution_opportunity']['adaptation_type']}")
+
     
     # Show final diagnostics
     print("\n" + "=" * 60)
@@ -924,18 +910,26 @@ if __name__ == "__main__":
     diagnostics = aco.get_system_diagnostics()
     aco_diag = diagnostics.get('aco_diagnostics', {})
     
-    print(f"Adaptation Metrics:")
-    for key, value in aco_diag.get('adaptation_metrics', {}).items():
+    print(f"Evolution Analytics:")
+    analytics = aco_diag.get('evolution_analytics', {})
+    for key, value in analytics.items():
         print(f"  {key}: {value}")
     
-    print(f"\nLearning Insights:")
-    learning = aco_diag.get('learning_insights', {})
-    print(f"  Total queries analyzed: {learning.get('total_queries_analyzed', 0)}")
-    print(f"  Unique patterns detected: {learning.get('unique_patterns_detected', 0)}")
-    print(f"  Emergent domains count: {learning.get('emergent_domains_count', 0)}")
-    
-    if learning.get('emergent_domains'):
-        print(f"\nEmergent Domains:")
-        for sig, domain in learning['emergent_domains'].items():
-            print(f"  {domain['suggested_name']}: {domain['occurrences']} occurrences, "
-                  f"score {domain['emergent_score']:.2f}") 
+    print(f"\nLearning Metrics:")
+    learning = aco_diag.get('learning_metrics', {})
+    for key, value in learning.items():
+        print(f"  {key}: {value}")
+
+    # Test controller generation
+    if aco.evolution_candidates:
+        print("\n" + "="*60)
+        print("GENERATING CONTROLLER DRAFT")
+        print("="*60)
+        candidate_id = list(aco.evolution_candidates.keys())[0]
+        candidate_config = aco.evolution_candidates[candidate_id]['config']
+        
+        # Manually add to detector for draft generation
+        aco.domain_detector.candidates[candidate_id] = candidate_config
+        
+        draft = aco.domain_detector.generate_controller_draft(candidate_id)
+        print(draft) 

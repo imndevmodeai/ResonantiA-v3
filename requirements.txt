@@ -73,3 +73,9 @@ flake8>=4.0.0
 python-dotenv
 beautifulsoup4
 rich>=10.0.0
+uvicorn
+websockets
+werkzeug
+zeroconf
+Flask
+Flask-Cors

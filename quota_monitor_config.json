@@ -1,0 +1,19 @@
+{
+  "monitoring": {
+    "enabled": true,
+    "check_interval": 300,
+    "alert_threshold": 0.8,
+    "log_file": "quota_monitor.log"
+  },
+  "alerts": {
+    "email": false,
+    "console": true,
+    "webhook": false
+  },
+  "metrics": {
+    "track_requests": true,
+    "track_tokens": true,
+    "track_errors": true,
+    "track_costs": true
+  }
+}

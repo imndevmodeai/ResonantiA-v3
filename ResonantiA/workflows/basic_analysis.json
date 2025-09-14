@@ -11,11 +11,11 @@
       },
       "dependencies": []
     },
-    "perform_search": {
+    "perform_web_search": {
       "description": "Perform web search using the user query.",
-      "action_type": "search_web",
+      "action_type": "execute_web_task",
       "inputs": {
-        "query": "{{ initial_context.user_query }}",
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "{{ initial_context.user_query }}",
         "num_results": 5
       },
       "outputs": {
@@ -28,15 +28,15 @@
       "description": "Summarize search results using LLM, noting search confidence.",
       "action_type": "generate_text_llm",
       "inputs": {
-        "prompt": "User Query: {{ initial_context.user_query }}\n\nSearch Results (Confidence: {{ perform_search.reflection.confidence }}):\n```json\n{{ perform_search.results }}\n```\n\nPlease provide a concise summary of these search results relevant to the user query. Acknowledge the search confidence score in your assessment if it's low (e.g., below 0.7).",
+        "prompt": "User Query: {{ initial_context.user_query }}\n\nSearch Results (Confidence: {{ perform_web_search.reflection.confidence }}):\n```json\n{{ perform_web_search.answer }}\n```\n\nPlease provide a concise summary of these search results relevant to the user query. Acknowledge the search confidence score in your assessment if it's low (e.g., below 0.7).",
         "max_tokens": 500
       },
       "outputs": {
         "response_text": "string",
         "reflection": "dict"
       },
-      "dependencies": ["perform_search"],
-      "condition": "{{ perform_search.reflection.status }} == 'Success'"
+      "dependencies": ["perform_web_search"],
+      "condition": "{{ perform_web_search.reflection.status }} == 'Success'"
     },
     "display_summary": {
       "description": "Format and display the final summary including IAR status.",
@@ -46,8 +46,8 @@
         "code": "import json\\nimport sys\\n\\n# Load context variables from stdin\\ninput_vars_str = sys.stdin.read()\\nctx = json.loads(input_vars_str) if input_vars_str else {}\\n\\nsearch_status = ctx.get('search_reflection_status', 'N/A')\\nsearch_conf = ctx.get('search_reflection_confidence', 'N/A')\\nsummary_status = ctx.get('summary_reflection_status', 'N/A')\\nsummary_conf = ctx.get('summary_reflection_confidence', 'N/A')\\nsummary_text = ctx.get('summary_response_text', 'Summary generation failed or skipped.')\\nuser_query = ctx.get('user_query', 'N/A')\\n\\noutput = f\\\"\\\"\\\"--- Analysis Summary (ResonantiA v3.0) ---\\nUser Query: {user_query}\\n\\nSearch Status: {search_status} (Confidence: {search_conf})\\nSummary Status: {summary_status} (Confidence: {summary_conf})\\n\\nSummary:\\n{summary_text}\\n---------------------------------------\\\"\\\"\\\"\\n\\nprint(output)\\n# For now, primary output is via print(). Reflection should capture this.\\nresult = {'formatted_summary': output}\\n",
         "input_data": {
           "user_query": "{{ initial_context.user_query }}",
-          "search_reflection_status": "{{ perform_search.reflection.status }}",
-          "search_reflection_confidence": "{{ perform_search.reflection.confidence }}",
+          "search_reflection_status": "{{ perform_web_search.reflection.status }}",
+          "search_reflection_confidence": "{{ perform_web_search.reflection.confidence }}",
           "summary_reflection_status": "{{ summarize_results.reflection.status }}",
           "summary_reflection_confidence": "{{ summarize_results.reflection.confidence }}",
           "summary_response_text": "{{ summarize_results.response_text }}"

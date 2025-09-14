@@ -175,10 +175,10 @@ def validate_workflow_file(filepath: str, action_registry: Dict[str, Any]) -> Va
 
 if __name__ == "__main__":
     # Example usage
-    from action_registry import ACTION_REGISTRY
+    from action_registry import main_action_registry
     
     workflow_path = "workflows/system_genesis_and_evolution_workflow.json"
-    result = validate_workflow_file(workflow_path, ACTION_REGISTRY)
+    result = validate_workflow_file(workflow_path, main_action_registry.actions)
     
     if result.is_valid:
         print("Workflow is valid!")

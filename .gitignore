@@ -1,5 +1,195 @@
-node_modules/
-.next/
-*.log
-*.env
+# --- ResonantiA v3.0 .gitignore ---
+
+# Python Bytecode and Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments (Common Names)
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# IDE / Editor Configuration Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# Secrets & Sensitive Configuration (NEVER COMMIT THESE)
+# Add specific files containing secrets if not using environment variables
+# Example:
+# .env
+# secrets.json
+# config_secrets.py
+# api_keys.yaml
+
+# Operating System Generated Files
 .DS_Store
+Thumbs.db
+._*
+
+# Log Files
+logs/
+*.log
+*.log.*
+
+# Output Files (Exclude results, visualizations, models by default)
+# Allow specific examples if needed by prefixing with !
+outputs/
+# Preserve the models and visualizations subdirectories if they exist, but ignore their contents
+!outputs/models/
+outputs/models/*
+!outputs/visualizations/
+outputs/visualizations/*
+# Exclude specific file types within outputs, but allow the directories
+outputs/**/*.png
+outputs/**/*.jpg
+outputs/**/*.jpeg
+outputs/**/*.gif
+outputs/**/*.mp4
+outputs/**/*.csv
+outputs/**/*.feather
+outputs/**/*.sqlite
+outputs/**/*.db
+outputs/**/*.joblib
+outputs/**/*.sim_model
+outputs/**/*.h5
+outputs/**/*.pt
+outputs/**/*.onnx
+# Exclude output JSON results by default from the root of outputs/
+outputs/*.json
+
+# --- IMPORTANT: Keep knowledge graph and workflow definitions ---
+# Un-ignore the directories themselves
+!knowledge_graph/
+!workflows/
+# Ignore everything IN those directories initially
+knowledge_graph/*
+workflows/*
+# Then specifically un-ignore the files we want to keep
+!knowledge_graph/spr_definitions_tv.json
+!workflows/*.json
+
+# Build, Distribution, and Packaging Artifacts
+dist/
+build/
+*.egg-info/
+*.egg
+wheels/
+pip-wheel-metadata/
+MANIFEST
+
+# Testing Artifacts (customize based on testing framework)
+.pytest_cache/
+.coverage
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+tests/outputs/ # Exclude test-specific outputs if generated there
+tests/logs/    # Exclude test-specific logs
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints
+
+# Cursor IDE specific files
+.cursor/
+
+# Temporary Files
+*~
+*.bak
+*.tmp
+*.swp
+# Project-specific temporary files at root
+temp_*.json
+
+# Browser session data (often contains private info and cache)
+ResonantiA/browser_automation/.chrome_dev_session/
+
+# Python files from conversation ingestion
+conv2injest*.py
+
+# Browser automation outputs
+ResonantiA/browser_automation/*.txt
+ResonantiA/browser_automation/*.png
+
+# Dependencies (if managed locally, though venv is preferred)
+# node_modules/
+
+# Node.js
+/node_modules
+/ResonantiA/browser_automation/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak
+venv.bak
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Output Files
+/outputs/
+*.log
+/ResonantiA/browser_automation/workflow_search_results.json
+/ResonantiA/browser_automation/search_results.json
+*.png
+outputs/
+
+# --- End of .gitignore ---
+
+# Test commit for snapshot hook (attempt 2) 
+tags
+tags.zip
+voice_typing/
+
+# Ignore all node_modules and chrome artifacts
+**/node_modules/
+**/chrome/
+

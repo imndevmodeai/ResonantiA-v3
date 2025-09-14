@@ -1,22 +1,36 @@
 {
-  "dependencies": {
-    "firebase": "^11.9.1",
-    "http-proxy-agent": "^7.0.2",
-    "https-proxy-agent": "^7.0.6",
-    "next": "^14.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "reactflow": "^11.2.4",
-    "socks-proxy-agent": "^8.0.5",
-    "ws": "^8.16.0"
-  },
+  "name": "arche-cognitive-system",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:full": "node dev-server.js",
+    "dev:master": "node master-startup.js",
+    "dev:arche": "source .venv/bin/activate && python3 arche_persistent_server.py",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "health": "node -e \"require('./dev-server.js').main().then(() => process.exit(0)).catch(() => process.exit(1))\"",
+    "startup": "node master-startup.js",
+    "status": "node -e \"require('./master-startup.js').displayStatus()\"",
+    "test-ui": "./simple-startup.sh",
+    "simple": "./simple-startup.sh"
+  },
+  "dependencies": {
+    "next": "14.0.4",
+    "puppeteer-core": "^24.15.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-markdown": "^10.1.0",
+    "reactflow": "^11.11.4",
+    "remark-gfm": "^4.0.1",
+    "ws": "^8.14.2"
   },
   "devDependencies": {
-    "typescript": "5.8.3"
+    "@types/react": "19.1.9",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4"
   }
 }

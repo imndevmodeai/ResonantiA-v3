@@ -27,7 +27,7 @@ except ImportError as e:
 
 def load_protocol_chunks() -> List[str]:
     """Load ResonantiA Protocol chunks for ACO initialization."""
-    protocol_path = "protocol/ResonantiA_Protocol_v3.1-CA.md"
+    protocol_path = "ResonantiA_Protocol_v3.1-CA.md"
     
     if not os.path.exists(protocol_path):
         print(f"⚠️  Protocol file not found: {protocol_path}")

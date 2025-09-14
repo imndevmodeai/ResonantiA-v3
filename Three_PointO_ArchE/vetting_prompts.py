@@ -285,4 +285,36 @@ def format_vetting_prompt(
         logger.error(f"Unexpected error formatting vetting prompt: {e_fmt}", exc_info=True)
         return f"Error: Could not format vetting prompt: {e_fmt}"
 
+# --- Placeholder Stubs for Missing Synergistic Fusion Functions ---
+# TODO: Implement the actual logic for these functions or remove the calls
+# from rise_orchestrator.py if the Synergistic Fusion Protocol is deprecated.
+
+def perform_scope_limitation_assessment(
+    problem_description: str,
+    current_thought: str,
+    action_inputs: Dict[str, Any],
+    context: Dict[str, Any]
+) -> Dict[str, Any]:
+    """
+    Placeholder stub for the synergistic fusion protocol's scope assessment.
+    This function is intended to analyze if a problem requires axiomatic knowledge.
+    Currently returns a default "pass-through" value.
+    """
+    logger.warning("Using placeholder stub for perform_scope_limitation_assessment. Synergistic Fusion is not active.")
+    return {
+        "axiomatic_activation_needed": False,
+        "relevant_axioms": [],
+        "synergistic_potential": 0.0,
+        "reason": "Stub function: Defaulting to no activation."
+    }
+
+def get_relevant_axioms(axiom_ids: List[str]) -> Dict[str, Any]:
+    """
+    Placeholder stub for retrieving axiomatic knowledge.
+    This function is intended to fetch axioms from the knowledge graph.
+    Currently returns an empty dictionary.
+    """
+    logger.warning("Using placeholder stub for get_relevant_axioms. No axioms will be loaded.")
+    return {}
+
 # --- END OF FILE 3.0ArchE/vetting_prompts.py --- 

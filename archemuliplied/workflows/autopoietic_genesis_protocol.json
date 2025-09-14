@@ -1,0 +1,88 @@
+{
+  "name": "Autopoietic System Genesis Protocol",
+  "description": "Self-build ArchE from canonical Section 7 specifications with Keyholder validation, spec deconstruction, and code generation.",
+  "tasks": {
+    "validate_keyholder_authority": {
+      "description": "Keyholder override must be present to proceed.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json, sys\nkeyholder_auth = \"{{initial_context.keyholder_authority | default(\"keyy=('IMnDEVmode')\")}}\"\nif keyholder_auth != \"keyy=('IMnDEVmode')\":\n    print(json.dumps({\n        'status': 'error',\n        'message': 'Keyholder authority not recognized. Autopoietic System Genesis requires Keyholder override.'\n    }))\n    sys.exit(1)\nelse:\n    print(json.dumps({\n        'status': 'success',\n        'message': 'Keyholder authority validated. Autopoietic System Genesis authorized.'\n    }))"
+      },
+      "dependencies": []
+    },
+    "ingest_canonical_specification": {
+      "description": "Read canonical protocol file (Section 7 must exist).",
+      "action_type": "read_file",
+      "inputs": {
+        "file_path": "ResonantiA_Protocol_v3.1-CA.md"
+      },
+      "dependencies": ["validate_keyholder_authority"]
+    },
+    "deconstruct_code_blueprints": {
+      "description": "Extract file_path/specification objects from Section 7.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Analyze the provided ResonantiA Protocol text. Locate 'Section 7: Codebase & File Definitions'. For each numbered subsection that defines a Python file (e.g., '7.1 config.py'), extract: (1) file_path (relative to Three_PointO_ArchE/) and (2) full specification text. Output a STRICT JSON array of objects with keys 'file_path' and 'specification'. Do not include markdown fences.",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 8000,
+        "temperature": 0.1
+      },
+      "dependencies": ["ingest_canonical_specification"]
+    },
+    "parse_blueprints": {
+      "description": "Parse the JSON array from LLM safely.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json, sys, ast, re\nraw = '''{{deconstruct_code_blueprints.response_text}}'''\ntext = raw.strip()\n# Strip code fences and markers\nif text.startswith('```'):\n    parts = text.split('```')\n    # choose first fenced content block if present\n    if len(parts) >= 2:\n        text = parts[1].strip()\n# Attempt to locate outermost JSON array substring\nif '[' in text and ']' in text:\n    start = text.find('[')\n    end = text.rfind(']')\n    if start >= 0 and end > start:\n        text = text[start:end+1]\n# Normalize smart quotes\ntext = text.replace('\u201c', '"').replace('\u201d', '"').replace('\u2019', "'")\n# Try strict JSON first\nitems = None\nerr = None\nfor attempt in ('json','ast'):\n    try:\n        if attempt == 'json':\n            items = json.loads(text)\n        else:\n            # Fallback: Python literal eval (safe) then re-serialize into JSON-like structures\n            items = ast.literal_eval(text)\n        if isinstance(items, dict) and 'items' in items:\n            items = items['items']\n        if not isinstance(items, list):\n            raise ValueError('Parsed value is not a list')\n        break\n    except Exception as e:\n        err = e\n        items = None\nif items is None:\n    print(json.dumps({'error': f'Failed to parse blueprints: {err}'}))\n    sys.exit(1)\n# Minimal validation of elements\nclean = []\nfor it in items:\n    if isinstance(it, dict) and 'file_path' in it and 'specification' in it:\n        clean.append({'file_path': str(it['file_path']), 'specification': str(it['specification'])})\n# If nothing valid, error\nif not clean:\n    print(json.dumps({'error': 'No valid blueprint items found'}))\n    sys.exit(1)\nprint(json.dumps({'items': clean}))"
+      },
+      "dependencies": ["deconstruct_code_blueprints"]
+    },
+    "generate_files": {
+      "description": "Generate code for each file from its specification.",
+      "action_type": "for_each",
+      "inputs": {
+        "items": "{{parse_blueprints.items}}",
+        "workflow": {
+          "tasks": {
+            "generate_file_content": {
+              "action_type": "generate_text_llm",
+              "description": "Produce complete Python code for the file.",
+              "inputs": {
+                "prompt": "You are an expert Python engineer implementing the ResonantiA Protocol v3.1-CA. Based on the following specification, write COMPLETE production-grade Python code for the file '{{item.file_path}}'. Do not add any prose; output code only.\n\nSPECIFICATION:\n{{item.specification}}",
+                "model": "gemini-2.5-pro",
+                "max_tokens": 12000,
+                "temperature": 0.1
+              },
+              "dependencies": []
+            },
+            "write_code": {
+              "action_type": "create_file",
+              "description": "Write generated code to disk under Three_PointO_ArchE/",
+              "inputs": {
+                "file_path": "Three_PointO_ArchE/{{item.file_path}}",
+                "content": "{{generate_file_content.response_text}}"
+              },
+              "dependencies": ["generate_file_content"]
+            }
+          }
+        }
+      },
+      "dependencies": ["parse_blueprints"]
+    },
+    "summary": {
+      "description": "Summarize the autopoietic build.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "✅ Autopoietic System Genesis completed: files generated per Section 7 and written under Three_PointO_ArchE/"
+      },
+      "dependencies": ["generate_files"]
+    }
+  },
+  "start_tasks": ["validate_keyholder_authority"]
+}
+
+
+
+

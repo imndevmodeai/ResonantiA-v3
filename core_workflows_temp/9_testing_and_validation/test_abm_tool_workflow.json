@@ -1,0 +1,82 @@
+{
+  "name": "Test Agent-Based Modeling Tool",
+  "description": "Tests run_simulation, data analysis, and visualization operations of the ABM tool.",
+  "version": "1.1",
+  "tasks": {
+    "run_sample_simulation": {
+      "description": "Run a sample ABM simulation.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "BasicGridModel", 
+        "num_steps": "{{ context.simulation_parameters.num_steps }}",
+        "model_params": {
+          "width": "{{ context.simulation_parameters.width }}",
+          "height": "{{ context.simulation_parameters.height }}",
+          "density": 0.3,
+          "seed": 12345,
+          "agent_params": {"custom_agent_val": 1} 
+        },
+        "visualize": true 
+      },
+      "outputs": {
+        "model_run_id": "str",
+        "simulation_summary": "str", 
+        "model_data": "list",
+        "agent_data_last_step": "list",
+        "final_state_grid": "list",
+        "active_count": "int",
+        "visualization_path_from_run": "str", 
+        "reflection": "dict"
+      },
+      "dependencies": [],
+      "error_handling": {"strategy": "retry", "max_attempts": 2, "retry_delay_sec": 0.5}
+    },
+    "analyze_simulation_results": {
+      "description": "Perform basic analysis on the simulation results.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "analyze_results",
+        "results": "{{ run_sample_simulation }}", 
+        "analysis_type": "basic"
+      },
+      "outputs": {
+        "analysis_type": "str",
+        "analysis": "dict",
+        "reflection": "dict"
+      },
+      "dependencies": ["run_sample_simulation"],
+      "error_handling": {"strategy": "retry", "max_attempts": 2, "retry_delay_sec": 0.5}
+    },
+    "generate_explicit_visualization": {
+      "description": "Generate a visualization from the simulation results.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "generate_visualization",
+        "simulation_results": "{{ run_sample_simulation }}",
+        "output_filename": "test_abm_explicit_viz_{{ run_sample_simulation.model_run_id }}.png"
+      },
+      "outputs": {
+        "visualization_path": "str",
+        "reflection": "dict"
+      },
+      "dependencies": ["run_sample_simulation"],
+      "error_handling": {"strategy": "retry", "max_attempts": 2, "retry_delay_sec": 0.5}
+    },
+    "display_abm_results": {
+      "description": "Display the summary of the ABM test.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "ABM Test Workflow Summary ({{ context.task_id }}):\n--- Run Simulation ---\nModel Run ID: {{ run_sample_simulation.model_run_id }}\nStatus: {{ run_sample_simulation.reflection.status }}\nSummary: {{ run_sample_simulation.reflection.summary }}\nSteps Run: {{ run_sample_simulation.simulation_steps_run }}\nFinal Active Agents: {{ run_sample_simulation.active_count }}\nVisualization (from run): {{ run_sample_simulation.visualization_path }}\nSimulated Note: {{ run_sample_simulation.note }}\n--- Analysis ---\nAnalysis Status: {{ analyze_simulation_results.reflection.status }}\nAnalysis Summary: {{ analyze_simulation_results.reflection.summary }}\nTime Series Analysis: {{ analyze_simulation_results.analysis.time_series }}\nSpatial Analysis: {{ analyze_simulation_results.analysis.spatial }}\n--- Explicit Visualization ---\nVisualization Status: {{ generate_explicit_visualization.reflection.status }}\nExplicit Viz Path: {{ generate_explicit_visualization.visualization_path }}\n"
+      },
+      "outputs": {"display_confirmation": "str", "reflection": "dict"},
+      "dependencies": ["analyze_simulation_results", "generate_explicit_visualization"],
+      "error_handling": {"strategy": "log_error_continue"}
+    }
+  },
+  "error_handling_defaults": {
+    "strategy": "fail_workflow", 
+    "max_attempts": 1, 
+    "retry_delay_sec": 1
+  }
+} 

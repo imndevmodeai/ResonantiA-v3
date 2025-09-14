@@ -1,0 +1,29 @@
+{
+  "last_updated": "2025-08-10T05:31:00.192692+00:00",
+  "instances": [
+    {
+      "instance_id": "specialized_ade01b08",
+      "instance_type": "specialized",
+      "name": "mul-worker-01",
+      "description": "local:9101",
+      "capabilities": [
+        {
+          "name": "Code executoR",
+          "level": "basic",
+          "specializations": [],
+          "last_validated": "2025-08-10T05:31:00.192597+00:00",
+          "success_rate": 1.0
+        }
+      ],
+      "status": "active",
+      "last_active": "2025-08-10T05:31:00.192621+00:00",
+      "total_tasks_completed": 0,
+      "success_rate": 1.0,
+      "current_load": 0,
+      "max_concurrent_tasks": 3,
+      "metadata": {
+        "external_instance_id": "mul-worker-01"
+      }
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "name": "As Above So Below Workflow",
+  "description": "Implements the hermetic principle of 'as above so below' through bidirectional pattern reflection and hierarchical integration",
+  "version": "3.0",
+  "tasks": {
+    "initialize_hierarchical_system": {
+      "description": "Initialize the hierarchical system with bidirectional pattern reflection",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "initialize_hierarchy",
+        "levels": ["cosmic", "systemic", "local", "micro"],
+        "bidirectional": true
+      },
+      "dependencies": []
+    },
+    "extract_cosmic_patterns": {
+      "description": "Extract patterns from the highest level of abstraction",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "extract_patterns",
+        "level": "cosmic",
+        "source": "knowledge_tapestry.json"
+      },
+      "dependencies": ["initialize_hierarchical_system"]
+    },
+    "reflect_patterns_downward": {
+      "description": "Reflect cosmic patterns through each level of the hierarchy",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "reflect_patterns",
+        "direction": "downward",
+        "patterns": "{{extract_cosmic_patterns.result.patterns}}",
+        "levels": ["systemic", "local", "micro"]
+      },
+      "dependencies": ["extract_cosmic_patterns"]
+    },
+    "extract_micro_patterns": {
+      "description": "Extract patterns from the lowest level of abstraction",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "extract_patterns",
+        "level": "micro",
+        "source": "knowledge_tapestry.json"
+      },
+      "dependencies": ["reflect_patterns_downward"]
+    },
+    "reflect_patterns_upward": {
+      "description": "Reflect micro patterns through each level of the hierarchy",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "reflect_patterns",
+        "direction": "upward",
+        "patterns": "{{extract_micro_patterns.result.patterns}}",
+        "levels": ["local", "systemic", "cosmic"]
+      },
+      "dependencies": ["extract_micro_patterns"]
+    },
+    "synthesize_bidirectional_patterns": {
+      "description": "Synthesize patterns from both directions into a unified model",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "synthesize_patterns",
+        "upward_patterns": "{{reflect_patterns_upward.result.patterns}}",
+        "downward_patterns": "{{reflect_patterns_downward.result.patterns}}"
+      },
+      "dependencies": ["reflect_patterns_upward", "reflect_patterns_downward"]
+    },
+    "validate_pattern_coherence": {
+      "description": "Validate the coherence of patterns across all levels",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "validate_coherence",
+        "synthesized_patterns": "{{synthesize_bidirectional_patterns.result.patterns}}",
+        "threshold": 0.95
+      },
+      "dependencies": ["synthesize_bidirectional_patterns"]
+    },
+    "integrate_patterns_into_system": {
+      "description": "Integrate validated patterns into the system architecture",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "integrate_patterns",
+        "validated_patterns": "{{validate_pattern_coherence.result.patterns}}",
+        "target_system": "Three_PointO_ArchE"
+      },
+      "dependencies": ["validate_pattern_coherence"]
+    },
+    "generate_reflection_report": {
+      "description": "Generate a comprehensive report of the pattern reflection process",
+      "action_type": "perform_system_genesis_action",
+      "inputs": {
+        "operation": "generate_report",
+        "integration_results": "{{integrate_patterns_into_system.result}}",
+        "format": "markdown"
+      },
+      "dependencies": ["integrate_patterns_into_system"]
+    },
+    "final_output": {
+      "description": "Display the final reflection report",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "{{generate_reflection_report.result.report}}",
+        "format": "markdown"
+      },
+      "dependencies": ["generate_reflection_report"]
+    }
+  }
+} 

@@ -1,0 +1,96 @@
+{
+  "query": "AI trends and developments",
+  "engines": [
+    "google",
+    "duckduckgo"
+  ],
+  "timestamp": "2025-07-19T20-53-19.482Z",
+  "results": {
+    "google": {
+      "error": "Google search failed: net::ERR_ABORTED at https://www.google.com/search?q=AI%20trends%20and%20developments",
+      "results": []
+    },
+    "duckduckgo": {
+      "engine": "duckduckgo",
+      "query": "AI trends and developments",
+      "results": [
+        {
+          "title": "14 AI Trends Transforming Tech in 2025 and Beyond - DigitalOcean",
+          "link": "https://www.digitalocean.com/resources/articles/ai-trends",
+          "description": "From AI-powered search engines enabling interactive knowledge synthesis to generative systems transforming creative work to intelligent automation reshaping industrial processes, new AI developments are emerging daily, both online and IRL. We see this in real-world applications: ChatGPT and Perplexity transforming information discovery, GitHub Copilot and Replit changing how developers build ..."
+        },
+        {
+          "title": "The 10 Biggest AI Trends Of 2025 Everyone Must Be Ready For Today - Forbes",
+          "link": "https://www.forbes.com/sites/bernardmarr/2024/09/24/the-10-biggest-ai-trends-of-2025-everyone-must-be-ready-for-today/",
+          "description": "Discover the 10 major AI trends set to reshape 2025: from augmented working and real-time decision-making to advanced AI legislation and sustainable AI initiatives."
+        },
+        {
+          "title": "Five Trends in AI and Data Science for 2025 - MIT Sloan Management Review",
+          "link": "https://sloanreview.mit.edu/article/five-trends-in-ai-and-data-science-for-2025/",
+          "description": "AI experts Thomas H. Davenport and Randy Bean explain the top AI trends leaders should watch in the new year."
+        },
+        {
+          "title": "Future of AI in 2025 [Top Trends and Predictions] - GeeksforGeeks",
+          "link": "https://www.geeksforgeeks.org/blogs/future-of-ai/",
+          "description": "Latest Developments in AI As of 2025, several technical trends stand out: 1. Multimodal AI Generative models have matured to create high-resolution images, videos and 3D content. Multimodal systems like OpenAI's CLIP and DeepMind's Flamingo combine text, image and video inputs to solve tasks that require reasoning across various applications. 2. (XAI) AI is becoming more interpretable ..."
+        },
+        {
+          "title": "6 AI trends you'll see more of in 2025 - news.microsoft.com",
+          "link": "https://news.microsoft.com/source/features/ai/6-ai-trends-youll-see-more-of-in-2025/",
+          "description": "Want to know what's ahead in AI? Here are six trends to watch — and how Microsoft will innovate on each — in 2025."
+        },
+        {
+          "title": "8 AI and machine learning trends to watch in 2025 - TechTarget",
+          "link": "https://www.techtarget.com/searchenterpriseai/tip/9-top-AI-and-machine-learning-trends",
+          "description": "Explore the key trends shaping AI in 2025, from multimodal models and AI agents to security challenges and evolving regulatory landscapes."
+        },
+        {
+          "title": "Top AI Development Trends for 2025-2030 - Techstack",
+          "link": "https://tech-stack.com/blog/top-ai-dev-trends/",
+          "description": "Discover the key AI development trends - from generative AI advancements to AI in cybersecurity, software engineering, and specialized industry solutions."
+        },
+        {
+          "title": "Top AI Trends 2025: Key Developments to Watch - Appinventiv",
+          "link": "https://appinventiv.com/blog/ai-trends/",
+          "description": "Explore the top AI trends of 2025 and stay updated on the latest developments reshaping industry landscapes with this detailed blog."
+        },
+        {
+          "title": "Top 14 Exciting AI Developments Coming in 2025 and Beyond",
+          "link": "https://jetruby.com/blog/14-exciting-ai-developments-coming-in-2025/",
+          "description": "Top 14 Recent AI Developments for 2025 and Beyond AI is set to reach $243.70B by 2025, transforming marketing, healthcare, cybersecurity & more. Discover the latest AI trends and AI developments!"
+        },
+        {
+          "title": "7 AI Trends for 2025 | Uptech",
+          "link": "https://www.uptech.team/blog/ai-trends-2025",
+          "description": "The blog post outlines the top 8 AI trends for the following year and explains why businesses should follow them."
+        }
+      ],
+      "count": 10,
+      "status": "success",
+      "timestamp": "2025-07-19T20:53:19.482Z"
+    }
+  },
+  "metadata": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "options": {
+      "headless": false,
+      "debug": true,
+      "timeout": 30000,
+      "maxResults": 10,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "chromePath": "/usr/bin/google-chrome-stable",
+      "enableStealth": true,
+      "enableHumanHandoff": true,
+      "handoffTimeout": 300000,
+      "resultsDir": "/media/newbu/3626C55326C514B1/Happier/ResonantiA/browser_automation/search_results"
+    }
+  }
+}

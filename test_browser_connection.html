@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchE Browser Connection Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .connected { background-color: #d4edda; color: #155724; }
+        .disconnected { background-color: #f8d7da; color: #721c24; }
+        .connecting { background-color: #fff3cd; color: #856404; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        #messages { height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>ArchE Browser Connection Test</h1>
+    
+    <div id="status" class="status disconnected">Disconnected</div>
+    
+    <button onclick="connect()">Connect</button>
+    <button onclick="disconnect()">Disconnect</button>
+    <button onclick="sendTest()">Send Test Message</button>
+    <button onclick="clearMessages()">Clear Messages</button>
+    
+    <div id="messages"></div>
+
+    <script>
+        // Get WebSocket URL from environment or use default
+        const wsUrl = window.location.hostname === 'localhost' 
+            ? `ws://localhost:${window.ARCHE_PORT || 3005}`
+            : `ws://${window.location.hostname}:${window.ARCHE_PORT || 3005}`;
+        
+        let ws = null;
+        const messagesDiv = document.getElementById('messages');
+        const statusDiv = document.getElementById('status');
+
+        function addMessage(message, type = 'info') {
+            const div = document.createElement('div');
+            div.innerHTML = `<strong>[${new Date().toLocaleTimeString()}] ${type.toUpperCase()}:</strong> ${message}`;
+            div.style.marginBottom = '5px';
+            messagesDiv.appendChild(div);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function updateStatus(status, className) {
+            statusDiv.textContent = status;
+            statusDiv.className = `status ${className}`;
+        }
+
+        function connect() {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                addMessage('Already connected', 'warning');
+                return;
+            }
+
+            updateStatus('Connecting...', 'connecting');
+            addMessage(`Attempting to connect to ${wsUrl}`, 'info');
+
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = function() {
+                updateStatus('Connected', 'connected');
+                addMessage('WebSocket connection established', 'success');
+            };
+
+            ws.onmessage = function(event) {
+                addMessage(`Received: ${event.data}`, 'received');
+            };
+
+            ws.onclose = function(event) {
+                updateStatus('Disconnected', 'disconnected');
+                addMessage(`Connection closed: ${event.code} ${event.reason}`, 'error');
+            };
+
+            ws.onerror = function(error) {
+                updateStatus('Error', 'disconnected');
+                addMessage(`WebSocket error: ${error}`, 'error');
+            };
+        }
+
+        function disconnect() {
+            if (ws) {
+                ws.close();
+                ws = null;
+                updateStatus('Disconnected', 'disconnected');
+                addMessage('Manually disconnected', 'info');
+            }
+        }
+
+        function sendTest() {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                const testMessage = "Hello ArchE, this is a test message from the browser!";
+                ws.send(testMessage);
+                addMessage(`Sent: ${testMessage}`, 'sent');
+            } else {
+                addMessage('Not connected. Please connect first.', 'warning');
+            }
+        }
+
+        function clearMessages() {
+            messagesDiv.innerHTML = '';
+        }
+
+        // Auto-connect on page load
+        window.onload = function() {
+            addMessage('Page loaded, ready to connect', 'info');
+        };
+    </script>
+</body>
+</html> 
+</html> 

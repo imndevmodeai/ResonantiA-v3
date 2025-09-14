@@ -1,0 +1,93 @@
+{
+  "name": "Villager Combat Sweep",
+  "version": "1.0",
+  "description": "Runs the advanced combat ABM for different villager counts to estimate win probability.",
+  "tasks": {
+    "sim_30": {
+      "action": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "combat",
+        "model_params": {
+          "num_humans": 30,
+          "width": 20,
+          "height": 20,
+          "seed": 30
+        },
+        "num_steps": 200
+      }
+    },
+    "sim_40": {
+      "action": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "combat",
+        "model_params": {
+          "num_humans": 40,
+          "width": 20,
+          "height": 20,
+          "seed": 40
+        },
+        "num_steps": 200
+      }
+    },
+    "sim_50": {
+      "action": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "combat",
+        "model_params": {
+          "num_humans": 50,
+          "width": 20,
+          "height": 20,
+          "seed": 50
+        },
+        "num_steps": 200
+      }
+    },
+    "sim_60": {
+      "action": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "combat",
+        "model_params": {
+          "num_humans": 60,
+          "width": 20,
+          "height": 20,
+          "seed": 60
+        },
+        "num_steps": 200
+      }
+    },
+    "sim_70": {
+      "action": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "combat",
+        "model_params": {
+          "num_humans": 70,
+          "width": 20,
+          "height": 20,
+          "seed": 70
+        },
+        "num_steps": 200
+      }
+    },
+    "summarize": {
+      "action": "generate_text_llm",
+      "dependencies": ["sim_30", "sim_40", "sim_50", "sim_60", "sim_70"],
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "We ran combat ABM simulations of villagers vs a silverback gorilla. Summary of survivors and outcome per run:\n- 30 villagers → alive: {{ sim_30.active_count }} gorilla_health: {{ sim_30.gorilla_health }}\n- 40 villagers → alive: {{ sim_40.active_count }} gorilla_health: {{ sim_40.gorilla_health }}\n- 50 villagers → alive: {{ sim_50.active_count }} gorilla_health: {{ sim_50.gorilla_health }}\n- 60 villagers → alive: {{ sim_60.active_count }} gorilla_health: {{ sim_60.gorilla_health }}\n- 70 villagers → alive: {{ sim_70.active_count }} gorilla_health: {{ sim_70.gorilla_health }}\n\nUsing these data, estimate the villager count that yields ~50% probability of killing the gorilla. Briefly explain reasoning."
+      }
+    },
+    "display": {
+      "action": "display_output",
+      "dependencies": ["summarize"],
+      "inputs": {
+        "content": "Combat sweep summary:\n{{ summarize.response_text }}"
+      }
+    }
+  }
+} 

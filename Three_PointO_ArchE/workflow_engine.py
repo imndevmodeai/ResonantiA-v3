@@ -13,49 +13,96 @@ import time
 import re
 import uuid  # Added for workflow_run_id generation consistency
 import tempfile
+import sys
 # Expanded type hints
 from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable
 # Use relative imports within the package
-from . import config
-# Imports the function that calls specific tools and centralized registry
-from .action_registry import execute_action, main_action_registry, register_action
-# May be used for SPR-related context or validation
-from .spr_manager import SPRManager
-# Imports error handling logic
-from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
-from .action_context import ActionContext  # Import from new file
+"""
+Import strategy hardening:
+Prefer relative imports when the module is part of the package.
+If executed as a standalone script (no known parent package), fall back to
+absolute imports after ensuring the project root is on sys.path.
+"""
+try:
+    from . import config
+    from .action_registry import execute_action, main_action_registry
+    from .spr_manager import SPRManager
+    from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
+    from .action_context import ActionContext  # Import from new file
+    from .workflow_recovery import WorkflowRecoveryHandler
+    from .recovery_actions import (
+        analyze_failure,
+        fix_template,
+        fix_action,
+        validate_workflow,
+        validate_action
+    )
+    from .system_genesis_tool import perform_system_genesis_action
+    from .qa_tools import run_code_linter, run_workflow_suite
+    from .output_handler import (
+        display_task_result,
+        display_workflow_progress,
+        display_workflow_start,
+        display_workflow_complete,
+        display_workflow_error,
+        display_output
+    )
+    from .custom_json import dumps, loads
+    from .knowledge_graph_manager import KnowledgeGraphManager
+    from .ias_manager import IASManager
+    from .logging_config import setup_logging
+    from .config import get_config
+    from .comparison_manager import ComparisonManager
+    from .reflection_manager import ReflectionManager
+    from .synthesis_manager import SynthesisManager
+    from .execution_manager import ExecutionManager
+    from .task_manager import TaskManager
+    from .context_manager import ContextManager
+    from .pattern_manager import PatternManager
+except ImportError:
+    # Standalone execution: ensure project root is importable
+    _this_dir = os.path.dirname(os.path.abspath(__file__))
+    _project_root = os.path.dirname(_this_dir)
+    if _project_root not in sys.path:
+        sys.path.insert(0, _project_root)
+    from Three_PointO_ArchE import config  # type: ignore
+    from Three_PointO_ArchE.action_registry import execute_action, main_action_registry  # type: ignore
+    from Three_PointO_ArchE.spr_manager import SPRManager  # type: ignore
+    from Three_PointO_ArchE.error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS  # type: ignore
+    from Three_PointO_ArchE.action_context import ActionContext  # type: ignore
+    from Three_PointO_ArchE.workflow_recovery import WorkflowRecoveryHandler  # type: ignore
+    from Three_PointO_ArchE.recovery_actions import (  # type: ignore
+        analyze_failure,
+        fix_template,
+        fix_action,
+        validate_workflow,
+        validate_action
+    )
+    from Three_PointO_ArchE.system_genesis_tool import perform_system_genesis_action  # type: ignore
+    from Three_PointO_ArchE.qa_tools import run_code_linter, run_workflow_suite  # type: ignore
+    from Three_PointO_ArchE.output_handler import (  # type: ignore
+        display_task_result,
+        display_workflow_progress,
+        display_workflow_start,
+        display_workflow_complete,
+        display_workflow_error,
+        display_output
+    )
+    from Three_PointO_ArchE.custom_json import dumps, loads  # type: ignore
+    from Three_PointO_ArchE.knowledge_graph_manager import KnowledgeGraphManager  # type: ignore
+    from Three_PointO_ArchE.ias_manager import IASManager  # type: ignore
+    from Three_PointO_ArchE.logging_config import setup_logging  # type: ignore
+    from Three_PointO_ArchE.config import get_config  # type: ignore
+    from Three_PointO_ArchE.comparison_manager import ComparisonManager  # type: ignore
+    from Three_PointO_ArchE.reflection_manager import ReflectionManager  # type: ignore
+    from Three_PointO_ArchE.synthesis_manager import SynthesisManager  # type: ignore
+    from Three_PointO_ArchE.execution_manager import ExecutionManager  # type: ignore
+    from Three_PointO_ArchE.task_manager import TaskManager  # type: ignore
+    from Three_PointO_ArchE.context_manager import ContextManager  # type: ignore
+    from Three_PointO_ArchE.pattern_manager import PatternManager  # type: ignore
 import ast
 from datetime import datetime  # Added import
-from .workflow_recovery import WorkflowRecoveryHandler
-from .recovery_actions import (
-    analyze_failure,
-    fix_template,
-    fix_action,
-    validate_workflow,
-    validate_action
-)
-from .system_genesis_tool import perform_system_genesis_action
-from .qa_tools import run_code_linter, run_workflow_suite
-from .output_handler import (
-    display_task_result,
-    display_workflow_progress,
-    display_workflow_start,
-    display_workflow_complete,
-    display_workflow_error,
-    display_output
-)
-from .custom_json import dumps, loads # Use custom JSON encoder/decoder
-from .knowledge_graph_manager import KnowledgeGraphManager
-from .ias_manager import IASManager
-from .logging_config import setup_logging
-from .config import get_config
-from .comparison_manager import ComparisonManager
-from .reflection_manager import ReflectionManager
-from .synthesis_manager import SynthesisManager
-from .execution_manager import ExecutionManager
-from .task_manager import TaskManager
-from .context_manager import ContextManager
-from .pattern_manager import PatternManager
+# (imports are resolved above via hardened strategy)
 
 # Attempt to import numpy for numeric type checking in _compare_values,
 # optional
@@ -226,6 +273,26 @@ class ResonanceTracker:
                             (avg_confidence * 0.3) + (avg_resonance * 0.3)
         return min(compliance_score, 1.0)
 
+# === Session State Manager ===
+try:
+    from .session_state_manager import load_session_state, save_session_state, append_fact
+    from .context_superposition import create_context_bundle, merge_bundles
+    from .prefetch_manager import trigger_predictive_prefetch
+    from .sirc_autonomy import maybe_autorun_sirc
+    from .causal_digest import build_flux_annotated_digest
+except Exception:
+    # Fallback no-ops if module not available
+    def load_session_state():
+        return {"facts_ledger": [], "updated_at": datetime.utcnow().isoformat() + "Z"}
+    def save_session_state(state):
+        return None
+    def append_fact(state, fact):
+        state.setdefault("facts_ledger", []).append({**fact, "ts": datetime.utcnow().isoformat() + "Z"})
+    def create_context_bundle(spr_def, runtime_context, initial_context):
+        return {"spr_id": spr_def.get("spr_id"), "created_at": datetime.utcnow().isoformat() + "Z"}
+    def merge_bundles(bundles):
+        return {"spr_index": [b.get("spr_id") for b in bundles]}
+
 
 def _execute_standalone_workflow(workflow_definition: Dict[str, Any], initial_context: Dict[str, Any], parent_run_id: str, action_registry: Dict[str, Callable]) -> Dict[str, Any]:
     """
@@ -271,6 +338,8 @@ def _execute_standalone_workflow(workflow_definition: Dict[str, Any], initial_co
             break
 
         try:
+            # The arguments must be passed as a single 'inputs' dictionary
+            # to align with the action wrappers in action_registry.py
             result = action_func(**resolved_inputs)
             if not isinstance(result, dict):
                 result = {"output": result}
@@ -327,10 +396,10 @@ class IARCompliantWorkflowEngine:
 
     def register_action(self, action_type: str, action_func: Callable) -> None:
         """Register an action function with the engine."""
-        register_action(
-    action_type,
-    action_func,
-     force=True)  # Use centralized registration
+        main_action_registry.register_action(
+            action_type,
+            action_func,
+        )
         self.action_registry = main_action_registry.actions.copy()  # Update local copy
         logger.debug(f"Registered action: {action_type}")
 
@@ -383,7 +452,7 @@ class IARCompliantWorkflowEngine:
         return {"results": all_results}
     
     def _execute_task(self, task: Dict[str, Any],
-                      results: Dict[str, Any]) -> Dict[str, Any]:
+                      results: Dict[str, Any], initial_context: Dict[str, Any] = None) -> Dict[str, Any]:
         """Execute a single task with proper action type handling."""
         action_type = task.get("action_type")
         if not action_type:
@@ -394,7 +463,7 @@ class IARCompliantWorkflowEngine:
 
         action_func = self.action_registry[action_type]
         inputs = self._resolve_template_variables(
-            task.get("inputs", {}), results)
+            task.get("inputs", {}), results, initial_context)
 
         try:
             result = action_func(inputs)
@@ -402,21 +471,54 @@ class IARCompliantWorkflowEngine:
                 result = {"output": result}
             return result
         except Exception as e:
-            logger.error(f"Task execution failed: {str(e)}")
-            raise
+            error_msg = f"Task '{task.get('description', 'Unknown')}' failed: {str(e)}"
+            logger.error(error_msg)
+            
+            # Enhanced error reporting with input validation
+            if "Missing required input" in str(e):
+                logger.error(f"Input validation failed for task. Provided inputs: {list(inputs.keys())}")
+            elif "NoneType" in str(e):
+                logger.error(f"Null value error - check if previous task outputs are properly formatted")
+            
+            raise ValueError(error_msg)
 
-    def _resolve_template_variables(self, inputs: Dict[str, Any], results: Dict[str, Any]) -> Dict[str, Any]:
+    def _resolve_template_variables(self, inputs: Dict[str, Any], results: Dict[str, Any], initial_context: Dict[str, Any] = None) -> Dict[str, Any]:
         """Resolve template variables in task inputs."""
         resolved = {}
+        initial_context = initial_context or {}
         for key, value in inputs.items():
             if isinstance(value, str) and "{{" in value and "}}" in value:
                 # Extract task and field from template
                 template = value.strip("{} ")
+                
+                # NEW: Add support for a default filter
+                default_value = None
+                if "|" in template:
+                    parts = template.split("|", 1)
+                    template = parts[0].strip()
+                    filter_part = parts[1].strip()
+                    if filter_part.startswith("default("):
+                        default_value = filter_part[len("default("):-1].strip()
+                        # Basic handling for quotes
+                        if default_value.startswith(("'", '"')) and default_value.endswith(("'", '"')):
+                            default_value = default_value[1:-1]
+
                 parts = template.split(".", 1)
+                
+                # NEW: Add support for initial_context via `context.` prefix
+                if parts[0] == 'context':
+                    context_key = parts[1] if len(parts) > 1 else None
+                    if context_key and context_key in initial_context:
+                        resolved[key] = initial_context[context_key]
+                    else:
+                        resolved[key] = default_value if default_value is not None else value
+                    continue
+
                 if len(parts) == 2:
                     task_id, field_path = parts
                 else:
                     task_id, field_path = parts[0], ""
+                
                 # Support nested field resolution (e.g., result.patterns)
                 if task_id in results:
                     field_value = results[task_id]
@@ -427,9 +529,12 @@ class IARCompliantWorkflowEngine:
                             else:
                                 field_value = None
                                 break
-                    resolved[key] = field_value
+                    if field_value is not None:
+                        resolved[key] = field_value
+                    else:
+                        resolved[key] = default_value if default_value is not None else value
                 else:
-                    resolved[key] = value
+                    resolved[key] = default_value if default_value is not None else value
             else:
                 resolved[key] = value
         return resolved
@@ -443,8 +548,29 @@ class IARCompliantWorkflowEngine:
             "iar_validation": self.iar_validator.get_validation_status() if hasattr(self.iar_validator, 'get_validation_status') else None
         }
 
-    def load_workflow(self, workflow_path: str) -> Dict[str, Any]:
+    def load_workflow(self, workflow_name: str) -> Dict[str, Any]:
         """Load workflow definition from file."""
+        # Ensure the workflow path is absolute by joining with the engine's workflows_dir
+        if not os.path.isabs(workflow_name):
+            # Dynamic path resolution - check multiple possible locations
+            possible_paths = [
+                workflow_name,  # Direct path
+                os.path.join(self.workflows_dir, os.path.basename(workflow_name)),  # In workflows dir
+                os.path.join(os.path.dirname(os.path.dirname(__file__)), os.path.basename(workflow_name)),  # Project root
+                os.path.join(os.getcwd(), os.path.basename(workflow_name))  # Current working directory
+            ]
+            
+            workflow_path = None
+            for path in possible_paths:
+                if os.path.exists(path):
+                    workflow_path = path
+                    break
+            
+            if workflow_path is None:
+                raise FileNotFoundError(f"Workflow file not found. Searched: {possible_paths}")
+        else:
+            workflow_path = workflow_name
+
         try:
             logger.info(f"Attempting to load workflow definition from: {workflow_path}")
             with open(workflow_path, 'r') as f:
@@ -453,6 +579,12 @@ class IARCompliantWorkflowEngine:
             # Validate workflow structure
             if "tasks" not in workflow:
                 raise ValueError("Workflow must contain 'tasks' section")
+            
+            # Ensure workflow has a proper name
+            if "name" not in workflow and "workflow_name" not in workflow:
+                workflow["name"] = f"Unnamed Workflow ({os.path.basename(workflow_path)})"
+            elif "name" not in workflow and "workflow_name" in workflow:
+                workflow["name"] = workflow["workflow_name"]
 
             # Validate each task
             for task_id, task in workflow["tasks"].items():
@@ -471,6 +603,12 @@ class IARCompliantWorkflowEngine:
             self.last_workflow_name = workflow.get("name", "Unnamed Workflow")
             return workflow
 
+        except FileNotFoundError:
+            logger.error(f"Workflow file not found at the specified path: {workflow_path}")
+            raise
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to decode JSON from workflow file {workflow_path}: {e}")
+            raise
         except Exception as e:
             logger.error(f"Unexpected error loading workflow file {workflow_path}: {str(e)}")
             raise
@@ -612,7 +750,13 @@ class IARCompliantWorkflowEngine:
             
             # Apply other filters
             for f_spec in filters:  # default_filter_spec already removed
-                if f_spec['name'] == 'toJson':
+                if f_spec['name'] == 'from_json':
+                    try:
+                        current_value_for_placeholder = json.loads(current_value_for_placeholder)
+                    except (json.JSONDecodeError, TypeError):
+                        logger.warning(f"Task '{task_key}': Value for filter 'from_json' could not be parsed. Value: {current_value_for_placeholder}")
+                        # Keep the value as is or set to a default error indicator? Let's keep it for now.
+                elif f_spec['name'] == 'toJson':
                     current_value_for_placeholder = json.dumps(
                         current_value_for_placeholder)
                 elif f_spec['name'] == 'replace':
@@ -704,7 +848,12 @@ class IARCompliantWorkflowEngine:
                     # Apply other filters to
                     # current_value_for_placeholder_inner
                     for f_spec_inner in filters_inner:
-                        if f_spec_inner['name'] == 'toJson':
+                        if f_spec_inner['name'] == 'from_json':
+                            try:
+                                current_value_for_placeholder_inner = json.loads(current_value_for_placeholder_inner)
+                            except (json.JSONDecodeError, TypeError):
+                                logger.warning(f"Task '{task_key}': Value for filter 'from_json' could not be parsed. Value: {current_value_for_placeholder_inner}")
+                        elif f_spec_inner['name'] == 'toJson':
                             current_value_for_placeholder_inner = json.dumps(
                                 current_value_for_placeholder_inner)
                         elif f_spec_inner['name'] == 'replace':
@@ -979,7 +1128,8 @@ class IARCompliantWorkflowEngine:
         return str(data)
 
     def run_workflow(self, workflow_name: str,
-                     initial_context: Dict[str, Any]) -> Dict[str, Any]:
+                     initial_context: Dict[str, Any],
+                     timeout: int = 900) -> Dict[str, Any]:
         """
         Main entry point to run a workflow.
         Initializes context, manages the task queue, and returns the final results.
@@ -1000,11 +1150,39 @@ class IARCompliantWorkflowEngine:
         initial_context["workflow_run_id"] = run_id
         
         event_log = []
+        # Load externalized session state (non-negotiable) and inject into initial_context
+        try:
+            session_state = load_session_state()
+        except Exception:
+            session_state = {"facts_ledger": [], "updated_at": datetime.utcnow().isoformat() + "Z"}
+        initial_context = {**initial_context, "session_state": session_state}
+        # Prime SPR bundles if text context exists
+        try:
+            if self.spr_manager and hasattr(self.spr_manager, "scan_and_prime"):
+                prime_text = initial_context.get("prime_text") or initial_context.get("user_query") or ""
+                spr_defs = self.spr_manager.scan_and_prime(prime_text) or []
+                bundles = [create_context_bundle(sd, {}, initial_context) for sd in spr_defs]
+                if bundles:
+                    initial_context["context_bundles"] = merge_bundles(bundles)
+                    # Feed pinned policy headers to retrieval layer for modulation
+                    pinned_terms = [sd.get("term") for sd in spr_defs if sd.get("term")]
+                    if pinned_terms:
+                        initial_context.setdefault("retrieval_modulation", {})
+                        initial_context["retrieval_modulation"]["pinned_policy_terms"] = pinned_terms
+                        initial_context["retrieval_modulation"]["pinned_policy_weight"] = 2.0
+        except Exception:
+            pass
         runtime_context = {
                 "initial_context": initial_context,
             "workflow_run_id": run_id,
             "workflow_definition": workflow_definition,
         }
+
+        # Autonomous SIRC: refine complex intent into executable objective
+        try:
+            initial_context = maybe_autorun_sirc(initial_context, getattr(self, 'spr_manager', None))
+        except Exception:
+            pass
         
         tasks = workflow_definition.get('tasks', {})
         task_statuses = {key: "pending" for key in tasks}
@@ -1024,6 +1202,17 @@ class IARCompliantWorkflowEngine:
         
         while ready_tasks or running_tasks:
             
+            # --- NEW: Timeout Check ---
+            for task_key_running, start_time_running in list(running_tasks.items()):
+                if time.time() - start_time_running > timeout:
+                    error_msg = f"Task '{task_key_running}' timed out after {timeout} seconds"
+                    logger.error(error_msg)
+                    runtime_context[task_key_running] = {"error": error_msg, "reflection": {"status": "failed", "message": error_msg}}
+                    task_statuses[task_key_running] = "failed"
+                    del running_tasks[task_key_running]
+                    # This task is now "completed" in a failed state
+                    completed_tasks.add(task_key_running)
+
             if not ready_tasks:
                 if running_tasks:
                     time.sleep(0.1) 
@@ -1103,6 +1292,73 @@ class IARCompliantWorkflowEngine:
             is_success = "error" not in result or result.get("error") is None
             task_statuses[task_key] = "completed" if is_success else "failed"
             
+            # IAR contract validation (bedrock of trust)
+            reflection = result.get("reflection") or result.get("iar") or {}
+            if isinstance(reflection, dict) and reflection:
+                ok, issues = self.iar_validator.validate_structure(reflection)
+                if not ok:
+                    # Mark as failure on contract violation
+                    result.setdefault("error", "IAR contract violation")
+                    result["iar_issues"] = issues
+                    task_statuses[task_key] = "failed"
+                    is_success = False
+                else:
+                    # Record resonance metrics when available
+                    try:
+                        self.resonance_tracker.record_execution(task_key, reflection, runtime_context)
+                    except Exception:
+                        pass
+
+            # Append atomic fact to facts_ledger for successful tasks
+            if is_success:
+                try:
+                    append_fact(session_state, {
+                        "task": task_key,
+                        "status": "success",
+                        "confidence": (reflection or {}).get("confidence"),
+                        "summary": (reflection or {}).get("summary") or result.get("summary"),
+                    })
+                except Exception:
+                    pass
+
+                # Causal-preserving progressive summarization (flux-annotated digest)
+                try:
+                    # Use recent successful results as raw events window
+                    trail_window = []
+                    for k in list(runtime_context.keys())[-60:]:
+                        if isinstance(runtime_context.get(k), dict):
+                            entry = runtime_context.get(k)
+                            if isinstance(entry, dict) and ("reflection" in entry or "iar" in entry):
+                                trail_window.append({
+                                    'task_id': k,
+                                    'outputs': entry,
+                                    'iar_reflection': entry.get('reflection') or entry.get('iar') or {}
+                                })
+                    if trail_window:
+                        digest = build_flux_annotated_digest(trail_window)
+                        if isinstance(digest, dict):
+                            session_state.setdefault("digests", []).append(digest)
+                            save_session_state(session_state)
+                except Exception:
+                    pass
+
+                # Build superpositioned context bundles on SPR activations (from outputs)
+                try:
+                    if self.spr_manager and isinstance(result.get("output_text"), str):
+                        spr_defs = self.spr_manager.scan_and_prime(result["output_text"]) or []
+                        if spr_defs:
+                            bundles = [create_context_bundle(sd, runtime_context, initial_context) for sd in spr_defs]
+                            existing = initial_context.get("context_bundles")
+                            merged = merge_bundles(bundles if not existing else bundles + [existing])
+                            initial_context["context_bundles"] = merged
+                            # Predictive prefetch when bundles change
+                            try:
+                                trigger_predictive_prefetch(session_state, initial_context)
+                            except Exception:
+                                pass
+                except Exception:
+                    pass
+
             if is_success:
                 for next_task_key, next_task_info in tasks.items():
                     if next_task_key not in completed_tasks and next_task_key not in ready_tasks and next_task_key not in running_tasks:
@@ -1132,6 +1388,12 @@ class IARCompliantWorkflowEngine:
             logger.info(f"Detailed event log saved to: {event_log_path}")
         except Exception as e:
             logger.error(f"Failed to save event log to {event_log_path}: {e}")
+
+        # Persist session state at the end of run
+        try:
+            save_session_state(session_state)
+        except Exception:
+            pass
 
         final_results = self._summarize_run(
             workflow_name=self.last_workflow_name, run_id=run_id, status=final_status,
@@ -1227,7 +1489,7 @@ class IARCompliantWorkflowEngine:
                 
                 # Execute task
                 try:
-                    task_result = self._execute_task(task, results)
+                    task_result = self._execute_task(task, results, initial_context)
                     results["tasks"][task_name] = task_result
                     display_task_result(task_name, task_result)
                     display_workflow_progress(task_name, "Completed")

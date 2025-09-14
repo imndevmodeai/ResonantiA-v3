@@ -1,0 +1,48 @@
+{
+  "workflow_name": "Phoenix_Engine_Validation",
+  "description": "An end-to-end test for the ResonantWorkflowEngine_v3_1_CA.",
+  "tasks": {
+    "task_A_success": {
+      "action_type": "mock_tool_a",
+      "description": "A simple task that should succeed.",
+      "inputs": {
+        "param_a": "Initial Data"
+      }
+    },
+    "task_B_conditional_pass": {
+      "action_type": "mock_tool_b",
+      "description": "A task that depends on A and has a condition that should pass.",
+      "dependencies": ["task_A_success"],
+      "inputs": {
+        "input_from_task_A": "{{ task_A_success.processed_data_A }}",
+        "param_b": "Conditional Pass"
+      },
+      "condition": "{{ task_A_success.reflection.confidence }} > 0.9"
+    },
+    "task_C_conditional_skip": {
+      "action_type": "mock_tool_a",
+      "description": "A task with a condition that should fail, causing it to be skipped.",
+      "dependencies": ["task_A_success"],
+      "inputs": { "param_a": "This should not run" },
+      "condition": "{{ task_A_success.reflection.confidence }} > 0.99"
+    },
+    "task_D_after_skip": {
+        "action_type": "mock_tool_a",
+        "description": "This task depends on a skipped task and should also be skipped.",
+        "dependencies": ["task_C_conditional_skip"],
+        "inputs": { "param_a": "This should also not run" }
+    },
+    "task_E_critical_fail": {
+        "action_type": "mock_tool_b",
+        "description": "This task will intentionally fail, halting its branch.",
+        "dependencies": ["task_A_success"],
+        "inputs": { "param_b": "critical_fail" }
+    },
+    "task_F_after_fail": {
+        "action_type": "mock_tool_a",
+        "description": "This task depends on a failed task and must be skipped.",
+        "dependencies": ["task_E_critical_fail"],
+        "inputs": { "param_a": "This must not run" }
+    }
+  }
+} 

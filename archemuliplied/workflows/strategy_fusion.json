@@ -1,0 +1,194 @@
+{
+  "name": "Strategy Fusion Workflow (RISE Phase B)",
+  "description": "The 'genius' core of the RISE engine. It analyzes a problem from three parallel perspectives (Causal, Simulative, Comparative) and fuses the resulting insights with the Specialist Agent's report into a single, multi-faceted strategic dossier.",
+  "version": "2.0",
+  "author": "ArchE RISE v2.0 Genesis Protocol",
+  "created_date": "2025-07-24",
+  "tags": ["rise", "phase_b", "genius_core", "parallel_analysis", "cfp", "abm", "causal_inference"],
+  
+  "inputs": {
+    "problem_description": {
+      "type": "string",
+      "description": "The original problem to be analyzed",
+      "required": true
+    },
+    "specialized_agent": {
+      "type": "object",
+      "description": "The forged specialized cognitive agent from metamorphosis_protocol",
+      "required": true
+    },
+    "knowledge_base": {
+      "type": "object",
+      "description": "The acquired knowledge base from knowledge_scaffolding",
+      "required": true
+    },
+    "context_data": {
+      "type": "object",
+      "description": "Any additional context or data provided with the problem",
+      "required": false
+    },
+    "initial_context": {
+      "type": "object",
+      "description": "Initial context including case_event_timeline, core_hypothesis, narratives, and scenario configs",
+      "required": false
+    }
+  },
+  
+  "outputs": {
+    "fused_strategic_dossier": {
+      "description": "Comprehensive strategic dossier integrating all parallel pathway insights",
+      "source": "synthesize_fused_dossier"
+    }
+  },
+  
+  "tasks": {
+    "initiate_fusion": {
+      "description": "Initializes the fusion process and validates inputs from Phase A.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "🎯 RISE Phase B Initiated - Genius Core Activated\n\nInputs received:\n- Problem: {{problem_description}}\n- Specialized Agent: {{specialized_agent}}\n- Knowledge Base: {{knowledge_base}}\n- Context Data: {{context_data}}\n\nBeginning parallel insight generation across three cognitive pathways:\n1. Causal Analysis Pathway\n2. Simulation (ABM) Pathway  \n3. Comparative (CFP) Pathway\n4. Specialist Consultation Pathway\n\nArchitectural Principle: Parallel execution forces multi-perspective analysis."
+      },
+      "dependencies": []
+    },
+
+    "load_causal_csv": {
+      "description": "Loads tabular causal dataset from CSV for real effect estimation.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import csv, json\npath='data/causal_demo.csv'\ndata={}\nwith open(path, newline='') as f:\n    r=csv.DictReader(f)\n    for row in r:\n        for k,v in row.items():\n            try:\n                # try float coercion\n                val = float(v)\n            except Exception:\n                val = v\n            data.setdefault(k, []).append(val)\nprint(json.dumps({'data': data}))"
+      },
+      "dependencies": ["initiate_fusion"]
+    },
+    
+    "pathway_causal_analysis": {
+      "description": "Estimates causal effect using real tabular data (CSV) with specified treatment/outcome/confounders.",
+      "action_type": "perform_causal_inference",
+      "inputs": {
+        "operation": "estimate_effect",
+        "data": "{{ load_causal_csv.data }}",
+        "treatment": "x",
+        "outcome": "y",
+        "confounders": ["z"],
+        "method": "backdoor.linear_regression"
+      },
+      "dependencies": ["load_causal_csv"]
+    },
+    
+    "pathway_simulation_abm": {
+      "description": "Simulates emergent behaviors of key agents to forecast the effectiveness of potential strategies.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "create_model",
+        "model_definition_path": "models/strategic_interaction_model.py",
+        "simulation_params": {
+          "narratives_to_test": ["{{initial_context.narrative_a}}", "{{initial_context.narrative_b}}"],
+          "num_agents": 100,
+          "simulation_runs": 1000,
+          "agent_types": ["stakeholder", "decision_maker", "influencer", "resistor"],
+          "interaction_rules": "complex_adaptive",
+          "emergence_detection": true,
+          "output_metrics": ["consensus", "conflict", "efficiency", "adaptation_rate"]
+        },
+        "visualization": true,
+        "statistical_analysis": true
+      },
+      "dependencies": ["initiate_fusion"]
+    },
+
+    "run_simulation_abm": {
+      "description": "Runs the ABM model created in the previous step and collects results.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model": "{{pathway_simulation_abm.model | default(pathway_simulation_abm.result.model)}}",
+        "steps": 200,
+        "visualize": true,
+        "statistical_analysis": true
+      },
+      "dependencies": ["pathway_simulation_abm"]
+    },
+    
+    "pathway_comparative_cfp": {
+      "description": "Compares the strategic trajectories of two potential future states using Comparative Fluxual Processing.",
+      "action_type": "run_cfp",
+      "inputs": {
+        "system_a_config": "{{ initial_context.scenario_a_config | default({\"quantum_state\": [0.8, 0.6]}) }}",
+        "system_b_config": "{{ initial_context.scenario_b_config | default({\"quantum_state\": [0.6, 0.7]}) }}",
+        "time_horizon": 365,
+        "integration_steps": 1000,
+        "flux_analysis": {
+          "energy_thresholds": [0.1, 0.5, 0.9],
+          "stability_metrics": ["lyapunov_exponent", "attractor_strength"],
+          "phase_space_mapping": true
+        },
+        "comparative_metrics": ["trajectory_divergence", "convergence_probability", "optimal_path"]
+      },
+      "dependencies": ["initiate_fusion"]
+    },
+    
+    "pathway_specialist_consultation": {
+      "description": "Consults the sandboxed, expert clone (SCA) forged in Phase A for its specialized analysis.",
+      "action_type": "invoke_specialist_agent",
+      "inputs": {
+        "specialized_agent": "{{specialized_agent}}",
+        "task_prompt": "Analyze the core problem based on your specialized knowledge. Provide key insights, identify hidden risks, and propose domain-specific strategies. Consider:\n1. Domain-specific patterns and trends\n2. Historical precedents and lessons learned\n3. Emerging risks and opportunities\n4. Optimal intervention points\n5. Success probability factors\n\nProblem: {{problem_description}}\nKnowledge Base: {{knowledge_base}}\n\nProvide expert analysis in your specialized domain voice.",
+        "context_injection": "{{knowledge_base}}",
+        "response_format": "structured_analysis"
+      },
+      "dependencies": ["initiate_fusion"]
+    },
+    
+    "synthesize_fused_dossier": {
+      "description": "Synthesizes the outputs of all four parallel pathways into a single, fused strategic dossier.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "🎭 **ResonantiA Maestro - Strategic Synthesis**\n\nYou are the grand synthesizer of the RISE engine. Your task is to fuse insights from four parallel cognitive pathways into a single, coherent strategic dossier.\n\n**Problem**: {{problem_description}}\n\n**Input Pathways:**\n1. **Causal Analysis**: {{pathway_causal_analysis}}\n2. **Simulation (ABM)**: {{run_simulation_abm}}\n3. **Comparative (CFP)**: {{pathway_comparative_cfp}}\n4. **Specialist Consultation**: {{pathway_specialist_consultation}}\n\nIf any pathways failed or are empty, proceed with synthesis using available inputs and the knowledge base: {{knowledge_base}}.\n\n**Synthesis Requirements:**\n- Identify convergent insights across pathways\n- Resolve any contradictions between pathways\n- Highlight unique contributions from each pathway\n- Create a unified strategic narrative\n- Provide actionable recommendations\n- Assess confidence levels for each insight\n\n**Output Format:**\nCreate a comprehensive strategic dossier with:\n1. Executive Summary\n2. Multi-Pathway Analysis\n3. Convergent Insights\n4. Strategic Recommendations\n5. Implementation Roadmap\n6. Risk Assessment\n7. Success Metrics\n\nThis is the moment where the genius of the RISE engine manifests. Synthesize with precision and insight.",
+        "model": "gemini-1.5-pro-latest",
+        "temperature": 0.3,
+        "max_tokens": 5000,
+        "system_prompt": "You are the ResonantiA Maestro, the grand synthesizer of the RISE engine. Your role is to weave disparate cognitive insights into coherent strategic wisdom."
+      },
+      "dependencies": [
+        "pathway_causal_analysis",
+        "run_simulation_abm", 
+        "pathway_comparative_cfp",
+        "pathway_specialist_consultation"
+      ]
+    },
+    
+    "validate_fusion_quality": {
+      "description": "Validates the quality and completeness of the fused strategic dossier.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Validate the quality and completeness of the fused strategic dossier. Assess:\n\n**Quality Metrics:**\n1. Comprehensiveness: Does it cover all critical aspects?\n2. Coherence: Are insights logically connected?\n3. Actionability: Are recommendations specific and implementable?\n4. Evidence: Are insights well-supported by pathway analysis?\n5. Innovation: Does it provide novel strategic perspectives?\n\n**Completeness Check:**\n- All pathways represented ✓\n- Convergent insights identified ✓\n- Contradictions resolved ✓\n- Strategic narrative coherent ✓\n- Implementation guidance clear ✓\n\n**Fused Dossier:** {{synthesize_fused_dossier.result.response_text}}\n\nProvide validation results and identify any gaps or areas for improvement.",
+        "model": "gemini-1.5-pro-latest",
+        "temperature": 0.2,
+        "max_tokens": 2000
+      },
+      "dependencies": ["synthesize_fused_dossier"]
+    }
+  },
+  
+  "final_output": {
+    "fused_strategic_dossier": "{{synthesize_fused_dossier.result.response_text}}",
+    "parallel_insights": {
+      "causal_analysis": "{{pathway_causal_analysis.results}}",
+      "simulation_abm": "{{run_simulation_abm.results}}",
+      "comparative_cfp": "{{pathway_comparative_cfp.results}}",
+      "specialist_consultation": "{{pathway_specialist_consultation.results}}"
+    },
+    "validation_results": "{{validate_fusion_quality.output}}",
+    "fusion_complete": true
+  },
+  
+  "metadata": {
+    "phase": "B",
+    "purpose": "genius_core",
+    "estimated_duration": "60-120 seconds",
+    "complexity": "maximum",
+    "requires_internet": true,
+    "architectural_principle": "parallel_pathway_analysis",
+    "cognitive_tools_integrated": ["CFP", "ABM", "CausalInference", "SpecialistAgent"]
+  }
+} 

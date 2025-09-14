@@ -1354,7 +1354,7 @@
                 "id": "KeyholderoverridE"
             },
             {
-                "spr_id": "ProportionalResonantControlPatterN",
+                "spr_id": "ProportionalresonantcontrolpatterN",
                 "term": "Proportional Resonant Control Pattern",
                 "definition": "An architectural pattern inspired by PR controllers in power electronics for achieving high-fidelity Implementation resonancE in specific frequency domains. Combines general-purpose error correction (Proportional gain) with specialized, high-gain extraction mechanisms (Resonant gain) tuned to target domains, operating in native context to minimize complexity. Eliminates oscillatory errors between reference signals (protocol definitions) and system outputs (actual behavior).",
                 "category": "ArchitecturalPattern",
@@ -1379,7 +1379,7 @@
                 "blueprint_details": "Reference: Power Electronics PR Controller Theory applied to cognitive architecture. Key components: \u03c9o (target frequency/domain), Kp (general error correction), Ki (specialized high-gain response), wc (operational flexibility). Successfully demonstrated elimination of Implementation Resonance query oscillatory error from complete failure to precise definition extraction.",
                 "usage_context": "Apply when system exhibits oscillatory errors in specific conceptual domains. Create domain-specific detection logic, implement high-gain specialized extraction for that domain, maintain general proportional control for other queries. Monitor error reduction and tune gains as needed.",
                 "success_metrics": "Error magnitude reduction from maximum to near-zero, successful extraction of fragmented information across multiple chunks, elimination of external tool fallback requirements for domain-specific queries.",
-                "id": "ProportionalResonantControlPatterN"
+                "id": "ProportionalresonantcontrolpatterN"
             },
             {
                 "spr_id": "GeminiCodeExecutoR",
@@ -2013,7 +2013,7 @@
             },
             {
                 "type": "supports",
-                "source": "ProportionalResonantControlPatterN",
+                "source": "ProportionalresonantcontrolpatterN",
                 "target": "CognitiveresonancE"
             },
             {

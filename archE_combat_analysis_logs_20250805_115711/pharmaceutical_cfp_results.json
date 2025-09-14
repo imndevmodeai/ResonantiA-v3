@@ -1,0 +1,97 @@
+{
+  "timestamp": "2025-08-05T12:10:52.205734",
+  "duration_seconds": 0.010662,
+  "high_price_config": {
+    "quantum_state": [
+      0.9,
+      0.8,
+      0.2,
+      0.7
+    ],
+    "evolution_model_type": "hamiltonian",
+    "hamiltonian_matrix": [
+      [
+        0.2,
+        0.1,
+        0.4,
+        0.3
+      ],
+      [
+        0.1,
+        0.2,
+        0.3,
+        0.4
+      ],
+      [
+        0.4,
+        0.3,
+        0.2,
+        0.1
+      ],
+      [
+        0.3,
+        0.4,
+        0.1,
+        0.2
+      ]
+    ]
+  },
+  "low_price_config": {
+    "quantum_state": [
+      0.3,
+      0.2,
+      0.9,
+      0.1
+    ],
+    "evolution_model_type": "hamiltonian",
+    "hamiltonian_matrix": [
+      [
+        0.1,
+        0.2,
+        0.3,
+        0.4
+      ],
+      [
+        0.2,
+        0.1,
+        0.4,
+        0.3
+      ],
+      [
+        0.3,
+        0.4,
+        0.1,
+        0.2
+      ],
+      [
+        0.4,
+        0.3,
+        0.2,
+        0.1
+      ]
+    ]
+  },
+  "analysis_results": {
+    "observable_analyzed": "energy",
+    "time_horizon": 365.0,
+    "evolution_model_used": "placeholder",
+    "system_dimension": 4,
+    "quantum_flux_difference": 165.26345716037198,
+    "entanglement_correlation_MI": 0.0,
+    "entropy_system_a": 1.6664847382851664,
+    "entropy_system_b": 0.7797800794189962,
+    "spooky_flux_divergence": null,
+    "reflection": {
+      "status": "Success",
+      "summary": "CFP analysis completed. Successfully calculated: ['quantum_flux_difference', 'entanglement_correlation_MI', 'entropy_system_a', 'entropy_system_b'].",
+      "confidence": 0.85,
+      "alignment_check": "Aligned with comparing dynamic system states.",
+      "potential_issues": [
+        "State evolution was placeholder (no actual dynamics simulated). QFD may not be meaningful.",
+        "Spooky Flux Divergence not calculated (requires classical baseline)."
+      ],
+      "raw_output_preview": "{\"quantum_flux_difference\": 165.26345716037198, \"entanglement_correlation_MI\": 0.0, \"entropy_system_a\": 1.6664847382851664, \"entropy_system_b\": 0.7797..."
+    }
+  },
+  "status": "completed"
+}

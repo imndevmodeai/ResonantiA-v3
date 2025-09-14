@@ -1,0 +1,324 @@
+{
+  "arche_1753704000_c21f_febbd4c2": {
+    "problem_description": "Test problem 1",
+    "problem_hash": "febbd4c2",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753704198.919333,
+    "last_accessed": 1753704198.919333,
+    "access_count": 1
+  },
+  "arche_1753704000_c21f_cbc06d16": {
+    "problem_description": "Test problem 2",
+    "problem_hash": "cbc06d16",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753704208.0387774,
+    "last_accessed": 1753704208.0387774,
+    "access_count": 1
+  },
+  "arche_1753704000_c21f_055ffbf9": {
+    "problem_description": "Test session",
+    "problem_hash": "055ffbf9",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753704231.4333866,
+    "last_accessed": 1753704231.4333868,
+    "access_count": 1
+  },
+  "arche_1753786800_c21f_055ffbf9": {
+    "problem_description": "Test session",
+    "problem_hash": "055ffbf9",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753787029.2297652,
+    "last_accessed": 1753787029.2297654,
+    "access_count": 1
+  },
+  "arche_1753786800_c21f_936dbc87": {
+    "problem_description": "What is 2+2?",
+    "problem_hash": "936dbc87",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753788466.4728482,
+    "last_accessed": 1753788466.4728482,
+    "access_count": 1
+  },
+  "arche_1753786800_c21f_2a083d7d": {
+    "problem_description": "Design a comprehensive strategy for navigating an unknown competitive landscape where information is",
+    "problem_hash": "2a083d7d",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753788766.4824066,
+    "last_accessed": 1753792002.7862923,
+    "access_count": 4
+  },
+  "arche_1753786800_c21f_5de160c4": {
+    "problem_description": "ArchE - ResonantiA Protocol v3.1-CA\nConnected\nProtocol Status: 0/10\nShow RISE\nHide Canvas\nIar Enable",
+    "problem_hash": "5de160c4",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753788836.3375127,
+    "last_accessed": 1753788836.3375127,
+    "access_count": 1
+  },
+  "arche_1753786800_c21f_2b3a924f": {
+    "problem_description": " Design a comprehensive strategy for navigating an unknown competitive landscape where information i",
+    "problem_hash": "2b3a924f",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753788924.457116,
+    "last_accessed": 1753788924.457116,
+    "access_count": 1
+  },
+  "arche_1753786800_c21f_8fd1d215": {
+    "problem_description": "There is a rapidly developing geopolitical crisis in the South China Sea. Initial reports are confli",
+    "problem_hash": "8fd1d215",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753790119.07542,
+    "last_accessed": 1753790119.07542,
+    "access_count": 1
+  },
+  "arche_1753790400_c21f_5ea5870a": {
+    "problem_description": "There is a rapidly developing geopolitical crisis in the South China Sea. Initial reports are confli",
+    "problem_hash": "5ea5870a",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753790643.7112067,
+    "last_accessed": 1753791099.0306926,
+    "access_count": 3
+  },
+  "arche_1753790400_c21f_207de85d": {
+    "problem_description": "Session ID: session_1753790796695_9vzavedbh\nAvailable Workflows: 3",
+    "problem_hash": "207de85d",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753790858.0102687,
+    "last_accessed": 1753790858.015246,
+    "access_count": 2
+  },
+  "arche_1753790400_c21f_2a083d7d": {
+    "problem_description": "Design a comprehensive strategy for navigating an unknown competitive landscape where information is",
+    "problem_hash": "2a083d7d",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753792566.4307895,
+    "last_accessed": 1753792566.4349422,
+    "access_count": 2
+  },
+  "arche_1753840800_c21f_055ffbf9": {
+    "problem_description": "Test session",
+    "problem_hash": "055ffbf9",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1753840952.2664783,
+    "last_accessed": 1753840952.2664783,
+    "access_count": 1
+  },
+  "arche_1754020800_c21f_c885077e": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"I am the CEO of a publicly traded pharmaceutical company. We have develop",
+    "problem_hash": "c885077e",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754021793.810944,
+    "last_accessed": 1754021793.811395,
+    "access_count": 2
+  },
+  "arche_1754020800_c21f_28c0aac7": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"I am the CEO of a publicly traded pharmaceutical company. We have develop",
+    "problem_hash": "28c0aac7",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754022583.8690083,
+    "last_accessed": 1754022583.869456,
+    "access_count": 2
+  },
+  "arche_1754020800_c21f_d4221969": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"I am the CEO of a publicly traded pharmaceutical company. We have develop",
+    "problem_hash": "d4221969",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754023492.181753,
+    "last_accessed": 1754023492.184526,
+    "access_count": 2
+  },
+  "arche_1754020800_c21f_49b78fe0": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"There is a rapidly developing geopolitical crisis in the South China Sea.",
+    "problem_hash": "49b78fe0",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754024058.9275427,
+    "last_accessed": 1754024058.9288495,
+    "access_count": 2
+  },
+  "arche_1754020800_c21f_40270c58": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"There is a rapidly developing geopolitical crisis in the South China Sea.",
+    "problem_hash": "40270c58",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754024170.2945476,
+    "last_accessed": 1754024170.2958796,
+    "access_count": 2
+  },
+  "arche_1754024400_c21f_1cb9461b": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"I am the CEO of a publicly traded pharmaceutical company. We have develop",
+    "problem_hash": "1cb9461b",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754026305.099746,
+    "last_accessed": 1754026305.101255,
+    "access_count": 2
+  },
+  "arche_1754046000_c21f_d7865700": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, ",
+    "problem_hash": "d7865700",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754048821.4098313,
+    "last_accessed": 1754048821.4103348,
+    "access_count": 2
+  },
+  "arche_1754103600_c21f_615310d7": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, ",
+    "problem_hash": "615310d7",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754107100.4884045,
+    "last_accessed": 1754107100.4951785,
+    "access_count": 2
+  },
+  "arche_1754103600_c21f_77a7dd69": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, ",
+    "problem_hash": "77a7dd69",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754107162.4300885,
+    "last_accessed": 1754107162.4333298,
+    "access_count": 2
+  },
+  "arche_1754107200_c21f_02558fb6": {
+    "problem_description": "{\"type\":\"query\",\"content\":\"iment trends.\\\\\\\"\\\\n* `{develop_analytical_frameworks.output}`:  \\\\\\\"Deve",
+    "problem_hash": "02558fb6",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754107366.0983517,
+    "last_accessed": 1754107366.0993736,
+    "access_count": 2
+  },
+  "arche_1754406000_c21f_855ae7dd": {
+    "problem_description": "\nAnalyze the realistic outcome of a combat scenario between 30 unarmed men and a silverback gorilla ",
+    "problem_hash": "855ae7dd",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754407612.6138296,
+    "last_accessed": 1754407612.6143713,
+    "access_count": 2
+  },
+  "arche_1754406000_c21f_61987a6d": {
+    "problem_description": "\nAnalyze how 30 unarmed men can maximize their chances of victory against a silverback gorilla \ngive",
+    "problem_hash": "61987a6d",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754408656.9407666,
+    "last_accessed": 1754408656.9411986,
+    "access_count": 2
+  },
+  "arche_1754406000_c21f_2c9f5298": {
+    "problem_description": "\n    Analyze how 30 unarmed men can maximize their chances of victory against a silverback gorilla \n",
+    "problem_hash": "2c9f5298",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754409453.5157466,
+    "last_accessed": 1754409453.516476,
+    "access_count": 2
+  },
+  "arche_1754409600_c21f_cd39af60": {
+    "problem_description": "\n    I am the CEO of a publicly traded pharmaceutical company. We have developed a life-saving drug ",
+    "problem_hash": "cd39af60",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754409748.3696594,
+    "last_accessed": 1754409748.3701575,
+    "access_count": 2
+  },
+  "arche_1754409600_c21f_d09afacd": {
+    "problem_description": "I am the CEO of a publicly traded pharmaceutical company. We have developed a life-saving drug for a",
+    "problem_hash": "d09afacd",
+    "user_hash": "c21f",
+    "user_id": "default",
+    "created_time": 1754411616.4828777,
+    "last_accessed": 1754411616.4839296,
+    "access_count": 2
+  },
+  "facts_ledger": [
+    {
+      "task": "execute_rise_protocol",
+      "status": "success",
+      "confidence": null,
+      "summary": null,
+      "ts": "2025-09-12T05:18:51.364711Z"
+    },
+    {
+      "task": "deconstruct_query",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Generated 16 characters of text.",
+      "ts": "2025-09-12T05:53:31.950717Z"
+    },
+    {
+      "task": "deconstruct_and_refine_query",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Generated 16 characters of text.",
+      "ts": "2025-09-12T05:53:38.620487Z"
+    },
+    {
+      "task": "refine_and_rephrase",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Generated 16 characters of text.",
+      "ts": "2025-09-12T05:53:47.341880Z"
+    },
+    {
+      "task": "log_refined_objective",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Displayed 50 characters to the console.",
+      "ts": "2025-09-12T05:53:47.343663Z"
+    }
+  ],
+  "updated_at": "2025-09-14T12:29:30.793846Z",
+  "digests": [
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "deconstruct_query"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_query",
+        "deconstruct_and_refine_query"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_query",
+        "deconstruct_and_refine_query",
+        "refine_and_rephrase"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_query",
+        "deconstruct_and_refine_query",
+        "refine_and_rephrase",
+        "log_refined_objective"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "name": "Knowledge Scaffolding & Dynamic Specialization (Simple)",
+  "description": "Phase A of RISE v2.0: Acquire domain knowledge and forge specialist agent with robust null handling",
+  "version": "2.2",
+  "inputs": {
+    "problem_description": {
+      "type": "string",
+      "description": "The problem to be analyzed and solved",
+      "required": true
+    }
+  },
+  "tasks": {
+    "deconstruct_problem": {
+      "action_type": "generate_text_llm",
+      "description": "Deconstruct the problem into core components and identify domain requirements",
+      "inputs": {
+        "prompt": "Analyze the following problem and deconstruct it into core components:\n\n{{problem_description}}\n\nIdentify:\n1. Core domain areas\n2. Key variables and unknowns\n3. Strategic requirements\n4. Risk factors\n5. Success criteria\n\nOutput your analysis as a structured JSON object with a key 'deconstruction_text'.",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 2000,
+        "temperature": 0.3
+      },
+      "dependencies": []
+    },
+    "extract_domain": {
+      "action_type": "generate_text_llm",
+      "description": "Extract the primary domain from the problem description",
+      "inputs": {
+        "prompt": "Given this problem description, identify the most relevant domain area:\n\n{{problem_description}}\n\nExtract the primary domain as a JSON object with one key: 'domain'. Use a general domain if specific domain cannot be determined.\n\nExample: {\"domain\": \"Strategic Analysis\"}",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 100,
+        "temperature": 0.1
+      },
+      "dependencies": ["deconstruct_problem"]
+    },
+    "validate_domain": {
+      "action_type": "execute_code",
+      "description": "[PhasegateS] Validate the extracted domain and provide a fallback.",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nraw_domain = {{extract_domain.output.domain | default('null')}}\ndomain = raw_domain if isinstance(raw_domain, str) and raw_domain.strip() and raw_domain.lower() != 'null' else 'General Strategic Analysis'\nprint(json.dumps({'domain': domain, 'was_fallback': (domain == 'General Strategic Analysis')}))"
+      },
+      "dependencies": ["extract_domain"]
+    },
+    "acquire_domain_knowledge": {
+      "action_type": "execute_web_task",
+      "description": "Acquire relevant domain knowledge and current information",
+      "inputs": {
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "latest developments in {{validate_domain.output.domain}} strategy competitive landscape analysis",
+        "max_results": 10,
+        "validate_urls": true
+      },
+      "dependencies": ["validate_domain"]
+    },
+    "validate_web_search": {
+      "action_type": "execute_code",
+      "description": "[PhasegateS] Validate that the web search returned usable results; enable fallbacks if not.",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nraw = {{acquire_domain_knowledge}}\ntry:\n    data = json.loads(raw) if isinstance(raw, str) else (raw or {})\nexcept Exception:\n    data = raw if isinstance(raw, dict) else {}\nresults = data.get('results')\nvalid = isinstance(results, list) and len(results) > 0\nprint(json.dumps({'search_is_valid': valid, 'results_count': (len(results) if isinstance(results, list) else 0)}))"
+      },
+      "dependencies": ["acquire_domain_knowledge"]
+    },
+    "probe_codebase": {
+      "action_type": "search_codebase",
+      "description": "Search internal codebase for domain-aligned artifacts (SPRs, workflows, docs).",
+      "inputs": {
+        "pattern": "{{ validate_domain.output.domain }}",
+        "root": ".",
+        "case_insensitive": true,
+        "context_lines": 1,
+        "max_results": 50,
+        "include_globs": ["Three_PointO_ArchE/**", "workflows/**", "**/*.md", "README.md"],
+        "exclude_globs": ["**/.venv/**", "**/node_modules/**", "**/logs/**", "**/outputs/**"]
+      },
+      "dependencies": ["validate_domain"]
+    },
+    "fallback_navigate": {
+      "action_type": "navigate_web",
+      "description": "Fallback lightweight navigation to seed knowledge when search results are empty.",
+      "condition": "{{ validate_web_search.output.search_is_valid }} == true",
+      "inputs": {
+        "url": "https://en.wikipedia.org/wiki/{{ validate_domain.output.domain }}",
+        "selector": "#mw-content-text",
+        "timeout": 15
+      },
+      "dependencies": ["validate_web_search"]
+    },
+    "assemble_session_knowledge_base": {
+      "action_type": "execute_code",
+      "description": "Assemble a structured session knowledge base from web search, fallback navigation, and internal codebase probes.",
+      "inputs": {
+        "language": "python",
+        "input_data": "{{ { 'problem_description': problem_description, 'domain': validate_domain.output.domain, 'deconstruction': deconstruct_problem.output, 'web_search': acquire_domain_knowledge, 'navigation': fallback_navigate, 'codebase': probe_codebase } | toJson | default('{}') }}",
+        "code": "import sys, json\nraw = sys.stdin.read()\ntry:\n    data = json.loads(raw) if raw else {}\nexcept Exception:\n    data = {}\n\n# Coercion helpers\ndef _coerce_obj(x):\n    if isinstance(x, str):\n        try:\n            return json.loads(x)\n        except Exception:\n            return {}\n    return x or {}\n\nproblem = data.get('problem_description')\ndomain = data.get('domain') or 'General'\ndecon = _coerce_obj(data.get('deconstruction'))\nweb = _coerce_obj(data.get('web_search'))\nnav = _coerce_obj(data.get('navigation'))\ncode = _coerce_obj(data.get('codebase'))\nresults = web.get('results') if isinstance(web, dict) else []\nnav_text = None\nif isinstance(nav, dict):\n    nav_text = nav.get('extracted_text') or nav.get('text') or nav.get('content')\ncode_hits = code.get('results') if isinstance(code, dict) else []\nkb = {\n  'domain': domain,\n  'problem_description': problem,\n  'problem_analysis': decon,\n  'search_results': results or [],\n  'fallback_navigation_text_preview': (nav_text[:1200] if isinstance(nav_text, str) else None),\n  'codebase_hits': code_hits[:50]\n}\nprint(json.dumps({'session_knowledge_base': kb}))"
+      },
+      "dependencies": ["deconstruct_problem", "validate_domain", "acquire_domain_knowledge", "validate_web_search", "probe_codebase", "fallback_navigate"]
+    },
+    "create_fallback_knowledge": {
+      "action_type": "generate_text_llm",
+      "description": "Create fallback knowledge when search fails",
+      "inputs": {
+        "prompt": "Create a comprehensive knowledge base for the domain: {{validate_domain.output.domain}}\n\nProblem: {{problem_description}}\n\nGenerate:\n1. Domain overview and key concepts\n2. Current trends and developments\n3. Strategic considerations\n4. Risk factors and challenges\n5. Success factors and best practices\n\nFormat as structured knowledge that can be used for strategic analysis.",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 2000,
+        "temperature": 0.4
+      },
+      "dependencies": ["validate_domain"]
+    },
+    "analyze_specialization_requirements": {
+      "action_type": "generate_text_llm",
+      "description": "Analyze what specialized capabilities are needed for this problem",
+      "inputs": {
+        "prompt": "Based on the problem description and domain, analyze what specialized capabilities and expertise are required:\n\nProblem: {{problem_description}}\nDomain: {{validate_domain.output.domain}}\n\nIdentify:\n1. Required specialized knowledge areas\n2. Critical analytical capabilities\n3. Strategic thinking patterns\n4. Risk assessment frameworks\n5. Implementation expertise\n\nProvide a comprehensive analysis of the required capabilities.",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 2000,
+        "temperature": 0.4
+      },
+      "dependencies": ["acquire_domain_knowledge", "create_fallback_knowledge"]
+    },
+    "forge_specialist_agent": {
+      "action_type": "generate_text_llm",
+      "description": "Forge a specialized agent with the required capabilities",
+      "inputs": {
+        "prompt": "Create a specialized agent profile for solving this problem:\n\nProblem: {{problem_description}}\nDomain: {{validate_domain.output.domain}}\nRequirements: {{analyze_specialization_requirements.output}}\n\nDefine:\n1. Agent's core expertise and background\n2. Analytical frameworks and methodologies\n3. Strategic thinking patterns\n4. Risk assessment capabilities\n5. Implementation approach\n6. Success metrics and validation criteria",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 2500,
+        "temperature": 0.3
+      },
+      "dependencies": ["analyze_specialization_requirements"]
+    },
+    "validate_specialist_agent": {
+      "action_type": "generate_text_llm",
+      "description": "Validate that the specialist agent has the required capabilities",
+      "inputs": {
+        "prompt": "Validate the specialist agent against the original problem requirements:\n\nProblem: {{problem_description}}\nDomain: {{validate_domain.output.domain}}\nRequirements: {{analyze_specialization_requirements.output}}\nSpecialist Agent: {{forge_specialist_agent.output}}\n\nAssess:\n1. Coverage of required capabilities\n2. Alignment with problem requirements\n3. Strategic fit and expertise match\n4. Potential gaps or limitations\n5. Confidence in agent's ability to solve the problem",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 1500,
+        "temperature": 0.2
+      },
+      "dependencies": ["forge_specialist_agent"]
+    },
+    "build_knowledge_base": {
+      "action_type": "generate_text_llm",
+      "description": "Build the final session knowledge base",
+      "inputs": {
+        "prompt": "Create a comprehensive session knowledge base for the RISE engine:\n\nProblem: {{problem_description}}\nDomain: {{validate_domain.output.domain}}\nProblem Analysis: {{deconstruct_problem.output}}\nDomain Knowledge: {{acquire_domain_knowledge.output}}\nFallback Knowledge: {{create_fallback_knowledge.output}}\nSpecialization Requirements: {{analyze_specialization_requirements.output}}\n\nOrganize this into a structured knowledge base with:\n1. Domain information and context\n2. Problem analysis and decomposition\n3. Strategic considerations\n4. Risk factors and challenges\n5. Implementation guidance\n6. Success metrics and validation criteria\n\nFormat as a comprehensive knowledge base that can be used for strategic analysis.",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 3000,
+        "temperature": 0.3
+      },
+      "dependencies": ["validate_specialist_agent"]
+    }
+  },
+  "outputs": {
+    "session_knowledge_base": {
+      "description": "Accumulated domain knowledge and insights",
+      "source": "assemble_session_knowledge_base"
+    },
+    "specialized_agent": {
+      "description": "The forged specialist agent with required capabilities",
+      "source": "validate_specialist_agent"
+    },
+    "knowledge_acquisition_metrics": {
+      "description": "Metrics on knowledge acquisition effectiveness",
+      "source": "acquire_domain_knowledge"
+    }
+  }
+} 

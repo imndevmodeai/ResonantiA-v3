@@ -15,6 +15,12 @@ from typing import Dict, List, Tuple, Optional, Any
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 
+# This is a forward declaration for type hinting, as the class is not available at this point
+class BaseLLMProvider(ABC):
+    @abstractmethod
+    def complete(self, prompt: str, **kwargs) -> Dict[str, Any]:
+        pass
+
 logger = logging.getLogger("CRCS")
 
 @dataclass
@@ -192,8 +198,9 @@ class CognitiveResonantControllerSystem:
     Implements hierarchical control architecture with learning capabilities
     """
     
-    def __init__(self, protocol_chunks: List[str]):
+    def __init__(self, protocol_chunks: List[str], llm_provider: Optional[BaseLLMProvider] = None):
         self.protocol_chunks = protocol_chunks
+        self.llm_provider = llm_provider  # Store the LLM provider
         self.domain_controllers: Dict[str, FrequencyDomainController] = {}
         self.general_controller_params = {
             'proportional_gain': 10.0,
@@ -282,16 +289,23 @@ class CognitiveResonantControllerSystem:
         # Phase 3: Fallback to General Proportional Control
         self.system_metrics['fallback_activations'] += 1
         logger.info("No specialized controller activated, using general proportional control")
-        return self._general_proportional_extraction(query), {
+        
+        # Pass the original query to the general extraction method
+        context = self._general_proportional_extraction(query)
+        
+        return context, {
             'active_domain': 'General',
-            'controller_used': 'ProportionalControl',
-            'extraction_method': 'tfidf_fallback',
+            'controller_used': 'ProportionalControl' if not self.llm_provider else 'GenerativeFallback',
+            'extraction_method': 'tfidf_fallback' if not self.llm_provider else 'generative_response',
             'response_time': time.time() - start_time,
             'system_metrics': self.system_metrics
         }
     
     def _general_proportional_extraction(self, query: str) -> Optional[str]:
-        """Fallback TF-IDF based extraction for unrecognized domains"""
+        """
+        Fallback extraction. First tries TF-IDF, then uses a generative LLM if available.
+        """
+        # --- TF-IDF Search (Attempt 1) ---
         query_words = set(word.lower() for word in query.replace('?', '').split())
         num_chunks = len(self.protocol_chunks)
         
@@ -318,10 +332,60 @@ class CognitiveResonantControllerSystem:
             if tfidf_score > max_score:
                 max_score, best_chunk = tfidf_score, chunk
         
-        if best_chunk and max_score > 0.01:
+        if best_chunk and max_score > 0.3: # Raised threshold to prevent low-quality matches
             logger.info(f"General controller: Found context (TF-IDF Score: {max_score:.4f})")
             return best_chunk
         
+        # --- Generative Fallback (Attempt 2) ---
+        if self.llm_provider:
+            logger.info("TF-IDF search failed. Engaging generative LLM for direct response.")
+            try:
+                prompt = f"You are ArchE, an advanced cognitive system. A user has sent you the following message: '{query}'. Please provide a direct, helpful, and concise response. IMPORTANT: Respond with plain text only. Do not use function calls, special formatting, or any structured output. Just give a natural, conversational response."
+                response = self.llm_provider.generate(prompt, model="gemini-1.5-pro", max_tokens=1000, temperature=0.7)
+                
+                # Debug logging to see exactly what we're getting
+                logger.info(f"LLM response type: {type(response)}, content: {response}")
+                
+                # Handle both string and dict responses from the LLM provider
+                if isinstance(response, dict):
+                    # Check if it's a function call response
+                    if response.get("type") == "function_call":
+                        logger.info(f"LLM returned function call: {response.get('function')} with args: {response.get('arguments')}")
+                        # Extract useful information from function call arguments
+                        args = response.get("arguments", {})
+                        if isinstance(args, dict):
+                            # Look for common argument fields that might contain the response
+                            for key in ["response", "answer", "text", "content", "message"]:
+                                if key in args and args[key]:
+                                    return str(args[key])
+                            # If no direct response field, try to construct one from available data
+                            if args:
+                                return f"Function {response.get('function')} called with: {str(args)}"
+                        return "I received your message, but I am having trouble formulating a response right now."
+                    else:
+                        # Other dict format - try to extract text
+                        logger.info(f"LLM returned dict format: {response}")
+                        # Look for common response fields
+                        for key in ["response", "answer", "text", "content", "message", "output"]:
+                            if key in response and response[key]:
+                                return str(response[key])
+                        return "I received your message, but I am having trouble formulating a response right now."
+                elif isinstance(response, str):
+                    # Normal string response
+                    if response:
+                        return response.strip()
+                    else:
+                        logger.error("LLM response was empty string.")
+                        return "I received your message, but I am having trouble formulating a response right now."
+                else:
+                    # Unexpected response type
+                    logger.error(f"LLM returned unexpected response type: {type(response)}")
+                    return "I received your message, but I am having trouble formulating a response right now."
+            except Exception as e:
+                logger.error(f"Error during generative LLM fallback: {e}", exc_info=True)
+                return f"An error occurred while trying to generate a response: {e}"
+
+        logger.warning("No relevant chunk found and no LLM provider available for generative fallback.")
         return None
     
     def get_system_diagnostics(self) -> Dict[str, Any]:

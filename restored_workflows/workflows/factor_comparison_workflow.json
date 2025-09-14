@@ -1,0 +1,30 @@
+{
+  "name": "Detailed System Factor Comparison",
+  "description": "Uses the new compare_system_factors tool to provide a detailed, parameter-by-parameter breakdown of the differences between two system states.",
+  "version": "1.0",
+  "tasks": {
+    "get_detailed_comparison": {
+      "action": "compare_system_factors",
+      "inputs": {
+        "system_a_path": "knowledge_graph/arche_self_state.json",
+        "system_b_path": "knowledge_graph/arche_ideal_state.json"
+      },
+      "outputs": {
+        "comparison_summary": "dict",
+        "parameter_comparison": "list"
+      },
+      "dependencies": []
+    },
+    "display_comparison_results": {
+      "action": "display_output",
+      "inputs": {
+        "content": {
+          "title": "--- System Factor Comparison Report ---",
+          "summary": "{{ get_detailed_comparison.comparison_summary }}",
+          "details": "{{ get_detailed_comparison.parameter_comparison }}"
+        }
+      },
+      "dependencies": ["get_detailed_comparison"]
+    }
+  }
+} 

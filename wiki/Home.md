@@ -23,6 +23,10 @@ The project Wiki serves as an essential, dynamic, and user-centric knowledge bas
 * **System Representation**: Enhanced with timestamp-based history tracking for temporal analysis
 * **Resonance Tracking**: New ResonanceTracker for monitoring tactical resonance and crystallization metrics
 
+## v3.5‑GP Canonical Links
+- Chronicle: `../protocol/ResonantiA_Protocol_v3.5-GP_Canonical.md`
+- Spec Suite: `../protocol/specs/`
+
 ## Table of Contents
 
 *   [I. ResonantiA Protocol v3.0 (The Guiding Framework)](./01_ResonantiA_Protocol_v3_0/README.md)
