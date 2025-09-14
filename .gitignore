@@ -184,6 +184,11 @@ outputs/
 
 # --- End of .gitignore ---
 
+# Next.js build artifacts
+nextjs-chat/.next/
+nextjs-chat/out/
+nextjs-chat/build/
+
 # Test commit for snapshot hook (attempt 2) 
 tags
 tags.zip
