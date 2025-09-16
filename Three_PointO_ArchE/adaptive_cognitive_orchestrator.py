@@ -23,6 +23,7 @@ from datetime import datetime
 import hashlib
 import re
 import numpy as np
+import asyncio
 
 # Optional Dependencies for advanced features
 try:
@@ -37,6 +38,7 @@ except ImportError:
 try:
     from .cognitive_resonant_controller import CognitiveResonantControllerSystem
     from .llm_providers import BaseLLMProvider # Import for type hinting
+    from .rise_orchestrator import RISE_Orchestrator
 except ImportError:
     # Fallback for standalone execution
     CognitiveResonantControllerSystem = None
@@ -578,13 +580,15 @@ class AdaptiveCognitiveOrchestrator:
     - Foundation for collective intelligence (Phase 3)
     """
     
-    def __init__(self, protocol_chunks: List[str], llm_provider: Optional[BaseLLMProvider] = None):
+    def __init__(self, protocol_chunks: List[str], llm_provider: Optional[BaseLLMProvider] = None, event_callback: Optional[callable] = None, loop: Optional[asyncio.AbstractEventLoop] = None):
         """
         Initialize the Adaptive Cognitive Orchestrator
         
         Args:
             protocol_chunks: List of protocol text chunks for domain controllers
             llm_provider: An optional LLM provider for generative capabilities
+            event_callback: An optional callable for emitting events to a listener (like the VCD)
+            loop: The asyncio event loop to run callbacks on.
         """
         # Initialize base system if available
         if CognitiveResonantControllerSystem:
@@ -600,6 +604,18 @@ class AdaptiveCognitiveOrchestrator:
         self.pattern_engine = PatternEvolutionEngine()
         self.domain_detector = EmergentDomainDetector()
         self.evolution_candidates = {}
+        
+        # Add event callback for VCD integration
+        self.event_callback = event_callback
+        self.loop = loop
+        
+        # Instantiate RISE orchestrator for handling high-stakes queries
+        self.rise_orchestrator = RISE_Orchestrator(
+            event_callback=self.event_callback  # Pass the callback to RISE
+        )
+        # Hook the event callback into RISE as well
+        if self.event_callback:
+            self.rise_orchestrator.event_callback = self.event_callback
         
         # Meta-learning configuration
         self.meta_learning_active = True
@@ -621,8 +637,32 @@ class AdaptiveCognitiveOrchestrator:
         self.learning_metrics['total_queries'] += 1
         
         try:
+            self.emit_aco_event("QueryReceived", f"ACO received query: {query[:80]}...", {"query": query})
+
+            # --- High-Stakes Query Escalation to RISE ---
+            high_stakes_keywords = ['strategy', 'strategic', 'plan', 'framework', 'protocol', 'pharmaceutical', 'ethical']
+            if any(keyword in query.lower() for keyword in high_stakes_keywords):
+                self.emit_aco_event("Escalation", "High-stakes query detected. Escalating to RISE Engine.", {"keywords": high_stakes_keywords})
+                
+                # RISE workflow is synchronous and long-running
+                rise_result = self.rise_orchestrator.run_rise_workflow(query)
+                
+                self.emit_aco_event("RISEComplete", "RISE Engine workflow finished.", {"rise_result": rise_result})
+                
+                # The final result from RISE is the context
+                context = json.dumps(rise_result.get('final_strategy', {'error': 'No strategy produced'}), indent=2)
+                
+                # For now, metrics are simple. In a real scenario, we'd parse the RISE IAR.
+                response_metrics = {
+                    'active_domain': 'RISE_Engine',
+                    'escalated': True,
+                    'rise_session_id': rise_result.get('session_id')
+                }
+                return context, response_metrics
+
             # --- Base System Processing (if available) ---
             if self.base_system:
+                self.emit_aco_event("Routing", "Routing to Cognitive Resonant Controller System (CRCS).", {})
                 context, base_metrics = self.base_system.process_query(query)
                 success = bool(context)
                 active_domain = base_metrics.get('active_domain', 'standalone')
@@ -656,12 +696,34 @@ class AdaptiveCognitiveOrchestrator:
             return context, response_metrics
             
         except Exception as e:
+            self.emit_aco_event("Error", "An error occurred during ACO processing.", {"error": str(e)})
             logger.error(f"[ACO] Error processing query: {e}", exc_info=True)
             return f"Error processing query: {str(e)}", {
                 'error': str(e),
                 'learning_metrics': self.learning_metrics.copy()
             }
     
+    def emit_aco_event(self, step_name: str, message: str, metadata: Dict[str, Any]) -> None:
+        """Emits an event for the VCD or other listeners."""
+        if not self.event_callback or not self.loop:
+            return
+
+        event = {
+            "type": "thought_process_step",
+            "source": "ACO",
+            "step_id": f"aco_{step_name.lower()}_{int(time.time() * 1000)}",
+            "step_name": step_name,
+            "message": message,
+            "timestamp": datetime.now().isoformat(),
+            "metadata": metadata
+        }
+        
+        try:
+            # Schedule the async callback to run on the provided event loop
+            self.loop.call_soon_threadsafe(asyncio.create_task, self.event_callback(event))
+        except Exception as e:
+            logger.error(f"Failed to emit ACO event: {e}")
+
     def _attempt_adaptation(self, query: str, pattern_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """Attempt to adapt the system based on pattern analysis."""
         adaptation_result = {

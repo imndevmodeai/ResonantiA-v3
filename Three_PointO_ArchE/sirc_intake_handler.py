@@ -6,9 +6,20 @@ import logging
 import re
 import json
 from typing import Dict, Any, List, Optional, Tuple
-from .spr_manager import SPRManager
+from dataclasses import dataclass, field
+from Three_PointO_ArchE.spr_manager import SPRManager
 
 logger = logging.getLogger(__name__)
+
+@dataclass
+class SircIntentPacket:
+    """A structured data packet to hold the finalized intent from SIRC."""
+    directive: str
+    spr_list: List[str] = field(default_factory=list)
+    confidence: float = 0.0
+    context: Dict[str, Any] = field(default_factory=dict)
+    origin: str = "Unknown"
+    is_bypass: bool = False
 
 class SIRCIntakeHandler:
     """

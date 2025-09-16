@@ -25,27 +25,17 @@ import time
 import uuid
 import os
 import sys
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Dict, Any, List, Optional, Tuple, Callable
 from datetime import datetime
 from dataclasses import dataclass, asdict
 
-# Import existing components
-try:
-    # Try relative imports first (when used as part of package)
-    from .workflow_engine import IARCompliantWorkflowEngine
-    from .spr_manager import SPRManager
-    from .thought_trail import ThoughtTrail
-    from .config import get_config
-    from .vetting_prompts import perform_scope_limitation_assessment, get_relevant_axioms
-    from .utopian_solution_synthesizer import UtopianSolutionSynthesizer
-except ImportError:
-    # Fallback to absolute imports (when run directly)
-    from workflow_engine import IARCompliantWorkflowEngine
-    from spr_manager import SPRManager
-    from thought_trail import ThoughtTrail
-    from config import get_config
-    from vetting_prompts import perform_scope_limitation_assessment, get_relevant_axioms
-    from utopian_solution_synthesizer import UtopianSolutionSynthesizer
+# Import existing components using absolute paths
+from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
+from Three_PointO_ArchE.spr_manager import SPRManager
+from Three_PointO_ArchE.thought_trail import ThoughtTrail
+from Three_PointO_ArchE.config import get_config
+from Three_PointO_ArchE.vetting_prompts import perform_scope_limitation_assessment, get_relevant_axioms
+from Three_PointO_ArchE.utopian_solution_synthesizer import UtopianSolutionSynthesizer
 
 
 logger = logging.getLogger(__name__)
@@ -94,7 +84,7 @@ class RISE_Orchestrator:
     are detected, creating a synergistic fusion of scientific reasoning and spiritual guidance.
     """
     
-    def __init__(self, workflows_dir: str = None, spr_manager: Optional[SPRManager] = None, workflow_engine: Optional[IARCompliantWorkflowEngine] = None):
+    def __init__(self, workflows_dir: str = None, spr_manager: Optional[SPRManager] = None, workflow_engine: Optional[IARCompliantWorkflowEngine] = None, event_callback: Optional[Callable] = None):
         """
         Initialize the RISE_Orchestrator with proper path resolution.
         
@@ -169,7 +159,10 @@ class RISE_Orchestrator:
         
         # Initialize workflow engine with the correct workflows directory
         if workflow_engine is None:
-            self.workflow_engine = IARCompliantWorkflowEngine(workflows_dir=self.workflows_dir)
+            self.workflow_engine = IARCompliantWorkflowEngine(
+                workflows_dir=self.workflows_dir, 
+                event_callback=event_callback  # Pass the callback here
+            )
         else:
             self.workflow_engine = workflow_engine
             # Update the workflow engine's workflows directory if needed
@@ -677,7 +670,7 @@ class RISE_Orchestrator:
             knowledge_result = None
             try:
                 knowledge_result = self.workflow_engine.run_workflow(
-                    "knowledge_scaffolding_simple.json",
+                    "knowledge_scaffolding.json",
                     {
                         "problem_description": rise_state.problem_description,
                         "session_id": rise_state.session_id,
@@ -848,7 +841,7 @@ class RISE_Orchestrator:
                 raise RuntimeError(f"Phase B failed integrity check: {failure_output}")
 
             # Check for dossier existence as a final safeguard
-            fused_dossier = fusion_result.get("synthesize_fused_dossier", {}).get("output")
+            fused_dossier = fusion_result.get("synthesize_fused_dossier", {}).get("result", {}).get("generated_text")
             if not fused_dossier:
                  raise RuntimeError("Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.")
             
