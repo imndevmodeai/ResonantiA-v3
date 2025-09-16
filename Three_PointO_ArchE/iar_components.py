@@ -27,7 +27,7 @@ class IARValidator:
             'alignment_check': Dict[str, Any]
         }
     
-    def validate_structure(self, iar_data: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    def validate_structure(self, iar_data: Dict) -> Tuple[bool, List[str]]:
         """
         Validate the structure of IAR data.
         

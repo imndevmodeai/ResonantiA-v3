@@ -11,18 +11,24 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any
 
-# Ensure the ArchE modules can be imported
-sys.path.insert(0, str(Path(__file__).parent / 'Three_PointO_ArchE'))
-sys.path.insert(0, str(Path(__file__).parent / 'Four_PointO_ArchE'))
+# Ensure the ArchE modules can be imported by adding the project root to the path
+sys.path.insert(0, str(Path(__file__).parent))
 
 try:
-    from rise_orchestrator import RISE_Orchestrator
-    from sirc_intake_handler import SircIntakeHandler, SircIntentPacket
+    from Three_PointO_ArchE.rise_orchestrator import RISE_Orchestrator
+    from Three_PointO_ArchE.sirc_intake_handler import SIRCIntakeHandler, SircIntentPacket
+    from Three_PointO_ArchE.spr_manager import SPRManager
+    from Three_PointO_ArchE.adaptive_cognitive_orchestrator import AdaptiveCognitiveOrchestrator
+    from Three_PointO_ArchE.llm_providers import get_llm_provider, LLMProviderError
     print("✅ Successfully imported ArchE core components.")
 except ImportError as e:
     print(f"❌ Failed to import ArchE core components: {e}")
     print("Ensure you have run `export PYTHONPATH=$PYTHONPATH:./Three_PointO_ArchE:./Four_PointO_ArchE`")
     sys.exit(1)
+
+# For running non-async methods in the event loop
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 WS_PORT = 8765
 WS_HOST = "0.0.0.0"
@@ -30,29 +36,49 @@ WS_HOST = "0.0.0.0"
 class VCDBridge:
     def __init__(self):
         self.connected_clients = set()
-        self.rise_orchestrator = self._initialize_rise()
-        self.sirc_handler = SircIntakeHandler()
-
-    def _initialize_rise(self):
-        """Initializes the RISE Orchestrator and attaches the event callback."""
+        self.loop = asyncio.get_event_loop()
+        
+        # --- LLM Provider Initialization ---
         try:
-            workflows_dir = Path(__file__).parent / "workflows"
-            orchestrator = RISE_Orchestrator(workflows_dir=str(workflows_dir))
-            
-            # This is the crucial link: hook our broadcast function into the orchestrator's event system
-            orchestrator.event_callback = self.handle_rise_event
-            print("✅ RISE v2.0 Genesis Protocol is ONLINE and hooked into VCD Bridge.")
-            return orchestrator
-        except Exception as e:
-            print(f"❌ Failed to initialize RISE v2.0: {e}", file=sys.stderr)
-            return None
-            
-    async def handle_rise_event(self, event_obj: Dict[str, Any]):
-        """Callback function to receive events from the RISE orchestrator."""
-        print(f"📨 RISE Event Received: {event_obj.get('message_type')}")
-        await self.broadcast_to_all(event_obj)
+            # The get_llm_provider factory will handle API keys from env vars
+            self.llm_provider = get_llm_provider("google") 
+            print("✅ LLM Provider initialized successfully.")
+        except (LLMProviderError, ValueError) as e:
+            print(f"❌ CRITICAL: LLM Provider initialization failed: {e}")
+            print("   Ensure GEMINI_API_KEY or OPENAI_API_KEY is set in your environment.")
+            self.llm_provider = None
 
-    async def handle_client(self, websocket, path):
+
+        # Correct Initialization:
+        # Provide the correct, existing path to the SPRManager.
+        spr_file_path = "knowledge_graph/spr_definitions_tv.json"
+        self.spr_manager = SPRManager(spr_filepath=spr_file_path)
+        
+        # Pass the created spr_manager to the SIRC handler.
+        self.sirc_handler = SIRCIntakeHandler(spr_manager=self.spr_manager)
+        
+        # Instantiate the ACO as the main entry point
+        self.aco = AdaptiveCognitiveOrchestrator(
+            protocol_chunks=[],  # Let ACO load defaults
+            llm_provider=self.llm_provider, # Pass the initialized provider
+            event_callback=self.broadcast_event_to_vcd,
+            loop=self.loop # Pass the asyncio event loop
+        )
+
+        # RISE is now managed by ACO, but we keep a reference for direct access if needed
+        self.rise_orchestrator = self.aco.rise_orchestrator
+
+        print("✅ VCD Bridge initialized with ACO and RISE Engine.")
+
+    async def broadcast_event_to_vcd(self, event_data: dict):
+        """Callback for ACO/RISE to send events to the VCD."""
+        await self.broadcast_to_all(event_data)
+
+        
+        
+        
+
+    async def handle_client(self, websocket, path=None):
         """Register client and handle incoming messages."""
         self.connected_clients.add(websocket)
         print(f"VCD client connected from {websocket.remote_address}. Total clients: {len(self.connected_clients)}")
@@ -70,18 +96,32 @@ class VCDBridge:
                     data = json.loads(message)
                     if data.get("type") == "query" and "payload" in data:
                         prompt = data["payload"]
-                        print(f"▶️ Received query. Passing to SIRC Intake: {prompt[:80]}...")
+                        print(f"▶️ Received query. Passing to ACO: {prompt[:80]}...")
                         
-                        # Use the actual SIRC handler to process the intent
-                        intent_packet = await self.sirc_handler.process_request(prompt)
-                        
-                        # Start the actual RISE workflow execution in the background
-                        if self.rise_orchestrator:
-                            asyncio.create_task(self.rise_orchestrator.handle_intent(intent_packet))
-                        else:
+                        # The ACO is the new entry point.
+                        # Since process_query_with_evolution is synchronous, run it in an executor
+                        # to avoid blocking the WebSocket's async event loop.
+                        with ThreadPoolExecutor() as executor:
+                            future = self.loop.run_in_executor(
+                                executor, 
+                                self.aco.process_query_with_evolution, 
+                                prompt
+                            )
+                            # Await the result from the synchronous function.
+                            final_response = await future
+
+                            # Now, broadcast the final response back to the VCD
+                            print(f"✅ ACO processing complete. Broadcasting final response.")
                             await self.broadcast_to_all({
-                                "type": "error", "message_type": "error", "content": "RISE Orchestrator is not initialized."
+                                "type": "event",
+                                "event": "final_response",
+                                "timestamp": datetime.now().isoformat(),
+                                "payload": {
+                                    "content": final_response,
+                                    "content_type": "text"
+                                }
                             })
+                        
                 except json.JSONDecodeError:
                     print(f"Received non-JSON message: {message}")
 

@@ -13,6 +13,7 @@ import time
 import re
 import uuid  # Added for workflow_run_id generation consistency
 import tempfile
+from datetime import datetime
 import sys
 # Expanded type hints
 from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable
@@ -371,9 +372,10 @@ def _execute_standalone_workflow(workflow_definition: Dict[str, Any], initial_co
 class IARCompliantWorkflowEngine:
     """Enhanced workflow engine with IAR compliance and recovery support."""
 
-    def __init__(self, workflows_dir: str = "workflows", spr_manager=None):
+    def __init__(self, workflows_dir: str = "workflows", spr_manager=None, event_callback: Optional[Callable] = None):
         self.workflows_dir = workflows_dir
         self.spr_manager = spr_manager
+        self.event_callback = event_callback  # <-- ADDED
         self.last_workflow_name = None
         self.action_registry = main_action_registry.actions.copy()  # Use centralized registry
         self.recovery_handler = None
@@ -1127,6 +1129,21 @@ class IARCompliantWorkflowEngine:
         # Fallback for other types (like numpy floats, etc.)
         return str(data)
 
+    def _emit_event(self, event_type: str, payload: Dict[str, Any]):
+        """Helper to safely call the event_callback if it exists."""
+        if self.event_callback:
+            try:
+                # Package the event data correctly for the VCD callback
+                event_data = {
+                    "type": "thought_process_step",
+                    "event": event_type,
+                    "timestamp": datetime.now().isoformat(),
+                    "payload": payload
+                }
+                self.event_callback(event_data)
+            except Exception as e:
+                logger.warning(f"Failed to emit VCD event: {e}")
+
     def run_workflow(self, workflow_name: str,
                      initial_context: Dict[str, Any],
                      timeout: int = 900) -> Dict[str, Any]:
@@ -1228,11 +1245,19 @@ class IARCompliantWorkflowEngine:
             max_attempts = task_info.get('retries', 0) + 1
             
             condition = task_info.get('condition')
+
+            # --- VCD INSTRUMENTATION ---
+            self._emit_event("ThoughtTrail", {"message": f"Evaluating condition for task: {task_key}..."})
+
             if condition and not self._evaluate_condition(
                 condition, runtime_context, initial_context):
                 logger.info(
     f"Skipping task '{task_key}' due to unmet condition: {condition}")
                 task_statuses[task_key] = "skipped"
+                
+                # --- VCD INSTRUMENTATION ---
+                self._emit_event("ThoughtTrail", {"message": f"Task '{task_key}' skipped. Condition not met."})
+
                 # Treat as 'completed' for dependency checking
                 completed_tasks.add(task_key)
                 # Check for newly ready tasks after skipping
@@ -1245,6 +1270,9 @@ class IARCompliantWorkflowEngine:
 
             running_tasks[task_key] = time.time()
             
+            # --- VCD INSTRUMENTATION ---
+            self._emit_event("ThoughtTrail", {"message": f"Executing task: {task_key} (Action: {action_type})"})
+
             action_context_obj = ActionContext(
                 task_key=task_key, action_name=task_key, action_type=action_type,
                 workflow_name=self.last_workflow_name, run_id=run_id,
@@ -1292,6 +1320,10 @@ class IARCompliantWorkflowEngine:
             is_success = "error" not in result or result.get("error") is None
             task_statuses[task_key] = "completed" if is_success else "failed"
             
+            # --- VCD INSTRUMENTATION ---
+            status_msg = "succeeded" if is_success else "failed"
+            self._emit_event("ThoughtTrail", {"message": f"Task '{task_key}' {status_msg}. Duration: {task_duration}s"})
+
             # IAR contract validation (bedrock of trust)
             reflection = result.get("reflection") or result.get("iar") or {}
             if isinstance(reflection, dict) and reflection:
