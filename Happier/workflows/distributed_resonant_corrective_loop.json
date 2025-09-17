@@ -1,0 +1,1 @@
+{"code": "import json\nraw={{conceptual_map.response_text | default('{}')}}\ntry:\n  cm=json.loads(raw)\nexcept Exception as e:\n  cm={'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'conceptual_map_json': cm}))"}
