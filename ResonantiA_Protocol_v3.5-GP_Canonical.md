@@ -1,3 +1,4 @@
+
 # The ResonantiA Protocol v3.5‑GP (Genesis Protocol)
 
 ## Document Metadata

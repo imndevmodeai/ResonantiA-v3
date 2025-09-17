@@ -59,7 +59,7 @@ class EnhancedLLMProvider(BaseLLMProvider):
         self.enable_self_assessment = kwargs.get('enable_self_assessment', True)
         
         # Token caching configuration
-        self.enable_caching = kwargs.get('enable_caching', True)
+        self.enable_caching = kwargs.get('enable_caching', False)  # Disabled for debugging
         self.cache_ttl = kwargs.get('cache_ttl', 3600)  # 1 hour default
         self.cache_confidence_threshold = kwargs.get('cache_confidence_threshold', 0.8)
         self.cache_semantic_threshold = kwargs.get('cache_semantic_threshold', 0.85)

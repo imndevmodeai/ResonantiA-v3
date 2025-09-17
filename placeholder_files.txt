@@ -1,1 +1,1 @@
-Scanning for placeholder text in: /media/newbu/3626C55326C514B1/Happier
+./scripts/find_placeholders.py

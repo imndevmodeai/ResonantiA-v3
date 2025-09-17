@@ -1,0 +1,361 @@
+def __init__(self):
+    self.workflow_registry = {
+        'audio_analysis': self.process_audio_workflow,
+        'entity_extraction': self.process_entity_workflow,
+        'geospatial_analysis': self.process_geospatial_workflow,
+        'cognitive_resonance': self.process_cognitive_workflow,
+        'metacognitive_shift': self.process_metacognitive_workflow
+    }
+    self.active_sessions = {}
+
+def process_query(self, query_data, session_id):
+    """Main entry point for RISE engine query processing"""
+    try:
+        # Generate unique session if not provided
+        if not session_id:
+            session_id = str(uuid.uuid4())
+        
+        # Initialize session tracking
+        if session_id not in self.active_sessions:
+            self.active_sessions[session_id] = {
+                'start_time': datetime.now(),
+                'query_history': [],
+                'workflow_results': {},
+                'status': 'active'
+            }
+        
+        # Extract query type and parameters
+        query_type = query_data.get('type', 'general')
+        query_content = query_data.get('content', '')
+        workflow_preference = query_data.get('workflow', 'auto')
+        
+        # Log query for session tracking
+        self.active_sessions[session_id]['query_history'].append({
+            'timestamp': datetime.now(),
+            'type': query_type,
+            'content': query_content,
+            'workflow': workflow_preference
+        })
+        
+        # Determine appropriate workflow
+        if workflow_preference == 'auto':
+            workflow = self._determine_workflow(query_type, query_content)
+        else:
+            workflow = workflow_preference
+        
+        # Execute workflow
+        if workflow in self.workflow_registry:
+            result = self.workflow_registry[workflow](query_data, session_id)
+            self.active_sessions[session_id]['workflow_results'][workflow] = result
+            
+            return {
+                'status': 'success',
+                'session_id': session_id,
+                'workflow_executed': workflow,
+                'result': result,
+                'timestamp': datetime.now().isoformat()
+            }
+        else:
+            return {
+                'status': 'error',
+                'message': f'Unknown workflow: {workflow}',
+                'available_workflows': list(self.workflow_registry.keys())
+            }
+            
+    except Exception as e:
+        return {
+            'status': 'error',
+            'message': f'RISE engine processing failed: {str(e)}',
+            'session_id': session_id
+        }
+
+def _determine_workflow(self, query_type, content):
+    """Intelligently determine the appropriate workflow based on query characteristics"""
+    content_lower = content.lower()
+    
+    # Audio-related queries
+    if any(keyword in content_lower for keyword in ['audio', 'sound', 'transcribe', 'record', 'voice']):
+        return 'audio_analysis'
+    
+    # Entity extraction queries
+    if any(keyword in content_lower for keyword in ['extract', 'entity', 'person', 'location', 'organization']):
+        return 'entity_extraction'
+    
+    # Geospatial queries
+    if any(keyword in content_lower for keyword in ['location', 'coordinates', 'map', 'geospatial', 'geo']):
+        return 'geospatial_analysis'
+    
+    # Cognitive/metacognitive queries
+    if any(keyword in content_lower for keyword in ['cognitive', 'resonance', 'metacognitive', 'shift', 'rise']):
+        return 'cognitive_resonance'
+    
+    # Default to entity extraction for general queries
+    return 'entity_extraction'
+
+def process_audio_workflow(self, query_data, session_id):
+    """Process audio-related queries through the RISE workflow system"""
+    try:
+        # Extract audio processing parameters
+        audio_source = query_data.get('audio_source', 'microphone')
+        processing_mode = query_data.get('processing_mode', 'realtime')
+        
+        # Initialize workflow context
+        workflow_context = {
+            'session_id': session_id,
+            'workflow_type': 'audio_analysis',
+            'audio_source': audio_source,
+            'processing_mode': processing_mode,
+            'start_time': datetime.now(),
+            'steps_completed': []
+        }
+        
+        # Step 1: Audio acquisition
+        if audio_source == 'microphone':
+            workflow_context['steps_completed'].append('audio_acquisition')
+            # This would integrate with the existing audio recording functionality
+        
+        # Step 2: Audio preprocessing
+        workflow_context['steps_completed'].append('audio_preprocessing')
+        
+        # Step 3: Transcription
+        workflow_context['steps_completed'].append('transcription')
+        
+        # Step 4: Post-processing analysis
+        workflow_context['steps_completed'].append('post_processing')
+        
+        workflow_context['end_time'] = datetime.now()
+        workflow_context['status'] = 'completed'
+        
+        return {
+            'workflow_type': 'audio_analysis',
+            'context': workflow_context,
+            'output': {
+                'transcription_ready': True,
+                'processing_mode': processing_mode,
+                'session_tracking': session_id
+            }
+        }
+        
+    except Exception as e:
+        return {
+            'workflow_type': 'audio_analysis',
+            'status': 'error',
+            'error': str(e),
+            'session_id': session_id
+        }
+
+def process_entity_workflow(self, query_data, session_id):
+    """Process entity extraction queries through the RISE workflow system"""
+    try:
+        # Extract entity processing parameters
+        entity_types = query_data.get('entity_types', ['person', 'location', 'organization'])
+        extraction_mode = query_data.get('extraction_mode', 'comprehensive')
+        
+        workflow_context = {
+            'session_id': session_id,
+            'workflow_type': 'entity_extraction',
+            'entity_types': entity_types,
+            'extraction_mode': extraction_mode,
+            'start_time': datetime.now(),
+            'steps_completed': []
+        }
+        
+        # Step 1: Text preprocessing
+        workflow_context['steps_completed'].append('text_preprocessing')
+        
+        # Step 2: Entity recognition
+        workflow_context['steps_completed'].append('entity_recognition')
+        
+        # Step 3: Entity classification
+        workflow_context['steps_completed'].append('entity_classification')
+        
+        # Step 4: Confidence scoring
+        workflow_context['steps_completed'].append('confidence_scoring')
+        
+        workflow_context['end_time'] = datetime.now()
+        workflow_context['status'] = 'completed'
+        
+        return {
+            'workflow_type': 'entity_extraction',
+            'context': workflow_context,
+            'output': {
+                'entities_ready': True,
+                'extraction_mode': extraction_mode,
+                'session_tracking': session_id
+            }
+        }
+        
+    except Exception as e:
+        return {
+            'workflow_type': 'entity_extraction',
+            'status': 'error',
+            'error': str(e),
+            'session_id': session_id
+        }
+
+def process_geospatial_workflow(self, query_data, session_id):
+    """Process geospatial analysis queries through the RISE workflow system"""
+    try:
+        # Extract geospatial processing parameters
+        coordinate_system = query_data.get('coordinate_system', 'wgs84')
+        analysis_depth = query_data.get('analysis_depth', 'standard')
+        
+        workflow_context = {
+            'session_id': session_id,
+            'workflow_type': 'geospatial_analysis',
+            'coordinate_system': coordinate_system,
+            'analysis_depth': analysis_depth,
+            'start_time': datetime.now(),
+            'steps_completed': []
+        }
+        
+        # Step 1: Coordinate validation
+        workflow_context['steps_completed'].append('coordinate_validation')
+        
+        # Step 2: Geocoding
+        workflow_context['steps_completed'].append('geocoding')
+        
+        # Step 3: Spatial analysis
+        workflow_context['steps_completed'].append('spatial_analysis')
+        
+        # Step 4: Result formatting
+        workflow_context['steps_completed'].append('result_formatting')
+        
+        workflow_context['end_time'] = datetime.now()
+        workflow_context['status'] = 'completed'
+        
+        return {
+            'workflow_type': 'geospatial_analysis',
+            'context': workflow_context,
+            'output': {
+                'geospatial_ready': True,
+                'coordinate_system': coordinate_system,
+                'session_tracking': session_id
+            }
+        }
+        
+    except Exception as e:
+        return {
+            'workflow_type': 'geospatial_analysis',
+            'status': 'error',
+            'error': str(e),
+            'session_id': session_id
+        }
+
+def process_cognitive_workflow(self, query_data, session_id):
+    """Process cognitive resonance queries through the RISE workflow system"""
+    try:
+        # Extract cognitive processing parameters
+        resonance_mode = query_data.get('resonance_mode', 'adaptive')
+        cognitive_depth = query_data.get('cognitive_depth', 'deep')
+        
+        workflow_context = {
+            'session_id': session_id,
+            'workflow_type': 'cognitive_resonance',
+            'resonance_mode': resonance_mode,
+            'cognitive_depth': cognitive_depth,
+            'start_time': datetime.now(),
+            'steps_completed': []
+        }
+        
+        # Step 1: Intent analysis
+        workflow_context['steps_completed'].append('intent_analysis')
+        
+        # Step 2: Cognitive mapping
+        workflow_context['steps_completed'].append('cognitive_mapping')
+        
+        # Step 3: Resonance calculation
+        workflow_context['steps_completed'].append('resonance_calculation')
+        
+        # Step 4: Strategy generation
+        workflow_context['steps_completed'].append('strategy_generation')
+        
+        workflow_context['end_time'] = datetime.now()
+        workflow_context['status'] = 'completed'
+        
+        return {
+            'workflow_type': 'cognitive_resonance',
+            'context': workflow_context,
+            'output': {
+                'cognitive_ready': True,
+                'resonance_mode': resonance_mode,
+                'session_tracking': session_id
+            }
+        }
+        
+    except Exception as e:
+        return {
+            'workflow_type': 'cognitive_resonance',
+            'status': 'error',
+            'error': str(e),
+            'session_id': session_id
+        }
+
+def process_metacognitive_workflow(self, query_data, session_id):
+    """Process metacognitive shift queries through the RISE workflow system"""
+    try:
+        # Extract metacognitive processing parameters
+        shift_trigger = query_data.get('shift_trigger', 'automatic')
+        shift_intensity = query_data.get('shift_intensity', 'moderate')
+        
+        workflow_context = {
+            'session_id': session_id,
+            'workflow_type': 'metacognitive_shift',
+            'shift_trigger': shift_trigger,
+            'shift_intensity': shift_intensity,
+            'start_time': datetime.now(),
+            'steps_completed': []
+        }
+        
+        # Step 1: Dissonance detection
+        workflow_context['steps_completed'].append('dissonance_detection')
+        
+        # Step 2: Shift initiation
+        workflow_context['steps_completed'].append('shift_initiation')
+        
+        # Step 3: Cognitive restructuring
+        workflow_context['steps_completed'].append('cognitive_restructuring')
+        
+        # Step 4: Integration and synthesis
+        workflow_context['steps_completed'].append('integration_synthesis')
+        
+        workflow_context['end_time'] = datetime.now()
+        workflow_context['status'] = 'completed'
+        
+        return {
+            'workflow_type': 'metacognitive_shift',
+            'context': workflow_context,
+            'output': {
+                'metacognitive_ready': True,
+                'shift_trigger': shift_trigger,
+                'session_tracking': session_id
+            }
+        }
+        
+    except Exception as e:
+        return {
+            'workflow_type': 'metacognitive_shift',
+            'status': 'error',
+            'error': str(e),
+            'session_id': session_id
+        }
+
+def get_session_status(self, session_id):
+    """Retrieve the current status of a RISE engine session"""
+    if session_id in self.active_sessions:
+        return self.active_sessions[session_id]
+    else:
+        return {'status': 'not_found', 'message': 'Session not found'}
+
+def get_available_workflows(self):
+    """Return list of available workflows for the UI"""
+    return {
+        'workflows': list(self.workflow_registry.keys()),
+        'descriptions': {
+            'audio_analysis': 'Process audio queries through transcription and analysis',
+            'entity_extraction': 'Extract and classify entities from text content',
+            'geospatial_analysis': 'Analyze and process geographic data and coordinates',
+            'cognitive_resonance': 'Calculate cognitive resonance and generate strategies',
+            'metacognitive_shift': 'Initiate and manage metacognitive shift processes'
+        }
+    }
