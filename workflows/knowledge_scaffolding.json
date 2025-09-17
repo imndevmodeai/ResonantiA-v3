@@ -14,10 +14,8 @@
       "action_type": "generate_text_llm",
       "description": "Deconstruct the problem into core components and identify domain requirements",
       "inputs": {
-        "prompt": "Analyze the following problem and deconstruct it into core components:\\n\\n{{problem_description}}\\n\\nIdentify:\\n1. Core domain areas\\n2. Key variables and unknowns\\n3. Strategic requirements\\n4. Risk factors\\n5. Success criteria\\n\\nOutput your analysis as a structured JSON object with a key 'deconstruction_text'.",
-        "model": "gemini-1.5-flash-latest",
-        "max_tokens": 2000,
-        "temperature": 0.3
+        "prompt": "Analyze the following problem and deconstruct it into core components:\\n\\n{{ problem_description }}\\n\\nIdentify:\\n1. Core domain areas\\n2. Key variables and unknowns\\n3. Strategic requirements\\n4. Risk factors\\n5. Success criteria\\n\\nOutput your analysis as a structured JSON object with a key 'deconstruction_text'.",
+        "model_settings": {"temperature": 0.3, "max_tokens": 2000}
       },
       "dependencies": []
     },
@@ -25,21 +23,19 @@
       "action_type": "generate_text_llm",
       "description": "Extract the primary domain from the deconstruction analysis into a structured format.",
       "inputs": {
-        "prompt": "From the following JSON analysis, identify and extract only the single, most relevant 'Core domain area'. Your output must be a single, clean JSON object with one key: 'domain'. For example: {\\\"domain\\\": \\\"Artificial Intelligence Strategy\\\"}\\n\\nAnalysis:\\n{{deconstruct_problem.output}}",
-        "model": "gemini-1.5-flash-latest",
-        "max_tokens": 100,
-        "temperature": 0.1
+        "prompt": "From the following JSON analysis, identify and extract only the single, most relevant 'Core domain area'. Your output must be a single, clean JSON object with one key: 'domain'. For example: {\\\"domain\\\": \\\"Artificial Intelligence Strategy\\\"}\\n\\nAnalysis:\\n{{ deconstruct_problem.result.generated_text }}",
+        "model_settings": {"temperature": 0.1, "max_tokens": 100}
       },
       "dependencies": ["deconstruct_problem"]
     },
     "acquire_domain_knowledge": {
-      "action_type": "execute_web_task",
-      "description": "Acquire relevant domain knowledge and current information",
+      "action_type": "search_web",
+      "description": "Acquire relevant domain knowledge through web search",
       "inputs": {
-        "target_site": "google_search", "task_name": "search", "query_params": { "query": "latest developments in {{extract_domain_from_deconstruction.output.domain}} strategy competitive landscape analysis",
-        "max_results": 10
-      }
-    },
+        "query": "{{ extract_domain_from_deconstruction.result.generated_text }} latest developments competitive landscape strategic insights trends key players market dynamics",
+        "num_results": 10,
+        "provider": "duckduckgo"
+      },
       "dependencies": ["extract_domain_from_deconstruction"]
     },
     "validate_search_results": {
@@ -47,19 +43,17 @@
       "description": "[PhasegateS] Validate that the search tool returned valid, non-empty results.",
       "inputs": {
         "language": "python",
-        "code": "import json\\nsearch_output = {{acquire_domain_knowledge.output}}\\nresults = search_output.get('results')\\nvalid = isinstance(results, list) and len(results) > 0\\nprint(json.dumps({'search_is_valid': valid, 'results_count': len(results) if isinstance(results, list) else 0}))"
+        "code": "import json\nsearch_output = {{ acquire_domain_knowledge.result }}\nresults = search_output.get('results')\nvalid = isinstance(results, list) and len(results) > 0\nprint(json.dumps({'search_is_valid': valid, 'results_count': len(results) if isinstance(results, list) else 0}))"
       },
       "dependencies": ["acquire_domain_knowledge"]
     },
     "analyze_specialization_requirements": {
       "action_type": "generate_text_llm",
       "description": "Analyze what specialized capabilities are needed for this problem",
-      "condition": "{{validate_search_results.output.search_is_valid}} == true",
+      "condition": "{{ validate_search_results.result.output.search_is_valid }} == true",
       "inputs": {
-        "prompt": "Based on the problem deconstruction and domain knowledge, analyze what specialized capabilities and expertise are required:\\n\\nProblem: {{problem_description}}\\nDeconstruction: {{deconstruct_problem.output}}\\nDomain Knowledge: {{acquire_domain_knowledge.output}}\\n\\nIdentify:\\n1. Required specialized knowledge areas\\n2. Critical analytical capabilities\\n3. Strategic thinking patterns\\n4. Risk assessment frameworks\\n5. Implementation expertise",
-        "model": "gemini-1.5-flash-latest",
-        "max_tokens": 2000,
-        "temperature": 0.4
+        "prompt": "Based on the problem deconstruction and domain knowledge, analyze what specialized capabilities and expertise are required:\\n\\nProblem: {{ problem_description }}\\nDeconstruction: {{ deconstruct_problem.result.generated_text }}\\nDomain Knowledge: {{ acquire_domain_knowledge.result }}\\n\\nIdentify:\\n1. Required specialized knowledge areas\\n2. Critical analytical capabilities\\n3. Strategic thinking patterns\\n4. Risk assessment frameworks\\n5. Implementation expertise",
+        "model_settings": {"temperature": 0.4, "max_tokens": 2000}
       },
       "dependencies": ["validate_search_results"]
     },
@@ -67,10 +61,8 @@
       "action_type": "generate_text_llm",
       "description": "Forge a specialized agent with the required capabilities",
       "inputs": {
-        "prompt": "Create a specialized agent profile for solving this problem:\\n\\nProblem: {{problem_description}}\\nRequirements: {{analyze_specialization_requirements.output}}\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria",
-        "model": "gemini-1.5-flash-latest",
-        "max_tokens": 2500,
-        "temperature": 0.3
+        "prompt": "Create a specialized agent profile for solving this problem:\\n\\nProblem: {{ problem_description }}\\nRequirements: {{ analyze_specialization_requirements.result.generated_text }}\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria",
+        "model_settings": {"temperature": 0.3, "max_tokens": 2500}
       },
       "dependencies": ["analyze_specialization_requirements"]
     },
@@ -78,10 +70,8 @@
       "action_type": "generate_text_llm",
       "description": "Validate that the specialist agent has the required capabilities",
       "inputs": {
-        "prompt": "Validate the specialist agent against the original problem requirements:\\n\\nProblem: {{problem_description}}\\nRequirements: {{analyze_specialization_requirements.output}}\\nSpecialist Agent: {{forge_specialist_agent.output}}\\n\\nAssess:\\n1. Coverage of required capabilities\\n2. Alignment with problem requirements\\n3. Strategic fit and expertise match\\n4. Potential gaps or limitations\\n5. Confidence in agent's ability to solve the problem",
-        "model": "gemini-1.5-flash-latest",
-        "max_tokens": 1500,
-        "temperature": 0.2
+        "prompt": "Validate the specialist agent against the original problem requirements:\\n\\nProblem: {{ problem_description }}\\nRequirements: {{ analyze_specialization_requirements.result.generated_text }}\\nSpecialist Agent: {{ forge_specialist_agent.result.generated_text }}\\n\\nAssess:\\n1. Coverage of required capabilities\\n2. Alignment with problem requirements\\n3. Strategic fit and expertise match\\n4. Potential gaps or limitations\\n5. Confidence in agent's ability to solve the problem",
+        "model_settings": {"temperature": 0.2, "max_tokens": 1500}
       },
       "dependencies": ["forge_specialist_agent"]
     }

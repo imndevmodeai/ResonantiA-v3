@@ -195,10 +195,11 @@ class RISE_Orchestrator:
 
     def _init_rise_state(self, problem_description: str) -> RISEState:
         """Initializes a new RISEState object for a workflow run."""
+        logger.info(f"🔍 DEBUG: _init_rise_state called with problem_description: '{problem_description}'")
         start_time = datetime.utcnow()
         session_id = f"rise_{int(start_time.timestamp())}_{uuid.uuid4().hex[:6]}"
         
-        return RISEState(
+        rise_state = RISEState(
             problem_description=problem_description,
             session_id=session_id,
             current_phase="Init",
@@ -222,6 +223,8 @@ class RISE_Orchestrator:
             synergistic_synthesis=None,
             utopian_trust_packet=None
         )
+        logger.info(f"🔍 DEBUG: RISEState created with problem_description: '{rise_state.problem_description}'")
+        return rise_state
 
     def _load_axiomatic_knowledge(self) -> Dict[str, Any]:
         """
@@ -665,10 +668,24 @@ class RISE_Orchestrator:
         
         logger.info("🔍 Phase A: Acquiring domain knowledge and forging specialist agent (Enhanced)")
         
+        # Emit rich VCD phase start event (synchronous for now)
+        try:
+            import sys
+            import os
+            sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+            from vcd_bridge import VCDBridge
+            vcd_bridge = VCDBridge()
+            # Note: VCD bridge methods are async, but we're in sync context
+            # This will be enhanced when VCD integration is fully async
+            logger.info("VCD Phase A start event prepared")
+        except Exception as e:
+            logger.warning(f"Failed to prepare VCD phase start: {e}")
+        
         try:
             # Try the simple knowledge scaffolding workflow first
             knowledge_result = None
             try:
+                logger.info(f"🔍 DEBUG: Phase A - problem_description: '{rise_state.problem_description}'")
                 knowledge_result = self.workflow_engine.run_workflow(
                     "knowledge_scaffolding.json",
                     {
@@ -841,9 +858,28 @@ class RISE_Orchestrator:
                 raise RuntimeError(f"Phase B failed integrity check: {failure_output}")
 
             # Check for dossier existence as a final safeguard
-            fused_dossier = fusion_result.get("synthesize_fused_dossier", {}).get("result", {}).get("generated_text")
-            if not fused_dossier:
-                 raise RuntimeError("Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.")
+            logger.info(f"🔍 Phase B fusion_result keys: {list(fusion_result.keys())}")
+            logger.info(f"🔍 Phase B fusion_result structure: {fusion_result}")
+            synthesize_task_result = fusion_result.get("synthesize_fused_dossier", {})
+            logger.info(f"🔍 synthesize_task_result: {synthesize_task_result}")
+            if not synthesize_task_result:
+                raise RuntimeError("Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.")
+            
+            # Extract the generated text from the task result
+            if isinstance(synthesize_task_result, dict):
+                # Check for the result structure from the workflow engine
+                if "result" in synthesize_task_result and "generated_text" in synthesize_task_result["result"]:
+                    fused_dossier = synthesize_task_result["result"]["generated_text"]
+                elif "generated_text" in synthesize_task_result:
+                    fused_dossier = synthesize_task_result["generated_text"]
+                else:
+                    # Fallback: try to extract any text content
+                    fused_dossier = str(synthesize_task_result.get("result", synthesize_task_result))
+            else:
+                fused_dossier = str(synthesize_task_result)
+            
+            if not fused_dossier or fused_dossier.strip() == "":
+                raise RuntimeError("Phase B completed, but the 'synthesize_fused_dossier' task did not produce meaningful output. Synthesis failed.")
             
             phase_end = datetime.utcnow()
             phase_duration = (phase_end - phase_start).total_seconds()

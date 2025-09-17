@@ -464,11 +464,16 @@ class IARCompliantWorkflowEngine:
             raise ValueError(f"Unknown action type: {action_type}")
 
         action_func = self.action_registry[action_type]
-        inputs = self._resolve_template_variables(
-            task.get("inputs", {}), results, initial_context)
+        # Use the robust resolver that supports embedded placeholders and context paths
+        resolved_inputs = self._resolve_inputs(
+            task.get('inputs'),
+            results,  # runtime_context
+            initial_context,
+            task_key
+        )
 
         try:
-            result = action_func(inputs)
+            result = action_func(resolved_inputs)
             if not isinstance(result, dict):
                 result = {"output": result}
             return result
@@ -739,10 +744,15 @@ class IARCompliantWorkflowEngine:
     f"Template (single) '{value}' in task '{task_key}' references itself ('{var_path_str}').")
                 resolved_var_from_context = runtime_context.get(task_key)
             else:
+                # Try runtime_context first
                 resolved_var_from_context = self._get_value_from_path(
                     var_path_str, runtime_context)
+                if resolved_var_from_context is None:
+                    # Fallback: try initial_context using the same path
+                    resolved_var_from_context = self._get_value_from_path(
+                        var_path_str, initial_context)
                 logger.debug(
-    f"Resolved (single) '{var_path_str}' to: {resolved_var_from_context} (from runtime_context)")
+    f"Resolved (single) '{var_path_str}' to: {resolved_var_from_context} (from runtime_context/initial_context)")
 
             current_value_for_placeholder = None
             if resolved_var_from_context is None and has_default_filter:
@@ -836,10 +846,15 @@ class IARCompliantWorkflowEngine:
                         resolved_var_from_context_inner = runtime_context.get(
                             task_key)
                     else:
+                        # Try runtime_context first
                         resolved_var_from_context_inner = self._get_value_from_path(
                             var_path_str_inner, runtime_context)
+                        if resolved_var_from_context_inner is None:
+                            # Fallback to initial_context if not found
+                            resolved_var_from_context_inner = self._get_value_from_path(
+                                var_path_str_inner, initial_context)
                         logger.debug(
-    f"Resolved (embedded) '{var_path_str_inner}' to: {resolved_var_from_context_inner} (from runtime_context)")
+    f"Resolved (embedded) '{var_path_str_inner}' to: {resolved_var_from_context_inner} (from runtime_context/initial_context)")
                     
                     current_value_for_placeholder_inner = None
                     if resolved_var_from_context_inner is None and has_default_filter_inner:
@@ -1143,6 +1158,39 @@ class IARCompliantWorkflowEngine:
                 self.event_callback(event_data)
             except Exception as e:
                 logger.warning(f"Failed to emit VCD event: {e}")
+    
+    def _emit_rich_vcd_event(self, event_type: str, title: str, description: str, 
+                           metadata: Dict[str, Any] = None, links: List[Dict[str, Any]] = None,
+                           code_blocks: List[Dict[str, Any]] = None, simulations: List[Dict[str, Any]] = None,
+                           visualizations: List[Dict[str, Any]] = None):
+        """Emit rich VCD events with enhanced metadata and interactive elements."""
+        if self.event_callback:
+            try:
+                # Create rich event data structure
+                rich_event_data = {
+                    "type": "rich_event",
+                    "event": event_type,
+                    "timestamp": datetime.now().isoformat(),
+                    "payload": {
+                        "event_id": f"{event_type}_{uuid.uuid4().hex[:8]}",
+                        "event_type": event_type,
+                        "title": title,
+                        "description": description,
+                        "phase": getattr(self, 'current_phase', 'Unknown'),
+                        "links": links or [],
+                        "code_blocks": code_blocks or [],
+                        "simulations": simulations or [],
+                        "visualizations": visualizations or [],
+                        "expandable": True,
+                        "drill_down_enabled": True,
+                        "interactive": True,
+                        "metadata": metadata or {},
+                        "tags": [event_type.lower(), "workflow", "analysis"]
+                    }
+                }
+                self.event_callback(rich_event_data)
+            except Exception as e:
+                logger.warning(f"Failed to emit rich VCD event: {e}")
 
     def run_workflow(self, workflow_name: str,
                      initial_context: Dict[str, Any],
@@ -1214,6 +1262,12 @@ class IARCompliantWorkflowEngine:
     f"Starting workflow '{
         self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {
             list(ready_tasks)}")
+        
+        # DEBUG: Print all tasks and their dependencies
+        logger.info(f"🔧 DEBUG: All workflow tasks: {list(tasks.keys())}")
+        for task_key, task_info in tasks.items():
+            deps = task_info.get('dependencies', [])
+            logger.info(f"🔧 DEBUG: Task '{task_key}' has dependencies: {deps}")
 
         start_time = time.time()
         
@@ -1272,6 +1326,37 @@ class IARCompliantWorkflowEngine:
             
             # --- VCD INSTRUMENTATION ---
             self._emit_event("ThoughtTrail", {"message": f"Executing task: {task_key} (Action: {action_type})"})
+            
+            # --- RICH VCD INSTRUMENTATION ---
+            # Emit rich events based on action type
+            if action_type == "search_web":
+                self._emit_rich_vcd_event(
+                    "web_search",
+                    f"Web Search: {task_key}",
+                    f"Searching for information related to task '{task_key}'",
+                    metadata={"task_key": task_key, "action_type": action_type}
+                )
+            elif action_type == "execute_code":
+                self._emit_rich_vcd_event(
+                    "code_execution",
+                    f"Code Execution: {task_key}",
+                    f"Executing code for task '{task_key}'",
+                    metadata={"task_key": task_key, "action_type": action_type}
+                )
+            elif action_type == "generate_text_llm":
+                self._emit_rich_vcd_event(
+                    "thought_process",
+                    f"LLM Generation: {task_key}",
+                    f"Generating text using LLM for task '{task_key}'",
+                    metadata={"task_key": task_key, "action_type": action_type}
+                )
+            else:
+                self._emit_rich_vcd_event(
+                    "thought_process",
+                    f"Task Execution: {task_key}",
+                    f"Executing {action_type} action for task '{task_key}'",
+                    metadata={"task_key": task_key, "action_type": action_type}
+                )
 
             action_context_obj = ActionContext(
                 task_key=task_key, action_name=task_key, action_type=action_type,
@@ -1323,6 +1408,60 @@ class IARCompliantWorkflowEngine:
             # --- VCD INSTRUMENTATION ---
             status_msg = "succeeded" if is_success else "failed"
             self._emit_event("ThoughtTrail", {"message": f"Task '{task_key}' {status_msg}. Duration: {task_duration}s"})
+            
+            # --- RICH VCD RESULT EMISSION ---
+            if is_success:
+                # Emit rich results based on action type and result content
+                if action_type == "search_web" and "search_results" in result:
+                    search_results = result.get("search_results", [])
+                    links = []
+                    for item in search_results:
+                        if isinstance(item, dict):
+                            links.append({
+                                'url': item.get('url', ''),
+                                'title': item.get('title', ''),
+                                'description': item.get('snippet', ''),
+                                'clickable': True
+                            })
+                    self._emit_rich_vcd_event(
+                        "web_search",
+                        f"Search Results: {task_key}",
+                        f"Found {len(links)} search results",
+                        metadata={"task_key": task_key, "result_count": len(links)},
+                        links=links
+                    )
+                elif action_type == "execute_code" and "result" in result:
+                    code_result = result.get("result", {})
+                    code_blocks = [{
+                        'code': resolved_inputs.get('code', ''),
+                        'language': 'python',
+                        'execution_result': str(code_result.get('stdout', '')),
+                        'execution_time': task_duration,
+                        'expandable': True
+                    }]
+                    self._emit_rich_vcd_event(
+                        "code_execution",
+                        f"Code Execution Complete: {task_key}",
+                        f"Code executed successfully in {task_duration}s",
+                        metadata={"task_key": task_key, "success": True},
+                        code_blocks=code_blocks
+                    )
+                elif action_type == "generate_text_llm" and "generated_text" in result:
+                    generated_text = result.get("generated_text", "")
+                    self._emit_rich_vcd_event(
+                        "strategy_synthesis",
+                        f"Text Generation Complete: {task_key}",
+                        f"Generated {len(generated_text)} characters of text",
+                        metadata={"task_key": task_key, "text_length": len(generated_text)}
+                    )
+            else:
+                # Emit error information
+                self._emit_rich_vcd_event(
+                    "thought_process",
+                    f"Task Failed: {task_key}",
+                    f"Task '{task_key}' failed: {result.get('error', 'Unknown error')}",
+                    metadata={"task_key": task_key, "error": result.get('error', 'Unknown error')}
+                )
 
             # IAR contract validation (bedrock of trust)
             reflection = result.get("reflection") or result.get("iar") or {}
@@ -1391,12 +1530,20 @@ class IARCompliantWorkflowEngine:
                 except Exception:
                     pass
 
-            if is_success:
-                for next_task_key, next_task_info in tasks.items():
-                    if next_task_key not in completed_tasks and next_task_key not in ready_tasks and next_task_key not in running_tasks:
-                        dependencies = next_task_info.get('dependencies', [])
-                        if all(dep in completed_tasks for dep in dependencies):
-                             ready_tasks.add(next_task_key)
+            # Always check for newly ready tasks after any task completes (successful or failed)
+            logger.info(f"🔍 Checking for newly ready tasks after '{task_key}' completion")
+            logger.info(f"🔍 Current state - completed: {list(completed_tasks)}, ready: {list(ready_tasks)}, running: {list(running_tasks.keys())}")
+            
+            for next_task_key, next_task_info in tasks.items():
+                if next_task_key not in completed_tasks and next_task_key not in ready_tasks and next_task_key not in running_tasks:
+                    dependencies = next_task_info.get('dependencies', [])
+                    logger.info(f"🔍 Checking task '{next_task_key}' with dependencies: {dependencies}")
+                    missing_deps = [dep for dep in dependencies if dep not in completed_tasks]
+                    if not missing_deps:
+                        logger.info(f"✅ Adding task '{next_task_key}' to ready_tasks (all dependencies completed)")
+                        ready_tasks.add(next_task_key)
+                    else:
+                        logger.info(f"⏳ Task '{next_task_key}' not ready, missing: {missing_deps}")
 
         end_time = time.time()
         run_duration = round(end_time - start_time, 2)
@@ -1426,6 +1573,24 @@ class IARCompliantWorkflowEngine:
             save_session_state(session_state)
         except Exception:
             pass
+
+        # Compute declared workflow outputs (if any) using template resolution
+        try:
+            outputs_def = workflow_definition.get('output', {})
+            if isinstance(outputs_def, dict) and outputs_def:
+                for out_key, out_spec in outputs_def.items():
+                    if isinstance(out_spec, dict) and 'value' in out_spec:
+                        try:
+                            resolved_out = self._resolve_value(
+                                out_spec.get('value'),
+                                runtime_context,
+                                initial_context
+                            )
+                            runtime_context[out_key] = resolved_out
+                        except Exception as e_out:
+                            logger.warning(f"Failed to resolve workflow output '{out_key}': {e_out}")
+        except Exception as e_outputs:
+            logger.warning(f"Error while computing workflow outputs: {e_outputs}")
 
         final_results = self._summarize_run(
             workflow_name=self.last_workflow_name, run_id=run_id, status=final_status,

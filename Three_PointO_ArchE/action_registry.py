@@ -85,6 +85,7 @@ class ActionRegistry:
         # For this refactoring, we'll keep them as placeholders.
         self.register_action("generate_text_llm", self.generate_text_llm_action)
         self.register_action("execute_code", self.execute_code_action)
+        self.register_action("string_template", self.string_template_action)
         
         # --- CAUSAL INFERENCE ACTION ---
         # Use V4 causal inference if available, otherwise fallback to V3
@@ -489,6 +490,72 @@ For more sophisticated text generation, the V4 LLM integration would provide enh
                     "message": f"Code execution error: {str(e)}",
                     "alignment_check": "Failed",
                     "potential_issues": [f"Execution error: {str(e)}"]
+                }
+            }
+
+    def string_template_action(self, inputs: Dict[str, Any]) -> Dict[str, Any]:
+        """Process a string template with variable substitution."""
+        try:
+            template = inputs.get("template", "")
+            if not template:
+                return {
+                    "error": "No template provided",
+                    "reflection": {
+                        "status": "Failed",
+                        "confidence": 0.0,
+                        "message": "string_template requires 'template' input parameter",
+                        "alignment_check": "Failed",
+                        "potential_issues": ["Missing required input: template"]
+                    }
+                }
+            
+            template_vars = {k: v for k, v in inputs.items() if k != "template"}
+            
+            try:
+                result = template.format(**template_vars)
+            except KeyError as e:
+                return {
+                    "error": f"Missing template variable: {e}",
+                    "reflection": {
+                        "status": "Failed",
+                        "confidence": 0.0,
+                        "message": f"Template variable not found: {e}",
+                        "alignment_check": "Failed",
+                        "potential_issues": [f"Missing template variable: {e}"]
+                    }
+                }
+            except Exception as e:
+                return {
+                    "error": f"Template processing failed: {str(e)}",
+                    "reflection": {
+                        "status": "Failed",
+                        "confidence": 0.0,
+                        "message": f"Template processing error: {str(e)}",
+                        "alignment_check": "Failed",
+                        "potential_issues": [f"Template processing error: {str(e)}"]
+                    }
+                }
+            
+            return {
+                "result": result,
+                "reflection": {
+                    "status": "Success",
+                    "confidence": 0.9,
+                    "message": "Template processed successfully",
+                    "alignment_check": "Aligned",
+                    "potential_issues": []
+                }
+            }
+            
+        except Exception as e:
+            return {
+                "error": f"String template processing failed: {str(e)}",
+                "reflection": {
+                    "status": "Failed",
+                    "confidence": 0.0,
+                    "message": f"String template error: {str(e)}",
+                    "alignment_check": "Failed",
+                    "potential_issues": [f"String template error: {str(e)}"]
                 }
             }
 
