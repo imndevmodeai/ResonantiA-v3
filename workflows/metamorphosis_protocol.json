@@ -23,11 +23,10 @@
                 "prompt": "Based on the following knowledge base and problem description, create a detailed persona for a specialized cognitive agent. The persona should be a JSON object with keys: 'name', 'expertise' (list of strings), 'background' (a detailed paragraph), 'analytical_frameworks' (list of strings), and 'strategic_patterns' (list of strings).\\n\\n== KNOWLEDGE BASE ==\\n{knowledge_base_str}\\n\\n== PROBLEM DESCRIPTION ==\\n{problem_description}",
                 "model_settings": {
                     "temperature": 0.4,
-                    "max_tokens": 1500,
-                    "response_format": "json"
+                    "max_tokens": 1500
                 },
-                "knowledge_base_str": "{{ context.session_knowledge_base }}",
-                "problem_description": "{{ context.problem_description }}"
+                "knowledge_base_str": "{{ session_knowledge_base }}",
+                "problem_description": "{{ problem_description }}"
             },
             "output_variable": "agent_profile"
         },

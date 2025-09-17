@@ -20,9 +20,8 @@
             "description": "The original problem description."
         }
     },
-    "tasks": [
-        {
-            "task_id": "format_distillation_prompt",
+    "tasks": {
+        "format_distillation_prompt": {
             "action_type": "string_template",
             "description": "Formats the inputs into a comprehensive prompt for the LLM.",
             "inputs": {
@@ -33,40 +32,37 @@
             },
             "output_variable": "distillation_prompt"
         },
-        {
-            "task_id": "distill_spr_with_llm",
+        "distill_spr_with_llm": {
             "action_type": "generate_text_llm",
             "description": "Uses a powerful language model to analyze the session and generate the SPR JSON.",
             "inputs": {
                 "prompt": "{{ tasks.format_distillation_prompt.output.result }}",
                 "model_settings": {
                     "temperature": 0.3,
-                    "max_tokens": 1000,
-                    "response_format": "json"
+                    "max_tokens": 1000
                 }
             },
             "output_variable": "llm_spr_output",
             "dependencies": ["format_distillation_prompt"]
         },
-        {
-            "task_id": "parse_and_validate_spr",
-            "action_type": "execute_python_code",
+        "parse_and_validate_spr": {
+            "action_type": "execute_code",
             "description": "Parses the LLM output and validates the structure of the generated SPR.",
             "inputs": {
                 "code": "import json\ndef parse_spr(llm_output):\n    try:\n        spr_data = json.loads(llm_output)\n        required_keys = ['spr_id', 'term', 'description', 'category', 'pattern_type', 'core_logic', 'aliases', 'confidence_score']\n        for key in required_keys:\n            if key not in spr_data:\n                return {'status': 'error', 'message': f'Missing key in SPR: {key}'}\n        return {'status': 'success', 'spr_definition': spr_data}\n    except Exception as e:\n        return {'status': 'error', 'message': str(e)}\n\nresult = parse_spr(spr_output)",
-                "spr_output": "{{ tasks.distill_spr_with_llm.output.generated_text }}"
+                "spr_output": "{{ distill_spr_with_llm.result.generated_text }}"
             },
             "output_variable": "parsed_spr_result",
             "dependencies": ["distill_spr_with_llm"]
         }
-    ],
+    },
     "output": {
         "spr_definition": {
-            "value": "{{ tasks.parse_and_validate_spr.output.result.spr_definition }}",
+            "value": "{{ parse_and_validate_spr.result.result.spr_definition }}",
             "description": "The newly generated and validated SPR definition."
         },
         "status": {
-            "value": "{{ tasks.parse_and_validate_spr.output.result.status }}",
+            "value": "{{ parse_and_validate_spr.result.result.status }}",
             "description": "The final status of the distillation process."
         }
     }

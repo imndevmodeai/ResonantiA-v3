@@ -13,47 +13,38 @@
             "action_type": "generate_text_llm",
             "description": "Analyzes the problem from a purely logical, data-driven, and analytical perspective.",
             "inputs": {
-                "prompt": "Analyze the following problem from a strictly analytical and data-driven perspective. Use first-principles thinking. Ignore creative or unconventional solutions. Provide a structured analysis and a list of logical conclusions.\\n\\n== PROBLEM ==\\n{problem_description}\\n\\n== KNOWLEDGE BASE ==\\n{knowledge_base_str}",
-                "model_settings": { "temperature": 0.1, "max_tokens": 1500 },
-                "problem_description": "{{ context.problem_description }}",
-                "knowledge_base_str": "{{ context.session_knowledge_base }}"
+                "prompt": "Analyze the following problem from a strictly analytical and data-driven perspective. Use first-principles thinking. Ignore creative or unconventional solutions. Provide a structured analysis and a list of logical conclusions.\\n\\n== PROBLEM ==\\n{{ problem_description }}\\n\\n== KNOWLEDGE BASE ==\\n{{ session_knowledge_base }}",
+                "model_settings": { "temperature": 0.1, "max_tokens": 1500 }
             },
             "output_variable": "analytical_insights"
         },
         "pathway_creative_insight": {
             "action_type": "generate_text_llm",
-            "description": "Analyzes the problem from a creative, divergent, and unconventional perspective.",
+            "description": "Analyzes the problem from a highly creative and unconventional perspective.",
             "inputs": {
-                "prompt": "Analyze the following problem from a highly creative and unconventional perspective. Brainstorm novel, 'outside-the-box' solutions. Do not be constrained by conventional wisdom. Provide a list of innovative ideas.\\n\\n== PROBLEM ==\\n{problem_description}",
-                "model_settings": { "temperature": 0.9, "max_tokens": 1500 },
-                "problem_description": "{{ context.problem_description }}"
+                "prompt": "Analyze the following problem from a highly creative and unconventional perspective. Brainstorm novel, 'outside-the-box' solutions. Do not be constrained by conventional wisdom. Provide a list of innovative ideas.\\n\\n== PROBLEM ==\\n{{ problem_description }}",
+                "model_settings": { "temperature": 0.9, "max_tokens": 1500 }
             },
             "output_variable": "creative_insights"
         },
         "pathway_specialist_consultation": {
             "action_type": "generate_text_llm",
-            "description": "Simulates the specialized agent's perspective on the problem.",
+            "description": "Provides specialized analysis based on agent expertise.",
             "inputs": {
-                "prompt": "You are a specialized agent with the following profile: {agent_profile_str}. Based on your unique expertise, provide a detailed analysis and strategic recommendation for the following problem.\\n\\n== PROBLEM ==\\n{problem_description}\\n\\n== KNOWLEDGE BASE ==\\n{knowledge_base_str}",
-                "model_settings": { "temperature": 0.5, "max_tokens": 1500 },
-                "agent_profile_str": "{{ context.specialized_agent }}",
-                "problem_description": "{{ context.problem_description }}",
-                "knowledge_base_str": "{{ context.session_knowledge_base }}"
+                "prompt": "You are a specialized agent with the following profile: {{ specialized_agent }}. Based on your unique expertise, provide a detailed analysis and strategic recommendation for the following problem.\\n\\n== PROBLEM ==\\n{{ problem_description }}\\n\\n== KNOWLEDGE BASE ==\\n{{ session_knowledge_base }}",
+                "model_settings": { "temperature": 0.5, "max_tokens": 1500 }
             },
             "output_variable": "specialist_insights"
         },
         "synthesize_fused_dossier": {
             "action_type": "generate_text_llm",
+ 
             "description": "Synthesizes the insights from all pathways into a single, cohesive strategic dossier.",
             "inputs": {
-                "prompt": "You are a master strategist. Synthesize the insights from the following three different analytical pathways into a single, cohesive, and powerful strategic dossier. The final strategy should balance the analytical, creative, and specialist perspectives to create a robust and innovative solution. Format the output as a detailed strategic plan.\\n\\n== ANALYTICAL INSIGHTS ==\\n{analytical}\\n\\n== CREATIVE INSIGHTS ==\\n{creative}\\n\\n== SPECIALIST INSIGHTS ==\\n{specialist}",
-                "model_settings": { "temperature": 0.5, "max_tokens": 2500, "response_format": "json" },
-                "analytical": "{{ pathway_analytical_insight.result.generated_text }}",
-                "creative": "{{ pathway_creative_insight.result.generated_text }}",
-                "specialist": "{{ pathway_specialist_consultation.result.generated_text }}"
+                "prompt": "You are a master strategist. Create a comprehensive strategic dossier for the following problem:\n\nPROBLEM: {{ problem_description }}\n\nSPECIALIST AGENT PROFILE: {{ specialized_agent }}\n\nKNOWLEDGE BASE: {{ session_knowledge_base }}\n\nSynthesize insights from analytical, creative, and specialist perspectives to create a robust and innovative solution. Format the output as a detailed strategic plan with actionable recommendations that directly addresses the specific problem described above.",
+                "model_settings": { "temperature": 0.5, "max_tokens": 2500 }
             },
-            "output_variable": "fused_strategic_dossier",
-            "dependencies": ["pathway_analytical_insight", "pathway_creative_insight", "pathway_specialist_consultation"]
+            "output_variable": "fused_strategic_dossier"
         }
     },
     "output": {

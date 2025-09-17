@@ -640,7 +640,7 @@ class EnhancedPerceptionEngine:
 
 def enhanced_web_search(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     """
-    Enhanced web search action with full Perception Engine capabilities.
+    Enhanced web search action with full Perception Engine capabilities and rich VCD events.
     
     Args:
         inputs: Dictionary containing 'query' and optional 'context'
@@ -657,6 +657,18 @@ def enhanced_web_search(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[st
     context = inputs.get("context", {})
     max_results = inputs.get("max_results", 5)
     
+    # Import existing VCD bridge
+    try:
+        import sys
+        import os
+        sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+        from vcd_bridge import VCDBridge
+        vcd_bridge = VCDBridge()
+        vcd_enabled = True
+    except ImportError:
+        vcd_bridge = None
+        vcd_enabled = False
+    
     engine = None
     try:
         engine = EnhancedPerceptionEngine()
@@ -666,11 +678,54 @@ def enhanced_web_search(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[st
         stats = engine.get_session_stats()
         result["session_stats"] = stats
         
+        # Emit rich VCD event if available and search was successful
+        if vcd_enabled and vcd_bridge and "error" not in result:
+            try:
+                # Extract search results for VCD
+                search_results = result.get("search_results", [])
+                formatted_results = []
+                
+                for item in search_results:
+                    if isinstance(item, dict):
+                        formatted_results.append({
+                            'title': item.get('title', ''),
+                            'url': item.get('url', ''),
+                            'snippet': item.get('snippet', ''),
+                            'relevance_score': item.get('relevance_score', 0.0),
+                            'source_credibility': item.get('source_credibility', 0.0)
+                        })
+                
+                vcd_bridge.emit_web_search(
+                    query=query,
+                    results=formatted_results,
+                    search_engine="enhanced_perception"
+                )
+                
+                # Also emit thought process for search strategy
+                vcd_bridge.emit_thought_process(
+                    message=f"Executed web search for '{query}' - found {len(formatted_results)} results",
+                    context={"query": query, "result_count": len(formatted_results)}
+                )
+                
+            except Exception as vcd_error:
+                logger.warning(f"Failed to emit VCD event: {vcd_error}")
+        
         return result, iar
         
     except Exception as e:
         result = {"error": f"Enhanced web search error: {e}"}
         iar = create_iar(0.2, 0.1, [f"Web search error: {e}"])
+        
+        # Emit error VCD event if available
+        if vcd_enabled and vcd_bridge:
+            try:
+                vcd_bridge.emit_thought_process(
+                    message=f"Web search failed for query '{query}': {str(e)}",
+                    context={"error": str(e), "query": query}
+                )
+            except Exception as vcd_error:
+                logger.warning(f"Failed to emit VCD error event: {vcd_error}")
+        
         return result, iar
     finally:
         if engine:
@@ -678,7 +733,7 @@ def enhanced_web_search(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[st
 
 def enhanced_page_analysis(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     """
-    Enhanced page analysis action.
+    Enhanced page analysis action with rich VCD events.
     
     Args:
         inputs: Dictionary containing 'url' and optional 'context'
@@ -694,6 +749,18 @@ def enhanced_page_analysis(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict
     
     context = inputs.get("context", {})
     
+    # Import existing VCD bridge
+    try:
+        import sys
+        import os
+        sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+        from vcd_bridge import VCDBridge
+        vcd_bridge = VCDBridge()
+        vcd_enabled = True
+    except ImportError:
+        vcd_bridge = None
+        vcd_enabled = False
+    
     engine = None
     try:
         engine = EnhancedPerceptionEngine()
@@ -703,11 +770,46 @@ def enhanced_page_analysis(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict
         stats = engine.get_session_stats()
         result["session_stats"] = stats
         
+        # Emit rich VCD event if available and analysis was successful
+        if vcd_enabled and vcd_bridge and "error" not in result:
+            try:
+                # Extract page analysis data for VCD
+                title = result.get("title", "Unknown Page")
+                content = result.get("content", "")
+                images = result.get("images", [])
+                
+                vcd_bridge.emit_web_browse(
+                    url=url,
+                    title=title,
+                    content=content,
+                    images=images
+                )
+                
+                # Also emit thought process for analysis insights
+                vcd_bridge.emit_thought_process(
+                    message=f"Analyzed page '{title}' - extracted {len(content)} characters of content",
+                    context={"url": url, "title": title, "content_length": len(content)}
+                )
+                
+            except Exception as vcd_error:
+                logger.warning(f"Failed to emit VCD event: {vcd_error}")
+        
         return result, iar
         
     except Exception as e:
         result = {"error": f"Enhanced page analysis error: {e}"}
         iar = create_iar(0.2, 0.1, [f"Page analysis error: {e}"])
+        
+        # Emit error VCD event if available
+        if vcd_enabled and vcd_bridge:
+            try:
+                vcd_bridge.emit_thought_process(
+                    message=f"Page analysis failed for URL '{url}': {str(e)}",
+                    context={"error": str(e), "url": url}
+                )
+            except Exception as vcd_error:
+                logger.warning(f"Failed to emit VCD error event: {vcd_error}")
+        
         return result, iar
     finally:
         if engine:
