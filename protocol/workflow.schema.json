@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://arche.sh/schemas/workflow.schema.json",
+  "title": "ArchE Workflow Definition",
+  "description": "Defines the structure for a multi-step, IAR-compliant workflow to be executed by the ArchE Workflow Engine.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "A human-readable name for the workflow.",
+      "type": "string"
+    },
+    "description": {
+      "description": "A detailed explanation of the workflow's purpose and goals.",
+      "type": "string"
+    },
+    "version": {
+      "description": "The semantic version of the workflow definition.",
+      "type": "string",
+      "pattern": "^(0|[1-9]\\\\d*)\\\\. (0|[1-9]\\\\d*)\\\\. (0|[1-9]\\\\d*)$"
+    },
+    "steps": {
+      "description": "An ordered list of steps to be executed in the workflow.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/step"
+      }
+    }
+  },
+  "required": ["name", "description", "version", "steps"],
+  "definitions": {
+    "step": {
+      "type": "object",
+      "properties": {
+        "step_id": {
+          "description": "A unique identifier for this step within the workflow.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The registered name of the cognitive tool/action to execute.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "An object containing the parameters to pass to the action.",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "on_success": {
+          "description": "The step_id to execute next if the action returns an IAR with a 'Success' status.",
+          "type": "string"
+        },
+        "on_failure": {
+          "description": "The step_id to execute next if the action returns an IAR with a 'Failure' status.",
+          "type": "string"
+        }
+      },
+      "required": ["step_id", "action", "parameters"]
+    }
+  }
+}

@@ -365,19 +365,7 @@ class GoogleProvider(BaseLLMProvider):
 
             # Process response with enhanced error handling
             try:
-                # Handle function calls if present (normalize to string)
-                if hasattr(response, 'candidates') and response.candidates:
-                    candidate = response.candidates[0]
-                    if hasattr(candidate, 'content') and candidate.content:
-                        # Check for function calls
-                        if hasattr(candidate.content, 'parts'):
-                            for part in candidate.content.parts:
-                                if hasattr(part, 'function_call'):
-                                    fn = getattr(part.function_call, 'name', '')
-                                    args = getattr(part.function_call, 'args', None)
-                                    return f"[function_call:{fn}] {json.dumps(args) if args is not None else ''}"
-
-                # Handle regular text response
+                # Handle regular text response first
                 if hasattr(response, 'text') and response.text:
                     text_response = response.text
                     finish_reason = getattr(response.candidates[0], 'finish_reason', 'N/A') if response.candidates else 'N/A'
@@ -391,6 +379,20 @@ class GoogleProvider(BaseLLMProvider):
                         )
                     
                     return text_response
+
+                # Handle function calls if present (but we disabled them, so this should not happen)
+                if hasattr(response, 'candidates') and response.candidates:
+                    candidate = response.candidates[0]
+                    if hasattr(candidate, 'content') and candidate.content:
+                        # Check for function calls
+                        if hasattr(candidate.content, 'parts'):
+                            for part in candidate.content.parts:
+                                if hasattr(part, 'function_call'):
+                                    fn = getattr(part.function_call, 'name', '')
+                                    args = getattr(part.function_call, 'args', None)
+                                    logger.warning(f"Unexpected function call detected despite being disabled: {fn}")
+                                    # Return a fallback response instead of function call
+                                    return f"I apologize, but I encountered an issue generating a proper response. Please try rephrasing your request."
 
                 # Fallback to detailed parsing
                 if response.candidates and response.candidates[0].content and response.candidates[0].content.parts:

@@ -1,0 +1,39 @@
+name: Placeholder Guard
+
+on:
+  pull_request:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Scan for placeholder markers
+        run: |
+          set -euo pipefail
+          PATTERNS=(
+            "# ... existing code ..."
+            "// ... existing code ..."
+            "existing code\\.\\.\\."
+            "existing code"
+          )
+          FILES=$(git ls-files | grep -E '\\.(py|js|ts|tsx|md|json|yaml|yml)$' || true)
+          FAIL=0
+          for f in $FILES; do
+            for p in "${PATTERNS[@]}"; do
+              if grep -P -n "$p" "$f" >/dev/null 2>&1; then
+                echo "Placeholder marker found in $f" >&2
+                FAIL=1
+                break
+              fi
+            done
+          done
+          if [ $FAIL -ne 0 ]; then
+            echo "Failing due to placeholder markers." >&2
+            exit 1
+          fi
+

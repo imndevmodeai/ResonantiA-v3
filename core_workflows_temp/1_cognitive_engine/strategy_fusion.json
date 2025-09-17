@@ -68,8 +68,8 @@
                 "pathway_integrity_check"
             ],
             "inputs": {
-                "prompt": "Synthesize the following analytical results into a cohesive strategic dossier. Reference the results from Causal Analysis, ABM Simulation, CFP Analysis, and the Specialist Consultation. Highlight areas of agreement and disagreement between the pathways to form a robust, multi-perspective insight.\n\nCausal Analysis Output:\n{{ pathway_causal_analysis.result | default('Not Available') }}\n\nABM Simulation Output:\n{{ pathway_simulation_abm.result | default('Not Available') }}\n\nCFP Analysis Output:\n{{ pathway_comparative_cfp.result | default('Not Available') }}\n\nSpecialist Consultation:\n{{ pathway_specialist_consultation.result | default('Not Available') }}",
-                "max_tokens": 4096
+                "prompt": "Synth0esize the following analytical results into a cohesive strategic dossier. Reference the results from Causal Analysis, ABM Simulation, CFP Analysis, and the Specialist Consultation. Highlight areas of agreement and disagreement between the pathways to form a robust, multi-perspective insight.\n\nCausal Analysis Output:\n{{ pathway_causal_analysis.result | default('Not Available') }}\n\nABM Simulation Output:\n{{ pathway_simulation_abm.result | default('Not Available') }}\n\nCFP Analysis Output:\n{{ pathway_comparative_cfp.result | default('Not Available') }}\n\nSpecialist Consultation:\n{{ pathway_specialist_consultation.result | default('Not Available') }}",
+                "max_tokens": 400096
             }
         },
         "handle_synthesis_failure": {

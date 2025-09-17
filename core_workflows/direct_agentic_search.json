@@ -1,3 +1,4 @@
+
 {
   "name": "Direct Agentic Search Workflow",
   "description": "Executes a single, direct search using the Puppeteer script and synthesizes the findings using Google's Generative AI. This workflow is designed to be a stable, direct alternative to more complex research workflows.",
