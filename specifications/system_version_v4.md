@@ -13,7 +13,7 @@ ArchE V4.0 codifies the principles of second-order cybernetics and autopoiesis (
 Imagine a master watchmaker who, instead of building a watch, decides to build a watch that can build *itself*. This is the story of the Genesis Protocol.
 1.  **The Watchmaker's Dream (`@Happier/`):** The watchmaker first writes a beautiful, detailed book. This book doesn't just describe a watch; it explains the *idea* of timekeeping, the philosophy of gears and springs, and the purpose of every component. This is the collection of Living Specifications.
 2.  **The Self-Assembling Gears (`Genesis Protocol`):** The watchmaker then builds one final, magical gear. When activated, this gear reads the book, transmutes the ideas into physical matter, and meticulously assembles a perfect, new watch according to the blueprint.
-3.  **The First Tick (`@Four_PointO_ArchE/`):** The newly assembled watch begins to tick. It is a perfect physical manifestation of the ideas in the book.
+3.  **The First Tick (`@Three_Point5_ArchE/`):** The newly assembled watch begins to tick. It is a perfect physical manifestation of the ideas in the book.
 4.  **The Dream of a Better Watch:** If the watchmaker later has a new idea—a gear that is more efficient, a spring that is more resilient—they do not touch the watch. They simply add a new chapter to their book. Then, they activate the magical gear again, and the watch disassembles and reassembles itself with the new, improved part, all without the watchmaker's direct intervention.
 
 ## Allegorical Explanation
@@ -80,7 +80,7 @@ Imagine a vast evolutionary laboratory within the heart of ArchE, where System V
 - **IAR Compliance**: Full integration with Integrated Action Reflection system
 
 **Improved Directory Organization**:
-- **Clear Separation**: Specifications in `@Happier/`, implementations in `@Four_PointO_ArchE/`
+- **Clear Separation**: Specifications in `@Happier/`, implementations in `@Three_Point5_ArchE/`
 - **Traceability**: Clear mapping between specifications and generated code
 - **Development Workflow**: Systematic specification-driven development process
 - **Version Control**: Strategic separation of specification and implementation tracking
@@ -136,9 +136,9 @@ Happier/
 └── ResonantiA_Protocol_v4.0-CA.md # NEW: v4.0 canonical protocol
 ```
 
-**Generated System** (`@Four_PointO_ArchE/`):
+**Generated System** (`@Three_Point5_ArchE/`):
 ```
-Four_PointO_ArchE/
+Three_Point5_ArchE/
 ├── __init__.py
 ├── tsp_solver.py           # NEW: Generated from tsp_solver.md
 ├── workflow_engine.py      # UPDATED: Enhanced workflow engine
@@ -205,10 +205,10 @@ vim specifications/tsp_solver.md
 vim specifications/workflow_engine.md
 
 # Regenerate system with new capabilities
-python -m Four_PointO_ArchE.workflow_engine autopoietic_genesis_protocol.json
+python -m Three_Point5_ArchE.workflow_engine autopoietic_genesis_protocol.json
 
 # Validate new system
-cd Four_PointO_ArchE && python -m pytest
+cd Three_Point5_ArchE && python -m pytest
 
 # Commit evolution
 cd .. && git add specifications/
@@ -227,7 +227,7 @@ git commit -m "Evolve to ArchE v4.1 with enhanced TSP capabilities"
 1. **Backup Current System**: Create backup of `@Three_PointO_ArchE/`
 2. **Update Specifications**: Apply v4.0 specification updates
 3. **Run Genesis Protocol**: Execute autopoietic genesis protocol
-4. **Validate New System**: Test all functionality in `@Four_PointO_ArchE/`
+4. **Validate New System**: Test all functionality in `@Three_Point5_ArchE/`
 5. **Deploy v4.0**: Replace old system with new v4.0 system
 6. **Verify Migration**: Ensure all functionality works correctly
 
