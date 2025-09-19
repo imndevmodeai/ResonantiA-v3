@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_07505dfd44bf4a1783a1a21548bcfaa0.jsonl",
+  "size_bytes": 136175,
+  "modified": "2025-08-05T11:49:59.854785",
+  "workflow_name": "Knowledge Scaffolding & Dynamic Specialization (Simple)",
+  "run_id": "run_07505dfd44bf4a1783a1a21548bcfaa0",
+  "phase": "A",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 8,
+  "duration_sec": 342.8955,
+  "status": "unknown",
+  "line_count": 8
+}

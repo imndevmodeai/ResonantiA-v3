@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_e93e1de90f4a4c51a13807c212c15e54.jsonl",
+  "size_bytes": 148290,
+  "modified": "2025-08-15T08:31:07.405600",
+  "workflow_name": "Specification Refinement Protocol",
+  "run_id": "run_e93e1de90f4a4c51a13807c212c15e54",
+  "phase": "D",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 5,
+  "duration_sec": 2.5014,
+  "status": "unknown",
+  "line_count": 5
+}

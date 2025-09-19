@@ -1,0 +1,173 @@
+{
+  "summary": {
+    "total_errors": 190,
+    "error_rate": 0.10144153764014949
+  },
+  "workflows_with_errors": {
+    "Metamorphosis Protocol": {
+      "count": 58,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 2,
+      "total_tasks": 203
+    },
+    "Knowledge Scaffolding & Dynamic Specialization": {
+      "count": 69,
+      "phases": [
+        "A"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 12,
+      "total_tasks": 310
+    },
+    "Live RISE Engine Invocation (External Script)": {
+      "count": 12,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 5,
+      "total_tasks": 12
+    },
+    "Strategy Fusion Workflow (RISE Phase B)": {
+      "count": 27,
+      "phases": [
+        "B"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 79,
+      "total_tasks": 169
+    },
+    "High Stakes Vetting Cascade": {
+      "count": 36,
+      "phases": [
+        "C"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 6,
+      "total_tasks": 180
+    },
+    "Distill SPR from Execution": {
+      "count": 34,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 34,
+      "total_tasks": 102
+    },
+    "Unnamed Workflow": {
+      "count": 50,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 17,
+      "total_tasks": 314
+    },
+    "Autopoietic System Genesis Protocol": {
+      "count": 12,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 11,
+      "total_tasks": 52
+    },
+    "System Genesis and Evolution Workflow": {
+      "count": 5,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 4,
+      "total_tasks": 33
+    },
+    "Autopoietic System Genesis Protocol (v3.6-CGS)": {
+      "count": 7,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 2,
+      "total_tasks": 19
+    },
+    "Resonant Autopoietic Genesis Protocol (v2)": {
+      "count": 4,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 1,
+      "total_tasks": 25
+    },
+    "Final RISE Engine Invocation": {
+      "count": 2,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 1,
+      "total_tasks": 2
+    },
+    "Basic Analysis Workflow (v3.0 Enhanced)": {
+      "count": 13,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 13,
+      "total_tasks": 46
+    },
+    "For Each Meta-Action Demonstration": {
+      "count": 3,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 1,
+      "total_tasks": 6
+    },
+    "Metacognitive Control Flow Demonstration": {
+      "count": 2,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 2,
+      "total_tasks": 4
+    }
+  }
+}

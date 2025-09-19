@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_5d03a0b484164d438bf557ad159571a3.jsonl",
+  "size_bytes": 96630,
+  "modified": "2025-07-29T08:13:59.623495",
+  "workflow_name": "Unnamed Workflow",
+  "run_id": "run_5d03a0b484164d438bf557ad159571a3",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 9,
+  "duration_sec": 99.49440000000001,
+  "status": "unknown",
+  "line_count": 9
+}

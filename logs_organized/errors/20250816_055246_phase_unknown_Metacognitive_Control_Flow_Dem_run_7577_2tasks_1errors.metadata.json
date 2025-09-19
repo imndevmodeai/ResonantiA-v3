@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_7577c7f2ef9843edb0b6a0f6df5215bb.jsonl",
+  "size_bytes": 3625,
+  "modified": "2025-08-16T05:52:46.939070",
+  "workflow_name": "Metacognitive Control Flow Demonstration",
+  "run_id": "run_7577c7f2ef9843edb0b6a0f6df5215bb",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 1,
+  "task_count": 2,
+  "duration_sec": 0.216,
+  "status": "unknown",
+  "line_count": 2
+}

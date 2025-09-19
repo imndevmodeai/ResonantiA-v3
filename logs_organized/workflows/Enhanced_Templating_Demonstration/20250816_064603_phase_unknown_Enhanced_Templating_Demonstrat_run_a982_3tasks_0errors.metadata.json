@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_a98289e1211643ccab06dd1639a8819a.jsonl",
+  "size_bytes": 1573,
+  "modified": "2025-08-16T06:46:03.903382",
+  "workflow_name": "Enhanced Templating Demonstration",
+  "run_id": "run_a98289e1211643ccab06dd1639a8819a",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 3,
+  "duration_sec": 0.0008,
+  "status": "unknown",
+  "line_count": 3
+}

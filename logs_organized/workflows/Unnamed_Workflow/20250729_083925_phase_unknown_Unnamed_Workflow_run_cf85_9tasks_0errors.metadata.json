@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_cf85d13add1546039948215c913321c3.jsonl",
+  "size_bytes": 70860,
+  "modified": "2025-07-29T08:39:25.096935",
+  "workflow_name": "Unnamed Workflow",
+  "run_id": "run_cf85d13add1546039948215c913321c3",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 9,
+  "duration_sec": 77.9739,
+  "status": "unknown",
+  "line_count": 9
+}

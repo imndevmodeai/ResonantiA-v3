@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #1a202c; /* Equivalent to gray-900 */
+  color: #e2e8f0; /* Equivalent to gray-200 */
+}
+

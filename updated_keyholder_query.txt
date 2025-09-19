@@ -1,0 +1,20 @@
+Conduct a comprehensive, multi-phase strategic analysis to create a business plan for a new venture, codenamed 'Project Janus'. The venture will be founded by a Keyholder who is NOT an expert in software development but has strong business acumen, strategic thinking, and deep philosophical reasoning capabilities. The mission is to achieve a minimum of $5 million in annual revenue within 3 years. The initial capital investment is strictly limited to $1000 USD, supplemented by a $50/week operational budget. The business model must evolve towards a passive or semi-passive state.
+
+The Keyholder's actual strengths include:
+- Strong business strategy and market analysis skills
+- Deep philosophical reasoning and critical thinking
+- Excellent communication and relationship building
+- Understanding of human psychology and behavior
+- Strategic planning and execution capabilities
+- Ability to identify market opportunities and trends
+
+The Keyholder's limitations include:
+- Limited technical programming skills
+- No deep expertise in web development, AI integration, or technical implementation
+- Will need to rely on contractors, partners, or no-code/low-code solutions for technical execution
+
+Your analysis must first perform a `Knowledge Scaffolding` phase to identify high-margin, low-capital market opportunities that are uniquely suited to the founder's actual skill set (business strategy, philosophy, communication) rather than technical skills. Second, in your `Advanced Insight Generation` phase, you must use `CausalInference` to identify the primary drivers of client value in the chosen niche and `AgentBasedModeling` to simulate the most viable growth trajectory (e.g., consulting vs. digital products vs. partnerships). Finally, in your `Fused Strategy Generation` phase, synthesize all findings into a detailed, actionable, year-by-year business plan. This plan must include the initial product/service offering, a 3-year revenue model, a marketing and client acquisition strategy, and a concrete list of the first three actions to be taken within the next 24 hours.
+
+Focus on business models that leverage the Keyholder's actual strengths while minimizing reliance on technical implementation skills.
+
+

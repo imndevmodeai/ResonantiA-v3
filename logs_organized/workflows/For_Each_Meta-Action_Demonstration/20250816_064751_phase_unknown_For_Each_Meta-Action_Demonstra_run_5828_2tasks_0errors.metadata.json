@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_5828fc31d5804423be48a4206fb5bef2.jsonl",
+  "size_bytes": 4450,
+  "modified": "2025-08-16T06:47:51.922914",
+  "workflow_name": "For Each Meta-Action Demonstration",
+  "run_id": "run_5828fc31d5804423be48a4206fb5bef2",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 2,
+  "duration_sec": 0.08460000000000001,
+  "status": "unknown",
+  "line_count": 2
+}

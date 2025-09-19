@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_e9e568ab7e7849929e145010bc161b7f.jsonl",
+  "size_bytes": 115040,
+  "modified": "2025-08-02T14:25:50.284235",
+  "workflow_name": "Autopoietic System Genesis Protocol",
+  "run_id": "run_e9e568ab7e7849929e145010bc161b7f",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 6,
+  "duration_sec": 78.69239999999999,
+  "status": "unknown",
+  "line_count": 6
+}

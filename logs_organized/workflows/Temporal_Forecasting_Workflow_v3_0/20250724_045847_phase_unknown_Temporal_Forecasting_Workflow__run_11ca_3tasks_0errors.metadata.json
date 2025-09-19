@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_11cab7646f6444c1974f900113e4382d.jsonl",
+  "size_bytes": 4228,
+  "modified": "2025-07-24T04:58:47.128836",
+  "workflow_name": "Temporal Forecasting Workflow (v3.0)",
+  "run_id": "run_11cab7646f6444c1974f900113e4382d",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 3,
+  "duration_sec": 0.8586,
+  "status": "unknown",
+  "line_count": 3
+}

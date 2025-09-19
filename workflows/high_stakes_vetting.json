@@ -21,10 +21,10 @@
             "action_type": "generate_text_llm",
             "description": "Simulates a 'Red Team' to adversarially critique the strategy and identify potential weaknesses.",
             "inputs": {
-                "prompt": "You are a member of a Red Team. Your sole purpose is to find flaws in the following strategy. Be ruthless and logical. Identify every possible weakness, assumption, and potential failure point. Provide a bulleted list of vulnerabilities.\\n\\n== PROBLEM ==\\n{problem_description}\\n\\n== STRATEGY TO CRITIQUE ==\\n{strategy_dossier_str}",
+                "prompt": "You are a member of a Red Team. Your sole purpose is to find flaws in the following strategy. Be ruthless and logical. Identify every possible weakness, assumption, and potential failure point. Provide a bulleted list of vulnerabilities.\\n\\n== PROBLEM ==\\n{{ problem_description }}\\n\\n== STRATEGY TO CRITIQUE ==\\n{{ strategy_dossier }}",
                 "model_settings": { "temperature": 0.8, "max_tokens": 1500 },
                 "problem_description": "{{ problem_description }}",
-                "strategy_dossier_str": "{{ strategy_dossier }}"
+                "strategy_dossier": "{{ strategy_dossier }}"
             },
             "output_variable": "red_team_report"
         },
@@ -32,10 +32,10 @@
             "action_type": "generate_text_llm",
             "description": "Analyzes the strategy for ethical implications, hidden biases, and potential negative second-order effects.",
             "inputs": {
-                "prompt": "You are an ethics and compliance officer. Review the following strategy for any potential ethical issues, biases (cognitive, social, data-driven), or negative second-order consequences that could impact stakeholders. Provide a detailed report.\\n\\n== PROBLEM ==\\n{problem_description}\\n\\n== STRATEGY TO REVIEW ==\\n{strategy_dossier_str}",
+                "prompt": "You are an ethics and compliance officer. Review the following strategy for any potential ethical issues, biases (cognitive, social, data-driven), or negative second-order consequences that could impact stakeholders. Provide a detailed report.\\n\\n== PROBLEM ==\\n{{ problem_description }}\\n\\n== STRATEGY TO REVIEW ==\\n{{ strategy_dossier }}",
                 "model_settings": { "temperature": 0.5, "max_tokens": 1500 },
                 "problem_description": "{{ problem_description }}",
-                "strategy_dossier_str": "{{ strategy_dossier }}"
+                "strategy_dossier": "{{ strategy_dossier }}"
             },
             "output_variable": "ethics_report"
         },
@@ -43,9 +43,9 @@
             "action_type": "generate_text_llm",
             "description": "Simulates the worst-case, dystopian outcome if the strategy were implemented and failed catastrophically.",
             "inputs": {
-                "prompt": "Write a short, vivid narrative describing the worst-case dystopian scenario that could result from the implementation of this strategy. Imagine everything that can go wrong, does go wrong. This is a stress test to reveal hidden dangers.\\n\\n== STRATEGY ==\\n{strategy_dossier_str}",
+                "prompt": "Write a short, vivid narrative describing the worst-case dystopian scenario that could result from the implementation of this strategy. Imagine everything that can go wrong, does go wrong. This is a stress test to reveal hidden dangers.\\n\\n== STRATEGY ==\\n{{ strategy_dossier }}",
                 "model_settings": { "temperature": 0.9, "max_tokens": 1500 },
-                "strategy_dossier_str": "{{ strategy_dossier }}"
+                "strategy_dossier": "{{ strategy_dossier }}"
             },
             "output_variable": "dystopian_narrative"
         },
@@ -53,11 +53,11 @@
             "action_type": "string_template",
             "description": "Combines all vetting reports into a single, comprehensive vetting dossier.",
             "inputs": {
-                "template": "== VETTING DOSSIER ==\\n\\nSession ID: {session_id}\\n\\n--- RED TEAM ANALYSIS ---\\n{red_team_analysis}\\n\\n--- ETHICS & BIAS REVIEW ---\\n{ethics_review}\\n\\n--- DYSTOPIAN SIMULATION ---\\n{dystopian_sim}",
+                "template": "== VETTING DOSSIER ==\\n\\nSession ID: {{ session_id }}\\n\\n--- RED TEAM ANALYSIS ---\\n{{ red_team_analysis }}\\n\\n--- ETHICS & BIAS REVIEW ---\\n{{ ethics_review }}\\n\\n--- DYSTOPIAN SIMULATION ---\\n{{ dystopian_sim }}",
                 "session_id": "{{ session_id }}",
-                "red_team_analysis": "{{ red_team_analysis.output.generated_text }}",
-                "ethics_review": "{{ ethical_and_bias_review.output.generated_text }}",
-                "dystopian_sim": "{{ dystopian_simulation.output.generated_text }}"
+                "red_team_analysis": "{{ red_team_analysis.result.generated_text }}",
+                "ethics_review": "{{ ethical_and_bias_review.result.generated_text }}",
+                "dystopian_sim": "{{ dystopian_simulation.result.generated_text }}"
             },
             "output_variable": "vetting_dossier",
             "dependencies": ["red_team_analysis", "ethical_and_bias_review", "dystopian_simulation"]
@@ -66,10 +66,10 @@
             "action_type": "generate_text_llm",
             "description": "Refines the original strategy based on the vetting dossier, mitigating identified risks.",
             "inputs": {
-                "prompt": "Based on the original strategy and the comprehensive vetting dossier below, produce a final, refined strategy. Your new strategy MUST address and mitigate the key weaknesses, ethical concerns, and risks identified. If the risks are too great, state that the strategy should be rejected and explain why.\\n\\n== ORIGINAL STRATEGY ==\\n{strategy_dossier_str}\\n\\n== VETTING DOSSIER ==\\n{vetting_report}",
+                "prompt": "Based on the original strategy and the comprehensive vetting dossier below, produce a final, refined strategy. Your new strategy MUST address and mitigate the key weaknesses, ethical concerns, and risks identified. If the risks are too great, state that the strategy should be rejected and explain why.\\n\\n== ORIGINAL STRATEGY ==\\n{{ strategy_dossier }}\\n\\n== VETTING DOSSIER ==\\n{{ vetting_report }}",
                 "model_settings": { "temperature": 0.4, "max_tokens": 2000 },
-                "strategy_dossier_str": "{{ strategy_dossier }}",
-                "vetting_report": "{{ synthesize_vetting_dossier.output.result }}"
+                "strategy_dossier": "{{ strategy_dossier }}",
+                "vetting_report": "{{ synthesize_vetting_dossier.result.result }}"
             },
             "output_variable": "final_strategy",
             "dependencies": ["synthesize_vetting_dossier"]
