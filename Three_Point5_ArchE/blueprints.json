@@ -1,0 +1,116 @@
+{
+  "blueprints": [
+    {
+      "file_path": "Three_Point5_ArchE/action_context.py",
+      "description": "Manages the contextual information surrounding every action execution."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/action_registry.py",
+      "description": "Provides a discoverable mapping of action names to their handler functions."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/adaptive_cognitive_orchestrator.py",
+      "description": "Detects patterns in queries, adapts controllers, and proposes new capability routes."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/autonomous_orchestrator.py",
+      "description": "Schedules and adopts evolved capabilities and creates rollout plans for new system versions."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/rise_orchestrator.py",
+      "description": "Performs deep reflective synthesis, hypothesis generation, and creates insight plans for complex problems."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/workflow_engine.py",
+      "description": "Executes Process Blueprints with phase-gates, context passing, and IAR enforcement."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/prompt_manager.py",
+      "description": "Composes prompts from SPRs, context, and tool schemas for the LLM."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/llm_tool.py",
+      "description": "Provides an interface to Large Language Models with IAR compliance."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/web_search_tool.py",
+      "description": "Performs web searches and returns structured results with IAR compliance."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/code_executor.py",
+      "description": "Executes code in a sandboxed environment with IAR compliance."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/predictive_modeling_tool.py",
+      "description": "Performs forecasting, classification, and regression tasks on data."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/causal_inference_tool.py",
+      "description": "Uncovers causal relationships in data using statistical methods."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/abm_dsl_engine.py",
+      "description": "Parses and executes Agent-Based Models defined in a Domain-Specific Language."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/agent_based_modeling_tool.py",
+      "description": "Creates and runs agent-based simulations for complex systems."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/combat_abm.py",
+      "description": "A specialized agent-based model for combat scenarios."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/temporal_reasoning_engine.py",
+      "description": "Analyzes timelines of events to build temporal models and detect contradictions."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/insight_solidification_engine.py",
+      "description": "Transforms candidate insights into durable SPRs in the knowledge graph."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/vetting_agent.py",
+      "description": "Vets artifacts against criteria such as logic, ethics, facts, and protocol compliance."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/token_cache_manager.py",
+      "description": "Caches responses to reduce redundant token usage."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/websocket_bridge.py",
+      "description": "Provides a real-time communication bridge for protocol events."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/visual_cognitive_debugger_ui.py",
+      "description": "Provides a URL to a UI for debugging roadmaps, IAR, and telemetry."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/executable_spec_parser.py",
+      "description": "Parses markdown specifications to extract executable artifacts."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/cfp_framework.py",
+      "description": "Performs Comparative Fluxual Processing for quantum-enhanced system analysis."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/quantum_utils.py",
+      "description": "Provides deterministic utilities for stochastic pipelines and quantum-inspired calculations."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/config.py",
+      "description": "Manages system configuration from environment variables and config files."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/scalable_framework.py",
+      "description": "Defines the scalable framework for distributed operation."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/spr_manager.py",
+      "description": "Manages the lifecycle of SPRs in the knowledge graph."
+    },
+    {
+      "file_path": "Three_Point5_ArchE/distributed_arche_registry.py",
+      "description": "A file-backed implementation of the Distributed ArchE Registry."
+    }
+  ]
+}

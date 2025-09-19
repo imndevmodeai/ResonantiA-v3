@@ -286,9 +286,37 @@
       "confidence": 1.0,
       "summary": "Displayed 50 characters to the console.",
       "ts": "2025-09-12T05:53:47.343663Z"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": null,
+      "summary": null,
+      "ts": "2025-09-17T16:54:20.900235Z"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": null,
+      "summary": null,
+      "ts": "2025-09-17T17:40:09.332497Z"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": null,
+      "summary": null,
+      "ts": "2025-09-17T18:12:17.060918Z"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": null,
+      "summary": null,
+      "ts": "2025-09-17T18:23:36.681806Z"
     }
   ],
-  "updated_at": "2025-09-17T14:32:03.362863Z",
+  "updated_at": "2025-09-19T02:55:40.900626Z",
   "digests": [
     {
       "summary": "digested 1 events; numeric_rows=1",
@@ -318,6 +346,34 @@
         "deconstruct_and_refine_query",
         "refine_and_rephrase",
         "log_refined_objective"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
       ]
     }
   ]

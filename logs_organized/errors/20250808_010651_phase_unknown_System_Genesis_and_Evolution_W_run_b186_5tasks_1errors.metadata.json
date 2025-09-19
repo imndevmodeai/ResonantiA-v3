@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_b18601a1fd5c4cfda157f5d7ea3e9b88.jsonl",
+  "size_bytes": 4615,
+  "modified": "2025-08-08T01:06:51.715552",
+  "workflow_name": "System Genesis and Evolution Workflow",
+  "run_id": "run_b18601a1fd5c4cfda157f5d7ea3e9b88",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 1,
+  "task_count": 5,
+  "duration_sec": 0.011800000000000001,
+  "status": "unknown",
+  "line_count": 5
+}

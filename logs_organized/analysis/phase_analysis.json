@@ -1,0 +1,69 @@
+{
+  "summary": {
+    "total_phases": 5,
+    "phase_distribution": {
+      "unknown": {
+        "count": 228,
+        "workflows": [
+          "Live RISE Engine Invocation",
+          "Full ArchE Genesis Test",
+          "Conditional Execution Demonstration",
+          "System Genesis and Evolution Workflow",
+          "Simple Test Workflow",
+          "Live RISE Engine Invocation (External Script)",
+          "Unnamed Workflow",
+          "Final RISE Engine Invocation",
+          "Resonant Autopoietic Genesis Protocol (v2)",
+          "Resilience-as-a-Service Blueprint Generation",
+          "For Each Meta-Action Demonstration",
+          "Metacognitive Control Flow Demonstration (Revised)",
+          "Test Bonnie Rotten Search Tool",
+          "Autopoietic System Genesis Protocol (v3.6-CGS)",
+          "Autopoietic Genesis Workflow v4",
+          "Distill SPR from Execution",
+          "Thought traiL Workflow",
+          "Metamorphosis Protocol",
+          "Autopoietic System Genesis Protocol (v4.0-CGS)",
+          "Enhanced Templating Demonstration",
+          "Metacognitive Control Flow Demonstration",
+          "Domain Extraction Debug",
+          "Autopoietic System Genesis Protocol",
+          "ArchE System Demo Workflow",
+          "Temporal Forecasting Workflow (v3.0)",
+          "Basic Analysis Workflow (v3.0 Enhanced)"
+        ],
+        "errors": 93
+      },
+      "A": {
+        "count": 84,
+        "workflows": [
+          "Knowledge Scaffolding & Dynamic Specialization",
+          "Knowledge Scaffolding & Dynamic Specialization (Simple)"
+        ],
+        "errors": 12
+      },
+      "B": {
+        "count": 77,
+        "workflows": [
+          "Strategy Fusion Workflow (RISE Phase B)",
+          "Fused Strategy Synthesis"
+        ],
+        "errors": 79
+      },
+      "C": {
+        "count": 36,
+        "workflows": [
+          "High Stakes Vetting Cascade"
+        ],
+        "errors": 6
+      },
+      "D": {
+        "count": 2,
+        "workflows": [
+          "Specification Refinement Protocol"
+        ],
+        "errors": 0
+      }
+    }
+  }
+}

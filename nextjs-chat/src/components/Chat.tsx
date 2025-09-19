@@ -13,23 +13,25 @@ import ReactFlow, {
   applyEdgeChanges,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-
+import { CognitiveStream } from './CognitiveStream';
+import { VCDRichEvent } from '../types'; // Assuming types are defined in a separate file
 
 const initialNodes: Node[] = [
   {
-    id: '1',
+    id: 'root',
     type: 'input',
-    data: { label: 'Directive Input' },
+    data: { label: 'User Directive' },
     position: { x: 250, y: 5 },
   },
 ];
 
-const VCDUI = () => {
+const Chat = () => {
   const [isConnected, setIsConnected] = useState<boolean>(false);
-  const [cognitiveStream, setCognitiveStream] = useState<any[]>([]);
+  const [cognitiveStream, setCognitiveStream] = useState<VCDRichEvent[]>([]);
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [message, setMessage] = useState<string>('');
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const websocket = useRef<WebSocket | null>(null);
 
   const onNodesChange = useCallback((changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)), []);
@@ -40,7 +42,6 @@ const VCDUI = () => {
   }, [setEdges]);
 
       useEffect(() => {
-    // Connect only once
     if (!websocket.current) {
       const wsUrl = process.env.NEXT_PUBLIC_WEBSOCKET_URL || 'ws://localhost:8765';
           console.log('🔗 Connecting to ArchE Cognitive Bus:', wsUrl);
@@ -50,13 +51,11 @@ const VCDUI = () => {
       ws.onopen = () => {
         console.log('✅ WebSocket connection established.');
             setIsConnected(true);
-        setCognitiveStream(prev => [...prev, { type: 'SYSTEM', content: 'Connection Established.', timestamp: new Date().toISOString() }]);
       };
 
       ws.onclose = () => {
         console.log('❌ WebSocket connection closed.');
         setIsConnected(false);
-        // Clean up the ref on close
         websocket.current = null;
       };
 
@@ -69,43 +68,49 @@ const VCDUI = () => {
         try {
           const eventData = JSON.parse(event.data);
           console.log('Received event:', eventData);
-          setCognitiveStream(prev => [...prev, eventData]);
+          
+          if (eventData.type === 'rich_event' && eventData.payload) {
+            setCognitiveStream(prev => [...prev, eventData.payload]);
 
-          // Logic to update the graph
-          if (eventData.type === 'thought_process_step') {
-              const newNode: Node = {
-                  id: eventData.step_id,
-                  data: { label: `${eventData.step_name}` },
-                  position: { x: Math.random() * 400, y: Math.random() * 400 }, // Position randomly for now
+            if(eventData.payload.event_type === 'analysis_start') {
+              setSessionId(eventData.payload.metadata?.session_id || null);
+            }
+            
+            // Basic node creation for phases
+            if (eventData.payload.event_type === 'phase_start') {
+              const phaseNode: Node = {
+                id: eventData.payload.event_id,
+                data: { label: `Phase: ${eventData.payload.phase}` },
+                position: { x: Math.random() * 400, y: nodes.length * 100 },
               };
-              setNodes((nds) => [...nds, newNode]);
-
-              if (eventData.parent_id) {
-                  const newEdge: Edge = {
-                      id: `e-${eventData.parent_id}-${eventData.step_id}`,
-                      source: eventData.parent_id,
-                      target: eventData.step_id,
-                      animated: true,
-                  };
-                  setEdges((eds) => addEdge(newEdge, eds));
-              }
+              setNodes((nds) => [...nds, phaseNode]);
+            }
+          } else if (eventData.type === 'system') {
+            const systemEvent: VCDRichEvent = {
+              event_id: `system-${Date.now()}`,
+              event_type: 'system_message' as any,
+              timestamp: eventData.timestamp,
+              phase: 'System',
+              title: 'System Message',
+              description: eventData.content,
+            };
+            setCognitiveStream(prev => [...prev, systemEvent]);
           }
 
-            } catch (error) {
+        } catch (error) {
           console.error('Error parsing WebSocket message:', error);
         }
       };
     }
 
-    // Cleanup function to close the socket when the component unmounts
-        return () => {
-      if (websocket.current?.readyState === 1) { // 1 = OPEN
+    return () => {
+      if (websocket.current?.readyState === 1) {
         websocket.current.close();
-          }
-        };
-      }, []);
+      }
+    };
+  }, [nodes]);
 
-      const sendMessage = () => {
+  const sendMessage = () => {
     if (websocket.current?.readyState === WebSocket.OPEN && message) {
       const queryPacket = {
         type: 'query',
@@ -120,16 +125,16 @@ const VCDUI = () => {
         position: { x: 250, y: 150}
       };
       setNodes((nds) => [nds[0], userNode]);
-      setEdges((eds) => addEdge({ id: `e-1-${userNode.id}`, source: '1', target: userNode.id, animated: false }, eds));
+      setEdges((eds) => addEdge({ id: `e-root-${userNode.id}`, source: 'root', target: userNode.id, animated: false }, eds));
 
       setMessage('');
     }
   };
         
         return (
-    <div className="flex h-screen w-full bg-[#1e1e1e] text-gray-200 font-sans">
+    <div className="flex h-screen w-full bg-gray-900 text-gray-100 font-sans">
       {/* Left Panel: Thought Flow Graph */}
-      <div className="w-2/3 h-full border-r border-gray-700">
+      <div className="w-1/2 h-full border-r border-gray-700">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -137,51 +142,48 @@ const VCDUI = () => {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           fitView
+          className="bg-gray-800"
         >
-          <Background color="#aaa" gap={16} />
+          <Background color="#4a5568" gap={16} />
           <Controls />
-          <Panel position="top-left" className="p-2 bg-gray-800 rounded-md text-sm">
-            Thought Flow
+          <Panel position="top-left" className="p-2 bg-gray-900 rounded-md text-sm border border-gray-700">
+            Cognitive Flow Graph
           </Panel>
         </ReactFlow>
             </div>
             
       {/* Right Panel: Control & Cognitive Stream */}
-      <div className="w-1/3 h-full flex flex-col">
+      <div className="w-1/2 h-full flex flex-col">
         {/* Header */}
-        <div className="p-4 border-b border-gray-700 bg-[#252526]">
-          <h1 className="text-xl font-bold">ArchE Resonant Interface</h1>
-          <p className="text-sm text-gray-400">ResonantiA Protocol v3.5-GP</p>
-          <div className="mt-2 text-sm">
-            Status: 
-            <span className={`ml-2 font-semibold ${isConnected ? 'text-green-400' : 'text-red-400'}`}>
-              {isConnected ? 'Connected' : 'Disconnected'}
-                  </span>
-          </div>
+        <div className="p-4 border-b border-gray-700 bg-gray-800">
+          <h1 className="text-2xl font-bold text-cyan-400">ArchE Visual Cognitive Debugger</h1>
+          <p className="text-md text-gray-400">ResonantiA Protocol v4.0</p>
+          <div className="mt-2 flex justify-between text-sm">
+            <div>
+              Status: 
+              <span className={`ml-2 font-semibold ${isConnected ? 'text-green-400' : 'text-red-400'}`}>
+                {isConnected ? 'LIVE' : 'DISCONNECTED'}
+              </span>
+            </div>
+            <div className="text-gray-500">
+              Session ID: {sessionId || 'N/A'}
               </div>
+            </div>
+          </div>
 
         {/* Cognitive Stream */}
-        <div className="flex-grow p-4 overflow-y-auto">
-          <h2 className="text-lg font-semibold mb-2">Cognitive Stream</h2>
-          <div className="space-y-3">
-            {cognitiveStream.map((event, index) => (
-              <div key={index} className="p-2 bg-[#2d2d2d] rounded-md text-sm">
-                <p className="font-bold text-cyan-400">[{event.type || 'EVENT'}]</p>
-                <p className="whitespace-pre-wrap">{typeof event.content === 'object' ? JSON.stringify(event.content, null, 2) : event.content}</p>
-                <p className="text-xs text-gray-500 text-right">{event.timestamp}</p>
-              </div>
-            ))}
-          </div>
+        <div className="flex-grow p-4 overflow-y-auto bg-gray-900">
+          <CognitiveStream events={cognitiveStream} />
               </div>
 
         {/* Input Area */}
-        <div className="p-4 border-t border-gray-700 bg-[#252526]">
+        <div className="p-4 border-t border-gray-700 bg-gray-800">
                 <textarea
-            className="w-full p-2 bg-[#3c3c3c] rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                  rows={3}
+            className="w-full p-3 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-100 placeholder-gray-400"
+            rows={4}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Enter your query for ArchE..."
+            placeholder="Enter your directive for ArchE..."
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -191,7 +193,8 @@ const VCDUI = () => {
                 />
                 <button 
                   onClick={sendMessage} 
-            className="w-full mt-2 p-2 bg-cyan-600 hover:bg-cyan-700 rounded-md font-semibold transition-colors"
+            disabled={!isConnected || !message}
+            className="w-full mt-2 p-3 bg-cyan-600 hover:bg-cyan-700 disabled:bg-gray-600 rounded-md font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-800"
           >
             Send Directive
                 </button>
@@ -201,4 +204,4 @@ const VCDUI = () => {
       );
     };
 
-export default VCDUI; 
+    export default Chat; 

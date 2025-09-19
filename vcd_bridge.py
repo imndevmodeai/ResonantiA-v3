@@ -151,29 +151,23 @@ class VCDBridge:
                         prompt = data["payload"]
                         print(f"▶️ Received query. Passing to ACO: {prompt[:80]}...")
                         
-                        # The ACO is the new entry point.
-                        # Since process_query_with_evolution is synchronous, run it in an executor
-                        # to avoid blocking the WebSocket's async event loop.
-                        with ThreadPoolExecutor() as executor:
-                            future = self.loop.run_in_executor(
-                                executor, 
-                                self.aco.process_query_with_evolution, 
-                                prompt
-                            )
-                            # Await the result from the synchronous function.
-                            final_response = await future
+                        # Use asyncio.to_thread to run the synchronous function in a separate thread
+                        final_response = await asyncio.to_thread(
+                            self.aco.process_query_with_evolution, 
+                            prompt
+                        )
 
-                            # Now, broadcast the final response back to the VCD
-                            print(f"✅ ACO processing complete. Broadcasting final response.")
-                            await self.broadcast_to_all({
-                                "type": "event",
-                                "event": "final_response",
-                                "timestamp": datetime.now().isoformat(),
-                                "payload": {
-                                    "content": final_response,
-                                    "content_type": "text"
-                                }
-                            })
+                        # Now, broadcast the final response back to the VCD
+                        print(f"✅ ACO processing complete. Broadcasting final response.")
+                        await self.broadcast_to_all({
+                            "type": "event",
+                            "event": "final_response",
+                            "timestamp": datetime.now().isoformat(),
+                            "payload": {
+                                "content": final_response,
+                                "content_type": "text"
+                            }
+                        })
                         
                 except json.JSONDecodeError:
                     print(f"Received non-JSON message: {message}")

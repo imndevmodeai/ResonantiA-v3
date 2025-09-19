@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_f00b60025f7b484aac5d8ca0df8db476.jsonl",
+  "size_bytes": 17103,
+  "modified": "2025-09-16T23:56:02.304458",
+  "workflow_name": "Fused Strategy Synthesis",
+  "run_id": "run_f00b60025f7b484aac5d8ca0df8db476",
+  "phase": "B",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 3,
+  "duration_sec": 18.714299999999998,
+  "status": "unknown",
+  "line_count": 3
+}

@@ -1565,6 +1565,13 @@ class IARCompliantWorkflowEngine:
                 for event in event_log:
                     f.write(json.dumps(event, default=str) + '\n')
             logger.info(f"Detailed event log saved to: {event_log_path}")
+            
+            # Auto-organize the new log file
+            try:
+                self._auto_organize_log(event_log_path)
+            except Exception as e:
+                logger.warning(f"Failed to auto-organize log {event_log_path}: {e}")
+                
         except Exception as e:
             logger.error(f"Failed to save event log to {event_log_path}: {e}")
 
@@ -1741,5 +1748,89 @@ class IARCompliantWorkflowEngine:
         with open(output_path, "w") as f:
             json.dump(result, f, indent=2)
         return output_path
+    
+    def _auto_organize_log(self, log_file_path: str):
+        """Auto-organize a single log file using the log organizer."""
+        try:
+            # Check if auto-organization is enabled
+            config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "log_organization_config.json")
+            if os.path.exists(config_path):
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                if not config.get("auto_organization", {}).get("enabled", True):
+                    logger.info("Auto-log organization is disabled")
+                    return
+            
+            # Import log organizer
+            import sys
+            import os
+            sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+            from log_organizer import LogOrganizer
+            
+            # Create organizer instance
+            organizer = LogOrganizer()
+            
+            # Extract metadata from the log file
+            metadata = organizer._extract_log_metadata(log_file_path)
+            
+            # Generate organized filename
+            organized_filename = organizer._generate_organized_filename(metadata)
+            
+            # Determine destination directory
+            workflow_clean = re.sub(r'[^\w\-_]', '_', metadata["workflow_name"])
+            workflow_clean = workflow_clean.replace('__', '_').strip('_')
+            
+            phase = metadata["phase"]
+            if metadata["error_count"] > 0:
+                dest_dir = organizer.organized_dir / "errors"
+            elif phase != "unknown":
+                dest_dir = organizer.organized_dir / "phases" / f"phase_{phase}"
+                dest_dir.mkdir(parents=True, exist_ok=True)
+            else:
+                dest_dir = organizer.organized_dir / "workflows" / workflow_clean
+                dest_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Copy file to organized location
+            dest_path = dest_dir / organized_filename
+            import shutil
+            shutil.copy2(log_file_path, dest_path)
+            
+            # Create metadata file
+            metadata_file = dest_path.with_suffix('.metadata.json')
+            with open(metadata_file, 'w') as f:
+                json.dump(metadata, f, indent=2)
+            
+            # Update catalog
+            workflow_name = metadata["workflow_name"]
+            if workflow_name not in organizer.catalog["workflows"]:
+                organizer.catalog["workflows"][workflow_name] = {
+                    "count": 0,
+                    "phases": set(),
+                    "sessions": set(),
+                    "total_errors": 0,
+                    "total_tasks": 0
+                }
+            
+            organizer.catalog["workflows"][workflow_name]["count"] += 1
+            organizer.catalog["workflows"][workflow_name]["phases"].add(phase)
+            organizer.catalog["workflows"][workflow_name]["sessions"].add(metadata["session_id"])
+            organizer.catalog["workflows"][workflow_name]["total_errors"] += metadata["error_count"]
+            organizer.catalog["workflows"][workflow_name]["total_tasks"] += metadata["task_count"]
+            
+            # Convert sets to lists for JSON serialization
+            for workflow_data in organizer.catalog["workflows"].values():
+                workflow_data["phases"] = list(workflow_data["phases"])
+                workflow_data["sessions"] = list(workflow_data["sessions"])
+            
+            organizer.catalog["metadata"]["total_logs"] += 1
+            organizer.catalog["metadata"]["last_organized"] = datetime.now().isoformat()
+            
+            # Save updated catalog
+            organizer._save_catalog()
+            
+            logger.info(f"Auto-organized log: {log_file_path} -> {dest_path}")
+            
+        except Exception as e:
+            logger.warning(f"Auto-organization failed for {log_file_path}: {e}")
 
 # --- END OF FILE 3.0ArchE/workflow_engine.py ---

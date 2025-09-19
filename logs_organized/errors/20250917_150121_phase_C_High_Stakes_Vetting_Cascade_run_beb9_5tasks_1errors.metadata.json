@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_beb95b2f37a040af9da655e9feac5599.jsonl",
+  "size_bytes": 59279,
+  "modified": "2025-09-17T15:01:21.027622",
+  "workflow_name": "High Stakes Vetting Cascade",
+  "run_id": "run_beb95b2f37a040af9da655e9feac5599",
+  "phase": "C",
+  "session_id": "unknown",
+  "error_count": 1,
+  "task_count": 5,
+  "duration_sec": 17.9239,
+  "status": "unknown",
+  "line_count": 5
+}

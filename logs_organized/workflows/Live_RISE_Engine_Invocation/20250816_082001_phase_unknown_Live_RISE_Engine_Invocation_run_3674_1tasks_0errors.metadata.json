@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_3674bed0d2da4bfbb688b344f30d2b53.jsonl",
+  "size_bytes": 11827,
+  "modified": "2025-08-16T08:20:01.001726",
+  "workflow_name": "Live RISE Engine Invocation",
+  "run_id": "run_3674bed0d2da4bfbb688b344f30d2b53",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 1,
+  "duration_sec": 6.1474,
+  "status": "unknown",
+  "line_count": 1
+}

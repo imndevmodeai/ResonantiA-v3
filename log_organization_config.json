@@ -1,0 +1,36 @@
+{
+  "auto_organization": {
+    "enabled": true,
+    "organize_on_completion": true,
+    "organize_on_error": true,
+    "update_catalog": true,
+    "generate_metadata": true
+  },
+  "organization_settings": {
+    "create_backup": false,
+    "compress_old_logs": false,
+    "max_log_age_days": 30,
+    "cleanup_original_logs": false
+  },
+  "directories": {
+    "organized_logs": "logs_organized",
+    "original_logs": "outputs",
+    "catalog_file": "logs_organized/log_catalog.json"
+  },
+  "naming": {
+    "include_timestamp": true,
+    "include_phase": true,
+    "include_workflow": true,
+    "include_run_id": true,
+    "include_task_count": true,
+    "include_error_count": true,
+    "max_workflow_name_length": 30
+  },
+  "analysis": {
+    "generate_reports": true,
+    "update_on_each_log": false,
+    "update_frequency_hours": 24
+  }
+}
+
+

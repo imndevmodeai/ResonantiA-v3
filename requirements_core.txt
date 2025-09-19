@@ -34,4 +34,8 @@ scikit-learn>=1.0.0
 statsmodels>=0.13.0
 jupyter>=1.0.0
 ipykernel>=6.0.0
+selenium>=4.0.0
+ortools==9.7.2996
+tsp-solver
+webdriver-manager
 

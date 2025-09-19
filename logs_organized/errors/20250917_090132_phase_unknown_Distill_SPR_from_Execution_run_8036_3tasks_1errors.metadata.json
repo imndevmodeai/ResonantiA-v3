@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_80364ed885174516b106dd3aa65bbd76.jsonl",
+  "size_bytes": 5293,
+  "modified": "2025-09-17T09:01:32.897634",
+  "workflow_name": "Distill SPR from Execution",
+  "run_id": "run_80364ed885174516b106dd3aa65bbd76",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 1,
+  "task_count": 3,
+  "duration_sec": 0.0381,
+  "status": "unknown",
+  "line_count": 3
+}

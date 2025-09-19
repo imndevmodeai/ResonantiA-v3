@@ -10,12 +10,15 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.12",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "ajv": "^8.17.1",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-flow-renderer": "^10.3.17",
-    "react-markdown": "^9.0.1",
+    "react-markdown": "^9.1.0",
+    "react-syntax-highlighter": "^15.6.6",
     "reactflow": "^11.11.3",
     "remark-gfm": "^4.0.0"
   },

@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_a31b2b581bc14fa087ee5b553a6cb668.jsonl",
+  "size_bytes": 5665,
+  "modified": "2025-06-25T21:52:17.767815",
+  "workflow_name": "Test Bonnie Rotten Search Tool",
+  "run_id": "run_a31b2b581bc14fa087ee5b553a6cb668",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 3,
+  "duration_sec": 36.6616,
+  "status": "unknown",
+  "line_count": 3
+}

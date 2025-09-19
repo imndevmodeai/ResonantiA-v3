@@ -61,17 +61,17 @@ class LLMConfig:
     """Configuration for Large Language Models."""
     # Switch default to Google/Gemini
     default_provider: str = "google"
-    default_model: str = "gemini-1.5-pro-latest"
+    default_model: str = "gemini-2.5-pro"
     temperature: float = 0.7
     max_tokens: int = 4096
 
     # Specific models for different providers
     openai_models: list[str] = field(default_factory=lambda: ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"])
-    google_models: list[str] = field(default_factory=lambda: ["gemini-1.5-pro-latest", "gemini-1.5-flash-latest", "gemini-pro"])
+    google_models: list[str] = field(default_factory=lambda: ["gemini-2.5-pro", "gemini-2.0-flash-exp", "gemini-1.5-pro-latest", "gemini-1.5-flash-latest", "gemini-pro"])
     
     # Vetting agent specific configuration
     vetting_provider: str = "google"
-    vetting_model: str = "gemini-1.5-pro-latest"
+    vetting_model: str = "gemini-2.5-pro"
 
 # Legacy compatibility attributes for llm_providers.py
 DEFAULT_LLM_PROVIDER = "google"
@@ -87,7 +87,7 @@ LLM_PROVIDERS = {
         # Prefer GOOGLE_API_KEY; fall back to GEMINI_API_KEY for convenience
         "api_key": os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY"),
         "base_url": None,
-        "default_model": "gemini-1.5-pro-latest",
+        "default_model": "gemini-2.5-pro",
         "temperature": 0.7,
         "max_tokens": 4096
     }
