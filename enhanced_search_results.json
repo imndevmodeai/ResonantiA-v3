@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "query": "Google AI Studio prompt sharing access method API documentation",
+  "engine": "duckduckgo",
+  "error": "Searching for: \"Google AI Studio prompt sharing access method API documentation\"\nSearch failed: Browser was not found at the configured executablePath (/usr/bin/chromium-browser)\n",
+  "results": [],
+  "timestamp": 1759853807.1417081,
+  "tool": "enhanced_search_tool",
+  "version": "1.0.0"
+}
