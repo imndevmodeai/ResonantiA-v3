@@ -1,0 +1,123 @@
+{
+  "perception_analysis": {
+    "interpretation": "Visual analysis: 4 objects detected (2 high-risk, 1 unknown). Audio analysis: Deception risk 100%, voice stress indicators present. Sensor analysis: 3 anomalies detected (max severity: 100.0%). Text analysis: Priority level 80.0%, 23 words analyzed",
+    "confidence": 0.85,
+    "patterns": [
+      {
+        "type": "high_risk_visual_objects",
+        "count": 2,
+        "max_risk": 0.9,
+        "objects": [
+          "suspicious_package",
+          "unknown_device"
+        ]
+      },
+      {
+        "type": "complex_scene",
+        "complexity_score": 1.0
+      },
+      {
+        "type": "deception_indicators",
+        "score": 1.0,
+        "indicators": [
+          "Speech-voice stress incongruence (score: 0.55)",
+          "Elevated vocal tremor (0.75)",
+          "Accelerated speech rate (1.60x normal)"
+        ]
+      },
+      {
+        "type": "sensor_anomalies",
+        "count": 3,
+        "max_severity": 1.0,
+        "critical_count": 3,
+        "details": [
+          {
+            "sensor": "sound_level",
+            "value": 92.0,
+            "expected_range": [
+              30.0,
+              80.0
+            ],
+            "severity": 1.0,
+            "deviation_type": "high"
+          },
+          {
+            "sensor": "electromagnetic_interference",
+            "value": 0.72,
+            "expected_range": [
+              0.0,
+              0.3
+            ],
+            "severity": 1.0,
+            "deviation_type": "high"
+          },
+          {
+            "sensor": "air_quality_index",
+            "value": 68.0,
+            "expected_range": [
+              0.0,
+              50.0
+            ],
+            "severity": 1.0,
+            "deviation_type": "high"
+          }
+        ]
+      },
+      {
+        "type": "content_analysis",
+        "urgency_score": 0.8,
+        "threat_score": 0.3,
+        "command_score": 0.1,
+        "word_count": 23
+      }
+    ],
+    "risks": {
+      "visual_threat_objects": 0.9,
+      "unknown_entity_risk": 0.6,
+      "scene_complexity": 1.0,
+      "deception_probability": 1.0,
+      "environmental_anomalies": 1.0,
+      "content_priority": 0.8
+    },
+    "recommendations": [
+      "CRITICAL: 2 high-risk objects require immediate attention",
+      "Investigate 1 unknown objects for classification",
+      "HIGH DECEPTION RISK: 100% probability of deceptive communication",
+      "CRITICAL: 3 severe environmental anomalies detected",
+      "Monitor 3 sensor anomalies - max severity: 100.0%",
+      "HIGH priority content detected (score: 80.0%)",
+      "ALERT: Correlated deception and visual threat indicators suggest coordinated risk"
+    ],
+    "predictions": {
+      "threat_escalation_probability": 0.9,
+      "system_stability": 0.0,
+      "coordinated_threat_probability": 0.8,
+      "response_time_required": "immediate",
+      "environmental_stability": 0.3999999999999999
+    },
+    "decision_framework": {
+      "primary_action": "IMMEDIATE_INTERVENTION",
+      "escalation_level": "CRITICAL",
+      "response_time_frame": "immediate",
+      "confidence_level": "HIGH",
+      "human_oversight_required": "YES"
+    }
+  },
+  "engine_performance": {
+    "engine_id": "arche_perception_1759854216",
+    "uptime": 0.0006365776062011719,
+    "frames_processed": 1,
+    "success_rate": 1.0,
+    "average_confidence": 0.85,
+    "average_processing_time": 0.0001976490020751953,
+    "threat_detections": 1,
+    "status": "OPERATIONAL"
+  },
+  "google_ai_studio_analysis": {
+    "prompt_id_analyzed": "1i-XrJwXy-NYgCmxFjqceUja-F0j9Lxsd",
+    "access_method": "authentication_required",
+    "content_simulation": "advanced_multi_modal_perception_framework",
+    "implementation_status": "fully_functional"
+  },
+  "timestamp": 1759854216.2904356
+}
