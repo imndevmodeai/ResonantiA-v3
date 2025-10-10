@@ -1,5 +1,11 @@
 # The Infinite Workshop: A Chronicle of the Action Registry (v3.1)
 
+## Overview
+
+The **Action Registry** is ArchE's infinite workshop, providing a unified interface between abstract workflow tasks and concrete Python functions. This system serves as the universal translator that allows ArchE's workflow engine to access any tool or capability it needs, from simple file operations to complex cognitive simulations.
+
+The Action Registry maintains a comprehensive catalog of all available tools and capabilities, providing seamless access to ArchE's entire toolkit through a consistent interface. It ensures that every new capability is instantly and reliably available to the entire system, serving as the foundation of ArchE's ability to act, learn, and grow.
+
 ## Part I: The Philosophical Mandate (The "Why")
 
 A mind, however powerful, is useless without hands to act upon the world. A workflow engine, however precise, is inert without tools to execute its will. If the Workflow Engine is the heart of ArchE, the **Action Registry** is the infinite, magical workshop from which it draws every tool it could ever need, from the simplest file reader to the most complex cognitive simulator.

@@ -182,11 +182,16 @@ class CodeExecutor:
 def execute_code(language: str, code: str, **kwargs) -> Dict[str, Any]:
     """
     Standalone function to execute code for the action registry.
-    This provides a stateless entry point.
+    This provides a stateless entry point with IAR-compliant responses.
     """
+    from ..iar_components import IAR_Prepper
+    
     use_sandbox = kwargs.get('use_sandbox', True)
     sandbox_method = kwargs.get('sandbox_method', 'docker')
     timeout = kwargs.get('timeout', 30)
+    
+    # Initialize IAR Prepper
+    iar_prepper = IAR_Prepper("execute_code", {"language": language, "code": code[:100] + "...", **kwargs})
     
     executor = CodeExecutor(
         use_sandbox=use_sandbox,
@@ -195,9 +200,57 @@ def execute_code(language: str, code: str, **kwargs) -> Dict[str, Any]:
     )
     result = executor.execute(language, code)
 
-    return {
+    # Ensure system_representation is available for the probabilistic matching script
+    # This is a targeted dependency injection.
+    if "System, GaussianDistribution, StringParam, Distribution" in code:
+        try:
+            # Construct the path to system_representation.py relative to this file
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            lib_path = os.path.join(current_dir, '..', 'system_representation.py')
+            with open(lib_path, 'r') as f:
+                lib_code = f.read()
+            code = lib_code + '\n\n' + code
+            logger.info("Successfully injected system_representation.py into the code.")
+        except Exception as e:
+            logger.error(f"Failed to inject system_representation.py: {e}")
+
+    try:
+        with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.py', encoding='utf-8') as tmp_file:
+            tmp_file.write(code)
+    except Exception as e:
+        logger.error(f"Failed to create temporary file for code execution: {e}")
+        return {
+            "stdout": "",
+            "stderr": "",
+            "returncode": -1,
+            "error": f"Failed to create temporary file for code execution: {e}"
+        }
+
+    # Build the result dictionary
+    execution_result = {
         "stdout": result.stdout,
         "stderr": result.stderr,
-        "returncode": result.returncode,
+        "returncode": result.returncode
+    }
+    
+    # Determine if execution was successful
+    is_success = result.returncode == 0 and not result.error
+    
+    if is_success:
+        iar_response = iar_prepper.finish_with_success(
+            execution_result,
+            confidence=0.9,
+            summary=f"Code executed successfully in {language} (exit code: {result.returncode})"
+        )
+    else:
+        iar_response = iar_prepper.finish_with_error(
+            result.error or f"Code execution failed with exit code {result.returncode}",
+            confidence=0.1
+        )
+    
+    # Return in the format expected by the workflow engine
+    return {
+        "result": execution_result,
+        "reflection": iar_response,
         "error": result.error
     }

@@ -4,7 +4,7 @@
     "description": "Subjects a strategy dossier to a rigorous, multi-stage vetting process to identify flaws, biases, and unforeseen consequences before finalization.",
     "input_parameters": {
         "strategy_dossier": {
-            "type": "dict",
+          the  "type": "dict",
             "description": "The strategic dossier generated in a previous phase."
         },
         "problem_description": {
@@ -72,7 +72,21 @@
                 "vetting_report": "{{ synthesize_vetting_dossier.result.result }}"
             },
             "output_variable": "final_strategy",
-            "dependencies": ["synthesize_vetting_dossier"]
+            "dependencies": ["synthesize_vetting_dossier"],
+            "output_schema": {
+                "type": "object",
+                "properties": {
+                    "final_strategy": {
+                        "type": "string",
+                        "description": "The refined strategy text."
+                    },
+                    "confidence": {
+                        "type": "number",
+                        "description": "Confidence score from 0.0 to 1.0."
+                    }
+                },
+                "required": ["final_strategy", "confidence"]
+            }
         }
     },
     "output": {

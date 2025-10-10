@@ -365,20 +365,22 @@ class GoogleProvider(BaseLLMProvider):
 
             # Process response with enhanced error handling
             try:
-                # Handle regular text response first
+                # Safety checks and response validation
+                if not response.parts:
+                    finish_reason = getattr(response.candidates[0], 'finish_reason', 0)
+                    if finish_reason == 2: # FinishReason.SAFETY
+                         logger.warning("Google API content blocked due to safety settings.")
+                         raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+                    else:
+                        logger.warning(f"Google API returned no content. Finish reason: {finish_reason}")
+                        raise LLMProviderError(f"Google API returned no content (Finish Reason: {finish_reason}).", provider="google")
+
                 if hasattr(response, 'text') and response.text:
-                    text_response = response.text
-                    finish_reason = getattr(response.candidates[0], 'finish_reason', 'N/A') if response.candidates else 'N/A'
-                    logger.debug(f"Google generation successful. Finish Reason: {finish_reason}")
-                    
-                    # Add citations if present
-                    if hasattr(response, 'citations') and response.citations:
-                        text_response += "\n\nCitations:\n" + "\n".join(
-                            f"- {citation.text}: {citation.url}" 
-                            for citation in response.citations
-                        )
-                    
-                    return text_response
+                    return response.text
+                else:
+                    # Handle cases where content might be empty or message object is unexpected
+                    logger.warning(f"Google response message content is empty or missing. Finish reason: {finish_reason}.")
+                    return "" # Return empty string for empty content
 
                 # Handle function calls if present (but we disabled them, so this should not happen)
                 if hasattr(response, 'candidates') and response.candidates:
@@ -446,7 +448,7 @@ class GoogleProvider(BaseLLMProvider):
             raise LLMProviderError("Google client not configured.", provider="google")
             
         try:
-            llm = self._client.GenerativeModel(model_name="gemini-1.5-pro-latest")
+            llm = self._client.GenerativeModel(model_name="gemini-2.0-flash-exp")
             response = llm.generate_content(
                 f"Execute the following Python code and return the results:\n```python\n{code}\n```",
                 generation_config=self._client.types.GenerationConfig(
@@ -481,7 +483,7 @@ class GoogleProvider(BaseLLMProvider):
             raise LLMProviderError("Google client not configured.", provider="google")
             
         try:
-            llm = self._client.GenerativeModel(model_name="gemini-1.5-pro-latest")
+            llm = self._client.GenerativeModel(model_name="gemini-2.0-flash-exp")
             response = llm.generate_content(
                 f"Process and analyze the content of this file: {file_url}",
                 generation_config=self._client.types.GenerationConfig(
@@ -594,6 +596,7 @@ def get_llm_provider(provider_name: Optional[str] = None) -> BaseLLMProvider:
         # Catch other unexpected errors during instantiation
         logger.error(f"Unexpected error creating provider instance for '{provider_name_to_use}': {e_create}", exc_info=True)
         raise LLMProviderError(f"Could not create provider instance for '{provider_name_to_use}'.", provider=provider_name_lower, original_exception=e_create)
+
 
 def get_model_for_provider(provider_name: Optional[str] = None) -> str:
     """

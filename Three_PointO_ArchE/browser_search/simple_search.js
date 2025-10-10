@@ -19,27 +19,34 @@ async function searchDuckDuckGo(query) {
         const page = await browser.newPage();
         await page.setViewport({ width: 1920, height: 1080 });
         
-        // Go to DuckDuckGo HTML version (more reliable for scraping)
-        await page.goto('https://duckduckgo.com/html/', { waitUntil: 'networkidle0', timeout: 30000 });
+        // Set a realistic User-Agent to avoid bot detection
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+
+        // Go to the main DuckDuckGo site
+        await page.goto('https://duckduckgo.com/', { waitUntil: 'networkidle0', timeout: 30000 });
         
         // Search
-        await page.type('input[name="q"]', query);
-        await page.click('input[type="submit"]');
+        await page.type('#search_form_input_homepage', query);
+        await page.click('#search_button_homepage');
         
-        // Wait for results
-        await page.waitForSelector('.result', { timeout: 15000 });
+        // Wait for results on the new page
+        await page.waitForSelector('#links', { timeout: 15000 });
         
+        // FOR DEBUGGING: Take a screenshot to see what the page looks like
+        await page.screenshot({ path: '/tmp/search_debug.png', fullPage: true });
+
         // Extract results
         const results = await page.evaluate(() => {
             const items = [];
-            const resultElements = document.querySelectorAll('.result');
+            // Use the new selector for the main site
+            const resultElements = document.querySelectorAll('.results--main #links .result');
             
             resultElements.forEach((element, index) => {
                 if (index >= 10) return; // Limit to 10 results
                 
+                // Updated selectors for the main site
                 const titleElement = element.querySelector('.result__title a');
                 const snippetElement = element.querySelector('.result__snippet');
-                const urlElement = element.querySelector('.result__url');
                 
                 if (titleElement) {
                     const title = titleElement.textContent.trim();

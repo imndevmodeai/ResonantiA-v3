@@ -1,5 +1,11 @@
 # The World-Builder's Hammer: A Chronicle of the Code Executor (v3.1)
 
+## Overview
+
+The **Code Executor** is ArchE's ultimate tool for bridging the gap between thought and action, providing secure and controlled code execution capabilities that enable ArchE to build, change, and create tangible artifacts in its environment. This system serves as the final bridge between strategic planning and tangible reality, allowing ArchE to execute complex calculations, interact with system libraries, and participate in its own evolution.
+
+The Code Executor provides multiple execution environments with varying levels of security, from fully isolated Docker containers for maximum safety to subprocess execution for trusted code. It embodies ArchE's commitment to safe, controlled action while maintaining the power needed to solve complex problems and participate in its own development and evolution.
+
 ## Part I: The Philosophical Mandate (The "Why")
 
 Talk is cheap. Analysis, however brilliant, remains confined to the realm of thought. To truly solve the `Execution paradox`, an intelligence must not only think and speak, but *act*. It must be able to build, to change, to create tangible artifacts in its environment.

@@ -8,7 +8,7 @@ This chronicle tells the story of the **`ThoughtTrail`**, the mechanism that gav
 
 ## Scholarly Introduction: Conceptual Foundations and Implementability
 
-The `ThoughtTrail` is a deque-based, in-memory data structure that functions as a short-term, chronological log of system actions. Each entry in the trail is a comprehensive dictionary containing the task ID, action type, inputs, outputs, and the all-important IAR dictionary for that step.
+The ThoughtTrail` is a deque-based, in-memory data structure that functions as a short-term, chronological log of system actions. Each entry in the trail is a comprehensive dictionary containing the task ID, action type, inputs, outputs, and the all-important IAR dictionary for that step.
 
 The key innovation of the `ThoughtTrail` class is its event-driven trigger system. Other, higher-level cognitive systems (like a metacognitive shift processor) can register callback functions that are tied to specific `TriggerType` enums (e.g., `DISSONANCE`, `LOW_CONFIDENCE`). When the `add_entry` method logs a new action, it inspects the entry's IAR. If the IAR meets the criteria for a trigger, the `ThoughtTrail` automatically invokes the registered handlers, creating a reactive and decoupled architecture for self-analysis. This document provides a direct blueprint for implementing the `ThoughtTrail` and its powerful trigger mechanism.
 

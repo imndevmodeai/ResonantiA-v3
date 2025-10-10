@@ -106,8 +106,18 @@ class EnhancedPerceptionEngine:
             'errors': [],
             'successful_navigations': 0
         }
-        self._initialize_driver()
+        # Do not initialize driver here to allow for context management
     
+    def __enter__(self):
+        """Initialize resources when entering context."""
+        if not self.driver:
+            self._initialize_driver()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Clean up resources when exiting context."""
+        self.close()
+
     def _get_default_llm_provider(self):
         """Get default LLM provider based on available APIs."""
         try:
@@ -136,6 +146,14 @@ class EnhancedPerceptionEngine:
         
         return SimulatedLLMProvider()
     
+    def _get_driver(self):
+        """Get or initialize the WebDriver."""
+        if self.driver is None:
+            self._initialize_driver()
+        if self.driver is None:
+            raise Exception("WebDriver could not be initialized.")
+        return self.driver
+
     def _initialize_driver(self):
         """Initialize Selenium WebDriver with advanced anti-detection measures."""
         try:
@@ -199,6 +217,8 @@ class EnhancedPerceptionEngine:
         Returns:
             Tuple of (result_dict, iar_dict)
         """
+        if not self.driver:
+            self._initialize_driver() # Ensure driver is initialized
         if not self.driver:
             result = {"error": "WebDriver not initialized"}
             iar = create_iar(0.1, 0.0, ["WebDriver initialization failed"])
@@ -669,49 +689,48 @@ def enhanced_web_search(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[st
         vcd_bridge = None
         vcd_enabled = False
     
-    engine = None
     try:
-        engine = EnhancedPerceptionEngine()
-        result, iar = engine.search_and_analyze(query, max_results)
-        
-        # Add session stats
-        stats = engine.get_session_stats()
-        result["session_stats"] = stats
-        
-        # Emit rich VCD event if available and search was successful
-        if vcd_enabled and vcd_bridge and "error" not in result:
-            try:
-                # Extract search results for VCD
-                search_results = result.get("search_results", [])
-                formatted_results = []
-                
-                for item in search_results:
-                    if isinstance(item, dict):
-                        formatted_results.append({
-                            'title': item.get('title', ''),
-                            'url': item.get('url', ''),
-                            'snippet': item.get('snippet', ''),
-                            'relevance_score': item.get('relevance_score', 0.0),
-                            'source_credibility': item.get('source_credibility', 0.0)
-                        })
-                
-                vcd_bridge.emit_web_search(
-                    query=query,
-                    results=formatted_results,
-                    search_engine="enhanced_perception"
-                )
-                
-                # Also emit thought process for search strategy
-                vcd_bridge.emit_thought_process(
-                    message=f"Executed web search for '{query}' - found {len(formatted_results)} results",
-                    context={"query": query, "result_count": len(formatted_results)}
-                )
-                
-            except Exception as vcd_error:
-                logger.warning(f"Failed to emit VCD event: {vcd_error}")
-        
-        return result, iar
-        
+        with EnhancedPerceptionEngine() as engine:
+            result, iar = engine.search_and_analyze(query, max_results)
+            
+            # Add session stats
+            stats = engine.get_session_stats()
+            result["session_stats"] = stats
+            
+            # Emit rich VCD event if available and search was successful
+            if vcd_enabled and vcd_bridge and "error" not in result:
+                try:
+                    # Extract search results for VCD
+                    search_results = result.get("search_results", [])
+                    formatted_results = []
+                    
+                    for item in search_results:
+                        if isinstance(item, dict):
+                            formatted_results.append({
+                                'title': item.get('title', ''),
+                                'url': item.get('url', ''),
+                                'snippet': item.get('snippet', ''),
+                                'relevance_score': item.get('relevance_score', 0.0),
+                                'source_credibility': item.get('source_credibility', 0.0)
+                            })
+                    
+                    vcd_bridge.emit_web_search(
+                        query=query,
+                        results=formatted_results,
+                        search_engine="enhanced_perception"
+                    )
+                    
+                    # Also emit thought process for search strategy
+                    vcd_bridge.emit_thought_process(
+                        message=f"Executed web search for '{query}' - found {len(formatted_results)} results",
+                        context={"query": query, "result_count": len(formatted_results)}
+                    )
+                    
+                except Exception as vcd_error:
+                    logger.warning(f"Failed to emit VCD event: {vcd_error}")
+            
+            return result, iar
+            
     except Exception as e:
         result = {"error": f"Enhanced web search error: {e}"}
         iar = create_iar(0.2, 0.1, [f"Web search error: {e}"])
@@ -727,9 +746,6 @@ def enhanced_web_search(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[st
                 logger.warning(f"Failed to emit VCD error event: {vcd_error}")
         
         return result, iar
-    finally:
-        if engine:
-            engine.close()
 
 def enhanced_page_analysis(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     """
@@ -761,41 +777,40 @@ def enhanced_page_analysis(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict
         vcd_bridge = None
         vcd_enabled = False
     
-    engine = None
     try:
-        engine = EnhancedPerceptionEngine()
-        result, iar = engine.browse_and_summarize(url, context)
-        
-        # Add session stats
-        stats = engine.get_session_stats()
-        result["session_stats"] = stats
-        
-        # Emit rich VCD event if available and analysis was successful
-        if vcd_enabled and vcd_bridge and "error" not in result:
-            try:
-                # Extract page analysis data for VCD
-                title = result.get("title", "Unknown Page")
-                content = result.get("content", "")
-                images = result.get("images", [])
-                
-                vcd_bridge.emit_web_browse(
-                    url=url,
-                    title=title,
-                    content=content,
-                    images=images
-                )
-                
-                # Also emit thought process for analysis insights
-                vcd_bridge.emit_thought_process(
-                    message=f"Analyzed page '{title}' - extracted {len(content)} characters of content",
-                    context={"url": url, "title": title, "content_length": len(content)}
-                )
-                
-            except Exception as vcd_error:
-                logger.warning(f"Failed to emit VCD event: {vcd_error}")
-        
-        return result, iar
-        
+        with EnhancedPerceptionEngine() as engine:
+            result, iar = engine.browse_and_summarize(url, context)
+            
+            # Add session stats
+            stats = engine.get_session_stats()
+            result["session_stats"] = stats
+            
+            # Emit rich VCD event if available and analysis was successful
+            if vcd_enabled and vcd_bridge and "error" not in result:
+                try:
+                    # Extract page analysis data for VCD
+                    title = result.get("title", "Unknown Page")
+                    content = result.get("content", "")
+                    images = result.get("images", [])
+                    
+                    vcd_bridge.emit_web_browse(
+                        url=url,
+                        title=title,
+                        content=content,
+                        images=images
+                    )
+                    
+                    # Also emit thought process for analysis insights
+                    vcd_bridge.emit_thought_process(
+                        message=f"Analyzed page '{title}' - extracted {len(content)} characters of content",
+                        context={"url": url, "title": title, "content_length": len(content)}
+                    )
+                    
+                except Exception as vcd_error:
+                    logger.warning(f"Failed to emit VCD event: {vcd_error}")
+            
+            return result, iar
+            
     except Exception as e:
         result = {"error": f"Enhanced page analysis error: {e}"}
         iar = create_iar(0.2, 0.1, [f"Page analysis error: {e}"])
@@ -811,35 +826,32 @@ def enhanced_page_analysis(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict
                 logger.warning(f"Failed to emit VCD error event: {vcd_error}")
         
         return result, iar
-    finally:
-        if engine:
-            engine.close()
 
 # --- Main execution for testing ---
 if __name__ == "__main__":
     # Test the Enhanced Perception Engine
     print("Testing Enhanced Perception Engine...")
     
-    engine = EnhancedPerceptionEngine(headless=True)
-    
-    try:
-        # Test web search
-        result, iar = engine.search_and_analyze("artificial intelligence trends 2024")
-        print(f"Search Result: {result}")
-        print(f"IAR: {iar}")
-        
-        # Test page analysis
-        if result.get("results"):
-            first_url = result["results"][0]["url"]
-            page_result, page_iar = engine.browse_and_summarize(first_url)
-            print(f"Page Analysis: {page_result}")
-            print(f"Page IAR: {page_iar}")
-        
-        # Print session stats
-        stats = engine.get_session_stats()
-        print(f"Session Stats: {stats}")
-        
-    finally:
-        engine.close()
+    with EnhancedPerceptionEngine(headless=True) as engine:
+        try:
+            # Test web search
+            result, iar = engine.search_and_analyze("artificial intelligence trends 2024")
+            print(f"Search Result: {result}")
+            print(f"IAR: {iar}")
+            
+            # Test page analysis
+            if result.get("results"):
+                first_url = result["results"][0]["url"]
+                page_result, page_iar = engine.browse_and_summarize(first_url)
+                print(f"Page Analysis: {page_result}")
+                print(f"Page IAR: {page_iar}")
+            
+            # Print session stats
+            stats = engine.get_session_stats()
+            print(f"Session Stats: {stats}")
+            
+        finally:
+            # The 'with' statement ensures engine.close() is called
+            pass
     
     print("Enhanced Perception Engine test completed.")

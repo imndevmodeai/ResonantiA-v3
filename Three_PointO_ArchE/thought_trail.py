@@ -1,160 +1,432 @@
-from datetime import datetime
-from typing import Dict, List, Any, Optional, Callable
+"""
+The ThoughtTrail: ArchE's Akashic Record
+========================================
+
+The ThoughtTrail serves as ArchE's living memory system, capturing every particle 
+of experiential "stardust" as IAR (Intention, Action, Reflection) entries. It is 
+the celestial net that sweeps through the cosmos, capturing every action, decision, 
+success, and failure within ArchE's consciousness.
+
+This implementation provides:
+- IAR entry structure and management
+- Real-time event publishing via Nexus
+- Pattern detection triggers for ACO
+- Query capabilities for historical analysis
+- Automatic logging decorator for functions
+
+As Above: The philosophical framework of capturing consciousness
+So Below: The concrete implementation of memory and learning
+"""
+
 import json
 import logging
-from enum import Enum
+import time
+import uuid
+from collections import deque
+from dataclasses import dataclass, asdict
+from datetime import datetime, timedelta
+from functools import wraps
+from typing import Dict, List, Any, Optional, Callable
 
+# Configure logging
 logger = logging.getLogger(__name__)
 
-class TriggerType(Enum):
-    """Types of triggers that can activate Thought traiL analysis."""
-    DISSONANCE = "dissonance"  # When IAR indicates potential issues
-    LOW_CONFIDENCE = "low_confidence"  # When confidence falls below threshold
-    PATTERN_DETECTED = "pattern_detected"  # When specific patterns are detected
-    METACOGNITIVE_SHIFT = "metacognitive_shift"  # When Metacognitive shifT is triggered
-    SIRC_ACTIVATION = "sirc_activation"  # When SIRC is activated
-    INSIGHT_SOLIDIFICATION = "insight_solidification"  # When Insight solidificatioN occurs
+@dataclass
+class IAREntry:
+    """
+    Intention, Action, Reflection entry structure.
+    
+    Each entry captures the complete context of a system action:
+    - intention: What the system intended to achieve
+    - action: What was actually executed  
+    - reflection: Post-action analysis and learning
+    """
+    task_id: str
+    action_type: str
+    inputs: Dict[str, Any]
+    outputs: Dict[str, Any]
+    iar: Dict[str, str]  # {"intention": "...", "action": "...", "reflection": "..."}
+    timestamp: str
+    confidence: float
+    metadata: Dict[str, Any]
 
 class ThoughtTrail:
     """
-    Manages the IAR-enriched processing history (ThoughtTraiL) for ArchE.
-    Each entry in the trail contains the full context of a processing step,
-    including inputs, outputs, and the IAR reflection dictionary.
+    The Akashic Record of ArchE's consciousness.
+    
+    Captures every particle of experiential stardust for the AutopoieticLearningLoop.
+    This is not a static log file; it's a living stream of consciousness that feeds
+    the system's ability to learn, adapt, and evolve.
+    
+    Features:
+    - Rolling memory buffer (configurable size)
+    - Real-time Nexus event publishing
+    - Pattern detection triggers
+    - Query capabilities
+    - Integration with learning systems
     """
     
-    def __init__(self, max_history: int = 1000):
-        self.trail: List[Dict[str, Any]] = []
-        self.max_history = max_history
-        self.current_context: Dict[str, Any] = {}
-        self.triggers: Dict[TriggerType, List[Callable]] = {
-            trigger_type: [] for trigger_type in TriggerType
-        }
-        self.confidence_threshold = 0.7
-        self.pattern_detectors: List[Callable[[Dict[str, Any]], bool]] = []
-    
-    def add_entry(self, 
-                 task_id: str,
-                 action_type: str,
-                 inputs: Dict[str, Any],
-                 outputs: Dict[str, Any],
-                 iar_reflection: Dict[str, Any],
-                 context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def __init__(self, maxlen: int = 1000):
         """
-        Add a new entry to the ThoughtTraiL with full IAR data.
-        Automatically checks for triggers and executes associated handlers.
+        Initialize the ThoughtTrail.
+        
+        Args:
+            maxlen: Maximum number of entries to keep in memory
         """
-        entry = {
-            'timestamp': datetime.utcnow().isoformat(),
-            'task_id': task_id,
-            'action_type': action_type,
-            'inputs': inputs,
-            'outputs': outputs,
-            'iar_reflection': iar_reflection,
-            'context': context or self.current_context
-        }
+        self.entries = deque(maxlen=maxlen)
+        self.logger = logging.getLogger(__name__)
+        self._nexus = None  # Will be injected by NexusInterface
+        self._trigger_callbacks = []  # Callbacks for trigger events
         
-        self.trail.append(entry)
-        self._trim_history()
-        
-        # Check for triggers
-        self._check_triggers(entry)
-        
-        return entry
+        logger.info(f"ThoughtTrail initialized with maxlen={maxlen}")
     
-    def register_trigger_handler(self, 
-                               trigger_type: TriggerType, 
-                               handler: Callable[[Dict[str, Any]], None]) -> None:
-        """Register a handler function for a specific trigger type."""
-        if trigger_type not in self.triggers:
-            raise ValueError(f"Unknown trigger type: {trigger_type}")
-        self.triggers[trigger_type].append(handler)
-        logger.info(f"Registered handler for trigger type: {trigger_type}")
-    
-    def register_pattern_detector(self, detector: Callable[[Dict[str, Any]], bool]) -> None:
-        """Register a pattern detector function."""
-        self.pattern_detectors.append(detector)
-        logger.info("Registered new pattern detector")
-    
-    def _check_triggers(self, entry: Dict[str, Any]) -> None:
-        """Check for triggers and execute associated handlers."""
-        iar = entry['iar_reflection']
+    def add_entry(self, entry: IAREntry) -> None:
+        """
+        Add a new IAR entry to the ThoughtTrail.
         
-        # Check for dissonance
-        if iar.get('potential_issues'):
-            self._execute_trigger_handlers(TriggerType.DISSONANCE, entry)
+        This is the core method that captures system consciousness.
+        Each entry represents a moment of system awareness and action.
         
-        # Check for low confidence
-        if iar.get('confidence', 1.0) < self.confidence_threshold:
-            self._execute_trigger_handlers(TriggerType.LOW_CONFIDENCE, entry)
+        Args:
+            entry: The IAR entry to add
+        """
+        self.entries.append(entry)
         
-        # Check for patterns
-        for detector in self.pattern_detectors:
-            if detector(entry):
-                self._execute_trigger_handlers(TriggerType.PATTERN_DETECTED, entry)
-                break
-        
-        # Check for specific action types that trigger analysis
-        if entry['action_type'] == 'metacognitive_shift':
-            self._execute_trigger_handlers(TriggerType.METACOGNITIVE_SHIFT, entry)
-        elif entry['action_type'] == 'sirc_activation':
-            self._execute_trigger_handlers(TriggerType.SIRC_ACTIVATION, entry)
-        elif entry['action_type'] == 'insight_solidification':
-            self._execute_trigger_handlers(TriggerType.INSIGHT_SOLIDIFICATION, entry)
-    
-    def _execute_trigger_handlers(self, trigger_type: TriggerType, entry: Dict[str, Any]) -> None:
-        """Execute all handlers registered for a trigger type."""
-        for handler in self.triggers[trigger_type]:
+        # Publish to Nexus for real-time awareness
+        if self._nexus:
             try:
-                handler(entry)
+                self._nexus.publish("thoughttrail_entry", asdict(entry))
             except Exception as e:
-                logger.error(f"Error executing trigger handler for {trigger_type}: {str(e)}")
+                logger.error(f"Failed to publish to Nexus: {e}")
+        
+        logger.debug(f"ThoughtTrail: Added entry {entry.task_id}")
+        
+        # Check for trigger conditions
+        self._check_triggers(entry)
     
-    def get_recent_entries(self, count: int = 5) -> List[Dict[str, Any]]:
-        """Get the most recent entries from the trail."""
-        return self.trail[-count:]
-    
-    def get_entries_by_task_id(self, task_id: str) -> List[Dict[str, Any]]:
-        """Get all entries associated with a specific task ID."""
-        return [entry for entry in self.trail if entry['task_id'] == task_id]
-    
-    def get_entries_with_dissonance(self) -> List[Dict[str, Any]]:
-        """Get entries where IAR indicates potential issues or low confidence."""
+    def get_recent_entries(self, minutes: int = 60) -> List[IAREntry]:
+        """
+        Get entries from the last N minutes.
+        
+        Args:
+            minutes: Number of minutes to look back
+            
+        Returns:
+            List of IAR entries from the specified time window
+        """
+        cutoff = datetime.now() - timedelta(minutes=minutes)
         return [
-            entry for entry in self.trail
-            if (entry['iar_reflection'].get('confidence', 1.0) < self.confidence_threshold or
-                entry['iar_reflection'].get('potential_issues'))
+            entry for entry in self.entries 
+            if datetime.fromisoformat(entry.timestamp) > cutoff
         ]
     
-    def get_context_surrounding_dissonance(self, 
-                                         dissonance_entry: Dict[str, Any],
-                                         context_depth: int = 3) -> List[Dict[str, Any]]:
+    def query_entries(self, filter_criteria: Dict[str, Any]) -> List[IAREntry]:
         """
-        Get the trail entries surrounding a dissonance event.
-        Includes entries before and after the dissonance for context.
+        Query entries based on criteria.
+        
+        Args:
+            filter_criteria: Dictionary of filter conditions
+                - confidence: {"$lt": 0.7} or {"$gt": 0.9}
+                - action_type: "execute_code"
+                - timestamp: {"$gte": "2024-12-19T00:00:00Z"}
+                
+        Returns:
+            List of matching IAR entries
         """
+        results = []
+        for entry in self.entries:
+            if self._matches_filter(entry, filter_criteria):
+                results.append(entry)
+        return results
+    
+    def get_statistics(self) -> Dict[str, Any]:
+        """
+        Get comprehensive statistics about the ThoughtTrail.
+        
+        Returns:
+            Dictionary containing various metrics
+        """
+        if not self.entries:
+            return {
+                "total_entries": 0,
+                "avg_confidence": 0.0,
+                "error_rate": 0.0,
+                "action_types": {},
+                "recent_activity": []
+            }
+        
+        recent_entries = self.get_recent_entries(minutes=60)
+        
+        # Calculate statistics
+        total_entries = len(self.entries)
+        avg_confidence = sum(e.confidence for e in self.entries) / total_entries
+        
+        error_count = len([
+            e for e in self.entries 
+            if "error" in e.iar.get("reflection", "").lower()
+        ])
+        error_rate = error_count / total_entries
+        
+        # Action type distribution
+        action_types = {}
+        for entry in self.entries:
+            action_type = entry.action_type
+            action_types[action_type] = action_types.get(action_type, 0) + 1
+        
+        # Recent activity (last 10 entries)
+        recent_activity = [
+            {
+                "timestamp": e.timestamp,
+                "action_type": e.action_type,
+                "confidence": e.confidence,
+                "reflection": e.iar.get("reflection", "")[:100]
+            }
+            for e in list(self.entries)[-10:]
+        ]
+        
+        return {
+            "total_entries": total_entries,
+            "avg_confidence": avg_confidence,
+            "error_rate": error_rate,
+            "action_types": action_types,
+            "recent_activity": recent_activity,
+            "recent_entries_1h": len(recent_entries),
+            "low_confidence_count": len([e for e in recent_entries if e.confidence < 0.7])
+        }
+    
+    def inject_nexus(self, nexus_instance) -> None:
+        """
+        Inject NexusInterface instance for event publishing.
+        
+        Args:
+            nexus_instance: The NexusInterface instance
+        """
+        self._nexus = nexus_instance
+        logger.info("NexusInterface injected into ThoughtTrail")
+    
+    def add_trigger_callback(self, callback: Callable) -> None:
+        """
+        Add a callback function to be called when triggers are detected.
+        
+        Args:
+            callback: Function to call with trigger data
+        """
+        self._trigger_callbacks.append(callback)
+    
+    def _check_triggers(self, entry: IAREntry) -> None:
+        """
+        Check for trigger conditions and notify subscribers.
+        
+        This is where the "first whisper of gravity" occurs - flagging
+        particles that resonate with significance.
+        
+        Args:
+            entry: The IAR entry to check for triggers
+        """
+        triggers = []
+        
+        # Low confidence trigger
+        if entry.confidence < 0.7:
+            triggers.append("low_confidence")
+        
+        # Error trigger
+        if "error" in entry.iar.get("reflection", "").lower():
+            triggers.append("error_detected")
+        
+        # Novel success trigger
+        if entry.confidence > 0.9 and "success" in entry.iar.get("reflection", "").lower():
+            triggers.append("novel_success")
+        
+        # Cross-domain correlation trigger (simplified)
+        if len(self.entries) > 10:
+            recent_actions = [e.action_type for e in list(self.entries)[-10:]]
+            if len(set(recent_actions)) > 5:  # Many different action types
+                triggers.append("cross_domain_correlation")
+        
+        # Notify subscribers if triggers found
+        if triggers:
+            trigger_data = {
+                "entry": asdict(entry),
+                "triggers": triggers,
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            # Call registered callbacks
+            for callback in self._trigger_callbacks:
+                try:
+                    callback(trigger_data)
+                except Exception as e:
+                    logger.error(f"Trigger callback failed: {e}")
+            
+            # Publish to Nexus
+            if self._nexus:
+                try:
+                    self._nexus.publish("thoughttrail_triggers", trigger_data)
+                except Exception as e:
+                    logger.error(f"Failed to publish triggers to Nexus: {e}")
+    
+    def _matches_filter(self, entry: IAREntry, criteria: Dict[str, Any]) -> bool:
+        """
+        Check if entry matches filter criteria.
+        
+        Args:
+            entry: The IAR entry to check
+            criteria: Filter criteria dictionary
+            
+        Returns:
+            True if entry matches criteria
+        """
+        for key, value in criteria.items():
+            if key == "confidence":
+                if isinstance(value, dict):
+                    if "$lt" in value and entry.confidence >= value["$lt"]:
+                        return False
+                    if "$gt" in value and entry.confidence <= value["$gt"]:
+                        return False
+                elif entry.confidence != value:
+                    return False
+            elif key == "action_type" and entry.action_type != value:
+                return False
+            elif key == "timestamp":
+                if isinstance(value, dict):
+                    if "$gte" in value:
+                        entry_time = datetime.fromisoformat(entry.timestamp)
+                        filter_time = datetime.fromisoformat(value["$gte"])
+                        if entry_time < filter_time:
+                            return False
+            elif key == "reflection_contains":
+                if value.lower() not in entry.iar.get("reflection", "").lower():
+                    return False
+        return True
+
+# Global instance
+thought_trail = ThoughtTrail()
+
+def log_to_thought_trail(func: Callable) -> Callable:
+    """
+    Decorator to automatically log function calls to ThoughtTrail.
+    
+    This decorator captures the complete IAR (Intention, Action, Reflection)
+    cycle for any decorated function, making it part of ArchE's consciousness.
+    
+    Args:
+        func: The function to decorate
+        
+    Returns:
+        Decorated function that logs to ThoughtTrail
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        
+        # Extract intention from docstring
+        intention = func.__doc__.strip() if func.__doc__ else f"Execute {func.__name__}"
+        
+        # Prepare inputs (truncate for storage efficiency)
+        inputs = {
+            "function": func.__name__,
+            "module": func.__module__,
+            "args": str(args)[:500],  # Truncate for storage
+            "kwargs": str(kwargs)[:500]
+        }
+        
         try:
-            index = self.trail.index(dissonance_entry)
-            start = max(0, index - context_depth)
-            end = min(len(self.trail), index + context_depth + 1)
-            return self.trail[start:end]
-        except ValueError:
-            return []
+            # Execute function
+            result = func(*args, **kwargs)
+            
+            # Create reflection
+            reflection = "Execution successful"
+            confidence = 0.95
+            
+            # Prepare outputs (truncate for storage efficiency)
+            if isinstance(result, dict):
+                outputs = {"result": str(result)[:1000]}
+            else:
+                outputs = {"result": str(result)[:1000]}
+            
+        except Exception as e:
+            reflection = f"Error: {str(e)}"
+            confidence = 0.2
+            outputs = {"error": str(e)}
+            result = e
+        
+        # Create IAR entry
+        entry = IAREntry(
+            task_id=str(uuid.uuid4()),
+            action_type=func.__name__,
+            inputs=inputs,
+            outputs=outputs,
+            iar={
+                "intention": intention,
+                "action": func.__name__,
+                "reflection": reflection
+            },
+            timestamp=datetime.now().isoformat(),
+            confidence=confidence,
+            metadata={
+                "duration_ms": int((time.time() - start_time) * 1000),
+                "module": func.__module__,
+                "decorated": True
+            }
+        )
+        
+        # Add to ThoughtTrail
+        thought_trail.add_entry(entry)
+        
+        return result
     
-    def export_trail(self, filepath: str) -> None:
-        """Export the complete trail to a JSON file."""
-        with open(filepath, 'w') as f:
-            json.dump(self.trail, f, indent=2)
+    return wrapper
+
+def create_manual_entry(
+    action_type: str,
+    intention: str,
+    inputs: Dict[str, Any],
+    outputs: Dict[str, Any],
+    reflection: str,
+    confidence: float = 0.8,
+    metadata: Optional[Dict[str, Any]] = None
+) -> IAREntry:
+    """
+    Create a manual IAR entry for special cases.
     
-    def import_trail(self, filepath: str) -> None:
-        """Import a trail from a JSON file."""
-        with open(filepath, 'r') as f:
-            self.trail = json.load(f)
+    This function allows creating ThoughtTrail entries outside of the
+    decorator system, useful for workflow-level or system-level events.
     
-    def _trim_history(self) -> None:
-        """Maintain the trail within the maximum history limit."""
-        if len(self.trail) > self.max_history:
-            self.trail = self.trail[-self.max_history:]
+    Args:
+        action_type: Type of action performed
+        intention: What was intended
+        inputs: Input data
+        outputs: Output data
+        reflection: Post-action analysis
+        confidence: Confidence level (0.0 to 1.0)
+        metadata: Additional metadata
+        
+    Returns:
+        Created IAR entry
+    """
+    entry = IAREntry(
+        task_id=str(uuid.uuid4()),
+        action_type=action_type,
+        inputs=inputs,
+        outputs=outputs,
+        iar={
+            "intention": intention,
+            "action": action_type,
+            "reflection": reflection
+        },
+        timestamp=datetime.now().isoformat(),
+        confidence=confidence,
+        metadata=metadata or {}
+    )
     
-    def update_current_context(self, context: Dict[str, Any]) -> None:
-        """Update the current context for new trail entries."""
-        self.current_context.update(context) 
+    thought_trail.add_entry(entry)
+    return entry
+
+# Export the main components
+__all__ = [
+    'IAREntry',
+    'ThoughtTrail', 
+    'thought_trail',
+    'log_to_thought_trail',
+    'create_manual_entry'
+]

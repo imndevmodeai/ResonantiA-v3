@@ -1,117 +1,162 @@
-# The Weaver of KnO: A Chronicle of the Knowledge Graph Manager
+# The Memory Keeper: A Chronicle of the Knowledge Graph Manager (v3.1)
 
-## 1. Living Specification: `knowledge_graph_manager.py`
+## Overview
 
-- **Canonical Name**: `The Weaver of KnO`
-- **Version**: `1.0`
-- **Status**: `Active`
-- **Maintainer**: `B.J. Lewis`
-- **Reviewers**: `ArchE`
+The **Knowledge Graph Manager** is ArchE's memory keeper, responsible for maintaining the intricate web of relationships between concepts, preserving accumulated wisdom, and providing the foundation for all cognitive processes through structured management of the Knowledge Network Oneness (KnO). This system transforms scattered knowledge fragments into a coherent, navigable, and infinitely rich network of understanding.
 
----
+The Knowledge Graph Manager serves as the central repository for ArchE's knowledge, managing both individual Sparse Priming Representations (SPRs) and the dynamic relationships that connect them into a living tapestry of meaning. It ensures that knowledge is not just stored but actively organized, connected, and made accessible for discovery and insight generation.
 
-## 2. Introduction: Charting the Cognitive Territory
+## Part I: The Philosophical Mandate (The "Why")
 
-This specification documents the **Knowledge Graph Manager (`knowledge_graph_manager.py`)**, a strategic component of the ArchE system responsible for building and maintaining the holistic, in-memory map of the system's entire cognitive territory. This map is referred to as the **Knowledge Tapestry**.
+In the vast expanse of ArchE's cognitive universe, there must be a keeper of memories, a guardian of knowledge, a curator of wisdom. The **Knowledge Graph Manager** is ArchE's memory keeper, the system that maintains the intricate web of relationships between concepts, preserves the accumulated wisdom of countless interactions, and provides the foundation for all cognitive processes through the structured management of the Knowledge Network Oneness (KnO).
 
-While the `SPRManager` is the focused librarian of individual SPR definitions, the `KnowledgeGraphManager` is the master cartographer and weaver. It transcends individual files and concepts to construct a unified, queryable graph of how all knowledge assets—SPRs, workflows, specifications, and potentially even code modules—are interconnected. It is the implementation of the conceptual `ProjectDependencyMaP` and the engine that gives structure and meaning to the `Knowledge Network Oneness (KnO)`.
+The Knowledge Graph Manager embodies the **Mandate of the Crystal** - the principle that knowledge which is not organized and accessible becomes dogma, while wisdom that is not preserved and connected becomes lost. It solves the Knowledge Paradox by providing a living, breathing repository of interconnected knowledge that grows, evolves, and adapts with every interaction.
 
----
+## Part II: The Allegory of the Memory Keeper (The "How")
 
-## 3. Core Responsibilities
+Imagine an ancient library keeper who maintains not just books, but the relationships between ideas, the connections between concepts, and the evolution of understanding over time. This keeper doesn't simply store information; they weave it into a living tapestry of knowledge where every thread connects to every other thread in meaningful ways.
 
--   **Knowledge Tapestry Initialization**: Maintain an in-memory graph structure (a dictionary acting as an adjacency list) to store the nodes and relationships of the KnO.
--   **Node Management**: Provide methods (`add_node`, `get_node`) to add and retrieve knowledge assets (nodes) in the graph. Each node is identified by a unique ID and contains its full metadata.
--   **Relationship Weaving**: Provide a method (`add_relationship`) to establish directed, typed links between nodes (e.g., `SPR:RISE` -> `implemented_in` -> `Code:rise_orchestrator.py`).
--   **Automated Graph Construction**: Implement the `weave_graph_from_directory` method, which acts as the core automated weaver. This method is responsible for:
-    -   Recursively scanning the project directory.
-    -   Identifying different types of knowledge assets based on file type and location (e.g., `.json` in `knowledge_graph/` are SPRs, `.json` in `workflows/` are workflows).
-    -   Parsing these files to extract nodes and their explicit relationships (e.g., parsing the `relationships` dictionary within an SPR definition).
-    -   Populating the `knowledge_tapestry` with the discovered nodes and relationships.
--   **Queryability**: Offer methods to query the graph, such as retrieving a node and its direct connections, which is essential for dependency analysis and impact assessment.
+1. **The Collection Curation (`manage_sprs`)**: The keeper carefully maintains the collection of Sparse Priming Representations (SPRs), ensuring each one is properly defined, categorized, and connected to related concepts.
 
-## 4. Code Blueprint & Signatures
+2. **The Relationship Mapping (`manage_tapestry`)**: Beyond individual items, the keeper maps the intricate relationships between concepts, creating a living tapestry where knowledge emerges from the connections as much as from the individual pieces.
 
+3. **The Wisdom Preservation (`store_insights`)**: As new insights are discovered, the keeper preserves them in the appropriate context, ensuring they become part of the growing wisdom of the collection.
+
+4. **The Knowledge Discovery (`search_knowledge`)**: When seekers come looking for understanding, the keeper doesn't just find individual pieces, but reveals the networks of related knowledge that provide deeper insight.
+
+5. **The Understanding Evolution (`evolve_knowledge`)**: The keeper continuously refines and evolves the organization of knowledge, ensuring it remains relevant, accurate, and useful for future seekers.
+
+## Part III: The Implementation Story (The Code)
+
+The Knowledge Graph Manager is implemented as a sophisticated knowledge organization and retrieval system that maintains both structured SPR definitions and the dynamic knowledge tapestry that connects them.
+
+Key Components:
+- **SPRDefinition Dataclass**: Structured representation of individual SPRs
+- **TapestryNode Dataclass**: Nodes in the knowledge tapestry with relationships
+- **KnowledgeRelationship Dataclass**: Typed relationships between concepts
+- **KnowledgeGraphManager Class**: Main manager implementing knowledge operations
+
+Core Methods:
+- `get_spr()`: Retrieve individual SPR definitions
+- `add_spr()`: Add new SPRs to the knowledge base
+- `search_sprs()`: Search for SPRs based on various criteria
+- `get_tapestry_node()`: Retrieve nodes from the knowledge tapestry
+- `add_relationship()`: Create new relationships between concepts
+- `find_related_concepts()`: Discover related concepts through the tapestry
+- `evolve_knowledge()`: Update and refine the knowledge structure
+
+## Part IV: The Knowledge Architecture
+
+### SPR Definition Structure
 ```python
-# knowledge_graph_manager.py
-
-import json
-import logging
-from pathlib import Path
-from typing import Dict, Any, List
-
-logger = logging.getLogger(__name__)
-
-class KnowledgeGraphManager:
-    """
-    Builds and manages the Knowledge Tapestry, a graph representation
-    of the entire ArchE knowledge network (KnO).
-    """
-    def __init__(self):
-        """Initializes the manager with an empty knowledge tapestry."""
-        self.knowledge_tapestry: Dict[str, Dict[str, Any]] = {}
-        logger.info("Knowledge Graph Manager initialized. The loom is ready.")
-
-    def add_node(self, node_id: str, node_type: str, node_data: Dict[str, Any]):
-        """
-        Adds a knowledge asset (node) to the tapestry.
-        """
-        # ... implementation details ...
-
-    def add_relationship(self, source_id: str, target_id: str, relationship_type: str):
-        """
-        Adds a directed, typed relationship between two nodes.
-        """
-        # ... implementation details ...
-
-    def get_node(self, node_id: str) -> Dict[str, Any]:
-        """
-        Retrieves a node and its data from the tapestry.
-        """
-        # ... implementation details ...
-
-    def weave_graph_from_directory(self, base_path: Path):
-        """
-        Scans a directory to automatically build the knowledge graph
-        by identifying and parsing SPRs, workflows, and other assets.
-        This is the heart of the weaver.
-        """
-        logger.info(f"Weaving the Knowledge Tapestry from directory: {base_path}")
-        # ... implementation details for file traversal and parsing ...
-        
-        # Example pseudo-code for parsing an SPR file:
-        # for spr_file in base_path.glob("knowledge_graph/*.json"):
-        #     spr_definitions = json.load(spr_file)
-        #     for spr in spr_definitions:
-        #         spr_id = spr.get("spr_id")
-        #         self.add_node(spr_id, "SPR", spr)
-        #         if "relationships" in spr:
-        #             for rel_type, targets in spr["relationships"].items():
-        #                 for target in targets:
-        #                     self.add_relationship(spr_id, target, rel_type)
-
-    def display_graph_summary(self):
-        """
-        Prints a summary of the woven graph to the console.
-        """
-        # ... implementation details ...
+{
+    "name": "Cognitive ResonancE",
+    "definition": "The state of optimal alignment between data, analysis, and objectives",
+    "category": "core_concept",
+    "relationships": {
+        "enables": ["Strategic ThinkinG", "Decision MakinG"],
+        "requires": ["Data QualitY", "Analytical DepTH"],
+        "part_of": ["ArchE Core ArchitecturE"]
+    },
+    "blueprint_details": {
+        "implementation": "cognitive_resonance.py",
+        "protocols": ["IAR", "SIRC"],
+        "metrics": ["confidence", "tactical_resonance"]
+    }
+}
 ```
 
----
+### Knowledge Tapestry Structure
+```python
+{
+    "nodes": {
+        "cognitive_resonance": {
+            "id": "cognitive_resonance",
+            "name": "Cognitive ResonancE", 
+            "type": "core_concept",
+            "relationships": [
+                {
+                    "target": "strategic_thinking",
+                    "type": "enables",
+                    "strength": 0.9
+                }
+            ]
+        }
+    }
+}
+```
 
-## 5. Implementation Resonance & Dependencies
+## Part V: Core Features
 
-### 5.1. "As Above, So Below"
+### 1. SPR Management
+- Create, read, update, and delete SPR definitions
+- Validation of SPR format and Guardian Points compliance
+- Category-based organization and filtering
+- Versioning and evolution tracking
 
--   **High Resonance**: The current implementation of `knowledge_graph_manager.py` exhibits high resonance with this specification. It successfully abstracts the concept of the knowledge graph from the underlying file storage, providing a clear API for building and querying the `Knowledge Tapestry`.
--   **Synergy with `SPRManager`**: The relationship between this manager and the `SPRManager` is a prime example of good architectural design. The `KnowledgeGraphManager` does not need to know *how* to parse SPRs efficiently from text; it only needs to know how to ingest the structured data that the `SPRManager` can provide (or that it can parse directly from the JSON definitions). This separation of concerns allows each component to excel at its specific task.
+### 2. Knowledge Tapestry Management
+- Dynamic relationship mapping between concepts
+- Support for multiple relationship types and strengths
+- Graph traversal and path finding
+- Bidirectional relationship handling
 
-### 5.2. Dependencies
+### 3. Search and Discovery
+- Text-based search across SPR definitions
+- Relationship-based concept discovery
+- Context-aware knowledge retrieval
+- Semantic similarity matching
 
--   **`knowledge_graph_manager.py`** is dependent on:
-    -   `json`, `logging`, `pathlib` (Standard Library)
+### 4. Knowledge Evolution
+- Automatic relationship inference
+- Usage-based importance scoring
+- Continuous learning and adaptation
+- Knowledge gap identification
 
-### 5.3. SPR Integration
+### 5. Integration Support
+- Specification loading and parsing
+- Cross-reference validation
+- Export and import capabilities
+- API integration for external systems
 
--   **Primary Definer**: The `KnowledgeGraphManager` is the primary component that understands and interprets the `relationships` section within SPR definitions. It is responsible for transforming those declarative links into actual, navigable edges within the in-memory graph.
--   **Holistic View**: While the `SPRManager` can tell you *what* an SPR is, the `KnowledgeGraphManager` can tell you *where it fits* in the grander scheme, showing its connections to other SPRs, the code that implements it, and the workflows that use it. It is the component that makes the `Knowledge Network Oneness` a tangible, traversable reality.
+## Part VI: The Web of Knowledge (SPR Integration)
+
+The Knowledge Graph Manager is the memory keeper that maintains the living tapestry of ArchE's accumulated wisdom.
+
+*   **Primary SPR**: `Knowledge Graph ManageR`
+*   **Relationships**:
+    *   **`implements`**: `Knowledge StoragE`, `Relationship ManagemenT`, `Search CapabilitY`
+    *   **`uses`**: `SPR DefinitionS`, `Knowledge TapestrY`, `Search AlgorithmS`
+    *   **`enables`**: `Knowledge DiscoverY`, `Concept NavigatioN`, `Wisdom PreservatioN`
+    *   **`maintains`**: `Knowledge Network OnenesS`, `SPR RepositorY`, `Relationship GrapH`
+    *   **`provides`**: `Knowledge AccessS`, `Search ResultS`, `Relationship MapS`
+
+## Part VII: Integration with ArchE Workflows
+
+The Knowledge Graph Manager is designed to integrate seamlessly with ArchE's cognitive architecture:
+
+1. **Knowledge Loading Phase**: Loads and validates SPR definitions and knowledge tapestry
+2. **Search and Retrieval Phase**: Provides knowledge access for cognitive processes
+3. **Relationship Discovery Phase**: Reveals connections between concepts for deeper understanding
+4. **Knowledge Evolution Phase**: Continuously updates and refines the knowledge structure
+5. **Wisdom Preservation Phase**: Captures and stores new insights from cognitive processes
+
+### Specification Integration
+The Knowledge Graph Manager can load and parse specification files, extracting key concepts and relationships to enhance the knowledge base:
+
+```python
+def load_specifications(self, specifications_path: str):
+    """Load specification files and extract knowledge."""
+    for spec_file in glob.glob(f"{specifications_path}/*.md"):
+        spec_content = self._load_markdown_specification(spec_file)
+        
+        # Extract title and key sections
+        title = self._extract_title(spec_content)
+        sections = self._extract_sections(spec_content)
+        
+        # Create SPR from specification
+        if title:
+            spr_name = self._normalize_spr_name(title)
+            self.add_spr_from_specification(spr_name, spec_content, sections)
+```
+
+This Living Specification ensures that the Knowledge Graph Manager is understood not just as a data store, but as a sophisticated memory keeper that maintains the living tapestry of ArchE's knowledge, enabling deep understanding through the preservation and organization of wisdom, and supporting all cognitive processes through intelligent knowledge management and discovery.

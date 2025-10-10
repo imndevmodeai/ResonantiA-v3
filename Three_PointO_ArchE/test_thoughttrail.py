@@ -1,0 +1,555 @@
+"""
+ThoughtTrail Test Suite
+=======================
+
+Comprehensive tests for the ThoughtTrail system, including:
+- Core ThoughtTrail functionality
+- Nexus integration
+- ACO pattern detection
+- SemanticArchiver compression
+- Keyholder Dashboard
+"""
+
+import asyncio
+import json
+import logging
+import tempfile
+import time
+import unittest
+from datetime import datetime, timedelta
+from pathlib import Path
+from unittest.mock import Mock, patch
+
+# Import the modules to test
+from Three_PointO_ArchE.thought_trail import (
+    IAREntry, ThoughtTrail, thought_trail, 
+    log_to_thought_trail, create_manual_entry
+)
+from Three_PointO_ArchE.nexus_interface import NexusInterface
+from Three_PointO_ArchE.aco_integration import (
+    PatternEvolutionEngine, AdaptiveCognitiveOrchestrator, aco
+)
+from Three_PointO_ArchE.semantic_archiver import (
+    SemanticArchiver, semantic_archiver
+)
+
+# Configure logging for tests
+logging.basicConfig(level=logging.WARNING)
+
+class TestIAREntry(unittest.TestCase):
+    """Test IAR entry structure and functionality."""
+    
+    def test_iar_entry_creation(self):
+        """Test creating an IAR entry."""
+        entry = IAREntry(
+            task_id="test_001",
+            action_type="test_action",
+            inputs={"param1": "value1"},
+            outputs={"result": "success"},
+            iar={
+                "intention": "Test intention",
+                "action": "test_action",
+                "reflection": "Test completed successfully"
+            },
+            timestamp=datetime.now().isoformat(),
+            confidence=0.95,
+            metadata={"test": True}
+        )
+        
+        self.assertEqual(entry.task_id, "test_001")
+        self.assertEqual(entry.action_type, "test_action")
+        self.assertEqual(entry.confidence, 0.95)
+        self.assertIn("Test intention", entry.iar["intention"])
+
+class TestThoughtTrail(unittest.TestCase):
+    """Test ThoughtTrail core functionality."""
+    
+    def setUp(self):
+        """Set up test fixtures."""
+        self.trail = ThoughtTrail(maxlen=100)
+        self.mock_nexus = Mock()
+        self.trail.inject_nexus(self.mock_nexus)
+    
+    def test_add_entry(self):
+        """Test adding entries to ThoughtTrail."""
+        entry = IAREntry(
+            task_id="test_001",
+            action_type="test_action",
+            inputs={},
+            outputs={},
+            iar={"intention": "test", "action": "test", "reflection": "success"},
+            timestamp=datetime.now().isoformat(),
+            confidence=0.9,
+            metadata={}
+        )
+        
+        self.trail.add_entry(entry)
+        
+        self.assertEqual(len(self.trail.entries), 1)
+        self.mock_nexus.publish.assert_called_once()
+    
+    def test_get_recent_entries(self):
+        """Test getting recent entries."""
+        # Add entries with different timestamps
+        now = datetime.now()
+        
+        entry1 = IAREntry(
+            task_id="test_001",
+            action_type="test_action",
+            inputs={},
+            outputs={},
+            iar={"intention": "test", "action": "test", "reflection": "success"},
+            timestamp=(now - timedelta(minutes=30)).isoformat(),
+            confidence=0.9,
+            metadata={}
+        )
+        
+        entry2 = IAREntry(
+            task_id="test_002",
+            action_type="test_action",
+            inputs={},
+            outputs={},
+            iar={"intention": "test", "action": "test", "reflection": "success"},
+            timestamp=(now - timedelta(minutes=90)).isoformat(),
+            confidence=0.9,
+            metadata={}
+        )
+        
+        self.trail.add_entry(entry1)
+        self.trail.add_entry(entry2)
+        
+        recent = self.trail.get_recent_entries(minutes=60)
+        self.assertEqual(len(recent), 1)
+        self.assertEqual(recent[0].task_id, "test_001")
+    
+    def test_query_entries(self):
+        """Test querying entries with criteria."""
+        entry1 = IAREntry(
+            task_id="test_001",
+            action_type="execute_code",
+            inputs={},
+            outputs={},
+            iar={"intention": "test", "action": "execute_code", "reflection": "success"},
+            timestamp=datetime.now().isoformat(),
+            confidence=0.9,
+            metadata={}
+        )
+        
+        entry2 = IAREntry(
+            task_id="test_002",
+            action_type="search_web",
+            inputs={},
+            outputs={},
+            iar={"intention": "test", "action": "search_web", "reflection": "success"},
+            timestamp=datetime.now().isoformat(),
+            confidence=0.7,
+            metadata={}
+        )
+        
+        self.trail.add_entry(entry1)
+        self.trail.add_entry(entry2)
+        
+        # Query by action type
+        results = self.trail.query_entries({"action_type": "execute_code"})
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].task_id, "test_001")
+        
+        # Query by confidence
+        results = self.trail.query_entries({"confidence": {"$lt": 0.8}})
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].task_id, "test_002")
+    
+    def test_get_statistics(self):
+        """Test getting ThoughtTrail statistics."""
+        # Add some test entries
+        for i in range(5):
+            entry = IAREntry(
+                task_id=f"test_{i:03d}",
+                action_type="test_action",
+                inputs={},
+                outputs={},
+                iar={"intention": "test", "action": "test", "reflection": "success"},
+                timestamp=datetime.now().isoformat(),
+                confidence=0.8 + (i * 0.05),
+                metadata={}
+            )
+            self.trail.add_entry(entry)
+        
+        stats = self.trail.get_statistics()
+        
+        self.assertEqual(stats['total_entries'], 5)
+        self.assertGreater(stats['avg_confidence'], 0.8)
+        self.assertEqual(stats['action_types']['test_action'], 5)
+    
+    def test_trigger_detection(self):
+        """Test trigger detection for low confidence and errors."""
+        # Test low confidence trigger
+        low_conf_entry = IAREntry(
+            task_id="test_low_conf",
+            action_type="test_action",
+            inputs={},
+            outputs={},
+            iar={"intention": "test", "action": "test", "reflection": "success"},
+            timestamp=datetime.now().isoformat(),
+            confidence=0.5,  # Low confidence
+            metadata={}
+        )
+        
+        trigger_callback = Mock()
+        self.trail.add_trigger_callback(trigger_callback)
+        
+        self.trail.add_entry(low_conf_entry)
+        
+        # Should trigger low confidence callback
+        trigger_callback.assert_called_once()
+        call_args = trigger_callback.call_args[0][0]
+        self.assertIn("low_confidence", call_args["triggers"])
+        
+        # Test error trigger
+        error_entry = IAREntry(
+            task_id="test_error",
+            action_type="test_action",
+            inputs={},
+            outputs={},
+            iar={"intention": "test", "action": "test", "reflection": "Error occurred"},
+            timestamp=datetime.now().isoformat(),
+            confidence=0.9,
+            metadata={}
+        )
+        
+        trigger_callback.reset_mock()
+        self.trail.add_entry(error_entry)
+        
+        # Should trigger error callback
+        trigger_callback.assert_called_once()
+        call_args = trigger_callback.call_args[0][0]
+        self.assertIn("error_detected", call_args["triggers"])
+
+class TestLogDecorator(unittest.TestCase):
+    """Test the log_to_thought_trail decorator."""
+    
+    def setUp(self):
+        """Set up test fixtures."""
+        self.trail = ThoughtTrail(maxlen=100)
+        # Replace global thought_trail with our test instance
+        import Three_PointO_ArchE.thought_trail
+        Three_PointO_ArchE.thought_trail.thought_trail = self.trail
+    
+    def test_decorator_logging(self):
+        """Test that the decorator logs function calls."""
+        @log_to_thought_trail
+        def test_function(param1: str, param2: int = 42) -> str:
+            """Test function for decorator testing."""
+            return f"Result: {param1} {param2}"
+        
+        # Call the decorated function
+        result = test_function("hello", param2=123)
+        
+        # Check that it was logged
+        self.assertEqual(len(self.trail.entries), 1)
+        entry = self.trail.entries[0]
+        
+        self.assertEqual(entry.action_type, "test_function")
+        self.assertEqual(entry.confidence, 0.95)  # Success confidence
+        self.assertIn("Test function for decorator testing", entry.iar["intention"])
+        self.assertIn("Execution successful", entry.iar["reflection"])
+        self.assertEqual(result, "Result: hello 123")
+    
+    def test_decorator_error_handling(self):
+        """Test decorator error handling."""
+        @log_to_thought_trail
+        def error_function() -> str:
+            """Function that raises an error."""
+            raise ValueError("Test error")
+        
+        # Call the function and expect it to raise
+        with self.assertRaises(ValueError):
+            error_function()
+        
+        # Check that error was logged
+        self.assertEqual(len(self.trail.entries), 1)
+        entry = self.trail.entries[0]
+        
+        self.assertEqual(entry.action_type, "error_function")
+        self.assertEqual(entry.confidence, 0.2)  # Error confidence
+        self.assertIn("Error:", entry.iar["reflection"])
+
+class TestManualEntry(unittest.TestCase):
+    """Test manual entry creation."""
+    
+    def setUp(self):
+        """Set up test fixtures."""
+        self.trail = ThoughtTrail(maxlen=100)
+        import Three_PointO_ArchE.thought_trail
+        Three_PointO_ArchE.thought_trail.thought_trail = self.trail
+    
+    def test_create_manual_entry(self):
+        """Test creating manual entries."""
+        entry = create_manual_entry(
+            action_type="manual_test",
+            intention="Test manual entry creation",
+            inputs={"test": "data"},
+            outputs={"result": "success"},
+            reflection="Manual entry created successfully",
+            confidence=0.9,
+            metadata={"manual": True}
+        )
+        
+        self.assertEqual(len(self.trail.entries), 1)
+        self.assertEqual(entry.action_type, "manual_test")
+        self.assertEqual(entry.confidence, 0.9)
+        self.assertIn("Test manual entry creation", entry.iar["intention"])
+
+class TestNexusIntegration(unittest.TestCase):
+    """Test NexusInterface integration."""
+    
+    def test_nexus_publishing(self):
+        """Test that ThoughtTrail publishes to Nexus."""
+        nexus = NexusInterface()
+        trail = ThoughtTrail(maxlen=100)
+        trail.inject_nexus(nexus)
+        
+        entry = IAREntry(
+            task_id="test_001",
+            action_type="test_action",
+            inputs={},
+            outputs={},
+            iar={"intention": "test", "action": "test", "reflection": "success"},
+            timestamp=datetime.now().isoformat(),
+            confidence=0.9,
+            metadata={}
+        )
+        
+        trail.add_entry(entry)
+        
+        # Check that event was published
+        history = nexus.get_event_history(topic="thoughttrail_entry")
+        self.assertEqual(len(history), 1)
+        self.assertEqual(history[0]["topic"], "thoughttrail_entry")
+
+class TestACOIntegration(unittest.TestCase):
+    """Test ACO integration with ThoughtTrail."""
+    
+    def setUp(self):
+        """Set up test fixtures."""
+        self.aco = AdaptiveCognitiveOrchestrator()
+        self.mock_nexus = Mock()
+        self.aco.inject_nexus(self.mock_nexus)
+    
+    def test_pattern_analysis(self):
+        """Test pattern analysis functionality."""
+        engine = PatternEvolutionEngine()
+        
+        result = engine.analyze_query_pattern(
+            query="Analyze market trends",
+            success=True,
+            active_domain="analytics"
+        )
+        
+        self.assertIn('pattern_signature', result)
+        self.assertEqual(result['occurrences'], 1)
+        self.assertEqual(result['success_rate'], 1.0)
+    
+    def test_trigger_handling(self):
+        """Test ACO trigger handling."""
+        trigger_data = {
+            'triggers': ['low_confidence'],
+            'entry': {
+                'task_id': 'test_001',
+                'action_type': 'test_action',
+                'iar': {'reflection': 'Low confidence result'},
+                'confidence': 0.5
+            }
+        }
+        
+        self.aco.on_thoughttrail_trigger(trigger_data)
+        
+        # Should publish optimization proposal
+        self.mock_nexus.publish.assert_called()
+        call_args = self.mock_nexus.publish.call_args
+        self.assertEqual(call_args[0][0], "aco_optimization_proposal")
+
+class TestSemanticArchiver(unittest.TestCase):
+    """Test SemanticArchiver functionality."""
+    
+    def setUp(self):
+        """Set up test fixtures."""
+        self.temp_dir = tempfile.mkdtemp()
+        self.archiver = SemanticArchiver(archive_dir=self.temp_dir)
+        self.mock_nexus = Mock()
+        self.archiver.inject_nexus(self.mock_nexus)
+    
+    def tearDown(self):
+        """Clean up test fixtures."""
+        import shutil
+        shutil.rmtree(self.temp_dir)
+    
+    def test_compression(self):
+        """Test ThoughtTrail compression."""
+        # Add some test entries to ThoughtTrail
+        trail = ThoughtTrail(maxlen=100)
+        import Three_PointO_ArchE.thought_trail
+        Three_PointO_ArchE.thought_trail.thought_trail = trail
+        
+        for i in range(3):
+            entry = IAREntry(
+                task_id=f"test_{i:03d}",
+                action_type="test_action",
+                inputs={"test": f"data_{i}"},
+                outputs={"result": f"success_{i}"},
+                iar={
+                    "intention": f"Test intention {i}",
+                    "action": "test_action",
+                    "reflection": f"Test completed successfully {i}"
+                },
+                timestamp=datetime.now().isoformat(),
+                confidence=0.8 + (i * 0.05),
+                metadata={"test": True}
+            )
+            trail.add_entry(entry)
+        
+        # Compress the entries
+        result = self.archiver.compress_thoughttrail()
+        
+        self.assertEqual(result['status'], 'success')
+        self.assertEqual(result['compressed'], 3)
+        self.assertIn('archive_file', result)
+        
+        # Check that archive file was created
+        archive_path = Path(result['archive_file'])
+        self.assertTrue(archive_path.exists())
+        
+        # Check archive content
+        with open(archive_path, 'r') as f:
+            archive_data = json.load(f)
+        
+        self.assertEqual(archive_data['metadata']['entries_count'], 3)
+        self.assertEqual(len(archive_data['entries']), 3)
+    
+    def test_archive_query(self):
+        """Test querying archived entries."""
+        # Create a test archive
+        test_entries = [
+            {
+                'original_task_id': 'test_001',
+                'timestamp': datetime.now().isoformat(),
+                'action_type': 'execute_code',
+                'confidence': 0.9,
+                'semantic_summary': 'Successful code execution',
+                'key_terms': ['code', 'execution', 'success'],
+                'category': 'execution',
+                'intention': 'Execute test code',
+                'reflection': 'Code executed successfully',
+                'metadata': {}
+            }
+        ]
+        
+        archive_file = self.archiver._save_to_archive(test_entries)
+        
+        # Query the archive
+        results = self.archiver.query_archives({'action_type': 'execute_code'})
+        
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]['action_type'], 'execute_code')
+    
+    def test_archive_statistics(self):
+        """Test archive statistics."""
+        # Create test archives
+        for i in range(2):
+            test_entries = [
+                {
+                    'original_task_id': f'test_{i:03d}',
+                    'timestamp': datetime.now().isoformat(),
+                    'action_type': f'test_action_{i}',
+                    'confidence': 0.8,
+                    'semantic_summary': f'Test summary {i}',
+                    'key_terms': ['test'],
+                    'category': 'general',
+                    'intention': f'Test intention {i}',
+                    'reflection': f'Test reflection {i}',
+                    'metadata': {}
+                }
+            ]
+            self.archiver._save_to_archive(test_entries)
+        
+        stats = self.archiver.get_archive_statistics()
+        
+        self.assertEqual(stats['total_archived_entries'], 2)
+        self.assertEqual(stats['archive_files_count'], 2)
+        self.assertIn('categories', stats)
+        self.assertIn('action_types', stats)
+
+class TestIntegration(unittest.TestCase):
+    """Test full system integration."""
+    
+    def setUp(self):
+        """Set up integration test."""
+        self.nexus = NexusInterface()
+        self.trail = ThoughtTrail(maxlen=100)
+        self.trail.inject_nexus(self.nexus)
+        
+        # Replace global instances
+        import Three_PointO_ArchE.thought_trail
+        Three_PointO_ArchE.thought_trail.thought_trail = self.trail
+    
+    def test_full_integration(self):
+        """Test full system integration."""
+        # Create a decorated function
+        @log_to_thought_trail
+        def integration_test_function(param: str) -> str:
+            """Integration test function."""
+            return f"Result: {param}"
+        
+        # Call the function
+        result = integration_test_function("test")
+        
+        # Check ThoughtTrail
+        self.assertEqual(len(self.trail.entries), 1)
+        entry = self.trail.entries[0]
+        self.assertEqual(entry.action_type, "integration_test_function")
+        
+        # Check Nexus events
+        history = self.nexus.get_event_history(topic="thoughttrail_entry")
+        self.assertEqual(len(history), 1)
+        
+        # Check statistics
+        stats = self.trail.get_statistics()
+        self.assertEqual(stats['total_entries'], 1)
+        
+        self.assertEqual(result, "Result: test")
+
+def run_tests():
+    """Run all tests."""
+    # Create test suite
+    test_suite = unittest.TestSuite()
+    
+    # Add test cases
+    test_classes = [
+        TestIAREntry,
+        TestThoughtTrail,
+        TestLogDecorator,
+        TestManualEntry,
+        TestNexusIntegration,
+        TestACOIntegration,
+        TestSemanticArchiver,
+        TestIntegration
+    ]
+    
+    for test_class in test_classes:
+        tests = unittest.TestLoader().loadTestsFromTestCase(test_class)
+        test_suite.addTests(tests)
+    
+    # Run tests
+    runner = unittest.TextTestRunner(verbosity=2)
+    result = runner.run(test_suite)
+    
+    return result.wasSuccessful()
+
+if __name__ == "__main__":
+    success = run_tests()
+    if success:
+        print("\n✅ All tests passed!")
+    else:
+        print("\n❌ Some tests failed!")
+        exit(1)
+

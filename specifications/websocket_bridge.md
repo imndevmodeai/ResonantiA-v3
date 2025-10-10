@@ -1,5 +1,11 @@
 # Living Specification: WebSocket Bridge for VCD
 
+## Overview
+
+The **WebSocket Bridge for VCD** is ArchE's critical communication infrastructure that bridges engine and protocol streams to UI clients, enriching raw data frames through sophisticated protocol processors and broadcasting them as standardized EnhancedMessage and VcdEvent structures. This bridge serves as the central nervous system for ArchE's real-time observability, enabling seamless communication between the core cognitive engine and the Visual Cognitive Debugger interface.
+
+The bridge operates through a comprehensive processing pipeline that transforms incoming text frames through six specialized processors: IARProcessor (Integrated Action Reflection), SPRDetector (Sparse Priming Representation detection), TemporalAnalyzer (temporal context analysis), MetaCognitiveTracker (meta-cognitive state tracking), ComplexSystemVisioningProcessor (complex system analysis), and ImplementationResonanceTracker (CRDSP compliance tracking). The system includes robust connection management with exponential backoff (250ms to 5s cap), heartbeat mechanisms (20s intervals), multi-client fanout capabilities, session scoping, comprehensive security measures (origin allowlists, rate limiting, secret redaction), and extensive testing protocols for unit, integration, and end-to-end validation.
+
 ## Purpose
 Bridge engine/protocol streams to UI clients; enrich frames with protocol processors (IAR/SPR/Temporal/Meta/Complex/CRDSP) and broadcast as `EnhancedMessage`/`VcdEvent`.
 

@@ -10,6 +10,45 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 
 console = Console()
 
+def _compact(obj: Any, max_chars: int = 600) -> str:
+    """Return a compact JSON-ish preview of obj, trimmed for terminal visibility."""
+    try:
+        from json import dumps as _jdumps
+        text = _jdumps(obj, ensure_ascii=False, default=str)
+    except Exception:
+        text = str(obj)
+    if len(text) > max_chars:
+        return text[:max_chars] + "..."
+    return text
+
+def print_tagged_execution(task_name: str, action_type: str, inputs: Dict[str, Any]) -> None:
+    """Emit execution tag block to the terminal for traceable runs."""
+    try:
+        print("->|execution|<-")
+        print(f"TASK: {task_name} | ACTION: {action_type}")
+        print(_compact({"inputs": inputs}))
+    except Exception:
+        # Keep terminal resilient; do not crash on logging issues
+        pass
+
+def print_tagged_results(task_name: str, action_type: str, result: Dict[str, Any]) -> None:
+    """Emit results tag block to the terminal with a concise preview."""
+    try:
+        print("->|Results|<-")
+        # Hardened status check: default to Failed if result is empty or status is missing
+        status = "Failed"
+        if result and result.get("status"):
+            status = result.get("status")
+        elif result and "error" not in result:
+            status = "Success"
+
+        print(f"TASK: {task_name} | ACTION: {action_type} | STATUS: {status}")
+        
+        # Always print the full result for complete transparency
+        print(_compact(result))
+    except Exception:
+        pass
+
 def display_task_result(task_name: str, result: Dict[str, Any]) -> None:
     """Display task execution result with rich formatting."""
     # Create a table for the task result

@@ -56,8 +56,12 @@
     "alert_threshold": 0.8,
     "log_file": "mastermind_quota.log"
   },
-  "autonomous_evolution": {
-    "enabled": true,
+  "autopoiesis": {
+    "AUTOPOIESIS_ENABLED": true,
+    "AUDIT_INTERVAL_MINUTES": 60,
+    "STAGNATION_ALERT_HOURS": 24,
+    "ACO_WORKER_INTERVAL_MINUTES": 15,
+    "INSIGHT_CONFIDENCE_THRESHOLD_FOR_REVIEW": 0.85,
     "universal_enhancement": true,
     "pattern_crystallization": true,
     "domain_evolution": true

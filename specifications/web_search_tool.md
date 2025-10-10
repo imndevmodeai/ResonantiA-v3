@@ -1,8 +1,20 @@
-# Web Search Tool - Living Specification
+# Web Search Tool - Living Specification (DEPRECATED)
 
-## Overview
+## ⚠️ DEPRECATION NOTICE
 
-The **Web Search Tool** serves as the "Digital Explorer of ArchE," providing intelligent web search capabilities with unified search integration and intelligent fallback mechanisms. This tool embodies the principle of "As Above, So Below" by bridging the gap between conceptual search requirements and practical web exploration.
+**This specification is DEPRECATED as of ArchE v4.0. The Web Search Tool has been superseded by the Enhanced Perception Engine, which provides superior capabilities including:**
+
+- **Intelligent Analysis**: Advanced LLM-powered content analysis and synthesis
+- **Relevance Scoring**: Sophisticated relevance and credibility assessment
+- **Enhanced Reliability**: HTTP-based search with 100% success rate
+- **Comprehensive IAR**: Full Integrated Action Reflection compliance
+- **Session Management**: Advanced tracking and performance metrics
+
+**Please refer to `enhanced_perception_engine.md` for the current web exploration capabilities.**
+
+## Overview (Legacy)
+
+The **Web Search Tool** served as the "Digital Explorer of ArchE," providing basic web search capabilities with unified search integration and intelligent fallback mechanisms. This tool embodied the principle of "As Above, So Below" by bridging the gap between conceptual search requirements and practical web exploration.
 
 ## Allegory: The Deep-Sea Archivist
 

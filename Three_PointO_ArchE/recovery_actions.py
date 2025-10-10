@@ -188,6 +188,64 @@ def validate_action(modified_action: str) -> Dict[str, Any]:
         }
     }
 
+def self_heal_output(inputs: Dict[str, Any], context_for_action: 'ActionContext') -> Dict[str, Any]:
+    """
+    Attempts to heal a malformed output from an LLM by re-running the generation
+    with explicit instructions to fix the format.
+    """
+    original_prompt = inputs.get("original_prompt")
+    invalid_output = inputs.get("invalid_output")
+    target_schema = inputs.get("target_schema")
+
+    if not all([original_prompt, invalid_output, target_schema]):
+        return {"error": "Self-healing requires original_prompt, invalid_output, and target_schema."}
+
+    healing_prompt = f"""
+    The following prompt was given to a generation model:
+    --- PROMPT ---
+    {original_prompt}
+    --- END PROMPT ---
+
+    Unfortunately, the model produced a malformed output that did not conform to the required JSON schema.
+    
+    --- INVALID OUTPUT ---
+    {json.dumps(invalid_output, indent=2)}
+    --- END INVALID OUTPUT ---
+
+    Your task is to correct this output. The output MUST conform to the following JSON schema:
+    --- TARGET SCHEMA ---
+    {json.dumps(target_schema, indent=2)}
+    --- END TARGET SCHEMA ---
+
+    Please provide ONLY the corrected JSON object, with no other text or explanation.
+    """
+
+    try:
+        # We need access to the LLM provider for this action.
+        # This assumes the action context provides a way to get it.
+        # This is a simplification; a real implementation would need a more robust dependency injection.
+        from .llm_provider import EnhancedLLMProvider
+        llm_provider = EnhancedLLMProvider()
+
+        corrected_output_str = llm_provider.generate_text(
+            prompt=healing_prompt,
+            model_settings={"temperature": 0.1} # Use low temp for deterministic correction
+        )
+        
+        # Attempt to parse the corrected string into a dictionary
+        corrected_output = json.loads(corrected_output_str)
+        return {"output": corrected_output}
+
+    except json.JSONDecodeError:
+        error_msg = "Self-healing failed: The healing model also produced invalid JSON."
+        logger.error(error_msg)
+        return {"error": error_msg}
+    except Exception as e:
+        error_msg = f"An unexpected error occurred during self-healing: {e}"
+        logger.error(error_msg, exc_info=True)
+        return {"error": error_msg}
+
+
 # Helper functions
 def _fix_template_path(template: str, analysis: Dict[str, Any]) -> str:
     """Fix template variable path based on analysis."""

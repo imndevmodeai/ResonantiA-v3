@@ -1,0 +1,32 @@
+{
+  "name": "Dynamic_Workflow_for_Query_-7228473557242051980",
+  "tasks": {
+    "A_fetch_user_data": {
+      "action_type": "display_output",
+      "description": "Simulates fetching user data based on the NL query.",
+      "inputs": {
+        "message": "Fetched user data for user_id 123"
+      }
+    },
+    "B_fetch_product_data": {
+      "action_type": "display_output",
+      "description": "Simulates fetching product data based on the NL query.",
+      "inputs": {
+        "message": "Fetched product data for product_id 456"
+      }
+    },
+    "C_generate_report": {
+      "action_type": "display_output",
+      "description": "Generates a report using previously fetched data.",
+      "inputs": {
+        "message": "Generated report using data from prior steps."
+      }
+    }
+  },
+  "dependencies": {
+    "C_generate_report": [
+      "A_fetch_user_data",
+      "B_fetch_product_data"
+    ]
+  }
+}
