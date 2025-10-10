@@ -1,6 +1,17 @@
 {
-  "version": "3.0",
-  "last_updated": "2024-03-19",
+  "version": "3.1",
+  "last_updated": "2025-09-21T12:33:12.815984",
+  "metadata": {
+    "name": "Complete ArchE Knowledge Tapestry",
+    "description": "Comprehensive knowledge graph with core ArchE concepts and expanded technology domains",
+    "total_nodes": 46,
+    "total_relationships": 99,
+    "domains": [
+      "CoreArchE",
+      "TechnologyConcepts",
+      "TechnologyDomains"
+    ]
+  },
   "nodes": [
     {
       "id": "cognitive_resonance",
@@ -9,7 +20,11 @@
         "name": "Cognitive Resonance",
         "description": "The primary objective state of harmonious alignment between perception, analysis, intent, and outcomes",
         "confidence": 0.95,
-        "temporal_aspects": ["historical", "present", "future"]
+        "temporal_aspects": [
+          "historical",
+          "present",
+          "future"
+        ]
       },
       "relationships": [
         {
@@ -25,202 +40,2568 @@
       ]
     },
     {
-      "id": "temporal_resonance",
-      "type": "CoreConcept",
+      "id": "rise_methodology",
+      "type": "CoreMethodology",
       "properties": {
-        "name": "Temporal Resonance",
-        "description": "Cognitive Resonance evaluated across time dimensions",
-        "confidence": 0.93,
-        "temporal_aspects": ["4d_thinking", "historical_consistency", "future_projection"]
+        "name": "RISE Methodology",
+        "description": "Resonant Insight and Strategy Engine - comprehensive methodology for strategic problem-solving",
+        "confidence": 0.94,
+        "phases": [
+          "Scaffold",
+          "Insight",
+          "Synthesis"
+        ]
       },
       "relationships": [
         {
-          "type": "extends",
+          "type": "implements",
           "target": "cognitive_resonance",
-          "confidence": 0.95
+          "confidence": 0.96
+        },
+        {
+          "type": "uses",
+          "target": "drcl_workflow",
+          "confidence": 0.93
         }
       ]
     },
     {
-      "id": "iar",
-      "type": "CoreMechanism",
+      "id": "drcl_workflow",
+      "type": "CoreWorkflow",
       "properties": {
-        "name": "Integrated Action Reflection",
-        "description": "Mandatory reflection mechanism for continuous self-assessment",
-        "confidence": 0.97,
-        "required_fields": [
-          "status",
-          "summary",
-          "confidence",
-          "alignment_check",
-          "potential_issues",
-          "raw_output_preview"
+        "name": "DRCL Workflow",
+        "description": "Distributed Resonant Corrective Loop - main cognitive process workflow",
+        "confidence": 0.93,
+        "tasks": [
+          "protocol_priming",
+          "intent_intake",
+          "conceptual_map",
+          "rise_blueprint",
+          "synthesis"
         ]
       },
       "relationships": [
+        {
+          "type": "implements",
+          "target": "rise_methodology",
+          "confidence": 0.95
+        },
+        {
+          "type": "uses",
+          "target": "spr_system",
+          "confidence": 0.94
+        }
+      ]
+    },
+    {
+      "id": "spr_system",
+      "type": "CoreSystem",
+      "properties": {
+        "name": "SPR System",
+        "description": "Sparse Priming Representations - cognitive keys for knowledge network access",
+        "confidence": 0.92,
+        "components": [
+          "spr_definitions",
+          "knowledge_tapestry"
+        ]
+      },
+      "relationships": [
+        {
+          "type": "enables",
+          "target": "drcl_workflow",
+          "confidence": 0.94
+        },
         {
           "type": "supports",
           "target": "cognitive_resonance",
-          "confidence": 0.96
+          "confidence": 0.91
+        }
+      ]
+    },
+    {
+      "id": "tech_node_1",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "System Overview",
+        "description": "System Overview - System Overview",
+        "spr_value": 0.001,
+        "spr_label": "System Overview",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_2",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.01,
+            "label": "Architecture"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_3",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.015,
+            "label": "Requirements"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_2",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "System Architecture",
+        "description": "System Architecture - Architecture",
+        "spr_value": 0.01,
+        "spr_label": "Architecture",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_4",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.02,
+            "label": "Cognitive"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_5",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.025,
+            "label": "Learning"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_6",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.03,
+            "label": "NLP"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_3",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "System Requirements",
+        "description": "System Requirements - Requirements",
+        "spr_value": 0.015,
+        "spr_label": "Requirements",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_7",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.035,
+            "label": "Functional"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_8",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.04,
+            "label": "Performance"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_9",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.045,
+            "label": "Security"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_4",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Cognitive Architecture",
+        "description": "Cognitive Architecture - Cognitive",
+        "spr_value": 0.02,
+        "spr_label": "Cognitive",
+        "domain": "Cognitive Science",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_10",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.05,
+            "label": "Knowledge"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_11",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.055,
+            "label": "Reasoning"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_12",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.06,
+            "label": "Learning"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_5",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Machine Learning",
+        "description": "Machine Learning - Learning",
+        "spr_value": 0.025,
+        "spr_label": "Learning",
+        "domain": "Artificial Intelligence",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_13",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.065,
+            "label": "Supervised"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_14",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.07,
+            "label": "Unsupervised"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_15",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.075,
+            "label": "Reinforcement"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_6",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Natural Language Processing",
+        "description": "Natural Language Processing - NLP",
+        "spr_value": 0.03,
+        "spr_label": "NLP",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_16",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.08,
+            "label": "Preprocessing"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_17",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.085,
+            "label": "POS"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_18",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.09,
+            "label": "NER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_7",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Functional Requirements",
+        "description": "Functional Requirements - Functional",
+        "spr_value": 0.035,
+        "spr_label": "Functional",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_19",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.095,
+            "label": "UI"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_20",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.1,
+            "label": "UX"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_21",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.105,
+            "label": "Functionality"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_8",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Performance Requirements",
+        "description": "Performance Requirements - Performance",
+        "spr_value": 0.04,
+        "spr_label": "Performance",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_22",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.11,
+            "label": "Speed"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_23",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.115,
+            "label": "Accuracy"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_24",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.12,
+            "label": "Scalability"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_9",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Security Requirements",
+        "description": "Security Requirements - Security",
+        "spr_value": 0.045,
+        "spr_label": "Security",
+        "domain": "Cybersecurity",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_25",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.125,
+            "label": "Authentication"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_26",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.13,
+            "label": "Authorization"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_27",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.135,
+            "label": "Encryption"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_10",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Knowledge Graph",
+        "description": "Knowledge Graph - Knowledge",
+        "spr_value": 0.05,
+        "spr_label": "Knowledge",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_28",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.14,
+            "label": "Node"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_29",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.145,
+            "label": "Edge"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_30",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.15,
+            "label": "Relationship"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_11",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Reasoning Engine",
+        "description": "Reasoning Engine - Reasoning",
+        "spr_value": 0.055,
+        "spr_label": "Reasoning",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_31",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.155,
+            "label": "Rule-Based"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_32",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.16,
+            "label": "Model-Based"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_33",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.165,
+            "label": "Hybrid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_12",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Learning Mechanism",
+        "description": "Learning Mechanism - Learning",
+        "spr_value": 0.06,
+        "spr_label": "Learning",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_34",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.17,
+            "label": "Supervised"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_35",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.175,
+            "label": "Unsupervised"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_36",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.18,
+            "label": "Reinforcement"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_37",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Natural Language Generation",
+        "description": "Natural Language Generation - NLG",
+        "spr_value": 0.185,
+        "spr_label": "NLG",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_38",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.19,
+            "label": "Text"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_39",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.195,
+            "label": "Language"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_38",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Text Generation",
+        "description": "Text Generation - Text",
+        "spr_value": 0.19,
+        "spr_label": "Text",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_40",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.2,
+            "label": "Sentence"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_41",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.205,
+            "label": "Paragraph"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_39",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Language Modeling",
+        "description": "Language Modeling - Language",
+        "spr_value": 0.195,
+        "spr_label": "Language",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_42",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.21,
+            "label": "Understanding"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_43",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.215,
+            "label": "Generation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_44",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Dialogue Management System",
+        "description": "Dialogue Management System - DMS",
+        "spr_value": 0.22,
+        "spr_label": "DMS",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_45",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.225,
+            "label": "State"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_46",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.23,
+            "label": "Policy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_45",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Dialogue State Tracking",
+        "description": "Dialogue State Tracking - State",
+        "spr_value": 0.225,
+        "spr_label": "State",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_47",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.235,
+            "label": "Intent"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_48",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.24,
+            "label": "Context"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_46",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Dialogue Policy",
+        "description": "Dialogue Policy - Policy",
+        "spr_value": 0.23,
+        "spr_label": "Policy",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_49",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.245,
+            "label": "Response"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_50",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.25,
+            "label": "Flow"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_51",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Sentiment Analysis",
+        "description": "Sentiment Analysis - Sentiment",
+        "spr_value": 0.255,
+        "spr_label": "Sentiment",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_52",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.26,
+            "label": "Emotion"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_53",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.265,
+            "label": "Classification"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_52",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Emotion Detection",
+        "description": "Emotion Detection - Emotion",
+        "spr_value": 0.26,
+        "spr_label": "Emotion",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_54",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.27,
+            "label": "Recognition"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_55",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.275,
+            "label": "Understanding"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_53",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Sentiment Classification",
+        "description": "Sentiment Classification - Classification",
+        "spr_value": 0.265,
+        "spr_label": "Classification",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_56",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.28,
+            "label": "Labeling"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_57",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.285,
+            "label": "Ranking"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_58",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Knowledge Graph Embedding",
+        "description": "Knowledge Graph Embedding - KGE",
+        "spr_value": 0.29,
+        "spr_label": "KGE",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_59",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.295,
+            "label": "Node"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_60",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.3,
+            "label": "Edge"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_59",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Node Embedding",
+        "description": "Node Embedding - Node",
+        "spr_value": 0.295,
+        "spr_label": "Node",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_61",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.305,
+            "label": "Learning"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_62",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.31,
+            "label": "Classification"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_60",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Edge Embedding",
+        "description": "Edge Embedding - Edge",
+        "spr_value": 0.3,
+        "spr_label": "Edge",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_63",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.315,
+            "label": "Learning"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_64",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.32,
+            "label": "Prediction"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_65",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Graph Neural Network",
+        "description": "Graph Neural Network - GNN",
+        "spr_value": 0.325,
+        "spr_label": "GNN",
+        "domain": "Artificial Intelligence",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_66",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.33,
+            "label": "Learning"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_67",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.335,
+            "label": "Learning"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_66",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Node Representation Learning",
+        "description": "Node Representation Learning - Learning",
+        "spr_value": 0.33,
+        "spr_label": "Learning",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_68",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.34,
+            "label": "GCN"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_69",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.345,
+            "label": "GAT"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_67",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Edge Representation Learning",
+        "description": "Edge Representation Learning - Learning",
+        "spr_value": 0.335,
+        "spr_label": "Learning",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_70",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.35,
+            "label": "ECN"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_71",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.355,
+            "label": "EAT"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_72",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Transfer Learning",
+        "description": "Transfer Learning - TL",
+        "spr_value": 0.36,
+        "spr_label": "TL",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_73",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.365,
+            "label": "Adaptation"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_74",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.37,
+            "label": "Adaptation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_73",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Domain Adaptation",
+        "description": "Domain Adaptation - Adaptation",
+        "spr_value": 0.365,
+        "spr_label": "Adaptation",
+        "domain": "Artificial Intelligence",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_75",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.375,
+            "label": "Learning"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_76",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.38,
+            "label": "Learning"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_74",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Task Adaptation",
+        "description": "Task Adaptation - Adaptation",
+        "spr_value": 0.37,
+        "spr_label": "Adaptation",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_77",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.385,
+            "label": "Learning"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_78",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.39,
+            "label": "Learning"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_79",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Reinforcement Learning",
+        "description": "Reinforcement Learning - RL",
+        "spr_value": 0.395,
+        "spr_label": "RL",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_80",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.4,
+            "label": "Policy"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_81",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.405,
+            "label": "Value"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_80",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Policy Learning",
+        "description": "Policy Learning - Policy",
+        "spr_value": 0.4,
+        "spr_label": "Policy",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_82",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.41,
+            "label": "PG"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_83",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.415,
+            "label": "AC"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_81",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Value Learning",
+        "description": "Value Learning - Value",
+        "spr_value": 0.405,
+        "spr_label": "Value",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_84",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.42,
+            "label": "VI"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_85",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.425,
+            "label": "QL"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_86",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Multi-Agent System",
+        "description": "Multi-Agent System - MAS",
+        "spr_value": 0.43,
+        "spr_label": "MAS",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_87",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.435,
+            "label": "Communication"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_88",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.44,
+            "label": "Cooperation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_87",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Agent Communication",
+        "description": "Agent Communication - Communication",
+        "spr_value": 0.435,
+        "spr_label": "Communication",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_89",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.445,
+            "label": "MP"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_90",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.45,
+            "label": "BC"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_88",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Agent Cooperation",
+        "description": "Agent Cooperation - Cooperation",
+        "spr_value": 0.44,
+        "spr_label": "Cooperation",
+        "domain": "General Technology",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_91",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.455,
+            "label": "CGT"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_92",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.46,
+            "label": "CL"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_93",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "Human-Computer Interaction",
+        "description": "Human-Computer Interaction - HCI",
+        "spr_value": 0.465,
+        "spr_label": "HCI",
+        "domain": "Human-Computer Interaction",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_94",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.47,
+            "label": "UID"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_95",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.475,
+            "label": "UXD"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_94",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "User Interface Design",
+        "description": "User Interface Design - UID",
+        "spr_value": 0.47,
+        "spr_label": "UID",
+        "domain": "Human-Computer Interaction",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_96",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.48,
+            "label": "GUI"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_97",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.485,
+            "label": "VUI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tech_node_95",
+      "type": "TechnologyConcept",
+      "properties": {
+        "name": "User Experience Design",
+        "description": "User Experience Design - UXD",
+        "spr_value": 0.475,
+        "spr_label": "UXD",
+        "domain": "Human-Computer Interaction",
+        "confidence": 0.85
+      },
+      "relationships": [
+        {
+          "type": "connects_to",
+          "target": "tech_node_98",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.49,
+            "label": "UR"
+          }
+        },
+        {
+          "type": "connects_to",
+          "target": "tech_node_99",
+          "confidence": 0.8,
+          "properties": {
+            "weight": 0.495,
+            "label": "UT"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ai_domain",
+      "type": "TechnologyDomain",
+      "properties": {
+        "name": "Artificial Intelligence",
+        "description": "Field of computer science focused on creating intelligent machines",
+        "confidence": 0.9,
+        "subdomains": [
+          "Machine Learning",
+          "Deep Learning",
+          "Neural Networks"
+        ]
+      },
+      "relationships": [
+        {
+          "type": "includes",
+          "target": "ml_domain",
+          "confidence": 0.95
+        },
+        {
+          "type": "includes",
+          "target": "dl_domain",
+          "confidence": 0.93
+        }
+      ]
+    },
+    {
+      "id": "cognitive_domain",
+      "type": "TechnologyDomain",
+      "properties": {
+        "name": "Cognitive Science",
+        "description": "Interdisciplinary study of mind and intelligence",
+        "confidence": 0.88,
+        "subdomains": [
+          "Cognitive Architecture",
+          "Reasoning Engine",
+          "Learning Mechanism"
+        ]
+      },
+      "relationships": [
+        {
+          "type": "relates_to",
+          "target": "ai_domain",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "security_domain",
+      "type": "TechnologyDomain",
+      "properties": {
+        "name": "Cybersecurity",
+        "description": "Practice of protecting systems from digital attacks",
+        "confidence": 0.87,
+        "subdomains": [
+          "Security Requirements",
+          "Authentication",
+          "Encryption"
+        ]
+      },
+      "relationships": [
+        {
+          "type": "protects",
+          "target": "ai_domain",
+          "confidence": 0.82
         }
       ]
     }
   ],
-  "edges": [
+  "relationships": [
     {
-      "source": "cognitive_resonance",
-      "target": "temporal_resonance",
-      "type": "enables",
+      "source": "tech_node_1",
+      "target": "tech_node_2",
+      "type": "connects_to",
       "properties": {
-        "confidence": 0.92,
-        "temporal_aspect": "continuous"
-      }
+        "weight": 0.01,
+        "label": "Architecture",
+        "source_name": "System Overview",
+        "target_name": "System Architecture"
+      },
+      "confidence": 0.8
     },
     {
-      "source": "cognitive_resonance",
-      "target": "iar",
-      "type": "requires",
+      "source": "tech_node_1",
+      "target": "tech_node_3",
+      "type": "connects_to",
       "properties": {
-        "confidence": 0.98,
-        "temporal_aspect": "instantaneous"
-      }
-    }
-  ],
-  "metadata": {
-    "schema_version": "3.0",
-    "generated_by": "ResonantiA Protocol",
-    "generation_timestamp": "2024-03-19T00:00:00Z"
-  },
-  "cosmic": [
+        "weight": 0.015,
+        "label": "Requirements",
+        "source_name": "System Overview",
+        "target_name": "System Requirements"
+      },
+      "confidence": 0.8
+    },
     {
-      "content": {
-        "universal_principles": [
-          "unity",
-          "harmony",
-          "balance",
-          "rhythm",
-          "resonance"
-        ],
-        "cosmic_patterns": [
-          "fractal",
-          "recursion",
-          "symmetry",
-          "emergence",
-          "self-similarity"
-        ],
-        "fundamental_laws": [
-          "conservation",
-          "entropy",
-          "causality",
-          "complementarity",
-          "interconnectedness"
-        ]
+      "source": "tech_node_2",
+      "target": "tech_node_4",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.02,
+        "label": "Cognitive",
+        "source_name": "System Architecture",
+        "target_name": "Cognitive Architecture"
       },
-      "metadata": {
-        "source": "cosmic_observation",
-        "confidence": 0.95,
-        "validation_method": "universal_consensus"
-      },
-      "reflection_strength": 0.95
-    }
-  ],
-  "systemic": [
+      "confidence": 0.8
+    },
     {
-      "content": {
-        "system_principles": [
-          "emergence",
-          "self-organization",
-          "adaptation",
-          "resilience",
-          "evolution"
-        ],
-        "system_patterns": [
-          "feedback",
-          "resonance",
-          "synchronization",
-          "networks",
-          "hierarchies"
-        ],
-        "system_laws": [
-          "homeostasis",
-          "complexity",
-          "chaos",
-          "order",
-          "transformation"
-        ]
+      "source": "tech_node_2",
+      "target": "tech_node_5",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.025,
+        "label": "Learning",
+        "source_name": "System Architecture",
+        "target_name": "Machine Learning"
       },
-      "metadata": {
-        "source": "system_analysis",
-        "confidence": 0.85,
-        "validation_method": "system_theory"
-      },
-      "reflection_strength": 0.85
-    }
-  ],
-  "local": [
+      "confidence": 0.8
+    },
     {
-      "content": {
-        "local_principles": [
-          "cooperation",
-          "competition",
-          "symbiosis",
-          "adaptation",
-          "specialization"
-        ],
-        "local_patterns": [
-          "networks",
-          "flows",
-          "boundaries",
-          "interactions",
-          "communities"
-        ],
-        "local_laws": [
-          "stability",
-          "change",
-          "interaction",
-          "balance",
-          "growth"
-        ]
+      "source": "tech_node_2",
+      "target": "tech_node_6",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.03,
+        "label": "NLP",
+        "source_name": "System Architecture",
+        "target_name": "Natural Language Processing"
       },
-      "metadata": {
-        "source": "local_observation",
-        "confidence": 0.75,
-        "validation_method": "empirical_analysis"
-      },
-      "reflection_strength": 0.75
-    }
-  ],
-  "micro": [
+      "confidence": 0.8
+    },
     {
-      "content": {
-        "micro_principles": [
-          "atomic",
-          "molecular",
-          "cellular",
-          "quantum",
-          "energetic"
-        ],
-        "micro_patterns": [
-          "structure",
-          "function",
-          "process",
-          "interaction",
-          "transformation"
-        ],
-        "micro_laws": [
-          "binding",
-          "catalysis",
-          "regulation",
-          "metabolism",
-          "replication"
-        ]
+      "source": "tech_node_3",
+      "target": "tech_node_7",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.035,
+        "label": "Functional",
+        "source_name": "System Requirements",
+        "target_name": "Functional Requirements"
       },
-      "metadata": {
-        "source": "micro_analysis",
-        "confidence": 0.65,
-        "validation_method": "scientific_method"
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_3",
+      "target": "tech_node_8",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.04,
+        "label": "Performance",
+        "source_name": "System Requirements",
+        "target_name": "Performance Requirements"
       },
-      "reflection_strength": 0.65
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_3",
+      "target": "tech_node_9",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.045,
+        "label": "Security",
+        "source_name": "System Requirements",
+        "target_name": "Security Requirements"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_4",
+      "target": "tech_node_10",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.05,
+        "label": "Knowledge",
+        "source_name": "Cognitive Architecture",
+        "target_name": "Knowledge Graph"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_4",
+      "target": "tech_node_11",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.055,
+        "label": "Reasoning",
+        "source_name": "Cognitive Architecture",
+        "target_name": "Reasoning Engine"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_4",
+      "target": "tech_node_12",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.06,
+        "label": "Learning",
+        "source_name": "Cognitive Architecture",
+        "target_name": "Learning Mechanism"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_5",
+      "target": "tech_node_13",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.065,
+        "label": "Supervised",
+        "source_name": "Machine Learning",
+        "target_name": "Supervised Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_5",
+      "target": "tech_node_14",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.07,
+        "label": "Unsupervised",
+        "source_name": "Machine Learning",
+        "target_name": "Unsupervised Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_5",
+      "target": "tech_node_15",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.075,
+        "label": "Reinforcement",
+        "source_name": "Machine Learning",
+        "target_name": "Reinforcement Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_6",
+      "target": "tech_node_16",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.08,
+        "label": "Preprocessing",
+        "source_name": "Natural Language Processing",
+        "target_name": "Text Preprocessing"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_6",
+      "target": "tech_node_17",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.085,
+        "label": "POS",
+        "source_name": "Natural Language Processing",
+        "target_name": "Part-of-Speech Tagging"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_6",
+      "target": "tech_node_18",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.09,
+        "label": "NER",
+        "source_name": "Natural Language Processing",
+        "target_name": "Named Entity Recognition"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_7",
+      "target": "tech_node_19",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.095,
+        "label": "UI",
+        "source_name": "Functional Requirements",
+        "target_name": "User Interface"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_7",
+      "target": "tech_node_20",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.1,
+        "label": "UX",
+        "source_name": "Functional Requirements",
+        "target_name": "User Experience"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_7",
+      "target": "tech_node_21",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.105,
+        "label": "Functionality",
+        "source_name": "Functional Requirements",
+        "target_name": "Functionality"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_8",
+      "target": "tech_node_22",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.11,
+        "label": "Speed",
+        "source_name": "Performance Requirements",
+        "target_name": "Speed"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_8",
+      "target": "tech_node_23",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.115,
+        "label": "Accuracy",
+        "source_name": "Performance Requirements",
+        "target_name": "Accuracy"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_8",
+      "target": "tech_node_24",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.12,
+        "label": "Scalability",
+        "source_name": "Performance Requirements",
+        "target_name": "Scalability"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_9",
+      "target": "tech_node_25",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.125,
+        "label": "Authentication",
+        "source_name": "Security Requirements",
+        "target_name": "Authentication"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_9",
+      "target": "tech_node_26",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.13,
+        "label": "Authorization",
+        "source_name": "Security Requirements",
+        "target_name": "Authorization"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_9",
+      "target": "tech_node_27",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.135,
+        "label": "Encryption",
+        "source_name": "Security Requirements",
+        "target_name": "Encryption"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_10",
+      "target": "tech_node_28",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.14,
+        "label": "Node",
+        "source_name": "Knowledge Graph",
+        "target_name": "Node Creation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_10",
+      "target": "tech_node_29",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.145,
+        "label": "Edge",
+        "source_name": "Knowledge Graph",
+        "target_name": "Edge Creation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_10",
+      "target": "tech_node_30",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.15,
+        "label": "Relationship",
+        "source_name": "Knowledge Graph",
+        "target_name": "Relationship Creation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_11",
+      "target": "tech_node_31",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.155,
+        "label": "Rule-Based",
+        "source_name": "Reasoning Engine",
+        "target_name": "Rule-Based Reasoning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_11",
+      "target": "tech_node_32",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.16,
+        "label": "Model-Based",
+        "source_name": "Reasoning Engine",
+        "target_name": "Model-Based Reasoning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_11",
+      "target": "tech_node_33",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.165,
+        "label": "Hybrid",
+        "source_name": "Reasoning Engine",
+        "target_name": "Hybrid Reasoning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_12",
+      "target": "tech_node_34",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.17,
+        "label": "Supervised",
+        "source_name": "Learning Mechanism",
+        "target_name": "Supervised Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_12",
+      "target": "tech_node_35",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.175,
+        "label": "Unsupervised",
+        "source_name": "Learning Mechanism",
+        "target_name": "Unsupervised Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_12",
+      "target": "tech_node_36",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.18,
+        "label": "Reinforcement",
+        "source_name": "Learning Mechanism",
+        "target_name": "Reinforcement Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_37",
+      "target": "tech_node_38",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.19,
+        "label": "Text",
+        "source_name": "Natural Language Generation",
+        "target_name": "Text Generation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_37",
+      "target": "tech_node_39",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.195,
+        "label": "Language",
+        "source_name": "Natural Language Generation",
+        "target_name": "Language Modeling"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_38",
+      "target": "tech_node_40",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.2,
+        "label": "Sentence",
+        "source_name": "Text Generation",
+        "target_name": "Sentence Generation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_38",
+      "target": "tech_node_41",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.205,
+        "label": "Paragraph",
+        "source_name": "Text Generation",
+        "target_name": "Paragraph Generation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_39",
+      "target": "tech_node_42",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.21,
+        "label": "Understanding",
+        "source_name": "Language Modeling",
+        "target_name": "Language Understanding"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_39",
+      "target": "tech_node_43",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.215,
+        "label": "Generation",
+        "source_name": "Language Modeling",
+        "target_name": "Language Generation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_44",
+      "target": "tech_node_45",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.225,
+        "label": "State",
+        "source_name": "Dialogue Management System",
+        "target_name": "Dialogue State Tracking"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_44",
+      "target": "tech_node_46",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.23,
+        "label": "Policy",
+        "source_name": "Dialogue Management System",
+        "target_name": "Dialogue Policy"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_45",
+      "target": "tech_node_47",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.235,
+        "label": "Intent",
+        "source_name": "Dialogue State Tracking",
+        "target_name": "User Intent Identification"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_45",
+      "target": "tech_node_48",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.24,
+        "label": "Context",
+        "source_name": "Dialogue State Tracking",
+        "target_name": "Dialogue Context Understanding"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_46",
+      "target": "tech_node_49",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.245,
+        "label": "Response",
+        "source_name": "Dialogue Policy",
+        "target_name": "Response Generation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_46",
+      "target": "tech_node_50",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.25,
+        "label": "Flow",
+        "source_name": "Dialogue Policy",
+        "target_name": "Dialogue Flow Control"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_51",
+      "target": "tech_node_52",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.26,
+        "label": "Emotion",
+        "source_name": "Sentiment Analysis",
+        "target_name": "Emotion Detection"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_51",
+      "target": "tech_node_53",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.265,
+        "label": "Classification",
+        "source_name": "Sentiment Analysis",
+        "target_name": "Sentiment Classification"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_52",
+      "target": "tech_node_54",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.27,
+        "label": "Recognition",
+        "source_name": "Emotion Detection",
+        "target_name": "Emotion Recognition"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_52",
+      "target": "tech_node_55",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.275,
+        "label": "Understanding",
+        "source_name": "Emotion Detection",
+        "target_name": "Emotion Understanding"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_53",
+      "target": "tech_node_56",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.28,
+        "label": "Labeling",
+        "source_name": "Sentiment Classification",
+        "target_name": "Sentiment Labeling"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_53",
+      "target": "tech_node_57",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.285,
+        "label": "Ranking",
+        "source_name": "Sentiment Classification",
+        "target_name": "Sentiment Ranking"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_58",
+      "target": "tech_node_59",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.295,
+        "label": "Node",
+        "source_name": "Knowledge Graph Embedding",
+        "target_name": "Node Embedding"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_58",
+      "target": "tech_node_60",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.3,
+        "label": "Edge",
+        "source_name": "Knowledge Graph Embedding",
+        "target_name": "Edge Embedding"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_59",
+      "target": "tech_node_61",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.305,
+        "label": "Learning",
+        "source_name": "Node Embedding",
+        "target_name": "Node Representation Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_59",
+      "target": "tech_node_62",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.31,
+        "label": "Classification",
+        "source_name": "Node Embedding",
+        "target_name": "Node Classification"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_60",
+      "target": "tech_node_63",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.315,
+        "label": "Learning",
+        "source_name": "Edge Embedding",
+        "target_name": "Edge Representation Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_60",
+      "target": "tech_node_64",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.32,
+        "label": "Prediction",
+        "source_name": "Edge Embedding",
+        "target_name": "Link Prediction"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_65",
+      "target": "tech_node_66",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.33,
+        "label": "Learning",
+        "source_name": "Graph Neural Network",
+        "target_name": "Node Representation Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_65",
+      "target": "tech_node_67",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.335,
+        "label": "Learning",
+        "source_name": "Graph Neural Network",
+        "target_name": "Edge Representation Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_66",
+      "target": "tech_node_68",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.34,
+        "label": "GCN",
+        "source_name": "Node Representation Learning",
+        "target_name": "Graph Convolutional Network"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_66",
+      "target": "tech_node_69",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.345,
+        "label": "GAT",
+        "source_name": "Node Representation Learning",
+        "target_name": "Graph Attention Network"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_67",
+      "target": "tech_node_70",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.35,
+        "label": "ECN",
+        "source_name": "Edge Representation Learning",
+        "target_name": "Edge Convolutional Network"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_67",
+      "target": "tech_node_71",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.355,
+        "label": "EAT",
+        "source_name": "Edge Representation Learning",
+        "target_name": "Edge Attention Network"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_72",
+      "target": "tech_node_73",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.365,
+        "label": "Adaptation",
+        "source_name": "Transfer Learning",
+        "target_name": "Domain Adaptation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_72",
+      "target": "tech_node_74",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.37,
+        "label": "Adaptation",
+        "source_name": "Transfer Learning",
+        "target_name": "Task Adaptation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_73",
+      "target": "tech_node_75",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.375,
+        "label": "Learning",
+        "source_name": "Domain Adaptation",
+        "target_name": "Domain-Invariant Feature Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_73",
+      "target": "tech_node_76",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.38,
+        "label": "Learning",
+        "source_name": "Domain Adaptation",
+        "target_name": "Domain-Specific Feature Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_74",
+      "target": "tech_node_77",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.385,
+        "label": "Learning",
+        "source_name": "Task Adaptation",
+        "target_name": "Task-Invariant Feature Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_74",
+      "target": "tech_node_78",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.39,
+        "label": "Learning",
+        "source_name": "Task Adaptation",
+        "target_name": "Task-Specific Feature Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_79",
+      "target": "tech_node_80",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.4,
+        "label": "Policy",
+        "source_name": "Reinforcement Learning",
+        "target_name": "Policy Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_79",
+      "target": "tech_node_81",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.405,
+        "label": "Value",
+        "source_name": "Reinforcement Learning",
+        "target_name": "Value Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_80",
+      "target": "tech_node_82",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.41,
+        "label": "PG",
+        "source_name": "Policy Learning",
+        "target_name": "Policy Gradient Methods"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_80",
+      "target": "tech_node_83",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.415,
+        "label": "AC",
+        "source_name": "Policy Learning",
+        "target_name": "Actor-Critic Methods"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_81",
+      "target": "tech_node_84",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.42,
+        "label": "VI",
+        "source_name": "Value Learning",
+        "target_name": "Value Iteration"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_81",
+      "target": "tech_node_85",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.425,
+        "label": "QL",
+        "source_name": "Value Learning",
+        "target_name": "Q-Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_86",
+      "target": "tech_node_87",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.435,
+        "label": "Communication",
+        "source_name": "Multi-Agent System",
+        "target_name": "Agent Communication"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_86",
+      "target": "tech_node_88",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.44,
+        "label": "Cooperation",
+        "source_name": "Multi-Agent System",
+        "target_name": "Agent Cooperation"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_87",
+      "target": "tech_node_89",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.445,
+        "label": "MP",
+        "source_name": "Agent Communication",
+        "target_name": "Message Passing"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_87",
+      "target": "tech_node_90",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.45,
+        "label": "BC",
+        "source_name": "Agent Communication",
+        "target_name": "Broadcast Communication"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_88",
+      "target": "tech_node_91",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.455,
+        "label": "CGT",
+        "source_name": "Agent Cooperation",
+        "target_name": "Cooperative Game Theory"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_88",
+      "target": "tech_node_92",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.46,
+        "label": "CL",
+        "source_name": "Agent Cooperation",
+        "target_name": "Cooperative Learning"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_93",
+      "target": "tech_node_94",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.47,
+        "label": "UID",
+        "source_name": "Human-Computer Interaction",
+        "target_name": "User Interface Design"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_93",
+      "target": "tech_node_95",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.475,
+        "label": "UXD",
+        "source_name": "Human-Computer Interaction",
+        "target_name": "User Experience Design"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_94",
+      "target": "tech_node_96",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.48,
+        "label": "GUI",
+        "source_name": "User Interface Design",
+        "target_name": "Graphical User Interface"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_94",
+      "target": "tech_node_97",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.485,
+        "label": "VUI",
+        "source_name": "User Interface Design",
+        "target_name": "Voice User Interface"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_95",
+      "target": "tech_node_98",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.49,
+        "label": "UR",
+        "source_name": "User Experience Design",
+        "target_name": "User Research"
+      },
+      "confidence": 0.8
+    },
+    {
+      "source": "tech_node_95",
+      "target": "tech_node_99",
+      "type": "connects_to",
+      "properties": {
+        "weight": 0.495,
+        "label": "UT",
+        "source_name": "User Experience Design",
+        "target_name": "User Testing"
+      },
+      "confidence": 0.8
     }
   ]
-} 
+}

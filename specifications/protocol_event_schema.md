@@ -1,6 +1,10 @@
 # Living Specification: Protocol & VCD Event Schema
 
-Defines canonical JSON shapes emitted by the engine and processors for UI/logs; standardizes Phoenix observability.
+## Overview
+
+The **Protocol & VCD Event Schema** defines the canonical JSON data structures that standardize communication between ArchE's core engine, protocol processors, and the Visual Cognitive Debugger (VCD) UI. This schema establishes the foundational data contracts that enable real-time observability of ArchE's cognitive processes, protocol execution, and Phoenix operations.
+
+The schema consists of two primary data structures: **EnhancedMessage** (a comprehensive envelope containing all cognitive metadata) and **VcdEvent** (lightweight timeline atoms for real-time streaming). The EnhancedMessage includes IAR reflections, SPR activations, temporal context, meta-cognitive state, complex system visioning data, implementation resonance tracking, thought trails, and protocol initialization/error information. The VcdEvent provides granular task-level events for workflow execution tracking. The schema includes comprehensive emission contracts, error handling protocols, Phoenix phase markers, versioning standards, and security constraints to ensure reliable, observable, and secure communication across ArchE's distributed cognitive architecture.
 
 ## EnhancedMessage (Envelope)
 ```json

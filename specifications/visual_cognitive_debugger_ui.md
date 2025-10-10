@@ -1,5 +1,11 @@
 # Living Specification: Visual Cognitive Debugger (VCD) UI
 
+## Overview
+
+The **Visual Cognitive Debugger (VCD) UI** is ArchE's sophisticated real-time introspection and observability interface, providing comprehensive visualization of ArchE's cognitive processes, protocol execution, and Phoenix operations. Built on Next.js with React 18 and TypeScript, this system renders Thought Trails, IAR reflections, SPR activations, Temporal Resonance, Meta-cognition (SIRC/Shift), ComplexSystemVisioning, and Implementation Resonance/CRDSP data in an intuitive, interactive interface.
+
+The VCD UI operates through a WebSocket-based data flow architecture that receives EnhancedMessage envelopes and VcdEvent timeline atoms, validates them against TypeScript schemas, stores them in a centralized state management system, and renders them through specialized components. Key components include Chat (layout and panel management), MessageList (EnhancedMessage rendering with badges and expansion), ChatInput (input handling with meta-command support), ProtocolFlow (phase pipeline visualization), ThoughtTrailGraph (timeline and reasoning trail display), and Canvas (ReactFlow-based task and SPR dependency visualization). The system includes comprehensive security measures, testing protocols, and integration with ArchE's workflow engine and autopoietic genesis protocol.
+
 ## Purpose
 Real-time, observable introspection of ArchE cognition and protocol execution for Phoenix and normal operation. Renders Thought Trails, IAR reflections, SPR activations, Temporal Resonance, Meta-cognition (SIRC/Shift), ComplexSystemVisioning, and Implementation Resonance/CRDSP.
 

@@ -1,5 +1,15 @@
 # The Conductor and the Spark Plug: A Chronicle of the Mastermind & Main Entrypoint
 
+## Overview
+
+The **Mastermind & Main Entrypoint** system serves as ArchE's foundational ignition and cognitive routing system, consisting of two critical components that work together to bootstrap and orchestrate the entire ArchE cognitive process.
+
+The **Main Entrypoint (`main.py`)** acts as the system's spark plug, handling command-line argument parsing, bootstrapping the operational environment (logging, configuration, directories), instantiating core components like the SPRManager, aggregating initial context with runtime information, and invoking the Mastermind with fully prepared context. It implements top-level error handling and saves final results to the outputs directory.
+
+The **Mastermind (`mastermind.py`)** serves as the central cognitive hub and strategic router, sitting between the raw entrypoint and tactical execution. It analyzes incoming requests to determine the most appropriate cognitive pathway (currently defaulting to WorkflowEngine, with architecture for future RISE Orchestrator and Adaptive Cognitive Orchestrator integration), orchestrates execution through the workflow engine, and manages state and results. It encapsulates execution complexity while providing a clean high-level interface.
+
+Together, these components form the foundation of ArchE's cognitive architecture, ensuring proper system initialization, strategic request routing, and seamless integration between external inputs and internal cognitive processes.
+
 ## 1. Living Specification: `mastermind.py` & `main.py`
 
 - **Canonical Name**: `The Conductor and the Spark Plug`

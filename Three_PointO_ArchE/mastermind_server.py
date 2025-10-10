@@ -17,21 +17,40 @@ import asyncio
 import websockets
 from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, Any, List
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 # Add the project root to the path to allow direct imports
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
-from Three_PointO_ArchE.proactive_truth_system import ProactiveTruthSystem
-from Three_PointO_ArchE.tools.enhanced_search_tool import EnhancedSearchTool
-from Three_PointO_ArchE.spr_manager import SPRManager
-from Three_PointO_ArchE.adaptive_cognitive_orchestrator import AdaptiveCognitiveOrchestrator
-from Three_PointO_ArchE.rise_orchestrator import RISE_Orchestrator
-from Three_PointO_ArchE.llm_providers import GoogleProvider
+try:
+    from .workflow_engine import IARCompliantWorkflowEngine
+    from .proactive_truth_system import ProactiveTruthSystem
+    from .tools.enhanced_search_tool import EnhancedSearchTool
+    from .spr_manager import SPRManager
+    from .adaptive_cognitive_orchestrator import AdaptiveCognitiveOrchestrator
+    from .rise_orchestrator import RISE_Orchestrator
+    from .autopoietic_governor import AutopoieticGovernor
+    from .thought_trail import ThoughtTrail # Assuming thought_trail is a singleton or class
+    from .nexus_interface import nexus_interface
+except ImportError:
+    # Fallback to absolute imports if relative imports fail
+    from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
+    from Three_PointO_ArchE.proactive_truth_system import ProactiveTruthSystem
+    from Three_PointO_ArchE.tools.enhanced_search_tool import EnhancedSearchTool
+    from Three_PointO_ArchE.spr_manager import SPRManager
+    from Three_PointO_ArchE.adaptive_cognitive_orchestrator import AdaptiveCognitiveOrchestrator
+    from Three_PointO_ArchE.rise_orchestrator import RISE_Orchestrator
+    from Three_PointO_ArchE.autopoietic_governor import AutopoieticGovernor
+    from Three_PointO_ArchE.thought_trail import ThoughtTrail
+    from Three_PointO_ArchE.nexus_interface import nexus_interface
+from .llm_providers.google import GoogleProvider
 
 # --- Logging Setup ---
-from Three_PointO_ArchE.logging_config import setup_logging
+try:
+    from .logging_config import setup_logging
+except ImportError:
+    from Three_PointO_ArchE.logging_config import setup_logging
 
 # Initialize timestamped logging system
 setup_logging()
@@ -47,12 +66,25 @@ class MastermindServer:
     def __init__(self):
         """Initializes all cognitive components of the ArchE system."""
         logger.info("🧠 Initializing ArchE Mastermind Server...")
+        self.config = self._load_config()
         self.engine = IARCompliantWorkflowEngine()
         self._initialize_ptrf()
         self._initialize_aco()
         self._initialize_rise()
+        self._initialize_autopoiesis()
         self.executor = ThreadPoolExecutor()
         logger.info("✅ ArchE Mastermind Server Initialized Successfully.")
+
+    def _load_config(self) -> Dict[str, Any]:
+        """Loads the enhanced mastermind configuration."""
+        try:
+            config_path = project_root / "mastermind" / "enhanced_mastermind_config.json"
+            with open(config_path, 'r') as f:
+                logger.info("Loading enhanced mastermind configuration...")
+                return json.load(f)
+        except (IOError, json.JSONDecodeError) as e:
+            logger.error(f"FATAL: Could not load or parse configuration file: {e}. Using empty config.", exc_info=True)
+            return {}
 
     def _initialize_ptrf(self):
         """Initializes the Proactive Truth Resonance Framework."""
@@ -66,13 +98,13 @@ class MastermindServer:
             self.llm_provider = GoogleProvider(api_key=api_key) # Store provider as instance variable
             web_search_tool = EnhancedSearchTool()
             spr_definitions_path = str(project_root / "knowledge_graph" / "spr_definitions_tv.json")
-            spr_manager = SPRManager(spr_filepath=spr_definitions_path)
+            self.spr_manager = SPRManager(spr_filepath=spr_definitions_path)
             
             self.truth_seeker = ProactiveTruthSystem(
                 workflow_engine=self.engine,
                 llm_provider=self.llm_provider,
                 web_search_tool=web_search_tool,
-                spr_manager=spr_manager
+                spr_manager=self.spr_manager
             )
             self.ptrf_enabled = True
             logger.info("✅ Proactive Truth Resonance Framework is ONLINE.")
@@ -80,6 +112,7 @@ class MastermindServer:
             logger.error(f"❌ Failed to initialize PTRF: {e}", exc_info=True)
             self.ptrf_enabled = False
             self.truth_seeker = None
+            self.spr_manager = None
 
     def _initialize_aco(self):
         """Initializes the Adaptive Cognitive Orchestrator."""
@@ -126,6 +159,45 @@ class MastermindServer:
             logger.error(f"❌ Failed to initialize RISE v2.0: {e}", exc_info=True)
             self.rise_v2_enabled = False
             self.rise_orchestrator = None
+
+    def _initialize_autopoiesis(self):
+        """Initializes the Autopoietic Governor and its dependencies."""
+        try:
+            # Connect the global thought_trail instance to the global nexus_interface
+            self.thought_trail = ThoughtTrail() 
+            nexus_interface.inject_thoughttrail(self.thought_trail)
+
+            # The insight engine needs to be defined/initialized, mocking for now
+            class MockInsightEngine: pass
+            self.insight_engine = MockInsightEngine()
+
+            self.governor = AutopoieticGovernor(
+                config=self.config, # Pass the loaded server config
+                thought_trail=self.thought_trail,
+                insight_engine=self.insight_engine,
+                spr_manager=self.spr_manager
+            )
+            
+            # Schedule the governor's self-audit
+            self.scheduler = AsyncIOScheduler()
+            audit_interval = self.governor.config.get("AUDIT_INTERVAL_MINUTES", 60)
+            self.scheduler.add_job(
+                self.governor.perform_self_audit, 
+                'interval', 
+                minutes=audit_interval
+            )
+            self.scheduler.start()
+            
+            self.autopoiesis_enabled = self.governor.config.get("AUTOPOIESIS_ENABLED", False)
+            if self.autopoiesis_enabled:
+                logger.info(f"✅ Autopoietic Governor is ONLINE and scheduled for audit every {audit_interval} minutes.")
+            else:
+                logger.warning("Autopoiesis is DISABLED by configuration. The Governor is idle.")
+        except Exception as e:
+            logger.error(f"❌ Failed to initialize Autopoietic Governor: {e}", exc_info=True)
+            self.autopoiesis_enabled = False
+            self.governor = None
+
 
     def _handle_cognitive_query_sync(self, query: str) -> Dict[str, Any]:
         """
@@ -416,16 +488,25 @@ async def main():
 
     server_instance = MastermindServer()
     
+    # Start the Nexus WebSocket server in a background thread
+    nexus_interface.start_server_in_thread()
+    
     logger.info(f"🚀 Attempting to start ArchE Mastermind Server on {host}:{websocket_port}")
     
     try:
-        async with websockets.serve(server_instance.websocket_handler, host, websocket_port) as server:
-            logger.info(f"✅ ArchE Mastermind Server is running on ws://{host}:{websocket_port}")
-            await server.wait_closed()
+        # We are not running a websocket server from here anymore, just the cognitive loop.
+        # This part of the code could be adapted to run a main cognitive loop
+        # or other primary server task. For now, we will just wait.
+        logger.info("✅ ArchE Mastermind Server core is running.")
+        logger.info("Nexus WebSocket bridge is running in a background thread.")
+        await asyncio.Future() # Keep the main thread alive
     except OSError as e:
-        logger.critical(f"FATAL: Failed to bind to port {websocket_port}. Error: {e}")
+        logger.critical(f"FATAL: Failed to start server components. Error: {e}")
     except Exception as e:
         logger.critical(f"FATAL: An unexpected error occurred: {e}", exc_info=True)
+    finally:
+        logger.info("Shutting down Nexus server...")
+        nexus_interface.stop()
 
 if __name__ == "__main__":
     try:

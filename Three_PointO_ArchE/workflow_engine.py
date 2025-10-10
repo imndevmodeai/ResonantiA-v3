@@ -36,7 +36,8 @@ try:
         fix_template,
         fix_action,
         validate_workflow,
-        validate_action
+        validate_action,
+        self_heal_output
     )
     from .system_genesis_tool import perform_system_genesis_action
     from .qa_tools import run_code_linter, run_workflow_suite
@@ -46,7 +47,9 @@ try:
         display_workflow_start,
         display_workflow_complete,
         display_workflow_error,
-        display_output
+        display_output,
+        print_tagged_execution,
+        print_tagged_results,
     )
     from .custom_json import dumps, loads
     from .knowledge_graph_manager import KnowledgeGraphManager
@@ -60,47 +63,52 @@ try:
     from .task_manager import TaskManager
     from .context_manager import ContextManager
     from .pattern_manager import PatternManager
+    from .workflow_optimizer import WorkflowOptimizer # <-- Import the optimizer
 except ImportError:
     # Standalone execution: ensure project root is importable
     _this_dir = os.path.dirname(os.path.abspath(__file__))
     _project_root = os.path.dirname(_this_dir)
     if _project_root not in sys.path:
         sys.path.insert(0, _project_root)
-    from Three_PointO_ArchE import config  # type: ignore
-    from Three_PointO_ArchE.action_registry import execute_action, main_action_registry  # type: ignore
-    from Three_PointO_ArchE.spr_manager import SPRManager  # type: ignore
-    from Three_PointO_ArchE.error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS  # type: ignore
-    from Three_PointO_ArchE.action_context import ActionContext  # type: ignore
-    from Three_PointO_ArchE.workflow_recovery import WorkflowRecoveryHandler  # type: ignore
-    from Three_PointO_ArchE.recovery_actions import (  # type: ignore
+    from . import config  # type: ignore
+    from .action_registry import execute_action, main_action_registry  # type: ignore
+    from .spr_manager import SPRManager  # type: ignore
+    from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS  # type: ignore
+    from .action_context import ActionContext  # type: ignore
+    from .workflow_recovery import WorkflowRecoveryHandler  # type: ignore
+    from .recovery_actions import (  # type: ignore
         analyze_failure,
         fix_template,
         fix_action,
         validate_workflow,
-        validate_action
+        validate_action,
+        self_heal_output
     )
-    from Three_PointO_ArchE.system_genesis_tool import perform_system_genesis_action  # type: ignore
-    from Three_PointO_ArchE.qa_tools import run_code_linter, run_workflow_suite  # type: ignore
-    from Three_PointO_ArchE.output_handler import (  # type: ignore
+    from .system_genesis_tool import perform_system_genesis_action  # type: ignore
+    from .qa_tools import run_code_linter, run_workflow_suite  # type: ignore
+    from .output_handler import (  # type: ignore
         display_task_result,
         display_workflow_progress,
         display_workflow_start,
         display_workflow_complete,
         display_workflow_error,
-        display_output
+        display_output,
+        print_tagged_execution,
+        print_tagged_results,
     )
-    from Three_PointO_ArchE.custom_json import dumps, loads  # type: ignore
-    from Three_PointO_ArchE.knowledge_graph_manager import KnowledgeGraphManager  # type: ignore
-    from Three_PointO_ArchE.ias_manager import IASManager  # type: ignore
-    from Three_PointO_ArchE.logging_config import setup_logging  # type: ignore
-    from Three_PointO_ArchE.config import get_config  # type: ignore
-    from Three_PointO_ArchE.comparison_manager import ComparisonManager  # type: ignore
-    from Three_PointO_ArchE.reflection_manager import ReflectionManager  # type: ignore
-    from Three_PointO_ArchE.synthesis_manager import SynthesisManager  # type: ignore
-    from Three_PointO_ArchE.execution_manager import ExecutionManager  # type: ignore
-    from Three_PointO_ArchE.task_manager import TaskManager  # type: ignore
-    from Three_PointO_ArchE.context_manager import ContextManager  # type: ignore
-    from Three_PointO_ArchE.pattern_manager import PatternManager  # type: ignore
+    from .custom_json import dumps, loads  # type: ignore
+    from .knowledge_graph_manager import KnowledgeGraphManager  # type: ignore
+    from .ias_manager import IASManager  # type: ignore
+    from .logging_config import setup_logging  # type: ignore
+    from .config import get_config  # type: ignore
+    from .comparison_manager import ComparisonManager  # type: ignore
+    from .reflection_manager import ReflectionManager  # type: ignore
+    from .synthesis_manager import SynthesisManager  # type: ignore
+    from .execution_manager import ExecutionManager  # type: ignore
+    from .task_manager import TaskManager  # type: ignore
+    from .context_manager import ContextManager  # type: ignore
+    from .pattern_manager import PatternManager  # type: ignore
+    from .workflow_optimizer import WorkflowOptimizer # type: ignore
 import ast
 from datetime import datetime  # Added import
 # (imports are resolved above via hardened strategy)
@@ -412,6 +420,7 @@ class IARCompliantWorkflowEngine:
         self.register_action("fix_action", fix_action)
         self.register_action("validate_workflow", validate_workflow)
         self.register_action("validate_action", validate_action)
+        self.register_action("self_heal_output", self_heal_output)
         # Register the new for_each meta-action
         self.register_action("for_each", self._execute_for_each_task)
 
@@ -560,10 +569,12 @@ class IARCompliantWorkflowEngine:
         # Ensure the workflow path is absolute by joining with the engine's workflows_dir
         if not os.path.isabs(workflow_name):
             # Dynamic path resolution - check multiple possible locations
+            engine_dir = os.path.dirname(os.path.abspath(__file__))
             possible_paths = [
                 workflow_name,  # Direct path
                 os.path.join(self.workflows_dir, os.path.basename(workflow_name)),  # In workflows dir
-                os.path.join(os.path.dirname(os.path.dirname(__file__)), os.path.basename(workflow_name)),  # Project root
+                os.path.join(engine_dir, "workflows", os.path.basename(workflow_name)), # Relative to the engine
+                os.path.join(os.path.dirname(engine_dir), os.path.basename(workflow_name)),  # Project root
                 os.path.join(os.getcwd(), os.path.basename(workflow_name))  # Current working directory
             ]
             
@@ -1250,300 +1261,211 @@ class IARCompliantWorkflowEngine:
             pass
         
         tasks = workflow_definition.get('tasks', {})
+        dependencies = workflow_definition.get('dependencies', {})
         task_statuses = {key: "pending" for key in tasks}
+
+        # --- OPTIMIZATION INJECTION ---
+        try:
+            optimizer = WorkflowOptimizer({"tasks": [{"id": tid} for tid in tasks.keys()], "dependencies": dependencies})
+            execution_plan = optimizer.get_optimized_execution_plan()
+            logger.info(f"Workflow plan optimized. Executing in {len(execution_plan)} parallel stage(s).")
+            self._emit_event("ThoughtTrail", {"message": f"Optimal execution path calculated: {len(execution_plan)} stages."})
+        except ValueError as e:
+            logger.error(f"Could not optimize workflow: {e}. Falling back to naive execution order.")
+            # Fallback to a simple, potentially incorrect order if optimization fails
+            execution_plan = [[key for key in tasks.keys() if not dependencies.get(key)]]
         
-        ready_tasks = {
-    key for key,
-     task in tasks.items() if not task.get('dependencies')}
         running_tasks = {}
         completed_tasks = set()
         
         logger.info(
     f"Starting workflow '{
-        self.last_workflow_name}' (Run ID: {run_id}). Initial ready tasks: {
-            list(ready_tasks)}")
-        
-        # DEBUG: Print all tasks and their dependencies
-        logger.info(f"🔧 DEBUG: All workflow tasks: {list(tasks.keys())}")
-        for task_key, task_info in tasks.items():
-            deps = task_info.get('dependencies', [])
-            logger.info(f"🔧 DEBUG: Task '{task_key}' has dependencies: {deps}")
+        self.last_workflow_name}' (Run ID: {run_id}).")
 
         start_time = time.time()
         
-        while ready_tasks or running_tasks:
+        # --- REFACTORED EXECUTION LOOP ---
+        for stage_index, stage_tasks in enumerate(execution_plan):
+            logger.info(f"Executing stage {stage_index + 1}/{len(execution_plan)} with tasks: {stage_tasks}")
+            self._emit_event("ThoughtTrail", {"message": f"Beginning execution of stage {stage_index + 1}."})
+
+            # In a true parallel implementation, these tasks would be submitted to a thread/process pool.
+            # For this simulation, we'll execute them sequentially within the stage.
+            for task_key in stage_tasks:
+                if task_key in completed_tasks:
+                    continue # Should not happen with a correct plan, but a safeguard.
+
+                task_info = tasks[task_key]
+                action_type = task_info.get("action_type")
             
-            # --- NEW: Timeout Check ---
-            for task_key_running, start_time_running in list(running_tasks.items()):
-                if time.time() - start_time_running > timeout:
-                    error_msg = f"Task '{task_key_running}' timed out after {timeout} seconds"
-                    logger.error(error_msg)
-                    runtime_context[task_key_running] = {"error": error_msg, "reflection": {"status": "failed", "message": error_msg}}
-                    task_statuses[task_key_running] = "failed"
-                    del running_tasks[task_key_running]
-                    # This task is now "completed" in a failed state
-                    completed_tasks.add(task_key_running)
-
-            if not ready_tasks:
-                if running_tasks:
-                    time.sleep(0.1) 
-                    continue
-                else:
-                    break 
-
-            task_key = ready_tasks.pop()
-            task_info = tasks[task_key]
-            action_type = task_info.get("action_type")
-            
-            attempt_count = 1 
-            max_attempts = task_info.get('retries', 0) + 1
-            
-            condition = task_info.get('condition')
-
-            # --- VCD INSTRUMENTATION ---
-            self._emit_event("ThoughtTrail", {"message": f"Evaluating condition for task: {task_key}..."})
-
-            if condition and not self._evaluate_condition(
-                condition, runtime_context, initial_context):
-                logger.info(
-    f"Skipping task '{task_key}' due to unmet condition: {condition}")
-                task_statuses[task_key] = "skipped"
+                attempt_count = 1 
+                max_attempts = task_info.get('retries', 0) + 1
                 
-                # --- VCD INSTRUMENTATION ---
-                self._emit_event("ThoughtTrail", {"message": f"Task '{task_key}' skipped. Condition not met."})
+                condition = task_info.get('condition')
 
-                # Treat as 'completed' for dependency checking
-                completed_tasks.add(task_key)
-                # Check for newly ready tasks after skipping
-                for next_task_key, next_task_info in tasks.items():
-                    if next_task_key not in completed_tasks and next_task_key not in ready_tasks and next_task_key not in running_tasks:
-                        dependencies = next_task_info.get('dependencies', [])
-                        if all(dep in completed_tasks for dep in dependencies):
-                            ready_tasks.add(next_task_key)
-                continue
+                self._emit_event("ThoughtTrail", {"message": f"Evaluating condition for task: {task_key}..."})
 
-            running_tasks[task_key] = time.time()
-            
-            # --- VCD INSTRUMENTATION ---
-            self._emit_event("ThoughtTrail", {"message": f"Executing task: {task_key} (Action: {action_type})"})
-            
-            # --- RICH VCD INSTRUMENTATION ---
-            # Emit rich events based on action type
-            if action_type == "search_web":
-                self._emit_rich_vcd_event(
-                    "web_search",
-                    f"Web Search: {task_key}",
-                    f"Searching for information related to task '{task_key}'",
-                    metadata={"task_key": task_key, "action_type": action_type}
-                )
-            elif action_type == "execute_code":
-                self._emit_rich_vcd_event(
-                    "code_execution",
-                    f"Code Execution: {task_key}",
-                    f"Executing code for task '{task_key}'",
-                    metadata={"task_key": task_key, "action_type": action_type}
-                )
-            elif action_type == "generate_text_llm":
-                self._emit_rich_vcd_event(
-                    "thought_process",
-                    f"LLM Generation: {task_key}",
-                    f"Generating text using LLM for task '{task_key}'",
-                    metadata={"task_key": task_key, "action_type": action_type}
-                )
-            else:
-                self._emit_rich_vcd_event(
-                    "thought_process",
-                    f"Task Execution: {task_key}",
-                    f"Executing {action_type} action for task '{task_key}'",
-                    metadata={"task_key": task_key, "action_type": action_type}
-                )
+                if condition and not self._evaluate_condition(
+                    condition, runtime_context, initial_context):
+                    logger.info(
+        f"Skipping task '{task_key}' due to unmet condition: {condition}")
+                    task_statuses[task_key] = "skipped"
+                    
+                    self._emit_event("ThoughtTrail", {"message": f"Task '{task_key}' skipped. Condition not met."})
 
-            action_context_obj = ActionContext(
-                task_key=task_key, action_name=task_key, action_type=action_type,
-                workflow_name=self.last_workflow_name, run_id=run_id,
-                attempt_number=attempt_count, max_attempts=max_attempts,
-                execution_start_time=datetime.utcnow(),
-                runtime_context=runtime_context
-            )
-
-            resolved_inputs = self._resolve_inputs(
-    task_info.get('inputs'), runtime_context, initial_context, task_key)
-            
-            # Resolve and merge prompt_vars if they exist for the task
-            prompt_vars = task_info.get('prompt_vars')
-            if prompt_vars:
-                resolved_prompt_vars = self._resolve_value(
-    prompt_vars, runtime_context, initial_context, task_key)
-                if isinstance(
-    resolved_prompt_vars,
-    dict) and isinstance(
-        resolved_inputs,
-         dict):
-                    resolved_inputs['initial_context'] = {
-                        **resolved_inputs.get('initial_context', {}), **resolved_prompt_vars}
-
-            result = execute_action(
-                task_key=task_key, action_name=task_key, action_type=action_type,
-                inputs=resolved_inputs, context_for_action=action_context_obj,
-                max_attempts=max_attempts, attempt_number=attempt_count
-            )
-            
-            task_duration = round(time.time() - running_tasks[task_key], 4)
-
-            event_log.append({
-                "timestamp": action_context_obj.execution_start_time.isoformat() + "Z",
-                "run_id": run_id, "workflow_name": self.last_workflow_name, "task_key": task_key,
-                "action_type": action_type, "attempt": attempt_count, "duration_sec": task_duration,
-                "inputs": self._sanitize_for_json(resolved_inputs), 
-                "result": self._sanitize_for_json(result)
-            })
-
-            del running_tasks[task_key]
-            completed_tasks.add(task_key)
-            runtime_context[task_key] = result
-            
-            is_success = "error" not in result or result.get("error") is None
-            task_statuses[task_key] = "completed" if is_success else "failed"
-            
-            # --- VCD INSTRUMENTATION ---
-            status_msg = "succeeded" if is_success else "failed"
-            self._emit_event("ThoughtTrail", {"message": f"Task '{task_key}' {status_msg}. Duration: {task_duration}s"})
-            
-            # --- RICH VCD RESULT EMISSION ---
-            if is_success:
-                # Emit rich results based on action type and result content
-                if action_type == "search_web" and "search_results" in result:
-                    search_results = result.get("search_results", [])
-                    links = []
-                    for item in search_results:
-                        if isinstance(item, dict):
-                            links.append({
-                                'url': item.get('url', ''),
-                                'title': item.get('title', ''),
-                                'description': item.get('snippet', ''),
-                                'clickable': True
-                            })
-                    self._emit_rich_vcd_event(
-                        "web_search",
-                        f"Search Results: {task_key}",
-                        f"Found {len(links)} search results",
-                        metadata={"task_key": task_key, "result_count": len(links)},
-                        links=links
+                    completed_tasks.add(task_key)
+                    self._execute_resonant_corrective_loop(
+                        trigger_task=task_key, 
+                        reason="condition_unmet",
+                        runtime_context=runtime_context
                     )
-                elif action_type == "execute_code" and "result" in result:
-                    code_result = result.get("result", {})
-                    code_blocks = [{
-                        'code': resolved_inputs.get('code', ''),
-                        'language': 'python',
-                        'execution_result': str(code_result.get('stdout', '')),
-                        'execution_time': task_duration,
-                        'expandable': True
-                    }]
-                    self._emit_rich_vcd_event(
-                        "code_execution",
-                        f"Code Execution Complete: {task_key}",
-                        f"Code executed successfully in {task_duration}s",
-                        metadata={"task_key": task_key, "success": True},
-                        code_blocks=code_blocks
-                    )
-                elif action_type == "generate_text_llm" and "generated_text" in result:
-                    generated_text = result.get("generated_text", "")
-                    self._emit_rich_vcd_event(
-                        "strategy_synthesis",
-                        f"Text Generation Complete: {task_key}",
-                        f"Generated {len(generated_text)} characters of text",
-                        metadata={"task_key": task_key, "text_length": len(generated_text)}
-                    )
-            else:
-                # Emit error information
-                self._emit_rich_vcd_event(
-                    "thought_process",
-                    f"Task Failed: {task_key}",
-                    f"Task '{task_key}' failed: {result.get('error', 'Unknown error')}",
-                    metadata={"task_key": task_key, "error": result.get('error', 'Unknown error')}
+                    continue
+
+                running_tasks[task_key] = time.time()
+                
+                self._emit_event("ThoughtTrail", {"message": f"Executing task: {task_key} (Action: {action_type})"})
+                
+                action_context_obj = ActionContext(
+                    task_key=task_key, action_name=task_key, action_type=action_type,
+                    workflow_name=self.last_workflow_name, run_id=run_id,
+                    attempt_number=attempt_count, max_attempts=max_attempts,
+                    execution_start_time=datetime.utcnow(),
+                    runtime_context=runtime_context
                 )
 
-            # IAR contract validation (bedrock of trust)
-            reflection = result.get("reflection") or result.get("iar") or {}
-            if isinstance(reflection, dict) and reflection:
-                ok, issues = self.iar_validator.validate_structure(reflection)
-                if not ok:
-                    # Mark as failure on contract violation
-                    result.setdefault("error", "IAR contract violation")
-                    result["iar_issues"] = issues
-                    task_statuses[task_key] = "failed"
-                    is_success = False
-                else:
-                    # Record resonance metrics when available
+                resolved_inputs = self._resolve_inputs(
+                    task_info.get('inputs'), runtime_context, initial_context, task_key
+                )
+                
+                prompt_vars = task_info.get('prompt_vars')
+                if prompt_vars:
+                    resolved_prompt_vars = self._resolve_value(
+                        prompt_vars, runtime_context, initial_context, task_key)
+                    if isinstance(resolved_prompt_vars, dict) and isinstance(resolved_inputs, dict):
+                        resolved_inputs['initial_context'] = {
+                            **resolved_inputs.get('initial_context', {}), **resolved_prompt_vars}
+
+                try:
+                    print_tagged_execution(task_key, action_type, resolved_inputs)
+                except Exception:
+                    pass
+
+                result = execute_action(
+                    task_key=task_key, action_name=task_key, action_type=action_type,
+                    inputs=resolved_inputs, context_for_action=action_context_obj,
+                    max_attempts=max_attempts, attempt_number=attempt_count
+                )
+                
+                try:
+                    print_tagged_results(task_key, action_type, result)
+                except Exception:
+                    pass
+                
+                if isinstance(result, dict) and 'output' in result and isinstance(result['output'], str):
                     try:
-                        self.resonance_tracker.record_execution(task_key, reflection, runtime_context)
+                        json_string = result['output'].strip()
+                        if json_string.startswith('{') and json_string.endswith('}'):
+                            parsed_output = json.loads(json_string)
+                            result.update(parsed_output)
+                            logger.debug(f"Parsed and merged JSON output from execute_code task '{task_key}'.")
+                    except json.JSONDecodeError:
+                        logger.debug(f"Output of task '{task_key}' looked like JSON but failed to parse. Proceeding with raw string output.")
+
+                result = self._ensure_iar_compliance(result, action_context_obj)
+                result = self._validate_and_heal_output(result, task_info, action_context_obj)
+
+                if result.get("reflection", {}).get("confidence", 1.0) < 0.7:
+                    self._execute_resonant_corrective_loop(
+                        trigger_task=task_key, reason="low_confidence",
+                        runtime_context=runtime_context, task_result=result
+                    )
+
+                task_duration = round(time.time() - running_tasks[task_key], 4)
+
+                event_log.append({
+                    "timestamp": action_context_obj.execution_start_time.isoformat() + "Z",
+                    "run_id": run_id, "workflow_name": self.last_workflow_name, "task_key": task_key,
+                    "action_type": action_type, "attempt": attempt_count, "duration_sec": task_duration,
+                    "inputs": self._sanitize_for_json(resolved_inputs), 
+                    "result": self._sanitize_for_json(result)
+                })
+
+                del running_tasks[task_key]
+                completed_tasks.add(task_key)
+                runtime_context[task_key] = result
+                
+                is_success = "error" not in result or result.get("error") is None
+                task_statuses[task_key] = "completed" if is_success else "failed"
+                
+                status_msg = "succeeded" if is_success else "failed"
+                self._emit_event("ThoughtTrail", {"message": f"Task '{task_key}' {status_msg}. Duration: {task_duration}s"})
+
+                # IAR contract validation (bedrock of trust)
+                reflection = result.get("reflection") or result.get("iar") or {}
+                if isinstance(reflection, dict) and reflection:
+                    ok, issues = self.iar_validator.validate_structure(reflection)
+                    if not ok:
+                        # Mark as failure on contract violation
+                        result.setdefault("error", "IAR contract violation")
+                        result["iar_issues"] = issues
+                        task_statuses[task_key] = "failed"
+                        is_success = False
+                    else:
+                        # Record resonance metrics when available
+                        try:
+                            self.resonance_tracker.record_execution(task_key, reflection, runtime_context)
+                        except Exception:
+                            pass
+
+                # Append atomic fact to facts_ledger for successful tasks
+                if is_success:
+                    try:
+                        append_fact(session_state, {
+                            "task": task_key,
+                            "status": "success",
+                            "confidence": (reflection or {}).get("confidence"),
+                            "summary": (reflection or {}).get("summary") or result.get("summary"),
+                        })
                     except Exception:
                         pass
 
-            # Append atomic fact to facts_ledger for successful tasks
-            if is_success:
-                try:
-                    append_fact(session_state, {
-                        "task": task_key,
-                        "status": "success",
-                        "confidence": (reflection or {}).get("confidence"),
-                        "summary": (reflection or {}).get("summary") or result.get("summary"),
-                    })
-                except Exception:
-                    pass
+                    # Causal-preserving progressive summarization (flux-annotated digest)
+                    try:
+                        # Use recent successful results as raw events window
+                        trail_window = []
+                        for k in list(runtime_context.keys())[-60:]:
+                            if isinstance(runtime_context.get(k), dict):
+                                entry = runtime_context.get(k)
+                                if isinstance(entry, dict) and ("reflection" in entry or "iar" in entry):
+                                    trail_window.append({
+                                        'task_id': k,
+                                        'outputs': entry,
+                                        'iar_reflection': entry.get('reflection') or entry.get('iar') or {}
+                                    })
+                        if trail_window:
+                            digest = build_flux_annotated_digest(trail_window)
+                            if isinstance(digest, dict):
+                                session_state.setdefault("digests", []).append(digest)
+                                save_session_state(session_state)
+                    except Exception:
+                        pass
 
-                # Causal-preserving progressive summarization (flux-annotated digest)
-                try:
-                    # Use recent successful results as raw events window
-                    trail_window = []
-                    for k in list(runtime_context.keys())[-60:]:
-                        if isinstance(runtime_context.get(k), dict):
-                            entry = runtime_context.get(k)
-                            if isinstance(entry, dict) and ("reflection" in entry or "iar" in entry):
-                                trail_window.append({
-                                    'task_id': k,
-                                    'outputs': entry,
-                                    'iar_reflection': entry.get('reflection') or entry.get('iar') or {}
-                                })
-                    if trail_window:
-                        digest = build_flux_annotated_digest(trail_window)
-                        if isinstance(digest, dict):
-                            session_state.setdefault("digests", []).append(digest)
-                            save_session_state(session_state)
-                except Exception:
-                    pass
-
-                # Build superpositioned context bundles on SPR activations (from outputs)
-                try:
-                    if self.spr_manager and isinstance(result.get("output_text"), str):
-                        spr_defs = self.spr_manager.scan_and_prime(result["output_text"]) or []
-                        if spr_defs:
-                            bundles = [create_context_bundle(sd, runtime_context, initial_context) for sd in spr_defs]
-                            existing = initial_context.get("context_bundles")
-                            merged = merge_bundles(bundles if not existing else bundles + [existing])
-                            initial_context["context_bundles"] = merged
-                            # Predictive prefetch when bundles change
-                            try:
-                                trigger_predictive_prefetch(session_state, initial_context)
-                            except Exception:
-                                pass
-                except Exception:
-                    pass
-
-            # Always check for newly ready tasks after any task completes (successful or failed)
-            logger.info(f"🔍 Checking for newly ready tasks after '{task_key}' completion")
-            logger.info(f"🔍 Current state - completed: {list(completed_tasks)}, ready: {list(ready_tasks)}, running: {list(running_tasks.keys())}")
-            
-            for next_task_key, next_task_info in tasks.items():
-                if next_task_key not in completed_tasks and next_task_key not in ready_tasks and next_task_key not in running_tasks:
-                    dependencies = next_task_info.get('dependencies', [])
-                    logger.info(f"🔍 Checking task '{next_task_key}' with dependencies: {dependencies}")
-                    missing_deps = [dep for dep in dependencies if dep not in completed_tasks]
-                    if not missing_deps:
-                        logger.info(f"✅ Adding task '{next_task_key}' to ready_tasks (all dependencies completed)")
-                        ready_tasks.add(next_task_key)
-                    else:
-                        logger.info(f"⏳ Task '{next_task_key}' not ready, missing: {missing_deps}")
+                    # Build superpositioned context bundles on SPR activations (from outputs)
+                    try:
+                        if self.spr_manager and isinstance(result.get("output_text"), str):
+                            spr_defs = self.spr_manager.scan_and_prime(result["output_text"]) or []
+                            if spr_defs:
+                                bundles = [create_context_bundle(sd, runtime_context, initial_context) for sd in spr_defs]
+                                existing = initial_context.get("context_bundles")
+                                merged = merge_bundles(bundles if not existing else bundles + [existing])
+                                initial_context["context_bundles"] = merged
+                                # Predictive prefetch when bundles change
+                                try:
+                                    trigger_predictive_prefetch(session_state, initial_context)
+                                except Exception:
+                                    pass
+                    except Exception:
+                        pass
 
         end_time = time.time()
         run_duration = round(end_time - start_time, 2)
@@ -1565,12 +1487,6 @@ class IARCompliantWorkflowEngine:
                 for event in event_log:
                     f.write(json.dumps(event, default=str) + '\n')
             logger.info(f"Detailed event log saved to: {event_log_path}")
-            
-            # Auto-organize the new log file
-            try:
-                self._auto_organize_log(event_log_path)
-            except Exception as e:
-                logger.warning(f"Failed to auto-organize log {event_log_path}: {e}")
                 
         except Exception as e:
             logger.error(f"Failed to save event log to {event_log_path}: {e}")
@@ -1762,8 +1678,6 @@ class IARCompliantWorkflowEngine:
                     return
             
             # Import log organizer
-            import sys
-            import os
             sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
             from log_organizer import LogOrganizer
             
@@ -1832,5 +1746,179 @@ class IARCompliantWorkflowEngine:
             
         except Exception as e:
             logger.warning(f"Auto-organization failed for {log_file_path}: {e}")
+
+    def _ensure_iar_compliance(self, result: Dict[str, Any], context: 'ActionContext') -> Dict[str, Any]:
+        """
+        Acts as middleware to guarantee every action result has a compliant IAR.
+        If the reflection is missing or invalid, it generates a default one.
+        """
+        reflection = result.get("reflection") or result.get("iar") or {}
+        is_compliant, issues = self.iar_validator.validate_structure(reflection)
+
+        if is_compliant:
+            return result
+
+        logger.warning(
+            f"Task '{context.task_key}' produced a non-compliant IAR. Issues: {issues}. Generating fallback IAR.")
+
+        # If we are here, the IAR is non-compliant, so we build one.
+        is_error = "error" in result and result["error"] is not None
+
+        generated_reflection = {
+            "status": "Failed" if is_error else "Success",
+            "summary": reflection.get("summary") or f"Task '{context.task_key}' completed.",
+            "confidence": reflection.get("confidence") or (0.5 if is_error else 0.9),
+            "alignment_check": reflection.get("alignment_check") or "Unknown",
+            "potential_issues": reflection.get("potential_issues") or (
+                [result["error"]] if is_error else []),
+            "raw_output_preview": reflection.get("raw_output_preview") or str(
+                result.get("output") or result)[:200]
+        }
+        
+        # Add the generated (or original if it existed) reflection back to the result
+        result["reflection"] = generated_reflection
+        
+        # If the original failure was an IAR contract violation, remove the error
+        # now that we have fixed it.
+        if result.get("error") == "IAR contract violation":
+            del result["error"]
+            if "iar_issues" in result:
+                del result["iar_issues"]
+
+        return result
+
+    def _validate_and_heal_output(self, result: Dict[str, Any], task_info: Dict[str, Any], context: 'ActionContext') -> Dict[str, Any]:
+        """
+        Validates the task result against its defined output_schema.
+        If validation fails, triggers a self-healing action to correct the format.
+        """
+        schema = task_info.get("output_schema")
+        if not schema:
+            return result # No schema to validate against
+
+        # Simple validation for now. A more robust solution would use jsonschema.
+        is_valid = True
+        if schema.get("type") == "object" and isinstance(result, dict):
+            for prop in schema.get("required", []):
+                if prop not in result:
+                    is_valid = False
+                    break
+        elif schema.get("type") == "string" and not isinstance(result, str):
+            is_valid = False
+        
+        if is_valid:
+            return result
+
+        logger.warning(f"Task '{context.task_key}' output failed schema validation. Attempting self-healing.")
+        
+        try:
+            heal_action = self.action_registry.get("self_heal_output")
+            if not heal_action:
+                logger.error("Self-healing failed: 'self_heal_output' action not registered.")
+                result["error"] = "Output schema validation failed and self-healing is unavailable."
+                return result
+            
+            healing_result = heal_action(
+                inputs={
+                    "original_prompt": context.runtime_context.get("initial_context", {}).get("prompt"), # A bit simplified
+                    "invalid_output": result.get("output") or result,
+                    "target_schema": schema
+                },
+                context_for_action=context
+            )
+            
+            if "error" in healing_result:
+                logger.error(f"Self-healing failed for task '{context.task_key}': {healing_result['error']}")
+                result["error"] = "Output schema validation and subsequent self-healing failed."
+                return result
+            
+            logger.info(f"Task '{context.task_key}' output successfully self-healed.")
+            # Return the corrected output
+            return healing_result
+
+        except Exception as e:
+            logger.error(f"Exception during self-healing for task '{context.task_key}': {e}")
+            result["error"] = "An exception occurred during output self-healing."
+            return result
+
+    def _execute_resonant_corrective_loop(self, trigger_task: str, reason: str, runtime_context: Dict[str, Any], task_result: Optional[Dict[str, Any]] = None):
+        """
+        Executes a corrective workflow in response to a trigger like a skipped task or low-confidence result.
+        RCL web search disabled - requires explicit LLM prompting for web searches.
+        """
+        logger.info(f"RCL triggered for task '{trigger_task}' due to '{reason}'. RCL web search disabled - requires explicit LLM prompting.")
+        
+        # RCL web search disabled to prevent automatic web searches without LLM prompting
+        # Log the issue for manual review instead of automatically searching
+        logger.warning(f"Task '{trigger_task}' failed with reason '{reason}'. Manual intervention may be required.")
+        
+        # Store the failure information for potential manual review
+        failure_info = {
+            "trigger_task": trigger_task,
+            "trigger_reason": reason,
+            "original_workflow_run_id": runtime_context.get("workflow_run_id"),
+            "task_result": task_result or runtime_context.get(trigger_task),
+            "timestamp": time.time(),
+            "rcl_action": "logged_for_review"
+        }
+        
+        # Could save to a log file for manual review if needed
+        # For now, just log the information
+        logger.info(f"RCL failure logged: {failure_info}")
+
+
+    def _validate_and_heal_output(self, result: Dict[str, Any], task_info: Dict[str, Any], context: 'ActionContext') -> Dict[str, Any]:
+        """
+        Validates the task result against its defined output_schema.
+        If validation fails, triggers a self-healing action to correct the format.
+        """
+        schema = task_info.get("output_schema")
+        if not schema:
+            return result # No schema to validate against
+
+        # Simple validation for now. A more robust solution would use jsonschema.
+        is_valid = True
+        if schema.get("type") == "object" and isinstance(result, dict):
+            for prop in schema.get("required", []):
+                if prop not in result:
+                    is_valid = False
+                    break
+        elif schema.get("type") == "string" and not isinstance(result, str):
+            is_valid = False
+        
+        if is_valid:
+            return result
+
+        logger.warning(f"Task '{context.task_key}' output failed schema validation. Attempting self-healing.")
+        
+        try:
+            heal_action = self.action_registry.get("self_heal_output")
+            if not heal_action:
+                logger.error("Self-healing failed: 'self_heal_output' action not registered.")
+                result["error"] = "Output schema validation failed and self-healing is unavailable."
+                return result
+            
+            healing_result = heal_action(
+                inputs={
+                    "original_prompt": context.runtime_context.get("initial_context", {}).get("prompt"), # A bit simplified
+                    "invalid_output": result.get("output") or result,
+                    "target_schema": schema
+                },
+                context_for_action=context
+            )
+            
+            if "error" in healing_result:
+                logger.error(f"Self-healing failed for task '{context.task_key}': {healing_result['error']}")
+                result["error"] = "Output schema validation and subsequent self-healing failed."
+                return result
+            
+            logger.info(f"Task '{context.task_key}' output successfully self-healed.")
+            # Return the corrected output
+            return healing_result
+
+        except Exception as e:
+            logger.error(f"Exception during self-healing for task '{context.task_key}': {e}")
+            result["error"] = "An exception occurred during output self-healing."
+            return result
 
 # --- END OF FILE 3.0ArchE/workflow_engine.py ---

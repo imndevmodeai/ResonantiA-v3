@@ -4,6 +4,9 @@
 # Reflects v3.0 enhancements including IAR thresholds and temporal tool defaults.
 
 import os
+import logging
+import logging.config
+import sys
 from dataclasses import dataclass, field
 from dotenv import load_dotenv
 from pathlib import Path
@@ -14,8 +17,50 @@ load_dotenv()
 # --- Project Root ---
 # Assumes the script is run from the project root.
 # Adjust if necessary, e.g., Path(__file__).parent.parent
-PROJECT_ROOT = Path(os.getcwd())
+PROJECT_ROOT = Path(__file__).parent.parent
 
+def configure_logging(log_level: str = "INFO") -> None:
+    """
+    Sets up a centralized, standardized logging configuration for the application.
+    """
+    log_dir = PROJECT_ROOT / "outputs" # CORRECTED: Was "logs"
+    log_dir.mkdir(exist_ok=True)
+    
+    LOGGING_CONFIG = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "standard": {
+                "format": "%(asctime)s - %(name)s - [%(levelname)s] - %(message)s",
+                "datefmt": "%Y-%m-%d %H:%M:%S",
+            },
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "standard",
+                "level": log_level,
+                "stream": sys.stdout,
+            },
+            "file": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "formatter": "standard",
+                "level": log_level,
+                "filename": log_dir / "arche_system.log", # This can be the main log
+                "maxBytes": 10485760,  # 10 MB
+                "backupCount": 5,
+                "encoding": "utf-8",
+            },
+        },
+        "root": {
+            "handlers": ["console", "file"],
+            "level": log_level,
+        },
+    }
+    logging.config.dictConfig(LOGGING_CONFIG)
+    logging.info("Logging configured successfully.")
+
+# --- Path Configuration ---
 @dataclass
 class PathConfig:
     """Stores all relevant paths for the ArchE system."""
@@ -61,7 +106,7 @@ class LLMConfig:
     """Configuration for Large Language Models."""
     # Switch default to Google/Gemini
     default_provider: str = "google"
-    default_model: str = "gemini-2.5-pro"
+    default_model: str = "gemini-2.0-flash-exp"
     temperature: float = 0.7
     max_tokens: int = 4096
 
@@ -87,11 +132,14 @@ LLM_PROVIDERS = {
         # Prefer GOOGLE_API_KEY; fall back to GEMINI_API_KEY for convenience
         "api_key": os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY"),
         "base_url": None,
-        "default_model": "gemini-2.5-pro",
+        "default_model": "gemini-2.0-flash-exp",
         "temperature": 0.7,
         "max_tokens": 4096
     }
 }
+
+# Legacy compatibility attributes for SPRManager
+SPR_JSON_FILE = str(PROJECT_ROOT / "knowledge_graph" / "spr_definitions_tv.json")
 
 # Legacy compatibility attributes for error_handler.py
 DEFAULT_ERROR_STRATEGY = "retry"

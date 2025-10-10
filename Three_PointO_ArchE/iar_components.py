@@ -15,6 +15,88 @@ class IARValidationResult:
     confidence: float
     resonance_score: float
 
+class IAR_Prepper:
+    """A helper class to prepare standardized IAR dictionaries."""
+    def __init__(self, action_name: str, action_inputs: Dict[str, Any]):
+        """
+        Initializes the IAR_Prepper.
+
+        Args:
+            action_name (str): The name of the action being performed.
+            action_inputs (Dict[str, Any]): The inputs provided to the action.
+        """
+        self.action_name = action_name
+        self.action_inputs = action_inputs
+        self.start_time = datetime.now()
+
+    def _get_common_fields(self) -> Dict[str, Any]:
+        """Returns fields common to all IAR responses."""
+        execution_duration = (datetime.now() - self.start_time).total_seconds()
+        return {
+            "action_name": self.action_name,
+            "inputs": self.action_inputs,
+            "timestamp": self.start_time.isoformat(),
+            "execution_duration": round(execution_duration, 4),
+            "alignment_check": {"objective_alignment": 1.0, "protocol_alignment": 1.0}, # Placeholder
+        }
+
+    def finish_with_success(
+        self, 
+        result: Dict[str, Any], 
+        confidence: float = 0.9, 
+        summary: str = "Action completed successfully."
+    ) -> Dict[str, Any]:
+        """Formats a successful IAR response."""
+        if not (0.5 <= confidence <= 1.0):
+            confidence = 0.9
+            
+        iar = self._get_common_fields()
+        iar.update({
+            "status": "Success",
+            "confidence": confidence,
+            "summary": summary,
+            "potential_issues": [],
+            "result": result,
+            "error": None,
+            "raw_output_preview": str(result)[:2000] + "..." if len(str(result)) > 2000 else str(result)
+        })
+        return iar
+
+    def finish_with_error(
+        self, 
+        error_message: str, 
+        confidence: float = 0.1
+    ) -> Dict[str, Any]:
+        """Formats a failed IAR response."""
+        if not (0.0 <= confidence < 0.5):
+            confidence = 0.1
+
+        iar = self._get_common_fields()
+        iar.update({
+            "status": "Failure",
+            "confidence": confidence,
+            "summary": f"Action failed with error: {error_message}",
+            "potential_issues": [error_message],
+            "result": None,
+            "error": error_message,
+            "raw_output_preview": f"Error: {error_message}"
+        })
+        return iar
+
+    def finish_with_skip(self, reason: str) -> Dict[str, Any]:
+        """Formats a skipped IAR response."""
+        iar = self._get_common_fields()
+        iar.update({
+            "status": "Skipped",
+            "confidence": 0.5, # Skipped tasks have neutral confidence
+            "summary": f"Action skipped: {reason}",
+            "potential_issues": [],
+            "result": {"status": "Skipped", "reason": reason},
+            "error": None,
+            "raw_output_preview": f"Skipped: {reason}"
+        })
+        return iar
+
 class IARValidator:
     """Validates IAR (Integrated Action Reflection) data structure and content."""
     

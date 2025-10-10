@@ -32,6 +32,7 @@ const Chat = () => {
   const [edges, setEdges] = useState<Edge[]>([]);
   const [message, setMessage] = useState<string>('');
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [playbookMode, setPlaybookMode] = useState(false);
   const websocket = useRef<WebSocket | null>(null);
 
   const onNodesChange = useCallback((changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)), []);
@@ -110,18 +111,62 @@ const Chat = () => {
     };
   }, [nodes]);
 
+  const generateDynamicPlaybook = async (question: string) => {
+    try {
+      const response = await fetch('/api/dynamic-playbook', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question, buildPlaybook: true }),
+      });
+
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        // Add playbook node to the graph
+        const playbookNode: Node = {
+          id: `playbook-${new Date().getTime()}`,
+          data: { label: `Generated Playbook: ${result.playbook?.name}` },
+          position: { x: 250, y: 250 },
+          style: { backgroundColor: '#10b981', color: 'white' }
+        };
+        setNodes((nds) => [...nds, playbookNode]);
+        
+        // Add system message
+        const systemEvent: VCDRichEvent = {
+          event_id: `playbook-${Date.now()}`,
+          event_type: 'system_message' as any,
+          timestamp: new Date().toISOString(),
+          phase: 'Playbook Generation',
+          title: 'Dynamic Playbook Generated',
+          description: `Generated playbook: ${result.playbook_path}`,
+        };
+        setCognitiveStream(prev => [...prev, systemEvent]);
+      }
+    } catch (error) {
+      console.error('Failed to generate playbook:', error);
+    }
+  };
+
   const sendMessage = () => {
     if (websocket.current?.readyState === WebSocket.OPEN && message) {
-      const queryPacket = {
-        type: 'query',
-        payload: message,
-      };
-      websocket.current.send(JSON.stringify(queryPacket));
+      if (playbookMode) {
+        // Generate dynamic playbook
+        generateDynamicPlaybook(message);
+      } else {
+        // Regular chat mode
+        const queryPacket = {
+          type: 'query',
+          payload: message,
+        };
+        websocket.current.send(JSON.stringify(queryPacket));
+      }
       
       const userNode: Node = {
         id: `user-${new Date().getTime()}`,
         type: 'output',
-        data: { label: `IMnDEVmode: "${message}"`},
+        data: { label: playbookMode ? `Playbook: "${message}"` : `IMnDEVmode: "${message}"`},
         position: { x: 250, y: 150}
       };
       setNodes((nds) => [nds[0], userNode]);
@@ -169,6 +214,18 @@ const Chat = () => {
               Session ID: {sessionId || 'N/A'}
               </div>
             </div>
+            <div className="mt-3">
+              <button
+                onClick={() => setPlaybookMode(!playbookMode)}
+                className={`px-4 py-2 rounded-md font-semibold transition-colors ${
+                  playbookMode 
+                    ? 'bg-green-600 text-white' 
+                    : 'bg-gray-600 text-gray-300 hover:bg-gray-500'
+                }`}
+              >
+                {playbookMode ? '🔧 Playbook Mode' : '💬 Chat Mode'}
+              </button>
+            </div>
           </div>
 
         {/* Cognitive Stream */}
@@ -183,7 +240,7 @@ const Chat = () => {
             rows={4}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Enter your directive for ArchE..."
+            placeholder={playbookMode ? "Ask a question to generate a dynamic playbook..." : "Enter your directive for ArchE..."}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -196,7 +253,7 @@ const Chat = () => {
             disabled={!isConnected || !message}
             className="w-full mt-2 p-3 bg-cyan-600 hover:bg-cyan-700 disabled:bg-gray-600 rounded-md font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-800"
           >
-            Send Directive
+{playbookMode ? 'Generate Playbook' : 'Send Directive'}
                 </button>
             </div>
           </div>

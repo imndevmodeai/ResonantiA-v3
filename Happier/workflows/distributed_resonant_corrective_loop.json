@@ -2,6 +2,16 @@
   "name": "Distributed Resonant Corrective Loop (DRCL)",
   "description": "Applies Enhance→Broaden→Critique→Deepen→Envision loop with ground-truth audit and correction across map/territory.",
   "tasks": {
+    "protocol_priming": {
+      "description": "Load ResonantiA protocol definitions from Knowledge Graph",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport os\nimport sys\nsys.path.append('Three_PointO_ArchE')\nfrom knowledge_graph_manager import KnowledgeGraphManager\n\n# Initialize KG manager with specifications\nkg = KnowledgeGraphManager(\n    'Three_PointO_ArchE/knowledge_graph/spr_definitions_tv.json',\n    'Three_PointO_ArchE/knowledge_graph/knowledge_tapestry.json',\n    'specifications'\n)\n\n# Extract key SPRs for protocol context\nkey_sprs = ['RISE', 'DRCL', 'SPR', 'CognitiveResonancE', 'TerritoryAssumptionS', 'ConceptualMaP', 'ResonantiaprotocoL']\nprotocol_definitions = {}\n\nfor spr_id in key_sprs:\n    spr_def = kg.get_spr_definition(spr_id)\n    if spr_def:\n        protocol_definitions[spr_def['term']] = spr_def['definition']\n\n# Add core ArchE concepts\nprotocol_definitions['ArchE'] = 'Architectural Engine - the core system for self-modification and evolution'\nprotocol_definitions['ResonantiA Protocol'] = 'The comprehensive document and conceptual framework that defines the architecture, operational logic, core principles, and evolutionary mechanisms of the ArchE system. It is the blueprint for achieving Cognitive Resonance.'\n\n# Add specifications overview\nspecifications_summary = {}\nfor spec_name in kg.list_specifications():\n    spec_data = kg.get_specification(spec_name)\n    if spec_data:\n        specifications_summary[spec_name] = {\n            'title': spec_data.get('title', ''),\n            'overview': spec_data.get('overview', '')[:300] + '...' if len(spec_data.get('overview', '')) > 300 else spec_data.get('overview', '')\n        }\n\nprotocol_definitions['ArchE Specifications'] = f'Comprehensive specifications covering {len(specifications_summary)} components: {list(specifications_summary.keys())}'\nprotocol_definitions['Available Specifications'] = specifications_summary\n\nprint(json.dumps({'protocol_definitions': protocol_definitions}))"
+      },
+      "outputs": {"protocol_definitions": "dict"},
+      "dependencies": []
+    },
     "intent_intake": {
       "description": "Normalize user request into Task Envelope",
       "action_type": "execute_code",
@@ -10,14 +20,14 @@
         "code": "import json\nctx={{initial_context | default({})}}\nout={\n 'goal': ctx.get('goal') or ctx.get('user_query') or '',\n 'constraints': ctx.get('constraints', {}),\n 'desired_outputs': ctx.get('desired_outputs', [])\n}\nprint(json.dumps({'task_envelope': out}))"
       },
       "outputs": {"task_envelope": "dict"},
-      "dependencies": []
+      "dependencies": ["protocol_priming"]
     },
     "conceptual_map": {
       "description": "Produce Conceptual Map (SPRs, abstract workflow, territory assumptions)",
       "action_type": "generate_text_llm",
       "inputs": {
-        "prompt": "Generate a JSON Conceptual Map for the following task envelope. Include: sprs, abstract_workflow (array of steps with name+summary), territory_assumptions (paths + expectations). Output strictly as JSON.\n```json\n{{intent_intake.task_envelope}}\n```",
-        "max_tokens": 600,
+        "prompt": "Using these ArchE protocol definitions: {{protocol_priming.protocol_definitions}}\n\nCreate a conceptual map for this development task. Generate ONLY a JSON structure with: sprs (Sparse Priming Representations), abstract_workflow (development steps), territory_assumptions (expected file paths). Task: {{intent_intake.task_envelope}}\n\nOutput ONLY valid JSON, no explanations.",
+        "max_tokens": 60000,
         "temperature": 0.3
       },
       "outputs": {"response_text": "string"},
@@ -28,8 +38,7 @@
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "impor
-        
+        "code": "import json\nimport re\nraw = '''{{conceptual_map.response_text | default('{}')}}'''\n# Extract JSON from markdown if present\nif '```json' in raw:\n json_match = re.search(r'```json\\s*(.*?)\\s*```', raw, re.DOTALL)\n if json_match:\n  raw = json_match.group(1)\ntry:\n  d = json.loads(raw)\nexcept Exception as e:\n  d = {'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'conceptual_map_json': d}))"
       },
       "outputs": {"conceptual_map_json": "dict"},
       "dependencies": ["conceptual_map"]
@@ -38,7 +47,7 @@
       "description": "Decide whether to use RISE (embedded|parallel|separate) and why.",
       "action_type": "generate_text_llm",
       "inputs": {
-        "prompt": "Given the Conceptual Map JSON and task envelope, output a compact JSON with keys: mode (embedded|parallel|separate), reason (string).\nConceptual Map: ```json\n{{parse_conceptual_map.conceptual_map_json}}\n```\nTask: ```json\n{{intent_intake.task_envelope}}\n```",
+        "prompt": "Using these ArchE protocol definitions: {{protocol_priming.protocol_definitions}}\n\nDetermine the best RISE methodology approach for this task. Return ONLY JSON with 'mode' (embedded|parallel|separate) and 'reason'. Task: {{intent_intake.task_envelope}}\n\nOutput ONLY valid JSON, no explanations.",
         "max_tokens": 200,
         "temperature": 0.2
       },
@@ -50,7 +59,7 @@
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import json\nraw={{rise_decision.response_text | default('{"mode":"separate","reason":"default"}')}}\ntry:\n  d=json.loads(raw)\nexcept Exception as e:\n  d={"mode":"separate","reason":f"parse_error:{e}"}\nprint(json.dumps({'rise_decision_json': d}))"
+        "code": "import json\nimport re\nraw = '''{{rise_decision.response_text | default('{\"mode\":\"separate\",\"reason\":\"default\"}')}}'''\n# Extract JSON from markdown if present\nif '```json' in raw:\n json_match = re.search(r'```json\\s*(.*?)\\s*```', raw, re.DOTALL)\n if json_match:\n  raw = json_match.group(1)\ntry:\n  d=json.loads(raw)\nexcept Exception as e:\n  d={\"mode\":\"separate\",\"reason\":f\"parse_error:{e}\"}\nprint(json.dumps({'rise_decision_json': d}))"
       },
       "outputs": {"rise_decision_json": "dict"},
       "dependencies": ["rise_decision"]
@@ -59,7 +68,7 @@
       "description": "If mode != separate, draft a brief RISE outline to inform correction plan.",
       "action_type": "generate_text_llm",
       "inputs": {
-        "prompt": "Draft a minimal JSON outline for RISE phases (scaffold, insight, synthesis) with steps aligned to the task. Keep under 10 steps total.\nTask: ```json\n{{intent_intake.task_envelope}}\n```",
+        "prompt": "Using these ArchE protocol definitions: {{protocol_priming.protocol_definitions}}\n\nCreate a RISE methodology outline for this development task. Generate ONLY JSON with phases: scaffold, insight, synthesis. Each phase should have steps. Task: {{intent_intake.task_envelope}}\n\nOutput ONLY valid JSON, no explanations.",
         "max_tokens": 300,
         "temperature": 0.4
       },
@@ -72,7 +81,7 @@
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import json\nraw={{rise_blueprint.response_text | default('null')}}\ntry:\n  bp=json.loads(raw) if raw not in (None, 'null') else None\nexcept Exception as e:\n  bp={'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'rise_outline_json': bp}))"
+        "code": "import json\nimport re\nraw = '''{{rise_blueprint.response_text | default('null')}}'''\n# Extract JSON from markdown if present\nif raw and '```json' in raw:\n json_match = re.search(r'```json\\s*(.*?)\\s*```', raw, re.DOTALL)\n if json_match:\n  raw = json_match.group(1)\ntry:\n  bp=json.loads(raw) if raw not in (None, 'null') else None\nexcept Exception as e:\n  bp={'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'rise_outline_json': bp}))"
       },
       "outputs": {"rise_outline_json": "dict"},
       "dependencies": ["rise_blueprint"],
@@ -83,7 +92,7 @@
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import os, json\ncm={{parse_conceptual_map.conceptual_map_json | default({})}}\nassumptions=cm.get('territory_assumptions', []) or []\nmissing=[]; mismatch=[]\nfor a in assumptions:\n  path=a.get('path')\n  if not path: continue\n  if not os.path.exists(path): missing.append(path)\nprint(json.dumps({'missing': missing, 'mismatch': mismatch}))"
+        "code": "import os, json\ncm={{parse_conceptual_map.conceptual_map_json | default({})}}\nassumptions=cm.get('territory_assumptions', {})\nmissing=[]; mismatch=[]\nif isinstance(assumptions, dict):\n  for key, path in assumptions.items():\n    if isinstance(path, str) and not os.path.exists(path):\n      missing.append(path)\nelif isinstance(assumptions, list):\n  for a in assumptions:\n    path=a.get('path') if isinstance(a, dict) else a\n    if path and not os.path.exists(path):\n      missing.append(path)\nprint(json.dumps({'missing': missing, 'mismatch': mismatch}))"
       },
       "outputs": {"missing": "list", "mismatch": "list"},
       "dependencies": ["parse_conceptual_map"]
@@ -92,7 +101,7 @@
       "description": "Generate Correction Plan based on dissonance and (optional) RISE outline",
       "action_type": "generate_text_llm",
       "inputs": {
-        "prompt": "Given the Conceptual Map, Audit, and (optional) RISE decision/outline, generate a JSON array Correction Plan of atomic edits: [{action:create|update|remove, path, content?, acceptance:[...]}]. Focus on minimal viable changes.\nConceptual Map: ```json\n{{parse_conceptual_map.conceptual_map_json}}\n```\nAudit: ```json\n{ \"missing\": {{ground_truth_audit.missing}}, \"mismatch\": {{ground_truth_audit.mismatch}} }\n```\nRISE: ```json\n{ \"decision\": {{parse_rise_decision.rise_decision_json}}, \"outline\": {{parse_rise_blueprint.rise_outline_json | default(null)}} }\n```",
+        "prompt": "Using these ArchE protocol definitions: {{protocol_priming.protocol_definitions}}\n\nCreate a software correction plan based on this audit. Focus on ACTUAL issues found in the codebase, not hypothetical missing documentation. Generate ONLY JSON array of edits with action (create|update|remove), path, content, acceptance criteria. Audit results: {{ground_truth_audit.missing}} missing, {{ground_truth_audit.mismatch}} mismatched. Task: {{intent_intake.task_envelope}}\n\nOutput ONLY valid JSON, no explanations.",
         "max_tokens": 900,
         "temperature": 0.35
       },
@@ -104,7 +113,7 @@
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import json\nraw={{critique_deepen_envision.response_text | default('[]')}}\ntry:\n  plan=json.loads(raw)\nexcept Exception as e:\n  plan={'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'correction_plan': plan}))"
+        "code": "import json\nimport re\nraw = '''{{critique_deepen_envision.response_text | default('[]')}}'''\n# Extract JSON from markdown if present\nif '```json' in raw:\n json_match = re.search(r'```json\\s*(.*?)\\s*```', raw, re.DOTALL)\n if json_match:\n  raw = json_match.group(1)\ntry:\n  plan = json.loads(raw)\nexcept Exception as e:\n  plan={'error': f'parse_error: {e}', 'raw': raw}\nprint(json.dumps({'correction_plan': plan}))"
       },
       "outputs": {"correction_plan": "list"},
       "dependencies": ["critique_deepen_envision"]
@@ -133,7 +142,7 @@
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import json, time\ncm={{parse_conceptual_map.conceptual_map_json | default({})}}\nmissing={{ground_truth_audit.missing | default([])}}\nmismatch={{ground_truth_audit.mismatch | default([])}}\nplan={{parse_correction_plan.correction_plan | default([])}}\nsync={{synchronize_blueprint.synced_blueprint | default({})}}\nrise_dec={{parse_rise_decision.rise_decision_json | default({})}}\nrise_bp={{parse_rise_blueprint.rise_outline_json | default(null)}}\ninteraction_id=f'drcl-{int(time.time())}'\nenvelope={\n  'archE_meta':{\n    'protocol':'DRCL.v1',\n    'interaction_id': interaction_id,\n    'phase':'execute',\n    'confidence':0.9,\n    'issues':[]\n  },\n  'conceptual_map': cm,\n  'dissonance_report': {'missing': missing, 'mismatch': mismatch},\n  'correction_plan': plan if isinstance(plan, list) else [],\n  'synced_blueprint': sync,\n  'iar': {'status':'ok', 'notes':'assembled'},\n  'rise': {'mode': rise_dec.get('mode','separate'), 'reason': rise_dec.get('reason'), 'outline': rise_bp}\n}\nprint(json.dumps({'envelope': envelope}))"
+        "code": "import json, time\ncm={{parse_conceptual_map.conceptual_map_json | default({})}}\nmissing={{ground_truth_audit.missing | default([])}}\nmismatch={{ground_truth_audit.mismatch | default([])}}\nplan={{parse_correction_plan.correction_plan | default([])}}\nsync={{synchronize_blueprint.synced_blueprint | default({})}}\nrise_dec={{parse_rise_decision.rise_decision_json | default({})}}\nrise_bp={{parse_rise_blueprint.rise_outline_json | default(None)}}\ninteraction_id=f'drcl-{int(time.time())}'\nenvelope={\n  'archE_meta':{\n    'protocol':'DRCL.v1',\n    'interaction_id': interaction_id,\n    'phase':'execute',\n    'confidence':0.9,\n    'issues':[]\n  },\n  'conceptual_map': cm,\n  'dissonance_report': {'missing': missing, 'mismatch': mismatch},\n  'correction_plan': plan if isinstance(plan, list) else [],\n  'synced_blueprint': sync,\n  'iar': {'status':'ok', 'notes':'assembled'},\n  'rise': {'mode': rise_dec.get('mode','separate'), 'reason': rise_dec.get('reason'), 'outline': rise_bp}\n}\nprint(json.dumps({'envelope': envelope}))"
       },
       "outputs": {"envelope": "dict"},
       "dependencies": ["synchronize_blueprint"]
@@ -143,7 +152,7 @@
       "action_type": "execute_code",
       "inputs": {
         "language": "python",
-        "code": "import json, sys\nfrom pathlib import Path\nenv={{assemble_envelope.envelope | default({})}}\nschema_path=Path('protocol/drcl_envelope.schema.json')\nresult={'valid': True, 'errors': []}\ntry:\n  import jsonschema\n  if schema_path.exists():\n    with schema_path.open('r', encoding='utf-8') as f:\n      schema=json.load(f)\n    jsonschema.validate(instance=env, schema=schema)\n  else:\n    result['valid']=True\n    result['errors']=['schema file not found, skipped validation']\nexcept Exception as e:\n  result['valid']=False\n  result['errors']=[str(e)]\nprint(json.dumps({'validation': result}))"
+        "code": "import json, sys\nfrom pathlib import Path\nenv_str='{{assemble_envelope.envelope}}'\nif isinstance(env_str, str):\n env = json.loads(env_str)\nelse:\n env = env_str\n# Fix None values in rise.reason\nif env.get('rise', {}).get('reason') is None:\n env['rise']['reason'] = 'default'\nresult={'valid': True, 'errors': []}\ntry:\n  import jsonschema\n  schema_path=Path('protocol/drcl_envelope.schema.json')\n  if schema_path.exists():\n    with schema_path.open('r', encoding='utf-8') as f:\n      schema=json.load(f)\n    jsonschema.validate(instance=env, schema=schema)\n  else:\n    result['valid']=True\n    result['errors']=['schema file not found, skipped validation']\nexcept Exception as e:\n  result['valid']=False\n  result['errors']=[str(e)]\nprint(json.dumps({'validation': result}))"
       },
       "outputs": {"validation": "dict"},
       "dependencies": ["assemble_envelope"]

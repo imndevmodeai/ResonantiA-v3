@@ -51,10 +51,12 @@ class ResonantiAMaestro:
     """
     
     def __init__(self, workflow_engine: Any, 
+                 rise_orchestrator: Any, # Added
                  llm_provider: Optional[Any] = None, 
                  spr_manager: Optional[Any] = None,
                  search_tool: Optional[Any] = None):
         self.workflow_engine = workflow_engine
+        self.rise_orchestrator = rise_orchestrator # Added
         self.llm_provider = llm_provider
         self.spr_manager = spr_manager
         self.search_tool = search_tool
@@ -628,6 +630,22 @@ class ResonantiAMaestro:
         """
         Weave a response using progressive enhancement and tool orchestration
         """
+        # Check for full RISE workflow trigger
+        if "fullriseanalysis" in query.lower():
+            logger.info("Full RISE workflow triggered by Maestro.")
+            if self.rise_orchestrator:
+                rise_result = self.rise_orchestrator.run_rise_workflow(query)
+                return {
+                    "content": json.dumps(rise_result, indent=2),
+                    "enhancement_level": "strategic",
+                    "tools_used": ["rise_orchestrator"],
+                    "knowledge_scaffold": True,
+                    "llm_enhanced": True
+                }
+            else:
+                logger.error("Maestro received a RISE trigger, but RISE orchestrator is not available.")
+                return {"error": "RISE Orchestrator not available to Maestro."}
+
         try:
             logger.info(f"ResonantiA Maestro weaving response for: {query}")
             

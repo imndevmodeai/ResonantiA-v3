@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Frontend Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .log { background: #f5f5f5; padding: 10px; border-radius: 5px; margin: 10px 0; font-family: monospace; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+        .info { background: #e3f2fd; color: #1565c0; }
+        button { padding: 10px 20px; margin: 10px 5px; font-size: 16px; }
+        input { padding: 8px; margin: 10px 5px; width: 300px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 WebSocket Frontend Test</h1>
+    <p>This test verifies WebSocket communication from the browser.</p>
+    
+    <div>
+        <button id="connectBtn">Connect</button>
+        <button id="disconnectBtn" disabled>Disconnect</button>
+        <input type="text" id="messageInput" placeholder="Enter test message" value="Hello from browser test">
+        <button id="sendBtn" disabled>Send Message</button>
+    </div>
+    
+    <div id="status" class="log info">Not connected</div>
+    <div id="logs"></div>
+
+    <script>
+        let websocket = null;
+        let messageCount = 0;
+
+        const statusDiv = document.getElementById('status');
+        const logsDiv = document.getElementById('logs');
+        const connectBtn = document.getElementById('connectBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const sendBtn = document.getElementById('sendBtn');
+        const messageInput = document.getElementById('messageInput');
+
+        function log(message, type = 'info') {
+            const logDiv = document.createElement('div');
+            logDiv.className = `log ${type}`;
+            logDiv.textContent = `${new Date().toLocaleTimeString()} - ${message}`;
+            logsDiv.appendChild(logDiv);
+            logsDiv.scrollTop = logsDiv.scrollHeight;
+            console.log(message);
+        }
+
+        function updateStatus(message, type = 'info') {
+            statusDiv.textContent = message;
+            statusDiv.className = `log ${type}`;
+        }
+
+        connectBtn.addEventListener('click', () => {
+            if (websocket) return;
+            
+            updateStatus('Connecting...', 'info');
+            log('Attempting to connect to ws://localhost:8765');
+            
+            websocket = new WebSocket('ws://localhost:8765');
+            
+            websocket.onopen = () => {
+                updateStatus('Connected ✅', 'success');
+                log('WebSocket connected successfully', 'success');
+                connectBtn.disabled = true;
+                disconnectBtn.disabled = false;
+                sendBtn.disabled = false;
+            };
+            
+            websocket.onmessage = (event) => {
+                messageCount++;
+                log(`📥 Message ${messageCount}: ${event.data}`, 'success');
+                
+                try {
+                    const parsed = JSON.parse(event.data);
+                    if (parsed.type === 'nexus_event') {
+                        log(`   🧠 Nexus event detected - topic: ${parsed.event?.topic}`, 'info');
+                    } else {
+                        log(`   💬 Chat response: ${parsed.content}`, 'info');
+                    }
+                } catch (e) {
+                    log(`   ⚠️ Non-JSON message received`, 'error');
+                }
+            };
+            
+            websocket.onclose = () => {
+                updateStatus('Disconnected 🔴', 'error');
+                log('WebSocket connection closed', 'error');
+                websocket = null;
+                connectBtn.disabled = false;
+                disconnectBtn.disabled = true;
+                sendBtn.disabled = true;
+            };
+            
+            websocket.onerror = (error) => {
+                updateStatus('Connection Error ❌', 'error');
+                log(`WebSocket error: ${error}`, 'error');
+            };
+        });
+
+        disconnectBtn.addEventListener('click', () => {
+            if (websocket) {
+                websocket.close();
+            }
+        });
+
+        sendBtn.addEventListener('click', () => {
+            if (!websocket || websocket.readyState !== WebSocket.OPEN) {
+                log('Cannot send: WebSocket not connected', 'error');
+                return;
+            }
+            
+            const message = messageInput.value.trim();
+            if (!message) {
+                log('Cannot send empty message', 'error');
+                return;
+            }
+            
+            const payload = {
+                content: message,
+                timestamp: new Date().toISOString()
+            };
+            
+            log(`📤 Sending: ${JSON.stringify(payload)}`, 'info');
+            websocket.send(JSON.stringify(payload));
+            messageInput.value = '';
+        });
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !sendBtn.disabled) {
+                sendBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
+

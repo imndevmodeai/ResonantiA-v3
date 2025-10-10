@@ -29,16 +29,47 @@ from typing import Dict, Any, List, Optional, Tuple, Callable
 from datetime import datetime
 from dataclasses import dataclass, asdict
 
-# Import existing components using absolute paths
-from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
-from Three_PointO_ArchE.spr_manager import SPRManager
-from Three_PointO_ArchE.thought_trail import ThoughtTrail
-from Three_PointO_ArchE.config import get_config
-from Three_PointO_ArchE.vetting_prompts import perform_scope_limitation_assessment, get_relevant_axioms
-from Three_PointO_ArchE.utopian_solution_synthesizer import UtopianSolutionSynthesizer
-
-
+# Configure logger first
 logger = logging.getLogger(__name__)
+
+# Import existing components with fallback handling
+try:
+    from .workflow_engine import IARCompliantWorkflowEngine
+    from .spr_manager import SPRManager
+    from .thought_trail import ThoughtTrail
+    from .config import get_config
+    from .vetting_prompts import perform_scope_limitation_assessment, get_relevant_axioms
+    from .utopian_solution_synthesizer import UtopianSolutionSynthesizer
+    from .adversary_simulator import StrategicAdversarySimulator # <-- Import the simulator
+    logger.info("✅ RISE Orchestrator: All relative imports successful")
+except ImportError as e:
+    logger.warning(f"⚠️ RISE Orchestrator: Relative imports failed ({e}), trying absolute imports")
+    try:
+        from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
+        from Three_PointO_ArchE.spr_manager import SPRManager
+        from Three_PointO_ArchE.thought_trail import ThoughtTrail
+        from Three_PointO_ArchE.config import get_config
+        from Three_PointO_ArchE.vetting_prompts import perform_scope_limitation_assessment, get_relevant_axioms
+        from Three_PointO_ArchE.utopian_solution_synthesizer import UtopianSolutionSynthesizer
+        from Three_PointO_ArchE.adversary_simulator import StrategicAdversarySimulator # <-- Import the simulator
+        logger.info("✅ RISE Orchestrator: All absolute imports successful")
+    except ImportError as e2:
+        logger.error(f"❌ RISE Orchestrator: All imports failed - {e}, {e2}")
+        # Create dummy classes to prevent crashes
+        class IARCompliantWorkflowEngine:
+            def __init__(self, *args, **kwargs): pass
+        class SPRManager:
+            def __init__(self, *args, **kwargs): pass
+        class ThoughtTrail:
+            def __init__(self, *args, **kwargs): pass
+        def get_config(): return {}
+        def perform_scope_limitation_assessment(*args): return {"error": "unavailable"}
+        def get_relevant_axioms(*args): return {}
+        class UtopianSolutionSynthesizer:
+            def __init__(self, *args, **kwargs): pass
+        class StrategicAdversarySimulator: # <-- Dummy class for fallback
+            def __init__(self, *args, **kwargs): pass
+            def run_simulation(self, *args, **kwargs): return {"error": "unavailable"}
 
 @dataclass
 class RISEState:
@@ -192,6 +223,7 @@ class RISE_Orchestrator:
         logger.info(f"🧠 SPR Manager: {type(self.spr_manager).__name__}")
         logger.info(f"📝 Thought Trail: {type(self.thought_trail).__name__}")
         self.synergistic_fusion_enabled = perform_scope_limitation_assessment is not None
+        self.adversary_simulator = StrategicAdversarySimulator() # <-- Instantiate the simulator
 
     def _init_rise_state(self, problem_description: str) -> RISEState:
         """Initializes a new RISEState object for a workflow run."""
@@ -617,6 +649,17 @@ class RISE_Orchestrator:
             phase_d_result = self._execute_phase_d(rise_state, code_executor_timeout)
             rise_state.utopian_trust_packet = phase_d_result.get('utopian_trust_packet')
             
+            # --- ADVERSARIAL ANALYSIS INJECTION ---
+            adversarial_analysis = {}
+            if rise_state.final_strategy:
+                logger.info("🛡️  Initiating Adversarial Simulation on final strategy...")
+                self.emit_sirc_event("Adversarial_Simulation", "Red-teaming final strategy for resilience.", {"session_id": session_id})
+                adversarial_analysis = self.adversary_simulator.run_simulation(
+                    strategy=rise_state.final_strategy,
+                    intensity=0.8 # High intensity for final vetting
+                )
+                logger.info(f"🛡️  Adversarial Simulation complete. Resilience Score: {adversarial_analysis.get('resilience_score')}")
+            
             # Final result assembly
             end_time = datetime.utcnow()
             total_duration = (end_time - start_time).total_seconds()
@@ -628,6 +671,7 @@ class RISE_Orchestrator:
                 'execution_status': 'completed',
                 'total_duration': total_duration,
                 'final_strategy': rise_state.final_strategy,
+                'adversarial_analysis': adversarial_analysis, # <-- Add analysis to results
                 'utopian_trust_packet': rise_state.utopian_trust_packet,
                 'execution_metrics': rise_state.execution_metrics,
             }

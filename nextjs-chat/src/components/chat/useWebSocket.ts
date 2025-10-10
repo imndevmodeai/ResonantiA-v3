@@ -1,73 +1,72 @@
 import { useState, useEffect, useCallback } from 'react';
 import { addEdge, applyNodeChanges, applyEdgeChanges, Node, Edge, NodeChange, EdgeChange, Connection } from 'reactflow';
 
-interface Message {
+export interface Message {
   id: string;
-  type: 'user' | 'system' | 'cli_output' | 'cli_error' | 'cli_complete' | 'welcome' | 'query_received';
+  type: 'user' | 'arche' | 'system';
+  sender: string;
   content: string;
   timestamp: string;
-  raw?: any;
+}
+
+export interface LogEntry {
+  id: string;
+  timestamp: string;
+  content: string;
 }
 
 const useWebSocket = (url: string) => {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [logEntries, setLogEntries] = useState<LogEntry[]>([]);
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'error'>('disconnected');
   const [nodes, setNodes] = useState<Node[]>([
-    { id: '1', position: { x: 0, y: 0 }, data: { label: 'ArchE' } },
+    { id: '1', type: 'input', position: { x: 100, y: 100 }, data: { label: 'ArchE Core' } },
   ]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [setNodes]
+    []
   );
   const onEdgesChange = useCallback(
     (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [setEdges]
+    []
   );
   const onConnect = useCallback(
     (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
-    [setEdges]
+    []
   );
 
   const addMessage = useCallback((message: Message) => {
     setMessages((prevMessages) => [...prevMessages, message]);
   }, []);
 
-  const addNode = useCallback((label: string, type: string = 'thought') => {
-    const newNodeId = (nodes.length + 1).toString();
+  const addLogEntry = useCallback((entry: LogEntry) => {
+    setLogEntries((prevEntries) => [...prevEntries, entry]);
+  }, []);
+  
+  const addNode = useCallback((id: string, label: string, parentId: string) => {
     const newNode: Node = {
-      id: newNodeId,
-      position: { x: Math.random() * 400, y: Math.random() * 400 },
-      data: { label, type },
-      style: {
-        background: type === 'spr' ? '#ff6b6b' : '#4ecdc4',
-        color: 'white',
-        border: '2px solid #2c3e50',
-        borderRadius: '8px',
-        padding: '10px',
-        fontSize: '12px',
-        maxWidth: '200px',
-        wordWrap: 'break-word'
-      }
+      id,
+      type: 'default',
+      position: { x: Math.random() * 400 + 100, y: Math.random() * 400 + 100 },
+      data: { label },
     };
     setNodes((nds) => [...nds, newNode]);
-    
+
     const newEdge: Edge = {
-      id: `e1-${newNodeId}`,
-      source: '1',
-      target: newNodeId,
-      animated: type === 'spr',
-      style: {
-        stroke: type === 'spr' ? '#ff6b6b' : '#4ecdc4',
-        strokeWidth: 2
-      }
+      id: `e-${parentId}-${id}`,
+      source: parentId,
+      target: id,
+      animated: true,
+      style: { stroke: '#60a5fa' },
     };
     setEdges((eds) => addEdge(newEdge, eds));
-  }, [nodes.length]);
+  }, []);
 
   useEffect(() => {
+    if (!url) return;
     const ws = new WebSocket(url);
 
     ws.onopen = () => {
@@ -78,103 +77,32 @@ const useWebSocket = (url: string) => {
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        console.log('Received message:', data);
+        if (data.type !== 'nexus_event') return;
 
-        switch (data.type) {
-          case 'welcome':
-            addMessage({
-              id: Date.now().toString(),
-              type: 'system',
-              content: `🎉 ${data.message}`,
-              timestamp: data.timestamp
-            });
-            break;
+        const topic = data.event.topic;
+        const eventData = data.event.data;
 
-          case 'query_received':
-            addMessage({
-              id: Date.now().toString(),
-              type: 'system',
-              content: `🔍 Processing query: "${data.query}"`,
-              timestamp: data.timestamp
-            });
-            break;
-
-          case 'cli_output':
-            const output = data.data as string;
-            addMessage({
-              id: Date.now().toString(),
-              type: 'cli_output',
-              content: output,
-              timestamp: data.timestamp
-            });
-
-            if (output.includes('Thought Trail:') || output.includes('🧠')) {
-              const thoughtMatch = output.match(/🧠\s*(.*?)(?:\n|$)/);
-              if (thoughtMatch) {
-                addNode(thoughtMatch[1], 'thought');
-              }
-            }
-
-            if (output.includes('SPR Activation:') || output.includes('📖')) {
-              const sprMatch = output.match(/📖\s*(.*?)(?:\n|$)/);
-              if (sprMatch) {
-                addNode(sprMatch[1], 'spr');
-              }
-            }
-
-            if (output.includes('WORKFLOW') || output.includes('🎯')) {
-              const workflowMatch = output.match(/🎯\s*(.*?)(?:\n|$)/);
-              if (workflowMatch) {
-                addNode(`Workflow: ${workflowMatch[1]}`, 'workflow');
-              }
-            }
-
-            if (output.includes('EVOLUTION') || output.includes('🧠')) {
-              const evolutionMatch = output.match(/🧠\s*(.*?)(?:\n|$)/);
-              if (evolutionMatch) {
-                addNode(`Evolution: ${evolutionMatch[1]}`, 'evolution');
-              }
-            }
-            break;
-
-          case 'cli_error':
-            addMessage({
-              id: Date.now().toString(),
-              type: 'cli_error',
-              content: `❌ Error: ${data.data}`,
-              timestamp: data.timestamp
-            });
-            break;
-
-          case 'cli_complete':
-            addMessage({
-              id: Date.now().toString(),
-              type: 'system',
-              content: `✅ Command completed (exit code: ${data.exitCode})`,
-              timestamp: data.timestamp
-            });
-            break;
-
-          case 'pong':
-            break;
-
-          default:
-            addMessage({
-              id: Date.now().toString(),
-              type: 'system',
-              content: data.data || JSON.stringify(data),
-              timestamp: data.timestamp || new Date().toISOString()
-            });
-            break;
+        const chatMessage: Message = {
+            id: eventData.timestamp + Math.random(),
+            type: 'arche',
+            sender: eventData.sender,
+            content: eventData.content,
+            timestamp: eventData.timestamp,
+        };
+        addMessage(chatMessage);
+        
+        if (topic === 'thoughttrail_entry') {
+          const { task_id, action_type, timestamp } = eventData;
+          const logEntry: LogEntry = {
+            id: task_id,
+            timestamp: timestamp,
+            content: `Action: ${action_type}`,
+          };
+          addLogEntry(logEntry);
+          addNode(task_id, action_type, '1'); // Correctly connect to the root node '1'
         }
       } catch (error) {
-        const plainMessage = event.data as string;
-        addMessage({
-          id: Date.now().toString(),
-          type: 'system',
-          content: plainMessage,
-          timestamp: new Date().toISOString()
-        });
+        console.error("Failed to process WebSocket message:", error);
       }
     };
 
@@ -193,19 +121,19 @@ const useWebSocket = (url: string) => {
     return () => {
       ws.close();
     };
-  }, [url, addMessage, addNode]);
+  }, [url, addMessage, addLogEntry, addNode]);
 
   const sendMessage = (message: string) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
-      const queryMessage = {
-        type: 'query',
-        data: message,
-        timestamp: new Date().toISOString()
+      const formattedMessage = {
+          content: message,
+          timestamp: new Date().toISOString()
       };
-      socket.send(JSON.stringify(queryMessage));
+      socket.send(JSON.stringify(formattedMessage));
       addMessage({
-        id: Date.now().toString(),
+        id: new Date().toISOString(),
         type: 'user',
+        sender: 'user',
         content: message,
         timestamp: new Date().toISOString()
       });
@@ -220,7 +148,8 @@ const useWebSocket = (url: string) => {
     onNodesChange, 
     onEdgesChange, 
     onConnect,
-    connectionStatus 
+    connectionStatus,
+    logEntries
   };
 };
 

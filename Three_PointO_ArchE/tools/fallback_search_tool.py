@@ -26,7 +26,7 @@ class FallbackSearchTool:
             "average_response_time": 0.0
         }
     
-    def search(self, query: str, engine: str = "duckduckgo", debug: bool = False) -> Dict[str, Any]:
+    def search(self, query: str, engine: str = "duckduckgo", **kwargs) -> Dict[str, Any]:
         """
         Perform a web search using HTTP requests.
         

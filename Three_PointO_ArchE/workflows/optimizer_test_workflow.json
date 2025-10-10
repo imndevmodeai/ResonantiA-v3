@@ -1,0 +1,30 @@
+{
+  "name": "Optimizer_Test_Workflow",
+  "tasks": {
+    "A_fetch_user_data": {
+      "action_type": "display_output",
+      "description": "Simulates fetching user data.",
+      "inputs": {
+        "message": "Fetched user data for user_id 123"
+      }
+    },
+    "B_fetch_product_data": {
+      "action_type": "display_output",
+      "description": "Simulates fetching product data.",
+      "inputs": {
+        "message": "Fetched product data for product_id 456"
+      }
+    },
+    "C_generate_report": {
+      "action_type": "display_output",
+      "description": "Generates a report using data from A and B.",
+      "inputs": {
+        "message": "Generated report using '{{ A_fetch_user_data.output }}' and '{{ B_fetch_product_data.output }}'"
+      }
+    }
+  },
+  "dependencies": {
+    "C_generate_report": ["A_fetch_user_data", "B_fetch_product_data"]
+  }
+}
+

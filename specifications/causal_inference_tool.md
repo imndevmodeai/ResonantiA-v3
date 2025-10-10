@@ -1,5 +1,11 @@
 # The Unseen Hand: A Chronicle of the Causal Inference Tool
 
+## Overview
+
+The **Causal Inference Tool** is ArchE's detective for uncovering the unseen hand of causation, moving beyond mere statistical correlation to discover the true underlying causal mechanisms that govern systems. This tool answers not just "what" happened, but "*why*" it happened, untangling complex webs of interactions to find genuine threads of influence.
+
+The tool operates like a crime scene investigator through a five-phase process: securing the scene (gathering time series data), dusting for fingerprints (identifying potential relationships through statistical tests like Granger causality), analyzing trajectories (temporal causal modeling using advanced algorithms like PCMCI+), building the case (constructing a clean causal graph by eliminating spurious correlations), and presenting the final report (providing actionable understanding with time lags and causal pathways). It includes specialized capabilities for CausalLagDetectioN and provides IAR-compliant output with confidence scoring. The tool is essential for building accurate models of the world and making interventions with predictable effects.
+
 ## Part I: The Philosophical Mandate (The "Why")
 
 Correlation is not causation. This simple phrase marks the boundary between shallow observation and deep understanding. To see that two things happen together is observation. To understand that one *causes* the other is wisdom. An intelligence that cannot distinguish between the two is easily fooled, forever mistaking symptoms for diseases and coincidences for truths.
