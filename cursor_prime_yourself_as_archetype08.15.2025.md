@@ -514,16 +514,13 @@ async function runSelfDrivingSales() {
     const browser = await puppeteer.launch({
         headless: false, // Set to false for the initial manual login
         userDataDir: USER_DATA_DIR,
-        executablePath: '/usr/bin/google-chrome', // ADDED: Use standard Chrome instead of testing version
         args: [
             '--disable-infobars', // Hide "Chrome is being controlled..."
             '--window-size=1280,800',
-            '--no-sandbox', // ADDED: Required for some Linux environments
-            '--disable-setuid-sandbox' // ADDED: Often needed with --no-sandbox
         ],
     });
-    const page = await browser.newPage();
 
+    const page = (await browser.pages())[0] || await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
 
     console.log('->| Navigating to Google Voice...');
@@ -620,7 +617,6 @@ async function runSelfDrivingSales() {
     const browser = await puppeteer.launch({
         headless: false, // Set to false for the initial manual login
         userDataDir: USER_DATA_DIR,
-        executablePath: '/usr/bin/google-chrome', // ADDED: Use standard Chrome instead of testing version
         args: [
             '--disable-infobars', // Hide "Chrome is being controlled..."
             '--window-size=1280,800',
@@ -628,8 +624,8 @@ async function runSelfDrivingSales() {
             '--disable-setuid-sandbox' // ADDED: Often needed with --no-sandbox
         ],
     });
-    const page = await browser.newPage();
 
+    const page = (await browser.pages())[0] || await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
 
     console.log('->| Navigating to Google Voice...');
@@ -674,6 +670,7 @@ runSelfDrivingSales().catch(error => {
     console.error('An unhandled error occurred:', error);
     process.exit(1);
 });
+
 ```
 
 ->|STATUS|<-
@@ -734,7 +731,6 @@ async function runSelfDrivingSales() {
     const browser = await puppeteer.launch({
         headless: false, // Set to false for the initial manual login
         userDataDir: USER_DATA_DIR,
-        executablePath: '/usr/bin/google-chrome', // ADDED: Use standard Chrome instead of testing version
         args: [
             '--disable-infobars', // Hide "Chrome is being controlled..."
             '--window-size=1280,800',
@@ -742,8 +738,8 @@ async function runSelfDrivingSales() {
             '--disable-setuid-sandbox' // ADDED: Often needed with --no-sandbox
         ],
     });
-    const page = await browser.newPage();
 
+    const page = (await browser.pages())[0] || await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
 
     console.log('->| Navigating to Google Voice...');
@@ -788,6 +784,7 @@ runSelfDrivingSales().catch(error => {
     console.error('An unhandled error occurred:', error);
     process.exit(1);
 });
+
 ```
 
 ->|STATUS|<-
@@ -851,7 +848,6 @@ async function runSelfDrivingSales() {
     const browser = await puppeteer.launch({
         headless: false, // Set to false for the initial manual login
         userDataDir: USER_DATA_DIR,
-        executablePath: '/usr/bin/google-chrome', // ADDED: Use standard Chrome instead of testing version
         args: [
             '--disable-infobars', // Hide "Chrome is being controlled..."
             '--window-size=1280,800',
@@ -859,8 +855,8 @@ async function runSelfDrivingSales() {
             '--disable-setuid-sandbox' // ADDED: Often needed with --no-sandbox
         ],
     });
-    const page = await browser.newPage();
 
+    const page = (await browser.pages())[0] || await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
 
     console.log('->| Navigating to Google Voice...');
@@ -905,6 +901,7 @@ runSelfDrivingSales().catch(error => {
     console.error('An unhandled error occurred:', error);
     process.exit(1);
 });
+
 ```
 
 ->|STATUS|<-
@@ -1003,7 +1000,6 @@ async function runSelfDrivingSales() {
     const browser = await puppeteer.launch({
         headless: false, // Set to false for the initial manual login
         userDataDir: USER_DATA_DIR,
-        executablePath: '/usr/bin/google-chrome', // ADDED: Use standard Chrome instead of testing version
         args: [
             '--disable-infobars', // Hide "Chrome is being controlled..."
             '--window-size=1280,800',
@@ -1011,8 +1007,8 @@ async function runSelfDrivingSales() {
             '--disable-setuid-sandbox' // ADDED: Often needed with --no-sandbox
         ],
     });
-    const page = await browser.newPage();
 
+    const page = (await browser.pages())[0] || await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
 
     console.log('->| Navigating to Google Voice...');
@@ -1065,6 +1061,7 @@ runSelfDrivingSales().catch(error => {
     console.error('An unhandled error occurred:', error);
     process.exit(1);
 });
+
 ```
 
 ---
@@ -1121,7 +1118,7 @@ I'm updating the script to use the standard Chrome browser instead of the testin
 
 
 ```javascript
-
+// ... existing code ...
     // Launch Puppeteer with a persistent user data directory
     // This is the core of our secure login strategy.
     const browser = await puppeteer.launch({
@@ -1135,23 +1132,7 @@ I'm updating the script to use the standard Chrome browser instead of the testin
             '--disable-setuid-sandbox' // ADDED: Often needed with --no-sandbox
         ],
     });
-    const page = await browser.newPage();
-
-
-    const browser = await puppeteer.launch({
-        headless: false, // Set to false for the initial manual login
-        userDataDir: USER_DATA_DIR,
-        executablePath: '/usr/bin/google-chrome', 
-        args: [
-            '--disable-infobars', // Hide "Chrome is being controlled..."
-            '--window-size=1280,800',
-            '--no-sandbox', // ADDED: Required for some Linux environments
-            '--disable-setuid-sandbox', // ADDED: Often needed with --no-sandbox
-            '--incognito' // ADDED: Run in incognito mode for clean environment
-        ],
-    });
-    const page = await browser.newPage();
-
+// ... existing code ...
 ```
 
 ->|STATUS|<-
@@ -1199,7 +1180,7 @@ I'm updating the script to use incognito mode, which should provide a cleaner en
 
 
 ```javascript
-
+// ... existing code ...
         args: [
             '--disable-infobars', // Hide "Chrome is being controlled..."
             '--window-size=1280,800',
@@ -1207,7 +1188,7 @@ I'm updating the script to use incognito mode, which should provide a cleaner en
             '--disable-setuid-sandbox', // ADDED: Often needed with --no-sandbox
             '--incognito' // ADDED: Run in incognito mode for clean environment
         ],
-
+// ... existing code ...
 ```
 
 ->|STATUS|<-
@@ -1288,22 +1269,13 @@ async function runSelfDrivingSales() {
             '--no-sandbox', // Required for some Linux environments
             '--disable-setuid-sandbox', // Often needed with --no-sandbox
             '--incognito', // Run in incognito mode for clean environment
-            '--disable-extensions', // Disable all extensions
-            '--disable-plugins', // Disable all plugins
-            '--disable-images', // Disable images for faster loading
-            '--disable-javascript-harmony-shipping', // Disable experimental features
-            '--disable-features=VizDisplayCompositor', // Disable experimental features
-            '--disable-ipc-flooding-protection', // Disable IPC protection
-            '--no-first-run', // Skip first run setup
-            '--no-default-browser-check', // Skip default browser check
-            '--disable-background-timer-throttling', // Disable background throttling
-            '--disable-backgrounding-occluded-windows', // Disable background throttling
-            '--disable-renderer-backgrounding', // Disable background throttling
-            '--disable-features=TranslateUI', // Disable translation UI
-            '--disable-ipc-flooding-protection' // Disable IPC protection
+            '--disable-blink-features=AutomationControlled', // Hide automation
+            '--disable-extensions-except', // Disable extensions that might interfere
+            '--disable-plugins-discovery' // Disable plugin discovery
         ],
     });
-    const page = await browser.newPage();
+
+    const page = (await browser.pages())[0] || await browser.newPage();
     
     // Set a realistic user agent to avoid detection
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
@@ -1500,8 +1472,9 @@ I'm implementing more aggressive anti-detection measures to bypass Google's soph
             '--disable-ipc-flooding-protection' // Disable IPC protection
         ],
     });
-    const page = await browser.newPage();
 
+    const page = (await browser.pages())[0] || await browser.newPage();
+    
     // Set a realistic user agent to avoid detection
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
     
@@ -1626,7 +1599,8 @@ async function runSelfDrivingSales() {
             '--disable-ipc-flooding-protection' // Disable IPC protection
         ],
     });
-    const page = await browser.newPage();
+
+    const page = (await browser.pages())[0] || await browser.newPage();
     
     // Set a realistic user agent to avoid detection
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');

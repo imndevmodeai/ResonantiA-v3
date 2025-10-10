@@ -2386,7 +2386,7 @@ I will now proceed with the next component: the **RISE Orchestrator**.
 First, I need to get the allegorical explanation from the canonical file. I have already read the file. I will now perform the edit.
 
 ```markdown
-
+# ... existing code ...
  ## Part II: The Allegory of the Three Forges (The "How")
  
 -Imagine a master blacksmith tasked with forging a legendary sword. They do not simply hammer a piece of steel. They undertake a sacred, three-phase process. The RISE Orchestrator follows this same path.

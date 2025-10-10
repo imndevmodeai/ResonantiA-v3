@@ -185,7 +185,7 @@ To ensure this fix is permanent and to maintain Implementation Resonance, I will
 
 ```pip-requirements
 
-
+// ... existing code ...
 beautifulsoup4
 rich>=10.0.0
 duckduckgo-search
@@ -212,7 +212,7 @@ To complete the resonance repair, I will now add the `google-search-results` pac
 
 ```pip-requirements
 
-
+// ... existing code ...
 rich>=10.0.0
 duckduckgo-search
 google-search-results
