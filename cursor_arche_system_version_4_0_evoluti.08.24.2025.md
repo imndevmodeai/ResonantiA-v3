@@ -1160,7 +1160,7 @@ from Four_PointO_ArchE.tsp_solver.solver import TSPSolver
 
 @pytest.fixture
 def mock_gmaps_client():
-
+# ... existing code ...
 
 ```
 
@@ -9339,7 +9339,7 @@ def create_genesis_iar(generation_report: Dict[str, Any], validation_results: Di
 I will now correct this by removing the local `create_iar` function from `Four_PointO_ArchE/tools/rise_actions.py`. After that, I will re-run the validation for the specification reader.
 
 ```python
-
+# ... existing code ...
     # Define dummy classes if Mesa is not available
     Agent = object
     Model = object
@@ -9348,7 +9348,7 @@ I will now correct this by removing the local `create_iar` function from `Four_P
 def perform_causal_inference(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     """
     [V4 Implementation] Performs causal inference analysis using the DoWhy library.
-
+# ... existing code ...
 
 ```
 

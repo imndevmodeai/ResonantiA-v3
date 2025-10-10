@@ -411,7 +411,7 @@ dont make a dummy invent the fluxcoupling beacons for reral enhancing your aboil
 **Cursor**
 
 ```json
-
+// ... existing code ...
   },
   {
     "spr_id": "FluxCouplinGbeaconS",
