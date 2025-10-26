@@ -9,6 +9,7 @@ import logging
 from typing import Dict, Any, List, Optional, Union
 from .llm_providers.google import GoogleProvider
 from .llm_providers.base import LLMProviderError
+from .thought_trail import log_to_thought_trail
 
 logger = logging.getLogger(__name__)
 
@@ -26,6 +27,7 @@ class GeminiCapabilities:
         """
         self.google_provider = google_provider
 
+    @log_to_thought_trail
     def execute_code(self, script: str, language: str = "python") -> Dict[str, Any]:
         """
         Executes a code string using the Gemini API's code execution capability.
@@ -63,6 +65,7 @@ class GeminiCapabilities:
                 }
             }
 
+    @log_to_thought_trail
     def handle_files(self, file_operations: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
         Handles file operations using the Gemini API's file handling capability.
@@ -91,6 +94,7 @@ class GeminiCapabilities:
                 }
             }
 
+    @log_to_thought_trail
     def perform_grounding(self, query: str, context_data: str) -> Optional[str]:
         """
         Performs grounding using the Gemini API.
@@ -109,6 +113,7 @@ class GeminiCapabilities:
             logger.error(f"Error performing grounding: {e}")
             return None
 
+    @log_to_thought_trail
     def call_function(self, function_name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """
         Calls a function using the Gemini API's function calling capability.
@@ -138,6 +143,7 @@ class GeminiCapabilities:
                 }
             }
 
+    @log_to_thought_trail
     def generate_structured_output(self, prompt: str, schema: Dict[str, Any]) -> Union[Dict[str, Any], List[Dict[str, Any]], None]:
         """
         Generates structured output based on a prompt and a schema using the Gemini API.

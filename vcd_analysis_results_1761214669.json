@@ -1,0 +1,179 @@
+{
+  "timestamp": "2025-10-23T06:17:49.735536",
+  "analysis_type": "comprehensive_vcd_analysis",
+  "vcd_status": {
+    "vcd_ui_available": false,
+    "vcd_bridge_connected": false,
+    "analysis_session_id": "vcd_analysis_1761214669",
+    "timestamp": "2025-10-23T06:17:49.735550",
+    "overall_status": "needs_attention"
+  },
+  "component_analysis": {
+    "vcd_ui_implementation": {
+      "status": "available",
+      "file_exists": true,
+      "file_size": 41223,
+      "has_visualizer_class": true,
+      "has_debugger_class": true,
+      "has_visualization_modes": true,
+      "capabilities": [
+        "real_time_monitoring",
+        "cognitive_resonance_visualization",
+        "temporal_dynamics_view",
+        "implementation_resonance_trace",
+        "pattern_crystallization_display",
+        "mandate_compliance_dashboard",
+        "thought_trail_visualization",
+        "spr_activation_monitoring"
+      ]
+    },
+    "vcd_bridge_server": {
+      "file_exists": true,
+      "connection_status": "connection_refused",
+      "connection_details": {
+        "status": "connection_refused",
+        "response_received": false
+      },
+      "port": 8765,
+      "host": "localhost"
+    },
+    "visualization_modes": {
+      "total_modes": 5,
+      "modes_detected": [
+        "REAL_TIME_MONITORING",
+        "COGNITIVE_RESONANCE_MAP",
+        "TEMPORAL_DYNAMICS_VIEW",
+        "IMPLEMENTATION_RESONANCE_TRACE",
+        "PATTERN_CRYSTALLIZATION_DISPLAY",
+        "MANDATE_COMPLIANCE_DASHBOARD",
+        "RISK_ASSESSMENT_VISUALIZATION",
+        "COLLECTIVE_INTELLIGENCE_NETWORK",
+        "THOUGHT_TRAIL_VISUALIZATION",
+        "SPR_ACTIVATION_MONITORING"
+      ],
+      "capabilities": {
+        "real_time_monitoring": true,
+        "cognitive_resonance_mapping": true,
+        "temporal_dynamics_analysis": true,
+        "implementation_resonance_tracing": true,
+        "pattern_crystallization_display": true,
+        "mandate_compliance_tracking": true,
+        "thought_trail_visualization": true,
+        "spr_activation_monitoring": true
+      }
+    },
+    "websocket_communication": {
+      "protocol": "WebSocket",
+      "port": 8765,
+      "host": "localhost",
+      "message_types": [
+        "handshake",
+        "query",
+        "start_analysis",
+        "thought_process",
+        "phase_start",
+        "phase_complete",
+        "cognitive_visualization_update",
+        "cognitive_insights",
+        "visualization_mode_toggled",
+        "data_stream",
+        "vetting_result",
+        "error"
+      ],
+      "connection_test": {
+        "status": "connection_refused",
+        "response_received": false
+      }
+    }
+  },
+  "integration_analysis": {
+    "ask_arche_integration": {
+      "status": "integrated",
+      "files": {
+        "ask_arche_vcd_enhanced.py": {
+          "exists": true,
+          "size": 12494
+        },
+        "ask_arche_vcd_real.py": {
+          "exists": true,
+          "size": 19177
+        },
+        "ask_arche_vcd_analysis_enhanced.py": {
+          "exists": true,
+          "size": 15991
+        }
+      },
+      "integration_type": "VCDIntegration class",
+      "capabilities": [
+        "websocket_connection",
+        "query_routing",
+        "phase_tracking",
+        "thought_process_emission",
+        "error_handling"
+      ]
+    },
+    "perception_engine_integration": {
+      "status": "integrated",
+      "file_exists": true,
+      "vcd_references": 16,
+      "vcd_emit_calls": 6,
+      "integration_points": [
+        "enhanced_web_search",
+        "enhanced_page_analysis"
+      ],
+      "event_types": [
+        "emit_web_search",
+        "emit_web_browse",
+        "emit_thought_process"
+      ]
+    },
+    "workflow_engine_integration": {
+      "status": "integrated",
+      "file_exists": true,
+      "vcd_references": 4,
+      "event_callback_references": 8,
+      "integration_type": "event_callback system",
+      "capabilities": [
+        "thought_process_step_emission",
+        "rich_vcd_event_emission",
+        "workflow_progress_tracking"
+      ]
+    },
+    "spr_definitions_integration": {
+      "status": "integrated",
+      "file_exists": true,
+      "vcd_references": 4,
+      "integration_type": "SPR definition",
+      "spr_definitions_file": "knowledge_graph/spr_definitions_tv.json"
+    }
+  },
+  "performance_metrics": {
+    "file_access_time": 6.103515625e-05,
+    "file_size": 41223,
+    "performance_rating": "excellent",
+    "memory_usage": "normal",
+    "cpu_usage": "normal",
+    "network_latency": "low"
+  },
+  "recommendations": [
+    "Implement comprehensive VCD testing suite",
+    "Add VCD performance monitoring and alerting",
+    "Create VCD usage documentation and user guide",
+    "Implement VCD configuration management",
+    "Add VCD backup and recovery procedures",
+    "Consider implementing VCD health dashboard",
+    "Add automated VCD system validation"
+  ],
+  "iar_reflection": {
+    "status": "success",
+    "confidence": 0.95,
+    "tactical_resonance": 0.92,
+    "potential_issues": [],
+    "metadata": {
+      "analysis_session_id": "vcd_analysis_1761214669",
+      "analysis_type": "comprehensive_vcd_analysis",
+      "components_analyzed": 4,
+      "integrations_analyzed": 4
+    }
+  }
+}

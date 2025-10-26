@@ -1,0 +1,44 @@
+{
+    "name": "Robust Knowledge Gathering",
+    "description": "A streamlined and resilient workflow for acquiring and synthesizing domain knowledge using the proven FallbackSearchTool.",
+    "tasks": {
+        "deconstruct_problem": {
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Analyze the following problem and deconstruct it into its core components. Identify the single, most critical domain for research. Output your analysis as a structured JSON object with two keys: 'deconstruction_text' and 'primary_domain'.\n\nPROBLEM:\nConduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between one (1) dominant male silverback gorilla and thirty (30) adult human males. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a full RISE analysis."
+            },
+            "dependencies": []
+        },
+        "acquire_domain_knowledge": {
+            "action_type": "search_web",
+            "inputs": {
+                "query": "{{deconstruct_problem.generated_text.primary_domain}} latest developments, key principles, and strategic analysis",
+                "engine": "duckduckgo" 
+            },
+            "dependencies": ["deconstruct_problem"]
+        },
+        "check_search_results": {
+            "action_type": "execute_code",
+            "inputs": {
+                "language": "python",
+                "code": "import json\n\nsearch_results_data = {{acquire_domain_knowledge.results}}\n\n# The FallbackSearchTool returns a list of dictionaries\nif isinstance(search_results_data, list) and len(search_results_data) > 0:\n    print(json.dumps({'status': 'Success', 'message': f'{len(search_results_data)} search results are valid.'}))\nelse:\n    print(json.dumps({'status': 'Failure', 'message': 'Search returned no results. Halting workflow.'}))"
+            },
+            "dependencies": ["acquire_domain_knowledge"]
+        },
+        "synthesize_knowledge": {
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Synthesize the provided search results into a concise, actionable intelligence briefing on the domain of '{{deconstruct_problem.generated_text.primary_domain}}'. Focus on the most critical insights that would inform a strategic analysis of the original problem.\n\nSEARCH RESULTS:\n{{acquire_domain_knowledge.results}}\n\nORIGINAL PROBLEM:\n{{deconstruct_problem.generated_text.deconstruction_text}}",
+                "max_tokens": 2048
+            },
+            "dependencies": ["check_search_results"]
+        },
+        "display_final_report": {
+            "action_type": "display_output",
+            "inputs": {
+                "content": "{{synthesize_knowledge.generated_text}}"
+            },
+            "dependencies": ["synthesize_knowledge"]
+        }
+    }
+}

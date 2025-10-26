@@ -179,12 +179,13 @@ class CodeExecutor:
             if script_path and os.path.exists(script_path):
                 os.remove(script_path)
 
+from Three_PointO_ArchE.iar_components import IAR_Prepper
+
 def execute_code(language: str, code: str, **kwargs) -> Dict[str, Any]:
     """
     Standalone function to execute code for the action registry.
     This provides a stateless entry point with IAR-compliant responses.
     """
-    from ..iar_components import IAR_Prepper
     
     use_sandbox = kwargs.get('use_sandbox', True)
     sandbox_method = kwargs.get('sandbox_method', 'docker')
@@ -206,7 +207,7 @@ def execute_code(language: str, code: str, **kwargs) -> Dict[str, Any]:
         try:
             # Construct the path to system_representation.py relative to this file
             current_dir = os.path.dirname(os.path.abspath(__file__))
-            lib_path = os.path.join(current_dir, '..', 'system_representation.py')
+            lib_path = os.path.abspath(os.path.join(current_dir, '..', '..', 'system_representation.py'))
             with open(lib_path, 'r') as f:
                 lib_code = f.read()
             code = lib_code + '\n\n' + code

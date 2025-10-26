@@ -27,21 +27,30 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 # Import ArchE components
 try:
-    from .llm_providers import BaseLLMProvider, OpenAIProvider, GoogleProvider
+    from .llm_providers import BaseLLMProvider, GoogleProvider
     from .action_context import ActionContext
     from .utils import create_iar
+    from .synergistic_inquiry import SynergisticInquiryOrchestrator
 except ImportError:
     try:
-        from llm_providers import BaseLLMProvider, OpenAIProvider, GoogleProvider
+        from llm_providers import BaseLLMProvider, GoogleProvider
         from action_context import ActionContext
         from utils import create_iar
+        from synergistic_inquiry import SynergisticInquiryOrchestrator
     except ImportError:
         # Fallback for standalone usage
         BaseLLMProvider = None
-        OpenAIProvider = None
         GoogleProvider = None
         ActionContext = None
-        create_iar = lambda *args, **kwargs: {"confidence": 0.5, "tactical_resonance": 0.5, "potential_issues": []}
+        SynergisticInquiryOrchestrator = None
+        create_iar = lambda **kwargs: {
+            "status": "Success",
+            "summary": "Enhanced perception engine operation completed",
+            "confidence": kwargs.get('confidence', 0.5),
+            "alignment_check": {"objective_alignment": 1.0, "protocol_alignment": 1.0},
+            "potential_issues": kwargs.get('potential_issues', []),
+            "raw_output_preview": f"{{'confidence': {kwargs.get('confidence', 0.5)}, 'tactical_resonance': {kwargs.get('tactical_resonance', 0.5)}}}"
+        }
 
 logger = logging.getLogger(__name__)
 
@@ -106,6 +115,13 @@ class EnhancedPerceptionEngine:
             'errors': [],
             'successful_navigations': 0
         }
+        # Initialize the new orchestrator only if it was imported successfully
+        if SynergisticInquiryOrchestrator:
+            self.orchestrator = SynergisticInquiryOrchestrator()
+            logger.info("EnhancedPerceptionEngine now orchestrating the Synergistic Inquiry Protocol.")
+        else:
+            self.orchestrator = None
+            logger.warning("SynergisticInquiryOrchestrator not available. EnhancedPerceptionEngine will have limited functionality.")
         # Do not initialize driver here to allow for context management
     
     def __enter__(self):
@@ -184,16 +200,27 @@ class EnhancedPerceptionEngine:
             options.add_argument('--disable-extensions')
             options.add_argument('--disable-plugins')
             options.add_argument('--disable-images')
-            options.add_argument('--disable-javascript')
+            # Removed --disable-javascript as it breaks search functionality
             options.add_argument('--disable-gpu')
             options.add_argument('--disable-software-rasterizer')
+            
+            # Timeout and connection settings
+            options.add_argument('--timeout=30000')
+            options.add_argument('--page-load-strategy=normal')
+            options.add_argument('--disable-background-timer-throttling')
+            options.add_argument('--disable-backgrounding-occluded-windows')
+            options.add_argument('--disable-renderer-backgrounding')
             
             # Window size to appear more human
             options.add_argument('--window-size=1920,1080')
             
-            # Initialize driver
+            # Initialize driver with improved timeout settings
             service = ChromeService(ChromeDriverManager().install())
             self.driver = webdriver.Chrome(service=service, options=options)
+            
+            # Set timeouts
+            self.driver.set_page_load_timeout(60)  # 60 seconds for page load
+            self.driver.implicitly_wait(10)  # 10 seconds for element finding
             
             # Execute stealth scripts
             self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
@@ -474,57 +501,501 @@ class EnhancedPerceptionEngine:
     
     def search_and_analyze(self, query: str, max_results: int = 5) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """
-        Perform intelligent web search and analyze results.
+        Executes a high-level search and analysis by invoking the
+        Synergistic Inquiry and Synthesis Protocol.
+        """
+        logger.info(f"Initiating Synergistic Inquiry for query: '{query}'")
+
+        if not self.orchestrator:
+            logger.critical("SynergisticInquiryOrchestrator is not available. Cannot perform search.")
+            error_result = {"error": "Orchestrator not initialized", "results": []}
+            error_iar = create_iar(
+                confidence=0.0,
+                tactical_resonance=0.0,
+                potential_issues=["SynergisticInquiryOrchestrator is not initialized. Check for import errors."],
+                summary="Synergistic Inquiry Protocol cannot be executed."
+            )
+            return error_result, error_iar
         
-        Args:
-            query: Search query
-            max_results: Maximum results to analyze
+        try:
+            # Execute the federated search
+            federated_results = self.orchestrator.execute_inquiry(query, max_results_per_agent=max_results)
             
-        Returns:
-            Tuple of (result_dict, iar_dict)
+            # Perform synthesis and reflection
+            synthesis_output = self.orchestrator.synthesize_and_reflect(query, federated_results)
+            
+            # Format the final output
+            final_result = {
+                "query": query,
+                "results_count": len(federated_results),
+                "results": federated_results,
+                "synthesis": synthesis_output.get('synthesis', {}),
+                "results_by_source": synthesis_output.get('synthesis', {}).get('results_by_source', {})
+            }
+            
+            iar_reflection = synthesis_output['reflection']
+            
+            # Ensure the reflection is a single dictionary
+            final_iar = {
+                "status": iar_reflection.get("status", "Unknown"),
+                "summary": iar_reflection.get("summary", "No summary provided."),
+                "confidence": iar_reflection.get("confidence", 0.0),
+                "alignment_check": {"objective_alignment": 1.0, "protocol_alignment": 1.0}, # Placeholder
+                "potential_issues": iar_reflection.get("potential_issues", []),
+                "raw_output_preview": f"Synthesized {len(federated_results)} results."
+            }
+
+            logger.info("Synergistic Inquiry Protocol completed successfully.")
+            return final_result, final_iar
+            
+        except Exception as e:
+            logger.critical(f"A critical error occurred in the Synergistic Inquiry Protocol: {e}", exc_info=True)
+            error_result = {"error": str(e), "results": []}
+            error_iar = create_iar(
+                confidence=0.1,
+                tactical_resonance=0.0,
+                potential_issues=[f"Protocol execution failed: {str(e)}"],
+                summary="A critical error occurred in the Synergistic Inquiry Protocol."
+            )
+            return error_result, error_iar
+    
+    def _http_search(self, query: str, max_results: int) -> Optional[Tuple[Dict[str, Any], Dict[str, Any]]]:
+        """
+        YouTube scraper-inspired HTTP search using multiple search engines.
+        Prioritizes reliability over complexity.
         """
         try:
-            # Construct search URL
+            import requests
+            from bs4 import BeautifulSoup
+            from urllib.parse import quote_plus
+            
+            # Try multiple search engines in order of preference
+            search_engines = [
+                {
+                    "name": "DuckDuckGo",
+                    "url": f"https://html.duckduckgo.com/html/?q={quote_plus(query)}",
+                    "selectors": ["div.result", "div[class*='result']", "a.result__a"],
+                    "title_selector": "h2.result__title a, h3.result__title a",
+                    "snippet_selector": "div.result__snippet, div[class*='snippet']"
+                },
+                {
+                    "name": "Startpage",
+                    "url": f"https://www.startpage.com/sp/search?query={quote_plus(query)}",
+                    "selectors": ["div.w-gl__result", "div[class*='result']"],
+                    "title_selector": "h3.w-gl__result-title a",
+                    "snippet_selector": "p.w-gl__description"
+                },
+                {
+                    "name": "Bing",
+                    "url": f"https://www.bing.com/search?q={quote_plus(query)}",
+                    "selectors": ["li.b_algo", "div[class*='b_algo']"],
+                    "title_selector": "h2 a",
+                    "snippet_selector": "p"
+                }
+            ]
+            
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1'
+            }
+            
+            for engine in search_engines:
+                try:
+                    logger.info(f"Trying {engine['name']} search...")
+                    
+                    response = requests.get(engine['url'], headers=headers, timeout=10)
+                    response.raise_for_status()
+                    
+                    soup = BeautifulSoup(response.text, 'html.parser')
+                    results = []
+                    
+                    # Try different selectors for this engine
+                    result_elements = []
+                    for selector in engine['selectors']:
+                        elements = soup.select(selector)
+                        if elements:
+                            result_elements = elements
+                            logger.info(f"Found {len(elements)} results using {engine['name']} selector: {selector}")
+                            break
+                    
+                    if not result_elements:
+                        logger.warning(f"No results found with {engine['name']}")
+                        continue
+                    
+                    # Extract results
+                    for element in result_elements[:max_results]:
+                        try:
+                            # Extract title and URL
+                            title_elem = element.select_one(engine['title_selector'])
+                            if not title_elem:
+                                continue
+                                
+                            title = title_elem.get_text(strip=True)
+                            url = title_elem.get('href', '')
+                            
+                            # Extract snippet
+                            snippet_elem = element.select_one(engine['snippet_selector'])
+                            snippet = snippet_elem.get_text(strip=True) if snippet_elem else ''
+                            
+                            # Clean up URL
+                            if url and not url.startswith('http'):
+                                if url.startswith('//'):
+                                    url = 'https:' + url
+                                elif url.startswith('/'):
+                                    url = 'https://' + engine['name'].lower() + '.com' + url
+                            
+                            if title and len(title) > 3:
+                                results.append({
+                                    'title': title,
+                                    'url': url,
+                                    'snippet': snippet,
+                                    'relevance_score': 0.8,  # High confidence for HTTP results
+                                    'source_credibility': 0.9,
+                                    'search_engine': engine['name']
+                                })
+                                
+                        except Exception as e:
+                            logger.warning(f"Error parsing {engine['name']} result: {e}")
+                            continue
+                    
+                    if results:
+                        result = {
+                            "query": query,
+                            "results_count": len(results),
+                            "results": results,
+                            "search_method": f"http_{engine['name'].lower()}",
+                            "search_url": engine['url']
+                        }
+                        
+                        iar = create_iar(
+                            confidence=0.8,  # High confidence for HTTP results
+                            tactical_resonance=0.8,
+                            potential_issues=[],
+                            metadata={"query": query, "results_analyzed": len(results), "method": f"http_{engine['name'].lower()}"}
+                        )
+                        
+                        logger.info(f"{engine['name']} search successful with {len(results)} results")
+                        return result, iar
+                        
+                except Exception as e:
+                    logger.warning(f"{engine['name']} search failed: {e}")
+                    continue
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"HTTP search failed: {e}")
+            return None
+
+    def _webdriver_search(self, query: str, max_results: int) -> Optional[Tuple[Dict[str, Any], Dict[str, Any]]]:
+        """
+        WebDriver search with enhanced error handling and session management.
+        """
+        try:
+            # Initialize driver with retry logic
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    if not self.driver:
+                        self._initialize_driver()
+                    
+                    if self.driver:
+                        break
+                        
+                except Exception as e:
+                    logger.warning(f"WebDriver initialization attempt {attempt + 1} failed: {e}")
+                    if attempt < max_retries - 1:
+                        time.sleep(2)
+                        continue
+                    else:
+                        return None
+            
+            if not self.driver:
+                logger.error("WebDriver initialization failed after all retries")
+                return None
+            
+            # Navigate to search
             search_query = query.replace(" ", "+")
             search_url = f"https://www.google.com/search?q={search_query}"
             
-            # Navigate to search results
+            logger.info(f"Navigating to: {search_url}")
             self.driver.get(search_url)
-            self.driver.implicitly_wait(self.timeout)
+            time.sleep(3)  # Allow page to load
             
+            # Check for blocking
             if self._is_blocked():
-                result = {"error": "Search blocked by bot detection"}
-                iar = create_iar(0.1, 0.0, ["Search bot detection triggered"])
-                return result, iar
+                logger.warning("Search blocked by bot detection")
+                return None
             
-            # Extract search results
+            # Extract results
             results = self._extract_search_results(max_results)
             
-            # Analyze results
-            analysis = self._analyze_search_results(results, query)
-            
-            result = {
-                "query": query,
-                "results_count": len(results),
-                "results": [r.__dict__ for r in results],
-                "analysis": analysis,
-                "search_url": search_url
-            }
-            
-            iar = create_iar(
-                confidence=0.8,
-                tactical_resonance=0.75,
-                potential_issues=["Results may be limited by search engine restrictions"],
-                metadata={"query": query, "results_analyzed": len(results)}
+            if results:
+                result = {
+                    "query": query,
+                    "results_count": len(results),
+                    "results": [r.__dict__ for r in results],
+                    "search_method": "webdriver_google",
+                    "search_url": search_url
+                }
+                
+                iar = create_iar(
+                    confidence=0.9,
+                    tactical_resonance=0.8,
+                    potential_issues=[],
+                    metadata={"query": query, "results_analyzed": len(results), "method": "webdriver"}
             )
             
             return result, iar
             
+            return None
+            
         except Exception as e:
-            logger.error(f"Error in search_and_analyze: {e}")
-            result = {"error": f"Search error: {str(e)}"}
-            iar = create_iar(0.2, 0.1, [f"Search error: {e}"])
+            logger.error(f"WebDriver search failed: {e}")
+            return None
+
+    def _alternative_http_search(self, query: str, max_results: int) -> Optional[Tuple[Dict[str, Any], Dict[str, Any]]]:
+        """
+        Alternative HTTP search using different approaches.
+        """
+        try:
+            import requests
+            from bs4 import BeautifulSoup
+            from urllib.parse import quote_plus
+            
+            # Try Brave Search API simulation
+            brave_url = f"https://search.brave.com/search?q={quote_plus(query)}"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            }
+            
+            response = requests.get(brave_url, headers=headers, timeout=10)
+            response.raise_for_status()
+            
+            soup = BeautifulSoup(response.text, 'html.parser')
+            results = []
+            
+            # Extract Brave results
+            result_elements = soup.select('div[data-testid="result"]')
+            
+            for element in result_elements[:max_results]:
+                try:
+                    title_elem = element.select_one('h3 a')
+                    if not title_elem:
+                        continue
+                        
+                    title = title_elem.get_text(strip=True)
+                    url = title_elem.get('href', '')
+                    
+                    snippet_elem = element.select_one('p')
+                    snippet = snippet_elem.get_text(strip=True) if snippet_elem else ''
+                    
+                    if title and len(title) > 3:
+                        results.append({
+                            'title': title,
+                            'url': url,
+                            'snippet': snippet,
+                            'relevance_score': 0.7,
+                            'source_credibility': 0.8,
+                            'search_engine': 'Brave'
+                        })
+                        
+                except Exception as e:
+                    logger.warning(f"Error parsing Brave result: {e}")
+                    continue
+            
+            if results:
+                result = {
+                    "query": query,
+                    "results_count": len(results),
+                    "results": results,
+                    "search_method": "http_brave",
+                    "search_url": brave_url
+                }
+                
+                iar = create_iar(
+                    confidence=0.7,
+                    tactical_resonance=0.6,
+                    potential_issues=["Using alternative search engine"],
+                    metadata={"query": query, "results_analyzed": len(results), "method": "http_brave"}
+                )
+                
             return result, iar
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Alternative HTTP search failed: {e}")
+            return None
+
+    def _mock_search_fallback(self, query: str, max_results: int) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+        """
+        Mock search fallback for testing when all other methods fail.
+        """
+        mock_results = [
+            {
+                'title': f'Search results for "{query}"',
+                'url': 'https://example.com/search-results',
+                'snippet': f'This is a mock result for the query: {query}. The web search encountered technical difficulties.',
+                'relevance_score': 0.5,
+                'source_credibility': 0.6,
+                'search_engine': 'Mock'
+            }
+        ]
+        
+        result = {
+            "query": query,
+            "results_count": len(mock_results),
+            "results": mock_results,
+            "search_method": "mock_fallback",
+            "search_url": "fallback://mock"
+        }
+        
+        iar = create_iar(
+            confidence=0.3,  # Very low confidence for mock results
+            tactical_resonance=0.2,
+            potential_issues=["Using mock fallback results", "All search methods failed"],
+            metadata={"query": query, "results_analyzed": len(mock_results), "method": "mock_fallback"}
+        )
+        
+        return result, iar
+
+    def _fallback_search(self, query: str, max_results: int) -> Optional[Tuple[Dict[str, Any], Dict[str, Any]]]:
+        """Fallback search using HTTP requests when WebDriver fails."""
+        try:
+            import requests
+            from bs4 import BeautifulSoup
+            from urllib.parse import quote_plus
+            
+            # Use DuckDuckGo for fallback (no CAPTCHA issues)
+            search_url = f"https://html.duckduckgo.com/html/?q={quote_plus(query)}"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            }
+            
+            response = requests.get(search_url, headers=headers, timeout=15)
+            response.raise_for_status()
+            
+            soup = BeautifulSoup(response.text, 'html.parser')
+            results = []
+            
+            # Extract DuckDuckGo results - try multiple selectors
+            result_elements = []
+            
+            # Try different selectors for DuckDuckGo results
+            selectors = [
+                'div.result',
+                'div[class*="result"]',
+                'div.web-result',
+                'div[class*="web-result"]',
+                'a.result__a',
+                'a[class*="result"]'
+            ]
+            
+            for selector in selectors:
+                elements = soup.select(selector)
+                if elements:
+                    result_elements = elements
+                    logger.info(f"Found {len(elements)} results using selector: {selector}")
+                    break
+            
+            if not result_elements:
+                # If no results found, try to extract any links
+                result_elements = soup.find_all('a', href=True)
+                logger.info(f"No specific results found, using {len(result_elements)} links as fallback")
+            
+            for element in result_elements[:max_results]:
+                try:
+                    # Handle different element types
+                    if element.name == 'a':
+                        title_elem = element
+                        snippet_elem = element.find_next('div') or element.find_next('span')
+                    else:
+                        title_elem = element.find('a') or element.find('h2') or element.find('h3')
+                        snippet_elem = element.find('div') or element.find('span') or element.find('p')
+                    
+                    if title_elem:
+                        title = title_elem.get_text(strip=True)
+                        url = title_elem.get('href', '') if title_elem.name == 'a' else ''
+                        snippet = snippet_elem.get_text(strip=True) if snippet_elem else ''
+                        
+                        # Clean up URL if it's a relative path
+                        if url and not url.startswith('http'):
+                            if url.startswith('//'):
+                                url = 'https:' + url
+                            elif url.startswith('/'):
+                                url = 'https://duckduckgo.com' + url
+                        
+                        if title and len(title) > 3:  # Only add meaningful results
+                            results.append({
+                                'title': title,
+                                'url': url,
+                                'snippet': snippet,
+                                'relevance_score': 0.7,  # Default relevance for fallback
+                                'source_credibility': 0.8  # DuckDuckGo is reliable
+                            })
+                except Exception as e:
+                    logger.warning(f"Error parsing result element: {e}")
+                    continue
+            
+            if results:
+                result = {
+                    "query": query,
+                    "results_count": len(results),
+                    "results": results,
+                    "search_method": "fallback_http",
+                    "search_url": search_url
+                }
+                
+                iar = create_iar(
+                    confidence=0.6,  # Lower confidence for fallback
+                    tactical_resonance=0.5,
+                    potential_issues=["Using fallback HTTP search", "Results may be limited"],
+                    metadata={"query": query, "results_analyzed": len(results), "method": "fallback"}
+                )
+                
+                return result, iar
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Fallback search failed: {e}")
+            # Try a simpler fallback with mock results
+            logger.info("Attempting simple fallback with mock results")
+            try:
+                mock_results = [
+                    {
+                        'title': f'Search results for "{query}"',
+                        'url': 'https://example.com',
+                        'snippet': f'This is a fallback result for the query: {query}. The web search encountered technical difficulties.',
+                        'relevance_score': 0.5,
+                        'source_credibility': 0.6
+                    }
+                ]
+                
+                result = {
+                    "query": query,
+                    "results_count": len(mock_results),
+                    "results": mock_results,
+                    "search_method": "mock_fallback",
+                    "search_url": "fallback://mock"
+                }
+                
+                iar = create_iar(
+                    confidence=0.3,  # Very low confidence for mock results
+                    tactical_resonance=0.2,
+                    potential_issues=["Using mock fallback results", "WebDriver and HTTP search both failed"],
+                    metadata={"query": query, "results_analyzed": len(mock_results), "method": "mock_fallback"}
+                )
+                
+                return result, iar
+            except Exception as mock_error:
+                logger.error(f"Mock fallback also failed: {mock_error}")
+                return None
     
     def _extract_search_results(self, max_results: int) -> List[SearchResult]:
         """Extract structured search results from Google."""
@@ -701,11 +1172,11 @@ def enhanced_web_search(inputs: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[st
             if vcd_enabled and vcd_bridge and "error" not in result:
                 try:
                     # Extract search results for VCD
-                    search_results = result.get("search_results", [])
+                    search_results = result.get("results_by_source", {}) # Changed to results_by_source
                     formatted_results = []
                     
-                    for item in search_results:
-                        if isinstance(item, dict):
+                    for source_name, source_data in search_results.items():
+                        for item in source_data.get("results", []):
                             formatted_results.append({
                                 'title': item.get('title', ''),
                                 'url': item.get('url', ''),
@@ -840,11 +1311,12 @@ if __name__ == "__main__":
             print(f"IAR: {iar}")
             
             # Test page analysis
-            if result.get("results"):
-                first_url = result["results"][0]["url"]
-                page_result, page_iar = engine.browse_and_summarize(first_url)
-                print(f"Page Analysis: {page_result}")
-                print(f"Page IAR: {page_iar}")
+            if result.get("results_by_source"):  # Changed to results_by_source
+                first_url = result["results_by_source"].get("google", {}).get("results", [{}])[0].get("url")
+                if first_url:
+                    page_result, page_iar = engine.browse_and_summarize(first_url)
+                    print(f"Page Analysis: {page_result}")
+                    print(f"Page IAR: {page_iar}")
             
             # Print session stats
             stats = engine.get_session_stats()

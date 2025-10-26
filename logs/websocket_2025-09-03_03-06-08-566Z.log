@@ -1,0 +1,15 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-03T03:06:08.566Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-03_03-06-08-566Z.log
+❌ Error Log: logs/errors_websocket_2025-09-03_03-06-08-566Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-03_03-06-08-566Z.log
+================================================================================
+2025-09-03T03:06:08.576Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-03T03:06:08.589Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-03T03:06:08.589Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-03T03:06:08.590Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-03T03:06:09.140Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:06:09.179Z [INFO] websocket: Client connected to ArchE Cognitive Bus

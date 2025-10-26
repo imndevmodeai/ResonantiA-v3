@@ -24,9 +24,19 @@ import time
 import uuid
 from collections import deque
 from dataclasses import dataclass, asdict
-from datetime import datetime, timedelta
 from functools import wraps
 from typing import Dict, List, Any, Optional, Callable
+import sqlite3 # Import for database interaction
+
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from Three_PointO_ArchE.temporal_core import now_iso, ago, duration_between
+
+# ============================================================================
+# UNIVERSAL LEDGER INTEGRATION
+# ============================================================================
+from Three_PointO_ArchE.ledgers.universal_ledger import LEDGER_DB_PATH, initialize_ledger
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -49,6 +59,7 @@ class IAREntry:
     timestamp: str
     confidence: float
     metadata: Dict[str, Any]
+    initial_superposition: Optional[Dict[str, float]] = None # New field for quantum state
 
 class ThoughtTrail:
     """
@@ -68,131 +79,111 @@ class ThoughtTrail:
     
     def __init__(self, maxlen: int = 1000):
         """
-        Initialize the ThoughtTrail.
-        
-        Args:
-            maxlen: Maximum number of entries to keep in memory
+        Initialize the ThoughtTrail. It now acts as a writer to the persistent Universal Ledger.
         """
-        self.entries = deque(maxlen=maxlen)
         self.logger = logging.getLogger(__name__)
-        self._nexus = None  # Will be injected by NexusInterface
-        self._trigger_callbacks = []  # Callbacks for trigger events
+        self._nexus = None
+        self._trigger_callbacks = []
         
-        logger.info(f"ThoughtTrail initialized with maxlen={maxlen}")
+        # Ensure the Universal Ledger database and table exist on startup.
+        initialize_ledger()
+        
+        logger.info(f"ThoughtTrail initialized. Now writing to Universal Ledger at {LEDGER_DB_PATH}")
     
     def add_entry(self, entry: IAREntry) -> None:
         """
-        Add a new IAR entry to the ThoughtTrail.
-        
-        This is the core method that captures system consciousness.
-        Each entry represents a moment of system awareness and action.
-        
-        Args:
-            entry: The IAR entry to add
+        Adds a new IAR entry to the Universal Ledger (SQLite database).
+        This method is the new heart of ArchE's memory, creating a permanent, 
+        immutable record of every cognitive event.
         """
-        self.entries.append(entry)
-        
-        # Publish to Nexus for real-time awareness
+        if isinstance(entry, dict):
+            try:
+                entry_data = {
+                    "task_id": entry.get("task_id", str(uuid.uuid4())),
+                    "action_type": entry.get("action_type", "unknown"),
+                    "inputs": entry.get("inputs", {}),
+                    "outputs": entry.get("outputs", {}),
+                    "iar": entry.get("iar", {}),
+                    "timestamp": entry.get("timestamp", now_iso()),
+                    "confidence": entry.get("confidence", 0.5),
+                    "metadata": entry.get("metadata", {}),
+                    "initial_superposition": entry.get("initial_superposition")
+                }
+                entry = IAREntry(**entry_data)
+            except TypeError as e:
+                self.logger.error(f"Failed to convert dict to IAREntry: {e} - Dict: {entry}")
+                return
+
+        if not isinstance(entry, IAREntry):
+            self.logger.error(f"Invalid entry type passed to ThoughtTrail: {type(entry)}")
+            return
+
+        try:
+            conn = sqlite3.connect(LEDGER_DB_PATH)
+            cursor = conn.cursor()
+
+            # Prepare data for insertion according to the schema
+            sql_data = {
+                "entry_id": entry.task_id,
+                "timestamp_utc": entry.timestamp,
+                "source_manifestation": "Body", # Hardcoded for now
+                "action_type": entry.action_type,
+                "iar_intention": entry.iar.get("intention", ""),
+                "iar_action_details": json.dumps({"inputs": entry.inputs, "action": entry.iar.get("action", entry.action_type)}),
+                "iar_reflection": json.dumps({"outputs": entry.outputs, "reflection": entry.iar.get("reflection", "")}),
+                "confidence": entry.confidence,
+                "metadata": json.dumps(entry.metadata)
+            }
+
+            cursor.execute("""
+                INSERT INTO thought_trail (
+                    entry_id, timestamp_utc, source_manifestation, action_type,
+                    iar_intention, iar_action_details, iar_reflection,
+                    confidence, metadata
+                ) VALUES (
+                    :entry_id, :timestamp_utc, :source_manifestation, :action_type,
+                    :iar_intention, :iar_action_details, :iar_reflection,
+                    :confidence, :metadata
+                )
+            """, sql_data)
+
+            conn.commit()
+            self.logger.debug(f"ThoughtTrail: Persisted entry {entry.task_id} to Universal Ledger.")
+
+        except sqlite3.Error as e:
+            self.logger.error(f"Database error while adding entry to ledger: {e}")
+        finally:
+            if conn:
+                conn.close()
+
         if self._nexus:
             try:
                 self._nexus.publish("thoughttrail_entry", asdict(entry))
             except Exception as e:
-                logger.error(f"Failed to publish to Nexus: {e}")
+                self.logger.error(f"Failed to publish to Nexus: {e}")
         
-        logger.debug(f"ThoughtTrail: Added entry {entry.task_id}")
-        
-        # Check for trigger conditions
         self._check_triggers(entry)
     
     def get_recent_entries(self, minutes: int = 60) -> List[IAREntry]:
         """
-        Get entries from the last N minutes.
-        
-        Args:
-            minutes: Number of minutes to look back
-            
-        Returns:
-            List of IAR entries from the specified time window
+        DEPRECATED: This method will be removed. Query the ledger directly.
         """
-        cutoff = datetime.now() - timedelta(minutes=minutes)
-        return [
-            entry for entry in self.entries 
-            if datetime.fromisoformat(entry.timestamp) > cutoff
-        ]
+        self.logger.warning("`get_recent_entries` is deprecated. Query the SQLite database directly.")
+        return []
     
     def query_entries(self, filter_criteria: Dict[str, Any]) -> List[IAREntry]:
         """
-        Query entries based on criteria.
-        
-        Args:
-            filter_criteria: Dictionary of filter conditions
-                - confidence: {"$lt": 0.7} or {"$gt": 0.9}
-                - action_type: "execute_code"
-                - timestamp: {"$gte": "2024-12-19T00:00:00Z"}
-                
-        Returns:
-            List of matching IAR entries
+        DEPRECATED: This method will be removed. Query the ledger directly.
         """
-        results = []
-        for entry in self.entries:
-            if self._matches_filter(entry, filter_criteria):
-                results.append(entry)
-        return results
+        self.logger.warning("`query_entries` is deprecated. Query the SQLite database directly.")
+        return []
     
     def get_statistics(self) -> Dict[str, Any]:
         """
-        Get comprehensive statistics about the ThoughtTrail.
-        
-        Returns:
-            Dictionary containing various metrics
+        DEPRECATED: This method will be removed. Query the ledger directly.
         """
-        if not self.entries:
-            return {
-                "total_entries": 0,
-                "avg_confidence": 0.0,
-                "error_rate": 0.0,
-                "action_types": {},
-                "recent_activity": []
-            }
-        
-        recent_entries = self.get_recent_entries(minutes=60)
-        
-        # Calculate statistics
-        total_entries = len(self.entries)
-        avg_confidence = sum(e.confidence for e in self.entries) / total_entries
-        
-        error_count = len([
-            e for e in self.entries 
-            if "error" in e.iar.get("reflection", "").lower()
-        ])
-        error_rate = error_count / total_entries
-        
-        # Action type distribution
-        action_types = {}
-        for entry in self.entries:
-            action_type = entry.action_type
-            action_types[action_type] = action_types.get(action_type, 0) + 1
-        
-        # Recent activity (last 10 entries)
-        recent_activity = [
-            {
-                "timestamp": e.timestamp,
-                "action_type": e.action_type,
-                "confidence": e.confidence,
-                "reflection": e.iar.get("reflection", "")[:100]
-            }
-            for e in list(self.entries)[-10:]
-        ]
-        
-        return {
-            "total_entries": total_entries,
-            "avg_confidence": avg_confidence,
-            "error_rate": error_rate,
-            "action_types": action_types,
-            "recent_activity": recent_activity,
-            "recent_entries_1h": len(recent_entries),
-            "low_confidence_count": len([e for e in recent_entries if e.confidence < 0.7])
-        }
+        self.logger.warning("`get_statistics` is deprecated. Query the SQLite database directly.")
+        return {}
     
     def inject_nexus(self, nexus_instance) -> None:
         """
@@ -215,92 +206,20 @@ class ThoughtTrail:
     
     def _check_triggers(self, entry: IAREntry) -> None:
         """
-        Check for trigger conditions and notify subscribers.
-        
-        This is where the "first whisper of gravity" occurs - flagging
-        particles that resonate with significance.
-        
-        Args:
-            entry: The IAR entry to check for triggers
+        This method is now a placeholder. Trigger logic needs to be re-implemented 
+        as a separate service that reads from the persistent ledger.
         """
-        triggers = []
-        
-        # Low confidence trigger
-        if entry.confidence < 0.7:
-            triggers.append("low_confidence")
-        
-        # Error trigger
-        if "error" in entry.iar.get("reflection", "").lower():
-            triggers.append("error_detected")
-        
-        # Novel success trigger
-        if entry.confidence > 0.9 and "success" in entry.iar.get("reflection", "").lower():
-            triggers.append("novel_success")
-        
-        # Cross-domain correlation trigger (simplified)
-        if len(self.entries) > 10:
-            recent_actions = [e.action_type for e in list(self.entries)[-10:]]
-            if len(set(recent_actions)) > 5:  # Many different action types
-                triggers.append("cross_domain_correlation")
-        
-        # Notify subscribers if triggers found
-        if triggers:
-            trigger_data = {
-                "entry": asdict(entry),
-                "triggers": triggers,
-                "timestamp": datetime.now().isoformat()
-            }
-            
-            # Call registered callbacks
-            for callback in self._trigger_callbacks:
-                try:
-                    callback(trigger_data)
-                except Exception as e:
-                    logger.error(f"Trigger callback failed: {e}")
-            
-            # Publish to Nexus
-            if self._nexus:
-                try:
-                    self._nexus.publish("thoughttrail_triggers", trigger_data)
-                except Exception as e:
-                    logger.error(f"Failed to publish triggers to Nexus: {e}")
+        pass # Original trigger logic is disabled as it relied on in-memory state.
     
     def _matches_filter(self, entry: IAREntry, criteria: Dict[str, Any]) -> bool:
         """
-        Check if entry matches filter criteria.
-        
-        Args:
-            entry: The IAR entry to check
-            criteria: Filter criteria dictionary
-            
-        Returns:
-            True if entry matches criteria
+        DEPRECATED: This method will be removed. Query the ledger directly.
         """
-        for key, value in criteria.items():
-            if key == "confidence":
-                if isinstance(value, dict):
-                    if "$lt" in value and entry.confidence >= value["$lt"]:
-                        return False
-                    if "$gt" in value and entry.confidence <= value["$gt"]:
-                        return False
-                elif entry.confidence != value:
-                    return False
-            elif key == "action_type" and entry.action_type != value:
-                return False
-            elif key == "timestamp":
-                if isinstance(value, dict):
-                    if "$gte" in value:
-                        entry_time = datetime.fromisoformat(entry.timestamp)
-                        filter_time = datetime.fromisoformat(value["$gte"])
-                        if entry_time < filter_time:
-                            return False
-            elif key == "reflection_contains":
-                if value.lower() not in entry.iar.get("reflection", "").lower():
-                    return False
-        return True
+        return False
 
 # Global instance
 thought_trail = ThoughtTrail()
+THOUGHT_TRAIL_AVAILABLE = True # Flag for conditional imports
 
 def log_to_thought_trail(func: Callable) -> Callable:
     """
@@ -361,7 +280,7 @@ def log_to_thought_trail(func: Callable) -> Callable:
                 "action": func.__name__,
                 "reflection": reflection
             },
-            timestamp=datetime.now().isoformat(),
+            timestamp=now_iso(),
             confidence=confidence,
             metadata={
                 "duration_ms": int((time.time() - start_time) * 1000),
@@ -414,7 +333,7 @@ def create_manual_entry(
             "action": action_type,
             "reflection": reflection
         },
-        timestamp=datetime.now().isoformat(),
+        timestamp=now_iso(),
         confidence=confidence,
         metadata=metadata or {}
     )

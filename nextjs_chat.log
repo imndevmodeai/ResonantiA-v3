@@ -1,0 +1,84 @@
+
+> arche-visual-cognitive-debugger@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.3
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 4.3s
+ ○ Compiling / ...
+ ✓ Compiled / in 13.7s (2416 modules)
+ GET / 200 in 15376ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 3.4s (2397 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 3699ms
+ ⨯ ./src/components/events/CodeExecutionEvent.tsx
+Error: 
+  [31mx[0m Identifier cannot follow number
+   ,-[[36;1;4m/media/newbu/3626C55326C514B1/Happier/nextjs-chat/src/components/events/CodeExecutionEvent.tsx[0m:1:1]
+ [2m1[0m | 0.import React from 'react';
+   : [31;1m  ^[0m
+ [2m2[0m | import ReactMarkdown from 'react-markdown';
+ [2m3[0m | import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+ [2m4[0m | import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/events/CodeExecutionEvent.tsx
+./src/components/EventCard.tsx
+./src/components/CognitiveStream.tsx
+./src/components/Chat.tsx
+ GET / 500 in 469ms
+ ○ Compiling /_error ...
+ ⨯ ./src/components/events/CodeExecutionEvent.tsx
+Error: 
+  [31mx[0m Identifier cannot follow number
+   ,-[[36;1;4m/media/newbu/3626C55326C514B1/Happier/nextjs-chat/src/components/events/CodeExecutionEvent.tsx[0m:1:1]
+ [2m1[0m | 0.import React from 'react';
+   : [31;1m  ^[0m
+ [2m2[0m | import ReactMarkdown from 'react-markdown';
+ [2m3[0m | import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+ [2m4[0m | import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/events/CodeExecutionEvent.tsx
+./src/components/EventCard.tsx
+./src/components/CognitiveStream.tsx
+./src/components/Chat.tsx
+ GET / 500 in 9315ms
+ ⨯ ./src/components/events/CodeExecutionEvent.tsx
+Error: 
+  [31mx[0m Identifier cannot follow number
+   ,-[[36;1;4m/media/newbu/3626C55326C514B1/Happier/nextjs-chat/src/components/events/CodeExecutionEvent.tsx[0m:1:1]
+ [2m1[0m | 0.import React from 'react';
+   : [31;1m  ^[0m
+ [2m2[0m | import ReactMarkdown from 'react-markdown';
+ [2m3[0m | import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+ [2m4[0m | import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/events/CodeExecutionEvent.tsx
+./src/components/EventCard.tsx
+./src/components/CognitiveStream.tsx
+./src/components/Chat.tsx
+ GET /.well-known/appspecific/com.chrome.devtools.json 500 in 3173ms
+ ✓ Compiled /_not-found in 19.8s (2606 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 148ms
+ GET /_next/static/webpack/c54152675c39a642.webpack.hot-update.json 404 in 6403ms
+ GET / 200 in 2741ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 306ms
+ ✓ Compiled in 7.6s (2617 modules)
+ ✓ Compiled in 4.5s (2617 modules)

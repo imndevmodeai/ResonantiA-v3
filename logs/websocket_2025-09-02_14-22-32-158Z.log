@@ -1,0 +1,68 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-02T14:22:32.159Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-02_14-22-32-158Z.log
+❌ Error Log: logs/errors_websocket_2025-09-02_14-22-32-158Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-02_14-22-32-158Z.log
+================================================================================
+2025-09-02T14:22:32.165Z [WARN] websocket: Protocol modules not available
+{
+  "error": "Cannot find module '/media/newbu/3626C55326C514B1/Happier/nextjs-chat/.next/server/app/utils/iarProcessor.js'\nRequire stack:\n- /media/newbu/3626C55326C514B1/Happier/webSocketServer.js"
+}
+2025-09-02T14:22:32.173Z [INFO] websocket: Falling back to basic processing mode
+2025-09-02T14:22:32.173Z [INFO] websocket: This may be due to a missing build step. Try running "npm run build" in the nextjs-chat directory
+2025-09-02T14:22:32.173Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-02T14:22:32.174Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-02T14:22:32.174Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-02T14:22:32.902Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:32.943Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:32.967Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:32.982Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:49.326Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:22:49.328Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:22:52.146Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:22:52.150Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:22:53.426Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:53.454Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:53.593Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:22:54.947Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:54.968Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:54.993Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:22:56.868Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:22:58.864Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:23:09.668Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:23:09.668Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:23:11.455Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:23:11.473Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:23:11.484Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:23:14.886Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:24:25.864Z [INFO] websocket: Received user query
+{
+  "query": "I am the CEO of a publicly traded pharmaceutical company. We have developed a life-saving drug for a..."
+}
+2025-09-02T14:24:25.890Z [INFO] websocket: Sent query to ArchE interface: I am the CEO of a publicly traded pharmaceutical c...
+2025-09-02T14:24:25.962Z [INFO] websocket: Received response from Python server:
+{
+  "session_id": "rise_1756837465_a057dd",
+  "execution_status": "failed",
+  "error": "IARCompliantWorkflowEngine.run_workflow() got an unexpected keyword argument 'timeout'",
+  "current_phase": "B"
+}
+2025-09-02T14:33:05.831Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-02T14:33:05.836Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-02T14:33:10.841Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-09-02T14:33:10.857Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-09-02T14:33:10.883Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-09-02T14:33:10.891Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-02T14:33:10.892Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-09-02T14:33:10.898Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-02T14:33:15.898Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-09-02T14:33:15.916Z [INFO] websocket: Attempting to reconnect to ArchE persistent server

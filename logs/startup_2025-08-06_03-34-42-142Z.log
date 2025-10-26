@@ -1,0 +1,10 @@
+================================================================================
+🚀 STARTUP Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-08-06T03:34:42.143Z
+🔧 Component: startup
+📁 Main Log: logs/startup_2025-08-06_03-34-42-142Z.log
+❌ Error Log: logs/errors_startup_2025-08-06_03-34-42-142Z.log
+⚡ Performance Log: logs/performance_startup_2025-08-06_03-34-42-142Z.log
+================================================================================
+2025-08-06T03:34:42.147Z [INFO] startup: Found Python executable in virtual environment: /media/newbu/3626C55326C514B1/Happier/.venv/bin/python3

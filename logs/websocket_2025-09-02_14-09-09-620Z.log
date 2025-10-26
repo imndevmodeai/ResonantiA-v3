@@ -1,0 +1,27 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-02T14:09:09.621Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-02_14-09-09-620Z.log
+❌ Error Log: logs/errors_websocket_2025-09-02_14-09-09-620Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-02_14-09-09-620Z.log
+================================================================================
+2025-09-02T14:09:09.647Z [WARN] websocket: Protocol modules not available
+{
+  "error": "Cannot find module '/media/newbu/3626C55326C514B1/Happier/nextjs-chat/.next/server/app/utils/iarProcessor.js'\nRequire stack:\n- /media/newbu/3626C55326C514B1/Happier/webSocketServer.js"
+}
+2025-09-02T14:09:09.670Z [INFO] websocket: Falling back to basic processing mode
+2025-09-02T14:09:09.672Z [INFO] websocket: This may be due to a missing build step. Try running "npm run build" in the nextjs-chat directory
+2025-09-02T14:09:09.678Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-02T14:09:09.679Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-02T14:09:09.680Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-02T14:09:10.730Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:09:10.744Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T14:09:10.748Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:09:10.759Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T14:15:41.720Z [INFO] websocket: Received user query
+{
+  "query": "hello..."
+}
+2025-09-02T14:15:41.724Z [INFO] websocket: Processing query directly: hello...

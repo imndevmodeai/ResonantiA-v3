@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchE Webcam Streaming System</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .video-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .controls-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .video-feed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group h3 {
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(86, 171, 47, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .status-value {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎥 ArchE Webcam Streaming System</h1>
+            <p>Professional-grade webcam streaming with AI effects and multi-platform support</p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <div class="main-content">
+            <div class="video-section">
+                <h3>📹 Live Preview</h3>
+                <div class="video-container">
+                    <img id="video-feed" class="video-feed" src="/video_feed" alt="Video Feed" style="display: none;">
+                    <div id="video-placeholder" class="video-placeholder">
+                        <div>
+                            <div style="font-size: 3em; margin-bottom: 10px;">📹</div>
+                            <div>Click "Start Streaming" to begin</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button id="start-btn" class="btn btn-success">▶️ Start Streaming</button>
+                    <button id="stop-btn" class="btn btn-danger" disabled>⏹️ Stop Streaming</button>
+                </div>
+            </div>
+
+            <div class="controls-section">
+                <h3>⚙️ Configuration</h3>
+                
+                <div class="control-group">
+                    <h4>📷 Camera Settings</h4>
+                    <div class="form-group">
+                        <label for="camera-device">Camera Device:</label>
+                        <select id="camera-device">
+                            <option value="0">Default Camera</option>
+                            <option value="1">Secondary Camera</option>
+                            <option value="2">External Camera</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resolution">Resolution:</label>
+                        <select id="resolution">
+                            <option value="640x480">640x480 (SD)</option>
+                            <option value="1280x720">1280x720 (HD)</option>
+                            <option value="1920x1080">1920x1080 (Full HD)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fps">Frame Rate:</label>
+                        <select id="fps">
+                            <option value="15">15 FPS</option>
+                            <option value="30" selected>30 FPS</option>
+                            <option value="60">60 FPS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>✨ AI Effects</h4>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="background-blur">
+                            <label for="background-blur">Background Blur</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="face-beauty">
+                            <label for="face-beauty">Face Beauty Enhancement</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>📱 DroidCam Integration</h4>
+                    <div class="form-group">
+                        <label for="droidcam-ip">DroidCam IP:</label>
+                        <input type="text" id="droidcam-ip" placeholder="192.168.1.100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="droidcam-port">DroidCam Port:</label>
+                        <input type="text" id="droidcam-port" placeholder="4747">
+                    </div>
+                    
+                    <div class="button-group">
+                        <button id="connect-droidcam" class="btn btn-primary">📱 Connect DroidCam</button>
+                        <button id="disconnect-droidcam" class="btn btn-danger">❌ Disconnect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <h3>📊 System Status</h3>
+            <div class="status-item">
+                <span class="status-label">Streaming Status:</span>
+                <span id="streaming-status" class="status-value status-inactive">Inactive</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Camera Device:</span>
+                <span id="camera-status" class="status-value">Not Connected</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Resolution:</span>
+                <span id="resolution-status" class="status-value">640x480</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Frame Rate:</span>
+                <span id="fps-status" class="status-value">30 FPS</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">DroidCam:</span>
+                <span id="droidcam-status" class="status-value status-inactive">Disconnected</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Last Updated:</span>
+                <span id="last-updated" class="status-value">Never</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Socket.IO connection
+        const socket = io();
+        
+        // DOM elements
+        const videoFeed = document.getElementById('video-feed');
+        const videoPlaceholder = document.getElementById('video-placeholder');
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const connectDroidcamBtn = document.getElementById('connect-droidcam');
+        const disconnectDroidcamBtn = document.getElementById('disconnect-droidcam');
+        
+        // Status elements
+        const streamingStatus = document.getElementById('streaming-status');
+        const cameraStatus = document.getElementById('camera-status');
+        const resolutionStatus = document.getElementById('resolution-status');
+        const fpsStatus = document.getElementById('fps-status');
+        const droidcamStatus = document.getElementById('droidcam-status');
+        const lastUpdated = document.getElementById('last-updated');
+        
+        // Alert container
+        const alertContainer = document.getElementById('alert-container');
+        
+        // Current state
+        let isStreaming = false;
+        let currentConfig = {};
+        
+        // Socket event handlers
+        socket.on('connect', function() {
+            console.log('Connected to server');
+            showAlert('Connected to ArchE Webcam System', 'success');
+            socket.emit('get_status');
+        });
+        
+        socket.on('disconnect', function() {
+            console.log('Disconnected from server');
+            showAlert('Disconnected from server', 'error');
+        });
+        
+        socket.on('status_update', function(data) {
+            updateStatus(data);
+        });
+        
+        socket.on('status', function(data) {
+            console.log('Status:', data.message);
+        });
+        
+        // Event listeners
+        startBtn.addEventListener('click', startStreaming);
+        stopBtn.addEventListener('click', stopStreaming);
+        connectDroidcamBtn.addEventListener('click', connectDroidcam);
+        disconnectDroidcamBtn.addEventListener('click', disconnectDroidcam);
+        
+        // Load initial configuration
+        loadConfig();
+        
+        function loadConfig() {
+            fetch('/api/config')
+                .then(response => response.json())
+                .then(config => {
+                    currentConfig = config;
+                    updateUIFromConfig();
+                })
+                .catch(error => {
+                    console.error('Failed to load config:', error);
+                    showAlert('Failed to load configuration', 'error');
+                });
+        }
+        
+        function updateUIFromConfig() {
+            // Update camera device
+            const cameraDevice = document.getElementById('camera-device');
+            cameraDevice.value = currentConfig.camera_device || 0;
+            
+            // Update resolution
+            const resolution = document.getElementById('resolution');
+            const res = currentConfig.resolution || {width: 640, height: 480};
+            resolution.value = `${res.width}x${res.height}`;
+            
+            // Update FPS
+            const fps = document.getElementById('fps');
+            fps.value = currentConfig.fps || 30;
+            
+            // Update effects
+            const backgroundBlur = document.getElementById('background-blur');
+            const faceBeauty = document.getElementById('face-beauty');
+            backgroundBlur.checked = currentConfig.effects?.background_blur || false;
+            faceBeauty.checked = currentConfig.effects?.face_beauty || false;
+            
+            // Update DroidCam settings
+            const droidcamIp = document.getElementById('droidcam-ip');
+            const droidcamPort = document.getElementById('droidcam-port');
+            droidcamIp.value = currentConfig.droidcam_settings?.ip || '192.168.1.100';
+            droidcamPort.value = currentConfig.droidcam_settings?.port || '4747';
+        }
+        
+        function saveConfig() {
+            // Collect current form values
+            const config = {
+                camera_device: parseInt(document.getElementById('camera-device').value),
+                resolution: {
+                    width: parseInt(document.getElementById('resolution').value.split('x')[0]),
+                    height: parseInt(document.getElementById('resolution').value.split('x')[1])
+                },
+                fps: parseInt(document.getElementById('fps').value),
+                effects: {
+                    background_blur: document.getElementById('background-blur').checked,
+                    face_beauty: document.getElementById('face-beauty').checked
+                },
+                droidcam_settings: {
+                    ip: document.getElementById('droidcam-ip').value,
+                    port: document.getElementById('droidcam-port').value,
+                    auto_connect: false
+                }
+            };
+            
+            fetch('/api/config', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(config)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    currentConfig = config;
+                    showAlert('Configuration saved successfully', 'success');
+                } else {
+                    showAlert('Failed to save configuration: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to save config:', error);
+                showAlert('Failed to save configuration', 'error');
+            });
+        }
+        
+        function startStreaming() {
+            saveConfig(); // Save current configuration first
+            
+            fetch('/api/start_streaming', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    isStreaming = true;
+                    startBtn.disabled = true;
+                    stopBtn.disabled = false;
+                    videoFeed.style.display = 'block';
+                    videoPlaceholder.style.display = 'none';
+                    showAlert('Streaming started successfully', 'success');
+                } else {
+                    showAlert('Failed to start streaming: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to start streaming:', error);
+                showAlert('Failed to start streaming', 'error');
+            });
+        }
+        
+        function stopStreaming() {
+            fetch('/api/stop_streaming', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    isStreaming = false;
+                    startBtn.disabled = false;
+                    stopBtn.disabled = true;
+                    videoFeed.style.display = 'none';
+                    videoPlaceholder.style.display = 'flex';
+                    showAlert('Streaming stopped', 'info');
+                } else {
+                    showAlert('Failed to stop streaming: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to stop streaming:', error);
+                showAlert('Failed to stop streaming', 'error');
+            });
+        }
+        
+        function connectDroidcam() {
+            saveConfig(); // Save DroidCam settings first
+            
+            fetch('/api/droidcam/connect', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    droidcamStatus.textContent = 'Connected';
+                    droidcamStatus.className = 'status-value status-active';
+                    showAlert('DroidCam connected successfully', 'success');
+                } else {
+                    showAlert('Failed to connect DroidCam: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to connect DroidCam:', error);
+                showAlert('Failed to connect DroidCam', 'error');
+            });
+        }
+        
+        function disconnectDroidcam() {
+            fetch('/api/droidcam/disconnect', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    droidcamStatus.textContent = 'Disconnected';
+                    droidcamStatus.className = 'status-value status-inactive';
+                    showAlert('DroidCam disconnected', 'info');
+                } else {
+                    showAlert('Failed to disconnect DroidCam: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to disconnect DroidCam:', error);
+                showAlert('Failed to disconnect DroidCam', 'error');
+            });
+        }
+        
+        function updateStatus(data) {
+            // Update streaming status
+            if (data.is_streaming) {
+                streamingStatus.textContent = 'Active';
+                streamingStatus.className = 'status-value status-active';
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+            } else {
+                streamingStatus.textContent = 'Inactive';
+                streamingStatus.className = 'status-value status-inactive';
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+            }
+            
+            // Update other status fields
+            cameraStatus.textContent = `Device ${data.camera_device}`;
+            resolutionStatus.textContent = `${data.resolution.width}x${data.resolution.height}`;
+            fpsStatus.textContent = `${data.fps || 30} FPS`;
+            lastUpdated.textContent = new Date(data.timestamp).toLocaleTimeString();
+        }
+        
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            
+            alertContainer.appendChild(alert);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.parentNode.removeChild(alert);
+                }
+            }, 5000);
+        }
+        
+        // Auto-refresh status every 5 seconds
+        setInterval(() => {
+            socket.emit('get_status');
+        }, 5000);
+    </script>
+</body>
+</html>
+

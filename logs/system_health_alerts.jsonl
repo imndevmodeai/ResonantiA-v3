@@ -1,0 +1,1 @@
+{"alert_id": "alert_1760095978_crcs_usage_rate", "severity": "critical", "component": "crcs", "message": "CRITICAL: crcs_usage_rate is 0.00ratio, exceeding critical threshold", "timestamp": "2025-10-10T07:32:58.815662", "metrics": {"crcs_usage_rate": 0.0}, "recommended_action": "Investigate system logs for root cause"}

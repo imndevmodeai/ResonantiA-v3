@@ -1,0 +1,33 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-08-01T05:26:27.909Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-08-01_05-26-27-909Z.log
+❌ Error Log: logs/errors_websocket_2025-08-01_05-26-27-909Z.log
+⚡ Performance Log: logs/performance_websocket_2025-08-01_05-26-27-909Z.log
+================================================================================
+2025-08-01T05:26:27.919Z [INFO] websocket: ResonantiA Protocol v3.1-CA modules loaded successfully
+2025-08-01T05:26:27.923Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3013
+2025-08-01T05:26:27.923Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-08-01T05:26:27.923Z [INFO] websocket: Connect at: ws://localhost:3013
+2025-08-01T05:31:02.524Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-01T05:31:02.638Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-01T05:31:02.807Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-01T05:31:45.077Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"I am the CEO of a publicly traded pharmaceutical company. We have develop..."
+}
+2025-08-01T05:31:45.083Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"I am the CEO of a publi...
+2025-08-01T05:35:45.226Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-01T05:35:49.118Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-01T05:35:49.139Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-01T05:35:49.214Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-01T05:47:24.722Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-01T05:47:24.745Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-01T05:47:24.802Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-01T08:08:08.216Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"07-01T04:39:42&quot;,&quot;video_start&quot;:7190,&quot;start&quot;:40.0,..."
+}
+2025-08-01T08:08:08.249Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"07-01T04:39:42&quot;,&q...

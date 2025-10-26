@@ -20,6 +20,11 @@ import json
 from typing import Dict, List, Tuple, Any, Optional
 from collections import defaultdict, deque
 from datetime import datetime
+
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from .temporal_core import now_iso, format_filename, format_log, Timer
 import hashlib
 import re
 import numpy as np
@@ -88,7 +93,7 @@ class PatternEvolutionEngine:
         
         # Record query in history
         query_record = {
-            'timestamp': datetime.now().isoformat(),
+            'timestamp': now_iso(),
             'query': query,
             'pattern_signature': pattern_signature,
             'success': success,
@@ -102,7 +107,7 @@ class PatternEvolutionEngine:
         # Update pattern tracking
         if pattern_signature not in self.pattern_signatures:
             self.pattern_signatures[pattern_signature] = {
-                'first_seen': datetime.now().isoformat(),
+                'first_seen': now_iso(),
                 'occurrences': 0,
                 'success_count': 0,
                 'failure_count': 0,
@@ -621,9 +626,7 @@ class AdaptiveCognitiveOrchestrator:
         
         # Instantiate RISE orchestrator for handling high-stakes queries
         if RISE_Orchestrator is not None:
-            self.rise_orchestrator = RISE_Orchestrator(
-                event_callback=self.event_callback  # Pass the callback to RISE
-            )
+            self.rise_orchestrator = RISE_Orchestrator()
             # Hook the event callback into RISE as well
             if self.event_callback:
                 self.rise_orchestrator.event_callback = self.event_callback
@@ -735,7 +738,7 @@ class AdaptiveCognitiveOrchestrator:
             "step_id": f"aco_{step_name.lower()}_{int(time.time() * 1000)}",
             "step_name": step_name,
             "message": message,
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": now_iso(),
             "metadata": metadata
         }
         
@@ -933,7 +936,7 @@ class AdaptiveCognitiveOrchestrator:
             
             # Log evolution event
             evolution_event = {
-                'timestamp': datetime.now().isoformat(),
+                'timestamp': now_iso(),
                 'event_type': 'domain_candidate_detected',
                 'candidate_id': candidate_id,
                 'domain_name': domain_name,

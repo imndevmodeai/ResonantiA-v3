@@ -33,7 +33,7 @@ async function searchDuckDuckGo(query) {
         await page.waitForSelector('#links', { timeout: 15000 });
         
         // FOR DEBUGGING: Take a screenshot to see what the page looks like
-        await page.screenshot({ path: '/tmp/search_debug.png', fullPage: true });
+        await page.screenshot({ path: 'outputs/search_debug.png', fullPage: true });
 
         // Extract results
         const results = await page.evaluate(() => {

@@ -1,0 +1,235 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-03T03:30:01.281Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-03_03-30-01-280Z.log
+❌ Error Log: logs/errors_websocket_2025-09-03_03-30-01-280Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-03_03-30-01-280Z.log
+================================================================================
+2025-09-03T03:30:01.282Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-03T03:30:01.294Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-03T03:30:01.295Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-03T03:30:01.296Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-03T03:30:05.161Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:30:05.207Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:30:46.866Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:30:46.871Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:30:48.617Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:30:48.644Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:30:48.747Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:30:53.448Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:31:04.553Z [INFO] websocket: Received user query
+{
+  "query": "Design a comprehensive framework for transforming global education systems to prepare humanity for t..."
+}
+2025-09-03T03:31:04.577Z [INFO] websocket: Sent query to ArchE interface: Design a comprehensive framework for transforming ...
+2025-09-03T03:31:04.654Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756870264.5991352,
+  "metadata": {
+    "session_id": "rise_1756884664_078306"
+  }
+}
+2025-09-03T03:31:04.669Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756870264.6199768,
+  "metadata": {
+    "session_id": "rise_1756884664_078306"
+  }
+}
+2025-09-03T03:31:04.681Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756870264631",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T03:31:04.632861Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T03:31:04.631014Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756884664_078306",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T03:31:08.390Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-03T03:31:08.391Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-03T03:31:08.734Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756870268731",
+  "content": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: Forbidden: 403 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: Generative Language API has not been used in project 452765917022 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=452765917022 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'SERVICE_DISABLED', 'domain': 'googleapis.com', 'metadata': {'containerInfo': '452765917022', 'service': 'generativelanguage.googleapis.com', 'serviceTitle': 'Generative Language API', 'activationUrl': 'https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=452765917022', 'consumer': 'projects/452765917022'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'Generative Language API has not been used in project 452765917022 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=452765917022 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.'}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Google developers console API activation', 'url': 'https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=452765917022'}]}]))",
+  "timestamp": "2025-09-03T03:31:08.731149Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-03T03:31:08.731133Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.30000000000000004,
+      "present_accuracy": 0.3,
+      "future_projection": 0.30000000000000004,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: Forbidden: 403 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: Generative Language API has not been used in project 452765917022 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=452765917022 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'SERVICE_DISABLED', 'domain': 'googleapis.com', 'metadata': {'containerInfo': '452765917022', 'service': 'generativelanguage.googleapis.com', 'serviceTitle': 'Generative Language API', 'activationUrl': 'https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=452765917022', 'consumer': 'projects/452765917022'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'Generative Language API has not been used in project 452765917022 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=452765917022 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.'}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Google developers console API activation', 'url': 'https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=452765917022'}]}]))"
+  }
+}
+2025-09-03T03:33:41.072Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:33:41.077Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:33:52.675Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:33:52.697Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:33:52.831Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:33:55.831Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:34:37.192Z [INFO] websocket: Received user query
+{
+  "query": "Design a comprehensive framework for transforming global education systems to prepare humanity for t..."
+}
+2025-09-03T03:34:37.194Z [INFO] websocket: Sent query to ArchE interface: Design a comprehensive framework for transforming ...
+2025-09-03T03:34:37.239Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756870477.2084532,
+  "metadata": {
+    "session_id": "rise_1756884877_d0040b"
+  }
+}
+2025-09-03T03:34:37.243Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756870477.2259505,
+  "metadata": {
+    "session_id": "rise_1756884877_d0040b"
+  }
+}
+2025-09-03T03:34:37.248Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756870477232",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T03:34:37.232607Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T03:34:37.232583Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756884877_d0040b",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T03:52:15.052Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-03T03:52:15.056Z [WARN] websocket: ArchE WebSocket connection closed

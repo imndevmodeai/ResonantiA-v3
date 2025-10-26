@@ -1,0 +1,49 @@
+──────────────────────────── ArchE Query Interface ─────────────────────────────
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ Submitting Custom Query: 'Analyze our AI system and create a comprehensive   │
+│ report'                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Action 'display_output' already registered. Skipping registration.
+Action 'display_output' already registered. Skipping registration.
+Action 'perform_system_genesis_action' already registered. Skipping registration.
+Action 'run_code_linter' already registered. Skipping registration.
+Action 'run_workflow_suite' already registered. Skipping registration.
+Action 'analyze_failure' already registered. Skipping registration.
+Action 'fix_template' already registered. Skipping registration.
+Action 'fix_action' already registered. Skipping registration.
+Action 'validate_workflow' already registered. Skipping registration.
+Action 'validate_action' already registered. Skipping registration.
+Action 'self_heal_output' already registered. Skipping registration.
+Action 'for_each' already registered. Skipping registration.
+Task 'A_search_ai_developments' failed with reason 'low_confidence'. Manual intervention may be required.
+INFO: Query elevated to RISE (Resonant Insight and Strategy Engine) for strategic analysis.
+INFO: RISE is performing a deep analysis to generate a novel workflow blueprint...
+INFO: RISE has produced a strategic plan.
+->|execution|<-
+TASK: A_search_ai_developments | ACTION: web_search
+{"inputs": {"query": "AI safety ethics recent developments 2024 2025", "max_results": 10}}
+->|Results|<-
+TASK: A_search_ai_developments | ACTION: web_search | STATUS: error
+{"status": "error", "message": "'str' object has no attribute 'get'", "reflection": {"status": "Failed", "summary": "Web search failed: 'str' object has no attribute 'get'", "confidence": 0.1, "alignment_check": {"objective_alignment": 0.0, "protocol_alignment": 0.0}, "potential_issues": ["'str' object has no attribute 'get'"], "raw_output_preview": "{'status': 'error', 'message': ''str' object has no attribute 'get''}"}}
+->|execution|<-
+TASK: B_analyze_spr_definitions | ACTION: analyze_spr_definitions
+{"inputs": {"spr_file": "knowledge_graph/spr_definitions_tv.json", "analysis_type": "gap_analysis"}}
+->|Results|<-
+TASK: B_analyze_spr_definitions | ACTION: analyze_spr_definitions | STATUS: success
+{"status": "success", "analysis_results": {"total_sprs": 191, "categories": {"CognitiveCapability": ["FourdthinkinG", "ComplexsystemvisioninG", "ContextualsuggestiongeneratioN", "PredictiveproblemsolvinG", "AdvancedreasoningenginE", "PatternrecognitionmasteR", "StrategicthinkingframeworK", "AdaptivelearningsysteM", "QuantumcomputingcapabilitY", "PatternevolutioncognitivE", "EmergentdomaindetectorcognitivE", "ArchesystemcognitivE", "ArcheinstanceregistrycognitivE", "CognitivereflectioncyclecognitivE", "CognitivetoolscognitivE", "KnowledgecrystallizationsystemcognitivE", "Knowledgetapestrycognit...
+->|execution|<-
+TASK: C_evaluate_error_handling | ACTION: evaluate_error_handling
+{"inputs": {"system_components": ["workflow_engine", "action_registry", "cognitive_dispatch"]}}
+->|Results|<-
+TASK: C_evaluate_error_handling | ACTION: evaluate_error_handling | STATUS: success
+{"status": "success", "evaluation_results": {"components_analyzed": ["workflow_engine", "action_registry", "cognitive_dispatch"], "error_handling_scores": {"workflow_engine": 0.8, "action_registry": 0.8, "cognitive_dispatch": 0.8}, "recommendations": []}, "reflection": {"status": "Success", "summary": "Error handling evaluation completed for 3 components", "confidence": 0.8, "alignment_check": {"objective_alignment": 1.0, "protocol_alignment": 1.0}, "potential_issues": [], "raw_output_preview": "{'status': 'success', 'components_analyzed': 3}"}}
+->|execution|<-
+TASK: D_generate_comprehensive_report | ACTION: generate_comprehensive_report
+{"inputs": {"sources": [{"status": "error", "message": "'str' object has no attribute 'get'", "reflection": {"status": "Failed", "summary": "Web search failed: 'str' object has no attribute 'get'", "confidence": 0.1, "alignment_check": {"objective_alignment": 0.0, "protocol_alignment": 0.0}, "potential_issues": ["'str' object has no attribute 'get'"], "raw_output_preview": "{'status': 'error', 'message': ''str' object has no attribute 'get''}"}}, {"status": "success", "analysis_results": {"total_sprs": 191, "categories": {"CognitiveCapability": ["FourdthinkinG", "ComplexsystemvisioninG", "Cont...
+->|Results|<-
+TASK: D_generate_comprehensive_report | ACTION: generate_comprehensive_report | STATUS: success
+{"status": "success", "report": {"report_type": "ai_system_analysis", "executive_summary": "Comprehensive AI system analysis completed", "key_findings": ["SPR Analysis: 191 SPRs analyzed", "Error Handling: 3 components evaluated"], "recommendations": ["Enhance AI safety and ethics SPR coverage", "Improve error handling robustness", "Implement continuous monitoring systems", "Add automated testing for critical workflows"], "next_steps": ["Implement recommended SPR additions", "Enhance error handling mechanisms", "Set up monitoring dashboards", "Create automated test suites"]}, "reflection": {"s...
+Execution Complete.
+--------------------------------------------------
+──────────────────────────── Demonstration Complete ────────────────────────────
+The script has demonstrated a full, protocol-compliant query path.

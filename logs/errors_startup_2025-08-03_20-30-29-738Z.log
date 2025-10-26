@@ -1,0 +1,14 @@
+================================================================================
+🚀 STARTUP Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-08-03T20:30:29.738Z
+🔧 Component: startup
+📁 Main Log: logs/startup_2025-08-03_20-30-29-738Z.log
+❌ Error Log: logs/errors_startup_2025-08-03_20-30-29-738Z.log
+⚡ Performance Log: logs/performance_startup_2025-08-03_20-30-29-738Z.log
+================================================================================
+2025-08-03T20:30:30.257Z [ERROR] startup: FATAL: Failed to build server-side utilities. Startup aborted
+{
+  "stdout": "🔧 Starting server-side utility build process...\n⚠️  Local TypeScript compiler not found in nextjs-chat/node_modules. Falling back to global `tsc`. Please run `npm install` in `nextjs-chat` if this fails.\n🔥 Executing build command: tsc --project tsconfig.server.json\n",
+  "stderr": "/bin/sh: 1: tsc: not found\n❌ A critical error occurred during the build process.\n"
+}

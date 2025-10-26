@@ -1,0 +1,92 @@
+{
+  "sandbox": {
+    "name": "ResonantiA Protocol v3.5-GP Sandbox",
+    "version": "3.5-GP",
+    "environment": "development",
+    "isolation_mode": true,
+    "production_path": "../Three_PointO_ArchE",
+    "backup_enabled": true,
+    "rollback_enabled": true
+  },
+  "validation": {
+    "enabled": true,
+    "auto_validation": true,
+    "validation_interval": 300,
+    "thresholds": {
+      "performance_degradation": 0.05,
+      "memory_increase": 0.10,
+      "error_rate": 0.01,
+      "compatibility_score": 0.95
+    },
+    "tests": [
+      "environment_isolation",
+      "component_compatibility",
+      "performance_benchmarks",
+      "memory_usage",
+      "error_handling",
+      "data_integrity",
+      "security_isolation"
+    ]
+  },
+  "deployment": {
+    "enabled": true,
+    "staged_deployment": true,
+    "validation_required": true,
+    "backup_before_deployment": true,
+    "rollback_on_failure": true,
+    "components": {
+      "enhanced_workflow_engine.py": "workflow_engine.py",
+      "enhanced_iar_validator.py": "workflow_engine.py",
+      "enhanced_resonance_tracker.py": "workflow_engine.py"
+    }
+  },
+  "monitoring": {
+    "enabled": true,
+    "monitoring_interval": 5,
+    "data_retention": 1000,
+    "thresholds": {
+      "cpu_usage": 80.0,
+      "memory_usage": 80.0,
+      "disk_usage": 90.0,
+      "response_time": 5.0,
+      "error_rate": 0.05
+    },
+    "callbacks": {
+      "threshold_exceeded": true,
+      "performance_degradation": true,
+      "error_detected": true,
+      "system_health": true
+    }
+  },
+  "features": {
+    "genesis_protocol": {
+      "enabled": true,
+      "objective_clarity_target": 0.85,
+      "implementation_resonance_target": 0.90
+    },
+    "resonant_corrective_loop": {
+      "enabled": true,
+      "max_iterations": 5,
+      "correction_timeout": 30
+    },
+    "autonomous_orchestration": {
+      "enabled": true,
+      "decision_autonomy_level": "high",
+      "context_adaptation_enabled": true
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "file_logging": true,
+    "console_logging": true,
+    "log_file": "sandbox.log",
+    "max_log_size": "10MB",
+    "backup_count": 5
+  },
+  "security": {
+    "isolation_enforced": true,
+    "production_access_restricted": true,
+    "sandbox_only_imports": true,
+    "validation_required": true
+  }
+}

@@ -1,0 +1,25 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-02T19:56:38.623Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-02_19-56-38-623Z.log
+❌ Error Log: logs/errors_websocket_2025-09-02_19-56-38-623Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-02_19-56-38-623Z.log
+================================================================================
+2025-09-02T19:56:38.625Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-02T19:56:38.639Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-02T19:56:38.639Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-02T19:56:38.640Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-02T19:56:42.052Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T19:56:42.072Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T20:11:06.506Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T20:11:06.511Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T20:11:31.543Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T20:11:31.556Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T01:25:17.154Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T01:25:17.178Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T01:25:17.263Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T01:25:20.254Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T01:33:09.835Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-03T01:33:09.841Z [WARN] websocket: ArchE WebSocket connection closed

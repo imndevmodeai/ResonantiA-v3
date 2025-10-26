@@ -1,0 +1,9 @@
+2025-08-05 11:57:11,730 - ArchE_Combat_Analysis - INFO - ================================================================================
+2025-08-05 11:57:11,731 - ArchE_Combat_Analysis - INFO - ARCH E COMBAT ANALYSIS SESSION STARTED
+2025-08-05 11:57:11,732 - ArchE_Combat_Analysis - INFO - Session ID: 20250805_115711
+2025-08-05 11:57:11,733 - ArchE_Combat_Analysis - INFO - Log Directory: /media/newbu/3626C55326C514B1/Happier/ArchE_Combat_AnalysisarchE_combat_analysis_logs_20250805_115711
+2025-08-05 11:57:11,733 - ArchE_Combat_Analysis - INFO - ================================================================================
+2025-08-05 11:57:11,734 - ArchE_Combat_Analysis - INFO - Session metadata saved
+2025-08-05 11:57:11,736 - ArchE_Combat_Analysis - INFO - Analysis Type: 24_hour_preparation_strategy
+2025-08-05 11:57:11,736 - ArchE_Combat_Analysis - INFO - Scenario: 30_unarmed_men_vs_silverback_gorilla
+2025-08-05 11:57:11,736 - ArchE_Combat_Analysis - INFO - ArchE Tools: ['RISE_Orchestrator', 'ABM_Simulation', 'CFP_Framework']

@@ -48,7 +48,13 @@ Query arrives
     ↓
   YES → Return CRCS response (fast path)
     |
-  NO → Escalate to RISE (slow path)
+  NO → Escalate to RISE Analytical Suite (slow path)
+    ↓
+  Intelligent RISE Routing
+    ↓
+  - Genius Path (ResonantiA terms) → Playbook Orchestrator
+  - PhD-Level Path (Complexity indicators) → RISE-Enhanced Synergistic Inquiry
+  - Standard Deep Analysis Path → Standard RISE
     ↓
   RISE performs deep analysis
     ↓

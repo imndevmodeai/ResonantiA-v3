@@ -22,7 +22,7 @@ from rich.panel import Panel
 from rich.syntax import Syntax
 
 # Assume a shared location for the review packages
-REVIEW_DIR = Path(os.getenv("ARCHE_REVIEW_DIR", "/tmp/arche_review_packages"))
+REVIEW_DIR = Path(os.getenv("ARCHE_REVIEW_DIR", "outputs/arche_review_packages"))
 REVIEW_DIR.mkdir(exist_ok=True)
 
 app = typer.Typer(help="The Guardian's Scepter: A CLI for ArchE's Guardian-Points system.")
@@ -116,14 +116,14 @@ def _emit_decision_event(decision: str, insight_id: str, reason: str = None):
     that the mastermind_server is subscribed to.
     For now, it writes to a file in a directory the server can watch.
     """
-    EVENT_DIR = Path(os.getenv("ARCHE_EVENT_DIR", "/tmp/arche_events"))
+    EVENT_DIR = Path(os.getenv("ARCHE_EVENT_DIR", "outputs/arche_events"))
     EVENT_DIR.mkdir(exist_ok=True)
     
     event_file = EVENT_DIR / f"{decision}_{insight_id}.json"
     event_data = {
         "event_type": f"guardian_{decision}",
         "insight_id": insight_id,
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": now_iso(),
     }
     if reason:
         event_data["reason"] = reason
@@ -164,6 +164,11 @@ def reject_review(
 if __name__ == "__main__":
     # A quick mock for testing the CLI
     from datetime import datetime
+
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from .temporal_core import now_iso, format_filename, format_log, Timer
     
     # Create a fake review package for demonstration
     mock_insight_id = f"insight_{int(datetime.utcnow().timestamp())}"
@@ -171,7 +176,7 @@ if __name__ == "__main__":
         "hypothesis": "Mock Hypothesis: Using a cache for team data will improve performance.",
         "source": "ACO_Instinct_Formation",
         "confidence_score": 0.92,
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": now_iso(),
         "evidence": {"query_count": 500, "avg_latency_ms": 120},
         "simulation_result": {"projected_latency_ms": 15, "success_rate": "100%"},
         "proposed_solution": "Implement Redis caching for the NFLTeamDatabase.get_all_teams() method."

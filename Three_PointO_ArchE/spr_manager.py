@@ -3,6 +3,7 @@ import logging
 import re
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Set
+from .thought_trail import log_to_thought_trail
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,7 @@ class SPRManager:
         self.spr_pattern: Optional[re.Pattern] = None
         self.load_sprs()
 
+    @log_to_thought_trail
     def load_sprs(self):
         """Loads or reloads the SPR definitions from the JSON file."""
         try:
@@ -60,6 +62,7 @@ class SPRManager:
         self.spr_pattern = re.compile(pattern_str)
         logger.info(f"Compiled SPR pattern for {len(spr_keys)} keys.")
 
+    @log_to_thought_trail
     def scan_and_prime(self, text: str) -> List[Dict[str, Any]]:
         """
         Scans a given text for all occurrences of registered SPR keys and returns
@@ -75,6 +78,7 @@ class SPRManager:
         
         return [self.sprs[key] for key in sorted(list(found_sprs)) if key in self.sprs]
     
+    @log_to_thought_trail
     def detect_sprs_with_confidence(self, text: str) -> List[Dict[str, Any]]:
         """
         Enhanced SPR detection with fuzzy matching, confidence scoring, and activation levels.
@@ -201,6 +205,7 @@ class SPRManager:
             logger.error(f"Failed to save SPR file to {self.filepath}: {e}", exc_info=True)
             return False
 
+    @log_to_thought_trail
     def add_spr(self, spr_definition: Dict[str, Any], save_to_file: bool = True) -> bool:
         """
         Adds a new SPR to the manager and optionally saves the updated ledger to file.
@@ -225,6 +230,7 @@ class SPRManager:
         
         return True
 
+    @log_to_thought_trail
     def get_spr_by_id(self, spr_id: str) -> Optional[Dict[str, Any]]:
         """
         Retrieves a single SPR definition by its ID.
@@ -237,6 +243,7 @@ class SPRManager:
         """
         return self.sprs.get(spr_id)
 
+    @log_to_thought_trail
     def get_all_sprs(self) -> List[Dict[str, Any]]:
         """
         Retrieves all loaded SPR definitions.
@@ -246,6 +253,7 @@ class SPRManager:
         """
         return list(self.sprs.values())
 
+    @log_to_thought_trail
     def search_sprs(self, query: str) -> List[Dict[str, Any]]:
         """
         Searches SPR definitions for a query string in the name or description.

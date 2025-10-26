@@ -1,0 +1,47 @@
+2025-07-18 17:30:27,290 - INFO - Starting Guardian pointS format correction process
+2025-07-18 17:30:27,445 - INFO - Found 4 SPR definition files
+2025-07-18 17:30:27,446 - INFO - Processing file: ./Three_PointO_ArchE/knowledge_graph/spr_definitions_tv.json
+2025-07-18 17:30:27,446 - INFO - Created backup: backup_guardian_correction_20250718_173027/spr_definitions_tv.json
+2025-07-18 17:30:27,449 - INFO - Completed processing: ./Three_PointO_ArchE/knowledge_graph/spr_definitions_tv.json (0 corrections)
+2025-07-18 17:30:27,449 - INFO - Processing file: ./Happier_new_clone/knowledge_graph/spr_definitions_tv.json
+2025-07-18 17:30:27,449 - INFO - Created backup: backup_guardian_correction_20250718_173027/spr_definitions_tv.json
+2025-07-18 17:30:27,450 - INFO - Correcting: ArcheSysteM -> ArchesysteM
+2025-07-18 17:30:27,452 - INFO - Correcting: ComparativEfluxuaLprocessinG -> ComparativefluxualprocessinG
+2025-07-18 17:30:27,452 - INFO - Correcting: PredictivemodelinGtooL -> PredictivemodelingtooL
+2025-07-18 17:30:27,453 - INFO - Correcting: ScenarioRealismAssessmenT -> ScenariorealismassessmenT
+2025-07-18 17:30:27,454 - INFO - Correcting: ObjectiveClarificationProtocoL -> ObjectiveclarificationprotocoL
+2025-07-18 17:30:27,454 - INFO - Correcting: AmbiguityDetectioN -> AmbiguitydetectioN
+2025-07-18 17:30:27,455 - INFO - Correcting: ContextualSuggestionGeneratioN -> ContextualsuggestiongeneratioN
+2025-07-18 17:30:27,457 - INFO - Correcting: LeadingQueryFormulationN -> LeadingqueryformulatioN
+2025-07-18 17:30:27,458 - INFO - Correcting: PreferenceOverrideHandlinG -> PreferenceoverridehandlinG
+2025-07-18 17:30:27,459 - INFO - Correcting: FinalizeResonantObjective -> FinalizeresonantobjectivE
+2025-07-18 17:30:27,459 - INFO - Correcting: ResonantGratiDSouL -> ResonantgratidsouL
+2025-07-18 17:30:27,460 - INFO - Correcting: GeminiCodeExecutoR -> GeminicodeexecutoR
+2025-07-18 17:30:27,461 - INFO - Correcting: GeminiFileProcessoR -> GeminifileprocessoR
+2025-07-18 17:30:27,461 - INFO - Correcting: GroundedGeneratioN -> GroundedgeneratioN
+2025-07-18 17:30:27,462 - INFO - Correcting: GeminiFunctionCallinG -> GeminifunctioncallinG
+2025-07-18 17:30:27,462 - INFO - Correcting: StructuredOutputGeneratoR -> StructuredoutputgeneratoR
+2025-07-18 17:30:27,465 - INFO - Completed processing: ./Happier_new_clone/knowledge_graph/spr_definitions_tv.json (16 corrections)
+2025-07-18 17:30:27,466 - INFO - Processing file: ./Happier_new_clone/Three_PointO_ArchE/knowledge_graph/spr_definitions_tv.json
+2025-07-18 17:30:27,466 - INFO - Created backup: backup_guardian_correction_20250718_173027/spr_definitions_tv.json
+2025-07-18 17:30:27,468 - INFO - Completed processing: ./Happier_new_clone/Three_PointO_ArchE/knowledge_graph/spr_definitions_tv.json (0 corrections)
+2025-07-18 17:30:27,469 - INFO - Processing file: ./knowledge_graph/spr_definitions_tv.json
+2025-07-18 17:30:27,477 - INFO - Created backup: backup_guardian_correction_20250718_173027/spr_definitions_tv.json
+2025-07-18 17:30:27,478 - INFO - Correcting: ArcheSysteM -> ArchesysteM
+2025-07-18 17:30:27,481 - INFO - Correcting: ComparativEfluxuaLprocessinG -> ComparativefluxualprocessinG
+2025-07-18 17:30:27,483 - INFO - Correcting: PredictivemodelinGtooL -> PredictivemodelingtooL
+2025-07-18 17:30:27,486 - INFO - Correcting: ScenarioRealismAssessmenT -> ScenariorealismassessmenT
+2025-07-18 17:30:27,487 - INFO - Correcting: ObjectiveClarificationProtocoL -> ObjectiveclarificationprotocoL
+2025-07-18 17:30:27,487 - INFO - Correcting: AmbiguityDetectioN -> AmbiguitydetectioN
+2025-07-18 17:30:27,488 - INFO - Correcting: ContextualSuggestionGeneratioN -> ContextualsuggestiongeneratioN
+2025-07-18 17:30:27,488 - INFO - Correcting: LeadingQueryFormulationN -> LeadingqueryformulatioN
+2025-07-18 17:30:27,489 - INFO - Correcting: PreferenceOverrideHandlinG -> PreferenceoverridehandlinG
+2025-07-18 17:30:27,490 - INFO - Correcting: FinalizeResonantObjective -> FinalizeresonantobjectivE
+2025-07-18 17:30:27,491 - INFO - Correcting: ResonantGratiDSouL -> ResonantgratidsouL
+2025-07-18 17:30:27,491 - INFO - Correcting: GeminiCodeExecutoR -> GeminicodeexecutoR
+2025-07-18 17:30:27,494 - INFO - Correcting: GeminiFileProcessoR -> GeminifileprocessoR
+2025-07-18 17:30:27,495 - INFO - Correcting: GroundedGeneratioN -> GroundedgeneratioN
+2025-07-18 17:30:27,495 - INFO - Correcting: GeminiFunctionCallinG -> GeminifunctioncallinG
+2025-07-18 17:30:27,496 - INFO - Correcting: StructuredOutputGeneratoR -> StructuredoutputgeneratoR
+2025-07-18 17:30:27,499 - INFO - Completed processing: ./knowledge_graph/spr_definitions_tv.json (16 corrections)
+2025-07-18 17:30:27,500 - INFO - Correction process completed. Report saved to: guardian_points_correction_report_20250718_173027.txt

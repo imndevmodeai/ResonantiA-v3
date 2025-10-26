@@ -1,0 +1,13 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-02T15:36:40.135Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-02_15-36-40-135Z.log
+❌ Error Log: logs/errors_websocket_2025-09-02_15-36-40-135Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-02_15-36-40-135Z.log
+================================================================================
+2025-09-02T15:36:40.161Z [INFO] websocket: Protocol modules not available. Using lightweight processing mode
+2025-09-02T15:36:40.186Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-02T15:36:40.191Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-02T15:36:40.194Z [INFO] websocket: Connect at: ws://localhost:3006

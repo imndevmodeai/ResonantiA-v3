@@ -1,0 +1,155 @@
+{
+  "timestamp": "2025-10-23T06:19:56.572290",
+  "test_suite_version": "1.0",
+  "tests": {
+    "unit_tests": {
+      "category": "unit_tests",
+      "tests": [
+        {
+          "name": "VCD UI Implementation",
+          "status": "passed",
+          "details": {
+            "file_size": 41223,
+            "has_visualizer_class": true,
+            "has_debugger_class": true,
+            "has_visualization_modes": true
+          },
+          "timestamp": "2025-10-23T06:19:56.572526"
+        },
+        {
+          "name": "VCD Bridge Configuration",
+          "status": "passed",
+          "details": {
+            "config_sections": 4,
+            "bridge_port": 8765,
+            "timeout": 5
+          },
+          "timestamp": "2025-10-23T06:19:56.572641"
+        },
+        {
+          "name": "WebSocket Timeout Wrapper",
+          "status": "passed",
+          "details": {
+            "has_wrapper_class": true,
+            "has_connect_method": true,
+            "has_test_function": true
+          },
+          "timestamp": "2025-10-23T06:19:56.572690"
+        },
+        {
+          "name": "Configuration File Structure",
+          "status": "passed",
+          "details": {
+            "config_valid": true,
+            "server_port": 8765,
+            "server_timeout": 5
+          },
+          "timestamp": "2025-10-23T06:19:56.572745"
+        }
+      ],
+      "passed": 4,
+      "failed": 0,
+      "total": 4
+    },
+    "integration_tests": {
+      "category": "integration_tests",
+      "tests": [
+        {
+          "name": "VCD Analysis Agent Integration",
+          "status": "passed",
+          "details": {
+            "has_timeout_wrapper_import": true,
+            "has_timeout_wrapper_usage": true
+          },
+          "timestamp": "2025-10-23T06:19:56.572938"
+        },
+        {
+          "name": "Ask_Arche VCD Integration",
+          "status": "passed",
+          "details": {
+            "ask_arche_vcd_enhanced.py": {
+              "exists": true,
+              "has_vcd_integration": true
+            },
+            "ask_arche_vcd_real.py": {
+              "exists": true,
+              "has_vcd_integration": true
+            },
+            "ask_arche_vcd_analysis_enhanced.py": {
+              "exists": true,
+              "has_vcd_integration": true
+            }
+          },
+          "timestamp": "2025-10-23T06:19:56.573421"
+        }
+      ],
+      "passed": 2,
+      "failed": 0,
+      "total": 2
+    },
+    "performance_tests": {
+      "category": "performance_tests",
+      "tests": [
+        {
+          "name": "File Access Performance",
+          "status": "passed",
+          "details": {
+            "access_time": 3.933906555175781e-05,
+            "file_size": 41223,
+            "performance_rating": "excellent"
+          },
+          "timestamp": "2025-10-23T06:19:56.573474"
+        },
+        {
+          "name": "Configuration Loading Performance",
+          "status": "passed",
+          "details": {
+            "loading_time": 5.745887756347656e-05,
+            "config_sections": 4,
+            "performance_rating": "excellent"
+          },
+          "timestamp": "2025-10-23T06:19:56.573538"
+        }
+      ],
+      "passed": 2,
+      "failed": 0,
+      "total": 2
+    },
+    "stress_tests": {
+      "category": "stress_tests",
+      "tests": [
+        {
+          "name": "Multiple File Access Stress",
+          "status": "passed",
+          "details": {
+            "total_time": 0.00020241737365722656,
+            "files_accessed": 4,
+            "files_total": 4,
+            "performance_rating": "excellent"
+          },
+          "timestamp": "2025-10-23T06:19:56.573754"
+        },
+        {
+          "name": "Configuration Validation Stress",
+          "status": "passed",
+          "details": {
+            "total_time": 0.004690647125244141,
+            "validations_performed": 100,
+            "performance_rating": "excellent"
+          },
+          "timestamp": "2025-10-23T06:19:56.578455"
+        }
+      ],
+      "passed": 2,
+      "failed": 0,
+      "total": 2
+    }
+  },
+  "summary": {
+    "total_tests": 10,
+    "total_passed": 10,
+    "total_failed": 0,
+    "pass_rate": 100.0,
+    "overall_status": "passed"
+  }
+}

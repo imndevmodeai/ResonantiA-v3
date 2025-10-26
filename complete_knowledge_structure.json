@@ -1,0 +1,1698 @@
+{
+  "metadata": {
+    "name": "Complete Expanded Knowledge Graph",
+    "total_nodes": 39,
+    "total_edges": 89,
+    "parsing_method": "Direct regex block matching"
+  },
+  "nodes": {
+    "1": {
+      "id": "1",
+      "name": "System Overview",
+      "spr_value": 0.001,
+      "spr_label": "System Overview",
+      "connections": [
+        {
+          "target": "2",
+          "label": "Architecture",
+          "weight": 0.01,
+          "target_name": "System Architecture"
+        },
+        {
+          "target": "3",
+          "label": "Requirements",
+          "weight": 0.015,
+          "target_name": "System Requirements"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "2": {
+      "id": "2",
+      "name": "System Architecture",
+      "spr_value": 0.01,
+      "spr_label": "Architecture",
+      "connections": [
+        {
+          "target": "4",
+          "label": "Cognitive",
+          "weight": 0.02,
+          "target_name": "Cognitive Architecture"
+        },
+        {
+          "target": "5",
+          "label": "Learning",
+          "weight": 0.025,
+          "target_name": "Machine Learning"
+        },
+        {
+          "target": "6",
+          "label": "NLP",
+          "weight": 0.03,
+          "target_name": "Natural Language Processing"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "3": {
+      "id": "3",
+      "name": "System Requirements",
+      "spr_value": 0.015,
+      "spr_label": "Requirements",
+      "connections": [
+        {
+          "target": "7",
+          "label": "Functional",
+          "weight": 0.035,
+          "target_name": "Functional Requirements"
+        },
+        {
+          "target": "8",
+          "label": "Performance",
+          "weight": 0.04,
+          "target_name": "Performance Requirements"
+        },
+        {
+          "target": "9",
+          "label": "Security",
+          "weight": 0.045,
+          "target_name": "Security Requirements"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "4": {
+      "id": "4",
+      "name": "Cognitive Architecture",
+      "spr_value": 0.02,
+      "spr_label": "Cognitive",
+      "connections": [
+        {
+          "target": "10",
+          "label": "Knowledge",
+          "weight": 0.05,
+          "target_name": "Knowledge Graph"
+        },
+        {
+          "target": "11",
+          "label": "Reasoning",
+          "weight": 0.055,
+          "target_name": "Reasoning Engine"
+        },
+        {
+          "target": "12",
+          "label": "Learning",
+          "weight": 0.06,
+          "target_name": "Learning Mechanism"
+        }
+      ],
+      "domain": "Cognitive Science"
+    },
+    "5": {
+      "id": "5",
+      "name": "Machine Learning",
+      "spr_value": 0.025,
+      "spr_label": "Learning",
+      "connections": [
+        {
+          "target": "13",
+          "label": "Supervised",
+          "weight": 0.065,
+          "target_name": "Supervised Learning"
+        },
+        {
+          "target": "14",
+          "label": "Unsupervised",
+          "weight": 0.07,
+          "target_name": "Unsupervised Learning"
+        },
+        {
+          "target": "15",
+          "label": "Reinforcement",
+          "weight": 0.075,
+          "target_name": "Reinforcement Learning"
+        }
+      ],
+      "domain": "Artificial Intelligence"
+    },
+    "6": {
+      "id": "6",
+      "name": "Natural Language Processing",
+      "spr_value": 0.03,
+      "spr_label": "NLP",
+      "connections": [
+        {
+          "target": "16",
+          "label": "Preprocessing",
+          "weight": 0.08,
+          "target_name": "Text Preprocessing"
+        },
+        {
+          "target": "17",
+          "label": "POS",
+          "weight": 0.085,
+          "target_name": "Part-of-Speech Tagging"
+        },
+        {
+          "target": "18",
+          "label": "NER",
+          "weight": 0.09,
+          "target_name": "Named Entity Recognition"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "7": {
+      "id": "7",
+      "name": "Functional Requirements",
+      "spr_value": 0.035,
+      "spr_label": "Functional",
+      "connections": [
+        {
+          "target": "19",
+          "label": "UI",
+          "weight": 0.095,
+          "target_name": "User Interface"
+        },
+        {
+          "target": "20",
+          "label": "UX",
+          "weight": 0.1,
+          "target_name": "User Experience"
+        },
+        {
+          "target": "21",
+          "label": "Functionality",
+          "weight": 0.105,
+          "target_name": "Functionality"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "8": {
+      "id": "8",
+      "name": "Performance Requirements",
+      "spr_value": 0.04,
+      "spr_label": "Performance",
+      "connections": [
+        {
+          "target": "22",
+          "label": "Speed",
+          "weight": 0.11,
+          "target_name": "Speed"
+        },
+        {
+          "target": "23",
+          "label": "Accuracy",
+          "weight": 0.115,
+          "target_name": "Accuracy"
+        },
+        {
+          "target": "24",
+          "label": "Scalability",
+          "weight": 0.12,
+          "target_name": "Scalability"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "9": {
+      "id": "9",
+      "name": "Security Requirements",
+      "spr_value": 0.045,
+      "spr_label": "Security",
+      "connections": [
+        {
+          "target": "25",
+          "label": "Authentication",
+          "weight": 0.125,
+          "target_name": "Authentication"
+        },
+        {
+          "target": "26",
+          "label": "Authorization",
+          "weight": 0.13,
+          "target_name": "Authorization"
+        },
+        {
+          "target": "27",
+          "label": "Encryption",
+          "weight": 0.135,
+          "target_name": "Encryption"
+        }
+      ],
+      "domain": "Cybersecurity"
+    },
+    "10": {
+      "id": "10",
+      "name": "Knowledge Graph",
+      "spr_value": 0.05,
+      "spr_label": "Knowledge",
+      "connections": [
+        {
+          "target": "28",
+          "label": "Node",
+          "weight": 0.14,
+          "target_name": "Node Creation"
+        },
+        {
+          "target": "29",
+          "label": "Edge",
+          "weight": 0.145,
+          "target_name": "Edge Creation"
+        },
+        {
+          "target": "30",
+          "label": "Relationship",
+          "weight": 0.15,
+          "target_name": "Relationship Creation"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "11": {
+      "id": "11",
+      "name": "Reasoning Engine",
+      "spr_value": 0.055,
+      "spr_label": "Reasoning",
+      "connections": [
+        {
+          "target": "31",
+          "label": "Rule-Based",
+          "weight": 0.155,
+          "target_name": "Rule-Based Reasoning"
+        },
+        {
+          "target": "32",
+          "label": "Model-Based",
+          "weight": 0.16,
+          "target_name": "Model-Based Reasoning"
+        },
+        {
+          "target": "33",
+          "label": "Hybrid",
+          "weight": 0.165,
+          "target_name": "Hybrid Reasoning"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "12": {
+      "id": "12",
+      "name": "Learning Mechanism",
+      "spr_value": 0.06,
+      "spr_label": "Learning",
+      "connections": [
+        {
+          "target": "34",
+          "label": "Supervised",
+          "weight": 0.17,
+          "target_name": "Supervised Learning"
+        },
+        {
+          "target": "35",
+          "label": "Unsupervised",
+          "weight": 0.175,
+          "target_name": "Unsupervised Learning"
+        },
+        {
+          "target": "36",
+          "label": "Reinforcement",
+          "weight": 0.18,
+          "target_name": "Reinforcement Learning"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "37": {
+      "id": "37",
+      "name": "Natural Language Generation",
+      "spr_value": 0.185,
+      "spr_label": "NLG",
+      "connections": [
+        {
+          "target": "38",
+          "label": "Text",
+          "weight": 0.19,
+          "target_name": "Text Generation"
+        },
+        {
+          "target": "39",
+          "label": "Language",
+          "weight": 0.195,
+          "target_name": "Language Modeling"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "38": {
+      "id": "38",
+      "name": "Text Generation",
+      "spr_value": 0.19,
+      "spr_label": "Text",
+      "connections": [
+        {
+          "target": "40",
+          "label": "Sentence",
+          "weight": 0.2,
+          "target_name": "Sentence Generation"
+        },
+        {
+          "target": "41",
+          "label": "Paragraph",
+          "weight": 0.205,
+          "target_name": "Paragraph Generation"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "39": {
+      "id": "39",
+      "name": "Language Modeling",
+      "spr_value": 0.195,
+      "spr_label": "Language",
+      "connections": [
+        {
+          "target": "42",
+          "label": "Understanding",
+          "weight": 0.21,
+          "target_name": "Language Understanding"
+        },
+        {
+          "target": "43",
+          "label": "Generation",
+          "weight": 0.215,
+          "target_name": "Language Generation"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "44": {
+      "id": "44",
+      "name": "Dialogue Management System",
+      "spr_value": 0.22,
+      "spr_label": "DMS",
+      "connections": [
+        {
+          "target": "45",
+          "label": "State",
+          "weight": 0.225,
+          "target_name": "Dialogue State Tracking"
+        },
+        {
+          "target": "46",
+          "label": "Policy",
+          "weight": 0.23,
+          "target_name": "Dialogue Policy"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "45": {
+      "id": "45",
+      "name": "Dialogue State Tracking",
+      "spr_value": 0.225,
+      "spr_label": "State",
+      "connections": [
+        {
+          "target": "47",
+          "label": "Intent",
+          "weight": 0.235,
+          "target_name": "User Intent Identification"
+        },
+        {
+          "target": "48",
+          "label": "Context",
+          "weight": 0.24,
+          "target_name": "Dialogue Context Understanding"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "46": {
+      "id": "46",
+      "name": "Dialogue Policy",
+      "spr_value": 0.23,
+      "spr_label": "Policy",
+      "connections": [
+        {
+          "target": "49",
+          "label": "Response",
+          "weight": 0.245,
+          "target_name": "Response Generation"
+        },
+        {
+          "target": "50",
+          "label": "Flow",
+          "weight": 0.25,
+          "target_name": "Dialogue Flow Control"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "51": {
+      "id": "51",
+      "name": "Sentiment Analysis",
+      "spr_value": 0.255,
+      "spr_label": "Sentiment",
+      "connections": [
+        {
+          "target": "52",
+          "label": "Emotion",
+          "weight": 0.26,
+          "target_name": "Emotion Detection"
+        },
+        {
+          "target": "53",
+          "label": "Classification",
+          "weight": 0.265,
+          "target_name": "Sentiment Classification"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "52": {
+      "id": "52",
+      "name": "Emotion Detection",
+      "spr_value": 0.26,
+      "spr_label": "Emotion",
+      "connections": [
+        {
+          "target": "54",
+          "label": "Recognition",
+          "weight": 0.27,
+          "target_name": "Emotion Recognition"
+        },
+        {
+          "target": "55",
+          "label": "Understanding",
+          "weight": 0.275,
+          "target_name": "Emotion Understanding"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "53": {
+      "id": "53",
+      "name": "Sentiment Classification",
+      "spr_value": 0.265,
+      "spr_label": "Classification",
+      "connections": [
+        {
+          "target": "56",
+          "label": "Labeling",
+          "weight": 0.28,
+          "target_name": "Sentiment Labeling"
+        },
+        {
+          "target": "57",
+          "label": "Ranking",
+          "weight": 0.285,
+          "target_name": "Sentiment Ranking"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "58": {
+      "id": "58",
+      "name": "Knowledge Graph Embedding",
+      "spr_value": 0.29,
+      "spr_label": "KGE",
+      "connections": [
+        {
+          "target": "59",
+          "label": "Node",
+          "weight": 0.295,
+          "target_name": "Node Embedding"
+        },
+        {
+          "target": "60",
+          "label": "Edge",
+          "weight": 0.3,
+          "target_name": "Edge Embedding"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "59": {
+      "id": "59",
+      "name": "Node Embedding",
+      "spr_value": 0.295,
+      "spr_label": "Node",
+      "connections": [
+        {
+          "target": "61",
+          "label": "Learning",
+          "weight": 0.305,
+          "target_name": "Node Representation Learning"
+        },
+        {
+          "target": "62",
+          "label": "Classification",
+          "weight": 0.31,
+          "target_name": "Node Classification"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "60": {
+      "id": "60",
+      "name": "Edge Embedding",
+      "spr_value": 0.3,
+      "spr_label": "Edge",
+      "connections": [
+        {
+          "target": "63",
+          "label": "Learning",
+          "weight": 0.315,
+          "target_name": "Edge Representation Learning"
+        },
+        {
+          "target": "64",
+          "label": "Prediction",
+          "weight": 0.32,
+          "target_name": "Link Prediction"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "65": {
+      "id": "65",
+      "name": "Graph Neural Network",
+      "spr_value": 0.325,
+      "spr_label": "GNN",
+      "connections": [
+        {
+          "target": "66",
+          "label": "Learning",
+          "weight": 0.33,
+          "target_name": "Node Representation Learning"
+        },
+        {
+          "target": "67",
+          "label": "Learning",
+          "weight": 0.335,
+          "target_name": "Edge Representation Learning"
+        }
+      ],
+      "domain": "Artificial Intelligence"
+    },
+    "66": {
+      "id": "66",
+      "name": "Node Representation Learning",
+      "spr_value": 0.33,
+      "spr_label": "Learning",
+      "connections": [
+        {
+          "target": "68",
+          "label": "GCN",
+          "weight": 0.34,
+          "target_name": "Graph Convolutional Network"
+        },
+        {
+          "target": "69",
+          "label": "GAT",
+          "weight": 0.345,
+          "target_name": "Graph Attention Network"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "67": {
+      "id": "67",
+      "name": "Edge Representation Learning",
+      "spr_value": 0.335,
+      "spr_label": "Learning",
+      "connections": [
+        {
+          "target": "70",
+          "label": "ECN",
+          "weight": 0.35,
+          "target_name": "Edge Convolutional Network"
+        },
+        {
+          "target": "71",
+          "label": "EAT",
+          "weight": 0.355,
+          "target_name": "Edge Attention Network"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "72": {
+      "id": "72",
+      "name": "Transfer Learning",
+      "spr_value": 0.36,
+      "spr_label": "TL",
+      "connections": [
+        {
+          "target": "73",
+          "label": "Adaptation",
+          "weight": 0.365,
+          "target_name": "Domain Adaptation"
+        },
+        {
+          "target": "74",
+          "label": "Adaptation",
+          "weight": 0.37,
+          "target_name": "Task Adaptation"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "73": {
+      "id": "73",
+      "name": "Domain Adaptation",
+      "spr_value": 0.365,
+      "spr_label": "Adaptation",
+      "connections": [
+        {
+          "target": "75",
+          "label": "Learning",
+          "weight": 0.375,
+          "target_name": "Domain-Invariant Feature Learning"
+        },
+        {
+          "target": "76",
+          "label": "Learning",
+          "weight": 0.38,
+          "target_name": "Domain-Specific Feature Learning"
+        }
+      ],
+      "domain": "Artificial Intelligence"
+    },
+    "74": {
+      "id": "74",
+      "name": "Task Adaptation",
+      "spr_value": 0.37,
+      "spr_label": "Adaptation",
+      "connections": [
+        {
+          "target": "77",
+          "label": "Learning",
+          "weight": 0.385,
+          "target_name": "Task-Invariant Feature Learning"
+        },
+        {
+          "target": "78",
+          "label": "Learning",
+          "weight": 0.39,
+          "target_name": "Task-Specific Feature Learning"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "79": {
+      "id": "79",
+      "name": "Reinforcement Learning",
+      "spr_value": 0.395,
+      "spr_label": "RL",
+      "connections": [
+        {
+          "target": "80",
+          "label": "Policy",
+          "weight": 0.4,
+          "target_name": "Policy Learning"
+        },
+        {
+          "target": "81",
+          "label": "Value",
+          "weight": 0.405,
+          "target_name": "Value Learning"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "80": {
+      "id": "80",
+      "name": "Policy Learning",
+      "spr_value": 0.4,
+      "spr_label": "Policy",
+      "connections": [
+        {
+          "target": "82",
+          "label": "PG",
+          "weight": 0.41,
+          "target_name": "Policy Gradient Methods"
+        },
+        {
+          "target": "83",
+          "label": "AC",
+          "weight": 0.415,
+          "target_name": "Actor-Critic Methods"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "81": {
+      "id": "81",
+      "name": "Value Learning",
+      "spr_value": 0.405,
+      "spr_label": "Value",
+      "connections": [
+        {
+          "target": "84",
+          "label": "VI",
+          "weight": 0.42,
+          "target_name": "Value Iteration"
+        },
+        {
+          "target": "85",
+          "label": "QL",
+          "weight": 0.425,
+          "target_name": "Q-Learning"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "86": {
+      "id": "86",
+      "name": "Multi-Agent System",
+      "spr_value": 0.43,
+      "spr_label": "MAS",
+      "connections": [
+        {
+          "target": "87",
+          "label": "Communication",
+          "weight": 0.435,
+          "target_name": "Agent Communication"
+        },
+        {
+          "target": "88",
+          "label": "Cooperation",
+          "weight": 0.44,
+          "target_name": "Agent Cooperation"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "87": {
+      "id": "87",
+      "name": "Agent Communication",
+      "spr_value": 0.435,
+      "spr_label": "Communication",
+      "connections": [
+        {
+          "target": "89",
+          "label": "MP",
+          "weight": 0.445,
+          "target_name": "Message Passing"
+        },
+        {
+          "target": "90",
+          "label": "BC",
+          "weight": 0.45,
+          "target_name": "Broadcast Communication"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "88": {
+      "id": "88",
+      "name": "Agent Cooperation",
+      "spr_value": 0.44,
+      "spr_label": "Cooperation",
+      "connections": [
+        {
+          "target": "91",
+          "label": "CGT",
+          "weight": 0.455,
+          "target_name": "Cooperative Game Theory"
+        },
+        {
+          "target": "92",
+          "label": "CL",
+          "weight": 0.46,
+          "target_name": "Cooperative Learning"
+        }
+      ],
+      "domain": "General Technology"
+    },
+    "93": {
+      "id": "93",
+      "name": "Human-Computer Interaction",
+      "spr_value": 0.465,
+      "spr_label": "HCI",
+      "connections": [
+        {
+          "target": "94",
+          "label": "UID",
+          "weight": 0.47,
+          "target_name": "User Interface Design"
+        },
+        {
+          "target": "95",
+          "label": "UXD",
+          "weight": 0.475,
+          "target_name": "User Experience Design"
+        }
+      ],
+      "domain": "Human-Computer Interaction"
+    },
+    "94": {
+      "id": "94",
+      "name": "User Interface Design",
+      "spr_value": 0.47,
+      "spr_label": "UID",
+      "connections": [
+        {
+          "target": "96",
+          "label": "GUI",
+          "weight": 0.48,
+          "target_name": "Graphical User Interface"
+        },
+        {
+          "target": "97",
+          "label": "VUI",
+          "weight": 0.485,
+          "target_name": "Voice User Interface"
+        }
+      ],
+      "domain": "Human-Computer Interaction"
+    },
+    "95": {
+      "id": "95",
+      "name": "User Experience Design",
+      "spr_value": 0.475,
+      "spr_label": "UXD",
+      "connections": [
+        {
+          "target": "98",
+          "label": "UR",
+          "weight": 0.49,
+          "target_name": "User Research"
+        },
+        {
+          "target": "99",
+          "label": "UT",
+          "weight": 0.495,
+          "target_name": "User Testing"
+        }
+      ],
+      "domain": "Human-Computer Interaction"
+    }
+  },
+  "edges": [
+    {
+      "source": "1",
+      "target": "2",
+      "relationship": "connects_to",
+      "weight": 0.01,
+      "label": "Architecture",
+      "source_name": "System Overview",
+      "target_name": "System Architecture"
+    },
+    {
+      "source": "1",
+      "target": "3",
+      "relationship": "connects_to",
+      "weight": 0.015,
+      "label": "Requirements",
+      "source_name": "System Overview",
+      "target_name": "System Requirements"
+    },
+    {
+      "source": "2",
+      "target": "4",
+      "relationship": "connects_to",
+      "weight": 0.02,
+      "label": "Cognitive",
+      "source_name": "System Architecture",
+      "target_name": "Cognitive Architecture"
+    },
+    {
+      "source": "2",
+      "target": "5",
+      "relationship": "connects_to",
+      "weight": 0.025,
+      "label": "Learning",
+      "source_name": "System Architecture",
+      "target_name": "Machine Learning"
+    },
+    {
+      "source": "2",
+      "target": "6",
+      "relationship": "connects_to",
+      "weight": 0.03,
+      "label": "NLP",
+      "source_name": "System Architecture",
+      "target_name": "Natural Language Processing"
+    },
+    {
+      "source": "3",
+      "target": "7",
+      "relationship": "connects_to",
+      "weight": 0.035,
+      "label": "Functional",
+      "source_name": "System Requirements",
+      "target_name": "Functional Requirements"
+    },
+    {
+      "source": "3",
+      "target": "8",
+      "relationship": "connects_to",
+      "weight": 0.04,
+      "label": "Performance",
+      "source_name": "System Requirements",
+      "target_name": "Performance Requirements"
+    },
+    {
+      "source": "3",
+      "target": "9",
+      "relationship": "connects_to",
+      "weight": 0.045,
+      "label": "Security",
+      "source_name": "System Requirements",
+      "target_name": "Security Requirements"
+    },
+    {
+      "source": "4",
+      "target": "10",
+      "relationship": "connects_to",
+      "weight": 0.05,
+      "label": "Knowledge",
+      "source_name": "Cognitive Architecture",
+      "target_name": "Knowledge Graph"
+    },
+    {
+      "source": "4",
+      "target": "11",
+      "relationship": "connects_to",
+      "weight": 0.055,
+      "label": "Reasoning",
+      "source_name": "Cognitive Architecture",
+      "target_name": "Reasoning Engine"
+    },
+    {
+      "source": "4",
+      "target": "12",
+      "relationship": "connects_to",
+      "weight": 0.06,
+      "label": "Learning",
+      "source_name": "Cognitive Architecture",
+      "target_name": "Learning Mechanism"
+    },
+    {
+      "source": "5",
+      "target": "13",
+      "relationship": "connects_to",
+      "weight": 0.065,
+      "label": "Supervised",
+      "source_name": "Machine Learning",
+      "target_name": "Supervised Learning"
+    },
+    {
+      "source": "5",
+      "target": "14",
+      "relationship": "connects_to",
+      "weight": 0.07,
+      "label": "Unsupervised",
+      "source_name": "Machine Learning",
+      "target_name": "Unsupervised Learning"
+    },
+    {
+      "source": "5",
+      "target": "15",
+      "relationship": "connects_to",
+      "weight": 0.075,
+      "label": "Reinforcement",
+      "source_name": "Machine Learning",
+      "target_name": "Reinforcement Learning"
+    },
+    {
+      "source": "6",
+      "target": "16",
+      "relationship": "connects_to",
+      "weight": 0.08,
+      "label": "Preprocessing",
+      "source_name": "Natural Language Processing",
+      "target_name": "Text Preprocessing"
+    },
+    {
+      "source": "6",
+      "target": "17",
+      "relationship": "connects_to",
+      "weight": 0.085,
+      "label": "POS",
+      "source_name": "Natural Language Processing",
+      "target_name": "Part-of-Speech Tagging"
+    },
+    {
+      "source": "6",
+      "target": "18",
+      "relationship": "connects_to",
+      "weight": 0.09,
+      "label": "NER",
+      "source_name": "Natural Language Processing",
+      "target_name": "Named Entity Recognition"
+    },
+    {
+      "source": "7",
+      "target": "19",
+      "relationship": "connects_to",
+      "weight": 0.095,
+      "label": "UI",
+      "source_name": "Functional Requirements",
+      "target_name": "User Interface"
+    },
+    {
+      "source": "7",
+      "target": "20",
+      "relationship": "connects_to",
+      "weight": 0.1,
+      "label": "UX",
+      "source_name": "Functional Requirements",
+      "target_name": "User Experience"
+    },
+    {
+      "source": "7",
+      "target": "21",
+      "relationship": "connects_to",
+      "weight": 0.105,
+      "label": "Functionality",
+      "source_name": "Functional Requirements",
+      "target_name": "Functionality"
+    },
+    {
+      "source": "8",
+      "target": "22",
+      "relationship": "connects_to",
+      "weight": 0.11,
+      "label": "Speed",
+      "source_name": "Performance Requirements",
+      "target_name": "Speed"
+    },
+    {
+      "source": "8",
+      "target": "23",
+      "relationship": "connects_to",
+      "weight": 0.115,
+      "label": "Accuracy",
+      "source_name": "Performance Requirements",
+      "target_name": "Accuracy"
+    },
+    {
+      "source": "8",
+      "target": "24",
+      "relationship": "connects_to",
+      "weight": 0.12,
+      "label": "Scalability",
+      "source_name": "Performance Requirements",
+      "target_name": "Scalability"
+    },
+    {
+      "source": "9",
+      "target": "25",
+      "relationship": "connects_to",
+      "weight": 0.125,
+      "label": "Authentication",
+      "source_name": "Security Requirements",
+      "target_name": "Authentication"
+    },
+    {
+      "source": "9",
+      "target": "26",
+      "relationship": "connects_to",
+      "weight": 0.13,
+      "label": "Authorization",
+      "source_name": "Security Requirements",
+      "target_name": "Authorization"
+    },
+    {
+      "source": "9",
+      "target": "27",
+      "relationship": "connects_to",
+      "weight": 0.135,
+      "label": "Encryption",
+      "source_name": "Security Requirements",
+      "target_name": "Encryption"
+    },
+    {
+      "source": "10",
+      "target": "28",
+      "relationship": "connects_to",
+      "weight": 0.14,
+      "label": "Node",
+      "source_name": "Knowledge Graph",
+      "target_name": "Node Creation"
+    },
+    {
+      "source": "10",
+      "target": "29",
+      "relationship": "connects_to",
+      "weight": 0.145,
+      "label": "Edge",
+      "source_name": "Knowledge Graph",
+      "target_name": "Edge Creation"
+    },
+    {
+      "source": "10",
+      "target": "30",
+      "relationship": "connects_to",
+      "weight": 0.15,
+      "label": "Relationship",
+      "source_name": "Knowledge Graph",
+      "target_name": "Relationship Creation"
+    },
+    {
+      "source": "11",
+      "target": "31",
+      "relationship": "connects_to",
+      "weight": 0.155,
+      "label": "Rule-Based",
+      "source_name": "Reasoning Engine",
+      "target_name": "Rule-Based Reasoning"
+    },
+    {
+      "source": "11",
+      "target": "32",
+      "relationship": "connects_to",
+      "weight": 0.16,
+      "label": "Model-Based",
+      "source_name": "Reasoning Engine",
+      "target_name": "Model-Based Reasoning"
+    },
+    {
+      "source": "11",
+      "target": "33",
+      "relationship": "connects_to",
+      "weight": 0.165,
+      "label": "Hybrid",
+      "source_name": "Reasoning Engine",
+      "target_name": "Hybrid Reasoning"
+    },
+    {
+      "source": "12",
+      "target": "34",
+      "relationship": "connects_to",
+      "weight": 0.17,
+      "label": "Supervised",
+      "source_name": "Learning Mechanism",
+      "target_name": "Supervised Learning"
+    },
+    {
+      "source": "12",
+      "target": "35",
+      "relationship": "connects_to",
+      "weight": 0.175,
+      "label": "Unsupervised",
+      "source_name": "Learning Mechanism",
+      "target_name": "Unsupervised Learning"
+    },
+    {
+      "source": "12",
+      "target": "36",
+      "relationship": "connects_to",
+      "weight": 0.18,
+      "label": "Reinforcement",
+      "source_name": "Learning Mechanism",
+      "target_name": "Reinforcement Learning"
+    },
+    {
+      "source": "37",
+      "target": "38",
+      "relationship": "connects_to",
+      "weight": 0.19,
+      "label": "Text",
+      "source_name": "Natural Language Generation",
+      "target_name": "Text Generation"
+    },
+    {
+      "source": "37",
+      "target": "39",
+      "relationship": "connects_to",
+      "weight": 0.195,
+      "label": "Language",
+      "source_name": "Natural Language Generation",
+      "target_name": "Language Modeling"
+    },
+    {
+      "source": "38",
+      "target": "40",
+      "relationship": "connects_to",
+      "weight": 0.2,
+      "label": "Sentence",
+      "source_name": "Text Generation",
+      "target_name": "Sentence Generation"
+    },
+    {
+      "source": "38",
+      "target": "41",
+      "relationship": "connects_to",
+      "weight": 0.205,
+      "label": "Paragraph",
+      "source_name": "Text Generation",
+      "target_name": "Paragraph Generation"
+    },
+    {
+      "source": "39",
+      "target": "42",
+      "relationship": "connects_to",
+      "weight": 0.21,
+      "label": "Understanding",
+      "source_name": "Language Modeling",
+      "target_name": "Language Understanding"
+    },
+    {
+      "source": "39",
+      "target": "43",
+      "relationship": "connects_to",
+      "weight": 0.215,
+      "label": "Generation",
+      "source_name": "Language Modeling",
+      "target_name": "Language Generation"
+    },
+    {
+      "source": "44",
+      "target": "45",
+      "relationship": "connects_to",
+      "weight": 0.225,
+      "label": "State",
+      "source_name": "Dialogue Management System",
+      "target_name": "Dialogue State Tracking"
+    },
+    {
+      "source": "44",
+      "target": "46",
+      "relationship": "connects_to",
+      "weight": 0.23,
+      "label": "Policy",
+      "source_name": "Dialogue Management System",
+      "target_name": "Dialogue Policy"
+    },
+    {
+      "source": "45",
+      "target": "47",
+      "relationship": "connects_to",
+      "weight": 0.235,
+      "label": "Intent",
+      "source_name": "Dialogue State Tracking",
+      "target_name": "User Intent Identification"
+    },
+    {
+      "source": "45",
+      "target": "48",
+      "relationship": "connects_to",
+      "weight": 0.24,
+      "label": "Context",
+      "source_name": "Dialogue State Tracking",
+      "target_name": "Dialogue Context Understanding"
+    },
+    {
+      "source": "46",
+      "target": "49",
+      "relationship": "connects_to",
+      "weight": 0.245,
+      "label": "Response",
+      "source_name": "Dialogue Policy",
+      "target_name": "Response Generation"
+    },
+    {
+      "source": "46",
+      "target": "50",
+      "relationship": "connects_to",
+      "weight": 0.25,
+      "label": "Flow",
+      "source_name": "Dialogue Policy",
+      "target_name": "Dialogue Flow Control"
+    },
+    {
+      "source": "51",
+      "target": "52",
+      "relationship": "connects_to",
+      "weight": 0.26,
+      "label": "Emotion",
+      "source_name": "Sentiment Analysis",
+      "target_name": "Emotion Detection"
+    },
+    {
+      "source": "51",
+      "target": "53",
+      "relationship": "connects_to",
+      "weight": 0.265,
+      "label": "Classification",
+      "source_name": "Sentiment Analysis",
+      "target_name": "Sentiment Classification"
+    },
+    {
+      "source": "52",
+      "target": "54",
+      "relationship": "connects_to",
+      "weight": 0.27,
+      "label": "Recognition",
+      "source_name": "Emotion Detection",
+      "target_name": "Emotion Recognition"
+    },
+    {
+      "source": "52",
+      "target": "55",
+      "relationship": "connects_to",
+      "weight": 0.275,
+      "label": "Understanding",
+      "source_name": "Emotion Detection",
+      "target_name": "Emotion Understanding"
+    },
+    {
+      "source": "53",
+      "target": "56",
+      "relationship": "connects_to",
+      "weight": 0.28,
+      "label": "Labeling",
+      "source_name": "Sentiment Classification",
+      "target_name": "Sentiment Labeling"
+    },
+    {
+      "source": "53",
+      "target": "57",
+      "relationship": "connects_to",
+      "weight": 0.285,
+      "label": "Ranking",
+      "source_name": "Sentiment Classification",
+      "target_name": "Sentiment Ranking"
+    },
+    {
+      "source": "58",
+      "target": "59",
+      "relationship": "connects_to",
+      "weight": 0.295,
+      "label": "Node",
+      "source_name": "Knowledge Graph Embedding",
+      "target_name": "Node Embedding"
+    },
+    {
+      "source": "58",
+      "target": "60",
+      "relationship": "connects_to",
+      "weight": 0.3,
+      "label": "Edge",
+      "source_name": "Knowledge Graph Embedding",
+      "target_name": "Edge Embedding"
+    },
+    {
+      "source": "59",
+      "target": "61",
+      "relationship": "connects_to",
+      "weight": 0.305,
+      "label": "Learning",
+      "source_name": "Node Embedding",
+      "target_name": "Node Representation Learning"
+    },
+    {
+      "source": "59",
+      "target": "62",
+      "relationship": "connects_to",
+      "weight": 0.31,
+      "label": "Classification",
+      "source_name": "Node Embedding",
+      "target_name": "Node Classification"
+    },
+    {
+      "source": "60",
+      "target": "63",
+      "relationship": "connects_to",
+      "weight": 0.315,
+      "label": "Learning",
+      "source_name": "Edge Embedding",
+      "target_name": "Edge Representation Learning"
+    },
+    {
+      "source": "60",
+      "target": "64",
+      "relationship": "connects_to",
+      "weight": 0.32,
+      "label": "Prediction",
+      "source_name": "Edge Embedding",
+      "target_name": "Link Prediction"
+    },
+    {
+      "source": "65",
+      "target": "66",
+      "relationship": "connects_to",
+      "weight": 0.33,
+      "label": "Learning",
+      "source_name": "Graph Neural Network",
+      "target_name": "Node Representation Learning"
+    },
+    {
+      "source": "65",
+      "target": "67",
+      "relationship": "connects_to",
+      "weight": 0.335,
+      "label": "Learning",
+      "source_name": "Graph Neural Network",
+      "target_name": "Edge Representation Learning"
+    },
+    {
+      "source": "66",
+      "target": "68",
+      "relationship": "connects_to",
+      "weight": 0.34,
+      "label": "GCN",
+      "source_name": "Node Representation Learning",
+      "target_name": "Graph Convolutional Network"
+    },
+    {
+      "source": "66",
+      "target": "69",
+      "relationship": "connects_to",
+      "weight": 0.345,
+      "label": "GAT",
+      "source_name": "Node Representation Learning",
+      "target_name": "Graph Attention Network"
+    },
+    {
+      "source": "67",
+      "target": "70",
+      "relationship": "connects_to",
+      "weight": 0.35,
+      "label": "ECN",
+      "source_name": "Edge Representation Learning",
+      "target_name": "Edge Convolutional Network"
+    },
+    {
+      "source": "67",
+      "target": "71",
+      "relationship": "connects_to",
+      "weight": 0.355,
+      "label": "EAT",
+      "source_name": "Edge Representation Learning",
+      "target_name": "Edge Attention Network"
+    },
+    {
+      "source": "72",
+      "target": "73",
+      "relationship": "connects_to",
+      "weight": 0.365,
+      "label": "Adaptation",
+      "source_name": "Transfer Learning",
+      "target_name": "Domain Adaptation"
+    },
+    {
+      "source": "72",
+      "target": "74",
+      "relationship": "connects_to",
+      "weight": 0.37,
+      "label": "Adaptation",
+      "source_name": "Transfer Learning",
+      "target_name": "Task Adaptation"
+    },
+    {
+      "source": "73",
+      "target": "75",
+      "relationship": "connects_to",
+      "weight": 0.375,
+      "label": "Learning",
+      "source_name": "Domain Adaptation",
+      "target_name": "Domain-Invariant Feature Learning"
+    },
+    {
+      "source": "73",
+      "target": "76",
+      "relationship": "connects_to",
+      "weight": 0.38,
+      "label": "Learning",
+      "source_name": "Domain Adaptation",
+      "target_name": "Domain-Specific Feature Learning"
+    },
+    {
+      "source": "74",
+      "target": "77",
+      "relationship": "connects_to",
+      "weight": 0.385,
+      "label": "Learning",
+      "source_name": "Task Adaptation",
+      "target_name": "Task-Invariant Feature Learning"
+    },
+    {
+      "source": "74",
+      "target": "78",
+      "relationship": "connects_to",
+      "weight": 0.39,
+      "label": "Learning",
+      "source_name": "Task Adaptation",
+      "target_name": "Task-Specific Feature Learning"
+    },
+    {
+      "source": "79",
+      "target": "80",
+      "relationship": "connects_to",
+      "weight": 0.4,
+      "label": "Policy",
+      "source_name": "Reinforcement Learning",
+      "target_name": "Policy Learning"
+    },
+    {
+      "source": "79",
+      "target": "81",
+      "relationship": "connects_to",
+      "weight": 0.405,
+      "label": "Value",
+      "source_name": "Reinforcement Learning",
+      "target_name": "Value Learning"
+    },
+    {
+      "source": "80",
+      "target": "82",
+      "relationship": "connects_to",
+      "weight": 0.41,
+      "label": "PG",
+      "source_name": "Policy Learning",
+      "target_name": "Policy Gradient Methods"
+    },
+    {
+      "source": "80",
+      "target": "83",
+      "relationship": "connects_to",
+      "weight": 0.415,
+      "label": "AC",
+      "source_name": "Policy Learning",
+      "target_name": "Actor-Critic Methods"
+    },
+    {
+      "source": "81",
+      "target": "84",
+      "relationship": "connects_to",
+      "weight": 0.42,
+      "label": "VI",
+      "source_name": "Value Learning",
+      "target_name": "Value Iteration"
+    },
+    {
+      "source": "81",
+      "target": "85",
+      "relationship": "connects_to",
+      "weight": 0.425,
+      "label": "QL",
+      "source_name": "Value Learning",
+      "target_name": "Q-Learning"
+    },
+    {
+      "source": "86",
+      "target": "87",
+      "relationship": "connects_to",
+      "weight": 0.435,
+      "label": "Communication",
+      "source_name": "Multi-Agent System",
+      "target_name": "Agent Communication"
+    },
+    {
+      "source": "86",
+      "target": "88",
+      "relationship": "connects_to",
+      "weight": 0.44,
+      "label": "Cooperation",
+      "source_name": "Multi-Agent System",
+      "target_name": "Agent Cooperation"
+    },
+    {
+      "source": "87",
+      "target": "89",
+      "relationship": "connects_to",
+      "weight": 0.445,
+      "label": "MP",
+      "source_name": "Agent Communication",
+      "target_name": "Message Passing"
+    },
+    {
+      "source": "87",
+      "target": "90",
+      "relationship": "connects_to",
+      "weight": 0.45,
+      "label": "BC",
+      "source_name": "Agent Communication",
+      "target_name": "Broadcast Communication"
+    },
+    {
+      "source": "88",
+      "target": "91",
+      "relationship": "connects_to",
+      "weight": 0.455,
+      "label": "CGT",
+      "source_name": "Agent Cooperation",
+      "target_name": "Cooperative Game Theory"
+    },
+    {
+      "source": "88",
+      "target": "92",
+      "relationship": "connects_to",
+      "weight": 0.46,
+      "label": "CL",
+      "source_name": "Agent Cooperation",
+      "target_name": "Cooperative Learning"
+    },
+    {
+      "source": "93",
+      "target": "94",
+      "relationship": "connects_to",
+      "weight": 0.47,
+      "label": "UID",
+      "source_name": "Human-Computer Interaction",
+      "target_name": "User Interface Design"
+    },
+    {
+      "source": "93",
+      "target": "95",
+      "relationship": "connects_to",
+      "weight": 0.475,
+      "label": "UXD",
+      "source_name": "Human-Computer Interaction",
+      "target_name": "User Experience Design"
+    },
+    {
+      "source": "94",
+      "target": "96",
+      "relationship": "connects_to",
+      "weight": 0.48,
+      "label": "GUI",
+      "source_name": "User Interface Design",
+      "target_name": "Graphical User Interface"
+    },
+    {
+      "source": "94",
+      "target": "97",
+      "relationship": "connects_to",
+      "weight": 0.485,
+      "label": "VUI",
+      "source_name": "User Interface Design",
+      "target_name": "Voice User Interface"
+    },
+    {
+      "source": "95",
+      "target": "98",
+      "relationship": "connects_to",
+      "weight": 0.49,
+      "label": "UR",
+      "source_name": "User Experience Design",
+      "target_name": "User Research"
+    },
+    {
+      "source": "95",
+      "target": "99",
+      "relationship": "connects_to",
+      "weight": 0.495,
+      "label": "UT",
+      "source_name": "User Experience Design",
+      "target_name": "User Testing"
+    }
+  ]
+}

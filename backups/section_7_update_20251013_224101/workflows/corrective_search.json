@@ -1,0 +1,44 @@
+{
+    "workflow_name": "Resonant Corrective Loop - Search",
+    "version": "1.0",
+    "description": "A corrective workflow that researches a task failure or low-confidence result to find potential solutions.",
+    "input_parameters": {
+        "trigger_task": {
+            "type": "string"
+        },
+        "trigger_reason": {
+            "type": "string"
+        },
+        "task_result": {
+            "type": "dict"
+        }
+    },
+    "tasks": {
+        "formulate_search_query": {
+            "action_type": "string_template",
+            "description": "Formulate a search query based on the failure context.",
+            "inputs": {
+                "template": "How to fix error in ResonantiA workflow task '{{ trigger_task }}'. Reason: {{ trigger_reason }}. Error details: {{ task_result.error }}"
+            },
+            "output_variable": "search_query"
+        },
+        "research_solution": {
+            "action_type": "search_web",
+            "description": "Search the web for a solution to the identified problem.",
+            "inputs": {
+                "query": "{{ formulate_search_query.result }}"
+            },
+            "dependencies": ["formulate_search_query"]
+        },
+        "save_findings": {
+            "action_type": "save_to_file",
+            "description": "Save the research findings to a corrective action log.",
+            "inputs": {
+                "file_path": "outputs/rcl_findings_{{ workflow_run_id }}.json",
+                "content": "{{ research_solution.result.search_results }}"
+            },
+            "dependencies": ["research_solution"]
+        }
+    }
+}
+

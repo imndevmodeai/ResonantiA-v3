@@ -1,0 +1,6 @@
+2025-08-05 23:54:41 - Three_PointO_ArchE.workflow_engine:1029 - CRITICAL - workflow_engine - Workflow execution failed during loading: problem_description cannot be null - must be in workflow definition or initial context
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_engine.py", line 1018, in run_workflow
+    raise ValueError("problem_description cannot be null - must be in workflow definition or initial context")
+ValueError: problem_description cannot be null - must be in workflow definition or initial context
+2025-08-05 23:54:41 - __main__:221 - ERROR - main - Could not write final result to /media/newbu/3626C55326C514B1/Happier/outputs/result_thought_trail_workflow_N/A.json: [Errno 2] No such file or directory: '/media/newbu/3626C55326C514B1/Happier/outputs/result_thought_trail_workflow_N/A.json'

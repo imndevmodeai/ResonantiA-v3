@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceCheck Data Processor</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #444; text-align: center; }
+        textarea, input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; margin-bottom: 10px; }
+        textarea { height: 300px; }
+        input[type="submit"] { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; display: block; width: 100%; }
+        input[type="submit"]:hover { background-color: #0056b3; }
+        .loader { display: none; margin: 15px auto; border: 5px solid #f3f3f3; border-radius: 50%; border-top: 5px solid #3498db; width: 50px; height: 50px; animation: spin 1s linear infinite; }
+        .or-separator { text-align: center; margin: 20px 0; font-weight: bold; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FaceCheck Data Processor</h1>
+        
+        <!-- URL Form -->
+        <form id="url-form">
+            <input type="text" id="facecheck_url" placeholder="Paste FaceCheck.ID search URL here...">
+            <input type="submit" value="Process from URL">
+        </form>
+
+        <div class="or-separator">OR</div>
+
+        <!-- JSON Form -->
+        <form id="json-form">
+            <textarea id="json_data" placeholder="Paste your FaceCheck JSON data here..."></textarea>
+            <input type="submit" value="Process from JSON">
+        </form>
+
+        <div id="loader" class="loader"></div>
+    </div>
+
+    <script>
+        function handleResponse(response) {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.text();
+        }
+
+        function displayResult(html) {
+            document.open();
+            document.write(html);
+            document.close();
+        }
+
+        function handleError(error) {
+            document.open();
+            document.write(error.message);
+            document.close();
+        }
+
+        document.getElementById('url-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('loader').style.display = 'block';
+
+            const facecheckUrl = document.getElementById('facecheck_url').value;
+            fetch(`/from-url?url=${encodeURIComponent(facecheckUrl)}`)
+                .then(handleResponse)
+                .then(displayResult)
+                .catch(handleError)
+                .finally(() => {
+                    document.getElementById('loader').style.display = 'none';
+                });
+        });
+
+        document.getElementById('json-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('loader').style.display = 'block';
+
+            const jsonData = document.getElementById('json_data').value;
+            fetch('/process', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: jsonData
+            })
+                .then(handleResponse)
+                .then(displayResult)
+                .catch(handleError)
+                .finally(() => {
+                    document.getElementById('loader').style.display = 'none';
+                });
+        });
+    </script>
+</body>
+</html>

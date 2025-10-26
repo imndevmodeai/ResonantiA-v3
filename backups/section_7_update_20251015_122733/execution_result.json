@@ -1,0 +1,8 @@
+{
+  "workflow_name": "workflows/section_7_update_protocol.json",
+  "workflow_run_id": "N/A",
+  "workflow_status": "Failed",
+  "workflow_run_duration_sec": 0,
+  "task_statuses": {},
+  "error": "Action type 'write_file' is not registered in the engine"
+}

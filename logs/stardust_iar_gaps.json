@@ -1,0 +1,482 @@
+[
+  {
+    "entry_id": "stardust_iar_gap_0",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed standalone_execute_code in Three_PointO_ArchE/action_registry.py",
+    "reflection": "FAILURE: Function 'standalone_execute_code' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/action_registry.py",
+      "function": "standalone_execute_code",
+      "line": 123
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934657",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_1",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed string_template_action in Three_PointO_ArchE/action_registry.py",
+    "reflection": "FAILURE: Function 'string_template_action' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/action_registry.py",
+      "function": "string_template_action",
+      "line": 226
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934722",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_2",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed save_to_file_action in Three_PointO_ArchE/action_registry.py",
+    "reflection": "FAILURE: Function 'save_to_file_action' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/action_registry.py",
+      "function": "save_to_file_action",
+      "line": 262
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934727",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_3",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed execute_action in Three_PointO_ArchE/action_registry.py",
+    "reflection": "FAILURE: Function 'execute_action' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/action_registry.py",
+      "function": "execute_action",
+      "line": 334
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934729",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_4",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed register_action in Three_PointO_ArchE/action_registry.py",
+    "reflection": "FAILURE: Function 'register_action' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/action_registry.py",
+      "function": "register_action",
+      "line": 76
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934730",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_5",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed get_action in Three_PointO_ArchE/action_registry.py",
+    "reflection": "FAILURE: Function 'get_action' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/action_registry.py",
+      "function": "get_action",
+      "line": 91
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934732",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_6",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed call_api in Three_PointO_ArchE/enhanced_tools.py",
+    "reflection": "FAILURE: Function 'call_api' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/enhanced_tools.py",
+      "function": "call_api",
+      "line": 55
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934734",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_7",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed perform_complex_data_analysis in Three_PointO_ArchE/enhanced_tools.py",
+    "reflection": "FAILURE: Function 'perform_complex_data_analysis' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/enhanced_tools.py",
+      "function": "perform_complex_data_analysis",
+      "line": 212
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934735",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_8",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed interact_with_database in Three_PointO_ArchE/enhanced_tools.py",
+    "reflection": "FAILURE: Function 'interact_with_database' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/enhanced_tools.py",
+      "function": "interact_with_database",
+      "line": 284
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934736",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_9",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed perform_causal_inference in Three_PointO_ArchE/causal_inference_tool.py",
+    "reflection": "FAILURE: Function 'perform_causal_inference' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/causal_inference_tool.py",
+      "function": "perform_causal_inference",
+      "line": 94
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934738",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_10",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed perform_abm in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'perform_abm' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "perform_abm",
+      "line": 1200
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934739",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_11",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed step in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'step' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "step",
+      "line": 108
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934740",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_12",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed advance in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'advance' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "advance",
+      "line": 133
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934742",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_13",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed step in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'step' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "step",
+      "line": 175
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934743",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_14",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed step in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'step' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "step",
+      "line": 265
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934744",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_15",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed count_active_agents in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'count_active_agents' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "count_active_agents",
+      "line": 346
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934746",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_16",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed count_inactive_agents in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'count_inactive_agents' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "count_inactive_agents",
+      "line": 349
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934747",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_17",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed get_agent_states in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'get_agent_states' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "get_agent_states",
+      "line": 353
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934748",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_18",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed create_model in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'create_model' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "create_model",
+      "line": 384
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934750",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_19",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed run_simulation in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'run_simulation' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "run_simulation",
+      "line": 457
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934751",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_20",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed analyze_results in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'analyze_results' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "analyze_results",
+      "line": 695
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934752",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_21",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed convert_to_state_vector in Three_PointO_ArchE/agent_based_modeling_tool.py",
+    "reflection": "FAILURE: Function 'convert_to_state_vector' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "function": "convert_to_state_vector",
+      "line": 914
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934758",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_22",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed run_prediction in Three_PointO_ArchE/predictive_modeling_tool.py",
+    "reflection": "FAILURE: Function 'run_prediction' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/predictive_modeling_tool.py",
+      "function": "run_prediction",
+      "line": 68
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934759",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_23",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed main in Three_PointO_ArchE/plan_validator.py",
+    "reflection": "FAILURE: Function 'main' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/plan_validator.py",
+      "function": "main",
+      "line": 673
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934761",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_24",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed validate_workflow in Three_PointO_ArchE/plan_validator.py",
+    "reflection": "FAILURE: Function 'validate_workflow' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/plan_validator.py",
+      "function": "validate_workflow",
+      "line": 126
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934762",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_25",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed validate_and_educate in Three_PointO_ArchE/plan_validator.py",
+    "reflection": "FAILURE: Function 'validate_and_educate' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/plan_validator.py",
+      "function": "validate_and_educate",
+      "line": 612
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934763",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_26",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed get_validation_stats in Three_PointO_ArchE/plan_validator.py",
+    "reflection": "FAILURE: Function 'get_validation_stats' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/plan_validator.py",
+      "function": "get_validation_stats",
+      "line": 655
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934765",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_27",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed extract_from_value in Three_PointO_ArchE/plan_validator.py",
+    "reflection": "FAILURE: Function 'extract_from_value' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/plan_validator.py",
+      "function": "extract_from_value",
+      "line": 396
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934766",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "stardust_iar_gap_28",
+    "action_type": "code_analysis_failure",
+    "intention": "ensure_full_iar_compliance",
+    "action": "Analyzed to_dict in Three_PointO_ArchE/plan_validator.py",
+    "reflection": "FAILURE: Function 'to_dict' is missing the @log_to_thought_trail decorator.",
+    "confidence": 0.2,
+    "metadata": {
+      "file": "Three_PointO_ArchE/plan_validator.py",
+      "function": "to_dict",
+      "line": 51
+    },
+    "status": "RESOLVED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934767",
+    "resolution_action": "Added @log_to_thought_trail decorator"
+  },
+  {
+    "entry_id": "iar_compliance_summary",
+    "action_type": "compliance_resolution",
+    "intention": "achieve_full_iar_compliance",
+    "action": "Added @log_to_thought_trail decorators to all identified functions",
+    "reflection": "SUCCESS: All 29 IAR compliance gaps have been resolved. All functions now have proper @log_to_thought_trail decorators.",
+    "confidence": 1.0,
+    "status": "COMPLETED",
+    "resolution_timestamp": "2025-10-16T07:45:25.934769",
+    "metadata": {
+      "total_gaps_resolved": 29,
+      "files_processed": 6,
+      "mandate_compliance": "MANDATE 3: The Mind Forge - IAR compliance achieved",
+      "backup_policy": "MANDATE 13: Backup retention policy followed"
+    }
+  }
+]

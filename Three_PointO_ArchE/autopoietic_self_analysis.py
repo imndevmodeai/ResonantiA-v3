@@ -29,6 +29,12 @@ from dataclasses import dataclass, asdict, field
 from collections import defaultdict
 import numpy as np
 
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from Three_PointO_ArchE.temporal_core import now, now_iso, ago, from_now, format_log, format_filename
+
+
 logger = logging.getLogger(__name__)
 
 # Quantum Utils Integration
@@ -197,7 +203,7 @@ class AutopoieticSelfAnalysis:
     ):
         """Log an IAR entry to the transformation log."""
         entry = IAREntry(
-            timestamp=datetime.now().isoformat(),
+            timestamp=now_iso(),
             phase=phase,
             action_type=action_type,
             intention=intention,
@@ -370,36 +376,22 @@ class AutopoieticSelfAnalysis:
                 "line_count": len(content.split('\n'))
             }
             
-            # Track current class context for method attribution
-            current_class = None
-            
-            for node in ast.walk(tree):
+            # Iterate through top-level nodes to distinguish functions from methods
+            for node in tree.body:
                 if isinstance(node, ast.ClassDef):
                     analysis["classes"].add(node.name)
-                    # Extract methods directly from class body (not via walk to avoid double-counting)
-                    if hasattr(node, 'body') and isinstance(node.body, list):
-                        for item in node.body:
-                            if isinstance(item, ast.FunctionDef):
-                                analysis["methods"][node.name].add(item.name)
-                
-                elif isinstance(node, ast.FunctionDef):
-                    # Check if this is a top-level function (not inside a class)
-                    # If parent is Module, it's top-level
-                    # Note: ast.walk doesn't preserve parent info, so we check if function name
-                    # isn't already in methods dict
-                    is_method = any(node.name in methods for methods in analysis["methods"].values())
-                    if not is_method:
-                        analysis["functions"].add(node.name)
-                
-                elif isinstance(node, (ast.Import, ast.ImportFrom)):
-                    if isinstance(node, ast.Import):
-                        if hasattr(node, 'names') and isinstance(node.names, list):
-                            for alias in node.names:
-                                if hasattr(alias, 'name'):
-                                    analysis["imports"].add(alias.name)
-                    elif isinstance(node, ast.ImportFrom) and hasattr(node, 'module') and node.module:
+                    for item in node.body:
+                        if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                            analysis["methods"][node.name].add(item.name)
+                elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    analysis["functions"].add(node.name)
+                elif isinstance(node, ast.Import):
+                    for alias in node.names:
+                        analysis["imports"].add(alias.name)
+                elif isinstance(node, ast.ImportFrom):
+                    if node.module:
                         analysis["imports"].add(node.module)
-            
+
             # Quantum IAR Compliance Analysis
             iar_evidence = []
             iar_probability = 0.0
@@ -645,7 +637,7 @@ class AutopoieticSelfAnalysis:
             "medium_count": sum(1 for g in self.gaps if g.severity == "medium"),
             "low_count": sum(1 for g in self.gaps if g.severity == "low"),
             "average_alignment": sum(g.confidence_score for g in self.gaps) / len(self.gaps) if self.gaps else 0.0,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": now_iso()
         }
         
         return summary
@@ -786,7 +778,7 @@ def main():
     print(report)
     
     # Save reports
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = format_filename()
     report_dir = analysis.project_root / "logs" / "self_analysis"
     report_dir.mkdir(exist_ok=True)
     

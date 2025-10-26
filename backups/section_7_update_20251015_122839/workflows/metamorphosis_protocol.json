@@ -1,0 +1,54 @@
+{
+    "workflow_name": "Metamorphosis Protocol",
+    "version": "1.0",
+    "description": "Forges a Specialized Cognitive Agent (SCA) persona based on a session's knowledge base and the problem description.",
+    "input_parameters": {
+        "session_knowledge_base": {
+            "type": "dict",
+            "description": "The knowledge base compiled during the scaffolding phase."
+        },
+        "problem_description": {
+            "type": "string",
+            "description": "The original problem description."
+        },
+        "session_id": {
+            "type": "string"
+        }
+    },
+    "tasks": {
+        "define_agent_persona": {
+            "action_type": "generate_text_llm",
+            "description": "Defines the core persona, expertise, and operational parameters of a specialized agent.",
+            "inputs": {
+                "prompt": "Based on the following knowledge base and problem description, create a detailed persona for a specialized cognitive agent. The persona should be a JSON object with keys: 'name', 'expertise' (list of strings), 'background' (a detailed paragraph), 'analytical_frameworks' (list of strings), and 'strategic_patterns' (list of strings).\\n\\n== KNOWLEDGE BASE ==\\n{knowledge_base_str}\\n\\n== PROBLEM DESCRIPTION ==\\n{problem_description}",
+                "model_settings": {
+                    "temperature": 0.4,
+                    "max_tokens": 1500
+                },
+                "knowledge_base_str": "{{ session_knowledge_base }}",
+                "problem_description": "{{ problem_description }}"
+            },
+            "output_variable": "agent_profile"
+        },
+        "validate_agent_structure": {
+            "action_type": "generate_text_llm",
+            "description": "Validates the generated agent profile to ensure it conforms to the required structure.",
+            "inputs": {
+                "prompt": "Please validate the following agent profile JSON and ensure it contains all required keys: 'name', 'expertise', 'background', 'analytical_frameworks', 'strategic_patterns'. If any keys are missing, add them with appropriate placeholder values. Return the complete, validated JSON object.\n\nAgent Profile:\n{{ define_agent_persona.output.generated_text }}",
+                "model_settings": {"temperature": 0.1, "max_tokens": 1000}
+            },
+            "output_variable": "validated_agent",
+            "dependencies": ["define_agent_persona"]
+        }
+    },
+    "output": {
+        "specialized_agent": {
+            "value": "{{ validate_agent_structure.output.result.agent_profile }}",
+            "description": "The validated profile of the newly forged specialized cognitive agent."
+        },
+        "status": {
+            "value": "{{ validate_agent_structure.output.result.status }}",
+            "description": "The final status of the agent creation process."
+        }
+    }
+}

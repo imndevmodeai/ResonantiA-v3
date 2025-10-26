@@ -3,27 +3,40 @@ import os
 import logging
 from typing import Dict, Any
 
-# Corrected import: Import the entire module to access its factory function.
-from .. import llm_providers 
-from ..iar_components import IAR_Prepper
+# Corrected import: Import the specific factory functions directly.
+from Three_PointO_ArchE.llm_providers import get_llm_provider, get_model_for_provider
+from Three_PointO_ArchE.iar_components import IAR_Prepper
 import re
 
 logger = logging.getLogger(__name__)
 
-def invoke_llm_for_synthesis(prompt: str, **kwargs) -> Dict[str, Any]:
+def invoke_llm_for_synthesis(**kwargs) -> Dict[str, Any]:
     """
     Invokes the appropriate LLM provider to synthesize information.
     Includes a pre-flight check for empty search results.
     """
+    prompt = kwargs.get('prompt')
+    if not prompt:
+        return {
+            "status": "error",
+            "reason": "Input dictionary must contain a 'prompt' key.",
+            "generated_text": "{}"
+        }
+        
     # Prong 2: Input Validation Pre-flight check
     # Use regex to find the search results section of the prompt
     match = re.search(r"SEARCH RESULTS:\s*(\[\]|NONE)", prompt, re.IGNORECASE)
     if match:
         # If the search results are empty, do not call the LLM.
+        iar_prepper = IAR_Prepper("generate_text_llm", {"prompt": prompt, **kwargs})
         return {
             "status": "skipped",
             "reason": "Input search results were empty. LLM call was not made.",
-            "generated_text": "{}" # Return empty JSON to satisfy downstream tasks
+            "generated_text": "{}", # Return empty JSON to satisfy downstream tasks
+            "reflection": iar_prepper.finish_with_success({
+                "status": "skipped",
+                "reason": "Input search results were empty."
+            })
         }
         
     iar_prepper = IAR_Prepper("generate_text_llm", {"prompt": prompt, **kwargs})
@@ -39,31 +52,41 @@ def invoke_llm_for_synthesis(prompt: str, **kwargs) -> Dict[str, Any]:
             prompt = f"{prompt}\n\n--- Context ---\n{json.dumps(context, indent=2)}"
 
         model = kwargs.get('model') # Can be None, factory will use default
-        provider_name = kwargs.get('provider', 'google') # Can be None, factory will use default
+        provider_name = kwargs.get('provider') # Can be None, factory will use default
 
         # Use the factory to get the correct, configured provider instance
-        provider = llm_providers.get_llm_provider(provider_name)
+        provider = get_llm_provider(provider_name)
         
         # Determine which model to use (input > provider default > provider backup)
-        # The model from input is used directly if provided. If not, the factory inside generate will resolve it.
-        model_to_use = model or llm_providers.get_model_for_provider(provider._provider_name)
-
+        model_to_use = model or get_model_for_provider(provider._provider_name)
 
         logger.info(f"Invoking LLM provider '{provider._provider_name}' with model '{model_to_use}'.")
 
-        # Prepare generation parameters
-        max_tokens = kwargs.get('max_tokens', 4096)
-        temperature = kwargs.get('temperature', 0.7)
+        # --- CORRECTED PARAMETER HANDLING ---
+        # Define the set of known, valid parameters for the Google GenAI API
+        VALID_GOOGLE_PARAMS = {'max_output_tokens', 'temperature', 'top_p', 'top_k', 'candidate_count', 'stop_sequences'}
+
+        # Unpack model_settings if it exists, otherwise use top-level kwargs.
+        model_params = kwargs.get('model_settings', {})
         
-        # Pass through any other kwargs
-        additional_kwargs = {k: v for k, v in kwargs.items() if k not in ['prompt', 'context', 'model', 'provider', 'max_tokens', 'temperature']}
+        # Start with a clean dictionary for the final generation config
+        generation_config = {}
+
+        # Explicitly handle standard parameters and map them to the API's expected names
+        generation_config['max_output_tokens'] = model_params.get('max_tokens', kwargs.get('max_tokens', 4096))
+        generation_config['temperature'] = model_params.get('temperature', kwargs.get('temperature', 0.7))
+
+        # Filter and pass through only the valid, known additional parameters
+        # from both model_settings and the top-level kwargs.
+        all_potential_params = {**kwargs, **model_params}
+        for key, value in all_potential_params.items():
+            if key in VALID_GOOGLE_PARAMS and key not in generation_config:
+                generation_config[key] = value
 
         generated_text = provider.generate(
             prompt=prompt,
             model=model_to_use,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            **additional_kwargs
+            **generation_config
         )
         
         logger.info("LLM generation successful.")

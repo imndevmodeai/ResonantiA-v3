@@ -1,0 +1,97 @@
+{
+  "name": "RISE v2 Robust Knowledge Scaffolding",
+  "description": "Phase A of RISE v2.0: Robust 6-step workflow with explicit validation",
+  "version": "2.0",
+  "inputs": {
+    "user_query": {
+      "type": "string",
+      "description": "The user's query to be analyzed",
+      "required": true
+    }
+  },
+  "tasks": {
+    "deconstruct_problem": {
+      "action_type": "generate_text_llm",
+      "description": "Deconstruct the user request into its core components",
+      "inputs": {
+        "prompt": "Deconstruct the following user request into its core components: {{ context.user_query }}. Identify the primary objective, key entities, constraints, and desired output format. Output your analysis as a structured JSON object.",
+        "model": "{{ context.model | default(gemini-2.0-flash-exp) }}",
+        "model_settings": {"temperature": 0.3, "max_tokens": 4096}
+      },
+      "dependencies": []
+    },
+    "extract_domain": {
+      "action_type": "generate_text_llm",
+      "description": "Extract the primary knowledge domain from the deconstruction",
+      "inputs": {
+        "prompt": "From the following deconstruction, identify the primary knowledge domain (e.g., 'Financial Analysis', 'Software Engineering', 'Geopolitical Strategy'). Output only the domain name as a JSON object with key 'domain'.\n\nDeconstruction: {{ deconstruct_problem.result.generated_text }}",
+        "model": "{{ context.model | default(gemini-2.0-flash-exp) }}",
+        "model_settings": {"temperature": 0.1, "max_tokens": 500}
+      },
+      "dependencies": ["deconstruct_problem"]
+    },
+    "acquire_knowledge": {
+      "action_type": "search_web",
+      "description": "Acquire foundational knowledge about the identified domain",
+      "inputs": {
+        "query": "{{ extract_domain.result.generated_text }} comprehensive overview latest developments key concepts",
+        "num_results": 10
+      },
+      "dependencies": ["extract_domain"]
+    },
+    "validate_search_results": {
+      "action_type": "execute_code",
+      "description": "Validate that search results are valid and non-empty",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nsearch_output = {{ acquire_knowledge.result }}\nresults = search_output.get('results', [])\nvalid = isinstance(results, list) and len(results) > 0\nprint(json.dumps({'search_is_valid': valid, 'results_count': len(results) if isinstance(results, list) else 0}))"
+      },
+      "dependencies": ["acquire_knowledge"]
+    },
+    "validate_knowledge": {
+      "action_type": "generate_text_llm",
+      "description": "Validate and synthesize the acquired knowledge into a coherent packet",
+      "condition": "{{ validate_search_results.result.output.search_is_valid }} == true",
+      "inputs": {
+        "prompt": "Review the following search results for relevance, accuracy, and potential bias regarding the domain of {{ extract_domain.result.generated_text }}. Synthesize the top 3-5 most reliable sources into a coherent knowledge packet.\n\nSearch Results: {{ acquire_knowledge.result }}\n\nProvide a comprehensive knowledge packet as a structured JSON object.",
+        "model": "{{ context.model | default(gemini-2.0-flash-exp) }}",
+        "model_settings": {"temperature": 0.4, "max_tokens": 8192}
+      },
+      "dependencies": ["validate_search_results"]
+    },
+    "forge_agent": {
+      "action_type": "generate_text_llm",
+      "description": "Forge a specialized cognitive agent profile from the validated knowledge",
+      "inputs": {
+        "prompt": "Create a specialized agent profile for solving problems in the domain of {{ extract_domain.result.generated_text }}. Base the agent on this validated knowledge:\n\n{{ validate_knowledge.result.generated_text }}\n\nDefine:\n1. Agent's core expertise and background\n2. Analytical frameworks and methodologies\n3. Strategic thinking patterns\n4. Risk assessment capabilities\n5. Implementation approach\n6. Success metrics\n\nOutput as a structured JSON object with key 'agent_profile'.",
+        "model": "gemini-2.0-flash-exp",
+        "model_settings": {"temperature": 0.7, "max_tokens": 16384}
+      },
+      "dependencies": ["validate_knowledge"]
+    },
+    "validate_agent": {
+      "action_type": "generate_text_llm",
+      "description": "Validate the forged agent profile for coherence and alignment",
+      "inputs": {
+        "prompt": "Assess the following agent profile for coherence, completeness, and alignment with the original problem deconstruction. Provide a validation score (1-5) and detailed justification.\n\nOriginal Deconstruction: {{ deconstruct_problem.result.generated_text }}\n\nAgent Profile: {{ forge_agent.result.generated_text }}\n\nOutput as JSON with keys 'validation_score', 'justification', and 'identified_gaps'.",
+        "model": "{{ context.model | default(gemini-2.0-flash-exp) }}",
+        "model_settings": {"temperature": 0.2, "max_tokens": 2048}
+      },
+      "dependencies": ["forge_agent"]
+    }
+  },
+  "output": {
+    "session_knowledge_base": {
+      "description": "Accumulated domain knowledge and insights",
+      "value": "{{ validate_knowledge.result.generated_text }}"
+    },
+    "specialized_agent": {
+      "description": "The forged specialist agent with required capabilities",
+      "value": "{{ forge_agent.result.generated_text }}"
+    },
+    "agent_validation": {
+      "description": "Validation assessment of the forged agent",
+      "value": "{{ validate_agent.result.generated_text }}"
+    }
+  }
+}

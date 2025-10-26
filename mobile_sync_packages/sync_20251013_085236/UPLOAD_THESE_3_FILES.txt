@@ -1,0 +1,53 @@
+📱 MOBILE ARCHE - UPLOAD THESE 3 FILES TO GOOGLE DRIVE
+========================================================
+
+Copy these 3 files to your Google Drive "ArchE_Mobile" folder:
+
+1. ✅ PRIME_ARCHE_PROTOCOL_v2_AUTO.md (7.4 KB) 
+   ⚠️  THIS ONE IS ABSOLUTELY ESSENTIAL!
+   Without this, mobile ArchE won't work.
+
+2. ✅ knowledge_snapshot_20251013_085236.json (28 KB)
+   Highly recommended - contains current system state
+
+3. ✅ ARCHE_MOBILE_QUICK_REFERENCE.md (12 KB)
+   Very helpful - quick commands and SPR list
+
+========================================================
+
+QUICK UPLOAD METHOD:
+
+Option A - Drag and Drop (EASIEST):
+1. Open this folder in file manager
+2. Open Google Drive in browser
+3. Navigate to your "ArchE_Mobile" folder
+4. Drag these 3 files from file manager to browser
+5. Done!
+
+Option B - Google Drive Web Upload:
+1. Go to drive.google.com
+2. Navigate to "ArchE_Mobile" folder
+3. Click "New" → "File upload"
+4. Select these 3 files
+5. Upload
+
+========================================================
+
+CURRENT FOLDER:
+/media/newbu/3626C55326C514B1/Happier/mobile_sync_packages/sync_20251013_085236
+
+TO OPEN IN FILE MANAGER:
+Run: xdg-open /media/newbu/3626C55326C514B1/Happier/mobile_sync_packages/sync_20251013_085236
+
+========================================================
+
+ONCE UPLOADED, ON YOUR PHONE:
+
+1. Open AI Studio (aistudio.google.com)
+2. Upload PRIME_ARCHE_PROTOCOL_v2_AUTO.md
+3. Type: Keyy=('IMnDEVmode') Prime yourself
+4. Start using mobile ArchE!
+
+========================================================
+
+

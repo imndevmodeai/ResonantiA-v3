@@ -1,0 +1,79 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-02T16:53:05.212Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-02_16-53-05-212Z.log
+❌ Error Log: logs/errors_websocket_2025-09-02_16-53-05-212Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-02_16-53-05-212Z.log
+================================================================================
+2025-09-02T16:53:05.224Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-02T16:53:05.241Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-02T16:53:05.242Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-02T16:53:05.243Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-02T16:53:40.237Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T16:53:40.291Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T16:53:40.345Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T16:53:43.331Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T16:53:58.534Z [INFO] websocket: Received user query
+{
+  "query": "hello ArchE I am the keyholder..."
+}
+2025-09-02T16:53:58.545Z [INFO] websocket: Sent query to ArchE interface: hello ArchE I am the keyholder...
+2025-09-02T16:53:59.172Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756832039154",
+  "content": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '0s'}]))",
+  "timestamp": "2025-09-02T16:53:59.154456Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-02T16:53:59.154336Z",
+    "cognitive_resonance": {
+      "clarity": 0.4,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.4,
+      "future_projection": 0.30000000000000004,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.45000000000000007
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '0s'}]))"
+  }
+}
+2025-09-02T17:20:55.739Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T17:20:55.794Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T17:21:01.040Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T17:21:01.057Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T18:15:44.915Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T18:15:44.921Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T18:34:21.131Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T18:34:21.151Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T19:56:30.092Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-02T19:56:30.105Z [WARN] websocket: ArchE WebSocket connection closed

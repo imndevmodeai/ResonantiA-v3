@@ -26,6 +26,28 @@ class ArcheStartup:
         print("🧠 RISE Engine + NextJS UI + Session Management")
         print("=" * 50)
         
+    def prime_action_registry(self):
+        """Run the action registry priming script as a module."""
+        print("\n🅿️  Priming action registry...")
+        try:
+            # Run the priming script as a module to fix relative import issues
+            result = subprocess.run(
+                [sys.executable, "-m", "Three_PointO_ArchE.prime_action_registry"],
+                capture_output=True,
+                text=True,
+                cwd=self.project_root
+            )
+            if result.returncode == 0:
+                print("✅ Action registry primed successfully.")
+                return True
+            else:
+                print("❌ Action registry priming failed.")
+                print(result.stderr)
+                return False
+        except Exception as e:
+            print(f"❌ Error priming action registry: {e}")
+            return False
+
     def check_environment(self):
         """Check if all required components are available"""
         print("🔍 Checking environment...")
@@ -59,6 +81,24 @@ class ArcheStartup:
         
         return True
         
+    def verify_action_registry(self):
+        """Verify the action registry, including dynamic loading."""
+        print("\n🔬 Verifying full action registry...")
+        total_actions = 0
+        try:
+            from Three_PointO_ArchE.action_registry import main_action_registry
+            total_actions = len(main_action_registry.actions)
+            
+            if total_actions > 0:
+                print(f"✅ Action registry verification passed. Found {total_actions} actions.")
+                return True
+            else:
+                print("❌ Action registry is empty. Dynamic loading may have failed.")
+                return False
+        except Exception as e:
+            print(f"❌ Error verifying action registry: {e}")
+            return False
+
     def test_rise_engine(self):
         """Test the RISE engine functionality"""
         print("\n🧪 Testing RISE Engine...")
@@ -224,10 +264,20 @@ class ArcheStartup:
     def run(self):
         """Main startup sequence"""
         self.print_banner()
+
+        # Prime the action registry first
+        if not self.prime_action_registry():
+            print("❌ Action registry priming failed. Aborting startup.")
+            sys.exit(1)
         
         # Check environment
         if not self.check_environment():
             print("❌ Environment check failed. Please fix issues and try again.")
+            sys.exit(1)
+            
+        # Verify action registry
+        if not self.verify_action_registry():
+            print("❌ Action registry verification failed. Please fix issues and try again.")
             sys.exit(1)
             
         # Test components

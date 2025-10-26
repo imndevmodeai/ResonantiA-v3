@@ -1,0 +1,584 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-03T01:56:53.772Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-03_01-56-53-771Z.log
+❌ Error Log: logs/errors_websocket_2025-09-03_01-56-53-771Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-03_01-56-53-771Z.log
+================================================================================
+2025-09-03T01:56:53.774Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-03T01:56:53.785Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-03T01:56:53.785Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-03T01:56:53.785Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-03T01:56:55.236Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T01:56:55.277Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T01:59:00.511Z [INFO] websocket: Received user query
+{
+  "query": "🤖 ArchE9:55:36 PMv3.1-CA\nAn error occurred while trying to generate a response: [google Error] Unex..."
+}
+2025-09-03T01:59:00.516Z [INFO] websocket: Sent query to ArchE interface: 🤖 ArchE9:55:36 PMv3.1-CA
+An error occurred while ...
+2025-09-03T01:59:00.849Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756864740837",
+  "content": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-1.5-pro', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]))",
+  "timestamp": "2025-09-03T01:59:00.837222Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-03T01:59:00.837123Z",
+    "cognitive_resonance": {
+      "clarity": 0.4,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.4,
+      "future_projection": 0.30000000000000004,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.45000000000000007
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-1.5-pro', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]))"
+  }
+}
+2025-09-03T01:59:08.846Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-03T01:59:08.847Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-03T01:59:08.953Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756864748952",
+  "content": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '51s'}]))",
+  "timestamp": "2025-09-03T01:59:08.952602Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-03T01:59:08.952587Z",
+    "cognitive_resonance": {
+      "clarity": 0.4,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.4,
+      "future_projection": 0.30000000000000004,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.45000000000000007
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '51s'}]))"
+  }
+}
+2025-09-03T02:00:23.345Z [INFO] websocket: Received user query
+{
+  "query": "Design a comprehensive framework for transforming global education systems to prepare humanity for t..."
+}
+2025-09-03T02:00:23.347Z [INFO] websocket: Sent query to ArchE interface: Design a comprehensive framework for transforming ...
+2025-09-03T02:00:23.384Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756864823.364119,
+  "metadata": {
+    "session_id": "rise_1756879223_488c39"
+  }
+}
+2025-09-03T02:00:23.397Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756864823.371496,
+  "metadata": {
+    "session_id": "rise_1756879223_488c39"
+  }
+}
+2025-09-03T02:00:23.406Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756864823376",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T02:00:23.376949Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T02:00:23.376926Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756879223_488c39",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T02:00:29.875Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Design a comprehensive framework for transforming global ed..."
+}
+2025-09-03T02:00:29.877Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Design a ...
+2025-09-03T02:00:29.888Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756864829.8812723,
+  "metadata": {
+    "session_id": "rise_1756879229_ef9db5"
+  }
+}
+2025-09-03T02:00:29.900Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756864829.8833282,
+  "metadata": {
+    "session_id": "rise_1756879229_ef9db5"
+  }
+}
+2025-09-03T02:00:29.913Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756864829886",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T02:00:29.886158Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T02:00:29.886135Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756879229_ef9db5",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T02:00:46.045Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Design a comprehensive framework for transforming global ed..."
+}
+2025-09-03T02:00:46.047Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Design a ...
+2025-09-03T02:00:46.056Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756864846.0491333,
+  "metadata": {
+    "session_id": "rise_1756879246_1d4122"
+  }
+}
+2025-09-03T02:00:46.059Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756864846.0511138,
+  "metadata": {
+    "session_id": "rise_1756879246_1d4122"
+  }
+}
+2025-09-03T02:00:46.063Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756864846052",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T02:00:46.052650Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T02:00:46.052628Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756879246_1d4122",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T02:00:47.737Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Design a comprehensive framework for transforming global ed..."
+}
+2025-09-03T02:00:47.738Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Design a ...
+2025-09-03T02:00:47.759Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756864847.747307,
+  "metadata": {
+    "session_id": "rise_1756879247_379c41"
+  }
+}
+2025-09-03T02:00:47.765Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756864847.7528288,
+  "metadata": {
+    "session_id": "rise_1756879247_379c41"
+  }
+}
+2025-09-03T02:00:47.769Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756864847754",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T02:00:47.754822Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T02:00:47.754797Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756879247_379c41",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T02:00:54.336Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Design a comprehensive framework for transforming global ed..."
+}
+2025-09-03T02:00:54.337Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Design a ...
+2025-09-03T02:00:54.354Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756864854.3449237,
+  "metadata": {
+    "session_id": "rise_1756879254_7d4730"
+  }
+}
+2025-09-03T02:00:54.367Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756864854.3496568,
+  "metadata": {
+    "session_id": "rise_1756879254_7d4730"
+  }
+}
+2025-09-03T02:00:54.377Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756864854352",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T02:00:54.352207Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T02:00:54.352182Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756879254_7d4730",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T02:00:57.138Z [INFO] websocket: Received user query
+{
+  "query": "Design a comprehensive framework for transforming global education systems to prepare humanity for t..."
+}
+2025-09-03T02:00:57.142Z [INFO] websocket: Sent query to ArchE interface: Design a comprehensive framework for transforming ...
+2025-09-03T02:00:57.179Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756864857.147578,
+  "metadata": {
+    "session_id": "rise_1756879257_05c4c5"
+  }
+}
+2025-09-03T02:00:57.183Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756864857.1610963,
+  "metadata": {
+    "session_id": "rise_1756879257_05c4c5"
+  }
+}
+2025-09-03T02:00:57.205Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756864857168",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T02:00:57.168207Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T02:00:57.168182Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756879257_05c4c5",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T02:04:30.236Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-03T02:04:30.241Z [WARN] websocket: ArchE WebSocket connection closed
