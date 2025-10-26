@@ -1,0 +1,24 @@
+{
+  "name": "generic_dsl_demo",
+  "version": "1.0",
+  "tasks": {
+    "run_sim_dsl": {
+      "action": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "generic_dsl",
+        "num_steps": 50,
+        "model_params": {
+          "schema": "{{ context.schema }}"
+        }
+      }
+    },
+    "display": {
+      "action": "display_output",
+      "inputs": {
+        "content": "DSL demo run complete. Steps: {{ run_sim_dsl.simulation_steps_run }} | Agents: {{ run_sim_dsl.model.agent_count }}"
+      },
+      "dependencies": ["run_sim_dsl"]
+    }
+  }
+} 

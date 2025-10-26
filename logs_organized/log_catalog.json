@@ -1,0 +1,366 @@
+{
+  "metadata": {
+    "created": "2025-09-18T11:59:30.275194",
+    "version": "1.0",
+    "total_logs": 427,
+    "last_organized": "2025-09-18T11:59:32.607372"
+  },
+  "workflows": {
+    "Metamorphosis Protocol": {
+      "count": 58,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 2,
+      "total_tasks": 203
+    },
+    "Knowledge Scaffolding & Dynamic Specialization": {
+      "count": 69,
+      "phases": [
+        "A"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 12,
+      "total_tasks": 310
+    },
+    "Live RISE Engine Invocation (External Script)": {
+      "count": 12,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 5,
+      "total_tasks": 12
+    },
+    "Fused Strategy Synthesis": {
+      "count": 50,
+      "phases": [
+        "B"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 179
+    },
+    "Strategy Fusion Workflow (RISE Phase B)": {
+      "count": 27,
+      "phases": [
+        "B"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 79,
+      "total_tasks": 169
+    },
+    "High Stakes Vetting Cascade": {
+      "count": 36,
+      "phases": [
+        "C"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 6,
+      "total_tasks": 180
+    },
+    "Distill SPR from Execution": {
+      "count": 34,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 34,
+      "total_tasks": 102
+    },
+    "Unnamed Workflow": {
+      "count": 50,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 17,
+      "total_tasks": 314
+    },
+    "Knowledge Scaffolding & Dynamic Specialization (Simple)": {
+      "count": 15,
+      "phases": [
+        "A"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 130
+    },
+    "Autopoietic System Genesis Protocol": {
+      "count": 12,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 11,
+      "total_tasks": 52
+    },
+    "Enhanced Templating Demonstration": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 3
+    },
+    "Domain Extraction Debug": {
+      "count": 3,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 9
+    },
+    "System Genesis and Evolution Workflow": {
+      "count": 5,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 4,
+      "total_tasks": 33
+    },
+    "Live RISE Engine Invocation": {
+      "count": 3,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 3
+    },
+    "Autopoietic System Genesis Protocol (v3.6-CGS)": {
+      "count": 7,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 2,
+      "total_tasks": 19
+    },
+    "ArchE System Demo Workflow": {
+      "count": 4,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 16
+    },
+    "Resonant Autopoietic Genesis Protocol (v2)": {
+      "count": 4,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 1,
+      "total_tasks": 25
+    },
+    "Metacognitive Control Flow Demonstration (Revised)": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 2
+    },
+    "Final RISE Engine Invocation": {
+      "count": 2,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 1,
+      "total_tasks": 2
+    },
+    "Basic Analysis Workflow (v3.0 Enhanced)": {
+      "count": 13,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 13,
+      "total_tasks": 46
+    },
+    "For Each Meta-Action Demonstration": {
+      "count": 3,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 1,
+      "total_tasks": 6
+    },
+    "Thought traiL Workflow": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 1
+    },
+    "Autopoietic Genesis Workflow v4": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 3
+    },
+    "Specification Refinement Protocol": {
+      "count": 2,
+      "phases": [
+        "D"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 10
+    },
+    "Autopoietic System Genesis Protocol (v4.0-CGS)": {
+      "count": 5,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 15
+    },
+    "Temporal Forecasting Workflow (v3.0)": {
+      "count": 2,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 6
+    },
+    "Full ArchE Genesis Test": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 10
+    },
+    "Simple Test Workflow": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 2
+    },
+    "Test Bonnie Rotten Search Tool": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 3
+    },
+    "Conditional Execution Demonstration": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 3
+    },
+    "Metacognitive Control Flow Demonstration": {
+      "count": 2,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 2,
+      "total_tasks": 4
+    },
+    "Resilience-as-a-Service Blueprint Generation": {
+      "count": 1,
+      "phases": [
+        "unknown"
+      ],
+      "sessions": [
+        "unknown"
+      ],
+      "total_errors": 0,
+      "total_tasks": 1
+    }
+  },
+  "phases": {},
+  "errors": {},
+  "sessions": {},
+  "analysis": {}
+}

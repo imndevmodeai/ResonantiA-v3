@@ -1,0 +1,934 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-08-06T02:13:35.056Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-08-06_02-13-35-055Z.log
+❌ Error Log: logs/errors_websocket_2025-08-06_02-13-35-055Z.log
+⚡ Performance Log: logs/performance_websocket_2025-08-06_02-13-35-055Z.log
+================================================================================
+2025-08-06T02:13:35.084Z [WARN] websocket: Protocol modules not available
+{
+  "error": "Cannot find module './utils/iarProcessor.js'\nRequire stack:\n- /media/newbu/3626C55326C514B1/Happier/webSocketServer.js"
+}
+2025-08-06T02:13:35.123Z [INFO] websocket: Falling back to basic processing mode
+2025-08-06T02:13:35.125Z [INFO] websocket: This may be due to a missing build step. Try running "npm run build" in the nextjs-chat directory
+2025-08-06T02:13:35.125Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-08-06T02:13:35.128Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-08-06T02:13:35.130Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-08-06T02:18:03.120Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-06T02:18:03.227Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-06T02:18:03.263Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:03.274Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:03.309Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-06T02:18:03.320Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:03.325Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:08.281Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:08.284Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:08.284Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:08.331Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:08.334Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:08.334Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:13.290Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:13.298Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:13.300Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:13.339Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:13.347Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:13.347Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:18.308Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:18.317Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:18.320Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:18.356Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:18.366Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:18.371Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:23.332Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:23.335Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:23.335Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:23.371Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:23.374Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:23.374Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:28.340Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:28.342Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:28.342Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:28.374Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:28.376Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:28.376Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:33.348Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:33.350Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:33.351Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:33.377Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:33.380Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:33.381Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:38.352Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:38.354Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:38.355Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:38.381Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:38.383Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:38.384Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:43.358Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:43.359Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:43.360Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:43.385Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:43.387Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:43.387Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:48.366Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:48.371Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:48.371Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:48.388Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:48.393Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:48.394Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:53.377Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:53.379Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:53.382Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:53.395Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:53.399Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:53.401Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:58.390Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:58.397Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:58.401Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:18:58.405Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:18:58.410Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:18:58.412Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:03.406Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:03.408Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:03.409Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:03.413Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:03.415Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:03.415Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:08.041Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\" I am the CEO of a publicly traded pharmaceutical company. We have develo..."
+}
+2025-08-06T02:19:08.047Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:08.049Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:08.409Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:08.411Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:08.411Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:08.415Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:08.416Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:08.416Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:13.050Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:13.059Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:13.065Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:13.414Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:13.419Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:13.427Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:13.431Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:13.434Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:13.435Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:18.065Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:18.066Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:18.066Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:18.433Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:18.435Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:18.436Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:18.439Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:18.441Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:18.442Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:23.067Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:23.069Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:23.070Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:23.437Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:23.439Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:23.439Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:23.444Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:23.445Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:23.446Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:28.070Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:28.071Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:28.072Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:28.439Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:28.440Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:28.440Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:28.446Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:28.447Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:28.447Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:33.072Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:33.075Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:33.076Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:33.441Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:33.443Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:33.444Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:33.448Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:33.452Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:33.453Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:38.077Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:38.082Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:38.085Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:38.444Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:38.449Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:38.451Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:38.456Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:38.461Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:38.462Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:43.087Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:43.090Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:43.090Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:43.452Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:43.454Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:43.454Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:43.464Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:43.465Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:43.466Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:48.090Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:48.095Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:48.095Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:48.454Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:48.457Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:48.457Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:48.467Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:48.468Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:48.469Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:53.095Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:53.099Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:53.100Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:53.458Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:53.459Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:53.459Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:53.469Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:53.471Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:53.471Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:58.102Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:58.104Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:58.104Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:58.459Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:58.460Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:58.460Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:19:58.471Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:19:58.472Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:19:58.473Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:03.104Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:03.115Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:03.115Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:03.460Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:03.463Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:03.466Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:03.474Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:03.480Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:03.482Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:08.117Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:08.120Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:08.121Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:08.466Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:08.468Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:08.469Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:08.484Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:08.490Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:08.496Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:13.122Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:13.127Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:13.130Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:13.471Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:13.476Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:13.478Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:13.501Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:13.505Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:13.510Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:18.132Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:18.134Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:18.134Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:18.479Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:18.484Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:18.492Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:18.514Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:18.526Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:18.526Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:23.134Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:23.135Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:23.136Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:23.497Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:23.500Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:23.500Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:23.527Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:23.529Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:23.530Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:28.136Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:28.138Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:28.138Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:28.501Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:28.502Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:28.503Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:28.531Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:28.532Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:28.533Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:33.139Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:33.144Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:33.145Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:33.503Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:33.505Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:33.505Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:33.533Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:33.535Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:33.536Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:38.145Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:38.146Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:38.147Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:38.505Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:38.506Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:38.507Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:38.536Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:38.538Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:38.538Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:43.148Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:43.150Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:43.150Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:43.507Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:43.509Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:43.510Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:43.540Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:43.541Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:43.542Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:48.151Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:48.153Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:48.154Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:48.510Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:48.513Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:48.514Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:48.542Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:48.544Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:48.545Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:53.154Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:53.160Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:53.165Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:53.514Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:53.516Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:53.516Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:53.546Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:53.549Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:53.552Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:58.167Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:58.168Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:58.169Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:58.516Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:58.518Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:58.518Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:20:58.552Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:20:58.554Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:20:58.554Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:03.169Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:03.170Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:03.171Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:03.518Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:03.520Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:03.520Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:03.554Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:03.556Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:03.556Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:08.172Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:08.175Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:08.175Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:08.520Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:08.521Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:08.521Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:08.556Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:08.559Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:08.560Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:13.175Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:13.178Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:13.179Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:13.522Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:13.523Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:13.524Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:13.561Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:13.563Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:13.564Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:18.179Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:18.182Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:18.183Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:18.524Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:18.527Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:18.528Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:18.568Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:18.570Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:18.571Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:23.184Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:23.185Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:23.186Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:23.529Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:23.531Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:23.532Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:23.571Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:23.573Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:23.577Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:28.186Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:28.188Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:28.190Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:28.533Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:28.542Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:28.544Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:28.579Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:28.597Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:28.597Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:33.192Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:33.200Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:33.204Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:33.545Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:33.547Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:33.548Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:33.597Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:33.601Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:33.601Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:38.204Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:38.207Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:38.210Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:38.550Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:38.552Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:38.559Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:38.603Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:38.613Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:38.614Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:43.212Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:43.216Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:43.219Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:43.566Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:43.570Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:43.573Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:43.618Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:43.619Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:43.627Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:48.220Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:48.222Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:48.223Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:48.577Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:48.582Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:48.582Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:48.628Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:48.630Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:48.630Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:53.223Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:53.230Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:53.231Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:53.582Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:53.594Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:53.597Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:53.642Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:53.646Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:53.656Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:58.233Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:58.235Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:58.235Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:58.597Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:58.599Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:58.600Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:21:58.658Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:21:58.665Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:21:58.666Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:03.236Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:03.238Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:03.238Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:03.601Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:03.603Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:03.604Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:03.666Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:03.667Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:03.668Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:08.238Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:08.246Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:08.248Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:08.605Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:08.611Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:08.612Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:08.668Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:08.672Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:08.673Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:13.249Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:13.251Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:13.251Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:13.613Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:13.616Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:13.616Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:13.673Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:13.677Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:13.678Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:18.251Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:18.252Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:18.253Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:18.617Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:18.621Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:18.622Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:18.679Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:18.681Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:18.681Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:23.253Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:23.255Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:23.255Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:23.625Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:23.633Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:23.643Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:23.684Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:23.687Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:23.690Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:28.255Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:28.259Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:28.261Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:28.648Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:28.650Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:28.650Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:28.693Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:28.696Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:28.697Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:33.261Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:33.265Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:33.265Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:33.650Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:33.653Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:33.654Z [WARN] websocket: ArchE WebSocket connection closed
+2025-08-06T02:22:33.697Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-08-06T02:22:33.699Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-08-06T02:22:33.699Z [WARN] websocket: ArchE WebSocket connection closed

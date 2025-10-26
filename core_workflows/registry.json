@@ -1,0 +1,171 @@
+{
+  "schema_version": "1.0",
+  "description": "Master registry of all cognitive routines (Process Blueprints) available to the ResonantiA Protocol's WorkflowOrchestrator. This file serves as the definitive map for discovering and dispatching workflows.",
+  "categories": {
+    "cognitive_engine": {
+      "description": "Core workflows central to the RISE (Resonant Insight and Strategy Engine) and ACO (Adaptive Cognitive Orchestrator) cognitive cycles.",
+      "workflows": [
+        {
+          "id": "rise_cognitive_scaffolding_and_grounding",
+          "path": "core_workflows/1_cognitive_engine/rise_cognitive_scaffolding_and_grounding.json",
+          "description": "Master workflow for the RISE 'Knowledge Scaffolding' phase. Chains query refinement and temporal grounding."
+        },
+        {
+          "id": "advanced_insight_generation",
+          "path": "core_workflows/1_cognitive_engine/advanced_insight_generation.json",
+          "description": "Represents the second phase of the RISE engine, focusing on deep analysis and insight extraction."
+        },
+        {
+          "id": "strategy_fusion",
+          "path": "core_workflows/1_cognitive_engine/strategy_fusion.json",
+          "description": "The final phase of the RISE engine, synthesizing insights into a cohesive, actionable strategy."
+        },
+        {
+          "id": "invoke_rise_engine",
+          "path": "core_workflows/1_cognitive_engine/invoke_rise_engine.json",
+          "description": "A meta-workflow to invoke the full three-phase RISE engine on a complex problem."
+        },
+        {
+          "id": "metacognitive_shift_workflow",
+          "path": "core_workflows/1_cognitive_engine/metacognitive_shift_workflow.json",
+          "description": "The formal process for reactive self-correction and error analysis."
+        },
+        {
+          "id": "sirc_application_workflow",
+          "path": "core_workflows/1_cognitive_engine/sirc_application_workflow.json",
+          "description": "Guides the Synergistic Intent Resonance Cycle for proactive alignment with Keyholder intent."
+        }
+      ]
+    },
+    "analysis_temporal": {
+      "description": "Workflows specializing in time-series analysis, forecasting, and causal inference over time.",
+      "workflows": [
+        {
+          "id": "temporal_causal_analysis_workflow",
+          "path": "core_workflows/2_analysis_temporal/temporal_causal_analysis_workflow.json",
+          "description": "Performs temporal causal discovery to identify lagged effects and relationships in time-series data."
+        },
+        {
+          "id": "temporal_forecasting_workflow",
+          "path": "core_workflows/2_analysis_temporal/temporal_forecasting_workflow.json",
+          "description": "Uses predictive models to forecast future values from historical time-series data."
+        },
+        {
+          "id": "objective_temporal_grounding_workflow",
+          "path": "core_workflows/2_analysis_temporal/objective_temporal_grounding_workflow.json",
+          "description": "Deeply analyzes a query to identify and ground its explicit and implicit temporal constraints."
+        }
+      ]
+    },
+    "analysis_general": {
+      "description": "Workflows for general-purpose research, search, summarization, and analysis.",
+      "workflows": [
+        {
+          "id": "agentic_research",
+          "path": "core_workflows/3_analysis_general/agentic_research.json",
+          "description": "A multi-step agentic workflow for conducting comprehensive research on a given topic."
+        },
+        {
+          "id": "query_refinement_workflow",
+          "path": "core_workflows/3_analysis_general/query_refinement_workflow.json",
+          "description": "Takes a raw user query and refines it into a structured, deconstructed objective."
+        },
+        {
+          "id": "basic_analysis",
+          "path": "core_workflows/3_analysis_general/basic_analysis.json",
+          "description": "A simple, general-purpose analysis workflow."
+        }
+      ]
+    },
+    "system_management": {
+      "description": "Workflows for managing the protocol, SPRs, knowledge base, and system state.",
+      "workflows": [
+        {
+          "id": "as_above_so_below_workflow",
+          "path": "core_workflows/4_system_management/as_above_so_below_workflow.json",
+          "description": "Ensures synchronization between protocol documentation and implemented code/workflows."
+        },
+        {
+          "id": "manual_spr_fix",
+          "path": "core_workflows/4_system_management/manual_spr_fix.json",
+          "description": "A utility workflow for manually correcting or updating SPR definitions in the Knowledge Tapestry."
+        },
+        {
+          "id": "spr_cognitive_unfolding_workflow",
+          "path": "core_workflows/4_system_management/spr_cognitive_unfolding_workflow.json",
+          "description": "Simulates and traces the cognitive activation process when an SPR is triggered."
+        },
+        {
+          "id": "wiki_protocol_resonance_check",
+          "path": "core_workflows/4_system_management/wiki_protocol_resonance_check.json",
+          "description": "Compares the live protocol state with the documented wiki to ensure resonance."
+        },
+        {
+          "id": "ressyd_capture_session",
+          "path": "core_workflows/4_system_management/ressyd_capture_session.json",
+          "description": "Captures and crystallizes the current session's interactions and insights into a persistent format."
+        }
+      ]
+    },
+    "data_processing": {
+      "description": "Workflows for ingesting, parsing, and processing various data formats.",
+      "workflows": [
+        {
+          "id": "parse_all_videos",
+          "path": "core_workflows/5_data_processing/parse_all_videos.json",
+          "description": "Orchestrates the parsing and analysis of multiple video files."
+        },
+        {
+          "id": "parse_videos",
+          "path": "core_workflows/5_data_processing/parse_videos.json",
+          "description": "A workflow for processing a single video file."
+        }
+      ]
+    },
+    "specialized_protocols": {
+      "description": "High-concept, multi-domain workflows that orchestrate complex, specialized tasks.",
+      "workflows": [
+        {
+          "id": "tesla_visioning_workflow",
+          "path": "core_workflows/6_specialized_protocols/tesla_visioning_workflow.json",
+          "description": "A structured workflow for creative problem-solving and novel design, inspired by Tesla's methods."
+        },
+        {
+          "id": "resonant_autopoietic_genesis_protocol",
+          "path": "core_workflows/6_specialized_protocols/resonant_autopoietic_genesis_protocol.json",
+          "description": "A self-generating protocol workflow for system evolution and bootstrapping."
+        },
+        {
+          "id": "phoenix_validation_workflow",
+          "path": "core_workflows/6_specialized_protocols/phoenix_validation_workflow.json",
+          "description": "Validates and integrates self-modifying code or protocol enhancements generated by the system."
+        }
+      ]
+    },
+    "testing_and_validation": {
+      "description": "Workflows designed specifically for testing tools, validating system components, and running diagnostic checks.",
+      "workflows": [
+        {
+          "id": "simple_causal_abm_test_v3_0",
+          "path": "core_workflows/9_testing_and_validation/simple_causal_abm_test_v3_0.json",
+          "description": "A test workflow for the integrated Causal-ABM capabilities."
+        },
+        {
+          "id": "test_abm_tool_workflow",
+          "path": "core_workflows/9_testing_and_validation/test_abm_tool_workflow.json",
+          "description": "Tests the functionality of the Agent-Based Modeling tool."
+        },
+        {
+          "id": "test_causal_tool_workflow",
+          "path": "core_workflows/9_testing_and_validation/test_causal_tool_workflow.json",
+          "description": "Tests the functionality of the Causal Inference tool."
+        },
+        {
+          "id": "test_predictive_tool_workflow",
+          "path": "core_workflows/9_testing_and_validation/test_predictive_tool_workflow.json",
+          "description": "Tests the functionality of the Predictive Modeling tool."
+        }
+      ]
+    }
+  }
+}

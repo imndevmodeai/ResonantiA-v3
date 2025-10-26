@@ -1,0 +1,11 @@
+2025-08-05 23:51:01 - Three_PointO_ArchE.workflow_engine:1028 - CRITICAL - workflow_engine - Workflow execution failed during loading: problem_description cannot be null
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_engine.py", line 1015, in run_workflow
+    raise ValueError("problem_description cannot be null")
+ValueError: problem_description cannot be null
+2025-08-05 23:51:01 - __main__:272 - CRITICAL - main - A critical error occurred in the main execution block: module 'Three_PointO_ArchE.config' has no attribute 'OUTPUT_DIR'
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/main.py", line 195, in handle_run_workflow
+    output_dir = config.OUTPUT_DIR
+                 ^^^^^^^^^^^^^^^^^
+AttributeError: module 'Three_PointO_ArchE.config' has no attribute 'OUTPUT_DIR'. Did you mean: 'ABM_OUTPUT_DIR'?

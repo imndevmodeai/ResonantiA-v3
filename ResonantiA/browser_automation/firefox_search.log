@@ -1,0 +1,22 @@
+2025-07-19 00:06:26,890 - INFO - Starting Gemini model search for query: latest Gemini models 2025 Google AI
+2025-07-19 00:13:49,420 - INFO - Starting Gemini model search for query: latest Gemini models 2025
+2025-07-19 00:13:51,092 - ERROR - Failed to initialize Firefox WebDriver: Message: binary is not a Firefox executable
+
+2025-07-19 00:13:51,092 - ERROR - Search workflow failed: Message: binary is not a Firefox executable
+
+2025-07-19 00:14:28,421 - INFO - Starting Gemini model search for query: latest Gemini models 2025
+2025-07-19 00:15:00,852 - ERROR - Failed to initialize Firefox WebDriver: Message: Can not connect to the Service /usr/bin/firefox
+
+2025-07-19 00:15:00,861 - ERROR - Search workflow failed: Message: Can not connect to the Service /usr/bin/firefox
+
+2025-07-19 00:15:30,613 - INFO - Starting Gemini model search for query: latest Gemini models 2025
+2025-07-19 00:15:30,721 - INFO - ====== WebDriver manager ======
+2025-07-19 00:15:32,979 - INFO - Get LATEST geckodriver version for 140.0 firefox
+2025-07-19 00:15:33,150 - INFO - Get LATEST geckodriver version for 140.0 firefox
+2025-07-19 00:15:33,268 - INFO - There is no [linux64] geckodriver "v0.36.0" for browser firefox "140.0" in cache
+2025-07-19 00:15:33,268 - INFO - Get LATEST geckodriver version for 140.0 firefox
+2025-07-19 00:15:33,387 - INFO - Getting latest mozilla release info for v0.36.0
+2025-07-19 00:15:33,552 - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-linux64.tar.gz
+2025-07-19 00:15:33,814 - INFO - Driver downloading response is 200
+2025-07-19 00:15:34,025 - INFO - Get LATEST geckodriver version for 140.0 firefox
+2025-07-19 00:15:34,215 - INFO - Driver has been saved in cache [/home/newbu/.wdm/drivers/geckodriver/linux64/v0.36.0]

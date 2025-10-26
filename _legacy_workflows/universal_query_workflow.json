@@ -1,0 +1,32 @@
+{
+  "name": "Universal Query Workflow",
+  "version": "1.0",
+  "description": "Routes any user_query through the LLM tool and displays the answer.",
+  "tasks": {
+    "answer_query": {
+      "description": "Answer the arbitrary user query via LLM provider",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "{{ context.user_query | default('Explain the ResonantiA Protocol briefly.') }}",
+        "temperature": 0.5
+      }
+    },
+    "display": {
+      "description": "Display the answer",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "# Universal Query Answer\n\n{{answer_query.result.result.response_text | default('No response')}}"
+      },
+      "dependencies": ["answer_query"]
+    }
+  },
+  "start_tasks": ["answer_query"]
+}
+
+
+
+
+
+
+
+

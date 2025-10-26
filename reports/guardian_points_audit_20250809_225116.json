@@ -1,0 +1,209 @@
+{
+  "timestamp": "20250809_225116",
+  "files": [
+    {
+      "path": "/media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json",
+      "valid_count": 43,
+      "invalid_count": 19,
+      "invalid": [
+        {
+          "index": 3,
+          "spr_id": "AmbiguityDetectioN",
+          "proposed_correction": "AmbiguitydetectioN"
+        },
+        {
+          "index": 4,
+          "spr_id": "ArcheSysteM",
+          "proposed_correction": "ArchesysteM"
+        },
+        {
+          "index": 7,
+          "spr_id": "AutopoieticSystemGenesiS",
+          "proposed_correction": "AutopoieticsystemgenesiS"
+        },
+        {
+          "index": 14,
+          "spr_id": "ComparativEfluxuaLprocessinG",
+          "proposed_correction": "ComparativefluxualprocessinG"
+        },
+        {
+          "index": 16,
+          "spr_id": "ContextualSuggestionGeneratioN",
+          "proposed_correction": "ContextualsuggestiongeneratioN"
+        },
+        {
+          "index": 22,
+          "spr_id": "EscalatioNgateS",
+          "proposed_correction": "EscalationgateS"
+        },
+        {
+          "index": 23,
+          "spr_id": "Executable Specification PrinciplE",
+          "proposed_correction": "Executable specification principlE"
+        },
+        {
+          "index": 24,
+          "spr_id": "FinalizeResonantObjective",
+          "proposed_correction": "FinalizeresonantobjectivE"
+        },
+        {
+          "index": 26,
+          "spr_id": "GeminiCodeExecutoR",
+          "proposed_correction": "GeminicodeexecutoR"
+        },
+        {
+          "index": 27,
+          "spr_id": "GeminiFileProcessoR",
+          "proposed_correction": "GeminifileprocessoR"
+        },
+        {
+          "index": 28,
+          "spr_id": "GeminiFunctionCallinG",
+          "proposed_correction": "GeminifunctioncallinG"
+        },
+        {
+          "index": 29,
+          "spr_id": "GroundedGeneratioN",
+          "proposed_correction": "GroundedgeneratioN"
+        },
+        {
+          "index": 40,
+          "spr_id": "LeadingQueryFormulationN",
+          "proposed_correction": "LeadingqueryformulationN"
+        },
+        {
+          "index": 42,
+          "spr_id": "ObjectiveClarificationProtocoL",
+          "proposed_correction": "ObjectiveclarificationprotocoL"
+        },
+        {
+          "index": 46,
+          "spr_id": "PredictivemodelinGtooL",
+          "proposed_correction": "PredictivemodelingtooL"
+        },
+        {
+          "index": 48,
+          "spr_id": "PreferenceOverrideHandlinG",
+          "proposed_correction": "PreferenceoverridehandlinG"
+        },
+        {
+          "index": 51,
+          "spr_id": "ResonantGratiDSouL",
+          "proposed_correction": "ResonantgratidsouL"
+        },
+        {
+          "index": 54,
+          "spr_id": "ScenarioRealismAssessmenT",
+          "proposed_correction": "ScenariorealismassessmenT"
+        },
+        {
+          "index": 56,
+          "spr_id": "StructuredOutputGeneratoR",
+          "proposed_correction": "StructuredoutputgeneratoR"
+        }
+      ]
+    },
+    {
+      "path": "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/knowledge_graph/spr_definitions_tv.json",
+      "valid_count": 43,
+      "invalid_count": 19,
+      "invalid": [
+        {
+          "index": 3,
+          "spr_id": "AmbiguityDetectioN",
+          "proposed_correction": "AmbiguitydetectioN"
+        },
+        {
+          "index": 4,
+          "spr_id": "ArcheSysteM",
+          "proposed_correction": "ArchesysteM"
+        },
+        {
+          "index": 7,
+          "spr_id": "AutopoieticSystemGenesiS",
+          "proposed_correction": "AutopoieticsystemgenesiS"
+        },
+        {
+          "index": 14,
+          "spr_id": "ComparativEfluxuaLprocessinG",
+          "proposed_correction": "ComparativefluxualprocessinG"
+        },
+        {
+          "index": 16,
+          "spr_id": "ContextualSuggestionGeneratioN",
+          "proposed_correction": "ContextualsuggestiongeneratioN"
+        },
+        {
+          "index": 22,
+          "spr_id": "EscalatioNgateS",
+          "proposed_correction": "EscalationgateS"
+        },
+        {
+          "index": 23,
+          "spr_id": "Executable Specification PrinciplE",
+          "proposed_correction": "Executable specification principlE"
+        },
+        {
+          "index": 24,
+          "spr_id": "FinalizeResonantObjective",
+          "proposed_correction": "FinalizeresonantobjectivE"
+        },
+        {
+          "index": 26,
+          "spr_id": "GeminiCodeExecutoR",
+          "proposed_correction": "GeminicodeexecutoR"
+        },
+        {
+          "index": 27,
+          "spr_id": "GeminiFileProcessoR",
+          "proposed_correction": "GeminifileprocessoR"
+        },
+        {
+          "index": 28,
+          "spr_id": "GeminiFunctionCallinG",
+          "proposed_correction": "GeminifunctioncallinG"
+        },
+        {
+          "index": 29,
+          "spr_id": "GroundedGeneratioN",
+          "proposed_correction": "GroundedgeneratioN"
+        },
+        {
+          "index": 40,
+          "spr_id": "LeadingQueryFormulationN",
+          "proposed_correction": "LeadingqueryformulationN"
+        },
+        {
+          "index": 42,
+          "spr_id": "ObjectiveClarificationProtocoL",
+          "proposed_correction": "ObjectiveclarificationprotocoL"
+        },
+        {
+          "index": 46,
+          "spr_id": "PredictivemodelinGtooL",
+          "proposed_correction": "PredictivemodelingtooL"
+        },
+        {
+          "index": 48,
+          "spr_id": "PreferenceOverrideHandlinG",
+          "proposed_correction": "PreferenceoverridehandlinG"
+        },
+        {
+          "index": 51,
+          "spr_id": "ResonantGratiDSouL",
+          "proposed_correction": "ResonantgratidsouL"
+        },
+        {
+          "index": 54,
+          "spr_id": "ScenarioRealismAssessmenT",
+          "proposed_correction": "ScenariorealismassessmenT"
+        },
+        {
+          "index": 56,
+          "spr_id": "StructuredOutputGeneratoR",
+          "proposed_correction": "StructuredoutputgeneratoR"
+        }
+      ]
+    }
+  ]
+}

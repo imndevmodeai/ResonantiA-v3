@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_d97e834b5eb048978faf0e779459c836.jsonl",
+  "size_bytes": 3114,
+  "modified": "2025-08-07T07:20:04.569925",
+  "workflow_name": "ArchE System Demo Workflow",
+  "run_id": "run_d97e834b5eb048978faf0e779459c836",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 4,
+  "duration_sec": 0.0001,
+  "status": "unknown",
+  "line_count": 4
+}

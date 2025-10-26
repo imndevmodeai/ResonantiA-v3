@@ -1,0 +1,66 @@
+{
+  "name": "Parse All Video Pages",
+  "description": "Parses the saved HTML from all five sites to extract video data.",
+  "version": "1.0",
+  "tasks": {
+    "parse_pornhub": {
+      "description": "Parse the saved Pornhub HTML file.",
+      "action_type": "parse_html_for_videos",
+      "inputs": {
+        "html_path": "c42a4439-8b1a-43ac-b75c-faf555e34628/html_scrapes/scraped-page-content-2025-06-09T05-05-04.159Z_6f9330f8.html",
+        "site_key": "pornhub"
+      },
+      "dependencies": []
+    },
+    "parse_pornxp": {
+        "description": "Parse the saved PornXP HTML file.",
+        "action_type": "parse_html_for_videos",
+        "inputs": {
+            "html_path": "c42a4439-8b1a-43ac-b75c-faf555e34628/html_scrapes/scraped-page-content-2025-06-09T05-05-09.999Z_41d9e22a.html",
+            "site_key": "pornxp"
+        },
+        "dependencies": []
+    },
+    "parse_porntrex": {
+        "description": "Parse the saved PornTrex HTML file.",
+        "action_type": "parse_html_for_videos",
+        "inputs": {
+            "html_path": "c42a4439-8b1a-43ac-b75c-faf555e34628/html_scrapes/scraped-page-content-2025-06-09T05-05-17.132Z_e7058a5c.html",
+            "site_key": "porntrex"
+        },
+        "dependencies": []
+    },
+    "parse_eporner": {
+        "description": "Parse the saved Eporner HTML file.",
+        "action_type": "parse_html_for_videos",
+        "inputs": {
+            "html_path": "c42a4439-8b1a-43ac-b75c-faf555e34628/html_scrapes/scraped-page-content-2025-06-09T05-05-26.159Z_522284fe.html",
+            "site_key": "eporner"
+        },
+        "dependencies": []
+    },
+    "parse_xvideos": {
+        "description": "Parse the saved xvideos HTML file.",
+        "action_type": "parse_html_for_videos",
+        "inputs": {
+            "html_path": "c42a4439-8b1a-43ac-b75c-faf555e34628/html_scrapes/scraped-page-content-2025-06-09T05-05-33.923Z_2d935c44.html",
+            "site_key": "xvideos"
+        },
+        "dependencies": []
+    },
+    "display_parsed_data": {
+      "description": "Display the extracted video data.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+            "pornhub": "{{ parse_pornhub.video_data }}",
+            "pornxp": "{{ parse_pornxp.video_data }}",
+            "porntrex": "{{ parse_porntrex.video_data }}",
+            "eporner": "{{ parse_eporner.video_data }}",
+            "xvideos": "{{ parse_xvideos.video_data }}"
+        }
+      },
+      "dependencies": ["parse_pornhub", "parse_pornxp", "parse_porntrex", "parse_eporner", "parse_xvideos"]
+    }
+  }
+} 

@@ -1,0 +1,254 @@
+2025-10-13 23:15:08,437 - QuantumUtils - INFO - ThoughtTrail initialized with maxlen=1000
+2025-10-13 23:15:31,991 - QuantumUtils - INFO - ====== WebDriver manager ======
+2025-10-13 23:15:32,620 - QuantumUtils - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-13 23:15:33,061 - QuantumUtils - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-13 23:15:33,399 - QuantumUtils - INFO - Driver [/home/newbu/.wdm/drivers/chromedriver/linux64/139.0.7258.154/chromedriver-linux64/chromedriver] found in cache
+2025-10-13 23:15:35,282 - QuantumUtils - INFO - Enhanced Perception Engine available
+2025-10-13 23:15:35,284 - QuantumUtils - INFO - ActionRegistry initialized.
+2025-10-13 23:15:35,293 - QuantumUtils - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-10-13 23:15:35,294 - QuantumUtils - INFO - GoogleProvider initialized successfully.
+2025-10-13 23:15:35,294 - QuantumUtils - INFO - GeminiCapabilities initialized and available in ActionRegistry.
+2025-10-13 23:15:35,294 - QuantumUtils - INFO - Action 'execute_code_standalone' registered.
+2025-10-13 23:15:35,294 - QuantumUtils - INFO - Action 'search_web' registered.
+2025-10-13 23:15:35,294 - QuantumUtils - INFO - Action 'generate_text_llm' registered.
+2025-10-13 23:15:35,294 - QuantumUtils - INFO - Action 'display_output' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'calculate_math' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'string_template' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'save_to_file' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'predict_nfl_game' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'execute_code' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Registered canonical 'execute_code' from code_executor.py
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'execute_code_gemini' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'handle_files' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'perform_grounding' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'call_function' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Action 'generate_structured_output' registered.
+2025-10-13 23:15:35,295 - QuantumUtils - INFO - Actions from GeminiCapabilities registered (execute_code_gemini, handle_files, etc.).
+2025-10-13 23:15:35,674 - QuantumUtils - INFO - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-10-13 23:15:35,693 - QuantumUtils - INFO - ✅ RISE Orchestrator: All relative imports successful
+2025-10-13 23:15:35,712 - QuantumUtils - WARNING - SystemHealthMonitor not available
+2025-10-13 23:15:35,774 - QuantumUtils - INFO - [CognitiveHub] Loaded 550 protocol chunks
+2025-10-13 23:15:35,776 - QuantumUtils - INFO - Initialized 3 domain controllers
+2025-10-13 23:15:35,776 - QuantumUtils - INFO - Cognitive Resonant Controller System initialized
+2025-10-13 23:15:35,776 - QuantumUtils - INFO - ThoughtTrail initialized with maxlen=1000
+2025-10-13 23:15:35,783 - QuantumUtils - INFO - Successfully loaded 102 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-10-13 23:15:35,797 - QuantumUtils - INFO - Compiled SPR pattern for 102 keys.
+2025-10-13 23:15:35,797 - QuantumUtils - INFO - RISE_Orchestrator initialized with workflows_dir: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-10-13 23:15:35,798 - QuantumUtils - INFO - Successfully loaded 102 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-10-13 23:15:35,798 - QuantumUtils - INFO - Compiled SPR pattern for 102 keys.
+2025-10-13 23:15:35,798 - QuantumUtils - INFO - SPRManager initialized with default path: /media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/../knowledge_graph/spr_definitions_tv.json
+2025-10-13 23:15:35,798 - QuantumUtils - INFO - ThoughtTrail initialized with maxlen=1000
+2025-10-13 23:15:35,798 - QuantumUtils - WARNING - Action 'display_output' already registered. Skipping registration.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'perform_system_genesis_action' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'run_code_linter' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'run_workflow_suite' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'analyze_failure' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'fix_template' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'fix_action' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'validate_workflow' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'validate_action' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'self_heal_output' registered.
+2025-10-13 23:15:35,799 - QuantumUtils - INFO - Action 'for_each' registered.
+2025-10-13 23:15:35,801 - QuantumUtils - INFO - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-10-13 23:15:35,801 - QuantumUtils - INFO - ✅ UtopianSolutionSynthesizer initialized with full capabilities
+2025-10-13 23:15:35,804 - QuantumUtils - INFO - 🚀 RISE_Orchestrator initialized successfully
+2025-10-13 23:15:35,805 - QuantumUtils - INFO - 📁 Workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-10-13 23:15:35,805 - QuantumUtils - INFO - 🔧 Workflow engine: IARCompliantWorkflowEngine
+2025-10-13 23:15:35,805 - QuantumUtils - INFO - 🧠 SPR Manager: SPRManager
+2025-10-13 23:15:35,805 - QuantumUtils - INFO - 📝 Thought Trail: ThoughtTrail
+2025-10-13 23:15:35,805 - QuantumUtils - INFO - [CognitiveHub] Initialized with confidence_threshold=0.7, learning_enabled=True
+2025-10-13 23:15:35,806 - QuantumUtils - INFO - [CIH] Query superposition: {'generic_inquiry': 0.3846153846153846, 'data_analysis': 0.6153846153846154}
+2025-10-13 23:15:35,810 - QuantumUtils - INFO - No specialized controller activated, using general proportional control
+2025-10-13 23:15:35,810 - QuantumUtils - WARNING - No relevant chunk found and no LLM provider available for generative fallback.
+2025-10-13 23:15:35,811 - QuantumUtils - INFO - [CIH] CRCS confidence (0.30) below threshold or controller suppressed, escalating to RISE.
+2025-10-13 23:15:35,811 - QuantumUtils - INFO - 🔍 DEBUG: _init_rise_state called with problem_description: 'Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025. Provide a 1000-word strategic briefing for performers.'
+2025-10-13 23:15:35,811 - QuantumUtils - INFO - 🔍 DEBUG: RISEState created with problem_description: 'Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025. Provide a 1000-word strategic briefing for performers.'
+2025-10-13 23:15:35,811 - QuantumUtils - INFO - 🚀 Initiating RISE v2.0 workflow for session rise_1760411735_e7dbb3
+2025-10-13 23:15:35,811 - QuantumUtils - INFO - Problem: Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-20...
+
+    ..:: ArchE Guardian CLI ::..    
+
+----------------------------------------------------
+Initializing Cognitive Integration Hub...
+   ✓ Hub initialized successfully.
+
+Routing query: 'Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025. Provide a 1000-word strategic briefing for performers.'
+----------------------------------------------------
+SIRC_JSON: {"type": "sirc_event", "phase": "Phase_A_Start", "message": "Knowledge Scaffolding & Dynamic Specialization", "timestamp": 1760411735.811209, "metadata": {"session_id": "rise_1760411735_e7dbb3"}}
+🔄 SIRC Phase_A_Start: Knowledge Scaffolding & Dynamic Specialization
+2025-10-13 23:15:35,811 - QuantumUtils - INFO - 🔍 Phase A: Acquiring domain knowledge and forging specialist agent (Enhanced)
+2025-10-13 23:15:35,856 - QuantumUtils - INFO - ✅ Base CRCS system imported successfully
+2025-10-13 23:15:35,856 - QuantumUtils - INFO - ✅ RISE Orchestrator imported successfully
+2025-10-13 23:15:35,866 - QuantumUtils - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-10-13 23:15:35,866 - QuantumUtils - INFO - GoogleProvider initialized successfully.
+2025-10-13 23:15:35,875 - QuantumUtils - INFO - Successfully loaded 102 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-10-13 23:15:35,876 - QuantumUtils - INFO - Compiled SPR pattern for 102 keys.
+2025-10-13 23:15:35,876 - QuantumUtils - INFO - Initialized 3 domain controllers
+2025-10-13 23:15:35,876 - QuantumUtils - INFO - Cognitive Resonant Controller System initialized
+2025-10-13 23:15:35,876 - QuantumUtils - INFO - [PatternEngine] Initialized with learning capabilities
+2025-10-13 23:15:35,876 - QuantumUtils - INFO - [DomainDetector] Initialized with detection capabilities
+2025-10-13 23:15:35,876 - QuantumUtils - INFO - ThoughtTrail initialized with maxlen=1000
+2025-10-13 23:15:35,883 - QuantumUtils - INFO - Successfully loaded 102 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-10-13 23:15:35,886 - QuantumUtils - INFO - Compiled SPR pattern for 102 keys.
+2025-10-13 23:15:35,887 - QuantumUtils - INFO - RISE_Orchestrator initialized with workflows_dir: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-10-13 23:15:35,893 - QuantumUtils - INFO - Successfully loaded 102 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-10-13 23:15:35,897 - QuantumUtils - INFO - Compiled SPR pattern for 102 keys.
+2025-10-13 23:15:35,897 - QuantumUtils - INFO - SPRManager initialized with default path: /media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/../knowledge_graph/spr_definitions_tv.json
+2025-10-13 23:15:35,897 - QuantumUtils - INFO - ThoughtTrail initialized with maxlen=1000
+2025-10-13 23:15:35,897 - QuantumUtils - WARNING - Action 'display_output' already registered. Skipping registration.
+2025-10-13 23:15:35,897 - QuantumUtils - WARNING - Action 'perform_system_genesis_action' already registered. Skipping registration.
+2025-10-13 23:15:35,897 - QuantumUtils - WARNING - Action 'run_code_linter' already registered. Skipping registration.
+2025-10-13 23:15:35,897 - QuantumUtils - WARNING - Action 'run_workflow_suite' already registered. Skipping registration.
+2025-10-13 23:15:35,897 - QuantumUtils - WARNING - Action 'analyze_failure' already registered. Skipping registration.
+2025-10-13 23:15:35,897 - QuantumUtils - WARNING - Action 'fix_template' already registered. Skipping registration.
+2025-10-13 23:15:35,897 - QuantumUtils - WARNING - Action 'fix_action' already registered. Skipping registration.
+2025-10-13 23:15:35,904 - QuantumUtils - WARNING - Action 'validate_workflow' already registered. Skipping registration.
+2025-10-13 23:15:35,904 - QuantumUtils - WARNING - Action 'validate_action' already registered. Skipping registration.
+2025-10-13 23:15:35,904 - QuantumUtils - WARNING - Action 'self_heal_output' already registered. Skipping registration.
+2025-10-13 23:15:35,904 - QuantumUtils - WARNING - Action 'for_each' already registered. Skipping registration.
+2025-10-13 23:15:35,904 - QuantumUtils - INFO - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-10-13 23:15:35,904 - QuantumUtils - INFO - ✅ UtopianSolutionSynthesizer initialized with full capabilities
+2025-10-13 23:15:35,911 - QuantumUtils - INFO - 🚀 RISE_Orchestrator initialized successfully
+2025-10-13 23:15:35,912 - QuantumUtils - INFO - 📁 Workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-10-13 23:15:35,912 - QuantumUtils - INFO - 🔧 Workflow engine: IARCompliantWorkflowEngine
+2025-10-13 23:15:35,912 - QuantumUtils - INFO - 🧠 SPR Manager: SPRManager
+2025-10-13 23:15:35,912 - QuantumUtils - INFO - 📝 Thought Trail: ThoughtTrail
+2025-10-13 23:15:35,912 - QuantumUtils - INFO - RISE Orchestrator integrated successfully
+2025-10-13 23:15:35,912 - QuantumUtils - INFO - [ACO] Initialized with evolution capabilities
+2025-10-13 23:15:35,912 - QuantumUtils - INFO - VCD Phase A start event prepared
+2025-10-13 23:15:35,912 - QuantumUtils - INFO - Executing knowledge scaffolding workflow...
+2025-10-13 23:15:35,917 - QuantumUtils - INFO - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/knowledge_scaffolding.json
+2025-10-13 23:15:35,955 - QuantumUtils - INFO - Workflow plan optimized. Executing in 1 parallel stage(s).
+2025-10-13 23:15:35,964 - QuantumUtils - INFO - Starting workflow 'Knowledge Scaffolding & Dynamic Specialization' (Run ID: run_484ac0585d3a44c698f31239df1e27e3).
+2025-10-13 23:15:35,964 - QuantumUtils - INFO - Executing stage 1/1 with tasks: ['deconstruct_problem', 'extract_domain_from_deconstruction', 'acquire_domain_knowledge', 'validate_search_results', 'analyze_specialization_requirements', 'forge_specialist_agent', 'validate_specialist_agent']
+2025-10-13 23:15:35,982 - QuantumUtils - INFO - Executing action 'generate_text_llm'...
+2025-10-13 23:15:35,989 - QuantumUtils - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-10-13 23:15:35,989 - QuantumUtils - INFO - GoogleProvider initialized successfully.
+2025-10-13 23:15:35,989 - QuantumUtils - INFO - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.
+2025-10-13 23:15:45,488 - QuantumUtils - INFO - LLM generation successful.
+2025-10-13 23:15:45,490 - QuantumUtils - INFO - Action 'generate_text_llm' executed successfully.
+2025-10-13 23:15:45,789 - QuantumUtils - INFO - Executing action 'generate_text_llm'...
+2025-10-13 23:15:45,795 - QuantumUtils - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-10-13 23:15:45,798 - QuantumUtils - INFO - GoogleProvider initialized successfully.
+2025-10-13 23:15:45,801 - QuantumUtils - INFO - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.
+2025-10-13 23:15:46,544 - QuantumUtils - INFO - LLM generation successful.
+2025-10-13 23:15:46,544 - QuantumUtils - INFO - Action 'generate_text_llm' executed successfully.
+2025-10-13 23:15:46,716 - QuantumUtils - INFO - Executing action 'search_web'...
+2025-10-13 23:15:46,724 - QuantumUtils - INFO - Action 'search_web' executed successfully.
+2025-10-13 23:15:46,724 - QuantumUtils - ERROR - execute_action returned non-dict type: <class 'TypeError'>. Converting to error dict.
+2025-10-13 23:15:46,724 - QuantumUtils - INFO - RCL triggered for task 'acquire_domain_knowledge' due to 'low_confidence'. RCL web search disabled - requires explicit LLM prompting.
+2025-10-13 23:15:46,724 - QuantumUtils - WARNING - Task 'acquire_domain_knowledge' failed with reason 'low_confidence'. Manual intervention may be required.
+2025-10-13 23:15:46,724 - QuantumUtils - INFO - RCL failure logged: {'trigger_task': 'acquire_domain_knowledge', 'trigger_reason': 'low_confidence', 'original_workflow_run_id': 'run_484ac0585d3a44c698f31239df1e27e3', 'task_result': {'error': "execute_action returned invalid type: <class 'TypeError'>", 'reflection': {'status': 'Failed', 'summary': "Action execution returned invalid type: <class 'TypeError'>", 'confidence': 0.0, 'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0}, 'potential_issues': ['execute_action did not return a dictionary'], 'raw_output_preview': "perform_web_search() got an unexpected keyword argument 'provider'"}}, 'timestamp': 1760411746.724339, 'rcl_action': 'logged_for_review'}
+2025-10-13 23:15:46,748 - QuantumUtils - INFO - Executing action 'execute_code'...
+2025-10-13 23:15:46,910 - QuantumUtils - INFO - Action 'execute_code' executed successfully.
+2025-10-13 23:15:46,910 - QuantumUtils - WARNING - Task 'validate_search_results' produced a non-compliant IAR. Issues: ['Missing required field: summary', 'Missing required field: raw_output_preview', "Status must be 'Success', 'Partial', or 'Failed'"]. Generating fallback IAR.
+2025-10-13 23:15:46,910 - QuantumUtils - INFO - RCL triggered for task 'validate_search_results' due to 'low_confidence'. RCL web search disabled - requires explicit LLM prompting.
+2025-10-13 23:15:46,910 - QuantumUtils - WARNING - Task 'validate_search_results' failed with reason 'low_confidence'. Manual intervention may be required.
+2025-10-13 23:15:46,910 - QuantumUtils - INFO - RCL failure logged: {'trigger_task': 'validate_search_results', 'trigger_reason': 'low_confidence', 'original_workflow_run_id': 'run_484ac0585d3a44c698f31239df1e27e3', 'task_result': {'result': {'output': '', 'error': 'Traceback (most recent call last):\n  File "/tmp/tmpi7mfautw.python", line 2, in <module>\n    search_output = null\n                    ^^^^\nNameError: name \'null\' is not defined\n'}, 'reflection': {'status': 'Success', 'summary': "Task 'validate_search_results' completed.", 'confidence': 0.1, 'alignment_check': {'resonatia_protocol': 'Alignment not assessed.'}, 'potential_issues': ['Return Code: 1', 'Traceback (most recent call last):\n  File "/tmp/tmpi7mfautw.python", line 2, in <module>\n    search_output = null\n                    ^^^^\nNameError: name \'null\' is not defined\n'], 'raw_output_preview': '{\'result\': {\'output\': \'\', \'error\': \'Traceback (most recent call last):\\n  File "/tmp/tmpi7mfautw.python", line 2, in <module>\\n    search_output = null\\n                    ^^^^\\nNameError: name \\\'nul'}}, 'timestamp': 1760411746.9104548, 'rcl_action': 'logged_for_review'}
+2025-10-13 23:15:47,053 - QuantumUtils - INFO - Skipping task 'analyze_specialization_requirements' due to unmet condition: {{ validate_search_results.result.output.search_is_valid }} == true
+2025-10-13 23:15:47,053 - QuantumUtils - INFO - RCL triggered for task 'analyze_specialization_requirements' due to 'condition_unmet'. RCL web search disabled - requires explicit LLM prompting.
+2025-10-13 23:15:47,053 - QuantumUtils - WARNING - Task 'analyze_specialization_requirements' failed with reason 'condition_unmet'. Manual intervention may be required.
+2025-10-13 23:15:47,053 - QuantumUtils - INFO - RCL failure logged: {'trigger_task': 'analyze_specialization_requirements', 'trigger_reason': 'condition_unmet', 'original_workflow_run_id': 'run_484ac0585d3a44c698f31239df1e27e3', 'task_result': None, 'timestamp': 1760411747.0536907, 'rcl_action': 'logged_for_review'}
+2025-10-13 23:15:47,068 - QuantumUtils - INFO - Executing action 'generate_text_llm'...
+2025-10-13 23:15:47,075 - QuantumUtils - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-10-13 23:15:47,078 - QuantumUtils - INFO - GoogleProvider initialized successfully.
+2025-10-13 23:15:47,078 - QuantumUtils - INFO - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.
+2025-10-13 23:15:58,039 - QuantumUtils - INFO - LLM generation successful.
+2025-10-13 23:15:58,040 - QuantumUtils - INFO - Action 'generate_text_llm' executed successfully.
+2025-10-13 23:15:58,076 - QuantumUtils - INFO - Executing action 'generate_text_llm'...
+2025-10-13 23:15:58,078 - QuantumUtils - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-10-13 23:15:58,078 - QuantumUtils - INFO - GoogleProvider initialized successfully.
+2025-10-13 23:15:58,078 - QuantumUtils - INFO - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.
+2025-10-13 23:16:05,888 - QuantumUtils - INFO - LLM generation successful.
+2025-10-13 23:16:05,889 - QuantumUtils - INFO - Action 'generate_text_llm' executed successfully.
+2025-10-13 23:16:05,930 - QuantumUtils - INFO - Workflow 'Knowledge Scaffolding & Dynamic Specialization' finished in 29.97s with status: Completed with Errors
+2025-10-13 23:16:05,934 - QuantumUtils - INFO - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_484ac0585d3a44c698f31239df1e27e3.jsonl
+2025-10-13 23:16:05,973 - QuantumUtils - INFO - ✅ Knowledge scaffolding workflow completed successfully
+2025-10-13 23:16:05,973 - QuantumUtils - INFO - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/metamorphosis_protocol.json
+2025-10-13 23:16:05,979 - QuantumUtils - INFO - Workflow plan optimized. Executing in 1 parallel stage(s).
+2025-10-13 23:16:05,979 - QuantumUtils - INFO - Starting workflow 'Metamorphosis Protocol' (Run ID: run_cf4e4121552b4a589e65206376141702).
+2025-10-13 23:16:05,980 - QuantumUtils - INFO - Executing stage 1/1 with tasks: ['define_agent_persona', 'validate_agent_structure']
+✅ Successfully imported ArchE core components.
+✅ LLM Provider initialized successfully.
+✅ VCD Bridge initialized with ACO and RISE Engine.
+->|execution|<-
+TASK: deconstruct_problem | ACTION: generate_text_llm
+{"inputs": {"prompt": "Analyze the following problem and deconstruct it into core components:\\n\\nAnalyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025. Provide a 1000-word strategic briefing for performers.\\n\\nIdentify:\\n1. Core domain areas\\n2. Key variables and unknowns\\n3. Strategic requirements\\n4. Risk factors\\n5. Success criteria\\n\\nOutput your analysis as a structured JSON object with a key 'deconstruction_text'.", "model": null, "model_settings": {"temperature": 0.3, "max_tokens": 8192}}}
+->|Results|<-
+TASK: deconstruct_problem | ACTION: generate_text_llm | STATUS: Success
+{"result": {"generated_text": "```json\n{\n  \"deconstruction_text\": {\n    \"problem_statement\": \"Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025 and provide a 1000-word strategic briefing for performers.\",\n    \"core_domain_areas\": [\n      \"Adult Webcam Industry: Understanding the platforms, business models, revenue streams, and audience demographics.\",\n      \"Sexuality and Sexual Performance: Knowledge of female anatomy, physiology, orgasm, and squirting (including scientific understanding and common misconceptions).\",\n    ...
+->|execution|<-
+TASK: extract_domain_from_deconstruction | ACTION: generate_text_llm
+{"inputs": {"prompt": "From the following JSON analysis, identify and extract only the single, most relevant 'Core domain area'. Your output must be a single, clean JSON object with one key: 'domain'. For example: {\\\"domain\\\": \\\"Artificial Intelligence Strategy\\\"}\\n\\nAnalysis:\\n```json\n{\n  \"deconstruction_text\": {\n    \"problem_statement\": \"Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025 and provide a 1000-word strategic briefing for performers.\",\n    \"core_domain_areas\": [\n      \"Adult Webcam Industry: Understandin...
+->|Results|<-
+TASK: extract_domain_from_deconstruction | ACTION: generate_text_llm | STATUS: Success
+{"result": {"generated_text": "```json\n{\n  \"domain\": \"Adult Webcam Industry\"\n}\n```"}, "reflection": {"action_name": "generate_text_llm", "inputs": {"prompt": "From the following JSON analysis, identify and extract only the single, most relevant 'Core domain area'. Your output must be a single, clean JSON object with one key: 'domain'. For example: {\\\"domain\\\": \\\"Artificial Intelligence Strategy\\\"}\\n\\nAnalysis:\\n```json\n{\n  \"deconstruction_text\": {\n    \"problem_statement\": \"Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 20...
+->|execution|<-
+TASK: acquire_domain_knowledge | ACTION: search_web
+{"inputs": {"query": "{% if extract_domain_from_deconstruction.result and extract_domain_from_deconstruction.result.generated_text %}```json\n{\n  \"domain\": \"Adult Webcam Industry\"\n}\n```{% else %}Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025. Provide a 1000-word strategic briefing for performers.{% endif %} latest developments competitive landscape strategic insights trends key players market dynamics", "num_results": 10, "provider": "duckduckgo"}}
+->|Results|<-
+TASK: acquire_domain_knowledge | ACTION: search_web | STATUS: Failed
+{"error": "execute_action returned invalid type: <class 'TypeError'>", "reflection": {"status": "Failed", "summary": "Action execution returned invalid type: <class 'TypeError'>", "confidence": 0.0, "alignment_check": {"objective_alignment": 0.0, "protocol_alignment": 0.0}, "potential_issues": ["execute_action did not return a dictionary"], "raw_output_preview": "perform_web_search() got an unexpected keyword argument 'provider'"}}
+->|execution|<-
+TASK: validate_search_results | ACTION: execute_code
+{"inputs": {"language": "python", "code": "import json\nsearch_output = null\nresults = search_output.get('results')\nvalid = isinstance(results, list) and len(results) > 0\nprint(json.dumps({'search_is_valid': valid, 'results_count': len(results) if isinstance(results, list) else 0}))"}}
+->|Results|<-
+TASK: validate_search_results | ACTION: execute_code | STATUS: Success
+{"result": {"output": "", "error": "Traceback (most recent call last):\n  File \"/tmp/tmpi7mfautw.python\", line 2, in <module>\n    search_output = null\n                    ^^^^\nNameError: name 'null' is not defined\n"}, "reflection": {"action_name": "execute_code", "timestamp_utc": 1760411746.9096773, "status": "Failure", "confidence": 0.1, "summary_message": "Code execution failed with return code 1.", "inputs_preview": {"language": "python", "code": "import json\nsearch_output = null\nresults = search_output.get('results')\nvalid = isinstance(results, ..."}, "outputs_preview": {"output":...
+->|execution|<-
+TASK: forge_specialist_agent | ACTION: generate_text_llm
+{"inputs": {"prompt": "Create a specialized agent profile for solving this problem:\\n\\nProblem: Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025. Provide a 1000-word strategic briefing for performers.\\nRequirements: null\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria", "model_settings": {"temperature": 0.3, "max_tokens": 16384}}}
+->|Results|<-
+TASK: forge_specialist_agent | ACTION: generate_text_llm | STATUS: Success
+{"result": {"generated_text": "## Agent Profile: The \"Erotic Trend Forecaster\" - Strategic Briefing for Webcam Performers\n\nThis agent profile outlines the capabilities of a specialized consultant, the \"Erotic Trend Forecaster,\" designed to analyze the surge in popularity of female orgasms and squirting in the adult webcam industry between 2020-2025 and provide a strategic briefing for performers.\n\n**1. Agent's Core Expertise and Background:**\n\n*   **Core Expertise:**  Market research within the adult entertainment industry, specifically focusing on consumer preferences, emerging tren...
+->|execution|<-
+TASK: validate_specialist_agent | ACTION: generate_text_llm
+{"inputs": {"prompt": "Validate the specialist agent against the original problem requirements:\\n\\nProblem: Analyze the surge in popularity of female orgasms and squirting in the adult webcam industry 2020-2025. Provide a 1000-word strategic briefing for performers.\\nRequirements: null\\nSpecialist Agent: ## Agent Profile: The \"Erotic Trend Forecaster\" - Strategic Briefing for Webcam Performers\n\nThis agent profile outlines the capabilities of a specialized consultant, the \"Erotic Trend Forecaster,\" designed to analyze the surge in popularity of female orgasms and squirting in the adul...
+->|Results|<-
+TASK: validate_specialist_agent | ACTION: generate_text_llm | STATUS: Success
+{"result": {"generated_text": "Okay, let's break down the validation of the \"Erotic Trend Forecaster\" agent against the original problem requirements.\n\n**1. Coverage of Required Capabilities:**\n\n*   **Strong Coverage:** The agent profile demonstrates a very strong understanding of the capabilities needed to address the problem. It covers market research, data analysis, sexology, digital media strategy, and sociological perspectives.\n*   **Specific Focus:** The agent's expertise is explicitly tailored to the adult entertainment industry, with a particular emphasis on female sexuality and...
+->|execution|<-
+TASK: define_agent_persona | ACTION: generate_text_llm
+2025-10-13 23:16:05,988 - QuantumUtils - INFO - Executing action 'generate_text_llm'...
+2025-10-13 23:16:05,990 - QuantumUtils - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-10-13 23:16:05,991 - QuantumUtils - INFO - GoogleProvider initialized successfully.
+2025-10-13 23:16:05,991 - QuantumUtils - INFO - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.
+2025-10-13 23:16:14,144 - QuantumUtils - INFO - LLM generation successful.
+2025-10-13 23:16:14,144 - QuantumUtils - INFO - Action 'generate_text_llm' executed successfully.
+2025-10-13 23:16:14,289 - QuantumUtils - INFO - Executing action 'generate_text_llm'...
+2025-10-13 23:16:14,300 - QuantumUtils - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-10-13 23:16:14,308 - QuantumUtils - INFO - GoogleProvider initialized successfully.
+2025-10-13 23:16:14,308 - QuantumUtils - INFO - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.
+2025-10-13 23:16:16,500 - QuantumUtils - INFO - LLM generation successful.
+2025-10-13 23:16:16,500 - QuantumUtils - INFO - Action 'generate_text_llm' executed successfully.
+2025-10-13 23:16:16,527 - QuantumUtils - INFO - Workflow 'Metamorphosis Protocol' finished in 10.55s with status: Completed Successfully
+2025-10-13 23:16:16,528 - QuantumUtils - INFO - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_cf4e4121552b4a589e65206376141702.jsonl
+2025-10-13 23:16:16,552 - QuantumUtils - INFO - ✅ Metamorphosis protocol completed successfully
+2025-10-13 23:16:16,552 - QuantumUtils - ERROR - ❌ Phase A failed completely: can't subtract offset-naive and offset-aware datetimes
+2025-10-13 23:16:16,552 - QuantumUtils - ERROR - ❌ RISE v2.0 workflow failed for session rise_1760411735_e7dbb3: can't subtract offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/rise_orchestrator.py", line 691, in run_rise_workflow
+    phase_a_result = self._execute_phase_a(rise_state, code_executor_timeout, model=model, datetime_module=datetime)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/rise_orchestrator.py", line 864, in _execute_phase_a
+    phase_duration = (phase_end - phase_start).total_seconds()
+                      ~~~~~~~~~~^~~~~~~~~~~~~
+TypeError: can't subtract offset-naive and offset-aware datetimes
+{"inputs": {"prompt": "Based on the following knowledge base and problem description, create a detailed persona for a specialized cognitive agent. The persona should be a JSON object with keys: 'name', 'expertise' (list of strings), 'background' (a detailed paragraph), 'analytical_frameworks' (list of strings), and 'strategic_patterns' (list of strings).\\n\\n== KNOWLEDGE BASE ==\\n{knowledge_base_str}\\n\\n== PROBLEM DESCRIPTION ==\\n{problem_description}", "model_settings": {"temperature": 0.4, "max_tokens": 1500}, "knowledge_base_str": null, "problem_description": "Analyze the surge in popu...
+->|Results|<-
+TASK: define_agent_persona | ACTION: generate_text_llm | STATUS: Success
+{"result": {"generated_text": "```json\n{\n  \"knowledge_base_str\": \"{\\n  \\\"knowledge_domains\\\": [\\n    \\\"Game Theory\\\",\\n    \\\"Mechanism Design\\\",\\n    \\\"Auction Theory\\\",\\n    \\\"Behavioral Economics\\\",\\n    \\\"Contract Theory\\\",\\n    \\\"Information Economics\\\",\\n    \\\"Algorithmic Game Theory\\\",\\n    \\\"Artificial Intelligence\\\",\\n    \\\"Machine Learning\\\",\\n    \\\"Optimization\\\",\\n    \\\"Decision Theory\\\"\\n  ],\\n  \\\"key_concepts\\\": [\\n    \\\"Nash Equilibrium\\\",\\n    \\\"Bayesian Nash Equilibrium\\\",\\n    \\\"Mechanism Desig...
+->|execution|<-
+TASK: validate_agent_structure | ACTION: generate_text_llm
+{"inputs": {"prompt": "Please validate the following agent profile JSON and ensure it contains all required keys: 'name', 'expertise', 'background', 'analytical_frameworks', 'strategic_patterns'. If any keys are missing, add them with appropriate placeholder values. Return the complete, validated JSON object.\n\nAgent Profile:\nnull", "model_settings": {"temperature": 0.1, "max_tokens": 1000}}}
+->|Results|<-
+TASK: validate_agent_structure | ACTION: generate_text_llm | STATUS: Success
+{"result": {"generated_text": "```json\n{\n  \"name\": \"Placeholder Agent Name\",\n  \"expertise\": \"General Problem Solving\",\n  \"background\": \"Generic AI Assistant\",\n  \"analytical_frameworks\": [\n    \"SWOT Analysis\",\n    \"PESTLE Analysis\"\n  ],\n  \"strategic_patterns\": [\n    \"First Principles Thinking\",\n    \"Game Theory\"\n  ]\n}\n```\n\n**Explanation of Changes:**\n\nThe original input was `null`.  Since the requirement was to validate and complete the JSON object with the required keys, I've created a new JSON object with the following:\n\n*   **`name`**:  Set to \"Pl...
+
+--- ArchE Response ---
+Content: RISE workflow completed, but final strategy could not be extracted.
+Processing Path: rise_escalation
+Controller Used: RISE_Workflow
+Confidence: 0.950
+----------------------
+

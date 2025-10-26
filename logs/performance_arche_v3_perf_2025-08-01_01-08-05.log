@@ -1,0 +1,4 @@
+2025-08-01 01:08:05 - performance:174 - INFO - logging_config - Performance monitoring initialized
+2025-08-01 01:08:05 - performance:42 - INFO - test_timestamped_logging - Performance test: System startup completed in 2.3 seconds
+2025-08-01 01:08:05 - performance:43 - INFO - test_timestamped_logging - Performance test: Query processing took 1.1 seconds
+2025-08-01 01:08:05 - performance:44 - INFO - test_timestamped_logging - Performance test: Response generation completed in 0.8 seconds

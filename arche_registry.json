@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-06-07T11:12:04.394985+00:00",
+  "last_updated": "2025-08-10T04:58:10.485866+00:00",
   "instances": [
     {
       "instance_id": "engineering_2834a17c",
@@ -81,6 +81,129 @@
         "collaboration_history": [
           "ai_studio_arche_strategic_analysis"
         ]
+      }
+    },
+    {
+      "instance_id": "engineering_e686f1dd",
+      "instance_type": "engineering",
+      "name": "Local Engineer",
+      "description": "Handles Code executoR tasks",
+      "capabilities": [
+        {
+          "name": "Code executoR",
+          "level": "master",
+          "specializations": [
+            "python",
+            "bash"
+          ],
+          "last_validated": "2025-08-10T04:49:16.228947+00:00",
+          "success_rate": 0.99
+        }
+      ],
+      "status": "active",
+      "last_active": "2025-08-10T04:49:16.228978+00:00",
+      "total_tasks_completed": 0,
+      "success_rate": 1.0,
+      "current_load": 0,
+      "max_concurrent_tasks": 2,
+      "metadata": {
+        "env": "local"
+      }
+    },
+    {
+      "instance_id": "specialized_45d6cf0b",
+      "instance_type": "specialized",
+      "name": "cli-worker-01",
+      "description": "local:9001",
+      "capabilities": [
+        {
+          "name": "Code executoR",
+          "level": "basic",
+          "specializations": [],
+          "last_validated": "2025-08-10T04:54:04.988837+00:00",
+          "success_rate": 1.0
+        }
+      ],
+      "status": "active",
+      "last_active": "2025-08-10T04:54:04.988859+00:00",
+      "total_tasks_completed": 0,
+      "success_rate": 1.0,
+      "current_load": 0,
+      "max_concurrent_tasks": 3,
+      "metadata": {
+        "external_instance_id": "cli-worker-01"
+      }
+    },
+    {
+      "instance_id": "specialized_2abe5bb8",
+      "instance_type": "specialized",
+      "name": "code-exec-01",
+      "description": "local:67680",
+      "capabilities": [
+        {
+          "name": "Code executoR",
+          "level": "basic",
+          "specializations": [],
+          "last_validated": "2025-08-10T04:55:00.034999+00:00",
+          "success_rate": 1.0
+        }
+      ],
+      "status": "active",
+      "last_active": "2025-08-10T04:55:00.035017+00:00",
+      "total_tasks_completed": 0,
+      "success_rate": 1.0,
+      "current_load": 0,
+      "max_concurrent_tasks": 3,
+      "metadata": {
+        "external_instance_id": "code-exec-01"
+      }
+    },
+    {
+      "instance_id": "specialized_4766060a",
+      "instance_type": "specialized",
+      "name": "cli-worker-03",
+      "description": "local:9003",
+      "capabilities": [
+        {
+          "name": "Code executoR",
+          "level": "basic",
+          "specializations": [],
+          "last_validated": "2025-08-10T04:57:31.039100+00:00",
+          "success_rate": 1.0
+        }
+      ],
+      "status": "active",
+      "last_active": "2025-08-10T04:57:31.039121+00:00",
+      "total_tasks_completed": 0,
+      "success_rate": 1.0,
+      "current_load": 0,
+      "max_concurrent_tasks": 3,
+      "metadata": {
+        "external_instance_id": "cli-worker-03"
+      }
+    },
+    {
+      "instance_id": "specialized_fb2103f2",
+      "instance_type": "specialized",
+      "name": "cli-worker-04",
+      "description": "local:9004",
+      "capabilities": [
+        {
+          "name": "Code executoR",
+          "level": "basic",
+          "specializations": [],
+          "last_validated": "2025-08-10T04:58:10.485674+00:00",
+          "success_rate": 1.0
+        }
+      ],
+      "status": "active",
+      "last_active": "2025-08-10T04:58:10.485697+00:00",
+      "total_tasks_completed": 0,
+      "success_rate": 1.0,
+      "current_load": 0,
+      "max_concurrent_tasks": 3,
+      "metadata": {
+        "external_instance_id": "cli-worker-04"
       }
     }
   ]

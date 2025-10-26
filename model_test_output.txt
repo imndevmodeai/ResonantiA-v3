@@ -1,0 +1,165 @@
+No valid response text generated. The API response may have been blocked. Finish Reason: Unknown
+No valid response text generated. The API response may have been blocked. Finish Reason: Unknown
+No valid response text generated. The API response may have been blocked. Finish Reason: Unknown
+No valid response text generated. The API response may have been blocked. Finish Reason: Unknown
+====================================================================================================
+COMPREHENSIVE GEMINI MODEL TEST FOR RISE COMPATIBILITY
+Testing 15 models with 3 prompts
+====================================================================================================
+
+[1/15] Testing: gemini-2.0-flash-exp
+----------------------------------------------------------------------------------------------------
+  ✅ SUCCESS - 2221 chars
+  Preview: ```json
+{
+  "name": "Dr. Anya Sharma",
+  "expertise": {
+    "core": [
+      "Electric Vehicle (EV) M...
+
+[2/15] Testing: gemini-2.0-flash
+----------------------------------------------------------------------------------------------------
+  ✅ SUCCESS - 2407 chars
+  Preview: ```json
+{
+  "name": "Electra Analytics",
+  "expertise": {
+    "primary": "Electric Vehicle Market An...
+
+[3/15] Testing: gemini-2.0-flash-001
+----------------------------------------------------------------------------------------------------
+  ✅ SUCCESS - 2496 chars
+  Preview: ```json
+{
+  "name": "Evana Volt",
+  "expertise": [
+    "Electric Vehicle (EV) Market Analysis",
+    ...
+
+[4/15] Testing: gemini-2.0-flash-lite
+----------------------------------------------------------------------------------------------------
+  ✅ SUCCESS - 1940 chars
+  Preview: ```json
+{
+  "name": "EVolve Strategist",
+  "expertise": [
+    "Electric Vehicle Market Analysis",
+  ...
+
+[5/15] Testing: gemini-2.0-flash-lite-001
+----------------------------------------------------------------------------------------------------
+  ✅ SUCCESS - 1938 chars
+  Preview: ```json
+{
+  "name": "ElectraStrat Analyst",
+  "expertise": [
+    "Electric Vehicle (EV) Market Analy...
+
+[6/15] Testing: gemini-2.0-pro-exp
+----------------------------------------------------------------------------------------------------
+  ❌ ERROR
+  Error: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-pro-exp:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded yo...
+
+[7/15] Testing: gemini-2.0-pro-exp-02-05
+----------------------------------------------------------------------------------------------------
+  ❌ ERROR
+  Error: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-pro-exp-02-05:generateContent?%24alt=json%3Benum-encoding%3Dint: You excee...
+
+[8/15] Testing: gemini-exp-1206
+----------------------------------------------------------------------------------------------------
+  ❌ ERROR
+  Error: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-exp-1206:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your ...
+
+[9/15] Testing: gemini-flash-latest
+----------------------------------------------------------------------------------------------------
+  ❌ BLOCKED
+  Error: [google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown...
+
+[10/15] Testing: gemini-pro-latest
+----------------------------------------------------------------------------------------------------
+  ❌ BLOCKED
+  Error: [google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown...
+
+[11/15] Testing: gemini-2.5-flash
+----------------------------------------------------------------------------------------------------
+  ❌ BLOCKED
+  Error: [google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown...
+
+[12/15] Testing: gemini-2.5-flash-lite
+----------------------------------------------------------------------------------------------------
+  ✅ SUCCESS - 2194 chars
+  Preview: ```json
+{
+  "name": "Anya Sharma",
+  "expertise": [
+    "Electric Vehicle (EV) Market Analysis",
+   ...
+
+[13/15] Testing: gemini-2.5-pro
+----------------------------------------------------------------------------------------------------
+  ❌ BLOCKED
+  Error: [google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown...
+
+[14/15] Testing: gemma-3-27b-it
+----------------------------------------------------------------------------------------------------
+  ✅ SUCCESS - 2576 chars
+  Preview: ```json
+{
+  "name": "Volt Insights - Market Analyst Agent",
+  "expertise": [
+    "Electric Vehicle (...
+
+[15/15] Testing: gemma-3-12b-it
+----------------------------------------------------------------------------------------------------
+  ✅ SUCCESS - 2302 chars
+  Preview: ```json
+{
+  "name": "Eleanor Vance - EV Market Strategist",
+  "expertise": {
+    "primary": "Electri...
+
+====================================================================================================
+SUMMARY REPORT - AGENT TERMINOLOGY TEST
+====================================================================================================
+
+✅ SUCCESS: 8/15 models
+❌ BLOCKED: 4/15 models
+⚠️ NOT_FOUND: 0/15 models
+❌ ERROR: 3/15 models
+
+🎯 WORKING MODELS (RECOMMENDED):
+  ✅ gemini-2.0-flash-exp
+  ✅ gemini-2.0-flash
+  ✅ gemini-2.0-flash-001
+  ✅ gemini-2.0-flash-lite
+  ✅ gemini-2.0-flash-lite-001
+  ✅ gemini-2.5-flash-lite
+  ✅ gemma-3-27b-it
+  ✅ gemma-3-12b-it
+
+❌ BLOCKED MODELS (AVOID):
+  ❌ gemini-flash-latest
+  ❌ gemini-pro-latest
+  ❌ gemini-2.5-flash
+  ❌ gemini-2.5-pro
+
+✅ Results saved to: /media/newbu/3626C55326C514B1/Happier/comprehensive_model_test_results.json
+
+====================================================================================================
+FINAL RECOMMENDATIONS
+====================================================================================================
+
+🎯 RECOMMENDED MODELS (8 options):
+  1. gemini-2.0-flash-exp
+  2. gemini-2.0-flash
+  3. gemini-2.0-flash-001
+  4. gemini-2.0-flash-lite
+  5. gemini-2.0-flash-lite-001
+  6. gemini-2.5-flash-lite
+  7. gemma-3-27b-it
+  8. gemma-3-12b-it
+
+✅ PRIMARY RECOMMENDATION: gemini-2.0-flash-exp
+✅ BACKUP OPTIONS: gemini-2.0-flash, gemini-2.0-flash-001, gemini-2.0-flash-lite, gemini-2.0-flash-lite-001, gemini-2.5-flash-lite, gemma-3-27b-it, gemma-3-12b-it
+
+====================================================================================================

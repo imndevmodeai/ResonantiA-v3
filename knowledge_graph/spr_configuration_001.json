@@ -1,0 +1,82 @@
+{
+  "spr_id": "SPR_Configuration_001",
+  "title": "Query Complexity Analyzer Configuration Parameters",
+  "category": "system_configuration",
+  "created": "2025-10-12T16:50:00.000000Z",
+  "updated": "2025-10-12T16:50:00.000000Z",
+  "status": "canonical",
+  "description": "Defines the canonical configuration parameters, thresholds, and model paths for the Query Complexity Analyzer component within ArchE's cognitive routing system.",
+  
+  "sparse_priming_representations": [
+    {
+      "concept": "Complexity Thresholds",
+      "priming_data": "CRCS_threshold: 0.3 (queries below this are simple, routed to CRCS). RISE_threshold: 0.7 (queries above this are complex, routed to RISE). Middle_zone: 0.3-0.7 (requires heuristic analysis or hybrid routing)."
+    },
+    {
+      "concept": "Feature Weights",
+      "priming_data": "sentence_count: 0.15, avg_sentence_length: 0.10, vocab_complexity: 0.25, syntactic_depth: 0.20, domain_specificity: 0.15, ambiguity_score: 0.15. Total weight must sum to 1.0."
+    },
+    {
+      "concept": "Model Paths",
+      "priming_data": "complexity_model_path: 'models/query_complexity_classifier.pkl'. tokenizer_path: 'models/tokenizer_config.json'. Fallback to rule-based if models unavailable."
+    },
+    {
+      "concept": "NLP Library Configuration",
+      "priming_data": "Primary: spaCy (en_core_web_sm). Fallback: NLTK. Feature extraction: POS tagging, dependency parsing, named entity recognition."
+    },
+    {
+      "concept": "Performance Constraints",
+      "priming_data": "Max analysis time: 50ms per query. Max memory: 10MB per analysis. Batch processing: enabled for >10 concurrent queries."
+    },
+    {
+      "concept": "Adaptive Learning",
+      "priming_data": "Enable threshold auto-tuning based on routing success rate. Log misroutes to ThoughtTrail. Trigger ACO review if misroute rate >10%."
+    }
+  ],
+  
+  "technical_parameters": {
+    "thresholds": {
+      "crcs_route_threshold": 0.3,
+      "rise_route_threshold": 0.7,
+      "confidence_minimum": 0.5
+    },
+    "feature_weights": {
+      "sentence_count": 0.15,
+      "avg_sentence_length": 0.10,
+      "vocab_complexity": 0.25,
+      "syntactic_depth": 0.20,
+      "domain_specificity": 0.15,
+      "ambiguity_score": 0.15
+    },
+    "model_config": {
+      "classifier_path": "models/query_complexity_classifier.pkl",
+      "tokenizer_path": "models/tokenizer_config.json",
+      "fallback_mode": "rule_based"
+    },
+    "nlp_config": {
+      "primary_library": "spacy",
+      "primary_model": "en_core_web_sm",
+      "fallback_library": "nltk"
+    },
+    "performance": {
+      "max_analysis_time_ms": 50,
+      "max_memory_mb": 10,
+      "batch_threshold": 10
+    },
+    "learning": {
+      "enable_auto_tuning": true,
+      "misroute_threshold": 0.10,
+      "log_to_thought_trail": true
+    }
+  },
+  
+  "related_sprs": [
+    "SPR_ModelRepository_001",
+    "SPR_CognitiveRouting_001",
+    "SPR_ThoughtTrail_Core",
+    "SPR_PerformanceMonitoring_001"
+  ],
+  
+  "usage_notes": "This SPR is referenced by specifications/query_complexity_analyzer.md. Update this configuration when tuning routing behavior or model parameters. All changes trigger a Guardian review event."
+}
+

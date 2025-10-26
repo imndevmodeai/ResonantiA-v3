@@ -6,7 +6,7 @@ SERVICE_NAME="arche_registry"
 PID_FILE="/tmp/${SERVICE_NAME}.pid"
 LOG_FILE="/tmp/${SERVICE_NAME}.log"
 VENV_PATH="./.venv" # Path to the virtual environment
-WAITRESS_SERVE_PATH="${VENV_PATH}/bin/waitress-serve"
+PY_BIN="${VENV_PATH}/bin/python"
 HOST="127.0.0.1"
 PORT="5001"
 
@@ -21,9 +21,9 @@ find_available_port() {
 }
 
 start() {
-    if [ ! -f "$WAITRESS_SERVE_PATH" ]; then
-        echo "Error: waitress-serve not found at ${WAITRESS_SERVE_PATH}."
-        echo "Please ensure the virtual environment is set up and dependencies are installed ('pip install -e .')."
+    if [ ! -x "$PY_BIN" ]; then
+        echo "Error: Python not found at ${PY_BIN}."
+        echo "Please create the virtual environment (python3 -m venv .venv) and install dependencies."
         exit 1
     fi
 
@@ -36,8 +36,8 @@ start() {
     PORT=$(find_available_port $PORT)
     echo "Starting service on port $PORT..."
 
-    # We cd into the directory so waitress can find the module.
-    (cd arche_registry && nohup python3 -u -m waitress --host=$HOST --port=$PORT api:app > "$LOG_FILE" 2>&1 &)
+    # Run waitress from repo root, targeting the package module path
+    nohup "$PY_BIN" -u -m waitress --host=$HOST --port=$PORT arche_registry.api:app > "$LOG_FILE" 2>&1 &
     
     PID=$!
     echo $PID > "$PID_FILE"

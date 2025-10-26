@@ -1,0 +1,23 @@
+{
+    "name": "Simple Search Test",
+    "description": "A simple test workflow to verify the enhanced search functionality works.",
+    "tasks": {
+        "test_search": {
+            "action_type": "search_web",
+            "inputs": {
+                "query": "artificial intelligence trends 2024",
+                "engine": "duckduckgo",
+                "num_results": 5
+            },
+            "dependencies": []
+        },
+        "analyze_results": {
+            "action_type": "execute_code",
+            "inputs": {
+                "language": "python",
+                "code": "import json\n\nsearch_results = {{test_search.results}}\nprint('Search Results Analysis:')\nprint(f'Success: {search_results.get(\"success\", False)}')\nprint(f'Total Results: {search_results.get(\"total_results\", 0)}')\nprint(f'Response Time: {search_results.get(\"response_time\", 0):.2f}s')\n\nif search_results.get('results'):\n    print('\\nFirst 3 Results:')\n    for i, result in enumerate(search_results['results'][:3]):\n        print(f'{i+1}. {result.get(\"title\", \"No title\")}')\n        print(f'   URL: {result.get(\"url\", \"No URL\")}')\n        print(f'   Description: {result.get(\"description\", \"No description\")[:100]}...')\n        print()\nelse:\n    print('No results found')\n    if search_results.get('error'):\n        print(f'Error: {search_results[\"error\"]}')"
+            },
+            "dependencies": ["test_search"]
+        }
+    }
+}

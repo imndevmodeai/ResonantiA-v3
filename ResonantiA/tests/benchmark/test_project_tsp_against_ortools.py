@@ -27,7 +27,7 @@ def test_abm_vs_ortools(instance, opt_dist):
     # Run ABM workflow
     wf = json.load(open('../../../../todo/traveling_salesman_optimization.json'))
     engine = IARCompliantWorkflowEngine()
-    res = engine.execute_workflow(wf, input_data={'tsp_data': tsp_data})
+    res = engine.run_workflow('traveling_salesman_optimization.json', {'tsp_data': tsp_data})
     abm_res = res['step_results']['tsp_simulation']['result']
     abm_dist = abm_res['total_distance']
 

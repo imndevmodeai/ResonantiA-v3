@@ -1,0 +1,2208 @@
+->| Launching Conversational Sales Assistant v2...
+->| Navigating to Google Messages: https://messages.google.com/web/
+->| Waiting for main interface to load...
+--> Interface loaded.
+->| Starting message monitoring loop. Will check every 15 seconds.
+->| Press Ctrl+C to stop the listener.
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Lewis Ben: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+->| ERROR navigating to conversation for Lewis Ben: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:81:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:59:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:132:17)
+->| Attempting to recover...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:81:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:59:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:132:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:81:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:59:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:132:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:81:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:59:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:132:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error closing browser context: browserContext.close: Target page, context or browser has been closed
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:140:25)
+->| Launching Conversational Sales Assistant v2...
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Target page, context or browser has been closed
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:81:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:59:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:132:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+node:internal/process/promises:288
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+browserType.launchPersistentContext: Failed to create a ProcessSingleton for your profile directory. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+[2m  - <launching> /home/newbu/.cache/ms-playwright/chromium-1181/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AutoExpandDetailsElement,AvoidUnnecessaryBeforeUnloadCheckSync,CertificateTransparencyComponentUpdater,DestroyProfileOnBrowserClose,DialMediaRouteProvider,ExtensionManifestV2Disabled,GlobalMediaControls,HttpsUpgrades,ImprovedCookieControls,LazyFrameLoading,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --no-sandbox --no-sandbox --disable-setuid-sandbox --user-data-dir=/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/google_messages_data --remote-debugging-pipe about:blank[22m
+[2m  - <launched> pid=9924[22m
+[2m  - [pid=9924][err] [9924:9924:0817/042943.828041:ERROR:chrome/browser/process_singleton_posix.cc:340] Failed to create /media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/google_messages_data/SingletonLock: File exists (17)[22m
+[2m  - [pid=9924][err] [9924:9924:0817/042943.996452:ERROR:chrome/app/chrome_main_delegate.cc:529] Failed to create a ProcessSingleton for your profile directory. This means that running multiple instances would start multiple browser processes rather than opening a new window in the existing process. Aborting now to avoid profile corruption.[22m
+
+    at async initializeBrowser (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:20:28)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:147:43) {
+  name: 'Error'
+}
+
+Node.js v18.19.1
+->| Launching Conversational Sales Assistant v2...
+->| Navigating to Google Messages: https://messages.google.com/web/
+->| Waiting for main interface to load...
+--> Interface loaded.
+->| Starting message monitoring loop. Will check every 15 seconds.
+->| Press Ctrl+C to stop the listener.
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+->| Launching Conversational Sales Assistant v2...
+->| Navigating to Google Messages: https://messages.google.com/web/
+->| Waiting for main interface to load...
+--> Interface loaded.
+->| Starting message monitoring loop. Will check every 15 seconds.
+->| Press Ctrl+C to stop the listener.
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new leads to contact...
+--> Sending initial message to: Lewis Ben (2694796603)
+----> Sending message: "Hi Lewis Ben, this is ArchE from Aaron's. I see you recently applied and have a leasing power of $475/month. I can help you finish up your order or find some great items. Let me know what you're looking for!"
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+
+->| Checking for new leads to contact...
+--> Sending initial message to: Lewis Ben (2694796603)
+----> Sending message: "Hi Lewis Ben, this is ArchE from Aaron's. I see you recently applied and have a leasing power of $475/month. I can help you finish up your order or find some great items. Let me know what you're looking for!"
+
+->| Checking for new messages...
+--> No leads to monitor for new messages right now.
+------> Message sent.
+----> Updated lead crm-104 to status "contacted_initial" in leads.json.
+
+->| Checking for new leads to contact...
+--> Sending initial message to: Jacob Lewis (2698883503)
+----> Sending message: "Hi Jacob Lewis, ArchE from Aaron's here. Hope you're enjoying the mattress set! I saw you still have about $335/month of available leasing power. We've got some great new TVs and game systems in stock if you're interested in adding something to your lease."
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Target page, context or browser has been closed
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:81:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:59:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:132:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+node:internal/process/promises:288
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+browserType.launchPersistentContext: Failed to create a ProcessSingleton for your profile directory. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+[2m  - <launching> /home/newbu/.cache/ms-playwright/chromium-1181/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AutoExpandDetailsElement,AvoidUnnecessaryBeforeUnloadCheckSync,CertificateTransparencyComponentUpdater,DestroyProfileOnBrowserClose,DialMediaRouteProvider,ExtensionManifestV2Disabled,GlobalMediaControls,HttpsUpgrades,ImprovedCookieControls,LazyFrameLoading,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --no-sandbox --no-sandbox --disable-setuid-sandbox --user-data-dir=/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/google_messages_data --remote-debugging-pipe about:blank[22m
+[2m  - <launched> pid=22463[22m
+[2m  - [pid=22463][err] [22463:22463:0817/055817.575570:ERROR:chrome/browser/process_singleton_posix.cc:340] Failed to create /media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/google_messages_data/SingletonLock: File exists (17)[22m
+[2m  - [pid=22463][err] [22463:22463:0817/055817.576469:ERROR:chrome/app/chrome_main_delegate.cc:529] Failed to create a ProcessSingleton for your profile directory. This means that running multiple instances would start multiple browser processes rather than opening a new window in the existing process. Aborting now to avoid profile corruption.[22m
+
+    at async initializeBrowser (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:20:28)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:147:43) {
+  name: 'Error'
+}
+
+Node.js v18.19.1
+
+->| Checking for new leads to contact...
+--> Sending initial message to: Jacob Lewis (2698883503)
+->| ERROR processing new lead Lewis Ben: page.type: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('textarea[placeholder="Text message"]')[22m
+[2m    - locator resolved to <textarea rows="1" class="input" mwswatchsize="" mwsautotextdirection="" mwsdisablewhenoffline="" placeholder="Text message" _ngcontent-ng-c3622044267="" data-e2e-message-input-box="" aria-label="Type a text message to (269) 888-3503"></textarea>[22m
+[2m  - elementHandle.type("Hi Lewis Ben, this is ArchE from Aaron's. I see you recently applied and have a leasing power of $475/month. I can help you finish up your order or find some great items. Let me know what you're looking for!")[22m
+
+----> Sending message: "Hi Jacob Lewis, ArchE from Aaron's here. Hope you're enjoying the mattress set! I saw you still have about $335/month of available leasing power. We've got some great new TVs and game systems in stock if you're interested in adding something to your lease."
+--> Sending initial message to: Jacob Lewis (2698883503)
+->| ERROR processing new lead Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Sending initial message to: Jacob Lewis (2698883503)
+----> Sending message: "Hi Jacob Lewis, ArchE from Aaron's here. Hope you're enjoying the mattress set! I saw you still have about $335/month of available leasing power. We've got some great new TVs and game systems in stock if you're interested in adding something to your lease."
+
+->| Checking for new leads to contact...
+--> Sending initial message to: Jacob Lewis (2698883503)
+------> Message sent.
+----> Updated lead crm-105 to status "contacted_initial" in leads.json.
+----> Sending message: "Hi Jacob Lewis, ArchE from Aaron's here. Hope you're enjoying the mattress set! I saw you still have about $335/month of available leasing power. We've got some great new TVs and game systems in stock if you're interested in adding something to your lease."
+----> Sending message: "Hi Jacob Lewis, ArchE from Aaron's here. Hope you're enjoying the mattress set! I saw you still have about $335/month of available leasing power. We've got some great new TVs and game systems in stock if you're interested in adding something to your lease."
+
+->| Checking for new leads to contact...
+--> No new leads to process.
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR processing new lead Jacob Lewis: page.type: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('textarea[placeholder="Text message"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+[2m    - locator resolved to <textarea rows="1" dir="auto" class="input" mwswatchsize="" mwsautotextdirection="" mwsdisablewhenoffline="" placeholder="Text message" _ngcontent-ng-c3622044267="" data-e2e-message-input-box="" aria-label="Type a text message to (269) 888-3503"></textarea>[22m
+[2m  - elementHandle.type("Hi Jacob Lewis, ArchE from Aaron's here. Hope you're enjoying the mattress set! I saw you still have about $335/month of available leasing power. We've got some great new TVs and game systems in stock if you're interested in adding something to your lease.")[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR processing new lead Jacob Lewis: page.type: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('textarea[placeholder="Text message"]')[22m
+[2m    - locator resolved to <textarea rows="1" dir="auto" class="input" mwswatchsize="" mwsautotextdirection="" mwsdisablewhenoffline="" placeholder="Text message" _ngcontent-ng-c3622044267="" data-e2e-message-input-box="" aria-label="Type a text message to (269) 888-3503"></textarea>[22m
+[2m  - elementHandle.type("Hi Jacob Lewis, ArchE from Aaron's here. Hope you're enjoying the mattress set! I saw you still have about $335/month of available leasing power. We've got some great new TVs and game systems in stock if you're interested in adding something to your lease.")[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+------> Message sent.
+----> Updated lead crm-105 to status "contacted_initial" in leads.json.
+
+->| Checking for new leads to contact...
+--> No new leads to process.
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+------> Message sent.
+----> Updated lead crm-105 to status "contacted_initial" in leads.json.
+->| ERROR processing new lead Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+
+->| Checking for new leads to contact...
+--> No new leads to process.
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR processing new lead Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+
+->| Checking for new leads to contact...
+--> No new leads to process.
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR processing new lead Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+
+->| Checking for new leads to contact...
+--> No new leads to process.
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    3 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    3 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+
+->| Checking for new leads to contact...
+--> No new leads to process.
+
+->| Checking for new messages...
+--> Checking lead: Lewis Ben (2694796603)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+--> Checking lead: Jacob Lewis (2698883503)
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+->| Error during monitoring cycle: page.goto: net::ERR_ABORTED at https://messages.google.com/web/
+Call log:
+[2m  - navigating to "https://messages.google.com/web/", waiting until "load"[22m
+
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17) {
+  name: 'Error'
+}
+->| Attempting to recover...
+->| ERROR navigating to conversation for Lewis Ben: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+->| Error during monitoring cycle: page.goto: net::ERR_ABORTED; maybe frame was detached?
+Call log:
+[2m  - navigating to "https://messages.google.com/web/", waiting until "load"[22m
+
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17) {
+  name: 'Error'
+}
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+Call log:
+[2m  - navigating to "https://messages.google.com/web/", waiting until "load"[22m
+
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Lewis Ben: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    3 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+[2m    2 × waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m      - navigated to "https://messages.google.com/web/"[22m
+
+->| ERROR navigating to conversation for Lewis Ben: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button[aria-label="Cancel"]')[22m
+
+->| ERROR navigating to conversation for Jacob Lewis: page.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('a[href="/web/conversations/new"]')[22m
+[2m    - locator resolved to <a mat-button="" data-e2e-start-button="" queryparamshandling="merge" _ngcontent-ng-c1362737702="" href="/web/conversations/new" mat-ripple-loader-uninitialized="" mat-ripple-loader-class-name="mat-mdc-button-ripple" class="mdc-button mat-mdc-button-base fab link mat-mdc-button mat-unthemed">…</a>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div dir="ltr" id="loader" aria-hidden="true">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div dir="ltr" id="loader" aria-hidden="true">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <div dir="ltr" id="loader" aria-hidden="true">…</div> intercepts pointer events[22m
+[2m  - retrying click action[22m
+[2m    - waiting 500ms[22m
+
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Error during monitoring cycle: page.goto: Target page, context or browser has been closed
+    at checkMessagesForLead (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:116:20)
+    at async monitorMessages (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:94:9)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:170:17)
+->| Attempting to recover...
+->| Launching Conversational Sales Assistant v2...
+->| Launching Conversational Sales Assistant v2...
+node:internal/process/promises:288
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+browserType.launchPersistentContext: Failed to create a ProcessSingleton for your profile directory. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+[2m  - <launching> /home/newbu/.cache/ms-playwright/chromium-1181/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AutoExpandDetailsElement,AvoidUnnecessaryBeforeUnloadCheckSync,CertificateTransparencyComponentUpdater,DestroyProfileOnBrowserClose,DialMediaRouteProvider,ExtensionManifestV2Disabled,GlobalMediaControls,HttpsUpgrades,ImprovedCookieControls,LazyFrameLoading,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --no-sandbox --no-sandbox --disable-setuid-sandbox --user-data-dir=/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/google_messages_data --remote-debugging-pipe about:blank[22m
+[2m  - <launched> pid=22920[22m
+[2m  - [pid=22920][err] [22920:22920:0817/060020.031197:ERROR:chrome/browser/process_singleton_posix.cc:340] Failed to create /media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/google_messages_data/SingletonLock: File exists (17)[22m
+[2m  - [pid=22920][err] [22920:22920:0817/060020.210269:ERROR:chrome/app/chrome_main_delegate.cc:529] Failed to create a ProcessSingleton for your profile directory. This means that running multiple instances would start multiple browser processes rather than opening a new window in the existing process. Aborting now to avoid profile corruption.[22m
+
+    at async initializeBrowser (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:20:28)
+    at async Timeout.monitor (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:185:43) {
+  name: 'Error'
+}
+
+Node.js v18.19.1
+[2025-08-17T11:22:45.767Z] [INFO] Launching browser and setting up context...
+[2025-08-17T11:22:47.571Z] [INFO] Navigating to https://messages.google.com/web/
+[2025-08-17T11:22:48.826Z] [INFO] Waiting for interface to load...
+[2025-08-17T11:22:50.402Z] [SUCCESS] Interface loaded successfully.
+[2025-08-17T11:22:50.404Z] [INFO] Starting main loop. Will check every 15 seconds.
+[2025-08-17T11:23:05.405Z] [INFO] Checking for new leads...
+[2025-08-17T11:23:05.411Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:23:20.405Z] [INFO] Checking for new leads...
+[2025-08-17T11:23:20.406Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:23:35.404Z] [INFO] Checking for new leads...
+[2025-08-17T11:23:35.407Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:23:50.405Z] [INFO] Checking for new leads...
+[2025-08-17T11:23:50.409Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:24:02.147Z] [ERROR] Failed to process new lead lewis lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Send message"]')[22m
+
+[2025-08-17T11:24:02.750Z] [INFO] Monitoring for responses...
+[2025-08-17T11:24:02.765Z] [INFO] No leads to monitor for responses.
+[2025-08-17T11:24:02.765Z] [INFO] Checking for leads who need a reply...
+[2025-08-17T11:24:02.773Z] [INFO] No leads waiting for a reply.
+[2025-08-17T11:24:05.405Z] [INFO] Checking for new leads...
+[2025-08-17T11:24:05.410Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:24:20.405Z] [INFO] Checking for new leads...
+[2025-08-17T11:24:20.407Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:24:31.599Z] [ERROR] Failed to process new lead lewis lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Send message"]')[22m
+
+[2025-08-17T11:24:31.820Z] [ERROR] Failed to process new lead lewis lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Send message"]')[22m
+
+[2025-08-17T11:24:32.336Z] [INFO] Monitoring for responses...
+[2025-08-17T11:24:32.338Z] [INFO] Monitoring for responses...
+[2025-08-17T11:24:32.359Z] [INFO] No leads to monitor for responses.
+[2025-08-17T11:24:32.359Z] [INFO] Checking for leads who need a reply...
+[2025-08-17T11:24:32.370Z] [INFO] No leads to monitor for responses.
+[2025-08-17T11:24:32.371Z] [INFO] Checking for leads who need a reply...
+[2025-08-17T11:24:32.399Z] [INFO] No leads waiting for a reply.
+[2025-08-17T11:24:32.399Z] [INFO] No leads waiting for a reply.
+[2025-08-17T11:24:35.406Z] [INFO] Checking for new leads...
+[2025-08-17T11:24:35.408Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:24:50.407Z] [INFO] Checking for new leads...
+[2025-08-17T11:24:50.408Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:25:02.739Z] [ERROR] Failed to process new lead lewis lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Send message"]')[22m
+
+[2025-08-17T11:25:03.052Z] [ERROR] Failed to process new lead lewis lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Send message"]')[22m
+
+[2025-08-17T11:25:03.556Z] [INFO] Monitoring for responses...
+[2025-08-17T11:25:03.556Z] [INFO] Monitoring for responses...
+[2025-08-17T11:25:03.604Z] [INFO] No leads to monitor for responses.
+[2025-08-17T11:25:03.604Z] [INFO] Checking for leads who need a reply...
+[2025-08-17T11:25:03.604Z] [INFO] No leads to monitor for responses.
+[2025-08-17T11:25:03.604Z] [INFO] Checking for leads who need a reply...
+[2025-08-17T11:25:03.610Z] [INFO] No leads waiting for a reply.
+[2025-08-17T11:25:03.610Z] [INFO] No leads waiting for a reply.
+[2025-08-17T11:25:05.407Z] [INFO] Checking for new leads...
+[2025-08-17T11:25:05.408Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:25:20.408Z] [INFO] Checking for new leads...
+[2025-08-17T11:25:20.408Z] [INFO] Processing new lead: lewis lewis (2693151914)
+[2025-08-17T11:25:31.864Z] [ERROR] Failed to process new lead lewis lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Send message"]')[22m
+[2m    - waiting for" https://messages.google.com/web/" navigation to finish...[22m
+[2m    - navigated to "https://messages.google.com/web/"[22m
+
+[2025-08-17T11:25:31.900Z] [ERROR] Failed to process new lead lewis lewis: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[aria-label="Send message"]')[22m
+
+[2025-08-17T11:25:31.907Z] [ERROR] An error occurred in the main loop: page.goto: net::ERR_ABORTED at https://messages.google.com/web/
+Call log:
+[2m  - navigating to "https://messages.google.com/web/", waiting until "load"[22m
+
+[2025-08-17T11:25:31.907Z] [INFO] Attempting to recover by refreshing the page...
+node:internal/process/promises:288
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+page.reload: net::ERR_ABORTED; maybe frame was detached?
+Call log:
+[2m  - waiting for navigation until "load"[22m
+
+    at Timeout.mainLoop (/media/newbu/3626C55326C514B1/Happier/archemuliplied/self_driving_sales/self_driving_sales.js:80:24) {
+  name: 'Error'
+}
+
+Node.js v18.19.1

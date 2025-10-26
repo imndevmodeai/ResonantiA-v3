@@ -1,0 +1,42 @@
+{
+    "name": "Workflow Recovery Flow",
+    "version": "1.0.0",
+    "description": "Automated recovery flow for failed workflows",
+    "metadata": {
+        "created_at": "2024-03-19T00:00:00Z",
+        "author": "ArchE",
+        "tags": ["recovery", "automation", "resilience"]
+    },
+    "tasks": {
+        "analyze_failure": {
+            "action_type": "analyze_failure",
+            "inputs": {
+                "failure_type": "{{workflow_context.error_type}}",
+                "context": "{{workflow_context}}"
+            }
+        },
+        "fix_issues": {
+            "action_type": "fix_template",
+            "inputs": {
+                "analysis": "{{analyze_failure.output}}",
+                "workflow": "{{workflow_context.workflow_definition}}"
+            },
+            "dependencies": ["analyze_failure"]
+        },
+        "validate_fix": {
+            "action_type": "validate_workflow",
+            "inputs": {
+                "modified_workflow": "{{fix_issues.output}}"
+            },
+            "dependencies": ["fix_issues"]
+        },
+        "report_recovery": {
+            "action_type": "display_output",
+            "inputs": {
+                "content": "## Workflow Recovery Report\n\n### Analysis\n{{analyze_failure.output}}\n\n### Fixes Applied\n{{fix_issues.output}}\n\n### Validation Results\n{{validate_fix.output}}",
+                "format": "markdown"
+            },
+            "dependencies": ["validate_fix"]
+        }
+    }
+} 

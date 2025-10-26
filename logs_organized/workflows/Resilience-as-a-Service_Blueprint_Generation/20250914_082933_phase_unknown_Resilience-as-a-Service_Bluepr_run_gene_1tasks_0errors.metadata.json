@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_generic_001.jsonl",
+  "size_bytes": 777,
+  "modified": "2025-09-14T08:29:33.393703",
+  "workflow_name": "Resilience-as-a-Service Blueprint Generation",
+  "run_id": "run_generic_001",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 1,
+  "duration_sec": 2.5993,
+  "status": "unknown",
+  "line_count": 1
+}

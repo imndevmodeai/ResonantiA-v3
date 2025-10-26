@@ -1,0 +1,96 @@
+{
+  "query": "quantum computing applications",
+  "engines": [
+    "google",
+    "duckduckgo"
+  ],
+  "timestamp": "2025-07-19T20-53-03.609Z",
+  "results": {
+    "google": {
+      "error": "Google search failed: net::ERR_ABORTED at https://www.google.com/search?q=quantum%20computing%20applications",
+      "results": []
+    },
+    "duckduckgo": {
+      "engine": "duckduckgo",
+      "query": "quantum computing applications",
+      "results": [
+        {
+          "title": "10 Quantum Computing Applications and Examples - Built In",
+          "link": "https://builtin.com/hardware/quantum-computing-applications",
+          "description": "Learn how quantum computing could transform various industries, such as artificial intelligence, finance, and cybersecurity. Explore the challenges and opportunities of quantum computing, and the companies leading the way in this field."
+        },
+        {
+          "title": "Quantum computing - Wikipedia",
+          "link": "https://en.wikipedia.org/wiki/Quantum_computing",
+          "description": "Learn about the origins, principles and challenges of quantum computing, a field that exploits quantum mechanical phenomena for faster and more efficient calculations. Explore the examples of quantum algorithms, encryption schemes and simulations that could benefit from quantum computing."
+        },
+        {
+          "title": "20 Real-World Applications Of Quantum Computing To Watch - Forbes",
+          "link": "https://www.forbes.com/councils/forbestechcouncil/2025/06/09/20-real-world-applications-of-quantum-computing-to-watch/",
+          "description": "Early use cases suggest surprising applications for—and challenges from—quantum computing may arrive sooner than many people expect. Below, members of Forbes Technology Council detail some of ..."
+        },
+        {
+          "title": "5 Crucial Quantum Computing Applications & Examples",
+          "link": "https://thequantuminsider.com/2023/05/24/quantum-computing-applications/",
+          "description": "Learn how quantum computing can solve real-world problems in material science, finance, machine learning, natural language processing and more. See examples of quantum computing use cases, challenges and opportunities from leading companies and researchers."
+        },
+        {
+          "title": "Top 10 Applications of Quantum Computing Across Industries",
+          "link": "https://www.veritis.com/blog/top-applications-of-quantum-computing/",
+          "description": "Explore Quantum Computing applications! Learn what Quantum Computing is and discover the top 10 Applications of Quantum Computing across industries."
+        },
+        {
+          "title": "Top 20 Quantum Computing Use Cases & Applications ['25]",
+          "link": "https://research.aimultiple.com/quantum-computing-applications/",
+          "description": "Learn how quantum computing can impact businesses in optimization, research, cryptography and industry-specific domains. Explore examples of quantum computing platforms, partners and timelines for different applications."
+        },
+        {
+          "title": "What is quantum computing? - IBM",
+          "link": "https://www.ibm.com/think/topics/quantum-computing",
+          "description": "Quantum computing is a rapidly-emerging technology that harnesses the laws of quantum mechanics to solve problems too complex for classical computers."
+        },
+        {
+          "title": "Application of Quantum Computing - GeeksforGeeks",
+          "link": "https://www.geeksforgeeks.org/artificial-intelligence/application-of-quantum-computing/",
+          "description": "Quantum computing harnesses the principles of quantum mechanics to process information in ways that classical computers cannot. By leveraging phenomena like superposition, entanglement, and quantum interference, quantum computers have the potential to solve complex problems more efficiently than traditional computers."
+        },
+        {
+          "title": "6 Top Quantum Computer Applications with Real-World Examples",
+          "link": "https://www.spinquanta.com/news-detail/top-quantum-computer-applications-with-real-world-examples20250113034956",
+          "description": "Discover 6 top quantum computer applications with examples, showing how quantum computers benefit industries like healthcare, finance, cybersecurity, AI, and more."
+        },
+        {
+          "title": "5 Exciting Quantum Computing Applications (with Examples)",
+          "link": "https://www.bluequbit.io/quantum-computing-applications",
+          "description": "Learn how quantum computing can solve complex problems in various sectors, such as finance, healthcare, energy, logistics, and materials science. Discover examples of quantum algorithms, cloud services, and partnerships that drive innovation and transformation."
+        }
+      ],
+      "count": 10,
+      "status": "success",
+      "timestamp": "2025-07-19T20:53:03.602Z"
+    }
+  },
+  "metadata": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "options": {
+      "headless": false,
+      "debug": true,
+      "timeout": 30000,
+      "maxResults": 10,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "chromePath": "/usr/bin/google-chrome-stable",
+      "enableStealth": true,
+      "enableHumanHandoff": true,
+      "handoffTimeout": 300000,
+      "resultsDir": "/media/newbu/3626C55326C514B1/Happier/ResonantiA/browser_automation/search_results"
+    }
+  }
+}

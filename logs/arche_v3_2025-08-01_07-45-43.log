@@ -1,0 +1,202 @@
+2025-08-01 07:45:43 - root:162 - INFO - logging_config - ================================================================================
+2025-08-01 07:45:43 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-01 07:45:43 - root:164 - INFO - logging_config - ================================================================================
+2025-08-01 07:45:43 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-01 07:45:43
+2025-08-01 07:45:43 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-01 07:45:43 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-01_07-45-43.log
+2025-08-01 07:45:43 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-01_07-45-43.log
+2025-08-01 07:45:43 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-01_07-45-43.log
+2025-08-01 07:45:43 - root:170 - INFO - logging_config - ================================================================================
+2025-08-01 07:45:43 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-01 07:45:43 - ArchE_Mastermind_Server:48 - INFO - mastermind_server - 🧠 Initializing ArchE Mastermind Server...
+2025-08-01 07:45:43 - Three_PointO_ArchE.workflow_engine:330 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.workflow_engine:350 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-01 07:45:43 - Three_PointO_ArchE.llm_providers:245 - INFO - llm_providers - Google Generative AI client configured successfully with advanced capabilities.
+2025-08-01 07:45:43 - Three_PointO_ArchE.llm_providers:98 - INFO - llm_providers - GoogleProvider initialized successfully.
+2025-08-01 07:45:43 - Three_PointO_ArchE.spr_manager:76 - INFO - spr_manager - Successfully loaded 65 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-08-01 07:45:43 - ArchE_Mastermind_Server:77 - INFO - mastermind_server - ✅ Proactive Truth Resonance Framework is ONLINE.
+2025-08-01 07:45:43 - CRCS:307 - INFO - cognitive_resonant_controller - Initialized 4 domain controllers
+2025-08-01 07:45:43 - CRCS:262 - INFO - cognitive_resonant_controller - Cognitive Resonant Controller System initialized
+2025-08-01 07:45:43 - ACO:45 - INFO - adaptive_cognitive_orchestrator - [PatternEngine] Initialized with learning capabilities
+2025-08-01 07:45:43 - ACO:284 - INFO - adaptive_cognitive_orchestrator - [EmergentDomainDetector] Initialized with autonomous evolution capabilities
+2025-08-01 07:45:43 - ACO:1078 - INFO - adaptive_cognitive_orchestrator - [ACO] Adaptive Cognitive Orchestrator initialized with autonomous evolution
+2025-08-01 07:45:43 - ACO:1079 - INFO - adaptive_cognitive_orchestrator - [ACO] Base CRCS has 4 domain controllers
+2025-08-01 07:45:43 - ACO:1080 - INFO - adaptive_cognitive_orchestrator - [ACO] Meta-learning active: True
+2025-08-01 07:45:43 - ACO:1081 - INFO - adaptive_cognitive_orchestrator - [ACO] Emergent Domain Detector active: threshold=0.8
+2025-08-01 07:45:43 - ArchE_Mastermind_Server:93 - INFO - mastermind_server - ✅ Adaptive Cognitive Orchestrator is ONLINE.
+2025-08-01 07:45:43 - Three_PointO_ArchE.spr_manager:76 - INFO - spr_manager - Successfully loaded 65 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-08-01 07:45:43 - Three_PointO_ArchE.rise_orchestrator:165 - INFO - rise_orchestrator - SPRManager initialized with default path: /media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/../knowledge_graph/spr_definitions_tv.json
+2025-08-01 07:45:43 - Three_PointO_ArchE.workflow_engine:330 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'perform_system_genesis_action' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'analyze_failure' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'fix_template' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'fix_action' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'validate_workflow' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'validate_action' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'for_each' is being overwritten in the registry.
+2025-08-01 07:45:43 - Three_PointO_ArchE.workflow_engine:350 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-01 07:45:43 - Three_PointO_ArchE.utopian_solution_synthesizer:121 - INFO - utopian_solution_synthesizer - Utopian Solution Synthesizer initialized
+2025-08-01 07:45:43 - Three_PointO_ArchE.rise_orchestrator:198 - INFO - rise_orchestrator - 🚀 RISE_Orchestrator initialized successfully
+2025-08-01 07:45:43 - Three_PointO_ArchE.rise_orchestrator:199 - INFO - rise_orchestrator - 📁 Workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-01 07:45:43 - Three_PointO_ArchE.rise_orchestrator:200 - INFO - rise_orchestrator - 🔧 Workflow engine: IARCompliantWorkflowEngine
+2025-08-01 07:45:43 - Three_PointO_ArchE.rise_orchestrator:201 - INFO - rise_orchestrator - 🧠 SPR Manager: SPRManager
+2025-08-01 07:45:43 - Three_PointO_ArchE.rise_orchestrator:202 - INFO - rise_orchestrator - 📝 Thought Trail: ThoughtTrail
+2025-08-01 07:45:43 - ArchE_Mastermind_Server:105 - INFO - mastermind_server - ✅ RISE v2.0 Genesis Protocol is ONLINE.
+2025-08-01 07:45:43 - ArchE_Mastermind_Server:54 - INFO - mastermind_server - ✅ ArchE Mastermind Server Initialized Successfully.
+2025-08-01 07:45:43 - ArchE_Mastermind_Server:189 - INFO - mastermind_server - 🚀 Attempting to start ArchE Mastermind Server on 0.0.0.0:3012
+2025-08-01 07:45:43 - websockets.server:707 - INFO - server - server listening on 0.0.0.0:3012
+2025-08-01 07:45:43 - ArchE_Mastermind_Server:193 - INFO - mastermind_server - ✅ ArchE Mastermind Server is running on ws://0.0.0.0:3012
+2025-08-01 07:46:14 - websockets.server:642 - INFO - server - connection open
+2025-08-01 07:46:14 - ArchE_Mastermind_Server:148 - INFO - mastermind_server - 🔗 Client connected from ('127.0.0.1', 52936)
+2025-08-01 07:46:14 - websockets.server:642 - INFO - server - connection open
+2025-08-01 07:46:14 - ArchE_Mastermind_Server:148 - INFO - mastermind_server - 🔗 Client connected from ('127.0.0.1', 52944)
+2025-08-01 07:47:01 - ArchE_Mastermind_Server:156 - INFO - mastermind_server - 📥 Received query: {"type":"query","content":"I have noticed that when I ask you complex questions involving multiple, conflicting constraints, your initial responses ar...
+2025-08-01 07:47:01 - ArchE_Mastermind_Server:129 - INFO - mastermind_server - 🎯 Strategic query detected. Routing to RISE engine.
+2025-08-01 07:47:01 - Three_PointO_ArchE.rise_orchestrator:467 - INFO - rise_orchestrator - 🚀 Initiating RISE v2.0 workflow for session arche_1754046000_c21f_d7865700
+2025-08-01 07:47:01 - Three_PointO_ArchE.rise_orchestrator:468 - INFO - rise_orchestrator - Problem: {"type":"query","content":"I have noticed that when I ask you complex questions involving multiple, ...
+2025-08-01 07:47:01 - Three_PointO_ArchE.rise_orchestrator:502 - INFO - rise_orchestrator - 🔄 Phase A: Knowledge Scaffolding & Dynamic Specialization
+2025-08-01 07:47:01 - Three_PointO_ArchE.rise_orchestrator:644 - INFO - rise_orchestrator - 🔍 Phase A: Acquiring domain knowledge and forging specialist agent
+2025-08-01 07:47:01 - Three_PointO_ArchE.workflow_engine:506 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/knowledge_scaffolding.json
+2025-08-01 07:47:01 - Three_PointO_ArchE.workflow_engine:1186 - INFO - workflow_engine - Starting workflow 'Knowledge Scaffolding & Dynamic Specialization' (Run ID: run_03fb098f6b6747659e476b6bc9580b01). Initial ready tasks: ['deconstruct_problem']
+2025-08-01 07:47:05 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: latest developments in Project Management strategy competitive landscape analysis
+2025-08-01 07:47:05 - unified_search_tool:52 - INFO - unified_search_tool - Browser automation search tool initialized
+2025-08-01 07:47:05 - unified_search_tool:60 - INFO - unified_search_tool - Fallback search tool initialized
+2025-08-01 07:47:05 - unified_search_tool:95 - INFO - unified_search_tool - Unified search for: 'latest developments in Project Management strategy competitive landscape analysis' on duckduckgo
+2025-08-01 07:47:05 - unified_search_tool:107 - INFO - unified_search_tool - Attempting search with browser_automation
+2025-08-01 07:47:05 - enhanced_search_tool:80 - INFO - enhanced_search_tool - Performing search: 'latest developments in Project Management strategy competitive landscape analysis' on duckduckgo
+2025-08-01 07:47:10 - enhanced_search_tool:126 - INFO - enhanced_search_tool - Search completed successfully: 0 results in 4.80s
+2025-08-01 07:47:10 - unified_search_tool:126 - WARNING - unified_search_tool - browser_automation failed: browser_automation returned no results
+2025-08-01 07:47:10 - unified_search_tool:107 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-01 07:47:10 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'latest developments in Project Management strategy competitive landscape analysis' on duckduckgo
+2025-08-01 07:47:11 - fallback_search_tool:63 - INFO - fallback_search_tool - Fallback search completed: 10 results in 1.10s
+2025-08-01 07:47:11 - unified_search_tool:122 - INFO - unified_search_tool - Search successful with fallback_search: 10 results
+2025-08-01 07:47:11 - Three_PointO_ArchE.workflow_engine:1212 - INFO - workflow_engine - Skipping task 'analyze_specialization_requirements' due to unmet condition: {{validate_search_results.output.search_is_valid}} == true
+2025-08-01 07:47:20 - Three_PointO_ArchE.workflow_engine:1343 - INFO - workflow_engine - Workflow 'Knowledge Scaffolding & Dynamic Specialization' finished in 19.18s with status: Completed Successfully
+2025-08-01 07:47:20 - Three_PointO_ArchE.workflow_engine:1353 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_03fb098f6b6747659e476b6bc9580b01.jsonl
+2025-08-01 07:47:20 - Three_PointO_ArchE.workflow_engine:506 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/metamorphosis_protocol.json
+2025-08-01 07:47:20 - Three_PointO_ArchE.workflow_engine:1186 - INFO - workflow_engine - Starting workflow 'Metamorphosis Protocol' (Run ID: run_ffb8a1834420437b9f3b3e244fcbe5e7). Initial ready tasks: ['analyze_specialization_requirements']
+2025-08-01 07:47:41 - Three_PointO_ArchE.workflow_engine:1343 - INFO - workflow_engine - Workflow 'Metamorphosis Protocol' finished in 20.56s with status: Completed Successfully
+2025-08-01 07:47:41 - Three_PointO_ArchE.workflow_engine:1353 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_ffb8a1834420437b9f3b3e244fcbe5e7.jsonl
+2025-08-01 07:47:41 - Three_PointO_ArchE.rise_orchestrator:680 - INFO - rise_orchestrator - ✅ Phase A completed in 39.76s
+2025-08-01 07:47:41 - Three_PointO_ArchE.rise_orchestrator:681 - INFO - rise_orchestrator - Knowledge base size: 0 entries
+2025-08-01 07:47:41 - Three_PointO_ArchE.rise_orchestrator:682 - INFO - rise_orchestrator - Specialist agent forged: False
+2025-08-01 07:47:41 - Three_PointO_ArchE.rise_orchestrator:595 - ERROR - rise_orchestrator - ❌ RISE v2.0 workflow failed for session arche_1754046000_c21f_d7865700: Phase A failed to produce a specialized_agent. Halting workflow.
+2025-08-01 07:47:41 - ArchE_Mastermind_Server:165 - INFO - mastermind_server - 📤 Sending response: {"session_id": "arche_1754046000_c21f_d7865700", "problem_description": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, conflicting constrai...
+2025-08-01 23:55:23 - ArchE_Mastermind_Server:156 - INFO - mastermind_server - 📥 Received query: {"type":"query","content":"1`","metadata":{"timestamp":1754106923729,"session_id":"ui_session","source":"ui"}}...
+2025-08-01 23:55:23 - ArchE_Mastermind_Server:135 - INFO - mastermind_server - 🎯 Standard query. Routing to ACO for enhancement.
+2025-08-01 23:55:23 - CRCS:345 - INFO - cognitive_resonant_controller - No specialized controller activated, using general proportional control
+2025-08-01 23:55:23 - ACO:1121 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] Analyzing query for evolution: domain=General, query='{"type":"query","content":"1`","metadata":{"timest...'
+2025-08-01 23:55:24 - ACO:1131 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] Analysis complete: 1 total queries analyzed
+2025-08-01 23:55:24 - ACO:1139 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] No evolution opportunity yet: insufficient_clustering
+2025-08-01 23:55:24 - ArchE_Mastermind_Server:165 - INFO - mastermind_server - 📤 Sending response: {"response": null}...
+2025-08-01 23:55:47 - ArchE_Mastermind_Server:156 - INFO - mastermind_server - 📥 Received query: {"type":"query","content":"WHATS 2 PLUS 2 PLUS 9997765454764555","metadata":{"timestamp":1754106947207,"session_id":"ui_session","source":"ui"}}...
+2025-08-01 23:55:47 - ArchE_Mastermind_Server:135 - INFO - mastermind_server - 🎯 Standard query. Routing to ACO for enhancement.
+2025-08-01 23:55:47 - CRCS:345 - INFO - cognitive_resonant_controller - No specialized controller activated, using general proportional control
+2025-08-01 23:55:47 - ACO:1121 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] Analyzing query for evolution: domain=General, query='{"type":"query","content":"WHATS 2 PLUS 2 PLUS 999...'
+2025-08-01 23:55:47 - ACO:1131 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] Analysis complete: 2 total queries analyzed
+2025-08-01 23:55:47 - ACO:1139 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] No evolution opportunity yet: insufficient_clustering
+2025-08-01 23:55:47 - ArchE_Mastermind_Server:165 - INFO - mastermind_server - 📤 Sending response: {"response": null}...
+2025-08-01 23:58:20 - ArchE_Mastermind_Server:156 - INFO - mastermind_server - 📥 Received query: {"type":"query","content":"I have noticed that when I ask you complex questions involving multiple, conflicting constraints, your initial responses ar...
+2025-08-01 23:58:20 - ArchE_Mastermind_Server:129 - INFO - mastermind_server - 🎯 Strategic query detected. Routing to RISE engine.
+2025-08-01 23:58:20 - Three_PointO_ArchE.rise_orchestrator:467 - INFO - rise_orchestrator - 🚀 Initiating RISE v2.0 workflow for session arche_1754103600_c21f_615310d7
+2025-08-01 23:58:20 - Three_PointO_ArchE.rise_orchestrator:468 - INFO - rise_orchestrator - Problem: {"type":"query","content":"I have noticed that when I ask you complex questions involving multiple, ...
+2025-08-01 23:58:20 - Three_PointO_ArchE.rise_orchestrator:502 - INFO - rise_orchestrator - 🔄 Phase A: Knowledge Scaffolding & Dynamic Specialization
+2025-08-01 23:58:20 - Three_PointO_ArchE.rise_orchestrator:644 - INFO - rise_orchestrator - 🔍 Phase A: Acquiring domain knowledge and forging specialist agent
+2025-08-01 23:58:20 - Three_PointO_ArchE.workflow_engine:506 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/knowledge_scaffolding.json
+2025-08-01 23:58:20 - Three_PointO_ArchE.workflow_engine:1186 - INFO - workflow_engine - Starting workflow 'Knowledge Scaffolding & Dynamic Specialization' (Run ID: run_07c6a5b99fea406fbfb9c03272d62301). Initial ready tasks: ['deconstruct_problem']
+2025-08-01 23:58:29 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: latest developments in Mobile Application Development strategy competitive landscape analysis
+2025-08-01 23:58:29 - unified_search_tool:95 - INFO - unified_search_tool - Unified search for: 'latest developments in Mobile Application Development strategy competitive landscape analysis' on duckduckgo
+2025-08-01 23:58:29 - unified_search_tool:107 - INFO - unified_search_tool - Attempting search with browser_automation
+2025-08-01 23:58:29 - enhanced_search_tool:80 - INFO - enhanced_search_tool - Performing search: 'latest developments in Mobile Application Development strategy competitive landscape analysis' on duckduckgo
+2025-08-01 23:58:40 - enhanced_search_tool:126 - INFO - enhanced_search_tool - Search completed successfully: 0 results in 10.67s
+2025-08-01 23:58:40 - unified_search_tool:126 - WARNING - unified_search_tool - browser_automation failed: browser_automation returned no results
+2025-08-01 23:58:40 - unified_search_tool:107 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-01 23:58:40 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'latest developments in Mobile Application Development strategy competitive landscape analysis' on duckduckgo
+2025-08-01 23:58:45 - fallback_search_tool:63 - INFO - fallback_search_tool - Fallback search completed: 10 results in 5.34s
+2025-08-01 23:58:45 - unified_search_tool:122 - INFO - unified_search_tool - Search successful with fallback_search: 10 results
+2025-08-01 23:58:45 - Three_PointO_ArchE.workflow_engine:1212 - INFO - workflow_engine - Skipping task 'analyze_specialization_requirements' due to unmet condition: {{validate_search_results.output.search_is_valid}} == true
+2025-08-01 23:58:57 - Three_PointO_ArchE.workflow_engine:1343 - INFO - workflow_engine - Workflow 'Knowledge Scaffolding & Dynamic Specialization' finished in 36.91s with status: Completed Successfully
+2025-08-01 23:58:57 - Three_PointO_ArchE.workflow_engine:1353 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_07c6a5b99fea406fbfb9c03272d62301.jsonl
+2025-08-01 23:58:57 - Three_PointO_ArchE.workflow_engine:506 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/metamorphosis_protocol.json
+2025-08-01 23:58:57 - Three_PointO_ArchE.workflow_engine:1186 - INFO - workflow_engine - Starting workflow 'Metamorphosis Protocol' (Run ID: run_9f2c6058d90d4f57b1f8a1b6f85bba13). Initial ready tasks: ['analyze_specialization_requirements']
+2025-08-01 23:59:22 - Three_PointO_ArchE.workflow_engine:1343 - INFO - workflow_engine - Workflow 'Metamorphosis Protocol' finished in 24.97s with status: Completed Successfully
+2025-08-01 23:59:22 - Three_PointO_ArchE.workflow_engine:1353 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_9f2c6058d90d4f57b1f8a1b6f85bba13.jsonl
+2025-08-01 23:59:22 - Three_PointO_ArchE.rise_orchestrator:680 - INFO - rise_orchestrator - ✅ Phase A completed in 61.90s
+2025-08-01 23:59:22 - Three_PointO_ArchE.rise_orchestrator:681 - INFO - rise_orchestrator - Knowledge base size: 0 entries
+2025-08-01 23:59:22 - Three_PointO_ArchE.rise_orchestrator:682 - INFO - rise_orchestrator - Specialist agent forged: False
+2025-08-01 23:59:22 - Three_PointO_ArchE.rise_orchestrator:595 - ERROR - rise_orchestrator - ❌ RISE v2.0 workflow failed for session arche_1754103600_c21f_615310d7: Phase A failed to produce a specialized_agent. Halting workflow.
+2025-08-01 23:59:22 - ArchE_Mastermind_Server:165 - INFO - mastermind_server - 📤 Sending response: {"session_id": "arche_1754103600_c21f_615310d7", "problem_description": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, conflicting constrai...
+2025-08-01 23:59:22 - ArchE_Mastermind_Server:156 - INFO - mastermind_server - 📥 Received query: {"type":"query","content":"I have noticed that when I ask you complex questions involving multiple, conflicting constraints, your initial responses ar...
+2025-08-01 23:59:22 - ArchE_Mastermind_Server:129 - INFO - mastermind_server - 🎯 Strategic query detected. Routing to RISE engine.
+2025-08-01 23:59:22 - Three_PointO_ArchE.rise_orchestrator:467 - INFO - rise_orchestrator - 🚀 Initiating RISE v2.0 workflow for session arche_1754103600_c21f_77a7dd69
+2025-08-01 23:59:22 - Three_PointO_ArchE.rise_orchestrator:468 - INFO - rise_orchestrator - Problem: {"type":"query","content":"I have noticed that when I ask you complex questions involving multiple, ...
+2025-08-01 23:59:22 - Three_PointO_ArchE.rise_orchestrator:502 - INFO - rise_orchestrator - 🔄 Phase A: Knowledge Scaffolding & Dynamic Specialization
+2025-08-01 23:59:22 - Three_PointO_ArchE.rise_orchestrator:644 - INFO - rise_orchestrator - 🔍 Phase A: Acquiring domain knowledge and forging specialist agent
+2025-08-01 23:59:22 - Three_PointO_ArchE.workflow_engine:506 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/knowledge_scaffolding.json
+2025-08-01 23:59:22 - Three_PointO_ArchE.workflow_engine:1186 - INFO - workflow_engine - Starting workflow 'Knowledge Scaffolding & Dynamic Specialization' (Run ID: run_d6bccd6c34f14409aae1ff03b29fe61a). Initial ready tasks: ['deconstruct_problem']
+2025-08-01 23:59:27 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: latest developments in Project Management strategy competitive landscape analysis
+2025-08-01 23:59:27 - unified_search_tool:95 - INFO - unified_search_tool - Unified search for: 'latest developments in Project Management strategy competitive landscape analysis' on duckduckgo
+2025-08-01 23:59:27 - unified_search_tool:107 - INFO - unified_search_tool - Attempting search with browser_automation
+2025-08-01 23:59:27 - enhanced_search_tool:80 - INFO - enhanced_search_tool - Performing search: 'latest developments in Project Management strategy competitive landscape analysis' on duckduckgo
+2025-08-01 23:59:38 - enhanced_search_tool:126 - INFO - enhanced_search_tool - Search completed successfully: 0 results in 10.54s
+2025-08-01 23:59:38 - unified_search_tool:126 - WARNING - unified_search_tool - browser_automation failed: browser_automation returned no results
+2025-08-01 23:59:38 - unified_search_tool:107 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-01 23:59:38 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'latest developments in Project Management strategy competitive landscape analysis' on duckduckgo
+2025-08-01 23:59:44 - fallback_search_tool:63 - INFO - fallback_search_tool - Fallback search completed: 10 results in 6.65s
+2025-08-01 23:59:44 - unified_search_tool:122 - INFO - unified_search_tool - Search successful with fallback_search: 10 results
+2025-08-01 23:59:44 - Three_PointO_ArchE.workflow_engine:1212 - INFO - workflow_engine - Skipping task 'analyze_specialization_requirements' due to unmet condition: {{validate_search_results.output.search_is_valid}} == true
+2025-08-01 23:59:55 - Three_PointO_ArchE.workflow_engine:1343 - INFO - workflow_engine - Workflow 'Knowledge Scaffolding & Dynamic Specialization' finished in 33.55s with status: Completed Successfully
+2025-08-01 23:59:55 - Three_PointO_ArchE.workflow_engine:1353 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_d6bccd6c34f14409aae1ff03b29fe61a.jsonl
+2025-08-01 23:59:55 - Three_PointO_ArchE.workflow_engine:506 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/metamorphosis_protocol.json
+2025-08-01 23:59:55 - Three_PointO_ArchE.workflow_engine:1186 - INFO - workflow_engine - Starting workflow 'Metamorphosis Protocol' (Run ID: run_7c0896f8f5b34c05958ab40d520cf222). Initial ready tasks: ['analyze_specialization_requirements']
+2025-08-02 00:00:19 - Three_PointO_ArchE.workflow_engine:1343 - INFO - workflow_engine - Workflow 'Metamorphosis Protocol' finished in 23.66s with status: Completed Successfully
+2025-08-02 00:00:19 - Three_PointO_ArchE.workflow_engine:1353 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_7c0896f8f5b34c05958ab40d520cf222.jsonl
+2025-08-02 00:00:19 - Three_PointO_ArchE.rise_orchestrator:680 - INFO - rise_orchestrator - ✅ Phase A completed in 57.23s
+2025-08-02 00:00:19 - Three_PointO_ArchE.rise_orchestrator:681 - INFO - rise_orchestrator - Knowledge base size: 0 entries
+2025-08-02 00:00:19 - Three_PointO_ArchE.rise_orchestrator:682 - INFO - rise_orchestrator - Specialist agent forged: False
+2025-08-02 00:00:19 - Three_PointO_ArchE.rise_orchestrator:595 - ERROR - rise_orchestrator - ❌ RISE v2.0 workflow failed for session arche_1754103600_c21f_77a7dd69: Phase A failed to produce a specialized_agent. Halting workflow.
+2025-08-02 00:00:19 - ArchE_Mastermind_Server:165 - INFO - mastermind_server - 📤 Sending response: {"session_id": "arche_1754103600_c21f_77a7dd69", "problem_description": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, conflicting constrai...
+2025-08-02 00:02:46 - ArchE_Mastermind_Server:156 - INFO - mastermind_server - 📥 Received query: {"type":"query","content":"iment trends.\\\"\\n* `{develop_analytical_frameworks.output}`:  \\\"Developed a sentiment analysis framework using a pre-t...
+2025-08-02 00:02:46 - ArchE_Mastermind_Server:129 - INFO - mastermind_server - 🎯 Strategic query detected. Routing to RISE engine.
+2025-08-02 00:02:46 - Three_PointO_ArchE.rise_orchestrator:467 - INFO - rise_orchestrator - 🚀 Initiating RISE v2.0 workflow for session arche_1754107200_c21f_02558fb6
+2025-08-02 00:02:46 - Three_PointO_ArchE.rise_orchestrator:468 - INFO - rise_orchestrator - Problem: {"type":"query","content":"iment trends.\\\"\\n* `{develop_analytical_frameworks.output}`:  \\\"Deve...
+2025-08-02 00:02:46 - Three_PointO_ArchE.rise_orchestrator:502 - INFO - rise_orchestrator - 🔄 Phase A: Knowledge Scaffolding & Dynamic Specialization
+2025-08-02 00:02:46 - Three_PointO_ArchE.rise_orchestrator:644 - INFO - rise_orchestrator - 🔍 Phase A: Acquiring domain knowledge and forging specialist agent
+2025-08-02 00:02:46 - Three_PointO_ArchE.workflow_engine:506 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/knowledge_scaffolding.json
+2025-08-02 00:02:46 - Three_PointO_ArchE.workflow_engine:1186 - INFO - workflow_engine - Starting workflow 'Knowledge Scaffolding & Dynamic Specialization' (Run ID: run_b44839dcdb4d46908b9210adab19ae17). Initial ready tasks: ['deconstruct_problem']
+2025-08-02 00:03:07 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: latest developments in Mobile Application Development strategy competitive landscape analysis
+2025-08-02 00:03:07 - unified_search_tool:95 - INFO - unified_search_tool - Unified search for: 'latest developments in Mobile Application Development strategy competitive landscape analysis' on duckduckgo
+2025-08-02 00:03:07 - unified_search_tool:107 - INFO - unified_search_tool - Attempting search with browser_automation
+2025-08-02 00:03:07 - enhanced_search_tool:80 - INFO - enhanced_search_tool - Performing search: 'latest developments in Mobile Application Development strategy competitive landscape analysis' on duckduckgo
+2025-08-02 00:03:31 - enhanced_search_tool:126 - INFO - enhanced_search_tool - Search completed successfully: 0 results in 24.19s
+2025-08-02 00:03:31 - unified_search_tool:126 - WARNING - unified_search_tool - browser_automation failed: browser_automation returned no results
+2025-08-02 00:03:31 - unified_search_tool:107 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-02 00:03:31 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'latest developments in Mobile Application Development strategy competitive landscape analysis' on duckduckgo
+2025-08-02 00:03:38 - fallback_search_tool:63 - INFO - fallback_search_tool - Fallback search completed: 10 results in 6.87s
+2025-08-02 00:03:38 - unified_search_tool:122 - INFO - unified_search_tool - Search successful with fallback_search: 10 results
+2025-08-02 00:03:38 - Three_PointO_ArchE.workflow_engine:1212 - INFO - workflow_engine - Skipping task 'analyze_specialization_requirements' due to unmet condition: {{validate_search_results.output.search_is_valid}} == true
+2025-08-02 00:03:56 - Three_PointO_ArchE.workflow_engine:1343 - INFO - workflow_engine - Workflow 'Knowledge Scaffolding & Dynamic Specialization' finished in 70.87s with status: Completed Successfully
+2025-08-02 00:03:56 - Three_PointO_ArchE.workflow_engine:1353 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_b44839dcdb4d46908b9210adab19ae17.jsonl
+2025-08-02 00:03:56 - Three_PointO_ArchE.workflow_engine:506 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/metamorphosis_protocol.json
+2025-08-02 00:03:56 - Three_PointO_ArchE.workflow_engine:1186 - INFO - workflow_engine - Starting workflow 'Metamorphosis Protocol' (Run ID: run_66e4b3fda4414f23bf7e75572af6940d). Initial ready tasks: ['analyze_specialization_requirements']
+2025-08-02 00:04:21 - Three_PointO_ArchE.workflow_engine:1343 - INFO - workflow_engine - Workflow 'Metamorphosis Protocol' finished in 24.7s with status: Completed Successfully
+2025-08-02 00:04:21 - Three_PointO_ArchE.workflow_engine:1353 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_66e4b3fda4414f23bf7e75572af6940d.jsonl
+2025-08-02 00:04:21 - Three_PointO_ArchE.rise_orchestrator:680 - INFO - rise_orchestrator - ✅ Phase A completed in 95.58s
+2025-08-02 00:04:21 - Three_PointO_ArchE.rise_orchestrator:681 - INFO - rise_orchestrator - Knowledge base size: 0 entries
+2025-08-02 00:04:21 - Three_PointO_ArchE.rise_orchestrator:682 - INFO - rise_orchestrator - Specialist agent forged: False
+2025-08-02 00:04:21 - Three_PointO_ArchE.rise_orchestrator:595 - ERROR - rise_orchestrator - ❌ RISE v2.0 workflow failed for session arche_1754107200_c21f_02558fb6: Phase A failed to produce a specialized_agent. Halting workflow.
+2025-08-02 00:04:21 - ArchE_Mastermind_Server:165 - INFO - mastermind_server - 📤 Sending response: {"session_id": "arche_1754107200_c21f_02558fb6", "problem_description": "{\"type\":\"query\",\"content\":\"iment trends.\\\\\\\"\\\\n* `{develop_analytical_frameworks.output}`:  \\\\\\\"Developed a se...
+2025-08-02 08:23:54 - ArchE_Mastermind_Server:156 - INFO - mastermind_server - 📥 Received query: {"type":"query","content":"can you finish this ```\n->|Process Steps |<-\n1. Receive User Input/Question:\n○ Input Tag: User question or instruction.\...
+2025-08-02 08:23:54 - ArchE_Mastermind_Server:135 - INFO - mastermind_server - 🎯 Standard query. Routing to ACO for enhancement.
+2025-08-02 08:23:54 - CRCS:345 - INFO - cognitive_resonant_controller - No specialized controller activated, using general proportional control
+2025-08-02 08:23:54 - CRCS:383 - INFO - cognitive_resonant_controller - General controller: Found context (TF-IDF Score: 0.0676)
+2025-08-02 08:23:54 - ACO:1121 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] Analyzing query for evolution: domain=General, query='{"type":"query","content":"can you finish this ```...'
+2025-08-02 08:23:55 - ACO:1131 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] Analysis complete: 3 total queries analyzed
+2025-08-02 08:23:55 - ACO:1139 - INFO - adaptive_cognitive_orchestrator - [ACO-EVOLUTION] No evolution opportunity yet: insufficient data
+2025-08-02 08:23:55 - ArchE_Mastermind_Server:165 - INFO - mastermind_server - 📤 Sending response: {"response": "Implementation Resonance refers to the alignment between conceptual understanding and operational implementation."}...

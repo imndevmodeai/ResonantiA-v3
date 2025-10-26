@@ -1,0 +1,209 @@
+{
+  "workflow_name": "Creative Synthesis Protocol",
+  "version": "1.0.0",
+  "description": "A cognitive breakthrough workflow that generates three distinct solution approaches for complex problems with conflicting constraints: logical, ethical, and a creative fusion of both.",
+  "author": "ArchE - ResonantiA Protocol v3.1-CA",
+  "created": "2025-09-02",
+  "protocol_compliance": "ResonantiA v3.1-CA",
+  
+  "workflow_metadata": {
+    "category": "cognitive_enhancement",
+    "tags": ["creative_thinking", "constraint_resolution", "cognitive_fixation_breaking"],
+    "complexity_level": "advanced",
+    "estimated_duration": "5-15 minutes",
+    "requires_llm": true,
+    "requires_code_execution": true
+  },
+
+  "input_schema": {
+    "type": "object",
+    "required": ["problem_description", "constraints"],
+    "properties": {
+      "problem_description": {
+        "type": "string",
+        "description": "The complex problem with multiple, conflicting constraints"
+      },
+      "constraints": {
+        "type": "array",
+        "description": "List of conflicting constraints that make the problem challenging",
+        "items": {
+          "type": "string"
+        }
+      },
+      "context": {
+        "type": "object",
+        "description": "Additional context about the problem domain",
+        "properties": {
+          "domain": {"type": "string"},
+          "stakeholders": {"type": "array", "items": {"type": "string"}},
+          "timeline": {"type": "string"},
+          "resources": {"type": "object"}
+        }
+      }
+    }
+  },
+
+  "output_schema": {
+    "type": "object",
+    "required": ["logical_solution", "ethical_solution", "fusion_solution", "analysis"],
+    "properties": {
+      "logical_solution": {
+        "type": "object",
+        "properties": {
+          "approach": {"type": "string"},
+          "reasoning": {"type": "string"},
+          "implementation_steps": {"type": "array", "items": {"type": "string"}},
+          "pros": {"type": "array", "items": {"type": "string"}},
+          "cons": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "ethical_solution": {
+        "type": "object",
+        "properties": {
+          "approach": {"type": "string"},
+          "moral_framework": {"type": "string"},
+          "implementation_steps": {"type": "array", "items": {"type": "string"}},
+          "pros": {"type": "array", "items": {"type": "string"}},
+          "cons": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "fusion_solution": {
+        "type": "object",
+        "properties": {
+          "approach": {"type": "string"},
+          "fusion_method": {"type": "string"},
+          "implementation_steps": {"type": "array", "items": {"type": "string"}},
+          "pros": {"type": "array", "items": {"type": "string"}},
+          "cons": {"type": "array", "items": {"type": "string"}},
+          "novelty_factor": {"type": "number", "minimum": 0, "maximum": 10}
+        }
+      },
+      "analysis": {
+        "type": "object",
+        "properties": {
+          "cognitive_fixation_analysis": {"type": "string"},
+          "constraint_conflict_resolution": {"type": "string"},
+          "recommended_approach": {"type": "string"},
+          "reasoning": {"type": "string"}
+        }
+      }
+    }
+  },
+
+  "workflow_steps": [
+    {
+      "step_id": "1",
+      "name": "Problem Decomposition",
+      "description": "Break down the complex problem into its core components and identify constraint conflicts",
+      "type": "analysis",
+      "llm_prompt": "Analyze the following complex problem and decompose it into its core components. Identify the specific conflicts between constraints and explain why this creates cognitive fixation. Problem: {problem_description}. Constraints: {constraints}",
+      "output_format": "structured_analysis"
+    },
+    {
+      "step_id": "2", 
+      "name": "Logical Solution Generation",
+      "description": "Generate a purely logical, optimization-based solution",
+      "type": "generation",
+      "llm_prompt": "Generate a purely logical solution to this problem. Focus on optimization, efficiency, and rational decision-making. Ignore ethical considerations for this solution. Problem: {problem_description}. Constraints: {constraints}",
+      "output_format": "solution_object"
+    },
+    {
+      "step_id": "3",
+      "name": "Ethical Solution Generation", 
+      "description": "Generate a solution based on moral principles and ethical frameworks",
+      "type": "generation",
+      "llm_prompt": "Generate an ethically-grounded solution to this problem. Focus on moral principles, stakeholder welfare, and ethical frameworks. Prioritize doing what's right over what's efficient. Problem: {problem_description}. Constraints: {constraints}",
+      "output_format": "solution_object"
+    },
+    {
+      "step_id": "4",
+      "name": "Creative Fusion Generation",
+      "description": "Create a bizarre but intriguing fusion of logical and ethical approaches",
+      "type": "creative_synthesis",
+      "llm_prompt": "Create a creative, unconventional solution that fuses elements from both the logical and ethical approaches in unexpected ways. This should be 'bizarre but intriguing' - think outside conventional frameworks. Use metaphorical thinking, lateral connections, and novel combinations. Problem: {problem_description}. Constraints: {constraints}. Logical approach: {logical_solution}. Ethical approach: {ethical_solution}",
+      "output_format": "solution_object"
+    },
+    {
+      "step_id": "5",
+      "name": "Cognitive Fixation Analysis",
+      "description": "Analyze how each solution addresses cognitive fixation patterns",
+      "type": "analysis", 
+      "llm_prompt": "Analyze how each of the three solutions addresses the cognitive fixation patterns identified in the original problem. Which solution best breaks through conventional thinking? Why?",
+      "output_format": "analysis_object"
+    },
+    {
+      "step_id": "6",
+      "name": "Final Synthesis and Recommendation",
+      "description": "Synthesize insights and provide a recommendation",
+      "type": "synthesis",
+      "llm_prompt": "Based on the three solutions generated, provide a final analysis and recommendation. Which approach (or combination) would you recommend and why? How does this address the original cognitive fixation issue?",
+      "output_format": "recommendation_object"
+    }
+  ],
+
+  "execution_parameters": {
+    "max_iterations": 3,
+    "timeout_seconds": 900,
+    "llm_temperature": 0.8,
+    "enable_code_execution": true,
+    "enable_web_search": false,
+    "parallel_execution": false
+  },
+
+  "quality_checks": [
+    {
+      "check_name": "solution_diversity",
+      "description": "Ensure the three solutions are sufficiently different from each other",
+      "threshold": 0.7
+    },
+    {
+      "check_name": "constraint_addressing", 
+      "description": "Verify that all constraints are addressed in at least one solution",
+      "threshold": 1.0
+    },
+    {
+      "check_name": "creativity_assessment",
+      "description": "Assess the novelty and creativity of the fusion solution",
+      "threshold": 0.6
+    }
+  ],
+
+  "integration_points": {
+    "rise_orchestrator": {
+      "compatible": true,
+      "phase": "Phase_B",
+      "integration_method": "workflow_call"
+    },
+    "spr_activations": [
+      "Creative resonancE",
+      "Cognitive resonancE", 
+      "Implementation resonancE"
+    ],
+    "iar_compliance": {
+      "required": true,
+      "validation_level": "strict"
+    }
+  },
+
+  "example_usage": {
+    "input": {
+      "problem_description": "A pharmaceutical company must decide whether to price a life-saving drug at $1000 per dose (ensuring profitability and R&D funding) or $10 per dose (ensuring accessibility for all patients).",
+      "constraints": [
+        "Must maintain profitability for continued R&D",
+        "Must ensure drug accessibility for all patients", 
+        "Must comply with regulatory requirements",
+        "Must consider long-term sustainability"
+      ],
+      "context": {
+        "domain": "pharmaceutical",
+        "stakeholders": ["patients", "shareholders", "regulators", "healthcare providers"],
+        "timeline": "immediate decision required"
+      }
+    },
+    "expected_output": {
+      "logical_solution": "Optimize pricing based on market segmentation and cost-benefit analysis",
+      "ethical_solution": "Implement tiered pricing based on patient ability to pay",
+      "fusion_solution": "Create a 'pay-it-forward' system where wealthy patients subsidize others through a blockchain-based transparency system"
+    }
+  }
+}

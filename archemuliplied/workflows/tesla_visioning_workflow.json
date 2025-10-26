@@ -1,0 +1,110 @@
+{
+  "name": "Tesla Visioning Workflow (Conceptual v3.0)",
+  "description": "Conceptual workflow for complex problem-solving/design, involving priming, blueprinting, assessment (using IAR context), execution/simulation (placeholder), and confirmation.",
+  "version": "3.0",
+  "tasks": {
+    "phase1_start": {
+      "description": "Initiate Tesla Visioning for the request.",
+      "action_type": "display_output",
+      "inputs": { "content": "--- Starting Tesla Visioning Workflow ---\nRequest: {{ initial_context.UserRequest }}" },
+      "dependencies": []
+    },
+    "phase1_spr_identify": {
+      "description": "Identify relevant SPRs based on the request and triggering SPR.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Analyze the User Request and Triggering SPR (if provided). Identify 3-5 key ResonantiA v3.0 SPRs (Sparse Priming Representations) most relevant for addressing this complex design/problem-solving task. List the SPR IDs.\nUser Request: {{ initial_context.UserRequest }}\nTriggering SPR: {{ initial_context.TriggeringSPR }}\nRelevant SPRs:",
+        "max_tokens": 150
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["phase1_start"]
+    },
+    "phase1_cognitive_unfolding": {
+      "description": "Simulate cognitive unfolding based on identified SPRs.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "model": "gemini-2.5-pro-latest",
+        "prompt": "ResonantiA Cognitive Priming Simulation (v2.9.5):\nUser Request: '{{initial_context.user_request}}'\nIdentified SPRs: {{phase1_spr_identify.identified_sprs}}\n\nBased on these SPRs, describe the primary cognitive concepts, analytical modes (e.g., CFP, Causal, ABM), knowledge domains, and operational principles (e.g., SIRC, As Above So Below) that should be activated or foregrounded within Arche according to the ResonantiA v2.9.5 protocol. Focus on the *internal cognitive state change* preparing for blueprinting.",
+        "max_tokens": 300,
+        "temperature": 0.4
+      },
+      "outputs": {"cognitive_unfolding_results": "dict"},
+      "output_key": "cognitive_unfolding_results",
+      "dependencies": ["phase1_spr_identify"],
+      "condition": "{{ phase1_spr_identify.reflection.status == 'Success' }}",
+      "max_retries": 1
+    },
+    "phase2_start": {
+        "description": "Start Phase 2: Mental Blueprinting.",
+        "action_type": "display_output",
+        "inputs": {"content": "--- Phase 2: Mental Blueprinting ---"},
+        "dependencies": ["phase1_cognitive_unfolding"]
+    },
+    "phase2_mental_blueprinting": {
+      "description": "Generate a detailed, step-by-step blueprint (Tesla Visioning).",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "model": "gemini-2.5-pro-latest",
+        "prompt": "ResonantiA Mental Blueprinting (v2.9.5):\nObjective: Address the user request: '{{initial_context.user_request}}'\nCognitive State Primed By SPRs: {{phase1_spr_identify.identified_sprs}}\nPriming Summary: {{phase1_cognitive_unfolding.response_text}}\n\nGenerate a detailed, step-by-step, actionable blueprint (like a project plan or research outline) to achieve the objective. Structure the output logically (e.g., using phases or numbered steps). For each significant step, include:\n- **Description:** Clear explanation of the step's purpose and expected outcome.\n- **Key Action(s):** Specific ResonantiA actions needed (e.g., `search_web`, `run_cfp`, `perform_abm`, `execute_code`, `generate_text_llm`, `request_clarification`, `perform_causal_inference`, `run_prediction`).\n- **Inputs/Dependencies:** Key inputs needed (e.g., '{{PreviousStep.output}}', 'Specific Dataset', 'User Parameter').\n- **SPR Tags:** Suggest relevant SPRs (e.g., `Data CollectioN`, `Model TraininG`, `Ethical VettinG`, `Scenario AnalysiS`) associated with the step or its components.\n- **Anticipated Issues & Solutions:** Briefly note potential challenges (e.g., 'API Rate Limits', 'Data Quality Issues', 'Model Convergence Failure') and mitigation SPRs or strategies (e.g., `Error HandlinG`, `Data CleaninG`, `Parameter TuninG`, `Metacognitive shifT`).\n\nEnsure the blueprint is granular, logical, reflects a creative yet structured approach inspired by the primed cognitive state, and leverages relevant ResonantiA tools.",
+        "max_tokens": 2500,
+        "temperature": 0.65
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["phase2_start"],
+      "condition": "{{ phase1_cognitive_unfolding.simulated_cognitive_unfolding_status == 'Success' }}"
+    },
+     "phase3_start": {
+        "description": "Start Phase 3: Assessment & Decision.",
+        "action_type": "display_output",
+        "inputs": {"content": "--- Phase 3: Assessment & Decision ---"},
+        "dependencies": ["phase2_mental_blueprinting"]
+    },
+    "phase3_assess_blueprint": {
+      "description": "Analyze blueprint for risk, resources, and simulation need.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "model": "gemini-2.5-pro-latest",
+         "prompt": "ResonantiA Blueprint Assessment (v2.9.5):\nBlueprint Generated:\n```\n{{phase2_mental_blueprinting.response_text}}\n```\nAssess this blueprint based on the following criteria:\n1.  **Complexity & Novelty:** How intricate, unprecedented, or reliant on unproven steps is this plan? (Low/Medium/High)\n2.  **Resource Intensity:** Estimate compute, data, time, and external API costs/dependencies. (Low/Medium/High)\n3.  **Risk Level:** Assess potential failure points, security risks (esp. `execute_code`), ethical risks, dependency stability. (Low/Medium/High)\n4.  **Simulation Value:** How much would internal simulation (e.g., testing key algorithms via `execute_code`, running ABM/CFP on simulated data derived from blueprint steps, simulating workflow logic) likely improve success probability, refine the plan, or identify critical flaws before committing to full execution?\n\n**Recommendation:** Based on the assessment, strongly recommend either 'Simulate First (Specify key areas/steps to simulate)' or 'Proceed to Execution (Note key risks)'. Justify the recommendation.",
+         "max_tokens": 400,
+         "temperature": 0.5
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["phase3_start"],
+      "condition": "{{ phase2_mental_blueprinting.reflection.status == 'Success' }}"
+    },
+    "phase4_placeholder_execution": {
+      "description": "Placeholder representing the execution or simulation of the blueprint.",
+      "action_type": "execute_code",
+      "inputs": {
+        "input_data": {
+          "blueprint_assessment_text": "{{ phase3_assess_blueprint.response_text }}"
+        }
+      },
+      "action_config": {
+        "language": "python",
+        "code": "import sys\\nimport json\\n\\n# Load input data from stdin\\ninput_str = sys.stdin.read()\\ninput_json = json.loads(input_str)\\n\\nblueprint_assessment = input_json.get('blueprint_assessment_text', 'Assessment N/A')\\n\\nrecommendation = 'Execute' \\nif 'Simulate' in blueprint_assessment: recommendation = 'Simulate'\\nif 'Refine Blueprint' in blueprint_assessment: recommendation = 'Refine'\\n\\nsim_status = ''\\nsim_summary = ''\\nsim_confidence = 0.0\\n\\nif recommendation == 'Refine':\\n    sim_status = 'RefinementRequired'\\n    sim_summary = 'Blueprint refinement suggested before execution.'\\n    sim_confidence = 0.5\\nelif recommendation == 'Simulate':\\n    sim_status = 'SimulationComplete'\\n    sim_summary = f'Conceptual simulation of blueprint completed successfully.'\\n    sim_confidence = 0.85\\nelse: # Execute\\n    sim_status = 'ExecutionComplete'\\n    sim_summary = f'Conceptual execution of blueprint completed successfully.'\\n    sim_confidence = 0.9\\n\\noutput = {\\n    'execution_outcome': {\\n        'status': sim_status,\\n        'summary': sim_summary,\\n        'recommendation_followed': recommendation\\n    },\\n    'placeholder_execution_status': 'Success', \\n    'simulated_confidence': sim_confidence,\\n    'debug_message': f'Simulating Phase 4: {recommendation} based on assessment.'\\n}\\nprint(json.dumps(output))"
+      },
+      "outputs": {"execution_results": "dict", "stdout": "string", "reflection": "dict"},
+      "output_key": "placeholder_execution_results",
+      "dependencies": ["phase3_assess_blueprint"],
+      "condition": "{{ phase3_assess_blueprint.reflection.status == 'Success' }}"
+    },
+     "phase5_start": {
+        "description": "Start Phase 5: Human Confirmation.",
+        "action_type": "display_output",
+        "inputs": {"content": "--- Phase 5: Human Confirmation ---"},
+        "dependencies": ["phase4_placeholder_execution"]
+    },
+    "phase5_present_for_confirmation": {
+      "description": "Present the final outcome, blueprint, and assessment (incl. IAR context) for Keyholder review.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Prepare a final summary report for Keyholder confirmation regarding the Tesla Visioning request.\n\nOriginal Request: {{ initial_context.UserRequest }}\n\nGenerated Blueprint:\n```\n{{ phase2_mental_blueprinting.response_text }}\n```\n\nBlueprint Assessment (IAR Confidence: {{ phase3_assess_blueprint.reflection.confidence }}):\n```\n{{ phase3_assess_blueprint.response_text }}\n```\n\nExecution/Simulation Outcome (IAR Confidence: {{ phase4_placeholder_execution.simulated_confidence }}):\n```json\n{{ phase4_placeholder_execution.execution_outcome }}\n```\n\nSynthesize these elements into a concise report. Highlight the proposed solution/design, key decisions made during assessment, the final outcome status, and overall confidence based on the IAR data from the blueprinting, assessment, and execution phases. Request Keyholder confirmation or further refinement instructions.",
+        "max_tokens": 1200
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["phase5_start"],
+      "condition": "{{ phase4_placeholder_execution.placeholder_execution_status == 'Success' }}"
+    }
+  }
+} 

@@ -1,0 +1,65 @@
+{
+  "name": "combat_scenario_query",
+  "version": "1.0",
+  "description": "Generic pipeline: parse combat scenario, build ABM, run multiseed simulations, summarise probability landscape.",
+  "tasks": {
+    "extract_parameters": {
+      "action": "generate_text_llm",
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-pro",
+        "prompt": "You are a scenario-parser. From the following user prompt, extract attacker_species, defender_species, attacker_count, defender_count, environment, constraints, success_definition. Return JSON only.\n\nPROMPT:\n{{ context.user_query }}"
+      }
+    },
+    "build_abm_blueprint": {
+      "action": "transform_json",
+      "dependencies": ["extract_parameters"],
+      "inputs": {
+        "template": {
+          "model_type": "combat",
+          "model_params": {
+            "num_humans": "{{ extract_parameters.attacker_count if extract_parameters.attacker_species=='human' else extract_parameters.defender_count }}",
+            "width": 20,
+            "height": 20,
+            "seed": "{{ context.task_id | default('combat_seed') }}"
+          },
+          "num_steps": 200
+        }
+      }
+    },
+    "multi_seed_runs": {
+      "action": "fan_out",
+      "dependencies": ["build_abm_blueprint"],
+      "inputs": {
+        "count": 5,
+        "fan_action": {
+          "action": "perform_abm",
+          "inputs": "{{ build_abm_blueprint }}"
+        }
+      }
+    },
+    "aggregate_results": {
+      "action": "aggregate_json",
+      "dependencies": ["multi_seed_runs"],
+      "inputs": {
+        "fields": ["active_count", "gorilla_health"]
+      }
+    },
+    "summarise": {
+      "action": "generate_text_llm",
+      "dependencies": ["aggregate_results"],
+      "inputs": {
+        "provider": "google",
+        "model": "gemini-1.5-pro-latest",
+        "prompt": "Based on these simulation aggregates:\n{{ aggregate_results }}\nProvide probability of success for humans and key tactical insights."
+      }
+    },
+    "display": {
+      "action": "display_output",
+      "dependencies": ["summarise"],
+      "inputs": {
+        "content": "Combat scenario analysis:\n{{ summarise.response_text }}"
+      }
+    }
+  }
+} 

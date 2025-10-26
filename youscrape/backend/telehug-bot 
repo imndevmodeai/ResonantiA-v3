@@ -1,0 +1,101 @@
+//what other code functions could we build for our selves based on sucess with the telegram bot require('dotenv').config();
+const TelegramBot = require('node-telegram-bot-api');
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
+const fs = require('fs');
+const path = require('path');
+
+// Initialize bot
+const token = process.env.TELEGRAM_BOT_TOKEN;
+const bot = new TelegramBot(token, { polling: true });
+
+// Create saves directory
+const directoryName = path.join(__dirname, 'saves');
+if (!fs.existsSync(directoryName)) {
+    fs.mkdirSync(directoryName);
+}
+
+// Helper function to slugify text
+function slugify(text) {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .trim();
+}
+
+// Your proven scraping function
+async function scrapeTextFile(url) {
+    const browser = await puppeteer.launch({ 
+        headless: false, 
+        args: ['--incognito'] 
+    });
+    const page = await browser.newPage();
+    
+    await page.goto(url, { waitUntil: 'networkidle2' });
+    const html = await page.content();
+    const $ = cheerio.load(html);
+    
+    // Extract title
+    let title = $('title').text();
+    if (!title) title = $('h1').first().text();
+    if (!title) title = "Untitled";
+
+    // Extract text and clean up paragraphs
+    const paragraphs = [];
+    $('p').each((_, element) => {
+        // Get text and remove HTML tags
+        const text = $(element).text().trim();
+        if (text) {
+            // Store clean text without HTML tags
+            paragraphs.push(text);
+        }
+    });
+
+    // Join paragraphs with double newlines (no HTML tags)
+    const text = paragraphs.join('\n\n');
+
+    const currentTime = new Date();
+    const epochTime = Math.floor(currentTime.getTime() / 1000);
+    const dateString = currentTime.toISOString().replace(/T|Z/g, '');
+    const fileName = `${dateString}hf-chat_${slugify(title)}_response.txt`;
+    const filePath = path.join(directoryName, fileName);
+    
+    // Create file header with properly formatted URL for clicking
+    const fileHeader = `URL: ${url}
+Epoch Time: ${epochTime}
+Date: ${dateString}
+Title: ${title}
+
+`;
+    
+    fs.writeFileSync(filePath, fileHeader + text);
+    console.log(`Text saved to ${fileName} successfully!`);
+    
+    await browser.close();
+    
+    return { filePath, fileName };
+}
+
+// Bot message handler
+bot.on('message', async (msg) => {
+    const chatId = msg.chat.id;
+    const text = msg.text || '';
+    
+    console.log('Received message:', text); // Debug log
+
+    if (text.includes('huggingface.co') || text.includes('hf.co')) {
+        try {
+            await bot.sendMessage(chatId, 'Processing your Hugging Face chat...');
+            const { filePath, fileName } = await scrapeTextFile(text);
+            await bot.sendDocument(chatId, filePath, { 
+                caption: `Here's your saved chat: ${fileName}`
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            await bot.sendMessage(chatId, 'Error processing your request. Please try again.');
+        }
+    }
+});
+
+console.log('Bot is active and waiting for HuggingFace chat URLs...');``

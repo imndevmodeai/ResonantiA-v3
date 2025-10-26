@@ -1,0 +1,40 @@
+{
+  "name": "Basic Analysis Workflow (V4 Unified)",
+  "description": "A simple workflow to search for information and summarize it using the canonical Perception Engine.",
+  "tasks": {
+    "start_analysis": {
+      "description": "Initial placeholder task to receive context.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Starting basic analysis for query: {{initial_context.user_query | default('Not Provided')}} (User: {{initial_context.user_id | default('Unknown')}})"
+      },
+      "dependencies": []
+    },
+    "perform_web_search": {
+      "description": "Search the web for the user's query using the Perception Engine.",
+      "action_type": "search_web",
+      "inputs": {
+        "query": "{{initial_context.user_query | default('Artificial Intelligence')}}"
+      },
+      "dependencies": ["start_analysis"]
+    },
+    "summarize_results": {
+      "description": "Summarize the search results using an LLM.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Please provide a concise summary of the following web search results regarding the query '{{initial_context.user_query}}'. Focus on the key findings.\n\nSEARCH RESULTS:\n```\n{{perform_web_search.answer}}\n```\n\nSUMMARY:",
+        "max_tokens": 300,
+        "temperature": 0.5
+      },
+      "dependencies": ["perform_web_search"]
+    },
+    "display_summary": {
+      "description": "Display the final summary.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "{{summarize_results.response_text}}"
+      },
+      "dependencies": ["summarize_results"]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "generated_at": "2025-07-22T03:09:03.769771",
+  "orchestrator_state": {
+    "last_harvest_date": "2025-07-22 03:09:03.769459",
+    "total_work_items": 0,
+    "pending_items": 0,
+    "in_progress_items": 0,
+    "completed_items": 0,
+    "escalated_items": 0,
+    "overall_confidence": 0.8,
+    "active_escalations": [],
+    "next_harvest_due": "2025-07-22 09:09:03.769465"
+  },
+  "kpi_summary": {
+    "completion_rate": 0.0,
+    "escalation_rate": 0.0,
+    "average_confidence": 0.8,
+    "active_escalations_count": 0
+  },
+  "active_escalations": [],
+  "top_priorities": [
+    {
+      "id": "GH-123",
+      "description": "Complete PTRF implementation",
+      "priority_score": 0.95,
+      "status": "in_progress"
+    }
+  ],
+  "risk_indicators": {
+    "high_escalation_rate": false,
+    "low_confidence": false,
+    "blocked_items": false
+  },
+  "recommendations": []
+}

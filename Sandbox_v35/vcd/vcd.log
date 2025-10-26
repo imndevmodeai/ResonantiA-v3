@@ -1,0 +1,51 @@
+🐛 ResonantiA Protocol v3.5-GP - Interactive VCD Startup
+============================================================
++++ dirname ./vcd/start_vcd.sh
+++ cd ./vcd
+++ pwd
++ SCRIPT_DIR=/media/newbu/3626C55326C514B1/Happier/Sandbox_v35/vcd
++ cd /media/newbu/3626C55326C514B1/Happier/Sandbox_v35/vcd
++ '[' '!' -f interactive_vcd.py ']'
++ '[' -f ../../arche_env/bin/activate ']'
++ echo '🔧 Activating virtual environment...'
+🔧 Activating virtual environment...
++ source ../../arche_env/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ '[' linux-gnu = cygwin ']'
+++ '[' linux-gnu = msys ']'
+++ export VIRTUAL_ENV=/media/newbu/3626C55326C514B1/Happier/arche_env
+++ VIRTUAL_ENV=/media/newbu/3626C55326C514B1/Happier/arche_env
+++ _OLD_VIRTUAL_PATH=/media/newbu/3626C55326C514B1/Happier/arche_env/bin:/home/newbu/.local/bin:/home/newbu/.cache/cloud-code/m2c/bin:/home/newbu/.local/bin:/tmp/.mount_CursorqPFIqT/usr/bin/:/tmp/.mount_CursorqPFIqT/usr/sbin/:/tmp/.mount_CursorqPFIqT/usr/games/:/tmp/.mount_CursorqPFIqT/bin/:/tmp/.mount_CursorqPFIqT/sbin/:/home/newbu/.nvm/versions/node/v20.19.5/bin:/home/newbu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ PATH=/media/newbu/3626C55326C514B1/Happier/arche_env/bin:/media/newbu/3626C55326C514B1/Happier/arche_env/bin:/home/newbu/.local/bin:/home/newbu/.cache/cloud-code/m2c/bin:/home/newbu/.local/bin:/tmp/.mount_CursorqPFIqT/usr/bin/:/tmp/.mount_CursorqPFIqT/usr/sbin/:/tmp/.mount_CursorqPFIqT/usr/games/:/tmp/.mount_CursorqPFIqT/bin/:/tmp/.mount_CursorqPFIqT/sbin/:/home/newbu/.nvm/versions/node/v20.19.5/bin:/home/newbu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(arche_env) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(arche_env) '
+++ export VIRTUAL_ENV_PROMPT
+++ hash -r
++ echo '🧹 Cleaning up previous VCD sessions...'
+🧹 Cleaning up previous VCD sessions...
++ pkill -f interactive_vcd
++ true
++ pkill -f 'python.*vcd'
++ true
++ sleep 2
++ echo '🚀 Starting Interactive VCD...'
+🚀 Starting Interactive VCD...
++ echo ============================================================
+============================================================
++ python3 interactive_vcd.py
+2025-09-19 10:24:15,409 - INFO - Starting VCD main function
+2025-09-19 10:24:15,409 - INFO - Cleaning up previous sessions...
+Terminated
++ set +x

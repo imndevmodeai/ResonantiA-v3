@@ -1,0 +1,61 @@
+{
+  "name": "Scrape Video Page Links",
+  "description": "Saves the HTML for a list of URLs.",
+  "version": "1.0",
+  "tasks": {
+    "scrape_pornhub": {
+      "description": "Save HTML from Pornhub",
+      "action_type": "save_page_html",
+      "inputs": {
+        "url": "https://www.pornhub.com/pornstar/bonnie-rotten/videos"
+      },
+      "dependencies": []
+    },
+    "scrape_pornxp": {
+      "description": "Save HTML from PornXP",
+      "action_type": "save_page_html",
+      "inputs": {
+        "url": "https://pornxp.com/tags/bonnie%20rotten"
+      },
+      "dependencies": []
+    },
+    "scrape_porntrex": {
+      "description": "Save HTML from PornTrex",
+      "action_type": "save_page_html",
+      "inputs": {
+        "url": "https://www.porntrex.com/models/bonnie-rotten/"
+      },
+      "dependencies": []
+    },
+    "scrape_eporner": {
+      "description": "Save HTML from Eporner",
+      "action_type": "save_page_html",
+      "inputs": {
+        "url": "https://www.eporner.com/pornstar/bonnie-rotten/"
+      },
+      "dependencies": []
+    },
+    "scrape_xvideos": {
+      "description": "Save HTML from XVideos",
+      "action_type": "save_page_html",
+      "inputs": {
+        "url": "https://www.xvideos.com/pornstars/bonnie-rotten"
+      },
+      "dependencies": []
+    },
+    "report_saved_files": {
+      "description": "Report the paths of all saved HTML files.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "pornhub_html": "{{ scrape_pornhub.saved_html_path }}",
+          "pornxp_html": "{{ scrape_pornxp.saved_html_path }}",
+          "porntrex_html": "{{ scrape_porntrex.saved_html_path }}",
+          "eporner_html": "{{ scrape_eporner.saved_html_path }}",
+          "xvideos_html": "{{ scrape_xvideos.saved_html_path }}"
+        }
+      },
+      "dependencies": ["scrape_pornhub", "scrape_pornxp", "scrape_porntrex", "scrape_eporner", "scrape_xvideos"]
+    }
+  }
+} 

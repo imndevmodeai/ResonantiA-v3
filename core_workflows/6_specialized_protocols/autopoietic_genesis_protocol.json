@@ -1,0 +1,83 @@
+{
+  "name": "Autopoietic System Genesis Protocol (v4.0-CGS)",
+  "description": "Builds ArchE v4.0 from the distributed living specifications in the specifications/ directory, embodying The New Code philosophy with enhanced TSP capabilities and improved directory organization.",
+  "start_tasks": [
+    "discover_specifications"
+  ],
+  "tasks": {
+    "discover_specifications": {
+      "description": "List all canonical specification blueprints in the specifications/ directory.",
+      "action_type": "list_directory",
+      "inputs": {
+        "path": "specifications"
+      },
+      "dependencies": []
+    },
+    "generate_system_from_specifications": {
+      "description": "Iterate through each specification, parse it, and generate the corresponding code file in Four_PointO_ArchE/.",
+      "action_type": "for_each",
+      "inputs": {
+        "items": "{{discover_specifications.results.contents}}",
+        "workflow": {
+          "tasks": {
+            "read_specification_file": {
+              "action_type": "read_file",
+              "description": "Read the content of the current specification blueprint.",
+              "inputs": {
+                "path": "specifications/{{item}}"
+              },
+              "dependencies": []
+            },
+            "extract_blueprint": {
+              "action_type": "generate_text_llm",
+              "description": "Extract the target file path and implementation details from the specification.",
+              "inputs": {
+                "prompt": "Analyze the provided Living Specification markdown. Extract two key pieces of information: 1) The target file path for the code to be generated (look for paths like 'Four_PointO_ArchE/file_name.py'). 2) The detailed technical specification for the code itself (the 'Implementation Story' or 'Technical Implementation' section). Respond with ONLY a JSON object containing 'file_path' and 'specification' keys.",
+                "context_data": "{{read_specification_file.content}}",
+                "model": "gemini-2.5-pro-latest"
+              },
+              "dependencies": ["read_specification_file"]
+            },
+            "generate_file_content": {
+              "action_type": "generate_text_llm",
+              "description": "Generate the complete Python code based on the extracted blueprint.",
+              "inputs": {
+                "prompt": "You are an expert Python engineer implementing the ResonantiA Protocol v4.0. Based on the following detailed specification from a Living Specification document, write the COMPLETE, production-ready Python code for the file '{{extract_blueprint.parsed_json.file_path}}'. Ensure all classes, functions, and logic described are implemented. Adhere strictly to the specification. Output ONLY the raw Python code, with no extra commentary or markdown.",
+                "context_data": "{{extract_blueprint.parsed_json.specification}}",
+                "model": "gemini-2.5-pro-latest",
+                "max_tokens": 8192
+              },
+              "dependencies": ["extract_blueprint"]
+            },
+            "write_code_to_file": {
+              "action_type": "create_file",
+              "description": "Write the generated code to its specified file path.",
+              "inputs": {
+                "file_path": "{{extract_blueprint.parsed_json.file_path}}",
+                "content": "{{generate_file_content.response_text}}"
+              },
+              "dependencies": ["generate_file_content"]
+            }
+          }
+        }
+      },
+      "dependencies": [
+        "discover_specifications"
+      ]
+    },
+    "summary": {
+      "description": "Summarize the autopoietic build process for v4.0.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "✅ Autopoietic System Genesis v4.0 completed. ArchE v4.0 system forged from canonical blueprints in specifications/ with enhanced TSP capabilities and improved directory organization."
+      },
+      "dependencies": [
+        "generate_system_from_specifications"
+      ]
+    }
+  }
+}
+
+
+
+

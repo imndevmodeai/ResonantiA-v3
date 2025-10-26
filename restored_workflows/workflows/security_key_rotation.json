@@ -1,0 +1,79 @@
+{
+  "name": "Security Key Rotation Workflow (Conceptual v3.0)",
+  "description": "Conceptual workflow for rotating an API key, using IAR status checks.",
+  "version": "3.0",
+  "tasks": {
+    "start_rotation": {
+      "description": "Log start of key rotation process.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Initiating Security Key Rotation for service: {{ initial_context.service_name }}"
+      },
+      "dependencies": []
+    },
+    "generate_new_key": {
+      "description": "Call external API to generate a new key.",
+      "action_type": "call_external_api",
+      "inputs": {
+        "url": "{{ initial_context.key_generation_endpoint }}",
+        "method": "POST",
+        "auth": "{{ initial_context.admin_auth_token }}"
+      },
+      "outputs": {"response_body": "dict", "status_code": "int", "reflection": "dict"},
+      "dependencies": ["start_rotation"]
+    },
+    "update_secure_storage": {
+      "description": "Simulate updating secure storage (e.g., Vault, Secrets Manager) with the new key.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "# Simulation: In reality, use secure SDKs (Vault, AWS Secrets Manager, etc.)\nimport json\nnew_key_data = context.get('generate_new_key', {}).get('response_body', {})
+new_key = new_key_data.get('new_api_key')\nservice = context.get('initial_context', {}).get('service_name')\n\nif new_key and service:\n    print(f'Simulating update of secure storage for service {service} with new key ending in ...{new_key[-4:]}')\n    # Simulate success\n    status = 'Success: Simulated secure storage update.'\n    result = {'update_status': 'Success', 'key_identifier': f'{service}_api_key'}\nelse:\n    status = 'Failure: Missing new key or service name for storage update.'\n    result = {'update_status': 'Failure', 'error': status}\n\nprint(status)\n"
+      },
+      "outputs": {"update_status": "string", "key_identifier": "string", "error": "string", "stdout": "string", "reflection": "dict"},
+      "dependencies": ["generate_new_key"],
+      "condition": "{{ generate_new_key.reflection.status == 'Success' }}"
+    },
+    "wait_for_propagation": {
+      "description": "Simulate waiting for the new key to propagate.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import time\npropagation_time = context.get('initial_context', {}).get('propagation_delay_sec', 30)
+print(f'Simulating wait for key propagation ({propagation_time}s)...')\ntime.sleep(0.5) # Simulate short delay for testing\nprint('Propagation wait complete.')\nresult = {'wait_completed': True}"
+      },
+      "outputs": {"wait_completed": "bool", "stdout": "string", "reflection": "dict"},
+      "dependencies": ["update_secure_storage"],
+      "condition": "{{ update_secure_storage.reflection.status == 'Success' and update_secure_storage.update_status == 'Success' }}"
+    },
+    "deactivate_old_key": {
+      "description": "Call external API to deactivate the old key.",
+      "action_type": "call_external_api",
+      "inputs": {
+        "url": "{{ initial_context.key_deactivation_endpoint }}",
+        "method": "DELETE",
+        "json_data": {
+          "key_to_deactivate": "{{ initial_context.old_key_id }}"
+        },
+        "auth": "{{ initial_context.admin_auth_token }}"
+      },
+      "outputs": {"response_body": "dict", "status_code": "int", "reflection": "dict"},
+      "dependencies": ["wait_for_propagation"],
+      "condition": "{{ wait_for_propagation.reflection.status == 'Success' }}"
+    },
+    "final_status_display": {
+        "description": "Display the final status of the key rotation.",
+        "action_type": "display_output",
+        "inputs": {
+            "content": {
+                "service": "{{ initial_context.service_name }}",
+                "new_key_generation_status": "{{ generate_new_key.reflection.status if 'generate_new_key' in context else 'Skipped' }}",
+                "storage_update_status": "{{ update_secure_storage.update_status if 'update_secure_storage' in context else 'Skipped' }}",
+                "old_key_deactivation_status": "{{ deactivate_old_key.reflection.status if 'deactivate_old_key' in context else 'Skipped' }}"
+            },
+            "format": "json"
+        },
+        "dependencies": ["deactivate_old_key", "update_secure_storage"]
+    }
+  }
+} 

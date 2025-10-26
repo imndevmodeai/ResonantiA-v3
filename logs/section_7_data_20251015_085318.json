@@ -1,0 +1,5942 @@
+{
+  "codebase_inventory": {
+    "total_files": 194,
+    "files": [
+      {
+        "path": "Three_PointO_ArchE/__init__.py",
+        "name": "__init__.py",
+        "size_bytes": 2,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/abm_dsl_engine.py",
+        "name": "abm_dsl_engine.py",
+        "size_bytes": 11728,
+        "classes": [
+          "DSLAgent",
+          "DSLModel"
+        ],
+        "functions": [
+          "create_model_from_schema",
+          "__init__",
+          "_move_random",
+          "_move_towards",
+          "step",
+          "__init__",
+          "_create_agents",
+          "step",
+          "hours_from_test"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "__future__",
+          "uuid",
+          "logging",
+          "re",
+          "random",
+          "typing",
+          "agent_based_modeling_tool",
+          "mesa",
+          "mesa.space",
+          "mesa.datacollection",
+          "math"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/aco_integration.py",
+        "name": "aco_integration.py",
+        "size_bytes": 14407,
+        "classes": [
+          "PatternEvolutionEngine",
+          "AdaptiveCognitiveOrchestrator"
+        ],
+        "functions": [
+          "initialize_aco_integration",
+          "__init__",
+          "analyze_query_pattern",
+          "_create_pattern_signature",
+          "_analyze_emergent_potential",
+          "__init__",
+          "inject_nexus",
+          "on_thoughttrail_trigger",
+          "_analyze_low_confidence_pattern",
+          "_analyze_error_pattern",
+          "_analyze_success_pattern",
+          "_analyze_cross_domain_pattern",
+          "_propose_optimization",
+          "_propose_error_handling",
+          "_propose_cross_domain_analysis",
+          "get_learning_metrics"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "collections",
+          "Three_PointO_ArchE.nexus_interface",
+          "Three_PointO_ArchE.thought_trail",
+          "hashlib",
+          "re",
+          "json"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/action_context.py",
+        "name": "action_context.py",
+        "size_bytes": 1070,
+        "classes": [
+          "ActionContext"
+        ],
+        "functions": [
+          "__post_init__"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "dataclasses",
+          "typing",
+          "datetime"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/action_handlers.py",
+        "name": "action_handlers.py",
+        "size_bytes": 6041,
+        "classes": [
+          "BaseActionHandler",
+          "InteractiveGuidanceHandler"
+        ],
+        "functions": [
+          "get_handler_instance",
+          "__init__",
+          "handle",
+          "get_state",
+          "handle"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "time"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/action_registry.py",
+        "name": "action_registry.py",
+        "size_bytes": 19596,
+        "classes": [
+          "ActionRegistry"
+        ],
+        "functions": [
+          "standalone_execute_code",
+          "display_output",
+          "calculate_math",
+          "string_template_action",
+          "save_to_file_action",
+          "execute_action",
+          "__init__",
+          "register_action",
+          "get_action",
+          "handle_action_error",
+          "log_to_thought_trail"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "subprocess",
+          "os",
+          "sys",
+          "tempfile",
+          "error_handler",
+          "thought_trail",
+          "tools.enhanced_search_tool",
+          "tools.synthesis_tool",
+          "code_executor",
+          "web_search_tool",
+          "nfl_prediction_action",
+          "llm_providers",
+          "enhanced_capabilities",
+          "tools.perception_engine",
+          "tools.rise_actions",
+          "tsp_solver.solver",
+          "enhanced_perception_engine",
+          "pprint",
+          "os",
+          "enhanced_perception_engine"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/action_registry_v2.py",
+        "name": "action_registry_v2.py",
+        "size_bytes": 3582,
+        "classes": [
+          "ActionRegistry"
+        ],
+        "functions": [
+          "display_output",
+          "calculate_math",
+          "execute_action",
+          "__init__",
+          "register_action",
+          "get_action"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "subprocess",
+          "os",
+          "sys",
+          "tempfile",
+          "Three_PointO_ArchE.tools.enhanced_search_tool",
+          "Three_PointO_ArchE.tools.synthesis_tool",
+          "Three_PointO_ArchE.tools.code_executor",
+          "error_handler",
+          "pprint",
+          "config",
+          "error_handler"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/adaptive_cognitive_orchestrator.py",
+        "name": "adaptive_cognitive_orchestrator.py",
+        "size_bytes": 49525,
+        "classes": [
+          "PatternEvolutionEngine",
+          "EmergentDomainDetector",
+          "AdaptiveCognitiveOrchestrator"
+        ],
+        "functions": [
+          "__init__",
+          "analyze_query_pattern",
+          "_create_pattern_signature",
+          "_analyze_emergent_potential",
+          "_suggest_domain_name",
+          "get_learning_insights",
+          "__init__",
+          "_load_controller_templates",
+          "analyze_fallback_query",
+          "_extract_query_features",
+          "_calculate_similarity",
+          "_perform_clustering_analysis",
+          "_simple_clustering",
+          "_check_evolution_opportunity",
+          "_generate_domain_candidate",
+          "_extract_common_terms",
+          "_generate_domain_name",
+          "generate_controller_draft",
+          "_determine_controller_type",
+          "_generate_controller_code",
+          "get_evolution_status",
+          "__init__",
+          "process_query_with_evolution",
+          "emit_aco_event",
+          "_generate_intelligent_response",
+          "_analyze_query_domain",
+          "_attempt_adaptation",
+          "_generate_controller_candidate",
+          "_extract_common_terms",
+          "_generate_domain_name",
+          "_auto_tune_parameters",
+          "share_learning_across_instances",
+          "predict_evolution_needs",
+          "get_evolution_analytics",
+          "get_system_diagnostics",
+          "_handle_evolution_opportunity",
+          "get_evolution_candidates_for_review"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "typing",
+          "collections",
+          "datetime",
+          "temporal_core",
+          "hashlib",
+          "re",
+          "numpy",
+          "asyncio",
+          "sklearn.cluster",
+          "sklearn.feature_extraction.text",
+          "sklearn.metrics",
+          "cognitive_resonant_controller",
+          "llm_providers",
+          "rise_orchestrator",
+          "numpy.linalg",
+          "collections",
+          "collections"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/adaptive_filter.py",
+        "name": "adaptive_filter.py",
+        "size_bytes": 181,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/adversary_simulator.py",
+        "name": "adversary_simulator.py",
+        "size_bytes": 7867,
+        "classes": [
+          "AdversaryAgent",
+          "LogicalInconsistencyAgent",
+          "ResourceScarcityAgent",
+          "ExternalVolatilityAgent",
+          "StrategicAdversarySimulator"
+        ],
+        "functions": [
+          "__init__",
+          "attack",
+          "attack",
+          "attack",
+          "attack",
+          "__init__",
+          "run_simulation"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "random",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+        "name": "agent_based_modeling_tool.py",
+        "size_bytes": 90007,
+        "classes": [
+          "BasicGridAgent",
+          "ScalableAgentModel",
+          "BasicGridModel",
+          "ABMTool",
+          "FallbackConfig",
+          "MinimalModelInfo"
+        ],
+        "functions": [
+          "_create_reflection",
+          "perform_abm",
+          "__init__",
+          "step",
+          "advance",
+          "__init__",
+          "step",
+          "__init__",
+          "_create_agents_mesa",
+          "_create_agents_sim",
+          "step",
+          "count_active_agents",
+          "count_inactive_agents",
+          "get_agent_states",
+          "__init__",
+          "create_model",
+          "run_simulation",
+          "_generate_visualization",
+          "analyze_results",
+          "_analyze_time_series",
+          "_analyze_spatial",
+          "_detect_patterns",
+          "convert_to_state_vector",
+          "_simulate_model_creation",
+          "_simulate_model_run",
+          "_simulate_result_analysis",
+          "_get_total_agents",
+          "_detect_convergence",
+          "_detect_oscillation",
+          "_calculate_clustering",
+          "_calculate_entropy",
+          "__init__"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "os",
+          "json",
+          "logging",
+          "numpy",
+          "pandas",
+          "time",
+          "uuid",
+          "typing",
+          "utils.reflection_utils",
+          "thought_trail",
+          "scalable_framework",
+          "mesa",
+          "mesa",
+          "mesa.space",
+          "mesa.datacollection",
+          "matplotlib.pyplot",
+          "scipy",
+          "combat_abm",
+          "abm_dsl_engine"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/autonomous_orchestrator.py",
+        "name": "autonomous_orchestrator.py",
+        "size_bytes": 15744,
+        "classes": [
+          "WorkItemStatus",
+          "EscalationReason",
+          "WorkItem",
+          "OrchestratorState",
+          "TaskPrioritizationMatrix",
+          "EscalationGates",
+          "AutonomousOrchestrator"
+        ],
+        "functions": [
+          "__init__",
+          "calculate_priority_score",
+          "_calculate_value_score",
+          "_calculate_risk_penalty",
+          "__init__",
+          "check_escalation_triggers",
+          "__init__",
+          "run_orchestration_cycle",
+          "harvest_backlog",
+          "dispatch_work",
+          "generate_ceo_dashboard",
+          "_load_or_initialize_state",
+          "_save_state",
+          "_harvest_github_issues",
+          "_dependencies_satisfied",
+          "_select_best_instance",
+          "_update_state_after_dispatch",
+          "_generate_executive_summary",
+          "_calculate_kpi_summary",
+          "_get_top_priorities",
+          "_assess_risk_indicators",
+          "_generate_recommendations"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "time",
+          "datetime",
+          "temporal_core",
+          "dataclasses",
+          "typing",
+          "pathlib",
+          "requests",
+          "enum",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/autopoietic_governor.py",
+        "name": "autopoietic_governor.py",
+        "size_bytes": 9860,
+        "classes": [
+          "AutopoieticGovernor",
+          "MockThoughtTrail",
+          "MockInsightEngine",
+          "MockSPRManager"
+        ],
+        "functions": [
+          "__init__",
+          "_load_status",
+          "_save_status",
+          "_get_default_status",
+          "update_status",
+          "perform_self_audit",
+          "_check_for_stagnation",
+          "increment_unhandled_failure",
+          "reset_unhandled_failure_count"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "datetime",
+          "temporal_core",
+          "pathlib",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/autopoietic_learning_loop.py",
+        "name": "autopoietic_learning_loop.py",
+        "size_bytes": 30963,
+        "classes": [
+          "StardustEntry",
+          "NebulaePattern",
+          "IgnitedWisdom",
+          "GalaxyKnowledge",
+          "AutopoieticLearningLoop",
+          "QuantumProbability"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "capture_stardust",
+          "get_recent_stardust",
+          "detect_nebulae",
+          "propose_controller",
+          "ignite_wisdom",
+          "_run_validation",
+          "guardian_approve",
+          "crystallize_knowledge",
+          "_create_pattern_signature",
+          "_generate_id",
+          "run_learning_cycle",
+          "get_metrics",
+          "get_guardian_queue",
+          "__init__",
+          "to_dict"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "json",
+          "time",
+          "typing",
+          "dataclasses",
+          "datetime",
+          "pathlib",
+          "collections",
+          "hashlib",
+          "Three_PointO_ArchE.temporal_core",
+          "thought_trail",
+          "adaptive_cognitive_orchestrator",
+          "insight_solidification_engine",
+          "spr_manager",
+          "autopoietic_self_analysis"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/autopoietic_mandate_system.py",
+        "name": "autopoietic_mandate_system.py",
+        "size_bytes": 10735,
+        "classes": [
+          "AutopoieticMandateSystem"
+        ],
+        "functions": [
+          "mandate_check",
+          "activate_autopoietic_mandate",
+          "execute_autopoietic_genesis",
+          "__init__",
+          "validate_keyholder_authority",
+          "check_mandate_status",
+          "activate_mandate",
+          "enforce_mandate",
+          "execute_genesis_workflow",
+          "_update_genesis_status",
+          "get_mandate_report"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "os",
+          "logging",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "pathlib",
+          "Three_PointO_ArchE.workflow_engine"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/autopoietic_self_analysis.py",
+        "name": "autopoietic_self_analysis.py",
+        "size_bytes": 30883,
+        "classes": [
+          "QuantumProbability",
+          "ComponentGap",
+          "IAREntry",
+          "AutopoieticSelfAnalysis"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "collapse",
+          "to_dict",
+          "__repr__",
+          "__float__",
+          "__bool__",
+          "certain_true",
+          "certain_false",
+          "uncertain",
+          "to_json",
+          "__init__",
+          "_log_iar",
+          "discover_specifications",
+          "discover_implementations",
+          "extract_spec_requirements",
+          "analyze_implementation",
+          "compare_component",
+          "run_full_analysis",
+          "_generate_summary",
+          "get_critical_gaps",
+          "get_high_priority_gaps",
+          "generate_report",
+          "export_gaps_json"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "re",
+          "ast",
+          "pathlib",
+          "datetime",
+          "typing",
+          "dataclasses",
+          "collections",
+          "numpy",
+          "Three_PointO_ArchE.temporal_core",
+          "quantum_utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/benchmarks/__init__.py",
+        "name": "__init__.py",
+        "size_bytes": 0,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/benchmarks/ortools_baseline.py",
+        "name": "ortools_baseline.py",
+        "size_bytes": 191,
+        "classes": [],
+        "functions": [
+          "solve"
+        ],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/canonical_types.py",
+        "name": "canonical_types.py",
+        "size_bytes": 1953,
+        "classes": [
+          "QuantumProbability",
+          "CognitiveResponse",
+          "CognitiveMetrics"
+        ],
+        "functions": [
+          "to_dict",
+          "to_dict",
+          "update_avg"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "dataclasses",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/capabilities/__init__.py",
+        "name": "__init__.py",
+        "size_bytes": 66,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/capabilities/gemini_capabilities.py",
+        "name": "gemini_capabilities.py",
+        "size_bytes": 1485,
+        "classes": [
+          "GeminiCapabilities"
+        ],
+        "functions": [
+          "__init__",
+          "execute_code"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/capabilities/local_code_executor.py",
+        "name": "local_code_executor.py",
+        "size_bytes": 907,
+        "classes": [],
+        "functions": [
+          "execute_code_locally"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/causal_digest.py",
+        "name": "causal_digest.py",
+        "size_bytes": 2911,
+        "classes": [],
+        "functions": [
+          "build_flux_annotated_digest",
+          "perform_causal_inference"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing",
+          "logging",
+          "causal_inference_tool"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/causal_inference_tool.py",
+        "name": "causal_inference_tool.py",
+        "size_bytes": 44627,
+        "classes": [
+          "FallbackConfig",
+          "InfeasibleTestError"
+        ],
+        "functions": [
+          "_create_reflection",
+          "_prepare_causal_data",
+          "perform_causal_inference",
+          "_estimate_effect",
+          "_run_granger_causality",
+          "_estimate_lagged_effects",
+          "_convert_to_state_vector",
+          "_simulate_causal_inference"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "logging",
+          "pandas",
+          "numpy",
+          "time",
+          "networkx",
+          "typing",
+          "re",
+          "thought_trail",
+          "dowhy",
+          "dowhy",
+          "statsmodels.api",
+          "statsmodels.tsa.stattools",
+          "statsmodels.tsa.api",
+          "statsmodels.tools.sm_exceptions"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cfp_evolution.py",
+        "name": "cfp_evolution.py",
+        "size_bytes": 15208,
+        "classes": [
+          "PhDLevelCFPEvolution"
+        ],
+        "functions": [
+          "__init__",
+          "get_comprehensive_insights"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "asyncio",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "cfp_evolution_part1",
+          "cfp_evolution_part2",
+          "cfp_evolution_part3"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cfp_evolution_part1.py",
+        "name": "cfp_evolution_part1.py",
+        "size_bytes": 10876,
+        "classes": [
+          "FluxType",
+          "EvolutionPhase",
+          "ModuleMetrics",
+          "FluxAnalysis",
+          "CFPEvolutionResult",
+          "QuantumFluxSimulator"
+        ],
+        "functions": [
+          "__init__",
+          "prepare_quantum_state",
+          "construct_hamiltonian",
+          "evolve_quantum_state",
+          "calculate_flux_divergence",
+          "detect_entanglement",
+          "analyze_emergence_patterns",
+          "_calculate_interaction_strength"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "numpy",
+          "asyncio",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "scipy.optimize",
+          "scipy.stats",
+          "pathlib",
+          "matplotlib.pyplot",
+          "seaborn",
+          "iar_components",
+          "llm_providers",
+          "phd_level_vetting_agent",
+          "iar_components",
+          "llm_providers",
+          "phd_level_vetting_agent"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cfp_evolution_part2.py",
+        "name": "cfp_evolution_part2.py",
+        "size_bytes": 17655,
+        "classes": [
+          "CFPEvolutionEngine"
+        ],
+        "functions": [
+          "__init__"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cfp_evolution_part3.py",
+        "name": "cfp_evolution_part3.py",
+        "size_bytes": 24336,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": [],
+        "parse_error": "unexpected indent (<unknown>, line 1)"
+      },
+      {
+        "path": "Three_PointO_ArchE/cfp_framework.py",
+        "name": "cfp_framework.py",
+        "size_bytes": 29878,
+        "classes": [
+          "CfpframeworK"
+        ],
+        "functions": [
+          "__init__",
+          "_validate_and_get_state",
+          "_validate_hamiltonian",
+          "_get_operator",
+          "_evolve_state",
+          "compute_quantum_flux_difference",
+          "quantify_entanglement_correlation",
+          "compute_system_entropy",
+          "compute_spooky_flux_divergence",
+          "run_analysis",
+          "superposition_state",
+          "entangled_state",
+          "compute_multipartite_mutual_information",
+          "calculate_shannon_entropy",
+          "von_neumann_entropy",
+          "integrand"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing",
+          "numpy",
+          "scipy.integrate",
+          "scipy.linalg",
+          "logging",
+          "json",
+          "time",
+          "quantum_utils",
+          "quantum_utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cfp_implementation_example.py",
+        "name": "cfp_implementation_example.py",
+        "size_bytes": 8413,
+        "classes": [
+          "CFPEngineExample",
+          "Distribution",
+          "HistogramDistribution",
+          "System"
+        ],
+        "functions": [
+          "__init__",
+          "calculate_flux",
+          "calculate_similarity",
+          "calculate_internal_flux",
+          "calculate_system_entropy",
+          "__init__",
+          "get_history",
+          "calculate_divergence",
+          "calculate_similarity"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "copy",
+          "time",
+          "numpy",
+          "system_representation",
+          "system_representation"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cfp_real_world_examples.py",
+        "name": "cfp_real_world_examples.py",
+        "size_bytes": 37527,
+        "classes": [
+          "RealWorldCFPEngine"
+        ],
+        "functions": [
+          "__init__",
+          "analyze_life_decision",
+          "predict_nfl_game",
+          "analyze_investment_opportunity",
+          "predict_relationship_compatibility",
+          "_convert_to_metrics",
+          "_convert_team_to_metrics",
+          "_convert_investment_to_metrics",
+          "_convert_person_to_metrics",
+          "_perform_cfp_analysis",
+          "_determine_flux_type",
+          "_generate_decision_insights",
+          "_generate_nfl_prediction",
+          "_extract_key_factors",
+          "_generate_investment_insights",
+          "_assess_investment_risk",
+          "_calculate_expected_return",
+          "_generate_compatibility_insights",
+          "_extract_compatibility_factors",
+          "_generate_recommendation"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "numpy",
+          "json",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "dataclasses",
+          "asyncio",
+          "consolidated_cfp_evolution_final"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cfp_usage_demonstration.py",
+        "name": "cfp_usage_demonstration.py",
+        "size_bytes": 24670,
+        "classes": [
+          "CFPUsageDemonstrator"
+        ],
+        "functions": [
+          "__init__"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "logging",
+          "typing",
+          "dataclasses",
+          "enhanced_cfp_evolution_extended",
+          "enhanced_cfp_evolution_complete_phases"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/code_executor.py",
+        "name": "code_executor.py",
+        "size_bytes": 28632,
+        "classes": [
+          "ExecutionResult",
+          "CodeExecutor",
+          "FallbackConfig"
+        ],
+        "functions": [
+          "execute_code",
+          "_execute_with_docker",
+          "_execute_with_subprocess",
+          "__init__",
+          "validate_execution",
+          "get_execution_summary"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "subprocess",
+          "tempfile",
+          "os",
+          "json",
+          "platform",
+          "sys",
+          "time",
+          "shutil",
+          "typing",
+          "asyncio",
+          "dataclasses",
+          "iar_components",
+          "utils.reflection_utils",
+          "action_context",
+          "base64"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cognitive_dispatch.py",
+        "name": "cognitive_dispatch.py",
+        "size_bytes": 6049,
+        "classes": [
+          "CognitiveDispatch"
+        ],
+        "functions": [
+          "__init__",
+          "_execute_aco_path",
+          "_execute_rise_path",
+          "_execute_plan",
+          "route_query"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "natural_language_planner",
+          "workflow_engine",
+          "typing",
+          "os"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cognitive_integration_hub.py",
+        "name": "cognitive_integration_hub.py",
+        "size_bytes": 23645,
+        "classes": [
+          "CognitiveIntegrationHub"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "_load_protocol_chunks",
+          "process_query",
+          "_report_to_aco",
+          "_log_response",
+          "get_metrics",
+          "get_system_status",
+          "_create_initial_superposition",
+          "route_query",
+          "_get_dynamic_threshold"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "random",
+          "datetime",
+          "typing",
+          "pathlib",
+          "canonical_types",
+          "Three_PointO_ArchE.temporal_core",
+          "cognitive_resonant_controller",
+          "rise_orchestrator",
+          "thought_trail",
+          "system_health_monitor"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/cognitive_resonant_controller.py",
+        "name": "cognitive_resonant_controller.py",
+        "size_bytes": 22457,
+        "classes": [
+          "CognitiveResponse",
+          "BaseLLMProvider",
+          "ControllerPerformanceMetrics",
+          "DomainControllerConfig",
+          "FrequencyDomainController",
+          "ImplementationResonanceController",
+          "SPRController",
+          "ProportionalResonantController",
+          "CognitiveResonantControllerSystem",
+          "CognitiveResonantController",
+          "QuantumProbability"
+        ],
+        "functions": [
+          "complete",
+          "success_rate",
+          "average_confidence",
+          "__init__",
+          "detect_frequency_domain",
+          "extract_specialized_context",
+          "update_performance",
+          "_auto_tune_parameters",
+          "detect_frequency_domain",
+          "extract_specialized_context",
+          "detect_frequency_domain",
+          "extract_specialized_context",
+          "_contains_guardian_points_pattern",
+          "detect_frequency_domain",
+          "extract_specialized_context",
+          "__init__",
+          "_initialize_default_controllers",
+          "process_query",
+          "_general_proportional_extraction",
+          "get_system_diagnostics",
+          "__init__",
+          "handle_query",
+          "__init__",
+          "to_dict",
+          "collapse"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "json",
+          "math",
+          "re",
+          "time",
+          "typing",
+          "dataclasses",
+          "abc",
+          "time",
+          "autopoietic_self_analysis"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/collective_intelligence_network.py",
+        "name": "collective_intelligence_network.py",
+        "size_bytes": 29271,
+        "classes": [
+          "InstanceType",
+          "InstanceCapability",
+          "InstanceStatus",
+          "ArchEInstanceRegistry",
+          "KnowledgeTransferProtocol",
+          "CollectiveConsensusAlgorithm",
+          "CollectiveIntelligenceNetwork"
+        ],
+        "functions": [
+          "__init__",
+          "register_instance",
+          "find_instances_with_capability",
+          "get_network_status",
+          "__init__",
+          "create_knowledge_package",
+          "_calculate_trust_level",
+          "_calculate_checksum",
+          "__init__",
+          "get_consensus_diagnostics",
+          "__init__",
+          "process_query_with_collective_intelligence",
+          "_assess_collective_benefit",
+          "_identify_required_capabilities",
+          "_process_with_collective",
+          "_simulate_collective_processing",
+          "_contribute_to_network",
+          "get_collective_diagnostics"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "time",
+          "hashlib",
+          "logging",
+          "threading",
+          "typing",
+          "collections",
+          "datetime",
+          "temporal_core",
+          "pathlib",
+          "uuid",
+          "enum",
+          "socket",
+          "asyncio",
+          "adaptive_cognitive_orchestrator",
+          "cognitive_resonant_controller"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/combat_abm.py",
+        "name": "combat_abm.py",
+        "size_bytes": 5340,
+        "classes": [
+          "GorillaAgent",
+          "HumanVillagerAgent",
+          "GorillaCombatModel"
+        ],
+        "functions": [
+          "__init__",
+          "step",
+          "move_towards",
+          "__init__",
+          "take_damage",
+          "step",
+          "__init__",
+          "step",
+          "count_active_agents",
+          "count_inactive_agents"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "numpy",
+          "uuid",
+          "logging",
+          "typing",
+          "agent_based_modeling_tool",
+          "mesa",
+          "mesa.space",
+          "mesa.datacollection"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/communication_manager.py",
+        "name": "communication_manager.py",
+        "size_bytes": 8815,
+        "classes": [
+          "CommunicationManager"
+        ],
+        "functions": [
+          "__init__",
+          "_get_redis_connection",
+          "_create_message",
+          "send_task",
+          "broadcast_for_capability",
+          "listen_for_tasks",
+          "stop_listening",
+          "my_task_handler"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "logging",
+          "uuid",
+          "datetime",
+          "typing",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/comparison_manager.py",
+        "name": "comparison_manager.py",
+        "size_bytes": 485,
+        "classes": [
+          "ComparisonManager"
+        ],
+        "functions": [
+          "__init__",
+          "compare"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/config.py",
+        "name": "config.py",
+        "size_bytes": 7876,
+        "classes": [
+          "PathConfig",
+          "APIKeys",
+          "LLMConfig",
+          "ToolConfig",
+          "SystemConfig",
+          "AppConfig"
+        ],
+        "functions": [
+          "configure_logging",
+          "get_config"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "os",
+          "logging",
+          "logging.config",
+          "sys",
+          "dataclasses",
+          "dotenv",
+          "pathlib"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/consolidated_cfp_evolution.py",
+        "name": "consolidated_cfp_evolution.py",
+        "size_bytes": 18764,
+        "classes": [
+          "FluxType",
+          "EvolutionPhase",
+          "ModuleMetrics",
+          "FluxAnalysis",
+          "CFPEvolutionResult",
+          "KnowledgeGraphIntegrator",
+          "QuantumFluxSimulator"
+        ],
+        "functions": [
+          "__init__",
+          "load_knowledge_graph",
+          "_create_fallback_graph",
+          "_build_module_mappings",
+          "get_module_node_info",
+          "calculate_spr_synergy",
+          "find_relationships",
+          "get_capability_overlap",
+          "__init__",
+          "prepare_quantum_state",
+          "construct_hamiltonian",
+          "_calculate_interaction_strength",
+          "evolve_quantum_state",
+          "calculate_flux_divergence",
+          "detect_entanglement",
+          "analyze_emergence_patterns"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "numpy",
+          "asyncio",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "pathlib",
+          "scipy"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/consolidated_cfp_evolution_complete.py",
+        "name": "consolidated_cfp_evolution_complete.py",
+        "size_bytes": 40647,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": [],
+        "parse_error": "unexpected indent (<unknown>, line 1)"
+      },
+      {
+        "path": "Three_PointO_ArchE/consolidated_cfp_evolution_final.py",
+        "name": "consolidated_cfp_evolution_final.py",
+        "size_bytes": 22765,
+        "classes": [
+          "FluxType",
+          "EvolutionPhase",
+          "ModuleMetrics",
+          "FluxAnalysis",
+          "CFPEvolutionResult",
+          "KnowledgeGraphIntegrator",
+          "QuantumFluxSimulator"
+        ],
+        "functions": [
+          "__init__",
+          "load_knowledge_graph",
+          "_create_fallback_graph",
+          "_build_module_mappings",
+          "get_module_node_info",
+          "calculate_spr_synergy",
+          "find_relationships",
+          "get_capability_overlap",
+          "__init__",
+          "prepare_quantum_state",
+          "construct_hamiltonian",
+          "_calculate_interaction_strength",
+          "evolve_quantum_state",
+          "calculate_flux_divergence",
+          "detect_entanglement",
+          "analyze_emergence_patterns"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "numpy",
+          "asyncio",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "pathlib",
+          "scipy"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/consolidated_cfp_evolution_part2.py",
+        "name": "consolidated_cfp_evolution_part2.py",
+        "size_bytes": 25192,
+        "classes": [
+          "EnhancedCFPEvolutionEngine"
+        ],
+        "functions": [
+          "__init__",
+          "_validate_inputs",
+          "_enhance_flux_with_kg",
+          "_enhance_emergence_with_kg"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/context_manager.py",
+        "name": "context_manager.py",
+        "size_bytes": 618,
+        "classes": [
+          "ContextManager"
+        ],
+        "functions": [
+          "__init__",
+          "update_context",
+          "get_context"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/context_superposition.py",
+        "name": "context_superposition.py",
+        "size_bytes": 1694,
+        "classes": [],
+        "functions": [
+          "create_context_bundle",
+          "merge_bundles"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing",
+          "datetime",
+          "temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/custom_json.py",
+        "name": "custom_json.py",
+        "size_bytes": 387,
+        "classes": [
+          "CustomEncoder"
+        ],
+        "functions": [
+          "dumps",
+          "loads",
+          "default"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "datetime"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/demo_enhanced_search_integration.py",
+        "name": "demo_enhanced_search_integration.py",
+        "size_bytes": 7566,
+        "classes": [],
+        "functions": [
+          "demo_web_search_tool",
+          "demo_unified_search_tool",
+          "demo_performance_comparison",
+          "main"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "time",
+          "typing",
+          "web_search_tool",
+          "sys",
+          "pathlib",
+          "sys",
+          "pathlib",
+          "unified_search_tool",
+          "fallback_search_tool",
+          "traceback"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/display_tool.py",
+        "name": "display_tool.py",
+        "size_bytes": 1800,
+        "classes": [],
+        "functions": [
+          "display_output"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "json"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_capabilities.py",
+        "name": "enhanced_capabilities.py",
+        "size_bytes": 7055,
+        "classes": [
+          "GeminiCapabilities"
+        ],
+        "functions": [
+          "__init__",
+          "execute_code",
+          "handle_files",
+          "perform_grounding",
+          "call_function",
+          "generate_structured_output"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "typing",
+          "llm_providers.google",
+          "llm_providers.base"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_cfp_evolution_complete.py",
+        "name": "enhanced_cfp_evolution_complete.py",
+        "size_bytes": 38231,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": [],
+        "parse_error": "unexpected indent (<unknown>, line 1)"
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_cfp_evolution_complete_phases.py",
+        "name": "enhanced_cfp_evolution_complete_phases.py",
+        "size_bytes": 29900,
+        "classes": [
+          "CompleteEnhancedCFPEvolutionEngine"
+        ],
+        "functions": [
+          "__init__",
+          "_validate_inputs"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_cfp_evolution_engine.py",
+        "name": "enhanced_cfp_evolution_engine.py",
+        "size_bytes": 20360,
+        "classes": [
+          "EnhancedCFPEvolutionEngine"
+        ],
+        "functions": [
+          "__init__",
+          "_validate_inputs",
+          "_enhance_flux_with_kg",
+          "_enhance_emergence_with_kg"
+        ],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_cfp_evolution_extended.py",
+        "name": "enhanced_cfp_evolution_extended.py",
+        "size_bytes": 29099,
+        "classes": [
+          "FluxType",
+          "EvolutionPhase",
+          "SimulationMethod",
+          "ModuleMetrics",
+          "FluxAnalysis",
+          "CFPEvolutionResult",
+          "AdvancedQuantumSimulator"
+        ],
+        "functions": [
+          "__init__",
+          "prepare_quantum_state",
+          "construct_hamiltonian",
+          "_calculate_enhanced_interaction_strength",
+          "evolve_quantum_state",
+          "calculate_flux_divergence",
+          "detect_entanglement",
+          "analyze_emergence_patterns",
+          "quantum_monte_carlo_simulation",
+          "fluxual_dynamics_simulation",
+          "temporal_simulation",
+          "cognitive_modeling_simulation",
+          "emergence_simulation",
+          "entanglement_simulation",
+          "resonance_analysis_simulation",
+          "multi_scale_simulation"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "numpy",
+          "asyncio",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "pathlib",
+          "scipy.linalg",
+          "scipy.stats",
+          "scipy.optimize",
+          "matplotlib.pyplot",
+          "seaborn"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_cfp_evolution_test.py",
+        "name": "enhanced_cfp_evolution_test.py",
+        "size_bytes": 10176,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "numpy",
+          "asyncio",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "enhanced_cfp_evolution_with_kg",
+          "enhanced_cfp_evolution_engine"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_cfp_evolution_with_kg.py",
+        "name": "enhanced_cfp_evolution_with_kg.py",
+        "size_bytes": 20054,
+        "classes": [
+          "FluxType",
+          "EvolutionPhase",
+          "ModuleMetrics",
+          "FluxAnalysis",
+          "CFPEvolutionResult",
+          "KnowledgeGraphIntegrator",
+          "QuantumFluxSimulator"
+        ],
+        "functions": [
+          "__init__",
+          "load_knowledge_graph",
+          "_create_fallback_graph",
+          "_build_module_mappings",
+          "get_module_node_info",
+          "find_relationships",
+          "calculate_spr_synergy",
+          "get_domain_relevance",
+          "get_capability_overlap",
+          "__init__",
+          "prepare_quantum_state",
+          "construct_hamiltonian",
+          "_calculate_interaction_strength",
+          "evolve_quantum_state",
+          "calculate_flux_divergence",
+          "detect_entanglement",
+          "analyze_emergence_patterns"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "numpy",
+          "asyncio",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "pathlib"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_llm_provider.py",
+        "name": "enhanced_llm_provider.py",
+        "size_bytes": 37115,
+        "classes": [
+          "EnhancedLLMProvider"
+        ],
+        "functions": [
+          "get_enhanced_llm_provider",
+          "__init__",
+          "_get_enabled_capabilities",
+          "_initialize_client",
+          "_cached_generate",
+          "_estimate_cost",
+          "generate",
+          "generate_chat",
+          "enhanced_query_processing",
+          "_assess_query_complexity",
+          "_process_complex_query",
+          "_enhanced_problem_scaffolding",
+          "_multi_source_research",
+          "_enhanced_ptrf_verification",
+          "_temporal_modeling_and_cfp",
+          "_cfp_analysis",
+          "_complex_system_visioning",
+          "_explore_adjacent_possibilities",
+          "_generate_enhanced_strategy",
+          "_iar_aware_self_assessment",
+          "_extract_uncertainties",
+          "_extract_confidence_score",
+          "_extract_iar_score",
+          "_extract_risk_factors",
+          "get_cache_stats",
+          "clear_cache"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "os",
+          "json",
+          "asyncio",
+          "typing",
+          "datetime",
+          "time",
+          "llm_providers",
+          "token_cache_manager",
+          "llm_providers",
+          "token_cache_manager"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_perception_engine.py",
+        "name": "enhanced_perception_engine.py",
+        "size_bytes": 33983,
+        "classes": [
+          "WebPageAnalysis",
+          "SearchResult",
+          "EnhancedPerceptionEngine",
+          "SimulatedLLMProvider"
+        ],
+        "functions": [
+          "enhanced_web_search",
+          "enhanced_page_analysis",
+          "__init__",
+          "__enter__",
+          "__exit__",
+          "_get_default_llm_provider",
+          "_create_simulated_provider",
+          "_get_driver",
+          "_initialize_driver",
+          "browse_and_summarize",
+          "_is_blocked",
+          "_analyze_page_content",
+          "_calculate_relevance_score",
+          "_analyze_sentiment",
+          "_generate_content_summary",
+          "_generate_intelligent_summary",
+          "search_and_analyze",
+          "_extract_search_results",
+          "_calculate_result_relevance",
+          "_calculate_source_credibility",
+          "_analyze_search_results",
+          "navigate_to_link",
+          "get_session_stats",
+          "close",
+          "generate",
+          "generate_chat"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "os",
+          "re",
+          "time",
+          "random",
+          "json",
+          "logging",
+          "typing",
+          "dataclasses",
+          "urllib.parse",
+          "requests",
+          "bs4",
+          "selenium",
+          "selenium.webdriver.chrome.service",
+          "selenium.webdriver.chrome.options",
+          "selenium.webdriver.common.by",
+          "selenium.webdriver.support.ui",
+          "selenium.webdriver.support",
+          "selenium.webdriver.common.action_chains",
+          "selenium.common.exceptions",
+          "webdriver_manager.chrome",
+          "llm_providers",
+          "action_context",
+          "utils",
+          "sys",
+          "os",
+          "vcd_bridge",
+          "sys",
+          "os",
+          "vcd_bridge",
+          "llm_providers",
+          "action_context",
+          "utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_tools.py",
+        "name": "enhanced_tools.py",
+        "size_bytes": 20577,
+        "classes": [
+          "FallbackConfig"
+        ],
+        "functions": [
+          "_create_reflection",
+          "call_api",
+          "perform_complex_data_analysis",
+          "interact_with_database"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "requests",
+          "json",
+          "numpy",
+          "pandas",
+          "typing",
+          "time",
+          "thought_trail",
+          "config"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_vetting_agent.py",
+        "name": "enhanced_vetting_agent.py",
+        "size_bytes": 1882,
+        "classes": [
+          "VettingStatus",
+          "VettingResult"
+        ],
+        "functions": [],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "hashlib",
+          "typing",
+          "dataclasses",
+          "enum",
+          "pathlib",
+          "asyncio",
+          "aiohttp",
+          "datetime",
+          "iar_components",
+          "llm_providers",
+          "action_context",
+          "iar_components",
+          "llm_providers",
+          "action_context"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_vetting_agent_main.py",
+        "name": "enhanced_vetting_agent_main.py",
+        "size_bytes": 12487,
+        "classes": [
+          "EnhancedVettingAgent"
+        ],
+        "functions": [
+          "__init__",
+          "_generate_enhanced_reasoning",
+          "_compile_potential_issues",
+          "_generate_proposed_modifications"
+        ],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_vetting_agent_part2.py",
+        "name": "enhanced_vetting_agent_part2.py",
+        "size_bytes": 8150,
+        "classes": [
+          "AxiomaticKnowledgeBase"
+        ],
+        "functions": [
+          "__init__",
+          "_load_critical_mandates",
+          "get_relevant_axioms",
+          "update_temporal_context",
+          "_analyze_temporal_patterns",
+          "_detect_causal_lags",
+          "_generate_temporal_predictions"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_vetting_agent_part3.py",
+        "name": "enhanced_vetting_agent_part3.py",
+        "size_bytes": 8879,
+        "classes": [
+          "SynergisticFusionProtocol"
+        ],
+        "functions": [
+          "__init__"
+        ],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_visual_cognitive_debugger_part1.py",
+        "name": "enhanced_visual_cognitive_debugger_part1.py",
+        "size_bytes": 12353,
+        "classes": [
+          "CognitiveVisualizationMode",
+          "CognitiveVisualizationData",
+          "AdvancedCognitiveVisualizer"
+        ],
+        "functions": [
+          "__init__",
+          "generate_cognitive_resonance_map",
+          "generate_temporal_dynamics_view",
+          "generate_implementation_resonance_trace",
+          "generate_pattern_crystallization_display",
+          "generate_mandate_compliance_dashboard",
+          "_calculate_resonance_quality",
+          "_generate_resonance_nodes",
+          "_generate_resonance_edges",
+          "_generate_resonance_heatmap",
+          "_get_resonance_color",
+          "_get_mandate_name"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "asyncio",
+          "json",
+          "time",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "websockets",
+          "websockets.server",
+          "aiohttp",
+          "numpy",
+          "pathlib",
+          "iar_components",
+          "llm_providers",
+          "phd_level_vetting_agent",
+          "iar_components",
+          "llm_providers",
+          "phd_level_vetting_agent"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_visual_cognitive_debugger_part2.py",
+        "name": "enhanced_visual_cognitive_debugger_part2.py",
+        "size_bytes": 13374,
+        "classes": [
+          "EnhancedVisualCognitiveDebugger"
+        ],
+        "functions": [
+          "__init__"
+        ],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_web_search_tool.py",
+        "name": "enhanced_web_search_tool.py",
+        "size_bytes": 19559,
+        "classes": [
+          "EnhancedWebSearchTool"
+        ],
+        "functions": [
+          "enhanced_search_web",
+          "__init__",
+          "_setup_driver",
+          "_handle_cookie_consent",
+          "_handle_age_gate",
+          "_detect_captcha",
+          "_wait_for_page_load",
+          "search_with_selenium",
+          "search_with_requests"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "json",
+          "logging",
+          "time",
+          "typing",
+          "pathlib",
+          "sys",
+          "os",
+          "selenium",
+          "selenium.webdriver.common.by",
+          "selenium.webdriver.support.ui",
+          "selenium.webdriver.support",
+          "selenium.webdriver.chrome.options",
+          "selenium.webdriver.chrome.service",
+          "webdriver_manager.chrome",
+          "selenium.common.exceptions",
+          "requests",
+          "bs4",
+          "urllib.parse"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/enhanced_workflow_orchestrator.py",
+        "name": "enhanced_workflow_orchestrator.py",
+        "size_bytes": 25285,
+        "classes": [
+          "ConversationalFormatter",
+          "EnhancedSearchAction",
+          "ConversationalAnalysisAction",
+          "EnhancedWorkflowOrchestrator"
+        ],
+        "functions": [
+          "create_and_run_search_workflow",
+          "format_search_results",
+          "format_analysis_result",
+          "format_workflow_summary",
+          "perform_enhanced_search",
+          "perform_conversational_analysis",
+          "__init__",
+          "_register_enhanced_actions",
+          "_conversational_display",
+          "run_enhanced_workflow",
+          "create_enhanced_workflow_template",
+          "save_enhanced_workflow"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "json",
+          "time",
+          "uuid",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "pathlib",
+          "sys",
+          "os",
+          "workflow_engine",
+          "action_registry",
+          "utils.reflection_utils",
+          "unified_search_tool"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/error_handler.py",
+        "name": "error_handler.py",
+        "size_bytes": 12865,
+        "classes": [
+          "FallbackConfig"
+        ],
+        "functions": [
+          "_dispatch_consultation_broadcast",
+          "handle_action_error"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "time",
+          "typing",
+          "pathlib",
+          "json",
+          "datetime",
+          "temporal_core",
+          "Three_PointO_ArchE.temporal_core",
+          "config"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/executable_spec_parser.py",
+        "name": "executable_spec_parser.py",
+        "size_bytes": 8320,
+        "classes": [],
+        "functions": [
+          "ingest_canonical_specification",
+          "deconstruct_code_blueprints",
+          "_normalize_path"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "re",
+          "json",
+          "logging",
+          "pathlib",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/execution_manager.py",
+        "name": "execution_manager.py",
+        "size_bytes": 847,
+        "classes": [
+          "ExecutionManager"
+        ],
+        "functions": [
+          "__init__",
+          "execute_task"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/fanduel_api_integration.py",
+        "name": "fanduel_api_integration.py",
+        "size_bytes": 0,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/fuzzy_intent_mapper.py",
+        "name": "fuzzy_intent_mapper.py",
+        "size_bytes": 13842,
+        "classes": [
+          "FuzzyIntentMapper"
+        ],
+        "functions": [
+          "get_mapper",
+          "interpret_fuzzy_intent",
+          "__init__",
+          "_compile_patterns",
+          "map_intent",
+          "_calculate_relevance",
+          "_generate_recommendation",
+          "check_for_duplication"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "re",
+          "logging",
+          "pathlib",
+          "typing",
+          "difflib"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/genesis_agent.py",
+        "name": "genesis_agent.py",
+        "size_bytes": 13043,
+        "classes": [
+          "GenesisAgent"
+        ],
+        "functions": [
+          "generate_code_from_specification_file",
+          "__init__",
+          "_load_prompt_template",
+          "_get_fallback_template",
+          "generate_code_from_spec",
+          "_construct_prompt",
+          "_parse_llm_response",
+          "_validate_syntax"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "ast",
+          "pathlib",
+          "typing",
+          "Three_PointO_ArchE.temporal_core",
+          "Three_PointO_ArchE.thought_trail",
+          "Three_PointO_ArchE.llm_providers"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/google_maps_decoder.py",
+        "name": "google_maps_decoder.py",
+        "size_bytes": 13916,
+        "classes": [
+          "PhotosphereParams",
+          "LocationIntelligence",
+          "GoogleMapsDecoder"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "decode_google_url",
+          "_extract_place_id",
+          "_extract_photosphere_params",
+          "_extract_coordinates",
+          "_is_valid_coordinate",
+          "_analyze_geography",
+          "_identify_region",
+          "_calculate_confidence",
+          "_generate_applications",
+          "_generate_metadata"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "re",
+          "urllib.parse",
+          "struct",
+          "binascii",
+          "math",
+          "typing",
+          "dataclasses",
+          "json"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/guardian_cli.py",
+        "name": "guardian_cli.py",
+        "size_bytes": 9534,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": [],
+        "parse_error": "unexpected indent (<unknown>, line 174)"
+      },
+      {
+        "path": "Three_PointO_ArchE/iar_compliance_validator.py",
+        "name": "iar_compliance_validator.py",
+        "size_bytes": 1,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/iar_components.py",
+        "name": "iar_components.py",
+        "size_bytes": 10888,
+        "classes": [
+          "IARValidationResult",
+          "IAR_Prepper",
+          "IARValidator",
+          "ResonanceTracker"
+        ],
+        "functions": [
+          "__init__",
+          "_get_common_fields",
+          "finish_with_success",
+          "finish_with_error",
+          "finish_with_skip",
+          "__init__",
+          "validate_structure",
+          "validate_content",
+          "_calculate_resonance",
+          "__init__",
+          "record_execution",
+          "get_resonance_trend",
+          "detect_resonance_issues",
+          "get_execution_summary"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "typing",
+          "datetime",
+          "temporal_core",
+          "numpy",
+          "dataclasses",
+          "typing",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/ias_manager.py",
+        "name": "ias_manager.py",
+        "size_bytes": 497,
+        "classes": [
+          "IASManager"
+        ],
+        "functions": [
+          "__init__",
+          "add_insight",
+          "get_insights"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/insight_solidification_engine.py",
+        "name": "insight_solidification_engine.py",
+        "size_bytes": 39100,
+        "classes": [
+          "InsightType",
+          "ValidationStatus",
+          "SolidificationMethod",
+          "InsightCandidate",
+          "ValidationResult",
+          "SolidificationPlan",
+          "SolidificationResult",
+          "InsightValidator",
+          "SPRManager",
+          "InsightSolidificationEngine"
+        ],
+        "functions": [
+          "create_insight_solidification_engine",
+          "__init__",
+          "_get_default_config",
+          "_load_existing_sprs",
+          "validate_insight",
+          "_validate_quality_thresholds",
+          "_check_for_duplicates",
+          "_calculate_concept_similarity",
+          "_detect_conflicts",
+          "_concepts_contradict",
+          "_validate_relationships",
+          "_determine_validation_status",
+          "_calculate_validation_confidence",
+          "_generate_recommendations",
+          "_generate_reviewer_notes",
+          "__init__",
+          "create_backup",
+          "restore_backup",
+          "add_spr",
+          "update_spr",
+          "_load_tapestry",
+          "_save_tapestry",
+          "__init__",
+          "_get_default_config",
+          "solidify_insight",
+          "_create_solidification_plan",
+          "_execute_solidification",
+          "get_solidification_analytics",
+          "_get_most_common_insight_type",
+          "_calculate_knowledge_growth_rate",
+          "generate_iar_reflection"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "os",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "dataclasses",
+          "enum",
+          "logging",
+          "pathlib",
+          "Three_PointO_ArchE.temporal_core",
+          "shutil",
+          "shutil"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/keyholder_client.py",
+        "name": "keyholder_client.py",
+        "size_bytes": 14221,
+        "classes": [
+          "KeyholderClient"
+        ],
+        "functions": [
+          "__init__"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "json",
+          "logging",
+          "sys",
+          "datetime",
+          "typing",
+          "websockets",
+          "websockets.client"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/keyholder_dashboard.py",
+        "name": "keyholder_dashboard.py",
+        "size_bytes": 14551,
+        "classes": [
+          "KeyholderDashboard"
+        ],
+        "functions": [
+          "__init__",
+          "on_thoughttrail_entry",
+          "on_thoughttrail_triggers",
+          "on_spec_submission",
+          "on_spec_integration",
+          "on_aco_pattern",
+          "on_ise_solidification"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "json",
+          "logging",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "websockets",
+          "websockets.server",
+          "Three_PointO_ArchE.nexus_interface",
+          "Three_PointO_ArchE.thought_trail"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/knowledge_crystallization_system.py",
+        "name": "knowledge_crystallization_system.py",
+        "size_bytes": 21602,
+        "classes": [
+          "InsightCategory",
+          "ValidationStatus",
+          "KnowledgeInsight",
+          "CrystallizedPattern",
+          "KnowledgeCrystallizationSystem"
+        ],
+        "functions": [
+          "crystallize_pattern",
+          "initialize_asasf_insights",
+          "__init__",
+          "capture_insight",
+          "validate_insight",
+          "crystallize_pattern",
+          "find_applicable_patterns",
+          "apply_pattern",
+          "get_knowledge_stats",
+          "export_knowledge_for_instance",
+          "load_knowledge_base",
+          "save_knowledge_base"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "uuid",
+          "hashlib",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "dataclasses",
+          "enum",
+          "os",
+          "Three_PointO_ArchE.temporal_core",
+          "datetime"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/knowledge_graph/__init__.py",
+        "name": "__init__.py",
+        "size_bytes": 204,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": [
+          "spr_definitions",
+          "knowledge_tapestry"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/knowledge_graph_manager.py",
+        "name": "knowledge_graph_manager.py",
+        "size_bytes": 6849,
+        "classes": [
+          "KnowledgeGraphManager"
+        ],
+        "functions": [
+          "__init__",
+          "_load_json",
+          "get_spr_definition",
+          "get_tapestry_node",
+          "_load_specifications",
+          "_load_markdown_specification",
+          "_extract_title",
+          "_extract_section",
+          "get_specification",
+          "list_specifications",
+          "search_specifications",
+          "_calculate_relevance"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "os",
+          "typing",
+          "pathlib"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/llm_providers/__init__.py",
+        "name": "__init__.py",
+        "size_bytes": 2716,
+        "classes": [],
+        "functions": [
+          "get_llm_provider",
+          "get_model_for_provider"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "base",
+          "google",
+          "llm_providers"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/llm_providers/base.py",
+        "name": "base.py",
+        "size_bytes": 3730,
+        "classes": [
+          "LLMProviderError",
+          "BaseLLMProvider"
+        ],
+        "functions": [
+          "__init__",
+          "__str__",
+          "__init__",
+          "_initialize_client",
+          "generate",
+          "generate_chat"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "typing",
+          "google.generativeai"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/llm_providers/google.py",
+        "name": "google.py",
+        "size_bytes": 7567,
+        "classes": [
+          "GoogleProvider"
+        ],
+        "functions": [
+          "_initialize_client",
+          "generate",
+          "generate_chat"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "typing",
+          "google.generativeai",
+          "google.generativeai.types",
+          "base"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/llm_tool.py",
+        "name": "llm_tool.py",
+        "size_bytes": 6514,
+        "classes": [],
+        "functions": [
+          "_render_prompt_from_template",
+          "generate_text_llm"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "json",
+          "os",
+          "google.generativeai",
+          "dotenv",
+          "jinja2",
+          "utils.reflection_utils",
+          "llm_providers",
+          "time",
+          "base64"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/logging_config.py",
+        "name": "logging_config.py",
+        "size_bytes": 5709,
+        "classes": [
+          "FallbackConfig"
+        ],
+        "functions": [
+          "setup_logging"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "logging.config",
+          "os"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/logscribe_core.py",
+        "name": "logscribe_core.py",
+        "size_bytes": 8857,
+        "classes": [
+          "LogScribe"
+        ],
+        "functions": [
+          "__init__",
+          "_parse_repo_url",
+          "_fetch_commits",
+          "_generate_changelog_prompt",
+          "generate_changelog"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "os",
+          "requests",
+          "openai",
+          "logging",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/main.py",
+        "name": "main.py",
+        "size_bytes": 26746,
+        "classes": [],
+        "functions": [
+          "truncate_value",
+          "ensure_directories",
+          "find_last_successful_run_id",
+          "handle_sirc_directive",
+          "handle_run_workflow",
+          "main"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "os",
+          "json",
+          "argparse",
+          "sys",
+          "time",
+          "uuid",
+          "typing",
+          "logging_config",
+          "workflow_engine",
+          "spr_manager",
+          "sirc_intake_handler"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/mastermind.py",
+        "name": "mastermind.py",
+        "size_bytes": 7932,
+        "classes": [
+          "Mastermind"
+        ],
+        "functions": [
+          "__init__",
+          "interact_sync"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "pathlib",
+          "os",
+          "adaptive_cognitive_orchestrator",
+          "rise_orchestrator",
+          "proactive_truth_system",
+          "workflow_engine",
+          "spr_manager",
+          "llm_providers",
+          "tools.search_tool",
+          "resonantia_maestro"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/mastermind_server.py",
+        "name": "mastermind_server.py",
+        "size_bytes": 24522,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": [],
+        "parse_error": "unexpected indent (<unknown>, line 253)"
+      },
+      {
+        "path": "Three_PointO_ArchE/mastermind_server.py\nThree_PointO_ArchE/adaptive_cognitive_orchestrator.py",
+        "name": "adaptive_cognitive_orchestrator.py",
+        "size_bytes": 0,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/metacognitive_shift_processor.py",
+        "name": "metacognitive_shift_processor.py",
+        "size_bytes": 38526,
+        "classes": [
+          "DissonanceType",
+          "ShiftSeverity",
+          "CorrectionStrategy",
+          "DissonanceSignal",
+          "CorrectionPlan",
+          "ShiftResult",
+          "DissonanceDetector",
+          "CorrectionPlanner",
+          "MetacognitiveShiftProcessor"
+        ],
+        "functions": [
+          "create_metacognitive_shift_processor",
+          "__init__",
+          "_get_default_config",
+          "detect_dissonance",
+          "_detect_low_confidence",
+          "_detect_repeated_failures",
+          "_detect_strategy_misalignment",
+          "_detect_inconsistent_results",
+          "_detect_temporal_inconsistency",
+          "__init__",
+          "_get_default_config",
+          "plan_correction",
+          "_select_correction_strategy",
+          "_plan_adjustments",
+          "_define_expected_outcomes",
+          "_define_success_metrics",
+          "_create_implementation_steps",
+          "_plan_rollback_strategy",
+          "_estimate_effectiveness",
+          "__init__",
+          "_get_default_config",
+          "process_metacognitive_shift",
+          "_execute_correction",
+          "_learn_from_shifts",
+          "get_shift_analytics",
+          "_get_most_common_dissonance",
+          "_get_most_effective_strategy",
+          "_calculate_improvement_trend",
+          "generate_iar_reflection"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "numpy",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "dataclasses",
+          "enum",
+          "logging",
+          "abc",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/natural_language_planner.py",
+        "name": "natural_language_planner.py",
+        "size_bytes": 6082,
+        "classes": [
+          "NaturalLanguagePlanner"
+        ],
+        "functions": [
+          "__init__",
+          "generate_plan_from_query"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "typing",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/nexus_interface.py",
+        "name": "nexus_interface.py",
+        "size_bytes": 13028,
+        "classes": [
+          "NexusInterface"
+        ],
+        "functions": [
+          "publish_event",
+          "subscribe_to_topic",
+          "get_nexus",
+          "__init__",
+          "publish",
+          "subscribe",
+          "unsubscribe",
+          "inject_thoughttrail",
+          "get_event_history",
+          "get_subscriber_count",
+          "get_topics",
+          "start_server_in_thread",
+          "_run_server",
+          "stop"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "json",
+          "logging",
+          "threading",
+          "time",
+          "collections",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "websockets",
+          "websockets.server"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/nexus_server.py",
+        "name": "nexus_server.py",
+        "size_bytes": 6874,
+        "classes": [
+          "ConnectionManager",
+          "MockMastermind"
+        ],
+        "functions": [
+          "__init__",
+          "disconnect"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "logging",
+          "fastapi",
+          "fastapi.responses",
+          "typing",
+          "mastermind_server",
+          "uvicorn"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/nfl_prediction_action.py",
+        "name": "nfl_prediction_action.py",
+        "size_bytes": 11987,
+        "classes": [],
+        "functions": [
+          "predict_nfl_game",
+          "_generate_player_predictions",
+          "_generate_betting_advice"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "typing",
+          "datetime",
+          "temporal_core",
+          "Three_PointO_ArchE.temporal_core",
+          "Three_PointO_ArchE.nfl_prediction_engine"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/nfl_prediction_engine.py",
+        "name": "nfl_prediction_engine.py",
+        "size_bytes": 28074,
+        "classes": [
+          "NFLPredictionEngine"
+        ],
+        "functions": [
+          "__init__",
+          "_load_team_database",
+          "predict_game",
+          "_get_default_stats",
+          "_apply_game_context",
+          "_convert_team_to_metrics",
+          "_perform_cfp_analysis",
+          "_determine_flux_type",
+          "_generate_detailed_prediction",
+          "_generate_key_moments",
+          "_assess_weather_impact",
+          "_assess_injury_impact",
+          "_assess_momentum",
+          "_assess_clutch_performance",
+          "_extract_key_factors",
+          "get_prediction_history",
+          "get_team_stats"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "numpy",
+          "json",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "dataclasses",
+          "asyncio",
+          "consolidated_cfp_evolution_final",
+          "consolidated_cfp_evolution_final"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/output_handler.py",
+        "name": "output_handler.py",
+        "size_bytes": 4793,
+        "classes": [],
+        "functions": [
+          "_compact",
+          "print_tagged_execution",
+          "print_tagged_results",
+          "display_task_result",
+          "display_workflow_progress",
+          "display_workflow_start",
+          "display_workflow_complete",
+          "display_workflow_error",
+          "display_output"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "datetime",
+          "temporal_core",
+          "typing",
+          "rich.console",
+          "rich.panel",
+          "rich.table",
+          "rich.progress",
+          "json"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/pattern_manager.py",
+        "name": "pattern_manager.py",
+        "size_bytes": 511,
+        "classes": [
+          "PatternManager"
+        ],
+        "functions": [
+          "__init__",
+          "add_pattern",
+          "get_patterns"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/pattern_processors.py",
+        "name": "pattern_processors.py",
+        "size_bytes": 17712,
+        "classes": [
+          "PatternProcessingResult",
+          "PatternProcessor",
+          "EnhancementPatternProcessor",
+          "MetacognitivePatternProcessor",
+          "InsightPatternProcessor",
+          "CFPPatternProcessor",
+          "CausalABMPatternProcessor",
+          "TeslaPatternProcessor",
+          "KNOPatternProcessor",
+          "PatternProcessorFactory"
+        ],
+        "functions": [
+          "__init__",
+          "validate_iar",
+          "track_resonance",
+          "create_processor"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "typing",
+          "dataclasses",
+          "asyncio",
+          "iar_components"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/pattern_reflection_system.py",
+        "name": "pattern_reflection_system.py",
+        "size_bytes": 16780,
+        "classes": [
+          "Pattern",
+          "PatternReflectionSystem"
+        ],
+        "functions": [
+          "__init__",
+          "initialize_hierarchy",
+          "extract_patterns",
+          "reflect_patterns",
+          "_reflect_single_pattern",
+          "_calculate_reflection_strength",
+          "_transform_content",
+          "_transform_to_cosmic",
+          "_transform_to_systemic",
+          "_transform_to_local",
+          "_transform_to_micro",
+          "synthesize_patterns",
+          "_merge_patterns",
+          "validate_coherence",
+          "_calculate_level_coherence",
+          "_calculate_pattern_similarity",
+          "integrate_patterns",
+          "_create_level_integration",
+          "_determine_target_component",
+          "_determine_integration_method",
+          "generate_report",
+          "_generate_overview_section",
+          "_generate_distribution_section",
+          "_generate_integration_section",
+          "_generate_coherence_section",
+          "_format_markdown_report"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "typing",
+          "dataclasses",
+          "logging",
+          "pathlib"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/perception_engine.py",
+        "name": "perception_engine.py",
+        "size_bytes": 15139,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": [],
+        "parse_error": "unexpected indent (<unknown>, line 1)"
+      },
+      {
+        "path": "Three_PointO_ArchE/phd_level_vetting_agent.py",
+        "name": "phd_level_vetting_agent.py",
+        "size_bytes": 11592,
+        "classes": [
+          "PhDLevelVettingAgent"
+        ],
+        "functions": [
+          "__init__",
+          "get_cognitive_insights"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "asyncio",
+          "typing",
+          "dataclasses",
+          "enum",
+          "datetime",
+          "temporal_core",
+          "enhanced_vetting_agent",
+          "enhanced_vetting_agent_part2",
+          "enhanced_vetting_agent_part3",
+          "enhanced_vetting_agent_main"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/plan_validator.py",
+        "name": "plan_validator.py",
+        "size_bytes": 28751,
+        "classes": [
+          "PreconditionCheck",
+          "StateTransition",
+          "ValidationError",
+          "ValidationReport",
+          "PlanValidator",
+          "QuantumProbability"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "validate_workflow",
+          "_validate_dependencies",
+          "_topological_sort",
+          "_validate_preconditions",
+          "_extract_required_inputs",
+          "_is_available",
+          "_validate_goal_achievable",
+          "_validate_temporal_coherence",
+          "_generate_error_education",
+          "validate_and_educate",
+          "get_validation_stats",
+          "extract_from_value",
+          "__init__",
+          "to_dict"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "typing",
+          "dataclasses",
+          "pathlib",
+          "datetime",
+          "autopoietic_self_analysis",
+          "thought_trail",
+          "Three_PointO_ArchE.temporal_core",
+          "re"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/playbook_orchestrator.py",
+        "name": "playbook_orchestrator.py",
+        "size_bytes": 11657,
+        "classes": [
+          "PlaybookActionRegistry",
+          "PlaybookOrchestrator"
+        ],
+        "functions": [
+          "run_playbook",
+          "__init__",
+          "_register_core_actions",
+          "register_action",
+          "get_action",
+          "display_output_action",
+          "__init__",
+          "run_playbook",
+          "_resolve_inputs_robustly",
+          "_resolve_task_order",
+          "replacer"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "json",
+          "re",
+          "typing",
+          "tools.enhanced_search_tool",
+          "tools.synthesis_tool",
+          "tools.code_executor",
+          "iar_components",
+          "pprint",
+          "collections"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/predictive_flux_coupling_engine.py",
+        "name": "predictive_flux_coupling_engine.py",
+        "size_bytes": 14417,
+        "classes": [
+          "PredictiveFluxCouplingEngine"
+        ],
+        "functions": [
+          "run_predictive_flux_analysis",
+          "__init__",
+          "calculate_pfc_metric",
+          "_calculate_lagged_correlation",
+          "_calculate_transfer_entropy",
+          "_discretize_signal",
+          "_calculate_entropy",
+          "_assess_pfc_confidence",
+          "_identify_pfc_issues"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "numpy",
+          "pandas",
+          "logging",
+          "time",
+          "hashlib",
+          "typing",
+          "datetime",
+          "temporal_core",
+          "collections",
+          "cfp_framework",
+          "predictive_modeling_tool",
+          "adaptive_cognitive_orchestrator",
+          "scipy.stats",
+          "scipy.spatial.distance",
+          "sklearn.metrics",
+          "sklearn.feature_selection"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/predictive_modeling_tool.py",
+        "name": "predictive_modeling_tool.py",
+        "size_bytes": 29175,
+        "classes": [
+          "FallbackConfig"
+        ],
+        "functions": [
+          "_create_reflection",
+          "run_prediction",
+          "_train_model",
+          "_forecast_future_states",
+          "_predict",
+          "_evaluate_model",
+          "_simulate_prediction"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "logging",
+          "pandas",
+          "numpy",
+          "time",
+          "os",
+          "uuid",
+          "typing",
+          "thought_trail",
+          "statsmodels.api",
+          "statsmodels.tsa.arima.model",
+          "sklearn.model_selection",
+          "sklearn.metrics",
+          "joblib",
+          "prophet",
+          "sklearn.linear_model"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/prefetch_manager.py",
+        "name": "prefetch_manager.py",
+        "size_bytes": 3458,
+        "classes": [],
+        "functions": [
+          "_extract_candidates_from_bundle",
+          "prefetch_from_bundles",
+          "trigger_predictive_prefetch"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/proactive_truth_system.py",
+        "name": "proactive_truth_system.py",
+        "size_bytes": 23490,
+        "classes": [
+          "ConsensusLevel",
+          "SourceCredibility",
+          "HypotheticalAnswerModel",
+          "LowestConfidenceVector",
+          "SourceAnalysis",
+          "SolidifiedTruthPacket",
+          "TrustedSourceRegistry",
+          "ProactiveTruthSystem"
+        ],
+        "functions": [
+          "register_proactive_truth_workflow",
+          "get_lowest_confidence_component",
+          "__init__",
+          "assess_source_credibility",
+          "__init__",
+          "seek_truth",
+          "_generate_hypothetical_answer_model",
+          "_identify_lowest_confidence_vector",
+          "_execute_targeted_verification",
+          "_analyze_source",
+          "_synthesize_solidified_truth_packet",
+          "_create_stp_from_ham",
+          "_extract_ham_from_text"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "typing",
+          "dataclasses",
+          "enum",
+          "re",
+          "urllib.parse",
+          "workflow_engine",
+          "llm_providers",
+          "tools.search_tool",
+          "spr_manager"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/prompt_manager.py",
+        "name": "prompt_manager.py",
+        "size_bytes": 180,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/prompts/truth_seeking_prompts.py",
+        "name": "truth_seeking_prompts.py",
+        "size_bytes": 10598,
+        "classes": [],
+        "functions": [
+          "format_truth_seeking_prompt",
+          "get_available_prompts"
+        ],
+        "has_docstring": true,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/protocol_event_schema.py",
+        "name": "protocol_event_schema.py",
+        "size_bytes": 6649,
+        "classes": [
+          "IARSchema",
+          "SPRActivationSchema",
+          "TemporalContextSchema",
+          "MetaCognitiveStateSchema",
+          "ComplexSystemVisioningSchema",
+          "ImplementationResonanceSchema",
+          "ProtocolInitSchema",
+          "ProtocolErrorSchema",
+          "EnhancedMessage",
+          "VcdEvent"
+        ],
+        "functions": [
+          "emit_vcd_event",
+          "to_json",
+          "to_json"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "dataclasses",
+          "typing",
+          "uuid",
+          "time",
+          "datetime",
+          "temporal_core",
+          "json"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/puppeteer_tool.py",
+        "name": "puppeteer_tool.py",
+        "size_bytes": 9094,
+        "classes": [],
+        "functions": [
+          "_create_reflection",
+          "run_puppeteer_search"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "json",
+          "os",
+          "typing",
+          "code_executor"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/qa_tools.py",
+        "name": "qa_tools.py",
+        "size_bytes": 7206,
+        "classes": [],
+        "functions": [
+          "run_code_linter",
+          "run_workflow_suite"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "subprocess",
+          "json",
+          "typing",
+          "utils.reflection_utils",
+          "workflow_engine",
+          "datetime"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/quantum_agent.py",
+        "name": "quantum_agent.py",
+        "size_bytes": 18524,
+        "classes": [
+          "ScalableAgent"
+        ],
+        "functions": [
+          "__init__",
+          "select_operator",
+          "perform_action",
+          "update_state",
+          "run_workflow",
+          "get_state_trajectory",
+          "calculate_network_flux",
+          "run_comparative_fluxual_processing",
+          "calculate_integrated_flux_over_trajectory",
+          "calculate_flux_potential_integral_over_trajectory",
+          "current_entropy",
+          "average_flux",
+          "simple_operator_selection_strategy",
+          "explore_action",
+          "exploit_action",
+          "consolidate_action"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing",
+          "numpy",
+          "cfp_framework",
+          "quantum_utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/quantum_perception_engine.py",
+        "name": "quantum_perception_engine.py",
+        "size_bytes": 32850,
+        "classes": [
+          "QuantumPerceptionResult",
+          "QuantumLensGrinder",
+          "OpticNervePipeline",
+          "QuantumRetina",
+          "QuantumPerceptionEngine",
+          "QuantumCircuit",
+          "QuantumRegister",
+          "ClassicalRegister"
+        ],
+        "functions": [
+          "perceive_quantum_system",
+          "to_dict",
+          "__init__",
+          "normalize_to_probs",
+          "grind_feature_vector",
+          "__init__",
+          "ingest_raw_data",
+          "extract_features",
+          "transform_to_quantum_ready",
+          "full_pipeline",
+          "__init__",
+          "create_entangled_circuit",
+          "simulate_perception",
+          "interpret_measurement",
+          "perceive",
+          "__init__",
+          "perceive_system",
+          "compare_to_classical",
+          "get_perception_statistics"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "numpy",
+          "logging",
+          "typing",
+          "dataclasses",
+          "datetime",
+          "temporal_core",
+          "pathlib",
+          "json",
+          "qiskit",
+          "qiskit_aer",
+          "qiskit.compiler"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/quantum_system_analyzer.py",
+        "name": "quantum_system_analyzer.py",
+        "size_bytes": 7985,
+        "classes": [
+          "QuantumSystemAnalyzer"
+        ],
+        "functions": [
+          "normalize_metrics_to_probs",
+          "__init__",
+          "run_nfl_game_simulation",
+          "_run_mock_simulation"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "numpy",
+          "pandas",
+          "typing",
+          "qiskit",
+          "qiskit_aer"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/quantum_utils.py",
+        "name": "quantum_utils.py",
+        "size_bytes": 25191,
+        "classes": [],
+        "functions": [
+          "superposition_state",
+          "entangled_state",
+          "_density_matrix",
+          "partial_trace",
+          "von_neumann_entropy",
+          "get_quaternion_for_state",
+          "compute_multipartite_mutual_information",
+          "calculate_shannon_entropy",
+          "entangling_hamiltonian",
+          "hamiltonian_pulsed",
+          "evolve_quantum_state",
+          "run_quantum_simulation"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "numpy",
+          "scipy.linalg",
+          "math",
+          "logging",
+          "typing",
+          "scipy.linalg",
+          "scipy.constants"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/query_complexity_analyzer.py",
+        "name": "query_complexity_analyzer.py",
+        "size_bytes": 13077,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": [],
+        "parse_error": "unterminated triple-quoted string literal (detected at line 273) (<unknown>, line 269)"
+      },
+      {
+        "path": "Three_PointO_ArchE/real_time_event_correlator.py",
+        "name": "real_time_event_correlator.py",
+        "size_bytes": 9121,
+        "classes": [
+          "BaseDetector",
+          "AnomalyDetector",
+          "SequenceDetector",
+          "RealTimeEventCorrelator"
+        ],
+        "functions": [
+          "__init__",
+          "__init__",
+          "__init__",
+          "__init__"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "time",
+          "random",
+          "collections",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/real_world_cfp_demonstration.py",
+        "name": "real_world_cfp_demonstration.py",
+        "size_bytes": 27490,
+        "classes": [
+          "PerformanceMetrics",
+          "BusinessImpact",
+          "RealWorldCFPDemonstration"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "_define_problem_context",
+          "_define_current_system",
+          "_define_target_improvements",
+          "_define_measurement_framework",
+          "generate_cfp_demonstration_query",
+          "create_measurable_demonstration_scenario",
+          "generate_execution_plan"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "logging",
+          "time",
+          "json",
+          "numpy",
+          "typing",
+          "dataclasses",
+          "datetime"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/recovery_actions.py",
+        "name": "recovery_actions.py",
+        "size_bytes": 10998,
+        "classes": [],
+        "functions": [
+          "analyze_failure",
+          "fix_template",
+          "fix_action",
+          "validate_workflow",
+          "validate_action",
+          "self_heal_output",
+          "_fix_template_path",
+          "_validate_template_variables",
+          "_validate_dependencies",
+          "_validate_action_references",
+          "_validate_return_structure",
+          "_validate_error_handling",
+          "_validate_debug_logging"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing",
+          "json",
+          "logging",
+          "datetime",
+          "temporal_core",
+          "llm_provider"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/reflection_manager.py",
+        "name": "reflection_manager.py",
+        "size_bytes": 474,
+        "classes": [
+          "ReflectionManager"
+        ],
+        "functions": [
+          "__init__",
+          "add_reflection",
+          "get_reflections"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/registry_manager.py",
+        "name": "registry_manager.py",
+        "size_bytes": 7200,
+        "classes": [
+          "InstanceType",
+          "InstanceStatus",
+          "InstanceCapability",
+          "ArchEInstance",
+          "DistributedArchERegistry"
+        ],
+        "functions": [
+          "get_registry",
+          "query_registry",
+          "register_new_instance",
+          "__init__",
+          "register_instance",
+          "find_capable_instances",
+          "get_instance",
+          "save_registry",
+          "load_registry"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "time",
+          "uuid",
+          "dataclasses",
+          "datetime",
+          "enum",
+          "typing",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/resonance_evaluator.py",
+        "name": "resonance_evaluator.py",
+        "size_bytes": 24789,
+        "classes": [
+          "ResonanceMetrics",
+          "ResonanceContext",
+          "CognitiveResonanceEvaluator"
+        ],
+        "functions": [
+          "create_resonance_evaluator",
+          "evaluate_workflow_resonance",
+          "_convert_workflow_to_resonance_context",
+          "__init__",
+          "_get_default_config",
+          "evaluate_cognitive_resonance",
+          "_assess_data_alignment",
+          "_assess_analysis_coherence",
+          "_assess_objective_clarity",
+          "_assess_outcome_probability",
+          "_assess_temporal_consistency",
+          "_calculate_assessment_confidence",
+          "_identify_dissonance_factors",
+          "_generate_enhancement_recommendations",
+          "get_resonance_trend",
+          "generate_iar_reflection"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "numpy",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "dataclasses",
+          "logging"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/resonant_orchestrator.py",
+        "name": "resonant_orchestrator.py",
+        "size_bytes": 14382,
+        "classes": [
+          "ResonantOrchestrator"
+        ],
+        "functions": [
+          "__init__",
+          "analyze_capabilities",
+          "_select_tools_for_target",
+          "_tool_matches_aspect",
+          "_can_run_in_parallel",
+          "_build_dependency_graph",
+          "_identify_parallel_groups",
+          "_build_sequential_steps",
+          "_add_monitoring_points",
+          "_extract_dependencies",
+          "_needs_adaptation",
+          "_update_history"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "typing",
+          "datetime",
+          "temporal_core",
+          "asyncio",
+          "concurrent.futures",
+          "networkx",
+          "rich.console",
+          "workflow_engine",
+          "action_registry",
+          "output_handler"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/resonantia_bridge.py",
+        "name": "resonantia_bridge.py",
+        "size_bytes": 12767,
+        "classes": [
+          "ThoughtTrailBridge",
+          "SPRManagerBridge",
+          "SystemHealthMonitorBridge"
+        ],
+        "functions": [
+          "create_thought_trail",
+          "create_spr_manager",
+          "create_health_monitor",
+          "__init__",
+          "log_thought",
+          "add_entry",
+          "log",
+          "get_recent_entries",
+          "get_statistics",
+          "thought_buffer_native",
+          "__init__",
+          "_find_spr_file",
+          "list_all_sprs",
+          "get_spr",
+          "expand_text",
+          "__init__",
+          "start_monitoring",
+          "stop_monitoring",
+          "collect_metrics",
+          "get_health_status"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "sys",
+          "logging",
+          "pathlib",
+          "typing",
+          "datetime",
+          "temporal_core",
+          "dataclasses",
+          "Three_PointO_ArchE.temporal_core",
+          "thought_trail",
+          "spr_manager",
+          "system_health_monitor"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/resonantia_maestro.py",
+        "name": "resonantia_maestro.py",
+        "size_bytes": 34729,
+        "classes": [
+          "EnhancementLevel",
+          "WeavingContext",
+          "ResonantiAMaestro"
+        ],
+        "functions": [
+          "__init__",
+          "_initialize_tool_registry",
+          "_execute_knowledge_scaffolding",
+          "_select_appropriate_tools",
+          "_execute_tool_chain",
+          "_execute_web_search",
+          "_execute_llm_generation",
+          "_execute_workflow",
+          "_execute_spr_activation",
+          "_create_enhanced_llm_prompt",
+          "_select_rise_workflow",
+          "_extract_domain_terms",
+          "_extract_search_terms",
+          "_progressive_enhancement_with_tools",
+          "_enhance_to_skeleton_with_tools",
+          "_enhance_to_flesh_with_tools",
+          "_enhance_to_resonant_with_tools",
+          "_enhance_to_strategic_with_tools",
+          "_generate_fallback_response",
+          "_perform_actual_investigation",
+          "weave_response"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "time",
+          "typing",
+          "dataclasses",
+          "datetime",
+          "enum",
+          "re",
+          "workflow_engine",
+          "llm_providers",
+          "spr_manager"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/rise_enhanced_mit_integration.py",
+        "name": "rise_enhanced_mit_integration.py",
+        "size_bytes": 19516,
+        "classes": [
+          "RISEEnhancedResult",
+          "RISE_Enhanced",
+          "QuantumProbability"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "generate_validated_plan",
+          "_simulate_rise_generation",
+          "get_learning_insights",
+          "_calculate_improvement_potential",
+          "_get_improvement_recommendation",
+          "__init__",
+          "to_dict"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "typing",
+          "dataclasses",
+          "datetime",
+          "rise_orchestrator",
+          "plan_validator",
+          "autopoietic_self_analysis",
+          "time"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/rise_orchestrator.py",
+        "name": "rise_orchestrator.py",
+        "size_bytes": 58952,
+        "classes": [
+          "RISEState",
+          "RISE_Orchestrator"
+        ],
+        "functions": [
+          "to_dict",
+          "__init__",
+          "_load_axiomatic_knowledge",
+          "_build_spr_index",
+          "_detect_and_normalize_sprs_in_text",
+          "perform_synergistic_fusion",
+          "_perform_synergistic_synthesis",
+          "_apply_axiomatic_guidance",
+          "_enhance_with_axiom",
+          "emit_sirc_event",
+          "process_query",
+          "_execute_phase_a",
+          "_execute_phase_b",
+          "_execute_phase_c",
+          "_execute_phase_d",
+          "get_execution_status",
+          "get_execution_history",
+          "get_system_diagnostics",
+          "_calculate_success_rate",
+          "_calculate_average_duration",
+          "norm",
+          "norm",
+          "decamel"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "json",
+          "time",
+          "uuid",
+          "os",
+          "sys",
+          "typing",
+          "datetime",
+          "dataclasses",
+          "workflow_engine",
+          "spr_manager",
+          "thought_trail",
+          "config",
+          "vetting_prompts",
+          "utopian_solution_synthesizer",
+          "sys",
+          "os",
+          "workflow_engine",
+          "spr_manager",
+          "thought_trail",
+          "config"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/scalable_framework.py",
+        "name": "scalable_framework.py",
+        "size_bytes": 2429,
+        "classes": [
+          "ScalableAgent",
+          "ScalableFramework"
+        ],
+        "functions": [
+          "create_scalable_agent",
+          "create_scalable_framework",
+          "__init__",
+          "start",
+          "stop",
+          "get_status",
+          "__init__",
+          "add_agent",
+          "start_all_agents",
+          "stop_all_agents"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "uuid",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/self_interrogate_tool.py",
+        "name": "self_interrogate_tool.py",
+        "size_bytes": 2224,
+        "classes": [],
+        "functions": [
+          "self_interrogate"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "json"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/semantic_archiver.py",
+        "name": "semantic_archiver.py",
+        "size_bytes": 14424,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": [],
+        "parse_error": "expected an indented block after 'try' statement on line 234 (<unknown>, line 235)"
+      },
+      {
+        "path": "Three_PointO_ArchE/session_auto_capture.py",
+        "name": "session_auto_capture.py",
+        "size_bytes": 10507,
+        "classes": [
+          "SessionAutoCapture"
+        ],
+        "functions": [
+          "__init__",
+          "capture_message",
+          "capture_iar_entry",
+          "capture_spr_priming",
+          "capture_insight",
+          "export_session",
+          "_generate_markdown",
+          "reset_session",
+          "get_session_summary"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "pathlib",
+          "typing",
+          "datetime",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/session_manager.py",
+        "name": "session_manager.py",
+        "size_bytes": 480,
+        "classes": [
+          "SessionManager"
+        ],
+        "functions": [
+          "__init__",
+          "status"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/session_state_manager.py",
+        "name": "session_state_manager.py",
+        "size_bytes": 2161,
+        "classes": [
+          "_P",
+          "paths"
+        ],
+        "functions": [
+          "_state_path",
+          "load_session_state",
+          "save_session_state",
+          "append_fact",
+          "get_config"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "os",
+          "datetime",
+          "temporal_core",
+          "pathlib",
+          "typing",
+          "config"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/sirc_autonomy.py",
+        "name": "sirc_autonomy.py",
+        "size_bytes": 2591,
+        "classes": [],
+        "functions": [
+          "_looks_complex_intent",
+          "maybe_autorun_sirc"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing",
+          "logging",
+          "sirc_intake_handler",
+          "spr_manager"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/sirc_intake_handler.py",
+        "name": "sirc_intake_handler.py",
+        "size_bytes": 24297,
+        "classes": [
+          "SircIntentPacket",
+          "SIRCIntakeHandler"
+        ],
+        "functions": [
+          "__init__",
+          "process_directive",
+          "_detect_ambiguity",
+          "_should_bypass_clarification",
+          "_minimal_clarification",
+          "_full_clarification_protocol",
+          "_generate_contextual_suggestions",
+          "_analyze_domain",
+          "_generate_technical_suggestions",
+          "_generate_analytical_suggestions",
+          "_generate_strategic_suggestions",
+          "_generate_generic_suggestions",
+          "_format_leading_question",
+          "_process_keyholder_response",
+          "_finalize_resonant_objective",
+          "_calculate_clarity_score",
+          "_enhance_objective_clarity",
+          "get_clarification_metrics"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "re",
+          "json",
+          "typing",
+          "dataclasses",
+          "Three_PointO_ArchE.spr_manager"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/specification_forger_agent.py",
+        "name": "specification_forger_agent.py",
+        "size_bytes": 17511,
+        "classes": [
+          "SpecificationIntent",
+          "SpecificationForgerAgent"
+        ],
+        "functions": [
+          "forge_specification_from_intention",
+          "__init__",
+          "_load_prompt_template",
+          "forge_specification",
+          "_construct_prompt",
+          "_format_specification",
+          "_sanitize_filename",
+          "solidify_specification"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "pathlib",
+          "typing",
+          "dataclasses",
+          "Three_PointO_ArchE.temporal_core",
+          "Three_PointO_ArchE.llm_providers",
+          "time"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/spr_action_bridge.py",
+        "name": "spr_action_bridge.py",
+        "size_bytes": 16390,
+        "classes": [
+          "SPRBridgeLoader"
+        ],
+        "functions": [
+          "invoke_spr",
+          "__init__",
+          "load_tapestry",
+          "get_spr_definition"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "importlib",
+          "importlib.util",
+          "pathlib",
+          "typing",
+          "traceback",
+          "datetime",
+          "temporal_core",
+          "Three_PointO_ArchE.temporal_core",
+          "sys",
+          "os"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/spr_manager.py",
+        "name": "spr_manager.py",
+        "size_bytes": 11130,
+        "classes": [
+          "SPRManager"
+        ],
+        "functions": [
+          "__init__",
+          "load_sprs",
+          "_compile_spr_pattern",
+          "scan_and_prime",
+          "detect_sprs_with_confidence",
+          "_calculate_spr_activation",
+          "_calculate_spr_confidence",
+          "_decompose_camelcase",
+          "_get_semantic_variations",
+          "_calculate_context_relevance",
+          "_calculate_semantic_clarity",
+          "_calculate_resonance_frequency",
+          "_get_activation_history",
+          "_get_related_sprs",
+          "_save_sprs",
+          "add_spr",
+          "get_spr_by_id",
+          "get_all_sprs",
+          "search_sprs"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "logging",
+          "re",
+          "pathlib",
+          "typing",
+          "re",
+          "random",
+          "random"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/spr_resonant_gratid_soul.py",
+        "name": "spr_resonant_gratid_soul.py",
+        "size_bytes": 15792,
+        "classes": [
+          "ResonanceState",
+          "FrequencyDomain",
+          "LuminousInterface",
+          "GoldenCubeVisualization",
+          "ResonantGratiDSouL"
+        ],
+        "functions": [
+          "main",
+          "__post_init__",
+          "generate_interface_pattern",
+          "__init__",
+          "activate_spiritual_technology",
+          "process_divine_input",
+          "project_coherent_intent",
+          "generate_spr_documentation",
+          "get_guardian_points_format"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "dataclasses",
+          "typing",
+          "json",
+          "enum"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/synthesis_manager.py",
+        "name": "synthesis_manager.py",
+        "size_bytes": 555,
+        "classes": [
+          "SynthesisManager"
+        ],
+        "functions": [
+          "__init__",
+          "synthesize"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/system_genesis_tool.py",
+        "name": "system_genesis_tool.py",
+        "size_bytes": 21464,
+        "classes": [],
+        "functions": [
+          "_create_reflection",
+          "_analyze_target_system_structure",
+          "_distill_core_principles_and_probe_kemb",
+          "_identify_extension_vectors_and_gaps",
+          "_synthesize_multi_source_knowledge",
+          "_architectural_blueprinting_sgew",
+          "_prototype_system_sgew",
+          "_solidify_genesis_learnings_sgew",
+          "_generalize_learnings_sgew",
+          "format_as_markdown",
+          "_solidify_learnings",
+          "perform_system_genesis_action",
+          "_analyze_system",
+          "_extract_patterns",
+          "_identify_integration_points",
+          "_synthesize_plan",
+          "_generate_blueprint",
+          "_validate_integration"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "json",
+          "uuid",
+          "typing",
+          "os",
+          "utils.reflection_utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/system_health_monitor.py",
+        "name": "system_health_monitor.py",
+        "size_bytes": 22304,
+        "classes": [
+          "HealthMetric",
+          "SystemAlert",
+          "HealthSnapshot",
+          "SystemHealthMonitor",
+          "QuantumProbability"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "set_components",
+          "collect_metrics",
+          "_evaluate_status",
+          "generate_alerts",
+          "_get_recommended_action",
+          "_log_alert",
+          "take_snapshot",
+          "generate_dashboard",
+          "_calculate_trends",
+          "get_health_status",
+          "should_alert_guardian",
+          "__init__",
+          "to_dict"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "time",
+          "json",
+          "typing",
+          "dataclasses",
+          "datetime",
+          "pathlib",
+          "collections",
+          "statistics",
+          "Three_PointO_ArchE.temporal_core",
+          "autopoietic_self_analysis"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/system_representation.py",
+        "name": "system_representation.py",
+        "size_bytes": 3688,
+        "classes": [
+          "Distribution",
+          "GaussianDistribution",
+          "StringParam",
+          "System"
+        ],
+        "functions": [
+          "__init__",
+          "update",
+          "kld",
+          "emd",
+          "similarity",
+          "get_params",
+          "copy",
+          "__init__",
+          "update",
+          "kld",
+          "emd",
+          "get_params",
+          "__init__",
+          "update",
+          "similarity",
+          "get_params",
+          "__init__",
+          "similarity"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "numpy",
+          "logging",
+          "json",
+          "scipy.stats",
+          "difflib",
+          "typing",
+          "copy"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/task_manager.py",
+        "name": "task_manager.py",
+        "size_bytes": 976,
+        "classes": [
+          "TaskManager"
+        ],
+        "functions": [
+          "__init__",
+          "get_ready_tasks",
+          "update_task_status"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/temporal_core.py",
+        "name": "temporal_core.py",
+        "size_bytes": 12647,
+        "classes": [
+          "Timer"
+        ],
+        "functions": [
+          "now",
+          "now_iso",
+          "from_iso",
+          "timestamp_unix",
+          "from_unix",
+          "ago",
+          "from_now",
+          "duration_between",
+          "format_human",
+          "format_filename",
+          "format_log",
+          "is_valid_iso",
+          "migrate_timestamp",
+          "__init__",
+          "elapsed_seconds",
+          "elapsed_ms",
+          "elapsed_us",
+          "reset"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "datetime",
+          "time",
+          "typing",
+          "logging"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/temporal_reasoning_engine.py",
+        "name": "temporal_reasoning_engine.py",
+        "size_bytes": 31358,
+        "classes": [
+          "TemporalScope",
+          "TemporalAnalysisType",
+          "TemporalContext",
+          "TemporalInsight",
+          "TemporalTrajectory",
+          "TemporalAnalyzer",
+          "HistoricalContextualizer",
+          "FutureStateAnalyzer",
+          "EmergenceAnalyzer",
+          "TemporalReasoningEngine"
+        ],
+        "functions": [
+          "create_temporal_reasoning_engine",
+          "analyze",
+          "analyze",
+          "_analyze_trend",
+          "_identify_patterns",
+          "analyze",
+          "_project_variable",
+          "_calculate_projection_confidence",
+          "analyze",
+          "_detect_emergence",
+          "_detect_cross_variable_emergence",
+          "_analyze_correlation_evolution",
+          "__init__",
+          "_get_default_config",
+          "perform_temporal_analysis",
+          "generate_temporal_trajectory",
+          "generate_iar_reflection"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "numpy",
+          "pandas",
+          "datetime",
+          "temporal_core",
+          "typing",
+          "dataclasses",
+          "abc",
+          "logging",
+          "enum",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/test_iar_simple.py",
+        "name": "test_iar_simple.py",
+        "size_bytes": 1026,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": [
+          "workflow_engine"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/test_thoughttrail.py",
+        "name": "test_thoughttrail.py",
+        "size_bytes": 19636,
+        "classes": [
+          "TestIAREntry",
+          "TestThoughtTrail",
+          "TestLogDecorator",
+          "TestManualEntry",
+          "TestNexusIntegration",
+          "TestACOIntegration",
+          "TestSemanticArchiver",
+          "TestIntegration"
+        ],
+        "functions": [
+          "run_tests",
+          "test_iar_entry_creation",
+          "setUp",
+          "test_add_entry",
+          "test_get_recent_entries",
+          "test_query_entries",
+          "test_get_statistics",
+          "test_trigger_detection",
+          "setUp",
+          "test_decorator_logging",
+          "test_decorator_error_handling",
+          "setUp",
+          "test_create_manual_entry",
+          "test_nexus_publishing",
+          "setUp",
+          "test_pattern_analysis",
+          "test_trigger_handling",
+          "setUp",
+          "tearDown",
+          "test_compression",
+          "test_archive_query",
+          "test_archive_statistics",
+          "setUp",
+          "test_full_integration",
+          "test_function",
+          "error_function",
+          "integration_test_function"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "json",
+          "logging",
+          "tempfile",
+          "time",
+          "unittest",
+          "datetime",
+          "temporal_core",
+          "pathlib",
+          "unittest.mock",
+          "Three_PointO_ArchE.thought_trail",
+          "Three_PointO_ArchE.nexus_interface",
+          "Three_PointO_ArchE.aco_integration",
+          "Three_PointO_ArchE.semantic_archiver",
+          "Three_PointO_ArchE.temporal_core",
+          "Three_PointO_ArchE.thought_trail",
+          "Three_PointO_ArchE.thought_trail",
+          "shutil",
+          "Three_PointO_ArchE.thought_trail",
+          "Three_PointO_ArchE.thought_trail"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tests/test_new_capabilities.py",
+        "name": "test_new_capabilities.py",
+        "size_bytes": 1523,
+        "classes": [],
+        "functions": [
+          "test_session_state_file_exists",
+          "test_action_registry_auto_adjustments",
+          "test_causal_digest_works_with_minimal_events",
+          "fake_action"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "os",
+          "Three_PointO_ArchE.action_registry",
+          "Three_PointO_ArchE.action_registry",
+          "Three_PointO_ArchE.causal_digest"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tests/test_quantum_simulation.py",
+        "name": "test_quantum_simulation.py",
+        "size_bytes": 7997,
+        "classes": [
+          "TestQuantumSimulation"
+        ],
+        "functions": [
+          "simple_hamiltonian",
+          "initial_state",
+          "test_hamiltonian_pulsed",
+          "test_quantum_simulation_basic",
+          "test_quantum_simulation_entanglement",
+          "test_quantum_simulation_4d_entanglement",
+          "test_quantum_simulation_conservation",
+          "test_quantum_simulation_error_handling",
+          "test_quantum_simulation_visualization"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "unittest",
+          "numpy",
+          "scipy.linalg",
+          "pytest",
+          "Three_PointO_ArchE.quantum_utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tests/unit/test_llm_tool.py",
+        "name": "test_llm_tool.py",
+        "size_bytes": 3842,
+        "classes": [
+          "TestLLMToolIntegration"
+        ],
+        "functions": [
+          "test_live_generate_text_llm_success",
+          "test_generate_text_llm_unsupported_provider",
+          "test_generate_text_llm_missing_prompt"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "unittest",
+          "unittest.mock",
+          "os",
+          "sys",
+          "time",
+          "Three_PointO_ArchE.llm_tool",
+          "Three_PointO_ArchE.utils.reflection_utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tests/unit/test_web_search_tool.py",
+        "name": "test_web_search_tool.py",
+        "size_bytes": 3318,
+        "classes": [
+          "TestWebSearchToolIntegration"
+        ],
+        "functions": [
+          "test_live_web_search_success",
+          "test_web_search_no_results",
+          "test_web_search_missing_query"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "unittest",
+          "os",
+          "sys",
+          "Three_PointO_ArchE.web_search_tool",
+          "Three_PointO_ArchE.utils.reflection_utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/thought_trail.py",
+        "name": "thought_trail.py",
+        "size_bytes": 16293,
+        "classes": [
+          "IAREntry",
+          "ThoughtTrail"
+        ],
+        "functions": [
+          "log_to_thought_trail",
+          "create_manual_entry",
+          "__init__",
+          "add_entry",
+          "get_recent_entries",
+          "query_entries",
+          "get_statistics",
+          "inject_nexus",
+          "add_trigger_callback",
+          "_check_triggers",
+          "_matches_filter",
+          "wrapper"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "time",
+          "uuid",
+          "collections",
+          "dataclasses",
+          "functools",
+          "typing",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/token_cache_manager.py",
+        "name": "token_cache_manager.py",
+        "size_bytes": 23484,
+        "classes": [
+          "CacheEntry",
+          "TokenCacheManager"
+        ],
+        "functions": [
+          "get_global_cache",
+          "clear_global_cache",
+          "__init__",
+          "_init_cache_storage",
+          "_start_cleanup_thread",
+          "_generate_query_hash",
+          "_compress_response",
+          "_decompress_response",
+          "_calculate_similarity",
+          "get",
+          "_get_exact_match",
+          "_get_semantic_match",
+          "_get_partial_match",
+          "put",
+          "_cleanup_expired_entries",
+          "_enforce_size_limit",
+          "get_stats",
+          "clear",
+          "export_cache",
+          "import_cache",
+          "cleanup_worker"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "hashlib",
+          "json",
+          "time",
+          "os",
+          "pickle",
+          "typing",
+          "datetime",
+          "logging",
+          "dataclasses",
+          "pathlib",
+          "sqlite3",
+          "threading",
+          "concurrent.futures",
+          "gzip"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/__init__.py",
+        "name": "__init__.py",
+        "size_bytes": 58,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/agent_based_modeling_tool.py",
+        "name": "agent_based_modeling_tool.py",
+        "size_bytes": 197,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/causal_inference_tool.py",
+        "name": "causal_inference_tool.py",
+        "size_bytes": 193,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/code_executor.py",
+        "name": "code_executor.py",
+        "size_bytes": 10225,
+        "classes": [
+          "ExecutionResult",
+          "CodeExecutor",
+          "FallbackConfig"
+        ],
+        "functions": [
+          "execute_code",
+          "__init__",
+          "execute",
+          "_execute_in_docker",
+          "_execute_with_subprocess"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "subprocess",
+          "tempfile",
+          "os",
+          "stat",
+          "shutil",
+          "typing",
+          "sys",
+          "Three_PointO_ArchE.config",
+          "docker",
+          "docker.errors",
+          "requests",
+          "iar_components"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/codebase_search.py",
+        "name": "codebase_search.py",
+        "size_bytes": 890,
+        "classes": [],
+        "functions": [
+          "search_codebase"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/enhanced_search_tool.py",
+        "name": "enhanced_search_tool.py",
+        "size_bytes": 13821,
+        "classes": [
+          "EnhancedSearchTool"
+        ],
+        "functions": [
+          "perform_web_search",
+          "__init__",
+          "_validate_setup",
+          "search",
+          "_format_results",
+          "_create_error_result",
+          "_update_average_response_time",
+          "get_statistics"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "subprocess",
+          "json",
+          "os",
+          "logging",
+          "pathlib",
+          "typing",
+          "tempfile",
+          "time",
+          "sys",
+          "enhanced_perception_engine_with_fallback",
+          "sys",
+          "datetime"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/fallback_search_tool.py",
+        "name": "fallback_search_tool.py",
+        "size_bytes": 10475,
+        "classes": [
+          "FallbackSearchTool"
+        ],
+        "functions": [
+          "perform_web_search",
+          "__init__",
+          "search",
+          "_search_duckduckgo",
+          "_parse_duckduckgo_html",
+          "_find_description_near_title",
+          "_format_results",
+          "_create_error_result",
+          "_update_average_response_time",
+          "get_statistics"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "subprocess",
+          "json",
+          "re",
+          "logging",
+          "typing",
+          "time",
+          "urllib.parse",
+          "sys"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/file_system.py",
+        "name": "file_system.py",
+        "size_bytes": 1402,
+        "classes": [],
+        "functions": [
+          "read_file",
+          "create_file",
+          "list_directory"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "os",
+          "logging",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/gemini_enhanced_tools.py",
+        "name": "gemini_enhanced_tools.py",
+        "size_bytes": 5865,
+        "classes": [
+          "GeminiToolSuite"
+        ],
+        "functions": [
+          "get_gemini_tool_suite",
+          "__init__",
+          "execute_gemini_code",
+          "process_gemini_file",
+          "generate_with_grounding",
+          "generate_with_function_calling",
+          "generate_with_structured_output"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "typing",
+          "llm_providers",
+          "enhanced_capabilities",
+          "\u0925\u094d\u0930\u0940_PointO_ArchE.utils.reflection_utils"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/search_tool.py",
+        "name": "search_tool.py",
+        "size_bytes": 4695,
+        "classes": [
+          "SearchTool"
+        ],
+        "functions": [
+          "get_tool",
+          "__init__",
+          "_generate_iar_reflection",
+          "search",
+          "_duckduckgo_search",
+          "_google_search",
+          "scrape_url"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "requests",
+          "bs4",
+          "json",
+          "os",
+          "duckduckgo_search",
+          "serpapi"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/synthesis_tool.py",
+        "name": "synthesis_tool.py",
+        "size_bytes": 6610,
+        "classes": [],
+        "functions": [
+          "invoke_llm_for_synthesis",
+          "synthesize_search_results"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "os",
+          "logging",
+          "typing",
+          "llm_providers",
+          "iar_components",
+          "re"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/unified_search_tool.py",
+        "name": "unified_search_tool.py",
+        "size_bytes": 12999,
+        "classes": [
+          "UnifiedSearchTool"
+        ],
+        "functions": [
+          "get_unified_search_tool",
+          "perform_web_search",
+          "__init__",
+          "search",
+          "_determine_search_methods",
+          "_update_stats",
+          "_create_unified_error_result",
+          "get_statistics",
+          "get_method_preferences",
+          "_get_recommended_method"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "logging",
+          "typing",
+          "time",
+          "pathlib",
+          "enhanced_search_tool",
+          "fallback_search_tool",
+          "sys"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/vetting_agent.py",
+        "name": "vetting_agent.py",
+        "size_bytes": 185,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/web_navigation.py",
+        "name": "web_navigation.py",
+        "size_bytes": 1003,
+        "classes": [],
+        "functions": [
+          "navigate_web"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tools/web_search_tool.py",
+        "name": "web_search_tool.py",
+        "size_bytes": 187,
+        "classes": [],
+        "functions": [],
+        "has_docstring": true,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/tools.py",
+        "name": "tools.py",
+        "size_bytes": 70773,
+        "classes": [
+          "SearchResult",
+          "LLMResult",
+          "Tools",
+          "LLMProviderError",
+          "FallbackConfig"
+        ],
+        "functions": [
+          "get_global_spr_manager",
+          "run_search",
+          "invoke_llm",
+          "display_output",
+          "run_cfp",
+          "calculate_math",
+          "placeholder_codebase_search",
+          "_format_output_content",
+          "retrieve_spr_definitions",
+          "default_failure_reflection",
+          "_create_system_from_json",
+          "analyze_system_divergence",
+          "compare_system_factors",
+          "analyze_workflow_impact",
+          "run_code_linter",
+          "run_workflow_suite",
+          "default_failure_reflection_local",
+          "__init__",
+          "validate_result",
+          "get_execution_summary"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "json",
+          "requests",
+          "time",
+          "numpy",
+          "typing",
+          "os",
+          "sys",
+          "asyncio",
+          "dataclasses",
+          "spr_manager",
+          "llm_providers",
+          "action_context",
+          "predictive_modeling_tool",
+          "system_representation",
+          "iar_components",
+          "subprocess",
+          "shutil",
+          "uuid",
+          "traceback",
+          "workflow_engine",
+          "numexpr"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/tsp_solver.py",
+        "name": "tsp_solver.py",
+        "size_bytes": 5784,
+        "classes": [
+          "TSPSolver"
+        ],
+        "functions": [
+          "__init__",
+          "solve_tsp",
+          "nearest_neighbor_heuristic",
+          "two_opt_optimization",
+          "solve_with_ortools",
+          "_compute_distance_matrix",
+          "_calculate_route_distance",
+          "_format_ortools_solution",
+          "distance_callback"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "ortools.constraint_solver",
+          "numpy"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/utils/__init__.py",
+        "name": "__init__.py",
+        "size_bytes": 0,
+        "classes": [],
+        "functions": [],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/utils/reflection_utils.py",
+        "name": "reflection_utils.py",
+        "size_bytes": 2361,
+        "classes": [
+          "ExecutionStatus"
+        ],
+        "functions": [
+          "create_reflection"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing",
+          "time",
+          "enum"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/utils/tsplib_loader.py",
+        "name": "tsplib_loader.py",
+        "size_bytes": 357,
+        "classes": [],
+        "functions": [
+          "tsplib_to_abm_data"
+        ],
+        "has_docstring": false,
+        "imports": []
+      },
+      {
+        "path": "Three_PointO_ArchE/utils.py",
+        "name": "utils.py",
+        "size_bytes": 607,
+        "classes": [],
+        "functions": [
+          "_create_reflection"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/utopian_solution_synthesizer.py",
+        "name": "utopian_solution_synthesizer.py",
+        "size_bytes": 13151,
+        "classes": [
+          "UtopianSolutionSynthesizer"
+        ],
+        "functions": [
+          "__init__",
+          "_initialize_ethical_frameworks",
+          "_initialize_optimization_weights",
+          "synthesize_utopian_solution",
+          "_extract_strategy_elements",
+          "_identify_stakeholders",
+          "_identify_constraints",
+          "_identify_opportunities",
+          "_perform_ethical_assessment",
+          "_generate_utopian_variants",
+          "_enhance_strategy_for_variant",
+          "_optimize_solution",
+          "_create_trust_packet",
+          "_create_fallback_packet"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "numpy",
+          "pandas",
+          "typing",
+          "datetime",
+          "temporal_core",
+          "json"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/verifiable_cfp_prediction.py",
+        "name": "verifiable_cfp_prediction.py",
+        "size_bytes": 19543,
+        "classes": [
+          "VerifiableCFPPrediction"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "_create_verifiable_scenario",
+          "_create_measurement_framework",
+          "_create_validation_timeline",
+          "generate_cfp_prediction_query",
+          "create_verification_checklist"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "asyncio",
+          "logging",
+          "time",
+          "json",
+          "numpy",
+          "typing",
+          "dataclasses",
+          "datetime",
+          "temporal_core",
+          "Three_PointO_ArchE.temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/vetting_agent.py",
+        "name": "vetting_agent.py",
+        "size_bytes": 31097,
+        "classes": [
+          "VettingStatus",
+          "VettingResult",
+          "AxiomaticKnowledgeBase",
+          "SynergisticFusionProtocol",
+          "VettingAgent"
+        ],
+        "functions": [
+          "create_vetting_agent",
+          "quick_vet",
+          "__post_init__",
+          "to_dict",
+          "__init__",
+          "get_axiom",
+          "get_all_axioms",
+          "__init__",
+          "assess_scope_and_alignment",
+          "_assess_scope_limitation",
+          "_assess_ethical_alignment",
+          "_check_mandate_compliance",
+          "_assess_risks",
+          "_calculate_cognitive_resonance",
+          "_assess_temporal_resonance",
+          "_assess_implementation_resonance",
+          "_generate_reasoning",
+          "_compile_issues",
+          "__init__",
+          "perform_vetting",
+          "_check_logical_consistency",
+          "_create_rejection_result",
+          "_generate_modifications",
+          "get_vetting_history"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "json",
+          "logging",
+          "datetime",
+          "typing",
+          "enum",
+          "dataclasses",
+          "temporal_core",
+          "iar_components",
+          "action_context",
+          "action_context"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/vetting_prompts.py",
+        "name": "vetting_prompts.py",
+        "size_bytes": 18015,
+        "classes": [],
+        "functions": [
+          "format_vetting_prompt",
+          "perform_scope_limitation_assessment",
+          "get_relevant_axioms",
+          "safe_serialize"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "logging",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/web_search_tool.py",
+        "name": "web_search_tool.py",
+        "size_bytes": 9012,
+        "classes": [],
+        "functions": [
+          "search_web"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "time",
+          "sys",
+          "os",
+          "pathlib",
+          "urllib.parse",
+          "unified_search_tool",
+          "utils.reflection_utils",
+          "requests",
+          "bs4",
+          "utils.reflection_utils",
+          "requests",
+          "bs4",
+          "urllib.parse"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/workflow_chaining_engine.py",
+        "name": "workflow_chaining_engine.py",
+        "size_bytes": 12995,
+        "classes": [
+          "WorkflowChainingEngine",
+          "IARManager",
+          "IARValidator",
+          "ResonanceTracker"
+        ],
+        "functions": [
+          "__init__",
+          "_validate_workflow",
+          "_build_execution_graph",
+          "_check_dependencies",
+          "_resolve_path",
+          "_resolve_inputs",
+          "_evaluate_condition",
+          "__init__",
+          "process_iar",
+          "validate_structure",
+          "__init__",
+          "record_execution"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "typing",
+          "datetime",
+          "temporal_core",
+          "asyncio",
+          "concurrent.futures",
+          "networkx",
+          "rich.console",
+          "workflow_engine",
+          "action_registry",
+          "output_handler",
+          "re"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/workflow_engine.py",
+        "name": "workflow_engine.py",
+        "size_bytes": 89561,
+        "classes": [
+          "IARValidator",
+          "ResonanceTracker",
+          "IARCompliantWorkflowEngine",
+          "SPRManager"
+        ],
+        "functions": [
+          "_execute_standalone_workflow",
+          "__init__",
+          "validate_structure",
+          "validate_enhanced_fields",
+          "__init__",
+          "record_execution",
+          "_update_metrics",
+          "get_resonance_report",
+          "_calculate_trend",
+          "_calculate_compliance_score",
+          "__init__",
+          "register_action",
+          "register_recovery_actions",
+          "_execute_for_each_task_wrapper",
+          "_execute_for_each_task",
+          "_execute_task",
+          "_resolve_template_variables",
+          "get_resonance_dashboard",
+          "load_workflow",
+          "_extract_var_path",
+          "_parse_filters",
+          "_get_value_from_path",
+          "_resolve_value",
+          "_resolve_inputs",
+          "_evaluate_condition",
+          "_parse_condition_value",
+          "_compare_values",
+          "_sanitize_for_json",
+          "_emit_event",
+          "_emit_rich_vcd_event",
+          "run_workflow",
+          "_summarize_run",
+          "_display_task_result",
+          "_display_workflow_progress",
+          "execute_workflow",
+          "_save_workflow_result",
+          "_auto_organize_log",
+          "_ensure_iar_compliance",
+          "_validate_and_heal_output",
+          "_execute_resonant_corrective_loop",
+          "_validate_and_heal_output",
+          "execute_action",
+          "load_session_state",
+          "save_session_state",
+          "append_fact",
+          "create_context_bundle",
+          "merge_bundles"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "os",
+          "logging",
+          "copy",
+          "time",
+          "re",
+          "uuid",
+          "tempfile",
+          "datetime",
+          "typing",
+          "ast",
+          "datetime",
+          "Three_PointO_ArchE.temporal_core",
+          "action_registry",
+          "spr_manager",
+          "error_handler",
+          "action_context",
+          "workflow_recovery",
+          "recovery_actions",
+          "system_genesis_tool",
+          "qa_tools",
+          "output_handler",
+          "custom_json",
+          "workflow_optimizer",
+          "numpy",
+          "session_state_manager",
+          "context_superposition",
+          "prefetch_manager",
+          "sirc_autonomy",
+          "causal_digest",
+          "logging",
+          "log_organizer",
+          "shutil"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/workflow_optimizer.py",
+        "name": "workflow_optimizer.py",
+        "size_bytes": 8811,
+        "classes": [
+          "WorkflowOptimizer"
+        ],
+        "functions": [
+          "__init__",
+          "_build_dependency_graph",
+          "get_optimized_execution_plan",
+          "_get_task_cost",
+          "get_tsp_optimized_plan"
+        ],
+        "has_docstring": true,
+        "imports": [
+          "networkx",
+          "itertools",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/workflow_orchestrator.py",
+        "name": "workflow_orchestrator.py",
+        "size_bytes": 9121,
+        "classes": [
+          "WorkflowOrchestrator"
+        ],
+        "functions": [
+          "__new__",
+          "load_registry",
+          "flatten_workflows",
+          "get_workflow_details",
+          "get_workflow_path",
+          "list_workflows",
+          "select_workflow_for_query",
+          "search_workflows",
+          "execute_workflow"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "os",
+          "typing"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/workflow_playbooks.py",
+        "name": "workflow_playbooks.py",
+        "size_bytes": 1905,
+        "classes": [],
+        "functions": [
+          "run_strategic_intelligence_workflow",
+          "run_playbook"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "logging",
+          "typing",
+          "Three_PointO_ArchE.workflow_engine",
+          "Three_PointO_ArchE.spr_manager",
+          "Three_PointO_ArchE",
+          "Three_PointO_ArchE.playbook_orchestrator",
+          "config",
+          "logging",
+          "os"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/workflow_recovery.py",
+        "name": "workflow_recovery.py",
+        "size_bytes": 7838,
+        "classes": [
+          "WorkflowRecoveryHandler"
+        ],
+        "functions": [
+          "__init__",
+          "_load_recovery_flows",
+          "analyze_failure",
+          "append_recovery_flow"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "typing",
+          "json",
+          "logging",
+          "datetime",
+          "temporal_core"
+        ]
+      },
+      {
+        "path": "Three_PointO_ArchE/workflow_validator.py",
+        "name": "workflow_validator.py",
+        "size_bytes": 6958,
+        "classes": [
+          "ValidationResult",
+          "WorkflowValidator"
+        ],
+        "functions": [
+          "validate_workflow_file",
+          "__init__",
+          "validate_workflow",
+          "_validate_task",
+          "_check_dependency_cycles",
+          "dfs"
+        ],
+        "has_docstring": false,
+        "imports": [
+          "json",
+          "os",
+          "logging",
+          "typing",
+          "dataclasses",
+          "collections",
+          "action_registry"
+        ]
+      }
+    ],
+    "directories": {}
+  },
+  "gap_analysis": {
+    "undocumented_files": [
+      {
+        "name": "action_context.py",
+        "path": "Three_PointO_ArchE/action_context.py",
+        "priority": "CRITICAL",
+        "size": 1070,
+        "classes": [
+          "ActionContext"
+        ],
+        "functions": [
+          "__post_init__"
+        ]
+      },
+      {
+        "name": "causal_inference_tool.py",
+        "path": "Three_PointO_ArchE/causal_inference_tool.py",
+        "priority": "HIGH",
+        "size": 44627,
+        "classes": [
+          "FallbackConfig",
+          "InfeasibleTestError"
+        ],
+        "functions": [
+          "_create_reflection",
+          "_prepare_causal_data",
+          "perform_causal_inference",
+          "_estimate_effect",
+          "_run_granger_causality"
+        ]
+      },
+      {
+        "name": "cfp_framework.py",
+        "path": "Three_PointO_ArchE/cfp_framework.py",
+        "priority": "HIGH",
+        "size": 29878,
+        "classes": [
+          "CfpframeworK"
+        ],
+        "functions": [
+          "__init__",
+          "_validate_and_get_state",
+          "_validate_hamiltonian",
+          "_get_operator",
+          "_evolve_state"
+        ]
+      },
+      {
+        "name": "cognitive_integration_hub.py",
+        "path": "Three_PointO_ArchE/cognitive_integration_hub.py",
+        "priority": "HIGH",
+        "size": 23645,
+        "classes": [
+          "CognitiveIntegrationHub"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "_load_protocol_chunks",
+          "process_query",
+          "_report_to_aco"
+        ]
+      },
+      {
+        "name": "iar_components.py",
+        "path": "Three_PointO_ArchE/iar_components.py",
+        "priority": "CRITICAL",
+        "size": 10888,
+        "classes": [
+          "IARValidationResult",
+          "IAR_Prepper",
+          "IARValidator",
+          "ResonanceTracker"
+        ],
+        "functions": [
+          "__init__",
+          "_get_common_fields",
+          "finish_with_success",
+          "finish_with_error",
+          "finish_with_skip"
+        ]
+      },
+      {
+        "name": "predictive_modeling_tool.py",
+        "path": "Three_PointO_ArchE/predictive_modeling_tool.py",
+        "priority": "HIGH",
+        "size": 29175,
+        "classes": [
+          "FallbackConfig"
+        ],
+        "functions": [
+          "_create_reflection",
+          "run_prediction",
+          "_train_model",
+          "_forecast_future_states",
+          "_predict"
+        ]
+      },
+      {
+        "name": "rise_orchestrator.py",
+        "path": "Three_PointO_ArchE/rise_orchestrator.py",
+        "priority": "CRITICAL",
+        "size": 58952,
+        "classes": [
+          "RISEState",
+          "RISE_Orchestrator"
+        ],
+        "functions": [
+          "to_dict",
+          "__init__",
+          "_load_axiomatic_knowledge",
+          "_build_spr_index",
+          "_detect_and_normalize_sprs_in_text"
+        ]
+      },
+      {
+        "name": "session_auto_capture.py",
+        "path": "Three_PointO_ArchE/session_auto_capture.py",
+        "priority": "CRITICAL",
+        "size": 10507,
+        "classes": [
+          "SessionAutoCapture"
+        ],
+        "functions": [
+          "__init__",
+          "capture_message",
+          "capture_iar_entry",
+          "capture_spr_priming",
+          "capture_insight"
+        ]
+      },
+      {
+        "name": "spr_manager.py",
+        "path": "Three_PointO_ArchE/spr_manager.py",
+        "priority": "CRITICAL",
+        "size": 11130,
+        "classes": [
+          "SPRManager"
+        ],
+        "functions": [
+          "__init__",
+          "load_sprs",
+          "_compile_spr_pattern",
+          "scan_and_prime",
+          "detect_sprs_with_confidence"
+        ]
+      },
+      {
+        "name": "system_health_monitor.py",
+        "path": "Three_PointO_ArchE/system_health_monitor.py",
+        "priority": "CRITICAL",
+        "size": 22304,
+        "classes": [
+          "HealthMetric",
+          "SystemAlert",
+          "HealthSnapshot",
+          "SystemHealthMonitor",
+          "QuantumProbability"
+        ],
+        "functions": [
+          "main",
+          "__init__",
+          "set_components",
+          "collect_metrics",
+          "_evaluate_status"
+        ]
+      },
+      {
+        "name": "temporal_core.py",
+        "path": "Three_PointO_ArchE/temporal_core.py",
+        "priority": "CRITICAL",
+        "size": 12647,
+        "classes": [
+          "Timer"
+        ],
+        "functions": [
+          "now",
+          "now_iso",
+          "from_iso",
+          "timestamp_unix",
+          "from_unix"
+        ]
+      },
+      {
+        "name": "thought_trail.py",
+        "path": "Three_PointO_ArchE/thought_trail.py",
+        "priority": "CRITICAL",
+        "size": 16293,
+        "classes": [
+          "IAREntry",
+          "ThoughtTrail"
+        ],
+        "functions": [
+          "log_to_thought_trail",
+          "create_manual_entry",
+          "__init__",
+          "add_entry",
+          "get_recent_entries"
+        ]
+      },
+      {
+        "name": "causal_inference_tool.py",
+        "path": "Three_PointO_ArchE/tools/causal_inference_tool.py",
+        "priority": "HIGH",
+        "size": 193,
+        "classes": [],
+        "functions": []
+      },
+      {
+        "name": "vetting_agent.py",
+        "path": "Three_PointO_ArchE/tools/vetting_agent.py",
+        "priority": "CRITICAL",
+        "size": 185,
+        "classes": [],
+        "functions": []
+      },
+      {
+        "name": "vetting_agent.py",
+        "path": "Three_PointO_ArchE/vetting_agent.py",
+        "priority": "CRITICAL",
+        "size": 31097,
+        "classes": [
+          "VettingStatus",
+          "VettingResult",
+          "AxiomaticKnowledgeBase",
+          "SynergisticFusionProtocol",
+          "VettingAgent"
+        ],
+        "functions": [
+          "create_vetting_agent",
+          "quick_vet",
+          "__post_init__",
+          "to_dict",
+          "__init__"
+        ]
+      },
+      {
+        "name": "workflow_engine.py",
+        "path": "Three_PointO_ArchE/workflow_engine.py",
+        "priority": "CRITICAL",
+        "size": 89561,
+        "classes": [
+          "IARValidator",
+          "ResonanceTracker",
+          "IARCompliantWorkflowEngine",
+          "SPRManager"
+        ],
+        "functions": [
+          "_execute_standalone_workflow",
+          "__init__",
+          "validate_structure",
+          "validate_enhanced_fields",
+          "__init__"
+        ]
+      }
+    ],
+    "documented_files": [
+      "__init__.py",
+      "abm_dsl_engine.py",
+      "aco_integration.py",
+      "action_handlers.py",
+      "action_registry.py",
+      "action_registry_v2.py",
+      "adaptive_cognitive_orchestrator.py",
+      "adaptive_filter.py",
+      "adversary_simulator.py",
+      "agent_based_modeling_tool.py",
+      "autonomous_orchestrator.py",
+      "autopoietic_governor.py",
+      "autopoietic_learning_loop.py",
+      "autopoietic_mandate_system.py",
+      "autopoietic_self_analysis.py",
+      "__init__.py",
+      "ortools_baseline.py",
+      "canonical_types.py",
+      "__init__.py",
+      "gemini_capabilities.py",
+      "local_code_executor.py",
+      "causal_digest.py",
+      "cfp_evolution.py",
+      "cfp_evolution_part1.py",
+      "cfp_evolution_part2.py",
+      "cfp_evolution_part3.py",
+      "cfp_implementation_example.py",
+      "cfp_real_world_examples.py",
+      "cfp_usage_demonstration.py",
+      "code_executor.py",
+      "cognitive_dispatch.py",
+      "cognitive_resonant_controller.py",
+      "collective_intelligence_network.py",
+      "combat_abm.py",
+      "communication_manager.py",
+      "comparison_manager.py",
+      "config.py",
+      "consolidated_cfp_evolution.py",
+      "consolidated_cfp_evolution_complete.py",
+      "consolidated_cfp_evolution_final.py",
+      "consolidated_cfp_evolution_part2.py",
+      "context_manager.py",
+      "context_superposition.py",
+      "custom_json.py",
+      "demo_enhanced_search_integration.py",
+      "display_tool.py",
+      "enhanced_capabilities.py",
+      "enhanced_cfp_evolution_complete.py",
+      "enhanced_cfp_evolution_complete_phases.py",
+      "enhanced_cfp_evolution_engine.py",
+      "enhanced_cfp_evolution_extended.py",
+      "enhanced_cfp_evolution_test.py",
+      "enhanced_cfp_evolution_with_kg.py",
+      "enhanced_llm_provider.py",
+      "enhanced_perception_engine.py",
+      "enhanced_tools.py",
+      "enhanced_vetting_agent.py",
+      "enhanced_vetting_agent_main.py",
+      "enhanced_vetting_agent_part2.py",
+      "enhanced_vetting_agent_part3.py",
+      "enhanced_visual_cognitive_debugger_part1.py",
+      "enhanced_visual_cognitive_debugger_part2.py",
+      "enhanced_web_search_tool.py",
+      "enhanced_workflow_orchestrator.py",
+      "error_handler.py",
+      "executable_spec_parser.py",
+      "execution_manager.py",
+      "fanduel_api_integration.py",
+      "fuzzy_intent_mapper.py",
+      "genesis_agent.py",
+      "google_maps_decoder.py",
+      "guardian_cli.py",
+      "iar_compliance_validator.py",
+      "ias_manager.py",
+      "insight_solidification_engine.py",
+      "keyholder_client.py",
+      "keyholder_dashboard.py",
+      "knowledge_crystallization_system.py",
+      "__init__.py",
+      "knowledge_graph_manager.py",
+      "__init__.py",
+      "base.py",
+      "google.py",
+      "llm_tool.py",
+      "logging_config.py",
+      "logscribe_core.py",
+      "main.py",
+      "mastermind.py",
+      "mastermind_server.py",
+      "adaptive_cognitive_orchestrator.py",
+      "metacognitive_shift_processor.py",
+      "natural_language_planner.py",
+      "nexus_interface.py",
+      "nexus_server.py",
+      "nfl_prediction_action.py",
+      "nfl_prediction_engine.py",
+      "output_handler.py",
+      "pattern_manager.py",
+      "pattern_processors.py",
+      "pattern_reflection_system.py",
+      "perception_engine.py",
+      "phd_level_vetting_agent.py",
+      "plan_validator.py",
+      "playbook_orchestrator.py",
+      "predictive_flux_coupling_engine.py",
+      "prefetch_manager.py",
+      "proactive_truth_system.py",
+      "prompt_manager.py",
+      "truth_seeking_prompts.py",
+      "protocol_event_schema.py",
+      "puppeteer_tool.py",
+      "qa_tools.py",
+      "quantum_agent.py",
+      "quantum_perception_engine.py",
+      "quantum_system_analyzer.py",
+      "quantum_utils.py",
+      "query_complexity_analyzer.py",
+      "real_time_event_correlator.py",
+      "real_world_cfp_demonstration.py",
+      "recovery_actions.py",
+      "reflection_manager.py",
+      "registry_manager.py",
+      "resonance_evaluator.py",
+      "resonant_orchestrator.py",
+      "resonantia_bridge.py",
+      "resonantia_maestro.py",
+      "rise_enhanced_mit_integration.py",
+      "scalable_framework.py",
+      "self_interrogate_tool.py",
+      "semantic_archiver.py",
+      "session_manager.py",
+      "session_state_manager.py",
+      "sirc_autonomy.py",
+      "sirc_intake_handler.py",
+      "specification_forger_agent.py",
+      "spr_action_bridge.py",
+      "spr_resonant_gratid_soul.py",
+      "synthesis_manager.py",
+      "system_genesis_tool.py",
+      "system_representation.py",
+      "task_manager.py",
+      "temporal_reasoning_engine.py",
+      "test_iar_simple.py",
+      "test_thoughttrail.py",
+      "test_new_capabilities.py",
+      "test_quantum_simulation.py",
+      "test_llm_tool.py",
+      "test_web_search_tool.py",
+      "token_cache_manager.py",
+      "__init__.py",
+      "agent_based_modeling_tool.py",
+      "code_executor.py",
+      "codebase_search.py",
+      "enhanced_search_tool.py",
+      "fallback_search_tool.py",
+      "file_system.py",
+      "gemini_enhanced_tools.py",
+      "search_tool.py",
+      "synthesis_tool.py",
+      "unified_search_tool.py",
+      "web_navigation.py",
+      "web_search_tool.py",
+      "tools.py",
+      "tsp_solver.py",
+      "__init__.py",
+      "reflection_utils.py",
+      "tsplib_loader.py",
+      "utils.py",
+      "utopian_solution_synthesizer.py",
+      "verifiable_cfp_prediction.py",
+      "vetting_prompts.py",
+      "web_search_tool.py",
+      "workflow_chaining_engine.py",
+      "workflow_optimizer.py",
+      "workflow_orchestrator.py",
+      "workflow_playbooks.py",
+      "workflow_recovery.py",
+      "workflow_validator.py"
+    ],
+    "total_files": 194,
+    "undocumented_count": 16,
+    "documented_count": 178,
+    "coverage_percentage": 91.8
+  },
+  "timestamp": "20251015_085318"
+}

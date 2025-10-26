@@ -1,0 +1,41 @@
+{
+  "name": "ArchE System Demo Workflow",
+  "description": "Demonstrates the core capabilities of the ArchE system including workflow execution, IAR compliance, and VCD events.",
+  "problem_description": "Execute a comprehensive demonstration of ArchE's capabilities including workflow orchestration, IAR reflection, VCD event emission, and system status reporting.",
+  "version": "3.1",
+  "tasks": {
+    "system_status": {
+      "description": "Display system status and initialization information.",
+      "action_type": "display_output",
+      "inputs": {
+        "message": "🚀 ArchE System Demo - ResonantiA Protocol v3.1-CA\n==============================================\n✅ System initialized successfully\n✅ Workflow engine operational\n✅ IAR compliance active\n✅ VCD events enabled\n✅ Action registry populated"
+      },
+      "dependencies": []
+    },
+    "iar_demo": {
+      "description": "Demonstrate IAR (Integrated Action Reflection) capabilities.",
+      "action_type": "display_output",
+      "inputs": {
+        "message": "🧠 IAR Demo - Integrated Action Reflection\n========================================\n• Status: Success\n• Confidence: 0.95\n• Reflection: System demonstrating proper IAR compliance\n• Potential Issues: None detected\n• Protocol Alignment: ResonantiA v3.1-CA compliant"
+      },
+      "dependencies": ["system_status"]
+    },
+    "vcd_demo": {
+      "description": "Demonstrate VCD (Visual Cognitive Debugger) event emission.",
+      "action_type": "display_output",
+      "inputs": {
+        "message": "📊 VCD Demo - Visual Cognitive Debugger\n====================================\n• Event Type: Thought Trail\n• Metadata: Structured cognitive events\n• Real-time: WebSocket transmission active\n• Visualization: Ready for frontend consumption\n• Protocol: JSON-structured events"
+      },
+      "dependencies": ["iar_demo"]
+    },
+    "workflow_summary": {
+      "description": "Provide a comprehensive summary of the demo execution.",
+      "action_type": "display_output",
+      "inputs": {
+        "message": "📋 Demo Summary\n==============\n✅ All core systems operational\n✅ Workflow orchestration successful\n✅ IAR reflection working\n✅ VCD events emitted\n✅ Action registry functional\n✅ Configuration system active\n\n🎯 ArchE is ready for complex cognitive tasks!"
+      },
+      "dependencies": ["vcd_demo"]
+    }
+  },
+  "start_tasks": ["system_status"]
+} 

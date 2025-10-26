@@ -1,0 +1,54 @@
+2025-08-01 01:09:10 - root:162 - INFO - logging_config - ================================================================================
+2025-08-01 01:09:10 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-01 01:09:10 - root:164 - INFO - logging_config - ================================================================================
+2025-08-01 01:09:10 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-01 01:09:10
+2025-08-01 01:09:10 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-01 01:09:10 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-01_01-09-10.log
+2025-08-01 01:09:10 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-01_01-09-10.log
+2025-08-01 01:09:10 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-01_01-09-10.log
+2025-08-01 01:09:10 - root:170 - INFO - logging_config - ================================================================================
+2025-08-01 01:09:10 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-01 01:09:10 - ArchE_Mastermind_Server:48 - INFO - mastermind_server - 🧠 Initializing ArchE Mastermind Server...
+2025-08-01 01:09:10 - Three_PointO_ArchE.workflow_engine:330 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.workflow_engine:350 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-01 01:09:10 - Three_PointO_ArchE.llm_providers:245 - INFO - llm_providers - Google Generative AI client configured successfully with advanced capabilities.
+2025-08-01 01:09:10 - Three_PointO_ArchE.llm_providers:98 - INFO - llm_providers - GoogleProvider initialized successfully.
+2025-08-01 01:09:10 - Three_PointO_ArchE.spr_manager:76 - INFO - spr_manager - Successfully loaded 65 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-08-01 01:09:10 - ArchE_Mastermind_Server:77 - INFO - mastermind_server - ✅ Proactive Truth Resonance Framework is ONLINE.
+2025-08-01 01:09:10 - CRCS:307 - INFO - cognitive_resonant_controller - Initialized 4 domain controllers
+2025-08-01 01:09:10 - CRCS:262 - INFO - cognitive_resonant_controller - Cognitive Resonant Controller System initialized
+2025-08-01 01:09:10 - ACO:45 - INFO - adaptive_cognitive_orchestrator - [PatternEngine] Initialized with learning capabilities
+2025-08-01 01:09:10 - ACO:284 - INFO - adaptive_cognitive_orchestrator - [EmergentDomainDetector] Initialized with autonomous evolution capabilities
+2025-08-01 01:09:10 - ACO:1078 - INFO - adaptive_cognitive_orchestrator - [ACO] Adaptive Cognitive Orchestrator initialized with autonomous evolution
+2025-08-01 01:09:10 - ACO:1079 - INFO - adaptive_cognitive_orchestrator - [ACO] Base CRCS has 4 domain controllers
+2025-08-01 01:09:10 - ACO:1080 - INFO - adaptive_cognitive_orchestrator - [ACO] Meta-learning active: True
+2025-08-01 01:09:10 - ACO:1081 - INFO - adaptive_cognitive_orchestrator - [ACO] Emergent Domain Detector active: threshold=0.8
+2025-08-01 01:09:10 - ArchE_Mastermind_Server:93 - INFO - mastermind_server - ✅ Adaptive Cognitive Orchestrator is ONLINE.
+2025-08-01 01:09:10 - Three_PointO_ArchE.spr_manager:76 - INFO - spr_manager - Successfully loaded 65 SPR definitions from /media/newbu/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+2025-08-01 01:09:10 - Three_PointO_ArchE.rise_orchestrator:164 - INFO - rise_orchestrator - SPRManager initialized with default path: /media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/../knowledge_graph/spr_definitions_tv.json
+2025-08-01 01:09:10 - Three_PointO_ArchE.workflow_engine:330 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'perform_system_genesis_action' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'analyze_failure' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'fix_template' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'fix_action' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'validate_workflow' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'validate_action' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'for_each' is being overwritten in the registry.
+2025-08-01 01:09:10 - Three_PointO_ArchE.workflow_engine:350 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-01 01:09:10 - Three_PointO_ArchE.utopian_solution_synthesizer:121 - INFO - utopian_solution_synthesizer - Utopian Solution Synthesizer initialized
+2025-08-01 01:09:10 - Three_PointO_ArchE.rise_orchestrator:197 - INFO - rise_orchestrator - 🚀 RISE_Orchestrator initialized successfully
+2025-08-01 01:09:10 - Three_PointO_ArchE.rise_orchestrator:198 - INFO - rise_orchestrator - 📁 Workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-01 01:09:10 - Three_PointO_ArchE.rise_orchestrator:199 - INFO - rise_orchestrator - 🔧 Workflow engine: IARCompliantWorkflowEngine
+2025-08-01 01:09:10 - Three_PointO_ArchE.rise_orchestrator:200 - INFO - rise_orchestrator - 🧠 SPR Manager: SPRManager
+2025-08-01 01:09:10 - Three_PointO_ArchE.rise_orchestrator:201 - INFO - rise_orchestrator - 📝 Thought Trail: ThoughtTrail
+2025-08-01 01:09:10 - ArchE_Mastermind_Server:105 - INFO - mastermind_server - ✅ RISE v2.0 Genesis Protocol is ONLINE.
+2025-08-01 01:09:10 - ArchE_Mastermind_Server:54 - INFO - mastermind_server - ✅ ArchE Mastermind Server Initialized Successfully.
+2025-08-01 01:09:10 - ArchE_Mastermind_Server:189 - INFO - mastermind_server - 🚀 Attempting to start ArchE Mastermind Server on 0.0.0.0:3010
+2025-08-01 01:09:10 - websockets.server:707 - INFO - server - server listening on 0.0.0.0:3010
+2025-08-01 01:09:10 - ArchE_Mastermind_Server:193 - INFO - mastermind_server - ✅ ArchE Mastermind Server is running on ws://0.0.0.0:3010

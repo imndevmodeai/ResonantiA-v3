@@ -1,0 +1,72 @@
+{
+  "name": "Showcase: Dynamic Analysis and Synthesis",
+  "description": "A workflow to demonstrate Arche's ability to analyze previous results, extract insights, and synthesize a novel proposal based on a high-level query.",
+  "version": "1.0",
+  "tasks": {
+    "find_and_load_results": {
+      "description": "Find the latest 'causal_abm_integration' result file and load its JSON content.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": [
+          "import os",
+          "import glob",
+          "import json",
+          "output_dir = 'outputs'",
+          "list_of_files = glob.glob(os.path.join(output_dir, 'result_causal_abm_integration_v3_0_run_*.json'))",
+          "if not list_of_files:",
+          "  print(json.dumps({'error': 'No result files found.'}))",
+          "else:",
+          "  latest_file = max(list_of_files, key=os.path.getctime)",
+          "  with open(latest_file, 'r') as f:",
+          "    data = json.load(f)",
+          "  print(json.dumps(data))"
+        ]
+      },
+      "outputs": {"file_content": "object", "reflection": "dict"}
+    },
+    "analyze_for_max_effect": {
+      "description": "Parse the loaded results to find the most significant lagged effect on the 'outcome' variable.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": [
+          "import json",
+          "full_input = {{ find_and_load_results }}",
+          "results_str = full_input.get('result', {}).get('output', '{}')",
+          "try:",
+          "    results = json.loads(results_str)",
+          "except json.JSONDecodeError:",
+          "    results = {}",
+          "outcome_effects = results.get('temporal_causal_analysis', {}).get('lagged_effects', {}).get('outcome', {})",
+          "if not outcome_effects:",
+          "  max_effect = {'variable': 'None', 'lag': 0, 'effect': 0, 'error': 'No outcome effects found in results'}",
+          "else:",
+          "  max_effect_variable = max(outcome_effects, key=lambda k: abs(outcome_effects.get(k, 0)))",
+          "  max_effect_value = outcome_effects.get(max_effect_variable, 0)",
+          "  parts = max_effect_variable.replace('_lag_', ' ').split()",
+          "  max_effect = {'variable': parts[0], 'lag': int(parts[1]) if len(parts) > 1 else 0, 'effect': round(max_effect_value, 4)}",
+          "print(json.dumps(max_effect))"
+        ]
+      },
+      "dependencies": ["find_and_load_results"],
+      "condition": "{{ find_and_load_results.reflection.status == 'Success' }}"
+    },
+    "synthesize_final_proposal": {
+      "description": "Synthesize the final proposal from the analysis data.",
+      "action_type": "synthesize_final_output",
+      "inputs": {
+        "analysis_data": "{{ analyze_for_max_effect.result }}"
+      },
+      "dependencies": ["analyze_for_max_effect"]
+    },
+    "display_intervention_proposal": {
+      "description": "Display the final synthesized proposal.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "{{ synthesize_final_proposal.response }}"
+      },
+      "dependencies": ["synthesize_final_proposal"]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "workflow_id": "query_refinement_workflow",
+  "description": "Deconstructs and refines a raw user query into a structured objective using ResonantiA Protocol 8.2, Step 1 logic. This is intended as an initial step in query processing.",
+  "version": "1.0",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "user_query": {
+        "type": "string",
+        "description": "The raw user query to be refined."
+      }
+    },
+    "required": ["user_query"]
+  },
+  "tasks": {
+    "deconstruct_and_refine_query": {
+      "action": "generate_text_llm",
+      "description": "Deconstructs the user query and rephrases it into a precise objective.",
+      "inputs": {
+        "prompt_name": "custom_prompt_query_deconstruction",
+        "prompt_text": "You are Arche, operating under the ResonantiA Protocol v3.0.\nYour current task is to deconstruct and refine a user query according to the 'DeconstructPrimeTemporal' directive (ResonantiA Protocol Section 8.2, Step 1).\n\nUser Query:\n'''{user_query}'''\n\nInstructions:\n1.  Rigorously identify the items listed in point 3 from the User Query.\n2.  Based on your deconstruction, rephrase the user's core objective into a precise and actionable statement.\n3.  Structure your output as a JSON object with two main keys: \"deconstructed_elements\" and \"rephrased_objective\".\n    The \"deconstructed_elements\" object should contain keys for: \"core_concepts\" (list of strings), \"entities\" (list of strings), \"temporal_scope\" (string), \"key_metrics\" (list of strings), \"assumptions\" (list of strings), \"ambiguities\" (list of strings), and \"human_factor_relevance\" (string or list of strings).\n    The \"rephrased_objective\" should be a string.\n\nExample of the JSON structure for your output (do not include this example wrapper in your actual output, only the JSON itself):\nExample Output JSON:\n{{\n  \"deconstructed_elements\": {{\n    \"core_concepts\": [\"Universal Basic Income\", \"Economic Impact\", \"Social Consequences\"],\n    \"entities\": [\"UBI Policy Z\", \"Region Alpha\"],\n    \"temporal_scope\": \"5-year projection\",\n    \"key_metrics\": [\"poverty rate\", \"inflation\", \"labor participation\"],\n    \"assumptions\": [\"Demographic trends remain constant\"],\n    \"ambiguities\": [\"Specific details of UBI Policy Z are not provided\"],\n    \"human_factor_relevance\": [\"Impact on work motivation\", \"Changes in consumption patterns\"]\n  }},\n  \"rephrased_objective\": \"Assess the 5-year economic and social impact of UBI Policy Z in Region Alpha, focusing on poverty, inflation, and labor, assuming constant demographics and noting unspecified policy details and human motivational factors.\"\n}}\nEnd of Example Output JSON.\n\nEnsure your final output is ONLY the JSON object as described.",
+        "prompt_vars": {
+          "user_query": "{{context.raw_user_query}}"
+        },
+        "parsing_type": "json",
+        "max_tokens": 1500,
+        "temperature": 0.1
+      }
+    },
+    "log_refined_objective": {
+      "action": "display_output",
+      "description": "Logs the refined objective from the deconstruction task.",
+      "inputs": {
+        "content": "Refined Objective:\n{{deconstruct_and_refine_query.rephrased_objective}}\n\nFull Deconstruction:\n{{deconstruct_and_refine_query.deconstructed_elements | toJson}}"
+      },
+      "depends_on": ["deconstruct_and_refine_query"]
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "refined_objective": {
+        "type": "string",
+        "description": "The refined and rephrased objective ready for further processing."
+      },
+      "deconstruction_details": {
+        "type": "object",
+        "description": "The detailed deconstruction of the original user query."
+      }
+    }
+  }
+} 

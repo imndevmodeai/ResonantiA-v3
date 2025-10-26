@@ -1,0 +1,32 @@
+{
+  "name": "File Analysis and Summary",
+  "description": "A workflow to read a file, analyze its content, and write a summary to a new file.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "step_id": "read_source_file",
+      "action": "read_file",
+      "parameters": {
+        "target_file": "{{workflow.input.filepath}}"
+      },
+      "on_success": "analyze_content"
+    },
+    {
+      "step_id": "analyze_content",
+      "action": "text_analysis",
+      "parameters": {
+        "text": "{{steps.read_source_file.output}}",
+        "analysis_type": "summarization"
+      },
+      "on_success": "write_summary_file"
+    },
+    {
+      "step_id": "write_summary_file",
+      "action": "write_file",
+      "parameters": {
+        "target_file": "{{workflow.input.summary_path}}",
+        "content": "{{steps.analyze_content.output.summary}}"
+      }
+    }
+  ]
+}

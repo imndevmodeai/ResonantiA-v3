@@ -1,0 +1,87 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-08-01T11:45:53.932Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-08-01_11-45-53-931Z.log
+❌ Error Log: logs/errors_websocket_2025-08-01_11-45-53-931Z.log
+⚡ Performance Log: logs/performance_websocket_2025-08-01_11-45-53-931Z.log
+================================================================================
+2025-08-01T11:45:53.943Z [INFO] websocket: ResonantiA Protocol v3.1-CA modules loaded successfully
+2025-08-01T11:45:53.950Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3013
+2025-08-01T11:45:53.950Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-08-01T11:45:53.950Z [INFO] websocket: Connect at: ws://localhost:3013
+2025-08-01T11:46:14.686Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-01T11:46:14.833Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-01T11:46:14.971Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-01T11:47:01.384Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, ..."
+}
+2025-08-01T11:47:01.389Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"I have noticed that whe...
+2025-08-01T13:06:10.902Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-01T13:06:23.821Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T03:22:22.599Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T03:22:22.651Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T03:22:22.781Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T03:55:23.729Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"1`\",\"metadata\":{\"timestamp\":1754106923729,\"session_id\":\"ui_session\",\"sour..."
+}
+2025-08-02T03:55:23.740Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"1`","metadata":{"timest...
+2025-08-02T03:55:47.208Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"WHATS 2 PLUS 2 PLUS 9997765454764555\",\"metadata\":{\"timestamp\":17541069472..."
+}
+2025-08-02T03:55:47.217Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"WHATS 2 PLUS 2 PLUS 999...
+2025-08-02T03:58:20.480Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, ..."
+}
+2025-08-02T03:58:20.481Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"I have noticed that whe...
+2025-08-02T03:58:41.877Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T03:58:42.887Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T03:58:42.907Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T03:58:42.971Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T03:58:50.614Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"I have noticed that when I ask you complex questions involving multiple, ..."
+}
+2025-08-02T03:58:50.616Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"I have noticed that whe...
+2025-08-02T04:02:46.094Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"iment trends.\\\\\\\"\\\\n* `{develop_analytical_frameworks.output}`:  \\\\\\\"Deve..."
+}
+2025-08-02T04:02:46.095Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"iment trends.\\\"\\n* `...
+2025-08-02T11:08:55.796Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T11:45:12.191Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T11:45:12.212Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T11:45:12.353Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T12:23:54.508Z [INFO] websocket: Received user query
+{
+  "query": "{\"type\":\"query\",\"content\":\"can you finish this ```\\n->|Process Steps |<-\\n1. Receive User Input/Ques..."
+}
+2025-08-02T12:23:54.523Z [INFO] websocket: Sent query to ArchE interface: {"type":"query","content":"can you finish this ```...
+2025-08-02T13:06:32.459Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T13:06:32.526Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T13:06:33.560Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T13:07:14.159Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T13:07:15.376Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T13:07:15.622Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T13:07:17.613Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T13:07:18.103Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T13:30:04.822Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T13:30:04.850Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T13:30:15.924Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T13:30:16.085Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T16:27:01.443Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T16:27:01.447Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T16:27:14.869Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T16:27:14.941Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T17:27:23.676Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T17:27:23.706Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T17:28:18.139Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T17:28:19.840Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-08-02T18:32:18.020Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T19:10:29.651Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-08-02T19:10:43.074Z [INFO] websocket: Client connected to ArchE Cognitive Bus

@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_9b487327af7d48c488557c7063040c8e.jsonl",
+  "size_bytes": 2910,
+  "modified": "2025-08-05T23:55:02.411492",
+  "workflow_name": "Thought traiL Workflow",
+  "run_id": "run_9b487327af7d48c488557c7063040c8e",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 1,
+  "duration_sec": 0.0842,
+  "status": "unknown",
+  "line_count": 1
+}

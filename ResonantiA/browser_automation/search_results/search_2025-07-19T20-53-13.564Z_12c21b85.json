@@ -1,0 +1,96 @@
+{
+  "query": "quantum computing applications 2024",
+  "engines": [
+    "google",
+    "duckduckgo"
+  ],
+  "timestamp": "2025-07-19T20-53-13.564Z",
+  "results": {
+    "google": {
+      "error": "Google search failed: net::ERR_ABORTED at https://www.google.com/search?q=quantum%20computing%20applications%202024",
+      "results": []
+    },
+    "duckduckgo": {
+      "engine": "duckduckgo",
+      "query": "quantum computing applications 2024",
+      "results": [
+        {
+          "title": "Quantum Computing: Breakthroughs, Challenges & What's Ahead",
+          "link": "https://microtime.com/quantum-computing-in-2024-breakthroughs-challenges-and-what-lies-ahead/",
+          "description": "Quantum computing (QC), once a theoretical concept confined to academic research, has rapidly evolved into one of the most exciting and promising fields in technology. As we move through 2024, QC is inching closer to practical applications that could revolutionize industries from cryptography to drug discovery. However, alongside these breakthroughs come significant challenges that must be ..."
+        },
+        {
+          "title": "10 quantum computing milestones - Network World",
+          "link": "https://www.networkworld.com/article/3618098/10-quantum-computing-milestones-of-2024.html",
+          "description": "The quantum computing industry hasn't settled on a hardware standard and we're still years away from commercial use. But major vendors have made significant progress in improving capabilities ..."
+        },
+        {
+          "title": "2024 Quantum Computing Report: The Current & Future State - QuEra",
+          "link": "https://www.quera.com/blog-posts/current-and-future-state-of-quantum-computing",
+          "description": "‍ July 2024 Introduction The quantum computing industry is evolving rapidly, drawing interest from various sectors, including academia, industry, government, and enthusiasts. This report provides a comprehensive analysis based on the recent survey conducted by QuEra Computing in June 2024."
+        },
+        {
+          "title": "The State of Quantum Computing in 2024: Innovations, Challenges, and ...",
+          "link": "https://methodologists.net/Exploring-the-Transformative-Advancements-in-Quantum-Computing-and-Their-Global-Impact-in-2024",
+          "description": "Discover the latest breakthroughs in quantum computing as of late 2024, from advancements in hardware and algorithms to impacts on cybersecurity, AI integration, and future industry trends."
+        },
+        {
+          "title": "Quantum Computing: Key Players and Innovations in 2024",
+          "link": "https://industrywired.com/quantum-computing-key-players-and-innovations-in-2024/",
+          "description": "Conclusion: The year 2024 is a pivotal moment in the development of quantum computing, with major industry advancements in technology and applications. As IBM, Google, Microsoft, and Rigetti Computing push the boundaries, the potential of quantum computing to solve previously insurmountable problems becomes increasingly tangible."
+        },
+        {
+          "title": "The Top Six Quantum Computing Trends for 2024 - AI TechPark",
+          "link": "https://ai-techpark.com/the-top-six-quantum-computing-trends-for-2024/",
+          "description": "In 2024, organizations will gradually adapt to cloud-based quantum computing platforms, enabling them to experiment with new quantum algorithms and applications without the need to invest in hardware."
+        },
+        {
+          "title": "Quantum Computing: The Breakthrough of 2024",
+          "link": "https://cherokee.ces.ncsu.edu/2025/01/quantum-computing-the-breakthrough-of-2024/",
+          "description": "2024 was a year that yielded a great deal of advancement and insight. As we look to the future, quantum computing is likely to be the most significant innovation of them all."
+        },
+        {
+          "title": "Quantum Computing 2024: Breakthrough Advances and Real-World Applications",
+          "link": "https://techcyclohub.com/quantum-computing-2024/",
+          "description": "Quantum Computing 2024: Breakthrough Advances and Real-World Applications Quantum computing, once an idea limited to theoretical physics, has now become one of the most exciting advancements in modern technology. As we navigate 2024, quantum computing breakthroughs are driving innovation, solving complex problems, and shaping the future of industries worldwide."
+        },
+        {
+          "title": "9 Promising Quantum Computing Applications in 2024",
+          "link": "https://vegavid.com/blog/quantum-computing-applications/",
+          "description": "While still in its nascent stages, 9 promising quantum computing applications holds immense potential to revolutionize various fields."
+        },
+        {
+          "title": "The Future of Quantum Computing: Trends and Predictions for 2024",
+          "link": "https://quantumzeitgeist.com/the-future-of-quantum-computing-trends-and-predictions-for-2024/",
+          "description": "Quantum computing has witnessed significant investment and funding trends, with governments and private organizations pouring billions into research and development. The global quantum computing market is expected to reach $65 billion by 2030, growing at a compound annual growth rate of 56% from 2024 to 2030."
+        }
+      ],
+      "count": 10,
+      "status": "success",
+      "timestamp": "2025-07-19T20:53:13.564Z"
+    }
+  },
+  "metadata": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "options": {
+      "headless": false,
+      "debug": true,
+      "timeout": 30000,
+      "maxResults": 10,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "chromePath": "/usr/bin/google-chrome-stable",
+      "enableStealth": true,
+      "enableHumanHandoff": true,
+      "handoffTimeout": 300000,
+      "resultsDir": "/media/newbu/3626C55326C514B1/Happier/ResonantiA/browser_automation/search_results"
+    }
+  }
+}

@@ -4,7 +4,8 @@ Tests for the workflow chaining functionality
 import unittest
 import asyncio
 from typing import Dict, Any
-from Three_PointO_ArchE.workflow_chaining_engine import WorkflowChainingEngine
+from unittest.mock import MagicMock
+from Three_PointO_ArchE.workflow_chaining_engine import WorkflowChainingEngine, IARManager
 from Three_PointO_ArchE.iar_components import IARValidator, ResonanceTracker
 
 class TestWorkflowChaining(unittest.TestCase):
@@ -97,10 +98,10 @@ class TestWorkflowChaining(unittest.TestCase):
         }
         
         condition = "{{task1.result.confidence}} > 0.8"
-        self.assertTrue(self.engine._evaluate_condition(condition, results))
+        self.assertTrue(self.engine._evaluate_condition(condition, {}, results))
         
         condition = "{{task1.result.confidence}} < 0.8"
-        self.assertFalse(self.engine._evaluate_condition(condition, results))
+        self.assertFalse(self.engine._evaluate_condition(condition, {}, results))
     
     def test_iar_validation(self):
         """Test IAR validation."""

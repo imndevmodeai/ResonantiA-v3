@@ -1,0 +1,96 @@
+{
+  "query": "quantum computing",
+  "engines": [
+    "google",
+    "duckduckgo"
+  ],
+  "timestamp": "2025-07-19T20-52-54.257Z",
+  "results": {
+    "google": {
+      "error": "Google search failed: net::ERR_ABORTED at https://www.google.com/search?q=quantum%20computing",
+      "results": []
+    },
+    "duckduckgo": {
+      "engine": "duckduckgo",
+      "query": "quantum computing",
+      "results": [
+        {
+          "title": "Quantum computing - Wikipedia",
+          "link": "https://en.wikipedia.org/wiki/Quantum_computing",
+          "description": "Learn about quantum computing, a computer that exploits quantum mechanical phenomena to perform calculations faster than classical computers. Explore the basic concepts, history, algorithms, and challenges of this emerging field."
+        },
+        {
+          "title": "What is quantum computing? - IBM",
+          "link": "https://www.ibm.com/think/topics/quantum-computing",
+          "description": "Quantum computing is a rapidly-emerging technology that harnesses the laws of quantum mechanics to solve problems too complex for classical computers."
+        },
+        {
+          "title": "Quantum Computing Explained | NIST",
+          "link": "https://www.nist.gov/quantum-information-science/quantum-computing-explained",
+          "description": "Learn how quantum computers work by harnessing quantum physics and exploiting the strange phenomena of superposition and entanglement. Discover how quantum computers could revolutionize fields such as encryption, drug discovery and cybersecurity."
+        },
+        {
+          "title": "Explainer: What is a quantum computer? - MIT Technology Review",
+          "link": "https://www.technologyreview.com/2019/01/29/66141/what-is-quantum-computing/",
+          "description": "Learn how quantum computers use qubits, superposition, entanglement, and algorithms to perform calculations beyond the reach of classical machines. Find out where quantum computers are likely to be most useful first and what challenges they face."
+        },
+        {
+          "title": "What Is Quantum Computing? - Azure Quantum | Microsoft Learn",
+          "link": "https://learn.microsoft.com/en-us/azure/quantum/overview-understanding-quantum-computing",
+          "description": "Quantum computing holds the promise of solving some of our planet's biggest challenges - in the areas of environment, agriculture, health, energy, climate, materials science, and more. For some of these problems, classical computing is increasingly challenged as the size of the system grows. When designed to scale, quantum systems will likely have capabilities that exceed those of today's most ..."
+        },
+        {
+          "title": "What is quantum computing? Here's everything you need to know - Fast ...",
+          "link": "https://www.fastcompany.com/91335798/what-is-quantum-computing-wtf-google-microsoft-amazon-nvidia-ibm-phasecraft-aurora-xanadu-majorana",
+          "description": "Quantum computing explained: Inside the transformative technology, and how Google, Apple, Nvidia, and others are playing a role."
+        },
+        {
+          "title": "Introduction to quantum computing - GeeksforGeeks",
+          "link": "https://www.geeksforgeeks.org/blogs/introduction-quantum-computing/",
+          "description": "Quantum computing harnesses the laws of quantum mechanics for complex problem solving.There are many software and hardware tools like quantum hardware platforms, SDK's, simulators in market that help to execute quantum algorithms."
+        },
+        {
+          "title": "Quantum computing: A simple introduction - Explain that Stuff",
+          "link": "https://www.explainthatstuff.com/quantum-computing.html",
+          "description": "Learn how quantum computing works and why it could be more powerful than conventional computing. Explore the basics of quantum physics, qubits, superposition, entanglement, and quantum algorithms."
+        },
+        {
+          "title": "What is quantum computing? How it works and examples",
+          "link": "https://www.techtarget.com/whatis/definition/quantum-computing",
+          "description": "Quantum computing is an emerging area of computer science focused on building computers based on the principles of quantum theory to dramatically increase computation speeds. It aims to use the unique behaviors of quantum physics to solve problems that are too complex for classical computing and to provide massive performance gains in existing high-end applications. To do so, specialized ..."
+        },
+        {
+          "title": "What is a Quantum Computer? Understanding the Future of Computing",
+          "link": "https://www.sciencenewstoday.org/what-is-a-quantum-computer-understanding-the-future-of-computing",
+          "description": "Learn what quantum computing is, how it works, and why it matters. Explore the concepts of quantum mechanics, qubits, quantum gates, quantum algorithms, and their potential impact on various fields."
+        }
+      ],
+      "count": 10,
+      "status": "success",
+      "timestamp": "2025-07-19T20:52:54.257Z"
+    }
+  },
+  "metadata": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "options": {
+      "headless": false,
+      "debug": true,
+      "timeout": 30000,
+      "maxResults": 10,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "chromePath": "/usr/bin/google-chrome-stable",
+      "enableStealth": true,
+      "enableHumanHandoff": true,
+      "handoffTimeout": 300000,
+      "resultsDir": "/media/newbu/3626C55326C514B1/Happier/ResonantiA/browser_automation/search_results"
+    }
+  }
+}

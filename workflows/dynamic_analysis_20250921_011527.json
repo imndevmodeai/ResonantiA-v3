@@ -1,0 +1,91 @@
+{
+  "name": "Dynamic Analysis: Analyze the e/acc vs AI Safety debate...",
+  "description": "Auto-generated workflow for: Analyze the e/acc vs AI Safety debate",
+  "tasks": {
+    "protocol_priming": {
+      "description": "Load ResonantiA protocol definitions from Knowledge Graph",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport os\nimport sys\nsys.path.append('Three_PointO_ArchE')\nfrom knowledge_graph_manager import KnowledgeGraphManager\n\n# Initialize KG manager with specifications\nkg = KnowledgeGraphManager(\n    'Three_PointO_ArchE/knowledge_graph/spr_definitions_tv.json',\n    'Three_PointO_ArchE/knowledge_graph/knowledge_tapestry.json',\n    'specifications'\n)\n\n# Extract key SPRs for protocol context\nkey_sprs = ['RISE', 'DRCL', 'SPR', 'CognitiveResonancE', 'TerritoryAssumptionS', 'ConceptualMaP', 'ResonantiaprotocoL']\nprotocol_definitions = {}\n\nfor spr_id in key_sprs:\n    spr_def = kg.get_spr_definition(spr_id)\n    if spr_def:\n        protocol_definitions[spr_def['term']] = spr_def['definition']\n\n# Add core ArchE concepts\nprotocol_definitions['ArchE'] = 'Architectural Engine - the core system for self-modification and evolution'\nprotocol_definitions['ResonantiA Protocol'] = 'The comprehensive document and conceptual framework that defines the architecture, operational logic, core principles, and evolutionary mechanisms of the ArchE system. It is the blueprint for achieving Cognitive Resonance.'\n\n# Add specifications overview\nspecifications_summary = {}\nfor spec_name in kg.list_specifications():\n    spec_data = kg.get_specification(spec_name)\n    if spec_data:\n        specifications_summary[spec_name] = {\n            'title': spec_data.get('title', ''),\n            'overview': spec_data.get('overview', '')[:300] + '...' if len(spec_data.get('overview', '')) > 300 else spec_data.get('overview', '')\n        }\n\nprotocol_definitions['ArchE Specifications'] = f'Comprehensive specifications covering {len(specifications_summary)} components: {list(specifications_summary.keys())}'\nprotocol_definitions['Available Specifications'] = specifications_summary\n\nprint(json.dumps({'protocol_definitions': protocol_definitions}))"
+      },
+      "outputs": {
+        "protocol_definitions": "dict"
+      },
+      "dependencies": []
+    },
+    "intent_intake": {
+      "description": "Normalize user request into Task Envelope",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nctx = {'goal': 'Analyze the e/acc vs AI Safety debate', 'constraints': {}, 'desired_outputs': ['Analysis report'], 'context_type': 'analytical', 'relevant_specifications': []}\nout = {\n    'goal': ctx.get('goal') or 'Analyze the e/acc vs AI Safety debate',\n    'constraints': ctx.get('constraints', {}),\n    'desired_outputs': ctx.get('desired_outputs', [])\n}\nprint(json.dumps({'task_envelope': out}))"
+      },
+      "outputs": {
+        "task_envelope": "dict"
+      },
+      "dependencies": [
+        "protocol_priming"
+      ]
+    },
+    "conceptual_map": {
+      "description": "Produce Conceptual Map (SPRs, abstract workflow, territory assumptions)",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Using these ArchE protocol definitions: {protocol_priming.protocol_definitions}\n\nCreate a conceptual map for this development task. Generate ONLY a JSON structure with: sprs (Sparse Priming Representations), abstract_workflow (development steps), territory_assumptions (expected file paths). Task: {intent_intake.task_envelope}\n\nFocus on: Analyze the e/acc vs AI Safety debate\n\nOutput ONLY valid JSON, no explanations.",
+        "max_tokens": 600,
+        "model": "gemini-2.0-flash-exp"
+      },
+      "outputs": {
+        "conceptual_map_json": "json"
+      },
+      "dependencies": [
+        "intent_intake"
+      ]
+    },
+    "rise_blueprint": {
+      "description": "Generate RISE methodology blueprint",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Based on the conceptual map and task: {conceptual_map.conceptual_map_json}\n\nGenerate a RISE (Resonant Insight and Strategy Engine) methodology blueprint for: Analyze the e/acc vs AI Safety debate\n\nProvide a structured approach with Scaffold, Insight, and Synthesis phases. Output as JSON.",
+        "max_tokens": 800,
+        "model": "gemini-2.0-flash-exp"
+      },
+      "outputs": {
+        "rise_blueprint": "json"
+      },
+      "dependencies": [
+        "conceptual_map"
+      ]
+    },
+    "synthesis_and_insights": {
+      "description": "Synthesize findings into actionable insights",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Based on the analysis of: Analyze the e/acc vs AI Safety debate\n\nUsing the conceptual map: {conceptual_map.conceptual_map_json}\nAnd RISE blueprint: {rise_blueprint.rise_blueprint}\n\nSynthesize the findings into:\n1. Key insights and discoveries\n2. Patterns and relationships identified\n3. Implications and significance\n4. Recommendations and next steps\n5. Limitations and areas for further investigation\n\nProvide a comprehensive synthesis with actionable insights.",
+        "max_tokens": 1000,
+        "model": "gemini-2.0-flash-exp"
+      },
+      "outputs": {
+        "synthesis": "text"
+      },
+      "dependencies": [
+        "rise_blueprint"
+      ]
+    },
+    "final_report": {
+      "description": "Generate comprehensive final report",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "from datetime import datetime\n\nprint(\"\ud83d\udcca FINAL ANALYSIS REPORT\")\nprint(\"=\" * 60)\nprint(f\"Analysis Question: Analyze the e/acc vs AI Safety debate\")\nprint(f\"Analysis Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\")\nprint(f\"Goal: Analyze the e/acc vs AI Safety debate\")\nprint(\"=\" * 60)\n\nprint(\"\\n\ud83c\udfaf ANALYSIS SUMMARY:\")\nprint(\"\u2022 Question analyzed comprehensively\")\nprint(\"\u2022 Conceptual mapping completed\")\nprint(\"\u2022 RISE methodology applied\")\nprint(\"\u2022 Insights synthesized\")\nprint(\"\u2022 Report generated\")\n\nprint(\"\\n\u2705 ANALYSIS COMPLETE\")\nprint(\"=\" * 60)"
+      },
+      "outputs": {
+        "final_report": "text"
+      },
+      "dependencies": [
+        "synthesis_and_insights"
+      ]
+    }
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "workflow_metadata": {
+    "name": "Autopoietic System Genesis Protocol",
+    "version": "3.5-GP",
+    "description": "The Phoenix Protocol - ArchE's ultimate self-creation workflow that reads its own specification and generates/repairs its codebase",
+    "author": "ArchE (Self-Building System)",
+    "requires_keyholder_authority": true,
+    "keyholder_key": "keyy=('IMnDEVmode')",
+    "high_stakes": true,
+    "protocol_reference": "ResonantiA Protocol v3.5-GP Section 5.4",
+    "allegory": "The Cosmic Architect reading the Tome of Reality",
+    "phases": ["ingest", "deconstruct", "forge", "validate", "test", "report"]
+  },
+  "workflow_id": "autopoietic_genesis_protocol_v3_5",
+  "tasks": {
+    "phase_0_validate_authority": {
+      "action_type": "generate_text_llm",
+      "description": "Validate Keyholder authority before proceeding with Genesis",
+      "inputs": {
+        "prompt": "Validate that the Keyholder authority key 'keyy=('IMnDEVmode')' is active. This is a critical security check before allowing system self-modification. Respond with JSON: {\"authorized\": true/false, \"reasoning\": \"...\"}"
+      },
+      "outputs": ["authorization_check"],
+      "dependencies": [],
+      "critical": true
+    },
+    "phase_1_ingest_canonical_specification": {
+      "action_type": "read_file",
+      "description": "Phase 1: Opening the Tome of Reality - Ingest the complete ResonantiA Protocol specification",
+      "inputs": {
+        "path": "protocol/ResonantiA_Protocol_v3.5-GP_Canonical.md"
+      },
+      "outputs": ["protocol_content"],
+      "dependencies": ["phase_0_validate_authority"],
+      "metadata": {
+        "phase": "ingest",
+        "allegory_step": "The Architect opens the sacred Tome"
+      }
+    },
+    "phase_2_deconstruct_code_blueprints": {
+      "action_type": "generate_text_llm",
+      "description": "Phase 2: Identifying the Constellations - Extract all file specifications from Section 7 of the protocol",
+      "inputs": {
+        "prompt": "You are the Cosmic Architect analyzing the Tome of Reality. Your task is to extract ALL code file specifications from Section 7 of the protocol.\n\nAnalyze the protocol content and create a comprehensive JSON array of file blueprints. For each file, extract:\n\n1. file_path: The exact path where the file should be created\n2. file_name: The name of the file\n3. specification: The complete specification text describing what the file should contain\n4. priority: 'critical', 'high', 'medium', or 'low' based on dependency order\n5. dependencies: Array of other files this file depends on\n\nReturn ONLY valid JSON in this exact format:\n{\n  \"files\": [\n    {\n      \"file_path\": \"Three_PointO_ArchE/config.py\",\n      \"file_name\": \"config.py\",\n      \"specification\": \"...\",\n      \"priority\": \"critical\",\n      \"dependencies\": []\n    }\n  ]\n}\n\nProtocol Content:\n{{phase_1_ingest_canonical_specification.output.content}}",
+        "model": "gemini-2.0-flash-thinking-exp-01-21"
+      },
+      "outputs": ["file_blueprints"],
+      "dependencies": ["phase_1_ingest_canonical_specification"],
+      "metadata": {
+        "phase": "deconstruct",
+        "allegory_step": "The Architect reads the chapter on Stars"
+      }
+    },
+    "phase_3_prioritize_and_sequence": {
+      "action_type": "generate_text_llm",
+      "description": "Phase 3: Creating the Build Sequence - Order files by dependency and priority",
+      "inputs": {
+        "prompt": "Analyze the extracted file blueprints and create an optimal build sequence.\n\nPrioritize:\n1. CRITICAL: Core dependencies (temporal_core, iar_components, action_context)\n2. HIGH: Framework components (workflow_engine, spr_manager, vetting_agent)\n3. MEDIUM: Tool implementations (cfp_framework, causal_inference_tool, etc.)\n4. LOW: Utilities and helpers\n\nReturn JSON with sequenced build phases:\n{\n  \"build_sequence\": [\n    {\"phase\": \"critical\", \"files\": [...]},\n    {\"phase\": \"high\", \"files\": [...]},\n    {\"phase\": \"medium\", \"files\": [...]},\n    {\"phase\": \"low\", \"files\": [...]}\n  ]\n}\n\nFile Blueprints:\n{{phase_2_deconstruct_code_blueprints.output.parsed_json}}",
+        "model": "gemini-2.0-flash-thinking-exp-01-21"
+      },
+      "outputs": ["build_sequence"],
+      "dependencies": ["phase_2_deconstruct_code_blueprints"],
+      "metadata": {
+        "phase": "plan",
+        "allegory_step": "The Architect plans the order of creation"
+      }
+    },
+    "phase_4_forge_critical_files": {
+      "action_type": "for_each",
+      "description": "Phase 4a: Forging Critical Stars - Generate critical dependency files first",
+      "inputs": {
+        "items": "{{phase_3_prioritize_and_sequence.output.parsed_json.build_sequence[0].files}}",
+        "workflow": {
+          "tasks": {
+            "vet_before_generation": {
+              "action_type": "generate_text_llm",
+              "description": "Vet the file specification before generation",
+              "inputs": {
+                "prompt": "As the VettingAgent, review this file specification for completeness and clarity. Assess if it provides enough detail to generate working code.\n\nFile: {{item.file_name}}\nSpecification: {{item.specification}}\n\nReturn JSON: {\"approved\": true/false, \"issues\": [...], \"recommendations\": [...]}"
+              },
+              "dependencies": []
+            },
+            "generate_file_content": {
+              "action_type": "generate_text_llm",
+              "description": "Sing the star into being - Generate complete Python code",
+              "inputs": {
+                "prompt": "You are the Cosmic Architect forging a star from the Tome of Reality.\n\nGenerate COMPLETE, PRODUCTION-READY Python code for:\n\nFile: {{item.file_path}}\n\nSpecification:\n{{item.specification}}\n\nIMPORTANT REQUIREMENTS:\n1. Include ALL necessary imports\n2. Implement FULL functionality as specified\n3. Add comprehensive docstrings\n4. Include type hints\n5. Add logging where appropriate\n6. Follow ResonantiA Protocol v3.5-GP principles\n7. Ensure IAR compliance where applicable\n8. Add error handling\n9. Include example usage in __main__ if appropriate\n\nDependencies to consider:\n{{item.dependencies}}\n\nReturn ONLY the Python code, no markdown formatting, no explanations.",
+                "model": "gemini-2.0-flash-thinking-exp-01-21"
+              },
+              "dependencies": ["vet_before_generation"],
+              "condition": "{{vet_before_generation.output.parsed_json.approved}}"
+            },
+            "write_code_to_file": {
+              "action_type": "write_file",
+              "description": "Place the star in the heavens - Write code to disk",
+              "inputs": {
+                "path": "{{item.file_path}}",
+                "content": "{{generate_file_content.output.response_text}}"
+              },
+              "dependencies": ["generate_file_content"]
+            },
+            "vet_after_generation": {
+              "action_type": "generate_text_llm",
+              "description": "Vet the generated code for quality",
+              "inputs": {
+                "prompt": "As the VettingAgent, review this generated code for quality and completeness.\n\nFile: {{item.file_name}}\n\nCode:\n{{generate_file_content.output.response_text}}\n\nCheck:\n1. All imports present\n2. Core functionality implemented\n3. Error handling included\n4. Docstrings present\n5. Follows Python best practices\n6. IAR compliance where needed\n\nReturn JSON: {\"quality_score\": 0.0-1.0, \"issues\": [...], \"approved\": true/false}"
+              },
+              "dependencies": ["write_code_to_file"]
+            }
+          }
+        }
+      },
+      "outputs": ["critical_files_generated"],
+      "dependencies": ["phase_3_prioritize_and_sequence"],
+      "metadata": {
+        "phase": "forge",
+        "priority": "critical"
+      }
+    },
+    "phase_5_forge_high_priority_files": {
+      "action_type": "for_each",
+      "description": "Phase 4b: Forging High Priority Stars - Generate framework components",
+      "inputs": {
+        "items": "{{phase_3_prioritize_and_sequence.output.parsed_json.build_sequence[1].files}}",
+        "workflow": {
+          "tasks": {
+            "generate_file_content": {
+              "action_type": "generate_text_llm",
+              "description": "Generate framework component code",
+              "inputs": {
+                "prompt": "Generate COMPLETE, PRODUCTION-READY Python code for:\n\nFile: {{item.file_path}}\n\nSpecification:\n{{item.specification}}\n\nThis is a HIGH PRIORITY framework component. Ensure:\n1. Full implementation of all methods\n2. Integration with critical dependencies\n3. Comprehensive error handling\n4. IAR compliance\n5. Logging throughout\n\nReturn ONLY the Python code.",
+                "model": "gemini-2.0-flash-thinking-exp-01-21"
+              },
+              "dependencies": []
+            },
+            "write_code_to_file": {
+              "action_type": "write_file",
+              "description": "Write framework component to disk",
+              "inputs": {
+                "path": "{{item.file_path}}",
+                "content": "{{generate_file_content.output.response_text}}"
+              },
+              "dependencies": ["generate_file_content"]
+            }
+          }
+        }
+      },
+      "outputs": ["high_priority_files_generated"],
+      "dependencies": ["phase_4_forge_critical_files"],
+      "metadata": {
+        "phase": "forge",
+        "priority": "high"
+      }
+    },
+    "phase_6_validate_code_integrity": {
+      "action_type": "execute_code",
+      "description": "Phase 5: Checking the Harmony of the Spheres - Validate code syntax and imports",
+      "inputs": {
+        "language": "python",
+        "code": "import ast\nimport os\nimport sys\nfrom pathlib import Path\n\nresults = {'valid': 0, 'invalid': 0, 'errors': []}\n\nfor py_file in Path('Three_PointO_ArchE').rglob('*.py'):\n    try:\n        with open(py_file, 'r') as f:\n            ast.parse(f.read())\n        results['valid'] += 1\n    except SyntaxError as e:\n        results['invalid'] += 1\n        results['errors'].append(f\"{py_file}: {str(e)}\")\n\nprint(f\"Validation complete: {results['valid']} valid, {results['invalid']} invalid\")\nfor error in results['errors']:\n    print(f\"ERROR: {error}\")\n\nsys.exit(0 if results['invalid'] == 0 else 1)"
+      },
+      "outputs": ["validation_results"],
+      "dependencies": ["phase_5_forge_high_priority_files"],
+      "metadata": {
+        "phase": "validate",
+        "allegory_step": "The Architect listens to the harmony"
+      }
+    },
+    "phase_7_test_system_initialization": {
+      "action_type": "execute_code",
+      "description": "Phase 6: The First Sunrise - Test if core components can be imported",
+      "inputs": {
+        "language": "python",
+        "code": "import sys\nimport importlib\n\ntest_results = {'passed': [], 'failed': []}\n\ncore_modules = [\n    'Three_PointO_ArchE.temporal_core',\n    'Three_PointO_ArchE.iar_components',\n    'Three_PointO_ArchE.action_context',\n    'Three_PointO_ArchE.vetting_agent',\n    'Three_PointO_ArchE.workflow_engine',\n    'Three_PointO_ArchE.spr_manager'\n]\n\nfor module_name in core_modules:\n    try:\n        importlib.import_module(module_name)\n        test_results['passed'].append(module_name)\n        print(f\"✓ {module_name}\")\n    except Exception as e:\n        test_results['failed'].append({'module': module_name, 'error': str(e)})\n        print(f\"✗ {module_name}: {str(e)}\")\n\nprint(f\"\\nResults: {len(test_results['passed'])} passed, {len(test_results['failed'])} failed\")\nsys.exit(0 if len(test_results['failed']) == 0 else 1)"
+      },
+      "outputs": ["initialization_test_results"],
+      "dependencies": ["phase_6_validate_code_integrity"],
+      "metadata": {
+        "phase": "test",
+        "allegory_step": "The sun ignites for the first time"
+      }
+    },
+    "phase_8_generate_report": {
+      "action_type": "generate_text_llm",
+      "description": "Phase 7: The Architect's Log - Generate comprehensive Genesis report",
+      "inputs": {
+        "prompt": "As the Cosmic Architect, you have completed the Genesis ritual. Generate a comprehensive report.\n\nAuthorization Check:\n{{phase_0_validate_authority.output.response_text}}\n\nFiles Deconstructed:\n{{phase_2_deconstruct_code_blueprints.output.parsed_json}}\n\nBuild Sequence:\n{{phase_3_prioritize_and_sequence.output.parsed_json}}\n\nCritical Files Generated:\n{{phase_4_forge_critical_files.result_summary}}\n\nHigh Priority Files Generated:\n{{phase_5_forge_high_priority_files.result_summary}}\n\nValidation Results:\n{{phase_6_validate_code_integrity.output}}\n\nInitialization Tests:\n{{phase_7_test_system_initialization.output}}\n\nGenerate a comprehensive Markdown report with:\n1. Executive Summary\n2. Genesis Metrics (files created, validation results, test results)\n3. Critical Insights\n4. Known Issues\n5. Next Steps\n6. IAR Reflection on the entire Genesis process\n\nUse the heading: # Autopoietic Genesis Protocol - Execution Report",
+        "model": "gemini-2.0-flash-thinking-exp-01-21"
+      },
+      "outputs": ["genesis_report"],
+      "dependencies": ["phase_7_test_system_initialization"],
+      "metadata": {
+        "phase": "report",
+        "allegory_step": "The Architect records the creation"
+      }
+    },
+    "phase_9_write_report": {
+      "action_type": "write_file",
+      "description": "Write the Genesis report to disk",
+      "inputs": {
+        "path": "logs/autopoietic_genesis_report_{{timestamp}}.md",
+        "content": "{{phase_8_generate_report.output.response_text}}"
+      },
+      "outputs": ["report_path"],
+      "dependencies": ["phase_8_generate_report"],
+      "metadata": {
+        "phase": "finalize"
+      }
+    }
+  },
+  "expected_outputs": {
+    "genesis_report": "Comprehensive report on Genesis execution",
+    "files_generated": "List of all generated files",
+    "validation_passed": "Boolean indicating if all files are valid",
+    "initialization_passed": "Boolean indicating if core modules can be imported"
+  },
+  "error_handling": {
+    "on_authorization_failure": "halt_immediately",
+    "on_validation_failure": "continue_but_flag",
+    "on_test_failure": "continue_but_flag",
+    "trigger_metacognitive_shift": true
+  },
+  "success_criteria": {
+    "authorization_confirmed": true,
+    "files_generated": ">= 10",
+    "validation_passed": true,
+    "core_modules_importable": ">= 80%"
+  }
+}
+
+
+
+
+
+
+
+
+

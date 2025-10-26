@@ -1,0 +1,18 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-08-06T04:01:20.254Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-08-06_04-01-20-253Z.log
+❌ Error Log: logs/errors_websocket_2025-08-06_04-01-20-253Z.log
+⚡ Performance Log: logs/performance_websocket_2025-08-06_04-01-20-253Z.log
+================================================================================
+2025-08-06T04:01:20.263Z [WARN] websocket: Protocol modules not available
+{
+  "error": "Cannot find module './utils/iarProcessor.js'\nRequire stack:\n- /media/newbu/3626C55326C514B1/Happier/webSocketServer.js\n- /media/newbu/3626C55326C514B1/Happier/next.config.js"
+}
+2025-08-06T04:01:20.272Z [INFO] websocket: Falling back to basic processing mode
+2025-08-06T04:01:20.276Z [INFO] websocket: This may be due to a missing build step. Try running "npm run build" in the nextjs-chat directory
+2025-08-06T04:01:20.276Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3013
+2025-08-06T04:01:20.278Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-08-06T04:01:20.279Z [INFO] websocket: Connect at: ws://localhost:3013

@@ -1,0 +1,10 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: check-placeholders
+        name: Check for placeholders
+        entry: scripts/check_placeholders.py
+        language: python
+        types: [text]
+        exclude: \\.md$
+        stages: [commit]

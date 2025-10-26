@@ -1,0 +1,364 @@
+"""Auto-created placeholder for Three_PointO_ArchE/autonomous_orchestrator.py (from cursor logs)."""
+import json
+import logging
+import time
+from datetime import datetime, timedelta
+
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from .temporal_core import now_iso, format_filename, format_log, Timer
+from dataclasses import dataclass, asdict, field
+from typing import Dict, List, Any, Optional, Tuple
+from pathlib import Path
+import requests
+from enum import Enum
+
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from Three_PointO_ArchE.temporal_core import now, now_iso, ago, from_now, format_log, format_filename
+
+
+logger = logging.getLogger(__name__)
+
+# --- Enums and Dataclasses ---
+
+class WorkItemStatus(Enum):
+    """Status of work items in the autonomous orchestration system."""
+    PENDING = "pending"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+    BLOCKED = "blocked"
+    ESCALATED = "escalated"
+
+class EscalationReason(Enum):
+    """Reasons for escalation to the Keyholder."""
+    LOW_CONFIDENCE = "low_confidence"
+    ETHICAL_FLAG = "ethical_flag"
+    BUDGET_OVERRUN = "budget_overrun"
+    TECHNICAL_BLOCK = "technical_block"
+    SCOPE_CREEP = "scope_creep"
+
+@dataclass
+class WorkItem:
+    """Represents a work item in the autonomous orchestration system."""
+    id: str
+    description: str
+    tags: List[str]
+    priority_score: float = 0.0
+    value_score: float = 0.0
+    effort_estimate: float = 1.0
+    risk_score: float = 0.1
+    resonance_score: float = 0.5
+    urgency_level: int = 3  # 1-5, where 5 is highest urgency
+    status: WorkItemStatus = WorkItemStatus.PENDING
+    assigned_instance: Optional[str] = None
+    created_date: datetime = field(default_factory=datetime.now)
+    dependencies: List[str] = field(default_factory=list)
+    confidence_score: Optional[float] = None
+    ethical_flags: Optional[List[str]] = None
+    budget_impact: float = 0.0
+
+@dataclass
+class OrchestratorState:
+    """Represents the persistent state of the orchestrator."""
+    last_harvest_date: datetime
+    total_work_items: int = 0
+    pending_items: int = 0
+    in_progress_items: int = 0
+    completed_items: int = 0
+    escalated_items: int = 0
+    overall_confidence: float = 1.0
+    active_escalations: List[Dict[str, Any]] = field(default_factory=list)
+    next_harvest_due: datetime = field(default_factory=datetime.now)
+    work_items: Dict[str, WorkItem] = field(default_factory=dict)
+
+
+# --- Core Components ---
+
+class TaskPrioritizationMatrix:
+    """Implements the TaskPrioritisatioNMatrix SPR for work item prioritization."""
+    
+    def __init__(self):
+        self.value_weights = {
+            "protocol_compliance": 0.3,
+            "business_value": 0.25,
+            "user_impact": 0.2,
+            "technical_debt": 0.15,
+            "innovation": 0.1
+        }
+        
+        self.risk_penalties = {
+            "security": 0.4,
+            "stability": 0.3,
+            "performance": 0.2,
+            "compatibility": 0.1
+        }
+    
+    def calculate_priority_score(self, work_item: WorkItem) -> float:
+        """Calculate comprehensive priority score for a work item."""
+        value_score = self._calculate_value_score(work_item)
+        risk_penalty = self._calculate_risk_penalty(work_item)
+        urgency_bonus = (work_item.urgency_level - 1) * 0.1
+        resonance_bonus = work_item.resonance_score * 0.2
+        
+        priority_score = value_score - risk_penalty + urgency_bonus + resonance_bonus
+        return max(0.0, min(1.0, priority_score))
+    
+    def _calculate_value_score(self, work_item: WorkItem) -> float:
+        value_score = 0.0
+        if "protocol" in work_item.description.lower() or "compliance" in work_item.tags:
+            value_score += self.value_weights["protocol_compliance"]
+        if any(tag in work_item.tags for tag in ["business", "revenue", "customer"]):
+            value_score += self.value_weights["business_value"]
+        if any(tag in work_item.tags for tag in ["user", "customer", "impact"]):
+            value_score += self.value_weights["user_impact"]
+        if "technical_debt" in work_item.tags or "refactor" in work_item.description.lower():
+            value_score += self.value_weights["technical_debt"]
+        if any(tag in work_item.tags for tag in ["innovation", "research", "experimental"]):
+            value_score += self.value_weights["innovation"]
+        return value_score
+
+    def _calculate_risk_penalty(self, work_item: WorkItem) -> float:
+        # Simplified risk calculation
+        return work_item.risk_score * 0.5
+
+
+class EscalationGates:
+    """Manages escalation triggers and thresholds."""
+    
+    def __init__(self):
+        self.thresholds = {
+            "confidence": 0.6,
+            "budget_overrun": 0.1,  # 10%
+            "ethical_flags": 1,
+            "technical_blocks": 3,
+            "scope_creep": 0.2  # 20%
+        }
+    
+    def check_escalation_triggers(self, work_item: WorkItem) -> Optional[EscalationReason]:
+        if work_item.confidence_score is not None and work_item.confidence_score < self.thresholds["confidence"]:
+            return EscalationReason.LOW_CONFIDENCE
+        if work_item.ethical_flags and len(work_item.ethical_flags) >= self.thresholds["ethical_flags"]:
+            return EscalationReason.ETHICAL_FLAG
+        if work_item.budget_impact > self.thresholds["budget_overrun"]:
+            return EscalationReason.BUDGET_OVERRUN
+        if work_item.status == WorkItemStatus.BLOCKED:
+            return EscalationReason.TECHNICAL_BLOCK
+        return None
+
+class AutonomousOrchestrator:
+    """Autonomous Orchestration System (AOS)"""
+    
+    def __init__(self, config_path: Optional[str] = None):
+        # self.config = self._load_config(config_path) # Configuration loading can be added
+        self.state = self._load_or_initialize_state()
+        self.prioritization_matrix = TaskPrioritizationMatrix()
+        self.escalation_gates = EscalationGates()
+        logger.info("[AOS] Initialized with autonomous orchestration capabilities")
+
+    def run_orchestration_cycle(self) -> Dict[str, Any]:
+        """Runs a full orchestration cycle: harvest, prioritize, dispatch."""
+        logger.info("Starting new orchestration cycle...")
+        work_items = self.harvest_backlog()
+        dispatch_results = self.dispatch_work(work_items)
+        self.generate_ceo_dashboard()
+        
+        status = {
+            "status": "completed",
+            "work_items_processed": len(work_items),
+            "dispatch_summary": dispatch_results
+        }
+        logger.info("Orchestration cycle complete.")
+        return status
+
+    def harvest_backlog(self) -> List[WorkItem]:
+        work_items = []
+        github_items = self._harvest_github_issues()
+        work_items.extend(github_items)
+        
+        # In a real system, you'd also harvest from IAR logs and protocol docs
+        # iar_items = self._harvest_iar_logs()
+        # work_items.extend(iar_items)
+        # protocol_items = self._harvest_protocol_documents()
+        # work_items.extend(protocol_items)
+        
+        for item in work_items:
+            item.priority_score = self.prioritization_matrix.calculate_priority_score(item)
+            item.value_score = self.prioritization_matrix._calculate_value_score(item)
+        
+        work_items.sort(key=lambda x: x.priority_score, reverse=True)
+        self.state.work_items = {item.id: item for item in work_items}
+        self.state.total_work_items = len(work_items)
+        self.state.pending_items = len(work_items)
+        self.state.last_harvest_date = now()
+        
+        logger.info(f"[AOS] Harvested {len(work_items)} work items from backlog")
+        self._save_state()
+        return work_items
+
+    def dispatch_work(self, work_items: List[WorkItem]) -> Dict[str, Any]:
+        dispatch_results = {
+            "dispatched_items": [],
+            "escalated_items": [],
+            "blocked_items": [],
+            "total_items": len(work_items)
+        }
+        
+        for work_item in work_items:
+            escalation_reason = self.escalation_gates.check_escalation_triggers(work_item)
+            
+            if escalation_reason:
+                work_item.status = WorkItemStatus.ESCALATED
+                escalated_info = {
+                    "item_id": work_item.id,
+                    "reason": escalation_reason.value,
+                    "description": work_item.description
+                }
+                dispatch_results["escalated_items"].append(escalated_info)
+                self.state.active_escalations.append(escalated_info)
+                logger.info(f"[AOS] Escalated work item {work_item.id}: {escalation_reason.value}")
+                continue
+            
+            if not self._dependencies_satisfied(work_item):
+                work_item.status = WorkItemStatus.BLOCKED
+                dispatch_results["blocked_items"].append({
+                    "item_id": work_item.id,
+                    "reason": "dependencies_not_satisfied",
+                    "description": work_item.description
+                })
+                continue
+            
+            best_instance = self._select_best_instance(work_item)
+            work_item.assigned_instance = best_instance
+            work_item.status = WorkItemStatus.IN_PROGRESS
+            
+            dispatch_results["dispatched_items"].append({
+                "item_id": work_item.id,
+                "instance": best_instance,
+                "description": work_item.description
+            })
+            logger.info(f"[AOS] Dispatched work item {work_item.id} to {best_instance}")
+        
+        self._update_state_after_dispatch()
+        self._save_state()
+        return dispatch_results
+
+    def generate_ceo_dashboard(self) -> Dict[str, Any]:
+        dashboard = {
+            "executive_summary": self._generate_executive_summary(),
+            "kpi_summary": self._calculate_kpi_summary(),
+            "top_priorities": self._get_top_priorities(),
+            "risk_indicators": self._assess_risk_indicators(),
+            "recommendations": self._generate_recommendations(),
+            "generated_at": now_iso()
+        }
+        
+        dashboard_file = Path("outputs") / f"ceo_dashboard_{format_filename()}.json"
+        dashboard_file.parent.mkdir(exist_ok=True, parents=True)
+        
+        with open(dashboard_file, 'w') as f:
+            json.dump(dashboard, f, indent=2, default=str)
+        
+        logger.info(f"[AOS] Generated CEO dashboard: {dashboard_file}")
+        return dashboard
+
+    def _load_or_initialize_state(self) -> OrchestratorState:
+        state_file = Path("data") / "orchestrator_state.json"
+        if state_file.exists():
+            try:
+                with open(state_file, 'r') as f:
+                    state_data = json.load(f)
+                
+                # Rehydrate WorkItem objects
+                work_items_data = state_data.pop("work_items", {})
+                state_data["work_items"] = {
+                    wid: WorkItem(**w_data) for wid, w_data in work_items_data.items()
+                }
+
+                return OrchestratorState(**state_data)
+            except (json.JSONDecodeError, TypeError) as e:
+                logger.error(f"Error loading state file, initializing fresh state: {e}")
+        
+        return OrchestratorState(
+            last_harvest_date=now(),
+            next_harvest_due=now() + timedelta(hours=1)
+        )
+    
+    def _save_state(self):
+        state_file = Path("data") / "orchestrator_state.json"
+        state_file.parent.mkdir(exist_ok=True, parents=True)
+        with open(state_file, 'w') as f:
+            json.dump(asdict(self.state), f, indent=2, default=str)
+        logger.info("Orchestrator state saved.")
+
+    def _harvest_github_issues(self) -> List[WorkItem]:
+        # Mock implementation. In a real system, this would use the GitHub API.
+        logger.warning("[AOS] GitHub API not available, using mock data for harvesting.")
+        return [
+            WorkItem(id="issue_001", description="Implement quantum-enhanced analysis", tags=["enhancement", "quantum"], urgency_level=4),
+            WorkItem(id="issue_002", description="Refactor logging module", tags=["technical_debt"], urgency_level=2),
+        ]
+
+    def _dependencies_satisfied(self, work_item: WorkItem) -> bool:
+        for dep_id in work_item.dependencies:
+            dep_item = self.state.work_items.get(dep_id)
+            if not dep_item or dep_item.status != WorkItemStatus.COMPLETED:
+                return False
+        return True
+
+    def _select_best_instance(self, work_item: WorkItem) -> str:
+        # Simplified logic for instance selection
+        if "quantum" in work_item.tags:
+            return "QuantumAnalysisInstance"
+        return "GeneralPurposeInstance"
+
+    def _update_state_after_dispatch(self):
+        self.state.pending_items = len([wi for wi in self.state.work_items.values() if wi.status == WorkItemStatus.PENDING])
+        self.state.in_progress_items = len([wi for wi in self.state.work_items.values() if wi.status == WorkItemStatus.IN_PROGRESS])
+        self.state.escalated_items = len([wi for wi in self.state.work_items.values() if wi.status == WorkItemStatus.ESCALATED])
+        self.state.completed_items = len([wi for wi in self.state.work_items.values() if wi.status == WorkItemStatus.COMPLETED])
+        # Update other state metrics as needed
+    
+    def _generate_executive_summary(self) -> str:
+        total = self.state.total_work_items
+        completed = self.state.completed_items
+        completion_rate = (completed / total * 100) if total > 0 else 0
+        
+        summary = f"Total Work Items: {total}. Completed: {completed} ({completion_rate:.1f}%). In Progress: {self.state.in_progress_items}. Escalated: {self.state.escalated_items}."
+        return summary
+    
+    def _calculate_kpi_summary(self) -> Dict[str, Any]:
+        return {
+            "completion_rate": (self.state.completed_items / self.state.total_work_items) if self.state.total_work_items > 0 else 0,
+            "escalation_rate": (self.state.escalated_items / self.state.total_work_items) if self.state.total_work_items > 0 else 0,
+            "overall_confidence": self.state.overall_confidence
+        }
+
+    def _get_top_priorities(self) -> List[Dict[str, Any]]:
+        sorted_items = sorted(
+            [item for item in self.state.work_items.values() if item.status == WorkItemStatus.PENDING], 
+            key=lambda x: x.priority_score, 
+            reverse=True
+        )
+        return [{"id": item.id, "description": item.description, "priority": item.priority_score} for item in sorted_items[:5]]
+
+    def _assess_risk_indicators(self) -> List[str]:
+        risks = []
+        if (self.state.escalated_items / self.state.total_work_items > 0.2) if self.state.total_work_items > 0 else False:
+            risks.append("High escalation rate")
+        if self.state.overall_confidence < 0.7:
+            risks.append("Low overall confidence")
+        return risks
+
+    def _generate_recommendations(self) -> List[str]:
+        recs = []
+        if len(self.state.active_escalations) > 5:
+            recs.append("Review active escalations to unblock progress.")
+        return recs
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    orchestrator = AutonomousOrchestrator()
+    orchestrator.run_orchestration_cycle()

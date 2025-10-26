@@ -4,9 +4,13 @@
 # Reflects v3.0 enhancements including IAR thresholds and temporal tool defaults.
 
 import os
+import logging
+import logging.config
+import sys
 from dataclasses import dataclass, field
 from dotenv import load_dotenv
 from pathlib import Path
+from .thought_trail import log_to_thought_trail
 
 # Load environment variables from .env file
 load_dotenv()
@@ -14,8 +18,51 @@ load_dotenv()
 # --- Project Root ---
 # Assumes the script is run from the project root.
 # Adjust if necessary, e.g., Path(__file__).parent.parent
-PROJECT_ROOT = Path(os.getcwd())
+PROJECT_ROOT = Path(__file__).parent.parent
 
+@log_to_thought_trail
+def configure_logging(log_level: str = "INFO") -> None:
+    """
+    Sets up a centralized, standardized logging configuration for the application.
+    """
+    log_dir = PROJECT_ROOT / "outputs" # CORRECTED: Was "logs"
+    log_dir.mkdir(exist_ok=True)
+    
+    LOGGING_CONFIG = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "standard": {
+                "format": "%(asctime)s - %(name)s - [%(levelname)s] - %(message)s",
+                "datefmt": "%Y-%m-%d %H:%M:%S",
+            },
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "standard",
+                "level": log_level,
+                "stream": sys.stdout,
+            },
+            "file": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "formatter": "standard",
+                "level": log_level,
+                "filename": log_dir / "arche_system.log", # This can be the main log
+                "maxBytes": 10485760,  # 10 MB
+                "backupCount": 5,
+                "encoding": "utf-8",
+            },
+        },
+        "root": {
+            "handlers": ["console", "file"],
+            "level": log_level,
+        },
+    }
+    logging.config.dictConfig(LOGGING_CONFIG)
+    logging.info("Logging configured successfully.")
+
+# --- Path Configuration ---
 @dataclass
 class PathConfig:
     """Stores all relevant paths for the ArchE system."""
@@ -27,7 +74,7 @@ class PathConfig:
     
     # Top-level directories
     knowledge_graph: Path = PROJECT_ROOT / "knowledge_graph"
-    workflows: Path = PROJECT_ROOT / "workflows"
+    workflows: Path = PROJECT_ROOT / "core_workflows"
     scripts: Path = PROJECT_ROOT / "scripts"
     logs: Path = PROJECT_ROOT / "logs"
     outputs: Path = PROJECT_ROOT / "outputs"
@@ -59,25 +106,54 @@ class APIKeys:
 @dataclass
 class LLMConfig:
     """Configuration for Large Language Models."""
-    default_provider: str = "openai"
-    default_model: str = "gpt-4o"
+    # Switch default to Google/Gemini
+    default_provider: str = "google"
+    default_model: str = "gemini-2.0-flash-exp"
     temperature: float = 0.7
     max_tokens: int = 4096
 
     # Specific models for different providers
     openai_models: list[str] = field(default_factory=lambda: ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"])
-    google_models: list[str] = field(default_factory=lambda: ["gemini-1.5-pro-latest", "gemini-pro"])
+    google_models: list[str] = field(default_factory=lambda: ["gemini-2.5-pro", "gemini-2.0-flash-exp", "gemini-1.5-pro-latest", "gemini-1.5-flash-latest", "gemini-pro"])
     
     # Vetting agent specific configuration
-    vetting_provider: str = "openai"
-    vetting_model: str = "gpt-4o"
+    vetting_provider: str = "google"
+    vetting_model: str = "gemini-2.0-flash-exp"  # Changed from 2.5-pro (blocks agent prompts)
+
+# Legacy compatibility attributes for llm_providers.py
+DEFAULT_LLM_PROVIDER = "google"
+LLM_PROVIDERS = {
+    "openai": {
+        "api_key": os.getenv("OPENAI_API_KEY"),
+        "base_url": None,
+        "default_model": "gpt-4o",
+        "temperature": 0.7,
+        "max_tokens": 4096
+    },
+    "google": {
+        # Prefer GOOGLE_API_KEY; fall back to GEMINI_API_KEY for convenience
+        "api_key": os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY"),
+        "base_url": None,
+        "default_model": "gemini-2.0-flash-exp",
+        "temperature": 0.7,
+        "max_tokens": 4096
+    }
+}
+
+# Legacy compatibility attributes for SPRManager
+SPR_JSON_FILE = str(PROJECT_ROOT / "knowledge_graph" / "spr_definitions_tv.json")
+
+# Legacy compatibility attributes for error_handler.py
+DEFAULT_ERROR_STRATEGY = "retry"
+DEFAULT_RETRY_ATTEMPTS = 1
+METAC_DISSONANCE_THRESHOLD_CONFIDENCE = 0.6
 
 @dataclass
 class ToolConfig:
     """Configuration for various cognitive tools."""
     # Code Executor (Docker)
     code_executor_docker_image: str = "python:3.11-slim"
-    code_executor_timeout: int = 300  # seconds
+    code_executor_timeout: int = 900  # seconds
 
     # Search Tool
     search_result_count: int = 10
@@ -124,6 +200,7 @@ class AppConfig:
 # Instantiate the main config object
 CONFIG = AppConfig()
 
+@log_to_thought_trail
 def get_config() -> AppConfig:
     """Returns the global configuration object."""
     # In the future, this could be extended to load from YAML or other sources

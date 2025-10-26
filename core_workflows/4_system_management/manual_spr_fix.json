@@ -1,0 +1,93 @@
+{
+  "workflow_name": "Manual SPR JSON Fix (Base64)",
+  "workflow_description": "Reads spr_definitions_tv.json, fixes an invalid escape character (unescaped newline) using LLM for string manipulation with Base64, and writes it back.",
+  "tasks": {
+    "read_spr_json": {
+      "task_key": "read_spr_json",
+      "action_type": "read_file_custom",
+      "inputs": {
+        "target_file": "knowledge_graph/spr_definitions_tv.json",
+        "should_read_entire_file": true
+      },
+      "outputs": {
+        "original_content_base64": "{{task_result.content}}"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.8
+      }
+    },
+    "generate_fixed_content": {
+      "task_key": "generate_fixed_content",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "The following is Base64 encoded content representing a JSON file. Decode it. In the decoded JSON string, find the 'definition' field within the SPR with 'spr_id': 'Cognitive resonancE'. Within that 'definition' string, find the literal sequence of 'S\nPR-activated' (where \n is an actual newline character, not escaped) and replace it with 'SPR-activated'. Also, within the same definition, replace 'o\nf' with 'of'. After these specific replacements, ensure all other actual newline characters within any JSON string values are replaced with '\\n' to make it valid JSON. Finally, re-encode the entire modified JSON string back to Base64. Output ONLY the Base64 string, no other text or formatting.\n\n{{tasks.read_spr_json.outputs.original_content_base64}}",
+        "model": "gemini-1.5-flash-latest",
+        "temperature": 0.1
+      },
+      "outputs": {
+        "llm_raw_output": "{{task_result.text}}"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.7
+      }
+    },
+    "extract_base64_from_llm_output": {
+      "task_key": "extract_base64_from_llm_output",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "The following text contains a Base64 encoded string. Extract ONLY the Base64 string and output it without any other text or formatting. If no Base64 string is found, output an empty string.\n\nText:\n{{tasks.generate_fixed_content.outputs.llm_raw_output}}",
+        "model": "gemini-1.5-flash-latest",
+        "temperature": 0.1
+      },
+      "outputs": {
+        "fixed_content_base64": "{{task_result.text}}"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.9
+      }
+    },
+    "write_fixed_spr_json": {
+      "task_key": "write_fixed_spr_json",
+      "action_type": "edit_file_custom",
+      "inputs": {
+        "target_file": "knowledge_graph/spr_definitions_tv.json",
+        "code_edit_base64": "{{tasks.extract_base64_from_llm_output.outputs.fixed_content_base64}}",
+        "instructions": "Writing Base64-encoded fixed content back to spr_definitions_tv.json to correct invalid escape characters."
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.9
+      }
+    },
+    "confirm_fix": {
+      "task_key": "confirm_fix",
+      "action_type": "read_file_custom",
+      "inputs": {
+        "target_file": "knowledge_graph/spr_definitions_tv.json",
+        "should_read_entire_file": true
+      },
+      "outputs": {
+        "confirmed_fixed_content_base64": "{{task_result.content}}"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.8
+      }
+    },
+    "display_confirmation": {
+      "task_key": "display_confirmation",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "## Confirmed Content of Fixed spr_definitions_tv.json (Base64 decoded, first 500 chars):\n```json\n{{tasks.confirm_fix.outputs.confirmed_fixed_content_base64 | base64_decode_and_to_string | truncate(500)}}\n```",
+        "format": "markdown"
+      },
+      "iar_expectation": {
+        "status": "success",
+        "confidence_threshold": 0.9
+      }
+    }
+  }
+} 

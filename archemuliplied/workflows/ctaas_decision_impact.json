@@ -1,0 +1,89 @@
+{
+  "name": "CTaaS Decision Impact (v3.5)",
+  "description": "Generates a Certified Decision Pack with IAR confidence for a proposed strategic move.",
+  "start_tasks": ["ingest_context"],
+  "tasks": {
+    "ingest_context": {
+      "description": "Load inputs (treatment, outcome, controls, scenario params).",
+      "action_type": "display_output",
+      "inputs": { "content": "CTaaS run: {{initial_context.scenario_name}} for {{initial_context.business_unit}}" }
+    },
+    "estimate_causal": {
+      "description": "Estimate treatment effect with diagnostics.",
+      "action_type": "perform_causal_inference",
+      "inputs": {
+        "operation": "estimate_effect",
+        "data": "{{initial_context.data_ref}}",
+        "treatment": "{{initial_context.treatment}}",
+        "outcome": "{{initial_context.outcome}}",
+        "confounders": "{{initial_context.controls}}"
+      },
+      "dependencies": ["ingest_context"]
+    },
+    "create_abm": {
+      "description": "Create ABM using causal effect for parameterization.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "create_model",
+        "model_type": "basic",
+        "width": 50, "height": 50,
+        "density": 0.5,
+        "model_params": { "activation_threshold": 3, "seed": 42 }
+      },
+      "dependencies": ["estimate_causal"]
+    },
+    "simulate_abm": {
+      "description": "Run ABM to capture emergent second/third-order effects.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model": "{{create_abm.model}}",
+        "steps": 100,
+        "visualize": false
+      },
+      "dependencies": ["create_abm"]
+    },
+    "predict_timeline": {
+      "description": "Forecast KPIs over time with predictive modeling.",
+      "action_type": "run_prediction",
+      "inputs": {
+        "operation": "forecast",
+        "data": "{{initial_context.time_series_seed}}",
+        "steps_to_forecast": 12,
+        "target_column": "{{initial_context.forecast_target}}"
+      },
+      "dependencies": ["simulate_abm"]
+    },
+    "compare_states": {
+      "description": "Optional CFP comparison (causal state vs ABM metrics state).",
+      "action_type": "run_cfp",
+      "inputs": {
+        "system_a_config": { "quantum_state": "{{estimate_causal | default({}).state_vector}}" },
+        "system_b_config": { "quantum_state": "{{simulate_abm | default({}).metrics_state_vector}}" },
+        "observable": "position",
+        "time_horizon": 0.1
+      },
+      "dependencies": ["predict_timeline"]
+    },
+    "assemble_cdp": {
+      "description": "Assemble Certified Decision Pack (IAR aggregation).",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\ncdp = {\n  'scenario': {{initial_context | default({})}},\n  'causal': {{estimate_causal | default({})}},\n  'abm': {{simulate_abm | default({})}},\n  'predictive': {{predict_timeline | default({})}},\n  'cfp': {{compare_states | default({})}}\n}\n# Aggregate IAR confidence heuristic\nconf = 0.0\nparts = [cdp.get('causal'), cdp.get('abm'), cdp.get('predictive')]\nnum = 0\nfor p in parts:\n  if isinstance(p, dict) and p.get('iar') and isinstance(p['iar'].get('confidence'), (int,float)):\n    conf += p['iar']['confidence']; num += 1\nIAR = { 'confidence': round(conf/max(num,1), 2), 'tactical_resonance': 'high' if conf/max(num,1) > 0.8 else 'medium', 'potential_issues': [] }\nprint(json.dumps({'cdp': cdp, 'iar': IAR}))"
+      },
+      "dependencies": ["compare_states"]
+    },
+    "deliver": {
+      "description": "Deliver summary (Decision Integrity Ledger entry).",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "CDP ready with IAR: {{assemble_cdp.iar}}"
+      },
+      "dependencies": ["assemble_cdp"]
+    }
+  }
+}
+
+
+

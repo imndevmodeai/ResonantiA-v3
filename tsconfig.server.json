@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": "./", // All paths are relative to this tsconfig.json location
+    "paths": {
+      "@/types/*": ["types/*"],
+      "@/utils/*": ["utils/*"]
+    }
+  },
+  "include": [
+    "types/**/*.ts",
+    "utils/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "nextjs-chat" // Exclude the nextjs project's own typescript files
+  ]
+}

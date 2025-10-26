@@ -1,0 +1,83 @@
+{
+    "name": "Strategy Fusion with Parallel Pathway Integrity",
+    "description": "Orchestrates Phase B of the RISE protocol. Executes multiple analytical pathways in parallel, verifies a minimum number of successful completions, and then fuses the results into a strategic dossier. Aborts if integrity check fails.",
+    "tasks": {
+        "pathway_causal_analysis": {
+            "action_type": "perform_causal_inference",
+            "description": "Executes the causal inference pathway to identify key drivers.",
+            "inputs": {
+                "operation": "estimate_effect",
+                "data": "{{ context.session_knowledge_base.causal_data | default(null) }}",
+                "treatment": "intervention",
+                "outcome": "target_metric"
+            },
+            "error_strategy": "continue"
+        },
+        "pathway_simulation_abm": {
+            "action_type": "perform_abm",
+            "description": "Executes Agent-Based Modeling to simulate system dynamics.",
+            "inputs": {
+                "operation": "run_simulation",
+                "model_type": "generic_dsl",
+                "schema": "{{ context.session_knowledge_base.abm_schema | default(null) }}",
+                "steps": 100
+            },
+            "error_strategy": "continue"
+        },
+        "pathway_comparative_cfp": {
+            "action_type": "run_cfp",
+            "description": "Executes Comparative Flux Processing to analyze system potentials.",
+            "inputs": {
+                "system_a_config": "{{ context.session_knowledge_base.system_a_config | default(null) }}",
+                "system_b_config": "{{ context.session_knowledge_base.system_b_config | default(null) }}"
+            },
+            "error_strategy": "continue"
+        },
+        "pathway_specialist_consultation": {
+            "action_type": "invoke_specialist_agent",
+            "description": "Consults the forged specialist agent for domain-specific insights.",
+            "inputs": {
+                "specialized_agent": "{{ context.specialized_agent }}",
+                "task_prompt": "Analyze the problem based on the session knowledge base and provide your core insights, potential strategies, and key risks.",
+                "context_injection": "{{ context.session_knowledge_base }}"
+            },
+            "error_strategy": "continue"
+        },
+        "pathway_integrity_check": {
+            "action_type": "execute_code",
+            "description": "Checks the results of the parallel pathways to ensure a minimum number succeeded before synthesis.",
+            "dependencies": [
+                "pathway_causal_analysis",
+                "pathway_simulation_abm",
+                "pathway_comparative_cfp",
+                "pathway_specialist_consultation"
+            ],
+            "inputs": {
+                "language": "python",
+                "code": "import json; pathways = ['pathway_causal_analysis', 'pathway_simulation_abm', 'pathway_comparative_cfp', 'pathway_specialist_consultation']; successful_count = 0; reflections = {'pathway_causal_analysis': {{ pathway_causal_analysis.reflection | default({}) }}, 'pathway_simulation_abm': {{ pathway_simulation_abm.reflection | default({}) }}, 'pathway_comparative_cfp': {{ pathway_comparative_cfp.reflection | default({}) }}, 'pathway_specialist_consultation': {{ pathway_specialist_consultation.reflection | default({}) }}}; for p, r in reflections.items(): print(f'Checking {p}: {r.get(\"status\")}');  if r and r.get('status') == 'Success': successful_count += 1; result = {'successful_pathways': successful_count, 'required_pathways': 2, 'total_pathways': len(pathways)}; print(json.dumps(result))"
+            }
+        },
+        "synthesize_fused_dossier": {
+            "action_type": "generate_text_llm",
+            "description": "Synthesizes the outputs from all successful pathways into a single, fused strategic dossier.",
+            "dependencies": [
+                "pathway_causal_analysis",
+                "pathway_simulation_abm",
+                "pathway_comparative_cfp",
+                "pathway_specialist_consultation",
+                "pathway_integrity_check"
+            ],
+            "inputs": {
+                "prompt": "Synthesize the following analytical results into a cohesive strategic dossier. Reference the results from Causal Analysis, ABM Simulation, CFP Analysis, and the Specialist Consultation. Highlight areas of agreement and disagreement between the pathways to form a robust, multi-perspective insight.\n\nCausal Analysis Output:\n{{ pathway_causal_analysis.result | default('Not Available') }}\n\nABM Simulation Output:\n{{ pathway_simulation_abm.result | default('Not Available') }}\n\nCFP Analysis Output:\n{{ pathway_comparative_cfp.result | default('Not Available') }}\n\nSpecialist Consultation:\n{{ pathway_specialist_consultation.result | default('Not Available') }}",
+                "max_tokens": 4096
+            }
+        },
+        "handle_synthesis_failure": {
+            "action_type": "display_output",
+            "description": "A terminal task that executes if the integrity check fails, halting the workflow.",
+            "inputs": {
+                "content": "CRITICAL FAILURE: Synthesis aborted. Only {{ pathway_integrity_check.result.output | from_json | get('successful_pathways') }} out of 4 analytical pathways succeeded. This is below the required threshold of {{ pathway_integrity_check.result.output | from_json | get('required_pathways') }}. Insufficient data for a resonant strategy."
+            }
+        }
+    }
+} 

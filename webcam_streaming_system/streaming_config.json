@@ -1,0 +1,65 @@
+{
+  "camera_device": 0,
+  "resolution_width": 1920,
+  "resolution_height": 1080,
+  "fps": 30,
+  "virtual_cam_name": "ArchE_Webcam",
+  "virtual_cam_device_number": 10,
+
+  "enable_effects": true,
+  "enable_background_blur": true,
+  "enable_face_beauty": true,
+
+  "streaming_quality": "ultra",
+
+  "platforms": {
+    "chaturbate": {
+      "rtmp_url": "rtmp://edge-us-east.live.chaturbate.com/live",
+      "stream_key": "YOUR_CHATURBATE_STREAM_KEY_HERE",
+      "enabled": false
+    },
+    "onlyfans": {
+      "rtmp_url": "rtmp://live.onlyfans.com/live",
+      "stream_key": "YOUR_ONLYFANS_STREAM_KEY_HERE",
+      "enabled": false
+    },
+    "obs_studio": {
+      "rtmp_url": "rtmp://localhost:1935/live",
+      "stream_key": "obs_stream",
+      "enabled": false
+    }
+  },
+
+  "advanced_settings": {
+    "beauty_filter_strength": 0.7,
+    "skin_smoothing": 0.6,
+    "brightness_boost": 0.15,
+    "contrast_enhancement": 0.1
+  },
+
+  "background_settings": {
+    "blur_intensity": 20,
+    "edge_smoothing": 0.5,
+    "background_replacement": false,
+    "background_image_path": "./backgrounds/default_background.jpg"
+  },
+
+  "privacy_settings": {
+    "enable_privacy_mode": true,
+    "face_detection_privacy": false,
+    "metadata_stripping": true,
+    "secure_streaming": false
+  },
+
+  "performance": {
+    "bitrate_kbps": 4500,
+    "hardware_acceleration": true,
+    "threading_optimization": true,
+    "effects_quality": "high"
+  },
+  "droidcam_settings": {
+    "default_ip": "192.168.13.252",
+    "default_port": "7007",
+    "auto_connect": true
+  }
+}

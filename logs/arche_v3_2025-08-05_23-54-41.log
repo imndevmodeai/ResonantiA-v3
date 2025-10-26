@@ -1,0 +1,23 @@
+2025-08-05 23:54:41 - root:162 - INFO - logging_config - ================================================================================
+2025-08-05 23:54:41 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-05 23:54:41 - root:164 - INFO - logging_config - ================================================================================
+2025-08-05 23:54:41 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-05 23:54:41
+2025-08-05 23:54:41 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-05 23:54:41 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-05_23-54-41.log
+2025-08-05 23:54:41 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-05_23-54-41.log
+2025-08-05 23:54:41 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-05_23-54-41.log
+2025-08-05 23:54:41 - root:170 - INFO - logging_config - ================================================================================
+2025-08-05 23:54:41 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-05 23:54:41 - __main__:164 - INFO - main - --- Received command to run workflow: thought_trail_workflow.json ---
+2025-08-05 23:54:41 - Three_PointO_ArchE.workflow_engine:341 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-05 23:54:41 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-05 23:54:41 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-05 23:54:41 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-05 23:54:41 - Three_PointO_ArchE.workflow_engine:361 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-05 23:54:41 - Three_PointO_ArchE.workflow_engine:517 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/thought_trail_workflow.json
+2025-08-05 23:54:41 - Three_PointO_ArchE.workflow_engine:1029 - CRITICAL - workflow_engine - Workflow execution failed during loading: problem_description cannot be null - must be in workflow definition or initial context
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_engine.py", line 1018, in run_workflow
+    raise ValueError("problem_description cannot be null - must be in workflow definition or initial context")
+ValueError: problem_description cannot be null - must be in workflow definition or initial context
+2025-08-05 23:54:41 - __main__:221 - ERROR - main - Could not write final result to /media/newbu/3626C55326C514B1/Happier/outputs/result_thought_trail_workflow_N/A.json: [Errno 2] No such file or directory: '/media/newbu/3626C55326C514B1/Happier/outputs/result_thought_trail_workflow_N/A.json'

@@ -1,0 +1,51 @@
+{
+  "name": "AI Metacognitive Self-Reflection Workflow",
+  "description": "Uses the system_representation framework to analyze its own operational state against an ideal baseline, calculates divergence, and reflects on the outcome.",
+  "version": "1.0",
+  "tasks": {
+    "start_reflection": {
+      "action": "display_output",
+      "inputs": {
+        "content": "--- Starting Metacognitive Self-Reflection Cycle ---"
+      },
+      "dependencies": []
+    },
+    "analyze_self_state_divergence": {
+      "action": "analyze_system_divergence",
+      "inputs": {
+        "system_a_path": "knowledge_graph/arche_self_state.json",
+        "system_b_path": "knowledge_graph/arche_ideal_state.json",
+        "method": "kld"
+      },
+      "outputs": {
+        "divergence_score": "float",
+        "analysis_summary": "string"
+      },
+      "dependencies": ["start_reflection"]
+    },
+    "generate_reflection_insights": {
+      "action": "generate_text_llm",
+      "inputs": {
+        "prompt": "As an AI, I have analyzed my current operational state against my ideal baseline. The total Kullback-Leibler divergence is {{ analyze_self_state_divergence.divergence_score }}.\\n\\nAnalysis Details:\\n{{ analyze_self_state_divergence.analysis_summary }}\\n\\nBased on this data, please provide a brief, first-person reflection. What is one potential insight from this divergence? What is one area I could focus on to better align with my ideal state?",
+        "max_tokens": 500
+      },
+      "outputs": {
+        "response_text": "string"
+      },
+      "dependencies": ["analyze_self_state_divergence"],
+      "condition": "{{ analyze_self_state_divergence.reflection.status }} == 'Success'"
+    },
+    "display_final_reflection": {
+        "action": "display_output",
+        "inputs": {
+            "content": {
+                "title": "--- Metacognitive Reflection Complete ---",
+                "divergence_score": "{{ analyze_self_state_divergence.divergence_score }}",
+                "llm_insight": "{{ generate_reflection_insights.response_text }}",
+                "raw_analysis": "{{ analyze_self_state_divergence.analysis_summary }}"
+            }
+        },
+        "dependencies": ["generate_reflection_insights"]
+    }
+  }
+} 

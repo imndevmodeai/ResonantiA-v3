@@ -1,0 +1,49 @@
+{
+    "name": "Real-World Codebase Analysis",
+    "description": "A workflow to analyze a directory, aggregate file contents, and generate a summary report.",
+    "tasks": {
+        "list_util_files": {
+            "action_type": "list_directory",
+            "description": "Find all files in the utils directory.",
+            "inputs": {
+                "path": "Three_PointO_ArchE/utils/"
+            },
+            "dependencies": []
+        },
+        "aggregate_file_contents": {
+            "action_type": "execute_code",
+            "description": "Read all files listed in the previous step and combine their contents.",
+            "inputs": {
+                "language": "python",
+                "code": "import os\nimport json\n\n# The context variable is automatically injected by the code executor\nfile_list = context.get('list_util_files', {}).get('result', {}).get('contents', [])\nbase_path = context.get('list_util_files', {}).get('result', {}).get('path', '')\n\naggregated_content = ''\nfor filename in file_list:\n    if filename.endswith('.py'):\n        try:\n            full_path = os.path.join(base_path, filename)\n            with open(full_path, 'r', encoding='utf-8') as f:\n                aggregated_content += f\"\"\"# --- START OF {filename} ---\\n\\n{f.read()}\\n\\n# --- END OF {filename} ---\\n\\n\"\"\"\n        except Exception as e:\n            aggregated_content += f\"\"\"# --- FAILED TO READ {filename}: {e} ---\\n\"\"\"\n\n# The final print statement is captured as the stdout/output of the action\nprint(json.dumps({'aggregated_code': aggregated_content}))\n"
+            },
+            "dependencies": [
+                "list_util_files"
+            ]
+        },
+        "generate_analysis_report": {
+            "action_type": "generate_text_llm",
+            "description": "Analyze the aggregated code and generate a refactoring suggestion.",
+            "inputs": {
+                "prompt": "The following is a collection of Python utility files from a larger system called 'ArchE'. Please perform a concise analysis of the code. Provide a one-paragraph summary of their purpose and one concrete, actionable suggestion for improvement or refactoring. Frame your response as a professional code review comment.",
+                "initial_context": {
+                    "code_to_analyze": "{{ aggregate_file_contents.result.output.aggregated_code }}"
+                }
+            },
+            "dependencies": [
+                "aggregate_file_contents"
+            ]
+        },
+        "save_report_to_file": {
+            "action_type": "create_file",
+            "description": "Save the generated analysis report to a file.",
+            "inputs": {
+                "file_path": "outputs/analysis_report.txt",
+                "content": "{{ generate_analysis_report.result.response_text }}"
+            },
+            "dependencies": [
+                "generate_analysis_report"
+            ]
+        }
+    }
+}

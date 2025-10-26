@@ -1,0 +1,60 @@
+{
+  "id": "query_refinement_workflow",
+  "name": "Query Refinement Workflow",
+  "description": "Deconstructs and refines a raw user query into a structured objective using ResonantiA Protocol 8.2, Step 1 logic. This is intended as an initial step in query processing.",
+  "version": "1.0",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "user_query": {
+        "type": "string",
+        "description": "The raw user query to be refined."
+      }
+    },
+    "required": ["user_query"]
+  },
+  "tasks": {
+    "deconstruct_and_refine_query": {
+      "action_type": "call_llm",
+      "description": "Deconstructs the user query and rephrases it into a precise objective.",
+      "inputs": {
+        "prompt": "Rephrase the following user query into a precise and actionable objective: {{ context.user_query }}"
+      }
+    },
+    "refine_and_rephrase": {
+      "action_type": "call_llm",
+      "description": "Refines and rephrases the user query into a precise objective.",
+      "inputs": {
+          "prompt": "Rephrase the following user query into a precise and actionable objective: {{ context.user_query }}"
+      }
+    },
+    "deconstruct_query": {
+        "action_type": "call_llm",
+        "description": "Deconstructs the user query into its core components.",
+        "inputs": {
+            "prompt": "Deconstruct the following user query into its core concepts, entities, and temporal scope: {{ context.user_query }}"
+        }
+    },
+    "log_refined_objective": {
+      "action_type": "display_output",
+      "description": "Logs the refined objective from the deconstruction task.",
+      "inputs": {
+        "content": "Refined Objective:\n{{refine_and_rephrase.output}}\n\nFull Deconstruction:\n{{deconstruct_query.output}}"
+      },
+      "dependencies": ["deconstruct_query", "refine_and_rephrase"]
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "refined_objective": {
+        "type": "string",
+        "description": "The refined and rephrased objective ready for further processing."
+      },
+      "deconstruction_details": {
+        "type": "object",
+        "description": "The detailed deconstruction of the original user query."
+      }
+    }
+  }
+} 

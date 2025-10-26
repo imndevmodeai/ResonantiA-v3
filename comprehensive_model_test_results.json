@@ -1,0 +1,125 @@
+{
+  "results": [
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash-exp",
+      "prompt": "agent_terminology",
+      "response_length": 2221,
+      "response_preview": "```json\n{\n  \"name\": \"Dr. Anya Sharma\",\n  \"expertise\": {\n    \"core\": [\n      \"Electric Vehicle (EV) Market Analysis\",\n      \"Strategic Planning & Forec..."
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash",
+      "prompt": "agent_terminology",
+      "response_length": 2407,
+      "response_preview": "```json\n{\n  \"name\": \"Electra Analytics\",\n  \"expertise\": {\n    \"primary\": \"Electric Vehicle Market Analysis & Strategic Planning\",\n    \"secondary\": [\n ..."
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash-001",
+      "prompt": "agent_terminology",
+      "response_length": 2496,
+      "response_preview": "```json\n{\n  \"name\": \"Evana Volt\",\n  \"expertise\": [\n    \"Electric Vehicle (EV) Market Analysis\",\n    \"Strategic Planning & Forecasting in the EV Sector..."
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash-lite",
+      "prompt": "agent_terminology",
+      "response_length": 1940,
+      "response_preview": "```json\n{\n  \"name\": \"EVolve Strategist\",\n  \"expertise\": [\n    \"Electric Vehicle Market Analysis\",\n    \"EV Industry Trends and Forecasting\",\n    \"Compe..."
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash-lite-001",
+      "prompt": "agent_terminology",
+      "response_length": 1938,
+      "response_preview": "```json\n{\n  \"name\": \"ElectraStrat Analyst\",\n  \"expertise\": [\n    \"Electric Vehicle (EV) Market Analysis\",\n    \"EV Technology Trends (Battery, Charging..."
+    },
+    {
+      "status": "\u274c ERROR",
+      "model": "gemini-2.0-pro-exp",
+      "prompt": "agent_terminology",
+      "error": "429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-pro-exp:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota. Please migrate to Gemini 2.5 Pro"
+    },
+    {
+      "status": "\u274c ERROR",
+      "model": "gemini-2.0-pro-exp-02-05",
+      "prompt": "agent_terminology",
+      "error": "429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-pro-exp-02-05:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota. Please migrate to Gemini 2"
+    },
+    {
+      "status": "\u274c ERROR",
+      "model": "gemini-exp-1206",
+      "prompt": "agent_terminology",
+      "error": "429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-exp-1206:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota. Please migrate to Gemini 2.5 Pro Pr"
+    },
+    {
+      "status": "\u274c BLOCKED",
+      "model": "gemini-flash-latest",
+      "prompt": "agent_terminology",
+      "error": "[google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown"
+    },
+    {
+      "status": "\u274c BLOCKED",
+      "model": "gemini-pro-latest",
+      "prompt": "agent_terminology",
+      "error": "[google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown"
+    },
+    {
+      "status": "\u274c BLOCKED",
+      "model": "gemini-2.5-flash",
+      "prompt": "agent_terminology",
+      "error": "[google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown"
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.5-flash-lite",
+      "prompt": "agent_terminology",
+      "response_length": 2194,
+      "response_preview": "```json\n{\n  \"name\": \"Anya Sharma\",\n  \"expertise\": [\n    \"Electric Vehicle (EV) Market Analysis\",\n    \"EV Technology Trends (Battery, Charging Infrastr..."
+    },
+    {
+      "status": "\u274c BLOCKED",
+      "model": "gemini-2.5-pro",
+      "prompt": "agent_terminology",
+      "error": "[google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown"
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemma-3-27b-it",
+      "prompt": "agent_terminology",
+      "response_length": 2576,
+      "response_preview": "```json\n{\n  \"name\": \"Volt Insights - Market Analyst Agent\",\n  \"expertise\": [\n    \"Electric Vehicle (EV) Market Analysis\",\n    \"Competitive Intelligenc..."
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemma-3-12b-it",
+      "prompt": "agent_terminology",
+      "response_length": 2302,
+      "response_preview": "```json\n{\n  \"name\": \"Eleanor Vance - EV Market Strategist\",\n  \"expertise\": {\n    \"primary\": \"Electric Vehicle (EV) Market Analysis & Strategic Plannin..."
+    }
+  ],
+  "summary": {
+    "total_tested": 15,
+    "successes": 8,
+    "blocked": 4,
+    "not_found": 0,
+    "errors": 3,
+    "working_models": [
+      "gemini-2.0-flash-exp",
+      "gemini-2.0-flash",
+      "gemini-2.0-flash-001",
+      "gemini-2.0-flash-lite",
+      "gemini-2.0-flash-lite-001",
+      "gemini-2.5-flash-lite",
+      "gemma-3-27b-it",
+      "gemma-3-12b-it"
+    ],
+    "blocked_models": [
+      "gemini-flash-latest",
+      "gemini-pro-latest",
+      "gemini-2.5-flash",
+      "gemini-2.5-pro"
+    ]
+  }
+}

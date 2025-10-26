@@ -1,0 +1,14 @@
+{
+    "name": "Live RISE Engine Invocation (External Script)",
+    "description": "A workflow to invoke the RISE Orchestrator via a dedicated Python script.",
+    "tasks": {
+        "execute_rise_protocol": {
+            "action_type": "execute_code",
+            "description": "Runs the RISE analysis via the run_rise_analysis.sh script.",
+            "inputs": {
+                "language": "shell",
+                "code": "./run_rise_analysis.sh \"{{ initial_context.user_query }}\""
+            }
+        }
+    }
+}

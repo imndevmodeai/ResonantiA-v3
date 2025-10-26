@@ -1,0 +1,227 @@
+YouTube Transcript
+URL: https://youtu.be/qIL8xEz17Nk?si=i9D7kv11dKrdGV4q
+Date: 2025-10-2122:36:39.861
+Title: Gemini 3.0 Pro (Lithiumflow): Greatest Model Ever! Most Powerful, Cheapest, & Fastest Model Ever! - YouTube
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=0">Looks like we're back again to discuss a</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=2">pretty big new update regarding the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=4">Gemini 3.0 release. We have two new</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=6">models currently being tested on LM</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=8">Marina's WebDev Arena called Lithium</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=11">Flow and Orion Mist. Both of these</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=14">models are showing impressive coding</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=15">capabilities with nearperfect front-end</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=18">designing skills and even solving</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=20">complex programming problems with ease.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=22">Now, the lithium flow model is a</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=24">mysterious new AI language model that</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=26">appeared on Marina, which is a public</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=29">benchmarking platform for large language</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=31">models. This was posted on October 19th</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=34">of this year, and it's widely speculated</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=36">to be a pre-release version of the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=38">Google Gemini 3.0 Pro model, mainly</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=41">because of Google's internal code naming</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=44">patterns. For example, Orion directly</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=46">ties to the past Gemini theory leaks</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=49">paired with Orion Mist, which is likely</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=51">Gemini 3.0 Flash. These two represent</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=54">Google's nextg push towards advanced</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=57">multimodal AI. Lithium Flow especially</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=60">excels in UI and graphics generation. It</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=63">also does quite well with SVG creation</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=65">and even complex visual renders like a</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=67">Pelican riding a bicycle or a Nintendo</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=70">Switch 2 mockup. It also dominates in</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=73">low latency tasks, making it ideal for</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=76">realtime app generation and interactive</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=79">designs. Users on Elmarina have already</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=82">reported that these two models</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=84">outperform many of the proprietary</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=86">models from GBT 5 all the way to many of</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=89">the other cloud models. Not only in</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=91">speed, but in quality, especially for</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=93">creative prompts and front-end builds.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=96">But the best part is you don't need to</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=98">use Google AI studio to get a response</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=100">from one of the checkpoints. You can</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=102">simply use Ella Marina where you have a</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=104">higher success rate of getting a reply</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=106">directly from Ella Marina's webdev</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=108">arena. And this is where you can easily</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=111">access it completely for free and get</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=113">any ser generations. In this case, I</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=115">simply sent in a prompt to create a</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=118">weather forecast with animated UIs. And</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=121">you can see that it was able to generate</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=123">it with the lithium flow model which</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=124">looks absolutely amazing in my opinion.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=127">It's really simple to access and it's</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=129">completely free. You can head over to</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=131">the LM Arena webdev arena and simply you</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=135">want to send in any sort of natural</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=136">language prompt and it it could be</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=138">something like creating a music playlist</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=140">generator or something like a smart home</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=143">dashboard UI. You can send in this</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=145">prompt and it will take a couple seconds</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=147">to generate with both of these two</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=149">models. This is essentially like the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=151">checkpoints where you get to compare the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=153">responses that is being generated from</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=155">two different models and you get to</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=158">judge which model ended up doing better.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=160">So it would only reveal it after you</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=162">provide it which model did a better job.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=165">Obviously give the best answer that you</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=167">think is applicable in that case and it</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=169">will reveal which model did generate</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=172">that.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=176">And there we go. Just take a look at the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=178">code being generated for the smartome</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=180">dashboard. You can see on the left hand</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=182">side it looks pretty good in my opinion.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=184">It's not bad at all. There is different</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=186">quick scenes that you can work with.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=188">There is the ability to control the room</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=190">settings for your living room, bedroom,</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=192">etc. like changing the brightness of the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=194">lights maybe or the temperature. You can</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=197">see which one is on the camera system as</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=200">well as the energy consumption. Now on</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=202">the right hand side, overall it looks</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=204">pretty decent in my opinion in terms of</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=205">the UI components. You can see that it</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=208">did a great job in adding all the things</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=210">that should be needed for any sort of</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=213">smart home dashboard. There is the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=215">energy consumption, the security, all</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=217">the different rooms for it as well as an</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=220">energy usage like we saw at the bottom.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=222">And as after you have decided on which</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=225">one looks better, you can simply vote</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=227">and it will then reveal which one had</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=229">generated it. So, in this case, it looks</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=231">like the lithium flow model generated</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=233">this uh UI for the smart home app.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=236">Before we get started, I just want to</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=238">mention that you should definitely go</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=239">ahead and subscribe to the world of AI</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=241">newsletter. I'm constantly posting</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=243">different newsletters on a weekly basis.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=246">So, this is where you can easily get</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=248">up-to-date knowledge about what is</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=250">happening in the AI space. So,</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=252">definitely go ahead and subscribe as</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=253">this is completely for free. But the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=255">thing with the webdev arena is that you</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=258">have a higher success rate of getting</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=260">the lithium flow model in comparison to</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=262">the Google AI studio which is where</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=264">you're going to get a lot of usage of</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=267">this potential Google model within the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=269">web dev arena. Here is a prompt to make</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=272">a website presenting yourself which</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=274">includes things like the company that</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=276">made you as well as flashy as you would</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=279">want it to be.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=281">Here's</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=283">a prompt to create a SAS landing page</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=286">which is representing the company. And</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=288">the results honestly look pretty</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=290">impressive for a raw HTML file being</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=292">generated in WebDev Arena. You're not</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=295">going to have high context within that</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=297">web dev arena. But overall, the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=298">structure, the animations, even the text</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=300">hierarchy, it all looked pretty cohesive</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=302">and deliberate. But here's the thing,</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=304">the older checkpoints that we saw</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=307">previously felt a bit more dynamic and</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=309">expressive. It added animations as well</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=312">as sound in this case, but it is kind of</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=316">limiting in terms of the skill set we</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=318">actually saw previously with the other</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=320">checkpoints. But then again, I'm seeing</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=322">landing pages like this being generated</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=324">by Lithium Flow, which makes me doubt</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=326">whatever I just had stated as this is</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=329">just truly remarkable to see such a</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=332">great generation with animations and</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=334">such a different type of generation that</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=337">we've never basically seen with any AI</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=339">model. Here is where I had requested it</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=342">to create a beautiful animated SAS</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=344">landing page. And on the left, we have</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=346">gotten the generation from the lithium</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=349">flow model, which looks pretty</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=350">impressive in my opinion. And the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=352">front-end capabilities of this model are</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=354">just truly insane cuz it looks super</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=356">intuitive and basically doesn't look AI</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=359">generated at all. There's the trusted</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=361">companies, which you can hover over the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=363">different animated feature cards, the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=366">pricing structure, as well as</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=368">testimonials. All of this was fully done</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=370">in a single prompt. And you can see that</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=372">this is something that looks a lot</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=374">better than the typical AI generated SAS</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=376">landing pages. I'm sold. This is the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=379">best Mac OS browserbased operating</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=381">system that I've seen. And I can 100%</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=384">guarantee that this is by the Lithium</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=387">Flow model. This looks absolutely</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=389">amazing. You have functional</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=390">applications. This definitely looks</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=392">exactly like a Mac OS operating system.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=395">You have the browser which actually</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=397">showcases Wikipedia. You also have the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=400">iMessage. uh app over here, a notes app,</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=403">which looks exactly like iOS's notes</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=406">app, the calculator. You also have the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=408">terminal, which works. You have a</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=410">settings tab, and then lastly, trash</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=412">can. So, let's actually vote. Now, this</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=414">is what I've gotten with the other</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=416">model, but we're definitely going to</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=417">vote that the right one is better. You</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=420">can see that this was lithium flow, and</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=422">on the left hand side is GBT 5. This is</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=424">why everyone's so hyped about this new</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=426">Gemini 3.0 release cuz it's going to be</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=428">truly revolutionary in all fronts. If</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=431">you like this video and would love to</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=433">support the channel, you can consider</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=435">donating to my channel through the super</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=437">thanks option below. Or you can consider</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=439">joining our private Discord where you</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=442">can access multiple subscriptions to</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=443">different AI tools for free on a monthly</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=446">basis, plus daily AI news and exclusive</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=449">content, plus a lot more. But that's</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=451">basically it, guys. I hope you enjoyed</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=452">today's video and got some sort of</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=454">value. I'll leave all these links in the</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=455">description below so that you can easily</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=456">get started. This is truly a great</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=458">chance for you to access the Gemini 3.0</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=461">model completely for free and get a good</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=463">grasp as to how this model actually</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=466">performs. But that's basically it, guys.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=467">I hope you enjoyed today's video and got</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=469">some sort of value. I'll leave these</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=470">links in the description below. Make</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=472">sure you subscribe to the second</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=473">channel, join the newsletter, join our</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=474">Discord, follow me on Twitter, and</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=476">lastly, make sure you guys subscribe,</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=477">turn on notification bell, like this</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=479">video, and please take a look at our</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=480">previous videos cuz there is a lot of</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=481">videos that you will truly benefit from.</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=483">But with that thought, guys, have an</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=485">amazing day. Spread positivity and I'll</a>
+<a href="https://youtu.be/qIL8xEz17Nk?si=W8yOaOuVwC9YANzG&t=486">see you guys fairly shortly.</a>

@@ -1,0 +1,22 @@
+2025-08-04 22:02:24 - root:162 - INFO - logging_config - ================================================================================
+2025-08-04 22:02:24 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-04 22:02:24 - root:164 - INFO - logging_config - ================================================================================
+2025-08-04 22:02:24 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-04 22:02:24
+2025-08-04 22:02:24 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-04 22:02:24 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-04_22-02-24.log
+2025-08-04 22:02:24 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-04_22-02-24.log
+2025-08-04 22:02:24 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-04_22-02-24.log
+2025-08-04 22:02:24 - root:170 - INFO - logging_config - ================================================================================
+2025-08-04 22:02:24 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-04 22:02:24 - root:48 - CRITICAL - main - Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): No module named 'networkx'. Check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/main.py", line 43, in <module>
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_engine.py", line 22, in <module>
+    from .action_registry import main_action_registry, register_action
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/action_registry.py", line 24, in <module>
+    from .causal_inference_tool import perform_causal_inference
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/causal_inference_tool.py", line 12, in <module>
+    import networkx as nx # For graph representation if needed
+    ^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'networkx'

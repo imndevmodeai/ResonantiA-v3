@@ -1,0 +1,79 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-02T13:52:00.537Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-02_13-52-00-534Z.log
+❌ Error Log: logs/errors_websocket_2025-09-02_13-52-00-534Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-02_13-52-00-534Z.log
+================================================================================
+2025-09-02T13:52:00.569Z [WARN] websocket: Protocol modules not available
+{
+  "error": "Cannot find module '/media/newbu/3626C55326C514B1/Happier/nextjs-chat/.next/server/app/utils/iarProcessor.js'\nRequire stack:\n- /media/newbu/3626C55326C514B1/Happier/webSocketServer.js"
+}
+2025-09-02T13:52:00.607Z [INFO] websocket: Falling back to basic processing mode
+2025-09-02T13:52:00.610Z [INFO] websocket: This may be due to a missing build step. Try running "npm run build" in the nextjs-chat directory
+2025-09-02T13:52:00.610Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-02T13:52:00.614Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-02T13:52:00.619Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-02T13:52:01.055Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T13:52:01.068Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T13:52:01.155Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T13:52:01.163Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T13:52:02.490Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T13:52:02.496Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T13:52:06.664Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T13:52:06.670Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T13:52:58.045Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T13:52:58.048Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T13:53:02.600Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T13:53:02.601Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T13:53:03.344Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T13:53:03.348Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T13:53:08.104Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T13:53:08.119Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T13:53:12.095Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T13:53:12.097Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T13:53:12.304Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T13:53:12.305Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T13:54:00.080Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T13:54:00.094Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T13:54:14.019Z [INFO] websocket: Received user query
+{
+  "query": "i  have noticed that when I ask you complex questions involving multiple, conflicting constraints, y..."
+}
+2025-09-02T13:54:14.022Z [INFO] websocket: Processing query directly: i  have noticed that when I ask you complex questi...
+2025-09-02T13:54:19.240Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-02T13:54:19.241Z [INFO] websocket: Processing query directly: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-02T13:54:56.670Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-02T13:54:56.671Z [INFO] websocket: Processing query directly: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-02T13:55:34.903Z [INFO] websocket: Received user query
+{
+  "query": "i have noticed that when I ask you complex questions involving multiple, conflicting constraints, yo..."
+}
+2025-09-02T13:55:34.906Z [INFO] websocket: Processing query directly: i have noticed that when I ask you complex questio...
+2025-09-02T13:55:40.460Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-02T13:55:40.460Z [INFO] websocket: Processing query directly: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-02T14:02:57.418Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:02:57.420Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:02:58.599Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:02:58.615Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T14:02:58.629Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:02:58.635Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T14:02:58.678Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:03:01.655Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:03:01.656Z [INFO] websocket: ArchE interface ready for direct processing
+2025-09-02T14:03:13.044Z [INFO] websocket: Received user query
+{
+  "query": "I am the CEO of a publicly traded pharmaceutical company. We have developed a life-saving drug for a..."
+}
+2025-09-02T14:03:13.048Z [INFO] websocket: Processing query directly: I am the CEO of a publicly traded pharmaceutical c...

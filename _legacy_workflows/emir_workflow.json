@@ -1,0 +1,104 @@
+{
+  "name": "EMIR_v1.0",
+  "version": "1.0.0",
+  "description": "External Media Ingestion & Resonance: Ingests a URL, extracts content, synthesizes insights, and generates a resonance report with candidate SPRs.",
+  "inputs": {
+    "source_url": {
+      "type": "string",
+      "description": "The URL of the external media to process."
+    }
+  },
+  "steps": [
+    {
+      "id": "step_1_intake",
+      "action": "ValidateAndStoreURI",
+      "inputs": {
+        "from_context": [],
+        "literals": {
+          "url": "{{inputs.source_url}}"
+        }
+      },
+      "outputs": {
+        "validated_url": "validated_url"
+      },
+      "phase_gates": [
+        {
+          "condition": "iar.confidence > 0.9",
+          "on_fail": "halt",
+          "message": "Source URL is invalid or unreachable."
+        }
+      ]
+    },
+    {
+      "id": "step_2_extraction",
+      "action": "ExtractTranscriptFromMedia",
+      "inputs": {
+        "from_context": ["validated_url"],
+        "literals": {}
+      },
+      "outputs": {
+        "structured_content": "structured_content"
+      },
+      "phase_gates": [
+        {
+          "condition": "iar.confidence > 0.7",
+          "on_fail": "shift",
+          "message": "Failed to extract structured content from the source. Initiating Metacognitive Shift to attempt recovery."
+        }
+      ]
+    },
+    {
+      "id": "step_3_synthesis",
+      "action": "SynthesizeContent",
+      "inputs": {
+        "from_context": ["structured_content"],
+        "literals": {}
+      },
+      "outputs": {
+        "synthesis_report": "synthesis_report"
+      },
+      "phase_gates": []
+    },
+    {
+      "id": "step_4_insight_generation",
+      "action": "GenerateInsightPlan",
+      "inputs": {
+        "from_context": ["synthesis_report.summary", "synthesis_report.themes"],
+        "literals": {
+          "problem_statement": "Based on the provided synthesis, generate a strategic insight plan for leveraging this information to enhance the ResonantiA Protocol."
+        }
+      },
+      "outputs": {
+        "rise_insight_plan": "rise_insight_plan"
+      },
+      "phase_gates": []
+    },
+    {
+      "id": "step_5_crystallization_proposal",
+      "action": "ProposeCandidateSPRs",
+      "inputs": {
+        "from_context": ["synthesis_report.candidate_concepts"],
+        "literals": {}
+      },
+      "outputs": {
+        "candidate_sprs": "candidate_sprs"
+      },
+      "phase_gates": []
+    },
+    {
+      "id": "step_6_reporting",
+      "action": "GenerateFinalReport",
+      "inputs": {
+        "from_context": ["synthesis_report", "rise_insight_plan", "candidate_sprs"],
+        "literals": {}
+      },
+      "outputs": {
+        "final_report_artifact": "final_report"
+      },
+      "phase_gates": []
+    }
+  ],
+  "outputs": {
+    "expose": ["context.final_report"]
+  }
+}

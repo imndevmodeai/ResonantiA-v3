@@ -1,0 +1,16 @@
+2025-08-01 01:08:05 - root:162 - INFO - logging_config - ================================================================================
+2025-08-01 01:08:05 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-01 01:08:05 - root:164 - INFO - logging_config - ================================================================================
+2025-08-01 01:08:05 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-01 01:08:05
+2025-08-01 01:08:05 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-01 01:08:05 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-01_01-08-05.log
+2025-08-01 01:08:05 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-01_01-08-05.log
+2025-08-01 01:08:05 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-01_01-08-05.log
+2025-08-01 01:08:05 - root:170 - INFO - logging_config - ================================================================================
+2025-08-01 01:08:05 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-01 01:08:05 - test_logger:32 - INFO - test_timestamped_logging - This is a test info message
+2025-08-01 01:08:05 - test_logger:33 - WARNING - test_timestamped_logging - This is a test warning message
+2025-08-01 01:08:05 - test_logger:34 - ERROR - test_timestamped_logging - This is a test error message
+2025-08-01 01:08:05 - session:37 - INFO - test_timestamped_logging - User started a new session
+2025-08-01 01:08:05 - session:38 - INFO - test_timestamped_logging - User sent a query
+2025-08-01 01:08:05 - session:39 - INFO - test_timestamped_logging - User received a response

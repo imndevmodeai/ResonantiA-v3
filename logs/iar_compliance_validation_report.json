@@ -1,0 +1,52 @@
+{
+  "validation_timestamp": "2025-10-16T07:46:08.350105",
+  "overall_compliance": 39.743589743589745,
+  "total_functions": 78,
+  "decorated_functions": 31,
+  "files_validated": 6,
+  "validation_results": [
+    {
+      "file": "Three_PointO_ArchE/action_registry.py",
+      "total_functions": 11,
+      "decorated_functions": 8,
+      "compliance_rate": 72.72727272727273,
+      "status": "NON_COMPLIANT"
+    },
+    {
+      "file": "Three_PointO_ArchE/enhanced_tools.py",
+      "total_functions": 4,
+      "decorated_functions": 3,
+      "compliance_rate": 75.0,
+      "status": "NON_COMPLIANT"
+    },
+    {
+      "file": "Three_PointO_ArchE/causal_inference_tool.py",
+      "total_functions": 8,
+      "decorated_functions": 1,
+      "compliance_rate": 12.5,
+      "status": "NON_COMPLIANT"
+    },
+    {
+      "file": "Three_PointO_ArchE/agent_based_modeling_tool.py",
+      "total_functions": 32,
+      "decorated_functions": 12,
+      "compliance_rate": 37.5,
+      "status": "NON_COMPLIANT"
+    },
+    {
+      "file": "Three_PointO_ArchE/predictive_modeling_tool.py",
+      "total_functions": 7,
+      "decorated_functions": 1,
+      "compliance_rate": 14.285714285714285,
+      "status": "NON_COMPLIANT"
+    },
+    {
+      "file": "Three_PointO_ArchE/plan_validator.py",
+      "total_functions": 16,
+      "decorated_functions": 6,
+      "compliance_rate": 37.5,
+      "status": "NON_COMPLIANT"
+    }
+  ],
+  "status": "PARTIAL"
+}

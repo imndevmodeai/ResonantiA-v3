@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: auto; }
+        h1 { color: #444; text-align: center; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+        .card { background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .card img { width: 100%; height: 300px; object-fit: cover; }
+        .card-content { padding: 15px; }
+        .card-content p { margin: 10px 0; }
+        .card-content a { color: #007bff; text-decoration: none; word-wrap: break-word; }
+        .card-content a:hover { text-decoration: underline; }
+        .back-link { display: block; text-align: center; margin-top: 30px; }
+        .score { font-weight: bold; }
+        .guid { font-size: 0.9em; color: #666; }
+        .image-container { position: relative; }
+        .original-image-preview {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            z-index: 1000;
+            max-width: 400px;
+            max-height: 400px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Processing Results</h1>
+        <div class="grid-container">
+            {% for item in items %}
+            <div class="card">
+                <div class="image-container">
+                    <img src="{{ item.base64 }}" alt="Processed Image" class="result-image">
+                </div>
+                <div class="card-content">
+                    <p>
+                        <strong>URL:</strong>
+                        {% if item.url and item.url != 'No URL found' %}
+                            <a href="{{ item.url }}" target="_blank">{{ item.url }}</a>
+                        {% else %}
+                            No URL found
+                        {% endif %}
+                    </p>
+                    <p class="score">Confidence Score: {{ item.score }}%</p>
+                    <p class="guid">GUID: {{ item.guid }}</p>
+                    <p>Index: {{ item.index }}</p>
+                    <p>IndexDB: {{ item.indexDB }}</p>
+                    <p>Seen: {{ item.seen }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="/" class="back-link">Back to Input</a>
+    </div>
+
+    {% if original_image %}
+    <img src="{{ original_image }}" class="original-image-preview" id="original-image">
+    {% endif %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const originalImage = document.getElementById('original-image');
+            if (originalImage) {
+                const resultImages = document.querySelectorAll('.result-image');
+                resultImages.forEach(img => {
+                    img.addEventListener('mouseover', () => {
+                        originalImage.style.display = 'block';
+                    });
+                    img.addEventListener('mouseout', () => {
+                        originalImage.style.display = 'none';
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -58,6 +58,18 @@ async function search(page, query, searchEngine = "duckduckgo", debug = false) {
 async function handleGoogleSearch(page, query, debug) {
   try {
     console.error(`Handling Google search... Debug mode is: ${debug}`); 
+    
+    // Go to the main Google page first
+    await page.goto("https://www.google.com", { waitUntil: 'domcontentloaded', timeout: 30000 });
+    
+    // Type the query into the search box
+    await page.type('textarea[name="q"]', query);
+    
+    // Wait for a moment before pressing Enter
+    await page.waitForTimeout(500);
+    
+    // Press Enter to initiate the search
+    await page.keyboard.press('Enter');
 
     // Expose a function to Node.js environment to capture click details
     await page.exposeFunction('reportClickDetailsToNode', (details) => {

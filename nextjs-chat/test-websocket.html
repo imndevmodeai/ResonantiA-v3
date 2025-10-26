@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Connection Test</h1>
+    <div id="status">Connecting...</div>
+    <div id="messages"></div>
+    
+    <script>
+        const status = document.getElementById('status');
+        const messages = document.getElementById('messages');
+        
+        const ws = new WebSocket('ws://localhost:8765');
+        
+        ws.onopen = function() {
+            status.textContent = '✅ Connected to VCD Bridge!';
+            status.style.color = 'green';
+        };
+        
+        ws.onmessage = function(event) {
+            const message = document.createElement('div');
+            message.textContent = '📨 ' + event.data.substring(0, 100) + '...';
+            message.style.margin = '5px 0';
+            message.style.padding = '5px';
+            message.style.background = '#f0f0f0';
+            message.style.borderRadius = '3px';
+            messages.appendChild(message);
+        };
+        
+        ws.onclose = function() {
+            status.textContent = '❌ Connection closed';
+            status.style.color = 'red';
+        };
+        
+        ws.onerror = function(error) {
+            status.textContent = '❌ Connection error: ' + error;
+            status.style.color = 'red';
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

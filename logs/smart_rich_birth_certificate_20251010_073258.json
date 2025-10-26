@@ -1,0 +1,103 @@
+{
+  "birth_timestamp": "2025-10-10T07:32:58.778567",
+  "activation_duration_seconds": 0.040791,
+  "system_state": "smart",
+  "state_description": "Core systems operational with partial integration",
+  "success_rate": 0.875,
+  "quantum_enhanced": true,
+  "components": {
+    "self_analysis": true,
+    "cognitive_hub": true,
+    "learning_loop": true,
+    "health_monitor": true
+  },
+  "capabilities": {
+    "map_territory_analysis": true,
+    "quantum_probability": true,
+    "cognitive_integration": true,
+    "autopoietic_learning": true,
+    "self_monitoring": true,
+    "crcs_fast_path": true,
+    "rise_deep_thinking": true,
+    "aco_pattern_learning": true
+  },
+  "test_results": {
+    "learning_loop_cycle": {
+      "stardust_analyzed": 5,
+      "nebulae_detected": 0,
+      "wisdom_ignited": 0,
+      "knowledge_crystallized": 0,
+      "cycle_time_ms": 0.05793571472167969
+    }
+  },
+  "health_status": {
+    "overall_health": "critical",
+    "confidence": 0.3,
+    "active_alerts": 1,
+    "metrics_count": 6
+  },
+  "activation_log": [
+    {
+      "timestamp": "2025-10-10T07:32:58.780731",
+      "step": "initialize_self_analysis",
+      "status": "success",
+      "details": "Self-analysis system with quantum probabilities ready",
+      "confidence": 1.0
+    },
+    {
+      "timestamp": "2025-10-10T07:32:58.807024",
+      "step": "initialize_cognitive_hub",
+      "status": "success",
+      "details": "CRCS \u2192 RISE \u2192 ACO integration established",
+      "confidence": 0.95
+    },
+    {
+      "timestamp": "2025-10-10T07:32:58.815097",
+      "step": "initialize_learning_loop",
+      "status": "success",
+      "details": "Stardust \u2192 Nebulae \u2192 Ignition \u2192 Galaxies cycle ready",
+      "confidence": 0.9
+    },
+    {
+      "timestamp": "2025-10-10T07:32:58.815273",
+      "step": "initialize_health_monitor",
+      "status": "success",
+      "details": "Health monitoring active with component integration",
+      "confidence": 0.95
+    },
+    {
+      "timestamp": "2025-10-10T07:32:58.815321",
+      "step": "test_cognitive_hub",
+      "status": "failure",
+      "details": "Error: 'dict' object has no attribute 'task_id'",
+      "confidence": 0.0
+    },
+    {
+      "timestamp": "2025-10-10T07:32:58.815627",
+      "step": "test_learning_loop",
+      "status": "success",
+      "details": "Cycle complete: 0 patterns detected",
+      "confidence": 0.85
+    },
+    {
+      "timestamp": "2025-10-10T07:32:58.818350",
+      "step": "test_health_monitor",
+      "status": "success",
+      "details": "Health: critical (30.0% confidence)",
+      "confidence": 0.3
+    },
+    {
+      "timestamp": "2025-10-10T07:32:58.818779",
+      "step": "demonstrate_quantum",
+      "status": "success",
+      "details": "Quantum probability states operational",
+      "confidence": 1.0
+    }
+  ],
+  "iar_compliance": {
+    "intention": "Transform ArchE into smart-rich state through autopoietic enhancement",
+    "action": "Executed 8 activation steps",
+    "reflection": "Achieved smart state with 87.5% success rate",
+    "confidence": 0.875
+  }
+}

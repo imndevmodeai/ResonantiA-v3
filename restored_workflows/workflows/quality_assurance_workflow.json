@@ -1,0 +1,39 @@
+{
+  "name": "Full Quality Assurance Cycle",
+  "description": "Performs a complete QA cycle by running a code linter and executing the entire suite of existing workflows to check for regressions.",
+  "version": "1.0",
+  "tasks": {
+    "lint_codebase": {
+      "action_type": "run_code_linter",
+      "description": "Runs a linter on the codebase.",
+      "inputs": {
+        "directory": "Three_PointO_ArchE"
+      },
+      "dependencies": []
+    },
+    "test_workflow_suite": {
+      "action_type": "run_workflow_suite",
+      "description": "Runs a suite of test workflows to verify system functionality.",
+      "inputs": {
+        "workflow_files": [
+          "workflows/system_genesis_workflow.json",
+          "workflows/as_above_so_below_workflow.json",
+          "workflows/recovery_workflow.json"
+        ]
+      },
+      "dependencies": []
+    },
+    "display_qa_report": {
+      "action_type": "display_output",
+      "description": "Displays the final QA report.",
+      "inputs": {
+        "content": {
+          "title": "--- Quality Assurance Report ---",
+          "code_quality": "{{ lint_codebase.summary }}",
+          "workflow_regression_test": "{{ test_workflow_suite.output }}"
+        }
+      },
+      "dependencies": ["lint_codebase", "test_workflow_suite"]
+    }
+  }
+} 

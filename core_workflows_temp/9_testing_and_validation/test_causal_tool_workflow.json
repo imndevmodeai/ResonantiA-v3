@@ -1,0 +1,37 @@
+{
+  "name": "Test Causal Inference Tool",
+  "description": "Tests the 'estimate_effect' operation of the causal inference tool.",
+  "version": "1.0",
+  "tasks": {
+    "run_causal_estimation": {
+      "description": "Estimate causal effect.",
+      "action_type": "perform_causal_inference",
+      "inputs": {
+        "operation": "estimate_effect",
+        "data": {
+          "X": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "Z": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+          "Y": [2, 4, 5, 7, 8, 10, 11, 13, 14, 16]
+        },
+        "treatment": "X",
+        "outcome": "Y",
+        "confounders": ["Z"],
+        "method": "backdoor.linear_regression"
+      },
+      "outputs": {
+        "estimated_effect": "float",
+        "p_value": "float",
+        "reflection": "dict"
+      },
+      "dependencies": []
+    },
+    "display_causal_results": {
+      "description": "Display the causal estimation results.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Causal Estimation Test Results:\\nEffect: {{ run_causal_estimation.estimated_effect }}\nP-value: {{ run_causal_estimation.p_value }}\nReflection: {{ run_causal_estimation.reflection | toJson }}"
+      },
+      "dependencies": ["run_causal_estimation"]
+    }
+  }
+} 

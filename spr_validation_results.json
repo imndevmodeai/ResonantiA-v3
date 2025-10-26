@@ -1,0 +1,115 @@
+{
+  "phase_4_validation_completed": true,
+  "validation_timestamp": "2025-10-16T07:22:21.934103",
+  "total_sprs": 199,
+  "proper_format_count": 65,
+  "improper_format_count": 134,
+  "format_compliance_percentage": 32.663316582914575,
+  "validation_tests": [
+    {
+      "spr_id": "KnO",
+      "is_valid": true,
+      "reason": "Valid Summers eyeS format"
+    },
+    {
+      "spr_id": "Summers_eyeS",
+      "is_valid": true,
+      "reason": "Valid Summers eyeS format"
+    },
+    {
+      "spr_id": "ResonantInsightStrategyEnginE",
+      "is_valid": false,
+      "reason": "Invalid format"
+    },
+    {
+      "spr_id": "SparsePrimingRepresentationS",
+      "is_valid": false,
+      "reason": "Invalid format"
+    },
+    {
+      "spr_id": "That man has skillS",
+      "is_valid": true,
+      "reason": "Valid Summers eyeS format"
+    },
+    {
+      "spr_id": "MidnighT",
+      "is_valid": true,
+      "reason": "Valid Summers eyeS format"
+    },
+    {
+      "spr_id": "RISE",
+      "is_valid": false,
+      "reason": "Invalid format"
+    },
+    {
+      "spr_id": "SPR",
+      "is_valid": false,
+      "reason": "Invalid format"
+    },
+    {
+      "spr_id": "CognitiveResonancE",
+      "is_valid": false,
+      "reason": "Invalid format"
+    },
+    {
+      "spr_id": "TerritoryAssumptionS",
+      "is_valid": false,
+      "reason": "Invalid format"
+    }
+  ],
+  "proper_format_sprs": [
+    "AgentbasedmodelinG",
+    "AisysteM",
+    "AmbiguitydetectioN",
+    "ActionregistrY",
+    "ArchesysteM",
+    "ArcheinstanceregistrY",
+    "AsabovesobeloW",
+    "AutopoieticsystemgenesiS",
+    "CausalinferencE",
+    "CausallagdetectioN",
+    "CognitivereflectioncyclE",
+    "CognitiveresonancE",
+    "CognitivetoolS",
+    "CodeexecutoR",
+    "CollectiveconsciousnesS",
+    "ComparativefluxualprocessinG",
+    "ComplexsystemvisioninG",
+    "ContextualsuggestiongeneratioN",
+    "CoreworkflowenginE",
+    "CrossinstancelearninG"
+  ],
+  "improper_format_sprs": [
+    "4dthinkinG",
+    "AdaptiveCognitiveOrchestratoR",
+    "PatternEvolutioN",
+    "EmergentDomainDetectoR",
+    "LlmTooL",
+    "ResonantInsightStrategyEnginE",
+    "MasterMindArtificialIntelligencE",
+    "ResonantiA Protocol v3.1-CA",
+    "VisualCognitiveDebuggeR",
+    "IARCompliantWorkflowEngine",
+    "CriticalMandatesDocumentatioN",
+    "ActionContext",
+    "BaseLLMProvider",
+    "Three_PointO_ArchE",
+    "Four_PointO_ArchE",
+    "SPRmanageR",
+    "DoWhy",
+    "Mesa",
+    "SciPy",
+    "Selenium"
+  ],
+  "recognition_system": {
+    "validation_function": "validate_summers_eyes_format",
+    "recognition_function": "recognize_summers_eyes_pattern",
+    "format_rule": "First letter of first word and last letter of last word capitalized, no internal capitals",
+    "examples": [
+      "KnO",
+      "Summers_eyeS",
+      "That man has skillS",
+      "MidnighT"
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "primes_integration_completed": true,
+  "completion_timestamp": "2025-10-16T06:36:57.487545",
+  "framework_source": {
+    "title": "A Methodological Framework for LLM-Based Mining of Software Repositories",
+    "authors": "Vincenzo De Martino, Joel Casta\u00f1o, Fabio Palomba, Xavier Franch, Silverio Mart\u00ednez-Fern\u00e1ndez",
+    "publication": "ACM Trans. Softw. Eng. Methodol. (April 2025)",
+    "doi": "https://doi.org/10.48550/arXiv.2508.02233"
+  },
+  "primes_framework_overview": {
+    "version": "PRIMES 2.0",
+    "stages": 6,
+    "methodological_substeps": 23,
+    "methodological_approaches": 15,
+    "main_threats": 9,
+    "mitigation_strategies": 25
+  },
+  "arche_integration_sprs": [
+    {
+      "spr_id": "PRIMESFrameworkIntegration",
+      "category": "SystemProtocol",
+      "confidence": 0.95,
+      "purpose": "Core PRIMES framework integration"
+    },
+    {
+      "spr_id": "PromptRefinementProtocol",
+      "category": "SystemProtocol",
+      "confidence": 0.9,
+      "purpose": "PRIMES Stage 1-2 prompt methodology"
+    },
+    {
+      "spr_id": "LLMValidationFramework",
+      "category": "QualityAssurance",
+      "confidence": 0.92,
+      "purpose": "PRIMES Stage 4 validation methodology"
+    },
+    {
+      "spr_id": "ThreatMitigationStrategy",
+      "category": "RiskAnalysis",
+      "confidence": 0.88,
+      "purpose": "PRIMES threat mitigation strategies"
+    },
+    {
+      "spr_id": "ReproducibleMSRWorkflow",
+      "category": "CoreWorkflow",
+      "confidence": 0.93,
+      "purpose": "Complete PRIMES 2.0 workflow"
+    }
+  ],
+  "integration_benefits": {
+    "empirical_rigor": "Systematic approach to LLM-based repository mining",
+    "threat_mitigation": "Comprehensive threat identification and mitigation",
+    "reproducibility": "Structured workflow for reproducible research",
+    "validation_framework": "Robust validation of LLM outputs",
+    "methodological_excellence": "Best practices for empirical research"
+  },
+  "primes_stages_integrated": {
+    "stage_1": "Creation of Prompts for Piloting",
+    "stage_2": "Prompt Pilot Test",
+    "stage_3": "Evaluation Among Multiple LLMs",
+    "stage_4": "Output Validation",
+    "stage_5": "Threat Mitigation",
+    "stage_6": "Reproducible Workflow"
+  },
+  "arche_enhancements": {
+    "repository_mining": "Enhanced with PRIMES methodology",
+    "llm_validation": "Systematic validation framework",
+    "empirical_research": "Rigorous research practices",
+    "threat_awareness": "Comprehensive threat mitigation",
+    "reproducibility": "Structured reproducible workflows"
+  }
+}
