@@ -1,0 +1,23 @@
+{
+    "window.titleBarStyle": "native",
+    "window.commandCenter": true,
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "window.customTitleBarVisibility": "never",
+    "cursor.composer.shouldChimeAfterChatFinishes": true,
+    "cursor.composer.shouldShowMarkdownHoverParticipantActions2": true,
+    "cursor.cpp.enablePartialAccepts": true,
+    "cursor.general.gitGraphIndexing": "enabled",
+    "workbench.settings.openDefaultSettings": true,
+    "terminal.integrated.persistentSessionScrollback": 1000,
+    "workbench.editor.showTabs": "single",
+    "editor.minimap.enabled": true,
+    "cursor.composer.shouldAllowCustomModes": true,
+    "cursor.diffs.useCharacterLevelDiffs": true,
+    "workbench.editorAssociations": {
+        "*.pdf": "default"
+    },
+    "update.releaseTrack": "prerelease",
+    "cloudcode.project": "radiant-chicken-vl0vz",
+    "workbench.secondarySideBar.showLabels": false,
+    "cursor.enable_git_worktrees_setting": true
+}

@@ -1,0 +1,328 @@
+0:00 [Music]
+0:00 remember mgpt it's a framework that
+0:03 allows you to build large Lage model
+0:04 agents that are infused with memory and
+0:07 this is with addition with custom tools
+0:10 it enables anyone to build and deploy
+0:13 stateful large L model agents with
+0:15 long-term memory which is able to
+0:17 connect to external data sources like
+0:19 PDF files for rag you have the ability
+0:22 to Define and call Custom tools like
+0:24 Google search and you have the ability
+0:26 to also integrate other plugins now back
+0:29 when we had covered it on the channel it
+0:31 wasn't Deployable with a UI that you see
+0:34 over here it didn't have any of the mgpt
+0:37 services that they've just recently
+0:38 introduced and this is why we're
+0:40 actually going to be covering it once
+0:41 again due to its extensive new tool set
+0:44 and abilities so with that thought guys
+0:46 stay tuned and let's get straight into
+0:47 the video and showcase this new UI as
+0:50 well as the M GPT Services which they
+0:52 have introduced sorry for being
+0:55 repetitive but this month we had insane
+0:57 Partnerships with big companies giving
+0:59 us subscriptions to AI tools completely
+1:02 for free these are tools that will
+1:04 streamline your business's growth and
+1:06 improve your efficiency just being a
+1:09 patreon this past month you were given
+1:11 access to six paid subscriptions
+1:13 completely for free not only do you
+1:15 access these subcriptions but you gain
+1:17 the ability for Consulting networking
+1:20 collaborating with the community as well
+1:22 as with myself you get access to daily
+1:25 AI news resources giveaways and so much
+1:28 more if you're interested check out out
+1:30 the patreon link in the description
+1:31 below to gain access to these
+1:36 benefits hey what is up guys welcome
+1:38 back to another YouTube video at the
+1:40 world of AI in today's video we're going
+1:42 to be taking a look at M GPT now if you
+1:45 haven't seen this video you should
+1:46 definitely do so this is a video I made
+1:49 on mgpt long time ago around 6 months
+1:51 ago and we went over this framework but
+1:54 just to briefly go over what mgpt is
+1:57 it's basically this framework that's
+1:58 designed to simplify by the development
+2:00 and the deployment of stateful large
+2:02 nage model agents it offers various
+2:05 functionalities like long-term memory
+2:08 and State Management where it's going to
+2:10 be able to allow the creation of agents
+2:12 that can retain and access information
+2:15 over extended periods this will reduce
+2:18 the costage of having different large
+2:21 Lage models utilize less tokens as it
+2:23 refers to previous context and this will
+2:26 enhance your contextual understanding
+2:28 better now it ALS Al allows you for
+2:31 having con connections with external
+2:33 data sources now which is with Rag and
+2:36 it will enable a large language model
+2:38 agent to connect to external data
+2:39 sources which will facilitate tasks such
+2:42 as document analysis and this is through
+2:44 rag setups you're now also able to
+2:47 Define and call Custom Tool functions
+2:49 where you're going to be able to Define
+2:51 and utilize custom functions such as
+2:53 integrating Google search for example so
+2:55 that you can extend the capabilities of
+2:57 your large language model agent this is
+3:00 a great framework that we have covered
+3:02 previously and we finally got a new
+3:04 update where mgbt supports the
+3:06 deployment of multi- agents and
+3:08 multi-user services that M GPZ Services
+3:11 provide and it's going to be making it
+3:13 more suitable for various applications
+3:16 it's completely open source and it's
+3:18 something that I'm going to be
+3:18 showcasing how to install this UI cuz it
+3:21 is definitely way more easier to use and
+3:24 it's super easy to use their tool
+3:26 Builder we can see that this is the mgbt
+3:28 dev portal we're going to be able to
+3:29 create Monitor and chat with your large
+3:32 language model agents now guys there's
+3:34 actually multiple methods to get started
+3:36 with mgpt but say you want to install
+3:39 mgpt with the def portal we're going to
+3:42 be utilizing Docker to set this up but
+3:44 there's also a way to start it up with
+3:46 your Clive which is possibly something
+3:49 that many of us who do not have the
+3:50 hardware requirements should follow
+3:52 through with you can get started by
+3:54 going to the docs simply copying this
+3:56 command pip install pi mgbt if you
+4:00 already have mgpt like say if you watch
+4:02 this video and you already had it
+4:03 installed previously you can just simply
+4:06 update it by putting in the dash update
+4:08 command beside the PIP install pipe mgpt
+4:12 and once you have installed mgpt on your
+4:14 command prompt or your computer you can
+4:16 then get started by running mgpt with
+4:18 this command and you'll be able to start
+4:19 chatting with it within vs code or your
+4:22 cly but now what we're going to be doing
+4:24 is installing mgbt with a server so that
+4:28 we can access this UI so first things
+4:30 first you need to make sure that you
+4:32 have the requirements fulfilled you need
+4:33 to make sure that you have Docker
+4:35 installed if you do not make sure you
+4:37 install it for your operating system
+4:39 whether that's Mac windows or Linux now
+4:42 this would require at least 8 GB of vram
+4:45 so make sure you have that fulfilled
+4:47 beforehand so that you know that you you
+4:50 don't waste time basically if you do not
+4:52 have the hardware compatibility now once
+4:55 you have Docker installed what you can
+4:57 do is go back to the mgpt uh get
+4:59 repository you want to basically click
+5:01 on this green button over here and copy
+5:03 the geub repository link once you have
+5:05 done that scroll back down to the
+5:08 section which is Dev portal and just to
+5:10 note that this is actually an alpha
+5:12 build so it's going to be current
+5:14 continuously upgraded over a period of
+5:17 time they're going to be adding more
+5:18 updates and they're going to be trying
+5:20 their best to keep evolving and
+5:22 innovating this platform further so what
+5:24 you want to do now is after you have
+5:26 Docker installed and you copied this
+5:28 link you need to also make sure that you
+5:30 have G installed and once all of that
+5:32 has been fulfilled you can open up your
+5:34 command prompt and you can just simply
+5:36 type in get clone and copy the link or
+5:39 paste the link into your command prompt
+5:40 and click enter this will take a couple
+5:42 of seconds to clone the repository and
+5:45 once this is done what we can do is we
+5:48 can then go into the CD or sorry the
+5:51 mgbt file which we just cloned and this
+5:54 is by typing in CD mgbt once we are in
+5:57 the mgbt directory we we can run Docker
+6:00 compose up and it's easy as that guys
+6:03 now I totally forgot to do this what you
+6:05 got to do is go into your VSS code or
+6:08 your ID and what you want to do is open
+6:10 up your n file in the mgpt folder what
+6:14 you want to do is just rename this so
+6:16 what we're going to do is find the
+6:18 rename function take out. example and
+6:22 what we're going to do is set the
+6:23 variables so you can actually set a
+6:24 password so when you have opened up your
+6:27 mgpt on your Local Host post you can
+6:30 then access it through a password so
+6:32 definitely set it beforehand I'm just
+6:34 going to keep it the default password
+6:36 which is just password and I'm going to
+6:38 set my open AI API key once I've done
+6:41 this you can then go back into Docker
+6:43 you can simply just paste this up and
+6:45 you can click enter and your Docker will
+6:47 start running sorry about that I should
+6:49 have mentioned it before but once this
+6:51 has finished starting up we're going to
+6:53 be able to open it up on our local or
+6:55 sorry the mgbt localhost in our browser
+6:59 so once this is finished composing the
+7:01 docker I'm going to be right back and
+7:03 we're going to be starting to play
+7:05 around with it so it looks like it's
+7:07 running now so what we can do is go back
+7:09 to our GitHub repository copy this link
+7:12 and we can open up a new tab and head
+7:14 over to our mgpt uh UI and we can see
+7:19 that we're going to be now able to work
+7:21 with M gpt's framework where we're going
+7:23 to be able to create a long-term memory
+7:25 agent that have the ability to connect
+7:28 to external data sources and we're going
+7:30 to have the ability to Define and call
+7:32 Custom functions this is where we're
+7:34 going to be playing around and creating
+7:35 creating our AI agents so what you want
+7:38 to do first is go to the setting you can
+7:40 configure certain things over here where
+7:43 you're going to be able to add a URL
+7:45 you're going to be able to create your
+7:46 own profile so that you can have
+7:48 multiple people working in this UI now
+7:51 your agents tab is where you're going to
+7:53 be working with your agents where you're
+7:55 going to be able to create multiple
+7:56 agents your data sources is where you're
+7:58 going to be able to upload various file
+8:00 types such as Excel files notion files
+8:04 you have various components that you can
+8:05 integrate within mgbt you have a tool
+8:08 Builder that you can basically work with
+8:10 where you can see that there's example
+8:12 tools already here where there's a send
+8:15 tool and this is where it's going to be
+8:17 able to send messages to a human you can
+8:19 see that there's various other tools
+8:21 that they have already pre-built you
+8:23 have Persona template where they're
+8:25 going to be able to reenact a certain
+8:27 type of persona you have user templates
+8:30 for whoever is utilizing mgpt on this
+8:33 local server so what we're going to be
+8:35 doing first is just creating our own
+8:36 agent we can name this world of AI agent
+8:40 we can util utilize uh various models at
+8:44 the current moment we only have it
+8:45 preset to GPT 4 but say if we want to
+8:49 utilize something else you can go to the
+8:51 GitHub repository and they basically St
+8:53 that you have the ability to support
+8:55 different end points and backends you
+8:57 can see that there's LM end points for
+8:59 Aur open AI Google AI Gemini model
+9:02 anthropic and so many others you can
+9:05 have it connected to hugging or sorry
+9:07 Lama CPP you have UGA web UI and you're
+9:11 going to be able to have embedding end
+9:12 points for open Ai and Aur AI or aour
+9:16 open Ai and hugging face Dei but in this
+9:19 case we're just going to be utilizing
+9:20 gbt 4 cuz it should be able to do most
+9:23 of the things for us so we're going to
+9:25 set the model to gbt 4 we can select the
+9:27 Persona you can see that there's already
+9:29 base personas made so if we are to
+9:32 actually go back we're just going to
+9:33 copy this so we don't waste time but we
+9:35 can go to the Persona template you can
+9:37 see that these are the following
+9:39 personas that have been already created
+9:41 so I have went along and created my own
+9:43 Persona so what I'm going to do is go
+9:44 back to the agent tab create my agent
+9:47 base my agent name and then I'm going to
+9:49 select my Persona so I have the world of
+9:51 AI Persona and this is basically a
+9:53 personal that states that you are a
+9:55 famous AI YouTuber I'm just boosting
+9:57 myself here but you will answer
+9:59 questions about Ai and showcase what you
+10:01 can do with it now what you can do is
+10:02 you can select the user you can just
+10:04 select the basic user you can then go
+10:07 move forward I mean move down sorry and
+10:09 then you can select various tools that
+10:11 you can actually create beforehand you
+10:13 can see that you can add in an archival
+10:16 memory where you're going to be able to
+10:17 make sure that the phrase the memory
+10:19 contents such as that it'll be easily
+10:21 queried later you also have conversation
+10:24 search tools and various other tools
+10:26 that you can get started and turn on if
+10:28 you want so once that is done you can
+10:30 just create the agent and then you can
+10:32 head over to the agents Tab and you can
+10:34 just simply click on the conversation
+10:36 icon over here you can then start
+10:38 chatting with your agent so you can see
+10:40 that a prompt template you can add
+10:42 afterwards it's going to be coming soon
+10:44 but you can also add core memory you can
+10:46 configure that you can add data sources
+10:49 you have tools as well as different chat
+10:51 settings that you can work with and in
+10:52 here you're going to be able to utilize
+10:54 the M jpt framework with this UI so that
+10:56 you can chat and create your own AI
+10:58 agent with M gpt's framework as the back
+11:02 end which will provide you the long-term
+11:04 memory and it will be able to enhance
+11:07 your contextual understanding as in your
+11:10 ai's understanding so that it's going to
+11:11 be able to provide and retain and access
+11:14 information way better than any regular
+11:16 AI agent and that's basically it for
+11:18 today's video on mgbt I really wanted to
+11:21 Showcase this new UI as well as this new
+11:23 upgrade where you're going to be able to
+11:25 integrate mgpt Services where you're
+11:27 going to be able to integrate various
+11:28 tools
+11:29 where you can make your AI agent Smarter
+11:32 with better memory and that's about it
+11:35 guys I'll leave all the links that I use
+11:36 in today's video in the description
+11:37 below make sure you check it out make
+11:39 sure you check out my previous video on
+11:41 mgpt this is something that is amazing
+11:43 and it's something that you should
+11:45 definitely reference if you haven't
+11:46 already make sure you follow me on the
+11:48 patreon page so that you can access
+11:50 different subscriptions completely for
+11:51 free make sure you follow me on Twitter
+11:53 great way for you to stay up to date the
+11:55 latest AI news and lastly make sure you
+11:57 guys subscribe turn on the notification
+11:59 like this video and check out our
+12:00 previous videos so you can stay up to
+12:02 date with the latest AI news but with
+12:04 that thought guys have an amazing day
+12:06 positivity and I'll see you guys fairly
+12:08 shortly peace off fell

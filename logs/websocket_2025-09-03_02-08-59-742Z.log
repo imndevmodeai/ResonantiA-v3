@@ -1,0 +1,98 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-03T02:08:59.743Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-03_02-08-59-742Z.log
+❌ Error Log: logs/errors_websocket_2025-09-03_02-08-59-742Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-03_02-08-59-742Z.log
+================================================================================
+2025-09-03T02:08:59.754Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-03T02:08:59.778Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-03T02:08:59.781Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-03T02:08:59.782Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-03T02:09:01.841Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T02:09:01.960Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T02:09:29.427Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T02:09:29.433Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T02:09:43.898Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T02:09:43.928Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T02:09:44.149Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T02:09:47.134Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T02:10:03.114Z [INFO] websocket: Received user query
+{
+  "query": "Design a comprehensive framework for transforming global education systems to prepare humanity for t..."
+}
+2025-09-03T02:10:03.121Z [INFO] websocket: Sent query to ArchE interface: Design a comprehensive framework for transforming ...
+2025-09-03T02:10:03.142Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756865403.1256623,
+  "metadata": {
+    "session_id": "rise_1756879803_f0969c"
+  }
+}
+2025-09-03T02:10:03.144Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756865403.1326973,
+  "metadata": {
+    "session_id": "rise_1756879803_f0969c"
+  }
+}
+2025-09-03T02:10:03.147Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756865403137",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T02:10:03.137952Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T02:10:03.137900Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756879803_f0969c",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}

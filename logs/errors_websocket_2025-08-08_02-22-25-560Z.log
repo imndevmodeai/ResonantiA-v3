@@ -1,0 +1,13 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-08-08T02:22:25.561Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-08-08_02-22-25-560Z.log
+❌ Error Log: logs/errors_websocket_2025-08-08_02-22-25-560Z.log
+⚡ Performance Log: logs/performance_websocket_2025-08-08_02-22-25-560Z.log
+================================================================================
+2025-08-08T02:22:26.339Z [ERROR] websocket: WebSocket server error
+{
+  "error": "listen EADDRINUSE: address already in use :::3013"
+}

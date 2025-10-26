@@ -1,0 +1,151 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-03T03:12:03.964Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-03_03-12-03-964Z.log
+❌ Error Log: logs/errors_websocket_2025-09-03_03-12-03-964Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-03_03-12-03-964Z.log
+================================================================================
+2025-09-03T03:12:03.975Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-03T03:12:03.988Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-03T03:12:03.990Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-03T03:12:03.990Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-03T03:12:04.135Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:12:04.182Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:12:31.291Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:12:31.292Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:12:47.044Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:12:47.085Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:12:47.310Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:12:50.296Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:13:13.077Z [INFO] websocket: Received user query
+{
+  "query": "Design a comprehensive framework for transforming global education systems to prepare humanity for t..."
+}
+2025-09-03T03:13:13.080Z [INFO] websocket: Sent query to ArchE interface: Design a comprehensive framework for transforming ...
+2025-09-03T03:13:13.133Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756869193.0879164,
+  "metadata": {
+    "session_id": "rise_1756883593_816e1b"
+  }
+}
+2025-09-03T03:13:13.152Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756869193.1022606,
+  "metadata": {
+    "session_id": "rise_1756883593_816e1b"
+  }
+}
+2025-09-03T03:13:13.186Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756869193108",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T03:13:13.108300Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T03:13:13.108221Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756883593_816e1b",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T03:13:21.541Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-03T03:13:21.542Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-03T03:13:21.823Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756869201814",
+  "content": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-1.5-pro', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '38s'}]))",
+  "timestamp": "2025-09-03T03:13:21.814602Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-03T03:13:21.814587Z",
+    "cognitive_resonance": {
+      "clarity": 0.4,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.4,
+      "future_projection": 0.30000000000000004,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.45000000000000007
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-1.5-pro', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '38s'}]))"
+  }
+}
+2025-09-03T03:29:49.767Z [WARN] websocket: ArchE WebSocket connection closed

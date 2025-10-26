@@ -3,6 +3,7 @@ Base classes for LLM providers.
 """
 import logging
 from typing import Dict, Any, Optional, List
+from ..thought_trail import log_to_thought_trail
 
 logger = logging.getLogger(__name__)
 
@@ -60,10 +61,12 @@ class BaseLLMProvider:
         """Placeholder for initializing the provider-specific client."""
         raise NotImplementedError("Subclasses must implement _initialize_client.")
 
+    @log_to_thought_trail
     def generate(self, prompt: str, model: str, max_tokens: int = 500, temperature: float = 0.7, **kwargs) -> str:
         """Generates text based on a single prompt (completion style)."""
         raise NotImplementedError("Subclasses must implement generate or generate_chat.")
 
+    @log_to_thought_trail
     def generate_chat(self, messages: List[Dict[str, str]], model: str, max_tokens: int = 500, temperature: float = 0.7, **kwargs) -> str:
         """
         Generates text based on a list of chat messages (chat completion style).

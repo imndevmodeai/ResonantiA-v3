@@ -1,0 +1,42 @@
+2025-08-05 07:35:14 - root:162 - INFO - logging_config - ================================================================================
+2025-08-05 07:35:14 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-05 07:35:14 - root:164 - INFO - logging_config - ================================================================================
+2025-08-05 07:35:14 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-05 07:35:14
+2025-08-05 07:35:14 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-05 07:35:14 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-05_07-35-13.log
+2025-08-05 07:35:14 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-05_07-35-13.log
+2025-08-05 07:35:14 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-05_07-35-13.log
+2025-08-05 07:35:14 - root:170 - INFO - logging_config - ================================================================================
+2025-08-05 07:35:14 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-05 07:35:14 - FullArchEGenesisTest:53 - INFO - run_full_genesis_test - Loading context from: full_arche_genesis_context.json
+2025-08-05 07:35:14 - FullArchEGenesisTest:56 - INFO - run_full_genesis_test - ✅ Context loaded successfully.
+2025-08-05 07:35:14 - FullArchEGenesisTest:60 - INFO - run_full_genesis_test - Initializing IARCompliantWorkflowEngine...
+2025-08-05 07:35:14 - Three_PointO_ArchE.workflow_engine:341 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-05 07:35:14 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-05 07:35:14 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-05 07:35:14 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-05 07:35:14 - Three_PointO_ArchE.workflow_engine:361 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-05 07:35:14 - FullArchEGenesisTest:62 - INFO - run_full_genesis_test - ✅ Workflow engine initialized.
+2025-08-05 07:35:14 - FullArchEGenesisTest:66 - INFO - run_full_genesis_test - Starting Full ArchE Genesis workflow: full_arche_genesis_test.json
+2025-08-05 07:35:14 - Three_PointO_ArchE.workflow_engine:1023 - INFO - workflow_engine - ✅ Input validation passed for workflow: full_arche_genesis_test.json
+2025-08-05 07:35:14 - Three_PointO_ArchE.workflow_engine:1024 - INFO - workflow_engine - Problem description length: 94 characters
+2025-08-05 07:35:14 - Three_PointO_ArchE.workflow_engine:517 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/full_arche_genesis_test.json
+2025-08-05 07:35:14 - Three_PointO_ArchE.workflow_engine:1055 - INFO - workflow_engine - Starting workflow 'Full ArchE Genesis Test' (Run ID: run_2a19e95aa61f468dba191a13370029fb). Initial ready tasks: ['generate_action_registry', 'generate_llm_tool', 'generate_config', 'generate_spr_manager', 'generate_workflow_engine']
+2025-08-05 07:35:14 - Three_PointO_ArchE.llm_tool:72 - INFO - llm_tool - Loaded content for template var 'specification_content' from file: specifications/action_registry.md
+2025-08-05 07:35:14 - Three_PointO_ArchE.llm_tool:86 - INFO - llm_tool - Loaded and rendered template: code_generation_from_spec.j2
+2025-08-05 07:36:04 - Three_PointO_ArchE.llm_tool:139 - INFO - llm_tool - Base64 encoding requested for LLM output.
+2025-08-05 07:36:04 - Three_PointO_ArchE.llm_tool:72 - INFO - llm_tool - Loaded content for template var 'specification_content' from file: specifications/llm_tool.md
+2025-08-05 07:36:04 - Three_PointO_ArchE.llm_tool:86 - INFO - llm_tool - Loaded and rendered template: code_generation_from_spec.j2
+2025-08-05 07:36:58 - Three_PointO_ArchE.llm_tool:139 - INFO - llm_tool - Base64 encoding requested for LLM output.
+2025-08-05 07:36:58 - Three_PointO_ArchE.llm_tool:72 - INFO - llm_tool - Loaded content for template var 'specification_content' from file: specifications/config.md
+2025-08-05 07:36:58 - Three_PointO_ArchE.llm_tool:86 - INFO - llm_tool - Loaded and rendered template: code_generation_from_spec.j2
+2025-08-05 07:37:51 - Three_PointO_ArchE.llm_tool:139 - INFO - llm_tool - Base64 encoding requested for LLM output.
+2025-08-05 07:37:51 - Three_PointO_ArchE.llm_tool:72 - INFO - llm_tool - Loaded content for template var 'specification_content' from file: specifications/spr_manager.md
+2025-08-05 07:37:51 - Three_PointO_ArchE.llm_tool:86 - INFO - llm_tool - Loaded and rendered template: code_generation_from_spec.j2
+2025-08-05 07:38:52 - Three_PointO_ArchE.llm_tool:139 - INFO - llm_tool - Base64 encoding requested for LLM output.
+2025-08-05 07:38:52 - Three_PointO_ArchE.llm_tool:72 - INFO - llm_tool - Loaded content for template var 'specification_content' from file: specifications/workflow_engine.md
+2025-08-05 07:38:52 - Three_PointO_ArchE.llm_tool:86 - INFO - llm_tool - Loaded and rendered template: code_generation_from_spec.j2
+2025-08-05 07:40:14 - Three_PointO_ArchE.llm_tool:139 - INFO - llm_tool - Base64 encoding requested for LLM output.
+2025-08-05 07:40:14 - Three_PointO_ArchE.workflow_engine:1216 - INFO - workflow_engine - Workflow 'Full ArchE Genesis Test' finished in 300.72s with status: Completed Successfully
+2025-08-05 07:40:14 - Three_PointO_ArchE.workflow_engine:1226 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_2a19e95aa61f468dba191a13370029fb.jsonl
+2025-08-05 07:40:14 - FullArchEGenesisTest:81 - INFO - run_full_genesis_test - Full ArchE Genesis Test completed.

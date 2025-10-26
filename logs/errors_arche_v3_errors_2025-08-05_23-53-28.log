@@ -1,0 +1,6 @@
+2025-08-05 23:53:28 - Three_PointO_ArchE.workflow_engine:1028 - CRITICAL - workflow_engine - Workflow execution failed during loading: problem_description cannot be null
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_engine.py", line 1015, in run_workflow
+    raise ValueError("problem_description cannot be null")
+ValueError: problem_description cannot be null
+2025-08-05 23:53:28 - __main__:221 - ERROR - main - Could not write final result to /media/newbu/3626C55326C514B1/Happier/outputs/result_simple_test_N/A.json: [Errno 2] No such file or directory: '/media/newbu/3626C55326C514B1/Happier/outputs/result_simple_test_N/A.json'

@@ -75,6 +75,7 @@ logger = logging.getLogger(__name__) # Logger for this module
 # --- IAR Helper Function ---
 # Use the canonical, centralized reflection utility from reflection_utils
 from .utils.reflection_utils import create_reflection, ExecutionStatus
+from .thought_trail import log_to_thought_trail
 
 # --- Default Agent and Model Implementations ---
 # (Provide basic examples that can be overridden or extended)
@@ -105,6 +106,7 @@ class BasicGridAgent(Agent if MESA_AVAILABLE else object):
         self.next_state = self.state
         self.params = kwargs # Store any extra parameters
 
+    @log_to_thought_trail
     def step(self):
         """ Defines agent behavior within a simulation step. """
         if not MESA_AVAILABLE or not hasattr(self.model, 'grid') or self.model.grid is None or self.pos is None:
@@ -130,6 +132,7 @@ class BasicGridAgent(Agent if MESA_AVAILABLE else object):
             logger.error(f"Error in agent {self.unique_id} step at pos {self.pos}: {e_agent_step}", exc_info=True)
             self.next_state = self.state # Default to current state on error
 
+    @log_to_thought_trail
     def advance(self):
         """ Updates the agent's state based on the calculated next_state. """
         # Check if next_state was calculated and differs from current state
@@ -172,6 +175,7 @@ class ScalableAgentModel(Model if MESA_AVAILABLE else object):
             agent_reporters={"State": "current_state", "Entropy": "current_entropy"}
         )
 
+    @log_to_thought_trail
     def step(self):
         """Advance the model by one step."""
         self.schedule.step()
@@ -262,6 +266,7 @@ class BasicGridModel(Model if MESA_AVAILABLE else object):
                         agent.pos = (x, y); self.agents_sim.append(agent)
         logger.info(f"Created {len(self.agents_sim)} agents for SIMULATED model. Initial active: {initial_active_count}")
 
+    @log_to_thought_trail
     def step(self):
         """ Advances the model by one step. """
         self._step_count += 1 # Mesa 3.0+ Model.steps auto-increments, but this can be model's internal counter
@@ -343,13 +348,16 @@ class BasicGridModel(Model if MESA_AVAILABLE else object):
             logger.debug(f"Simulated step {self._step_count} completed.")
 
     # Helper methods for data collection reporters
+    @log_to_thought_trail
     def count_active_agents(self):
         """ Counts agents with state > 0. """
         return sum(1 for agent in self.agents if hasattr(agent, 'state') and agent.state > 0) if MESA_AVAILABLE else sum(1 for agent in self.agents_sim if hasattr(agent, 'state') and agent.state > 0)
+    @log_to_thought_trail
     def count_inactive_agents(self):
         """ Counts agents with state <= 0. """
         return sum(1 for agent in self.agents if hasattr(agent, 'state') and agent.state <= 0) if MESA_AVAILABLE else sum(1 for agent in self.agents_sim if hasattr(agent, 'state') and agent.state <= 0)
 
+    @log_to_thought_trail
     def get_agent_states(self) -> np.ndarray:
         """ Returns a 2D NumPy array representing the state of each agent on the grid. """
         states = np.full((self.width, self.height), -1.0)
@@ -381,6 +389,7 @@ class ABMTool:
         self.is_available = MESA_AVAILABLE # Flag indicating if Mesa library loaded
         logger.info(f"ABM Tool (v3.0) initialized (Mesa Available: {self.is_available})")
 
+    @log_to_thought_trail
     def create_model(self, model_type: str = "basic", agent_class: Optional[Type[Agent]] = None, **kwargs) -> Dict[str, Any]:
         """
         Creates an ABM model instance based on specified type and parameters.
@@ -454,6 +463,7 @@ class ABMTool:
             "reflection": reflection
         }
 
+    @log_to_thought_trail
     def run_simulation(self, model: Any, steps: int = 100, visualize: bool = False, **kwargs) -> Dict[str, Any]:
         """
         [IAR Enabled] Runs the simulation for a given model instance for a number of steps.
@@ -692,6 +702,7 @@ class ABMTool:
                 except Exception: pass
             return None
 
+    @log_to_thought_trail
     def analyze_results(self, results: Dict[str, Any], analysis_type: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """
         [IAR Enabled] Analyzes results from an ABM simulation run.
@@ -911,6 +922,7 @@ class ABMTool:
 
         return patterns
 
+    @log_to_thought_trail
     def convert_to_state_vector(self, abm_result: Dict[str, Any], representation_type: str = "final_state", **kwargs) -> Dict[str, Any]:
         """
         [IAR Enabled] Converts ABM simulation results into a normalized state vector
@@ -1197,6 +1209,7 @@ class ABMTool:
 
 
 # --- Main Wrapper Function (Handles Operations & IAR) ---
+@log_to_thought_trail
 def perform_abm(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """
     [IAR Enabled] Main wrapper function for dispatching ABM operations.

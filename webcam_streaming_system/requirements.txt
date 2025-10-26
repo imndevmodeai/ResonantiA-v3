@@ -1,0 +1,11 @@
+# Core streaming dependencies
+opencv-python
+numpy
+pyvirtualcam
+
+# Advanced AI features
+mediapipe
+
+# Additional effects libraries
+pillow
+scipy

@@ -1,0 +1,312 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-03T03:58:19.458Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-03_03-58-19-457Z.log
+❌ Error Log: logs/errors_websocket_2025-09-03_03-58-19-457Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-03_03-58-19-457Z.log
+================================================================================
+2025-09-03T03:58:19.461Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-03T03:58:19.473Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-03T03:58:19.474Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-03T03:58:19.474Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-03T03:58:19.729Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:58:19.827Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:59:15.827Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:59:15.845Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:59:37.972Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:59:38.012Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:59:38.131Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T03:59:41.121Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T03:59:45.837Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Design a comprehensive framework for transforming global ed..."
+}
+2025-09-03T03:59:45.853Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Design a ...
+2025-09-03T03:59:45.951Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756871985.8840168,
+  "metadata": {
+    "session_id": "rise_1756886385_55e70e"
+  }
+}
+2025-09-03T03:59:45.967Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756871985.9146616,
+  "metadata": {
+    "session_id": "rise_1756886385_55e70e"
+  }
+}
+2025-09-03T03:59:45.978Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756871985934",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T03:59:45.934960Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T03:59:45.934850Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756886385_55e70e",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T03:59:52.119Z [INFO] websocket: Received user query
+{
+  "query": "Design a comprehensive framework for transforming global education systems to prepare humanity for t..."
+}
+2025-09-03T03:59:52.121Z [INFO] websocket: Sent query to ArchE interface: Design a comprehensive framework for transforming ...
+2025-09-03T03:59:52.203Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756871992.1292055,
+  "metadata": {
+    "session_id": "rise_1756886392_7f60c6"
+  }
+}
+2025-09-03T03:59:52.215Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756871992.1610336,
+  "metadata": {
+    "session_id": "rise_1756886392_7f60c6"
+  }
+}
+2025-09-03T03:59:52.221Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756871992194",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T03:59:52.194511Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T03:59:52.194488Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756886392_7f60c6",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T03:59:56.397Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-03T03:59:56.402Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-03T03:59:57.771Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756871997770",
+  "content": "I received your message, but I am having trouble formulating a response right now.",
+  "timestamp": "2025-09-03T03:59:57.770067Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-03T03:59:57.770054Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.6
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.4,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "I received your message, but I am having trouble formulating a response right now."
+  }
+}
+2025-09-03T04:00:37.444Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T04:00:37.445Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T04:01:14.649Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T04:01:14.740Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T04:01:15.211Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T04:01:18.212Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T04:01:20.959Z [INFO] websocket: Received user query
+{
+  "query": "Design a comprehensive framework for transforming global education systems to prepare humanity for t..."
+}
+2025-09-03T04:01:20.966Z [INFO] websocket: Sent query to ArchE interface: Design a comprehensive framework for transforming ...
+2025-09-03T04:01:21.077Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756872080.9826672,
+  "metadata": {
+    "session_id": "rise_1756886480_7cbf1c"
+  }
+}
+2025-09-03T04:01:21.086Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756872081.0175972,
+  "metadata": {
+    "session_id": "rise_1756886480_7cbf1c"
+  }
+}
+2025-09-03T04:01:21.096Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756872081063",
+  "content": "Error: Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+  "timestamp": "2025-09-03T04:01:21.063691Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Failure",
+    "confidence": 0.1,
+    "summary": "Query processed by RISE engine",
+    "potential_issues": [
+      "Engine RISE returned error"
+    ],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.1
+    },
+    "engine_used": "RISE",
+    "timestamp": "2025-09-03T04:01:21.063672Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.4,
+      "contextual_relevance": 0.9
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.3,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0.8,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "session_id": "rise_1756886480_7cbf1c",
+    "execution_status": "failed",
+    "error": "Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.",
+    "current_phase": "B"
+  }
+}
+2025-09-03T04:02:53.325Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-03T04:02:53.337Z [WARN] websocket: ArchE WebSocket connection closed

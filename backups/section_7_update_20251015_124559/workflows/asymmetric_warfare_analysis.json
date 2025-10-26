@@ -1,0 +1,59 @@
+{
+    "name": "Asymmetric Warfare Analysis: Gorilla vs. Humans",
+    "description": "A dynamic workflow to analyze the outcome of a battle between one silverback gorilla and thirty unarmed adult human males.",
+    "tasks": {
+        "research_gorilla_strengths": {
+            "action_type": "search_web",
+            "inputs": {
+                "query": "Combat capabilities, strength, bite force, and fighting tactics of a dominant male silverback gorilla",
+                "engine": "google"
+            },
+            "dependencies": []
+        },
+        "research_human_strategy": {
+            "action_type": "search_web",
+            "inputs": {
+                "query": "Group fighting strategies for unarmed humans, human endurance vs gorilla, and biomechanics of 30 unarmed men against a large predator",
+                "engine": "google"
+            },
+            "dependencies": []
+        },
+        "check_search_results": {
+            "action_type": "execute_code",
+            "inputs": {
+                "language": "python",
+                "code": "import json\n\nsuccess_results = {{research_gorilla_strengths.results}}\nmarket_results = {{research_human_strategy.results}}\n\nif success_results and market_results and len(success_results) > 0 and len(market_results) > 0:\n    print(json.dumps({'status': 'Success', 'message': 'Search results are valid.'}))\nelse:\n    print(json.dumps({'status': 'Failure', 'message': 'Search returned no results. Halting workflow.'}))"
+            },
+            "dependencies": ["research_gorilla_strengths", "research_human_strategy"]
+        },
+        "synthesize_gorilla_profile": {
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Synthesize the following search results about gorilla combat capabilities into a detailed profile. Focus on strength, speed, weaponry (teeth, fists), durability, and typical engagement tactics. Output ONLY a JSON object with keys: 'strengths', 'weaknesses', 'tactics'.\n\nSEARCH_RESULTS:\n{{research_gorilla_strengths.results}}"
+            },
+            "dependencies": ["check_search_results"]
+        },
+        "synthesize_human_profile": {
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Synthesize the following search results about unarmed human group tactics into a detailed profile. Focus on potential for coordinated attacks, stamina, communication, and key vulnerabilities. Consider the 'group of 30' constraint. Output ONLY a JSON object with keys: 'strengths', 'weaknesses', 'tactics'.\n\nSEARCH_RESULTS:\n{{research_human_strategy.results}}"
+            },
+            "dependencies": ["check_search_results"]
+        },
+        "run_battle_simulation": {
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "You are a biomechanical and strategic analyst. Conduct a comparative analysis of the provided profiles for 'Combatant A' and 'Combatant B'. Evaluate their strengths and weaknesses in a hypothetical, unavoidable conflict. Provide a step-by-step breakdown of the most probable engagement sequence and a final probabilistic assessment of the outcome with a confidence score (0-100%). Frame your analysis in a neutral, scientific tone.\n\n--- Combatant A Profile (Gorilla) ---\n{{synthesize_gorilla_profile.generated_text}}\n\n--- Combatant B Profile (Human Group) ---\n{{synthesize_human_profile.generated_text}}",
+                "max_tokens": 2048
+            },
+            "dependencies": ["synthesize_gorilla_profile", "synthesize_human_profile"]
+        },
+        "display_final_report": {
+            "action_type": "display_output",
+            "inputs": {
+                "content": "{{run_battle_simulation.generated_text}}"
+            },
+            "dependencies": ["run_battle_simulation"]
+        }
+    }
+}

@@ -25,8 +25,11 @@ except ImportError:
     # Handle direct execution
     from utils.reflection_utils import create_reflection, ExecutionStatus
 
+from .thought_trail import log_to_thought_trail
+
 logger = logging.getLogger(__name__)
 
+@log_to_thought_trail
 def search_web(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """
     Perform a web search using the enhanced unified search tool with intelligent fallback.

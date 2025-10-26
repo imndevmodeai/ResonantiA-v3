@@ -1,0 +1,477 @@
+{
+  "iar_data": {},
+  "task_details": {
+    "research_gorilla_strengths": {
+      "start_time": "2025-09-20 10:40:39",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 10:40:39 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'Combat capabilities, strength, bite force, and fighting tactics of a dominant male silverback gorilla' on google"
+      ],
+      "end_time": "2025-09-20 10:40:39"
+    },
+    "research_human_strategy": {
+      "start_time": "2025-09-20 10:40:39",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 10:40:39 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'Group fighting strategies for unarmed humans, human endurance vs gorilla, and biomechanics of 30 unarmed men against a large predator' on google"
+      ],
+      "end_time": "2025-09-20 10:40:39"
+    },
+    "check_search_results": {
+      "start_time": "2025-09-20 11:01:27",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 11:01:27 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 11:01:27 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 11:01:27"
+    },
+    "synthesize_gorilla_profile": {
+      "start_time": "2025-09-20 10:40:39",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 10:40:39 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 10:40:39 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 10:40:39 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.",
+        "2025-09-20 10:40:39 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the following search results about gorilla combat capabilities into a detailed profile. F...'",
+        "2025-09-20 10:41:06 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 10:41:06 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 10:41:06"
+    },
+    "synthesize_human_profile": {
+      "start_time": "2025-09-20 10:41:06",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 10:41:06 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 10:41:06 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 10:41:06 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.",
+        "2025-09-20 10:41:06 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the following search results about unarmed human group tactics into a detailed profile. F...'",
+        "2025-09-20 10:41:36 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 10:41:36 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 10:41:36"
+    },
+    "run_battle_simulation": {
+      "start_time": "2025-09-20 10:41:36",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 10:41:36 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 10:41:36 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 10:41:36 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.",
+        "2025-09-20 10:41:36 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'You are a biomechanical and strategic analyst. Conduct a comparative analysis of the provided profil...'",
+        "2025-09-20 10:42:01 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 10:42:01 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 10:42:01"
+    },
+    "deconstruct_problem": {
+      "start_time": "2025-09-20 11:25:08",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 11:25:08 - Three_PointO_ArchE.llm_providers - [WARNING] - Default model not available. Falling back to gemini-1.5-pro-latest.",
+        "2025-09-20 11:25:08 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Model: gemini-1.5-pro-latest, Prompt: 'Analyze the following problem and deconstruct it into its core components. Identify the single, most...'",
+        "2025-09-20 11:25:14 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API."
+      ],
+      "end_time": "2025-09-20 11:25:14"
+    },
+    "acquire_domain_knowledge": {
+      "start_time": "2025-09-20 11:01:25",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 11:01:25 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: '{{deconstruct_problem.generated_text.primary_domain}} latest developments, key principles, and strategic analysis' on duckduckgo",
+        "2025-09-20 11:01:27 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Fallback search completed: 10 results in 2.05s"
+      ],
+      "end_time": "2025-09-20 11:01:27"
+    },
+    "synthesize_knowledge": {
+      "start_time": "2025-09-20 11:01:27",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 11:01:27 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 11:01:27 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 11:01:27 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.",
+        "2025-09-20 11:01:27 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the provided search results into a concise, actionable intelligence briefing on the domai...'",
+        "2025-09-20 11:01:48 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 11:01:48 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 11:01:48"
+    },
+    "full_analysis": {
+      "start_time": "2025-09-20 11:25:41",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 11:25:41 - Three_PointO_ArchE.llm_providers - [WARNING] - Default model not available. Falling back to gemini-1.5-pro-latest.",
+        "2025-09-20 11:25:41 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Model: gemini-1.5-pro-latest, Prompt: 'You are a multi-persona AI analyst. Your task is to conduct a complete analysis of the following asy...'",
+        "2025-09-20 11:26:01 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API."
+      ],
+      "end_time": "2025-09-20 11:26:01"
+    },
+    "synchronize_blueprint": {
+      "start_time": "2025-09-20 22:20:11",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:20:11"
+    },
+    "intent_intake": {
+      "start_time": "2025-09-20 22:19:59",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:19:59 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:19:59 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:19:59"
+    },
+    "conceptual_map": {
+      "start_time": "2025-09-20 22:19:59",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:19:59 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 22:19:59 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 22:19:59 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.",
+        "2025-09-20 22:19:59 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Using these ArchE protocol definitions: {\"ResonantiA Protocol\": \"The comprehensive document and conc...'",
+        "2025-09-20 22:20:02 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 22:20:02 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 22:20:02"
+    },
+    "parse_conceptual_map": {
+      "start_time": "2025-09-20 22:20:02",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:02 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:20:02 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:20:02"
+    },
+    "rise_decision": {
+      "start_time": "2025-09-20 22:20:02",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:02 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 22:20:02 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 22:20:02 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.",
+        "2025-09-20 22:20:02 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Using these ArchE protocol definitions: {\"ResonantiA Protocol\": \"The comprehensive document and conc...'",
+        "2025-09-20 22:20:04 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 22:20:04 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 22:20:04"
+    },
+    "ground_truth_audit": {
+      "start_time": "2025-09-20 22:20:04",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:04 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:20:04 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:20:04"
+    },
+    "parse_rise_decision": {
+      "start_time": "2025-09-20 22:20:04",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:04 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:20:04 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:20:04"
+    },
+    "rise_blueprint": {
+      "start_time": "2025-09-20 22:20:04",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:04 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 22:20:04 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 22:20:04 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.",
+        "2025-09-20 22:20:04 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Using these ArchE protocol definitions: {\"ResonantiA Protocol\": \"The comprehensive document and conc...'",
+        "2025-09-20 22:20:06 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 22:20:06 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 22:20:06"
+    },
+    "critique_deepen_envision": {
+      "start_time": "2025-09-20 22:20:06",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:06 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 22:20:06 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 22:20:06 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.",
+        "2025-09-20 22:20:06 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Using these ArchE protocol definitions: {\"ResonantiA Protocol\": \"The comprehensive document and conc...'",
+        "2025-09-20 22:20:11 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 22:20:11"
+    },
+    "parse_rise_blueprint": {
+      "start_time": "2025-09-20 22:20:11",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:20:11"
+    },
+    "parse_correction_plan": {
+      "start_time": "2025-09-20 22:20:11",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:20:11"
+    },
+    "assemble_envelope": {
+      "start_time": "2025-09-20 22:20:11",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:20:11"
+    },
+    "validate_envelope": {
+      "start_time": "2025-09-20 22:20:11",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:20:11 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:20:11"
+    },
+    "reforge_apply": {
+      "start_time": "2025-09-20 22:20:11",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [],
+      "end_time": "2025-09-20 22:20:11"
+    },
+    "protocol_priming": {
+      "start_time": "2025-09-20 22:19:59",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 22:19:59 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 22:19:59 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 22:19:59"
+    },
+    "display_envelope": {
+      "start_time": "2025-09-20 14:38:42",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [],
+      "end_time": "2025-09-20 14:38:42"
+    },
+    "data_preparation": {
+      "start_time": "2025-09-20 15:01:46",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 15:01:46 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 15:01:46 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 15:01:47"
+    },
+    "predictive_modeling": {
+      "start_time": "2025-09-20 15:01:47",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 15:01:47 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 15:01:47 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 15:01:50"
+    },
+    "causal_inference": {
+      "start_time": "2025-09-20 15:01:50",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 15:01:50 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 15:01:50 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 15:01:54"
+    },
+    "strategic_analysis": {
+      "start_time": "2025-09-20 15:01:54",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 15:01:54 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.",
+        "2025-09-20 15:01:54 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.",
+        "2025-09-20 15:01:54 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.0-flash-exp'.",
+        "2025-09-20 15:01:54 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Based on the predictive modeling and causal inference analysis of the 2020-2023 semiconductor shorta...'",
+        "2025-09-20 15:02:09 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.",
+        "2025-09-20 15:02:09 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful."
+      ],
+      "end_time": "2025-09-20 15:02:09"
+    },
+    "final_synthesis": {
+      "start_time": "2025-09-20 15:02:09",
+      "action_type": "Unknown",
+      "status": "Success",
+      "duration": "Unknown",
+      "details": [
+        "2025-09-20 15:02:09 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess"
+      ],
+      "error": "2025-09-20 15:02:09 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.",
+      "end_time": "2025-09-20 15:02:09"
+    }
+  },
+  "tool_data": {
+    "llm_providers_LLMProvider": {
+      "usage_count": 892,
+      "instances": [
+        "llm_providers",
+        "llm_providers",
+        "llm_providers",
+        "llm_providers",
+        "llm_providers"
+      ]
+    },
+    "code_executor_CodeExecutor": {
+      "usage_count": 835,
+      "instances": [
+        "code_executor",
+        "code_executor",
+        "code_executor",
+        "code_executor",
+        "code_executor"
+      ]
+    },
+    "synthesis_tool_SynthesisTool": {
+      "usage_count": 348,
+      "instances": [
+        "synthesis_tool",
+        "synthesis_tool",
+        "synthesis_tool",
+        "synthesis_tool",
+        "synthesis_tool"
+      ]
+    },
+    "playbook_orchestrator_PlaybookOrchestrator": {
+      "usage_count": 1592,
+      "instances": [
+        "playbook_orchestrator",
+        "playbook_orchestrator",
+        "playbook_orchestrator",
+        "playbook_orchestrator",
+        "playbook_orchestrator"
+      ]
+    }
+  },
+  "workflow_data": {
+    "Orchestrating playbook: ([^\\s]+)": {
+      "matches": 61,
+      "instances": [
+        "workflows/asymmetric_warfare_analysis.json",
+        "workflows/robust_knowledge_gathering.json",
+        "workflows/robust_knowledge_gathering.json"
+      ]
+    },
+    "Playbook \\'([^\\']+)\\' orchestrated successfully": {
+      "matches": 60,
+      "instances": [
+        "Asymmetric Warfare Analysis: Gorilla vs. Humans",
+        "Robust Knowledge Gathering",
+        "Robust Knowledge Gathering"
+      ]
+    },
+    "Distributed Resonant Corrective Loop": {
+      "matches": 43,
+      "instances": [
+        "Distributed Resonant Corrective Loop",
+        "Distributed Resonant Corrective Loop",
+        "Distributed Resonant Corrective Loop"
+      ]
+    },
+    "RISE.*[Mm]ethodology": {
+      "matches": 4,
+      "instances": [
+        "RISE methodology",
+        "RISE methodology",
+        "RISE methodology"
+      ]
+    },
+    "protocol_priming": {
+      "matches": 82,
+      "instances": [
+        "protocol_priming",
+        "protocol_priming",
+        "protocol_priming"
+      ]
+    },
+    "conceptual_map": {
+      "matches": 177,
+      "instances": [
+        "conceptual_map",
+        "conceptual_map",
+        "conceptual_map"
+      ]
+    },
+    "rise_blueprint": {
+      "matches": 169,
+      "instances": [
+        "rise_blueprint",
+        "rise_blueprint",
+        "rise_blueprint"
+      ]
+    }
+  },
+  "extraction_time": "2025-09-20T22:24:39.711510"
+}

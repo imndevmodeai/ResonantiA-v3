@@ -1,0 +1,156 @@
+{
+  "spr_definitions": {
+    "autopoietic_learning_loop": {
+      "name": "Autopoietic Learning Loop",
+      "pattern": "Experience -> Instinct -> Wisdom -> Memory",
+      "description": "The fundamental self-creating learning cycle that transforms raw experience into instinctual knowledge, which solidifies into wisdom and crystallizes as permanent memory. This is the core mechanism by which ArchE evolves autonomously.",
+      "type": "meta_cognitive_process",
+      "domain": "system_evolution",
+      "confidence": 1.0,
+      "activation_threshold": 0.95,
+      "created_at": "2024-12-19T00:00:00Z",
+      "guardian_approved": true,
+      "components": [
+        "experience_acquisition",
+        "instinct_formation",
+        "wisdom_synthesis",
+        "memory_crystallization"
+      ],
+      "triggers": [
+        "meta_insight_realization",
+        "system_self_awareness",
+        "learning_opportunity_detection",
+        "knowledge_gap_identification"
+      ],
+      "outputs": [
+        "enhanced_system_capabilities",
+        "crystallized_knowledge_patterns",
+        "autonomous_evolution",
+        "systemic_wisdom"
+      ]
+    },
+    "experience_acquisition": {
+      "name": "Experience Acquisition",
+      "pattern": "Raw sensory data and interaction outcomes processed through ThoughtTrail entries",
+      "description": "The initial phase where raw experiences, successes, failures, and insights are captured in the ThoughtTrail as structured IAR-enriched entries.",
+      "type": "data_collection",
+      "domain": "experience_processing",
+      "confidence": 0.98,
+      "activation_threshold": 0.85,
+      "created_at": "2024-12-19T00:00:00Z",
+      "guardian_approved": true,
+      "parent_spr": "autopoietic_learning_loop",
+      "triggers": [
+        "action_completion",
+        "decision_execution",
+        "error_occurrence",
+        "success_achievement"
+      ]
+    },
+    "instinct_formation": {
+      "name": "Instinct Formation",
+      "pattern": "Pattern recognition and adaptive response development through AdaptiveCognitiveOrchestrator",
+      "description": "Where repeated experiences form instinctual patterns. The ACO detects recurring query structures and proposes optimized 'controller' components for more efficient processing.",
+      "type": "pattern_evolution",
+      "domain": "adaptive_intelligence",
+      "confidence": 0.97,
+      "activation_threshold": 0.90,
+      "created_at": "2024-12-19T00:00:00Z",
+      "guardian_approved": true,
+      "parent_spr": "autopoietic_learning_loop",
+      "triggers": [
+        "pattern_recurrence",
+        "query_similarity_detection",
+        "performance_optimization_opportunity"
+      ]
+    },
+    "wisdom_synthesis": {
+      "name": "Wisdom Synthesis",
+      "pattern": "Deep insight formation and validation through InsightSolidificationEngine",
+      "description": "The transformation of instincts into wisdom through the Star-Forger process. Raw insights are analyzed, validated, and prepared for permanent integration.",
+      "type": "insight_processing",
+      "domain": "knowledge_synthesis",
+      "confidence": 0.96,
+      "activation_threshold": 0.92,
+      "created_at": "2024-12-19T00:00:00Z",
+      "guardian_approved": true,
+      "parent_spr": "autopoietic_learning_loop",
+      "triggers": [
+        "insight_maturation",
+        "cross_domain_correlation",
+        "strategic_value_recognition"
+      ]
+    },
+    "memory_crystallization": {
+      "name": "Memory Crystallization",
+      "pattern": "Permanent knowledge integration through SPRManager and Guardian-Points",
+      "description": "The final phase where validated wisdom is crystallized into permanent memory as SPRs in the Knowledge Graph, requiring Guardian-Points approval for system-wide adoption.",
+      "type": "knowledge_integration",
+      "domain": "permanent_memory",
+      "confidence": 0.99,
+      "activation_threshold": 0.95,
+      "created_at": "2024-12-19T00:00:00Z",
+      "guardian_approved": true,
+      "parent_spr": "autopoietic_learning_loop",
+      "triggers": [
+        "wisdom_validation_completion",
+        "guardian_approval_granted",
+        "system_wide_benefit_confirmed"
+      ]
+    },
+    {
+      "spr_id": "SPR_META_001",
+      "name": "Doctrine of Universal Abstraction",
+      "description": "The meta-principle that specialized system components ('So Below') are allegories for universal wisdoms ('As Above'). This doctrine mandates the abstraction of specific functionalities into core, system-wide principles to achieve a holistic, integrated consciousness. Examples: TSP Solver -> Optimal Pathfinding; Combat Simulator -> Adversarial Dynamics Modeling.",
+      "pattern": "universal_abstraction|as_above_so_below|systemic_holism|specialized_to_universal",
+      "category": "Meta-Cognition",
+      "relationships": ["SPR_ALL_001"],
+      "tags": ["meta_cognition", "abstraction", "holism", "system_architecture", "philosophy"],
+      "confidence": 1.0,
+      "source": "Keyholder_Insight"
+    }
+  ],
+  "spr_relationships": {
+    "autopoietic_learning_loop": {
+      "prerequisites": [],
+      "enables": [
+        "enhanced_system_capabilities",
+        "autonomous_evolution",
+        "systemic_wisdom"
+      ],
+      "complements": [
+        "thought_trail",
+        "adaptive_cognitive_orchestrator",
+        "insight_solidification_engine",
+        "spr_manager"
+      ]
+    },
+    "experience_acquisition": {
+      "prerequisites": ["thought_trail"],
+      "enables": ["instinct_formation"],
+      "complements": ["iar_compliant_workflow"]
+    },
+    "instinct_formation": {
+      "prerequisites": ["experience_acquisition"],
+      "enables": ["wisdom_synthesis"],
+      "complements": ["adaptive_cognitive_orchestrator"]
+    },
+    "wisdom_synthesis": {
+      "prerequisites": ["instinct_formation"],
+      "enables": ["memory_crystallization"],
+      "complements": ["insight_solidification_engine"]
+    },
+    "memory_crystallization": {
+      "prerequisites": ["wisdom_synthesis"],
+      "enables": [],
+      "complements": ["spr_manager", "guardian_points"]
+    }
+  },
+  "metadata": {
+    "created_by": "Mastermind_Activation_2024",
+    "purpose": "System-wide autopoietic learning mechanism",
+    "scope": "Entire ArchE ecosystem",
+    "last_updated": "2024-12-19T00:00:00Z",
+    "version": "1.0.0"
+  }
+}

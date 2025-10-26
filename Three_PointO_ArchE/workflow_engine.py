@@ -11,25 +11,19 @@ import logging
 import copy
 import time
 import re
-import uuid  # Added for workflow_run_id generation consistency
+import uuid
 import tempfile
 from datetime import datetime
-import sys
-# Expanded type hints
 from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable
-# Use relative imports within the package
-"""
-Import strategy hardening:
-Prefer relative imports when the module is part of the package.
-If executed as a standalone script (no known parent package), fall back to
-absolute imports after ensuring the project root is on sys.path.
-"""
+
+# --- Standardized Imports ---
+# This single block ensures robust relative imports within the package.
 try:
     from . import config
     from .action_registry import execute_action, main_action_registry
     from .spr_manager import SPRManager
-    from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS
-    from .action_context import ActionContext  # Import from new file
+    from .error_handler import handle_action_error
+    from .action_context import ActionContext
     from .workflow_recovery import WorkflowRecoveryHandler
     from .recovery_actions import (
         analyze_failure,
@@ -41,77 +35,28 @@ try:
     )
     from .system_genesis_tool import perform_system_genesis_action
     from .qa_tools import run_code_linter, run_workflow_suite
-    from .output_handler import (
-        display_task_result,
-        display_workflow_progress,
-        display_workflow_start,
-        display_workflow_complete,
-        display_workflow_error,
-        display_output,
-        print_tagged_execution,
-        print_tagged_results,
-    )
-    from .custom_json import dumps, loads
-    from .knowledge_graph_manager import KnowledgeGraphManager
-    from .ias_manager import IASManager
-    from .logging_config import setup_logging
-    from .config import get_config
-    from .comparison_manager import ComparisonManager
-    from .reflection_manager import ReflectionManager
-    from .synthesis_manager import SynthesisManager
-    from .execution_manager import ExecutionManager
-    from .task_manager import TaskManager
-    from .context_manager import ContextManager
-    from .pattern_manager import PatternManager
-    from .workflow_optimizer import WorkflowOptimizer # <-- Import the optimizer
-except ImportError:
-    # Standalone execution: ensure project root is importable
-    _this_dir = os.path.dirname(os.path.abspath(__file__))
-    _project_root = os.path.dirname(_this_dir)
-    if _project_root not in sys.path:
-        sys.path.insert(0, _project_root)
-    from . import config  # type: ignore
-    from .action_registry import execute_action, main_action_registry  # type: ignore
-    from .spr_manager import SPRManager  # type: ignore
-    from .error_handler import handle_action_error, DEFAULT_ERROR_STRATEGY, DEFAULT_RETRY_ATTEMPTS  # type: ignore
-    from .action_context import ActionContext  # type: ignore
-    from .workflow_recovery import WorkflowRecoveryHandler  # type: ignore
-    from .recovery_actions import (  # type: ignore
-        analyze_failure,
-        fix_template,
-        fix_action,
-        validate_workflow,
-        validate_action,
-        self_heal_output
-    )
-    from .system_genesis_tool import perform_system_genesis_action  # type: ignore
-    from .qa_tools import run_code_linter, run_workflow_suite  # type: ignore
-    from .output_handler import (  # type: ignore
-        display_task_result,
-        display_workflow_progress,
-        display_workflow_start,
-        display_workflow_complete,
-        display_workflow_error,
-        display_output,
-        print_tagged_execution,
-        print_tagged_results,
-    )
-    from .custom_json import dumps, loads  # type: ignore
-    from .knowledge_graph_manager import KnowledgeGraphManager  # type: ignore
-    from .ias_manager import IASManager  # type: ignore
-    from .logging_config import setup_logging  # type: ignore
-    from .config import get_config  # type: ignore
-    from .comparison_manager import ComparisonManager  # type: ignore
-    from .reflection_manager import ReflectionManager  # type: ignore
-    from .synthesis_manager import SynthesisManager  # type: ignore
-    from .execution_manager import ExecutionManager  # type: ignore
-    from .task_manager import TaskManager  # type: ignore
-    from .context_manager import ContextManager  # type: ignore
-    from .pattern_manager import PatternManager  # type: ignore
-    from .workflow_optimizer import WorkflowOptimizer # type: ignore
+    from .output_handler import print_tagged_execution, print_tagged_results, display_output
+    from .custom_json import dumps
+    from .workflow_optimizer import WorkflowOptimizer
+    from .thought_trail import log_to_thought_trail
+except ImportError as e:
+    # This block should ideally not be hit if run as part of the package,
+    # but serves as a fallback and clear error indicator.
+    import logging
+    logging.getLogger(__name__).critical(f"A critical relative import failed in workflow_engine: {e}", exc_info=True)
+    # Define dummy fallbacks to prevent outright crashing where possible
+    def execute_action(*args, **kwargs): return {"error": f"Action Registry not available due to import error: {e}"}
+    # Add other necessary fallbacks here as needed...
+    class SPRManager: pass
+
 import ast
-from datetime import datetime  # Added import
-# (imports are resolved above via hardened strategy)
+from datetime import datetime
+
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from Three_PointO_ArchE.temporal_core import now, now_iso, ago, from_now, format_log, format_filename
+
 
 # Attempt to import numpy for numeric type checking in _compare_values,
 # optional
@@ -201,7 +146,7 @@ class ResonanceTracker:
     def record_execution(self, task_id, iar_data, context):
         """Record task execution for resonance tracking"""
         execution_record = {
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': now_iso(),
             'task_id': task_id,
             'status': iar_data.get('status'),
             'confidence': iar_data.get('confidence', 0.0),
@@ -292,13 +237,13 @@ try:
 except Exception:
     # Fallback no-ops if module not available
     def load_session_state():
-        return {"facts_ledger": [], "updated_at": datetime.utcnow().isoformat() + "Z"}
+        return {"facts_ledger": [], "updated_at": now_iso()}
     def save_session_state(state):
         return None
     def append_fact(state, fact):
-        state.setdefault("facts_ledger", []).append({**fact, "ts": datetime.utcnow().isoformat() + "Z"})
+        state.setdefault("facts_ledger", []).append({**fact, "ts": now_iso()})
     def create_context_bundle(spr_def, runtime_context, initial_context):
-        return {"spr_id": spr_def.get("spr_id"), "created_at": datetime.utcnow().isoformat() + "Z"}
+        return {"spr_id": spr_def.get("spr_id"), "created_at": now_iso()}
     def merge_bundles(bundles):
         return {"spr_index": [b.get("spr_id") for b in bundles]}
 
@@ -342,22 +287,23 @@ def _execute_standalone_workflow(workflow_definition: Dict[str, Any], initial_co
         action_func = action_registry.get(action_type)
         if not action_func:
             error_result = {"error": f"Sub-workflow failed: Action type '{action_type}' not found."}
-            runtime_context[task_key] = error_result
+            runtime_context[task_key] = self._ensure_iar_compliance(error_result, action_context_obj)
             task_statuses[task_key] = "failed"
             break
 
         try:
-            # The arguments must be passed as a single 'inputs' dictionary
+            # The arguments must be passed as keyword arguments
             # to align with the action wrappers in action_registry.py
             result = action_func(**resolved_inputs)
             if not isinstance(result, dict):
                 result = {"output": result}
-            runtime_context[task_key] = result
+            runtime_context[task_key] = self._ensure_iar_compliance(result, action_context_obj)
             task_statuses[task_key] = "completed"
         except Exception as e:
             error_msg = f"Sub-workflow task '{task_key}' failed: {e}"
             logger.error(error_msg, exc_info=True)
-            runtime_context[task_key] = {"error": error_msg}
+            error_result = {"error": error_msg}
+            runtime_context[task_key] = self._ensure_iar_compliance(error_result, action_context_obj)
             task_statuses[task_key] = "failed"
             break
 
@@ -404,6 +350,7 @@ class IARCompliantWorkflowEngine:
         logger.info(
             "IARCompliantWorkflowEngine initialized with full vetting capabilities")
 
+    @log_to_thought_trail
     def register_action(self, action_type: str, action_func: Callable) -> None:
         """Register an action function with the engine."""
         main_action_registry.register_action(
@@ -422,7 +369,21 @@ class IARCompliantWorkflowEngine:
         self.register_action("validate_action", validate_action)
         self.register_action("self_heal_output", self_heal_output)
         # Register the new for_each meta-action
-        self.register_action("for_each", self._execute_for_each_task)
+        self.register_action("for_each", self._execute_for_each_task_wrapper)
+
+    def _execute_for_each_task_wrapper(self, inputs: Dict[str, Any], **kwargs) -> Dict[str, Any]:
+        """
+        Wrapper for for_each action that can be called from action registry.
+        Creates a minimal ActionContext for the actual implementation.
+        """
+        # Create a minimal ActionContext for the for_each implementation
+        context_for_action = ActionContext(
+            workflow_name="for_each_wrapper",
+            task_name="for_each",
+            runtime_context=kwargs.get('runtime_context', {}),
+            initial_context=kwargs.get('initial_context', {})
+        )
+        return self._execute_for_each_task(inputs, context_for_action)
 
     def _execute_for_each_task(self, inputs: Dict[str, Any], context_for_action: ActionContext) -> Dict[str, Any]:
         """
@@ -462,6 +423,7 @@ class IARCompliantWorkflowEngine:
         logger.info("Completed all for_each iterations.")
         return {"results": all_results}
     
+    @log_to_thought_trail
     def _execute_task(self, task: Dict[str, Any],
                       results: Dict[str, Any], initial_context: Dict[str, Any] = None) -> Dict[str, Any]:
         """Execute a single task with proper action type handling."""
@@ -482,7 +444,7 @@ class IARCompliantWorkflowEngine:
         )
 
         try:
-            result = action_func(resolved_inputs)
+            result = action_func(**resolved_inputs)
             if not isinstance(result, dict):
                 result = {"output": result}
             return result
@@ -564,6 +526,7 @@ class IARCompliantWorkflowEngine:
             "iar_validation": self.iar_validator.get_validation_status() if hasattr(self.iar_validator, 'get_validation_status') else None
         }
 
+    @log_to_thought_trail
     def load_workflow(self, workflow_name: str) -> Dict[str, Any]:
         """Load workflow definition from file."""
         # Ensure the workflow path is absolute by joining with the engine's workflows_dir
@@ -1163,7 +1126,7 @@ class IARCompliantWorkflowEngine:
                 event_data = {
                     "type": "thought_process_step",
                     "event": event_type,
-                    "timestamp": datetime.now().isoformat(),
+                    "timestamp": now_iso(),
                     "payload": payload
                 }
                 self.event_callback(event_data)
@@ -1181,7 +1144,7 @@ class IARCompliantWorkflowEngine:
                 rich_event_data = {
                     "type": "rich_event",
                     "event": event_type,
-                    "timestamp": datetime.now().isoformat(),
+                    "timestamp": now_iso(),
                     "payload": {
                         "event_id": f"{event_type}_{uuid.uuid4().hex[:8]}",
                         "event_type": event_type,
@@ -1203,9 +1166,11 @@ class IARCompliantWorkflowEngine:
             except Exception as e:
                 logger.warning(f"Failed to emit rich VCD event: {e}")
 
+    @log_to_thought_trail
     def run_workflow(self, workflow_name: str,
                      initial_context: Dict[str, Any],
-                     timeout: int = 900) -> Dict[str, Any]:
+                     timeout: int = 900,
+                     model: str = None) -> Dict[str, Any]:
         """
         Main entry point to run a workflow.
         Initializes context, manages the task queue, and returns the final results.
@@ -1225,12 +1190,16 @@ class IARCompliantWorkflowEngine:
         uuid.uuid4().hex}")
         initial_context["workflow_run_id"] = run_id
         
+        # Inject the model into the initial context so all tasks can access it
+        if model:
+            initial_context["model"] = model
+
         event_log = []
         # Load externalized session state (non-negotiable) and inject into initial_context
         try:
             session_state = load_session_state()
         except Exception:
-            session_state = {"facts_ledger": [], "updated_at": datetime.utcnow().isoformat() + "Z"}
+            session_state = {"facts_ledger": [], "updated_at": now_iso()}
         initial_context = {**initial_context, "session_state": session_state}
         # Prime SPR bundles if text context exists
         try:
@@ -1329,7 +1298,7 @@ class IARCompliantWorkflowEngine:
                     task_key=task_key, action_name=task_key, action_type=action_type,
                     workflow_name=self.last_workflow_name, run_id=run_id,
                     attempt_number=attempt_count, max_attempts=max_attempts,
-                    execution_start_time=datetime.utcnow(),
+                    execution_start_time=now(),
                     runtime_context=runtime_context
                 )
 
@@ -1350,11 +1319,40 @@ class IARCompliantWorkflowEngine:
                 except Exception:
                     pass
 
-                result = execute_action(
-                    task_key=task_key, action_name=task_key, action_type=action_type,
-                    inputs=resolved_inputs, context_for_action=action_context_obj,
-                    max_attempts=max_attempts, attempt_number=attempt_count
-                )
+                try:
+                    result = execute_action(
+                        action_type=action_type,
+                        inputs=resolved_inputs,
+                        context_for_action=action_context_obj
+                    )
+                    # Defensive: Ensure result is always a dict
+                    if not isinstance(result, dict):
+                        logger.error(f"execute_action returned non-dict type: {type(result)}. Converting to error dict.")
+                        result = {
+                            "error": f"execute_action returned invalid type: {type(result)}",
+                            "reflection": {
+                                "status": "Failed",
+                                "summary": f"Action execution returned invalid type: {type(result)}",
+                                "confidence": 0.0,
+                                "alignment_check": {"objective_alignment": 0.0, "protocol_alignment": 0.0},
+                                "potential_issues": ["execute_action did not return a dictionary"],
+                                "raw_output_preview": str(result)
+                            }
+                        }
+                except Exception as e:
+                    # Ultimate failsafe: If execute_action itself raises an exception (which it shouldn't)
+                    logger.error(f"CRITICAL: execute_action raised an exception (this should never happen): {e}", exc_info=True)
+                    result = {
+                        "error": f"CRITICAL: execute_action raised exception: {str(e)}",
+                        "reflection": {
+                            "status": "Failed",
+                            "summary": f"Action execution raised an unhandled exception: {str(e)}",
+                            "confidence": 0.0,
+                            "alignment_check": {"objective_alignment": 0.0, "protocol_alignment": 0.0},
+                            "potential_issues": [f"execute_action raised: {type(e).__name__}: {str(e)}"],
+                            "raw_output_preview": str(e)
+                        }
+                    }
                 
                 try:
                     print_tagged_results(task_key, action_type, result)
@@ -1480,14 +1478,19 @@ class IARCompliantWorkflowEngine:
     f"Workflow '{
         self.last_workflow_name}' finished in {run_duration}s with status: {final_status}")
 
-        event_log_path = os.path.join(
-    config.CONFIG.paths.outputs, f"run_events_{run_id}.jsonl")
+        # --- Event Log Persistence ---
+        # Save the detailed event log for this run to a file for deeper analysis.
         try:
+            # Use the project outputs directory for the event log
+            from .config import PathConfig
+            config = PathConfig()
+            outputs_dir = config.outputs
+            outputs_dir.mkdir(exist_ok=True)
+            event_log_path = outputs_dir / f"run_events_{run_id}.jsonl"
             with open(event_log_path, 'w', encoding='utf-8') as f:
                 for event in event_log:
                     f.write(json.dumps(event, default=str) + '\n')
-            logger.info(f"Detailed event log saved to: {event_log_path}")
-                
+            logger.info(f"Event log for run {run_id} saved to {event_log_path}")
         except Exception as e:
             logger.error(f"Failed to save event log to {event_log_path}: {e}")
 
@@ -1575,13 +1578,13 @@ class IARCompliantWorkflowEngine:
 
     def _display_workflow_progress(self, task_name: str, status: str) -> None:
         """Display workflow execution progress."""
-        print(f"\n[{datetime.now().strftime('%H:%M:%S')}] {task_name}: {status}")
+        print(f"\n[{format_log()}] {task_name}: {status}")
 
     def execute_workflow(self, workflow: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a workflow with enhanced terminal output."""
         display_workflow_start(workflow.get('name', 'Unnamed Workflow'))
         
-        start_time = datetime.now()
+        start_time = now()
         run_id = str(uuid.uuid4())
         
         try:
@@ -1623,7 +1626,7 @@ class IARCompliantWorkflowEngine:
                     raise
             
             # Workflow completed successfully
-            end_time = datetime.now()
+            end_time = now()
             results["end_time"] = end_time.isoformat()
             results["workflow_status"] = "Completed Successfully"
             results["execution_time_seconds"] = (end_time - start_time).total_seconds()
@@ -1636,7 +1639,7 @@ class IARCompliantWorkflowEngine:
             
         except Exception as e:
             # Workflow failed
-            end_time = datetime.now()
+            end_time = now()
             results["end_time"] = end_time.isoformat()
             results["workflow_status"] = "Failed"
             results["error"] = str(e)
@@ -1650,7 +1653,7 @@ class IARCompliantWorkflowEngine:
 
     def _save_workflow_result(self, result: Dict[str, Any]) -> str:
         """Save workflow result to a file with timestamp."""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        timestamp = format_filename()
         workflow_name = result.get("workflow_name", "unknown_workflow")
         run_id = result.get("run_id", str(uuid.uuid4()))
         filename = f"result_{workflow_name}_run_{run_id}_{timestamp}.json"
@@ -1737,7 +1740,7 @@ class IARCompliantWorkflowEngine:
                 workflow_data["sessions"] = list(workflow_data["sessions"])
             
             organizer.catalog["metadata"]["total_logs"] += 1
-            organizer.catalog["metadata"]["last_organized"] = datetime.now().isoformat()
+            organizer.catalog["metadata"]["last_organized"] = now_iso()
             
             # Save updated catalog
             organizer._save_catalog()

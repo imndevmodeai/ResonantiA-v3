@@ -1,0 +1,386 @@
+[
+  {
+    "spr_id": "KnowledgeScaffoldinG",
+    "term": "Knowledge Scaffolding",
+    "definition": "The meta-learning workflow capability that enables ArchE to bootstrap domain expertise from first principles. When encountering a novel problem domain, Knowledge Scaffolding deconstructs the problem, acquires domain knowledge through web search, analyzes specialization requirements, and forges a Specialized Cognitive Agent (SCA) with domain-specific expertise, analytical frameworks, and problem-solving patterns. This is RISE Phase A - the foundation upon which all subsequent strategic thinking is built.",
+    "category": "CognitiveWorkflow",
+    "relationships": {
+      "type": "MetaLearningCapability",
+      "is_a": ["MetaWorkfloW", "DomainAdaptationProceS"],
+      "part_of": ["RISEOrchestratoR"],
+      "phase": "Phase_A",
+      "comprises": [
+        "DomainAcquisitioN",
+        "SpecialistForganG",
+        "CognitiveBootstrappinG"
+      ],
+      "uses": [
+        "WebSearchTooL",
+        "LLMProvideR",
+        "SPRManageR"
+      ],
+      "enables": [
+        "NovelProblemSolvinG",
+        "DynamicExpertisE"
+      ],
+      "produces": [
+        "SpecializedCognitiveAgenT"
+      ],
+      "embodies": [
+        "UniversalAbstractioN"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "See specifications/knowledge_scaffolding_workflow.md for complete workflow specification. Implemented in workflows/knowledge_scaffolding.json.",
+    "example_application": "When asked to solve a quantum computing optimization problem, Knowledge Scaffolding acquires quantum mechanics domain knowledge, analyzes required mathematical frameworks (linear algebra, complex numbers, Hilbert spaces), and forges a Quantum Computing Specialist agent with expertise in qubit operations, gate implementations, and error correction—all from zero prior quantum knowledge.",
+    "token_optimization": {
+      "task_allocation": {
+        "deconstruct_problem": 8192,
+        "extract_domain": 500,
+        "validate_search": 1500,
+        "analyze_specialization": 8192,
+        "forge_specialist_agent": 16384,
+        "validate_agent": 1500
+      },
+      "rationale": "The Specialized Cognitive Agent (16K tokens) is the primary deliverable and cannot be truncated. Analysis tasks (8K) need comprehensive reasoning. Validation tasks (1.5K) are structured checks.",
+      "cost_per_execution": "$0.0086 (gemini-2.5-flash)"
+    }
+  },
+  {
+    "spr_id": "SpecializedCognitiveAgenT",
+    "term": "Specialized Cognitive Agent (SCA)",
+    "definition": "A domain-specific cognitive tool forged by Knowledge Scaffolding that contains comprehensive expertise, analytical frameworks, strategic thinking patterns, and problem-solving methodologies tailored to a specific problem domain. The SCA is not a separate entity but a cognitive persona that ArchE adopts—like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs are the primary output of RISE Phase A and the foundation for all subsequent strategic analysis in Phases B, C, and D.",
+    "category": "CognitiveConstruct",
+    "relationships": {
+      "type": "DomainExpertiseProfile",
+      "created_by": ["KnowledgeScaffoldinG"],
+      "used_by": [
+        "StrategyFusioN",
+        "HighStakesVettinG",
+        "SPRDistillatioN"
+      ],
+      "comprises": [
+        "DomainKnowledgeBasE",
+        "AnalyticalFrameworkS",
+        "StrategicThinkingPatternS",
+        "RiskAssessmentMethodologieS",
+        "ImplementationGuidancE",
+        "ValidationCriteriA"
+      ],
+      "enables": [
+        "DomainSpecificReasoninG",
+        "ExpertStrategicAnalysiS"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "SCAs are comprehensive profiles (typically 10K-15K tokens) containing all knowledge and frameworks needed for domain-specific strategic reasoning. They are session-specific and dynamically generated per problem.",
+    "example_application": "For a supply chain resilience problem, the SCA might be a 'Supply Chain Risk Management Specialist' with expertise in network theory, just-in-time vs just-in-case strategies, geopolitical risk assessment, and multi-tier supplier visibility frameworks.",
+    "token_optimization": {
+      "typical_size": "10,000-15,000 tokens",
+      "max_allocation": 16384,
+      "compression_forbidden": true,
+      "rationale": "SCAs are the foundation for ALL subsequent RISE phases. Truncating them would cripple downstream strategic analysis. The 16K token allocation ensures comprehensive expertise profiles."
+    }
+  },
+  {
+    "spr_id": "StrategyFusioN",
+    "term": "Strategy Fusion",
+    "definition": "The multi-pathway analytical workflow that synthesizes strategic insights from three parallel cognitive perspectives: Analytical (rigorous, data-driven reasoning), Creative (unconventional, innovative ideation), and Specialist (domain-grounded practical wisdom). Strategy Fusion dissolves problems into parallel streams of thought, each exploring the solution space with different tools and temperatures, then coagulates these diverse insights into a unified strategic dossier that transcends single-perspective limitations. This is RISE Phase B - the alchemical transformation of knowledge into strategic options.",
+    "category": "CognitiveWorkflow",
+    "relationships": {
+      "type": "EnsembleReasoningCapability",
+      "is_a": ["MetaCognitiveProcessinG", "EnsembleReasoninG"],
+      "part_of": ["RISEOrchestratoR"],
+      "phase": "Phase_B",
+      "comprises": [
+        "ParallelCognitivE",
+        "PerspectiveDiversitY",
+        "StrategicSynthesiS"
+      ],
+      "uses": [
+        "SpecializedCognitiveAgenT",
+        "LLMProvideR"
+      ],
+      "requires": [
+        "KnowledgeScaffoldinG"
+      ],
+      "enables": [
+        "RobustStrategyCreatioN",
+        "InnovativeProblemsolvInG"
+      ],
+      "produces": [
+        "FusedStrategicDossieR"
+      ],
+      "embodies": [
+        "UniversalAbstractioN"
+      ],
+      "inspired_by": [
+        "EnsembleMachineLearninG",
+        "DialecticalReasoninG"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "See specifications/strategy_fusion_workflow.md for complete workflow specification. Implemented in workflows/strategy_fusion.json. Uses parallel execution of three LLM calls with distinct temperature settings (0.1, 0.9, 0.5) followed by synthesis.",
+    "example_application": "For a business expansion strategy, the Analytical pathway identifies market size, competitive forces, and financial constraints. The Creative pathway proposes unconventional market entry (e.g., reverse acquisitions, platform plays). The Specialist pathway applies industry-specific wisdom about distribution channels and regulatory hurdles. Fusion creates a strategy that is data-grounded, innovative, and practically executable.",
+    "token_optimization": {
+      "task_allocation": {
+        "pathway_analytical_insight": 8192,
+        "pathway_creative_insight": 8192,
+        "pathway_specialist_consultation": 8192,
+        "synthesize_fused_dossier": 16384
+      },
+      "parallel_execution": true,
+      "total_output": "~40K tokens",
+      "rationale": "Three pathways (8K each) ensure comprehensive exploration of solution space from distinct perspectives. Synthesis (16K) must integrate all perspectives without truncation.",
+      "cost_per_execution": "$0.0135 (gemini-2.5-flash)"
+    }
+  },
+  {
+    "spr_id": "ParallelCognitivE",
+    "term": "Parallel Cognitive Processing",
+    "definition": "The capability to execute multiple distinct cognitive processes simultaneously, each exploring the problem space with different assumptions, tools, or perspectives. Unlike sequential reasoning (which commits to a single path), parallel cognitive processing maintains multiple solution trajectories until synthesis forces convergence. This is analogous to quantum superposition in thought: multiple cognitive states exist simultaneously until measurement (decision) collapses them into a single strategic outcome.",
+    "category": "CognitiveArchitecture",
+    "relationships": {
+      "type": "ReasoningParadigm",
+      "used_by": [
+        "StrategyFusioN",
+        "HighStakesVettinG"
+      ],
+      "enables": [
+        "PerspectiveDiversitY",
+        "SolutionSpaceExploratioN"
+      ],
+      "contrasts_with": [
+        "SequentialReasoninG"
+      ],
+      "inspired_by": [
+        "QuantumSuperposition",
+        "EnsembleLearninG"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "Implemented through concurrent LLM invocations with distinct prompts and temperature settings. Each pathway is IAR-logged independently.",
+    "example_application": "In Strategy Fusion, three pathways process the same problem simultaneously: one analyzes data (temp 0.1), one brainstorms wildly (temp 0.9), one applies expertise (temp 0.5). All three complete in ~3-5 seconds total due to parallelism, vs 9-15 seconds if sequential."
+  },
+  {
+    "spr_id": "FusedStrategicDossieR",
+    "term": "Fused Strategic Dossier",
+    "definition": "The comprehensive strategic document produced by Strategy Fusion (Phase B) that integrates analytical rigor, creative innovation, and specialist wisdom into a unified strategic plan. The dossier contains executive summary, analytical foundations, creative breakthroughs, specialist recommendations, integrated strategy, actionable steps, risk assessment, and success metrics. It is the primary input to High-Stakes Vetting (Phase C) and represents the system's best strategic thinking before adversarial validation.",
+    "category": "StrategicArtifact",
+    "relationships": {
+      "type": "StrategicDocument",
+      "produced_by": ["StrategyFusioN"],
+      "input_to": ["HighStakesVettinG"],
+      "comprises": [
+        "ExecutiveSummarY",
+        "AnalyticalFoundatioN",
+        "CreativeInnovatioN",
+        "SpecialistRecommendatioN",
+        "IntegratedStrategY",
+        "ActionableStepS",
+        "RiskAssessmenT",
+        "SuccessMetricS"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "Typically 12K-15K tokens in length. Contains synthesis of three parallel pathway analyses.",
+    "example_application": "A Fused Strategic Dossier for market entry might show: Analytical foundation (TAM $2B, CAGR 15%, 3 major competitors), Creative innovation (freemium-to-enterprise funnel), Specialist wisdom (regulatory approval timeline 18 months), Integrated strategy (phase regulatory while building freemium base), with specific quarterly milestones.",
+    "token_optimization": {
+      "typical_size": "12,000-15,000 tokens",
+      "max_allocation": 16384,
+      "rationale": "Must contain complete strategic synthesis without truncation. This is the document that undergoes vetting—incomplete strategies lead to flawed vetting."
+    }
+  },
+  {
+    "spr_id": "HighStakesVettinG",
+    "term": "High-Stakes Vetting",
+    "definition": "The adversarial validation workflow that subjects strategic dossiers to a trinity of brutal examinations: Red Team (adversarial technical critique), Ethics Board (moral and bias scrutiny), and Dystopian Seer (catastrophic scenario imagination). Strategies must survive all three trials and be explicitly refined to address identified weaknesses before receiving a go/no-go decision. This is RISE Phase C - the trial by fire that transforms clever strategies into antifragile implementations.",
+    "category": "CognitiveWorkflow",
+    "relationships": {
+      "type": "AdversarialValidationFramework",
+      "is_a": ["AdversarialValidatioN", "RiskManagementFrameworK"],
+      "part_of": ["RISEOrchestratoR"],
+      "phase": "Phase_C",
+      "comprises": [
+        "RedTeamAnalysiS",
+        "EthicalReasoninG",
+        "DystopianSimulatioN",
+        "StrategicRefinemenT"
+      ],
+      "requires": [
+        "FusedStrategicDossieR"
+      ],
+      "enables": [
+        "RobustStrategyDeploymenT",
+        "CatastrophePreventioN"
+      ],
+      "produces": [
+        "RefinedStrategY",
+        "GoNoGoDecisioN"
+      ],
+      "embodies": [
+        "AntifragilitY"
+      ],
+      "inspired_by": [
+        "RedTeamCybersecuritY",
+        "EthicsReviewBoard",
+        "PremortemAnalysiS"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "See specifications/high_stakes_vetting_workflow.md for complete workflow specification. Implemented in workflows/high_stakes_vetting.json. Uses parallel adversarial LLM calls with distinct personas and temperature settings.",
+    "example_application": "A market expansion strategy passes through: Red Team (identifies supply chain vulnerabilities, competitive counter-moves), Ethics Board (flags potential labor practice issues in target market), Dystopian Seer (imagines regulatory crackdown scenario). Refined strategy adds supply chain redundancy, labor audits, and regulatory contingency plans. Result: GO decision with 83% confidence.",
+    "token_optimization": {
+      "task_allocation": {
+        "red_team_analysis": 8192,
+        "ethical_and_bias_review": 8192,
+        "dystopian_simulation": 8192,
+        "synthesize_vetting_dossier": 8192,
+        "generate_final_strategy": 16384
+      },
+      "parallel_execution": true,
+      "total_output": "~48K tokens",
+      "rationale": "Adversarial trials (8K each) need space for comprehensive critique. Final refined strategy (16K) must address ALL identified concerns without truncation.",
+      "cost_per_execution": "$0.016 (gemini-2.5-flash)"
+    }
+  },
+  {
+    "spr_id": "RedTeamAnalysiS",
+    "term": "Red Team Analysis",
+    "definition": "The adversarial critique process that attempts to find every possible weakness, questionable assumption, and failure mode in a strategic plan. The Red Team acts as an intelligent adversary whose goal is to break the strategy, not support it. This mirrors cybersecurity red-team exercises where security experts attack their own systems to find vulnerabilities before malicious actors do. In ArchE, Red Team Analysis uses high-temperature (0.8) LLM generation to encourage creative adversarial thinking.",
+    "category": "AdversarialValidation",
+    "relationships": {
+      "type": "AdversarialCritique",
+      "part_of": ["HighStakesVettinG"],
+      "produces": ["RedTeamReporT"],
+      "enables": ["VulnerabilityIdentificatioN"],
+      "inspired_by": ["CybersecurityRedTeaminG"],
+      "confidence": "high"
+    },
+    "blueprint_details": "Uses temperature 0.8 to encourage creative failure mode identification. Prompts frame the LLM as a 'risk analysis expert' to avoid safety filter triggers while maintaining adversarial rigor.",
+    "example_application": "Red Team attacking a cloud migration strategy might identify: single-point-of-failure in DNS provider, vendor lock-in risks with proprietary APIs, skill gap in team for managing distributed systems, cost overrun risk if data egress exceeds projections."
+  },
+  {
+    "spr_id": "EthicalReasoninG",
+    "term": "Ethical Reasoning",
+    "definition": "The systematic analysis of moral implications, bias risks, and stakeholder impacts of strategic decisions. Ethical Reasoning examines strategies through multiple ethical frameworks (utilitarian, deontological, virtue ethics) to identify potential harms, hidden biases (cognitive, social, algorithmic), and negative second-order effects. This ensures strategies are not just effective but also morally defensible and aligned with human values.",
+    "category": "MoralAnalysis",
+    "relationships": {
+      "type": "EthicalFramework",
+      "part_of": ["HighStakesVettinG"],
+      "produces": ["EthicsReporT"],
+      "enables": ["MoralValidatioN", "BiasDetectioN"],
+      "considers": [
+        "UtilitarianEthicS",
+        "DeontologicalEthicS",
+        "VirtueEthicS"
+      ],
+      "confidence": "medium"
+    },
+    "blueprint_details": "Uses temperature 0.5 for balanced ethical analysis. Examines stakeholder impacts, bias risks, and long-term consequences.",
+    "example_application": "Ethics review of an AI hiring tool might flag: potential demographic bias in training data, opacity concerns (candidates can't understand rejections), displacement of human HR workers, privacy implications of data collection, power imbalance (companies hold all decision-making)."
+  },
+  {
+    "spr_id": "DystopianSimulatioN",
+    "term": "Dystopian Simulation",
+    "definition": "The creative worst-case scenario narrative that vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure that force explicit contingency planning. This mirrors pre-mortem analysis (imagine the project failed—what happened?) but uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios that might not appear in traditional risk assessments.",
+    "category": "RiskAnalysis",
+    "relationships": {
+      "type": "CatastrophicImaginatioN",
+      "part_of": ["HighStakesVettinG"],
+      "produces": ["DystopianNarrativE"],
+      "enables": ["ContingencyPlanninG", "CatastrophePreventioN"],
+      "inspired_by": ["PremortemAnalysiS"],
+      "confidence": "medium"
+    },
+    "blueprint_details": "Uses temperature 0.9 for highly creative catastrophic thinking. Narrative format makes abstract risks concrete and psychologically impactful.",
+    "example_application": "Dystopian narrative for a social media feature launch: 'The feature went viral, but not for good reasons. Users discovered they could weaponize it for harassment. Media coverage framed the company as enabling abuse. Regulatory scrutiny intensified. Users revolted. Stock dropped 40%. The feature was pulled, but trust was permanently damaged.' Result: Explicit abuse-prevention measures added to strategy."
+  },
+  {
+    "spr_id": "RefinedStrategY",
+    "term": "Refined Strategy",
+    "definition": "The final strategic document produced by High-Stakes Vetting that explicitly addresses all vulnerabilities, ethical concerns, and catastrophic scenarios identified through adversarial analysis. Unlike the original Fused Strategic Dossier, the Refined Strategy includes risk mitigation matrices, ethical safeguards, catastrophic contingency plans, and a go/no-go decision with confidence assessment. This is the strategy that, if approved, proceeds to implementation.",
+    "category": "StrategicArtifact",
+    "relationships": {
+      "type": "VettedStrategyDocument",
+      "produced_by": ["HighStakesVettinG"],
+      "input_to": ["SPRDistillatioN"],
+      "comprises": [
+        "GoNoGoDecisioN",
+        "RiskMitigationMatriX",
+        "EthicalSafeguardS",
+        "CatastrophicContingencieS",
+        "ConfidenceAssessmenT"
+      ],
+      "stronger_than": ["FusedStrategicDossieR"],
+      "embodies": ["AntifragilitY"],
+      "confidence": "high"
+    },
+    "blueprint_details": "Typically 14K-16K tokens. Contains everything from Fused Dossier PLUS explicit mitigation plans for all identified risks.",
+    "example_application": "Refined strategy for platform launch includes: original growth plan, PLUS supply chain redundancy (Red Team mitigation), PLUS privacy audit process (Ethics mitigation), PLUS crisis communication protocol (Dystopian mitigation), PLUS go/no-go thresholds (confidence-based decision).",
+    "token_optimization": {
+      "typical_size": "14,000-16,000 tokens",
+      "max_allocation": 16384,
+      "rationale": "Must contain original strategy PLUS all mitigation plans. Truncation would lose critical risk management details."
+    }
+  },
+  {
+    "spr_id": "ModelSelectionHierarchY",
+    "term": "Model Selection Hierarchy",
+    "definition": "The 3-tier fallback system for determining which LLM model to use for any given task in ArchE's workflows. The hierarchy ensures explicit control when needed, automatic propagation from CLI, and graceful fallback to cost-optimized defaults. This enables cost optimization (using cheaper models for most tasks) while allowing override for high-stakes strategic decisions (using premium models when justified).",
+    "category": "SystemConfiguration",
+    "relationships": {
+      "type": "ConfigurationFramework",
+      "used_by": ["ALL_WORKFLOWS"],
+      "comprises": [
+        "ExplicitTaskOverridE",
+        "CLIArgumentInjectioN",
+        "ProviderDefaultFallbackS"
+      ],
+      "enables": [
+        "CostOptimizatioN",
+        "QualityControlL"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "See specifications/model_selection_strategy.md for complete strategy. Tier 1: Workflow JSON explicit model. Tier 2: CLI --model argument. Tier 3: Provider default (gemini-2.5-flash for cost optimization).",
+    "example_application": "User runs 'arche_cli.py query --model gemini-2.5-flash'. All workflow tasks use Flash UNLESS task explicitly specifies 'model: gemini-2.5-pro'. This allows 90% of tasks to use cheap model while 10% critical tasks use premium model, optimizing for cost without sacrificing quality on high-stakes decisions.",
+    "token_optimization": {
+      "default_model": "gemini-2.5-flash",
+      "cost_savings": "91% vs gemini-2.5-pro",
+      "quality_tradeoff": "Minimal for analytical tasks",
+      "override_use_cases": [
+        "Novel strategic decisions",
+        "High-stakes business plans",
+        "Complex technical architecture"
+      ]
+    }
+  },
+  {
+    "spr_id": "OptimalTokenLimitS",
+    "term": "Optimal Token Limits",
+    "definition": "The task-complexity-based token allocation strategy that matches LLM output limits to the cognitive requirements of each task type. Instead of using arbitrary conservative limits (e.g., 1500 tokens for everything), Optimal Token Limits allocate 500 tokens for simple extraction, 1500 for validation, 8192 for comprehensive analysis, and 16384 for strategic synthesis. This eliminates truncation on high-value outputs while avoiding waste on simple tasks.",
+    "category": "SystemConfiguration",
+    "relationships": {
+      "type": "ResourceAllocationStrategy",
+      "applied_to": ["ALL_WORKFLOWS"],
+      "principle": "MatchCapabilityToComplexitY",
+      "eliminates": ["TruncationOnCriticalOutputS"],
+      "enables": ["ComprehensiveAnalysiS"],
+      "confidence": "high"
+    },
+    "blueprint_details": "See specifications/optimal_token_limits.md for complete strategy and task-type mapping. All workflow JSON files updated with optimized limits (January 2025).",
+    "example_application": "Knowledge Scaffolding: domain extraction (500 tokens - simple), problem deconstruction (8192 - analytical), forge specialist agent (16384 - strategic synthesis). Total: right-sized for quality without waste.",
+    "token_optimization": {
+      "categories": {
+        "extraction": 500,
+        "validation": 1500,
+        "analytical": 8192,
+        "strategic_synthesis": 16384
+      },
+      "key_insight": "We pay per token USED, not per token ALLOWED. Setting appropriate limits costs nothing extra but prevents quality-destroying truncation.",
+      "cost_impact": "2-3x token usage on strategic tasks, but infinite value gain (complete vs truncated strategies)"
+    }
+  }
+]
+

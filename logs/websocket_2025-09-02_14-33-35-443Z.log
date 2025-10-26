@@ -1,0 +1,77 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-02T14:33:35.446Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-02_14-33-35-443Z.log
+❌ Error Log: logs/errors_websocket_2025-09-02_14-33-35-443Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-02_14-33-35-443Z.log
+================================================================================
+2025-09-02T14:33:35.497Z [WARN] websocket: Protocol modules not available
+{
+  "error": "Cannot find module '/media/newbu/3626C55326C514B1/Happier/nextjs-chat/.next/server/app/utils/iarProcessor.js'\nRequire stack:\n- /media/newbu/3626C55326C514B1/Happier/webSocketServer.js"
+}
+2025-09-02T14:33:35.580Z [INFO] websocket: Falling back to basic processing mode
+2025-09-02T14:33:35.581Z [INFO] websocket: This may be due to a missing build step. Try running "npm run build" in the nextjs-chat directory
+2025-09-02T14:33:35.581Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-02T14:33:35.581Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-02T14:33:35.581Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-02T14:33:37.554Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:33:37.756Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:33:38.889Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:33:38.931Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:34:47.702Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:34:47.707Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:35:01.500Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:35:01.533Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:35:01.708Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:35:04.699Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:35:13.995Z [INFO] websocket: Received user query
+{
+  "query": "I am the CEO of a publicly traded pharmaceutical company. We have developed a life-saving drug for a..."
+}
+2025-09-02T14:35:14.017Z [INFO] websocket: Sent query to ArchE interface: I am the CEO of a publicly traded pharmaceutical c...
+2025-09-02T14:35:14.131Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_A_Start",
+  "message": "Knowledge Scaffolding & Dynamic Specialization",
+  "timestamp": 1756823714.0844145,
+  "metadata": {
+    "session_id": "rise_1756838114_9ea5b8"
+  }
+}
+2025-09-02T14:35:14.143Z [INFO] websocket: Received response from Python server:
+{
+  "type": "sirc_event",
+  "phase": "Phase_B_Start",
+  "message": "Fused Insight Generation",
+  "timestamp": 1756823714.0913558,
+  "metadata": {
+    "session_id": "rise_1756838114_9ea5b8"
+  }
+}
+2025-09-02T14:35:14.158Z [INFO] websocket: Received response from Python server:
+{
+  "session_id": "rise_1756838114_9ea5b8",
+  "execution_status": "failed",
+  "error": "IARCompliantWorkflowEngine.run_workflow() got an unexpected keyword argument 'timeout'",
+  "current_phase": "B"
+}
+2025-09-02T14:35:47.825Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-02T14:35:47.826Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-02T14:35:48.523Z [INFO] websocket: Received response from Python server:
+{
+  "response": "An error occurred while trying to generate a response: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Exception during API call to Google. (Original: TooManyRequests: 429 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [{'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-1.5-pro', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-1.5-pro', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-1.5-pro'}}]}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '11s'}]))"
+}
+2025-09-02T14:42:12.535Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:42:12.550Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T14:42:12.607Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-02T14:42:15.866Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-02T15:06:11.513Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-02T15:06:11.520Z [WARN] websocket: ArchE WebSocket connection closed
+2025-09-02T15:06:16.521Z [INFO] websocket: Attempting to reconnect to ArchE persistent server
+2025-09-02T15:06:16.546Z [INFO] websocket: Attempting to reconnect to ArchE persistent server

@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Strategic Code: A Unified Spatio-Temporal Framework for Quantum Error ...",
+    "link": "https://arxiv.org/abs/2405.17567",
+    "description": "Within this framework, we show an algebraic and an information-theoretic necessary and sufficient error-correction conditions for a strategic code, which consider spatially and temporally correlated errors. These conditions include the analogous known static QECC conditions as a special case.",
+    "result_date_snippet": null
+  },
+  {
+    "title": "PDF Quantum error correction : an introductory guide",
+    "link": "https://eprints.whiterose.ac.uk/id/eprint/152064/1/arxiv_sub_v2.pdf",
+    "description": "As such, familiarity with quantum coding is an essential prerequisite for the understanding of current and future quantum comput-ing architectures. In this review, we provide an introductory guide to the theory and implementation of quantum error correction codes.",
+    "result_date_snippet": null
+  },
+  {
+    "title": "Building the future of quantum error correction - IBM",
+    "link": "https://www.ibm.com/quantum/blog/future-quantum-error-correction",
+    "description": "Errors are an unavoidable phenomenon in computation, and this is especially true in quantum computation, where we must exercise precise control over the behavior of ultra-sensitive quantum systems. While we look for computational advantage in the near term by using techniques that reduce the effects of noise in quantum systems, extracting the full potential of computation and realizing quantum ...",
+    "result_date_snippet": null
+  },
+  {
+    "title": "How Google AI Used Machine Learning for Quantum Error Correction",
+    "link": "https://machine-learning-made-simple.medium.com/how-google-ai-used-machine-learning-for-quantum-error-correction-b7c927e0e17b",
+    "description": "In the following Deep Dive, we will be looking at the paper to understand how the fiends at DeepMind were able to apply Machine Learning to QEC, making Quantum Computing more available- Our decoder outperforms other state-of-the-art decoders on real-world data from Google's Sycamore quantum processor for distance-3 and distance-5 surface codes.",
+    "result_date_snippet": null
+  },
+  {
+    "title": "Error Correction Integration in Quantum Programming Languages",
+    "link": "https://quantumzeitgeist.com/error-correction-integration-in-quantum-programming-languages/",
+    "description": "Q#, Microsoft's quantum programming language, takes a different approach, providing a library of error correction operations that developers can use to manually implement error correction protocols.",
+    "result_date_snippet": null
+  }
+]

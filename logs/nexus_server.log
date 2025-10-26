@@ -1,0 +1,7 @@
+INFO:websockets.server:server listening on 0.0.0.0:8765
+INFO:__main__:Standalone Nexus server thread started on port 8765
+INFO:websockets.server:connection open
+INFO:websockets.server:connection closed
+INFO:websockets.server:connection open
+INFO:websockets.server:connection open
+INFO:websockets.server:connection closed

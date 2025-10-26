@@ -1,0 +1,99 @@
+{
+    "name": "Strategic Intelligence Workflow",
+    "description": "Performs deep analysis of market opportunities by researching success patterns, analyzing market trends, and using probabilistic modeling to match them against user strengths.",
+    "tasks": {
+        "start_analysis": {
+            "description": "Initial task to acknowledge the start of the strategic analysis.",
+            "action_type": "display_output",
+            "inputs": {
+                "content": "🚀 Starting Strategic Intelligence Workflow..."
+            },
+            "dependencies": []
+        },
+        "research_success_patterns": {
+            "description": "Research success patterns for SaaS businesses in 2025.",
+            "action_type": "search_web",
+            "inputs": {
+                "query": "AI SaaS success patterns 2025",
+                "num_results": 5,
+                "engine": "google"
+            },
+            "dependencies": ["start_analysis"]
+        },
+        "research_market_opportunities": {
+            "description": "Research market opportunities for AI-driven content creation.",
+            "action_type": "search_web",
+            "inputs": {
+                "query": "AI content creation market opportunities 2025",
+                "num_results": 5,
+                "engine": "google"
+            },
+            "dependencies": ["start_analysis"]
+        },
+        "check_search_results": {
+            "description": "Phasegate: Checks if the web search returned any results before proceeding.",
+            "action_type": "execute_code",
+            "inputs": {
+                "language": "python",
+                "code": "import json\n\nsuccess_results = {{research_success_patterns.results}}\nmarket_results = {{research_market_opportunities.results}}\n\nif success_results and market_results and len(success_results) > 0 and len(market_results) > 0:\n    print(json.dumps({'status': 'success', 'message': 'Search results are valid.'}))\nelse:\n    print(json.dumps({'status': 'failure', 'message': 'Search returned no results. Halting workflow.'}))"
+            },
+            "dependencies": [
+                "research_success_patterns",
+                "research_market_opportunities"
+            ]
+        },
+        "analyze_success_patterns": {
+            "description": "Synthesizes the success patterns from the research.",
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Analyze the following search results and extract up to 5 distinct success patterns for SaaS businesses. For each pattern, provide: 'name', 'description', 'monetization_strategy' (e.g., 'Subscription', 'Freemium'), 'estimated_initial_cost' (e.g., 'Low <$1000', 'Medium $1000-$5000', 'High >$5000'), and 'required_skills' (list of skills). Output ONLY a valid JSON object with a key 'success_patterns' containing a list of these pattern objects.\\n\\nSEARCH RESULTS:\\n{{research_success_patterns.results}}",
+                "max_tokens": 2000
+            },
+            "dependencies": [
+                "check_search_results"
+            ]
+        },
+        "analyze_market_opportunities": {
+            "description": "Analyze search results to extract structured market opportunities.",
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Analyze the following search results and extract up to 3 distinct market opportunities for AI-driven businesses. For each opportunity, provide: 'name', 'description', 'target_audience', 'potential_revenue_per_year' (e.g., '$100k-$500k', '$500k-$2M', '$2M+'), and 'competition_level' ('Low', 'Medium', 'High'). Output ONLY a valid JSON object with a key 'market_opportunities' containing a list of these opportunity objects.\\n\\nSEARCH RESULTS:\\n{{research_market_opportunities.results}}",
+                "max_tokens": 2000
+            },
+            "dependencies": [
+                "check_search_results"
+            ]
+        },
+        "probabilistic_matching": {
+            "description": "Perform probabilistic matching of opportunities and patterns against user strengths.",
+            "action_type": "execute_code",
+            "inputs": {
+                "language": "python",
+                "code": "import json\nfrom typing import List, Dict, Tuple\n# The system_representation classes are expected to be in the execution environment's path.\nfrom Three_PointO_ArchE.system_representation import System, GaussianDistribution, StringParam, Distribution\n\n# Hardcoded user strengths for this workflow\nuser_strengths = {\n    'technical_skills': ['Python', 'AI/ML', 'API Integration'],\n    'business_skills': ['Marketing', 'Product Management'],\n    'capital': '$10000'\n}\n\n# Helper to create System objects\ndef _create_system_from_pattern(pattern: dict) -> System:\n    def scale_to_gauss(value_str: str, low: float, high: float, default: float) -> Tuple[float, float]:\n        value_str = str(value_str).lower()\n        if 'low' in value_str or '$1000' in value_str:\n            mean = low\n        elif 'medium' in value_str or '$5000' in value_str:\n            mean = (low + high) / 2\n        elif 'high' in value_str or '>$5000' in value_str or '>$8000' in value_str:\n            mean = high\n        else:\n            mean = default\n        return mean, (high - low) / 4.0 # Estimate std as 1/4 of range\n\n    cost_mean, cost_std = scale_to_gauss(pattern.get('estimated_initial_cost', ''), 1000, 10000, 5000)\n    \n    params: Dict[str, Distribution] = {\n        'initial_cost': GaussianDistribution('initial_cost', mean=cost_mean, std=cost_std),\n        'monetization': StringParam('monetization', pattern.get('monetization_strategy', ''))\n    }\n    return System(pattern.get('name', 'Unknown Pattern'), '', params)\n\ndef _create_system_from_strengths(strengths: dict) -> System:\n    cost_mean = float(strengths['capital'].replace('$', ''))\n    params: Dict[str, Distribution] = {\n        'initial_cost': GaussianDistribution('initial_cost', mean=cost_mean, std=cost_mean * 0.25)\n    }\n    return System('user_strengths', '', params)\n\n# Main logic\n# The context variable is passed in by the code executor\nsuccess_patterns_raw = json.loads(context.get('analyze_success_patterns', '{}')).get('result', {}).get('generated_text', '{}')\nmarket_opportunities_raw = json.loads(context.get('analyze_market_opportunities', '{}')).get('result', {}).get('generated_text', '{}')\n\nsuccess_patterns = json.loads(success_patterns_raw).get('success_patterns', [])\nmarket_opportunities = json.loads(market_opportunities_raw).get('market_opportunities', [])\n\nstrengths_system = _create_system_from_strengths(user_strengths)\nrecommendations = []\n\nfor opp in market_opportunities:\n    best_pattern = None\n    highest_similarity = -1.0\n\n    for pattern in success_patterns:\n        skill_match = any(skill for skill in pattern.get('required_skills', []) if skill in user_strengths['technical_skills'] or skill in user_strengths['business_skills'])\n        if not skill_match:\n            continue\n\n        pattern_system = _create_system_from_pattern(pattern)\n        similarity = strengths_system.similarity(pattern_system)\n\n        if similarity > highest_similarity:\n            highest_similarity = similarity\n            best_pattern = pattern\n    \n    if best_pattern:\n        recommendations.append({\n            'opportunity': opp.get('name'),\n            'description': opp.get('description'),\n            'best_fit_pattern': best_pattern.get('name'),\n            'probabilistic_match_score': highest_similarity,\n            'required_skills': best_pattern.get('required_skills'),\n            'monetization': best_pattern.get('monetization_strategy')\n        })\n\nrecommendations.sort(key=lambda x: x['probabilistic_match_score'], reverse=True)\n\nprint(json.dumps({'recommendations': recommendations}))",
+                "context": {
+                    "analyze_success_patterns": "{{analyze_success_patterns}}",
+                    "analyze_market_opportunities": "{{analyze_market_opportunities}}"
+                }
+            },
+            "dependencies": ["analyze_success_patterns", "analyze_market_opportunities"]
+        },
+        "generate_report": {
+            "description": "Generate a final report based on the recommendations.",
+            "action_type": "generate_text_llm",
+            "inputs": {
+                "prompt": "Based on the following strategic recommendations, write a concise and actionable report for the user. Highlight the top recommendation, explain why it's a good fit based on the probabilistic score and skill alignment, and briefly summarize the other potential opportunities.\\n\\nRECOMMENDATIONS:\\n{{probabilistic_matching.stdout}}",
+                "max_tokens": 1500
+            },
+            "dependencies": ["probabilistic_matching"]
+        },
+        "display_final_report": {
+            "description": "Display the final strategic report.",
+            "action_type": "display_output",
+            "inputs": {
+                "content": "{{generate_report}}"
+            },
+            "dependencies": ["generate_report"]
+        }
+    },
+    "start_tasks": ["start_analysis"]
+}

@@ -21,6 +21,7 @@
     from selenium.common.exceptions import TimeoutException, WebDriverException
     import requests
     from bs4 import BeautifulSoup
+    from .thought_trail import log_to_thought_trail
 
     logger = logging.getLogger(__name__)
 
@@ -70,6 +71,7 @@
                 self.logger.error(f"Failed to initialize WebDriver: {e}")
                 raise
         
+        @log_to_thought_trail
         def browse_and_summarize(self, url: str) -> Dict[str, Any]:
             """
             Navigate to a given URL, extract textual content, and generate a summary.
@@ -183,6 +185,7 @@
             
             return f"{summary}... [Summary of {len(words)} words]"
         
+        @log_to_thought_trail
         def search_and_answer(self, question: str) -> Dict[str, Any]:
             """
             Search for information to answer a question.
@@ -308,6 +311,7 @@
                 self.logger.error(f"Error closing WebDriver: {e}")
 
     # Action function for workflow integration
+    @log_to_thought_trail
     def answer_question_from_web(question: str, **kwargs) -> Dict[str, Any]:
         """
         Action function to answer questions from web information.

@@ -9,6 +9,18 @@ from typing import Dict, Any, Optional
 from pathlib import Path
 import json
 from datetime import datetime
+
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from .temporal_core import now_iso, format_filename, format_log, Timer
+
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from Three_PointO_ArchE.temporal_core import now, now_iso, ago, from_now, format_log, format_filename
+from .thought_trail import log_to_thought_trail
+
 # Use relative imports for configuration
 try:
     from . import config
@@ -29,6 +41,7 @@ DEFAULT_RETRY_ATTEMPTS = getattr(config, 'DEFAULT_RETRY_ATTEMPTS', 1)
 LOW_CONFIDENCE_THRESHOLD = getattr(config, 'METAC_DISSONANCE_THRESHOLD_CONFIDENCE', 0.6)
 
 
+@log_to_thought_trail
 def _dispatch_consultation_broadcast(broadcast: Dict[str, Any]) -> None:
     """
     Writes the consultation broadcast to a local outbox file for pickup by peer instances.
@@ -42,6 +55,7 @@ def _dispatch_consultation_broadcast(broadcast: Dict[str, Any]) -> None:
         json.dump(broadcast, f, indent=2)
     logger.info("[RCL] Consultation broadcast written: %s", fname)
 
+@log_to_thought_trail
 def handle_action_error(
     task_id: str,
     action_type: str,

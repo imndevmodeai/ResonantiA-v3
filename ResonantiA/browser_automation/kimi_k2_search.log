@@ -1,0 +1,4 @@
+2025-07-19 00:46:22,191 - INFO - Starting Kimi-K2 search for query: latest Gemini models 2025 Google AI
+2025-07-19 00:46:22,191 - INFO - Searching Kimi-K2 for: latest Gemini models 2025 Google AI
+2025-07-19 00:46:24,034 - ERROR - API request failed: 401 - {"error":{"message":"Invalid Authentication","type":"invalid_authentication_error"}}
+2025-07-19 00:46:24,034 - ERROR - Search failed: API request failed: 401

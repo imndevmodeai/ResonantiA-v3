@@ -43,6 +43,13 @@ from pathlib import Path
 from collections import deque
 import hashlib
 
+# ============================================================================
+# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+# ============================================================================
+from Three_PointO_ArchE.temporal_core import now, now_iso, ago, from_now, format_log, format_filename
+from Three_PointO_ArchE.thought_trail import log_to_thought_trail
+
+
 logger = logging.getLogger(__name__)
 
 # Component imports with graceful fallback
@@ -218,7 +225,7 @@ class AutopoieticLearningLoop:
             "knowledge_crystallized": 0,
             "guardian_approvals": 0,
             "guardian_rejections": 0,
-            "cycle_start_time": datetime.now().isoformat()
+            "cycle_start_time": now_iso()
         }
         
         logger.info(f"[ALL] Autopoietic Learning Loop initialized - Guardian review: {guardian_review_enabled}")
@@ -227,6 +234,7 @@ class AutopoieticLearningLoop:
     # EPOCH 1: STARDUST - Experience Capture
     # ═══════════════════════════════════════════════════════════════════════
     
+    @log_to_thought_trail
     def capture_stardust(self, entry: Dict[str, Any]) -> StardustEntry:
         """
         Capture a single experience as stardust.
@@ -243,7 +251,7 @@ class AutopoieticLearningLoop:
         # Create stardust entry
         stardust = StardustEntry(
             entry_id=entry.get("entry_id", self._generate_id("stardust")),
-            timestamp=entry.get("timestamp", datetime.now().isoformat()),
+            timestamp=entry.get("timestamp", now_iso()),
             action_type=entry.get("action_type", "unknown"),
             intention=entry.get("intention", ""),
             action=entry.get("action", ""),
@@ -260,7 +268,26 @@ class AutopoieticLearningLoop:
         # Also log to ThoughtTrail if available
         if self.thought_trail:
             try:
-                self.thought_trail.add_entry(entry)
+                # We must construct a proper IAREntry to ensure resonance
+                iar_entry_data = {
+                    "task_id": stardust.entry_id,
+                    "action_type": "autopoietic_learning",
+                    "inputs": {"stardust_action_type": stardust.action_type},
+                    "outputs": {"pattern_signature": self._create_pattern_signature(stardust)},
+                    "iar": {
+                        "intention": stardust.intention,
+                        "action": f"Captured stardust for analysis: {stardust.action}",
+                        "reflection": f"Learning from experience. {stardust.reflection}"
+                    },
+                    "timestamp": stardust.timestamp,
+                    "confidence": stardust.confidence,
+                    "metadata": {
+                        "source": "AutopoieticLearningLoop",
+                        "stardust_metadata": stardust.metadata
+                    }
+                }
+                # The add_entry method in ThoughtTrail can handle a dict
+                self.thought_trail.add_entry(iar_entry_data)
             except Exception as e:
                 logger.error(f"[ALL] Failed to log to ThoughtTrail: {e}")
         
@@ -276,16 +303,19 @@ class AutopoieticLearningLoop:
     # EPOCH 2: NEBULAE - Pattern Formation
     # ═══════════════════════════════════════════════════════════════════════
     
-    def detect_nebulae(self, min_occurrences: int = 5, min_success_rate: float = 0.7) -> List[NebulaePattern]:
+    @log_to_thought_trail
+    def detect_nebulae(self, min_occurrences: int = 5, min_success_rate: float = 0.7, failure_threshold: float = 0.3) -> List[NebulaePattern]:
         """
         Detect patterns in stardust (form nebulae).
         
         This scans recent experiences looking for recurring patterns that
-        could become new instincts or controllers.
+        could become new instincts or controllers. Now detects both
+        high-confidence success patterns and high-frequency failure patterns.
         
         Args:
             min_occurrences: Minimum pattern frequency to consider
-            min_success_rate: Minimum success rate for pattern
+            min_success_rate: Minimum success rate for a success pattern
+            failure_threshold: Maximum confidence for a failure pattern
             
         Returns:
             List of detected patterns
@@ -312,36 +342,49 @@ class AutopoieticLearningLoop:
         
         for signature, entries in pattern_groups.items():
             if len(entries) >= min_occurrences:
-                # Calculate success rate
-                successful = sum(1 for e in entries if e.confidence >= 0.7)
-                success_rate = successful / len(entries)
+                # Calculate metrics
+                avg_confidence = sum(e.confidence for e in entries) / len(entries)
                 
-                if success_rate >= min_success_rate:
-                    # This is a nebula!
-                    pattern = NebulaePattern(
-                        pattern_id=self._generate_id("nebula"),
-                        pattern_signature=signature,
-                        occurrences=len(entries),
-                        success_rate=success_rate,
-                        sample_entries=entries[:5],  # Keep samples
-                        confidence=success_rate,
-                        evidence=[
-                            f"frequency:{len(entries)}",
-                            f"success_rate:{success_rate:.2%}",
-                            f"action_type:{entries[0].action_type}"
-                        ]
-                    )
+                # Check for a FAILURE pattern first
+                if avg_confidence <= failure_threshold:
+                    pattern_type = "failure"
+                # Check for a SUCCESS pattern only if it's not a clear failure pattern
+                else:
+                    successful = sum(1 for e in entries if e.confidence >= 0.7)
+                    success_rate = successful / len(entries)
+                    if success_rate >= min_success_rate:
+                        pattern_type = "success"
+                    else:
+                        # Does not meet criteria for success or failure pattern
+                        continue
+
+                # This is a nebula!
+                pattern = NebulaePattern(
+                    pattern_id=self._generate_id("nebula"),
+                    pattern_signature=signature,
+                    occurrences=len(entries),
+                    success_rate=success_rate if 'success_rate' in locals() else 0.0,
+                    sample_entries=entries[:5],  # Keep samples
+                    confidence=avg_confidence,
+                    evidence=[
+                        f"pattern_type:{pattern_type}",
+                        f"frequency:{len(entries)}",
+                        f"avg_confidence:{avg_confidence:.2f}",
+                        f"action_type:{entries[0].action_type}"
+                    ]
+                )
+                
+                # Store if new
+                if signature not in self.detected_nebulae:
+                    self.detected_nebulae[signature] = pattern
+                    self.metrics["nebulae_detected"] += 1
+                    detected.append(pattern)
                     
-                    # Store if new
-                    if signature not in self.detected_nebulae:
-                        self.detected_nebulae[signature] = pattern
-                        self.metrics["nebulae_detected"] += 1
-                        detected.append(pattern)
-                        
-                        logger.info(f"[ALL:Nebulae] Detected pattern: {signature[:32]}... (n={pattern.occurrences}, success={success_rate:.1%})")
+                    logger.info(f"[ALL:Nebulae] Detected {pattern_type} pattern: {signature[:32]}... (n={pattern.occurrences}, avg_conf={avg_confidence:.2f})")
         
         return detected
     
+    @log_to_thought_trail
     def propose_controller(self, pattern: NebulaePattern) -> Optional[str]:
         """
         Propose a new controller for a detected pattern.
@@ -397,6 +440,7 @@ class PatternController_{pattern.pattern_id}:
     # EPOCH 3: IGNITION - Wisdom Forging
     # ═══════════════════════════════════════════════════════════════════════
     
+    @log_to_thought_trail
     def ignite_wisdom(self, pattern: NebulaePattern, run_validation: bool = True) -> Optional[IgnitedWisdom]:
         """
         Forge wisdom in the Star-Forge (validate and test).
@@ -457,7 +501,7 @@ class PatternController_{pattern.pattern_id}:
         elif self.auto_crystallization:
             # Dangerous: Auto-approve without Guardian
             wisdom.guardian_approval = True
-            wisdom.approval_timestamp = datetime.now().isoformat()
+            wisdom.approval_timestamp = now_iso()
             logger.warning(f"[ALL:Ignition] Wisdom {wisdom.wisdom_id} AUTO-APPROVED (no Guardian review!)")
         
         # Store
@@ -482,6 +526,7 @@ class PatternController_{pattern.pattern_id}:
             "cost_benefit_ratio": 2.5  # 2.5x benefit vs cost
         }
     
+    @log_to_thought_trail
     def guardian_approve(self, wisdom_id: str, approved: bool, notes: str = "") -> bool:
         """
         Guardian approval/rejection of wisdom.
@@ -500,7 +545,7 @@ class PatternController_{pattern.pattern_id}:
         
         wisdom = self.ignited_wisdom[wisdom_id]
         wisdom.guardian_approval = approved
-        wisdom.approval_timestamp = datetime.now().isoformat()
+        wisdom.approval_timestamp = now_iso()
         
         if approved:
             self.metrics["guardian_approvals"] += 1
@@ -520,6 +565,7 @@ class PatternController_{pattern.pattern_id}:
     # EPOCH 4: GALAXIES - Knowledge Crystallization
     # ═══════════════════════════════════════════════════════════════════════
     
+    @log_to_thought_trail
     def crystallize_knowledge(self, wisdom: IgnitedWisdom) -> Optional[GalaxyKnowledge]:
         """
         Crystallize wisdom into permanent knowledge (SPR).
@@ -549,7 +595,7 @@ class PatternController_{pattern.pattern_id}:
             "implementation": wisdom.source_pattern.proposed_solution,
             "confidence": wisdom.source_pattern.success_rate,
             "source": "autopoietic_learning_loop",
-            "created_at": datetime.now().isoformat()
+            "created_at": now_iso()
         }
         
         # Create galaxy knowledge
@@ -558,7 +604,7 @@ class PatternController_{pattern.pattern_id}:
             spr_name=spr_name,
             source_wisdom=wisdom,
             spr_definition=spr_definition,
-            integration_timestamp=datetime.now().isoformat(),
+            integration_timestamp=now_iso(),
             system_impact={
                 "estimated_queries_affected": wisdom.source_pattern.occurrences,
                 "estimated_improvement": wisdom.validation_results.get("expected_improvement", 0),
@@ -593,11 +639,13 @@ class PatternController_{pattern.pattern_id}:
         """Generate unique ID."""
         return f"{prefix}_{int(time.time() * 1000)}_{hash(time.time()) % 10000}"
     
+    @log_to_thought_trail
     def run_learning_cycle(
         self,
         detect_patterns: bool = True,
         propose_solutions: bool = True,
-        min_occurrences: int = 5
+        min_occurrences: int = 5,
+        failure_threshold: float = 0.3  # Add parameter here
     ) -> Dict[str, Any]:
         """
         Run a complete learning cycle.
@@ -623,7 +671,10 @@ class PatternController_{pattern.pattern_id}:
         
         # Epoch 2: Detect patterns
         if detect_patterns:
-            nebulae = self.detect_nebulae(min_occurrences=min_occurrences)
+            nebulae = self.detect_nebulae(
+                min_occurrences=min_occurrences,
+                failure_threshold=failure_threshold  # Pass parameter down
+            )
             results["nebulae_detected"] = len(nebulae)
             
             # Epoch 3: Propose solutions and ignite wisdom

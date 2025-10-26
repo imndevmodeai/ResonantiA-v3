@@ -1,0 +1,616 @@
+2025-09-20 08:38:13 - root - [INFO] - Logging configured successfully.
+2025-09-20 08:38:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: /media/newbu/3626C55326C514B1/Happier/workflows/strategic_intelligence_workflow.json
+2025-09-20 08:38:43 - root - [INFO] - Logging configured successfully.
+2025-09-20 08:38:43 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: /media/newbu/3626C55326C514B1/Happier/workflows/strategic_intelligence_workflow.json
+2025-09-20 08:38:43 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'start_analysis' with action 'display_output'...
+2025-09-20 08:38:43 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'start_analysis' completed successfully.
+2025-09-20 08:38:43 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_success_patterns' with action 'search_web'...
+2025-09-20 08:38:43 - Three_PointO_ArchE.tools.enhanced_search_tool - [INFO] - Performing search: 'SaaS success patterns 2025 AI content' on google
+2025-09-20 08:39:03 - Three_PointO_ArchE.tools.enhanced_search_tool - [INFO] - Search completed successfully: 0 results in 19.88s
+2025-09-20 08:39:03 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_success_patterns' completed successfully.
+2025-09-20 08:39:03 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_market_opportunities' with action 'search_web'...
+2025-09-20 08:39:03 - Three_PointO_ArchE.tools.enhanced_search_tool - [INFO] - Performing search: 'market opportunities AI content creation 2025' on google
+2025-09-20 08:39:53 - Three_PointO_ArchE.tools.enhanced_search_tool - [INFO] - Search completed successfully: 0 results in 50.44s
+2025-09-20 08:39:53 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_market_opportunities' completed successfully.
+2025-09-20 08:39:53 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'analyze_success_patterns' with action 'generate_text_llm'...
+2025-09-20 08:39:53 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 08:39:53 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 08:39:53 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 08:39:53 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Analyze the following search results and extract up to 5 distinct success patterns for SaaS business...'
+2025-09-20 08:40:12 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 08:40:12 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 08:40:12 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'analyze_success_patterns' completed successfully.
+2025-09-20 08:40:12 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'analyze_market_opportunities' with action 'generate_text_llm'...
+2025-09-20 08:40:12 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 08:40:12 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 08:40:12 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 08:40:12 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Analyze the following search results and extract up to 3 distinct market opportunities for AI-driven...'
+2025-09-20 08:40:33 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 08:40:33 - Three_PointO_ArchE.llm_providers - [WARNING] - ValueError accessing Google response: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+2025-09-20 08:40:33 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+2025-09-20 08:40:33 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 52, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 441, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+2025-09-20 08:40:33 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'analyze_market_opportunities' completed successfully.
+2025-09-20 08:40:33 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'probabilistic_matching' with action 'execute_code'...
+2025-09-20 08:40:33 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 08:40:33 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 08:40:33 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'probabilistic_matching' completed successfully.
+2025-09-20 08:40:33 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'generate_report' with action 'generate_text_llm'...
+2025-09-20 08:40:33 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 08:40:33 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 08:40:33 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 08:40:33 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Based on the following strategic recommendations, write a concise and actionable report for the user...'
+2025-09-20 08:40:49 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 08:40:49 - Three_PointO_ArchE.llm_providers - [WARNING] - ValueError accessing Google response: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+2025-09-20 08:40:49 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+2025-09-20 08:40:49 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 52, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 441, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+2025-09-20 08:40:49 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'generate_report' completed successfully.
+2025-09-20 08:47:04 - root - [INFO] - Logging configured successfully.
+2025-09-20 08:47:04 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: /media/newbu/3626C55326C514B1/Happier/workflows/strategic_intelligence_workflow.json
+2025-09-20 08:47:04 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'start_analysis' with action 'display_output'...
+2025-09-20 08:47:04 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'start_analysis' completed successfully.
+2025-09-20 08:47:04 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_success_patterns' with action 'search_web'...
+2025-09-20 08:47:04 - Three_PointO_ArchE.playbook_orchestrator - [ERROR] - Execution failed for task 'research_success_patterns': FallbackSearchTool.search() got an unexpected keyword argument 'num_results'
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/playbook_orchestrator.py", line 87, in run_playbook
+    result = action_func(**inputs)
+             ^^^^^^^^^^^^^^^^^^^^^
+TypeError: FallbackSearchTool.search() got an unexpected keyword argument 'num_results'
+2025-09-20 08:47:32 - root - [INFO] - Logging configured successfully.
+2025-09-20 08:47:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: /media/newbu/3626C55326C514B1/Happier/workflows/strategic_intelligence_workflow.json
+2025-09-20 08:47:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'start_analysis' with action 'display_output'...
+2025-09-20 08:47:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'start_analysis' completed successfully.
+2025-09-20 08:47:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_success_patterns' with action 'search_web'...
+2025-09-20 08:47:32 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'AI SaaS success patterns 2025' on google
+2025-09-20 08:47:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_success_patterns' completed successfully.
+2025-09-20 08:47:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_market_opportunities' with action 'search_web'...
+2025-09-20 08:47:32 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'AI content creation market opportunities 2025' on google
+2025-09-20 08:47:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_market_opportunities' completed successfully.
+2025-09-20 08:47:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'analyze_success_patterns' with action 'generate_text_llm'...
+2025-09-20 08:47:32 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 08:47:32 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 08:47:32 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 08:47:32 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Analyze the following search results and extract up to 5 distinct success patterns for SaaS business...'
+2025-09-20 08:47:52 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 08:47:52 - Three_PointO_ArchE.llm_providers - [WARNING] - ValueError accessing Google response: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+2025-09-20 08:47:52 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+2025-09-20 08:47:52 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 52, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 441, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+2025-09-20 08:47:52 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'analyze_success_patterns' completed successfully.
+2025-09-20 08:47:52 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'analyze_market_opportunities' with action 'generate_text_llm'...
+2025-09-20 08:47:52 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 08:47:52 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 08:47:52 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 08:47:52 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Analyze the following search results and extract up to 3 distinct market opportunities for AI-driven...'
+2025-09-20 08:48:12 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 08:48:12 - Three_PointO_ArchE.llm_providers - [WARNING] - ValueError accessing Google response: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+2025-09-20 08:48:12 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+2025-09-20 08:48:12 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 52, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 441, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+2025-09-20 08:48:12 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'analyze_market_opportunities' completed successfully.
+2025-09-20 08:48:12 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'probabilistic_matching' with action 'execute_code'...
+2025-09-20 08:48:12 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 08:48:12 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 08:48:12 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'probabilistic_matching' completed successfully.
+2025-09-20 08:48:12 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'generate_report' with action 'generate_text_llm'...
+2025-09-20 08:48:12 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 08:48:12 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 08:48:12 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 08:48:12 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Based on the following strategic recommendations, write a concise and actionable report for the user...'
+2025-09-20 08:48:26 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 08:48:26 - Three_PointO_ArchE.llm_providers - [WARNING] - ValueError accessing Google response: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+2025-09-20 08:48:26 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+2025-09-20 08:48:26 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 369, in generate
+    if hasattr(response, 'text') and response.text:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/newbu/.local/lib/python3.12/site-packages/google/generativeai/types/generation_types.py", line 481, in text
+    raise ValueError(msg)
+ValueError: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 430, in generate
+    raise LLMProviderError(
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 52, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 441, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API. Reason: 0. Message: No additional details)
+2025-09-20 08:48:26 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'generate_report' completed successfully.
+2025-09-20 08:48:26 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'display_final_report' with action 'display_output'...
+2025-09-20 08:48:26 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'display_final_report' completed successfully.
+2025-09-20 08:48:26 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Playbook 'Strategic Intelligence Workflow' orchestrated successfully.
+2025-09-20 09:13:06 - root - [INFO] - Logging configured successfully.
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: /media/newbu/3626C55326C514B1/Happier/workflows/strategic_intelligence_workflow.json
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'start_analysis' with action 'display_output'...
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'start_analysis' completed successfully.
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_success_patterns' with action 'search_web'...
+2025-09-20 09:13:06 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'AI SaaS success patterns 2025' on google
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_success_patterns' completed successfully.
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_market_opportunities' with action 'search_web'...
+2025-09-20 09:13:06 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'AI content creation market opportunities 2025' on google
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_market_opportunities' completed successfully.
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'check_search_results' with action 'execute_code'...
+2025-09-20 09:13:06 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 09:13:06 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'check_search_results' completed successfully.
+2025-09-20 09:13:06 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'analyze_success_patterns' with action 'generate_text_llm'...
+2025-09-20 09:13:06 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 09:13:06 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 09:13:06 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 09:13:06 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Analyze the following search results and extract up to 5 distinct success patterns for SaaS business...'
+2025-09-20 09:13:25 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 09:13:25 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 09:13:25 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'analyze_success_patterns' completed successfully.
+2025-09-20 09:13:25 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'analyze_market_opportunities' with action 'generate_text_llm'...
+2025-09-20 09:13:25 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 09:13:25 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 09:13:25 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 09:13:25 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Analyze the following search results and extract up to 3 distinct market opportunities for AI-driven...'
+2025-09-20 09:13:49 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 09:13:49 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 09:13:49 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'analyze_market_opportunities' completed successfully.
+2025-09-20 09:13:49 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'probabilistic_matching' with action 'execute_code'...
+2025-09-20 09:13:49 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 09:13:49 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 09:13:50 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'probabilistic_matching' completed successfully.
+2025-09-20 09:13:50 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'generate_report' with action 'generate_text_llm'...
+2025-09-20 09:13:50 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 09:13:50 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 09:13:50 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 09:13:50 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Based on the following strategic recommendations, write a concise and actionable report for the user...'
+2025-09-20 09:14:08 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 09:14:08 - Three_PointO_ArchE.llm_providers - [WARNING] - Google API content blocked due to safety settings.
+2025-09-20 09:14:08 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API due to safety settings.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+2025-09-20 09:14:08 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 61, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 443, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+2025-09-20 09:14:08 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'generate_report' completed successfully.
+2025-09-20 09:14:08 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'display_final_report' with action 'display_output'...
+2025-09-20 09:14:08 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'display_final_report' completed successfully.
+2025-09-20 09:14:08 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Playbook 'Strategic Intelligence Workflow' orchestrated successfully.
+2025-09-20 09:17:11 - root - [INFO] - Logging configured successfully.
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: /media/newbu/3626C55326C514B1/Happier/workflows/strategic_intelligence_workflow.json
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'start_analysis' with action 'display_output'...
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'start_analysis' completed successfully.
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_success_patterns' with action 'search_web'...
+2025-09-20 09:17:11 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'AI SaaS success patterns 2025' on google
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_success_patterns' completed successfully.
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_market_opportunities' with action 'search_web'...
+2025-09-20 09:17:11 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'AI content creation market opportunities 2025' on google
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_market_opportunities' completed successfully.
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'check_search_results' with action 'execute_code'...
+2025-09-20 09:17:11 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 09:17:11 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'check_search_results' completed successfully.
+2025-09-20 09:17:11 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'analyze_success_patterns' with action 'generate_text_llm'...
+2025-09-20 09:17:11 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 09:17:11 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 09:17:11 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 09:17:11 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Analyze the following search results and extract up to 5 distinct success patterns for SaaS business...'
+2025-09-20 09:17:32 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 09:17:32 - Three_PointO_ArchE.llm_providers - [WARNING] - Google API content blocked due to safety settings.
+2025-09-20 09:17:32 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API due to safety settings.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+2025-09-20 09:17:32 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 61, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 443, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+2025-09-20 09:17:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'analyze_success_patterns' completed successfully.
+2025-09-20 09:17:32 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'analyze_market_opportunities' with action 'generate_text_llm'...
+2025-09-20 09:17:32 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 09:17:32 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 09:17:32 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 09:17:32 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Analyze the following search results and extract up to 3 distinct market opportunities for AI-driven...'
+2025-09-20 09:17:54 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 09:17:54 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 09:17:54 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'analyze_market_opportunities' completed successfully.
+2025-09-20 09:17:54 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'probabilistic_matching' with action 'execute_code'...
+2025-09-20 09:17:54 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 09:17:54 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 09:17:54 - Three_PointO_ArchE.tools.code_executor - [INFO] - Successfully injected system_representation.py into the code.
+2025-09-20 09:17:54 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'probabilistic_matching' completed successfully.
+2025-09-20 09:17:54 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'generate_report' with action 'generate_text_llm'...
+2025-09-20 09:17:54 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 09:17:54 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 09:17:54 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 09:17:54 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Based on the following strategic recommendations, write a concise and actionable report for the user...'
+2025-09-20 09:18:10 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 09:18:10 - Three_PointO_ArchE.llm_providers - [WARNING] - Google API content blocked due to safety settings.
+2025-09-20 09:18:10 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API due to safety settings.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+2025-09-20 09:18:10 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 61, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 443, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+2025-09-20 09:18:10 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'generate_report' completed successfully.
+2025-09-20 09:18:10 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'display_final_report' with action 'display_output'...
+2025-09-20 09:18:10 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'display_final_report' completed successfully.
+2025-09-20 09:18:10 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Playbook 'Strategic Intelligence Workflow' orchestrated successfully.
+2025-09-20 10:29:13 - root - [INFO] - Logging configured successfully.
+2025-09-20 10:29:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: workflows/asymmetric_warfare_analysis.json
+2025-09-20 10:29:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_gorilla_strengths' with action 'search_web'...
+2025-09-20 10:29:13 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'Combat capabilities, strength, bite force, and fighting tactics of a dominant male silverback gorilla' on google
+2025-09-20 10:29:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_gorilla_strengths' completed successfully.
+2025-09-20 10:29:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_human_strategy' with action 'search_web'...
+2025-09-20 10:29:13 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'Group fighting strategies for unarmed humans, human endurance vs gorilla, and biomechanics of 30 unarmed men against a large predator' on google
+2025-09-20 10:29:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_human_strategy' completed successfully.
+2025-09-20 10:29:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'check_search_results' with action 'execute_code'...
+2025-09-20 10:29:13 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 10:29:13 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 10:29:14 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'check_search_results' completed successfully.
+2025-09-20 10:29:14 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'synthesize_gorilla_profile' with action 'generate_text_llm'...
+2025-09-20 10:29:14 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:29:14 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:29:14 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:29:14 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the following search results about gorilla combat capabilities into a detailed profile. F...'
+2025-09-20 10:29:34 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:29:34 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 10:29:34 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'synthesize_gorilla_profile' completed successfully.
+2025-09-20 10:29:34 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'synthesize_human_profile' with action 'generate_text_llm'...
+2025-09-20 10:29:34 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:29:34 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:29:34 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:29:34 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the following search results about unarmed human group tactics into a detailed profile. F...'
+2025-09-20 10:30:08 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:30:08 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 10:30:08 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'synthesize_human_profile' completed successfully.
+2025-09-20 10:30:08 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'run_battle_simulation' with action 'generate_text_llm'...
+2025-09-20 10:30:08 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:30:08 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:30:08 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:30:08 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'You are a master strategist. Based on the following detailed profiles, conduct a battle simulation a...'
+2025-09-20 10:30:31 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:30:31 - Three_PointO_ArchE.llm_providers - [WARNING] - Google API content blocked due to safety settings.
+2025-09-20 10:30:31 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API due to safety settings.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+2025-09-20 10:30:31 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 61, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 443, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+2025-09-20 10:30:31 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'run_battle_simulation' completed successfully.
+2025-09-20 10:31:27 - root - [INFO] - Logging configured successfully.
+2025-09-20 10:31:27 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: workflows/asymmetric_warfare_analysis.json
+2025-09-20 10:31:27 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_gorilla_strengths' with action 'search_web'...
+2025-09-20 10:31:27 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'Combat capabilities, strength, bite force, and fighting tactics of a dominant male silverback gorilla' on google
+2025-09-20 10:31:27 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_gorilla_strengths' completed successfully.
+2025-09-20 10:31:27 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_human_strategy' with action 'search_web'...
+2025-09-20 10:31:27 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'Group fighting strategies for unarmed humans, human endurance vs gorilla, and biomechanics of 30 unarmed men against a large predator' on google
+2025-09-20 10:31:27 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_human_strategy' completed successfully.
+2025-09-20 10:31:27 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'check_search_results' with action 'execute_code'...
+2025-09-20 10:31:27 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 10:31:27 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 10:31:27 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'check_search_results' completed successfully.
+2025-09-20 10:31:27 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'synthesize_gorilla_profile' with action 'generate_text_llm'...
+2025-09-20 10:31:27 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:31:27 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:31:27 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:31:27 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the following search results about gorilla combat capabilities into a detailed profile. F...'
+2025-09-20 10:31:46 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:31:46 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 10:31:46 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'synthesize_gorilla_profile' completed successfully.
+2025-09-20 10:31:46 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'synthesize_human_profile' with action 'generate_text_llm'...
+2025-09-20 10:31:46 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:31:46 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:31:46 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:31:46 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the following search results about unarmed human group tactics into a detailed profile. F...'
+2025-09-20 10:32:18 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:32:18 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 10:32:18 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'synthesize_human_profile' completed successfully.
+2025-09-20 10:32:18 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'run_battle_simulation' with action 'generate_text_llm'...
+2025-09-20 10:32:18 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:32:18 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:32:18 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:32:18 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'You are a biomechanical and strategic analyst. Conduct a comparative analysis of the provided profil...'
+2025-09-20 10:32:41 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:32:41 - Three_PointO_ArchE.llm_providers - [WARNING] - Google API content blocked due to safety settings.
+2025-09-20 10:32:41 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API due to safety settings.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+2025-09-20 10:32:41 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 61, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 443, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+2025-09-20 10:32:41 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'run_battle_simulation' completed successfully.
+2025-09-20 10:32:41 - Three_PointO_ArchE.playbook_orchestrator - [WARNING] - Skipping task 'display_final_report' because its dependency 'run_battle_simulation.generated_text' was not met.
+2025-09-20 10:33:20 - root - [INFO] - Logging configured successfully.
+2025-09-20 10:33:20 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Orchestrating playbook: workflows/asymmetric_warfare_analysis.json
+2025-09-20 10:33:20 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_gorilla_strengths' with action 'search_web'...
+2025-09-20 10:33:20 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'Combat capabilities, strength, bite force, and fighting tactics of a dominant male silverback gorilla' on google
+2025-09-20 10:33:20 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_gorilla_strengths' completed successfully.
+2025-09-20 10:33:20 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'research_human_strategy' with action 'search_web'...
+2025-09-20 10:33:20 - Three_PointO_ArchE.tools.fallback_search_tool - [INFO] - Performing fallback search: 'Group fighting strategies for unarmed humans, human endurance vs gorilla, and biomechanics of 30 unarmed men against a large predator' on google
+2025-09-20 10:33:20 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'research_human_strategy' completed successfully.
+2025-09-20 10:33:20 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'check_search_results' with action 'execute_code'...
+2025-09-20 10:33:20 - Three_PointO_ArchE.tools.code_executor - [ERROR] - Docker sandbox requested, but Docker SDK is not available. Falling back to subprocess.
+2025-09-20 10:33:20 - Three_PointO_ArchE.tools.code_executor - [INFO] - Executing code: Language=python, Sandbox=True, Method=subprocess
+2025-09-20 10:33:20 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'check_search_results' completed successfully.
+2025-09-20 10:33:20 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'synthesize_gorilla_profile' with action 'generate_text_llm'...
+2025-09-20 10:33:20 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:33:20 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:33:20 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:33:20 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the following search results about gorilla combat capabilities into a detailed profile. F...'
+2025-09-20 10:33:42 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:33:42 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 10:33:42 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'synthesize_gorilla_profile' completed successfully.
+2025-09-20 10:33:42 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'synthesize_human_profile' with action 'generate_text_llm'...
+2025-09-20 10:33:42 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:33:42 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:33:42 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:33:42 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'Synthesize the following search results about unarmed human group tactics into a detailed profile. F...'
+2025-09-20 10:34:13 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:34:13 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - LLM generation successful.
+2025-09-20 10:34:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'synthesize_human_profile' completed successfully.
+2025-09-20 10:34:13 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Executing task 'run_battle_simulation' with action 'generate_text_llm'...
+2025-09-20 10:34:13 - Three_PointO_ArchE.llm_providers - [INFO] - Google Generative AI client configured successfully with advanced capabilities.
+2025-09-20 10:34:13 - Three_PointO_ArchE.llm_providers - [INFO] - GoogleProvider initialized successfully.
+2025-09-20 10:34:13 - Three_PointO_ArchE.tools.synthesis_tool - [INFO] - Invoking LLM provider 'google' with model 'gemini-2.5-pro'.
+2025-09-20 10:34:13 - Three_PointO_ArchE.llm_providers - [INFO] - Sending request to Google API. Prompt: 'You are a biomechanical and strategic analyst. Conduct a comparative analysis of the provided profil...'
+2025-09-20 10:34:36 - Three_PointO_ArchE.llm_providers - [INFO] - Received response from Google API.
+2025-09-20 10:34:36 - Three_PointO_ArchE.llm_providers - [WARNING] - Google API content blocked due to safety settings.
+2025-09-20 10:34:36 - Three_PointO_ArchE.llm_providers - [ERROR] - Unexpected error during Google generation: [google Error] Content blocked by Google API due to safety settings.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+2025-09-20 10:34:36 - Three_PointO_ArchE.tools.synthesis_tool - [ERROR] - Error during LLM synthesis: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 373, in generate
+    raise LLMProviderError("Content blocked by Google API due to safety settings.", provider="google")
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Content blocked by Google API due to safety settings.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/tools/synthesis_tool.py", line 61, in invoke_llm_for_synthesis
+    generated_text = provider.generate(
+                     ^^^^^^^^^^^^^^^^^^
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/llm_providers.py", line 443, in generate
+    raise LLMProviderError(f"Unexpected Google generation error", provider="google", original_exception=e_unexp)
+Three_PointO_ArchE.llm_providers.LLMProviderError: [google Error] Unexpected Google generation error (Original: LLMProviderError: [google Error] Content blocked by Google API due to safety settings.)
+2025-09-20 10:34:36 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Task 'run_battle_simulation' completed successfully.
+2025-09-20 10:34:36 - Three_PointO_ArchE.playbook_orchestrator - [WARNING] - Skipping task 'display_final_report' because its dependency 'run_battle_simulation.generated_text' was not met.
+2025-09-20 10:34:36 - Three_PointO_ArchE.playbook_orchestrator - [INFO] - Playbook 'Asymmetric Warfare Analysis: Gorilla vs. Humans' orchestrated successfully.

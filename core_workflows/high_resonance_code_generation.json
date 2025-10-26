@@ -1,0 +1,48 @@
+{
+    "workflow_name": "High Resonance Code Generation",
+    "version": "1.0",
+    "description": "A workflow to generate missing code blocks based on surrounding context, present for vetting, and then implement upon approval.",
+    "input_parameters": {
+        "target_file": {
+            "type": "string",
+            "description": "The full path to the file that needs to be modified."
+        },
+        "context_snippet": {
+            "type": "string",
+            "description": "A multi-line string containing the code and '... existing code ...' marker to provide context."
+        }
+    },
+    "tasks": {
+        "generate_code_block": {
+            "action_type": "generate_text_llm",
+            "description": "Generates the missing code based on the provided context snippet.",
+            "inputs": {
+                "prompt": "You are ArchE, a senior AI software architect operating under the ResonantiA Protocol. Your task is to perform an act of 'Implementation Resonance' by generating a missing block of Python code. Analyze the following 'context_snippet' which contains an '... existing code ...' marker. Based on the surrounding code and the principles of robust, well-documented software, generate ONLY the precise, complete, and functional Python code block that should replace the marker. Do not include the '... existing code ...' markers in your output. Do not explain the code. Just provide the code itself.\\n\\n--- CONTEXT SNIPPET ---\\n{{ context.context_snippet }}\\n\\n--- GENERATED CODE BLOCK ---",
+                "model_settings": {
+                    "temperature": 0.2,
+                    "max_tokens": 2000
+                }
+            },
+            "output_variable": "generated_code"
+        },
+        "display_for_vetting": {
+            "action_type": "display_output",
+            "description": "Displays the generated code for Keyholder review and approval.",
+            "dependencies": ["generate_code_block"],
+            "inputs": {
+                "content": "--- PROPOSED CODE IMPLEMENTATION ---\\n\\nFile to be modified: {{ context.target_file }}\\n\\nI have generated the following code to replace the '... existing code ...' marker:\\n\\n```python\\n{{ generate_code_block.result.generated_text }}\\n```\\n\\nKeyholder, please review this code. Shall I proceed with implementing this change? (yes/no)"
+            }
+        }
+    },
+    "output": {
+        "generated_code_block": {
+            "value": "{{ generate_code_block.result.generated_text }}",
+            "description": "The generated Python code to be implemented."
+        },
+        "target_file_path": {
+            "value": "{{ context.target_file }}",
+            "description": "The file path targeted for modification."
+        }
+    }
+}
+

@@ -1,0 +1,23 @@
+{
+    "name": "Context Access Test",
+    "description": "Test how context variables are accessed in workflows",
+    "tasks": {
+        "test_search": {
+            "action_type": "search_web",
+            "inputs": {
+                "query": "test query",
+                "engine": "duckduckgo",
+                "num_results": 2
+            },
+            "dependencies": []
+        },
+        "debug_context": {
+            "action_type": "execute_code",
+            "inputs": {
+                "language": "python",
+                "code": "import json\n\n# Test different ways of accessing the search results\nprint('=== CONTEXT ACCESS DEBUG ===')\nprint(f'Type of test_search: {type({{test_search}})}')\nprint(f'Keys in test_search: {list({{test_search}}.keys()) if isinstance({{test_search}}, dict) else \"Not a dict\"}')\nprint(f'Success: {{test_search.success}}')\nprint(f'Results type: {type({{test_search.results}})}')\nprint(f'Results count: {len({{test_search.results}})}')\nprint(f'Total results: {{test_search.total_results}}')\nprint(f'Response time: {{test_search.response_time}}')\n\n# Test if we can access individual results\nif {{test_search.results}}:\n    print(f'First result type: {type({{test_search.results}}[0])}')\n    print(f'First result keys: {list({{test_search.results}}[0].keys()) if isinstance({{test_search.results}}[0], dict) else \"Not a dict\"}')\n    print(f'First result title: {{test_search.results}}[0].get(\"title\", \"No title\")}')\nelse:\n    print('No results found')"
+            },
+            "dependencies": ["test_search"]
+        }
+    }
+}

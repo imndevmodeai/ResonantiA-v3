@@ -12,6 +12,7 @@ from typing import Dict, List, Optional, Any
 import tempfile
 import time
 import sys
+from datetime import datetime
 
 # Add the current directory to path to import our enhanced perception engine
 current_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -23,6 +24,10 @@ try:
     ENHANCED_PERCEPTION_AVAILABLE = True
 except ImportError:
     ENHANCED_PERCEPTION_AVAILABLE = False
+
+def now_iso():
+    """Returns the current UTC time in ISO 8601 format."""
+    return datetime.utcnow().isoformat()
 
 class EnhancedSearchTool:
     """
@@ -147,8 +152,6 @@ class EnhancedSearchTool:
     
     def _format_results(self, results: List[Dict], query: str, engine: str, response_time: float) -> Dict[str, Any]:
         """Format search results for ArchE system compatibility with IAR compliance."""
-        from datetime import datetime
-        
         result_data = {
             "success": True,
             "query": query,
@@ -176,14 +179,13 @@ class EnhancedSearchTool:
                 "potential_issues": [] if len(results) >= 3 else ["Low number of search results returned"],
                 "raw_output_preview": f'{{"total_results": {len(results)}, "engine": "{engine}"}}',
                 "action_name": "perform_web_search",
-                "timestamp_utc": datetime.utcnow().isoformat() + "Z",
+                "timestamp_utc": now_iso() + "Z",
                 "execution_time_seconds": response_time
             }
         }
     
     def _create_error_result(self, query: str, engine: str, error_message: str) -> Dict[str, Any]:
         """Create a standardized error result with IAR compliance."""
-        from datetime import datetime
         
         self.search_stats["failed_searches"] += 1
         
@@ -212,7 +214,7 @@ class EnhancedSearchTool:
                 ],
                 "raw_output_preview": f'{{"error": "{error_message}", "query": "{query}"}}',
                 "action_name": "perform_web_search",
-                "timestamp_utc": datetime.utcnow().isoformat() + "Z",
+                "timestamp_utc": now_iso() + "Z",
                 "execution_time_seconds": 0.0
             }
         }

@@ -10,6 +10,7 @@ import sys
 from dataclasses import dataclass, field
 from dotenv import load_dotenv
 from pathlib import Path
+from .thought_trail import log_to_thought_trail
 
 # Load environment variables from .env file
 load_dotenv()
@@ -19,6 +20,7 @@ load_dotenv()
 # Adjust if necessary, e.g., Path(__file__).parent.parent
 PROJECT_ROOT = Path(__file__).parent.parent
 
+@log_to_thought_trail
 def configure_logging(log_level: str = "INFO") -> None:
     """
     Sets up a centralized, standardized logging configuration for the application.
@@ -116,7 +118,7 @@ class LLMConfig:
     
     # Vetting agent specific configuration
     vetting_provider: str = "google"
-    vetting_model: str = "gemini-2.5-pro"
+    vetting_model: str = "gemini-2.0-flash-exp"  # Changed from 2.5-pro (blocks agent prompts)
 
 # Legacy compatibility attributes for llm_providers.py
 DEFAULT_LLM_PROVIDER = "google"
@@ -198,6 +200,7 @@ class AppConfig:
 # Instantiate the main config object
 CONFIG = AppConfig()
 
+@log_to_thought_trail
 def get_config() -> AppConfig:
     """Returns the global configuration object."""
     # In the future, this could be extended to load from YAML or other sources

@@ -577,12 +577,15 @@ class RISE_Orchestrator:
         print(f"🔄 SIRC {phase}: {message}")
         sys.stdout.flush()
 
-    def run_rise_workflow(self, problem_description: str) -> Dict[str, Any]:
+    def process_query(self, problem_description: str, context: Dict[str, Any] = None, model: str = None, workflow_name: str = None) -> Dict[str, Any]:
         """
         Main entry point for RISE v2.0 workflow execution
         
         Args:
             problem_description: The problem to be solved
+            context: Optional context from the CognitiveIntegrationHub
+            model: Optional model name to be used by LLM tools
+            workflow_name: Optional name of the workflow blueprint to use for Phase A
             
         Returns:
             Complete execution results including final strategy and SPR
@@ -642,11 +645,16 @@ class RISE_Orchestrator:
             
             phase_a_context = {
                 "user_query": problem_description,
-                "session_id": self.session_id
+                "session_id": self.session_id,
+                "model": model  # Pass model to the context for use in the workflow
             }
 
+            # Use the specified workflow_name or default to knowledge_scaffolding
+            phase_a_workflow = f"{workflow_name}.json" if workflow_name else "knowledge_scaffolding.json"
+            logger.info(f"Using Phase A workflow: {phase_a_workflow}")
+
             phase_a_results = self.workflow_engine.run_workflow(
-                "knowledge_scaffolding.json",
+                phase_a_workflow,
                 initial_context=phase_a_context
             )
             

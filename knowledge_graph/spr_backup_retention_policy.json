@@ -1,0 +1,110 @@
+[
+  {
+    "spr_id": "BackupRetentionPolicY",
+    "term": "Backup Retention Policy",
+    "definition": "Validation-gated backup management protocol ensuring all code modifications create backups that persist until live validation succeeds across 5 stages: syntax, import, unit tests, live integration, and end-to-end workflows.",
+    "category": "SystemGovernance",
+    "related_sprs": [
+      "NonDestructiveModificatioN",
+      "ValidationGatedCleanU",
+      "SpecificationSynchronizatioN",
+      "ImplementationResonancE",
+      "LiveValidationMandatE"
+    ],
+    "examples": [
+      "Temporal core migration creates .BACKUP_AST files that remain until ArchE CLI successfully executes queries",
+      "Database migration creates .BACKUP_MIGRATION files that remain until end-to-end workflow validation passes"
+    ],
+    "priority": "CRITICAL",
+    "integration_points": [
+      "All code modification workflows",
+      "Migration scripts",
+      "Refactoring operations",
+      "Manual file edits"
+    ]
+  },
+  {
+    "spr_id": "NonDestructiveModificatioN",
+    "term": "Non-Destructive Modification",
+    "definition": "Principle requiring all code changes to preserve the original state through backup creation before any modification occurs, enabling instant rollback capability.",
+    "category": "SafetyProtocol",
+    "related_sprs": [
+      "BackupRetentionPolicY",
+      "ValidationGatedCleanU"
+    ],
+    "examples": [
+      "Before migrating workflow_engine.py, create workflow_engine.py.BACKUP_AST containing original code",
+      "AST-based migration creates backup, modifies file, tests, and either keeps changes or restores backup"
+    ],
+    "priority": "MANDATORY",
+    "integration_points": [
+      "File modification utilities",
+      "Migration scripts",
+      "Automated refactoring tools"
+    ]
+  },
+  {
+    "spr_id": "ValidationGatedCleanU",
+    "term": "Validation-Gated Cleanup",
+    "definition": "Protocol requiring backup files to persist through 5 validation stages before deletion: (1) syntax compilation, (2) module import, (3) unit tests, (4) live integration, (5) end-to-end workflow execution.",
+    "category": "SafetyProtocol",
+    "related_sprs": [
+      "BackupRetentionPolicY",
+      "NonDestructiveModificatioN",
+      "LiveValidationMandatE"
+    ],
+    "examples": [
+      "28 .BACKUP_AST files from temporal migration remain until ArchE CLI executes live queries successfully",
+      "Refactoring backups retained until full test suite passes and production workflow validates"
+    ],
+    "priority": "MANDATORY",
+    "integration_points": [
+      "Backup manager utility",
+      "CI/CD pipelines",
+      "Deployment workflows"
+    ]
+  },
+  {
+    "spr_id": "SpecificationSynchronizatioN",
+    "term": "Specification Synchronization",
+    "definition": "Iterative process of updating specification documents in lock-step with code changes to maintain implementation resonance and ensure documentation reflects operational reality.",
+    "category": "SystemGovernance",
+    "related_sprs": [
+      "BackupRetentionPolicY",
+      "ImplementationResonancE",
+      "AsAboveSoBeloW"
+    ],
+    "examples": [
+      "Temporal core migration triggers immediate update to temporal_core.md with migration status",
+      "New workflow creation requires simultaneous update to workflow_catalog.md and workflow-specific specification"
+    ],
+    "priority": "MANDATORY",
+    "integration_points": [
+      "All specification documents",
+      "SPR knowledge graph",
+      "Workflow documentation"
+    ]
+  },
+  {
+    "spr_id": "FiveStageValidatioN",
+    "term": "Five-Stage Validation Protocol",
+    "definition": "Comprehensive validation framework requiring changes to pass: Stage 1 (syntax compilation), Stage 2 (module import), Stage 3 (unit tests), Stage 4 (live integration), Stage 5 (end-to-end workflows) before backup cleanup.",
+    "category": "ValidationFramework",
+    "related_sprs": [
+      "BackupRetentionPolicY",
+      "ValidationGatedCleanU",
+      "LiveValidationMandatE"
+    ],
+    "examples": [
+      "Temporal migration passes Stages 1-2 but awaits Stage 4 (live ArchE CLI test) before backup deletion",
+      "Workflow refactoring must demonstrate successful RISE execution (Stage 5) before cleanup"
+    ],
+    "priority": "CRITICAL",
+    "integration_points": [
+      "Testing frameworks",
+      "CI/CD pipelines",
+      "Deployment verification"
+    ]
+  }
+]
+

@@ -1,0 +1,1290 @@
+[
+  {
+    "timestamp": "2025-09-19T13:34:40.345814",
+    "system": {
+      "cpu_usage": 31.6,
+      "memory_usage": 70.9,
+      "memory_available": 2.0408935546875,
+      "disk_usage": 94.1,
+      "disk_free": 2.1047210693359375
+    },
+    "process": {
+      "memory_mb": 340.515625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 15,
+      "total_size_mb": 0.224700927734375,
+      "last_modified": "2025-09-19T09:33:38.555878",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:34:45.448032",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 70.4,
+      "memory_available": 2.074108123779297,
+      "disk_usage": 94.1,
+      "disk_free": 2.0956497192382812
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.22525596618652344,
+      "last_modified": "2025-09-19T09:34:40.446808",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:34:50.583488",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 71.0,
+      "memory_available": 2.034893035888672,
+      "disk_usage": 94.1,
+      "disk_free": 2.0813827514648438
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2258138656616211,
+      "last_modified": "2025-09-19T09:34:45.578800",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:34:55.685444",
+    "system": {
+      "cpu_usage": 50.0,
+      "memory_usage": 71.0,
+      "memory_available": 2.0304908752441406,
+      "disk_usage": 94.1,
+      "disk_free": 2.081371307373047
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.22637081146240234,
+      "last_modified": "2025-09-19T09:34:50.683791",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:00.789625",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 72.0,
+      "memory_available": 1.9649581909179688,
+      "disk_usage": 94.2,
+      "disk_free": 2.0802955627441406
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2269277572631836,
+      "last_modified": "2025-09-19T09:34:59.464775",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:05.892880",
+    "system": {
+      "cpu_usage": 26.3,
+      "memory_usage": 72.1,
+      "memory_available": 1.9536895751953125,
+      "disk_usage": 94.2,
+      "disk_free": 2.0801734924316406
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.22748565673828125,
+      "last_modified": "2025-09-19T09:35:00.891772",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:10.994753",
+    "system": {
+      "cpu_usage": 30.0,
+      "memory_usage": 71.9,
+      "memory_available": 1.9667587280273438,
+      "disk_usage": 94.2,
+      "disk_free": 2.0802459716796875
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2280435562133789,
+      "last_modified": "2025-09-19T09:35:05.993762",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:16.097286",
+    "system": {
+      "cpu_usage": 42.1,
+      "memory_usage": 71.6,
+      "memory_available": 1.9882659912109375,
+      "disk_usage": 94.2,
+      "disk_free": 2.0802268981933594
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.22860050201416016,
+      "last_modified": "2025-09-19T09:35:11.095752",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:21.199764",
+    "system": {
+      "cpu_usage": 70.0,
+      "memory_usage": 70.1,
+      "memory_available": 2.093425750732422,
+      "disk_usage": 94.2,
+      "disk_free": 2.0802268981933594
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2291584014892578,
+      "last_modified": "2025-09-19T09:35:16.198741",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:26.301975",
+    "system": {
+      "cpu_usage": 60.0,
+      "memory_usage": 69.9,
+      "memory_available": 2.1097183227539062,
+      "disk_usage": 94.2,
+      "disk_free": 2.0802459716796875
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.22971439361572266,
+      "last_modified": "2025-09-19T09:35:21.300730",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:31.405758",
+    "system": {
+      "cpu_usage": 65.0,
+      "memory_usage": 70.2,
+      "memory_available": 2.090137481689453,
+      "disk_usage": 94.2,
+      "disk_free": 2.0802459716796875
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2302722930908203,
+      "last_modified": "2025-09-19T09:35:26.403718",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:36.509342",
+    "system": {
+      "cpu_usage": 33.3,
+      "memory_usage": 70.5,
+      "memory_available": 2.0696182250976562,
+      "disk_usage": 94.2,
+      "disk_free": 2.065074920654297
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23082828521728516,
+      "last_modified": "2025-09-19T09:35:31.507706",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:41.611392",
+    "system": {
+      "cpu_usage": 40.0,
+      "memory_usage": 70.4,
+      "memory_available": 2.0757904052734375,
+      "disk_usage": 94.2,
+      "disk_free": 2.0491256713867188
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2313852310180664,
+      "last_modified": "2025-09-19T09:35:36.609694",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:46.714476",
+    "system": {
+      "cpu_usage": 25.0,
+      "memory_usage": 71.0,
+      "memory_available": 2.0322341918945312,
+      "disk_usage": 94.2,
+      "disk_free": 2.047008514404297
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23194217681884766,
+      "last_modified": "2025-09-19T09:35:41.713682",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:51.816833",
+    "system": {
+      "cpu_usage": 45.0,
+      "memory_usage": 70.9,
+      "memory_available": 2.0395431518554688,
+      "disk_usage": 94.3,
+      "disk_free": 2.0446243286132812
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2324991226196289,
+      "last_modified": "2025-09-19T09:35:46.815669",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:35:56.919381",
+    "system": {
+      "cpu_usage": 42.9,
+      "memory_usage": 70.3,
+      "memory_available": 2.0817222595214844,
+      "disk_usage": 94.3,
+      "disk_free": 2.0387420654296875
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23305606842041016,
+      "last_modified": "2025-09-19T09:35:51.917655",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:02.024172",
+    "system": {
+      "cpu_usage": 40.0,
+      "memory_usage": 70.2,
+      "memory_available": 2.0855865478515625,
+      "disk_usage": 94.3,
+      "disk_free": 2.0348892211914062
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2336139678955078,
+      "last_modified": "2025-09-19T09:35:57.022642",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:07.126487",
+    "system": {
+      "cpu_usage": 30.0,
+      "memory_usage": 70.1,
+      "memory_available": 2.0932044982910156,
+      "disk_usage": 94.3,
+      "disk_free": 2.0308151245117188
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23417091369628906,
+      "last_modified": "2025-09-19T09:36:02.125628",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:12.228995",
+    "system": {
+      "cpu_usage": 85.0,
+      "memory_usage": 70.4,
+      "memory_available": 2.0778121948242188,
+      "disk_usage": 94.3,
+      "disk_free": 2.0220260620117188
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23472881317138672,
+      "last_modified": "2025-09-19T09:36:07.227613",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:17.333020",
+    "system": {
+      "cpu_usage": 95.2,
+      "memory_usage": 71.5,
+      "memory_available": 1.9994087219238281,
+      "disk_usage": 94.3,
+      "disk_free": 2.020263671875
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23528671264648438,
+      "last_modified": "2025-09-19T09:36:12.329599",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:22.441925",
+    "system": {
+      "cpu_usage": 40.0,
+      "memory_usage": 71.1,
+      "memory_available": 2.0279159545898438,
+      "disk_usage": 94.3,
+      "disk_free": 2.020000457763672
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2358407974243164,
+      "last_modified": "2025-09-19T09:36:17.440584",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:27.548724",
+    "system": {
+      "cpu_usage": 65.0,
+      "memory_usage": 70.8,
+      "memory_available": 2.04583740234375,
+      "disk_usage": 94.3,
+      "disk_free": 2.0195541381835938
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23639678955078125,
+      "last_modified": "2025-09-19T09:36:22.546568",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:32.651514",
+    "system": {
+      "cpu_usage": 26.3,
+      "memory_usage": 70.8,
+      "memory_available": 2.0445098876953125,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194931030273438
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2369527816772461,
+      "last_modified": "2025-09-19T09:36:27.650553",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:37.755566",
+    "system": {
+      "cpu_usage": 42.9,
+      "memory_usage": 70.9,
+      "memory_available": 2.0367088317871094,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194931030273438
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23750972747802734,
+      "last_modified": "2025-09-19T09:36:32.753537",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:42.860410",
+    "system": {
+      "cpu_usage": 22.2,
+      "memory_usage": 70.9,
+      "memory_available": 2.0406761169433594,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194931030273438
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.238067626953125,
+      "last_modified": "2025-09-19T09:36:37.858521",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:47.965284",
+    "system": {
+      "cpu_usage": 94.7,
+      "memory_usage": 72.0,
+      "memory_available": 1.9642486572265625,
+      "disk_usage": 94.3,
+      "disk_free": 2.019489288330078
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23862361907958984,
+      "last_modified": "2025-09-19T09:36:42.962504",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:53.072136",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 71.2,
+      "memory_available": 2.018939971923828,
+      "disk_usage": 94.3,
+      "disk_free": 2.019489288330078
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.2391805648803711,
+      "last_modified": "2025-09-19T09:36:48.068487",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:36:58.185052",
+    "system": {
+      "cpu_usage": 75.0,
+      "memory_usage": 71.0,
+      "memory_available": 2.0311279296875,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194778442382812
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.23973655700683594,
+      "last_modified": "2025-09-19T09:36:53.182470",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:03.287505",
+    "system": {
+      "cpu_usage": 80.0,
+      "memory_usage": 71.2,
+      "memory_available": 2.0154571533203125,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194778442382812
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 16,
+      "total_size_mb": 0.24029159545898438,
+      "last_modified": "2025-09-19T09:36:58.286452",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:08.402286",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 71.7,
+      "memory_available": 1.9822807312011719,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194664001464844
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 17,
+      "total_size_mb": 0.24642467498779297,
+      "last_modified": "2025-09-19T09:37:06.617423",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:13.514167",
+    "system": {
+      "cpu_usage": 63.2,
+      "memory_usage": 71.4,
+      "memory_available": 2.005950927734375,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194664001464844
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 17,
+      "total_size_mb": 0.24698352813720703,
+      "last_modified": "2025-09-19T09:37:08.512416",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:18.617943",
+    "system": {
+      "cpu_usage": 80.0,
+      "memory_usage": 71.5,
+      "memory_available": 2.0001068115234375,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194664001464844
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 17,
+      "total_size_mb": 0.24754047393798828,
+      "last_modified": "2025-09-19T09:37:13.616398",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:23.732278",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 71.8,
+      "memory_available": 1.9772377014160156,
+      "disk_usage": 94.3,
+      "disk_free": 2.019458770751953
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 18,
+      "total_size_mb": 0.24901866912841797,
+      "last_modified": "2025-09-19T09:37:22.945363",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:28.857118",
+    "system": {
+      "cpu_usage": 57.1,
+      "memory_usage": 72.2,
+      "memory_available": 1.9515609741210938,
+      "disk_usage": 94.3,
+      "disk_free": 2.019458770751953
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 18,
+      "total_size_mb": 0.24957656860351562,
+      "last_modified": "2025-09-19T09:37:23.854360",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:33.964059",
+    "system": {
+      "cpu_usage": 68.4,
+      "memory_usage": 72.2,
+      "memory_available": 1.9514999389648438,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194549560546875
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 18,
+      "total_size_mb": 0.2501335144042969,
+      "last_modified": "2025-09-19T09:37:28.962341",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:39.067997",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 72.3,
+      "memory_available": 1.9440803527832031,
+      "disk_usage": 94.3,
+      "disk_free": 2.019317626953125
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 18,
+      "total_size_mb": 0.2506904602050781,
+      "last_modified": "2025-09-19T09:37:34.065321",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:44.183001",
+    "system": {
+      "cpu_usage": 75.0,
+      "memory_usage": 71.5,
+      "memory_available": 1.9963912963867188,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194435119628906
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 18,
+      "total_size_mb": 0.2512474060058594,
+      "last_modified": "2025-09-19T09:37:39.181301",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:49.286074",
+    "system": {
+      "cpu_usage": 80.0,
+      "memory_usage": 72.2,
+      "memory_available": 1.9487648010253906,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194435119628906
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 18,
+      "total_size_mb": 0.2518043518066406,
+      "last_modified": "2025-09-19T09:37:44.284281",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:54.403273",
+    "system": {
+      "cpu_usage": 95.0,
+      "memory_usage": 72.8,
+      "memory_available": 1.9060592651367188,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194168090820312
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.25856685638427734,
+      "last_modified": "2025-09-19T09:37:52.349248",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:37:59.515376",
+    "system": {
+      "cpu_usage": 95.0,
+      "memory_usage": 72.5,
+      "memory_available": 1.9303741455078125,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194168090820312
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.259124755859375,
+      "last_modified": "2025-09-19T09:37:54.511240",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:04.629538",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 72.9,
+      "memory_available": 1.8997688293457031,
+      "disk_usage": 94.3,
+      "disk_free": 2.0194129943847656
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.25968074798583984,
+      "last_modified": "2025-09-19T09:37:59.617219",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:09.751119",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 73.4,
+      "memory_available": 1.8621253967285156,
+      "disk_usage": 94.3,
+      "disk_free": 2.017986297607422
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.2602396011352539,
+      "last_modified": "2025-09-19T09:38:06.056192",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:14.868181",
+    "system": {
+      "cpu_usage": 35.0,
+      "memory_usage": 73.6,
+      "memory_available": 1.8524169921875,
+      "disk_usage": 94.3,
+      "disk_free": 2.017986297607422
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.26079654693603516,
+      "last_modified": "2025-09-19T09:38:09.867176",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:19.980716",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 73.6,
+      "memory_available": 1.8472747802734375,
+      "disk_usage": 94.3,
+      "disk_free": 2.017986297607422
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 5,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.2613506317138672,
+      "last_modified": "2025-09-19T09:38:14.972154",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:25.102276",
+    "system": {
+      "cpu_usage": 68.4,
+      "memory_usage": 72.5,
+      "memory_available": 1.9307060241699219,
+      "disk_usage": 94.3,
+      "disk_free": 2.017986297607422
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.26190757751464844,
+      "last_modified": "2025-09-19T09:38:20.101132",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:30.209861",
+    "system": {
+      "cpu_usage": 60.0,
+      "memory_usage": 72.5,
+      "memory_available": 1.9252967834472656,
+      "disk_usage": 94.3,
+      "disk_free": 2.017986297607422
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.2624645233154297,
+      "last_modified": "2025-09-19T09:38:25.209109",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:35.317121",
+    "system": {
+      "cpu_usage": 85.0,
+      "memory_usage": 72.7,
+      "memory_available": 1.9153556823730469,
+      "disk_usage": 94.3,
+      "disk_free": 2.0179824829101562
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.26302051544189453,
+      "last_modified": "2025-09-19T09:38:30.316087",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:40.427673",
+    "system": {
+      "cpu_usage": 80.0,
+      "memory_usage": 72.9,
+      "memory_available": 1.8981094360351562,
+      "disk_usage": 94.3,
+      "disk_free": 2.0179786682128906
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.2635784149169922,
+      "last_modified": "2025-09-19T09:38:35.427064",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:45.532289",
+    "system": {
+      "cpu_usage": 90.0,
+      "memory_usage": 74.4,
+      "memory_available": 1.7921943664550781,
+      "disk_usage": 94.3,
+      "disk_free": 2.0185928344726562
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.26413536071777344,
+      "last_modified": "2025-09-19T09:38:40.531041",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:50.638067",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 75.9,
+      "memory_available": 1.6873550415039062,
+      "disk_usage": 94.3,
+      "disk_free": 2.0185928344726562
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.2646932601928711,
+      "last_modified": "2025-09-19T09:38:45.635018",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:38:55.752771",
+    "system": {
+      "cpu_usage": 42.9,
+      "memory_usage": 75.3,
+      "memory_available": 1.73260498046875,
+      "disk_usage": 94.3,
+      "disk_free": 2.0185890197753906
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.26525115966796875,
+      "last_modified": "2025-09-19T09:38:50.751994",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:39:00.861923",
+    "system": {
+      "cpu_usage": 73.7,
+      "memory_usage": 72.1,
+      "memory_available": 1.9583206176757812,
+      "disk_usage": 94.3,
+      "disk_free": 2.0185890197753906
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.2658071517944336,
+      "last_modified": "2025-09-19T09:38:55.859970",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:39:05.967977",
+    "system": {
+      "cpu_usage": 42.9,
+      "memory_usage": 72.0,
+      "memory_available": 1.9629440307617188,
+      "disk_usage": 94.3,
+      "disk_free": 2.0185890197753906
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.26636409759521484,
+      "last_modified": "2025-09-19T09:39:00.966946",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:39:11.072772",
+    "system": {
+      "cpu_usage": 100.0,
+      "memory_usage": 72.5,
+      "memory_available": 1.9260826110839844,
+      "disk_usage": 94.3,
+      "disk_free": 2.0185890197753906
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.2669219970703125,
+      "last_modified": "2025-09-19T09:39:06.069922",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:39:16.184277",
+    "system": {
+      "cpu_usage": 57.1,
+      "memory_usage": 73.1,
+      "memory_available": 1.8821487426757812,
+      "disk_usage": 94.3,
+      "disk_free": 2.0183982849121094
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.26747989654541016,
+      "last_modified": "2025-09-19T09:39:11.182897",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  },
+  {
+    "timestamp": "2025-09-19T13:39:21.291757",
+    "system": {
+      "cpu_usage": 73.7,
+      "memory_usage": 72.5,
+      "memory_available": 1.9245491027832031,
+      "disk_usage": 94.3,
+      "disk_free": 2.0183982849121094
+    },
+    "process": {
+      "memory_mb": 341.015625,
+      "cpu_percent": 0.0,
+      "threads": 4,
+      "open_files": 2
+    },
+    "sandbox": {
+      "files_count": 19,
+      "total_size_mb": 0.2680377960205078,
+      "last_modified": "2025-09-19T09:39:16.286872",
+      "validation_status": "unknown",
+      "deployment_status": "unknown"
+    }
+  }
+]

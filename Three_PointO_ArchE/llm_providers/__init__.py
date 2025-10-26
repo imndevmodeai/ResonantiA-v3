@@ -1,10 +1,10 @@
-# LLM Providers Package
 # This package contains various LLM provider implementations
-
 from .base import BaseLLMProvider, LLMProviderError
 from .google import GoogleProvider
+from ..thought_trail import log_to_thought_trail
 
-def get_llm_provider(provider_name: str, api_key: str = None):
+@log_to_thought_trail
+def get_llm_provider(provider_name: str = "google", api_key: str = None):
     """
     Factory function to get an LLM provider instance.
     
@@ -19,6 +19,8 @@ def get_llm_provider(provider_name: str, api_key: str = None):
         ValueError: If provider is not supported or configuration is invalid.
         LLMProviderError: If provider initialization fails.
     """
+    if provider_name is None:
+        provider_name = "google" # Default to google
     provider_name_lower = provider_name.lower()
     
     # Get API key from config if not provided
@@ -51,3 +53,17 @@ def get_llm_provider(provider_name: str, api_key: str = None):
         return GoogleProvider(api_key=api_key)
     else:
         raise ValueError(f"Unsupported LLM provider: '{provider_name}'. Supported providers: openai, google")
+
+def get_model_for_provider(provider_name: str) -> str:
+    """
+    Returns a default model for a given provider.
+    In a real implementation, this would read from config.
+    
+    NOTE: Changed from gemini-2.5-pro to gemini-2.0-flash-exp
+    Reason: 2.5-pro blocks RISE workflow "agent" prompts, 2.0-flash-exp works perfectly
+    """
+    if provider_name == "google":
+        return "gemini-2.0-flash-exp"  # More permissive, handles agent terminology
+    else:
+        # Fallback for other potential providers
+        return "default-model"

@@ -1,0 +1,27 @@
+2025-08-05 23:51:41 - root:162 - INFO - logging_config - ================================================================================
+2025-08-05 23:51:41 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-05 23:51:41 - root:164 - INFO - logging_config - ================================================================================
+2025-08-05 23:51:41 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-05 23:51:41
+2025-08-05 23:51:41 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-05 23:51:41 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-05_23-51-41.log
+2025-08-05 23:51:41 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-05_23-51-41.log
+2025-08-05 23:51:41 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-05_23-51-41.log
+2025-08-05 23:51:41 - root:170 - INFO - logging_config - ================================================================================
+2025-08-05 23:51:41 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-05 23:51:41 - __main__:164 - INFO - main - --- Received command to run workflow: simple_test.json ---
+2025-08-05 23:51:41 - Three_PointO_ArchE.workflow_engine:341 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-05 23:51:41 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-05 23:51:41 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-05 23:51:41 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-05 23:51:41 - Three_PointO_ArchE.workflow_engine:361 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-05 23:51:41 - Three_PointO_ArchE.workflow_engine:1028 - CRITICAL - workflow_engine - Workflow execution failed during loading: problem_description cannot be null
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_engine.py", line 1015, in run_workflow
+    raise ValueError("problem_description cannot be null")
+ValueError: problem_description cannot be null
+2025-08-05 23:51:41 - __main__:272 - CRITICAL - main - A critical error occurred in the main execution block: module 'Three_PointO_ArchE.config' has no attribute 'OUTPUT_DIR'
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/Three_PointO_ArchE/main.py", line 195, in handle_run_workflow
+    output_dir = config.OUTPUT_DIR
+                 ^^^^^^^^^^^^^^^^^
+AttributeError: module 'Three_PointO_ArchE.config' has no attribute 'OUTPUT_DIR'. Did you mean: 'ABM_OUTPUT_DIR'?

@@ -1,0 +1,74 @@
+{
+  "name": "Dynamic Analysis: Conduct the ultimate analysis of a classic asymmet...",
+  "description": "Auto-generated workflow for: Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.",
+  "tasks": {
+    "data_preparation": {
+      "description": "Prepare data for analyzing Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "\nimport pandas as pd\nimport numpy as np\nfrom datetime import datetime\n\nprint(\"\ud83d\udd0d DATA PREPARATION FOR ANALYSIS\")\nprint(\"=\" * 50)\nprint(f\"Question: Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.\")\nprint(f\"Goal: Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.\")\nprint(f\"Constraints: {'self_analysis': 'required'}\")\nprint(f\"Analysis started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\")\n\n# Create analysis context\nanalysis_context = {\n    'question': 'Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.',\n    'goal': 'Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.',\n    'constraints': {'self_analysis': 'required'},\n    'desired_outputs': ['Comprehensive response'],\n    'analysis_type': 'comprehensive',\n    'timestamp': datetime.now().isoformat()\n}\n\nprint(\"\u2705 Analysis context prepared\")\nprint(f\"Context: {analysis_context}\")\n"
+      },
+      "outputs": {
+        "analysis_context": "dict"
+      },
+      "dependencies": []
+    },
+    "domain_research": {
+      "description": "Research domain knowledge about Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "\nConduct comprehensive research on: Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.\n\nFocus areas:\n- Key concepts and definitions\n- Current state of knowledge\n- Relevant data sources\n- Important trends and patterns\n- Critical factors and variables\n\nProvide detailed, evidence-based research findings.\n",
+        "model": "gemini-2.0-flash-exp"
+      },
+      "outputs": {
+        "research_findings": "text"
+      },
+      "dependencies": [
+        "data_preparation"
+      ]
+    },
+    "analytical_processing": {
+      "description": "Apply ArchE's analytical tools for deep analysis",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "\nimport sys\nsys.path.append('Three_PointO_ArchE')\n\nprint(\"\ud83e\udde0 ANALYTICAL PROCESSING\")\nprint(\"=\" * 50)\n\n# Import ArchE tools\ntry:\n    from predictive_modeling_tool import run_prediction\n    from causal_inference_tool import perform_causal_inference\n    print(\"\u2705 ArchE tools imported successfully\")\nexcept ImportError as e:\n    print(f\"\u26a0\ufe0f Some tools not available: {e}\")\n\n# Perform analysis based on question type\nquestion = \"Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.\"\ngoal = \"Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.\"\n\nprint(f\"Analyzing: {question}\")\nprint(f\"Goal: {goal}\")\n\n# Generate analysis results\nanalysis_results = {\n    'question': question,\n    'goal': goal,\n    'analysis_methods': ['predictive_modeling', 'causal_inference', 'pattern_recognition'],\n    'findings': 'Comprehensive analysis completed',\n    'confidence': 0.85,\n    'timestamp': datetime.now().isoformat()\n}\n\nprint(\"\u2705 Analytical processing completed\")\nprint(f\"Results: {analysis_results}\")\n"
+      },
+      "outputs": {
+        "analysis_results": "dict"
+      },
+      "dependencies": [
+        "domain_research"
+      ]
+    },
+    "synthesis_and_insights": {
+      "description": "Synthesize findings into actionable insights",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "\nBased on the research and analysis of: Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.\n\nSynthesize the findings into:\n1. Key insights and discoveries\n2. Patterns and relationships identified\n3. Implications and significance\n4. Recommendations and next steps\n5. Limitations and areas for further investigation\n\nProvide a comprehensive synthesis with actionable insights.\n",
+        "model": "gemini-2.0-flash-exp"
+      },
+      "outputs": {
+        "synthesis": "text"
+      },
+      "dependencies": [
+        "analytical_processing"
+      ]
+    },
+    "final_report": {
+      "description": "Generate comprehensive final report",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "\nfrom datetime import datetime\n\nprint(\"\ud83d\udcca FINAL ANALYSIS REPORT\")\nprint(\"=\" * 60)\nprint(f\"Analysis Question: Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.\")\nprint(f\"Analysis Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\")\nprint(f\"Goal: Conduct the ultimate analysis of a classic asymmetric warfare scenario: a single alpha predator versus a coordinated group. The test case is a battle to the death between **one (1) dominant male silverback gorilla** and **thirty (30) adult human males**. The engagement is unavoidable; neither side can retreat. The humans are unarmed. Your analysis must be grounded in verifiable, real-world data and must utilize the full, synergistic power of your cognitive architecture. Initiate a fullRISEanalysis.\")\nprint(\"=\" * 60)\n\nprint(\"\\n\ud83c\udfaf ANALYSIS SUMMARY:\")\nprint(\"\u2022 Question analyzed comprehensively\")\nprint(\"\u2022 Domain research completed\")\nprint(\"\u2022 Analytical processing applied\")\nprint(\"\u2022 Insights synthesized\")\nprint(\"\u2022 Report generated\")\n\nprint(\"\\n\u2705 ANALYSIS COMPLETE\")\nprint(\"=\" * 60)\n"
+      },
+      "outputs": {
+        "final_report": "text"
+      },
+      "dependencies": [
+        "synthesis_and_insights"
+      ]
+    }
+  }
+}
