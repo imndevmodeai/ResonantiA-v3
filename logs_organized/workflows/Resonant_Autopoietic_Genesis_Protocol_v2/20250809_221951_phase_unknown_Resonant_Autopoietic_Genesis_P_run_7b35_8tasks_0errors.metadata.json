@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_7b355acce53d42f297e2caf17681f04a.jsonl",
+  "size_bytes": 18759,
+  "modified": "2025-08-09T22:19:51.737530",
+  "workflow_name": "Resonant Autopoietic Genesis Protocol (v2)",
+  "run_id": "run_7b355acce53d42f297e2caf17681f04a",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 8,
+  "duration_sec": 11.251099999999997,
+  "status": "unknown",
+  "line_count": 8
+}

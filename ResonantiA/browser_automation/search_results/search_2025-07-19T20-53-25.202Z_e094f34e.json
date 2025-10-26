@@ -1,0 +1,96 @@
+{
+  "query": "python web scraping best practices",
+  "engines": [
+    "google",
+    "duckduckgo"
+  ],
+  "timestamp": "2025-07-19T20-53-25.202Z",
+  "results": {
+    "google": {
+      "error": "Google search failed: net::ERR_ABORTED at https://www.google.com/search?q=python%20web%20scraping%20best%20practices",
+      "results": []
+    },
+    "duckduckgo": {
+      "engine": "duckduckgo",
+      "query": "python web scraping best practices",
+      "results": [
+        {
+          "title": "Advanced Python Web Scraping: Best Practices & Workarounds - Codementor",
+          "link": "https://www.codementor.io/blog/python-web-scraping-63l2v9sf2q",
+          "description": "Learn how to scrape data from websites using Python, and how to overcome common challenges such as asynchronous loading, authentication, and server-side blacklisting. This article covers the basics of web scraping, the tools and libraries used, and the tips and tricks to make your scraping more efficient and effective."
+        },
+        {
+          "title": "Python Web Scraping: Best Libraries and Practices - Medium",
+          "link": "https://medium.com/pythons-gurus/python-web-scraping-best-libraries-and-practices-86344aa3f703",
+          "description": "Learn how to scrape the web effectively using Python with our guide to the best libraries, ethical practices, common pitfalls to avoid, and real-world applications."
+        },
+        {
+          "title": "7 Web Scraping Best Practices You Must Be Aware of ['25]",
+          "link": "https://research.aimultiple.com/web-scraping-best-practices/",
+          "description": "Learn the best practices for web scraping, including ethical guidelines, legal considerations, and techniques to avoid IP bans."
+        },
+        {
+          "title": "Python Web Scraping Guide - Hackr",
+          "link": "https://hackr.io/blog/python-web-scraping-guide",
+          "description": "Step-by-step tutorials for Python web scraping in 2025 with Beautiful Soup and Selenium. Includes source code, best practices, common challenges, and more."
+        },
+        {
+          "title": "Web Scraping with Python: A Comprehensive Guide - CodeRivers",
+          "link": "https://coderivers.org/blog/scrape-web-python/",
+          "description": "Web scraping with Python is a powerful technique for gathering data from the web. By understanding the fundamental concepts, using the right libraries, following common practices, and implementing best practices, you can create efficient and ethical web scraping scripts."
+        },
+        {
+          "title": "Mastering Web Scraping with Python: Best Practices and Essential Tools",
+          "link": "https://codezup.com/python-web-scraping-best-practices-and-tools/",
+          "description": "Learn how to leverage Python for web scraping, discover best practices, and explore top tools in this comprehensive guide."
+        },
+        {
+          "title": "Web Scraping with Python | Codanics",
+          "link": "https://codanics.com/webscraping-with-python/",
+          "description": "Learn web scraping with Python! 🚀 A complete guide for beginners and professionals to extract data from websites using BeautifulSoup, Requests, and more. Step-by-step tutorials, code examples, and best practices by Codanics."
+        },
+        {
+          "title": "Scraping Best Practices and Optimization in Python",
+          "link": "https://usescraper.com/blog/scraping-best-practices-and-optimization-in-python",
+          "description": "Python provides a rich ecosystem of libraries and tools that make web scraping efficient and effective. In this article, we'll explore best practices and optimization techniques for web scraping using Python."
+        },
+        {
+          "title": "Optimizing Web Scraping Speed in Python - Techniques and Best Practices",
+          "link": "https://scrapingant.com/blog/fast-web-scraping-python",
+          "description": "Learn how to optimize web scraping speed in Python using advanced techniques and best practices. Discover how to leverage parallel processing, asynchronous programming, and efficient data handling to boost scraping performance significantly."
+        },
+        {
+          "title": "Best Practices for Web Scraping with Python | Zenscrape",
+          "link": "https://zenscrape.com/best-practices-for-web-scraping-with-python/",
+          "description": "Are you looking for best practices in web scraping processes with Python? Explore the guide on web scraping Python. Read out now!"
+        }
+      ],
+      "count": 10,
+      "status": "success",
+      "timestamp": "2025-07-19T20:53:25.202Z"
+    }
+  },
+  "metadata": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "options": {
+      "headless": false,
+      "debug": true,
+      "timeout": 30000,
+      "maxResults": 10,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "chromePath": "/usr/bin/google-chrome-stable",
+      "enableStealth": true,
+      "enableHumanHandoff": true,
+      "handoffTimeout": 300000,
+      "resultsDir": "/media/newbu/3626C55326C514B1/Happier/ResonantiA/browser_automation/search_results"
+    }
+  }
+}

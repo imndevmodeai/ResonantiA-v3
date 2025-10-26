@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_a698bebcd0764a92bb8f0c81018dfa68.jsonl",
+  "size_bytes": 1992,
+  "modified": "2025-08-16T06:44:51.009714",
+  "workflow_name": "Conditional Execution Demonstration",
+  "run_id": "run_a698bebcd0764a92bb8f0c81018dfa68",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 3,
+  "duration_sec": 0.05039999999999999,
+  "status": "unknown",
+  "line_count": 3
+}

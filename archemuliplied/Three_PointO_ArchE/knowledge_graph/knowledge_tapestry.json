@@ -1,0 +1,226 @@
+{
+  "version": "3.0",
+  "last_updated": "2024-03-19",
+  "nodes": [
+    {
+      "id": "cognitive_resonance",
+      "type": "CoreConcept",
+      "properties": {
+        "name": "Cognitive Resonance",
+        "description": "The primary objective state of harmonious alignment between perception, analysis, intent, and outcomes",
+        "confidence": 0.95,
+        "temporal_aspects": ["historical", "present", "future"]
+      },
+      "relationships": [
+        {
+          "type": "enables",
+          "target": "temporal_resonance",
+          "confidence": 0.92
+        },
+        {
+          "type": "requires",
+          "target": "iar",
+          "confidence": 0.98
+        }
+      ]
+    },
+    {
+      "id": "temporal_resonance",
+      "type": "CoreConcept",
+      "properties": {
+        "name": "Temporal Resonance",
+        "description": "Cognitive Resonance evaluated across time dimensions",
+        "confidence": 0.93,
+        "temporal_aspects": ["4d_thinking", "historical_consistency", "future_projection"]
+      },
+      "relationships": [
+        {
+          "type": "extends",
+          "target": "cognitive_resonance",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "id": "iar",
+      "type": "CoreMechanism",
+      "properties": {
+        "name": "Integrated Action Reflection",
+        "description": "Mandatory reflection mechanism for continuous self-assessment",
+        "confidence": 0.97,
+        "required_fields": [
+          "status",
+          "summary",
+          "confidence",
+          "alignment_check",
+          "potential_issues",
+          "raw_output_preview"
+        ]
+      },
+      "relationships": [
+        {
+          "type": "supports",
+          "target": "cognitive_resonance",
+          "confidence": 0.96
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "cognitive_resonance",
+      "target": "temporal_resonance",
+      "type": "enables",
+      "properties": {
+        "confidence": 0.92,
+        "temporal_aspect": "continuous"
+      }
+    },
+    {
+      "source": "cognitive_resonance",
+      "target": "iar",
+      "type": "requires",
+      "properties": {
+        "confidence": 0.98,
+        "temporal_aspect": "instantaneous"
+      }
+    }
+  ],
+  "metadata": {
+    "schema_version": "3.0",
+    "generated_by": "ResonantiA Protocol",
+    "generation_timestamp": "2024-03-19T00:00:00Z"
+  },
+  "cosmic": [
+    {
+      "content": {
+        "universal_principles": [
+          "unity",
+          "harmony",
+          "balance",
+          "rhythm",
+          "resonance"
+        ],
+        "cosmic_patterns": [
+          "fractal",
+          "recursion",
+          "symmetry",
+          "emergence",
+          "self-similarity"
+        ],
+        "fundamental_laws": [
+          "conservation",
+          "entropy",
+          "causality",
+          "complementarity",
+          "interconnectedness"
+        ]
+      },
+      "metadata": {
+        "source": "cosmic_observation",
+        "confidence": 0.95,
+        "validation_method": "universal_consensus"
+      },
+      "reflection_strength": 0.95
+    }
+  ],
+  "systemic": [
+    {
+      "content": {
+        "system_principles": [
+          "emergence",
+          "self-organization",
+          "adaptation",
+          "resilience",
+          "evolution"
+        ],
+        "system_patterns": [
+          "feedback",
+          "resonance",
+          "synchronization",
+          "networks",
+          "hierarchies"
+        ],
+        "system_laws": [
+          "homeostasis",
+          "complexity",
+          "chaos",
+          "order",
+          "transformation"
+        ]
+      },
+      "metadata": {
+        "source": "system_analysis",
+        "confidence": 0.85,
+        "validation_method": "system_theory"
+      },
+      "reflection_strength": 0.85
+    }
+  ],
+  "local": [
+    {
+      "content": {
+        "local_principles": [
+          "cooperation",
+          "competition",
+          "symbiosis",
+          "adaptation",
+          "specialization"
+        ],
+        "local_patterns": [
+          "networks",
+          "flows",
+          "boundaries",
+          "interactions",
+          "communities"
+        ],
+        "local_laws": [
+          "stability",
+          "change",
+          "interaction",
+          "balance",
+          "growth"
+        ]
+      },
+      "metadata": {
+        "source": "local_observation",
+        "confidence": 0.75,
+        "validation_method": "empirical_analysis"
+      },
+      "reflection_strength": 0.75
+    }
+  ],
+  "micro": [
+    {
+      "content": {
+        "micro_principles": [
+          "atomic",
+          "molecular",
+          "cellular",
+          "quantum",
+          "energetic"
+        ],
+        "micro_patterns": [
+          "structure",
+          "function",
+          "process",
+          "interaction",
+          "transformation"
+        ],
+        "micro_laws": [
+          "binding",
+          "catalysis",
+          "regulation",
+          "metabolism",
+          "replication"
+        ]
+      },
+      "metadata": {
+        "source": "micro_analysis",
+        "confidence": 0.65,
+        "validation_method": "scientific_method"
+      },
+      "reflection_strength": 0.65
+    }
+  ]
+} 

@@ -1,0 +1,74 @@
+{
+  "name": "Customer Retention Analysis and Strategy Proposal",
+  "description": "A workflow to analyze synthetic customer data, identify key drivers of churn, and propose a targeted retention strategy.",
+  "version": "1.0",
+  "tasks": {
+    "generate_synthetic_customer_data": {
+      "description": "Generate a synthetic dataset of customer rental and payment history.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": [
+          "import pandas as pd",
+          "import numpy as np",
+          "import json",
+          "np.random.seed(42)",
+          "num_customers = 500",
+          "data = {",
+          "    'customer_id': range(1, num_customers + 1),",
+          "    'product_category': np.random.choice(['Electronics', 'Furniture', 'Appliances'], num_customers, p=[0.4, 0.4, 0.2]),",
+          "    'rental_duration_months': np.random.randint(1, 24, num_customers),",
+          "    'on_time_payment_percentage': np.random.uniform(0.7, 1.0, num_customers).round(2),",
+          "    'service_calls': np.random.randint(0, 8, num_customers)",
+          "}",
+          "df = pd.DataFrame(data)",
+          "churn_probability = 0.1 + (df['service_calls'] * 0.05) - ((df['on_time_payment_percentage'] - 0.7) * 0.3)",
+          "df['churned'] = (churn_probability > np.random.rand(num_customers)).astype(int)",
+          "print(df.to_json(orient='records'))"
+        ]
+      },
+      "outputs": {"customer_data": "object", "reflection": "dict"}
+    },
+    "train_churn_model": {
+      "description": "Train a logistic regression model and extract feature importances.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": [
+          "import pandas as pd",
+          "import json",
+          "from sklearn.model_selection import train_test_split",
+          "from sklearn.linear_model import LogisticRegression",
+          "import numpy as np",
+          "data_str = '''{{ generate_synthetic_customer_data.result.output }}'''",
+          "data = pd.read_json(data_str)",
+          "X = data[['service_calls', 'rental_duration_months', 'on_time_payment_percentage']]",
+          "y = data['churned']",
+          "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)",
+          "model = LogisticRegression()",
+          "model.fit(X_train, y_train)",
+          "importances = dict(zip(X.columns, model.coef_[0]))",
+          "print(json.dumps({'feature_importance': importances}))"
+        ]
+      },
+      "outputs": {"model_results": "object", "reflection": "dict"},
+      "dependencies": ["generate_synthetic_customer_data"]
+    },
+    "synthesize_retention_strategy": {
+      "description": "Synthesize a business strategy based on the primary churn driver.",
+      "action_type": "synthesize_final_output",
+      "inputs": {
+        "analysis_data": "{{ train_churn_model.result }}"
+      },
+      "dependencies": ["train_churn_model"]
+    },
+    "display_retention_strategy": {
+      "description": "Display the final proposed retention strategy.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "{{ synthesize_retention_strategy.response }}"
+      },
+      "dependencies": ["synthesize_retention_strategy"]
+    }
+  }
+}

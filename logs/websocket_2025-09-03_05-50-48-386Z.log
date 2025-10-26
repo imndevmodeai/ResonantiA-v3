@@ -1,0 +1,175 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-03T05:50:48.386Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-03_05-50-48-386Z.log
+❌ Error Log: logs/errors_websocket_2025-09-03_05-50-48-386Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-03_05-50-48-386Z.log
+================================================================================
+2025-09-03T05:50:48.388Z [INFO] websocket: VCD WebSocket Server - IAR data will be received from Python ArchE backend
+2025-09-03T05:50:48.400Z [INFO] websocket: ArchE Protocol v3.1-CA WebSocket Server running on port 3006
+2025-09-03T05:50:48.403Z [INFO] websocket: Cognitive Bus ready for protocol-enhanced connections
+2025-09-03T05:50:48.403Z [INFO] websocket: Connect at: ws://localhost:3006
+2025-09-03T05:52:15.342Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T05:52:15.568Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T05:52:15.579Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T05:52:18.394Z [INFO] websocket: Client connected to ArchE Cognitive Bus
+2025-09-03T06:01:07.458Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-03T06:01:07.461Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-03T06:01:08.778Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-03T06:01:08.780Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-03T06:01:11.247Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756879271234",
+  "content": "I received your message, but I am having trouble formulating a response right now.",
+  "timestamp": "2025-09-03T06:01:11.234361Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-03T06:01:11.234238Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.6
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.4,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "I received your message, but I am having trouble formulating a response right now."
+  }
+}
+2025-09-03T06:01:13.260Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756879273252",
+  "content": "I received your message, but I am having trouble formulating a response right now.",
+  "timestamp": "2025-09-03T06:01:13.252871Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-03T06:01:13.252858Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.6
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.4,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "I received your message, but I am having trouble formulating a response right now."
+  }
+}
+2025-09-03T06:01:17.255Z [INFO] websocket: Received user query
+{
+  "query": "{\"command\":\"run_drcl\",\"payload\":{\"goal\":\"Run DRCL on current interaction\"}}..."
+}
+2025-09-03T06:01:17.256Z [INFO] websocket: Sent query to ArchE interface: {"command":"run_drcl","payload":{"goal":"Run DRCL ...
+2025-09-03T06:01:18.706Z [INFO] websocket: Received response from Python server:
+{
+  "id": "arche_1756879278701",
+  "content": "I received your message, but I am having trouble formulating a response right now.",
+  "timestamp": "2025-09-03T06:01:18.701858Z",
+  "sender": "arche",
+  "message_type": "chat",
+  "protocol_compliance": true,
+  "protocol_version": "ResonantiA v3.1-CA",
+  "iar": {
+    "status": "Success",
+    "confidence": 0.9,
+    "summary": "Query processed by ACO engine",
+    "potential_issues": [],
+    "alignment_check": {
+      "query_relevance": 0.9,
+      "engine_selection": 0.8,
+      "response_quality": 0.9
+    },
+    "engine_used": "ACO",
+    "timestamp": "2025-09-03T06:01:18.701848Z",
+    "cognitive_resonance": {
+      "clarity": 0.3,
+      "coherence": 0.3,
+      "completeness": 0.3,
+      "contextual_relevance": 0.6
+    },
+    "temporal_resonance": {
+      "past_context": 0.2,
+      "present_accuracy": 0.4,
+      "future_projection": 0.2,
+      "causal_understanding": 0.3
+    },
+    "recommendations": [
+      "Enhance clarity by providing more specific examples",
+      "Improve logical flow and structure",
+      "Strengthen causal relationships and temporal context",
+      "Provide more comprehensive coverage of the topic"
+    ],
+    "confidence_boost": 0,
+    "resonance_enhancement": 0.5
+  },
+  "spr_activations": [],
+  "raw_response": {
+    "response": "I received your message, but I am having trouble formulating a response right now."
+  }
+}
+2025-09-03T10:19:58.368Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus
+2025-09-03T10:19:58.373Z [INFO] websocket: Client disconnected from ArchE Cognitive Bus

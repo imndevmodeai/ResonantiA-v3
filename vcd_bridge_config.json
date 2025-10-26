@@ -1,0 +1,84 @@
+{
+  "vcd_bridge": {
+    "server": {
+      "host": "localhost",
+      "port": 8765,
+      "timeout": 5,
+      "max_connections": 100,
+      "heartbeat_interval": 30,
+      "reconnect_attempts": 3,
+      "reconnect_delay": 1
+    },
+    "websocket": {
+      "ping_interval": 20,
+      "ping_timeout": 10,
+      "close_timeout": 10,
+      "max_size": 1048576,
+      "compression": "deflate"
+    },
+    "logging": {
+      "level": "INFO",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "file": "logs/vcd_bridge.log",
+      "max_size": "10MB",
+      "backup_count": 5
+    },
+    "security": {
+      "allowed_origins": ["localhost", "127.0.0.1"],
+      "rate_limit": {
+        "requests_per_minute": 60,
+        "burst_size": 10
+      }
+    },
+    "performance": {
+      "connection_pool_size": 50,
+      "message_queue_size": 1000,
+      "batch_size": 10,
+      "flush_interval": 0.1
+    }
+  },
+  "vcd_ui": {
+    "visualization": {
+      "default_modes": [
+        "REAL_TIME_MONITORING",
+        "COGNITIVE_RESONANCE_MAP",
+        "TEMPORAL_DYNAMICS_VIEW"
+      ],
+      "refresh_interval": 100,
+      "data_retention": 1000,
+      "max_data_points": 10000
+    },
+    "performance": {
+      "compression_enabled": true,
+      "cache_size": 100,
+      "lazy_loading": true
+    }
+  },
+  "vcd_analysis_agent": {
+    "analysis": {
+      "session_timeout": 300,
+      "max_concurrent_analyses": 5,
+      "analysis_interval": 60,
+      "timeout_wrapper_enabled": true
+    },
+    "reporting": {
+      "output_format": "json",
+      "include_iar": true,
+      "save_to_file": true,
+      "output_directory": "outputs"
+    }
+  },
+  "monitoring": {
+    "health_check_interval": 30,
+    "performance_monitoring": true,
+    "alert_thresholds": {
+      "response_time": 1.0,
+      "memory_usage": 0.8,
+      "cpu_usage": 0.9,
+      "error_rate": 0.05
+    }
+  }
+}
+
+
+

@@ -1,0 +1,1173 @@
+#!/usr/bin/env python3
+"""
+RISE v2.0 Genesis Protocol - RISE_Orchestrator
+Master controller for the Resonant Insight and Strategy Engine (RISE) v2.0
+
+This module implements the Genesis Protocol as described in the RISE v2.0 blueprint.
+It orchestrates the three-phase workflow that can forge specialized expert clones
+and achieve unprecedented autonomous strategic reasoning.
+
+Phase A: Knowledge Scaffolding & Dynamic Specialization
+Phase B: Fused Insight Generation  
+Phase C: Fused Strategy Generation & Finalization
+
+The RISE_Orchestrator manages the state of a problem as it moves through these phases,
+coordinating the Metamorphosis Protocol (sandboxed expert clones) and HighStakesVetting.
+
+ENHANCED WITH SYNERGISTIC FUSION PROTOCOL:
+The orchestrator now includes the ability to activate axiomatic knowledge when scope limitations
+are detected, creating a synergistic fusion of scientific reasoning and spiritual guidance.
+"""
+
+import logging
+import json
+import time
+import uuid
+import os
+import sys
+from typing import Dict, Any, List, Optional, Tuple, Callable
+from datetime import datetime
+from dataclasses import dataclass, asdict, field
+import traceback
+
+# Import the canonical types
+from .canonical_types import CognitiveResponse, QuantumProbability
+
+# The VCD Bridge import is now removed from the top of the file.
+
+# Configure logger first
+logger = logging.getLogger(__name__)
+
+# Import existing components with fallback handling
+try:
+    from .workflow_engine import IARCompliantWorkflowEngine
+    from .spr_manager import SPRManager
+    from .thought_trail import ThoughtTrail
+    from .config import get_config
+    from .vetting_prompts import perform_scope_limitation_assessment, get_relevant_axioms
+    from .utopian_solution_synthesizer import UtopianSolutionSynthesizer
+    from .adversary_simulator import StrategicAdversarySimulator # <-- Import the simulator
+    logger.info("✅ RISE Orchestrator: All relative imports successful")
+except ImportError as e:
+    logger.error(f"❌ RISE Orchestrator: A critical import failed: {e}", exc_info=True)
+    # Create dummy classes to prevent crashes but log the failure prominently
+    class IARCompliantWorkflowEngine:
+        def __init__(self, *args, **kwargs): pass
+        def run_workflow(self, *args, **kwargs): return {"error": "Workflow Engine not available"}
+    class SPRManager:
+        def __init__(self, *args, **kwargs): pass
+    class ThoughtTrail:
+        def __init__(self, *args, **kwargs): pass
+    def get_config(): return {}
+    def perform_scope_limitation_assessment(*args): return {"error": "unavailable"}
+    def get_relevant_axioms(*args): return {}
+    class UtopianSolutionSynthesizer:
+        def __init__(self, *args, **kwargs): pass
+    class StrategicAdversarySimulator: # <-- Dummy class for fallback
+        def __init__(self, *args, **kwargs): pass
+        def run_simulation(self, *args, **kwargs): return {"error": "unavailable"}
+
+# --- Start of new integration code ---
+RISE_AVAILABLE = True
+
+try:
+    from .autopoietic_self_analysis import QuantumProbability
+except ImportError:
+    class QuantumProbability: # Fallback class
+        def __init__(self, prob: float, evidence: list = None):
+            self.probability = prob
+        def to_dict(self):
+            return {"probability": self.probability}
+        def collapse(self) -> float:
+            return self.probability
+
+# The local CognitiveResponse dataclass is now removed.
+
+@dataclass
+class RISEState:
+    """Represents the state of a RISE workflow execution"""
+    problem_description: str
+    session_id: str
+    current_phase: str
+    phase_start_time: datetime
+    session_knowledge_base: Dict[str, Any]
+    specialized_agent: Optional[Dict[str, Any]]
+    advanced_insights: List[Dict[str, Any]]
+    specialist_consultation: Optional[Dict[str, Any]]
+    fused_strategic_dossier: Optional[Dict[str, Any]]
+    vetting_dossier: Optional[Dict[str, Any]]
+    final_strategy: Optional[Dict[str, Any]]
+    spr_definition: Optional[Dict[str, Any]]
+    execution_metrics: Dict[str, Any]
+    # Synergistic Fusion Protocol additions
+    scope_limitation_assessment: Optional[Dict[str, Any]]
+    activated_axioms: List[Dict[str, Any]]
+    synergistic_synthesis: Optional[Dict[str, Any]]
+    # Utopian Solution Synthesizer additions
+    utopian_trust_packet: Optional[Dict[str, Any]]
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert state to dictionary for serialization"""
+        return asdict(self)
+
+class RISE_Orchestrator:
+    """
+    Master controller for the RISE v2.0 workflow.
+    
+    This orchestrator manages the three-phase process:
+    1. Knowledge Scaffolding & Dynamic Specialization (Phase A)
+    2. Fused Insight Generation (Phase B) 
+    3. Fused Strategy Generation & Finalization (Phase C)
+    
+    It coordinates the Metamorphosis Protocol for creating specialized expert clones
+    and implements HighStakesVetting for rigorous strategy validation.
+    
+    ENHANCED WITH SYNERGISTIC FUSION PROTOCOL:
+    The orchestrator now includes the ability to activate axiomatic knowledge when scope limitations
+    are detected, creating a synergistic fusion of scientific reasoning and spiritual guidance.
+    """
+    
+    def __init__(self, workflows_dir: str = None, spr_manager: Optional[SPRManager] = None, workflow_engine: Optional[IARCompliantWorkflowEngine] = None, event_callback: Optional[Callable] = None):
+        """
+        Initialize the RISE_Orchestrator with proper path resolution.
+        
+        Args:
+            workflows_dir: Directory containing workflow files. If None, will auto-detect.
+            spr_manager: Optional SPR manager instance
+            workflow_engine: Optional workflow engine instance
+        """
+        # --- Bedrock of Trust: Configuration & Initialization ---
+        self.config = get_config()
+        
+        # Hardened Workflow Path Resolution
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.workflows_dir = os.path.join(base_dir, '..', 'workflows')
+        
+        self.thought_trail = ThoughtTrail()
+        
+        # Correctly initialize SPRManager with the canonical path
+        spr_path = os.path.join(base_dir, '..', 'knowledge_graph', 'spr_definitions_tv.json')
+        self.spr_manager = SPRManager(spr_filepath=spr_path)
+
+        # Auto-detect workflows directory if not provided
+        if workflows_dir is None:
+            # Get the directory where this script is located
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            # Go up one level to the project root
+            project_root = os.path.dirname(script_dir)
+            # Set workflows directory to project_root/workflows
+            workflows_dir = os.path.join(project_root, "workflows")
+            
+            # Verify the workflows directory exists
+            if not os.path.exists(workflows_dir):
+                logger.warning(f"Workflows directory not found at {workflows_dir}, trying current working directory")
+                workflows_dir = os.path.join(os.getcwd(), "workflows")
+                
+            logger.info(f"RISE_Orchestrator initialized with workflows_dir: {workflows_dir}")
+        
+        # Ensure workflows_dir is absolute
+        workflows_dir = os.path.abspath(workflows_dir)
+        
+        # Verify the workflows directory exists and contains expected files
+        if not os.path.exists(workflows_dir):
+            raise FileNotFoundError(f"Workflows directory not found: {workflows_dir}")
+        
+        expected_files = [
+            "knowledge_scaffolding.json",
+            "metamorphosis_protocol.json", 
+            "strategy_fusion.json",
+            "high_stakes_vetting.json",
+            "distill_spr.json"
+        ]
+        
+        missing_files = []
+        for file in expected_files:
+            file_path = os.path.join(workflows_dir, file)
+            if not os.path.exists(file_path):
+                missing_files.append(file)
+        
+        if missing_files:
+            logger.warning(f"Missing expected workflow files: {missing_files}")
+        
+        self.workflows_dir = workflows_dir
+        self.active_sessions: Dict[str, RISEState] = {}
+        self.execution_history: List[Dict[str, Any]] = []
+        
+        # Initialize components
+        try:
+            if spr_manager is None:
+                # Provide default path to SPR definitions
+                default_spr_path = os.path.join(os.path.dirname(__file__), "..", "knowledge_graph", "spr_definitions_tv.json")
+                if os.path.exists(default_spr_path):
+                    self.spr_manager = SPRManager(spr_filepath=default_spr_path)
+                    logger.info(f"SPRManager initialized with default path: {default_spr_path}")
+                else:
+                    logger.warning(f"Default SPR file not found at {default_spr_path}, creating minimal SPRManager")
+                    # Create minimal fallback functionality
+                    self.spr_manager = None
+            else:
+                self.spr_manager = spr_manager
+        except Exception as e:
+            logger.error(f"Failed to initialize SPRManager: {e}")
+            self.spr_manager = None
+        
+        self.thought_trail = ThoughtTrail()
+        
+        # Initialize workflow engine with the correct workflows directory
+        if workflow_engine is None:
+            self.workflow_engine = IARCompliantWorkflowEngine(
+                workflows_dir=self.workflows_dir, 
+                event_callback=event_callback  # Pass the callback here
+            )
+        else:
+            self.workflow_engine = workflow_engine
+            # Update the workflow engine's workflows directory if needed
+            if hasattr(self.workflow_engine, 'workflows_dir'):
+                self.workflow_engine.workflows_dir = self.workflows_dir
+
+        # Utopian Solution Synthesizer initialization
+        if UtopianSolutionSynthesizer:
+            self.utopian_synthesizer = UtopianSolutionSynthesizer(self.workflow_engine)
+            self.utopian_synthesis_enabled = True
+        else:
+            self.utopian_synthesizer = None
+            self.utopian_synthesis_enabled = False
+        
+        # Load axiomatic knowledge for synergistic fusion
+        self.axiomatic_knowledge = self._load_axiomatic_knowledge()
+        # Preload SPR index for prompt-time detection (supports canonical + aliases + term)
+        try:
+            self._spr_index = self._build_spr_index()
+        except Exception as e:
+            logger.warning(f"SPR index build failed: {e}")
+            self._spr_index = None
+        
+        logger.info(f"🚀 RISE_Orchestrator initialized successfully")
+        logger.info(f"📁 Workflows directory: {self.workflows_dir}")
+        logger.info(f"🔧 Workflow engine: {type(self.workflow_engine).__name__}")
+        logger.info(f"🧠 SPR Manager: {type(self.spr_manager).__name__}")
+        logger.info(f"📝 Thought Trail: {type(self.thought_trail).__name__}")
+        self.synergistic_fusion_enabled = perform_scope_limitation_assessment is not None
+
+    def _init_rise_state(self, problem_description: str) -> RISEState:
+        """Initializes a new RISEState object for a workflow run."""
+        logger.info(f"🔍 DEBUG: _init_rise_state called with problem_description: '{problem_description}'")
+        start_time = datetime.utcnow()
+        session_id = f"rise_{int(start_time.timestamp())}_{uuid.uuid4().hex[:6]}"
+        
+        rise_state = RISEState(
+            problem_description=problem_description,
+            session_id=session_id,
+            current_phase="Init",
+            phase_start_time=start_time,
+            session_knowledge_base={},
+            specialized_agent=None,
+            advanced_insights=[],
+            specialist_consultation=None,
+            fused_strategic_dossier=None,
+            vetting_dossier=None,
+            final_strategy=None,
+            spr_definition=None,
+            execution_metrics={
+                'total_duration': 0,
+                'phase_durations': {},
+                'success_rate': 0.0,
+                'confidence_score': 0.0
+            },
+            scope_limitation_assessment=None,
+            activated_axioms=[],
+            synergistic_synthesis=None,
+            utopian_trust_packet=None
+        )
+        logger.info(f"🔍 DEBUG: RISEState created with problem_description: '{rise_state.problem_description}'")
+        return rise_state
+
+    def _load_axiomatic_knowledge(self) -> Dict[str, Any]:
+        """
+        Load the Axiomatic Knowledge Base for Synergistic Fusion Protocol.
+        
+        Returns:
+            Dict containing axiomatic knowledge base
+        """
+        try:
+            axiomatic_path = os.path.join(os.path.dirname(__file__), "..", "knowledge_graph", "axiomatic_knowledge.json")
+            with open(axiomatic_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.warning(f"Failed to load axiomatic knowledge base: {e}")
+            return {}
+
+    # --- SPR Discovery & Normalization Preprocessor ---
+    def _build_spr_index(self) -> Dict[str, Any]:
+        """Build a lightweight index from the Knowledge Tapestry for fuzzy SPR detection."""
+        # Prefer the same JSON used by default path detection
+        try_paths = [
+            os.path.join(os.path.dirname(__file__), "..", "knowledge_graph", "spr_definitions_tv.json"),
+        ]
+        spr_list = None
+        for p in try_paths:
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    spr_list = json.load(f)
+                    break
+            except Exception:
+                continue
+        if not spr_list:
+            return {}
+
+        # Build forms -> canonical spr_id
+        index = {}
+        def norm(s: str) -> str:
+            return " ".join("".join(ch.lower() if ch.isalnum() else " " for ch in s).split())
+
+        for spr in spr_list:
+            sid = spr.get("spr_id") or spr.get("id")
+            term = spr.get("term", "")
+            aliases = spr.get("aliases", []) if isinstance(spr.get("aliases"), list) else []
+            # Skip axioms or entries explicitly hidden from SPR index
+            if str(spr.get("category", "")).lower() in {"axiom", "axiomatic", "axiomaticknowledge"} or \
+               spr.get("is_axiom") is True or \
+               spr.get("hidden_from_spr_index") is True:
+                continue
+            if not isinstance(sid, str):
+                continue
+            forms = set()
+            forms.add(sid)
+            forms.add(term)
+            for a in aliases:
+                forms.add(a)
+
+            # Add decomposed forms (split camel-ish by capital boundaries)
+            def decamel(s: str) -> str:
+                buf = []
+                prev_upper = False
+                for ch in s:
+                    if ch.isupper() and not prev_upper:
+                        buf.append(" ")
+                    buf.append(ch)
+                    prev_upper = ch.isupper()
+                return "".join(buf)
+
+            forms.add(decamel(sid))
+            # Normalize all forms
+            norm_forms = {norm(f) for f in forms if isinstance(f, str) and f}
+            for nf in norm_forms:
+                if not nf:
+                    continue
+                # Prefer first seen canonical; do not overwrite unless empty
+                index.setdefault(nf, sid)
+        return index
+
+    def _detect_and_normalize_sprs_in_text(self, text: str) -> Dict[str, Any]:
+        """Detect likely SPR mentions in free text (voice transcriptions, informal prompts) and produce hints.
+
+        Returns: { detected: [spr_id...], normalized_text: str, map: [{match, spr_id}] }
+        """
+        if not text or not self._spr_index:
+            return {"detected": [], "normalized_text": text, "map": []}
+
+        # Normalize input for matching
+        def norm(s: str) -> str:
+            return " ".join("".join(ch.lower() if ch.isalnum() else " " for ch in s).split())
+
+        ntext = norm(text)
+        detected = []
+        mappings = []
+
+        # Greedy phrase scan: try all index keys that are substrings of normalized text
+        # (fast, but safe given small index size). For better scale, use trie/ahocorasick.
+        for form, sid in self._spr_index.items():
+            if not form or len(form) < 3:
+                continue
+            if form in ntext:
+                if sid not in detected:
+                    detected.append(sid)
+                    mappings.append({"form": form, "spr_id": sid})
+
+        # Produce a light-touch normalized text by appending a hint footer instead of in-place edits
+        if detected:
+            hint = "\n\n[SPR_HINTS]: " + ", ".join(sorted(detected))
+            normalized_text = text + hint
+        else:
+            normalized_text = text
+
+        return {"detected": detected, "normalized_text": normalized_text, "map": mappings}
+
+    def perform_synergistic_fusion(self, rise_state: RISEState, current_thought: str, action_inputs: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Perform Synergistic Fusion Protocol integration.
+        
+        Args:
+            rise_state: Current RISE state
+            current_thought: Current thought process
+            action_inputs: Proposed action inputs
+            
+        Returns:
+            Dict containing synergistic fusion results
+        """
+        if not self.synergistic_fusion_enabled or perform_scope_limitation_assessment is None:
+            return {"synergistic_fusion_applied": False, "reason": "Protocol not available"}
+        
+        try:
+            # Perform scope limitation assessment
+            context = {
+                "problem_description": rise_state.problem_description,
+                "current_phase": rise_state.current_phase,
+                "session_knowledge_base": rise_state.session_knowledge_base
+            }
+            
+            scope_assessment = perform_scope_limitation_assessment(
+                rise_state.problem_description,
+                current_thought,
+                action_inputs,
+                context
+            )
+            
+            # Update RISE state with scope assessment
+            rise_state.scope_limitation_assessment = scope_assessment
+            
+            # Check if axiomatic activation is needed
+            if scope_assessment.get("axiomatic_activation_needed"):
+                relevant_axiom_ids = scope_assessment.get("relevant_axioms", [])
+                activated_axioms = get_relevant_axioms(relevant_axiom_ids)
+                
+                # Update RISE state with activated axioms
+                rise_state.activated_axioms = list(activated_axioms.values())
+                
+                # Perform synergistic synthesis
+                synergistic_result = self._perform_synergistic_synthesis(
+                    rise_state, current_thought, action_inputs, activated_axioms
+                )
+                
+                rise_state.synergistic_synthesis = synergistic_result
+                
+                logger.info(f"Synergistic Fusion Protocol activated with {len(activated_axioms)} axioms")
+                
+                return {
+                    "synergistic_fusion_applied": True,
+                    "scope_limitation_detected": True,
+                    "activated_axioms": list(activated_axioms.keys()),
+                    "synergistic_potential": scope_assessment.get("synergistic_potential"),
+                    "synergistic_result": synergistic_result
+                }
+            else:
+                logger.debug("No scope limitation detected, proceeding with standard analysis")
+                return {
+                    "synergistic_fusion_applied": False,
+                    "scope_limitation_detected": False,
+                    "reason": "No scope limitation detected"
+                }
+                
+        except Exception as e:
+            logger.error(f"Error in synergistic fusion: {e}")
+            return {
+                "synergistic_fusion_applied": False,
+                "error": str(e),
+                "reason": "Error in synergistic fusion protocol"
+            }
+
+    def _perform_synergistic_synthesis(self, rise_state: RISEState, current_thought: str, action_inputs: Dict[str, Any], activated_axioms: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Perform synergistic synthesis combining scientific reasoning with axiomatic guidance.
+        
+        Args:
+            rise_state: Current RISE state
+            current_thought: Current thought process
+            action_inputs: Proposed action inputs
+            activated_axioms: Activated axioms from the knowledge base
+            
+        Returns:
+            Dict containing synergistic synthesis results
+        """
+        try:
+            synthesis_result = {
+                "synthesis_timestamp": datetime.now().isoformat(),
+                "original_thought": current_thought,
+                "original_action_inputs": action_inputs,
+                "activated_axioms": list(activated_axioms.keys()),
+                "axiomatic_guidance": {},
+                "enhanced_thought": current_thought,
+                "enhanced_action_inputs": action_inputs.copy(),
+                "synergistic_effects": []
+            }
+            
+            # Apply axiomatic guidance for each activated axiom
+            for axiom_id, axiom_data in activated_axioms.items():
+                axiom_guidance = self._apply_axiomatic_guidance(
+                    axiom_data, current_thought, action_inputs, rise_state
+                )
+                synthesis_result["axiomatic_guidance"][axiom_id] = axiom_guidance
+                
+                # Enhance thought process and action inputs based on axiom
+                enhanced_components = self._enhance_with_axiom(
+                    axiom_data, current_thought, action_inputs
+                )
+                
+                synthesis_result["enhanced_thought"] = enhanced_components["enhanced_thought"]
+                synthesis_result["enhanced_action_inputs"].update(enhanced_components["enhanced_action_inputs"])
+                synthesis_result["synergistic_effects"].append(enhanced_components["synergistic_effect"])
+            
+            return synthesis_result
+            
+        except Exception as e:
+            logger.error(f"Error in synergistic synthesis: {e}")
+            return {
+                "error": str(e),
+                "synthesis_failed": True
+            }
+
+    def _apply_axiomatic_guidance(self, axiom_data: Dict[str, Any], current_thought: str, action_inputs: Dict[str, Any], rise_state: RISEState) -> Dict[str, Any]:
+        """
+        Apply specific axiomatic guidance to the current thought and action.
+        
+        Args:
+            axiom_data: The axiom data to apply
+            current_thought: Current thought process
+            action_inputs: Proposed action inputs
+            rise_state: Current RISE state
+            
+        Returns:
+            Dict containing applied guidance
+        """
+        guidance = {
+            "axiom_id": axiom_data.get("axiom_id"),
+            "core_principle": axiom_data.get("core_principle"),
+            "applied_guidance": {},
+            "enhancement_notes": []
+        }
+        
+        # Apply specific guidance based on axiom type
+        if axiom_data.get("axiom_id") == "ResonantgratidsouL":
+            # Apply gratitude frequency and grace mechanism
+            guidance["applied_guidance"]["gratitude_assessment"] = "Evaluate solution for acknowledgment of all stakeholders"
+            guidance["applied_guidance"]["grace_mechanism"] = "Extend understanding beyond strict merit-based calculations"
+            guidance["applied_guidance"]["divine_intent"] = "Align with higher purpose and collective well-being"
+            guidance["enhancement_notes"].append("Enhanced with spiritual technology principles")
+            
+        elif axiom_data.get("axiom_id") == "HumanDignityInviolable":
+            # Apply human dignity preservation
+            guidance["applied_guidance"]["dignity_preservation"] = "Ensure all actions preserve and enhance human dignity"
+            guidance["enhancement_notes"].append("Enhanced with human dignity considerations")
+            
+        elif axiom_data.get("axiom_id") == "CollectiveWellbeing":
+            # Apply collective well-being optimization
+            guidance["applied_guidance"]["collective_optimization"] = "Optimize for collective benefit while respecting individual rights"
+            guidance["enhancement_notes"].append("Enhanced with collective well-being considerations")
+            
+        elif axiom_data.get("axiom_id") == "TruthPursuitMoral":
+            # Apply truth-seeking commitment
+            guidance["applied_guidance"]["truth_commitment"] = "Maintain intellectual honesty and truth-seeking protocols"
+            guidance["enhancement_notes"].append("Enhanced with truth-seeking commitment")
+        
+        return guidance
+
+    def _enhance_with_axiom(self, axiom_data: Dict[str, Any], current_thought: str, action_inputs: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Enhance thought process and action inputs with axiomatic guidance.
+        
+        Args:
+            axiom_data: The axiom data to apply
+            current_thought: Current thought process
+            action_inputs: Proposed action inputs
+            
+        Returns:
+            Dict containing enhanced components
+        """
+        enhanced_thought = current_thought
+        enhanced_action_inputs = action_inputs.copy()
+        synergistic_effect = f"Enhanced with {axiom_data.get('name', 'axiom')} principles"
+        
+        # Apply specific enhancements based on axiom
+        if axiom_data.get("axiom_id") == "ResonantgratidsouL":
+            enhanced_thought += "\n\nAxiomatic Enhancement: Considering gratitude frequency, grace mechanism, and divine intent alignment in this analysis."
+            enhanced_action_inputs["axiomatic_guidance"] = "ResonantgratidsouL"
+            synergistic_effect = "Spiritual technology principles enhance ethical decision-making"
+            
+        elif axiom_data.get("axiom_id") == "HumanDignityInviolable":
+            enhanced_thought += "\n\nAxiomatic Enhancement: Ensuring all proposed actions preserve and enhance human dignity."
+            enhanced_action_inputs["dignity_check"] = True
+            synergistic_effect = "Human dignity preservation enhances ethical framework"
+            
+        elif axiom_data.get("axiom_id") == "CollectiveWellbeing":
+            enhanced_thought += "\n\nAxiomatic Enhancement: Optimizing for collective benefit while respecting individual rights."
+            enhanced_action_inputs["collective_impact_assessment"] = True
+            synergistic_effect = "Collective well-being optimization enhances strategic outcomes"
+            
+        elif axiom_data.get("axiom_id") == "TruthPursuitMoral":
+            enhanced_thought += "\n\nAxiomatic Enhancement: Maintaining intellectual honesty and truth-seeking protocols."
+            enhanced_action_inputs["truth_validation"] = True
+            synergistic_effect = "Truth-seeking commitment enhances analytical rigor"
+        
+        return {
+            "enhanced_thought": enhanced_thought,
+            "enhanced_action_inputs": enhanced_action_inputs,
+            "synergistic_effect": synergistic_effect
+        }
+    
+    # Optional callback that a hosting server can set to receive live SIRC events
+    event_callback = None  # type: ignore
+
+    def emit_sirc_event(self, phase: str, message: str, metadata: Dict[str, Any] = None) -> None:
+        """Emit SIRC (Synergistic Intent Resonance Cycle) events for UI visualization"""
+        sirc_event = {
+            "type": "sirc_event",
+            "phase": phase,
+            "message": message,
+            "timestamp": time.time(),
+            "metadata": metadata or {}
+        }
+        print(f"SIRC_JSON: {json.dumps(sirc_event)}")
+        print(f"🔄 SIRC {phase}: {message}")
+        sys.stdout.flush()
+
+        # Stream to external observer if provided
+        try:
+            if callable(getattr(self, 'event_callback', None)):
+                self.event_callback(sirc_event)
+        except Exception:
+            pass
+
+    def process_query(self, query: str, context: Optional[Dict[str, Any]] = None, model: str = None) -> CognitiveResponse:
+        """
+        Adapter method to make RISE compatible with the CognitiveIntegrationHub.
+        This method wraps the original run_rise_workflow.
+        """
+        start_time = time.time()
+        
+        try:
+            # The original entry point
+            rise_result = self.run_rise_workflow(problem_description=query, model=model)
+            
+            processing_time_ms = (time.time() - start_time) * 1000
+
+            final_content = "RISE workflow completed, but final strategy could not be extracted."
+            if rise_result and rise_result.get('final_strategy'):
+                 final_content = rise_result.get('final_strategy')
+
+            return CognitiveResponse(
+                content=final_content,
+                confidence=QuantumProbability(probability=0.95, evidence=["RISE workflow completed successfully."]),
+                processing_path="rise_escalation",
+                controller_used="RISE_Workflow",
+                metadata={"processing_time_ms": processing_time_ms, "session_id": rise_result.get("session_id")}
+            )
+        except Exception as e:
+            logger.error(f"RISE process_query failed: {e}", exc_info=True)
+            return CognitiveResponse(
+                content=f"RISE workflow failed: {e}",
+                confidence=QuantumProbability(probability=0.1, evidence=["RISE workflow failed."]),
+                processing_path="rise_escalation_failed",
+                controller_used="RISE_Workflow",
+                metadata={"error": str(e), "traceback": traceback.format_exc()}
+            )
+
+    def run_rise_workflow(self, problem_description: str, code_executor_timeout: int = 60, model: str = None) -> Dict[str, Any]:
+        """
+        Main entry point for RISE v2.0 workflow execution
+        
+        Args:
+            problem_description: The problem to be solved
+            
+        Returns:
+            Complete execution results including final strategy and SPR
+        """
+        rise_state = self._init_rise_state(problem_description)
+        session_id = rise_state.session_id
+        start_time = rise_state.phase_start_time
+
+        logger.info(f"🚀 Initiating RISE v2.0 workflow for session {session_id}")
+        logger.info(f"Problem: {problem_description[:100]}...")
+        self.active_sessions[session_id] = rise_state
+        
+        try:
+            # Phase A
+            self.emit_sirc_event("Phase_A_Start", "Knowledge Scaffolding & Dynamic Specialization", {"session_id": session_id})
+            phase_a_result = self._execute_phase_a(rise_state, code_executor_timeout, model=model, datetime_module=datetime)
+            rise_state.session_knowledge_base = phase_a_result.get('session_knowledge_base', {})
+            rise_state.specialized_agent = phase_a_result.get('specialized_agent')
+            if rise_state.specialized_agent is None:
+                raise RuntimeError("Phase A failed to produce a specialized_agent.")
+
+            # Phase B
+            self.emit_sirc_event("Phase_B_Start", "Fused Insight Generation", {"session_id": session_id})
+            phase_b_result = self._execute_phase_b(rise_state, code_executor_timeout, model=model, datetime_module=datetime)
+            rise_state.fused_strategic_dossier = phase_b_result.get('fused_strategic_dossier')
+            if rise_state.fused_strategic_dossier is None:
+                raise RuntimeError("Phase B failed to produce a fused_strategic_dossier.")
+
+            # Phase C
+            self.emit_sirc_event("Phase_C_Start", "Fused Strategy Generation & Vetting", {"session_id": session_id})
+            phase_c_result = self._execute_phase_c(rise_state, code_executor_timeout, model=model, datetime_module=datetime)
+            rise_state.final_strategy = phase_c_result.get('final_strategy')
+            if rise_state.final_strategy is None:
+                raise RuntimeError("Phase C failed to produce a final_strategy.")
+
+            # Phase D
+            self.emit_sirc_event("Phase_D_Start", "Utopian Vetting & Refinement", {"session_id": session_id})
+            phase_d_result = self._execute_phase_d(rise_state, code_executor_timeout, model=model, datetime_module=datetime)
+            rise_state.utopian_trust_packet = phase_d_result.get('utopian_trust_packet')
+            
+            # Final result assembly
+            end_time = datetime.utcnow()
+            total_duration = (end_time - start_time).total_seconds()
+            rise_state.execution_metrics['total_duration'] = total_duration
+            
+            final_results = {
+                'session_id': session_id,
+                'problem_description': problem_description,
+                'execution_status': 'completed',
+                'total_duration': total_duration,
+                'final_strategy': rise_state.final_strategy,
+                'utopian_trust_packet': rise_state.utopian_trust_packet,
+                'execution_metrics': rise_state.execution_metrics,
+            }
+            
+            logger.info(f"✅ RISE v2.0 workflow completed successfully for session {session_id}")
+            return final_results
+
+        except Exception as e:
+            logger.error(f"❌ RISE v2.0 workflow failed for session {session_id}: {str(e)}", exc_info=True)
+            return {
+                'session_id': session_id,
+                'execution_status': 'failed',
+                'error': str(e),
+                'current_phase': rise_state.current_phase,
+            }
+        finally:
+            if session_id in self.active_sessions:
+                del self.active_sessions[session_id]
+    
+    def _execute_phase_a(self, rise_state: RISEState, code_executor_timeout: int, model: str = None, datetime_module=None) -> Dict[str, Any]:
+        """
+        Execute Phase A: Knowledge Scaffolding & Dynamic Specialization with null handling
+        
+        This phase:
+        1. Acquires domain knowledge through web search and analysis
+        2. Forges a specialized cognitive agent (SCA) for the domain
+        3. Establishes the session knowledge base
+        
+        Args:
+            rise_state: Current RISE execution state
+            
+        Returns:
+            Phase A results including session knowledge base and specialized agent
+        """
+        phase_start = datetime_module.utcnow()
+        rise_state.current_phase = "A"
+        rise_state.phase_start_time = phase_start
+        
+        logger.info("🔍 Phase A: Acquiring domain knowledge and forging specialist agent (Enhanced)")
+        
+        # Emit rich VCD phase start event (synchronous for now)
+        try:
+            from datetime import datetime
+            from vcd_bridge import VCDBridge
+            vcd_bridge = VCDBridge()
+            logger.info("VCD Phase A start event prepared")
+        except Exception as e:
+            logger.warning(f"Failed to prepare VCD phase start: {e}")
+        
+        try:
+            logger.info("Executing knowledge scaffolding workflow...")
+            knowledge_scaffolding_result = self.workflow_engine.run_workflow(
+                workflow_name="knowledge_scaffolding.json",
+                initial_context={
+                    "problem_description": rise_state.problem_description,
+                    "session_id": rise_state.session_id,
+                    "phase": "A"
+                },
+                timeout=code_executor_timeout,
+                model=model # Pass model to the workflow engine
+            )
+            logger.info("✅ Knowledge scaffolding workflow completed successfully")
+            
+            # Ensuref we have a valid session knowledge base
+            session_kb = knowledge_scaffolding_result.get('session_knowledge_base', {})
+            if not session_kb:
+                session_kb = {
+                    "domain": "Strategic Analysis",
+                    "search_results": [],
+                    "search_status": "fallback",
+                    "fallback_content": "Using general strategic analysis knowledge"
+                }
+            
+            # Execute metamorphosis protocol to forge specialist agent
+            metamorphosis_result = None
+            try:
+                metamorphosis_result = self.workflow_engine.run_workflow(
+                    workflow_name="metamorphosis_protocol.json",
+                    initial_context={
+                        "problem_description": rise_state.problem_description,
+                        "knowledge_base": rise_state.session_knowledge_base,
+                        "session_id": rise_state.session_id
+                    },
+                    timeout=code_executor_timeout,
+                    model=model # Pass model to the workflow engine
+                )
+                logger.info("✅ Metamorphosis protocol completed successfully")
+            except Exception as e:
+                logger.warning(f"⚠️ Metamorphosis protocol failed: {e}")
+                
+                # Create fallback specialist agent
+                domain = session_kb.get('domain', 'Strategic Analysis')
+                fallback_agent = {
+                    "agent_profile": {
+                        "name": f"{domain} Specialist Agent",
+                        "expertise": [domain, "Strategic Analysis", "Problem Solving"],
+                        "background": f"Specialized agent for {domain} with strategic analysis capabilities",
+                        "analytical_frameworks": ["SWOT Analysis", "Systems Thinking", "Risk Assessment"],
+                        "strategic_patterns": ["Holistic Analysis", "Multi-perspective Evaluation"],
+                        "implementation_approach": "Iterative analysis with continuous refinement",
+                        "success_metrics": ["comprehensive_coverage", "actionable_insights", "risk_mitigation"]
+                    },
+                    "capabilities": {
+                        "domain_knowledge": domain,
+                        "analytical_skills": ["critical_thinking", "systems_analysis", "risk_assessment"],
+                        "strategic_thinking": ["holistic_analysis", "multi-perspective_evaluation"],
+                        "implementation_skills": ["iterative_development", "continuous_improvement"]
+                    },
+                    "metadata": {
+                        "created_at": datetime.utcnow().isoformat(),
+                        "source": "fallback_generation",
+                        "confidence": 0.7
+                    }
+                }
+                
+                metamorphosis_result = {
+                    "specialized_agent": fallback_agent,
+                    "metrics": {"fallback_used": True, "error": str(e)}
+                }
+            
+            # Ensure we have a valid specialized agent
+            specialized_agent = metamorphosis_result.get('specialized_agent')
+            if not specialized_agent:
+                domain = session_kb.get('domain', 'Strategic Analysis')
+                specialized_agent = {
+                    "agent_profile": {
+                        "name": f"{domain} Specialist Agent",
+                        "expertise": [domain, "Strategic Analysis"],
+                        "background": f"Fallback agent for {domain}",
+                        "analytical_frameworks": ["SWOT Analysis", "Systems Thinking"],
+                        "strategic_patterns": ["Holistic Analysis"],
+                        "implementation_approach": "Iterative analysis",
+                        "success_metrics": ["comprehensive_coverage", "actionable_insights"]
+                    }
+                }
+            
+            phase_end = datetime.utcnow()
+            phase_duration = (phase_end - phase_start).total_seconds()
+            rise_state.execution_metrics['phase_durations']['A'] = phase_duration
+            
+            result = {
+                'session_knowledge_base': session_kb,
+                'specialized_agent': specialized_agent,
+                'knowledge_acquisition_metrics': knowledge_scaffolding_result.get('metrics', {}),
+                'metamorphosis_metrics': metamorphosis_result.get('metrics', {}),
+                'phase_duration': phase_duration,
+                'status': 'completed',
+                'fallback_used': knowledge_scaffolding_result.get('metrics', {}).get('fallback_used', False) or 
+                               metamorphosis_result.get('metrics', {}).get('fallback_used', False)
+            }
+            
+            logger.info(f"✅ Phase A completed in {phase_duration:.2f}s")
+            logger.info(f"Knowledge base size: {len(session_kb)} entries")
+            logger.info(f"Specialist agent forged: {specialized_agent is not None}")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"❌ Phase A failed completely: {str(e)}")
+            raise
+    
+    def _execute_phase_b(self, rise_state: RISEState, code_executor_timeout: int, model: str = None, datetime_module=None) -> Dict[str, Any]:
+        """
+        Execute Phase B: Fused Insight Generation with Parallel Pathway Integrity
+        """
+        phase_start = datetime_module.utcnow()
+        rise_state.current_phase = "B"
+        rise_state.phase_start_time = phase_start
+        
+        logger.info("🧠 Phase B: Generating fused insights with Parallel Pathway Integrity Check")
+        
+        try:
+            # Execute the newly designed strategy fusion workflow
+            fusion_result = self.workflow_engine.run_workflow(
+                "strategy_fusion.json",
+                {
+                    "problem_description": rise_state.problem_description,
+                    "session_knowledge_base": rise_state.session_knowledge_base,
+                    "specialized_agent": rise_state.specialized_agent,
+                    "session_id": rise_state.session_id,
+                    "phase": "B"
+                },
+                timeout=code_executor_timeout,
+                model=model # Pass model to the workflow engine
+            )
+
+            # *** NEW INTEGRITY CHECK LOGIC ***
+            # Check if the workflow's terminal task was the failure handler
+            task_statuses = fusion_result.get("task_statuses", {})
+            if task_statuses.get("handle_synthesis_failure") == "completed":
+                failure_output = fusion_result.get("handle_synthesis_failure", {}).get("output", "Synthesis failed due to lack of successful pathways.")
+                logger.error(f"CRITICAL: Phase B aborted by integrity phasegate. Reason: {failure_output}")
+                raise RuntimeError(f"Phase B failed integrity check: {failure_output}")
+
+            # Check for dossier existence as a final safeguard
+            logger.info(f"🔍 Phase B fusion_result keys: {list(fusion_result.keys())}")
+            logger.info(f"🔍 Phase B fusion_result structure: {fusion_result}")
+            synthesize_task_result = fusion_result.get("synthesize_fused_dossier", {})
+            logger.info(f"🔍 synthesize_task_result: {synthesize_task_result}")
+            if not synthesize_task_result:
+                raise RuntimeError("Phase B completed, but the 'synthesize_fused_dossier' task did not produce an output. Synthesis failed.")
+            
+            # Extract the generated text from the task result
+            if isinstance(synthesize_task_result, dict):
+                # Check for the result structure from the workflow engine
+                if "result" in synthesize_task_result and "generated_text" in synthesize_task_result["result"]:
+                    fused_dossier = synthesize_task_result["result"]["generated_text"]
+                elif "generated_text" in synthesize_task_result:
+                    fused_dossier = synthesize_task_result["generated_text"]
+                else:
+                    # Fallback: try to extract any text content
+                    fused_dossier = str(synthesize_task_result.get("result", synthesize_task_result))
+            else:
+                fused_dossier = str(synthesize_task_result)
+            
+            if not fused_dossier or fused_dossier.strip() == "":
+                raise RuntimeError("Phase B completed, but the 'synthesize_fused_dossier' task did not produce meaningful output. Synthesis failed.")
+            
+            phase_end = datetime.utcnow()
+            phase_duration = (phase_end - phase_start).total_seconds()
+            rise_state.execution_metrics['phase_durations']['B'] = phase_duration
+            
+            result = {
+                'advanced_insights': fusion_result.get('advanced_insights', []), # This part may need adjustment based on how insights are collected
+                'specialist_consultation': fusion_result.get('pathway_specialist_consultation'),
+                'fused_strategic_dossier': fused_dossier,
+                'fusion_metrics': fusion_result.get('metrics', {}),
+                'phase_duration': phase_duration,
+                'status': 'completed'
+            }
+            
+            logger.info(f"✅ Phase B completed in {phase_duration:.2f}s")
+            logger.info(f"Strategic dossier created successfully.")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"❌ Phase B failed: {str(e)}")
+            raise
+    
+    def _execute_phase_c(self, rise_state: RISEState, code_executor_timeout: int, model: str = None, datetime_module=None) -> Dict[str, Any]:
+        """
+        Execute Phase C: Fused Strategy Generation & Finalization
+        
+        This phase:
+        1. Synthesizes all insights into a final strategy
+        2. Subjects strategy to HighStakesVetting cascade
+        3. Distills successful process into new SPR for future use
+        
+        Args:
+            rise_state: Current RISE execution state
+            
+        Returns:
+            Phase C results including final strategy, vetting dossier, and SPR definition
+        """
+        phase_start = datetime_module.utcnow()
+        rise_state.current_phase = "C"
+        rise_state.phase_start_time = phase_start
+        
+        logger.info("🎯 Phase C: Finalizing strategy with HighStakesVetting")
+        
+        try:
+            # Execute high stakes vetting workflow
+            vetting_result = self.workflow_engine.run_workflow(
+                "high_stakes_vetting.json",
+                {
+                    "strategy_dossier": rise_state.fused_strategic_dossier,
+                    "problem_description": rise_state.problem_description,
+                    "session_id": rise_state.session_id,
+                    "phase": "C"
+                },
+                timeout=code_executor_timeout,
+                model=model # Pass model to the workflow engine
+            )
+            
+            # Execute SPR distillation workflow
+            spr_result = self.workflow_engine.run_workflow(
+                "distill_spr.json",
+                {
+                    "thought_trail": self.thought_trail.get_recent_entries(10) if self.thought_trail else [],
+                    "final_strategy": vetting_result.get('final_strategy'),
+                    "session_id": rise_state.session_id,
+                    "problem_description": rise_state.problem_description
+                },
+                timeout=code_executor_timeout,
+                model=model # Pass model to the workflow engine
+            )
+            
+            phase_end = datetime.utcnow()
+            phase_duration = (phase_end - phase_start).total_seconds()
+            rise_state.execution_metrics['phase_durations']['C'] = phase_duration
+            
+            result = {
+                'vetting_dossier': vetting_result.get('vetting_dossier'),
+                'final_strategy': vetting_result.get('final_strategy'),
+                'spr_definition': spr_result.get('spr_definition'),
+                'vetting_metrics': vetting_result.get('metrics', {}),
+                'spr_metrics': spr_result.get('metrics', {}),
+                'phase_duration': phase_duration,
+                'status': 'completed'
+            }
+            
+            logger.info(f"✅ Phase C completed in {phase_duration:.2f}s")
+            logger.info(f"Strategy vetted: {result['final_strategy'] is not None}")
+            logger.info(f"SPR distilled: {result['spr_definition'] is not None}")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"❌ Phase C failed: {str(e)}")
+            raise
+    
+    def _execute_phase_d(self, rise_state: RISEState, code_executor_timeout: int, model: str = None, datetime_module=None) -> Dict[str, Any]:
+        """
+        Execute Phase D: Utopian Vetting & Refinement (Corrected Implementation)
+        
+        This phase, as per the directive, should mirror the structure of Phase C,
+        running the high_stakes_vetting and distill_spr workflows on the
+        final strategy to produce the definitive, vetted output.
+
+        Args:
+            rise_state: Current RISE execution state
+            
+        Returns:
+            Phase D results including final vetted strategy and SPR definition.
+        """
+        phase_start = datetime_module.utcnow()
+        rise_state.current_phase = "D"
+        rise_state.phase_start_time = phase_start
+        
+        logger.info("🎯 Phase D: Final Vetting & Crystallization")
+        
+        try:
+            # Execute high stakes vetting workflow on the final strategy from Phase C
+            vetting_result = self.workflow_engine.run_workflow(
+                "high_stakes_vetting.json",
+                {
+                    "strategy_dossier": rise_state.final_strategy, # Vet the final strategy
+                    "problem_description": rise_state.problem_description,
+                    "session_id": rise_state.session_id,
+                    "phase": "D"
+                },
+                timeout=code_executor_timeout,
+                model=model # Pass model to the workflow engine
+            )
+
+            # --- CRITICAL VALIDATION ---
+            final_vetted_strategy = vetting_result.get('final_strategy')
+            if final_vetted_strategy is None:
+                raise RuntimeError("Phase D vetting failed to produce a final_strategy.")
+
+            # Execute SPR distillation workflow on the successfully vetted strategy
+            spr_result = self.workflow_engine.run_workflow(
+                "distill_spr.json",
+                {
+                    "thought_trail": self.thought_trail.get_recent_entries(50) if self.thought_trail else [],
+                    "final_strategy": final_vetted_strategy,
+                    "session_id": rise_state.session_id,
+                    "problem_description": rise_state.problem_description
+                },
+                timeout=code_executor_timeout,
+                model=model # Pass model to the workflow engine
+            )
+            
+            phase_end = datetime.utcnow()
+            phase_duration = (phase_end - phase_start).total_seconds()
+            rise_state.execution_metrics['phase_durations']['D'] = phase_duration
+            
+            result = {
+                'vetting_dossier': vetting_result.get('vetting_dossier'),
+                'final_strategy': final_vetted_strategy,
+                'spr_definition': spr_result.get('spr_definition'),
+                'vetting_metrics': vetting_result.get('metrics', {}),
+                'spr_metrics': spr_result.get('metrics', {}),
+                'phase_duration': phase_duration,
+                'status': 'completed'
+            }
+            
+            logger.info(f"✅ Phase D completed in {phase_duration:.2f}s")
+            logger.info(f"Final strategy confirmed: {result['final_strategy'] is not None}")
+            logger.info(f"Final SPR distilled: {result['spr_definition'] is not None}")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"❌ Phase D failed: {str(e)}")
+            raise
+    
+    def get_execution_status(self, session_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get the current execution status for a session
+        
+        Args:
+            session_id: The session ID to check
+            
+        Returns:
+            Current execution status or None if session not found
+        """
+        if session_id in self.active_sessions:
+            rise_state = self.active_sessions[session_id]
+            return {
+                'session_id': session_id,
+                'current_phase': rise_state.current_phase,
+                'phase_name': self.phases.get(rise_state.current_phase, 'Unknown'),
+                'phase_start_time': rise_state.phase_start_time.isoformat(),
+                'problem_description': rise_state.problem_description,
+                'status': 'active'
+            }
+        return None
+    
+    def get_execution_history(self, limit: int = 10) -> List[Dict[str, Any]]:
+        """
+        Get recent execution history
+        
+        Args:
+            limit: Maximum number of recent executions to return
+            
+        Returns:
+            List of recent execution records
+        """
+        return self.execution_history[-limit:] if self.execution_history else []
+    
+    def get_system_diagnostics(self) -> Dict[str, Any]:
+        """
+        Get comprehensive system diagnostics
+        
+        Returns:
+            System diagnostics including active sessions, history, and metrics
+        """
+        return {
+            'active_sessions': len(self.active_sessions),
+            'total_executions': len(self.execution_history),
+            'success_rate': self._calculate_success_rate(),
+            'average_duration': self._calculate_average_duration(),
+            'recent_executions': self.get_execution_history(5),
+            'workflow_engine_status': self.workflow_engine.get_resonance_dashboard()
+        }
+    
+    def _calculate_success_rate(self) -> float:
+        """Calculate overall success rate from execution history"""
+        if not self.execution_history:
+            return 0.0
+        
+        successful = sum(1 for record in self.execution_history if record.get('success', False))
+        return successful / len(self.execution_history)
+    
+    def _calculate_average_duration(self) -> float:
+        """Calculate average execution duration"""
+        if not self.execution_history:
+            return 0.0
+        
+        durations = [record.get('duration', 0) for record in self.execution_history]
+        return sum(durations) / len(durations) 

@@ -1,0 +1,94 @@
+{
+  "name": "Comparative Future Scenario Workflow (v3.0)",
+  "description": "Simulates/Predicts two future scenarios (A & B), converts results to state vectors, compares using CFP, and reports.",
+  "version": "3.0",
+  "tasks": {
+    "start_comparison": {
+      "description": "Start comparative scenario analysis.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Starting Comparative Future Scenario Analysis: Comparing Scenario A vs Scenario B."
+      },
+      "dependencies": []
+    },
+    "simulate_scenario_a": {
+      "description": "Run simulation/prediction for Scenario A.",
+      "action_type": "{{ initial_context.scenario_a.action_type }}",
+      "inputs": "{{ initial_context.scenario_a.inputs }}",
+      "outputs": {"results_a": "dict", "reflection": "dict"},
+      "dependencies": ["start_comparison"]
+    },
+    "simulate_scenario_b": {
+      "description": "Run simulation/prediction for Scenario B.",
+      "action_type": "{{ initial_context.scenario_b.action_type }}",
+      "inputs": "{{ initial_context.scenario_b.inputs }}",
+      "outputs": {"results_b": "dict", "reflection": "dict"},
+      "dependencies": ["start_comparison"]
+    },
+    "convert_scenario_a_to_state": {
+      "description": "Convert Scenario A results to state vector.",
+      "action_type": "{{ initial_context.scenario_a.conversion_action_type }}",
+      "inputs": {
+        "operation": "convert_to_state",
+        "{{ 'prediction_result' if initial_context.scenario_a.action_type == 'run_prediction' else 'abm_result' }}": "{{ simulate_scenario_a }}",
+        "representation_type": "{{ initial_context.scenario_a.representation_type }}"
+      },
+      "outputs": {"state_vector": "list", "dimensions": "int", "error": "string", "reflection": "dict"},
+      "dependencies": ["simulate_scenario_a"],
+      "condition": "{{ simulate_scenario_a.reflection.status == 'Success' }}"
+    },
+    "convert_scenario_b_to_state": {
+      "description": "Convert Scenario B results to state vector.",
+      "action_type": "{{ initial_context.scenario_b.conversion_action_type }}",
+      "inputs": {
+        "operation": "convert_to_state",
+        "{{ 'prediction_result' if initial_context.scenario_b.action_type == 'run_prediction' else 'abm_result' }}": "{{ simulate_scenario_b }}",
+        "representation_type": "{{ initial_context.scenario_b.representation_type }}"
+      },
+      "outputs": {"state_vector": "list", "dimensions": "int", "error": "string", "reflection": "dict"},
+      "dependencies": ["simulate_scenario_b"],
+      "condition": "{{ simulate_scenario_b.reflection.status == 'Success' }}"
+    },
+    "compare_scenario_states_cfp": {
+      "description": "Compare the state vectors of Scenario A and B using CFP.",
+      "action_type": "run_cfp",
+      "inputs": {
+        "system_a_config": { "name": "ScenarioA", "quantum_state": "{{ convert_scenario_a_to_state.state_vector }}" },
+        "system_b_config": { "name": "ScenarioB", "quantum_state": "{{ convert_scenario_b_to_state.state_vector }}" },
+        "observable": "{{ initial_context.cfp_observable | default('position') }}",
+        "time_horizon": 0.1,
+        "evolution_model": "placeholder"
+      },
+      "outputs": {"quantum_flux_difference": "float", "entanglement_correlation_MI": "float", "error": "string", "reflection": "dict"},
+      "dependencies": ["convert_scenario_a_to_state", "convert_scenario_b_to_state"],
+      "condition": "{{ convert_scenario_a_to_state.reflection.status == 'Success' and convert_scenario_b_to_state.reflection.status == 'Success' }}"
+    },
+    "display_comparison_results": {
+      "description": "Display the final comparison results including IAR status.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": {
+          "scenario_a_simulation": {
+            "action": "{{ initial_context.scenario_a.action_type }}",
+            "status": "{{ simulate_scenario_a.reflection.status if 'simulate_scenario_a' in context else 'Skipped' }}",
+            "confidence": "{{ simulate_scenario_a.reflection.confidence if 'simulate_scenario_a' in context else 'N/A' }}"
+          },
+          "scenario_b_simulation": {
+            "action": "{{ initial_context.scenario_b.action_type }}",
+            "status": "{{ simulate_scenario_b.reflection.status if 'simulate_scenario_b' in context else 'Skipped' }}",
+            "confidence": "{{ simulate_scenario_b.reflection.confidence if 'simulate_scenario_b' in context else 'N/A' }}"
+          },
+          "cfp_comparison": {
+            "status": "{{ compare_scenario_states_cfp.reflection.status if 'compare_scenario_states_cfp' in context else 'Skipped' }}",
+            "confidence": "{{ compare_scenario_states_cfp.reflection.confidence if 'compare_scenario_states_cfp' in context else 'N/A' }}",
+            "quantum_flux_difference": "{{ compare_scenario_states_cfp.quantum_flux_difference if 'compare_scenario_states_cfp' in context else 'N/A' }}",
+            "mutual_information": "{{ compare_scenario_states_cfp.entanglement_correlation_MI if 'compare_scenario_states_cfp' in context else 'N/A' }}",
+            "error": "{{ compare_scenario_states_cfp.error if 'compare_scenario_states_cfp' in context else None }}"
+          }
+        },
+        "format": "json"
+      },
+      "dependencies": ["compare_scenario_states_cfp"]
+    }
+  }
+} 

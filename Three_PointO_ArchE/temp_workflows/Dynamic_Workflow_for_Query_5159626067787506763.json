@@ -1,0 +1,13 @@
+{
+  "name": "Dynamic_Workflow_for_Query_5159626067787506763",
+  "tasks": {
+    "D_get_system_info": {
+      "action_type": "execute_code",
+      "description": "Executes a python script to get the current date, time, and location.",
+      "inputs": {
+        "script": "import datetime; import geocoder; g = geocoder.ip('me'); print(f'Current Date and Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}, Location: {g.city}, {g.country}')"
+      }
+    }
+  },
+  "dependencies": {}
+}

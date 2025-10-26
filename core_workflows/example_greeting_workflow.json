@@ -1,0 +1,32 @@
+{
+    "workflow_name": "Example Greeting Workflow",
+    "version": "1.0",
+    "description": "A simple workflow to demonstrate taking a name from the initial context, generating a greeting with an LLM, and returning the result.",
+    "input_parameters": {
+        "user_name": {
+            "type": "string",
+            "description": "The name of the user to greet."
+        }
+    },
+    "tasks": {
+        "generate_greeting_message": {
+            "action_type": "generate_text_llm",
+            "description": "Uses an LLM to generate a personalized greeting.",
+            "inputs": {
+                "prompt": "Create a brief, inspiring welcome message for a user named {{ context.user_name }}. Address them directly. The tone should be resonant with the ArchE system's purpose of empowerment and cognitive enhancement.",
+                "model_settings": {
+                    "temperature": 0.7,
+                    "max_tokens": 150
+                }
+            },
+            "output_variable": "greeting_result"
+        }
+    },
+    "output": {
+        "final_greeting": {
+            "value": "{{ generate_greeting_message.result.generated_text }}",
+            "description": "The final, personalized greeting message."
+        }
+    }
+}
+

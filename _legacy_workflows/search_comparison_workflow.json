@@ -1,0 +1,81 @@
+{"name": "Search_Comparison_Workflow_v1_0",
+"description": "Workflow to compare external browser automation search results with internal Cursor LLM AI agent search results for R&D insights.",
+"version": "1.0",
+"tasks": {
+  "initiate_search_comparison": {
+    "description": "Log the start of the search comparison process.",
+    "action_type": "display_output",
+    "inputs": {
+      "content": "--- Search Comparison Workflow (v1.0) Initiated for Wearable Sensor Technology for Sexual Stimulation ---"
+    },
+    "dependencies": []
+  },
+  "perform_external_search": {
+    "description": "Perform an external search using web search tools to gather publicly available information.",
+    "action_type": "execute_web_task",
+    "inputs": {
+      "target_site": "google_search", "task_name": "search", "query_params": { "query": "wearable sensor technology for sexual stimulation",
+      "explanation": "To gather external context and market trends on wearable sensor technology for sexual stimulation.",
+      "provider": "puppeteer_nodejs"
+    },
+    "outputs": {
+      "results": "list",
+      "external_summary": "string",
+      "stdout": "string",
+      "reflection": "dict"
+    },
+    "dependencies": ["initiate_search_comparison"]
+  },
+  "perform_internal_search": {
+    "description": "Perform an internal search within the project codebase to gather proprietary information.",
+    "action_type": "search_codebase",
+    "inputs": {
+      "target_site": "google_search", "task_name": "search", "query_params": { "query": "wearable sensor technology for sexual stimulation",
+      "explanation": "To find internal project information, research, and proprietary data related to wearable sensor technology for sexual stimulation."
+    },
+    "outputs": {
+      "search_results": "list",
+      "summary": "string",
+      "stdout": "string",
+      "reflection": "dict"
+    },
+    "dependencies": ["initiate_search_comparison"]
+  },
+  "compare_search_results": {
+    "description": "Analyze and compare external and internal search results to identify insights and opportunities.",
+    "action_type": "execute_code",
+    "inputs": {
+      "language": "python",
+      "input_data": {
+         "external_api_results": "{{ perform_external_search.results }}",
+         "external_search_reflection": "{{ perform_external_search.reflection }}",
+         "internal_codebase_results": "{{ perform_internal_search.search_results }}",
+         "internal_search_reflection": "{{ perform_internal_search.reflection }}"
+      },
+      "code": "import sys\\nimport json\\n\\n# Initialize IAR-related variables with defaults\\nexternal_confidence = 'N/A'\\nexternal_status = 'N/A'\\nexternal_issues = []\\ninternal_confidence = 'N/A'\\ninternal_status = 'N/A'\\ninternal_issues = []\\n\\ninput_json_str = sys.stdin.read()\\ndata = json.loads(input_json_str)\\n\\nexternal_data = data.get('external_api_results', [])\\nexternal_search_reflection_data = data.get('external_search_reflection', {})\\n# Handle if reflection is passed as a stringified JSON\\nif isinstance(external_search_reflection_data, str) and external_search_reflection_data:\\n    try:\\n        external_search_reflection_data = json.loads(external_search_reflection_data)\\n    except json.JSONDecodeError:\\n        external_search_reflection_data = {}\\nelif not isinstance(external_search_reflection_data, dict):\\n     external_search_reflection_data = {}\\n\\ninternal_codebase_results = data.get('internal_codebase_results', [])\\ninternal_search_reflection_data = data.get('internal_search_reflection', {})\\n# Handle if reflection is passed as a stringified JSON\\nif isinstance(internal_search_reflection_data, str) and internal_search_reflection_data:\\n    try:\\n        internal_search_reflection_data = json.loads(internal_search_reflection_data)\\n    except json.JSONDecodeError:\\n        internal_search_reflection_data = {}\\nelif not isinstance(internal_search_reflection_data, dict):\\n    internal_search_reflection_data = {}\\n\\n# Extract IAR details\\nexternal_confidence = external_search_reflection_data.get('confidence', 'N/A')\\nexternal_status = external_search_reflection_data.get('status', 'N/A')\\nexternal_issues = external_search_reflection_data.get('potential_issues', [])\\nif external_issues is None: external_issues = []\\n\\ninternal_confidence = internal_search_reflection_data.get('confidence', 'N/A')\\ninternal_status = internal_search_reflection_data.get('status', 'N/A')\\ninternal_issues = internal_search_reflection_data.get('potential_issues', [])\\nif internal_issues is None: internal_issues = []\\n\\ninternal_results_count = len(internal_codebase_results) if internal_codebase_results is not None else 0\\nexternal_results_count = len(external_data) if external_data is not None else 0\\n\\nexternal_summary_text = f'External web search returned {external_results_count} items.'\\ninternal_summary_text = f'Internal codebase search returned {internal_results_count} items.'\\n\\ncomparison_notes = []\\nif external_results_count > 0 and internal_results_count > 0:\\n    comparison_notes.append(f'Both external ({external_results_count}) and internal ({internal_results_count}) sources have relevant data.')\\nelif external_results_count > 0:\\n    comparison_notes.append(f'External sources ({external_results_count}) found. No internal codebase results.')\\nelif internal_results_count > 0:\\n    comparison_notes.append(f'Internal codebase results ({internal_results_count}) found. No external web results.')\\nelse:\\n    comparison_notes.append(\\\"Neither external web search nor internal codebase search yielded results.\\\")\\n\\nif external_results_count > internal_results_count:\\n    comparison_notes.append('External knowledge base appears broader or more populated currently.')\\nelif internal_results_count > external_results_count:\\n    comparison_notes.append('Internal codebase has more direct hits; may indicate focused internal R&D.')\\nelse:\\n    if external_results_count > 0 : comparison_notes.append('Comparable number of results from external and internal searches.')\\n\\n# Add IAR-informed notes\\niar_notes = []\\niar_notes.append(f\\\"External Search IAR: Status='{external_status}', Confidence={external_confidence}.\\\")\\nif external_issues:\\n    iar_notes.append(f\\\"External Search Potential Issues: {'; '.join(map(str,external_issues))}.\\\")\\nif isinstance(external_confidence, (float, int)) and external_confidence < 0.7:\\n    iar_notes.append(\\\"Note: External search confidence is moderate/low, results should be cross-verified.\\\")\\n\\niar_notes.append(f\\\"Internal Search (Simulated) IAR: Status='{internal_status}', Confidence={internal_confidence}.\\\")\\nif internal_issues:\\n    iar_notes.append(f\\\"Internal Search Potential Issues: {'; '.join(map(str,internal_issues))}.\\\")\\niar_notes.append(\\\"Note: Internal search results are simulated (placeholder) and have inherently low confidence.\\\")\\n\\n# Combine all notes\\nall_notes = comparison_notes + iar_notes\\ninsight_text = ' '.join(all_notes)\\nfull_comparison_summary = f'{external_summary_text} {internal_summary_text} Comparison Insight & IAR Assessment: {insight_text}'\\n\\nprint(full_comparison_summary)\\n"
+    },
+    "outputs": {
+      "comparison_summary": "string",
+      "external_count": "int",
+      "internal_count": "int",
+      "actionable_insights": "list",
+      "stdout": "string",
+      "reflection": "dict"
+    },
+    "dependencies": ["perform_external_search", "perform_internal_search"]
+  },
+  "feed_into_rd_process": {
+    "description": "Generate a report or directive for the next R&D process based on comparison insights.",
+    "action_type": "display_output",
+    "inputs": {
+      "content": {
+        "comparison_summary": "{{ compare_search_results.stdout | default('Comparison did not produce stdout.') }}",
+        "actionable_insights": "{{ compare_search_results.actionable_insights | default([]) }}",
+        "next_steps_message": "Based on the comparison, the next R&D process should prioritize the identified insights. Standing by for Keyholder directive on implementation."
+      },
+      "format": "json"
+    },
+    "dependencies": ["compare_search_results"]
+  }
+}
+}

@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_a087933aaf664171a8d30736035d5161.jsonl",
+  "size_bytes": 22180,
+  "modified": "2025-08-05T07:18:50.773194",
+  "workflow_name": "Autopoietic Genesis Workflow v4",
+  "run_id": "run_a087933aaf664171a8d30736035d5161",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 3,
+  "duration_sec": 16.5375,
+  "status": "unknown",
+  "line_count": 3
+}

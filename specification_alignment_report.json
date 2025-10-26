@@ -1,0 +1,2072 @@
+{
+  "metadata": {
+    "analysis_date": "2025-09-22T21:52:02.444433",
+    "total_specs": 47,
+    "total_code_files": 102,
+    "principle": "As Above, So Below - Guardian Points Mandate"
+  },
+  "specifications": {
+    "llm_tool": {
+      "title": "",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 8867,
+      "line_count": 149,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "mastermind": {
+      "title": "from mastermind_ai_v2_9.adaptive_cognitive_orchestrator import ACOrchestrator",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 9679,
+      "line_count": 175,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "perception_engine": {
+      "title": "The Digital Archaeologist: A Chronicle of the Enhanced Perception Engine",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 4717,
+      "line_count": 62,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "playbook_orchestrator": {
+      "title": "Import ArchE components",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 17690,
+      "line_count": 399,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "predictive_modeling_tool": {
+      "title": "The Oracle: A Chronicle of the Predictive Modeling Tool",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 11934,
+      "line_count": 130,
+      "has_implementation": false,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "prompt_manager": {
+      "title": "Use Jinja2 template with file-based variables",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 11911,
+      "line_count": 228,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "protocol_event_schema": {
+      "title": "Living Specification: Protocol & VCD Event Schema",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 2450,
+      "line_count": 57,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "quantum_utils": {
+      "title": "Run a quantum simulation",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 15060,
+      "line_count": 468,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "rise_orchestrator": {
+      "title": "Get execution status for a specific session",
+      "overview": "",
+      "status": "{status['status']}\")",
+      "file_size": 14297,
+      "line_count": 241,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "scalable_framework": {
+      "title": "Start with status monitoring",
+      "overview": "",
+      "status": "{framework.status}\")",
+      "file_size": 15273,
+      "line_count": 366,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "spr_manager": {
+      "title": "In Three_PointO_ArchE/spr_manager.py",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 6200,
+      "line_count": 101,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "spr_resonant_gratid_soul": {
+      "title": "Project coherent intent",
+      "overview": "",
+      "status": "{projection_result['projection_status']}\")",
+      "file_size": 28710,
+      "line_count": 809,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "system_version_v4": {
+      "title": "Commit evolution",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 16191,
+      "line_count": 291,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": false
+    },
+    "temporal_reasoning_engine": {
+      "title": "Access insights",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 26604,
+      "line_count": 749,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "thought_trail": {
+      "title": "Thought Trail - Living Specification",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 8475,
+      "line_count": 100,
+      "has_implementation": false,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "token_cache_manager": {
+      "title": "\"machine learning\" and \"healthcare\" separately",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 12672,
+      "line_count": 229,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "tsp_solver": {
+      "title": "Solve with real-world addresses",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 9403,
+      "line_count": 182,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "utils": {
+      "title": "Utilities - Living Specification",
+      "overview": "",
+      "status": "ExecutionStatus,",
+      "file_size": 5572,
+      "line_count": 100,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "vetting_agent": {
+      "title": "Perform scope limitation assessment",
+      "overview": "",
+      "status": "{scope_assessment['scope_status']}\")",
+      "file_size": 39738,
+      "line_count": 990,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": false
+    },
+    "visual_cognitive_debugger_ui": {
+      "title": "Living Specification: Visual Cognitive Debugger (VCD) UI",
+      "overview": "",
+      "status": "boolean; docs_updated?",
+      "file_size": 3663,
+      "line_count": 58,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": false
+    },
+    "websocket_bridge": {
+      "title": "Living Specification: WebSocket Bridge for VCD",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 1959,
+      "line_count": 43,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": false
+    },
+    "web_search_tool": {
+      "title": "- Empty results",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 11717,
+      "line_count": 359,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "workflow_engine": {
+      "title": "The Process Architect: A Chronicle of the IAR-Compliant Workflow Engine (v3.1)",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 8723,
+      "line_count": 189,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "abm_dsl_engine": {
+      "title": "Example of how to extend the behavior system",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 16734,
+      "line_count": 320,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "action_context": {
+      "title": "Use the analysis function",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 12852,
+      "line_count": 271,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "action_registry": {
+      "title": "... and so on for all other core functions.",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 6248,
+      "line_count": 100,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "adaptive_cognitive_orchestrator": {
+      "title": "Generate controller for detected domain",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 39763,
+      "line_count": 974,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "agent_based_modeling_tool": {
+      "title": "When Mesa is not available, the tool automatically falls back to simulation mode",
+      "overview": "",
+      "status": "{reflection.get('status')}\")",
+      "file_size": 15526,
+      "line_count": 352,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "autonomous_orchestrator": {
+      "title": "Harvest and dispatch work",
+      "overview": "",
+      "status": "WorkItemStatus",
+      "file_size": 31401,
+      "line_count": 924,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "autopoietic_genesis_protocol": {
+      "title": "The Phoenix Protocol: A Chronicle of the Autopoietic System Genesis Workflow",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 7540,
+      "line_count": 120,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": false
+    },
+    "causal_inference_tool": {
+      "title": "from cdt import BivariateGranger",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 7003,
+      "line_count": 102,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "cfp_evolution": {
+      "title": "Insight + Graph: Balanced flux reveals knowledge-weaving synergies.",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 7424,
+      "line_count": 115,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": false
+    },
+    "cfp_framework": {
+      "title": "Compute quantum metrics",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 19858,
+      "line_count": 585,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "code_executor": {
+      "title": "class for future integration with asynchronous workflows.",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 6069,
+      "line_count": 92,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "cognitive_resonant_controller": {
+      "title": "Cognitive Resonant Controller System - Living Specification",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 11538,
+      "line_count": 126,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "combat_abm": {
+      "title": "Run benchmark",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 16919,
+      "line_count": 384,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "config": {
+      "title": "Access all available paths",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 12160,
+      "line_count": 221,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "directory_organization": {
+      "title": "Living Specification: Directory Organization and Development Workflow",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 8020,
+      "line_count": 135,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": false
+    },
+    "enhanced_llm_provider": {
+      "title": "Clear cache if needed",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 13653,
+      "line_count": 256,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "enhanced_perception_engine": {
+      "title": "The Digital Archaeologist: A Chronicle of the Enhanced Perception Engine (v2.0)",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 14144,
+      "line_count": 321,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "executable_spec_parser": {
+      "title": "Global instance for workflow integration",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 15188,
+      "line_count": 322,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "executable_spec_parser_enhanced": {
+      "title": "Global instance for workflow integration",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 15188,
+      "line_count": 322,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": false
+    },
+    "iar_components": {
+      "title": "IAR Components - Living Specification",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 8698,
+      "line_count": 99,
+      "has_implementation": false,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "insight_solidification_engine": {
+      "title": "Check validation results",
+      "overview": "",
+      "status": "{result.execution_status}\")",
+      "file_size": 31773,
+      "line_count": 835,
+      "has_implementation": true,
+      "has_examples": true,
+      "code_exists": true
+    },
+    "knowledge_graph_manager": {
+      "title": "The Memory Keeper: A Chronicle of the Knowledge Graph Manager (v3.1)",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 7997,
+      "line_count": 156,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    },
+    "knowledge_graph_manager_enhanced": {
+      "title": "Markdown processing",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 11888,
+      "line_count": 262,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": false
+    },
+    "llm_providers": {
+      "title": "Register default providers",
+      "overview": "",
+      "status": "unknown",
+      "file_size": 19289,
+      "line_count": 499,
+      "has_implementation": true,
+      "has_examples": false,
+      "code_exists": true
+    }
+  },
+  "code_files": {
+    "test_iar_simple": {
+      "file_size": 1009,
+      "line_count": 32,
+      "classes": 0,
+      "functions": 0,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "thought_trail": {
+      "file_size": 6992,
+      "line_count": 160,
+      "classes": 2,
+      "functions": 14,
+      "imports": 5,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "token_cache_manager": {
+      "file_size": 23484,
+      "line_count": 570,
+      "classes": 2,
+      "functions": 21,
+      "imports": 14,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "tools": {
+      "file_size": 70773,
+      "line_count": 1335,
+      "classes": 5,
+      "functions": 20,
+      "imports": 23,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "tsp_solver": {
+      "file_size": 5784,
+      "line_count": 132,
+      "classes": 1,
+      "functions": 9,
+      "imports": 4,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "utils": {
+      "file_size": 607,
+      "line_count": 21,
+      "classes": 0,
+      "functions": 1,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": true
+    },
+    "utopian_solution_synthesizer": {
+      "file_size": 12873,
+      "line_count": 279,
+      "classes": 1,
+      "functions": 14,
+      "imports": 6,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "vetting_prompts": {
+      "file_size": 18015,
+      "line_count": 320,
+      "classes": 0,
+      "functions": 4,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "web_search_tool": {
+      "file_size": 9012,
+      "line_count": 226,
+      "classes": 0,
+      "functions": 1,
+      "imports": 15,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "workflow_chaining_engine": {
+      "file_size": 12811,
+      "line_count": 319,
+      "classes": 4,
+      "functions": 12,
+      "imports": 10,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "workflow_engine": {
+      "file_size": 95281,
+      "line_count": 2048,
+      "classes": 3,
+      "functions": 45,
+      "imports": 65,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "workflow_orchestrator": {
+      "file_size": 9121,
+      "line_count": 206,
+      "classes": 1,
+      "functions": 9,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "workflow_playbooks": {
+      "file_size": 1905,
+      "line_count": 48,
+      "classes": 0,
+      "functions": 2,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "workflow_recovery": {
+      "file_size": 7575,
+      "line_count": 184,
+      "classes": 1,
+      "functions": 4,
+      "imports": 4,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "workflow_validator": {
+      "file_size": 6958,
+      "line_count": 193,
+      "classes": 2,
+      "functions": 6,
+      "imports": 7,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "__init__": {
+      "file_size": 2,
+      "line_count": 3,
+      "classes": 0,
+      "functions": 0,
+      "imports": 0,
+      "has_docstrings": false,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "resonantia_maestro": {
+      "file_size": 34631,
+      "line_count": 692,
+      "classes": 3,
+      "functions": 21,
+      "imports": 11,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "resonant_orchestrator": {
+      "file_size": 14147,
+      "line_count": 384,
+      "classes": 1,
+      "functions": 12,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "rise_orchestrator": {
+      "file_size": 52099,
+      "line_count": 1114,
+      "classes": 2,
+      "functions": 24,
+      "imports": 18,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "scalable_framework": {
+      "file_size": 2429,
+      "line_count": 70,
+      "classes": 2,
+      "functions": 10,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": true
+    },
+    "self_interrogate_tool": {
+      "file_size": 2224,
+      "line_count": 67,
+      "classes": 0,
+      "functions": 1,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "session_manager": {
+      "file_size": 480,
+      "line_count": 13,
+      "classes": 1,
+      "functions": 2,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "session_state_manager": {
+      "file_size": 1955,
+      "line_count": 63,
+      "classes": 2,
+      "functions": 5,
+      "imports": 6,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "sirc_autonomy": {
+      "file_size": 2591,
+      "line_count": 69,
+      "classes": 0,
+      "functions": 2,
+      "imports": 4,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "sirc_intake_handler": {
+      "file_size": 24297,
+      "line_count": 539,
+      "classes": 2,
+      "functions": 18,
+      "imports": 6,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "spr_action_bridge": {
+      "file_size": 15894,
+      "line_count": 359,
+      "classes": 1,
+      "functions": 4,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "spr_manager": {
+      "file_size": 11130,
+      "line_count": 267,
+      "classes": 1,
+      "functions": 19,
+      "imports": 8,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "spr_resonant_gratid_soul": {
+      "file_size": 15768,
+      "line_count": 374,
+      "classes": 5,
+      "functions": 9,
+      "imports": 4,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "synthesis_manager": {
+      "file_size": 555,
+      "line_count": 19,
+      "classes": 1,
+      "functions": 2,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "system_genesis_tool": {
+      "file_size": 21464,
+      "line_count": 445,
+      "classes": 0,
+      "functions": 18,
+      "imports": 7,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "system_representation": {
+      "file_size": 3688,
+      "line_count": 90,
+      "classes": 4,
+      "functions": 18,
+      "imports": 7,
+      "has_docstrings": false,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "task_manager": {
+      "file_size": 976,
+      "line_count": 26,
+      "classes": 1,
+      "functions": 3,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "collective_intelligence_network": {
+      "file_size": 29078,
+      "line_count": 667,
+      "classes": 7,
+      "functions": 18,
+      "imports": 15,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "combat_abm": {
+      "file_size": 5336,
+      "line_count": 137,
+      "classes": 3,
+      "functions": 10,
+      "imports": 6,
+      "has_docstrings": false,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "communication_manager": {
+      "file_size": 8497,
+      "line_count": 195,
+      "classes": 1,
+      "functions": 8,
+      "imports": 7,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "comparison_manager": {
+      "file_size": 485,
+      "line_count": 18,
+      "classes": 1,
+      "functions": 2,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "config": {
+      "file_size": 7823,
+      "line_count": 222,
+      "classes": 6,
+      "functions": 2,
+      "imports": 7,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "context_manager": {
+      "file_size": 618,
+      "line_count": 17,
+      "classes": 1,
+      "functions": 3,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "context_superposition": {
+      "file_size": 1448,
+      "line_count": 34,
+      "classes": 0,
+      "functions": 2,
+      "imports": 2,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "custom_json": {
+      "file_size": 387,
+      "line_count": 15,
+      "classes": 1,
+      "functions": 3,
+      "imports": 2,
+      "has_docstrings": false,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "demo_enhanced_search_integration": {
+      "file_size": 7458,
+      "line_count": 210,
+      "classes": 0,
+      "functions": 4,
+      "imports": 12,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "display_tool": {
+      "file_size": 1800,
+      "line_count": 60,
+      "classes": 0,
+      "functions": 1,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "enhanced_capabilities": {
+      "file_size": 11024,
+      "line_count": 271,
+      "classes": 1,
+      "functions": 6,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "enhanced_llm_provider": {
+      "file_size": 37115,
+      "line_count": 815,
+      "classes": 1,
+      "functions": 26,
+      "imports": 11,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "enhanced_perception_engine": {
+      "file_size": 32995,
+      "line_count": 846,
+      "classes": 4,
+      "functions": 23,
+      "imports": 32,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "enhanced_tools": {
+      "file_size": 20462,
+      "line_count": 355,
+      "classes": 1,
+      "functions": 4,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "enhanced_web_search_tool": {
+      "file_size": 19559,
+      "line_count": 486,
+      "classes": 1,
+      "functions": 9,
+      "imports": 19,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "enhanced_workflow_orchestrator": {
+      "file_size": 24998,
+      "line_count": 633,
+      "classes": 4,
+      "functions": 12,
+      "imports": 13,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "error_handler": {
+      "file_size": 12259,
+      "line_count": 233,
+      "classes": 1,
+      "functions": 2,
+      "imports": 8,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "executable_spec_parser": {
+      "file_size": 8320,
+      "line_count": 217,
+      "classes": 0,
+      "functions": 3,
+      "imports": 5,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "execution_manager": {
+      "file_size": 847,
+      "line_count": 25,
+      "classes": 1,
+      "functions": 2,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "iar_components": {
+      "file_size": 10099,
+      "line_count": 292,
+      "classes": 4,
+      "functions": 14,
+      "imports": 5,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "ias_manager": {
+      "file_size": 497,
+      "line_count": 17,
+      "classes": 1,
+      "functions": 3,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "insight_solidification_engine": {
+      "file_size": 38577,
+      "line_count": 868,
+      "classes": 10,
+      "functions": 31,
+      "imports": 10,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "knowledge_crystallization_system": {
+      "file_size": 20998,
+      "line_count": 508,
+      "classes": 5,
+      "functions": 12,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "knowledge_graph_manager": {
+      "file_size": 6849,
+      "line_count": 158,
+      "classes": 1,
+      "functions": 12,
+      "imports": 4,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "llm_providers": {
+      "file_size": 33672,
+      "line_count": 643,
+      "classes": 5,
+      "functions": 19,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "llm_tool": {
+      "file_size": 6514,
+      "line_count": 164,
+      "classes": 0,
+      "functions": 2,
+      "imports": 11,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "logging_config": {
+      "file_size": 5709,
+      "line_count": 113,
+      "classes": 1,
+      "functions": 1,
+      "imports": 4,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "logscribe_core": {
+      "file_size": 8253,
+      "line_count": 190,
+      "classes": 1,
+      "functions": 5,
+      "imports": 6,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "main": {
+      "file_size": 26742,
+      "line_count": 489,
+      "classes": 0,
+      "functions": 6,
+      "imports": 13,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "mastermind": {
+      "file_size": 7932,
+      "line_count": 142,
+      "classes": 1,
+      "functions": 2,
+      "imports": 12,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "mastermind_server": {
+      "file_size": 20362,
+      "line_count": 437,
+      "classes": 1,
+      "functions": 14,
+      "imports": 20,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "metacognitive_shift_processor": {
+      "file_size": 38036,
+      "line_count": 856,
+      "classes": 9,
+      "functions": 29,
+      "imports": 8,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "output_handler": {
+      "file_size": 3026,
+      "line_count": 81,
+      "classes": 0,
+      "functions": 6,
+      "imports": 6,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "cognitive_resonant_controller": {
+      "file_size": 19590,
+      "line_count": 421,
+      "classes": 8,
+      "functions": 20,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "google_maps_decoder": {
+      "file_size": 13908,
+      "line_count": 382,
+      "classes": 3,
+      "functions": 12,
+      "imports": 8,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "pattern_manager": {
+      "file_size": 511,
+      "line_count": 17,
+      "classes": 1,
+      "functions": 3,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "resonance_evaluator": {
+      "file_size": 24520,
+      "line_count": 604,
+      "classes": 3,
+      "functions": 16,
+      "imports": 6,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "temporal_reasoning_engine": {
+      "file_size": 30810,
+      "line_count": 710,
+      "classes": 10,
+      "functions": 17,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "abm_dsl_engine": {
+      "file_size": 11716,
+      "line_count": 264,
+      "classes": 2,
+      "functions": 9,
+      "imports": 8,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "action_context": {
+      "file_size": 1070,
+      "line_count": 28,
+      "classes": 1,
+      "functions": 1,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": true
+    },
+    "action_handlers": {
+      "file_size": 6041,
+      "line_count": 125,
+      "classes": 2,
+      "functions": 5,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "action_registry": {
+      "file_size": 7214,
+      "line_count": 174,
+      "classes": 1,
+      "functions": 6,
+      "imports": 22,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "action_registry_v2": {
+      "file_size": 3582,
+      "line_count": 85,
+      "classes": 1,
+      "functions": 6,
+      "imports": 14,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "adaptive_cognitive_orchestrator": {
+      "file_size": 44075,
+      "line_count": 997,
+      "classes": 6,
+      "functions": 42,
+      "imports": 19,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "adaptive_filter": {
+      "file_size": 181,
+      "line_count": 7,
+      "classes": 0,
+      "functions": 0,
+      "imports": 0,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "agent_based_modeling_tool": {
+      "file_size": 89703,
+      "line_count": 1385,
+      "classes": 6,
+      "functions": 32,
+      "imports": 19,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "autonomous_orchestrator": {
+      "file_size": 15207,
+      "line_count": 354,
+      "classes": 7,
+      "functions": 22,
+      "imports": 9,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "autopoietic_mandate_system": {
+      "file_size": 10489,
+      "line_count": 272,
+      "classes": 1,
+      "functions": 11,
+      "imports": 8,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "causal_digest": {
+      "file_size": 2911,
+      "line_count": 74,
+      "classes": 0,
+      "functions": 2,
+      "imports": 3,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "causal_inference_tool": {
+      "file_size": 44553,
+      "line_count": 730,
+      "classes": 2,
+      "functions": 8,
+      "imports": 15,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "cfp_framework": {
+      "file_size": 29878,
+      "line_count": 504,
+      "classes": 1,
+      "functions": 16,
+      "imports": 10,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "cfp_implementation_example": {
+      "file_size": 8413,
+      "line_count": 163,
+      "classes": 4,
+      "functions": 9,
+      "imports": 7,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "code_executor": {
+      "file_size": 28632,
+      "line_count": 595,
+      "classes": 3,
+      "functions": 6,
+      "imports": 19,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "pattern_processors": {
+      "file_size": 17712,
+      "line_count": 491,
+      "classes": 10,
+      "functions": 4,
+      "imports": 4,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "pattern_reflection_system": {
+      "file_size": 16780,
+      "line_count": 397,
+      "classes": 2,
+      "functions": 26,
+      "imports": 5,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "perception_engine": {
+      "file_size": 15139,
+      "line_count": 377,
+      "classes": 1,
+      "functions": 12,
+      "imports": 11,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "playbook_orchestrator": {
+      "file_size": 11657,
+      "line_count": 260,
+      "classes": 2,
+      "functions": 11,
+      "imports": 10,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "predictive_flux_coupling_engine": {
+      "file_size": 14159,
+      "line_count": 348,
+      "classes": 1,
+      "functions": 9,
+      "imports": 16,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "predictive_modeling_tool": {
+      "file_size": 29104,
+      "line_count": 487,
+      "classes": 1,
+      "functions": 7,
+      "imports": 16,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "prefetch_manager": {
+      "file_size": 3458,
+      "line_count": 89,
+      "classes": 0,
+      "functions": 3,
+      "imports": 2,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "proactive_truth_system": {
+      "file_size": 23490,
+      "line_count": 538,
+      "classes": 8,
+      "functions": 13,
+      "imports": 11,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "high",
+      "spec_exists": false
+    },
+    "prompt_manager": {
+      "file_size": 180,
+      "line_count": 7,
+      "classes": 0,
+      "functions": 0,
+      "imports": 0,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": true
+    },
+    "protocol_event_schema": {
+      "file_size": 6383,
+      "line_count": 199,
+      "classes": 10,
+      "functions": 3,
+      "imports": 6,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": true
+    },
+    "puppeteer_tool": {
+      "file_size": 9094,
+      "line_count": 157,
+      "classes": 0,
+      "functions": 2,
+      "imports": 5,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "qa_tools": {
+      "file_size": 7223,
+      "line_count": 193,
+      "classes": 0,
+      "functions": 2,
+      "imports": 6,
+      "has_docstrings": true,
+      "has_tests": true,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "quantum_agent": {
+      "file_size": 18524,
+      "line_count": 411,
+      "classes": 1,
+      "functions": 16,
+      "imports": 4,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "quantum_utils": {
+      "file_size": 25188,
+      "line_count": 559,
+      "classes": 0,
+      "functions": 12,
+      "imports": 7,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "high",
+      "spec_exists": true
+    },
+    "recovery_actions": {
+      "file_size": 10746,
+      "line_count": 283,
+      "classes": 0,
+      "functions": 13,
+      "imports": 5,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    },
+    "reflection_manager": {
+      "file_size": 474,
+      "line_count": 16,
+      "classes": 1,
+      "functions": 3,
+      "imports": 1,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "low",
+      "spec_exists": false
+    },
+    "registry_manager": {
+      "file_size": 6882,
+      "line_count": 188,
+      "classes": 5,
+      "functions": 9,
+      "imports": 8,
+      "has_docstrings": true,
+      "has_tests": false,
+      "complexity": "medium",
+      "spec_exists": false
+    }
+  },
+  "alignment_issues": [
+    {
+      "type": "missing_code",
+      "spec": "system_version_v4",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_code",
+      "spec": "vetting_agent",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_code",
+      "spec": "visual_cognitive_debugger_ui",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_code",
+      "spec": "websocket_bridge",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_code",
+      "spec": "autopoietic_genesis_protocol",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_code",
+      "spec": "cfp_evolution",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_code",
+      "spec": "directory_organization",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_code",
+      "spec": "executable_spec_parser_enhanced",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_code",
+      "spec": "knowledge_graph_manager_enhanced",
+      "issue": "Specification exists but no corresponding Python implementation"
+    },
+    {
+      "type": "missing_spec",
+      "code": "test_iar_simple",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "tools",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "utopian_solution_synthesizer",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "vetting_prompts",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "workflow_chaining_engine",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "workflow_orchestrator",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "workflow_playbooks",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "workflow_recovery",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "workflow_validator",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "__init__",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "resonantia_maestro",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "resonant_orchestrator",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "self_interrogate_tool",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "session_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "session_state_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "sirc_autonomy",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "sirc_intake_handler",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "spr_action_bridge",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "synthesis_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "system_genesis_tool",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "system_representation",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "task_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "collective_intelligence_network",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "communication_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "comparison_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "context_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "context_superposition",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "custom_json",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "demo_enhanced_search_integration",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "display_tool",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "enhanced_capabilities",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "enhanced_tools",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "enhanced_web_search_tool",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "enhanced_workflow_orchestrator",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "error_handler",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "execution_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "ias_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "knowledge_crystallization_system",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "logging_config",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "logscribe_core",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "main",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "mastermind_server",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "metacognitive_shift_processor",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "output_handler",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "google_maps_decoder",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "pattern_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "resonance_evaluator",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "action_handlers",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "action_registry_v2",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "adaptive_filter",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "autopoietic_mandate_system",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "causal_digest",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "cfp_implementation_example",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "pattern_processors",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "pattern_reflection_system",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "predictive_flux_coupling_engine",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "prefetch_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "proactive_truth_system",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "puppeteer_tool",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "qa_tools",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "quantum_agent",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "recovery_actions",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "reflection_manager",
+      "issue": "Code exists but no corresponding specification"
+    },
+    {
+      "type": "missing_spec",
+      "code": "registry_manager",
+      "issue": "Code exists but no corresponding specification"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "action": "create_code",
+      "description": "Create Python implementations for 9 specifications",
+      "specs": [
+        "system_version_v4",
+        "vetting_agent",
+        "visual_cognitive_debugger_ui",
+        "websocket_bridge",
+        "autopoietic_genesis_protocol",
+        "cfp_evolution",
+        "directory_organization",
+        "executable_spec_parser_enhanced",
+        "knowledge_graph_manager_enhanced"
+      ]
+    },
+    {
+      "priority": "high",
+      "action": "create_specs",
+      "description": "Create specifications for 64 code files",
+      "code_files": [
+        "test_iar_simple",
+        "tools",
+        "utopian_solution_synthesizer",
+        "vetting_prompts",
+        "workflow_chaining_engine",
+        "workflow_orchestrator",
+        "workflow_playbooks",
+        "workflow_recovery",
+        "workflow_validator",
+        "__init__",
+        "resonantia_maestro",
+        "resonant_orchestrator",
+        "self_interrogate_tool",
+        "session_manager",
+        "session_state_manager",
+        "sirc_autonomy",
+        "sirc_intake_handler",
+        "spr_action_bridge",
+        "synthesis_manager",
+        "system_genesis_tool",
+        "system_representation",
+        "task_manager",
+        "collective_intelligence_network",
+        "communication_manager",
+        "comparison_manager",
+        "context_manager",
+        "context_superposition",
+        "custom_json",
+        "demo_enhanced_search_integration",
+        "display_tool",
+        "enhanced_capabilities",
+        "enhanced_tools",
+        "enhanced_web_search_tool",
+        "enhanced_workflow_orchestrator",
+        "error_handler",
+        "execution_manager",
+        "ias_manager",
+        "knowledge_crystallization_system",
+        "logging_config",
+        "logscribe_core",
+        "main",
+        "mastermind_server",
+        "metacognitive_shift_processor",
+        "output_handler",
+        "google_maps_decoder",
+        "pattern_manager",
+        "resonance_evaluator",
+        "action_handlers",
+        "action_registry_v2",
+        "adaptive_filter",
+        "autopoietic_mandate_system",
+        "causal_digest",
+        "cfp_implementation_example",
+        "pattern_processors",
+        "pattern_reflection_system",
+        "predictive_flux_coupling_engine",
+        "prefetch_manager",
+        "proactive_truth_system",
+        "puppeteer_tool",
+        "qa_tools",
+        "quantum_agent",
+        "recovery_actions",
+        "reflection_manager",
+        "registry_manager"
+      ]
+    },
+    {
+      "priority": "medium",
+      "action": "update_specs",
+      "description": "Update existing specifications to reflect current implementation",
+      "focus": "Ensure specs match actual code functionality"
+    },
+    {
+      "priority": "low",
+      "action": "cleanup",
+      "description": "Review and potentially delete outdated specifications",
+      "focus": "Remove specs for deprecated or unused components"
+    }
+  ]
+}

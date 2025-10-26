@@ -1,0 +1,17 @@
+================================================================================
+🚀 WEBSOCKET Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-09-02T14:22:32.159Z
+🔧 Component: websocket
+📁 Main Log: logs/websocket_2025-09-02_14-22-32-158Z.log
+❌ Error Log: logs/errors_websocket_2025-09-02_14-22-32-158Z.log
+⚡ Performance Log: logs/performance_websocket_2025-09-02_14-22-32-158Z.log
+================================================================================
+2025-09-02T14:33:10.883Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}
+2025-09-02T14:33:10.892Z [ERROR] websocket: ArchE WebSocket connection error
+{
+  "error": "connect ECONNREFUSED 127.0.0.1:3005"
+}

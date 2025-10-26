@@ -1,0 +1,69 @@
+{
+    "workflow_name": "Distill SPR from Execution",
+    "version": "1.0",
+    "description": "Analyzes a completed thought trail and final strategy to distill a new Sparse Priming Representation (SPR). This forms the learning and memory mechanism of the RISE engine.",
+    "input_parameters": {
+        "thought_trail": {
+            "type": "list",
+            "description": "The complete thought trail from the RISE execution session."
+        },
+        "final_strategy": {
+            "type": "dict",
+            "description": "The final, vetted strategy that was successfully produced."
+        },
+        "session_id": {
+            "type": "string",
+            "description": "The unique ID of the session being analyzed."
+        },
+        "problem_description": {
+            "type": "string",
+            "description": "The original problem description."
+        }
+    },
+    "tasks": {
+        "format_distillation_prompt": {
+            "action_type": "string_template",
+            "description": "Formats the inputs into a comprehensive prompt for the LLM.",
+            "inputs": {
+                "template": "Analyze the following problem-solving session to generate a new Sparse Priming Representation (SPR). The SPR should capture the core successful pattern demonstrated in this execution. Be concise, abstract, and focus on the reusable strategic logic.\\n\\n== PROBLEM ==\\n{problem_description}\\n\\n== FINAL STRATEGY ==\\n{final_strategy_str}\\n\\n== THOUGHT TRAIL ==\\n{thought_trail_str}\\n\\nBased on the above, generate a JSON object for the new SPR with the following keys: 'spr_id', 'term', 'description', 'category', 'pattern_type', 'core_logic', 'aliases', and 'confidence_score'. The spr_id should be a descriptive CamelCase name. The description should be a single sentence. The core_logic should be a bulleted list of the key steps. Confidence score should be a float between 0.0 and 1.0.",
+                "problem_description": "{{ inputs.problem_description }}",
+                "final_strategy_str": "{{ inputs.final_strategy }}",
+                "thought_trail_str": "{{ inputs.thought_trail }}"
+            },
+            "output_variable": "distillation_prompt"
+        },
+        "distill_spr_with_llm": {
+            "action_type": "generate_text_llm",
+            "description": "Uses a powerful language model to analyze the session and generate the SPR JSON.",
+            "inputs": {
+                "prompt": "{{ tasks.format_distillation_prompt.output.result }}",
+                "model_settings": {
+                    "temperature": 0.3,
+                    "max_tokens": 1000
+                }
+            },
+            "output_variable": "llm_spr_output",
+            "dependencies": ["format_distillation_prompt"]
+        },
+        "parse_and_validate_spr": {
+            "action_type": "execute_code",
+            "description": "Parses the LLM output and validates the structure of the generated SPR.",
+            "inputs": {
+                "code": "import json\ndef parse_spr(llm_output):\n    try:\n        spr_data = json.loads(llm_output)\n        required_keys = ['spr_id', 'term', 'description', 'category', 'pattern_type', 'core_logic', 'aliases', 'confidence_score']\n        for key in required_keys:\n            if key not in spr_data:\n                return {'status': 'error', 'message': f'Missing key in SPR: {key}'}\n        return {'status': 'success', 'spr_definition': spr_data}\n    except Exception as e:\n        return {'status': 'error', 'message': str(e)}\n\nresult = parse_spr(spr_output)",
+                "spr_output": "{{ distill_spr_with_llm.result.generated_text }}"
+            },
+            "output_variable": "parsed_spr_result",
+            "dependencies": ["distill_spr_with_llm"]
+        }
+    },
+    "output": {
+        "spr_definition": {
+            "value": "{{ parse_and_validate_spr.result.result.spr_definition }}",
+            "description": "The newly generated and validated SPR definition."
+        },
+        "status": {
+            "value": "{{ parse_and_validate_spr.result.result.status }}",
+            "description": "The final status of the distillation process."
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_2a19e95aa61f468dba191a13370029fb.jsonl",
+  "size_bytes": 170578,
+  "modified": "2025-08-05T07:40:14.752289",
+  "workflow_name": "Full ArchE Genesis Test",
+  "run_id": "run_2a19e95aa61f468dba191a13370029fb",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 10,
+  "duration_sec": 300.5959,
+  "status": "unknown",
+  "line_count": 13
+}

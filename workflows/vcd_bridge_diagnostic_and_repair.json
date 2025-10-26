@@ -1,0 +1,320 @@
+{
+  "playbook_id": "vcd_bridge_diagnostic_and_repair",
+  "name": "VCD Bridge Diagnostic and Repair Workflow",
+  "description": "Comprehensive diagnostic and automated repair workflow for VCD Bridge Server timeout parameter issues",
+  "version": "1.0",
+  "author": "ArchE System",
+  "created": "2025-10-23T06:00:00Z",
+  "category": "system_maintenance",
+  "priority": "high",
+  "tags": ["vcd", "bridge", "diagnostic", "repair", "websocket", "timeout"],
+  
+  "metadata": {
+    "autopoietic_cycle": "self_reflection_diagnosis_repair_validation",
+    "target_system": "Visual Cognitive Debugger Bridge Server",
+    "issue_type": "websocket_timeout_parameter_compatibility",
+    "expected_outcome": "fully_operational_vcd_bridge"
+  },
+
+  "workflow": {
+    "phases": [
+      {
+        "phase_id": "A1_diagnostic_analysis",
+        "name": "VCD Bridge Diagnostic Analysis",
+        "description": "Comprehensive analysis of VCD Bridge Server timeout parameter issue",
+        "tasks": [
+          {
+            "task_id": "A1_1_analyze_timeout_error",
+            "name": "Analyze Timeout Parameter Error",
+            "action": "analyze_error",
+            "inputs": {
+              "error_message": "BaseEventLoop.create_connection() got an unexpected keyword argument 'timeout'",
+              "target_file": "Three_PointO_ArchE/vcd_analysis_agent_simple.py",
+              "error_location": "_test_vcd_bridge_connection method"
+            },
+            "expected_output": {
+              "error_type": "websocket_timeout_compatibility",
+              "root_cause": "websockets library version incompatibility",
+              "affected_components": ["websocket connection", "timeout handling"]
+            }
+          },
+          {
+            "task_id": "A1_2_check_websockets_version",
+            "name": "Check WebSockets Library Version",
+            "action": "check_package_version",
+            "inputs": {
+              "package_name": "websockets",
+              "environment": "arche_env"
+            },
+            "expected_output": {
+              "current_version": "detected_version",
+              "compatibility_status": "incompatible_with_timeout_param"
+            }
+          },
+          {
+            "task_id": "A1_3_analyze_vcd_bridge_code",
+            "name": "Analyze VCD Bridge Server Code",
+            "action": "analyze_code",
+            "inputs": {
+              "target_file": "vcd_bridge.py",
+              "analysis_focus": ["websocket_server_configuration", "timeout_handling", "connection_management"]
+            },
+            "expected_output": {
+              "server_configuration": "detected_config",
+              "timeout_handling": "current_implementation",
+              "connection_management": "current_approach"
+            }
+          }
+        ]
+      },
+      {
+        "phase_id": "B1_automated_repair",
+        "name": "Automated Repair Implementation",
+        "description": "Implement automated fixes for VCD Bridge timeout parameter issue",
+        "tasks": [
+          {
+            "task_id": "B1_1_create_timeout_wrapper",
+            "name": "Create WebSocket Timeout Wrapper",
+            "action": "create_file",
+            "inputs": {
+              "file_path": "Three_PointO_ArchE/websocket_timeout_wrapper.py",
+              "content_template": "websocket_timeout_wrapper_template",
+              "purpose": "Compatible timeout handling for websockets library"
+            },
+            "expected_output": {
+              "file_created": true,
+              "wrapper_functionality": "timeout_compatible_websocket_connection"
+            }
+          },
+          {
+            "task_id": "B1_2_update_vcd_analysis_agent",
+            "name": "Update VCD Analysis Agent Connection Method",
+            "action": "modify_file",
+            "inputs": {
+              "target_file": "Three_PointO_ArchE/vcd_analysis_agent_simple.py",
+              "modification_type": "replace_method",
+              "target_method": "_test_vcd_bridge_connection",
+              "new_implementation": "timeout_wrapper_based_connection"
+            },
+            "expected_output": {
+              "method_updated": true,
+              "timeout_compatibility": "resolved"
+            }
+          },
+          {
+            "task_id": "B1_3_create_vcd_bridge_config",
+            "name": "Create VCD Bridge Configuration File",
+            "action": "create_file",
+            "inputs": {
+              "file_path": "vcd_bridge_config.json",
+              "configuration": {
+                "host": "localhost",
+                "port": 8765,
+                "timeout": 5,
+                "max_connections": 100,
+                "heartbeat_interval": 30,
+                "reconnect_attempts": 3,
+                "reconnect_delay": 1
+              }
+            },
+            "expected_output": {
+              "config_file_created": true,
+              "configuration_validated": true
+            }
+          },
+          {
+            "task_id": "B1_4_update_vcd_bridge_server",
+            "name": "Update VCD Bridge Server Implementation",
+            "action": "modify_file",
+            "inputs": {
+              "target_file": "vcd_bridge.py",
+              "modification_type": "add_configuration_support",
+              "config_file": "vcd_bridge_config.json",
+              "improvements": ["configurable_timeout", "better_error_handling", "connection_health_monitoring"]
+            },
+            "expected_output": {
+              "server_updated": true,
+              "configuration_support": "added",
+              "error_handling": "improved"
+            }
+          }
+        ]
+      },
+      {
+        "phase_id": "C1_validation_testing",
+        "name": "Validation and Testing",
+        "description": "Comprehensive validation of VCD Bridge repair and connection stability",
+        "tasks": [
+          {
+            "task_id": "C1_1_start_vcd_bridge_server",
+            "name": "Start VCD Bridge Server",
+            "action": "start_service",
+            "inputs": {
+              "service_name": "vcd_bridge",
+              "command": "python3 vcd_bridge.py",
+              "config_file": "vcd_bridge_config.json",
+              "background": true
+            },
+            "expected_output": {
+              "server_started": true,
+              "port_listening": 8765,
+              "health_check": "passed"
+            }
+          },
+          {
+            "task_id": "C1_2_test_websocket_connection",
+            "name": "Test WebSocket Connection",
+            "action": "test_connection",
+            "inputs": {
+              "connection_type": "websocket",
+              "uri": "ws://localhost:8765",
+              "test_message": {
+                "type": "test_connection",
+                "timestamp": "current_timestamp",
+                "client": "vcd_diagnostic_agent"
+              },
+              "timeout": 5
+            },
+            "expected_output": {
+              "connection_successful": true,
+              "response_received": true,
+              "response_valid": true
+            }
+          },
+          {
+            "task_id": "C1_3_run_vcd_analysis_validation",
+            "name": "Run VCD Analysis Agent Validation",
+            "action": "execute_script",
+            "inputs": {
+              "script_path": "./run_vcd_analysis.sh",
+              "expected_status": "vcd_bridge_connected: true",
+              "validation_criteria": ["connection_status: connected", "overall_status: operational"]
+            },
+            "expected_output": {
+              "analysis_completed": true,
+              "bridge_status": "connected",
+              "overall_status": "operational"
+            }
+          },
+          {
+            "task_id": "C1_4_stress_test_connection",
+            "name": "Stress Test VCD Bridge Connection",
+            "action": "stress_test",
+            "inputs": {
+              "test_type": "connection_stability",
+              "concurrent_connections": 10,
+              "test_duration": 30,
+              "message_frequency": "1_per_second"
+            },
+            "expected_output": {
+              "all_connections_stable": true,
+              "no_timeout_errors": true,
+              "performance_acceptable": true
+            }
+          }
+        ]
+      },
+      {
+        "phase_id": "D1_documentation_update",
+        "name": "Documentation and Reporting",
+        "description": "Update documentation and generate repair report",
+        "tasks": [
+          {
+            "task_id": "D1_1_generate_repair_report",
+            "name": "Generate VCD Bridge Repair Report",
+            "action": "generate_report",
+            "inputs": {
+              "report_type": "vcd_bridge_repair_summary",
+              "include_sections": ["diagnostic_results", "repair_actions", "validation_results", "recommendations"],
+              "output_format": "markdown"
+            },
+            "expected_output": {
+              "report_generated": true,
+              "report_path": "reports/vcd_bridge_repair_report.md"
+            }
+          },
+          {
+            "task_id": "D1_2_update_vcd_documentation",
+            "name": "Update VCD Documentation",
+            "action": "update_documentation",
+            "inputs": {
+              "target_files": ["README.md", "docs/vcd_usage.md"],
+              "updates": ["timeout_configuration", "troubleshooting_guide", "configuration_options"]
+            },
+            "expected_output": {
+              "documentation_updated": true,
+              "troubleshooting_guide": "added"
+            }
+          }
+        ]
+      }
+    ]
+  },
+
+  "success_criteria": {
+    "primary": {
+      "vcd_bridge_status": "fully_operational",
+      "connection_test": "passed",
+      "timeout_error": "resolved",
+      "overall_status": "operational"
+    },
+    "secondary": {
+      "performance_acceptable": true,
+      "stress_test_passed": true,
+      "documentation_updated": true,
+      "autopoietic_cycle_complete": true
+    }
+  },
+
+  "error_handling": {
+    "timeout_error_persists": {
+      "action": "escalate_to_manual_review",
+      "fallback": "alternative_websocket_library",
+      "notification": "alert_keyholder"
+    },
+    "connection_fails": {
+      "action": "retry_with_backoff",
+      "max_retries": 3,
+      "fallback": "port_conflict_resolution"
+    },
+    "server_start_fails": {
+      "action": "dependency_check",
+      "fallback": "environment_rebuild"
+    }
+  },
+
+  "monitoring": {
+    "health_checks": [
+      {
+        "check_name": "vcd_bridge_connection",
+        "frequency": "every_30_seconds",
+        "timeout": 5,
+        "alert_threshold": 3_failures
+      },
+      {
+        "check_name": "websocket_response_time",
+        "frequency": "every_minute",
+        "threshold": "max_1_second",
+        "alert_threshold": 2_violations
+      }
+    ]
+  },
+
+  "dependencies": [
+    "websockets",
+    "asyncio",
+    "json",
+    "pathlib",
+    "datetime"
+  ],
+
+  "execution_environment": {
+    "python_version": ">=3.8",
+    "virtual_environment": "arche_env",
+    "working_directory": "/media/newbu/3626C55326C514B1/Happier",
+    "required_permissions": ["file_write", "process_start", "network_access"]
+  }
+}
+
+
+

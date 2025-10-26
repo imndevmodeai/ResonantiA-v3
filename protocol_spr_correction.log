@@ -1,0 +1,35 @@
+2025-07-18 17:31:38,910 - INFO - Starting protocol SPR reference correction process
+2025-07-18 17:31:39,125 - INFO - Found 6 protocol files
+2025-07-18 17:31:39,126 - INFO - Processing protocol file: ./Happier_new_clone/protocol/CRITICAL_MANDATES.md
+2025-07-18 17:31:39,129 - INFO - Created backup: backup_protocol_spr_correction_20250718_173138/CRITICAL_MANDATES.md
+2025-07-18 17:31:39,130 - INFO - Completed processing: ./Happier_new_clone/protocol/CRITICAL_MANDATES.md (0 SPR types corrected)
+2025-07-18 17:31:39,130 - INFO - Processing protocol file: ./Happier_new_clone/protocol/ResonantiA_Protocol_v3.0.md
+2025-07-18 17:31:39,131 - INFO - Created backup: backup_protocol_spr_correction_20250718_173138/ResonantiA_Protocol_v3.0.md
+2025-07-18 17:31:39,134 - INFO - Corrected 17 occurrences: ScenarioRealismAssessmenT -> ScenariorealismassessmenT
+2025-07-18 17:31:39,137 - INFO - Completed processing: ./Happier_new_clone/protocol/ResonantiA_Protocol_v3.0.md (1 SPR types corrected)
+2025-07-18 17:31:39,140 - INFO - Processing protocol file: ./Happier_new_clone/protocol/ResonantiA_Protocol_v3.1-CA.md
+2025-07-18 17:31:39,142 - INFO - Created backup: backup_protocol_spr_correction_20250718_173138/ResonantiA_Protocol_v3.1-CA.md
+2025-07-18 17:31:39,145 - INFO - Corrected 1 occurrences: ScenarioRealismAssessmenT -> ScenariorealismassessmenT
+2025-07-18 17:31:39,145 - INFO - Corrected 1 occurrences: AmbiguityDetectioN -> AmbiguitydetectioN
+2025-07-18 17:31:39,147 - INFO - Corrected 1 occurrences: ContextualSuggestionGeneratioN -> ContextualsuggestiongeneratioN
+2025-07-18 17:31:39,147 - INFO - Corrected 1 occurrences: LeadingQueryFormulationN -> LeadingqueryformulatioN
+2025-07-18 17:31:39,148 - INFO - Corrected 1 occurrences: PreferenceOverrideHandlinG -> PreferenceoverridehandlinG
+2025-07-18 17:31:39,149 - INFO - Corrected 1 occurrences: FinalizeResonantObjective -> FinalizeresonantobjectivE
+2025-07-18 17:31:39,149 - INFO - Completed processing: ./Happier_new_clone/protocol/ResonantiA_Protocol_v3.1-CA.md (6 SPR types corrected)
+2025-07-18 17:31:39,150 - INFO - Processing protocol file: ./protocol/CRITICAL_MANDATES.md
+2025-07-18 17:31:39,151 - INFO - Created backup: backup_protocol_spr_correction_20250718_173138/CRITICAL_MANDATES.md
+2025-07-18 17:31:39,152 - INFO - Completed processing: ./protocol/CRITICAL_MANDATES.md (0 SPR types corrected)
+2025-07-18 17:31:39,152 - INFO - Processing protocol file: ./protocol/ResonantiA_Protocol_v3.0.md
+2025-07-18 17:31:39,153 - INFO - Created backup: backup_protocol_spr_correction_20250718_173138/ResonantiA_Protocol_v3.0.md
+2025-07-18 17:31:39,155 - INFO - Corrected 17 occurrences: ScenarioRealismAssessmenT -> ScenariorealismassessmenT
+2025-07-18 17:31:39,157 - INFO - Completed processing: ./protocol/ResonantiA_Protocol_v3.0.md (1 SPR types corrected)
+2025-07-18 17:31:39,157 - INFO - Processing protocol file: ./protocol/ResonantiA_Protocol_v3.1-CA.md
+2025-07-18 17:31:39,157 - INFO - Created backup: backup_protocol_spr_correction_20250718_173138/ResonantiA_Protocol_v3.1-CA.md
+2025-07-18 17:31:39,158 - INFO - Corrected 1 occurrences: ScenarioRealismAssessmenT -> ScenariorealismassessmenT
+2025-07-18 17:31:39,158 - INFO - Corrected 1 occurrences: AmbiguityDetectioN -> AmbiguitydetectioN
+2025-07-18 17:31:39,159 - INFO - Corrected 1 occurrences: ContextualSuggestionGeneratioN -> ContextualsuggestiongeneratioN
+2025-07-18 17:31:39,159 - INFO - Corrected 1 occurrences: LeadingQueryFormulationN -> LeadingqueryformulatioN
+2025-07-18 17:31:39,159 - INFO - Corrected 1 occurrences: PreferenceOverrideHandlinG -> PreferenceoverridehandlinG
+2025-07-18 17:31:39,160 - INFO - Corrected 1 occurrences: FinalizeResonantObjective -> FinalizeresonantobjectivE
+2025-07-18 17:31:39,160 - INFO - Completed processing: ./protocol/ResonantiA_Protocol_v3.1-CA.md (6 SPR types corrected)
+2025-07-18 17:31:39,161 - INFO - Protocol correction process completed. Report saved to: protocol_spr_correction_report_20250718_173139.txt

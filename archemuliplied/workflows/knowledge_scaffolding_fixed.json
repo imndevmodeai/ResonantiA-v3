@@ -1,0 +1,141 @@
+{
+  "name": "Knowledge Scaffolding & Dynamic Specialization (Fixed)",
+  "description": "Phase A of RISE v2.0: Acquire domain knowledge and forge specialist agent with null handling",
+  "version": "2.1",
+  "inputs": {
+    "problem_description": {
+      "type": "string",
+      "description": "The problem to be analyzed and solved",
+      "required": true
+    }
+  },
+  "tasks": {
+    "deconstruct_problem": {
+      "action_type": "generate_text_llm",
+      "description": "Deconstruct the problem into core components and identify domain requirements",
+      "inputs": {
+        "prompt": "Analyze the following problem and deconstruct it into core components:\n\n{{problem_description}}\n\nIdentify:\n1. Core domain areas\n2. Key variables and unknowns\n3. Strategic requirements\n4. Risk factors\n5. Success criteria\n\nOutput your analysis as a structured JSON object with a key 'deconstruction_text'.",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 2000,
+        "temperature": 0.3
+      },
+      "dependencies": []
+    },
+    "validate_deconstruction": {
+      "action_type": "execute_code",
+      "description": "Validate that the deconstruction step returned valid, non-empty results",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport re\n\ntry:\n    deconstruction_output = {{deconstruct_problem.output}}\n    \n    # Check if output exists and is not empty\n    if not deconstruction_output:\n        print(json.dumps({'is_valid': False, 'error': 'Empty deconstruction output'}))\n        exit(0)\n    \n    # Try to extract JSON from the output\n    deconstruction_text = str(deconstruction_output)\n    \n    # Look for JSON pattern\n    json_match = re.search(r'\\{[^\\}]*deconstruction_text[^\\}]*\\}', deconstruction_text, re.DOTALL)\n    if json_match:\n        try:\n            parsed = json.loads(json_match.group())\n            has_deconstruction = 'deconstruction_text' in parsed\n            print(json.dumps({\n                'is_valid': has_deconstruction,\n                'has_deconstruction_text': has_deconstruction,\n                'extracted_text': parsed.get('deconstruction_text', '')[:200] + '...' if len(parsed.get('deconstruction_text', '')) > 200 else parsed.get('deconstruction_text', '')\n            }))\n        except json.JSONDecodeError:\n            print(json.dumps({'is_valid': False, 'error': 'Invalid JSON in deconstruction output'}))\n    else:\n        # If no JSON found, check if there's meaningful text\n        meaningful_text = len(deconstruction_text.strip()) > 50\n        print(json.dumps({\n            'is_valid': meaningful_text,\n            'has_deconstruction_text': False,\n            'raw_text_length': len(deconstruction_text),\n            'extracted_text': deconstruction_text[:200] + '...' if len(deconstruction_text) > 200 else deconstruction_text\n        }))\nexcept Exception as e:\n    print(json.dumps({'is_valid': False, 'error': str(e)}))"
+      },
+      "dependencies": ["deconstruct_problem"]
+    },
+    "extract_domain_from_deconstruction": {
+      "action_type": "generate_text_llm",
+      "description": "Extract the primary domain from the deconstruction analysis into a structured format",
+      "condition": "{{validate_deconstruction.output.is_valid}} == true",
+      "inputs": {
+        "prompt": "From the following analysis, identify and extract only the single, most relevant 'Core domain area'. Your output must be a single, clean JSON object with one key: 'domain'. For example: {\"domain\": \"Artificial Intelligence Strategy\"}\n\nAnalysis:\n{{deconstruct_problem.output}}\n\nIf you cannot identify a specific domain, use a general domain like 'Strategic Analysis' or 'Problem Solving'.",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 100,
+        "temperature": 0.1
+      },
+      "dependencies": ["validate_deconstruction"]
+    },
+    "fallback_domain_extraction": {
+      "action_type": "generate_text_llm",
+      "description": "Fallback domain extraction when deconstruction validation fails",
+      "condition": "{{validate_deconstruction.output.is_valid}} == false",
+      "inputs": {
+        "prompt": "Given this problem description, identify the most relevant domain area:\n\n{{problem_description}}\n\nExtract the primary domain as a JSON object with one key: 'domain'. Use a general domain if specific domain cannot be determined.\n\nExample: {\"domain\": \"Strategic Analysis\"}",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 100,
+        "temperature": 0.1
+      },
+      "dependencies": ["validate_deconstruction"]
+    },
+    "finalize_domain": {
+      "action_type": "execute_code",
+      "description": "Finalize the domain extraction by choosing between primary and fallback results",
+      "inputs": {
+        "language": "python",
+        "import json\n\n# Get the validation result\ndeconstruction_valid = {{validate_deconstruction.output.is_valid}}\n\n# Choose the appropriate domain extraction\nif deconstruction_valid:\n    try:\n        domain_result = {{extract_domain_from_deconstruction.output}}\n        domain = domain_result.get('domain', 'Strategic Analysis')\n    except:\n        domain = 'Strategic Analysis'\nelse:\n    try:\n        fallback_result = {{fallback_domain_extraction.output}}\n        domain = fallback_result.get('domain', 'Strategic Analysis')\n    except:\n        domain = 'Strategic Analysis'\n\n# Ensure we have a valid domain\nif not domain or domain.strip() == '':\n    domain = 'Strategic Analysis'\n\nprint(json.dumps({'domain': domain, 'source': 'primary' if deconstruction_valid else 'fallback'}))"
+      },
+      "dependencies": ["extract_domain_from_deconstruction", "fallback_domain_extraction"]
+    },
+    "acquire_domain_knowledge": {
+      "action_type": "execute_web_task",
+      "description": "Acquire relevant domain knowledge and current information",
+      "inputs": {
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "latest developments in {{finalize_domain.output.domain}} strategy competitive landscape analysis",
+        "max_results": 10
+      },
+      "dependencies": ["finalize_domain"]
+    },
+    "validate_search_results": {
+      "action_type": "execute_code",
+      "description": "Validate that the search tool returned valid, non-empty results",
+      "inputs": {
+        "language": "python",
+        "import json\n\ntry:\n    search_output = {{acquire_domain_knowledge.output}}\n    results = search_output.get('results', [])\n    \n    # Check if we have valid results\n    valid = isinstance(results, list) and len(results) > 0\n    \n    # If no results, create a fallback knowledge base\n    if not valid:\n        fallback_knowledge = {\n            'domain': '{{finalize_domain.output.domain}}',\n            'search_status': 'failed',\n            'fallback_content': f'Domain analysis for {{finalize_domain.output.domain}} - search returned no results, using general knowledge',\n            'recommendations': ['Consider manual research', 'Expand search terms', 'Use alternative sources']\n        }\n        print(json.dumps({\n            'search_is_valid': False,\n            'results_count': 0,\n            'fallback_knowledge': fallback_knowledge\n        }))\n    else:\n        print(json.dumps({\n            'search_is_valid': True,\n            'results_count': len(results)\n        }))\nexcept Exception as e:\n    print(json.dumps({\n        'search_is_valid': False,\n        'results_count': 0,\n        'error': str(e)\n    }))"
+      },
+      "dependencies": ["acquire_domain_knowledge"]
+    },
+    "analyze_specialization_requirements": {
+      "action_type": "generate_text_llm",
+      "description": "Analyze what specialized capabilities are needed for this problem",
+      "inputs": {
+        "prompt": "Based on the problem description and available knowledge, analyze what specialized capabilities and expertise are required:\n\nProblem: {{problem_description}}\nDomain: {{finalize_domain.output.domain}}\nKnowledge Base: {{acquire_domain_knowledge.output}}\n\nIdentify:\n1. Required specialized knowledge areas\n2. Critical analytical capabilities\n3. Strategic thinking patterns\n4. Risk assessment frameworks\n5. Implementation expertise\n\nIf search results are limited, focus on general strategic analysis capabilities.",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 2000,
+        "temperature": 0.4
+      },
+      "dependencies": ["validate_search_results"]
+    },
+    "forge_specialist_agent": {
+      "action_type": "generate_text_llm",
+      "description": "Forge a specialized agent with the required capabilities",
+      "inputs": {
+        "prompt": "Create a specialized agent profile for solving this problem:\n\nProblem: {{problem_description}}\nDomain: {{finalize_domain.output.domain}}\nRequirements: {{analyze_specialization_requirements.output}}\n\nDefine:\n1. Agent's core expertise and background\n2. Analytical frameworks and methodologies\n3. Strategic thinking patterns\n4. Risk assessment capabilities\n5. Implementation approach\n6. Success metrics and validation criteria",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 2500,
+        "temperature": 0.3
+      },
+      "dependencies": ["analyze_specialization_requirements"]
+    },
+    "validate_specialist_agent": {
+      "action_type": "generate_text_llm",
+      "description": "Validate that the specialist agent has the required capabilities",
+      "inputs": {
+        "prompt": "Validate the specialist agent against the original problem requirements:\n\nProblem: {{problem_description}}\nDomain: {{finalize_domain.output.domain}}\nRequirements: {{analyze_specialization_requirements.output}}\nSpecialist Agent: {{forge_specialist_agent.output}}\n\nAssess:\n1. Coverage of required capabilities\n2. Alignment with problem requirements\n3. Strategic fit and expertise match\n4. Potential gaps or limitations\n5. Confidence in agent's ability to solve the problem",
+        "model": "gemini-2.5-pro",
+        "max_tokens": 1500,
+        "temperature": 0.2
+      },
+      "dependencies": ["forge_specialist_agent"]
+    },
+    "create_session_knowledge_base": {
+      "action_type": "execute_code",
+      "description": "Create the final session knowledge base with proper error handling",
+      "inputs": {
+        "language": "python",
+        "import json\n\n# Gather all the knowledge components\ntry:\n    domain = {{finalize_domain.output.domain}}\n    search_results = {{acquire_domain_knowledge.output}}\n    search_validation = {{validate_search_results.output}}\n    \n    # Create the knowledge base\n    knowledge_base = {\n        'domain': domain,\n        'search_results': search_results.get('results', []) if search_results else [],\n        'search_status': 'success' if search_validation.get('search_is_valid', False) else 'failed',\n        'problem_analysis': {{deconstruct_problem.output}},\n        'specialization_requirements': {{analyze_specialization_requirements.output}},\n        'metadata': {\n            'session_id': '{{session_id}}',\n            'phase': 'A',\n            'created_at': '{{datetime.now().isoformat()}}',\n            'search_results_count': len(search_results.get('results', [])) if search_results else 0\n        }\n    }\n    \n    # Add fallback knowledge if search failed\n    if not search_validation.get('search_is_valid', False):\n        knowledge_base['fallback_knowledge'] = search_validation.get('fallback_knowledge', {})\n    \n    print(json.dumps(knowledge_base))\nexcept Exception as e:\n    # Create minimal knowledge base on error\n    fallback_base = {\n        'domain': 'Strategic Analysis',\n        'search_results': [],\n        'search_status': 'error',\n        'error': str(e),\n        'problem_analysis': 'Analysis failed - using fallback',\n        'metadata': {\n            'session_id': '{{session_id}}',\n            'phase': 'A',\n            'created_at': '{{datetime.now().isoformat()}}',\n            'search_results_count': 0\n        }\n    }\n    print(json.dumps(fallback_base))"
+      },
+      "dependencies": ["validate_specialist_agent", "validate_search_results"]
+    }
+  },
+  "outputs": {
+    "session_knowledge_base": {
+      "description": "Accumulated domain knowledge and insights with error handling",
+      "source": "create_session_knowledge_base"
+    },
+    "specialized_agent": {
+      "description": "The forged specialist agent with required capabilities",
+      "source": "validate_specialist_agent"
+    },
+    "knowledge_acquisition_metrics": {
+      "description": "Metrics on knowledge acquisition effectiveness",
+      "source": "create_session_knowledge_base"
+    }
+  }
+} 

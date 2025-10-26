@@ -1,0 +1,52 @@
+{
+  "name": "Automated Root Cause Analysis Workflow",
+  "description": "Automatically identifies the largest parameter divergence between two system states and then analyzes workflow event logs to find the root cause.",
+  "version": "1.0",
+  "tasks": {
+    "get_factor_comparison": {
+      "action": "compare_system_factors",
+      "inputs": {
+        "system_a_path": "knowledge_graph/arche_self_state.json",
+        "system_b_path": "knowledge_graph/arche_ideal_state.json"
+      },
+      "dependencies": []
+    },
+    "find_max_divergence_parameter": {
+      "action": "execute_code",
+      "inputs": {
+        "code": "import numpy as np; comparison_data = {{ get_factor_comparison.parameter_comparison }}; max_emd_param = max(comparison_data, key=lambda x: x.get('emd', 0)); print(max_emd_param['parameter_name'])",
+        "language": "python"
+      },
+      "outputs": {
+        "stdout": "string"
+      },
+      "dependencies": ["get_factor_comparison"]
+    },
+    "get_root_cause_analysis": {
+      "action": "analyze_workflow_impact",
+      "inputs": {
+        "run_id": "{{ context.last_successful_run_id }}",
+        "parameter_name": "{{ find_max_divergence_parameter.stdout | trim }}"
+      },
+      "outputs": {
+        "analysis": "dict"
+      },
+      "dependencies": ["find_max_divergence_parameter"]
+    },
+    "synthesize_final_report": {
+      "action": "generate_text_llm",
+      "inputs": {
+        "prompt": "An automated analysis has been performed. The system parameter with the largest divergence from ideal is '{{ find_max_divergence_parameter.stdout | trim }}'. A root cause analysis was run on the event log of the last workflow. The analysis results are: {{ get_root_cause_analysis.analysis | to_json }}. Please synthesize these findings into a concise, human-readable report. Explain what specific actions in the last workflow run are likely causing the divergence in the identified parameter. Be direct and clear.",
+        "max_tokens": 700
+      },
+      "dependencies": ["get_root_cause_analysis"]
+    },
+    "display_report": {
+        "action": "display_output",
+        "inputs": {
+            "content": "{{ synthesize_final_report.response_text }}"
+        },
+        "dependencies": ["synthesize_final_report"]
+    }
+  }
+} 

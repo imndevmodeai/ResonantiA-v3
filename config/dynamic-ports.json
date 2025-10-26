@@ -1,0 +1,24 @@
+{
+  "ports": {
+    "arche_python": 3012,
+    "websocket": 3013,
+    "nextjs": 3004,
+    "arche_interface": 5001
+  },
+  "urls": {
+    "arche_python": "ws://localhost:3012",
+    "websocket": "ws://localhost:3013",
+    "nextjs": "http://localhost:3004",
+    "arche_interface": "http://localhost:5001"
+  },
+  "environment": {
+    "PORT": "3004",
+    "NEXT_PUBLIC_WEBSOCKET_URL": "ws://localhost:3013",
+    "ARCHE_PORT": "3012",
+    "WEBSOCKET_PORT": "3013",
+    "NEXTJS_PORT": "3004",
+    "NEXT_PUBLIC_ARCHE_PORT": "3013",
+    "WEBSOCKET_URL": "ws://localhost:3013",
+    "ARCHE_INTERFACE_PORT": "5001"
+  }
+}

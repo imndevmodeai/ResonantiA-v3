@@ -1,0 +1,176 @@
+================================================================================
+AUTOPOIETIC SELF-ANALYSIS REPORT
+Map vs Territory Comparison
+================================================================================
+
+Analysis Date: 2025-10-10T07:58:40.221445
+Project Root: /media/newbu/3626C55326C514B1/Happier
+
+SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total Components Analyzed: 158
+Complete Implementations: 28
+Partial Implementations: 0
+Missing Implementations: 9
+Misaligned Implementations: 20
+Undocumented Implementations: 101
+
+Critical Issues: 9
+High Priority Issues: 20
+Medium Priority Issues: 101
+Average Alignment Score: 55.38%
+
+CRITICAL GAPS (Requires Immediate Attention)
+--------------------------------------------------------------------------------
+
+Component: system_version_v4
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement system_version_v4 according to specification
+
+Component: universal_abstraction
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement universal_abstraction according to specification
+
+Component: vetting_agent
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement vetting_agent according to specification
+
+Component: visual_cognitive_debugger_ui
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement visual_cognitive_debugger_ui according to specification
+
+Component: websocket_bridge
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement websocket_bridge according to specification
+
+Component: autopoietic_genesis_protocol
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement autopoietic_genesis_protocol according to specification
+
+Component: directory_organization
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement directory_organization according to specification
+
+Component: executable_spec_parser_enhanced
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement executable_spec_parser_enhanced according to specification
+
+Component: knowledge_graph_manager_enhanced
+  Type: missing
+  Description: Component specified but not implemented
+  Recommended Action: Implement knowledge_graph_manager_enhanced according to specification
+
+HIGH PRIORITY GAPS
+--------------------------------------------------------------------------------
+
+Component: llm_tool
+  Type: misaligned
+  Description: Missing classes: generate_text_llm
+  Alignment Score: 0.00%
+
+Component: perception_engine
+  Type: misaligned
+  Description: Missing classes: PerceptionEngine; Missing functions: close
+  Alignment Score: 0.00%
+
+Component: prompt_manager
+  Type: misaligned
+  Description: Missing functions: get_available_prompts, format_synergistic_vetting_prompt, format_vetting_prompt, format_truth_seeking_prompt, perform_scope_limitation_assessment
+  Alignment Score: 0.00%
+
+Component: real_time_event_correlator
+  Type: misaligned
+  Description: Missing classes: RealTimeEventCorrelator, BaseDetector, SequenceDetector; Missing functions: push_event
+  Alignment Score: 0.00%
+
+Component: rise_orchestrator
+  Type: misaligned
+  Description: Missing classes: RISE_Orchestrator
+  Alignment Score: 0.00%
+
+Component: semantic_archiver
+  Type: misaligned
+  Description: Missing classes: SemanticArchiver
+  Alignment Score: 0.00%
+
+Component: thought_trail
+  Type: misaligned
+  Description: Missing classes: ThoughtTrail
+  Alignment Score: 0.00%
+
+Component: token_cache_manager
+  Type: misaligned
+  Description: Missing classes: TokenCacheManager
+  Alignment Score: 0.00%
+
+Component: tsp_solver
+  Type: misaligned
+  Description: Missing classes: TSPSolver; Missing functions: solve_with_ortools, nearest_neighbor_heuristic, two_opt_optimization, solve_tsp
+  Alignment Score: 0.00%
+
+Component: workflow_engine
+  Type: misaligned
+  Description: Missing functions: execute_task, handle_dependencies, capture_context, evaluate_condition, generate_execution_report, execute_workflow
+  Alignment Score: 0.00%
+
+Component: abm_dsl_engine
+  Type: misaligned
+  Description: Missing classes: create_model_from_schema; Missing functions: step
+  Alignment Score: 0.00%
+
+Component: action_context
+  Type: misaligned
+  Description: Missing classes: ActionContext
+  Alignment Score: 0.00%
+
+Component: action_registry
+  Type: misaligned
+  Description: Missing classes: ActionRegistry
+  Alignment Score: 0.00%
+
+Component: adaptive_cognitive_orchestrator
+  Type: misaligned
+  Description: Missing functions: _check_evolution_opportunity, _perform_clustering_analysis, _load_controller_templates, generate_controller_draft
+  Alignment Score: 0.00%
+
+Component: agent_based_modeling_tool
+  Type: misaligned
+  Description: Missing classes: perform_abm
+  Alignment Score: 0.00%
+
+Component: cognitive_resonant_controller
+  Type: misaligned
+  Description: Missing functions: extract_specialized_context, _auto_tune_parameters, _initialize_default_controllers, detect_frequency_domain
+  Alignment Score: 0.00%
+
+Component: config
+  Type: misaligned
+  Description: Missing classes: Config
+  Alignment Score: 0.00%
+
+Component: enhanced_llm_provider
+  Type: misaligned
+  Description: Missing classes: EnhancedLLMProvider
+  Alignment Score: 0.00%
+
+Component: iar_components
+  Type: misaligned
+  Description: Missing classes: ResonanceTracker, IARValidator; Missing functions: __init__
+  Alignment Score: 0.00%
+
+Component: knowledge_graph_manager
+  Type: misaligned
+  Description: Missing functions: get_tapestry_node, find_related_concepts, add_relationship, search_sprs, add_spr, get_spr, evolve_knowledge
+  Alignment Score: 0.00%
+
+================================================================================
+END OF REPORT
+================================================================================

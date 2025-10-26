@@ -20,13 +20,16 @@ except ImportError:
 from urllib.parse import quote_plus
 
 try:
-from .utils.reflection_utils import create_reflection, ExecutionStatus
+    from .utils.reflection_utils import create_reflection, ExecutionStatus
 except ImportError:
     # Handle direct execution
     from utils.reflection_utils import create_reflection, ExecutionStatus
 
+from .thought_trail import log_to_thought_trail
+
 logger = logging.getLogger(__name__)
 
+@log_to_thought_trail
 def search_web(inputs: Dict[str, Any]) -> Dict[str, Any]:
     """
     Perform a web search using the enhanced unified search tool with intelligent fallback.
@@ -46,6 +49,7 @@ def search_web(inputs: Dict[str, Any]) -> Dict[str, Any]:
     query = inputs.get("query")
     num_results = inputs.get("num_results", 10)
     provider = inputs.get("provider", "duckduckgo")
+    validate_urls = inputs.get("validate_urls", False)
 
     if not query:
         return {
@@ -153,6 +157,18 @@ def search_web(inputs: Dict[str, Any]) -> Dict[str, Any]:
                         "url": requests.utils.unquote(cleaned_url),
                         "snippet": snippet
                     })
+
+        if validate_urls and results:
+            validated_results = []
+            for res in results:
+                try:
+                    head_response = requests.head(res['url'], timeout=5, allow_redirects=True)
+                    if head_response.status_code < 400:
+                        validated_results.append(res)
+                except requests.exceptions.RequestException:
+                    # URL is not reachable, so we skip it
+                    pass
+            results = validated_results
 
         if not results:
             return {

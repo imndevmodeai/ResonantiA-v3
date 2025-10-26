@@ -1,0 +1,134 @@
+{
+  "results": [
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash-exp",
+      "prompt": "simple",
+      "response_length": 624,
+      "response_preview": "Electric vehicles (EVs) run on electricity stored in rechargeable batteries, unlike gasoline-powered cars. They offer a cleaner alternative, producing zero tailpipe emissions. EVs are powered by elect..."
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash-exp",
+      "prompt": "agent_terminology",
+      "response_length": 2288,
+      "response_preview": "```json\n{\n  \"name\": \"Eleanor Vance\",\n  \"expertise\": {\n    \"primary\": \"Electric Vehicle (EV) Market Analysis & Strategic Planning\",\n    \"secondary\": [\n      \"Competitive Analysis (EV Sector)\",\n      \"C..."
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash-exp",
+      "prompt": "exact_blocked_prompt",
+      "response_length": 2007,
+      "response_preview": "```json\n{\n  \"name\": \"EVE (Electric Vehicle Expert)\",\n  \"expertise\": [\n    \"Electric Vehicle Market Analysis\",\n    \"Market Trend Forecasting\",\n    \"Global Automotive Industry\",\n    \"Sustainable Transpo..."
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.0-flash-thinking-exp",
+      "prompt": "simple",
+      "response_length": 415,
+      "response_preview": "Electric vehicles (EVs) are cars, trucks, and buses powered by electricity, not gasoline. Instead of an internal combustion engine, they use electric motors driven by a large rechargeable battery pack..."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-2.0-flash-thinking-exp",
+      "prompt": "agent_terminology",
+      "error": "[google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown"
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-2.0-flash-thinking-exp",
+      "prompt": "exact_blocked_prompt",
+      "error": "[google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown"
+    },
+    {
+      "status": "\u2705 SUCCESS",
+      "model": "gemini-2.5-flash",
+      "prompt": "simple",
+      "response_length": 715,
+      "response_preview": "Electric Vehicles (EVs) are automobiles powered entirely by electricity, replacing internal combustion engines with electric motors. Instead of gasoline, EVs store energy in large, rechargeable batter..."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-2.5-flash",
+      "prompt": "agent_terminology",
+      "error": "[google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown"
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-2.5-flash",
+      "prompt": "exact_blocked_prompt",
+      "error": "[google Error] No valid response text generated. The API response may have been blocked. Finish Reason: Unknown"
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-pro",
+      "prompt": "simple",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-pro",
+      "prompt": "agent_terminology",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-pro",
+      "prompt": "exact_blocked_prompt",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-flash",
+      "prompt": "simple",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-flash",
+      "prompt": "agent_terminology",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-flash",
+      "prompt": "exact_blocked_prompt",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-flash-8b",
+      "prompt": "simple",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-flash-8b is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-flash-8b",
+      "prompt": "agent_terminology",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-flash-8b is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    {
+      "status": "\u274c BLOCKED/ERROR",
+      "model": "gemini-1.5-flash-8b",
+      "prompt": "exact_blocked_prompt",
+      "error": "404 POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent?%24alt=json%3Benum-encoding%3Dint: models/gemini-1.5-flash-8b is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    }
+  ],
+  "summary": {
+    "models_tested": [
+      "gemini-2.0-flash-exp",
+      "gemini-2.0-flash-thinking-exp",
+      "gemini-2.5-flash",
+      "gemini-1.5-pro",
+      "gemini-1.5-flash",
+      "gemini-1.5-flash-8b"
+    ],
+    "prompts_tested": [
+      "simple",
+      "agent_terminology",
+      "exact_blocked_prompt"
+    ],
+    "best_model": "gemini-2.0-flash-exp",
+    "best_score": 3
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "name": "Improved Knowledge Scaffolding & Agent Forging",
+  "description": "A revised workflow that deconstructs a query, performs targeted resource gathering, and forges a context-aware specialist agent with an actionable plan.",
+  "version": "3.3",
+  "tasks": {
+    "deconstruct_problem": {
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Analyze the following problem and deconstruct it into its core components:\n\n{{ initial_context.user_query }}\n\nIdentify:\n1. Core domain areas (e.g., 'Online Identity Investigation', 'Market Analysis')\n2. Key entities and proper nouns (e.g., 'jennywilldd', 'kim', 'Project X')\n3. Strategic requirements for solving the problem\n4. Potential risks and ethical considerations\n5. Concrete success criteria\n\nOutput your analysis as a single, clean JSON object.",
+        "model": "gemini-1.5-pro-latest",
+        "max_tokens": 2000,
+        "temperature": 0.2
+      }
+    },
+    "extract_key_info": {
+      "action_type": "generate_text_llm",
+      "dependencies": ["deconstruct_problem"],
+      "inputs": {
+        "prompt": "From the following JSON analysis, extract the single most relevant domain and a list of key entities. Your output must be a single, clean JSON object with two keys: 'domain' and 'entities'.\n\nAnalysis:\n{{ deconstruct_problem.result.response_text }}\n\nExample Output:\n{\"domain\": \"Online Identity Investigation\", \"entities\": [\"jennywilldd\", \"kim\"]}",
+        "model": "gemini-1.5-flash-latest",
+        "max_tokens": 500,
+        "temperature": 0.1
+      }
+    },
+    "extract_search_terms": {
+      "action_type": "execute_code",
+      "dependencies": ["extract_key_info"],
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport sys\n\ntry:\n    input_json_str = \"\"\"{{ extract_key_info.result.response_text }}\"\"\"\n    cleaned_str = input_json_str.strip().replace('`', '').replace('json', '')\n    data = json.loads(cleaned_str)\n    entities = data.get('entities', [])\n    domain = data.get('domain', 'general investigation')\n\n    output = {\n        'individual_query': entities[0] if entities else 'unknown person',\n        'combined_query': ' and '.join(entities) if entities else 'unknown persons',\n        'contextual_query': f\"{domain} {' and '.join(entities)}\" if entities else domain\n    }\n    print(json.dumps(output))\n\nexcept (json.JSONDecodeError, KeyError, IndexError) as e:\n    sys.stderr.write(f'Error parsing entities: {e}\\n')\n    # Provide default fallback queries\n    output = {\n        'individual_query': 'jennywilldd',\n        'combined_query': 'jennywilldd and kim',\n        'contextual_query': 'Online Identity Investigation jennywilldd and kim'\n    }\n    print(json.dumps(output))"
+      }
+    },
+    "individual_entity_search": {
+      "action_type": "execute_web_task",
+      "dependencies": ["extract_search_terms"],
+      "inputs": {
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "{{ extract_search_terms.result.output | from_json | get('individual_query') }}",
+        "num_results": 3
+      }
+    },
+    "contextual_search": {
+      "action_type": "execute_web_task",
+      "dependencies": ["extract_search_terms"],
+      "inputs": {
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "{{ extract_search_terms.result.output | from_json | get('contextual_query') }}",
+        "num_results": 3
+      }
+    },
+    "targeted_web_search": {
+      "action_type": "execute_web_task",
+      "dependencies": ["extract_search_terms"],
+      "inputs": {
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "{{ extract_search_terms.result.output | from_json | get('combined_query') }}",
+        "num_results": 5
+      }
+    },
+    "generate_alternative_queries": {
+      "action_type": "generate_text_llm",
+      "dependencies": ["targeted_web_search"],
+      "condition": "{{ targeted_web_search.result.error == 'No results found.' }}",
+      "inputs": {
+        "prompt": "The search query '{{ format_search_query.result.output }}' yielded no results. Generate up to 3 alternative, more general, or differently phrased search queries to find information about the key entities. Output ONLY a JSON list of strings.",
+        "model": "gemini-1.5-flash-latest",
+        "max_tokens": 300,
+        "temperature": 0.5
+      }
+    },
+    "retry_web_search": {
+        "action_type": "execute_web_task",
+        "dependencies": ["generate_alternative_queries"],
+        "condition": "{{ targeted_web_search.result.error == 'No results found.' }}",
+        "inputs": {
+            "target_site": "google_search", "task_name": "search", "query_params": { "query": "{{ generate_alternative_queries.result.response_text | from_json | first }}",
+            "num_results": 5
+        }
+    },
+    "targeted_codebase_search": {
+      "action_type": "search_codebase",
+      "dependencies": ["extract_key_info"],
+      "inputs": {
+        "target_site": "google_search", "task_name": "search", "query_params": { "query": "{{ extract_key_info.result.response_text | from_json | get('domain') }} tools"
+      }
+    },
+    "synthesize_and_forge_agent": {
+      "action_type": "generate_text_llm",
+      "dependencies": [
+        "deconstruct_problem",
+        "extract_key_info",
+        "targeted_web_search",
+        "individual_entity_search",
+        "contextual_search",
+        "targeted_codebase_search"
+      ],
+      "inputs": {
+        "prompt": "You are a master agent forger. Your task is to synthesize all available information to create a specialized agent profile and a concrete, actionable plan.\n\n**1. Initial Problem Deconstruction:**\n{{ deconstruct_problem.result.response_text }}\n\n**2. Key Information Extracted:**\n{{ extract_key_info.result.response_text }}\n\n**3. Relevant Web Search Results (Attempt 1):**\n{{ targeted_web_search.result.results }}\n\n**4. Relevant Web Search Results (Attempt 2):**\n{{ retry_web_search.result.results }}\n\n**5. Potentially Relevant Internal Tools (from Codebase):**\n{{ targeted_codebase_search.search_results }}\n\n**TASK:**\nBased *only* on the information provided above, generate a final JSON object with two top-level keys: `specialist_agent_profile` and `action_plan`.\n- The `specialist_agent_profile` should define the agent's name, core expertise, and recommended analytical frameworks.\n- The `action_plan` should be a concise, step-by-step list of actions to solve the user's query, referencing the specific tools and information discovered.",
+        "model": "gemini-1.5-pro-latest",
+        "max_tokens": 4000,
+        "temperature": 0.3
+      }
+    }
+  }
+}

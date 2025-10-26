@@ -1,0 +1,111 @@
+{
+  "name": "Tesla Visioning Workflow (Conceptual v3.0)",
+  "description": "Conceptual workflow for complex problem-solving/design, involving priming, blueprinting, assessment (using IAR context), execution/simulation (placeholder), and confirmation.",
+  "version": "3.0",
+  "tasks": {
+    "phase1_start": {
+      "description": "Initiate Tesla Visioning for the request.",
+      "action_type": "display_output",
+      "inputs": { "content": "--- Starting Tesla Visioning Workflow ---\nRequest: {{ initial_context.user_query }}" },
+      "dependencies": []
+    },
+    "phase1_spr_identify": {
+      "description": "Identify relevant SPRs based on the request and triggering SPR.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Analyze the User Request and Triggering SPR (if provided). Identify 3-5 key ResonantiA v3.0 SPRs (Sparse Priming Representations) most relevant for addressing this complex design/problem-solving task. List the SPR IDs.\nUser Request: {{ initial_context.user_query }}\nTriggering SPR: {{ initial_context.TriggeringSPR }}\nRelevant SPRs:",
+        "max_tokens": 150
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["phase1_start"]
+    },
+    "phase1_cognitive_unfolding": {
+      "description": "Simulate cognitive unfolding based on identified SPRs.",
+      "action_type": "execute_code",
+      "inputs": {
+        "input_data": {
+          "identified_sprs_text": "{{ phase1_spr_identify.response_text }}",
+          "triggering_spr": "{{ initial_context.TriggeringSPR }}",
+          "initial_user_request": "{{ initial_context.user_query }}"
+        }
+      },
+      "action_config": {
+        "language": "python",
+        "code": "import sys\\nimport json\\nimport re\\n\\n# Load input data from stdin\\ninput_str = sys.stdin.read()\\ninput_json = json.loads(input_str)\\n\\nidentified_sprs_text = input_json.get('identified_sprs_text', '')\\ntriggering_spr = input_json.get('triggering_spr')\\ninitial_user_request = input_json.get('initial_user_request', '')\\n\\nprimed_sprs = []\\nif identified_sprs_text:\\n    primed_sprs = [s.strip() for s in re.findall(r'([A-Z0-9][a-zA-Z0-9 _-]+[A-Z0-9a-z0-9])', identified_sprs_text)]\\n\\nif not primed_sprs and triggering_spr:\\n    primed_sprs = [triggering_spr]\\n\\nif not primed_sprs and initial_user_request: \\n    potential_concepts = re.findall(r'([A-Z][a-z]+(?:[A-Z][a-z]+)*)', initial_user_request) \\n    if potential_concepts: primed_sprs = [\"UserFocus: \" + ' '.join(potential_concepts[:3])]\\n\\nif not primed_sprs:\\n    primed_sprs = [\"GenericProblemSolvingSPR\"]\\n\\noutput = {\\n    'simulated_cognitive_unfolding_status': 'Success',\\n    'primed_concepts': primed_sprs,\\n    'message': f'Simulated Cognitive Unfolding complete. Key concepts primed: {primed_sprs}'\\n}\\nprint(json.dumps(output))"
+      },
+      "outputs": {"cognitive_unfolding_results": "dict"},
+      "output_key": "cognitive_unfolding_results",
+      "dependencies": ["phase1_spr_identify"],
+      "condition": "{{ phase1_spr_identify.reflection.status == 'Success' }}",
+      "max_retries": 1
+    },
+    "phase2_start": {
+        "description": "Start Phase 2: Mental Blueprinting.",
+        "action_type": "display_output",
+        "inputs": {"content": "--- Phase 2: Mental Blueprinting ---"},
+        "dependencies": ["phase1_cognitive_unfolding"]
+    },
+    "phase2_mental_blueprinting": {
+      "description": "Generate a detailed conceptual blueprint/plan using LLM.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Based on the User Request and the following primed concepts, generate a detailed conceptual blueprint (step-by-step plan or framework design) to address the request. The blueprint should leverage ResonantiA v3.0 capabilities where appropriate (mention relevant tools/workflows/SPRs).\nUser Request: {{ initial_context.user_query }}\nPrimed Concepts: {{ phase1_cognitive_unfolding.primed_concepts }}\n\nDetailed Blueprint:",
+        "max_tokens": 1500
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["phase2_start"],
+      "condition": "{{ phase1_cognitive_unfolding.simulated_cognitive_unfolding_status == 'Success' }}"
+    },
+     "phase3_start": {
+        "description": "Start Phase 3: Assessment & Decision.",
+        "action_type": "display_output",
+        "inputs": {"content": "--- Phase 3: Assessment & Decision ---"},
+        "dependencies": ["phase2_mental_blueprinting"]
+    },
+    "phase3_assess_blueprint": {
+      "description": "Assess the generated blueprint for feasibility, risks, and decide on simulation vs. execution.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are the VettingAgent. Assess the following generated blueprint for feasibility, potential risks, and alignment with the original request. Consider the complexity and potential for unintended consequences. Leverage conceptual IAR: estimate the likely confidence and potential issues of the core steps proposed in the blueprint. Recommend whether to proceed with direct execution (if low risk/well-defined) or internal simulation/further refinement first.\n\nUser Request: {{ initial_context.user_query }}\nGenerated Blueprint:\n```\n{{ phase2_mental_blueprinting.response_text }}\n```\n\nAssessment:\n- Feasibility Score (0.0-1.0):\n- Key Risks:\n- Alignment Score (0.0-1.0):\n- Estimated Confidence of Core Steps (Conceptual IAR):\n- Recommendation (Execute | Simulate | Refine Blueprint):\n- Justification:",
+        "max_tokens": 800
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["phase3_start"],
+      "condition": "{{ phase2_mental_blueprinting.reflection.status == 'Success' }}"
+    },
+    "phase4_placeholder_execution": {
+      "description": "Placeholder representing the execution or simulation of the blueprint.",
+      "action_type": "execute_code",
+      "inputs": {
+        "input_data": {
+          "blueprint_assessment_text": "{{ phase3_assess_blueprint.response_text }}"
+        }
+      },
+      "action_config": {
+        "language": "python",
+        "code": "import sys\\nimport json\\n\\n# Load input data from stdin\\ninput_str = sys.stdin.read()\\ninput_json = json.loads(input_str)\\n\\nblueprint_assessment = input_json.get('blueprint_assessment_text', 'Assessment N/A')\\n\\nrecommendation = 'Execute' \\nif 'Simulate' in blueprint_assessment: recommendation = 'Simulate'\\nif 'Refine Blueprint' in blueprint_assessment: recommendation = 'Refine'\\n\\nsim_status = ''\\nsim_summary = ''\\nsim_confidence = 0.0\\n\\nif recommendation == 'Refine':\\n    sim_status = 'RefinementRequired'\\n    sim_summary = 'Blueprint refinement suggested before execution.'\\n    sim_confidence = 0.5\\nelif recommendation == 'Simulate':\\n    sim_status = 'SimulationComplete'\\n    sim_summary = f'Conceptual simulation of blueprint completed successfully.'\\n    sim_confidence = 0.85\\nelse: # Execute\\n    sim_status = 'ExecutionComplete'\\n    sim_summary = f'Conceptual execution of blueprint completed successfully.'\\n    sim_confidence = 0.9\\n\\noutput = {\\n    'execution_outcome': {\\n        'status': sim_status,\\n        'summary': sim_summary,\\n        'recommendation_followed': recommendation\\n    },\\n    'placeholder_execution_status': 'Success', \\n    'simulated_confidence': sim_confidence,\\n    'debug_message': f'Simulating Phase 4: {recommendation} based on assessment.'\\n}\\nprint(json.dumps(output))"
+      },
+      "outputs": {"execution_results": "dict", "stdout": "string", "reflection": "dict"},
+      "output_key": "placeholder_execution_results",
+      "dependencies": ["phase3_assess_blueprint"],
+      "condition": "{{ phase3_assess_blueprint.reflection.status == 'Success' }}"
+    },
+     "phase5_start": {
+        "description": "Start Phase 5: Human Confirmation.",
+        "action_type": "display_output",
+        "inputs": {"content": "--- Phase 5: Human Confirmation ---"},
+        "dependencies": ["phase4_placeholder_execution"]
+    },
+    "phase5_present_for_confirmation": {
+      "description": "Present the final outcome, blueprint, and assessment (incl. IAR context) for Keyholder review.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Prepare a final summary report for Keyholder confirmation regarding the Tesla Visioning request.\n\nOriginal Request: {{ initial_context.user_query }}\n\nGenerated Blueprint:\n```\n{{ phase2_mental_blueprinting.response_text }}\n```\n\nBlueprint Assessment (IAR Confidence: {{ phase3_assess_blueprint.reflection.confidence }}):\n```\n{{ phase3_assess_blueprint.response_text }}\n```\n\nExecution/Simulation Outcome (IAR Confidence: {{ phase4_placeholder_execution.simulated_confidence }}):\n```json\n{{ phase4_placeholder_execution.execution_outcome }}\n```\n\nSynthesize these elements into a concise report. Highlight the proposed solution/design, key decisions made during assessment, the final outcome status, and overall confidence based on the IAR data from the blueprinting, assessment, and execution phases. Request Keyholder confirmation or further refinement instructions.",
+        "max_tokens": 1200
+      },
+      "outputs": {"response_text": "string", "reflection": "dict"},
+      "dependencies": ["phase5_start"],
+      "condition": "{{ phase4_placeholder_execution.placeholder_execution_status == 'Success' }}"
+    }
+  }
+} 

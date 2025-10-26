@@ -1,5 +1,118 @@
-node_modules/
-.next/
-*.log
-*.env
+# --- ResonantiA v3.0 .gitignore ---
+
+# Python Bytecode and Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments (Common Names)
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# IDE / Editor Configuration Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# Secrets & Sensitive Configuration (NEVER COMMIT THESE)
+# Add specific files containing secrets if not using environment variables
+# Example:
+# .env
+# secrets.json
+# config_secrets.py
+# api_keys.yaml
+
+# Operating System Generated Files
 .DS_Store
+Thumbs.db
+._*
+
+
+
+# Testing Artifacts (customize based on testing framework)
+.pytest_cache/
+.coverage
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+tests/outputs/ # Exclude test-specific outputs if generated there
+tests/logs/    # Exclude test-specific logs
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints
+
+# Cursor IDE specific files
+.cursor/
+
+
+# Dependencies (if managed locally, though venv is preferred)
+# node_modules/
+
+# Node.js
+/node_modules
+/ResonantiA/browser_automation/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak
+venv.bak
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Ignore all node_modules and chrome artifacts
+**/node_modules/
+**/chrome/
+
+cursor_discuss_protocol_files_and_spec10.19.25i.md
+nextjs-chat_backup_quarantine/
+outputs/
+cursor_*.deb

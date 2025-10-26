@@ -1,0 +1,37 @@
+{
+    "name": "Autopoietic Genesis Protocol v4",
+    "description": "The master workflow for ArchE v4.0 self-regeneration. It reads the living specifications, generates a new codebase from them, applies the changes, and validates the new system.",
+    "tasks": {
+        "read_specifications": {
+            "action": "read_living_specifications",
+            "inputs": {
+                "specifications_directory": "specifications"
+            },
+            "outputs": {
+                "specifications_content": "{{read_specifications.result}}"
+            }
+        },
+        "generate_codebase": {
+            "action": "generate_codebase_from_specs",
+            "dependencies": ["read_specifications"],
+            "inputs": {
+                "specifications": "{{ tasks.read_specifications.result.specifications }}",
+                "target_dir": "./"
+            }
+        },
+        "apply_changes": {
+            "action": "apply_codebase_changes",
+            "dependencies": ["generate_codebase"],
+            "inputs": {
+                "generated_files": "{{ tasks.generate_codebase.result.generated_files }}"
+            }
+        },
+        "validate_new_system": {
+            "action": "run_validation_tests",
+            "dependencies": ["apply_changes"],
+            "inputs": {
+                "target_dir": "./"
+            }
+        }
+    }
+}

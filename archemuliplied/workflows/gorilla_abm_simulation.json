@@ -1,0 +1,72 @@
+{
+  "name": "ABM Simulation: Gorilla vs. 30 Unarmed Men",
+  "description": "Uses the Agent-Based Modeling tool to simulate a battle to the death, tracking agent states and outcomes.",
+  "version": "1.0",
+  "tasks": {
+    "simulate_battle": {
+      "description": "Run an agent-based model of the combat scenario.",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "combat",
+        "steps": 300,
+        "grid_size": [50, 50],
+        "termination_conditions": [
+          {"agent_type": "Gorilla", "metric": "count", "condition": "less_than_or_equal_to", "value": 0},
+          {"agent_type": "Human", "metric": "count", "condition": "less_than_or_equal_to", "value": 0}
+        ],
+        "agent_definitions": {
+          "Gorilla": {
+            "count": 1,
+            "team": "A",
+            "attributes": {
+              "health": 1500,
+              "attack_power": 100,
+              "attack_range": 2
+            }
+          },
+          "Human": {
+            "count": 30,
+            "team": "B",
+            "attributes": {
+              "health": 100,
+              "attack_power": 4,
+              "attack_range": 1
+            }
+          }
+        }
+      },
+      "outputs": {"simulation_results": "object", "reflection": "dict"}
+    },
+    "summarize_simulation_results": {
+      "description": "Summarize the outcome of the ABM simulation.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": [
+          "import json",
+          "import pandas as pd",
+          "from io import StringIO",
+          "results_str = '''{{ simulate_battle.model_data }}'''",
+          "df = pd.read_json(StringIO(results_str))",
+          "final_step = df.iloc[-1]",
+          "gorilla_health = final_step['GorillaHealth']",
+          "humans_remaining = final_step['AliveHumans']",
+          "print('--- Simulation Play-by-Play ---')",
+          "print(f'Initial State: 1 Gorilla (1500 HP) vs. 30 Humans (100 HP each).')",
+          "for index, row in df.iterrows():",
+          "    if row['Step'] % 5 == 0 or index == len(df) - 1:",
+          "        print(f\"Step {row['Step']}: Gorilla Health: {row['GorillaHealth']:.0f}/1500 | Humans Remaining: {row['AliveHumans']}/30\")",
+          "print('\\n--- Final Outcome ---')",
+          "if gorilla_health > 0 and humans_remaining == 0:",
+          "    print(f'Outcome: The Gorilla is victorious after {int(final_step.Step)} steps.')",
+          "elif gorilla_health <= 0 and humans_remaining > 0:",
+          "    print(f'Outcome: The Men are victorious after {int(final_step.Step)} steps.')",
+          "else:",
+          "    print('Outcome: Mutual destruction or simulation timed out.')"
+        ]
+      },
+      "dependencies": ["simulate_battle"]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "specification_path": "specifications/action_registry.md",
+  "target_filename": "action_registry.py",
+  "target_file_path": "Three_PointO_ArchE/action_registry.py",
+  "problem_description": "Generate Python code for action_registry.py from its Living Specification using Autopoietic System Genesis"
+}

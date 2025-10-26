@@ -1,0 +1,94 @@
+{
+  "name": "Knowledge Scaffolding & Dynamic Specialization",
+  "description": "Phase A of RISE v2.0: Acquire domain knowledge and forge specialist agent",
+  "version": "2.0",
+  "inputs": {
+    "problem_description": {
+      "type": "string",
+      "description": "The problem to be analyzed and solved",
+      "required": true
+    }
+  },
+  "tasks": {
+    "deconstruct_problem": {
+      "action_type": "generate_text_llm",
+      "description": "Deconstruct the problem into core components and identify domain requirements",
+      "inputs": {
+        "prompt": "Analyze the following problem and deconstruct it into core components:\\n\\n{{ problem_description }}\\n\\nIdentify:\\n1. Core domain areas\\n2. Key variables and unknowns\\n3. Strategic requirements\\n4. Risk factors\\n5. Success criteria\\n\\nOutput your analysis as a structured JSON object with a key 'deconstruction_text'.",
+        "model": "{{ model }}",
+        "model_settings": {"temperature": 0.3, "max_tokens": 8192}
+      },
+      "dependencies": []
+    },
+    "extract_domain_from_deconstruction": {
+      "action_type": "generate_text_llm",
+      "description": "Extract the primary domain from the deconstruction analysis into a structured format.",
+      "inputs": {
+        "prompt": "From the following JSON analysis, identify and extract only the single, most relevant 'Core domain area'. Your output must be a single, clean JSON object with one key: 'domain'. For example: {\\\"domain\\\": \\\"Artificial Intelligence Strategy\\\"}\\n\\nAnalysis:\\n{{ deconstruct_problem.result.generated_text }}",
+        "model_settings": {"temperature": 0.1, "max_tokens": 500}
+      },
+      "dependencies": ["deconstruct_problem"]
+    },
+    "acquire_domain_knowledge": {
+      "action_type": "search_web",
+      "description": "Acquire relevant domain knowledge through web search",
+      "inputs": {
+        "query": "{% if extract_domain_from_deconstruction.result and extract_domain_from_deconstruction.result.generated_text %}{{ extract_domain_from_deconstruction.result.generated_text }}{% else %}{{ problem_description }}{% endif %} latest developments competitive landscape strategic insights trends key players market dynamics",
+        "num_results": 10,
+        "provider": "duckduckgo"
+      },
+      "dependencies": ["extract_domain_from_deconstruction"]
+    },
+    "validate_search_results": {
+      "action_type": "execute_code",
+      "description": "[PhasegateS] Validate that the search tool returned valid, non-empty results.",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nsearch_output = {{ acquire_domain_knowledge.result }}\nresults = search_output.get('results')\nvalid = isinstance(results, list) and len(results) > 0\nprint(json.dumps({'search_is_valid': valid, 'results_count': len(results) if isinstance(results, list) else 0}))"
+      },
+      "dependencies": ["acquire_domain_knowledge"]
+    },
+    "analyze_specialization_requirements": {
+      "action_type": "generate_text_llm",
+      "description": "Analyze what specialized capabilities are needed for this problem",
+      "condition": "{{ validate_search_results.result.output.search_is_valid }} == true",
+      "inputs": {
+        "prompt": "Based on the problem deconstruction and domain knowledge, analyze what specialized capabilities and expertise are required:\\n\\nProblem: {{ problem_description }}\\nDeconstruction: {{ deconstruct_problem.result.generated_text }}\\nDomain Knowledge: {{ acquire_domain_knowledge.result }}\\n\\nIdentify:\\n1. Required specialized knowledge areas\\n2. Critical analytical capabilities\\n3. Strategic thinking patterns\\n4. Risk assessment frameworks\\n5. Implementation expertise",
+        "model_settings": {"temperature": 0.4, "max_tokens": 8192}
+      },
+      "dependencies": ["validate_search_results"]
+    },
+    "forge_specialist_agent": {
+      "action_type": "generate_text_llm",
+      "description": "Forge a specialized agent with the required capabilities",
+      "inputs": {
+        "prompt": "Create a specialized agent profile for solving this problem:\\n\\nProblem: {{ problem_description }}\\nRequirements: {{ analyze_specialization_requirements.result.generated_text }}\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria",
+        "model_settings": {"temperature": 0.3, "max_tokens": 16384}
+      },
+      "dependencies": ["analyze_specialization_requirements"]
+    },
+    "validate_specialist_agent": {
+      "action_type": "generate_text_llm",
+      "description": "Validate that the specialist agent has the required capabilities",
+      "inputs": {
+        "prompt": "Validate the specialist agent against the original problem requirements:\\n\\nProblem: {{ problem_description }}\\nRequirements: {{ analyze_specialization_requirements.result.generated_text }}\\nSpecialist Agent: {{ forge_specialist_agent.result.generated_text }}\\n\\nAssess:\\n1. Coverage of required capabilities\\n2. Alignment with problem requirements\\n3. Strategic fit and expertise match\\n4. Potential gaps or limitations\\n5. Confidence in agent's ability to solve the problem",
+        "model_settings": {"temperature": 0.2, "max_tokens": 1500}
+      },
+      "dependencies": ["forge_specialist_agent"]
+    }
+  },
+  "outputs": {
+    "session_knowledge_base": {
+      "description": "Accumulated domain knowledge and insights",
+      "source": "acquire_domain_knowledge"
+    },
+    "specialized_agent": {
+      "description": "The forged specialist agent with required capabilities",
+      "source": "validate_specialist_agent"
+    },
+    "knowledge_acquisition_metrics": {
+      "description": "Metrics on knowledge acquisition effectiveness",
+      "source": "acquire_domain_knowledge"
+    }
+  }
+}

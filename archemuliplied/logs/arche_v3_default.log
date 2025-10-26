@@ -1,0 +1,595 @@
+2025-08-10 11:50:07 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 11:50:07 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 11:50:07 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 11:50:09 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 11:50:09 - Three_PointO_ArchE.causal_inference_tool:44 - WARNING - causal_inference_tool - Causal libraries import failed: No module named 'dowhy'. Causal Inference Tool functionality will be limited or simulated.
+2025-08-10 11:50:09 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 11:50:09 - Three_PointO_ArchE.agent_based_modeling_tool:65 - WARNING - agent_based_modeling_tool - Mesa library import failed: No module named 'mesa'. ABM Tool will run in SIMULATION MODE.
+2025-08-10 11:50:09 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'statsmodels'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 11:50:10 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 11:50:10 - root:36 - WARNING - predictive_flux_coupling_engine - SciPy/sklearn not available, using fallback implementations
+2025-08-10 11:50:10 - Three_PointO_ArchE.action_registry:46 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 11:50:10 - Three_PointO_ArchE.action_registry:90 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 11:50:10 - Three_PointO_ArchE.action_registry:145 - INFO - action_registry - Populating the main action registry...
+2025-08-10 11:50:10 - Three_PointO_ArchE.action_registry:188 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 11:50:10 - Three_PointO_ArchE.action_registry:201 - INFO - action_registry - Action registry populated. Total actions: 27.
+2025-08-10 11:50:10 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/ctaas_decision_impact.json ---
+2025-08-10 11:50:10 - __main__:174 - INFO - main - Loaded initial context from: /media/newbu/3626C55326C514B1/Happier/archemuliplied/ctaas_unilever_context.json
+2025-08-10 11:50:10 - Three_PointO_ArchE.workflow_engine:325 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-10 11:50:10 - Three_PointO_ArchE.workflow_engine:449 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/ctaas_decision_impact.json
+2025-08-10 11:50:10 - Three_PointO_ArchE.workflow_engine:1018 - INFO - workflow_engine - Starting workflow 'CTaaS Decision Impact (v3.5)' (Run ID: run_a197977ccc3141788665b5e01cceec5c). Initial ready tasks: ['ingest_context']
+2025-08-10 11:50:10 - Three_PointO_ArchE.causal_inference_tool:115 - INFO - causal_inference_tool - Performing causal inference operation: '{'operation': 'estimate_effect', 'data': {'x': [0, 1, 0, 1, 1], 'z': [1, 0, 1, 0, 1], 'y': [0.2, 0.9, 0.3, 1.1, 0.85]}, 'treatment': 'x', 'outcome': 'y', 'confounders': ['z']}'
+2025-08-10 11:50:10 - Three_PointO_ArchE.workflow_engine:1122 - INFO - workflow_engine - Workflow 'CTaaS Decision Impact (v3.5)' finished in 0.0s with status: Completed with Errors
+2025-08-10 11:50:10 - Three_PointO_ArchE.workflow_engine:1132 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_a197977ccc3141788665b5e01cceec5c.jsonl
+2025-08-10 11:50:10 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_ctaas_decision_impact_run_a197977ccc3141788665b5e01cceec5c.json
+2025-08-10 11:55:54 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 11:55:54 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 11:55:54 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 11:55:55 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 11:55:56 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 11:55:56 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 11:55:58 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 11:55:58 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 11:55:58 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 11:55:58 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 11:55:58 - root:48 - CRITICAL - main - Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): No module named 'google'. Check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/main.py", line 43, in <module>
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py", line 21, in <module>
+    from .action_registry import execute_action, main_action_registry, register_action
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/action_registry.py", line 29, in <module>
+    from .llm_tool import generate_text_llm
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/llm_tool.py", line 5, in <module>
+    import google.generativeai as genai
+ModuleNotFoundError: No module named 'google'
+2025-08-10 11:57:06 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 11:57:06 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 11:57:06 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 11:57:07 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 11:57:09 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 11:57:09 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 11:57:09 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 11:57:09 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 11:57:09 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 11:57:09 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 11:57:10 - root:48 - CRITICAL - main - Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): No module named 'bs4'. Check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/main.py", line 43, in <module>
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py", line 21, in <module>
+    from .action_registry import execute_action, main_action_registry, register_action
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/action_registry.py", line 32, in <module>
+    from .tools.search_tool import SearchTool
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/tools/search_tool.py", line 2, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+2025-08-10 11:57:47 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 11:57:47 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 11:57:47 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 11:57:48 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 11:57:50 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 11:57:50 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 11:57:51 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 11:57:51 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 11:57:51 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 11:57:51 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 11:57:51 - root:48 - CRITICAL - main - Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): No module named 'duckduckgo_search'. Check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/main.py", line 43, in <module>
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py", line 21, in <module>
+    from .action_registry import execute_action, main_action_registry, register_action
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/action_registry.py", line 32, in <module>
+    from .tools.search_tool import SearchTool
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/tools/search_tool.py", line 5, in <module>
+    from duckduckgo_search import DDGS
+ModuleNotFoundError: No module named 'duckduckgo_search'
+2025-08-10 11:59:26 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 11:59:26 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 11:59:26 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 11:59:27 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 11:59:28 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 11:59:28 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 11:59:29 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 11:59:29 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 11:59:29 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 11:59:29 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 11:59:30 - root:48 - CRITICAL - main - Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): No module named 'duckduckgo_search'. Check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/main.py", line 43, in <module>
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py", line 21, in <module>
+    from .action_registry import execute_action, main_action_registry, register_action
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/action_registry.py", line 32, in <module>
+    from .tools.search_tool import SearchTool
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/tools/search_tool.py", line 5, in <module>
+    from duckduckgo_search import DDGS
+ModuleNotFoundError: No module named 'duckduckgo_search'
+2025-08-10 11:59:45 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 11:59:45 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 11:59:45 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 11:59:45 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 11:59:47 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 11:59:47 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 11:59:48 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 11:59:48 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 11:59:48 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 11:59:48 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 11:59:48 - root:48 - CRITICAL - main - Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): No module named 'serpapi'. Check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/main.py", line 43, in <module>
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py", line 21, in <module>
+    from .action_registry import execute_action, main_action_registry, register_action
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/action_registry.py", line 32, in <module>
+    from .tools.search_tool import SearchTool
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/tools/search_tool.py", line 6, in <module>
+    from serpapi import GoogleSearch
+ModuleNotFoundError: No module named 'serpapi'
+2025-08-10 12:00:30 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 12:00:30 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 12:00:30 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 12:00:30 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 12:00:32 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 12:00:32 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 12:00:33 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 12:00:33 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 12:00:33 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 12:00:33 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 12:00:33 - root:48 - CRITICAL - main - Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): cannot import name 'GoogleSearch' from 'serpapi' (/media/newbu/3626C55326C514B1/Happier/archemuliplied/.venv/lib/python3.12/site-packages/serpapi/__init__.py). Check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/main.py", line 43, in <module>
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py", line 21, in <module>
+    from .action_registry import execute_action, main_action_registry, register_action
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/action_registry.py", line 32, in <module>
+    from .tools.search_tool import SearchTool
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/tools/search_tool.py", line 6, in <module>
+    from serpapi import GoogleSearch
+ImportError: cannot import name 'GoogleSearch' from 'serpapi' (/media/newbu/3626C55326C514B1/Happier/archemuliplied/.venv/lib/python3.12/site-packages/serpapi/__init__.py)
+2025-08-10 16:13:56 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 16:13:56 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 16:13:56 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 16:13:58 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 16:13:58 - Three_PointO_ArchE.causal_inference_tool:44 - WARNING - causal_inference_tool - Causal libraries import failed: No module named 'dowhy'. Causal Inference Tool functionality will be limited or simulated.
+2025-08-10 16:13:58 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 16:13:58 - Three_PointO_ArchE.agent_based_modeling_tool:65 - WARNING - agent_based_modeling_tool - Mesa library import failed: No module named 'mesa'. ABM Tool will run in SIMULATION MODE.
+2025-08-10 16:13:58 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'statsmodels'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 16:13:59 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 16:13:59 - root:36 - WARNING - predictive_flux_coupling_engine - SciPy/sklearn not available, using fallback implementations
+2025-08-10 16:13:59 - Three_PointO_ArchE.action_registry:47 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 16:13:59 - Three_PointO_ArchE.action_registry:91 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 16:13:59 - Three_PointO_ArchE.action_registry:146 - INFO - action_registry - Populating the main action registry...
+2025-08-10 16:13:59 - Three_PointO_ArchE.action_registry:190 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 16:13:59 - Three_PointO_ArchE.action_registry:203 - INFO - action_registry - Action registry populated. Total actions: 28.
+2025-08-10 16:13:59 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/search_comparison_workflow.json ---
+2025-08-10 16:13:59 - Three_PointO_ArchE.workflow_engine:325 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-10 16:13:59 - Three_PointO_ArchE.workflow_engine:449 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/search_comparison_workflow.json
+2025-08-10 16:13:59 - Three_PointO_ArchE.workflow_engine:1018 - INFO - workflow_engine - Starting workflow 'Search_Comparison_Workflow_v1_0' (Run ID: run_68f39acf445c4c798525b3576d9e8ba7). Initial ready tasks: ['initiate_search_comparison']
+2025-08-10 16:13:59 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: wearable sensor technology for sexual stimulation
+2025-08-10 16:13:59 - enhanced_search_tool:62 - WARNING - enhanced_search_tool - Node modules not found. Run 'npm install' in /media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/browser_search
+2025-08-10 16:13:59 - unified_search_tool:53 - INFO - unified_search_tool - Browser automation search tool initialized
+2025-08-10 16:13:59 - unified_search_tool:61 - INFO - unified_search_tool - Fallback search tool initialized
+2025-08-10 16:13:59 - unified_search_tool:96 - INFO - unified_search_tool - Unified search for: 'wearable sensor technology for sexual stimulation' on puppeteer_nodejs
+2025-08-10 16:13:59 - unified_search_tool:108 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-10 16:13:59 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'wearable sensor technology for sexual stimulation' on puppeteer_nodejs
+2025-08-10 16:13:59 - unified_search_tool:127 - WARNING - unified_search_tool - fallback_search failed: Engine 'puppeteer_nodejs' not supported in fallback mode
+2025-08-10 16:13:59 - unified_search_tool:108 - INFO - unified_search_tool - Attempting search with browser_automation
+2025-08-10 16:13:59 - enhanced_search_tool:80 - INFO - enhanced_search_tool - Performing search: 'wearable sensor technology for sexual stimulation' on puppeteer_nodejs
+2025-08-10 16:14:19 - enhanced_search_tool:120 - ERROR - enhanced_search_tool - Search failed: Searching for: "wearable sensor technology for sexual stimulation"
+Search failed: Waiting for selector `.result` failed: Waiting failed: 15000ms exceeded
+
+2025-08-10 16:14:19 - unified_search_tool:127 - WARNING - unified_search_tool - browser_automation failed: Searching for: "wearable sensor technology for sexual stimulation"
+Search failed: Waiting for selector `.result` failed: Waiting failed: 15000ms exceeded
+
+2025-08-10 16:14:19 - Three_PointO_ArchE.web_search_tool:95 - WARNING - web_search_tool - Unified search failed: Searching for: "wearable sensor technology for sexual stimulation"
+Search failed: Waiting for selector `.result` failed: Waiting failed: 15000ms exceeded
+
+2025-08-10 16:14:19 - Three_PointO_ArchE.web_search_tool:102 - INFO - web_search_tool - Using legacy search method as fallback
+2025-08-10 16:14:19 - Three_PointO_ArchE.code_executor:197 - ERROR - code_executor - Error executing code for action 'execute_code': An unexpected error occurred: 'dict' object has no attribute 'encode'
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/code_executor.py", line 139, in execute_code
+    result = subprocess.run(
+             ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 2092, in _communicate
+    self._save_input(input)
+  File "/usr/lib/python3.12/subprocess.py", line 2172, in _save_input
+    self._input = self._input.encode(self.stdin.encoding,
+                  ^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'encode'
+2025-08-10 16:14:19 - Three_PointO_ArchE.workflow_engine:1122 - INFO - workflow_engine - Workflow 'Search_Comparison_Workflow_v1_0' finished in 19.88s with status: Completed with Errors
+2025-08-10 16:14:19 - Three_PointO_ArchE.workflow_engine:1132 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_68f39acf445c4c798525b3576d9e8ba7.jsonl
+2025-08-10 16:14:19 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_search_comparison_workflow_run_68f39acf445c4c798525b3576d9e8ba7.json
+2025-08-10 16:16:29 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 16:16:29 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 16:16:29 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 16:16:31 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 16:16:31 - Three_PointO_ArchE.causal_inference_tool:44 - WARNING - causal_inference_tool - Causal libraries import failed: No module named 'dowhy'. Causal Inference Tool functionality will be limited or simulated.
+2025-08-10 16:16:31 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 16:16:31 - Three_PointO_ArchE.agent_based_modeling_tool:65 - WARNING - agent_based_modeling_tool - Mesa library import failed: No module named 'mesa'. ABM Tool will run in SIMULATION MODE.
+2025-08-10 16:16:31 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'statsmodels'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 16:16:32 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 16:16:32 - root:36 - WARNING - predictive_flux_coupling_engine - SciPy/sklearn not available, using fallback implementations
+2025-08-10 16:16:32 - Three_PointO_ArchE.action_registry:47 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 16:16:32 - Three_PointO_ArchE.action_registry:91 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 16:16:32 - Three_PointO_ArchE.action_registry:146 - INFO - action_registry - Populating the main action registry...
+2025-08-10 16:16:32 - Three_PointO_ArchE.action_registry:190 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 16:16:32 - Three_PointO_ArchE.action_registry:203 - INFO - action_registry - Action registry populated. Total actions: 28.
+2025-08-10 16:16:32 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/search_comparison_workflow.json ---
+2025-08-10 16:16:32 - Three_PointO_ArchE.workflow_engine:325 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-10 16:16:32 - Three_PointO_ArchE.workflow_engine:449 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/search_comparison_workflow.json
+2025-08-10 16:16:32 - Three_PointO_ArchE.workflow_engine:1018 - INFO - workflow_engine - Starting workflow 'Search_Comparison_Workflow_v1_0' (Run ID: run_43b7be910e7746fb8ce086a0816f7b12). Initial ready tasks: ['initiate_search_comparison']
+2025-08-10 16:16:32 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: wearable sensor technology for sexual stimulation
+2025-08-10 16:16:32 - enhanced_search_tool:62 - WARNING - enhanced_search_tool - Node modules not found. Run 'npm install' in /media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/browser_search
+2025-08-10 16:16:32 - unified_search_tool:53 - INFO - unified_search_tool - Browser automation search tool initialized
+2025-08-10 16:16:32 - unified_search_tool:61 - INFO - unified_search_tool - Fallback search tool initialized
+2025-08-10 16:16:32 - unified_search_tool:96 - INFO - unified_search_tool - Unified search for: 'wearable sensor technology for sexual stimulation' on duckduckgo
+2025-08-10 16:16:32 - unified_search_tool:108 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-10 16:16:32 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'wearable sensor technology for sexual stimulation' on duckduckgo
+2025-08-10 16:16:34 - fallback_search_tool:63 - INFO - fallback_search_tool - Fallback search completed: 10 results in 1.66s
+2025-08-10 16:16:34 - unified_search_tool:123 - INFO - unified_search_tool - Search successful with fallback_search: 10 results
+2025-08-10 16:16:34 - Three_PointO_ArchE.workflow_engine:1122 - INFO - workflow_engine - Workflow 'Search_Comparison_Workflow_v1_0' finished in 1.98s with status: Completed Successfully
+2025-08-10 16:16:34 - Three_PointO_ArchE.workflow_engine:1132 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_43b7be910e7746fb8ce086a0816f7b12.jsonl
+2025-08-10 16:16:34 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_search_comparison_workflow_run_43b7be910e7746fb8ce086a0816f7b12.json
+2025-08-10 16:21:40 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 16:21:40 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 16:21:40 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 16:21:42 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 16:21:42 - Three_PointO_ArchE.causal_inference_tool:44 - WARNING - causal_inference_tool - Causal libraries import failed: No module named 'dowhy'. Causal Inference Tool functionality will be limited or simulated.
+2025-08-10 16:21:42 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 16:21:42 - Three_PointO_ArchE.agent_based_modeling_tool:65 - WARNING - agent_based_modeling_tool - Mesa library import failed: No module named 'mesa'. ABM Tool will run in SIMULATION MODE.
+2025-08-10 16:21:42 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'statsmodels'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 16:21:43 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 16:21:43 - root:36 - WARNING - predictive_flux_coupling_engine - SciPy/sklearn not available, using fallback implementations
+2025-08-10 16:21:43 - Three_PointO_ArchE.action_registry:47 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 16:21:43 - Three_PointO_ArchE.action_registry:91 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 16:21:43 - Three_PointO_ArchE.action_registry:146 - INFO - action_registry - Populating the main action registry...
+2025-08-10 16:21:43 - Three_PointO_ArchE.action_registry:190 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 16:21:43 - Three_PointO_ArchE.action_registry:203 - INFO - action_registry - Action registry populated. Total actions: 28.
+2025-08-10 16:21:43 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/search_comparison_workflow.json ---
+2025-08-10 16:21:43 - Three_PointO_ArchE.workflow_engine:325 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-10 16:21:43 - Three_PointO_ArchE.workflow_engine:449 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/search_comparison_workflow.json
+2025-08-10 16:21:43 - Three_PointO_ArchE.workflow_engine:1018 - INFO - workflow_engine - Starting workflow 'Search_Comparison_Workflow_v1_0' (Run ID: run_96300bb9e3054a269f2163aeffd247ba). Initial ready tasks: ['initiate_search_comparison']
+2025-08-10 16:21:43 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: wearable sensor technology for sexual stimulation
+2025-08-10 16:21:43 - enhanced_search_tool:62 - WARNING - enhanced_search_tool - Node modules not found. Run 'npm install' in /media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/browser_search
+2025-08-10 16:21:43 - unified_search_tool:53 - INFO - unified_search_tool - Browser automation search tool initialized
+2025-08-10 16:21:43 - unified_search_tool:61 - INFO - unified_search_tool - Fallback search tool initialized
+2025-08-10 16:21:43 - unified_search_tool:96 - INFO - unified_search_tool - Unified search for: 'wearable sensor technology for sexual stimulation' on duckduckgo
+2025-08-10 16:21:43 - unified_search_tool:108 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-10 16:21:43 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'wearable sensor technology for sexual stimulation' on duckduckgo
+2025-08-10 16:21:45 - fallback_search_tool:63 - INFO - fallback_search_tool - Fallback search completed: 10 results in 1.88s
+2025-08-10 16:21:45 - unified_search_tool:123 - INFO - unified_search_tool - Search successful with fallback_search: 10 results
+2025-08-10 16:21:45 - Three_PointO_ArchE.workflow_engine:1122 - INFO - workflow_engine - Workflow 'Search_Comparison_Workflow_v1_0' finished in 2.23s with status: Completed Successfully
+2025-08-10 16:21:45 - Three_PointO_ArchE.workflow_engine:1132 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_96300bb9e3054a269f2163aeffd247ba.jsonl
+2025-08-10 16:21:45 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_search_comparison_workflow_run_96300bb9e3054a269f2163aeffd247ba.json
+2025-08-10 16:33:06 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 16:33:06 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 16:33:06 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 16:33:08 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 16:33:08 - Three_PointO_ArchE.causal_inference_tool:44 - WARNING - causal_inference_tool - Causal libraries import failed: No module named 'dowhy'. Causal Inference Tool functionality will be limited or simulated.
+2025-08-10 16:33:08 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 16:33:08 - Three_PointO_ArchE.agent_based_modeling_tool:65 - WARNING - agent_based_modeling_tool - Mesa library import failed: No module named 'mesa'. ABM Tool will run in SIMULATION MODE.
+2025-08-10 16:33:08 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'statsmodels'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 16:33:09 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 16:33:09 - root:36 - WARNING - predictive_flux_coupling_engine - SciPy/sklearn not available, using fallback implementations
+2025-08-10 16:33:09 - Three_PointO_ArchE.action_registry:47 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 16:33:09 - Three_PointO_ArchE.action_registry:91 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 16:33:09 - Three_PointO_ArchE.action_registry:146 - INFO - action_registry - Populating the main action registry...
+2025-08-10 16:33:09 - Three_PointO_ArchE.action_registry:190 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 16:33:09 - Three_PointO_ArchE.action_registry:203 - INFO - action_registry - Action registry populated. Total actions: 28.
+2025-08-10 16:33:09 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/search_comparison_workflow.json ---
+2025-08-10 16:33:09 - Three_PointO_ArchE.workflow_engine:325 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-10 16:33:09 - Three_PointO_ArchE.workflow_engine:449 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/search_comparison_workflow.json
+2025-08-10 16:33:09 - Three_PointO_ArchE.workflow_engine:1018 - INFO - workflow_engine - Starting workflow 'Search_Comparison_Workflow_v1_0' (Run ID: run_12961f9736d2432f825a57f5a607af5e). Initial ready tasks: ['initiate_search_comparison']
+2025-08-10 16:33:09 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: wearable sensor technology for sexual stimulation
+2025-08-10 16:33:09 - enhanced_search_tool:62 - WARNING - enhanced_search_tool - Node modules not found. Run 'npm install' in /media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/browser_search
+2025-08-10 16:33:09 - unified_search_tool:53 - INFO - unified_search_tool - Browser automation search tool initialized
+2025-08-10 16:33:09 - unified_search_tool:61 - INFO - unified_search_tool - Fallback search tool initialized
+2025-08-10 16:33:09 - unified_search_tool:96 - INFO - unified_search_tool - Unified search for: 'wearable sensor technology for sexual stimulation' on duckduckgo
+2025-08-10 16:33:09 - unified_search_tool:108 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-10 16:33:09 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'wearable sensor technology for sexual stimulation' on duckduckgo
+2025-08-10 16:33:10 - fallback_search_tool:63 - INFO - fallback_search_tool - Fallback search completed: 10 results in 1.11s
+2025-08-10 16:33:10 - unified_search_tool:123 - INFO - unified_search_tool - Search successful with fallback_search: 10 results
+2025-08-10 16:33:11 - Three_PointO_ArchE.workflow_engine:1122 - INFO - workflow_engine - Workflow 'Search_Comparison_Workflow_v1_0' finished in 1.48s with status: Completed Successfully
+2025-08-10 16:33:11 - Three_PointO_ArchE.workflow_engine:1132 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_12961f9736d2432f825a57f5a607af5e.jsonl
+2025-08-10 16:33:11 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_search_comparison_workflow_run_12961f9736d2432f825a57f5a607af5e.json
+2025-08-10 16:36:23 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 16:36:23 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 16:36:23 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 16:36:24 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 16:36:25 - Three_PointO_ArchE.causal_inference_tool:44 - WARNING - causal_inference_tool - Causal libraries import failed: No module named 'dowhy'. Causal Inference Tool functionality will be limited or simulated.
+2025-08-10 16:36:25 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 16:36:25 - Three_PointO_ArchE.agent_based_modeling_tool:65 - WARNING - agent_based_modeling_tool - Mesa library import failed: No module named 'mesa'. ABM Tool will run in SIMULATION MODE.
+2025-08-10 16:36:25 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'statsmodels'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 16:36:25 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 16:36:25 - root:36 - WARNING - predictive_flux_coupling_engine - SciPy/sklearn not available, using fallback implementations
+2025-08-10 16:36:25 - Three_PointO_ArchE.action_registry:47 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 16:36:25 - Three_PointO_ArchE.action_registry:91 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 16:36:25 - Three_PointO_ArchE.action_registry:146 - INFO - action_registry - Populating the main action registry...
+2025-08-10 16:36:25 - Three_PointO_ArchE.action_registry:190 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 16:36:25 - Three_PointO_ArchE.action_registry:203 - INFO - action_registry - Action registry populated. Total actions: 28.
+2025-08-10 16:36:25 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/search_comparison_workflow.json ---
+2025-08-10 16:36:25 - Three_PointO_ArchE.workflow_engine:325 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-10 16:36:25 - Three_PointO_ArchE.workflow_engine:449 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/search_comparison_workflow.json
+2025-08-10 16:36:25 - Three_PointO_ArchE.workflow_engine:1018 - INFO - workflow_engine - Starting workflow 'Search_Comparison_Workflow_v1_0' (Run ID: run_e2554d4c4f0545fd82e513f3dba754ba). Initial ready tasks: ['initiate_search_comparison']
+2025-08-10 16:36:25 - Three_PointO_ArchE.web_search_tool:65 - INFO - web_search_tool - Using unified search tool for query: wearable sensor technology for sexual stimulation
+2025-08-10 16:36:25 - enhanced_search_tool:62 - WARNING - enhanced_search_tool - Node modules not found. Run 'npm install' in /media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/browser_search
+2025-08-10 16:36:25 - unified_search_tool:53 - INFO - unified_search_tool - Browser automation search tool initialized
+2025-08-10 16:36:25 - unified_search_tool:61 - INFO - unified_search_tool - Fallback search tool initialized
+2025-08-10 16:36:25 - unified_search_tool:96 - INFO - unified_search_tool - Unified search for: 'wearable sensor technology for sexual stimulation' on duckduckgo
+2025-08-10 16:36:25 - unified_search_tool:108 - INFO - unified_search_tool - Attempting search with fallback_search
+2025-08-10 16:36:25 - fallback_search_tool:45 - INFO - fallback_search_tool - Performing fallback search: 'wearable sensor technology for sexual stimulation' on duckduckgo
+2025-08-10 16:36:27 - fallback_search_tool:63 - INFO - fallback_search_tool - Fallback search completed: 10 results in 1.74s
+2025-08-10 16:36:27 - unified_search_tool:123 - INFO - unified_search_tool - Search successful with fallback_search: 10 results
+2025-08-10 16:36:27 - Three_PointO_ArchE.workflow_engine:1122 - INFO - workflow_engine - Workflow 'Search_Comparison_Workflow_v1_0' finished in 2.07s with status: Completed Successfully
+2025-08-10 16:36:27 - Three_PointO_ArchE.workflow_engine:1132 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_e2554d4c4f0545fd82e513f3dba754ba.jsonl
+2025-08-10 16:36:27 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_search_comparison_workflow_run_e2554d4c4f0545fd82e513f3dba754ba.json
+2025-08-10 22:26:44 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 22:26:44 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 22:26:44 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 22:26:45 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 22:26:48 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 22:26:48 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 22:26:48 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 22:26:48 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 22:26:48 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 22:26:48 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 22:26:49 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 22:26:49 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 22:26:49 - Three_PointO_ArchE.action_registry:92 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 22:26:49 - Three_PointO_ArchE.action_registry:147 - INFO - action_registry - Populating the main action registry...
+2025-08-10 22:26:49 - Three_PointO_ArchE.action_registry:192 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 22:26:49 - Three_PointO_ArchE.action_registry:205 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-10 22:26:49 - root:48 - CRITICAL - main - Failed to import core ResonantiA modules (IARCompliantWorkflowEngine, SPRManager, SIRCIntakeHandler): No module named 'rich'. Check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/main.py", line 43, in <module>
+    from .workflow_engine import IARCompliantWorkflowEngine as IARCompliantWorkflowEngine
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py", line 39, in <module>
+    from .output_handler import (
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/output_handler.py", line 6, in <module>
+    from rich.console import Console
+ModuleNotFoundError: No module named 'rich'
+2025-08-10 22:27:36 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 22:27:36 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 22:27:36 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 22:27:37 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 22:27:39 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 22:27:39 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 22:27:40 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 22:27:40 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 22:27:40 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 22:27:40 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 22:27:40 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 22:27:40 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 22:27:40 - Three_PointO_ArchE.action_registry:92 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 22:27:40 - Three_PointO_ArchE.action_registry:147 - INFO - action_registry - Populating the main action registry...
+2025-08-10 22:27:40 - Three_PointO_ArchE.action_registry:192 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 22:27:40 - Three_PointO_ArchE.action_registry:205 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-10 22:27:54 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-10 22:27:54 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-10 22:27:54 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-10 22:27:55 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-10 22:27:57 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-10 22:27:57 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-10 22:27:58 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-10 22:27:58 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-10 22:27:58 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-10 22:27:58 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-10 22:27:58 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-10 22:27:58 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-10 22:27:58 - Three_PointO_ArchE.action_registry:92 - INFO - action_registry - ActionRegistry initialized.
+2025-08-10 22:27:58 - Three_PointO_ArchE.action_registry:147 - INFO - action_registry - Populating the main action registry...
+2025-08-10 22:27:58 - Three_PointO_ArchE.action_registry:192 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-10 22:27:58 - Three_PointO_ArchE.action_registry:205 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-10 22:27:58 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/knowledge_scaffolding_simple.json ---
+2025-08-10 22:27:58 - __main__:176 - ERROR - main - Error loading context file {"problem_description":"Assess feasibility of deploying federated learning for on-device personalization with privacy guarantees in a healthcare app"}: [Errno 2] No such file or directory: '{"problem_description":"Assess feasibility of deploying federated learning for on-device personalization with privacy guarantees in a healthcare app"}'
+2025-08-12 03:29:39 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-12 03:29:39 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-12 03:29:39 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-12 03:29:40 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-12 03:29:44 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-12 03:29:44 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-12 03:29:45 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-12 03:29:45 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-12 03:29:45 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-12 03:29:45 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-12 03:29:45 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-12 03:29:45 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-12 03:29:45 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-12 03:29:45 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-12 03:29:45 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-12 03:29:45 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-12 03:31:03 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-12 03:31:03 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-12 03:31:03 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-12 03:31:04 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-12 03:31:06 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-12 03:31:06 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-12 03:31:07 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-12 03:31:07 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-12 03:31:07 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-12 03:31:07 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-12 03:31:08 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-12 03:31:08 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-12 03:31:08 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-12 03:31:08 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-12 03:31:08 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-12 03:31:08 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-12 03:31:08 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/context_passing_test.json ---
+2025-08-12 03:31:08 - Three_PointO_ArchE.workflow_engine:327 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-12 03:31:08 - Three_PointO_ArchE.workflow_engine:451 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/context_passing_test.json
+2025-08-12 03:31:08 - Three_PointO_ArchE.workflow_engine:1026 - INFO - workflow_engine - Starting workflow 'Context Passing Test Workflow' (Run ID: run_9c745404424a400da0fbf6815b480ba0). Initial ready tasks: ['task_a_produces_data']
+2025-08-12 03:31:08 - Three_PointO_ArchE.workflow_engine:1142 - INFO - workflow_engine - Workflow 'Context Passing Test Workflow' finished in 0.11s with status: Completed Successfully
+2025-08-12 03:31:08 - Three_PointO_ArchE.workflow_engine:1152 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_9c745404424a400da0fbf6815b480ba0.jsonl
+2025-08-12 03:31:08 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_context_passing_test_run_9c745404424a400da0fbf6815b480ba0.json
+2025-08-12 03:31:47 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-12 03:31:47 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-12 03:31:47 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-12 03:31:48 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-12 03:31:50 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-12 03:31:50 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-12 03:31:51 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-12 03:31:51 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-12 03:31:51 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-12 03:31:51 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-12 03:31:51 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-12 03:31:52 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-12 03:31:52 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-12 03:31:52 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-12 03:31:52 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-12 03:31:52 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-12 03:31:52 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/context_passing_test.json ---
+2025-08-12 03:31:52 - Three_PointO_ArchE.workflow_engine:327 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-12 03:31:52 - Three_PointO_ArchE.workflow_engine:451 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/context_passing_test.json
+2025-08-12 03:31:52 - Three_PointO_ArchE.workflow_engine:1033 - INFO - workflow_engine - Starting workflow 'Context Passing Test Workflow' (Run ID: run_2c2e21481cc4402082822e8fdefd257e). Initial ready tasks: ['task_a_produces_data']
+2025-08-12 03:31:52 - Three_PointO_ArchE.workflow_engine:1149 - INFO - workflow_engine - Workflow 'Context Passing Test Workflow' finished in 0.05s with status: Completed Successfully
+2025-08-12 03:31:52 - Three_PointO_ArchE.workflow_engine:1159 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_2c2e21481cc4402082822e8fdefd257e.jsonl
+2025-08-12 03:31:52 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_context_passing_test_run_2c2e21481cc4402082822e8fdefd257e.json
+2025-08-12 03:32:25 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-12 03:32:25 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-12 03:32:25 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-12 03:32:26 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-12 03:32:28 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-12 03:32:28 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-12 03:32:29 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-12 03:32:29 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-12 03:32:29 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-12 03:32:29 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-12 03:32:30 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-12 03:32:30 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-12 03:32:30 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-12 03:32:30 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-12 03:32:30 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-12 03:32:30 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-12 03:32:30 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/context_passing_test.json ---
+2025-08-12 03:32:30 - Three_PointO_ArchE.workflow_engine:327 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-12 03:32:30 - Three_PointO_ArchE.workflow_engine:451 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/context_passing_test.json
+2025-08-12 03:32:30 - Three_PointO_ArchE.workflow_engine:1033 - INFO - workflow_engine - Starting workflow 'Context Passing Test Workflow' (Run ID: run_f8186460f3074fd48eee89989a89f8ff). Initial ready tasks: ['task_a_produces_data']
+2025-08-12 03:32:30 - Three_PointO_ArchE.workflow_engine:1165 - INFO - workflow_engine - Workflow 'Context Passing Test Workflow' finished in 0.04s with status: Completed Successfully
+2025-08-12 03:32:30 - Three_PointO_ArchE.workflow_engine:1175 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_f8186460f3074fd48eee89989a89f8ff.jsonl
+2025-08-12 03:32:30 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_context_passing_test_run_f8186460f3074fd48eee89989a89f8ff.json
+2025-08-12 03:33:15 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-12 03:33:15 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-12 03:33:15 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-12 03:33:17 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-12 03:33:19 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-12 03:33:19 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-12 03:33:20 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-12 03:33:20 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-12 03:33:20 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-12 03:33:20 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-12 03:33:20 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-12 03:33:20 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-12 03:33:20 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-12 03:33:20 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-12 03:33:20 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-12 03:33:21 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-12 03:33:21 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/context_passing_test.json ---
+2025-08-12 03:33:21 - Three_PointO_ArchE.workflow_engine:327 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-12 03:33:21 - Three_PointO_ArchE.workflow_engine:451 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/context_passing_test.json
+2025-08-12 03:33:21 - Three_PointO_ArchE.workflow_engine:1040 - INFO - workflow_engine - Starting workflow 'Context Passing Test Workflow' (Run ID: run_f49a50f42a454a2baf38cddc5f1dffbd). Initial ready tasks: ['task_a_produces_data']
+2025-08-12 03:33:21 - Three_PointO_ArchE.workflow_engine:1172 - INFO - workflow_engine - Workflow 'Context Passing Test Workflow' finished in 0.05s with status: Completed Successfully
+2025-08-12 03:33:21 - Three_PointO_ArchE.workflow_engine:1182 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_f49a50f42a454a2baf38cddc5f1dffbd.jsonl
+2025-08-12 03:33:21 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_context_passing_test_run_f49a50f42a454a2baf38cddc5f1dffbd.json
+2025-08-12 03:33:35 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-12 03:33:35 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-12 03:33:35 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-12 03:33:36 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-12 03:33:38 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-12 03:33:38 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-12 03:33:39 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-12 03:33:39 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-12 03:33:39 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-12 03:33:39 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-12 03:33:40 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-12 03:33:40 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-12 03:33:40 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-12 03:33:40 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-12 03:33:40 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-12 03:33:40 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-12 03:33:40 - __main__:168 - INFO - main - --- Received command to run workflow: workflows/context_passing_test.json ---
+2025-08-12 03:33:40 - Three_PointO_ArchE.workflow_engine:327 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-12 03:33:40 - Three_PointO_ArchE.workflow_engine:451 - INFO - workflow_engine - Attempting to load workflow definition from: workflows/context_passing_test.json
+2025-08-12 03:33:40 - Three_PointO_ArchE.workflow_engine:1040 - INFO - workflow_engine - Starting workflow 'Context Passing Test Workflow' (Run ID: run_38228c49deba408b9d4f33320dd186aa). Initial ready tasks: ['task_a_produces_data']
+2025-08-12 03:33:40 - Three_PointO_ArchE.workflow_engine:1172 - INFO - workflow_engine - Workflow 'Context Passing Test Workflow' finished in 0.05s with status: Completed Successfully
+2025-08-12 03:33:40 - Three_PointO_ArchE.workflow_engine:1182 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/run_events_run_38228c49deba408b9d4f33320dd186aa.jsonl
+2025-08-12 03:33:40 - __main__:203 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/archemuliplied/outputs/result_context_passing_test_run_38228c49deba408b9d4f33320dd186aa.json
+2025-08-12 03:54:16 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-12 03:54:16 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-12 03:54:16 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-12 03:54:17 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-12 03:54:19 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-12 03:54:19 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-12 03:54:19 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-12 03:54:19 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-12 03:54:19 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-12 03:54:19 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-12 03:54:20 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-12 03:54:20 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-12 03:54:20 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-12 03:54:20 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-12 03:54:20 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-12 03:54:20 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-12 04:00:05 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-12 04:00:05 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-12 04:00:05 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-12 04:00:07 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-12 04:00:10 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-12 04:00:10 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-12 04:00:11 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-12 04:00:11 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-12 04:00:11 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-12 04:00:11 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-12 04:00:12 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-12 04:00:12 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-12 04:00:12 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-12 04:00:12 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-12 04:00:12 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-12 04:00:12 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-18 05:21:55 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-18 05:21:55 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-18 05:21:55 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-18 05:21:57 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-18 05:22:00 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-18 05:22:00 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-18 05:22:01 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-18 05:22:01 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-18 05:22:01 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-18 05:22:01 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-18 05:22:02 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-18 05:22:02 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: No module named 'Three_PointO_ArchE.capability_functions'
+2025-08-18 05:22:02 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-18 05:22:02 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-18 05:22:02 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-18 05:22:02 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-18 05:22:02 - root:24 - CRITICAL - main - Failed to import core ResonantiA modules: cannot import name 'WorkflowEngine' from 'Three_PointO_ArchE.workflow_engine' (/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py). Please check installation and paths.
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/main.py", line 21, in <module>
+    from Three_PointO_ArchE.workflow_engine import WorkflowEngine
+ImportError: cannot import name 'WorkflowEngine' from 'Three_PointO_ArchE.workflow_engine' (/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/workflow_engine.py). Did you mean: 'workflow_engine'?
+2025-08-18 05:23:00 - root:105 - INFO - logging_config - --- Logging configured successfully (ResonantiA v3.0) ---
+2025-08-18 05:23:00 - root:106 - INFO - logging_config - Log Level: INFO
+2025-08-18 05:23:00 - root:107 - INFO - logging_config - Log File: logs/arche_v3_default.log
+2025-08-18 05:23:01 - Three_PointO_ArchE.cfp_framework:26 - INFO - cfp_framework - quantum_utils.py loaded successfully for CFP.
+2025-08-18 05:23:03 - Three_PointO_ArchE.causal_inference_tool:41 - INFO - causal_inference_tool - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-08-18 05:23:03 - Three_PointO_ArchE.agent_based_modeling_tool:28 - WARNING - agent_based_modeling_tool - scalable_framework.py not found. The 'scalable_agent' model type will not be available.
+2025-08-18 05:23:04 - Three_PointO_ArchE.agent_based_modeling_tool:43 - INFO - agent_based_modeling_tool - Mesa library loaded successfully for ABM.
+2025-08-18 05:23:04 - Three_PointO_ArchE.agent_based_modeling_tool:48 - INFO - agent_based_modeling_tool - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-08-18 05:23:04 - Three_PointO_ArchE.agent_based_modeling_tool:55 - INFO - agent_based_modeling_tool - SciPy library loaded successfully for ABM analysis.
+2025-08-18 05:23:04 - Three_PointO_ArchE.predictive_modeling_tool:45 - WARNING - predictive_modeling_tool - Predictive libraries import failed: No module named 'prophet'. Predictive Tool will run in SIMULATION MODE.
+2025-08-18 05:23:05 - root:24 - WARNING - predictive_flux_coupling_engine - ArchE framework components not available: No module named 'cognitive_resonant_controller'
+2025-08-18 05:23:05 - Three_PointO_ArchE.action_registry:48 - WARNING - action_registry - Optional capability_functions not available; skipping registration. Error: cannot import name 'workflow_debugging' from 'Three_PointO_ArchE.capability_functions' (/media/newbu/3626C55326C514B1/Happier/archemuliplied/Three_PointO_ArchE/capability_functions.py)
+2025-08-18 05:23:05 - Three_PointO_ArchE.action_registry:119 - INFO - action_registry - ActionRegistry initialized.
+2025-08-18 05:23:05 - Three_PointO_ArchE.action_registry:174 - INFO - action_registry - Populating the main action registry...
+2025-08-18 05:23:05 - Three_PointO_ArchE.action_registry:219 - INFO - action_registry - Capability functions not registered (module missing).
+2025-08-18 05:23:05 - Three_PointO_ArchE.action_registry:232 - INFO - action_registry - Action registry populated. Total actions: 29.
+2025-08-18 05:23:05 - __main__:61 - INFO - main - --- Arche System Initialization (ResonantiA Protocol v3.0) ---
+2025-08-18 05:23:05 - __main__:62 - WARNING - main - Keyholder Override ('IMnDEVmode') is conceptually active for this session.
+2025-08-18 05:23:05 - __main__:67 - CRITICAL - main - Failed to ensure necessary directories: module 'Three_PointO_ArchE.config' has no attribute 'LOG_DIR'. Exiting.

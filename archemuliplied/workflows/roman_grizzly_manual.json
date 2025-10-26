@@ -1,0 +1,30 @@
+{
+  "name": "roman_vs_grizzly_manual",
+  "version": "1.0",
+  "description": "Run combat ABM for Romans vs Grizzly (Gorilla proxy) with 20 humans across 5 seeds.",
+  "tasks": {
+    "run_simulation": {
+      "description": "Run single simulation with 20 humans vs proxy grizzly gorilla.",
+      "action": "perform_abm",
+      "inputs": {
+        "operation": "run_simulation",
+        "model_type": "combat",
+        "num_steps": 200,
+        "model_params": {
+          "width": 20,
+          "height": 20,
+          "num_humans": 20,
+          "seed": 42
+        }
+      },
+      "dependencies": []
+    },
+    "display": {
+      "action": "display_output",
+      "inputs": {
+        "content": "Single run summary: Active Humans: {{ run_simulation.active_count }} | Gorilla Health: {{ run_simulation.gorilla_health }} | Steps Run: {{ run_simulation.simulation_steps_run }}"
+      },
+      "dependencies": ["run_simulation"]
+    }
+  }
+} 

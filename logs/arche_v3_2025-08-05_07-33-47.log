@@ -1,0 +1,26 @@
+2025-08-05 07:33:47 - root:162 - INFO - logging_config - ================================================================================
+2025-08-05 07:33:47 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-05 07:33:47 - root:164 - INFO - logging_config - ================================================================================
+2025-08-05 07:33:47 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-05 07:33:47
+2025-08-05 07:33:47 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-05 07:33:47 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-05_07-33-47.log
+2025-08-05 07:33:47 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-05_07-33-47.log
+2025-08-05 07:33:47 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-05_07-33-47.log
+2025-08-05 07:33:47 - root:170 - INFO - logging_config - ================================================================================
+2025-08-05 07:33:47 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-05 07:33:47 - FullArchEGenesisTest:53 - INFO - run_full_genesis_test - Loading context from: full_arche_genesis_context.json
+2025-08-05 07:33:47 - FullArchEGenesisTest:56 - INFO - run_full_genesis_test - ✅ Context loaded successfully.
+2025-08-05 07:33:47 - FullArchEGenesisTest:60 - INFO - run_full_genesis_test - Initializing IARCompliantWorkflowEngine...
+2025-08-05 07:33:47 - Three_PointO_ArchE.workflow_engine:341 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-05 07:33:47 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-05 07:33:47 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-05 07:33:47 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-05 07:33:47 - Three_PointO_ArchE.workflow_engine:361 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-05 07:33:47 - FullArchEGenesisTest:62 - INFO - run_full_genesis_test - ✅ Workflow engine initialized.
+2025-08-05 07:33:47 - FullArchEGenesisTest:66 - INFO - run_full_genesis_test - Starting Full ArchE Genesis workflow: full_arche_genesis_test.json
+2025-08-05 07:33:47 - FullArchEGenesisTest:124 - ERROR - run_full_genesis_test - Unexpected error during Full ArchE Genesis Test: IARCompliantWorkflowEngine.run_workflow() got an unexpected keyword argument 'workflow_file'
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/run_full_genesis_test.py", line 72, in main
+    result = engine.run_workflow(
+             ^^^^^^^^^^^^^^^^^^^^
+TypeError: IARCompliantWorkflowEngine.run_workflow() got an unexpected keyword argument 'workflow_file'

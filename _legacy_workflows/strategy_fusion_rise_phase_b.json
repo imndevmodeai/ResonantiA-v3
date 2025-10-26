@@ -1,0 +1,91 @@
+{
+  "name": "Strategy Fusion Workflow (RISE Phase B)",
+  "description": "Fuses multiple cognitive pathways (Causal, ABM, CFP, Specialist) into a synthesized strategic dossier, then validates quality.",
+  "tasks": {
+    "initiate_fusion": {
+      "description": "Start fusion process.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "🔧 Initiating Strategy Fusion (RISE Phase B)"
+      },
+      "dependencies": []
+    },
+    "pathway_causal_analysis": {
+      "description": "Causal pathway (placeholder/stub).",
+      "action_type": "perform_causal_inference",
+      "inputs": {
+        "operation": "estimate_effect",
+        "data": "{{initial_context.initial_context | default({})}}",
+        "treatment": "x",
+        "outcome": "y",
+        "confounders": ["z"],
+        "method": "backdoor.linear_regression"
+      },
+      "dependencies": ["initiate_fusion"]
+    },
+    "pathway_simulation_abm": {
+      "description": "ABM pathway (placeholder/stub).",
+      "action_type": "perform_abm",
+      "inputs": {
+        "operation": "create_model",
+        "model_type": "basic",
+        "width": 10,
+        "height": 10,
+        "density": 0.4,
+        "model_params": {"activation_threshold": 3}
+      },
+      "dependencies": ["initiate_fusion"]
+    },
+    "pathway_comparative_cfp": {
+      "description": "CFP comparison (placeholder).",
+      "action_type": "run_cfp",
+      "inputs": {
+        "system_a_config": {"quantum_state": [1, 0]},
+        "system_b_config": {"quantum_state": [0.7071, 0.7071]},
+        "observable": "spin_z",
+        "time_horizon": 0.1
+      },
+      "dependencies": ["initiate_fusion"]
+    },
+    "pathway_specialist_consultation": {
+      "description": "Specialist consultation (stub/demo).",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "Specialist consultation completed"
+      },
+      "dependencies": ["initiate_fusion"]
+    },
+    "synthesize_fused_dossier": {
+      "description": "Synthesize an integrated strategic dossier.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "🎭 **ResonantiA Maestro - Strategic Synthesis**\n\nYou are the grand synthesizer of the RISE engine. You will fuse inputs across pathways (Causal, ABM, CFP, Specialist) into a cohesive strategic dossier. Produce the dossier using the following structure and include placeholders for any missing pathway outputs.\n\nUse this structure: \n## ResonantiA Maestro - Strategic Dossier\n**Subject:** {{initial_context.problem_description}}\n\n1. Executive Summary\n2. Multi-Pathway Analysis (Causal, ABM, CFP, Specialist)\n3. Convergent Insights\n4. Strategic Recommendations\n5. Implementation Roadmap\n6. Risk Assessment\n7. Success Metrics\n\nFill the sections with synthesized content.",
+        "model": "gemini-1.5-pro-latest",
+        "temperature": 0.3,
+        "max_tokens": 5000
+      },
+      "dependencies": [
+        "pathway_causal_analysis",
+        "pathway_simulation_abm",
+        "pathway_comparative_cfp",
+        "pathway_specialist_consultation"
+      ]
+    },
+    "validate_fusion_quality": {
+      "description": "Validate dossier quality.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "Validate the quality and completeness of the fused strategic dossier. Assess: Quality metrics (Comprehensiveness, Coherence, Actionability, Evidence, Innovation) and a completeness checklist.\n\nDossier:\n{{synthesize_fused_dossier.response_text}}",
+        "model": "gemini-1.5-pro-latest",
+        "temperature": 0.2,
+        "max_tokens": 2000
+      },
+      "dependencies": ["synthesize_fused_dossier"]
+    }
+  },
+  "start_tasks": ["initiate_fusion"]
+}
+
+
+
+

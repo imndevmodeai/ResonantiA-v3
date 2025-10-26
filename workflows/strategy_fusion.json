@@ -1,0 +1,56 @@
+{
+    "workflow_name": "Fused Strategy Synthesis",
+    "version": "1.0",
+    "description": "Generates a fused strategic dossier by analyzing a problem from multiple parallel pathways (e.g., analytical, creative, specialist) and synthesizing the insights.",
+    "input_parameters": {
+        "problem_description": { "type": "string" },
+        "session_knowledge_base": { "type": "dict" },
+        "specialized_agent": { "type": "dict" },
+        "session_id": { "type": "string" }
+    },
+    "tasks": {
+        "pathway_analytical_insight": {
+            "action_type": "generate_text_llm",
+            "description": "Analyzes the problem from a purely logical, data-driven, and analytical perspective.",
+            "inputs": {
+                "prompt": "Analyze the following problem from a strictly analytical and data-driven perspective. Use first-principles thinking. Ignore creative or unconventional solutions. Provide a structured analysis and a list of logical conclusions.\\n\\n== PROBLEM ==\\n{{ problem_description }}\\n\\n== KNOWLEDGE BASE ==\\n{{ session_knowledge_base }}",
+                "model_settings": { "temperature": 0.1, "max_tokens": 8192 }
+            },
+            "output_variable": "analytical_insights"
+        },
+        "pathway_creative_insight": {
+            "action_type": "generate_text_llm",
+            "description": "Analyzes the problem from a highly creative and unconventional perspective.",
+            "inputs": {
+                "prompt": "Analyze the following problem from a highly creative and unconventional perspective. Brainstorm novel, 'outside-the-box' solutions. Do not be constrained by conventional wisdom. Provide a list of innovative ideas.\\n\\n== PROBLEM ==\\n{{ problem_description }}",
+                "model_settings": { "temperature": 0.9, "max_tokens": 8192 }
+            },
+            "output_variable": "creative_insights"
+        },
+        "pathway_specialist_consultation": {
+            "action_type": "generate_text_llm",
+            "description": "Provides specialized analysis based on agent expertise.",
+            "inputs": {
+                "prompt": "You are a specialized agent with the following profile: {{ specialized_agent }}. Based on your unique expertise, provide a detailed analysis and strategic recommendation for the following problem.\\n\\n== PROBLEM ==\\n{{ problem_description }}\\n\\n== KNOWLEDGE BASE ==\\n{{ session_knowledge_base }}",
+                "model_settings": { "temperature": 0.5, "max_tokens": 8192 }
+            },
+            "output_variable": "specialist_insights"
+        },
+        "synthesize_fused_dossier": {
+            "action_type": "generate_text_llm",
+ 
+            "description": "Synthesizes the insights from all pathways into a single, cohesive strategic dossier.",
+            "inputs": {
+                "prompt": "You are a master strategist. Create a comprehensive strategic dossier for the following problem:\n\nPROBLEM: {{ problem_description }}\n\nSPECIALIST AGENT PROFILE: {{ specialized_agent }}\n\nKNOWLEDGE BASE: {{ session_knowledge_base }}\n\nSynthesize insights from analytical, creative, and specialist perspectives to create a robust and innovative solution. Format the output as a detailed strategic plan with actionable recommendations that directly addresses the specific problem described above.",
+                "model_settings": { "temperature": 0.5, "max_tokens": 16384 }
+            },
+            "output_variable": "fused_strategic_dossier"
+        }
+    },
+    "output": {
+        "fused_strategic_dossier": {
+            "value": "{{ synthesize_fused_dossier.result.generated_text }}",
+            "description": "The final synthesized strategic plan."
+        }
+    }
+}

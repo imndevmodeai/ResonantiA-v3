@@ -1,0 +1,5 @@
+2025-07-19 00:05:05,991 - INFO - Starting search comparison for query: latest Gemini models 2025 Google AI
+2025-07-19 00:05:05,992 - ERROR - Failed to initialize WebDriver: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+
+2025-07-19 00:05:05,992 - ERROR - Comparison workflow failed: Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+

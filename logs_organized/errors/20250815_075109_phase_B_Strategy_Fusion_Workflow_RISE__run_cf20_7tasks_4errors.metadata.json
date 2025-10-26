@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_cf206304e61b4d32b385f2a61a08ecd6.jsonl",
+  "size_bytes": 20175,
+  "modified": "2025-08-15T07:51:09.886635",
+  "workflow_name": "Strategy Fusion Workflow (RISE Phase B)",
+  "run_id": "run_cf206304e61b4d32b385f2a61a08ecd6",
+  "phase": "B",
+  "session_id": "unknown",
+  "error_count": 4,
+  "task_count": 7,
+  "duration_sec": 1.0644999999999998,
+  "status": "unknown",
+  "line_count": 7
+}

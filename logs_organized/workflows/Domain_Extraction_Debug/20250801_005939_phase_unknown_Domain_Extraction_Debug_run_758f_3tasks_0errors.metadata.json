@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_758feab00cea45019e66add2fe513b67.jsonl",
+  "size_bytes": 11303,
+  "modified": "2025-08-01T00:59:39.788302",
+  "workflow_name": "Domain Extraction Debug",
+  "run_id": "run_758feab00cea45019e66add2fe513b67",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 3,
+  "duration_sec": 4.940100000000001,
+  "status": "unknown",
+  "line_count": 3
+}

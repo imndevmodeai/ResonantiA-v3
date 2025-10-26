@@ -1,0 +1,6 @@
+2025-08-05 07:33:47 - FullArchEGenesisTest:124 - ERROR - run_full_genesis_test - Unexpected error during Full ArchE Genesis Test: IARCompliantWorkflowEngine.run_workflow() got an unexpected keyword argument 'workflow_file'
+Traceback (most recent call last):
+  File "/media/newbu/3626C55326C514B1/Happier/run_full_genesis_test.py", line 72, in main
+    result = engine.run_workflow(
+             ^^^^^^^^^^^^^^^^^^^^
+TypeError: IARCompliantWorkflowEngine.run_workflow() got an unexpected keyword argument 'workflow_file'

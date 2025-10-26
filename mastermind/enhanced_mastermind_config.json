@@ -1,0 +1,69 @@
+{
+  "google_api": {
+    "model": "gemini-2.5-pro",
+    "backup_model": "gemini-2.5-flash",
+    "experimental_model": "gemini-2.5-flash-lite",
+    "rate_limiting": {
+      "enabled": true,
+      "requests_per_minute": 15,
+      "retry_delay": 60,
+      "exponential_backoff": true
+    },
+    "caching": {
+      "enabled": {
+        "description": "Cache responses to avoid duplicate API calls",
+        "implementation": "Implement response caching with TTL",
+        "savings": "~50% reduction for repeated queries"
+      },
+      "ttl": 3600,
+      "cache_dir": "mastermind_cache"
+    },
+    "optimization": {
+      "use_streaming": {
+        "description": "Use streaming responses for long queries",
+        "implementation": "Enable streaming mode for better resource management",
+        "savings": "~20% reduction for long responses"
+      },
+      "batch_requests": {
+        "description": "Batch multiple requests when possible",
+        "implementation": "Group related queries into single API call",
+        "savings": "~40% reduction for grouped queries"
+      },
+      "max_tokens": 2048,
+      "temperature": 0.7
+    }
+  },
+  "fallback_providers": {
+    "enabled": true,
+    "providers": [
+      {
+        "name": "OpenAI",
+        "env_var": "OPENAI_API_KEY",
+        "model": "gpt-3.5-turbo",
+        "priority": 1
+      },
+      {
+        "name": "Anthropic",
+        "env_var": "ANTHROPIC_API_KEY",
+        "model": "claude-3-haiku",
+        "priority": 2
+      }
+    ]
+  },
+  "quota_monitoring": {
+    "enabled": true,
+    "check_interval": 300,
+    "alert_threshold": 0.8,
+    "log_file": "mastermind_quota.log"
+  },
+  "autopoiesis": {
+    "AUTOPOIESIS_ENABLED": true,
+    "AUDIT_INTERVAL_MINUTES": 60,
+    "STAGNATION_ALERT_HOURS": 24,
+    "ACO_WORKER_INTERVAL_MINUTES": 15,
+    "INSIGHT_CONFIDENCE_THRESHOLD_FOR_REVIEW": 0.85,
+    "universal_enhancement": true,
+    "pattern_crystallization": true,
+    "domain_evolution": true
+  }
+}

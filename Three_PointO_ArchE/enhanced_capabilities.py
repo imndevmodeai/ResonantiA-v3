@@ -7,265 +7,168 @@ including code execution, file handling, grounding, function calling, and struct
 
 import logging
 from typing import Dict, Any, List, Optional, Union
-from .llm_providers import GoogleProvider, LLMProviderError
+from .llm_providers.google import GoogleProvider
+from .llm_providers.base import LLMProviderError
+from .thought_trail import log_to_thought_trail
 
 logger = logging.getLogger(__name__)
 
-class EnhancedCapabilities:
-    """Manages enhanced capabilities provided by the Gemini API."""
+class GeminiCapabilities:
+    """
+    A class to manage and execute enhanced capabilities using the Gemini API.
+    """
     
     def __init__(self, google_provider: GoogleProvider):
-        """Initialize with a configured GoogleProvider instance."""
-        self.provider = google_provider
-        
-    def execute_code(self, code: str, **kwargs) -> Dict[str, Any]:
         """
-        Execute Python code using Gemini's built-in code interpreter.
+        Initializes the GeminiCapabilities with a GoogleProvider instance.
+
+        Args:
+            google_provider: An instance of GoogleProvider configured for Gemini API access.
+        """
+        self.google_provider = google_provider
+
+    @log_to_thought_trail
+    def execute_code(self, script: str, language: str = "python") -> Dict[str, Any]:
+        """
+        Executes a code string using the Gemini API's code execution capability.
         
         Args:
-            code: Python code to execute
-            **kwargs: Additional execution parameters
+            script: The code to execute.
+            language: The programming language of the code (default: "python").
             
         Returns:
-            Dict containing execution results and IAR reflection
+            A dictionary containing the execution results with IAR compliance.
         """
         try:
-            result = self.provider.execute_code(code, **kwargs)
-            
-            # Create IAR reflection
-            reflection = {
-                "status": result["status"],
-                "confidence": 1.0 if result["status"] == "success" else 0.0,
-                "summary": "Code execution completed successfully" if result["status"] == "success" else f"Code execution failed: {result['error']}",
-                "alignment_check": "Code execution aligned with expected behavior" if result["status"] == "success" else "Code execution deviated from expected behavior",
-                "potential_issues": [] if result["status"] == "success" else [result["error"]],
-                "raw_output_preview": str(result["output"]) if result["output"] else None
-            }
-            
+            # This assumes the provider has a method for this. This is a conceptual link.
+            result = self.google_provider.execute_code(script, language)
+            return result
+        except (LLMProviderError, AttributeError) as e:
+            logger.error(f"Error executing code: {e}")
             return {
-                "result": result,
-                "reflection": reflection
-            }
-            
-        except Exception as e:
-            logger.error(f"Error in code execution: {str(e)}", exc_info=True)
-            return {
-                "result": {
-                    "output": None,
-                    "status": "error",
-                    "error": str(e)
-                },
+                "status": "error",
+                "message": f"Code execution failed: {str(e)}",
+                "error_details": str(e),
                 "reflection": {
                     "status": "Failed",
+                    "summary": f"Code execution failed due to provider error: {str(e)}",
                     "confidence": 0.0,
-                    "summary": f"Code execution failed: {str(e)}",
-                    "alignment_check": "Code execution failed to align with expected behavior",
-                    "potential_issues": [str(e)],
-                    "raw_output_preview": None
+                    "alignment_check": {
+                        "objective_alignment": 0.0,
+                        "protocol_alignment": 0.0
+                    },
+                    "potential_issues": [
+                        "GoogleProvider.execute_code() method not implemented or raised an error",
+                        str(e)
+                    ],
+                    "raw_output_preview": f"Error: {str(e)}"
                 }
             }
-            
-    def process_file(self, file_url: str, **kwargs) -> Dict[str, Any]:
+
+    @log_to_thought_trail
+    def handle_files(self, file_operations: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
-        Process a file from a URL using Gemini's file handling capabilities.
+        Handles file operations using the Gemini API's file handling capability.
         
         Args:
-            file_url: URL of the file to process
-            **kwargs: Additional processing parameters
+            file_operations: A list of dictionaries, each describing a file operation.
             
         Returns:
-            Dict containing processing results and IAR reflection
+            A dictionary containing the results with IAR compliance.
         """
         try:
-            result = self.provider.process_file(file_url, **kwargs)
-            
-            # Create IAR reflection
-            reflection = {
-                "status": result["status"],
-                "confidence": 1.0 if result["status"] == "success" else 0.0,
-                "summary": "File processing completed successfully" if result["status"] == "success" else f"File processing failed: {result['error']}",
-                "alignment_check": "File processing aligned with expected behavior" if result["status"] == "success" else "File processing deviated from expected behavior",
-                "potential_issues": [] if result["status"] == "success" else [result["error"]],
-                "raw_output_preview": str(result["content"]) if result["content"] else None
-            }
-            
+            result = self.google_provider.handle_files(file_operations)
+            return result
+        except (LLMProviderError, AttributeError) as e:
+            logger.error(f"Error handling files: {e}")
             return {
-                "result": result,
-                "reflection": reflection
-            }
-            
-        except Exception as e:
-            logger.error(f"Error in file processing: {str(e)}", exc_info=True)
-            return {
-                "result": {
-                    "content": None,
-                    "status": "error",
-                    "error": str(e)
-                },
+                "status": "error",
+                "message": f"File handling failed: {str(e)}",
                 "reflection": {
                     "status": "Failed",
+                    "summary": f"File handling failed: {str(e)}",
                     "confidence": 0.0,
-                    "summary": f"File processing failed: {str(e)}",
-                    "alignment_check": "File processing failed to align with expected behavior",
-                    "potential_issues": [str(e)],
-                    "raw_output_preview": None
+                    "alignment_check": {"objective_alignment": 0.0, "protocol_alignment": 0.0},
+                    "potential_issues": ["GoogleProvider.handle_files() not implemented or raised error", str(e)],
+                    "raw_output_preview": f"Error: {str(e)}"
                 }
             }
-            
-    def generate_with_grounding(self, prompt: str, sources: List[str], **kwargs) -> Dict[str, Any]:
+
+    @log_to_thought_trail
+    def perform_grounding(self, query: str, context_data: str) -> Optional[str]:
         """
-        Generate text with grounding in specified sources.
+        Performs grounding using the Gemini API.
         
         Args:
-            prompt: The prompt to generate from
-            sources: List of source URLs or texts to ground the generation
-            **kwargs: Additional generation parameters
+            query: The query to ground.
+            context_data: The context data to use for grounding.
             
         Returns:
-            Dict containing generation results and IAR reflection
+            The grounded response, or None if grounding fails.
         """
         try:
-            # Configure grounding
-            kwargs["grounding"] = {
-                "sources": sources,
-                "citation_style": kwargs.get("citation_style", "default"),
-                "citation_format": kwargs.get("citation_format", "text")
-            }
-            
-            # Generate with grounding
-            result = self.provider.generate(prompt, **kwargs)
-            
-            # Create IAR reflection
-            reflection = {
-                "status": "Success",
-                "confidence": 0.9,  # High confidence due to grounding
-                "summary": "Text generation completed with grounding",
-                "alignment_check": "Generation aligned with provided sources",
-                "potential_issues": [],
-                "raw_output_preview": result
-            }
-            
-            return {
-                "result": result,
-                "reflection": reflection
-            }
-            
-        except Exception as e:
-            logger.error(f"Error in grounded generation: {str(e)}", exc_info=True)
-            return {
-                "result": None,
-                "reflection": {
-                    "status": "Failed",
-                    "confidence": 0.0,
-                    "summary": f"Grounded generation failed: {str(e)}",
-                    "alignment_check": "Generation failed to align with sources",
-                    "potential_issues": [str(e)],
-                    "raw_output_preview": None
-                }
-            }
-            
-    def generate_with_function_calling(self, prompt: str, tools: List[Dict[str, Any]], **kwargs) -> Dict[str, Any]:
+            grounded_response = self.google_provider.perform_grounding(query, context_data)
+            return grounded_response
+        except (LLMProviderError, AttributeError) as e:
+            logger.error(f"Error performing grounding: {e}")
+            return None
+
+    @log_to_thought_trail
+    def call_function(self, function_name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Generate text with function calling capabilities.
+        Calls a function using the Gemini API's function calling capability.
         
         Args:
-            prompt: The prompt to generate from
-            tools: List of tool definitions for function calling
-            **kwargs: Additional generation parameters
+            function_name: The name of the function to call.
+            arguments: A dictionary of arguments to pass to the function.
             
         Returns:
-            Dict containing generation results and IAR reflection
+            A dictionary containing the function's return value with IAR compliance.
         """
         try:
-            # Configure function calling
-            kwargs["tools"] = tools
-            
-            # Generate with function calling
-            result = self.provider.generate(prompt, **kwargs)
-            
-            # Check if result is a function call
-            if isinstance(result, dict) and result.get("type") == "function_call":
-                reflection = {
-                    "status": "Success",
-                    "confidence": 0.95,
-                    "summary": f"Function call generated: {result['function']}",
-                    "alignment_check": "Function call aligned with tool definitions",
-                    "potential_issues": [],
-                    "raw_output_preview": str(result)
-                }
-            else:
-                reflection = {
-                    "status": "Success",
-                    "confidence": 0.9,
-                    "summary": "Text generation completed with function calling capability",
-                    "alignment_check": "Generation aligned with tool definitions",
-                    "potential_issues": [],
-                    "raw_output_preview": result
-                }
-            
+            result = self.google_provider.call_function(function_name, arguments)
+            return result
+        except (LLMProviderError, AttributeError) as e:
+            logger.error(f"Error calling function {function_name}: {e}")
             return {
-                "result": result,
-                "reflection": reflection
-            }
-            
-        except Exception as e:
-            logger.error(f"Error in function calling generation: {str(e)}", exc_info=True)
-            return {
-                "result": None,
+                "status": "error",
+                "message": f"Function call failed: {str(e)}",
                 "reflection": {
                     "status": "Failed",
+                    "summary": f"Function '{function_name}' call failed: {str(e)}",
                     "confidence": 0.0,
-                    "summary": f"Function calling generation failed: {str(e)}",
-                    "alignment_check": "Generation failed to align with tool definitions",
-                    "potential_issues": [str(e)],
-                    "raw_output_preview": None
+                    "alignment_check": {"objective_alignment": 0.0, "protocol_alignment": 0.0},
+                    "potential_issues": ["GoogleProvider.call_function() not implemented or raised error", str(e)],
+                    "raw_output_preview": f"Error: {str(e)}"
                 }
             }
-            
-    def generate_with_structured_output(self, prompt: str, output_schema: Dict[str, Any], **kwargs) -> Dict[str, Any]:
+
+    @log_to_thought_trail
+    def generate_structured_output(self, prompt: str, schema: Dict[str, Any]) -> Union[Dict[str, Any], List[Dict[str, Any]], None]:
         """
-        Generate text with structured output according to a schema.
+        Generates structured output based on a prompt and a schema using the Gemini API.
         
         Args:
-            prompt: The prompt to generate from
-            output_schema: JSON schema defining the expected output structure
-            **kwargs: Additional generation parameters
+            prompt: The prompt to use for generating the output.
+            schema: The schema to use for structuring the output.
             
         Returns:
-            Dict containing generation results and IAR reflection
+            Structured output with IAR compliance, or error dict if generation fails.
         """
         try:
-            # Configure structured output
-            kwargs["output_schema"] = output_schema
-            
-            # Generate with structured output
-            result = self.provider.generate(prompt, **kwargs)
-            
-            # Create IAR reflection
-            reflection = {
-                "status": "Success",
-                "confidence": 0.95,  # High confidence due to schema enforcement
-                "summary": "Text generation completed with structured output",
-                "alignment_check": "Generation aligned with output schema",
-                "potential_issues": [],
-                "raw_output_preview": result
-            }
-            
+            result = self.google_provider.generate_structured_output(prompt, schema)
+            return result
+        except (LLMProviderError, AttributeError) as e:
+            logger.error(f"Error generating structured output: {e}")
             return {
-                "result": result,
-                "reflection": reflection
-            }
-            
-        except Exception as e:
-            logger.error(f"Error in structured output generation: {str(e)}", exc_info=True)
-            return {
-                "result": None,
+                "status": "error",
+                "message": f"Structured output generation failed: {str(e)}",
                 "reflection": {
                     "status": "Failed",
-                    "confidence": 0.0,
                     "summary": f"Structured output generation failed: {str(e)}",
-                    "alignment_check": "Generation failed to align with output schema",
-                    "potential_issues": [str(e)],
-                    "raw_output_preview": None
+                    "confidence": 0.0,
+                    "alignment_check": {"objective_alignment": 0.0, "protocol_alignment": 0.0},
+                    "potential_issues": ["GoogleProvider.generate_structured_output() not implemented or raised error", str(e)],
+                    "raw_output_preview": f"Error: {str(e)}"
                 }
             } 

@@ -1,0 +1,129 @@
+{
+    "name": "Enhanced Capabilities Demo",
+    "description": "Demonstrates the enhanced capabilities provided by the Gemini API",
+    "version": "1.0.0",
+    "tasks": {
+        "execute_python_code": {
+            "description": "Execute Python code using Gemini's built-in code interpreter",
+            "action_type": "execute_code",
+            "inputs": {
+                "provider": "google",
+                "model": "gemini-1.5-pro-latest",
+                "code": "import numpy as np\nx = np.array([1, 2, 3])\ny = np.array([4, 5, 6])\nprint(f'Dot product: {np.dot(x, y)}')"
+            },
+            "outputs": {
+                "result": "dict",
+                "reflection": "dict"
+            }
+        },
+        "process_file": {
+            "description": "Process a file from a URL using Gemini's file handling capabilities",
+            "action_type": "process_file",
+            "inputs": {
+                "provider": "google",
+                "model": "gemini-1.5-pro-latest",
+                "file_url": "https://raw.githubusercontent.com/google/generative-ai-docs/main/examples/python/quickstart.py",
+                "temperature": 0.7,
+                "max_tokens": 1000
+            },
+            "outputs": {
+                "result": "dict",
+                "reflection": "dict"
+            }
+        },
+        "generate_with_grounding": {
+            "description": "Generate text with grounding in specified sources",
+            "action_type": "generate_with_grounding",
+            "inputs": {
+                "provider": "google",
+                "model": "gemini-1.5-pro-latest",
+                "prompt": "Explain the key features of the Gemini API based on the provided documentation.",
+                "sources": [
+                    "https://ai.google.dev/docs/gemini_api_overview",
+                    "https://ai.google.dev/docs/gemini_api_quickstart"
+                ],
+                "citation_style": "default",
+                "citation_format": "text",
+                "temperature": 0.7,
+                "max_tokens": 1000
+            },
+            "outputs": {
+                "result": "dict",
+                "reflection": "dict"
+            }
+        },
+        "generate_with_function_calling": {
+            "description": "Generate text with function calling capabilities",
+            "action_type": "generate_with_function_calling",
+            "inputs": {
+                "provider": "google",
+                "model": "gemini-1.5-pro-latest",
+                "prompt": "Calculate the factorial of 5 using the provided function.",
+                "tools": [
+                    {
+                        "name": "calculate_factorial",
+                        "description": "Calculate the factorial of a number",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "number": {
+                                    "type": "integer",
+                                    "description": "The number to calculate factorial for"
+                                }
+                            },
+                            "required": ["number"]
+                        }
+                    }
+                ],
+                "temperature": 0.0,
+                "max_tokens": 1000
+            },
+            "outputs": {
+                "result": "dict",
+                "reflection": "dict"
+            }
+        },
+        "generate_with_structured_output": {
+            "description": "Generate text with structured output according to a schema",
+            "action_type": "generate_with_structured_output",
+            "inputs": {
+                "provider": "google",
+                "model": "gemini-1.5-pro-latest",
+                "prompt": "Analyze the sentiment of the following text: 'I absolutely love this product! It's amazing and works perfectly.'",
+                "output_schema": {
+                    "type": "object",
+                    "properties": {
+                        "sentiment": {
+                            "type": "string",
+                            "enum": ["positive", "negative", "neutral"]
+                        },
+                        "confidence": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "key_phrases": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": ["sentiment", "confidence", "key_phrases"]
+                },
+                "temperature": 0.0,
+                "max_tokens": 1000
+            },
+            "outputs": {
+                "result": "dict",
+                "reflection": "dict"
+            }
+        }
+    },
+    "dependencies": {
+        "process_file": ["execute_python_code"],
+        "generate_with_grounding": ["process_file"],
+        "generate_with_function_calling": ["generate_with_grounding"],
+        "generate_with_structured_output": ["generate_with_function_calling"]
+    }
+} 

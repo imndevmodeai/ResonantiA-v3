@@ -6,8 +6,7 @@ import subprocess
 from datetime import datetime
 
 WORKFLOW = "workflows/gorilla_scenario_abm_narrative_workflow.json"
-CONTEXT_DIR = Path("contexts/batch_runs")
-CONTEXT_DIR.mkdir(parents=True, exist_ok=True)
+CONT>EXT_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUTS = []
 
 def run_single_query(query: str, idx: int):

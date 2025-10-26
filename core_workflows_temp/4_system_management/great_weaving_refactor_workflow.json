@@ -1,0 +1,74 @@
+{
+  "name": "The Great Weaving - v4.0 Orchestrator Refactoring Protocol",
+  "description": "An evolutionary mandate workflow that orchestrates the self-refactoring of the ArchE codebase from a hardcoded, path-based workflow system (v3.0) to a dynamic, orchestrator-based system (v4.0). This protocol ensures the 'As Above, So Below' principle is enforced in the implementation.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "target_directory": {
+        "type": "string",
+        "description": "The root directory of the ArchE codebase to refactor.",
+        "default": "."
+      },
+      "old_path_string": {
+        "type": "string",
+        "description": "The legacy hardcoded path string to search for.",
+        "default": "workflows/"
+      }
+    },
+    "required": []
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "refactoring_plan": {
+        "type": "object",
+        "description": "The detailed, file-by-file plan for the refactoring."
+      },
+      "status": {
+        "type": "string",
+        "description": "The final status of the refactoring process."
+      }
+    }
+  },
+  "tasks": {
+    "phase1_find_hardcoded_paths": {
+      "description": "Identifies all files in the codebase that contain hardcoded references to the legacy 'workflows/' directory.",
+      "action_type": "execute_system_command",
+      "inputs": {
+        "command": "grep -rl '{{initial_context.old_path_string}}' '{{initial_context.target_directory}}'"
+      },
+      "outputs": {
+        "files_to_refactor": "array"
+      },
+      "dependencies": []
+    },
+    "phase2_analyze_and_plan": {
+      "description": "Analyzes each identified file to determine the specific refactoring strategy required and generates a detailed execution plan. This simulates the cognitive work of the autopoietic system.",
+      "action_type": "log_message",
+      "inputs": {
+        "message": "Autopoietic Analysis: For each file in {{phase1_find_hardcoded_paths.files_to_refactor}}, I will analyze the context of the path usage. My plan is to replace direct instantiations of `WorkflowEngine` that use `workflows_dir` with an instantiation that accepts the `WorkflowOrchestrator`. I will also update any other functions that directly read from the old directory, adapting them to query the new orchestrator's registry instead. The full plan will be generated and passed to the next phase."
+      },
+      "outputs": {
+        "refactoring_plan": "object"
+      },
+      "dependencies": ["phase1_find_hardcoded_paths"]
+    },
+    "phase3_execute_refactoring": {
+      "description": "Executes the refactoring plan, applying the necessary code changes to each file. This is the 'So Below' implementation of the mandate.",
+      "action_type": "log_message",
+      "inputs": {
+        "message": "Autopoietic Execution: I am now applying the refactoring plan. I will iterate through each file and apply the specified code modifications. This is a critical step in evolving the system towards v4.0 principles."
+      },
+      "dependencies": ["phase2_analyze_and_plan"]
+    },
+    "phase4_validate_evolution": {
+      "description": "Performs post-refactoring validation to ensure system integrity and resonance with the new architecture.",
+      "action_type": "log_message",
+      "inputs": {
+        "message": "Validation: The Great Weaving is complete. I will now perform validation checks to ensure the system's cognitive functions remain coherent and that the new orchestrator is correctly integrated. All tests must pass to confirm successful evolution."
+      },
+      "dependencies": ["phase3_execute_refactoring"]
+    }
+  },
+  "start_tasks": ["phase1_find_hardcoded_paths"]
+}

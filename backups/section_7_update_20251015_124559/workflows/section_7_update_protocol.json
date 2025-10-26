@@ -1,0 +1,130 @@
+{
+  "workflow_metadata": {
+    "name": "Section 7 Update Protocol",
+    "version": "1.0",
+    "description": "Scans actual codebase and generates/updates Section 7 specifications to ensure Genesis Protocol has accurate blueprints",
+    "author": "ArchE (Documentation System)",
+    "requires_keyholder_authority": true,
+    "priority": "critical",
+    "must_run_before": ["autopoietic_genesis_protocol"],
+    "protocol_reference": "ResonantiA Protocol v3.5-GP - Implementation Resonance Mandate"
+  },
+  "workflow_id": "section_7_update_protocol_v1",
+  "tasks": {
+    "phase_1_scan_codebase": {
+      "action_type": "execute_code",
+      "description": "Phase 1: Scan actual codebase and inventory all Python files",
+      "inputs": {
+        "language": "python",
+        "code": "import os\nimport ast\nimport json\nfrom pathlib import Path\n\nresults = {\n    'total_files': 0,\n    'files': [],\n    'directories': {}\n}\n\ntarget_dir = Path('Three_PointO_ArchE')\n\nfor py_file in sorted(target_dir.rglob('*.py')):\n    if '__pycache__' in str(py_file) or '.backup' in str(py_file).lower():\n        continue\n    \n    results['total_files'] += 1\n    \n    # Extract basic info\n    file_info = {\n        'path': str(py_file),\n        'name': py_file.name,\n        'size_bytes': py_file.stat().st_size,\n        'classes': [],\n        'functions': [],\n        'has_docstring': False,\n        'imports': []\n    }\n    \n    # Parse file\n    try:\n        with open(py_file, 'r', encoding='utf-8') as f:\n            content = f.read()\n            tree = ast.parse(content)\n            \n            # Get module docstring\n            if ast.get_docstring(tree):\n                file_info['has_docstring'] = True\n            \n            # Extract classes and functions\n            for node in ast.walk(tree):\n                if isinstance(node, ast.ClassDef):\n                    file_info['classes'].append(node.name)\n                elif isinstance(node, ast.FunctionDef) and not any(node.name == c for c in file_info['classes']):\n                    file_info['functions'].append(node.name)\n                elif isinstance(node, (ast.Import, ast.ImportFrom)):\n                    if isinstance(node, ast.Import):\n                        for alias in node.names:\n                            file_info['imports'].append(alias.name)\n                    elif node.module:\n                        file_info['imports'].append(node.module)\n    except Exception as e:\n        file_info['parse_error'] = str(e)\n    \n    results['files'].append(file_info)\n\nprint(json.dumps(results, indent=2))"
+      },
+      "outputs": ["codebase_inventory"],
+      "dependencies": []
+    },
+    "phase_2_compare_with_section_7": {
+      "action_type": "generate_text_llm",
+      "description": "Phase 2: Compare actual codebase with existing Section 7 specifications",
+      "inputs": {
+        "prompt": "Analyze the codebase inventory and identify gaps in Section 7 documentation.\n\nActual Codebase:\n{{phase_1_scan_codebase.output}}\n\nGenerate a JSON report with:\n1. undocumented_files: Array of files not in Section 7\n2. documented_files: Array of files that ARE in Section 7\n3. priority_for_documentation: Categorize undocumented files by priority (critical/high/medium/low)\n4. recommended_order: Suggested order for documenting files\n\nCriteria for priority:\n- CRITICAL: Core dependencies (temporal_core, iar_components, action_context, vetting_agent)\n- HIGH: Framework components (workflow_engine, spr_manager, cognitive_integration_hub)\n- MEDIUM: Tool implementations (cfp_framework, causal_inference_tool, etc.)\n- LOW: Utilities, demos, test files\n\nIMPORTANT: Return ONLY valid JSON, no markdown formatting or explanations.",
+        "model": "gemini-2.0-flash-thinking-exp-01-21"
+      },
+      "outputs": ["gap_analysis"],
+      "dependencies": ["phase_1_scan_codebase"]
+    },
+    "phase_3_generate_specifications": {
+      "action_type": "for_each",
+      "description": "Phase 3: Generate specifications for undocumented critical and high priority files",
+      "inputs": {
+        "items": "{{phase_2_compare_with_section_7.output.generated_text.parsed_json.priority_for_documentation.critical}}",
+        "workflow": {
+          "tasks": {
+            "read_source_code": {
+              "action_type": "read_file",
+              "description": "Read the actual source code",
+              "inputs": {
+                "path": "{{item.path}}"
+              },
+              "dependencies": []
+            },
+            "generate_specification": {
+              "action_type": "generate_text_llm",
+              "description": "Generate detailed Section 7 specification",
+              "inputs": {
+                "prompt": "Generate a detailed Section 7 specification for this file.\n\nFile: {{item.name}}\nPath: {{item.path}}\n\nSource Code:\n{{read_source_code.output.content}}\n\nGenerate specification in this EXACT format:\n\n## 7.X {{item.name}}\n\n**File Path**: `{{item.path}}`\n\n**Purpose**: [1-2 sentences describing the file's role]\n\n**Key Components**:\n- **Classes**: [List main classes with 1-line descriptions]\n- **Functions**: [List key functions with 1-line descriptions]\n- **Dependencies**: [List critical imports]\n\n**IAR Compliance**: [How this file implements or uses IAR]\n\n**Integration Points**: [What other components use this file]\n\n**Implementation Notes**: [Any critical details for regeneration]\n\nBe thorough and accurate - this specification will be used to regenerate the code.",
+                "model": "gemini-2.0-flash-thinking-exp-01-21"
+              },
+              "dependencies": ["read_source_code"]
+            },
+            "vet_specification": {
+              "action_type": "generate_text_llm",
+              "description": "Vet the specification for completeness",
+              "inputs": {
+                "prompt": "Review this specification for completeness and accuracy.\n\nSpecification:\n{{generate_specification.output.response_text}}\n\nOriginal Code (for reference):\n{{read_source_code.output.content}}\n\nCheck:\n1. Are all key classes mentioned?\n2. Are critical functions documented?\n3. Are dependencies listed?\n4. Is the purpose clear?\n5. Could this spec be used to regenerate working code?\n\nReturn JSON: {\"approved\": true/false, \"issues\": [...], \"quality_score\": 0.0-1.0}",
+                "model": "gemini-2.0-flash-thinking-exp-01-21"
+              },
+              "dependencies": ["generate_specification"]
+            }
+          }
+        }
+      },
+      "outputs": ["generated_specifications"],
+      "dependencies": ["phase_2_compare_with_section_7"]
+    },
+    "phase_4_compile_section_7": {
+      "action_type": "generate_text_llm",
+      "description": "Phase 4: Compile updated Section 7 with all specifications",
+      "inputs": {
+        "prompt": "Compile a complete, updated Section 7 for the ResonantiA Protocol.\n\nGap Analysis:\n{{phase_2_compare_with_section_7.output.generated_text}}\n\nNew Specifications Generated:\n{{phase_3_generate_specifications.result_summary}}\n\nCreate a comprehensive Section 7 document that includes:\n1. Introduction explaining Section 7's purpose\n2. All existing documented files (reference them)\n3. All newly documented files (from generated specs)\n4. Clear numbering (7.1, 7.2, etc.)\n5. Table of contents at the top\n\nFormat as Markdown with proper headings and structure.\nInclude a status section showing:\n- Total files documented: X\n- Coverage: Y%\n- Last updated: {{context.timestamp}}\n\nBegin with: # Section 7: Codebase & File Definitions (Updated {{context.timestamp}})",
+        "model": "gemini-2.0-flash-thinking-exp-01-21"
+      },
+      "outputs": ["updated_section_7"],
+      "dependencies": ["phase_3_generate_specifications"]
+    },
+    "phase_5_write_section_7": {
+            "action_type": "save_to_file",
+      "description": "Phase 5: Write updated Section 7 to disk",
+      "inputs": {
+        "path": "protocol/Section_7_Codebase_Definitions_UPDATED.md",
+        "content": "{{phase_4_compile_section_7.output.generated_text}}"
+      },
+      "outputs": ["section_7_path"],
+      "dependencies": ["phase_4_compile_section_7"]
+    },
+    "phase_6_generate_report": {
+      "action_type": "generate_text_llm",
+      "description": "Phase 6: Generate update report",
+      "inputs": {
+        "prompt": "Generate a comprehensive report on the Section 7 update.\n\nCodebase Inventory:\n{{phase_1_scan_codebase.output}}\n\nGap Analysis:\n{{phase_2_compare_with_section_7.output.generated_text}}\n\nSpecifications Generated:\n{{phase_3_generate_specifications.result_summary}}\n\nCreate a Markdown report with:\n1. Executive Summary\n2. Coverage Metrics (before/after)\n3. Critical Findings\n4. Recommendations\n5. Ready for Genesis? (yes/no with reasoning)\n\nTitle: # Section 7 Update Report - {{context.timestamp}}",
+        "model": "gemini-2.0-flash-thinking-exp-01-21"
+      },
+      "outputs": ["update_report"],
+      "dependencies": ["phase_5_write_section_7"]
+    },
+    "phase_7_write_report": {
+            "action_type": "save_to_file",
+      "description": "Write the update report",
+      "inputs": {
+        "path": "logs/section_7_update_report_{{context.timestamp}}.md",
+        "content": "{{phase_6_generate_report.output.generated_text}}"
+      },
+      "outputs": ["report_path"],
+      "dependencies": ["phase_6_generate_report"]
+    }
+  },
+  "expected_outputs": {
+    "updated_section_7": "Complete, current Section 7 documentation",
+    "coverage_percentage": "Percentage of codebase documented",
+    "ready_for_genesis": "Boolean indicating if Genesis Protocol can proceed"
+  },
+  "success_criteria": {
+    "critical_files_documented": ">= 95%",
+    "high_priority_files_documented": ">= 80%",
+    "specifications_vetted": "100%"
+  }
+}
+
+
+
+
+
+

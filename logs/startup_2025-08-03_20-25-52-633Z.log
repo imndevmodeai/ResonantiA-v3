@@ -1,0 +1,19 @@
+================================================================================
+🚀 STARTUP Logging Session Started
+================================================================================
+📅 Session Start Time: 2025-08-03T20:25:52.635Z
+🔧 Component: startup
+📁 Main Log: logs/startup_2025-08-03_20-25-52-633Z.log
+❌ Error Log: logs/errors_startup_2025-08-03_20-25-52-633Z.log
+⚡ Performance Log: logs/performance_startup_2025-08-03_20-25-52-633Z.log
+================================================================================
+2025-08-03T20:25:52.666Z [INFO] startup: Found Python executable in virtual environment: /media/newbu/3626C55326C514B1/Happier/.venv/bin/python3
+2025-08-03T20:25:52.669Z [INFO] startup: ArchE Unified Startup System
+2025-08-03T20:25:52.671Z [INFO] startup: Single Entry Point - All Services
+2025-08-03T20:25:52.673Z [INFO] startup: Centralized Port Management
+2025-08-03T20:25:52.764Z [INFO] startup: Building server-side utilities
+2025-08-03T20:25:53.538Z [ERROR] startup: FATAL: Failed to build server-side utilities. Startup aborted
+{
+  "stdout": "🔧 Starting server-side utility build process...\n⚠️  Local TypeScript compiler not found in nextjs-chat/node_modules. Falling back to global `tsc`. Please run `npm install` in `nextjs-chat` if this fails.\n🔥 Executing build command: tsc --project tsconfig.server.json\n",
+  "stderr": "/bin/sh: 1: tsc: not found\n❌ A critical error occurred during the build process.\n"
+}

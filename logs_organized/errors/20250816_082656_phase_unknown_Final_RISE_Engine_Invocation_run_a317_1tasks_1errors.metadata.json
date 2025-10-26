@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_a317bbfcf79f46a39884e7022d19c698.jsonl",
+  "size_bytes": 1060,
+  "modified": "2025-08-16T08:26:56.253761",
+  "workflow_name": "Final RISE Engine Invocation",
+  "run_id": "run_a317bbfcf79f46a39884e7022d19c698",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 1,
+  "task_count": 1,
+  "duration_sec": 30.0648,
+  "status": "unknown",
+  "line_count": 1
+}

@@ -1,0 +1,92 @@
+{
+  "backup_created": "2025-09-05T07:39:11.986914",
+  "original_path": "Four_PointO_ArchE",
+  "backup_path": "Four_PointO_ArchE_backup_20250905_073911",
+  "safety_version": "1.0",
+  "critical_files": [
+    {
+      "path": "tools/action_registry.py",
+      "hash": "3d31dbe109c604b7e250e34db3150e6e8b096a3e23d7dabf20877b31eaf3d333",
+      "size": 1192,
+      "modified": 1756733555.760122
+    },
+    {
+      "path": "tools/file_system_tools.py",
+      "hash": "f8a66a8801a15d3f6ef8809551f5a93ea561b1bc41b50fd5054c3a2bd379e672",
+      "size": 3604,
+      "modified": 1756000886.926675
+    },
+    {
+      "path": "tools/genesis_tools.py",
+      "hash": "b919c3d5efa5b42b7e5e2b1b8c88ea0d489761a63ae7dfbb8d56ec45cdb2c3c5",
+      "size": 12817,
+      "modified": 1756901048.1146188
+    },
+    {
+      "path": "tools/llm_tool.py",
+      "hash": "984c5bb1caa3fab55ca1dff1ef1411449a5236db74a527a3bee30be1d11c4d4c",
+      "size": 2549,
+      "modified": 1756901046.2726374
+    },
+    {
+      "path": "tools/new_harmonic_tool.py",
+      "hash": "823b5f90c7fcecf0661600d63b3305da5c1da7793357cad5d7c5156b8cef3ab4",
+      "size": 51,
+      "modified": 1756025143.0955117
+    },
+    {
+      "path": "tools/perception_engine.py",
+      "hash": "9f6a78d469b54cc1c656cc8918d4a198550fe3d976f0211ebbfe4f6e817dbb35",
+      "size": 10257,
+      "modified": 1756901052.4965749
+    },
+    {
+      "path": "tools/perception_orchestrator.py",
+      "hash": "6c9ccd759f0a6ab06ec8ef38d00c07b03a5832f92c902ff9669a7ed9f18e063d",
+      "size": 3397,
+      "modified": 1756733543.4262447
+    },
+    {
+      "path": "tools/rise_actions.py",
+      "hash": "f28cbf2e332ebede18702af07a27733c4a83b92785a42eeaf24c3df2c5f2b033",
+      "size": 11073,
+      "modified": 1756901049.0366096
+    },
+    {
+      "path": "tools/tsp_tools.py",
+      "hash": "ed2cf8b412426db6a9596766459ecc55710ebd87e3bd2779204af66ba485f7c6",
+      "size": 1857,
+      "modified": 1755916819.326554
+    },
+    {
+      "path": "tools/utils.py",
+      "hash": "205c5d6b4c79bf5928fba5ce1f9b8f746dd9c184cfa9b7702537888935e8238e",
+      "size": 480,
+      "modified": 1756025417.9728196
+    },
+    {
+      "path": "tools/web_tools.py",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "modified": 1756000873.7116637
+    },
+    {
+      "path": "workflow/action_registry.py",
+      "hash": "138f25d91bc28ec8f5b156547cc7715108b1125d5c96067d82a4bd08c23f3645",
+      "size": 3126,
+      "modified": 1756025417.9888194
+    },
+    {
+      "path": "workflow/engine.py",
+      "hash": "5ce647b1ca069c644051f53e47f519ef08cbfa48dc42c43bea6ece25f8bc499b",
+      "size": 10872,
+      "modified": 1756901045.207648
+    },
+    {
+      "path": "knowledge_graph/perception_targets.json",
+      "hash": "01ff76c7e965b312cbb6e4d6b45467e0c5970bf560c6128377252cb428218c61",
+      "size": 1246,
+      "modified": 1756692892.2740054
+    }
+  ]
+}

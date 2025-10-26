@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_87c8d0c995d34f42baba96974aa58e9b.jsonl",
+  "size_bytes": 1599,
+  "modified": "2025-07-22T01:47:40.171071",
+  "workflow_name": "Basic Analysis Workflow (v3.0 Enhanced)",
+  "run_id": "run_87c8d0c995d34f42baba96974aa58e9b",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 1,
+  "task_count": 2,
+  "duration_sec": 0.0132,
+  "status": "unknown",
+  "line_count": 2
+}

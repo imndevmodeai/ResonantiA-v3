@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_d848859266154ee48de5346818e82978.jsonl",
+  "size_bytes": 1032,
+  "modified": "2025-08-05T23:53:59.164942",
+  "workflow_name": "Simple Test Workflow",
+  "run_id": "run_d848859266154ee48de5346818e82978",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 2,
+  "duration_sec": 0.00030000000000000003,
+  "status": "unknown",
+  "line_count": 2
+}

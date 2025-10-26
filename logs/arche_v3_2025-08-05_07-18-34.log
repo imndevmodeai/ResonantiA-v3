@@ -1,0 +1,33 @@
+2025-08-05 07:18:34 - root:162 - INFO - logging_config - ================================================================================
+2025-08-05 07:18:34 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-05 07:18:34 - root:164 - INFO - logging_config - ================================================================================
+2025-08-05 07:18:34 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-05 07:18:34
+2025-08-05 07:18:34 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-05 07:18:34 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-05_07-18-34.log
+2025-08-05 07:18:34 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-05_07-18-34.log
+2025-08-05 07:18:34 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-05_07-18-34.log
+2025-08-05 07:18:34 - root:170 - INFO - logging_config - ================================================================================
+2025-08-05 07:18:34 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-05 07:18:34 - GenesisRunner:19 - INFO - run_genesis - --- Starting Autopoietic Genesis Test via Direct Invocation ---
+2025-08-05 07:18:34 - GenesisRunner:26 - INFO - run_genesis - Loading context from: autopoiesis_context.json
+2025-08-05 07:18:34 - GenesisRunner:29 - INFO - run_genesis - Context loaded successfully.
+2025-08-05 07:18:34 - GenesisRunner:32 - INFO - run_genesis - Instantiating IARCompliantWorkflowEngine...
+2025-08-05 07:18:34 - Three_PointO_ArchE.workflow_engine:341 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-05 07:18:34 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-05 07:18:34 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-05 07:18:34 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-05 07:18:34 - Three_PointO_ArchE.workflow_engine:361 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-05 07:18:34 - GenesisRunner:34 - INFO - run_genesis - Engine instantiated successfully.
+2025-08-05 07:18:34 - GenesisRunner:37 - INFO - run_genesis - Executing workflow: autopoietic_genesis_v4.json
+2025-08-05 07:18:34 - Three_PointO_ArchE.workflow_engine:1023 - INFO - workflow_engine - ✅ Input validation passed for workflow: autopoietic_genesis_v4.json
+2025-08-05 07:18:34 - Three_PointO_ArchE.workflow_engine:1024 - INFO - workflow_engine - Problem description length: 106 characters
+2025-08-05 07:18:34 - Three_PointO_ArchE.workflow_engine:517 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/autopoietic_genesis_v4.json
+2025-08-05 07:18:34 - Three_PointO_ArchE.workflow_engine:1055 - INFO - workflow_engine - Starting workflow 'Autopoietic Genesis Workflow v4' (Run ID: run_a087933aaf664171a8d30736035d5161). Initial ready tasks: ['generate_code_from_specification']
+2025-08-05 07:18:34 - Three_PointO_ArchE.llm_tool:72 - INFO - llm_tool - Loaded content for template var 'specification_content' from file: specifications/action_registry.md
+2025-08-05 07:18:34 - Three_PointO_ArchE.llm_tool:86 - INFO - llm_tool - Loaded and rendered template: code_generation_from_spec.j2
+2025-08-05 07:18:50 - Three_PointO_ArchE.llm_tool:139 - INFO - llm_tool - Base64 encoding requested for LLM output.
+2025-08-05 07:18:50 - Three_PointO_ArchE.workflow_engine:1216 - INFO - workflow_engine - Workflow 'Autopoietic Genesis Workflow v4' finished in 16.54s with status: Completed Successfully
+2025-08-05 07:18:50 - Three_PointO_ArchE.workflow_engine:1226 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_a087933aaf664171a8d30736035d5161.jsonl
+2025-08-05 07:18:50 - GenesisRunner:39 - INFO - run_genesis - Workflow execution finished.
+2025-08-05 07:18:50 - GenesisRunner:50 - INFO - run_genesis - Genesis workflow completed successfully.
+2025-08-05 07:18:50 - GenesisRunner:54 - INFO - run_genesis - SUCCESS: Verified that the target file 'autopoiesis_test/action_registry.py' was created.

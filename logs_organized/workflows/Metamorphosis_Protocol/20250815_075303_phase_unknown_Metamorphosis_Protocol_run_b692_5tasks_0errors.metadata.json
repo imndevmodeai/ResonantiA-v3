@@ -1,0 +1,14 @@
+{
+  "original_file": "outputs/run_events_run_b692e6386bdf48a6a5b8a0312ce6c29e.jsonl",
+  "size_bytes": 25972,
+  "modified": "2025-08-15T07:53:03.381369",
+  "workflow_name": "Metamorphosis Protocol",
+  "run_id": "run_b692e6386bdf48a6a5b8a0312ce6c29e",
+  "phase": "unknown",
+  "session_id": "unknown",
+  "error_count": 0,
+  "task_count": 5,
+  "duration_sec": 59.500899999999994,
+  "status": "unknown",
+  "line_count": 5
+}

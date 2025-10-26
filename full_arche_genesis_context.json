@@ -1,0 +1,14 @@
+{
+  "test_name": "Full ArchE Genesis Test",
+  "description": "Generate a complete, independent ArchE instance from Living Specifications",
+  "target_directory": "arche_genesis_test",
+  "components_to_generate": [
+    "workflow_engine",
+    "llm_tool", 
+    "spr_manager",
+    "action_registry",
+    "config"
+  ],
+  "isolation_guarantee": "This test creates a completely separate ArchE instance that does not affect the production codebase",
+  "problem_description": "Test Autopoietic System Genesis by creating a complete ArchE system from Living Specifications"
+}

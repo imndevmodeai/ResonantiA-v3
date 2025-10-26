@@ -1,0 +1,19 @@
+2025-10-02 04:53:41,707 - __main__ - INFO - Initializing ArchE components...
+2025-10-02 04:53:41,770 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized with maxlen=1000
+2025-10-02 04:53:42,936 - Three_PointO_ArchE.action_registry - WARNING - V4 system not available: No module named 'selenium'
+2025-10-02 04:53:43,020 - Three_PointO_ArchE.action_registry - WARNING - Enhanced Perception Engine not available: No module named 'selenium'
+2025-10-02 04:53:43,028 - llm_providers - WARNING - OpenAI library not installed. OpenAIProvider will be unavailable.
+2025-10-02 04:53:43,028 - llm_providers - INFO - Google Generative AI library found.
+2025-10-02 04:53:43,032 - Three_PointO_ArchE.llm_providers - WARNING - OpenAI library not installed. OpenAIProvider will be unavailable.
+2025-10-02 04:53:43,032 - Three_PointO_ArchE.llm_providers - INFO - Google Generative AI library found.
+2025-10-02 04:53:43,101 - Three_PointO_ArchE.tools.code_executor - WARNING - Using fallback config for code_executor.py
+2025-10-02 04:53:43,101 - Three_PointO_ArchE.tools.code_executor - ERROR - Docker library not found. Docker sandboxing will be unavailable. Install 'docker' package.
+2025-10-02 04:53:43,101 - Three_PointO_ArchE.action_registry - INFO - ActionRegistry initialized.
+2025-10-02 04:53:43,102 - Three_PointO_ArchE.action_registry - WARNING - V4 system not available: No module named 'selenium'
+2025-10-02 04:53:43,104 - Three_PointO_ArchE.action_registry - WARNING - Enhanced Perception Engine not available: No module named 'selenium'
+2025-10-02 04:53:43,104 - Three_PointO_ArchE.action_registry - INFO - ActionRegistry initialized.
+2025-10-02 04:53:43,105 - __main__ - ERROR - Failed to import ResonantiA Maestro components: No module named 'Three_PointO_ArchE.llm_providers.google'; 'Three_PointO_ArchE.llm_providers' is not a package
+2025-10-02 04:53:43,105 - __main__ - INFO - Falling back to enhanced response mode
+2025-10-02 04:53:43,105 - __main__ - INFO - 🚀 Starting ArchE-Nexus Bridge on port 8765
+2025-10-02 04:53:43,106 - websockets.server - INFO - server listening on 0.0.0.0:8765
+2025-10-02 04:53:43,108 - __main__ - INFO - 🌐 ArchE-Nexus Bridge listening on ws://0.0.0.0:8765

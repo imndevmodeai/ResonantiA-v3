@@ -1,0 +1,14 @@
+{
+    "name": "Live RISE Engine Invocation (External Script)",
+    "description": "A workflow to invoke the RISE Orchestrator via a dedicated Python script.",
+    "tasks": {
+        "execute_rise_protocol": {
+            "action_type": "execute_code",
+            "description": "Runs the invoke_rise_script.py to perform the strategic analysis.",
+            "inputs": {
+                "language": "python",
+                "code": "import subprocess; import sys; result = subprocess.run([sys.executable, 'invoke_rise_script.py'], capture_output=True, text=True); print(result.stdout); sys.exit(result.returncode)"
+            }
+        }
+    }
+}

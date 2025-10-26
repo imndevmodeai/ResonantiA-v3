@@ -1,0 +1,1262 @@
+{
+  "metadata": {
+    "plan_date": "2025-09-21T12:37:32.037653",
+    "principle": "Guardian Points Mandate - As Above, So Below",
+    "objective": "Align specifications, territory (code), and map (knowledge graph)",
+    "priority": "critical"
+  },
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Critical Missing Implementations",
+      "actions": [
+        {
+          "action_type": "create_implementation",
+          "specification": "perception_engine",
+          "priority": "critical",
+          "description": "Create Python implementation for perception_engine",
+          "requirements": [
+            "Read specification: specifications/perception_engine.md",
+            "Create implementation: Three_PointO_ArchE/perception_engine.py",
+            "Ensure Guardian Points compliance",
+            "Add comprehensive docstrings",
+            "Include error handling",
+            "Add unit tests"
+          ]
+        },
+        {
+          "action_type": "create_implementation",
+          "specification": "system_version_v4",
+          "priority": "critical",
+          "description": "Create Python implementation for system_version_v4",
+          "requirements": [
+            "Read specification: specifications/system_version_v4.md",
+            "Create implementation: Three_PointO_ArchE/system_version_v4.py",
+            "Ensure Guardian Points compliance",
+            "Add comprehensive docstrings",
+            "Include error handling",
+            "Add unit tests"
+          ]
+        },
+        {
+          "action_type": "create_implementation",
+          "specification": "vetting_agent",
+          "priority": "critical",
+          "description": "Create Python implementation for vetting_agent",
+          "requirements": [
+            "Read specification: specifications/vetting_agent.md",
+            "Create implementation: Three_PointO_ArchE/vetting_agent.py",
+            "Ensure Guardian Points compliance",
+            "Add comprehensive docstrings",
+            "Include error handling",
+            "Add unit tests"
+          ]
+        },
+        {
+          "action_type": "create_implementation",
+          "specification": "visual_cognitive_debugger_ui",
+          "priority": "critical",
+          "description": "Create Python implementation for visual_cognitive_debugger_ui",
+          "requirements": [
+            "Read specification: specifications/visual_cognitive_debugger_ui.md",
+            "Create implementation: Three_PointO_ArchE/visual_cognitive_debugger_ui.py",
+            "Ensure Guardian Points compliance",
+            "Add comprehensive docstrings",
+            "Include error handling",
+            "Add unit tests"
+          ]
+        },
+        {
+          "action_type": "create_implementation",
+          "specification": "websocket_bridge",
+          "priority": "critical",
+          "description": "Create Python implementation for websocket_bridge",
+          "requirements": [
+            "Read specification: specifications/websocket_bridge.md",
+            "Create implementation: Three_PointO_ArchE/websocket_bridge.py",
+            "Ensure Guardian Points compliance",
+            "Add comprehensive docstrings",
+            "Include error handling",
+            "Add unit tests"
+          ]
+        },
+        {
+          "action_type": "create_implementation",
+          "specification": "autopoietic_genesis_protocol",
+          "priority": "critical",
+          "description": "Create Python implementation for autopoietic_genesis_protocol",
+          "requirements": [
+            "Read specification: specifications/autopoietic_genesis_protocol.md",
+            "Create implementation: Three_PointO_ArchE/autopoietic_genesis_protocol.py",
+            "Ensure Guardian Points compliance",
+            "Add comprehensive docstrings",
+            "Include error handling",
+            "Add unit tests"
+          ]
+        },
+        {
+          "action_type": "create_implementation",
+          "specification": "cfp_evolution",
+          "priority": "critical",
+          "description": "Create Python implementation for cfp_evolution",
+          "requirements": [
+            "Read specification: specifications/cfp_evolution.md",
+            "Create implementation: Three_PointO_ArchE/cfp_evolution.py",
+            "Ensure Guardian Points compliance",
+            "Add comprehensive docstrings",
+            "Include error handling",
+            "Add unit tests"
+          ]
+        },
+        {
+          "action_type": "create_implementation",
+          "specification": "directory_organization",
+          "priority": "critical",
+          "description": "Create Python implementation for directory_organization",
+          "requirements": [
+            "Read specification: specifications/directory_organization.md",
+            "Create implementation: Three_PointO_ArchE/directory_organization.py",
+            "Ensure Guardian Points compliance",
+            "Add comprehensive docstrings",
+            "Include error handling",
+            "Add unit tests"
+          ]
+        }
+      ],
+      "estimated_effort": "high",
+      "priority": "critical"
+    },
+    {
+      "phase": 2,
+      "name": "Missing Specifications",
+      "actions": [
+        {
+          "action_type": "create_specification",
+          "code_file": "test_iar_simple",
+          "priority": "high",
+          "description": "Create specification for test_iar_simple",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/test_iar_simple.py",
+            "Create specification: specifications/test_iar_simple.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "tools",
+          "priority": "high",
+          "description": "Create specification for tools",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/tools.py",
+            "Create specification: specifications/tools.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "utopian_solution_synthesizer",
+          "priority": "high",
+          "description": "Create specification for utopian_solution_synthesizer",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/utopian_solution_synthesizer.py",
+            "Create specification: specifications/utopian_solution_synthesizer.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "vetting_prompts",
+          "priority": "high",
+          "description": "Create specification for vetting_prompts",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/vetting_prompts.py",
+            "Create specification: specifications/vetting_prompts.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "workflow_chaining_engine",
+          "priority": "high",
+          "description": "Create specification for workflow_chaining_engine",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/workflow_chaining_engine.py",
+            "Create specification: specifications/workflow_chaining_engine.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "workflow_orchestrator",
+          "priority": "high",
+          "description": "Create specification for workflow_orchestrator",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/workflow_orchestrator.py",
+            "Create specification: specifications/workflow_orchestrator.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "workflow_playbooks",
+          "priority": "high",
+          "description": "Create specification for workflow_playbooks",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/workflow_playbooks.py",
+            "Create specification: specifications/workflow_playbooks.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "workflow_recovery",
+          "priority": "high",
+          "description": "Create specification for workflow_recovery",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/workflow_recovery.py",
+            "Create specification: specifications/workflow_recovery.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "workflow_validator",
+          "priority": "high",
+          "description": "Create specification for workflow_validator",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/workflow_validator.py",
+            "Create specification: specifications/workflow_validator.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "__init__",
+          "priority": "high",
+          "description": "Create specification for __init__",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/__init__.py",
+            "Create specification: specifications/__init__.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "resonantia_maestro",
+          "priority": "high",
+          "description": "Create specification for resonantia_maestro",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/resonantia_maestro.py",
+            "Create specification: specifications/resonantia_maestro.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "resonant_orchestrator",
+          "priority": "high",
+          "description": "Create specification for resonant_orchestrator",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/resonant_orchestrator.py",
+            "Create specification: specifications/resonant_orchestrator.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "self_interrogate_tool",
+          "priority": "high",
+          "description": "Create specification for self_interrogate_tool",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/self_interrogate_tool.py",
+            "Create specification: specifications/self_interrogate_tool.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "session_manager",
+          "priority": "high",
+          "description": "Create specification for session_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/session_manager.py",
+            "Create specification: specifications/session_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "session_state_manager",
+          "priority": "high",
+          "description": "Create specification for session_state_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/session_state_manager.py",
+            "Create specification: specifications/session_state_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "sirc_autonomy",
+          "priority": "high",
+          "description": "Create specification for sirc_autonomy",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/sirc_autonomy.py",
+            "Create specification: specifications/sirc_autonomy.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "sirc_intake_handler",
+          "priority": "high",
+          "description": "Create specification for sirc_intake_handler",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/sirc_intake_handler.py",
+            "Create specification: specifications/sirc_intake_handler.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "spr_action_bridge",
+          "priority": "high",
+          "description": "Create specification for spr_action_bridge",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/spr_action_bridge.py",
+            "Create specification: specifications/spr_action_bridge.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "synthesis_manager",
+          "priority": "high",
+          "description": "Create specification for synthesis_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/synthesis_manager.py",
+            "Create specification: specifications/synthesis_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "system_genesis_tool",
+          "priority": "high",
+          "description": "Create specification for system_genesis_tool",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/system_genesis_tool.py",
+            "Create specification: specifications/system_genesis_tool.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "system_representation",
+          "priority": "high",
+          "description": "Create specification for system_representation",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/system_representation.py",
+            "Create specification: specifications/system_representation.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "task_manager",
+          "priority": "high",
+          "description": "Create specification for task_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/task_manager.py",
+            "Create specification: specifications/task_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "collective_intelligence_network",
+          "priority": "high",
+          "description": "Create specification for collective_intelligence_network",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/collective_intelligence_network.py",
+            "Create specification: specifications/collective_intelligence_network.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "communication_manager",
+          "priority": "high",
+          "description": "Create specification for communication_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/communication_manager.py",
+            "Create specification: specifications/communication_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "comparison_manager",
+          "priority": "high",
+          "description": "Create specification for comparison_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/comparison_manager.py",
+            "Create specification: specifications/comparison_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "context_manager",
+          "priority": "high",
+          "description": "Create specification for context_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/context_manager.py",
+            "Create specification: specifications/context_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "context_superposition",
+          "priority": "high",
+          "description": "Create specification for context_superposition",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/context_superposition.py",
+            "Create specification: specifications/context_superposition.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "custom_json",
+          "priority": "high",
+          "description": "Create specification for custom_json",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/custom_json.py",
+            "Create specification: specifications/custom_json.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "demo_enhanced_search_integration",
+          "priority": "high",
+          "description": "Create specification for demo_enhanced_search_integration",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/demo_enhanced_search_integration.py",
+            "Create specification: specifications/demo_enhanced_search_integration.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "display_tool",
+          "priority": "high",
+          "description": "Create specification for display_tool",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/display_tool.py",
+            "Create specification: specifications/display_tool.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "enhanced_capabilities",
+          "priority": "high",
+          "description": "Create specification for enhanced_capabilities",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/enhanced_capabilities.py",
+            "Create specification: specifications/enhanced_capabilities.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "enhanced_perception_engine",
+          "priority": "high",
+          "description": "Create specification for enhanced_perception_engine",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/enhanced_perception_engine.py",
+            "Create specification: specifications/enhanced_perception_engine.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "enhanced_tools",
+          "priority": "high",
+          "description": "Create specification for enhanced_tools",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/enhanced_tools.py",
+            "Create specification: specifications/enhanced_tools.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "enhanced_web_search_tool",
+          "priority": "high",
+          "description": "Create specification for enhanced_web_search_tool",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/enhanced_web_search_tool.py",
+            "Create specification: specifications/enhanced_web_search_tool.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "enhanced_workflow_orchestrator",
+          "priority": "high",
+          "description": "Create specification for enhanced_workflow_orchestrator",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/enhanced_workflow_orchestrator.py",
+            "Create specification: specifications/enhanced_workflow_orchestrator.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "error_handler",
+          "priority": "high",
+          "description": "Create specification for error_handler",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/error_handler.py",
+            "Create specification: specifications/error_handler.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "execution_manager",
+          "priority": "high",
+          "description": "Create specification for execution_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/execution_manager.py",
+            "Create specification: specifications/execution_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "ias_manager",
+          "priority": "high",
+          "description": "Create specification for ias_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/ias_manager.py",
+            "Create specification: specifications/ias_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "knowledge_crystallization_system",
+          "priority": "high",
+          "description": "Create specification for knowledge_crystallization_system",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/knowledge_crystallization_system.py",
+            "Create specification: specifications/knowledge_crystallization_system.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "llm_providers",
+          "priority": "high",
+          "description": "Create specification for llm_providers",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/llm_providers.py",
+            "Create specification: specifications/llm_providers.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "logging_config",
+          "priority": "high",
+          "description": "Create specification for logging_config",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/logging_config.py",
+            "Create specification: specifications/logging_config.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "logscribe_core",
+          "priority": "high",
+          "description": "Create specification for logscribe_core",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/logscribe_core.py",
+            "Create specification: specifications/logscribe_core.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "main",
+          "priority": "high",
+          "description": "Create specification for main",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/main.py",
+            "Create specification: specifications/main.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "mastermind_server",
+          "priority": "high",
+          "description": "Create specification for mastermind_server",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/mastermind_server.py",
+            "Create specification: specifications/mastermind_server.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "metacognitive_shift_processor",
+          "priority": "high",
+          "description": "Create specification for metacognitive_shift_processor",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/metacognitive_shift_processor.py",
+            "Create specification: specifications/metacognitive_shift_processor.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "output_handler",
+          "priority": "high",
+          "description": "Create specification for output_handler",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/output_handler.py",
+            "Create specification: specifications/output_handler.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "google_maps_decoder",
+          "priority": "high",
+          "description": "Create specification for google_maps_decoder",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/google_maps_decoder.py",
+            "Create specification: specifications/google_maps_decoder.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "pattern_manager",
+          "priority": "high",
+          "description": "Create specification for pattern_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/pattern_manager.py",
+            "Create specification: specifications/pattern_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "resonance_evaluator",
+          "priority": "high",
+          "description": "Create specification for resonance_evaluator",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/resonance_evaluator.py",
+            "Create specification: specifications/resonance_evaluator.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "action_handlers",
+          "priority": "high",
+          "description": "Create specification for action_handlers",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/action_handlers.py",
+            "Create specification: specifications/action_handlers.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "action_registry_v2",
+          "priority": "high",
+          "description": "Create specification for action_registry_v2",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/action_registry_v2.py",
+            "Create specification: specifications/action_registry_v2.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "adaptive_filter",
+          "priority": "high",
+          "description": "Create specification for adaptive_filter",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/adaptive_filter.py",
+            "Create specification: specifications/adaptive_filter.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "autopoietic_mandate_system",
+          "priority": "high",
+          "description": "Create specification for autopoietic_mandate_system",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/autopoietic_mandate_system.py",
+            "Create specification: specifications/autopoietic_mandate_system.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "causal_digest",
+          "priority": "high",
+          "description": "Create specification for causal_digest",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/causal_digest.py",
+            "Create specification: specifications/causal_digest.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "cfp_implementation_example",
+          "priority": "high",
+          "description": "Create specification for cfp_implementation_example",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/cfp_implementation_example.py",
+            "Create specification: specifications/cfp_implementation_example.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "pattern_processors",
+          "priority": "high",
+          "description": "Create specification for pattern_processors",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/pattern_processors.py",
+            "Create specification: specifications/pattern_processors.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "pattern_reflection_system",
+          "priority": "high",
+          "description": "Create specification for pattern_reflection_system",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/pattern_reflection_system.py",
+            "Create specification: specifications/pattern_reflection_system.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "playbook_orchestrator",
+          "priority": "high",
+          "description": "Create specification for playbook_orchestrator",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/playbook_orchestrator.py",
+            "Create specification: specifications/playbook_orchestrator.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "predictive_flux_coupling_engine",
+          "priority": "high",
+          "description": "Create specification for predictive_flux_coupling_engine",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/predictive_flux_coupling_engine.py",
+            "Create specification: specifications/predictive_flux_coupling_engine.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "prefetch_manager",
+          "priority": "high",
+          "description": "Create specification for prefetch_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/prefetch_manager.py",
+            "Create specification: specifications/prefetch_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "proactive_truth_system",
+          "priority": "high",
+          "description": "Create specification for proactive_truth_system",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/proactive_truth_system.py",
+            "Create specification: specifications/proactive_truth_system.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "puppeteer_tool",
+          "priority": "high",
+          "description": "Create specification for puppeteer_tool",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/puppeteer_tool.py",
+            "Create specification: specifications/puppeteer_tool.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "qa_tools",
+          "priority": "high",
+          "description": "Create specification for qa_tools",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/qa_tools.py",
+            "Create specification: specifications/qa_tools.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "quantum_agent",
+          "priority": "high",
+          "description": "Create specification for quantum_agent",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/quantum_agent.py",
+            "Create specification: specifications/quantum_agent.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "recovery_actions",
+          "priority": "high",
+          "description": "Create specification for recovery_actions",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/recovery_actions.py",
+            "Create specification: specifications/recovery_actions.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "reflection_manager",
+          "priority": "high",
+          "description": "Create specification for reflection_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/reflection_manager.py",
+            "Create specification: specifications/reflection_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        },
+        {
+          "action_type": "create_specification",
+          "code_file": "registry_manager",
+          "priority": "high",
+          "description": "Create specification for registry_manager",
+          "requirements": [
+            "Analyze code: Three_PointO_ArchE/registry_manager.py",
+            "Create specification: specifications/registry_manager.md",
+            "Follow specification template",
+            "Document purpose, inputs, outputs",
+            "Include examples and use cases",
+            "Align with Guardian Points mandate"
+          ]
+        }
+      ],
+      "estimated_effort": "medium",
+      "priority": "high"
+    },
+    {
+      "phase": 3,
+      "name": "Specification Updates",
+      "actions": [
+        {
+          "action_type": "update_specification",
+          "specification": "llm_tool",
+          "priority": "medium",
+          "description": "Update specification for llm_tool",
+          "requirements": [
+            "Compare spec: specifications/llm_tool.md",
+            "Compare code: Three_PointO_ArchE/llm_tool.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "mastermind",
+          "priority": "medium",
+          "description": "Update specification for mastermind",
+          "requirements": [
+            "Compare spec: specifications/mastermind.md",
+            "Compare code: Three_PointO_ArchE/mastermind.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "predictive_modeling_tool",
+          "priority": "medium",
+          "description": "Update specification for predictive_modeling_tool",
+          "requirements": [
+            "Compare spec: specifications/predictive_modeling_tool.md",
+            "Compare code: Three_PointO_ArchE/predictive_modeling_tool.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "prompt_manager",
+          "priority": "medium",
+          "description": "Update specification for prompt_manager",
+          "requirements": [
+            "Compare spec: specifications/prompt_manager.md",
+            "Compare code: Three_PointO_ArchE/prompt_manager.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "protocol_event_schema",
+          "priority": "medium",
+          "description": "Update specification for protocol_event_schema",
+          "requirements": [
+            "Compare spec: specifications/protocol_event_schema.md",
+            "Compare code: Three_PointO_ArchE/protocol_event_schema.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "quantum_utils",
+          "priority": "medium",
+          "description": "Update specification for quantum_utils",
+          "requirements": [
+            "Compare spec: specifications/quantum_utils.md",
+            "Compare code: Three_PointO_ArchE/quantum_utils.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "rise_orchestrator",
+          "priority": "medium",
+          "description": "Update specification for rise_orchestrator",
+          "requirements": [
+            "Compare spec: specifications/rise_orchestrator.md",
+            "Compare code: Three_PointO_ArchE/rise_orchestrator.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "scalable_framework",
+          "priority": "medium",
+          "description": "Update specification for scalable_framework",
+          "requirements": [
+            "Compare spec: specifications/scalable_framework.md",
+            "Compare code: Three_PointO_ArchE/scalable_framework.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "spr_manager",
+          "priority": "medium",
+          "description": "Update specification for spr_manager",
+          "requirements": [
+            "Compare spec: specifications/spr_manager.md",
+            "Compare code: Three_PointO_ArchE/spr_manager.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        },
+        {
+          "action_type": "update_specification",
+          "specification": "spr_resonant_gratid_soul",
+          "priority": "medium",
+          "description": "Update specification for spr_resonant_gratid_soul",
+          "requirements": [
+            "Compare spec: specifications/spr_resonant_gratid_soul.md",
+            "Compare code: Three_PointO_ArchE/spr_resonant_gratid_soul.py",
+            "Identify discrepancies",
+            "Update specification to match implementation",
+            "Ensure accuracy and completeness",
+            "Validate against Guardian Points"
+          ]
+        }
+      ],
+      "estimated_effort": "medium",
+      "priority": "medium"
+    },
+    {
+      "phase": 4,
+      "name": "Knowledge Graph Alignment",
+      "actions": [
+        {
+          "action_type": "update_spr_definitions",
+          "description": "Update SPR definitions to match current specifications",
+          "requirements": [
+            "Review all SPR definitions",
+            "Cross-reference with specifications",
+            "Update definitions for accuracy",
+            "Ensure Guardian Points compliance",
+            "Validate against actual implementations"
+          ]
+        },
+        {
+          "action_type": "update_knowledge_tapestry",
+          "description": "Update knowledge tapestry relationships",
+          "requirements": [
+            "Map specification relationships",
+            "Map code dependencies",
+            "Update knowledge graph structure",
+            "Ensure consistency across all components"
+          ]
+        }
+      ],
+      "estimated_effort": "high",
+      "priority": "high"
+    }
+  ],
+  "actions": [],
+  "validation_criteria": [
+    "All specifications have corresponding implementations",
+    "All code files have corresponding specifications",
+    "Specifications accurately describe implementations",
+    "Knowledge graph reflects actual system structure",
+    "Guardian Points mandate compliance verified",
+    "As Above, So Below principle satisfied"
+  ]
+}

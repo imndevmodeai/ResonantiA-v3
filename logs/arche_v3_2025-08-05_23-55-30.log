@@ -1,0 +1,23 @@
+2025-08-05 23:55:30 - root:162 - INFO - logging_config - ================================================================================
+2025-08-05 23:55:30 - root:163 - INFO - logging_config - 🚀 ArchE Logging System Initialized
+2025-08-05 23:55:30 - root:164 - INFO - logging_config - ================================================================================
+2025-08-05 23:55:30 - root:165 - INFO - logging_config - 📅 Session Start Time: 2025-08-05 23:55:30
+2025-08-05 23:55:30 - root:166 - INFO - logging_config - 🔧 Log Level: INFO
+2025-08-05 23:55:30 - root:167 - INFO - logging_config - 📁 Main Log File: logs/arche_v3_2025-08-05_23-55-30.log
+2025-08-05 23:55:30 - root:168 - INFO - logging_config - ❌ Error Log File: logs/errors_arche_v3_errors_2025-08-05_23-55-30.log
+2025-08-05 23:55:30 - root:169 - INFO - logging_config - ⚡ Performance Log File: logs/performance_arche_v3_perf_2025-08-05_23-55-30.log
+2025-08-05 23:55:30 - root:170 - INFO - logging_config - ================================================================================
+2025-08-05 23:55:30 - session:178 - INFO - logging_config - Session tracking initialized
+2025-08-05 23:55:30 - __main__:164 - INFO - main - --- Received command to run workflow: system_demo.json ---
+2025-08-05 23:55:30 - Three_PointO_ArchE.workflow_engine:341 - INFO - workflow_engine - WorkflowEngine initialized with workflows directory: /media/newbu/3626C55326C514B1/Happier/workflows
+2025-08-05 23:55:30 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'display_output' is being overwritten in the registry.
+2025-08-05 23:55:30 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_code_linter' is being overwritten in the registry.
+2025-08-05 23:55:30 - Three_PointO_ArchE.action_registry:80 - WARNING - action_registry - Action 'run_workflow_suite' is being overwritten in the registry.
+2025-08-05 23:55:30 - Three_PointO_ArchE.workflow_engine:361 - INFO - workflow_engine - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-08-05 23:55:30 - Three_PointO_ArchE.workflow_engine:517 - INFO - workflow_engine - Attempting to load workflow definition from: /media/newbu/3626C55326C514B1/Happier/workflows/system_demo.json
+2025-08-05 23:55:30 - Three_PointO_ArchE.workflow_engine:1026 - INFO - workflow_engine - ✅ Input validation passed for workflow: system_demo.json
+2025-08-05 23:55:30 - Three_PointO_ArchE.workflow_engine:1027 - INFO - workflow_engine - Problem description length: 160 characters
+2025-08-05 23:55:30 - Three_PointO_ArchE.workflow_engine:1056 - INFO - workflow_engine - Starting workflow 'ArchE System Demo Workflow' (Run ID: run_7c97952ce8a6453ebffb3c48690e472d). Initial ready tasks: ['system_status']
+2025-08-05 23:55:30 - Three_PointO_ArchE.workflow_engine:1217 - INFO - workflow_engine - Workflow 'ArchE System Demo Workflow' finished in 0.0s with status: Completed Successfully
+2025-08-05 23:55:30 - Three_PointO_ArchE.workflow_engine:1227 - INFO - workflow_engine - Detailed event log saved to: /media/newbu/3626C55326C514B1/Happier/outputs/run_events_run_7c97952ce8a6453ebffb3c48690e472d.jsonl
+2025-08-05 23:55:30 - __main__:207 - INFO - main - Final result saved successfully to /media/newbu/3626C55326C514B1/Happier/outputs/result_system_demo_run_7c97952ce8a6453ebffb3c48690e472d.json

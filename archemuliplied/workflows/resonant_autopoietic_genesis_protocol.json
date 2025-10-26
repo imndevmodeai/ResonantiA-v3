@@ -1,0 +1,139 @@
+{
+  "name": "Resonant Autopoietic Genesis Protocol (v2)",
+  "version": "3.1-CA",
+  "description": "SPR-aware genesis workflow that parses the canonical protocol, recognizes/activates SPRs, proposes module blueprints, and compiles a final genesis report.",
+  "expects_initial_context": {
+    "protocol_path": "ResonantiA_Protocol_v3.1-CA.md",
+    "target_output_root": "Directory root for generated code (e.g., Three_PointO_ArchE/ or arche_genesis/)",
+    "spr_definitions_path": "Optional path to knowledge_graph/spr_definitions_tv.json (defaults to knowledge_graph/spr_definitions_tv.json)",
+    "author": "Optional author/Keyholder name for report headers"
+  },
+  "tasks": {
+    "ingest_canonical_specification": {
+      "description": "Read the canonical protocol document and extract text, headings, and integrity hash.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json,hashlib,os,re\npath = {{initial_context.protocol_path | default('ResonantiA_Protocol_v3.1-CA.md')}}\nres={'error':None,'spec_text':None,'headings':[],'sha256':None,'path_used':path}\ntry:\n    with open(path,'r',encoding='utf-8',errors='replace') as f:\n        txt=f.read()\n    res['spec_text']=txt\n    res['sha256']=hashlib.sha256(txt.encode('utf-8')).hexdigest()\n    heads=[]\n    for line in txt.splitlines():\n        m=re.match(r'^(#{1,4})\\s+(.*)$',line)\n        if m:\n            level=len(m.group(1)); title=m.group(2).strip(); heads.append({'level':level,'title':title})\n    res['headings']=heads\nexcept Exception as e:\n    res['error']=str(e)\nprint(json.dumps(res))"
+      },
+      "outputs": {
+        "spec_text": "string",
+        "headings": "list",
+        "sha256": "string",
+        "path_used": "string",
+        "error": "string"
+      },
+      "dependencies": []
+    },
+
+    "deconstruct_and_recognize_sprs": {
+      "description": "Identify likely SPR tokens (Guardian-points format) from the spec text; summarize by section.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "system_prompt": "You detect Sparse Priming Representations (SPRs) in text. An SPR has Guardian-points formatting: first and last characters uppercase or digit; interior characters lowercase or spaces; avoid all-caps >3. Output a compact JSON with found_sprs (deduped in order), spr_counts, and mentions_by_section (best-effort using markdown headings).",
+        "prompt": "Protocol Headings (JSON):\n```json\n{{ingest_canonical_specification.headings}}\n```\n\nProtocol Text (truncated if large):\n```\n{{ingest_canonical_specification.spec_text}}\n```\n\nReturn a JSON object with keys: found_sprs (list), spr_counts (object), mentions_by_section (object).",
+        "max_tokens": 1000,
+        "temperature": 0.2
+      },
+      "outputs": {
+        "response_text": "string",
+        "error": "string"
+      },
+      "dependencies": ["ingest_canonical_specification"],
+      "condition": "'error' not in {{ ingest_canonical_specification }}"
+    },
+
+    "load_spr_knowledge_graph": {
+      "description": "Load the knowledge graph SPR definitions for cross-reference.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json,os\npath = {{initial_context.spr_definitions_path | default('knowledge_graph/spr_definitions_tv.json')}}\nres={'error':None,'path_used':path,'spr_kg':None}\ntry:\n    if os.path.exists(path):\n        with open(path,'r',encoding='utf-8',errors='replace') as f:\n            res['spr_kg']=json.load(f)\n    else:\n        res['error']=f'Not found: {path}'\nexcept Exception as e:\n    res['error']=str(e)\nprint(json.dumps(res))"
+      },
+      "outputs": {
+        "spr_kg": "any",
+        "path_used": "string",
+        "error": "string"
+      },
+      "dependencies": []
+    },
+
+    "cross_reference_knowledge_graph": {
+      "description": "Cross-reference recognized SPRs with the knowledge graph to gather definitions and blueprint hints.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "system_prompt": "You map a list of SPR ids to knowledge graph entries. The KG may be a list of objects (with spr_id) or a dict keyed by spr_id. Return JSON with resolved_sprs (spr_id, definition, category, relationships, blueprint_details) and unresolved_sprs (list).",
+        "prompt": "Found SPRs (JSON):\n```json\n{{deconstruct_and_recognize_sprs.response_text}}\n```\n\nSPR Knowledge Graph (may be large):\n```json\n{{load_spr_knowledge_graph.spr_kg}}\n```\n\nProduce a JSON with: resolved_sprs (list of objects), unresolved_sprs (list).",
+        "max_tokens": 1000,
+        "temperature": 0.2
+      },
+      "outputs": {
+        "response_text": "string",
+        "error": "string"
+      },
+      "dependencies": ["deconstruct_and_recognize_sprs", "load_spr_knowledge_graph"],
+      "condition": "'error' not in {{ load_spr_knowledge_graph }}"
+    },
+
+    "compute_activation_map": {
+      "description": "Transform SPRs + KG into an activation map: modules, files, responsibilities for codegen.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "system_prompt": "Create a pragmatic activation map from SPRs: list modules, their target files, and responsibilities. Include core modules when relevant (workflow_engine, action_registry, spr_manager, cfp_framework/quantum_utils, code_executor).",
+        "prompt": "Resolved SPRs (JSON):\n```json\n{{cross_reference_knowledge_graph.response_text}}\n```\n\nReturn JSON: {\n  'modules': [\n    { 'module': 'workflow_engine', 'files': ['workflow_engine.py'], 'sprs': ['...'], 'responsibilities': ['...'] },\n    ...\n  ]\n}",
+        "max_tokens": 900,
+        "temperature": 0.25
+      },
+      "outputs": {
+        "response_text": "string",
+        "error": "string"
+      },
+      "dependencies": ["cross_reference_knowledge_graph"]
+    },
+
+    "generate_module_blueprints": {
+      "description": "Produce code-level blueprints (classes, functions, interfaces) for each module in the activation map.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "system_prompt": "Generate concise, production-oriented Python module blueprints aligned to an activation map. Include file names, public classes/functions with signatures and docstrings, key responsibilities, and extension points. Emphasize IAR-compliant return dicts for actions.",
+        "prompt": "Activation Map (JSON):\n```json\n{{compute_activation_map.response_text}}\n```\n\nConstraints:\n- Target output root: {{initial_context.target_output_root | default('arche_genesis/')}}\n- Conform to protocol semantics (3.1-CA).\n- For each file, outline APIs and docstrings; do not include placeholder text.",
+        "max_tokens": 1400,
+        "temperature": 0.35
+      },
+      "outputs": {
+        "response_text": "string",
+        "error": "string"
+      },
+      "dependencies": ["compute_activation_map"]
+    },
+
+    "generate_genesis_report": {
+      "description": "Summarize the genesis run: SPRs, activation map, blueprint highlights.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "system_prompt": "Produce an engineering report capturing decisions, artifacts, and next actions. Prefer bullet lists and short sections.",
+        "prompt": "Resonant Autopoietic Genesis Report\n\nAuthor: {{initial_context.author | default('Keyholder')}}\nSpec File: {{ingest_canonical_specification.path_used}}\nSpec Hash: {{ingest_canonical_specification.sha256}}\n\nRecognized SPRs (JSON):\n```json\n{{deconstruct_and_recognize_sprs.response_text}}\n```\n\nActivation Map (JSON):\n```json\n{{compute_activation_map.response_text}}\n```\n\nBlueprints (excerpt):\n```\n{{generate_module_blueprints.response_text}}\n```\n\nPlease compile: (1) Summary, (2) Activated SPRs and rationale, (3) Module blueprint highlights, (4) Detected risks/assumptions, (5) Next steps to complete implementations and tests.",
+        "max_tokens": 900,
+        "temperature": 0.25
+      },
+      "outputs": {
+        "response_text": "string",
+        "error": "string"
+      },
+      "dependencies": ["deconstruct_and_recognize_sprs", "compute_activation_map", "generate_module_blueprints"]
+    },
+
+    "display_report": {
+      "description": "Display the final genesis report.",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "# Resonant Autopoietic Genesis Report (v2)\n\n{{generate_genesis_report.response_text | default('Report generation failed.')}}"
+      },
+      "outputs": {
+        "status": "string"
+      },
+      "dependencies": ["generate_genesis_report"]
+    }
+  },
+  "start_tasks": ["ingest_canonical_specification"]
+}

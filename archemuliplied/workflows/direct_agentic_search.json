@@ -1,0 +1,51 @@
+{
+  "name": "Direct Agentic Search Workflow",
+  "description": "Executes a single, direct search using the Puppeteer script and synthesizes the findings using Google's Generative AI. This workflow is designed to be a stable, direct alternative to more complex research workflows.",
+  "version": "1.1",
+  "tasks": {
+    "execute_search": {
+      "description": "Execute a web search using the puppeteer script via a python wrapper.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import subprocess\nimport sys\n\nquery = '{{ initial_context.user_query }}'\nscript_path = 'run_search_script.py'\n\ncommand = [sys.executable, script_path, query]\n\nresult = subprocess.run(command, capture_output=True, text=True)\n\nif result.returncode != 0:\n    raise Exception(f'Search script failed:\\nSTDOUT:\\n{result.stdout}\\nSTDERR:\\n{result.stderr}')\n\nprint(result.stdout)"
+      },
+      "next_step": "read_results"
+    },
+    "read_results": {
+        "description": "Read the search results from the output file.",
+        "action_type": "execute_code",
+        "inputs": {
+            "language": "python",
+            "code": "import json\nimport os\nresults_path = 'ResonantiA/browser_automation/workflow_search_results.json'\nif os.path.exists(results_path):\n    with open(results_path, 'r') as f:\n        print(f.read())\nelse:\n    print('[]')"
+        },
+        "outputs": {
+            "search_results_json": "{{ read_results.output }}"
+        },
+        "next_step": "synthesize_results"
+    },
+    "synthesize_results": {
+      "description": "Use Google's LLM to synthesize the search results into a final answer.",
+      "action_type": "generate_text_llm",
+      "inputs": {
+        "prompt": "You are a world-class research analyst. You have been given a user's original query and a collection of search results. Your task is to synthesize all of this information into a single, comprehensive, and well-written answer that directly addresses the user's original question. Be thorough and precise. \\n\\nOriginal Query: '{{ initial_context.user_query }}' \\n\\nSearch Results (JSON):\\n{{ read_results.output }}",
+        "provider": "gemini"
+      },
+      "outputs": {
+        "final_answer": "{{ synthesize_results.response_text }}"
+      },
+      "next_step": "display_final_answer"
+    },
+    "display_final_answer": {
+      "description": "Format and display the final synthesized answer.",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import os; final_answer = os.environ.get('FINAL_ANSWER', 'No answer found.'); print('--- Direct Agentic Search Summary ---\\n'); print(final_answer)"
+      },
+      "environment": {
+            "FINAL_ANSWER": "{{ synthesize_results.final_answer }}"
+      }
+    }
+  }
+} 
