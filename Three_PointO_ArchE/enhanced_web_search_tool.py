@@ -241,6 +241,7 @@ class EnhancedWebSearchTool:
     def search_with_selenium(self, query: str, num_results: int = 10, site_key: str = "search") -> Dict[str, Any]:
         """Perform web search using Selenium with enhanced obstacle handling."""
         start_time = time.time()
+        driver = None
         
         try:
             driver = self._setup_driver(site_key)
@@ -299,8 +300,6 @@ class EnhancedWebSearchTool:
             except TimeoutException:
                 logger.warning("Search results not found")
             
-            driver.quit()
-            
             execution_time = time.time() - start_time
             
             return {
@@ -326,6 +325,14 @@ class EnhancedWebSearchTool:
                     "potential_issues": [type(e).__name__]
                 }
             }
+        finally:
+            # CRITICAL: Always close the browser driver to prevent resource leaks
+            if driver:
+                try:
+                    driver.quit()
+                    logger.debug("Browser driver closed successfully")
+                except Exception as e:
+                    logger.error(f"Failed to close browser driver: {e}")
     
     def search_with_requests(self, query: str, num_results: int = 10) -> Dict[str, Any]:
         """Fallback search using requests and BeautifulSoup."""

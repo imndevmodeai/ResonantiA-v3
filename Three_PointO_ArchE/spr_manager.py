@@ -32,9 +32,19 @@ class SPRManager:
             with open(self.filepath, 'r', encoding='utf-8') as f:
                 spr_data = json.load(f)
             
-            # The SPR ID is now the 'spr_id' field in the JSON object
-            self.sprs = {spr['spr_id']: spr for spr in spr_data if 'spr_id' in spr}
-            logger.info(f"Successfully loaded {len(self.sprs)} SPR definitions from {self.filepath}")
+            # Handle both dict and list formats
+            if isinstance(spr_data, dict):
+                # If it's a dictionary with spr_id keys, use them directly
+                self.sprs = spr_data
+                logger.info(f"Successfully loaded {len(self.sprs)} SPR definitions from {self.filepath} (dict format)")
+            elif isinstance(spr_data, list):
+                # If it's a list of objects, extract spr_id keys
+                self.sprs = {spr['spr_id']: spr for spr in spr_data if isinstance(spr, dict) and 'spr_id' in spr}
+                logger.info(f"Successfully loaded {len(self.sprs)} SPR definitions from {self.filepath} (list format)")
+            else:
+                logger.error(f"SPR data format is unrecognized in {self.filepath}")
+                self.sprs = {}
+                
         except FileNotFoundError:
             logger.warning(f"SPR file not found at {self.filepath}. Initializing with empty definitions.")
             self.sprs = {}

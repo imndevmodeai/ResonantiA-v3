@@ -100,6 +100,7 @@ class APIKeys:
     """Manages API keys from environment variables."""
     openai_api_key: str = os.getenv("OPENAI_API_KEY")
     google_api_key: str = os.getenv("GOOGLE_API_KEY")
+    groq_api_key: str = os.getenv("GROQ_API_KEY")
     # Add other API keys as needed
     # e.g., github_token: str = os.getenv("GITHUB_TOKEN")
 
@@ -137,6 +138,13 @@ LLM_PROVIDERS = {
         "default_model": "gemini-2.0-flash-exp",
         "temperature": 0.7,
         "max_tokens": 4096
+    },
+    "groq": {
+        "api_key": os.getenv("GROQ_API_KEY"),
+        "base_url": None,
+        "default_model": "llama-3.1-70b-versatile",
+        "temperature": 0.7,
+        "max_tokens": 8192
     }
 }
 
@@ -169,7 +177,7 @@ class ToolConfig:
     abm_default_steps: int = 100
 
     # CFP Framework
-    cfp_default_evolution_model: str = "placeholder"
+    cfp_default_evolution_model: str = "qiskit"  # Enhanced with Qiskit for authentic quantum operations
     cfp_default_time_horizon: float = 10.0
     cfp_default_integration_steps: int = 100
 

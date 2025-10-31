@@ -106,6 +106,20 @@ class GoogleProvider(BaseLLMProvider):
                 raise LLMProviderError(error_message, provider="google")
             else:
                 raise LLMProviderError(f"Google generation failed: {ve}", provider="google", original_exception=ve)
+        except Exception as e:
+            # --- CRITICAL FIX: Convert all exceptions to serializable string format ---
+            # This prevents 'Object of type BadRequest is not JSON serializable' errors
+            error_message = str(e)
+            error_type = type(e).__name__
+            
+            # Log the full error for debugging
+            logger.error(f"Exception in GoogleProvider.generate: {error_type}: {error_message}", exc_info=True)
+            
+            # Wrap in LLMProviderError with serializable string representation
+            raise LLMProviderError(
+                f"Google Gemini generation failed: {error_type}: {error_message}",
+                provider="google"
+            ) from e
 
     @log_to_thought_trail
     def generate_chat(self, messages: List[Dict[str, str]], model: str = "gemini-2.0-flash-exp", max_tokens: int = 2048, temperature: float = 0.7, **kwargs) -> str:

@@ -21,6 +21,7 @@ def create_reflection(
     alignment_check: Optional[Dict[str, str]] = None,
     potential_issues: Optional[List[str]] = None,
     execution_time: Optional[float] = None,
+    metadata: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """
     Creates a standardized Integrated Action Reflection (IAR) dictionary.
@@ -47,11 +48,18 @@ def create_reflection(
         "timestamp_utc": time.time(),
         "status": status.value,
         "confidence": confidence if confidence is not None else 0.0,
-        "summary_message": message,
+        "summary": message,  # Changed from 'summary_message' to 'summary' for IAR compliance
+        "summary_message": message,  # Keep for backwards compatibility
         "inputs_preview": {k: str(v)[:100] + '...' if len(str(v)) > 100 else str(v) for k, v in (inputs or {}).items()},
         "outputs_preview": {k: str(v)[:100] + '...' if len(str(v)) > 100 else str(v) for k, v in (outputs or {}).items()},
+        "raw_output_preview": str(outputs or "No outputs"),  # Add required field
         "alignment_check": alignment_check or {"resonatia_protocol": "Alignment not assessed."},
         "potential_issues": potential_issues or [],
         "execution_time_seconds": execution_time
     }
+    
+    # Add metadata if provided
+    if metadata:
+        reflection.update(metadata)
+    
     return reflection 

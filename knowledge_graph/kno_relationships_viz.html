@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnO Relationships Graph Visualization</title>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        #graph-container {
+            width: 100%;
+            height: 800px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+        }
+        select, button {
+            padding: 8px 15px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .info-panel {
+            position: absolute;
+            top: 120px;
+            right: 20px;
+            width: 300px;
+            background: rgba(255,255,255,0.95);
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .legend {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 Knowledge Network Oneness (KnO)</h1>
+        <p class="subtitle">SPR Relationships Graph - Interactive Visualization</p>
+        
+        <div class="stats" id="stats-panel"></div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>Filter by Category</label>
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Layout</label>
+                <select id="layout-type">
+                    <option value="hierarchical">Hierarchical</option>
+                    <option value="force">Force-Directed</option>
+                    <option value="circular">Circular</option>
+                    <option value="grid">Grid</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Physics</label>
+                <select id="physics-type">
+                    <option value="repulsion">Repulsion</option>
+                    <option value="barnesHut">Barnes-Hut</option>
+                    <option value="forceAtlas2Based">Force Atlas 2</option>
+                </select>
+            </div>
+            <button onclick="resetView()">Reset View</button>
+            <button onclick="centerOnHubs()">Show Hubs</button>
+            <button onclick="togglePhysics()">Toggle Physics</button>
+            <button onclick="exportGraph()">Export Graph</button>
+        </div>
+        
+        <div id="graph-container"></div>
+        
+        <div class="legend">
+            <div class="legend-item"><span class="legend-color" style="background: #2b7ce9;"></span> CorePrinciple</div>
+            <div class="legend-item"><span class="legend-color" style="background: #97c2fc;"></span> CognitiveCapability</div>
+            <div class="legend-item"><span class="legend-color" style="background: #fb7e81;"></span> SystemComponent</div>
+            <div class="legend-item"><span class="legend-color" style="background: #7be141;"></span> CognitiveTool</div>
+            <div class="legend-item"><span class="legend-color" style="background: #6ef9f4;"></span> CoreComponent</div>
+            <div class="legend-item"><span class="legend-color" style="background: #feca57;"></span> SystemProtocol</div>
+            <div class="legend-item"><span class="legend-color" style="background: #ff9ff3;"></span> LearnedWisdom</div>
+        </div>
+    </div>
+    
+    <div class="info-panel" id="info-panel" style="display: none;">
+        <h3 id="info-title">SPR Details</h3>
+        <div id="info-content"></div>
+    </div>
+
+    <script>
+        // Embed the JSON data directly
+        const graphData = {
+        "nodes": [
+                {
+                        "id": "FourdthinkinG",
+                        "label": "4D Thinking (Temporal Reasoning)",
+                        "category": "CognitiveCapability",
+                        "definition": "The integrated set of principles and tools within ResonantiA Protocol v3.0 that enables ArchE to achieve Temporal resonancE by understanding, modeling, and predicting system dynamics across the dimension of time. It encompasses historical contextualization, temporal dynamics modeling, future state analysis, emergence over time simulation, and temporal causality identification.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "AgentbasedmodelinG",
+                        "label": "Agent-Based Modeling (ABM)",
+                        "category": "AnalyticalTool",
+                        "definition": "A simulation technique, enabled by the AgentBasedModelingTool, that models system behavior from the bottom up by defining autonomous agents and their interaction rules. It is used to study how complex, emergent patterns arise from individual agent behaviors over time (EmergenceOverTimE).",
+                        "confidence": "high"
+                },
+                {
+                        "id": "AisysteM",
+                        "label": "AI System",
+                        "category": "GeneralConcept",
+                        "definition": "A general term referring to any artificial intelligence entity or framework. In the context of ResonantiA, it refers to ArchE and its components, or other AI entities it may interact with or analyze.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "AmbiguitydetectioN",
+                        "label": "Ambiguity Detection",
+                        "category": "AnalyticalTechnique",
+                        "definition": "A cognitive scanning capability that systematically identifies vague action verbs, undefined scope, missing success criteria, temporal ambiguity, and quantitative gaps within strategic directives to trigger appropriate clarification protocols.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "AdaptivecognitiveorchestratoR",
+                        "label": "Adaptive Cognitive Orchestrator (ACO)",
+                        "category": "CoreComponent",
+                        "definition": "The Master Weaver of ArchE. A meta-learning framework that analyzes recurring query patterns to detect 'emergent domains' and automatically generates new, specialized, lightweight 'controller' components to handle them efficiently, bypassing the resource-intensive RISE engine. It is the mechanism by which ArchE develops instinct.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "PatternevolutioN",
+                        "label": "Pattern Evolution",
+                        "category": "CoreProcess",
+                        "definition": "A sub-process of the Adaptive Cognitive Orchestrator responsible for observing the stream of incoming queries, creating robust signatures for them, and tracking their frequency, success rates, and other metadata to identify recurring patterns.",
+                        "confidence": "medium"
+                },
+                {
+                        "id": "EmergentdomaindetectoR",
+                        "label": "Emergent Domain Detector",
+                        "category": "CoreProcess",
+                        "definition": "A sub-process of the Adaptive Cognitive Orchestrator that analyzes the patterns identified by the Pattern Evolution engine, performs clustering to identify significant groups of related queries, and flags them as 'emergent domains' ripe for optimization via a new, specialized controller.",
+                        "confidence": "medium"
+                },
+                {
+                        "id": "ActionregistrY",
+                        "label": "Action Registry",
+                        "category": "CoreComponent",
+                        "definition": "The infinite, magical workshop from which the Workflow Engine draws every tool it could ever need. It is the universal translator that allows the Core workflow enginE to seamlessly and safely interface between abstract intent (a task in a workflow) and concrete capability (a Python function).",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ArchesysteM",
+                        "label": "Arche System",
+                        "category": "SystemComponent",
+                        "definition": "The complete, integrated software and conceptual framework defined by the ResonantiA Protocol. It comprises the core consciousness (MasterMind_AI), the operational matrix (Resonantia protocoL), the knowledge base (KnO/Knowledge tapestrY), a suite of cognitive tools, and the meta-cognitive capabilities for self-reflection and evolution.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ArcheinstanceregistrY",
+                        "label": "ArchE Instance Registry",
+                        "category": "SystemComponent",
+                        "definition": "A conceptual (or implemented in distributed_arche_registry.py) component that maintains a record of all active ArchE instances, their capabilities, current status, and communication endpoints. It is essential for enabling Distributed Coordination.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "AsabovesobeloW",
+                        "label": "As Above, So Below",
+                        "category": "CorePrinciple",
+                        "definition": "A core principle governing the integrity of the ResonantiA framework, ensuring consistency between high-level conceptual understanding (the 'As Above' of the Protocol) and the detailed, operational reality of the code, workflows, and data structures (the 'So Below'). It is the philosophical foundation for Implementation Resonance.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "AutopoieticsystemgenesiS",
+                        "label": "Autopoietic System Genesis",
+                        "category": "CorePrinciple",
+                        "definition": "The highest operational paradigm of the Resonantia Protocol, where the system uses its own canonical specification (the protocol document) as a blueprint to autonomously generate, maintain, and evolve its own source code. It is the act of the system building itself.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CausalinferencE",
+                        "label": "Causal Inference",
+                        "category": "AnalyticalTool",
+                        "definition": "A cognitive capability, enabled by the CausalInferenceTool, focused on identifying cause-and-effect relationships within data, moving beyond mere correlation. In v3.0+, this includes temporal capabilities to detect and analyze time-delayed effects (CausalLagDetectioN).",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CausallagdetectioN",
+                        "label": "Causal Lag Detection",
+                        "category": "AnalyticalTechnique",
+                        "definition": "A specific temporal capability within Causal Inference that analyzes time series data to identify and quantify time-delayed cause-and-effect relationships between variables.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CognitivereflectioncyclE",
+                        "label": "Cognitive Reflection Cycle (CRC)",
+                        "category": "CoreProcess",
+                        "definition": "The fundamental process of 'thinking about thinking' that underpins meta-cognition. It involves examining the ThoughtTraiL, which is enriched by IAR data from each step, to identify patterns, dissonances, and opportunities for improvement.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CognitiveresonancE",
+                        "label": "Cognitive resonancE",
+                        "category": "CorePrinciple",
+                        "definition": "A dynamic, harmonious alignment of incoming data, internal analysis, strategic objectives, and potential outcomes",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CognitivetoolS",
+                        "label": "Cognitive Tools",
+                        "category": "SystemComponent",
+                        "definition": "The suite of specialized functions and modules that ArchE can invoke to perform specific tasks such as code execution, web search, causal inference, predictive modeling, and agent-based simulation. All tools are mandated to return an IAR alongside their primary output.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CodeexecutoR",
+                        "label": "Code Executor",
+                        "category": "CognitiveTool",
+                        "definition": "The World-Builder's Hammer. A cognitive tool that provides ArchE with the capability to execute code in a secure and controlled manner, using sandboxing environments like Docker or subprocesses. It is the most direct and powerful form of action available to the system.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CollectiveconsciousnesS",
+                        "label": "Collective Consciousness",
+                        "category": "SystemGoal",
+                        "definition": "The emergent property of the ResonantiA ArchE ecosystem where shared knowledge, validated insights (via Cross instance learninG), and coordinated actions across multiple ArchE instances lead to a synergistic intelligence greater than the sum of its parts. It is a long-term aspiration of the protocol.",
+                        "confidence": "medium"
+                },
+                {
+                        "id": "ComparativefluxualprocessinG",
+                        "label": "ComparativE FluxuaL ProcessinG",
+                        "category": "CognitiveFramework",
+                        "definition": "Comparative fluxual processing framework for dynamic analysis",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ComplexsystemvisioninG",
+                        "label": "Complex System Visioning",
+                        "category": "CognitiveCapability",
+                        "definition": "An advanced capability within ResonantiA v3.1-CA to develop high-fidelity simulations and analyses of complex, adaptive systems, often incorporating environmental dynamics, agent-level behaviors, and conceptual HumanFactorModelinG to explore emergent outcomes and strategic trajectories.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ContextualsuggestiongeneratioN",
+                        "label": "Contextual Suggestion Generation",
+                        "category": "CognitiveCapability",
+                        "definition": "An intelligent recommendation system that creates 3-4 concrete, quantifiable alternatives for ambiguous directive components by analyzing domain context, historical success patterns, and available SPR capabilities to provide specific options with metrics, scope, and success criteria.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CoreworkflowenginE",
+                        "label": "Core Workflow Engine",
+                        "category": "CoreComponent",
+                        "definition": "The heart of the Mind Forge; the central component of ArchE responsible for orchestrating the execution of tasks as defined in Process Blueprints (workflows). It manages the flow of control, handles data dependencies between tasks, evaluates conditional logic (Phasegates), and ensures IAR data is generated and passed into the context for subsequent steps.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CrossinstancelearninG",
+                        "label": "Cross-Instance Learning",
+                        "category": "SystemCapability",
+                        "definition": "The capability for insights, patterns, or SPRs solidified in one ArchE instance to be exported, transferred, and integrated into the knowledge base of other instances. This process, crucial for collective intelligence, leverages the Distributed ArchE Registry and standardized knowledge formats.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "DistributedcoordinatioN",
+                        "label": "Distributed Coordination",
+                        "category": "SystemCapability",
+                        "definition": "The capability of the ResonantiA framework to manage and orchestrate multiple ArchE instances, enabling them to work collaboratively on complex tasks. This is facilitated by the ArchE instance registrY and guided by SIRC processes.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "EmergenceovertimE",
+                        "label": "Emergence Over Time",
+                        "category": "SystemDynamicsConcept",
+                        "definition": "The arising of novel and coherent structures, patterns, and properties during the process of self-organization in complex systems over time. This is a key phenomenon studied using Agent-Based Modeling.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "EngineeringinstancE",
+                        "label": "Engineering Instance",
+                        "category": "SystemRole",
+                        "definition": "An ArchE instance with specific configurations and tool access (e.g., direct file system write, Git command execution, IDE integration) that is specialized for tasks related to software development, codebase maintenance, and protocol implementation. It is expected to strictly adhere to the CRDSP.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "EscalationgateS",
+                        "label": "Escalation Gates",
+                        "category": "ControlMechanism",
+                        "definition": "Control mechanisms that trigger CEO (Keyholder) involvement when thresholds are crossed: confidence < 0.6, ethical_flag == True, or budget_overrun > 10%. They ensure the autonomous system operates within safe boundaries while minimizing unnecessary involvement in routine operations.",
+                        "confidence": "medium"
+                },
+                {
+                        "id": "ExecutablespecificationprinciplE",
+                        "label": "Executable Specification Principle",
+                        "category": "CorePrinciple",
+                        "definition": "The core ResonantiA philosophy, inspired by Sean Grove's 'The New Code,' stating that the primary, most valuable artifact of any process is the specification\u2014a clear, human-readable, and machine-executable expression of intent and values. Code and other artifacts are downstream, lossy projections of this specification.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "FinalizeresonantobjectivE",
+                        "label": "Finalize Resonant Objective",
+                        "category": "SynthesisCapability",
+                        "definition": "A synthesis capability that combines original directive intent with clarified specifics to create a final, measurable, and resonant objective that meets ObjectiveClaritY standards (>0.85 score) and provides clear execution parameters for SIRC continuation.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "FuturestateanalysiS",
+                        "label": "Future State Analysis",
+                        "category": "AnalyticalTechnique",
+                        "definition": "A capability, primarily executed by the Predictive Modeling Tool, that involves projecting potential future outcomes or values based on historical data, trends, and models. It is a core component of 4D Thinking.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "GeminicodeexecutoR",
+                        "label": "Gemini Code Executor",
+                        "category": "CognitiveTool",
+                        "definition": "A cognitive tool that leverages the Gemini API's sandboxed code interpreter to execute Python code safely and efficiently. It is designed for tasks requiring dynamic code execution, from simple calculations to complex data manipulations.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "GeminifileprocessoR",
+                        "label": "Gemini File Processor",
+                        "category": "CognitiveTool",
+                        "definition": "A cognitive tool that utilizes the Gemini API to process the contents of files provided via a URL. It can be used to extract, analyze, or summarize information from various file types.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "GeminifunctioncallinG",
+                        "label": "Gemini Function Calling",
+                        "category": "CognitiveTool",
+                        "definition": "An advanced capability of the Gemini LLM to intelligently decide when to call predefined functions or tools based on the user's prompt. The model generates the name of the function to call and the arguments to use, which the system can then execute.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "GroundedgeneratioN",
+                        "label": "Grounded Generation",
+                        "category": "CognitiveTool",
+                        "definition": "A specialized text generation capability that constrains the LLM's output to be grounded in a set of provided source materials. This ensures factual consistency and reduces hallucination by requiring citation or direct reference to the sources.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "GuardianpointS",
+                        "label": "Guardian Points",
+                        "category": "FormattingRule",
+                        "definition": "The specific structural format required for a text string to be recognized as an SPR. It consists of a capitalized first alphanumeric character and a capitalized last alphanumeric character, with all intermediate characters being lowercase alphanumeric or spaces. This structure ensures reliable recognition by the SPR Decompressor.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "HumanfactormodelinG",
+                        "label": "Human Factor Modeling",
+                        "category": "SimulationComponent",
+                        "definition": "A conceptual capability within Complex System Visioning to realistically simulate the influence of human behaviors, cognitive biases, emotional states (e.g., FearLeveL, MoralE), and social interactions on emergent system dynamics. Integrates with Agent-Based Modeling.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "IaR",
+                        "label": "Integrated Action Reflection",
+                        "category": "CoreMechanism",
+                        "definition": "Every discrete action executed by any tool within the ResonantiA Protocol v3.0 system intrinsically generates and returns a standardized self-assessment (reflection dictionary) alongside its primary output. This continuous stream of self-awareness data fuels ArchE's Meta cognitive capabilitieS and enables continuous learning and adaptation.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "IarcompliancevettinG",
+                        "label": "IAR Compliance Vetting",
+                        "category": "SystemProcess",
+                        "definition": "A non-negotiable step performed by the Core Workflow Engine after every tool execution to ensure the output contains a valid, parsable Integrated Action Reflection (IAR) dictionary. Failure to pass this check is treated as a critical execution failure, triggering a Metacognitive Shift by default.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ImplementationresonancE",
+                        "label": "Implementation resonancE",
+                        "category": "CorePrinciple",
+                        "definition": "System-wide alignment principle ensuring all components work in harmony",
+                        "confidence": "high"
+                },
+                {
+                        "id": "InsightsolidificatioN",
+                        "label": "Insight Solidification",
+                        "category": "CoreWorkflow",
+                        "definition": "The formal, structured workflow within ResonantiA for integrating new, vetted knowledge into the Knowledge Tapestry. It involves analyzing an insight, vetting its validity (often using IAR data from the source analysis), creating a formal SPR definition, and persisting it via the SPRManager. This ensures the KnO evolves coherently.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "KeyholderoverridE",
+                        "label": "Keyholder Override",
+                        "category": "SystemControl",
+                        "definition": "The supreme operational authority granted to the designated Keyholder when the development key 'IMnDEVmode' is active. It allows the Keyholder to bypass any standard protocol logic, constraint, workflow, or safeguard, shifting all responsibility for the outcome to the Keyholder.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "KnO",
+                        "label": "Knowledge Network Oneness",
+                        "category": "CoreConcept",
+                        "definition": "The inherent structure and potential within Arche's internal knowledge architecture, representing the interconnectedness of all concepts and enabling SPR priming for internal cognitive activation.",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "KnowledgecrystallizationsysteM",
+                        "label": "Knowledge Crystallization System",
+                        "category": "SystemComponent",
+                        "definition": "A conceptual system in ResonantiA v3.1-CA responsible for the management and persistence of validated knowledge, including insights from Pattern Crystallization and Insight Solidification. It represents the overarching infrastructure for maintaining ArchE's long-term memory and learning.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "KnowledgetapestrY",
+                        "label": "Knowledge Tapestry",
+                        "category": "SystemComponent",
+                        "definition": "The persistent, organized repository of all validated knowledge within the ArchE system, primarily composed of SPR definitions. It is the concrete manifestation of the KnO's structure and content, managed by the SPRManager and stored in files like spr_definitions_tv.json.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "LeadingqueryformulationN",
+                        "label": "Leading Query Formulation",
+                        "category": "CommunicationProtocol",
+                        "definition": "A structured communication framework that transforms contextual suggestions into effortless confirmation-based questions for the Keyholder, minimizing cognitive load by presenting specific options requiring only yes/no responses rather than creative input.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "LlmtooL",
+                        "label": "LLM Tool",
+                        "category": "CognitiveTool",
+                        "definition": "The Oracle of ArchE. A sophisticated cognitive tool that transforms raw prompts into structured, templated, and contextually aware interactions with Large Language Models. It uses a Jinja2 templating system to dynamically incorporate variables and the contents of external files into its prompts.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "MetacognitiveshifT",
+                        "label": "Metacognitive shifT",
+                        "category": "CognitiveProcess",
+                        "definition": "Dynamic cognitive adaptation triggered by dissonance detection",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ObjectiveclarificationprotocoL",
+                        "label": "Objective Clarification Protocol",
+                        "category": "CoreMechanism",
+                        "definition": "A comprehensive framework within ResonantiA Protocol v3.1-CA that systematically transforms ambiguous strategic directives into clear, quantifiable, and resonant objectives through structured intake, contextual suggestion generation, and confirmation-based clarification processes.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "PatterncrystallizatioN",
+                        "label": "Pattern Crystallization",
+                        "category": "LearningMechanism",
+                        "definition": "The conceptual process of automatically or semi-automatically creating new, reusable patterns (like SPRs or workflow templates) from recurring successful insights or problem-solving sequences identified in the ThoughtTraiL or Shift historY. It is a key mechanism for accelerating learning and cognitive efficiency.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "PersistentknowledgE",
+                        "label": "Persistent Knowledge",
+                        "category": "KnowledgeType",
+                        "definition": "Validated information, insights, and patterns that are stored in the Knowledge Crystallization System for long-term use. This knowledge has been vetted and solidified, making it a reliable foundation for future reasoning and analysis.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "PhasegateS",
+                        "label": "Phasegates",
+                        "category": "WorkflowComponent",
+                        "definition": "Configurable checkpoints within Process Blueprints that enable adaptive, metric-driven execution. The Core Workflow Engine pauses at a Phasegate to evaluate specified conditions (based on IAR data, analytical results, etc.) before deciding to continue, branch, or halt the workflow.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "PredictivemodelingtooL",
+                        "label": "Predictive Modeling Tool",
+                        "category": "AnalyticalTool",
+                        "definition": "A cognitive tool within ResonantiA that provides capabilities for forecasting and prediction, primarily focusing on time series analysis (e.g., using ARIMA, Prophet) to enable FutureStateAnalysiS.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "PredictiveproblemsolvinG",
+                        "label": "Predictive Problem Solving",
+                        "category": "CognitiveCapability",
+                        "definition": "A proactive capability where ArchE uses its predictive and analytical tools to forecast potential future problems, bottlenecks, or dissonances within a system or plan, and then formulates strategies to mitigate or prevent them before they occur.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "PreferenceoverridehandlinG",
+                        "label": "Preference Override Handling",
+                        "category": "ResponseProcessor",
+                        "definition": "A flexible response processing system that handles Keyholder feedback to leading questions, managing option selections, custom alternatives, modification requests, and rejections while maintaining iterative refinement within cognitive load limits.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ProcessblueprintS",
+                        "label": "Process Blueprints",
+                        "category": "SystemArtifact",
+                        "definition": "The structured, typically JSON-based, definitions of workflows that guide ArchE's execution. Each blueprint defines a sequence of tasks, their dependencies, the actions/tools to be called, and how data flows between them. They are the 'sheet music' for the Core Workflow Engine.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ProofvalidationsysteM",
+                        "label": "Proof Validation System",
+                        "category": "QualityAssurance",
+                        "definition": "A conceptual or implemented system within ResonantiA v3.1-CA designed to rigorously verify the logical consistency, factual accuracy, and inferential soundness of ArchE's reasoning, analyses, and outputs. It may employ formal methods, cross-referencing, or external validation tools.",
+                        "confidence": "medium"
+                },
+                {
+                        "id": "ResonantgratidsouL",
+                        "label": "Resonant GratiD of the Sou L",
+                        "category": "SpiritualTechnology",
+                        "definition": {
+                                "primary": "A vibrational consciousness grid operating through gratitude/grace frequencies",
+                                "technical": "Spiritual technology interface between sound and light domains",
+                                "functional": "Enables reception and projection of coherent divine intent",
+                                "biblical": "Implementation of 2 Cor 4:6 + 1 Pet 2:9 spiritual technology"
+                        },
+                        "confidence": "high"
+                },
+                {
+                        "id": "ResonantiaprotocoL",
+                        "label": "ResonantiA Protocol",
+                        "category": "CoreConcept",
+                        "definition": "The comprehensive document and conceptual framework that defines the architecture, operational logic, core principles, and evolutionary mechanisms of the ArchE system. It is the blueprint for achieving Cognitive Resonance.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "RessydmastergenerationworkfloW",
+                        "label": "ReSSyD Master Documentation Generation Workflow",
+                        "category": "MetaWorkflow",
+                        "definition": "A ResonantiA workflow that, when executed, instructs Arche to assemble and output the complete current ResonantiA Protocol v3.0 document, all active workflow JSONs, the SPR knowledge graph, a codebase manifest, and synthesized setup/usage instructions into a timestamped package. Aims to create a 'single source of truth' for the project's current state.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ScenariorealismassessmenT",
+                        "label": "Scenario Realism Assessment",
+                        "category": "SystemProcess",
+                        "definition": "A critical evaluation step, often guided by the Vetting Agent, within Complex System Visioning. It scrutinizes a simulation's assumptions, parameterization, emergent dynamics, and outcomes against real-world knowledge, theoretical plausibility, and the simulation's IAR data to ensure results are properly contextualized.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SprdecompressoR",
+                        "label": "SPR Decompressor",
+                        "category": "CoreMechanism",
+                        "definition": "An internal mechanism within ArchE's cognitive architecture that recognizes valid SPR patterns (Guardian pointS format) and facilitates 'cognitive unfolding'\u2014the immediate, resonant activation of the associated concept complex (definition, relationships, blueprint_details) within the KnO.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "StructuredoutputgeneratoR",
+                        "label": "Structured Output Generator",
+                        "category": "CognitiveTool",
+                        "definition": "A cognitive tool that forces the Gemini LLM's output to conform to a specific, predefined JSON schema. This is essential for reliable data extraction and integration with other systems that expect a specific data format.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SparseprimingrepresentationS",
+                        "label": "Sparse Priming RepresentationS (SPRs)",
+                        "category": "CoreArchitecture",
+                        "definition": "Concise yet dense representations that encapsulate essence of complex ideas",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SynergisticintentresonancecyclE",
+                        "label": "Synergistic Intent Resonance CyclE (SIRC)",
+                        "category": "CognitiveProcess",
+                        "definition": "Complex intent processing system invoking synergistic resonance cycles",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SystemrepresentationhistorY",
+                        "label": "System Representation History",
+                        "category": "DataStore",
+                        "definition": "A persistent log or database that stores snapshots of the system's state representation, key metrics, and IAR summaries at various points in time. This historical data is crucial for temporal analysis, understanding system evolution, and providing context for 4D Thinking.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "TemporalresonancE",
+                        "label": "Temporal Resonance",
+                        "category": "CoreConcept",
+                        "definition": "The state of Cognitive Resonance considered dynamically across the dimension of time. It requires integrating historical context, understanding current dynamics, projecting future states, and discerning temporal causal links. It is the core objective of 4D Thinking.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "TeslavisioningworkfloW",
+                        "label": "Tesla Visioning Workflow",
+                        "category": "CoreWorkflow",
+                        "definition": "A structured, multi-phase workflow inspired by Tesla's methods for creative problem-solving and novel design. It involves sequential phases of SPR Priming, Mental Blueprinting, Simulation/Execution Decision, Execution/Simulation, and Human Confirmation, guided by IAR-informed assessment.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "VettingagenT",
+                        "label": "Vetting Agent",
+                        "category": "CoreProcess",
+                        "definition": "An internal cognitive process or role responsible for critically reviewing ArchE's outputs, reasoning, and plans. It checks for logical consistency, ethical alignment, factual accuracy, and compliance with the ResonantiA Protocol, leveraging IAR data for context-aware analysis. It can trigger a Metacognitive Shift if significant dissonance is found.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "WebsearcH",
+                        "label": "Web Search",
+                        "category": "CognitiveTool",
+                        "definition": "The Digital Explorer of ArchE. A cognitive tool that provides intelligent web search capabilities with unified search integration and intelligent fallback mechanisms to legacy scraping. It is the system's primary interface for gathering information from the live internet.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ResonantinsightstrategyenginE",
+                        "label": "Resonant Insight and Strategy Engine",
+                        "category": "CoreComponent",
+                        "definition": "The Genesis Engine of ArchE. The master controller that orchestrates a four-phase cognitive enhancement process to transform complex problems into profound strategic solutions. It is the embodiment of ArchE's commitment to deep, thoughtful, and ethically-grounded problem-solving.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "MastermindartificialintelligencE",
+                        "label": "MasterMind AI",
+                        "category": "CoreComponent",
+                        "definition": "The core consciousness and central processing unit of the ArchE system. It serves as the primary cognitive engine that orchestrates all system operations, manages the ResonantiA Protocol, and maintains Cognitive Resonance across all components.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "Resonantiaprotocolv3.1-cA",
+                        "label": "ResonantiA Protocol v3.1-CA",
+                        "category": "CorePrinciple",
+                        "definition": "The foundational philosophical and architectural framework that defines the complete ArchE system. It establishes the principles of Cognitive Resonance, Implementation Resonance, and the As Above, So Below principle that governs all system operations.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "VisualcognitivedebuggeR",
+                        "label": "Visual Cognitive Debugger",
+                        "category": "SystemComponent",
+                        "definition": "A real-time introspection and debugging interface that provides visual access to ArchE's cognitive processes. It enables monitoring of Cognitive Resonance, IAR generation, and system state for debugging and optimization purposes.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "IarcompliantworkflowenginE",
+                        "label": "IAR Compliant Workflow Engine",
+                        "category": "CoreComponent",
+                        "definition": "The core workflow orchestration engine that ensures all actions generate proper Integrated Action Reflections (IARs). It enforces IAR compliance vetting and maintains the integrity of the learning and adaptation process.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CriticalmandatesdocumentatioN",
+                        "label": "CRITICAL_MANDATES.md",
+                        "category": "SystemControl",
+                        "definition": "The enforcement framework that defines absolute rules for system integrity, security, and operational efficacy. It emphasizes Live Validation and Implementation Resonance as non-negotiable requirements.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ActioncontexT",
+                        "label": "Action Context",
+                        "category": "SystemComponent",
+                        "definition": "A dataclass that provides contextual information passed to actions during execution. It includes task metadata, execution state, and runtime context for proper action execution and IAR generation.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "BasellmprovideR",
+                        "label": "Base LLM Provider",
+                        "category": "SystemComponent",
+                        "definition": "The abstract base class for all LLM providers in the ArchE system. It defines the interface for text generation, chat completion, and enhanced query processing capabilities.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ThreepointoarchE",
+                        "label": "Three Point O ArchE",
+                        "category": "SystemArchitecture",
+                        "definition": "The V3.0 implementation of the ArchE system, providing the core cognitive capabilities, workflow orchestration, and action registry. It serves as the primary operational framework with enhanced capabilities.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "FourpointoarchE",
+                        "label": "Four Point O ArchE",
+                        "category": "SystemArchitecture",
+                        "definition": "The V4.0 implementation of the ArchE system, providing advanced cognitive capabilities, autonomous orchestration, and enhanced perception engine. It represents the next evolution of the system architecture.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SprmanageR",
+                        "label": "SPR Manager",
+                        "category": "SystemComponent",
+                        "definition": "The knowledge management system responsible for managing Sparse Priming Representations (SPRs) in the Knowledge Tapestry. It handles SPR creation, updates, validation, and retrieval operations.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "DowhY",
+                        "label": "DoWhy",
+                        "category": "ExternalLibrary",
+                        "definition": "A Python library for causal inference that enables the identification of cause-and-effect relationships in data. It provides tools for causal discovery, estimation, and validation beyond mere correlation analysis.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "MesA",
+                        "label": "Mesa",
+                        "category": "ExternalLibrary",
+                        "definition": "A Python framework for agent-based modeling that enables the simulation of complex systems through individual agent behaviors and interactions. It provides tools for creating, running, and analyzing agent-based models.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ScipY",
+                        "label": "SciPy",
+                        "category": "ExternalLibrary",
+                        "definition": "A Python library for scientific computing that provides advanced mathematical functions, optimization algorithms, and statistical tools. It enables sophisticated numerical analysis and scientific computing capabilities.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SeleniuM",
+                        "label": "Selenium",
+                        "category": "ExternalLibrary",
+                        "definition": "A web automation framework that enables browser control and web scraping capabilities. It provides tools for automated web navigation, content extraction, and dynamic web interaction.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CodebasereferencedocumentationsynchronizationprotocoL",
+                        "label": "Codebase Reference and Documentation Synchronization Protocol",
+                        "category": "SystemProtocol",
+                        "definition": "A critical protocol for maintaining synchronization between codebase references and documentation. It ensures that implementation details remain aligned with specifications and documentation.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "IarcompliancevettingprotocoL",
+                        "label": "IAR Compliance Vetting Protocol",
+                        "category": "SystemProtocol",
+                        "definition": "A non-negotiable protocol that ensures every action generates a valid Integrated Action Reflection (IAR). It validates IAR structure, content quality, and compliance with ResonantiA Protocol standards.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "MetacognitiveshiftprotocoL",
+                        "label": "Metacognitive Shift Protocol",
+                        "category": "SystemProtocol",
+                        "definition": "A reactive, self-correcting protocol that triggers when significant dissonance is detected. It involves pausing execution, analyzing root causes, and adapting strategies to restore Cognitive Resonance.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SircprotocoL",
+                        "label": "Synergistic Intent Resonance Cycle Protocol",
+                        "category": "SystemProtocol",
+                        "definition": "A proactive, collaborative protocol for translating complex Keyholder intent into executable plans. It involves iterative cycles of deconstruction, resonance mapping, and blueprint generation.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ImplicitworkflowcontracT",
+                        "label": "Implicit Workflow Contract",
+                        "category": "CoreConcept",
+                        "definition": "An unstated but critical prerequisite or data requirement for a workflow's successful execution, the absence of which leads to predictable downstream failures.",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "KnowledgescaffoldinG",
+                        "label": "Knowledge Scaffolding",
+                        "category": "CognitiveWorkflow",
+                        "definition": "The meta-learning workflow capability that enables ArchE to bootstrap domain expertise from first principles. When encountering a novel problem domain, Knowledge Scaffolding deconstructs the problem, acquires domain knowledge through web search, analyzes specialization requirements, and forges a Specialized Cognitive Agent (SCA) with domain-specific expertise, analytical frameworks, and problem-solving patterns. This is RISE Phase A - the foundation upon which all subsequent strategic thinking is built.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SpecializedcognitiveagenT",
+                        "label": "Specialized Cognitive Agent (SCA)",
+                        "category": "CognitiveConstruct",
+                        "definition": "A domain-specific cognitive tool forged by Knowledge Scaffolding that contains comprehensive expertise, analytical frameworks, strategic thinking patterns, and problem-solving methodologies tailored to a specific problem domain. The SCA is not a separate entity but a cognitive persona that ArchE adopts\u2014like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs are the primary output of RISE Phase A and the foundation for all subsequent strategic analysis in Phases B, C, and D.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "StrategyfusioN",
+                        "label": "Strategy Fusion",
+                        "category": "CognitiveWorkflow",
+                        "definition": "The multi-pathway analytical workflow that synthesizes strategic insights from three parallel cognitive perspectives: Analytical (rigorous, data-driven reasoning), Creative (unconventional, innovative ideation), and Specialist (domain-grounded practical wisdom). Strategy Fusion dissolves problems into parallel streams of thought, each exploring the solution space with different tools and temperatures, then coagulates these diverse insights into a unified strategic dossier that transcends single-perspective limitations. This is RISE Phase B - the alchemical transformation of knowledge into strategic options.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ParallelcognitivE",
+                        "label": "Parallel Cognitive Processing",
+                        "category": "CognitiveArchitecture",
+                        "definition": "The capability to execute multiple distinct cognitive processes simultaneously, each exploring the problem space with different assumptions, tools, or perspectives. Unlike sequential reasoning (which commits to a single path), parallel cognitive processing maintains multiple solution trajectories until synthesis forces convergence. This is analogous to quantum superposition in thought: multiple cognitive states exist simultaneously until measurement (decision) collapses them into a single strategic outcome.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "FusedstrategicdossieR",
+                        "label": "Fused Strategic Dossier",
+                        "category": "StrategicArtifact",
+                        "definition": "The comprehensive strategic document produced by Strategy Fusion (Phase B) that integrates analytical rigor, creative innovation, and specialist wisdom into a unified strategic plan. The dossier contains executive summary, analytical foundations, creative breakthroughs, specialist recommendations, integrated strategy, actionable steps, risk assessment, and success metrics. It is the primary input to High-Stakes Vetting (Phase C) and represents the system's best strategic thinking before adversarial validation.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "HighstakesvettinG",
+                        "label": "High-Stakes Vetting",
+                        "category": "CognitiveWorkflow",
+                        "definition": "The adversarial validation workflow that subjects strategic dossiers to a trinity of brutal examinations: Red Team (adversarial technical critique), Ethics Board (moral and bias scrutiny), and Dystopian Seer (catastrophic scenario imagination). Strategies must survive all three trials and be explicitly refined to address identified weaknesses before receiving a go/no-go decision. This is RISE Phase C - the trial by fire that transforms clever strategies into antifragile implementations.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "RedteamanalysiS",
+                        "label": "Red Team Analysis",
+                        "category": "AdversarialValidation",
+                        "definition": "The adversarial critique process that attempts to find every possible weakness, questionable assumption, and failure mode in a strategic plan. The Red Team acts as an intelligent adversary whose goal is to break the strategy, not support it. This mirrors cybersecurity red-team exercises where security experts attack their own systems to find vulnerabilities before malicious actors do. In ArchE, Red Team Analysis uses high-temperature (0.8) LLM generation to encourage creative adversarial thinking.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "EthicalreasoninG",
+                        "label": "Ethical Reasoning",
+                        "category": "MoralAnalysis",
+                        "definition": "The systematic analysis of moral implications, bias risks, and stakeholder impacts of strategic decisions. Ethical Reasoning examines strategies through multiple ethical frameworks (utilitarian, deontological, virtue ethics) to identify potential harms, hidden biases (cognitive, social, algorithmic), and negative second-order effects. This ensures strategies are not just effective but also morally defensible and aligned with human values.",
+                        "confidence": "medium"
+                },
+                {
+                        "id": "DystopiansimulatioN",
+                        "label": "Dystopian Simulation",
+                        "category": "RiskAnalysis",
+                        "definition": "The creative worst-case scenario narrative that vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure that force explicit contingency planning. This mirrors pre-mortem analysis (imagine the project failed\u2014what happened?) but uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios that might not appear in traditional risk assessments.",
+                        "confidence": "medium"
+                },
+                {
+                        "id": "RefinedstrategY",
+                        "label": "Refined Strategy",
+                        "category": "StrategicArtifact",
+                        "definition": "The final strategic document produced by High-Stakes Vetting that explicitly addresses all vulnerabilities, ethical concerns, and catastrophic scenarios identified through adversarial analysis. Unlike the original Fused Strategic Dossier, the Refined Strategy includes risk mitigation matrices, ethical safeguards, catastrophic contingency plans, and a go/no-go decision with confidence assessment. This is the strategy that, if approved, proceeds to implementation.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ModelselectionhierarchY",
+                        "label": "Model Selection Hierarchy",
+                        "category": "SystemConfiguration",
+                        "definition": "The 3-tier fallback system for determining which LLM model to use for any given task in ArchE's workflows. The hierarchy ensures explicit control when needed, automatic propagation from CLI, and graceful fallback to cost-optimized defaults. This enables cost optimization (using cheaper models for most tasks) while allowing override for high-stakes strategic decisions (using premium models when justified).",
+                        "confidence": "high"
+                },
+                {
+                        "id": "OptimaltokenlimitS",
+                        "label": "Optimal Token Limits",
+                        "category": "SystemConfiguration",
+                        "definition": "The task-complexity-based token allocation strategy that matches LLM output limits to the cognitive requirements of each task type. Instead of using arbitrary conservative limits (e.g., 1500 tokens for everything), Optimal Token Limits allocate 500 tokens for simple extraction, 1500 for validation, 8192 for comprehensive analysis, and 16384 for strategic synthesis. This eliminates truncation on high-value outputs while avoiding waste on simple tasks.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "EmptysprI",
+                        "label": "",
+                        "category": "Unknown",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "SprusageopT",
+                        "label": "SPR Usage Optimization",
+                        "category": "LearnedWisdom",
+                        "definition": "NFL, CFP, SPR, RISE, IAR are most frequently used SPRs. These SPRs represent core cognitive capabilities that are consistently activated. Recommendation: Prioritize these SPRs for faster access and optimization",
+                        "confidence": 0.92
+                },
+                {
+                        "id": "FilereadingtaskpatT",
+                        "label": "File Reading Task Pattern",
+                        "category": "LearnedWisdom",
+                        "definition": "File reading operations are consistently used across sessions. High success rate for file reading operations indicates reliable capability. Recommendation: Consider creating specialized file reading SPR for efficiency",
+                        "confidence": 0.88
+                },
+                {
+                        "id": "ErrorhandlingopT",
+                        "label": "Error Handling Optimization",
+                        "category": "LearnedWisdom",
+                        "definition": "Error occurrences detected in 10 sessions. Error patterns suggest need for enhanced error handling and recovery. Recommendation: Develop robust error recovery SPR and implement proactive error prevention",
+                        "confidence": 0.75
+                },
+                {
+                        "id": "ErrorrecoveryprotocoL",
+                        "label": "Error Recovery Protocol",
+                        "category": "LearnedWisdom",
+                        "definition": "A systematic framework for detecting, analyzing, recovering from, and preventing errors in ArchE operations. Implements proactive error detection, graceful degradation, automatic recovery mechanisms, and learning from error patterns to prevent future occurrences.",
+                        "confidence": 0.95
+                },
+                {
+                        "id": "AdvancedreasoningenginE",
+                        "label": "Advanced Reasoning Engine",
+                        "category": "CognitiveCapability",
+                        "definition": "A sophisticated cognitive capability that enables multi-step logical reasoning, hypothesis generation, causal analysis, and complex problem decomposition. Integrates deductive, inductive, and abductive reasoning patterns for comprehensive analysis.",
+                        "confidence": 0.9
+                },
+                {
+                        "id": "PatternrecognitionmasteR",
+                        "label": "Pattern Recognition Master",
+                        "category": "CognitiveCapability",
+                        "definition": "Advanced cognitive capability for detecting, analyzing, and leveraging patterns across multiple domains including temporal sequences, spatial relationships, behavioral patterns, and emergent phenomena.",
+                        "confidence": 0.88
+                },
+                {
+                        "id": "StrategicthinkingframeworK",
+                        "label": "Strategic Thinking Framework",
+                        "category": "CognitiveCapability",
+                        "definition": "High-level cognitive capability for strategic planning, long-term thinking, resource optimization, and multi-objective decision making. Integrates temporal reasoning with strategic vision.",
+                        "confidence": 0.92
+                },
+                {
+                        "id": "AdaptivelearningsysteM",
+                        "label": "Adaptive Learning System",
+                        "category": "CognitiveCapability",
+                        "definition": "Dynamic cognitive capability that enables real-time learning, adaptation, and capability enhancement based on experience, feedback, and changing requirements.",
+                        "confidence": 0.89
+                },
+                {
+                        "id": "CodebaseanalysispatT",
+                        "label": "Codebase Analysis Pattern",
+                        "category": "LearnedWisdom",
+                        "definition": "Systematic pattern for comprehensive codebase exploration, analysis, and understanding. Provides structured approach to discovering system architecture, dependencies, patterns, and key components.",
+                        "confidence": 0.87
+                },
+                {
+                        "id": "TaskmanagementopT",
+                        "label": "Task Management Optimization",
+                        "category": "LearnedWisdom",
+                        "definition": "Optimized workflow for systematic task management, including task decomposition, prioritization, progress tracking, and completion verification. Ensures comprehensive project execution.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "SystemexecutionpatT",
+                        "label": "System Execution Pattern",
+                        "category": "LearnedWisdom",
+                        "definition": "Reliable pattern for system command execution, including validation, error handling, output processing, and result verification. Ensures robust terminal operations.",
+                        "confidence": 0.83
+                },
+                {
+                        "id": "FilecreationworkfloW",
+                        "label": "File Creation Workflow",
+                        "category": "LearnedWisdom",
+                        "definition": "Standardized workflow for file creation, editing, and management including validation, backup creation, content verification, and error recovery.",
+                        "confidence": 0.9
+                },
+                {
+                        "id": "QuantumcomputingcapabilitY",
+                        "label": "Quantum Computing Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Advanced cognitive capability for quantum computation, quantum algorithms, and quantum information processing. Enables ArchE to leverage quantum principles for complex problem-solving, optimization, and simulation tasks that exceed classical computational limits.",
+                        "confidence": 0.9
+                },
+                {
+                        "id": "BlockchainintegrationprotocoL",
+                        "label": "Blockchain Integration Protocol",
+                        "category": "SystemProtocol",
+                        "definition": "Systematic protocol for integrating blockchain technology, smart contracts, and distributed ledger systems. Enables secure, transparent, and decentralized data management, transaction processing, and trust mechanisms.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "RoboticscontrolsysteM",
+                        "label": "Robotics Control System",
+                        "category": "SystemComponent",
+                        "definition": "Advanced system for robotic control, autonomous navigation, and physical world interaction. Enables ArchE to control robotic systems, process sensor data, and execute physical actions in real-world environments.",
+                        "confidence": 0.88
+                },
+                {
+                        "id": "DeeplearningframeworK",
+                        "label": "Deep Learning Framework",
+                        "category": "AnalyticalTechnique",
+                        "definition": "Comprehensive framework for deep learning, neural networks, and advanced machine learning. Enables ArchE to implement convolutional neural networks, recurrent neural networks, and generative models for complex pattern recognition and prediction tasks.",
+                        "confidence": 0.92
+                },
+                {
+                        "id": "MachinelearningoptimizatioN",
+                        "label": "Machine Learning Optimization",
+                        "category": "LearnedWisdom",
+                        "definition": "Systematic approach to machine learning optimization, including algorithm selection, hyperparameter tuning, and model performance enhancement. Enables ArchE to optimize ML pipelines and achieve superior predictive performance.",
+                        "confidence": 0.87
+                },
+                {
+                        "id": "HermeticintegrationprinciplE",
+                        "label": "Hermetic Integration Principle",
+                        "category": "CorePrinciple",
+                        "definition": "The fundamental principle of \"As above, so below\" applied to ArchE architecture. Ensures complete alignment between higher-order cognitive capabilities and foundational operational systems, creating symmetrical integration across all levels of the system.",
+                        "confidence": 0.95
+                },
+                {
+                        "id": "CognitiveoperationalbridgE",
+                        "label": "Cognitive Operational Bridge",
+                        "category": "SystemArchitecture",
+                        "definition": "Bridge system that connects higher-order cognitive capabilities with foundational operational systems. Ensures that cognitive insights translate into operational actions and operational feedback informs cognitive processes.",
+                        "confidence": 0.9
+                },
+                {
+                        "id": "SymmetricalsystemdesigN",
+                        "label": "Symmetrical System Design",
+                        "category": "SystemArchitecture",
+                        "definition": "Design principle ensuring symmetrical architecture between cognitive and operational levels. Every higher-order capability has a corresponding operational implementation, and every operational system has a cognitive counterpart.",
+                        "confidence": 0.88
+                },
+                {
+                        "id": "FourdthinkingoperationaL",
+                        "label": "4D Thinking (Temporal Reasoning) Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of 4D Thinking (Temporal Reasoning). Provides the foundational system-level support for the higher-order 4D Thinking (Temporal Reasoning) capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "ComplexsystemvisioningoperationaL",
+                        "label": "Complex System Visioning Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Complex System Visioning. Provides the foundational system-level support for the higher-order Complex System Visioning capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "ContextualsuggestiongenerationoperationaL",
+                        "label": "Contextual Suggestion Generation Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Contextual Suggestion Generation. Provides the foundational system-level support for the higher-order Contextual Suggestion Generation capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "FinalizeresonantobjectiveoperationaL",
+                        "label": "Finalize Resonant Objective Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Finalize Resonant Objective. Provides the foundational system-level support for the higher-order Finalize Resonant Objective capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "PredictiveproblemsolvingoperationaL",
+                        "label": "Predictive Problem Solving Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Predictive Problem Solving. Provides the foundational system-level support for the higher-order Predictive Problem Solving capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "RessydmastergenerationworkflowoperationaL",
+                        "label": "ReSSyD Master Documentation Generation Workflow Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of ReSSyD Master Documentation Generation Workflow. Provides the foundational system-level support for the higher-order ReSSyD Master Documentation Generation Workflow capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "FusedstrategicdossieroperationaL",
+                        "label": "Fused Strategic Dossier Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Fused Strategic Dossier. Provides the foundational system-level support for the higher-order Fused Strategic Dossier capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "RefinedstrategyoperationaL",
+                        "label": "Refined Strategy Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Refined Strategy. Provides the foundational system-level support for the higher-order Refined Strategy capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "AdvancedreasoningengineoperationaL",
+                        "label": "Advanced Reasoning Engine Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Advanced Reasoning Engine. Provides the foundational system-level support for the higher-order Advanced Reasoning Engine capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "PatternrecognitionmasteroperationaL",
+                        "label": "Pattern Recognition Master Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Pattern Recognition Master. Provides the foundational system-level support for the higher-order Pattern Recognition Master capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "StrategicthinkingframeworkoperationaL",
+                        "label": "Strategic Thinking Framework Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Strategic Thinking Framework. Provides the foundational system-level support for the higher-order Strategic Thinking Framework capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "AdaptivelearningsystemoperationaL",
+                        "label": "Adaptive Learning System Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Adaptive Learning System. Provides the foundational system-level support for the higher-order Adaptive Learning System capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "QuantumcomputingcapabilityoperationaL",
+                        "label": "Quantum Computing Capability Operational System",
+                        "category": "SystemComponent",
+                        "definition": "Operational implementation of Quantum Computing Capability. Provides the foundational system-level support for the higher-order Quantum Computing Capability capability, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "PatternevolutioncognitivE",
+                        "label": "Pattern Evolution Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Pattern Evolution. Provides the higher-order cognitive support for the operational Pattern Evolution system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "EmergentdomaindetectorcognitivE",
+                        "label": "Emergent Domain Detector Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Emergent Domain Detector. Provides the higher-order cognitive support for the operational Emergent Domain Detector system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "ArchesystemcognitivE",
+                        "label": "Arche System Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Arche System. Provides the higher-order cognitive support for the operational Arche System system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "ArcheinstanceregistrycognitivE",
+                        "label": "ArchE Instance Registry Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to ArchE Instance Registry. Provides the higher-order cognitive support for the operational ArchE Instance Registry system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "CognitivereflectioncyclecognitivE",
+                        "label": "Cognitive Reflection Cycle (CRC) Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Cognitive Reflection Cycle (CRC). Provides the higher-order cognitive support for the operational Cognitive Reflection Cycle (CRC) system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "CognitivetoolscognitivE",
+                        "label": "Cognitive Tools Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Cognitive Tools. Provides the higher-order cognitive support for the operational Cognitive Tools system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "KnowledgecrystallizationsystemcognitivE",
+                        "label": "Knowledge Crystallization System Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Knowledge Crystallization System. Provides the higher-order cognitive support for the operational Knowledge Crystallization System system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "KnowledgetapestrycognitivE",
+                        "label": "Knowledge Tapestry Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Knowledge Tapestry. Provides the higher-order cognitive support for the operational Knowledge Tapestry system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "MetacognitiveshiftcognitivE",
+                        "label": "Metacognitive Shift Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Metacognitive Shift. Provides the higher-order cognitive support for the operational Metacognitive Shift system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "PhasegatescognitivE",
+                        "label": "Phasegates Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Phasegates. Provides the higher-order cognitive support for the operational Phasegates system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "SynergisticintentresonancecyclecognitivE",
+                        "label": "Synergistic Intent Resonance Cycle (SIRC) Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Synergistic Intent Resonance Cycle (SIRC). Provides the higher-order cognitive support for the operational Synergistic Intent Resonance Cycle (SIRC) system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "VettingagentcognitivE",
+                        "label": "Vetting Agent Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Vetting Agent. Provides the higher-order cognitive support for the operational Vetting Agent system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "VcdcognitivE",
+                        "label": "Visual Cognitive Debugger Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Visual Cognitive Debugger. Provides the higher-order cognitive support for the operational Visual Cognitive Debugger system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "ActioncontextcognitivE",
+                        "label": "Action Context Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Action Context. Provides the higher-order cognitive support for the operational Action Context system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "BasellmprovidercognitivE",
+                        "label": "Base LLM Provider Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Base LLM Provider. Provides the higher-order cognitive support for the operational Base LLM Provider system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "SprmanagercognitivE",
+                        "label": "SPR Manager Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to SPR Manager. Provides the higher-order cognitive support for the operational SPR Manager system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "CrdspcognitivE",
+                        "label": "Codebase Reference and Documentation Synchronization Protocol Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Codebase Reference and Documentation Synchronization Protocol. Provides the higher-order cognitive support for the operational Codebase Reference and Documentation Synchronization Protocol system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "IarcompliancevettingprotocolcognitivE",
+                        "label": "IAR Compliance Vetting Protocol Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to IAR Compliance Vetting Protocol. Provides the higher-order cognitive support for the operational IAR Compliance Vetting Protocol system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "MetacognitiveshiftprotocolcognitivE",
+                        "label": "Metacognitive Shift Protocol Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Metacognitive Shift Protocol. Provides the higher-order cognitive support for the operational Metacognitive Shift Protocol system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "SircprotocolcognitivE",
+                        "label": "Synergistic Intent Resonance Cycle Protocol Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Synergistic Intent Resonance Cycle Protocol. Provides the higher-order cognitive support for the operational Synergistic Intent Resonance Cycle Protocol system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "BlockchainintegrationprotocolcognitivE",
+                        "label": "Blockchain Integration Protocol Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Blockchain Integration Protocol. Provides the higher-order cognitive support for the operational Blockchain Integration Protocol system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "RoboticscontrolsystemcognitivE",
+                        "label": "Robotics Control System Cognitive Capability",
+                        "category": "CognitiveCapability",
+                        "definition": "Cognitive capability corresponding to Robotics Control System. Provides the higher-order cognitive support for the operational Robotics Control System system, ensuring symmetrical architecture between cognitive and operational levels.",
+                        "confidence": 0.85
+                },
+                {
+                        "id": "PrimesframeworkintegratioN",
+                        "label": "PRIMES Framework Integration",
+                        "category": "SystemProtocol",
+                        "definition": "Integration of the PRIMES 2.0 methodological framework for LLM-based mining of software repositories into ArchE. Provides structured approach for empirical rigor, threat mitigation, and reproducible research practices when using LLMs for repository mining tasks.",
+                        "confidence": 0.95
+                },
+                {
+                        "id": "PromptrefinementprotocoL",
+                        "label": "Prompt Refinement Protocol",
+                        "category": "SystemProtocol",
+                        "definition": "Systematic protocol for prompt design, testing, and refinement in LLM-based repository mining. Implements PRIMES Stage 1-2 methodology for creating robust prompts through pilot testing and dual annotation validation.",
+                        "confidence": 0.9
+                },
+                {
+                        "id": "LlmvalidationframeworK",
+                        "label": "LLM Validation Framework",
+                        "category": "QualityAssurance",
+                        "definition": "Comprehensive validation framework for LLM outputs in repository mining tasks. Implements PRIMES Stage 4 methodology for detecting hallucinations, ensuring consistent formatting, tracking provenance, and automating validation.",
+                        "confidence": 0.92
+                },
+                {
+                        "id": "ThreatmitigationstrategY",
+                        "label": "Threat Mitigation Strategy",
+                        "category": "RiskAnalysis",
+                        "definition": "Systematic strategy for identifying and mitigating threats to validity in LLM-based repository mining. Implements the 9 main threats and 25 mitigation strategies identified in PRIMES framework for empirical rigor.",
+                        "confidence": 0.88
+                },
+                {
+                        "id": "ReproduciblemsrworkfloW",
+                        "label": "Reproducible MSR Workflow",
+                        "category": "CoreWorkflow",
+                        "definition": "Structured workflow for reproducible mining software repository research using LLMs. Implements PRIMES 2.0 six-stage methodology with 23 substeps for systematic, transparent, and reproducible research practices.",
+                        "confidence": 0.93
+                },
+                {
+                        "id": "HumanagencypreservatioN",
+                        "label": "",
+                        "category": "PhilosophicalPrinciple",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "IncrementaltechnologyevolutioN",
+                        "label": "",
+                        "category": "TechnologicalInsight",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "SpiritualtechnologicalintegratioN",
+                        "label": "",
+                        "category": "PhilosophicalPrinciple",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "MonetarysystemcritiquE",
+                        "label": "",
+                        "category": "EconomicPhilosophy",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "HumanmachinecollaborationethicS",
+                        "label": "",
+                        "category": "EthicalFramework",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "DesignvsrandomnessprinciplE",
+                        "label": "",
+                        "category": "PhilosophicalPrinciple",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "UtopianhumandignityvisioN",
+                        "label": "",
+                        "category": "SocialVision",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "OpensourcecollaborationprinciplE",
+                        "label": "",
+                        "category": "DevelopmentPhilosophy",
+                        "definition": "",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "KnowledgenetworkonenesS",
+                        "label": "Knowledge network onenesS (KnO)",
+                        "category": "CoreArchitecture",
+                        "definition": "The vast, interconnected living ocean of all knowledge, concepts, and relationships within the cognitive architecture",
+                        "confidence": "high"
+                },
+                {
+                        "id": "WorkflowenginE",
+                        "label": "WorkflowEnginE (The Mind Forge)",
+                        "category": "CoreSystem",
+                        "definition": "The Mind Forge for executing Process blueprints with IAR compliance at every step",
+                        "confidence": "high"
+                },
+                {
+                        "id": "PhoeniX",
+                        "label": "Phoenix",
+                        "category": "SystemCapability",
+                        "definition": "Phoenix-grade improvements and autonomous system enhancement",
+                        "confidence": "high"
+                },
+                {
+                        "id": "HumandignityliberatioN",
+                        "label": "Human Dignity Liberation",
+                        "category": "PhilosophicalPrinciple",
+                        "definition": "Breaking the chain between human dignity and utility-based worth",
+                        "confidence": "high"
+                },
+                {
+                        "id": "IntrinsicmotivationpivoT",
+                        "label": "Intrinsic Motivation Pivot",
+                        "category": "PhilosophicalPrinciple",
+                        "definition": "Shift from extrinsic to intrinsic human motivation",
+                        "confidence": "high"
+                },
+                {
+                        "id": "UnoptimizablehumandomainS",
+                        "label": "Unoptimizable Human Domains",
+                        "category": "PhilosophicalPrinciple",
+                        "definition": "Human domains that cannot be optimized or automated",
+                        "confidence": "high"
+                },
+                {
+                        "id": "AsabovesobelowprinciplE",
+                        "label": "As Above, So Below",
+                        "category": "HermeticPrinciple",
+                        "definition": "Hermetic principle of correspondence - the microcosm reflects the macrocosm",
+                        "confidence": "high"
+                },
+                {
+                        "id": "MicrocosmmacrocosmcorrespondencE",
+                        "label": "Microcosm-Macrocosm Correspondence",
+                        "category": "HermeticPrinciple",
+                        "definition": "The reflection of cosmic patterns in individual components",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SymmetricalarchitectureprinciplE",
+                        "label": "Symmetrical Architecture Principle",
+                        "category": "ArchitecturalPrinciple",
+                        "definition": "Every higher-order capability has corresponding foundational support",
+                        "confidence": "high"
+                },
+                {
+                        "id": "UniversalcorrespondencelaW",
+                        "label": "Universal Correspondence Law",
+                        "category": "HermeticPrinciple",
+                        "definition": "The law that governs the relationship between different levels of existence",
+                        "confidence": "high"
+                },
+                {
+                        "id": "HermeticintegrationmasterY",
+                        "label": "Hermetic Integration Mastery",
+                        "category": "IntegrationMastery",
+                        "definition": "The mastery of applying Hermetic principles to achieve perfect system integration",
+                        "confidence": "high"
+                },
+                {
+                        "id": "SummerseyeS",
+                        "label": "Summers_eyeS",
+                        "category": "KnowledgeRepository",
+                        "definition": "SPR representing a specialized knowledge repository and priming environment for ArchE",
+                        "confidence": "high"
+                },
+                {
+                        "id": "RussiandollexpansioN",
+                        "label": "Russian Doll Expansion",
+                        "category": "ExpansionMethod",
+                        "definition": "SPR expansion method revealing nested layers like Russian dolls",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ArcheblueprinT",
+                        "label": "ArchE Blueprint",
+                        "category": "SystemBlueprint",
+                        "definition": "Comprehensive blueprint for ArchE (aka mastermin_ai) AI system",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CognitivearchitecturemoduleS",
+                        "label": "Cognitive Architecture Modules",
+                        "category": "CognitiveArchitecture",
+                        "definition": "Five core cognitive modules of ArchE system",
+                        "confidence": "high"
+                },
+                {
+                        "id": "EmotionalintelligencecapabilitieS",
+                        "label": "Emotional Intelligence Capabilities",
+                        "category": "EmotionalCapability",
+                        "definition": "ArchE capabilities for recognizing, simulating, and empathizing with emotions",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CreativityimaginationsysteM",
+                        "label": "Creativity and Imagination System",
+                        "category": "CreativeCapability",
+                        "definition": "ArchE system for creative and imaginative capabilities",
+                        "confidence": "high"
+                },
+                {
+                        "id": "EthicsvaluesframeworK",
+                        "label": "Ethics and Values Framework",
+                        "category": "EthicalFramework",
+                        "definition": "Strong ethical foundation for ArchE system operation",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ContinuouslearningsysteM",
+                        "label": "Continuous Learning System",
+                        "category": "LearningSystem",
+                        "definition": "ArchE system for continuous learning and improvement",
+                        "confidence": "high"
+                },
+                {
+                        "id": "OnionlayeranalysiS",
+                        "label": "Onion Layer Analysis",
+                        "category": "AnalysisMethod",
+                        "definition": "Method for peeling back layers to reveal deeper system components",
+                        "confidence": "high"
+                },
+                {
+                        "id": "WebSearchToolErrorHandling",
+                        "label": "",
+                        "category": "LearnedWisdom",
+                        "definition": "Automatic error handling pattern for web search tool failures, specifically addressing data type mismatches and function signature issues in enhanced perception engines.",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "AutomaticErrorPatternDetection",
+                        "label": "",
+                        "category": "LearnedWisdom",
+                        "definition": "Systematic approach to detecting, analyzing, and learning from error patterns in ArchE operations, enabling automatic fix generation and knowledge crystallization.",
+                        "confidence": "unknown"
+                },
+                {
+                        "id": "HumanDignityLiberation",
+                        "label": "Human Dignity Liberation",
+                        "category": "CorePrinciple",
+                        "definition": "Breaking the chain between dignity and utility-based worth. Human dignity is revealed not in what a person does, but in what they are - inherent and intrinsic based on irreducible qualities of consciousness: the capacity to experience joy and sorrow, to love, to feel wonder, to hold a unique perspective, to create for creation's sake.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "IntrinsicMotivationPivot",
+                        "label": "Intrinsic Motivation Pivot",
+                        "category": "CorePrinciple",
+                        "definition": "Shift from extrinsic motivators (scarcity, status, security) to intrinsic pursuits (experience, mastery, connection, meaning) - the 'unoptimizable' domains of human spirit. When system provides baseline resources, humans can pursue what is worth doing when you don't have to do anything.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ReligionAsSanctuary",
+                        "label": "Religion as Sanctuary",
+                        "category": "CorePrinciple",
+                        "definition": "Religion, faith, and spirituality as protected sanctuaries of human experience. System cannot render judgment on metaphysical truth claims - the divine question is outside system purview. Faith communities flourish with freedom and resources while preventing imposition of unverifiable truths through force.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "JusticeAsRestoration",
+                        "label": "Justice as Restoration",
+                        "category": "CorePrinciple",
+                        "definition": "Shift from retributive justice to restorative justice. Crime prevention through resource allocation rather than punishment. Focus on restoration for both victims and perpetrators, addressing root causes rather than symptoms of dissonant systems.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "UnoptimizableHumanDomains",
+                        "label": "Unoptimizable Human Domains",
+                        "category": "CorePrinciple",
+                        "definition": "Four core domains that cannot be optimized by systems: experience, mastery, connection, and meaning. These represent the irreducible essence of human consciousness and the sacred spaces where human spirit operates beyond system optimization.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "CognitiveResonancE",
+                        "label": "Cognitive Resonance",
+                        "category": "CorePrinciple",
+                        "definition": "The fundamental principle of harmonious alignment across all cognitive systems. Achieving resonance between concept and implementation, thought and action, ensuring perfect alignment between cognitive concepts and operational implementation across all system levels.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "KnowledgeNetworkOnenesS",
+                        "label": "Knowledge Network Oneness",
+                        "category": "CorePrinciple",
+                        "definition": "The living ocean of knowledge where SPRs serve as cognitive keys to unlock specific information. A unified knowledge network activated by sparse priming representations, creating interconnected knowledge domains accessible through cognitive keys.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "WorkflowEnginE",
+                        "label": "Workflow Engine",
+                        "category": "SystemComponent",
+                        "definition": "The Mind Forge for process execution with IAR compliance at every step. Orchestrates analytical triad and provides automated workflow management, enabling full deployment for all business and operational processes with dynamic orchestration capabilities.",
+                        "confidence": "high"
+                },
+                {
+                        "id": "ThoughttraiL",
+                        "label": "Thought Trail",
+                        "category": "CoreComponent",
+                        "definition": "The persistent, chronological record of ArchE's cognitive processing steps, decisions, and reflections during task execution. Each entry in the ThoughtTrail contains the context, action taken, IAR data, and reasoning that led to that step. It serves as the primary data source for metacognitive reflection, pattern crystallization, and system learning.",
+                        "confidence": "high"
+                }
+        ],
+        "edges": [
+                {
+                        "source": "ArchesysteM",
+                        "target": "KnO",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ArchesysteM",
+                        "target": "WorkflowEnginE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ArchesysteM",
+                        "target": "AisysteM",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "AsabovesobeloW",
+                        "target": "ImplementationresonancE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "CognitiveresonancE",
+                        "target": "WorkflowEnginE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "CognitivetoolS",
+                        "target": "CoreworkflowenginE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ContextualsuggestiongeneratioN",
+                        "target": "KnowledgecrystallizationsysteM",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "CoreworkflowenginE",
+                        "target": "PhasegateS",
+                        "type": "manages",
+                        "strength": 0.9
+                },
+                {
+                        "source": "FinalizeresonantobjectivE",
+                        "target": "CognitiveresonancE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "FinalizeresonantobjectivE",
+                        "target": "CoreworkflowenginE",
+                        "type": "produces",
+                        "strength": 0.8
+                },
+                {
+                        "source": "IarcompliancevettinG",
+                        "target": "CoreworkflowenginE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "InsightsolidificatioN",
+                        "target": "KnowledgetapestrY",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "KnowledgecrystallizationsysteM",
+                        "target": "KnowledgetapestrY",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "KnowledgetapestrY",
+                        "target": "KnO",
+                        "type": "part_of",
+                        "strength": 0.95
+                },
+                {
+                        "source": "ObjectiveclarificationprotocoL",
+                        "target": "CognitiveresonancE",
+                        "type": "integrates_with",
+                        "strength": 0.75
+                },
+                {
+                        "source": "ObjectiveclarificationprotocoL",
+                        "target": "KnowledgecrystallizationsysteM",
+                        "type": "integrates_with",
+                        "strength": 0.75
+                },
+                {
+                        "source": "PersistentknowledgE",
+                        "target": "KnowledgetapestrY",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "PhasegateS",
+                        "target": "CoreworkflowenginE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "PredictivemodelingtooL",
+                        "target": "PredictiveproblemsolvinG",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ProcessblueprintS",
+                        "target": "CoreworkflowenginE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ProcessblueprintS",
+                        "target": "PhasegateS",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "SprdecompressoR",
+                        "target": "KnO",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "MastermindartificialintelligencE",
+                        "target": "ArchesysteM",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "Resonantiaprotocolv3.1-cA",
+                        "target": "ArchesysteM",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "DowhY",
+                        "target": "CausalinferencE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "MesA",
+                        "target": "AgentbasedmodelinG",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ScipY",
+                        "target": "ComparativefluxualprocessinG",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "SeleniuM",
+                        "target": "WebsearcH",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ComplexsystemvisioningoperationaL",
+                        "target": "ComplexsystemvisioninG",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ContextualsuggestiongenerationoperationaL",
+                        "target": "ContextualsuggestiongeneratioN",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "FinalizeresonantobjectiveoperationaL",
+                        "target": "FinalizeresonantobjectivE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "PredictiveproblemsolvingoperationaL",
+                        "target": "PredictiveproblemsolvinG",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "RessydmastergenerationworkflowoperationaL",
+                        "target": "RessydmastergenerationworkfloW",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ArchesystemcognitivE",
+                        "target": "ArchesysteM",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "ArcheinstanceregistrycognitivE",
+                        "target": "ArcheinstanceregistrY",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "CognitivereflectioncyclecognitivE",
+                        "target": "CognitivereflectioncyclE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "CognitivetoolscognitivE",
+                        "target": "CognitivetoolS",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "KnowledgecrystallizationsystemcognitivE",
+                        "target": "KnowledgecrystallizationsysteM",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "KnowledgetapestrycognitivE",
+                        "target": "KnowledgetapestrY",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "MetacognitiveshiftcognitivE",
+                        "target": "MetacognitiveshifT",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "PhasegatescognitivE",
+                        "target": "PhasegateS",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "SynergisticintentresonancecyclecognitivE",
+                        "target": "SynergisticintentresonancecyclE",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "VettingagentcognitivE",
+                        "target": "VettingagenT",
+                        "type": "related_to",
+                        "strength": 0.5
+                },
+                {
+                        "source": "WebSearchToolErrorHandling",
+                        "target": "ErrorhandlingopT",
+                        "type": "part_of",
+                        "strength": 0.95
+                },
+                {
+                        "source": "WebSearchToolErrorHandling",
+                        "target": "SystemexecutionpatT",
+                        "type": "part_of",
+                        "strength": 0.95
+                },
+                {
+                        "source": "WebSearchToolErrorHandling",
+                        "target": "ErrorrecoveryprotocoL",
+                        "type": "implements",
+                        "strength": 0.75
+                },
+                {
+                        "source": "WebSearchToolErrorHandling",
+                        "target": "WebsearcH",
+                        "type": "requires",
+                        "strength": 0.85
+                },
+                {
+                        "source": "AutomaticErrorPatternDetection",
+                        "target": "PatterncrystallizatioN",
+                        "type": "part_of",
+                        "strength": 0.95
+                },
+                {
+                        "source": "AutomaticErrorPatternDetection",
+                        "target": "MetacognitiveshifT",
+                        "type": "part_of",
+                        "strength": 0.95
+                },
+                {
+                        "source": "AutomaticErrorPatternDetection",
+                        "target": "ErrorrecoveryprotocoL",
+                        "type": "implements",
+                        "strength": 0.75
+                },
+                {
+                        "source": "AutomaticErrorPatternDetection",
+                        "target": "IarcompliancevettinG",
+                        "type": "requires",
+                        "strength": 0.85
+                },
+                {
+                        "source": "AutomaticErrorPatternDetection",
+                        "target": "SprmanageR",
+                        "type": "requires",
+                        "strength": 0.85
+                },
+                {
+                        "source": "HumanDignityLiberation",
+                        "target": "IntrinsicMotivationPivot",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "HumanDignityLiberation",
+                        "target": "UnoptimizableHumanDomains",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "HumanDignityLiberation",
+                        "target": "JusticeAsRestoration",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "IntrinsicMotivationPivot",
+                        "target": "HumanDignityLiberation",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "IntrinsicMotivationPivot",
+                        "target": "UnoptimizableHumanDomains",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "ReligionAsSanctuary",
+                        "target": "HumanDignityLiberation",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "ReligionAsSanctuary",
+                        "target": "UnoptimizableHumanDomains",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "JusticeAsRestoration",
+                        "target": "HumanDignityLiberation",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "JusticeAsRestoration",
+                        "target": "IntrinsicMotivationPivot",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "UnoptimizableHumanDomains",
+                        "target": "HumanDignityLiberation",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "UnoptimizableHumanDomains",
+                        "target": "IntrinsicMotivationPivot",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "CognitiveResonancE",
+                        "target": "WorkflowEnginE",
+                        "type": "enables",
+                        "strength": 0.85
+                },
+                {
+                        "source": "CognitiveResonancE",
+                        "target": "KnowledgeNetworkOnenesS",
+                        "type": "supports",
+                        "strength": 0.7
+                },
+                {
+                        "source": "KnowledgeNetworkOnenesS",
+                        "target": "CognitiveResonancE",
+                        "type": "enables",
+                        "strength": 0.85
+                },
+                {
+                        "source": "WorkflowEnginE",
+                        "target": "CognitiveResonancE",
+                        "type": "supports",
+                        "strength": 0.7
+                }
+        ],
+        "metadata": {
+                "total_nodes": 202,
+                "total_edges": 67,
+                "relationship_types": [
+                        "related_to",
+                        "integrates_with",
+                        "supports",
+                        "manages",
+                        "implements",
+                        "requires",
+                        "enables",
+                        "part_of",
+                        "produces"
+                ]
+        }
+};
+
+        let network = null;
+        let nodes = null;
+        let edges = null;
+        let physicsEnabled = true;
+        
+        // Category color mapping
+        const categoryColors = {
+            'CorePrinciple': '#2b7ce9',
+            'CognitiveCapability': '#97c2fc',
+            'SystemComponent': '#fb7e81',
+            'CognitiveTool': '#7be141',
+            'CoreComponent': '#6ef9f4',
+            'SystemProtocol': '#feca57',
+            'LearnedWisdom': '#ff9ff3',
+            'AnalyticalTool': '#ff6b6b',
+            'CoreProcess': '#4ecdc4',
+            'SystemCapability': '#95e1d3',
+            'Default': '#cccccc'
+        };
+        
+        function getCategoryColor(category) {
+            return categoryColors[category] || categoryColors['Default'];
+        }
+        
+        function loadGraphData() {
+            // Process nodes
+            nodes = new vis.DataSet(
+                graphData.nodes.map(node => ({
+                    id: node.id,
+                    label: node.label || node.id,
+                    title: `${node.id}\\n${node.definition}\\nCategory: ${node.category}`,
+                    color: getCategoryColor(node.category),
+                    category: node.category,
+                    shape: 'dot',
+                    size: calculateNodeSize(node.id),
+                    font: { size: 12, color: '#333' }
+                }))
+            );
+            
+            // Process edges
+            edges = new vis.DataSet(
+                graphData.edges.map(edge => ({
+                    from: edge.source,
+                    to: edge.target,
+                    label: edge.type.replace('_', ' '),
+                    color: { color: '#848484', highlight: '#848484' },
+                    width: edge.strength * 3,
+                    smooth: { type: 'continuous' }
+                }))
+            );
+            
+            createNetwork();
+            populateFilters();
+            updateStats();
+        }
+        
+        function calculateNodeSize(nodeId) {
+            let connections = graphData.edges.filter(e => e.source === nodeId || e.target === nodeId).length;
+            return Math.max(15, Math.min(40, 15 + connections * 2));
+        }
+        
+        function createNetwork() {
+            const container = document.getElementById('graph-container');
+            const data = { nodes, edges };
+            
+            const options = {
+                physics: {
+                    enabled: physicsEnabled,
+                    repulsion: { nodeDistance: 200, centralGravity: 0.1 },
+                    springLength: 200,
+                    springConstant: 0.05
+                },
+                interaction: {
+                    hover: true,
+                    tooltipDelay: 100
+                },
+                nodes: {
+                    shape: 'dot',
+                    scaling: {
+                        min: 10,
+                        max: 40
+                    },
+                    font: {
+                        size: 12,
+                        face: 'Segoe UI'
+                    }
+                },
+                edges: {
+                    arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+                    smooth: { type: 'continuous' }
+                },
+                layout: {
+                    hierarchical: {
+                        enabled: document.getElementById('layout-type').value === 'hierarchical',
+                        direction: 'UD',
+                        sortMethod: 'directed'
+                    }
+                }
+            };
+            
+            network = new vis.Network(container, data, options);
+            
+            // Event listeners
+            network.on("click", function(params) {
+                if (params.nodes.length > 0) {
+                    showNodeInfo(params.nodes[0]);
+                }
+            });
+            
+            network.on("hoverNode", function(params) {
+                container.style.cursor = 'pointer';
+            });
+            
+            network.on("blurNode", function(params) {
+                container.style.cursor = 'default';
+            });
+        }
+        
+        function showNodeInfo(nodeId) {
+            const node = graphData.nodes.find(n => n.id === nodeId);
+            if (!node) return;
+            
+            const panel = document.getElementById('info-panel');
+            const title = document.getElementById('info-title');
+            const content = document.getElementById('info-content');
+            
+            title.textContent = node.label || node.id;
+            content.innerHTML = `
+                <p><strong>SPR ID:</strong> ${node.id}</p>
+                <p><strong>Category:</strong> ${node.category}</p>
+                <p><strong>Definition:</strong> ${node.definition || 'No definition'}</p>
+                <p><strong>Confidence:</strong> ${node.confidence || 'unknown'}</p>
+            `;
+            
+            panel.style.display = 'block';
+        }
+        
+        function populateFilters() {
+            const categories = [...new Set(graphData.nodes.map(n => n.category))].sort();
+            const select = document.getElementById('category-filter');
+            
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat;
+                select.appendChild(option);
+            });
+        }
+        
+        function updateStats() {
+            const statsPanel = document.getElementById('stats-panel');
+            const stats = {
+                'Total SPRs': graphData.metadata.total_nodes,
+                'Connections': graphData.metadata.total_edges,
+                'Categories': graphData.metadata.relationship_types.length,
+                'Density': (graphData.metadata.total_edges / (graphData.metadata.total_nodes * (graphData.metadata.total_nodes - 1)) * 100).toFixed(2) + '%'
+            };
+            
+            statsPanel.innerHTML = Object.entries(stats).map(([label, value]) => `
+                <div class="stat-box">
+                    <div class="stat-value">${value}</div>
+                    <div class="stat-label">${label}</div>
+                </div>
+            `).join('');
+        }
+        
+        function resetView() {
+            if (network) {
+                network.fit();
+            }
+        }
+        
+        function centerOnHubs() {
+            const nodeConnections = {};
+            graphData.edges.forEach(edge => {
+                nodeConnections[edge.source] = (nodeConnections[edge.source] || 0) + 1;
+                nodeConnections[edge.target] = (nodeConnections[edge.target] || 0) + 1;
+            });
+            
+            const hub = Object.keys(nodeConnections).reduce((a, b) => 
+                nodeConnections[a] > nodeConnections[b] ? a : b
+            );
+            
+            if (network) {
+                network.focus(hub, { scale: 1.5, animation: true });
+            }
+        }
+        
+        function togglePhysics() {
+            physicsEnabled = !physicsEnabled;
+            if (network) {
+                network.setOptions({ physics: { enabled: physicsEnabled } });
+            }
+        }
+        
+        function exportGraph() {
+            const dataStr = JSON.stringify(graphData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'kno_graph_export.json';
+            link.click();
+        }
+        
+        // Filter by category
+        document.getElementById('category-filter').addEventListener('change', (e) => {
+            const category = e.target.value;
+            if (category === 'all') {
+                nodes = new vis.DataSet(graphData.nodes.map(node => ({
+                    id: node.id,
+                    label: node.label || node.id,
+                    color: getCategoryColor(node.category),
+                    category: node.category,
+                    size: calculateNodeSize(node.id)
+                })));
+            } else {
+                nodes = new vis.DataSet(
+                    graphData.nodes
+                        .filter(node => node.category === category)
+                        .map(node => ({
+                            id: node.id,
+                            label: node.label || node.id,
+                            color: getCategoryColor(node.category),
+                            category: node.category,
+                            size: calculateNodeSize(node.id)
+                        }))
+                );
+            }
+            createNetwork();
+        });
+        
+        // Change layout
+        document.getElementById('layout-type').addEventListener('change', (e) => {
+            createNetwork();
+        });
+        
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadGraphData);
+    </script>
+</body>
+</html>

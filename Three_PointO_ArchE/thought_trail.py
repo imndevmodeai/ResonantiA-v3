@@ -122,9 +122,14 @@ class ThoughtTrail:
             conn = sqlite3.connect(LEDGER_DB_PATH)
             cursor = conn.cursor()
 
+            # Generate a unique entry_id to prevent constraint violations
+            import time
+            import random
+            unique_entry_id = f"{entry.task_id}_{int(time.time() * 1000000)}_{random.randint(1000, 9999)}"  # Microsecond precision + random suffix
+            
             # Prepare data for insertion according to the schema
             sql_data = {
-                "entry_id": entry.task_id,
+                "entry_id": unique_entry_id,
                 "timestamp_utc": entry.timestamp,
                 "source_manifestation": "Body", # Hardcoded for now
                 "action_type": entry.action_type,
@@ -148,7 +153,7 @@ class ThoughtTrail:
             """, sql_data)
 
             conn.commit()
-            self.logger.debug(f"ThoughtTrail: Persisted entry {entry.task_id} to Universal Ledger.")
+            self.logger.debug(f"ThoughtTrail: Persisted entry {unique_entry_id} to Universal Ledger.")
 
         except sqlite3.Error as e:
             self.logger.error(f"Database error while adding entry to ledger: {e}")

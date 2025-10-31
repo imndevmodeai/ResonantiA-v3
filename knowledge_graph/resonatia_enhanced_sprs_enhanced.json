@@ -1,0 +1,3433 @@
+[
+  {
+    "spr_id": "ArchitecturE",
+    "term": "System Architecture",
+    "definition": "The foundational structure that defines how all components of ArchE interact, communicate, and coordinate to achieve cognitive operations. It encompasses the Unified Cognitive Hub (CRCS, RISE, ACO), the Autopoietic Learning Loop, and the connection between conceptual understanding (Protocol) and operational implementation (Code). This SPR represents the blueprint that ensures As Above mirrors So Below across all system dimensions.",
+    "category": "SystemComponent",
+    "relationships": {
+      "type": "CoreArchitecture",
+      "comprises": [
+        "UnifiedCognitiveHub",
+        "AutopoieticLearningLooP",
+        "WorkflowEnginE",
+        "SPRManageR"
+      ],
+      "governed_by": [
+        "AsabovesobeloW",
+        "ImplementationresonancE"
+      ],
+      "enables": [
+        "Cognitive resonancE",
+        "Temporal resonancE"
+      ],
+      "synergizes_with": [
+        "ImplementationresonancE",
+        "AsabovesobeloW",
+        "SystemrepresentationS",
+        "CfpframeworK"
+      ],
+      "requires": [
+        "Modularity",
+        "ExtensibilitY",
+        "MaintainabilitY"
+      ],
+      "confidence": "high"
+    },
+    "supporting_attributes": [
+      "HierarchicalStructure",
+      "ComponentIsolation",
+      "DataFlowManagement",
+      "ErrorHandling"
+    ],
+    "blueprint_details": "See ResonantiA Protocol v3.0, Sections 3.0-3.16. Implemented in Three_PointO_ArchE/ directory structure with modular component architecture.",
+    "example_application": "When analyzing a complex problem, ArchE's ArchitecturE orchestrates the RISE engine for deep thinking, routes routine tasks through ACO controllers, and ensures all components maintain cognitive resonance with the core principles.",
+    "activation_prompts": {
+      "architectural": "Visualize the system architecture and component interactions",
+      "structural": "Analyze the current system design and propose improvements",
+      "integrity": "Verify As Above So Below alignment in system components"
+    },
+    "metadata": {
+      "version": "3.0",
+      "status": "canonical",
+      "created_date": "2025-01-01",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20250809_231436"
+    },
+    "aliases": [
+      "System ArchitecturE",
+      "ArcH"
+    ]
+  },
+  {
+    "spr_id": "RequirementS",
+    "term": "System Requirements",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to System Requirements.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 3,
+      "spr_value": 0.015,
+      "linked_to": [],
+      "synergizes_with": [
+        "Synergistic Intent Resonance CyclE",
+        "System representationS",
+        "CfpframeworK"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around System Requirements.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "CognitivE",
+    "term": "Cognitive Architecture",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Cognitive Architecture.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 4,
+      "spr_value": 0.02,
+      "linked_to": [],
+      "synergizes_with": [
+        "Implementation resonancE",
+        "As Above So BeloW",
+        "Cognitive resonancE",
+        "KnO"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Cognitive Architecture.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "LearninG",
+    "term": "Task-Specific Feature Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Task-Specific Feature Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 78,
+      "spr_value": 0.39,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Task-Specific Feature Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "NlP",
+    "term": "Natural Language Processing",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Natural Language Processing.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 6,
+      "spr_value": 0.03,
+      "linked_to": [],
+      "synergizes_with": [
+        "LLMTool",
+        "VettingAgenT"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Natural Language Processing.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "FunctionaL",
+    "term": "Functional Requirements",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Functional Requirements.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 7,
+      "spr_value": 0.035,
+      "linked_to": [],
+      "synergizes_with": [
+        "Synergistic Intent Resonance CyclE"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Functional Requirements.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "PerformancE",
+    "term": "Performance Requirements",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Performance Requirements.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 8,
+      "spr_value": 0.04,
+      "linked_to": [],
+      "synergizes_with": [
+        "Synergistic Intent Resonance CyclE",
+        "PhasegateS"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Performance Requirements.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "SecuritY",
+    "term": "Security Requirements",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Security Requirements.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 9,
+      "spr_value": 0.045,
+      "linked_to": [],
+      "synergizes_with": [
+        "Synergistic Intent Resonance CyclE",
+        "MidnighT",
+        "SecurityKeyRotatioN"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Security Requirements.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "KnowledgE",
+    "term": "Knowledge Graph",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Knowledge Graph.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 10,
+      "spr_value": 0.05,
+      "linked_to": [],
+      "synergizes_with": [
+        "KnO",
+        "SPRManageR",
+        "Summers eyeS"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Knowledge Graph.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ReasoninG",
+    "term": "Reasoning Engine",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Reasoning Engine.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 11,
+      "spr_value": 0.055,
+      "linked_to": [],
+      "synergizes_with": [
+        "WorkflowEnginE",
+        "Metacognitive shifT"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol. Associated with the 'WorkflowEnginE'.",
+    "example_usage": "Priming this SPR activates the conceptual space around Reasoning Engine.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "SuperviseD",
+    "term": "Supervised Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Supervised Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 34,
+      "spr_value": 0.17,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Supervised Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "UnsuperviseD",
+    "term": "Unsupervised Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Unsupervised Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 35,
+      "spr_value": 0.175,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Unsupervised Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ReinforcemenT",
+    "term": "Reinforcement Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Reinforcement Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 36,
+      "spr_value": 0.18,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Reinforcement Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "PreprocessinG",
+    "term": "Text Preprocessing",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Text Preprocessing.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 16,
+      "spr_value": 0.08,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Text Preprocessing.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "PoS",
+    "term": "Part-of-Speech Tagging",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Part-of-Speech Tagging.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 17,
+      "spr_value": 0.085,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Part-of-Speech Tagging.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "NeR",
+    "term": "Named Entity Recognition",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Named Entity Recognition.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 103,
+      "spr_value": 0.515,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Named Entity Recognition.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "UI",
+    "term": "User Interface",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Interface.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 19,
+      "spr_value": 0.095,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Interface.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "UX",
+    "term": "User Experience",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Experience.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 20,
+      "spr_value": 0.1,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Experience.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "FunctionalitY",
+    "term": "Functionality",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Functionality.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 21,
+      "spr_value": 0.105,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Functionality.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "SpeeD",
+    "term": "Speed",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Speed.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 22,
+      "spr_value": 0.11,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Speed.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "AccuracY",
+    "term": "Accuracy",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Accuracy.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 23,
+      "spr_value": 0.115,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Accuracy.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ScalabilitY",
+    "term": "Scalability",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Scalability.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 24,
+      "spr_value": 0.12,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Scalability.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "AuthenticatioN",
+    "term": "Authentication",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Authentication.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 25,
+      "spr_value": 0.125,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Authentication.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "AuthorizatioN",
+    "term": "Authorization",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Authorization.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 26,
+      "spr_value": 0.13,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Authorization.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "EncryptioN",
+    "term": "Encryption",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Encryption.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 27,
+      "spr_value": 0.135,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Encryption.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "NodE",
+    "term": "Node Embedding",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Node Embedding.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 59,
+      "spr_value": 0.295,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Node Embedding.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "EdgE",
+    "term": "Edge Embedding",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Edge Embedding.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 60,
+      "spr_value": 0.3,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Edge Embedding.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "RelationshiP",
+    "term": "Relationship Creation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Relationship Creation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 30,
+      "spr_value": 0.15,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Relationship Creation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Rule-baseD",
+    "term": "Rule-Based Reasoning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Rule-Based Reasoning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 31,
+      "spr_value": 0.155,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Rule-Based Reasoning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Model-baseD",
+    "term": "Model-Based Reasoning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Model-Based Reasoning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 32,
+      "spr_value": 0.16,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Model-Based Reasoning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "HybriD",
+    "term": "Hybrid Reasoning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Hybrid Reasoning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 33,
+      "spr_value": 0.165,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Hybrid Reasoning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "TexT",
+    "term": "Text Generation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Text Generation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 38,
+      "spr_value": 0.19,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Text Generation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "LanguagE",
+    "term": "Language Modeling",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Language Modeling.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 39,
+      "spr_value": 0.195,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Language Modeling.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "SentencE",
+    "term": "Sentence Generation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Sentence Generation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 40,
+      "spr_value": 0.2,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Sentence Generation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ParagrapH",
+    "term": "Paragraph Generation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Paragraph Generation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 41,
+      "spr_value": 0.205,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Paragraph Generation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "UnderstandinG",
+    "term": "Emotion Understanding",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Emotion Understanding.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 55,
+      "spr_value": 0.275,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Emotion Understanding.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "GeneratioN",
+    "term": "Language Generation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Language Generation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 43,
+      "spr_value": 0.215,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Language Generation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "StatE",
+    "term": "Dialogue State Tracking",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Dialogue State Tracking.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 45,
+      "spr_value": 0.225,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Dialogue State Tracking.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "PolicY",
+    "term": "Policy Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Policy Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 80,
+      "spr_value": 0.4,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Policy Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "IntenT",
+    "term": "User Intent Identification",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Intent Identification.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 47,
+      "spr_value": 0.235,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Intent Identification.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ContexT",
+    "term": "Dialogue Context Understanding",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Dialogue Context Understanding.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 48,
+      "spr_value": 0.24,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Dialogue Context Understanding.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ResponsE",
+    "term": "Response Generation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Response Generation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 49,
+      "spr_value": 0.245,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Response Generation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "FloW",
+    "term": "Dialogue Flow Control",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Dialogue Flow Control.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 50,
+      "spr_value": 0.25,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Dialogue Flow Control.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "EmotioN",
+    "term": "Emotion Detection",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Emotion Detection.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 52,
+      "spr_value": 0.26,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Emotion Detection.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ClassificatioN",
+    "term": "Node Classification",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Node Classification.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 62,
+      "spr_value": 0.31,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Node Classification.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "RecognitioN",
+    "term": "Emotion Recognition",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Emotion Recognition.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 54,
+      "spr_value": 0.27,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Emotion Recognition.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "LabelinG",
+    "term": "Sentiment Labeling",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Sentiment Labeling.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 56,
+      "spr_value": 0.28,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Sentiment Labeling.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "RankinG",
+    "term": "Sentiment Ranking",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Sentiment Ranking.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 57,
+      "spr_value": 0.285,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Sentiment Ranking.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "PredictioN",
+    "term": "Link Prediction",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Link Prediction.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 64,
+      "spr_value": 0.32,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Link Prediction.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "GcN",
+    "term": "Graph Convolutional Network",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Graph Convolutional Network.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 68,
+      "spr_value": 0.34,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Graph Convolutional Network.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "GaT",
+    "term": "Graph Attention Network",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Graph Attention Network.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 69,
+      "spr_value": 0.345,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Graph Attention Network.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "EcN",
+    "term": "Edge Convolutional Network",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Edge Convolutional Network.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 70,
+      "spr_value": 0.35,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Edge Convolutional Network.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "EaT",
+    "term": "Edge Attention Network",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Edge Attention Network.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 71,
+      "spr_value": 0.355,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Edge Attention Network.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "AdaptatioN",
+    "term": "Task Adaptation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Task Adaptation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 74,
+      "spr_value": 0.37,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Task Adaptation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ValuE",
+    "term": "Value Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Value Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 81,
+      "spr_value": 0.405,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Value Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "PG",
+    "term": "Paragraph Generation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Paragraph Generation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 111,
+      "spr_value": 0.555,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Paragraph Generation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "AC",
+    "term": "Actor-Critic Methods",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Actor-Critic Methods.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 83,
+      "spr_value": 0.415,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Actor-Critic Methods.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "VI",
+    "term": "Value Iteration",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Value Iteration.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 84,
+      "spr_value": 0.42,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Value Iteration.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "QL",
+    "term": "Q-Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Q-Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 85,
+      "spr_value": 0.425,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Q-Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "CommunicatioN",
+    "term": "Agent Communication",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Agent Communication.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 87,
+      "spr_value": 0.435,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Agent Communication.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "CooperatioN",
+    "term": "Agent Cooperation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Agent Cooperation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 88,
+      "spr_value": 0.44,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Agent Cooperation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "MP",
+    "term": "Message Passing",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Message Passing.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 89,
+      "spr_value": 0.445,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Message Passing.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "BC",
+    "term": "Broadcast Communication",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Broadcast Communication.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 90,
+      "spr_value": 0.45,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Broadcast Communication.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "CgT",
+    "term": "Cooperative Game Theory",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Cooperative Game Theory.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 91,
+      "spr_value": 0.455,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Cooperative Game Theory.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "CL",
+    "term": "Cooperative Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Cooperative Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 92,
+      "spr_value": 0.46,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Cooperative Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "UiD",
+    "term": "User Interface Design",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Interface Design.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 94,
+      "spr_value": 0.47,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Interface Design.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "UxD",
+    "term": "User Experience Design",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Experience Design.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 95,
+      "spr_value": 0.475,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Experience Design.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "GuI",
+    "term": "Graphical User Interface",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Graphical User Interface.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 96,
+      "spr_value": 0.48,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Graphical User Interface.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "VuI",
+    "term": "Voice User Interface",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Voice User Interface.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 97,
+      "spr_value": 0.485,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Voice User Interface.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "UR",
+    "term": "User Research",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Research.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 98,
+      "spr_value": 0.49,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Research.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "UT",
+    "term": "User Testing",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Testing.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 99,
+      "spr_value": 0.495,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Testing.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "ED",
+    "term": "Entity Disambiguation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Entity Disambiguation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 101,
+      "spr_value": 0.505,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Entity Disambiguation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "RI",
+    "term": "Relationship Inference",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Relationship Inference.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 102,
+      "spr_value": 0.51,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Relationship Inference.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "EL",
+    "term": "Entity Linking",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Entity Linking.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 104,
+      "spr_value": 0.52,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Entity Linking.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "RE",
+    "term": "Relationship Extraction",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Relationship Extraction.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 105,
+      "spr_value": 0.525,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Relationship Extraction.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "RP",
+    "term": "Relationship Prediction",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Relationship Prediction.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 106,
+      "spr_value": 0.53,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Relationship Prediction.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "TG",
+    "term": "Text Generation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Text Generation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 108,
+      "spr_value": 0.54,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Text Generation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "LM",
+    "term": "Language Modeling",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Language Modeling.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 109,
+      "spr_value": 0.545,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Language Modeling.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "SG",
+    "term": "Sentence Generation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Sentence Generation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 110,
+      "spr_value": 0.55,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Sentence Generation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "IR",
+    "term": "Image Recognition",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Image Recognition.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 113,
+      "spr_value": 0.565,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Image Recognition.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "OD",
+    "term": "Object Detection",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Object Detection.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 114,
+      "spr_value": 0.57,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Object Detection.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "IC",
+    "term": "Image Classification",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Image Classification.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 115,
+      "spr_value": 0.575,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Image Classification.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "IS",
+    "term": "Image Segmentation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Image Segmentation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 116,
+      "spr_value": 0.58,
+      "linked_to": []
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Image Segmentation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Natural language processinG",
+    "term": "Natural Language Processing",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Natural Language Processing.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 973,
+      "spr_value": 4.965,
+      "linked_to": [
+        {
+          "target_node_id": 978,
+          "target_spr_id": "Text classificatioN"
+        },
+        {
+          "target_node_id": 979,
+          "target_spr_id": "Sentiment analysiS"
+        },
+        {
+          "target_node_id": 980,
+          "target_spr_id": "Language translatioN"
+        }
+      ],
+      "synergizes_with": [
+        "LLMTool",
+        "VettingAgenT"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Natural Language Processing.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Computer visioN",
+    "term": "Computer Vision",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Computer Vision.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 974,
+      "spr_value": 4.97,
+      "linked_to": [
+        {
+          "target_node_id": 981,
+          "target_spr_id": "Image classificatioN"
+        },
+        {
+          "target_node_id": 982,
+          "target_spr_id": "Object detectioN"
+        },
+        {
+          "target_node_id": 983,
+          "target_spr_id": "SegmentatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Computer Vision.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Data mininG",
+    "term": "Data Mining",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Data Mining.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 777,
+      "spr_value": 3.985,
+      "linked_to": [
+        {
+          "target_node_id": 780,
+          "target_spr_id": "ClusterinG"
+        },
+        {
+          "target_node_id": 781,
+          "target_spr_id": "Decision treeS"
+        },
+        {
+          "target_node_id": 782,
+          "target_spr_id": "Regression analysiS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Data Mining.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Predictive analyticS",
+    "term": "Predictive Analytics",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Predictive Analytics.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 778,
+      "spr_value": 3.99,
+      "linked_to": [
+        {
+          "target_node_id": 783,
+          "target_spr_id": "ForecastinG"
+        },
+        {
+          "target_node_id": 784,
+          "target_spr_id": "OptimizatioN"
+        },
+        {
+          "target_node_id": 785,
+          "target_spr_id": "SimulatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Predictive Analytics.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Data visualizatioN",
+    "term": "Data Visualization",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Data Visualization.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 959,
+      "spr_value": 4.895,
+      "linked_to": [
+        {
+          "target_node_id": 962,
+          "target_spr_id": "Information visualizatioN"
+        },
+        {
+          "target_node_id": 963,
+          "target_spr_id": "Scientific visualizatioN"
+        },
+        {
+          "target_node_id": 964,
+          "target_spr_id": "Geospatial visualizatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Data Visualization.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Device managemenT",
+    "term": "Device Management",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Device Management.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 790,
+      "spr_value": 4.05,
+      "linked_to": [
+        {
+          "target_node_id": 793,
+          "target_spr_id": "Device registratioN"
+        },
+        {
+          "target_node_id": 794,
+          "target_spr_id": "Device configuratioN"
+        },
+        {
+          "target_node_id": 795,
+          "target_spr_id": "Device monitorinG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Device Management.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Sensor integratioN",
+    "term": "Sensor Integration",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Sensor Integration.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 791,
+      "spr_value": 4.055,
+      "linked_to": [
+        {
+          "target_node_id": 796,
+          "target_spr_id": "Temperature sensorS"
+        },
+        {
+          "target_node_id": 797,
+          "target_spr_id": "Humidity sensorS"
+        },
+        {
+          "target_node_id": 798,
+          "target_spr_id": "Motion sensorS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Sensor Integration.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Actuator controL",
+    "term": "Actuator Control",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Actuator Control.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 792,
+      "spr_value": 4.06,
+      "linked_to": [
+        {
+          "target_node_id": 799,
+          "target_spr_id": "Lighting controL"
+        },
+        {
+          "target_node_id": 800,
+          "target_spr_id": "Heating and cooling controL"
+        },
+        {
+          "target_node_id": 801,
+          "target_spr_id": "Security systemS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Actuator Control.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Blockchain architecturE",
+    "term": "Blockchain Architecture",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Blockchain Architecture.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 985,
+      "spr_value": 5.025,
+      "linked_to": [
+        {
+          "target_node_id": 988,
+          "target_spr_id": "Blockchain networkS"
+        },
+        {
+          "target_node_id": 989,
+          "target_spr_id": "Blockchain protocolS"
+        },
+        {
+          "target_node_id": 990,
+          "target_spr_id": "Blockchain securitY"
+        }
+      ],
+      "synergizes_with": [
+        "Implementation resonancE",
+        "As Above So BeloW"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Blockchain Architecture.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Smart contractS",
+    "term": "Smart Contracts",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Smart Contracts.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 986,
+      "spr_value": 5.03,
+      "linked_to": [
+        {
+          "target_node_id": 991,
+          "target_spr_id": "Contract developmenT"
+        },
+        {
+          "target_node_id": 992,
+          "target_spr_id": "Contract deploymenT"
+        },
+        {
+          "target_node_id": 993,
+          "target_spr_id": "Contract executioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Smart Contracts.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Distributed ledger technologY",
+    "term": "Distributed Ledger Technology",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Distributed Ledger Technology.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 987,
+      "spr_value": 5.035,
+      "linked_to": [
+        {
+          "target_node_id": 994,
+          "target_spr_id": "Ledger architecturE"
+        },
+        {
+          "target_node_id": 995,
+          "target_spr_id": "Ledger securitY"
+        },
+        {
+          "target_node_id": 996,
+          "target_spr_id": "Ledger scalabilitY"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Distributed Ledger Technology.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Ar developmenT",
+    "term": "AR Development",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to AR Development.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 816,
+      "spr_value": 4.18,
+      "linked_to": [
+        {
+          "target_node_id": 819,
+          "target_spr_id": "Ar softwarE"
+        },
+        {
+          "target_node_id": 820,
+          "target_spr_id": "Ar hardwarE"
+        },
+        {
+          "target_node_id": 821,
+          "target_spr_id": "Ar content creatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around AR Development.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Vr developmenT",
+    "term": "VR Development",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to VR Development.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 817,
+      "spr_value": 4.185,
+      "linked_to": [
+        {
+          "target_node_id": 822,
+          "target_spr_id": "Vr softwarE"
+        },
+        {
+          "target_node_id": 823,
+          "target_spr_id": "Vr hardwarE"
+        },
+        {
+          "target_node_id": 824,
+          "target_spr_id": "Vr content creatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around VR Development.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Mixed realitY",
+    "term": "Mixed Reality",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Mixed Reality.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 818,
+      "spr_value": 4.19,
+      "linked_to": [
+        {
+          "target_node_id": 825,
+          "target_spr_id": "Mr softwarE"
+        },
+        {
+          "target_node_id": 826,
+          "target_spr_id": "Mr hardwarE"
+        },
+        {
+          "target_node_id": 827,
+          "target_spr_id": "Mr content creatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Mixed Reality.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "5g networkS",
+    "term": "5G Networks",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to 5G Networks.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 829,
+      "spr_value": 4.245,
+      "linked_to": [
+        {
+          "target_node_id": 832,
+          "target_spr_id": "5g architecturE"
+        },
+        {
+          "target_node_id": 833,
+          "target_spr_id": "5g protocolS"
+        },
+        {
+          "target_node_id": 834,
+          "target_spr_id": "5g securitY"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around 5G Networks.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Edge computinG",
+    "term": "Edge Computing",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Edge Computing.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 830,
+      "spr_value": 4.25,
+      "linked_to": [
+        {
+          "target_node_id": 835,
+          "target_spr_id": "Edge architecturE"
+        },
+        {
+          "target_node_id": 836,
+          "target_spr_id": "Edge protocolS"
+        },
+        {
+          "target_node_id": 837,
+          "target_spr_id": "Edge securitY"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Edge Computing.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Iot edgE",
+    "term": "IoT Edge",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to IoT Edge.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 831,
+      "spr_value": 4.255,
+      "linked_to": [
+        {
+          "target_node_id": 838,
+          "target_spr_id": "Iot edge architecturE"
+        },
+        {
+          "target_node_id": 839,
+          "target_spr_id": "Iot edge protocolS"
+        },
+        {
+          "target_node_id": 840,
+          "target_spr_id": "Iot edge securitY"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around IoT Edge.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "NanomaterialS",
+    "term": "Nanomaterials",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Nanomaterials.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 842,
+      "spr_value": 4.31,
+      "linked_to": [
+        {
+          "target_node_id": 845,
+          "target_spr_id": "Carbon nanotubeS"
+        },
+        {
+          "target_node_id": 846,
+          "target_spr_id": "GraphenE"
+        },
+        {
+          "target_node_id": 847,
+          "target_spr_id": "NanoparticleS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Nanomaterials.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "NanodeviceS",
+    "term": "Nanodevices",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Nanodevices.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 843,
+      "spr_value": 4.315,
+      "linked_to": [
+        {
+          "target_node_id": 848,
+          "target_spr_id": "Nanoscale sensorS"
+        },
+        {
+          "target_node_id": 849,
+          "target_spr_id": "Nanoscale actuatorS"
+        },
+        {
+          "target_node_id": 850,
+          "target_spr_id": "Nanoscale energy harvestinG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Nanodevices.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Nanoscale engineerinG",
+    "term": "Nanoscale Engineering",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Nanoscale Engineering.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 844,
+      "spr_value": 4.32,
+      "linked_to": [
+        {
+          "target_node_id": 851,
+          "target_spr_id": "Nanoscale fabricatioN"
+        },
+        {
+          "target_node_id": 852,
+          "target_spr_id": "Nanoscale characterizatioN"
+        },
+        {
+          "target_node_id": 853,
+          "target_spr_id": "Nanoscale modelinG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Nanoscale Engineering.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Genetic engineerinG",
+    "term": "Genetic Engineering",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Genetic Engineering.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 855,
+      "spr_value": 4.375,
+      "linked_to": [
+        {
+          "target_node_id": 858,
+          "target_spr_id": "Gene editinG"
+        },
+        {
+          "target_node_id": 859,
+          "target_spr_id": "Gene expressioN"
+        },
+        {
+          "target_node_id": 860,
+          "target_spr_id": "Gene regulatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Genetic Engineering.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Synthetic biologY",
+    "term": "Synthetic Biology",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Synthetic Biology.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 856,
+      "spr_value": 4.38,
+      "linked_to": [
+        {
+          "target_node_id": 861,
+          "target_spr_id": "Biological circuit desigN"
+        },
+        {
+          "target_node_id": 862,
+          "target_spr_id": "Biological system engineerinG"
+        },
+        {
+          "target_node_id": 863,
+          "target_spr_id": "Synthetic genomicS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Synthetic Biology.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Biomedical engineerinG",
+    "term": "Biomedical Engineering",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Biomedical Engineering.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 857,
+      "spr_value": 4.385,
+      "linked_to": [
+        {
+          "target_node_id": 864,
+          "target_spr_id": "Medical device developmenT"
+        },
+        {
+          "target_node_id": 865,
+          "target_spr_id": "Tissue engineerinG"
+        },
+        {
+          "target_node_id": 866,
+          "target_spr_id": "Biomedical imaginG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Biomedical Engineering.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Cognitive modelS",
+    "term": "Cognitive Models",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Cognitive Models.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 868,
+      "spr_value": 4.44,
+      "linked_to": [
+        {
+          "target_node_id": 871,
+          "target_spr_id": "Attention modelS"
+        },
+        {
+          "target_node_id": 872,
+          "target_spr_id": "Memory modelS"
+        },
+        {
+          "target_node_id": 873,
+          "target_spr_id": "Decision modelS"
+        }
+      ],
+      "synergizes_with": [
+        "Cognitive resonancE",
+        "KnO"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Cognitive Models.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Agi frameworkS",
+    "term": "AGI Frameworks",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to AGI Frameworks.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 869,
+      "spr_value": 4.445,
+      "linked_to": [
+        {
+          "target_node_id": 874,
+          "target_spr_id": "Integrated information theorY"
+        },
+        {
+          "target_node_id": 875,
+          "target_spr_id": "Global workspace theorY"
+        },
+        {
+          "target_node_id": 876,
+          "target_spr_id": "Cognitive architectureS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around AGI Frameworks.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Cognitive computinG",
+    "term": "Cognitive Computing",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Cognitive Computing.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 870,
+      "spr_value": 4.45,
+      "linked_to": [
+        {
+          "target_node_id": 877,
+          "target_spr_id": "Natural language processinG"
+        },
+        {
+          "target_node_id": 878,
+          "target_spr_id": "Computer visioN"
+        },
+        {
+          "target_node_id": 879,
+          "target_spr_id": "Machine learninG"
+        }
+      ],
+      "synergizes_with": [
+        "Cognitive resonancE",
+        "KnO"
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Cognitive Computing.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Brain-computer interfaceS",
+    "term": "Brain-Computer Interfaces",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Brain-Computer Interfaces.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 881,
+      "spr_value": 4.505,
+      "linked_to": [
+        {
+          "target_node_id": 884,
+          "target_spr_id": "ElectroencephalographY"
+        },
+        {
+          "target_node_id": 885,
+          "target_spr_id": "Functional magnetic resonance imaginG"
+        },
+        {
+          "target_node_id": 886,
+          "target_spr_id": "MagnetoencephalographY"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Brain-Computer Interfaces.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "NeurostimulatioN",
+    "term": "Neurostimulation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Neurostimulation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 882,
+      "spr_value": 4.51,
+      "linked_to": [
+        {
+          "target_node_id": 887,
+          "target_spr_id": "Transcranial magnetic stimulatioN"
+        },
+        {
+          "target_node_id": 888,
+          "target_spr_id": "Transcranial direct current stimulatioN"
+        },
+        {
+          "target_node_id": 889,
+          "target_spr_id": "Deep brain stimulatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Neurostimulation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "NeuroimaginG",
+    "term": "Neuroimaging",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Neuroimaging.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 883,
+      "spr_value": 4.515,
+      "linked_to": [
+        {
+          "target_node_id": 890,
+          "target_spr_id": "Magnetic resonance imaginG"
+        },
+        {
+          "target_node_id": 891,
+          "target_spr_id": "Positron emission tomographY"
+        },
+        {
+          "target_node_id": 892,
+          "target_spr_id": "Functional near-infrared spectroscopY"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Neuroimaging.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Quantum algorithmS",
+    "term": "Quantum Algorithms",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Quantum Algorithms.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 894,
+      "spr_value": 4.57,
+      "linked_to": [
+        {
+          "target_node_id": 897,
+          "target_spr_id": "Shor's algorithM"
+        },
+        {
+          "target_node_id": 898,
+          "target_spr_id": "Grover's algorithM"
+        },
+        {
+          "target_node_id": 899,
+          "target_spr_id": "Quantum approximate optimization algorithM"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Quantum Algorithms.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Quantum simulatioN",
+    "term": "Quantum Simulation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Quantum Simulation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 895,
+      "spr_value": 4.575,
+      "linked_to": [
+        {
+          "target_node_id": 900,
+          "target_spr_id": "Quantum chemistrY"
+        },
+        {
+          "target_node_id": 901,
+          "target_spr_id": "Quantum physicS"
+        },
+        {
+          "target_node_id": 902,
+          "target_spr_id": "Quantum materials sciencE"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Quantum Simulation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Quantum cryptographY",
+    "term": "Quantum Cryptography",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Quantum Cryptography.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 896,
+      "spr_value": 4.58,
+      "linked_to": [
+        {
+          "target_node_id": 903,
+          "target_spr_id": "Quantum key distributioN"
+        },
+        {
+          "target_node_id": 904,
+          "target_spr_id": "Quantum secure direct communicatioN"
+        },
+        {
+          "target_node_id": 905,
+          "target_spr_id": "Quantum cryptanalysiS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Quantum Cryptography.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Robot perceptioN",
+    "term": "Robot Perception",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Robot Perception.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 907,
+      "spr_value": 4.635,
+      "linked_to": [
+        {
+          "target_node_id": 910,
+          "target_spr_id": "Computer visioN"
+        },
+        {
+          "target_node_id": 911,
+          "target_spr_id": "Sensor fusioN"
+        },
+        {
+          "target_node_id": 912,
+          "target_spr_id": "Object recognitioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Robot Perception.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Robot motion planninG",
+    "term": "Robot Motion Planning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Robot Motion Planning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 908,
+      "spr_value": 4.64,
+      "linked_to": [
+        {
+          "target_node_id": 913,
+          "target_spr_id": "Trajectory planninG"
+        },
+        {
+          "target_node_id": 914,
+          "target_spr_id": "Motion controL"
+        },
+        {
+          "target_node_id": 915,
+          "target_spr_id": "Robot learninG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Robot Motion Planning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Autonomous navigatioN",
+    "term": "Autonomous Navigation",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Autonomous Navigation.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 909,
+      "spr_value": 4.645,
+      "linked_to": [
+        {
+          "target_node_id": 916,
+          "target_spr_id": "MappinG"
+        },
+        {
+          "target_node_id": 917,
+          "target_spr_id": "LocalizatioN"
+        },
+        {
+          "target_node_id": 918,
+          "target_spr_id": "Path planninG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Autonomous Navigation.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Swarm roboticS",
+    "term": "Swarm Robotics",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Swarm Robotics.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 920,
+      "spr_value": 4.7,
+      "linked_to": [
+        {
+          "target_node_id": 923,
+          "target_spr_id": "Robot swarmS"
+        },
+        {
+          "target_node_id": 924,
+          "target_spr_id": "Swarm controL"
+        },
+        {
+          "target_node_id": 925,
+          "target_spr_id": "Swarm optimizatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Swarm Robotics.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Collective intelligencE",
+    "term": "Collective Intelligence",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Collective Intelligence.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 921,
+      "spr_value": 4.705,
+      "linked_to": [
+        {
+          "target_node_id": 926,
+          "target_spr_id": "Social networkS"
+        },
+        {
+          "target_node_id": 927,
+          "target_spr_id": "CrowdsourcinG"
+        },
+        {
+          "target_node_id": 928,
+          "target_spr_id": "Collaborative filterinG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Collective Intelligence.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Network sciencE",
+    "term": "Network Science",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Network Science.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 922,
+      "spr_value": 4.71,
+      "linked_to": [
+        {
+          "target_node_id": 929,
+          "target_spr_id": "Network topologY"
+        },
+        {
+          "target_node_id": 930,
+          "target_spr_id": "Network dynamicS"
+        },
+        {
+          "target_node_id": 931,
+          "target_spr_id": "Network optimizatioN"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Network Science.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Model interpretabilitY",
+    "term": "Model Interpretability",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Model Interpretability.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 933,
+      "spr_value": 4.765,
+      "linked_to": [
+        {
+          "target_node_id": 936,
+          "target_spr_id": "Feature importancE"
+        },
+        {
+          "target_node_id": 937,
+          "target_spr_id": "Partial dependence plotS"
+        },
+        {
+          "target_node_id": 938,
+          "target_spr_id": "Shap valueS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Model Interpretability.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Model explainabilitY",
+    "term": "Model Explainability",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Model Explainability.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 934,
+      "spr_value": 4.77,
+      "linked_to": [
+        {
+          "target_node_id": 939,
+          "target_spr_id": "Model-based explainabilitY"
+        },
+        {
+          "target_node_id": 940,
+          "target_spr_id": "Model-free explainabilitY"
+        },
+        {
+          "target_node_id": 941,
+          "target_spr_id": "Hybrid explainabilitY"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Model Explainability.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Transparency techniqueS",
+    "term": "Transparency Techniques",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Transparency Techniques.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 935,
+      "spr_value": 4.775,
+      "linked_to": [
+        {
+          "target_node_id": 942,
+          "target_spr_id": "Model transparencY"
+        },
+        {
+          "target_node_id": 943,
+          "target_spr_id": "Data transparencY"
+        },
+        {
+          "target_node_id": 944,
+          "target_spr_id": "Algorithmic transparencY"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Transparency Techniques.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "User interface desigN",
+    "term": "User Interface Design",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Interface Design.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 946,
+      "spr_value": 4.83,
+      "linked_to": [
+        {
+          "target_node_id": 949,
+          "target_spr_id": "Visual desigN"
+        },
+        {
+          "target_node_id": 950,
+          "target_spr_id": "Interaction desigN"
+        },
+        {
+          "target_node_id": 951,
+          "target_spr_id": "Information architecturE"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Interface Design.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "User experience desigN",
+    "term": "User Experience Design",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to User Experience Design.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 947,
+      "spr_value": 4.835,
+      "linked_to": [
+        {
+          "target_node_id": 952,
+          "target_spr_id": "User researcH"
+        },
+        {
+          "target_node_id": 953,
+          "target_spr_id": "User testinG"
+        },
+        {
+          "target_node_id": 954,
+          "target_spr_id": "User feedbacK"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around User Experience Design.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Human-centered desigN",
+    "term": "Human-Centered Design",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Human-Centered Design.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 948,
+      "spr_value": 4.84,
+      "linked_to": [
+        {
+          "target_node_id": 955,
+          "target_spr_id": "EmpathY"
+        },
+        {
+          "target_node_id": 956,
+          "target_spr_id": "CreativitY"
+        },
+        {
+          "target_node_id": 957,
+          "target_spr_id": "PrototypinG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Human-Centered Design.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "StorytellinG",
+    "term": "Storytelling",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Storytelling.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 960,
+      "spr_value": 4.9,
+      "linked_to": [
+        {
+          "target_node_id": 965,
+          "target_spr_id": "Narrative structurE"
+        },
+        {
+          "target_node_id": 966,
+          "target_spr_id": "Character developmenT"
+        },
+        {
+          "target_node_id": 967,
+          "target_spr_id": "Plot developmenT"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Storytelling.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Narrative desigN",
+    "term": "Narrative Design",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Narrative Design.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 961,
+      "spr_value": 4.905,
+      "linked_to": [
+        {
+          "target_node_id": 968,
+          "target_spr_id": "Interactive storytellinG"
+        },
+        {
+          "target_node_id": 969,
+          "target_spr_id": "Immersive storytellinG"
+        },
+        {
+          "target_node_id": 970,
+          "target_spr_id": "Transmedia storytellinG"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Narrative Design.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  },
+  {
+    "spr_id": "Deep learninG",
+    "term": "Deep Learning",
+    "definition": "A concept within the ResonantiA Protocol operational in ArchE related to Deep Learning.",
+    "category": "ResonantiAConcept",
+    "relationships": {
+      "type": "ConceptualNode",
+      "node_id": 972,
+      "spr_value": 4.96,
+      "linked_to": [
+        {
+          "target_node_id": 975,
+          "target_spr_id": "Convolutional neural networkS"
+        },
+        {
+          "target_node_id": 976,
+          "target_spr_id": "Recurrent neural networkS"
+        },
+        {
+          "target_node_id": 977,
+          "target_spr_id": "Generative adversarial networkS"
+        }
+      ]
+    },
+    "blueprint_details": "Harmonized into the ResonantiA Protocol.",
+    "example_usage": "Priming this SPR activates the conceptual space around Deep Learning.",
+    "metadata": {
+      "version": "3.5-GP",
+      "status": "enhanced",
+      "created_date": "2025-10-27",
+      "last_modified_date": "2025-10-27",
+      "canonicalized_at": "20251027_043355"
+    }
+  }
+]

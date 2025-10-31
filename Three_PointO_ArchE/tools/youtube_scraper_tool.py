@@ -6,9 +6,8 @@ import os
 import json
 import re
 import logging
-from typing import Dict, Any, List
-from youtube_transcript_api import YouTubeTranscriptApi
-from urllib.parse import urlparse, parse_qs
+import requests # Import the requests library
+from typing import Dict, Any, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +26,7 @@ def extract_video_id(url: str) -> str:
     
     # Fallback: try to parse as URL
     try:
+        from urllib.parse import urlparse, parse_qs
         parsed = urlparse(url)
         if 'youtube.com' in parsed.netloc or 'youtu.be' in parsed.netloc:
             if parsed.path.startswith('/watch'):
@@ -62,104 +62,56 @@ def cache_transcript(video_id: str, transcript_data: Dict[str, Any], cache_dir: 
     except Exception as e:
         logger.warning(f"Failed to cache transcript for {video_id}: {e}")
 
-def get_youtube_transcript(video_url: str) -> Dict[str, Any]:
+# --- NEW: Refactored to use the internal youscrape service ---
+def get_youtube_transcript(video_id_or_url: str) -> Dict[str, Any]:
     """
-    [IAR Enabled]
-    Fetches the transcript for a given YouTube video URL using local caching.
-    Falls back to youscrape API if local method fails.
+    Fetches the transcript for a YouTube video using the internal youscrape service.
 
     Args:
-        video_url: The full URL of the YouTube video.
+        video_id_or_url: The ID or full URL of the YouTube video.
 
     Returns:
-        A dictionary containing the transcript data and video info, or an error message.
+        A dictionary containing the transcript and video information.
+        
+    Raises:
+        Exception: If the scraping service fails or returns an error.
     """
-    logger.info(f"Requesting transcript for YouTube video: {video_url}")
-    
-    # Extract video ID
-    video_id = extract_video_id(video_url)
-    if not video_id:
-        return {"status": "error", "message": f"Could not extract video ID from URL: {video_url}"}
-    
-    # Set up cache directory
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    cache_dir = os.path.join(project_root, "transcripts_cache")
-    os.makedirs(cache_dir, exist_ok=True)
-    
-    # Check cache first
-    cached_data = get_cached_transcript(video_id, cache_dir)
-    if cached_data:
-        return cached_data
-    
-    # Try local YouTube transcript API
+    logger.info(f"Requesting transcript for '{video_id_or_url}' from local youscrape service.")
+
+    # 1. Construct the full YouTube URL if only an ID is provided
+    if "youtube.com" in video_id_or_url or "youtu.be" in video_id_or_url:
+        video_url = video_id_or_url
+    else:
+        video_url = f"https://www.youtube.com/watch?v={video_id_or_url}"
+
+    # 2. Define the local service endpoint and payload
+    youscrape_endpoint = "http://localhost:3001/api/scrape"
+    payload = {"url": video_url}
+    headers = {"Content-Type": "application/json"}
+
     try:
-        logger.info(f"Fetching transcript using YouTube Transcript API for video ID: {video_id}")
-        
-        # Try to get English transcript first, then any available language
-        transcript_data = None
-        try:
-            # Try English transcript first
-            transcript_data = YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
-        except:
-            try:
-                # Try any available language
-                transcript_data = YouTubeTranscriptApi.get_transcript(video_id)
-            except:
-                # Try generated transcripts
-                transcript_data = YouTubeTranscriptApi.get_transcript(video_id, languages=['en'], preserve_formatting=True)
-        
-        # Combine transcript text into a single string for easier processing
-        transcript_text = " ".join([segment['text'] for segment in transcript_data])
-        
-        # Create video info (we don't have title from this API, so we'll use video ID)
-        video_info = {
-            "title": f"Video {video_id}",
-            "video_id": video_id,
-            "url": video_url
-        }
-        
-        result = {
-            "status": "success",
-            "video_info": video_info,
-            "full_transcript": transcript_text,
-            "transcript_segments": transcript_data
-        }
-        
-        # Cache the result
-        cache_transcript(video_id, result, cache_dir)
-        
-        logger.info(f"Successfully retrieved transcript for video ID: {video_id}")
-        return result
-        
-    except Exception as e:
-        logger.warning(f"YouTube Transcript API failed for {video_id}: {e}")
-        
-        # Use youscrape API server (no fallback - server must be running)
-        try:
-            import requests
-            YOUSCRAPE_API_URL = "http://localhost:3001/api/scrape"
-            logger.info(f"Using youscrape API server for video: {video_url}")
-            
-            response = requests.post(YOUSCRAPE_API_URL, json={"url": video_url}, timeout=30)
-            response.raise_for_status()
-            
-            data = response.json()
-            transcript_text = " ".join([segment['text'] for segment in data.get("transcriptData", [])])
-            
-            result = {
+        # 3. Make the POST request to the youscrape service
+        response = requests.post(youscrape_endpoint, json=payload, headers=headers, timeout=180) # Increased timeout for long scrapes
+        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
+
+        # 4. Process the response
+        data = response.json()
+
+        if data.get("success"):
+            logger.info(f"Successfully retrieved transcript for video: {data.get('videoInfo', {}).get('title')}")
+            # The service returns the data in the desired format
+            return {
                 "status": "success",
-                "video_info": data.get("videoInfo", {}),
-                "full_transcript": transcript_text,
-                "transcript_segments": data.get("transcriptData", [])
+                "transcript_data": data.get("transcriptData"),
+                "video_info": data.get("videoInfo")
             }
-            
-            # Cache the result
-            cache_transcript(video_id, result, cache_dir)
-            
-            logger.info(f"Successfully retrieved transcript via youscrape server for video: {data.get('videoInfo', {}).get('title', 'N/A')}")
-            return result
-            
-        except Exception as server_error:
-            error_message = f"YouTube transcript extraction failed for {video_url}. Local API error: {e}, Server error: {server_error}. Ensure youscrape server is running on localhost:3001"
-            logger.error(error_message)
-            return {"status": "error", "message": error_message}
+        else:
+            logger.error(f"youscrape service returned failure for URL: {video_url}")
+            raise Exception("Failed to retrieve transcript. The youscrape service indicated failure.")
+
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Failed to connect to youscrape service at {youscrape_endpoint}. Is it running? Error: {e}")
+        raise Exception(f"Could not connect to the internal youscrape service. Please ensure it is running on port 3001. Error: {e}")
+    except Exception as e:
+        logger.error(f"An unexpected error occurred while fetching transcript: {e}")
+        raise
