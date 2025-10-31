@@ -35,6 +35,7 @@ try:
     from .spr_manager import SPRManager
     from .thought_trail import ThoughtTrail
     from .config import get_config
+    from .utils.json_sanitizer import _sanitize_for_json # Import the sanitizer
 except ImportError:
     # Fallback for direct execution context
     import sys
@@ -235,6 +236,36 @@ class RISE_Orchestrator:
             logger.warning(f"SPR index build failed: {e}")
             self._spr_index = None
         
+        # Initialize Playbook Orchestrator for dynamic workflow generation
+        try:
+            from .playbook_orchestrator import PlaybookOrchestrator
+            self.playbook_orchestrator = PlaybookOrchestrator()
+            logger.info("🎭 PlaybookOrchestrator initialized - dynamic workflow generation enabled")
+        except Exception as e:
+            logger.warning(f"Failed to initialize PlaybookOrchestrator: {e}")
+            self.playbook_orchestrator = None
+        
+        # Initialize federated agents for multi-disciplinary search
+        try:
+            from .federated_search_agents import (
+                AcademicKnowledgeAgent,
+                CommunityPulseAgent,
+                CodebaseTruthAgent,
+                VisualSynthesisAgent,
+                SearchEngineAgent
+            )
+            self.federated_agents = {
+                'academic': AcademicKnowledgeAgent(),
+                'community': CommunityPulseAgent(),
+                'code': CodebaseTruthAgent(),
+                'visual': VisualSynthesisAgent(),
+                'search': SearchEngineAgent("Startpage")
+            }
+            logger.info("🔬 Federated search agents initialized - multi-disciplinary search enabled")
+        except Exception as e:
+            logger.warning(f"Failed to initialize federated agents: {e}")
+            self.federated_agents = {}
+        
         logger.info(f"🚀 RISE_Orchestrator initialized successfully")
         logger.info(f"📁 Workflows directory: {self.workflows_dir}")
         logger.info(f"🔧 Workflow engine: {type(self.workflow_engine).__name__}")
@@ -256,6 +287,80 @@ class RISE_Orchestrator:
         except Exception as e:
             logger.warning(f"Failed to load axiomatic knowledge base: {e}")
             return {}
+    
+    def _get_available_capabilities(self) -> Dict[str, Dict[str, Any]]:
+        """Return all available ResonantiA capabilities with descriptions for agent selection"""
+        return {
+            'ABM': {
+                'name': 'Agent-Based Modeling',
+                'tool': 'AgentBasedModelingTool',
+                'use_for': 'Simulating emergent behavior from agent interactions',
+                'inputs': ['agent_definitions', 'environment_config', 'simulation_steps'],
+                'outputs': ['simulation_results', 'emergent_patterns', 'time_series_data']
+            },
+            'CFP': {
+                'name': 'Comparative Fluxual Processing',
+                'tool': 'CfpFramework',
+                'use_for': 'Comparing dynamic evolution of different scenarios',
+                'inputs': ['state_vectors', 'hamiltonians', 'observables', 'timeframe'],
+                'outputs': ['flux_difference', 'entanglement_correlation', 'trajectory_comparison']
+            },
+            'CausalInference': {
+                'name': 'Causal Inference Analysis',
+                'tool': 'CausalInferenceTool',
+                'use_for': 'Identifying cause-effect relationships and temporal dependencies',
+                'inputs': ['data', 'treatment_variable', 'outcome_variable', 'confounders'],
+                'outputs': ['causal_effects', 'confidence_intervals', 'causal_graph']
+            },
+            'PredictiveModeling': {
+                'name': 'Predictive Modeling Tool',
+                'tool': 'PredictiveModelingTool',
+                'use_for': 'Forecasting future states and trends',
+                'inputs': ['historical_data', 'features', 'prediction_horizon'],
+                'outputs': ['predictions', 'confidence_intervals', 'feature_importance']
+            },
+            'PTRF': {
+                'name': 'Proactive Truth Resonance Framework',
+                'tool': 'PTRFTool',
+                'use_for': 'Multi-source verification and truth assessment',
+                'inputs': ['claims', 'sources', 'context'],
+                'outputs': ['truth_scores', 'confidence_levels', 'evidence_summary']
+            },
+            'FederatedSearch': {
+                'name': 'Federated Search Across Multiple Agents',
+                'tool': 'SynergisticInquiryOrchestrator',
+                'use_for': 'Comprehensive multi-source research',
+                'inputs': ['query', 'agent_types', 'max_results_per_agent'],
+                'outputs': ['multi_source_results', 'synthesized_insights']
+            },
+            'CodeGeneration': {
+                'name': 'Custom Code Generation',
+                'tool': 'generate_text_llm + execute_code',
+                'use_for': 'Creating custom analysis tools when standard tools insufficient',
+                'inputs': ['tool_specification', 'requirements'],
+                'outputs': ['executable_code', 'validation_results']
+            }
+        }
+    
+    def _get_recommended_capabilities(self, problem_description: str) -> List[str]:
+        """Get recommended capabilities based on problem description"""
+        problem_lower = problem_description.lower()
+        recommended = []
+        
+        if any(term in problem_lower for term in ['simulation', 'emergent', 'agent', 'modeling']):
+            recommended.append('ABM')
+        if any(term in problem_lower for term in ['compare', 'trajectory', 'evolution', 'flux']):
+            recommended.append('CFP')
+        if any(term in problem_lower for term in ['causal', 'cause', 'effect']):
+            recommended.append('CausalInference')
+        if any(term in problem_lower for term in ['predict', 'forecast', 'future']):
+            recommended.append('PredictiveModeling')
+        if any(term in problem_lower for term in ['truth', 'verify', 'fact']):
+            recommended.append('PTRF')
+        if any(term in problem_lower for term in ['search', 'find', 'research']):
+            recommended.append('FederatedSearch')
+            
+        return recommended if recommended else ['FederatedSearch']
 
     # --- SPR Discovery & Normalization Preprocessor ---
     def _build_spr_index(self) -> Dict[str, Any]:
@@ -597,6 +702,16 @@ class RISE_Orchestrator:
         
         logger.info(f"🚀 Initiating RISE v2.0 workflow for session {self.session_id}")
         logger.info(f"Problem: {problem_description}...")
+        
+        # --- NEW: Context-Aware Initialization ---
+        # The context from the CognitiveIntegrationHub can now influence the entire RISE process.
+        self.execution_mode = context.get("execution_mode", "standard_rise") if context else "standard_rise"
+        self.initial_query_analysis = context.get("initial_query_analysis") if context else None
+        
+        logger.info(f"RISE Execution Mode: {self.execution_mode}")
+        if self.initial_query_analysis:
+            logger.info("RISE process initiated with pre-analyzed query context.")
+        # --- END: Context-Aware Initialization ---
 
         self.thought_trail.add_entry({
             "task_id": "RISE_INIT",
@@ -646,27 +761,62 @@ class RISE_Orchestrator:
         
         self.active_sessions[self.session_id] = rise_state
         
+        final_return_value = {} # Ensure this is always defined
         try:
             # === PHASE A: Knowledge Scaffolding & Dynamic Specialization ===
             self.emit_sirc_event("Phase_A_Start", "Knowledge Scaffolding & Dynamic Specialization")
             logger.info("🔍 Phase A: Acquiring domain knowledge and forging specialist agent (Enhanced)")
             
+            # Ensure we have a valid model name, defaulting to gemini-2.0-flash-exp if not provided
+            effective_model = model if model else "gemini-2.0-flash-exp"
+            
             phase_a_context = {
-                "user_query": problem_description,
+                "problem_description": problem_description,  # Must match workflow input key
+                "user_query": problem_description,  # Also keep for compatibility
                 "session_id": self.session_id,
-                "model": model  # Pass model to the context for use in the workflow
+                "model": effective_model,  # Pass model to the context for use in the workflow
+                # Pass the rich initial analysis into the workflow context if it exists
+                "initial_query_analysis": self.initial_query_analysis
             }
 
-            # Use the specified workflow_name or default to knowledge_scaffolding
-            phase_a_workflow = f"{workflow_name}.json" if workflow_name else "knowledge_scaffolding.json"
-            logger.info(f"Using Phase A workflow: {phase_a_workflow}")
-
-            phase_a_results = self.workflow_engine.run_workflow(
-                phase_a_workflow,
-                initial_context=phase_a_context
-            )
+            # --- DYNAMIC WORKFLOW SELECTION (from new architecture) ---
+            # If the resonantia_playbook mode is active, the hub has generated a dynamic
+            # workflow and told us where to find it.
+            if self.execution_mode == "resonantia_playbook" and context:
+                phase_a_workflow = context.get("phase_a_workflow_blueprint")
+                # We also need to temporarily point the workflow engine to where the plan is
+                workflows_dir_override = context.get("workflows_dir_override")
+                if phase_a_workflow and workflows_dir_override:
+                    logger.info(f"Using dynamically generated Phase A workflow from ResonantiA path: {phase_a_workflow}")
+                    # Use a temporary engine instance for this dynamic execution
+                    dynamic_engine = IARCompliantWorkflowEngine(workflows_dir=workflows_dir_override)
+                    phase_a_results = dynamic_engine.run_workflow(
+                        f"{phase_a_workflow}", # The filename should not have .json here
+                        initial_context=phase_a_context
+                    )
+                else:
+                    logger.warning("ResonantiA mode active but dynamic workflow blueprint is missing. Falling back.")
+                    # Fallback to default if blueprint is missing
+                    phase_a_workflow = f"{workflow_name}.json" if workflow_name else "knowledge_scaffolding.json"
+                    phase_a_results = self.workflow_engine.run_workflow(
+                        phase_a_workflow,
+                        initial_context=phase_a_context
+                    )
+            else:
+                # Default behavior: use the specified or default workflow
+                phase_a_workflow = f"{workflow_name}.json" if workflow_name else "knowledge_scaffolding.json"
+                logger.info(f"Using Phase A workflow: {phase_a_workflow}")
+                phase_a_results = self.workflow_engine.run_workflow(
+                    phase_a_workflow,
+                    initial_context=phase_a_context
+                )
+            # --- END: DYNAMIC WORKFLOW SELECTION ---
             
-            # --- ROBUST OUTPUT INTEGRATION ---
+            # --- ROBUST OUTPUT INTEGRATION & STATUS CHECK (REVISED) ---
+            if phase_a_results.get("workflow_status") != "Completed Successfully":
+                logger.error(f"Phase A workflow did not complete successfully. Status: {phase_a_results.get('workflow_status')}")
+                raise RuntimeError("Phase A workflow failed to complete.", phase_a_results)
+            
             # Extract the key outputs from the workflow results and populate the RISE state.
             # The workflow engine resolves the 'outputs' section and places them in runtime_context.
             if phase_a_results.get("workflow_status") == "Completed Successfully":
@@ -685,7 +835,7 @@ class RISE_Orchestrator:
                     logger.warning("session_knowledge_base not found in Phase A results.")
             else:
                 logger.error(f"Phase A workflow did not complete successfully. Status: {phase_a_results.get('workflow_status')}")
-                raise RuntimeError("Phase A workflow failed to complete.")
+                raise RuntimeError("Phase A workflow failed to complete.", phase_a_results)
 
             self.thought_trail.add_entry({
                 "task_id": "PHASE_A_COMPLETE", 
@@ -766,18 +916,29 @@ class RISE_Orchestrator:
             }
             
             # Record in execution history
+            final_strategy_confidence = 0.0
+            if rise_state.final_strategy:
+                # Check if final_strategy is a dict before calling .get()
+                if isinstance(rise_state.final_strategy, dict):
+                    final_strategy_confidence = rise_state.final_strategy.get('confidence', 0.0)
+                elif isinstance(rise_state.final_strategy, str):
+                    # If it's a string, we can extract a confidence value if it's embedded
+                    # For now, default to a safe value
+                    final_strategy_confidence = 0.5
+            
             self.execution_history.append({
                 'session_id': self.session_id,
                 'timestamp': end_time.isoformat(),
                 'problem_description': problem_description,
                 'success': True,
                 'duration': total_duration,
-                'final_strategy_confidence': rise_state.final_strategy.get('confidence', 0.0) if rise_state.final_strategy else 0.0
+                'final_strategy_confidence': final_strategy_confidence
             })
             
             logger.info(f"✅ RISE v2.0 workflow completed successfully for session {self.session_id}")
             logger.info(f"Total duration: {total_duration:.2f}s")
             
+            final_return_value = final_results
             return final_results
             
         except Exception as e:
@@ -787,6 +948,9 @@ class RISE_Orchestrator:
             end_time = datetime.now(timezone.utc)
             total_duration = (end_time - rise_state.phase_start_time).total_seconds()
             
+            # --- NEW: Capture partial results if available from a custom exception ---
+            partial_results = e.args[1] if len(e.args) > 1 and isinstance(e.args[1], dict) else {}
+
             self.execution_history.append({
                 'session_id': self.session_id,
                 'timestamp': end_time.isoformat(),
@@ -796,21 +960,112 @@ class RISE_Orchestrator:
                 'error': str(e)
             })
             
-            return {
+            failure_results = {
                 'session_id': self.session_id,
                 'problem_description': problem_description,
                 'execution_status': 'failed',
                 'error': str(e),
                 'total_duration': total_duration,
                 'current_phase': rise_state.current_phase,
-                'timestamp': end_time.isoformat()
+                'timestamp': end_time.isoformat(),
+                'partial_results': partial_results # Include partial results for debugging
             }
+            final_return_value = failure_results
+            return failure_results
         
         finally:
             # Clean up active session
             if self.session_id in self.active_sessions:
                 del self.active_sessions[self.session_id]
+
+    def _generate_dynamic_workflow(self, problem_description: str, context: Dict[str, Any] = None) -> Optional[str]:
+        """
+        Generate a dynamic workflow using the PlaybookOrchestrator when appropriate.
+        
+        Args:
+            problem_description: The problem/query to analyze
+            context: Optional context for workflow generation
+            
+        Returns:
+            Path to the generated dynamic workflow file, or None if not generated
+        """
+        if not self.playbook_orchestrator:
+            return None
+        
+        try:
+            logger.info("🎭 Generating dynamic workflow using PlaybookOrchestrator...")
+            
+            # Analyze the query for ResonantiA patterns and generate workflow
+            dynamic_workflow_plan = self.playbook_orchestrator.analyze_query_for_resonantia_patterns(problem_description)
+            
+            if not dynamic_workflow_plan:
+                logger.warning("PlaybookOrchestrator did not generate a workflow")
+                return None
+            
+            # Save the dynamic workflow to outputs directory
+            import time
+            from pathlib import Path
+            
+            outputs_dir = Path("outputs")
+            outputs_dir.mkdir(exist_ok=True)
+            
+            timestamp = int(time.time() * 1000)
+            plan_name = dynamic_workflow_plan.get("name", "dynamic_rise_workflow")
+            plan_filename = f"dynamic_workflow_{plan_name}_{timestamp}.json"
+            plan_filepath = outputs_dir / plan_filename
+            
+            with open(plan_filepath, 'w', encoding='utf-8') as f:
+                import json
+                json.dump(dynamic_workflow_plan, f, indent=2)
+            
+            logger.info(f"✅ Dynamic workflow generated: {plan_filepath}")
+            return str(plan_filepath)
+            
+        except Exception as e:
+            logger.error(f"Failed to generate dynamic workflow: {e}", exc_info=True)
+            return None
     
+    def _execute_federated_search(self, query: str, agent_types: List[str] = None, max_results: int = 5) -> Dict[str, Any]:
+        """
+        Execute federated search across multiple specialized agents.
+        
+        Args:
+            query: The search query
+            agent_types: List of agent types to use (default: all agents)
+            max_results: Maximum results per agent
+            
+        Returns:
+            Dictionary of results from each agent
+        """
+        if not self.federated_agents:
+            logger.warning("Federated agents not available, skipping federated search")
+            return {}
+        
+        if agent_types is None:
+            agent_types = list(self.federated_agents.keys())
+        
+        results = {}
+        logger.info(f"🔬 Executing federated search across {len(agent_types)} agents")
+        
+        for agent_type in agent_types:
+            if agent_type not in self.federated_agents:
+                logger.warning(f"Agent type '{agent_type}' not found in federated agents")
+                continue
+            
+            try:
+                agent = self.federated_agents[agent_type]
+                agent_results = agent.search(query, max_results=max_results)
+                results[agent_type] = agent_results
+                logger.info(f"Agent '{agent_type}' found {len(agent_results)} results")
+            except Exception as e:
+                logger.error(f"Agent '{agent_type}' failed during search: {e}")
+                results[agent_type] = []
+        
+        total_results = sum(len(r) for r in results.values())
+        logger.info(f"Federated search complete: {total_results} total results from {len(results)} agents")
+        
+        return results
+
     def _execute_phase_a(self, rise_state: RISEState) -> Dict[str, Any]:
         """
         Execute Phase A: Knowledge Scaffolding & Dynamic Specialization with null handling
@@ -951,6 +1206,30 @@ class RISE_Orchestrator:
                     }
                 }
             
+            # NEW: Create specialized agent object and generate action plan
+            from .specialized_agent import SpecializedAgent
+            available_capabilities = self._get_available_capabilities()
+            protocol_knowledge = self.axiomatic_knowledge
+            
+            # Create specialized agent instance with workflow/action discovery
+            domain = session_kb.get('domain', 'general_analysis')
+            resonantia_capabilities = self._get_recommended_capabilities(rise_state.problem_description)
+            
+            # Pass workflows directory and action registry for discovery
+            specialized_agent_obj = SpecializedAgent(
+                domain_expertise=domain,
+                resonantia_capabilities=resonantia_capabilities,
+                workflows_dir=str(self.workflows_dir),
+                action_registry=getattr(self, 'action_registry', None)
+            )
+            
+            # Generate action plan
+            action_plan = specialized_agent_obj.generate_action_plan(
+                problem=rise_state.problem_description,
+                available_capabilities=available_capabilities,
+                protocol_knowledge=protocol_knowledge
+            )
+            
             phase_end = datetime.now(timezone.utc)
             phase_duration = (phase_end - phase_start).total_seconds()
             rise_state.execution_metrics['phase_durations']['A'] = phase_duration
@@ -958,6 +1237,8 @@ class RISE_Orchestrator:
             result = {
                 'session_knowledge_base': session_kb,
                 'specialized_agent': specialized_agent,
+                'specialized_agent_obj': specialized_agent_obj.to_dict() if specialized_agent_obj else None,
+                'action_plan': action_plan,
                 'knowledge_acquisition_metrics': knowledge_result.get('metrics', {}),
                 'metamorphosis_metrics': metamorphosis_result.get('metrics', {}),
                 'phase_duration': phase_duration,
@@ -969,6 +1250,7 @@ class RISE_Orchestrator:
             logger.info(f"✅ Phase A completed in {phase_duration:.2f}s")
             logger.info(f"Knowledge base size: {len(session_kb)} entries")
             logger.info(f"Specialist agent forged: {specialized_agent is not None}")
+            logger.info(f"Action plan generated with {len(action_plan.get('action_sequence', []))} phases")
             
             return result
             

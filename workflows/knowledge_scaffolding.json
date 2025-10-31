@@ -34,8 +34,7 @@
       "description": "Acquire relevant domain knowledge through web search",
       "inputs": {
         "query": "{% if extract_domain_from_deconstruction.result and extract_domain_from_deconstruction.result.generated_text %}{{ extract_domain_from_deconstruction.result.generated_text }}{% else %}{{ problem_description }}{% endif %} latest developments competitive landscape strategic insights trends key players market dynamics",
-        "num_results": 10,
-        "provider": "duckduckgo"
+        "num_results": 10
       },
       "dependencies": ["extract_domain_from_deconstruction"]
     },
@@ -44,7 +43,7 @@
       "description": "[PhasegateS] Validate that the search tool returned valid, non-empty results.",
       "inputs": {
         "language": "python",
-        "code": "import json\nsearch_output = {{ acquire_domain_knowledge.result }}\nresults = search_output.get('results')\nvalid = isinstance(results, list) and len(results) > 0\nprint(json.dumps({'search_is_valid': valid, 'results_count': len(results) if isinstance(results, list) else 0}))"
+        "code": "import json\nsearch_output = {{ acquire_domain_knowledge.result | default('{}') }}\nif not isinstance(search_output, dict):\n    search_output = {}\nresults = search_output.get('results')\nvalid = isinstance(results, list) and len(results) > 0\nprint(json.dumps({'search_is_valid': valid, 'results_count': len(results) if isinstance(results, list) else 0}))"
       },
       "dependencies": ["acquire_domain_knowledge"]
     },
@@ -62,16 +61,16 @@
       "action_type": "generate_text_llm",
       "description": "Forge a specialized agent with the required capabilities",
       "inputs": {
-        "prompt": "Create a specialized agent profile for solving this problem:\\n\\nProblem: {{ problem_description }}\\nRequirements: {{ analyze_specialization_requirements.result.generated_text }}\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria",
+        "prompt": "Create a specialized agent profile for solving this problem:\\n\\nProblem: {{ problem_description }}\\nDomain: {{ extract_domain_from_deconstruction.result.generated_text }}\\n{% if analyze_specialization_requirements is defined and analyze_specialization_requirements.result is defined %}Requirements: {{ analyze_specialization_requirements.result.generated_text }}{% else %}No specific requirements identified.{% endif %}\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria",
         "model_settings": {"temperature": 0.3, "max_tokens": 16384}
       },
-      "dependencies": ["analyze_specialization_requirements"]
+      "dependencies": ["extract_domain_from_deconstruction"]
     },
     "validate_specialist_agent": {
       "action_type": "generate_text_llm",
       "description": "Validate that the specialist agent has the required capabilities",
       "inputs": {
-        "prompt": "Validate the specialist agent against the original problem requirements:\\n\\nProblem: {{ problem_description }}\\nRequirements: {{ analyze_specialization_requirements.result.generated_text }}\\nSpecialist Agent: {{ forge_specialist_agent.result.generated_text }}\\n\\nAssess:\\n1. Coverage of required capabilities\\n2. Alignment with problem requirements\\n3. Strategic fit and expertise match\\n4. Potential gaps or limitations\\n5. Confidence in agent's ability to solve the problem",
+        "prompt": "Validate the specialist agent against the original problem requirements:\\n\\nProblem: {{ problem_description }}\\n{% if analyze_specialization_requirements is defined and analyze_specialization_requirements.result is defined %}Requirements: {{ analyze_specialization_requirements.result.generated_text }}{% else %}No specific requirements were identified due to limited search results.{% endif %}\\nSpecialist Agent: {{ forge_specialist_agent.result.generated_text }}\\n\\nAssess:\\n1. Coverage of required capabilities\\n2. Alignment with problem requirements\\n3. Strategic fit and expertise match\\n4. Potential gaps or limitations\\n5. Confidence in agent's ability to solve the problem",
         "model_settings": {"temperature": 0.2, "max_tokens": 1500}
       },
       "dependencies": ["forge_specialist_agent"]
@@ -80,15 +79,23 @@
   "outputs": {
     "session_knowledge_base": {
       "description": "Accumulated domain knowledge and insights",
-      "source": "acquire_domain_knowledge"
+      "value": "{{ acquire_domain_knowledge.result }}"
     },
     "specialized_agent": {
       "description": "The forged specialist agent with required capabilities",
-      "source": "validate_specialist_agent"
+      "value": "{{ forge_specialist_agent.result.generated_text }}"
     },
     "knowledge_acquisition_metrics": {
       "description": "Metrics on knowledge acquisition effectiveness",
-      "source": "acquire_domain_knowledge"
+      "value": "{{ acquire_domain_knowledge.result }}"
+    },
+    "problem_deconstruction": {
+      "description": "Deconstructed problem analysis",
+      "value": "{{ deconstruct_problem.result.generated_text }}"
+    },
+    "domain_identification": {
+      "description": "Primary domain area identified",
+      "value": "{{ extract_domain_from_deconstruction.result.generated_text }}"
     }
   }
 }

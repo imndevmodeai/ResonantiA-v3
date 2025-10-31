@@ -7,6 +7,7 @@ import os
 import sys
 import tempfile
 import json
+from jinja2 import Environment, meta, exceptions # Import Jinja2
 
 # Initialize logger first
 logger = logging.getLogger(__name__)
@@ -133,7 +134,9 @@ class ActionRegistry:
             force (bool): If True, overwrites an existing action with the same name.
         """
         if action_type in self.actions and not force:
-            logger.warning(f"Action '{action_type}' already registered. Skipping registration.")
+            # Suppress duplicate registration warnings as they're non-critical
+            # logger.warning(f"Action '{action_type}' already registered. Skipping registration.")
+            pass
         else:
             self.actions[action_type] = function
             logger.info(f"Action '{action_type}' registered.")
@@ -279,34 +282,48 @@ def calculate_math(expression: str, **kwargs) -> Dict[str, Any]:
 # --- Additional Action Implementations ---
 @log_to_thought_trail
 def string_template_action(**kwargs) -> Dict[str, Any]:
-    """Template string substitution action."""
+    """
+    [IAR Compliant] Renders a Jinja2 template string using the current workflow context.
+    This action ensures that templating is handled consistently and robustly
+    across the entire system, adhering to the capabilities of the core workflow engine.
+    """
+    template_string = kwargs.get('template', '')
+    context_for_action = kwargs.get('context_for_action')
+    runtime_context = {}
+
+    if context_for_action and hasattr(context_for_action, 'runtime_context'):
+        runtime_context = context_for_action.runtime_context
+
     try:
-        template = kwargs.get('template', '')
-        # Simple template substitution - replace {{ variable }} with context values
-        result = template
-        # For now, just return the template as-is since we don't have context substitution
-        # In a full implementation, this would substitute variables from the workflow context
-        
+        if not template_string:
+            raise ValueError("Input 'template' cannot be empty.")
+
+        # Use Jinja2 to render the template with the provided context
+        env = Environment()
+        template = env.from_string(template_string)
+        result = template.render(runtime_context)
+
         # Return IAR-compliant response
         return {
             'status': 'success',
             'result': result,
             'reflection': {
                 'status': 'Success',
-                'summary': f'Template processed successfully. Length: {len(result)} characters',
-                'confidence': 0.9,
+                'summary': f'Template rendered successfully. Result length: {len(result)} characters.',
+                'confidence': 1.0,
                 'alignment_check': {'objective_alignment': 1.0, 'protocol_alignment': 1.0},
                 'potential_issues': [],
                 'raw_output_preview': f"{{'status': 'success', 'result': '{result[:100]}{'...' if len(result) > 100 else ''}'}}"
             }
         }
     except Exception as e:
+        logger.error(f"Error rendering Jinja2 template in string_template_action: {e}", exc_info=True)
         return {
             'status': 'error',
             'message': str(e),
             'reflection': {
                 'status': 'Failed',
-                'summary': f'Template processing failed: {str(e)}',
+                'summary': f'Template rendering failed: {str(e)}',
                 'confidence': 0.1,
                 'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
                 'potential_issues': [str(e)],
@@ -930,7 +947,23 @@ def _calculate_iar_compliance(report: Dict[str, Any], analysis_data: Dict[str, A
 # Keep the standalone version for now, can be deprecated later
 main_action_registry.register_action("execute_code_standalone", standalone_execute_code)
 main_action_registry.register_action("search_web", log_to_thought_trail(perform_web_search))
-main_action_registry.register_action("generate_text_llm", invoke_llm_for_synthesis)
+
+# --- NEW: Wrapper for generate_text_llm to handle context injection ---
+@log_to_thought_trail
+def generate_text_llm_action(**kwargs) -> Dict[str, Any]:
+    """
+    IAR-compliant wrapper for the LLM synthesis tool. This wrapper ensures
+    that context, especially the 'model' parameter from the workflow's
+    initial_context, is correctly passed down to the synthesis function.
+    """
+    # The execute_action function (the caller of this wrapper) has already
+    # performed the logic to inject the model from the context into kwargs.
+    # We just need to call the underlying synthesis function.
+    return invoke_llm_for_synthesis(**kwargs)
+
+main_action_registry.register_action("generate_text_llm", generate_text_llm_action)
+# --- END NEW ---
+
 main_action_registry.register_action("display_output", display_output)
 main_action_registry.register_action("calculate_math", calculate_math)
 main_action_registry.register_action("string_template", string_template_action)

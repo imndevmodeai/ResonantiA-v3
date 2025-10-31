@@ -1,10 +1,36 @@
-# The Memory Keeper: A Chronicle of the Knowledge Graph Manager (v3.1)
+# The Memory Keeper: A Chronicle of the Knowledge Graph Manager (v3.1-CA Updated)
 
 ## Overview
 
 The **Knowledge Graph Manager** is ArchE's memory keeper, responsible for maintaining the intricate web of relationships between concepts, preserving accumulated wisdom, and providing the foundation for all cognitive processes through structured management of the Knowledge Network Oneness (KnO). This system transforms scattered knowledge fragments into a coherent, navigable, and infinitely rich network of understanding.
 
 The Knowledge Graph Manager serves as the central repository for ArchE's knowledge, managing both individual Sparse Priming Representations (SPRs) and the dynamic relationships that connect them into a living tapestry of meaning. It ensures that knowledge is not just stored but actively organized, connected, and made accessible for discovery and insight generation.
+
+## Current Architecture (v3.5-GP)
+
+**Tapestry Structure**:
+- **202 SPR nodes** across **65 knowledge categories**
+- **67 relationship edges** linking concepts
+- **Graph density**: Strategic sparse connectivity (0.0033)
+- **Primary storage**: `knowledge_graph/spr_definitions_tv.json`
+
+**Relationship Types** (9 primary):
+1. `requires` - Dependency relationships
+2. `implements` - Implementation mappings
+3. `part_of` - Compositional hierarchies
+4. `prime` - Priming/activation chains
+5. `enabled_by` - Capability enablement
+6. `used_by` - Usage relationships
+7. `related_to` - General associations
+8. `inform` - Information flow
+9. `monitor` - Observational connections
+
+**Top Interconnected SPRs** (Hub Analysis):
+- **FourdthinkinG** - Temporal reasoning capabilities
+- **AdaptivecognitiveorchestratoR (ACO)** - Fast-response cognitive routing
+- **WorkflowEnginE** - Process orchestration
+- **KnO** - Knowledge structure itself
+- **IAR** - Integrated Action Reflection
 
 ## Part I: The Philosophical Mandate (The "Why")
 

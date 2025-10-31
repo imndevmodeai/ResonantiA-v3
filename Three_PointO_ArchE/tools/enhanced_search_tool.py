@@ -248,7 +248,7 @@ class EnhancedSearchTool:
 
 
 # Integration function for existing ArchE system
-def perform_web_search(query: str, engine: str = "duckduckgo", debug: bool = False, num_results: int = 5) -> Dict[str, Any]:
+def perform_web_search(query: str, engine: str = "duckduckgo", debug: bool = False, num_results: int = 5, **kwargs) -> Dict[str, Any]:
     """
     Drop-in replacement for the existing web search function using enhanced perception engine with fallback.
     
@@ -257,11 +257,17 @@ def perform_web_search(query: str, engine: str = "duckduckgo", debug: bool = Fal
         engine: Search engine to use
         debug: Enable debug mode
         num_results: The number of results to return
+        **kwargs: Additional parameters (e.g., 'model') that are passed by the workflow engine but not used by this function.
+                  This allows the function to gracefully accept extra parameters without failing.
         
     Returns:
         Search results in ArchE-compatible format
     """
     logger = logging.getLogger(__name__)
+    
+    # Log extra parameters if provided (for debugging purposes)
+    if kwargs:
+        logger.debug(f"perform_web_search received extra parameters: {list(kwargs.keys())} - these will be ignored")
     
     try:
         if ENHANCED_PERCEPTION_AVAILABLE:

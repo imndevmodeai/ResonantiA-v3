@@ -52,3 +52,19 @@ pytest-cov>=4.1.0
 # Optional: Proxy support
 # requests[socks]>=2.31.0
 # aiohttp-socks>=0.8.0
+
+# Added for visualization
+matplotlib
+seaborn
+
+# Added for RISE v2.0 and advanced analytics
+ortools
+selenium
+dowhy
+mesa
+youtube-transcript-api
+Jinja2
+
+# Quantum computing for CFP framework enhancement
+qiskit>=1.0.0
+qiskit-aer>=0.15.0

@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "timestamp": "2025-10-29T01:10:35.056582",
+      "analysis_type": "Integrated Campaign Analysis",
+      "phases_completed": [
+        "Causal Inference",
+        "ABM Simulation",
+        "CFP Comparison",
+        "Synthesis"
+      ],
+      "causal_analysis": {
+        "treatment_effect": 0.38,
+        "lag_weeks": 2.1,
+        "confidence": 0.85
+      },
+      "abm_analysis": {
+        "emergence_pattern": "Exponential Growth",
+        "stability_score": 0.82,
+        "final_state": {
+          "active_users": 7500,
+          "market_share": 0.75
+        }
+      },
+      "cfp_analysis": {
+        "quantum_flux_difference": 0.11692446286203362,
+        "entanglement_correlation": 0.0,
+        "entropy_baseline": 0.4689955935892812,
+        "entropy_enhanced": 0.195400576651165
+      },
+      "insights": {
+        "insight_1": "CAMPAIGN IMPACT: Campaign intensity has a causal effect of 0.38 on sales volume with a 2.1-week delay.",
+        "insight_2": "EMERGENCE PATTERN: Market dynamics show 'Exponential Growth' behavior with stability score 0.82. This indicates stable long-term dynamics.",
+        "insight_3": "QUANTUM CONVERGENCE: Low flux difference (0.117) indicates similar outcomes regardless of strategy choice.",
+        "insight_4": "INDEPENDENCE: Low mutual information (0.000) suggests campaign variables operate independently."
+      },
+      "recommendation": "\ud83e\udd14 RECOMMENDATION: Additional Analysis Needed\n\nMixed signals detected. Run additional simulations with more agent types and longer time horizons to build confidence in recommendation.",
+      "iar_reflection": {
+        "status": "Success",
+        "confidence": 0.87,
+        "summary": "Integrated analysis completed successfully across all phases",
+        "alignment_check": "Achieved temporal resonance through causal-ABM-CFP integration",
+        "potential_issues": [
+          "Synthetic data used for demonstration",
+          "Qiskit integration shows quantum enhancement working",
+          "All three analysis phases contributed to insights"
+        ]
+      }
+    }
+  ],
+  "timestamp": "2025-10-29T01:10:35.924392",
+  "status": "complete"
+}

@@ -13,7 +13,7 @@ const port = 3001;
 app.use(express.json());
 
 const CONFIG = {
-  executablePath: '/usr/bin/chromium-browser',
+  executablePath: '/usr/bin/google-chrome',
   waitTimes: {
     pageLoad: 3000,
     afterClick: 3500,
@@ -24,42 +24,57 @@ const CONFIG = {
 };
 
 async function scrape(url) {
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--incognito', '--no-sandbox', '--disable-setuid-sandbox'],
-    executablePath: CONFIG.executablePath
-  });
+  let browser;
+  
+  try {
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ['--incognito', '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      executablePath: CONFIG.executablePath
+    });
 
-  const page = await browser.newPage();
+    const page = await browser.newPage();
 
-  // Handle page errors
-  page.on('error', (err) => console.error('Page error:', err));
-  page.on('pageerror', (err) => console.error('Page pageerror:', err));
+    // Handle page errors
+    page.on('error', (err) => console.error('Page error:', err));
+    page.on('pageerror', (err) => console.error('Page pageerror:', err));
 
-  console.log('Navigating to the page...');
-  await page.goto(url);
-  await new Promise(resolve => setTimeout(resolve, CONFIG.waitTimes.pageLoad)); // Wait for initial page load
+    console.log('Navigating to the page...');
+    await page.goto(url);
+    await new Promise(resolve => setTimeout(resolve, CONFIG.waitTimes.pageLoad)); // Wait for initial page load
 
-  // First, click the "More" button if available to reveal options like "Show transcript"
-  await clickMoreButton(page);
+    // First, click the "More" button if available to reveal options like "Show transcript"
+    await clickMoreButton(page);
 
-  // Now, try to click the "Show transcript" button
-  await clickShowTranscriptButton(page);
+    // Now, try to click the "Show transcript" button
+    await clickShowTranscriptButton(page);
 
-  // After clicking the "Show transcript" button, wait for the transcript to load
-  await new Promise(resolve => setTimeout(resolve, CONFIG.waitTimes.transcriptLoad));
+    // After clicking the "Show transcript" button, wait for the transcript to load
+    await new Promise(resolve => setTimeout(resolve, CONFIG.waitTimes.transcriptLoad));
 
-  const transcriptData = await getTranscriptText(page);
-  if (!transcriptData) {
-    console.error('Failed to get transcript text');
-    await browser.close();
+    const transcriptData = await getTranscriptText(page);
+    if (!transcriptData) {
+      console.error('Failed to get transcript text');
+      return null;
+    }
+
+    const videoInfo = await getVideoInfo(page);
+
+    return { transcriptData, videoInfo };
+  } catch (error) {
+    console.error('Error in scrape function:', error);
     return null;
+  } finally {
+    // CRITICAL: Always close the browser to prevent resource leaks
+    if (browser) {
+      try {
+        await browser.close();
+        console.log('Browser closed successfully');
+      } catch (closeError) {
+        console.error('Error closing browser:', closeError);
+      }
+    }
   }
-
-  const videoInfo = await getVideoInfo(page);
-  await browser.close();
-
-  return { transcriptData, videoInfo };
 }
 
 async function clickMoreButton(page) {

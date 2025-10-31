@@ -37,6 +37,7 @@ from Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine
 from Three_PointO_ArchE.playbook_orchestrator import PlaybookOrchestrator
 from Three_PointO_ArchE.rise_enhanced_synergistic_inquiry import RISEEnhancedSynergisticInquiry
 from Three_PointO_ArchE.strategic_workflow_planner import StrategicWorkflowPlanner # Import the new planner
+from Three_PointO_ArchE.rise_orchestrator import RISE_Orchestrator # Import the RISE Orchestrator
 from typing import Dict, Any
 
 # Mock solver for now, will be replaced with the real one
@@ -81,6 +82,7 @@ class CognitiveIntegrationHub:
         # be configured differently in a real system (e.g., different permissions,
         # resource limits, etc.)
         self.workflow_engine = IARCompliantWorkflowEngine(workflows_dir="Three_PointO_ArchE/workflows")
+        self.rise_orchestrator = RISE_Orchestrator() # Instantiate the orchestrator
 
     def _execute_aco_path(self, query: str) -> Dict[str, Any]:
         """
@@ -102,19 +104,30 @@ class CognitiveIntegrationHub:
         
         return self._execute_plan(workflow_plan, {"query": query})
 
-    def _execute_rise_path(self, query: str) -> Dict[str, Any]:
+    def _execute_rise_path(self, query: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
         """
-        Handles a complex query by using the StrategicWorkflowPlanner to generate
-        an optimized workflow from the query blueprint.
+        Handles a complex query by invoking the full RISE Orchestrator.
+        Can receive additional context from specialized upstream orchestrators.
         """
-        logger.info("Query elevated to RISE. Engaging Strategic Workflow Planner.")
+        logger.info("Query elevated to RISE. Engaging RISE_Orchestrator.")
         
-        # 1. RISE now uses the advanced planner to generate a truly novel workflow.
-        workflow_plan = self.strategic_planner.generate_workflow_from_blueprint(query)
-        logger.info("Strategic Planner has produced an optimized workflow.")
-
-        # 2. RISE executes the plan
-        return self._execute_plan(workflow_plan, {"query": query, "engine": "RISE"})
+        # The new implementation now calls the RISE Orchestrator directly
+        try:
+            # Pass the original query and any additional context to the orchestrator
+            rise_results = self.rise_orchestrator.process_query(
+                problem_description=query,
+                context=context
+            )
+            logger.info("RISE Orchestrator has completed its workflow.")
+            return rise_results
+        except Exception as e:
+            logger.error(f"RISE Orchestrator execution failed catastrophically: {e}", exc_info=True)
+            return {
+                "status": "RISE_EXECUTION_ERROR",
+                "error": str(e),
+                "details": "The RISE workflow failed to execute. Check the logs for details.",
+                "output": {}
+            }
 
     def _execute_plan(self, plan: Dict[str, Any], initial_context: Dict[str, Any]) -> Dict[str, Any]:
         """Helper to save a plan and execute it with the engine."""
@@ -237,18 +250,52 @@ class CognitiveIntegrationHub:
     
     def _execute_resonantia_path(self, query: str) -> Dict[str, Any]:
         """
-        Execute ResonantiA-aware genius-level analysis using Playbook Orchestrator.
+        Uses the PlaybookOrchestrator to generate a dynamic, GENIUS-LEVEL workflow
+        and then passes that workflow blueprint to the main RISE_Orchestrator for execution.
         """
-        logger.info("Executing ResonantiA Protocol with full ArchE capabilities.")
+        logger.info("Executing ResonantiA Protocol path: Dynamic Workflow Generation -> RISE Execution.")
         
         try:
-            # Use the ResonantiA-aware Playbook Orchestrator
-            result = self.playbook_orchestrator.execute_resonantia_query(query)
-            logger.info("ResonantiA Protocol execution completed successfully.")
-            return result
+            # 1. Generate the dynamic, genius-level workflow using the Playbook Orchestrator
+            dynamic_workflow_plan = self.playbook_orchestrator.analyze_query_for_resonantia_patterns(query)
+            
+            # Extract the name of the generated plan for execution
+            # This requires saving the plan and having the engine load it.
+            # For a more integrated approach, we can pass the plan name to RISE.
+            
+            # Save the dynamic workflow to the outputs directory to make it executable
+            import os
+            import time
+            from pathlib import Path
+
+            outputs_dir = Path("outputs")
+            outputs_dir.mkdir(exist_ok=True)
+            timestamp = int(time.time())
+            plan_name = dynamic_workflow_plan.get("name", "unnamed_genius_plan")
+            plan_filename = f"dynamic_workflow_{plan_name}_{timestamp}.json"
+            plan_filepath = outputs_dir / plan_filename
+            
+            with open(plan_filepath, 'w', encoding='utf-8') as f:
+                json.dump(dynamic_workflow_plan, f, indent=2)
+            logger.info(f"Dynamically generated ResonantiA workflow saved to: {plan_filepath}")
+
+            # 2. Prepare context for the RISE Orchestrator
+            # We are telling RISE to use our dynamically generated workflow for Phase A
+            # instead of its default "knowledge_scaffolding.json".
+            rise_context = {
+                "execution_mode": "resonantia_playbook",
+                "phase_a_workflow_blueprint": plan_filename,
+                "workflows_dir_override": str(outputs_dir) # Tell the engine where to find this dynamic plan
+            }
+
+            # 3. Execute the main RISE path with the specialized context
+            logger.info(f"Passing dynamically generated workflow '{plan_filename}' to RISE_Orchestrator.")
+            return self._execute_rise_path(query, context=rise_context)
+
         except Exception as e:
-            logger.warning(f"ResonantiA execution failed, falling back to RISE: {e}")
-            return self._execute_rise_path(query)
+            logger.error(f"ResonantiA path execution failed catastrophically: {e}", exc_info=True)
+            # Fallback to the standard RISE path if dynamic generation fails
+            return self._execute_rise_path(query, context={"error_fallback": True, "reason": str(e)})
     
     def _requires_rise_enhanced_analysis(self, query: str) -> bool:
         """
@@ -266,16 +313,31 @@ class CognitiveIntegrationHub:
     
     def _execute_rise_enhanced_path(self, query: str) -> Dict[str, Any]:
         """
-        Execute RISE-Enhanced Synergistic Inquiry for complex queries.
+        Uses the RISEEnhancedSynergisticInquiry orchestrator to perform a deep
+        analysis of the query, then passes the resulting insights and context
+        into the main RISE_Orchestrator for execution.
         """
-        logger.info("Executing RISE-Enhanced Synergistic Inquiry with PhD-level analysis.")
+        logger.info("Executing RISE-Enhanced Synergistic Inquiry path: Deep Analysis -> RISE Execution.")
         
         try:
-            # Use the RISE-Enhanced Synergistic Inquiry Orchestrator
-            result = self.rise_enhanced_orchestrator.execute_rise_enhanced_inquiry(query)
-            logger.info("RISE-Enhanced analysis completed successfully.")
-            return result
+            # 1. Perform the deep, PhD-level analysis of the query
+            enhanced_analysis_results = self.rise_enhanced_orchestrator.execute_rise_enhanced_inquiry(query)
+            
+            # 2. Prepare the context for the main RISE Orchestrator
+            # This context will enrich the standard RISE workflow with deeper initial understanding.
+            rise_context = {
+                "execution_mode": "rise_enhanced_inquiry",
+                "initial_query_analysis": enhanced_analysis_results.get("rise_analysis"),
+                "detected_resonantia_patterns": enhanced_analysis_results.get("resonantia_patterns"),
+                "analytical_approach": enhanced_analysis_results.get("analytical_approach")
+            }
+            
+            # 3. Execute the main RISE path with the enhanced context
+            logger.info("Passing enhanced analysis context to RISE_Orchestrator.")
+            return self._execute_rise_path(query, context=rise_context)
+            
         except Exception as e:
-            logger.warning(f"RISE-Enhanced execution failed, falling back to standard RISE: {e}")
-            return self._execute_rise_path(query)
+            logger.error(f"RISE-Enhanced path execution failed catastrophically: {e}", exc_info=True)
+            # Fallback to the standard RISE path if the enhanced analysis fails
+            return self._execute_rise_path(query, context={"error_fallback": True, "reason": str(e)})
 

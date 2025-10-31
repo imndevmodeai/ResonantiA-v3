@@ -1,10 +1,28 @@
-# The Keys to Consciousness: A Chronicle of the SPR Manager (v3.1)
+# The Keys to Consciousness: A Chronicle of the SPR Manager (v3.1-CA Updated)
 
 ## Overview
 
 The **SPR Manager** is ArchE's guardian of Sparse Priming Representations (SPRs), serving as the cognitive lexicon manager that transforms language into meaning and meaning into directed thought. This system manages the keys to ArchE's Knowledge Network Oneness (KnO), ensuring that concepts like `Cognitive resonancE` activate their full conceptual universe rather than remaining as mere strings of characters.
 
-The SPR Manager operates like a master musician in a resonant bell chamber, maintaining a master ledger (`spr_definitions_tv.json`) of all SPR definitions, compiling regex patterns for instant recognition, and scanning text to activate conceptual resonance through cognitive unfolding. It provides methods for loading SPRs, scanning and priming text, adding new SPRs, and managing the master ledger. The system serves as the fundamental mechanism that allows ArchE to think in concepts rather than just words, enabling the full richness of interconnected knowledge activation.
+The SPR Manager operates like a master musician in a resonant bell chamber, maintaining a master ledger (`knowledge_graph/spr_definitions_tv.json`) of all SPR definitions, compiling regex patterns for instant recognition, and scanning text to activate conceptual resonance through cognitive unfolding. It provides methods for loading SPRs, scanning and priming text, adding new SPRs, and managing the master ledger. The system serves as the fundamental mechanism that allows ArchE to think in concepts rather than just words, enabling the full richness of interconnected knowledge activation.
+
+## Current System State (v3.5-GP Update)
+
+**Knowledge Base Metrics** (as of v3.5-GP):
+- **Total SPRs**: 202 active SPR definitions
+- **Relationship Edges**: 67 interconnected relationships
+- **Categories**: 65 distinct knowledge categories
+- **Graph Density**: 0.0033 (sparse but strategically connected)
+- **Average Connections**: 0.66 per SPR
+- **Top Hub SPRs**: FourdthinkinG, ACO, WorkflowEnginE, KnO, and IAR with highest centrality
+
+**Relationship Graph Visualization**:
+The KnO now includes a relationship graph visualization system (`kno_relationships_graph.py`) that:
+- Extracts and normalizes relationship types from SPR definitions
+- Identifies hub SPRs by connection count
+- Maps category bridges and knowledge flow paths
+- Generates interactive HTML visualizations for human inspection
+- Calculates centrality metrics and graph topology
 
 ## Part I: The Philosophical Mandate (The "Why")
 

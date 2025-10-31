@@ -15,6 +15,7 @@ import uuid
 import tempfile
 from datetime import datetime
 from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable
+from jinja2 import Environment, meta, exceptions # Import Jinja2
 
 # --- Standardized Imports ---
 # This single block ensures robust relative imports within the package.
@@ -337,6 +338,7 @@ class IARCompliantWorkflowEngine:
         self.current_workflow = None
         self.iar_validator = IARValidator()
         self.resonance_tracker = ResonanceTracker()
+        self.jinja_env = Environment() # Initialize Jinja2 environment
 
         # Register standard actions
         self.register_action("display_output", display_output)
@@ -633,391 +635,70 @@ class IARCompliantWorkflowEngine:
                 return None # Path does not exist
         return value
 
-    def _resolve_value(self,
-    value: Any,
-    runtime_context: Dict[str,
-    Any],
-    initial_context: Dict[str,
-    Any],
-     task_key: Optional[str] = None) -> Any:
+    def _resolve_value(self, value: Any, context: Dict[str, Any]) -> Any:
         """
-        Resolves a value that might be a template string, a direct value, or a nested structure.
-        Handles template syntax {{ placeholder | filter1 | filter2(arg) | default(\"fallback\") }}.
-        Recursively resolves values if the input value is a dictionary or a list.
-        Uses initial_context for 'context.' prefixed paths, runtime_context otherwise.
+        Recursively resolves Jinja2 template strings within a nested data structure.
         """
-        original_template_for_logging = str(value)
-
         if isinstance(value, dict):
-            resolved_dict = {}
-            for k, v_item in value.items(
-            ):  # Changed v to v_item to avoid conflict
-                resolved_dict[k] = self._resolve_value(
-    v_item, runtime_context, initial_context, task_key)
-            return resolved_dict
+            return {k: self._resolve_value(v, context) for k, v in value.items()}
         elif isinstance(value, list):
-            resolved_list = []
-            for item in value:
-                resolved_list.append(
-    self._resolve_value(
-        item,
-        runtime_context,
-        initial_context,
-         task_key))
-            return resolved_list
-        elif not isinstance(value, str) or not ("{{" in value and "}}" in value):
-            return value
-
-        logger.debug(
-    f"Resolving template string: {original_template_for_logging} with initial_context keys: {
-        list(
-            initial_context.keys()) if initial_context else []}")
-        
-        matches = re.findall(r"(\{\{(.*?)\}\})", value, re.DOTALL)
-        # Should not happen if "{{" and "}}" are present, but as a safeguard
-        if not matches:
-            return value
-
-        # Case 1: The entire template string is a single placeholder (e.g., "{{
-        # my_variable }}")
-        if len(matches) == 1 and value.strip() == matches[0][0]:
-            full_match_tag, template_content = matches[0]
-            template_content = template_content.strip()
-            if not template_content: return ""  # Handle empty braces {{}}
-
-            var_path_str = self._extract_var_path(template_content)
-            filters = self._parse_filters(template_content)
-            
-            default_value_from_filter = None
-            has_default_filter = False
-            default_filter_spec = next(
-    (f for f in filters if f['name'] == 'default'), None)
-            if default_filter_spec:
-                has_default_filter = True
-                default_value_from_filter = default_filter_spec[
-                    'args'][0] if default_filter_spec['args'] else None
-                # Process default first, then remove
-                filters.remove(default_filter_spec)
-
-            resolved_var_from_context = None
-            if var_path_str.startswith("context."):
-                actual_path = var_path_str[len("context."):]
-                logger.debug(
-    f"Attempting to get value for path: '{actual_path}' from initial_context. Keys: {
-        list(
-            initial_context.keys()) if isinstance(
-                initial_context,
-                 dict) else 'Not a dict'}. Initial context itself: {initial_context}")
-                retrieved_value = self._get_value_from_path(
-                    actual_path, initial_context)
-                resolved_var_from_context = retrieved_value
-                logger.debug(
-    f"Resolved (single) '{var_path_str}' to: {resolved_var_from_context} (from initial_context)")
-            elif task_key and var_path_str == task_key:
-                logger.warning(
-    f"Template (single) '{value}' in task '{task_key}' references itself ('{var_path_str}').")
-                resolved_var_from_context = runtime_context.get(task_key)
-            else:
-                # Try runtime_context first
-                resolved_var_from_context = self._get_value_from_path(
-                    var_path_str, runtime_context)
-                if resolved_var_from_context is None:
-                    # Fallback: try initial_context using the same path
-                    resolved_var_from_context = self._get_value_from_path(
-                        var_path_str, initial_context)
-                logger.debug(
-    f"Resolved (single) '{var_path_str}' to: {resolved_var_from_context} (from runtime_context/initial_context)")
-
-            current_value_for_placeholder = None
-            if resolved_var_from_context is None and has_default_filter:
-                current_value_for_placeholder = default_value_from_filter
-            else:
-                current_value_for_placeholder = resolved_var_from_context
-            
-            # Apply other filters
-            for f_spec in filters:  # default_filter_spec already removed
-                if f_spec['name'] == 'from_json':
-                    try:
-                        current_value_for_placeholder = json.loads(current_value_for_placeholder)
-                    except (json.JSONDecodeError, TypeError):
-                        logger.warning(f"Task '{task_key}': Value for filter 'from_json' could not be parsed. Value: {current_value_for_placeholder}")
-                        # Keep the value as is or set to a default error indicator? Let's keep it for now.
-                elif f_spec['name'] == 'toJson':
-                    current_value_for_placeholder = json.dumps(
-                        current_value_for_placeholder)
-                elif f_spec['name'] == 'replace':
-                    if not isinstance(current_value_for_placeholder, str):
-                        current_value_for_placeholder = str(
-                            current_value_for_placeholder)
-                    if len(f_spec['args']) == 2:
-                        old_val, new_val = str(
-    f_spec['args'][0]), str(
-        f_spec['args'][1])
-                        current_value_for_placeholder = current_value_for_placeholder.replace(
-                            old_val, new_val)
-                    else:
-                        logger.warning(
-    f"Task '{task_key}': Filter 'replace' expects 2 arguments (old, new), got {
-        len(
-            f_spec['args'])}. Skipping.")
-                elif f_spec['name'] == 'trim':
-                    current_value_for_placeholder = str(
-                        current_value_for_placeholder).strip()
-                else:
-                    logger.warning(
-    f"Task '{task_key}': Unknown filter '{
-        f_spec['name']}' in template '{original_template_for_logging}'. Skipping filter.")
-            
-            logger.debug(
-    f"Resolved single placeholder '{value}' to: {
-        str(current_value_for_placeholder)[
-            :200]}")
-            return current_value_for_placeholder
-
-        # Case 2: The template string has one or more embedded placeholders
-        # (e.g., "Value is {{my_var}} and {{another.path}}")
+            return [self._resolve_value(item, context) for item in value]
+        elif isinstance(value, str) and ("{{" in value or "{%" in value):
+            try:
+                template = self.jinja_env.from_string(value)
+                return template.render(context)
+            except exceptions.TemplateError as e:
+                logger.warning(f"Jinja2 template rendering failed for '{value}': {e}. Returning as is.")
+                return value
         else:
-            processed_template_string = value
-            for full_match_tag, template_content_inner in matches:
-                template_content_inner = template_content_inner.strip()
-                
-                resolved_placeholder_value_after_filters = None  # Initialize
-                if not template_content_inner:  # Handle {{}}
-                    resolved_placeholder_value_after_filters = ""
-                else:
-                    var_path_str_inner = self._extract_var_path(
-                        template_content_inner)
-                    filters_inner = self._parse_filters(template_content_inner)
-                    
-                    default_value_from_filter_inner = None
-                    has_default_filter_inner = False
-                    default_filter_spec_inner = next(
-    (f for f in filters_inner if f['name'] == 'default'), None)
-                    if default_filter_spec_inner:
-                        has_default_filter_inner = True
-                        default_value_from_filter_inner = default_filter_spec_inner[
-                            'args'][0] if default_filter_spec_inner['args'] else None
-                        filters_inner.remove(default_filter_spec_inner)
-
-                    resolved_var_from_context_inner = None
-                    if var_path_str_inner.startswith("context."):
-                        actual_path_inner = var_path_str_inner[len(
-                            "context."):]
-                        logger.debug(
-    f"Attempting to get value for path: '{actual_path_inner}' from initial_context. Keys: {
-        list(
-            initial_context.keys()) if isinstance(
-                initial_context,
-                 dict) else 'Not a dict'}. Initial context itself: {initial_context}")
-                        retrieved_value = self._get_value_from_path(
-                            actual_path_inner, initial_context)
-                        resolved_var_from_context_inner = retrieved_value
-                        logger.debug(
-    f"Resolved (embedded) '{var_path_str_inner}' to: {resolved_var_from_context_inner} (from initial_context)")
-                    elif task_key and var_path_str_inner == task_key:
-                        logger.warning(
-    f"Template (embedded) '{value}' in task '{task_key}' references itself ('{var_path_str_inner}').")
-                        resolved_var_from_context_inner = runtime_context.get(
-                            task_key)
-                    else:
-                        # Try runtime_context first
-                        resolved_var_from_context_inner = self._get_value_from_path(
-                            var_path_str_inner, runtime_context)
-                        if resolved_var_from_context_inner is None:
-                            # Fallback to initial_context if not found
-                            resolved_var_from_context_inner = self._get_value_from_path(
-                                var_path_str_inner, initial_context)
-                        logger.debug(
-    f"Resolved (embedded) '{var_path_str_inner}' to: {resolved_var_from_context_inner} (from runtime_context/initial_context)")
-                    
-                    current_value_for_placeholder_inner = None
-                    if resolved_var_from_context_inner is None and has_default_filter_inner:
-                        current_value_for_placeholder_inner = default_value_from_filter_inner
-                    else:
-                        current_value_for_placeholder_inner = resolved_var_from_context_inner
-
-                    # Apply other filters to
-                    # current_value_for_placeholder_inner
-                    for f_spec_inner in filters_inner:
-                        if f_spec_inner['name'] == 'from_json':
-                            try:
-                                current_value_for_placeholder_inner = json.loads(current_value_for_placeholder_inner)
-                            except (json.JSONDecodeError, TypeError):
-                                logger.warning(f"Task '{task_key}': Value for filter 'from_json' could not be parsed. Value: {current_value_for_placeholder_inner}")
-                        elif f_spec_inner['name'] == 'toJson':
-                            current_value_for_placeholder_inner = json.dumps(
-                                current_value_for_placeholder_inner)
-                        elif f_spec_inner['name'] == 'replace':
-                            if not isinstance(
-    current_value_for_placeholder_inner, str):
-                                current_value_for_placeholder_inner = str(
-                                    current_value_for_placeholder_inner)
-                            if len(f_spec_inner['args']) == 2:
-                                old_val_inner, new_val_inner = str(
-    f_spec_inner['args'][0]), str(
-        f_spec_inner['args'][1])
-                                current_value_for_placeholder_inner = current_value_for_placeholder_inner.replace(
-                                    old_val_inner, new_val_inner)
-                            else:
-                                logger.warning(
-    f"Task '{task_key}': Filter 'replace' expects 2 arguments (old, new), got {
-        len(
-            f_spec_inner['args'])}. Skipping.")
-                        elif f_spec_inner['name'] == 'trim':
-                            current_value_for_placeholder_inner = str(
-                                current_value_for_placeholder_inner).strip()
-                        else:
-                            logger.warning(
-    f"Task '{task_key}': Unknown filter '{
-        f_spec_inner['name']}' in template '{original_template_for_logging}'. Skipping filter.")
-                    resolved_placeholder_value_after_filters = current_value_for_placeholder_inner
-
-                # Convert the resolved placeholder value to string for
-                # embedding
-                string_to_insert = ""
-                if isinstance(resolved_placeholder_value_after_filters, str):
-                    string_to_insert = resolved_placeholder_value_after_filters
-                elif isinstance(resolved_placeholder_value_after_filters, (list, dict, tuple)):
-                    string_to_insert = json.dumps(
-                        resolved_placeholder_value_after_filters)
-                elif isinstance(resolved_placeholder_value_after_filters, bool):
-                    string_to_insert = str(
-                        resolved_placeholder_value_after_filters).lower()
-                elif resolved_placeholder_value_after_filters is None:
-                    # Or "" or "None" depending on context, "null" seems
-                    # reasonable.
-                    string_to_insert = "null"
-                else:  # numbers, etc.
-                    string_to_insert = str(
-                        resolved_placeholder_value_after_filters)
-
-                processed_template_string = processed_template_string.replace(
-                    full_match_tag, string_to_insert)
-
-            logger.debug(
-                f"Resolved embedded template '{original_template_for_logging}' to: {processed_template_string[:200]}")
-            return processed_template_string
+            return value
 
     def _resolve_inputs(self,
-    inputs: Optional[Dict[str,
-    Any]],
-    runtime_context: Dict[str,
-    Any],
-    initial_context: Dict[str,
-    Any],
-    task_key: Optional[str] = None) -> Dict[str,
-     Any]:
-        """Resolves all template strings within a task's input dictionary."""
+                          inputs: Optional[Dict[str, Any]],
+                          runtime_context: Dict[str, Any],
+                          initial_context: Dict[str, Any],
+                          task_key: Optional[str] = None) -> Dict[str, Any]:
+        """Resolves all template strings within a task's input dictionary using Jinja2."""
         if inputs is None:
             return {}
-        # Pass both contexts to _resolve_value
-        return self._resolve_value(
-    inputs,
-    runtime_context,
-    initial_context,
-     task_key)
 
+        # Combine contexts: runtime_context takes precedence
+        combined_context = {**initial_context, **runtime_context}
+        
+        return self._resolve_value(inputs, combined_context)
+    
     def _evaluate_condition(self,
-    condition_str: Optional[str],
-    runtime_context: Dict[str,
-    Any],
-    initial_context: Dict[str,
-     Any]) -> bool:
+                          condition_str: Optional[str],
+                          runtime_context: Dict[str, Any],
+                          initial_context: Dict[str, Any]) -> bool:
         """
-        Evaluates a condition string (e.g., "{{ task_output.status }} == \"Success\"").
-        Supports basic comparisons (==, !=, >, <, >=, <=), truthiness checks,
-        and membership checks (in, not in) on resolved context variables,
-        including accessing IAR reflection data (e.g., {{task_A.reflection.confidence}}).
-        Returns True if condition is met or if condition_str is empty/None.
+        Evaluates a condition string using Jinja2.
+        Returns True if the rendered result is truthy, or if condition_str is empty/None.
         """
         if not condition_str or not isinstance(condition_str, str):
             return True  # No condition means execute
-        condition_str = condition_str.strip()
+        
         logger.debug(f"Evaluating condition: '{condition_str}'")
-
+        
         try:
-            # Simple true/false literals
-            condition_lower = condition_str.lower()
-            if condition_lower == 'true': return True
-            if condition_lower == 'false': return False
-
-            # Regex for comparison: {{ var.path OP value }} (e.g., {{ task_A.reflection.confidence > 0.7 }})
-            # Handle both formats: "{{ var.path }} OP value" and "{{ var.path
-            # OP value }}"
-            comp_match = re.match(
-    r"^{{\s*([\w\.\-]+)\s*(==|!=|>|<|>=|<=)\s*(.*?)\s*}}$",
-     condition_str)
-            if not comp_match:
-                # Try the old format: {{ var.path }} OP value
-                comp_match = re.match(
-    r"^{{\s*([\w\.\-]+)\s*}}\s*(==|!=|>|<|>=|<=)\s*(.*)$",
-     condition_str)
+            # Combine contexts for evaluation
+            combined_context = {**initial_context, **runtime_context}
             
-            if comp_match:
-                var_path, operator, value_str = comp_match.groups()
-                actual_value = self._resolve_value(
-                    # Resolve the variable
-                    f"{{{{ {var_path} }}}}", runtime_context, initial_context)
-                expected_value = self._parse_condition_value(
-                    value_str)  # Parse the literal value
-                result = self._compare_values(
-    actual_value, operator, expected_value)
-                logger.debug(
-    f"Condition '{condition_str}' evaluated to {result} (Actual: {
-        repr(actual_value)}, Op: {operator}, Expected: {
-            repr(expected_value)})")
-                return result
+            # Use Jinja2 to render the condition string
+            rendered_condition = self.jinja_env.from_string(condition_str).render(combined_context)
+            
+            # Evaluate the truthiness of the rendered result.
+            # Jinja2 will handle the logic like '{{ task.result.count > 0 }}'
+            # and the result will be 'True' or 'False' as a string, which we then evaluate.
+            result = rendered_condition.strip().lower() in ['true', '1', 'yes']
 
-            # Regex for membership: value IN/NOT IN {{ var.path }} (e.g.,
-            # "Error" in {{task_B.reflection.potential_issues}})
-            in_match = re.match(
-    r"^(.+?)\s+(in|not in)\s+{{\s*([\w\.\-]+)\s*}}$",
-    condition_str,
-     re.IGNORECASE)
-            if in_match:
-                value_str, operator, var_path = in_match.groups()
-                value_to_check = self._parse_condition_value(
-                    value_str.strip())  # Parse the literal value
-                container = self._resolve_value(
-                    # Resolve the container
-                    f"{{{{ {var_path} }}}}", runtime_context, initial_context)
-                operator_lower = operator.lower()
-                if isinstance(container, (list, str, dict, set)
-                              ):  # Check if container type supports 'in'
-                        is_in = value_to_check in container
-                        result = is_in if operator_lower == 'in' else not is_in
-                        logger.debug(
-    f"Condition '{condition_str}' evaluated to {result}")
-                        return result
-                else:
-                        logger.warning(
-    f"Container for '{operator}' check ('{var_path}') is not a list/str/dict/set: {
-        type(container)}. Evaluating to False.")
-                        return False
-
-            # Regex for simple truthiness/existence: {{ var.path }} or !{{
-            # var.path }}
-            truth_match = re.match(
-    r"^(!)?\s*{{\s*([\w\.\-]+)\s*}}$",
-     condition_str)
-            if truth_match:
-                negated, var_path = truth_match.groups()
-                actual_value = self._resolve_value(
-                    f"{{{{ {var_path} }}}}", runtime_context, initial_context)
-                result = bool(actual_value)
-                if negated: result = not result
-                logger.debug(
-    f"Condition '{condition_str}' (truthiness/existence) evaluated to {result}")
-                return result
-
-            # If no pattern matches
-            logger.error(
-    f"Unsupported condition format: {condition_str}. Defaulting evaluation to False.")
+            logger.debug(f"Condition '{condition_str}' rendered to '{rendered_condition}' and evaluated to {result}")
+            return result
+        except exceptions.TemplateError as e:
+            logger.error(f"Error rendering condition template '{condition_str}': {e}. Defaulting to False.", exc_info=True)
             return False
         except Exception as e:
-            logger.error(
-    f"Error evaluating condition '{condition_str}': {e}. Defaulting to False.",
-     exc_info=True)
+            logger.error(f"Unexpected error evaluating condition '{condition_str}': {e}. Defaulting to False.", exc_info=True)
             return False
 
     def _parse_condition_value(self, value_str: str) -> Any:
@@ -1115,6 +796,9 @@ class IARCompliantWorkflowEngine:
             return [self._sanitize_for_json(v) for v in data]
         if hasattr(data, 'isoformat'):  # Handle datetime objects
             return data.isoformat()
+        # NEW: Handle exception objects to prevent serialization errors
+        if isinstance(data, BaseException):
+            return f"Exception: {type(data).__name__}: {str(data)}"
         # Fallback for other types (like numpy floats, etc.)
         return str(data)
 
@@ -1502,15 +1186,17 @@ class IARCompliantWorkflowEngine:
 
         # Compute declared workflow outputs (if any) using template resolution
         try:
-            outputs_def = workflow_definition.get('output', {})
+            # Support both 'output' (singular) and 'outputs' (plural) keys for backward compatibility
+            outputs_def = workflow_definition.get('outputs', workflow_definition.get('output', {}))
             if isinstance(outputs_def, dict) and outputs_def:
                 for out_key, out_spec in outputs_def.items():
                     if isinstance(out_spec, dict) and 'value' in out_spec:
                         try:
+                            # Combine contexts: runtime_context takes precedence over initial_context
+                            combined_context = {**initial_context, **runtime_context}
                             resolved_out = self._resolve_value(
                                 out_spec.get('value'),
-                                runtime_context,
-                                initial_context
+                                combined_context
                             )
                             runtime_context[out_key] = resolved_out
                         except Exception as e_out:

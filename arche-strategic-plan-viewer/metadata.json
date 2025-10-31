@@ -1,0 +1,5 @@
+{
+  "name": "ArchE Strategic Plan Viewer",
+  "description": "A web application to visualize the strategic plan for the ArchE (Abstraction & Retrieval Cognizant Handler of Exploration) project. It displays the project phases, goals, actions, and timeline in a clean, interactive interface.",
+  "requestFramePermissions": []
+}

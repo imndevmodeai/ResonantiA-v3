@@ -820,7 +820,7 @@
     "spr_id": "ExecutablespecificationprinciplE",
     "term": "Executable Specification Principle",
     "category": "CorePrinciple",
-    "definition": "The core ResonantiA philosophy, inspired by Sean Grove's 'The New Code,' stating that the primary, most valuable artifact of any process is the specification\u2014a clear, human-readable, and machine-executable expression of intent and values. Code and other artifacts are downstream, lossy projections of this specification.",
+    "definition": "The core ResonantiA philosophy, inspired by Sean Grove's 'The New Code,' stating that the primary, most valuable artifact of any process is the specification—a clear, human-readable, and machine-executable expression of intent and values. Code and other artifacts are downstream, lossy projections of this specification.",
     "relationships": {
       "embodies": "Implementation resonancE",
       "solves": "Execution paradoX",
@@ -1933,7 +1933,7 @@
   {
     "spr_id": "SprdecompressoR",
     "term": "SPR Decompressor",
-    "definition": "An internal mechanism within ArchE's cognitive architecture that recognizes valid SPR patterns (Guardian pointS format) and facilitates 'cognitive unfolding'\u2014the immediate, resonant activation of the associated concept complex (definition, relationships, blueprint_details) within the KnO.",
+    "definition": "An internal mechanism within ArchE's cognitive architecture that recognizes valid SPR patterns (Guardian pointS format) and facilitates 'cognitive unfolding'—the immediate, resonant activation of the associated concept complex (definition, relationships, blueprint_details) within the KnO.",
     "category": "CoreMechanism",
     "relationships": {
       "type": "CognitiveFunction",
@@ -2788,7 +2788,7 @@
       "confidence": "high"
     },
     "blueprint_details": "See specifications/knowledge_scaffolding_workflow.md for complete workflow specification. Implemented in workflows/knowledge_scaffolding.json.",
-    "example_application": "When asked to solve a quantum computing optimization problem, Knowledge Scaffolding acquires quantum mechanics domain knowledge, analyzes required mathematical frameworks (linear algebra, complex numbers, Hilbert spaces), and forges a Quantum Computing Specialist agent with expertise in qubit operations, gate implementations, and error correction\u2014all from zero prior quantum knowledge.",
+    "example_application": "When asked to solve a quantum computing optimization problem, Knowledge Scaffolding acquires quantum mechanics domain knowledge, analyzes required mathematical frameworks (linear algebra, complex numbers, Hilbert spaces), and forges a Quantum Computing Specialist agent with expertise in qubit operations, gate implementations, and error correction—all from zero prior quantum knowledge.",
     "token_optimization": {
       "task_allocation": {
         "deconstruct_problem": 8192,
@@ -2805,7 +2805,7 @@
   {
     "spr_id": "SpecializedcognitiveagenT",
     "term": "Specialized Cognitive Agent (SCA)",
-    "definition": "A domain-specific cognitive tool forged by Knowledge Scaffolding that contains comprehensive expertise, analytical frameworks, strategic thinking patterns, and problem-solving methodologies tailored to a specific problem domain. The SCA is not a separate entity but a cognitive persona that ArchE adopts\u2014like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs are the primary output of RISE Phase A and the foundation for all subsequent strategic analysis in Phases B, C, and D.",
+    "definition": "A domain-specific cognitive tool forged by Knowledge Scaffolding that contains comprehensive expertise, analytical frameworks, strategic thinking patterns, and problem-solving methodologies tailored to a specific problem domain. The SCA is not a separate entity but a cognitive persona that ArchE adopts—like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs are the primary output of RISE Phase A and the foundation for all subsequent strategic analysis in Phases B, C, and D.",
     "category": "CognitiveConstruct",
     "relationships": {
       "type": "DomainExpertiseProfile",
@@ -2955,7 +2955,7 @@
     "token_optimization": {
       "typical_size": "12,000-15,000 tokens",
       "max_allocation": 16384,
-      "rationale": "Must contain complete strategic synthesis without truncation. This is the document that undergoes vetting\u2014incomplete strategies lead to flawed vetting."
+      "rationale": "Must contain complete strategic synthesis without truncation. This is the document that undergoes vetting—incomplete strategies lead to flawed vetting."
     }
   },
   {
@@ -3070,7 +3070,7 @@
   {
     "spr_id": "DystopiansimulatioN",
     "term": "Dystopian Simulation",
-    "definition": "The creative worst-case scenario narrative that vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure that force explicit contingency planning. This mirrors pre-mortem analysis (imagine the project failed\u2014what happened?) but uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios that might not appear in traditional risk assessments.",
+    "definition": "The creative worst-case scenario narrative that vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure that force explicit contingency planning. This mirrors pre-mortem analysis (imagine the project failed—what happened?) but uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios that might not appear in traditional risk assessments.",
     "category": "RiskAnalysis",
     "relationships": {
       "type": "CatastrophicImaginatioN",
@@ -4767,7 +4767,7 @@
       ],
       "confidence": "high"
     },
-    "blueprint_details": "Experience, mastery, connection, and meaning\u2014the unoptimizable domains of the human spirit",
+    "blueprint_details": "Experience, mastery, connection, and meaning—the unoptimizable domains of the human spirit",
     "example_application": "Recognizing and preserving uniquely human experiences and capabilities",
     "created": "2025-10-16T06:54:37.296521"
   },
@@ -5175,7 +5175,7 @@
         "Systematic error log analysis"
       ],
       "learning_process": [
-        "Pattern frequency analysis (\u22655 occurrences)",
+        "Pattern frequency analysis (≥5 occurrences)",
         "Root cause identification and analysis",
         "Automatic fix generation and validation",
         "Knowledge crystallization into SPRs"
@@ -5372,7 +5372,7 @@
     "term": "Workflow Engine",
     "definition": "The Mind Forge for process execution with IAR compliance at every step. Orchestrates analytical triad and provides automated workflow management, enabling full deployment for all business and operational processes with dynamic orchestration capabilities.",
     "category": "SystemComponent",
-    "relationships": {
+    "re{lationships": {
       "type": "ProcessOrchestration",
       "enables": [
         "IAR compliance",
@@ -5432,6 +5432,153 @@
       "source_reference": "Core metacognitive architecture requirement",
       "confidence": 0.98,
       "evidence_strength": 0.95
+    },
+    "mcp_mastery_frameworK": {
+      "spr_id": "mcp_mastery_frameworK",
+      "name": "MCP Mastery FrameworK",
+      "category": "System Capability",
+      "definition": "Comprehensive framework for understanding and utilizing Model Context Protocol (MCP) tools. Includes 5W+1H analysis (What, When, Where, Who, Why, How), decision trees, tool selection matrices, and practical examples. Enables ArchE to make context-appropriate tool selections aligned with ResonantiA mandates.",
+      "relationships": {
+        "type": "System Capability",
+        "enables": [
+          "CognitivE toolS Actuation",
+          "Workflow execution",
+          "External system integration",
+          "Knowledge discovery"
+        ],
+        "required_by": [
+          "Workflow enginE",
+          "Action registrY",
+          "Mind ForgE"
+        ],
+        "aligned_with": [
+          "ALL 13 MandateS",
+          "Implementation resonancE",
+          "Live validatioN",
+          "Truth seekinG"
+        ],
+        "documented_in": [
+          "knowledge_graph/mcp_usage_guide.md",
+          "knowledge_graph/my_mcp_tools_catalog.md",
+          "knowledge_graph/mcp_tool_selection_walkthrough.md"
+        ]
+      },
+      "blueprint_details": {
+        "conceptual": "MCP is the mechanism through which ArchE interacts with the external world",
+        "operational": {
+          "tool_selection": "Decision matrix based on requirement type",
+          "execution_pattern": "Intent → Select → Execute → Reflect (IAR) → Integrate",
+          "validation": "All MCP actions generate IAR and log to ThoughtTrail",
+          "error_handling": "Metacognitive shifT triggers on critical failures",
+          "catalog": "knowledge_graph/my_mcp_tools_catalog.md contains complete tool inventory"
+        }
+      },
+      "example_usage": "When user asks 'what's behind Summers_eyeS?', apply MCP Mastery Framework: Analyze intent (web research), Select tool (browser_navigate), Execute with IAR, Integrate results into knowledge base."
+    },
+    "mcP tool selection algorithm": {
+      "spr_id": "mcP tool selection algorithm",
+      "name": "MCP Tool Selection Algorithm",
+      "category": "Decision Framework",
+      "definition": "Systematic algorithm for selecting appropriate MCP tools based on user requirements. Involves intent recognition, requirement analysis, tool catalog filtering, mandate alignment checking, and optimization scoring. Ensures context-appropriate tool selection with full IAR compliance.",
+      "relationships": {
+        "type": "Algorithm",
+        "part_of": "MCP Mastery FrameworK",
+        "uses": [
+          "Mandate alignmenT",
+          "IAR generation",
+          "Contextual analysiS"
+        ],
+        "executed_by": "Action registrY",
+        "guides": "Tool orchestration",
+        "documented_in": "knowledge_graph/mcp_tool_selection_walkthrough.md"
+      },
+      "blueprint_details": {
+        "steps": [
+          "1. Intent Recognition: Parse user request and extract requirements",
+          "2. Tool Selection: Match requirements to available MCP tools",
+          "3. Parameter Preparation: Validate parameters against tool schema",
+          "4. Execution with IAR: Invoke tool and generate IAR",
+          "5. Result Integration: Integrate results into workflow"
+        ],
+        "decision_criteria": [
+          "Mandate alignment score",
+          "Tool capability match",
+          "Security assessment",
+          "Resource availability"
+        ],
+        "detailed_walkthrough": "See mcp_tool_selection_walkthrough.md for step-by-step real-world examples"
+      },
+      "example_usage": "User asks to run webcam server → Algorithm: intent=execution, requirement=start service, tool=run_terminal_cmd, params=[env, script], validate with IAR"
+    },
+    "mcP orchestration pattern": {
+      "spr_id": "mcP orchestration pattern",
+      "name": "MCP Orchestration Pattern",
+      "category": "Workflow Pattern",
+      "definition": "Pattern for coordinating multiple MCP tools in sequence or parallel to accomplish complex tasks. Includes dependency management, parallel execution for independent tools, sequential execution for dependent tools, result aggregation, and comprehensive IAR generation for the entire orchestration.",
+      "relationships": {
+        "type": "Workflow Pattern",
+        "part_of": "Workflow enginE",
+        "uses": [
+          "MCP tool selection algorithm",
+          "Action registrY",
+          "IAR compliance"
+        ],
+        "enables": [
+          "Complex task execution",
+          "Multi-step workflows",
+          "Parallel processing"
+        ]
+      },
+      "blueprint_details": {
+        "orchestration_types": {
+          "sequential": "Tools run in dependency order",
+          "parallel": "Independent tools run simultaneously",
+          "conditional": "Tool execution based on previous results",
+          "iterative": "Repeat tool execution with varying parameters"
+        },
+        "iText": "Each tool generates its own IAR, plus orchestrator generates meta-IAR for overall workflow"
+      },
+      "example_usage": "Multi-step web research: browser_navigate → browser_snapshot → extract_content → validate_with_mandates → integrate_into_knowledge_base. Each step has IAR, plus workflow-level meta-IAR."
+    },
+    "KnowledgeTransfeR Pattern": {
+      "spr_id": "KnowledgeTransfeR Pattern",
+      "name": "Knowledge Transfer to ArchE Pattern",
+      "category": "Knowledge Integration Pattern",
+      "definition": "ArchE successfully receives and integrates complex knowledge through structured transfer: Documentation → SPR creation → Practical examples → Integration validation. Pattern includes 5W+1H framework documentation, SPR definition, Python implementation, and usage examples. Evidence: MCP knowledge transfer complete with all components successfully integrated and validated.",
+      "relationships": {
+        "type": "Pattern",
+        "enables": [
+          "Cross-domain knowledge integration",
+          "Systematic knowledge transfer",
+          "Pattern crystallization automation"
+        ],
+        "uses": [
+          "Documentation frameworks",
+          "SPR creation processes",
+          "Validation methodologies"
+        ],
+        "aligned_with": [
+          "ALL MandateS",
+          "Knowledge evolution",
+          "Implementation resonance"
+        ]
+      },
+      "blueprint_details": {
+        "conceptual": "Repeatable methodology for transferring complex knowledge to ArchE",
+        "operational": {
+          "transfer_stages": [
+            "Documentation creation (complete framework)",
+            "SPR definition and addition",
+            "Python implementation examples",
+            "Integration validation and testing",
+            "Pattern crystallization"
+          ],
+          "validation_required": true,
+          "iar_compliance": "mandatory",
+          "guardian_review": "required for crystallization"
+        }
+      },
+      "example_usage": "To transfer new knowledge domain: 1) Create comprehensive guide with 5W+1H, 2) Add relevant SPRs to knowledge graph, 3) Implement Python examples, 4) Validate integration, 5) Crystallize pattern. Evidence: MCP knowledge transfer session demonstrates complete pattern successfully."
     }
   }
 ]
