@@ -24,11 +24,15 @@ import re
 from datetime import datetime
 
 from .federated_search_agents import (
+    DomainDetector,
     AcademicKnowledgeAgent,
     CommunityPulseAgent,
     CodebaseTruthAgent,
     VisualSynthesisAgent,
-    SearchEngineAgent
+    SearchEngineAgent,
+    SportsDomainAgent,
+    FinancialDomainAgent,
+    MusicDomainAgent
 )
 from .synthesis_engine import SynthesisEngine
 from .playbook_orchestrator import PlaybookOrchestrator
@@ -50,13 +54,23 @@ class RISEEnhancedSynergisticInquiry:
     """
     
     def __init__(self):
-        # Initialize specialized search agents
+        # Initialize domain detector for intelligent routing
+        self.domain_detector = DomainDetector()
+        
+        # Initialize specialized search agents (academic and general)
         self.agents = {
             'academic': AcademicKnowledgeAgent(),
             'community': CommunityPulseAgent(),
             'code': CodebaseTruthAgent(),
             'visual': VisualSynthesisAgent(),
             'startpage': SearchEngineAgent("Startpage")
+        }
+        
+        # Initialize domain-specific agents
+        self.domain_agents = {
+            'sports': SportsDomainAgent(),
+            'financial': FinancialDomainAgent(),
+            'music': MusicDomainAgent()
         }
         
         # Initialize synthesis engine
@@ -157,15 +171,21 @@ class RISEEnhancedSynergisticInquiry:
             6. Knowledge Gaps: What information gaps need to be filled?
             7. Synthesis Requirements: What level of synthesis is needed?
             
-            Return a structured JSON analysis with:
-            - resonant_insights: [list of core insights]
-            - strategic_requirements: [list of strategic elements]
-            - cognitive_complexity: [low/medium/high/genius]
-            - temporal_dimensions: [past/present/future/4d]
-            - causal_relationships: [list of implied relationships]
-            - knowledge_gaps: [list of information gaps]
-            - synthesis_level: [basic/intermediate/advanced/phd]
-            - analytical_depth: [surface/deep/comprehensive/genius]
+            **CRITICAL: You MUST respond with ONLY a valid JSON object. No additional text, explanations, or markdown formatting outside the JSON.**
+            
+            Return a structured JSON analysis with this exact format:
+            {{
+                "resonant_insights": ["insight1", "insight2"],
+                "strategic_requirements": ["requirement1", "requirement2"],
+                "cognitive_complexity": "low|medium|high|genius",
+                "temporal_dimensions": "past|present|future|4d",
+                "causal_relationships": ["relationship1", "relationship2"],
+                "knowledge_gaps": ["gap1", "gap2"],
+                "synthesis_level": "basic|intermediate|advanced|phd",
+                "analytical_depth": "surface|deep|comprehensive|genius"
+            }}
+            
+            Respond with ONLY the JSON object, nothing else.
             """
             
             llm_response = self.synthesis_engine.llm_provider.generate_chat(
@@ -314,7 +334,7 @@ class RISEEnhancedSynergisticInquiry:
                 domain=domain,
                 original_query=query,
                 rise_analysis=rise_analysis,
-                **self._get_phase_specific_params(phase, rise_analysis)
+                **self._get_phase_specific_params(phase, rise_analysis, query=query)
             )
             
             logger.info(f"ResonantiA phase {phase} completed successfully")
@@ -326,20 +346,69 @@ class RISEEnhancedSynergisticInquiry:
     
     def _execute_rise_enhanced_phase(self, query: str, phase: str, rise_analysis: Dict[str, Any], approach: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Execute a RISE-enhanced phase using multi-disciplinary search.
+        Execute a RISE-enhanced phase using domain-aware multi-disciplinary search.
+        Routes to domain-specific agents for non-academic queries, academic agents for academic queries.
         """
         logger.info(f"Executing RISE-enhanced phase: {phase}")
         
+        # DOMAIN-AWARE ROUTING: Detect query domain
+        domain_info = self.domain_detector.detect_domain(query)
+        primary_domain = domain_info.get('primary_domain', 'general')
+        domain_confidence = domain_info.get('confidence', 0.0)
+        
+        logger.info(f"Domain detected: {primary_domain} (confidence: {domain_confidence:.2f})")
+        
         # Get phase configuration
         phase_config = self.rise_phases.get(phase, {})
-        agents_to_use = phase_config.get('agents', ['academic', 'community'])
+        default_agents = phase_config.get('agents', ['academic', 'community'])
+        
+        # DOMAIN-AWARE AGENT SELECTION
+        # Route to domain-specific agents for non-academic domains with sufficient confidence
+        agents_to_use = []
+        domain_specific_results = {}
+        
+        if primary_domain == 'academic' or domain_confidence < 0.3:
+            # Use academic and general agents for academic queries or low-confidence detections
+            logger.info("Routing to academic/general agents (academic query or low domain confidence)")
+            agents_to_use = default_agents
+        elif primary_domain in self.domain_agents:
+            # Use domain-specific agent + complementary general agents
+            logger.info(f"Routing to domain-specific agent: {primary_domain}")
+            domain_agent = self.domain_agents[primary_domain]
+            agents_to_use = [f"domain_{primary_domain}"]  # Special marker for domain agent
+            
+            # Generate targeted queries for this phase
+            phase_queries = self._generate_phase_queries(query, phase, rise_analysis)
+            
+            # Execute domain-specific search with appropriate rigor
+            domain_results = []
+            for phase_query in phase_queries:
+                try:
+                    results = domain_agent.search(phase_query, max_results=8)
+                    domain_results.extend(results)
+                except Exception as e:
+                    logger.warning(f"Domain agent {primary_domain} search failed for phase {phase}: {e}")
+            
+            domain_specific_results[f"domain_{primary_domain}"] = domain_results
+            logger.info(f"Domain agent {primary_domain} found {len(domain_results)} results")
+            
+            # Also include community and visual agents for complementary context
+            agents_to_use.extend(['community', 'visual'])
+        else:
+            # General query, use default agents
+            logger.info("Using default agents for general query")
+            agents_to_use = default_agents
         
         # Generate targeted queries for this phase
         phase_queries = self._generate_phase_queries(query, phase, rise_analysis)
         
-        # Execute multi-disciplinary search
-        phase_results = {}
+        # Execute multi-disciplinary search (only if not already done by domain agent)
+        phase_results = domain_specific_results.copy()
+        
         for agent_type in agents_to_use:
+            if agent_type.startswith('domain_'):
+                # Already processed by domain agent, skip
+                continue
             if agent_type in self.agents:
                 agent_results = []
                 for phase_query in phase_queries:
@@ -355,10 +424,16 @@ class RISEEnhancedSynergisticInquiry:
         return {
             "status": "success",
             "phase": phase,
-            "methodology": "RISE-enhanced multi-disciplinary search",
-            "agents_used": agents_to_use,
+            "methodology": "RISE-enhanced domain-aware multi-disciplinary search",
+            "domain_detection": domain_info,
+            "agents_used": agents_to_use if not domain_specific_results else list(domain_specific_results.keys()) + [a for a in agents_to_use if not a.startswith('domain_')],
             "results": phase_results,
-            "total_results": sum(len(results) for results in phase_results.values())
+            "total_results": sum(len(results) for results in phase_results.values()),
+            "domain_routing": {
+                "primary_domain": primary_domain,
+                "confidence": domain_confidence,
+                "routing_strategy": "domain_specific" if primary_domain in self.domain_agents else "academic_general"
+            }
         }
     
     def _perform_phd_level_synthesis(self, query: str, analysis_results: Dict[str, Any], rise_analysis: Dict[str, Any]) -> Dict[str, Any]:
@@ -432,17 +507,165 @@ class RISEEnhancedSynergisticInquiry:
             else:
                 response_text = str(llm_response)
             
-            # Try to extract JSON
-            json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
-            if json_match:
-                return json.loads(json_match.group())
+            if not response_text or not response_text.strip():
+                logger.warning("RISE analysis: Empty response text")
+                return self._fallback_rise_analysis("")
+            
+            # Try multiple parsing strategies
+            
+            # Strategy 1: Try to find JSON block (code fence or plain)
+            # First, try to extract from code fences
+            code_fence_patterns = [
+                r'```json\s*(.*?)\s*```',  # JSON in json code fence
+                r'```\s*(.*?)\s*```',      # JSON in generic code fence
+            ]
+            
+            for pattern in code_fence_patterns:
+                fence_match = re.search(pattern, response_text, re.DOTALL)
+                if fence_match:
+                    json_str = fence_match.group(1).strip()
+                    if json_str.startswith('{'):
+                        # Try to extract complete JSON by matching braces
+                        json_str = self._extract_complete_json(json_str)
+                        if json_str:
+                            try:
+                                parsed = json.loads(json_str)
+                                if isinstance(parsed, dict):
+                                    logger.debug("RISE analysis: Successfully parsed JSON from code fence")
+                                    return parsed
+                            except json.JSONDecodeError as e:
+                                logger.debug(f"RISE analysis: JSON decode error from code fence: {e}")
+                                continue
+            
+            # Strategy 1b: Try to find standalone JSON object
+            # Find first { and try to extract complete JSON
+            first_brace = response_text.find('{')
+            if first_brace != -1:
+                json_str = self._extract_complete_json(response_text[first_brace:])
+                if json_str:
+                    try:
+                        parsed = json.loads(json_str)
+                        if isinstance(parsed, dict):
+                            logger.debug("RISE analysis: Successfully parsed standalone JSON")
+                            return parsed
+                    except json.JSONDecodeError:
+                        pass
+            
+            # Strategy 2: Try ast.literal_eval for Python dict syntax
+            try:
+                import ast
+                # Try to find Python dict-like structure
+                dict_match = re.search(r'\{[^}]*\}', response_text, re.DOTALL)
+                if dict_match:
+                    dict_str = dict_match.group(0)
+                    parsed = ast.literal_eval(dict_str)
+                    if isinstance(parsed, dict):
+                        logger.debug("RISE analysis: Successfully parsed using ast.literal_eval")
+                        return parsed
+            except (ValueError, SyntaxError) as e:
+                logger.debug(f"RISE analysis: ast.literal_eval failed: {e}")
+            
+            # Strategy 3: Try to extract structured data from markdown or text
+            # Look for key-value patterns
+            structured_data = self._extract_structured_data_from_text(response_text)
+            if structured_data:
+                logger.debug("RISE analysis: Successfully extracted structured data from text")
+                return structured_data
             
             # Fallback parsing
+            logger.warning("RISE analysis: All parsing strategies failed, using fallback")
             return self._fallback_rise_analysis(response_text)
             
         except Exception as e:
-            logger.warning(f"RISE analysis parsing failed: {e}")
+            logger.warning(f"RISE analysis parsing failed: {e}", exc_info=True)
             return self._fallback_rise_analysis("")
+    
+    def _extract_complete_json(self, text: str) -> Optional[str]:
+        """Extract a complete JSON object by matching braces."""
+        if not text or not text.strip().startswith('{'):
+            return None
+        
+        brace_count = 0
+        in_string = False
+        escape_next = False
+        json_end = -1
+        
+        for i, char in enumerate(text):
+            if escape_next:
+                escape_next = False
+                continue
+            
+            if char == '\\':
+                escape_next = True
+                continue
+            
+            if char == '"' and not escape_next:
+                in_string = not in_string
+                continue
+            
+            if not in_string:
+                if char == '{':
+                    brace_count += 1
+                elif char == '}':
+                    brace_count -= 1
+                    if brace_count == 0:
+                        json_end = i + 1
+                        break
+        
+        if json_end > 0:
+            return text[:json_end]
+        return None
+    
+    def _extract_structured_data_from_text(self, text: str) -> Optional[Dict[str, Any]]:
+        """Extract structured data from text using pattern matching."""
+        try:
+            result = {}
+            
+            # Look for common RISE analysis fields
+            patterns = {
+                'resonant_insights': r'resonant[_\s]*insights?[:\-]\s*\[(.*?)\]',
+                'strategic_requirements': r'strategic[_\s]*requirements?[:\-]\s*\[(.*?)\]',
+                'cognitive_complexity': r'cognitive[_\s]*complexity[:\-]\s*([a-z]+)',
+                'temporal_dimensions': r'temporal[_\s]*dimensions?[:\-]\s*([a-z/]+)',
+                'causal_relationships': r'causal[_\s]*relationships?[:\-]\s*\[(.*?)\]',
+                'knowledge_gaps': r'knowledge[_\s]*gaps?[:\-]\s*\[(.*?)\]',
+                'synthesis_level': r'synthesis[_\s]*level[:\-]\s*([a-z]+)',
+                'analytical_depth': r'analytical[_\s]*depth[:\-]\s*([a-z]+)',
+            }
+            
+            for key, pattern in patterns.items():
+                match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
+                if match:
+                    if key in ['resonant_insights', 'strategic_requirements', 'causal_relationships', 'knowledge_gaps']:
+                        # Extract list items
+                        list_content = match.group(1)
+                        items = [item.strip().strip('"\'') for item in re.split(r'[,;]', list_content) if item.strip()]
+                        result[key] = items if items else []
+                    else:
+                        result[key] = match.group(1).strip()
+            
+            # If we extracted at least one field, return the result
+            if result:
+                # Fill in missing fields with defaults
+                defaults = {
+                    'resonant_insights': [],
+                    'strategic_requirements': [],
+                    'cognitive_complexity': 'medium',
+                    'temporal_dimensions': 'present',
+                    'causal_relationships': [],
+                    'knowledge_gaps': [],
+                    'synthesis_level': 'intermediate',
+                    'analytical_depth': 'comprehensive',
+                }
+                for key, default_value in defaults.items():
+                    if key not in result:
+                        result[key] = default_value
+                return result
+            
+            return None
+        except Exception as e:
+            logger.debug(f"Structured data extraction failed: {e}")
+            return None
     
     def _fallback_rise_analysis(self, query: str) -> Dict[str, Any]:
         """Fallback RISE analysis when LLM fails."""
@@ -473,15 +696,34 @@ class RISEEnhancedSynergisticInquiry:
         }
         return priorities.get(pattern_name, 10)
     
-    def _get_phase_specific_params(self, phase: str, rise_analysis: Dict[str, Any]) -> Dict[str, Any]:
-        """Get phase-specific parameters for ResonantiA actions."""
+    def _get_phase_specific_params(self, phase: str, rise_analysis: Dict[str, Any], query: Optional[str] = None) -> Dict[str, Any]:
+        """Get phase-specific parameters for ResonantiA actions using dynamic extraction."""
         params = {}
         
         if phase == 'ptrf_analysis':
             params['misconceptions'] = rise_analysis.get('knowledge_gaps', [])
         elif phase == 'causal_inference':
-            params['treatment'] = rise_analysis.get('causal_relationships', ['unknown'])[0]
-            params['outcome'] = rise_analysis.get('strategic_requirements', ['unknown'])[0]
+            # Use universal dynamic extraction instead of hardcoded heuristics
+            try:
+                from .causal_parameter_extractor import extract_causal_parameters
+                
+                # Extract from RISE analysis (with query as context if available)
+                causal_params = extract_causal_parameters(
+                    query=query,
+                    rise_analysis=rise_analysis
+                )
+                
+                params['treatment'] = causal_params.get('treatment', 'unknown_treatment')
+                params['outcome'] = causal_params.get('outcome', 'unknown_outcome')
+                params['confounders'] = causal_params.get('confounders', [])
+                params['causal_mechanisms'] = causal_params.get('causal_mechanisms', [])
+                params['extraction_confidence'] = causal_params.get('confidence', 0.5)
+                params['extraction_method'] = causal_params.get('extraction_method', 'fallback')
+            except Exception as e:
+                logger.warning(f"Dynamic causal parameter extraction failed: {e}, using fallback")
+                # Fallback to original heuristic
+                params['treatment'] = rise_analysis.get('causal_relationships', ['unknown'])[0] if isinstance(rise_analysis.get('causal_relationships'), list) and len(rise_analysis.get('causal_relationships', [])) > 0 else 'unknown_treatment'
+                params['outcome'] = rise_analysis.get('strategic_requirements', ['unknown'])[0] if isinstance(rise_analysis.get('strategic_requirements'), list) and len(rise_analysis.get('strategic_requirements', [])) > 0 else 'unknown_outcome'
         elif phase == 'temporal_resonance':
             params['time_horizon'] = rise_analysis.get('temporal_dimensions', 'present')
         

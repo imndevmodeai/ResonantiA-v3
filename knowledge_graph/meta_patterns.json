@@ -1,0 +1,42 @@
+{
+    "keyword_to_identifier_mapping": {
+        "meta_pattern_id": "MP-001",
+        "description": "A meta-pattern describing a key-value mapping where a string keyword maps to a canonical identifier (like an SPR_ID).",
+        "structure_type": "key_value_map",
+        "transformation_type": "string_mapping",
+        "abstraction_level": 2,
+        "schema": {
+            "type": "object",
+            "patternProperties": {
+                "^[a-zA-Z0-9_-]+$": { "type": "string" }
+            },
+            "additionalProperties": false
+        },
+        "examples": [
+            {
+                "name": "SPR Keyword Map",
+                "instance": {
+                    "emergent": "EmergenceOverTimE",
+                    "historical": "HistoricalContextualizatioN"
+                }
+            }
+        ]
+    },
+    "string_substitution_template": {
+        "meta_pattern_id": "MP-002",
+        "description": "A meta-pattern for a string template that uses placeholders (e.g., '{key}') for dynamic content substitution.",
+        "structure_type": "string_template",
+        "transformation_type": "string_substitution",
+        "abstraction_level": 2,
+        "schema": {
+            "type": "string",
+            "pattern": ".*\\{.*\\}.*"
+        },
+        "examples": [
+            {
+                "name": "Objective Generation Template",
+                "instance": "Apply the full spectrum of {protocol_version} capabilities to analyze {query_description}."
+            }
+        ]
+    }
+}

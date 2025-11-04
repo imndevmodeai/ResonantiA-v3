@@ -22,6 +22,129 @@ from Three_PointO_ArchE.tools.youtube_scraper_tool import get_youtube_transcript
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+class DomainDetector:
+    """
+    Intelligent domain detection system to classify queries into appropriate categories.
+    Enables domain-specific search routing with appropriate rigor for each niche.
+    """
+    
+    def __init__(self):
+        # Define domain keywords and patterns
+        self.domain_patterns = {
+            'sports': {
+                'keywords': [
+                    'sport', 'athlete', 'team', 'game', 'match', 'championship', 'tournament',
+                    'boxing', 'football', 'basketball', 'baseball', 'soccer', 'tennis', 'golf',
+                    'hockey', 'cricket', 'rugby', 'volleyball', 'mma', 'ufc', 'boxing',
+                    'olympics', 'nfl', 'nba', 'mlb', 'nhl', 'premier league', 'fifa',
+                    'player', 'coach', 'franchise', 'draft', 'playoff', 'superbowl',
+                    'world cup', 'stanley cup', 'wimbledon', 'masters', 'open'
+                ],
+                'context_indicators': ['win', 'loss', 'victory', 'defeat', 'score', 'record', 'career', 'prime']
+            },
+            'financial': {
+                'keywords': [
+                    'stock', 'market', 'trading', 'investment', 'portfolio', 'finance', 'economic',
+                    'bank', 'banking', 'currency', 'crypto', 'bitcoin', 'ethereum', 'trading',
+                    'revenue', 'profit', 'revenue', 'earnings', 'dividend', 'ipo', 'merger',
+                    'acquisition', 'analyst', 'forecast', 'economy', 'gdp', 'inflation', 'interest rate',
+                    'bond', 'mutual fund', 'hedge fund', 'wall street', 's&p 500', 'dow jones',
+                    'nasdaq', 'forex', 'futures', 'options', 'derivatives', 'sec', 'federal reserve'
+                ],
+                'context_indicators': ['price', 'value', 'growth', 'decline', 'yield', 'return', 'risk']
+            },
+            'music': {
+                'keywords': [
+                    'song', 'album', 'artist', 'music', 'musician', 'band', 'genre', 'track',
+                    'record', 'single', 'hit', 'chart', 'billboard', 'grammy', 'award',
+                    'concert', 'tour', 'performance', 'lyrics', 'melody', 'harmony', 'rhythm',
+                    'rock', 'pop', 'jazz', 'classical', 'hip hop', 'rap', 'country', 'blues',
+                    'electronic', 'edm', 'folk', 'metal', 'punk', 'reggae', 'r&b', 'soul'
+                ],
+                'context_indicators': ['release', 'debut', 'album', 'song', 'track', 'single', 'hit']
+            },
+            'academic': {
+                'keywords': [
+                    'research', 'study', 'analysis', 'paper', 'publication', 'journal', 'article',
+                    'thesis', 'dissertation', 'peer review', 'methodology', 'hypothesis', 'theory',
+                    'experiment', 'data', 'findings', 'conclusion', 'abstract', 'citation',
+                    'scholar', 'academic', 'scientific', 'empirical', 'quantitative', 'qualitative',
+                    'arxiv', 'pubmed', 'ieee', 'science', 'nature', 'cell', 'lancet'
+                ],
+                'context_indicators': ['study', 'research', 'published', 'journal', 'conference', 'proceedings']
+            },
+            'technology': {
+                'keywords': [
+                    'software', 'hardware', 'programming', 'code', 'algorithm', 'system',
+                    'tech', 'technology', 'computer', 'server', 'cloud', 'ai', 'machine learning',
+                    'data science', 'cybersecurity', 'blockchain', 'internet', 'network',
+                    'api', 'framework', 'library', 'language', 'python', 'javascript', 'java'
+                ],
+                'context_indicators': ['develop', 'implement', 'system', 'application', 'platform']
+            },
+            'entertainment': {
+                'keywords': [
+                    'movie', 'film', 'tv', 'television', 'show', 'series', 'episode', 'actor',
+                    'actress', 'director', 'producer', 'cinema', 'theater', 'comedy', 'drama',
+                    'horror', 'action', 'thriller', 'oscar', 'emmy', 'golden globe', 'netflix',
+                    'hulu', 'disney', 'streaming', 'podcast', 'book', 'novel', 'author'
+                ],
+                'context_indicators': ['release', 'premiere', 'performance', 'role', 'character']
+            }
+        }
+    
+    def detect_domain(self, query: str) -> Dict[str, Any]:
+        """
+        Detect the primary domain(s) of a query.
+        Returns a dictionary with domain name, confidence score, and matched indicators.
+        """
+        query_lower = query.lower()
+        domain_scores = {}
+        
+        for domain, patterns in self.domain_patterns.items():
+            score = 0
+            matched_keywords = []
+            matched_indicators = []
+            
+            # Check keywords
+            for keyword in patterns['keywords']:
+                if keyword.lower() in query_lower:
+                    score += 2  # Keywords are strong indicators
+                    matched_keywords.append(keyword)
+            
+            # Check context indicators
+            for indicator in patterns['context_indicators']:
+                if indicator.lower() in query_lower:
+                    score += 1  # Context indicators provide additional evidence
+                    matched_indicators.append(indicator)
+            
+            if score > 0:
+                domain_scores[domain] = {
+                    'score': score,
+                    'confidence': min(score / 10.0, 1.0),  # Normalize to 0-1
+                    'matched_keywords': matched_keywords,
+                    'matched_indicators': matched_indicators
+                }
+        
+        # Determine primary domain
+        if domain_scores:
+            primary_domain = max(domain_scores.items(), key=lambda x: x[1]['score'])
+            return {
+                'primary_domain': primary_domain[0],
+                'confidence': primary_domain[1]['confidence'],
+                'all_domains': domain_scores,
+                'matched_keywords': primary_domain[1]['matched_keywords'],
+                'matched_indicators': primary_domain[1]['matched_indicators']
+            }
+        else:
+            return {
+                'primary_domain': 'general',
+                'confidence': 0.0,
+                'all_domains': {},
+                'matched_keywords': [],
+                'matched_indicators': []
+            }
+
 class BaseSearchAgent:
     """Abstract base class for a federated search agent."""
     def __init__(self, name: str):
@@ -294,6 +417,227 @@ class VisualSynthesisAgent(BaseSearchAgent):
             results_with_transcripts.append(res)
         
         return results_with_transcripts
+
+
+class SportsDomainAgent(BaseSearchAgent):
+    """
+    Specialized agent for sports-related queries.
+    Searches sports-specific sources: ESPN, Sports Illustrated, The Athletic, Bleacher Report, etc.
+    """
+    def __init__(self):
+        super().__init__("SportsDomain")
+        self.sports_sources = [
+            "site:espn.com",
+            "site:sportsillustrated.com",
+            "site:theathletic.com",
+            "site:bleacherreport.com",
+            "site:cbssports.com",
+            "site:si.com",
+            "site:nbcsports.com"
+        ]
+    
+    def search(self, query: str, max_results: int = 5) -> List[Dict[str, Any]]:
+        """
+        Search sports-specific sources with domain-appropriate rigor.
+        """
+        logger.info(f"Querying {self.name} for sports query: {query}")
+        results = []
+        
+        # Use DuckDuckGo with site-specific searches for sports sources
+        try:
+            for source in self.sports_sources[:3]:  # Limit to top 3 sources for performance
+                search_query = f"{source} {query}"
+                search_url = f"https://duckduckgo.com/html/?q={quote_plus(search_query)}"
+                
+                try:
+                    response = requests.get(search_url, headers=self.headers, timeout=20)
+                    response.raise_for_status()
+                    soup = BeautifulSoup(response.text, 'html.parser')
+                    
+                    result_elements = soup.select("div.result")
+                    if not result_elements:
+                        result_elements = soup.select("div[data-result]") or soup.select("div.web-result")
+                    
+                    for element in result_elements[:max_results]:
+                        title_elem = (element.select_one("h2.result__title a") or 
+                                    element.select_one("h2 a") or 
+                                    element.select_one("a.result__a"))
+                        
+                        snippet_elem = (element.select_one("div.result__snippet") or 
+                                      element.select_one("div.result__body") or
+                                      element.select_one("span"))
+                        
+                        if title_elem:
+                            results.append({
+                                'source': f"{self.name} ({source.replace('site:', '')})",
+                                'title': title_elem.get_text(strip=True),
+                                'url': title_elem['href'] if 'href' in title_elem.attrs else '',
+                                'snippet': snippet_elem.get_text(strip=True) if snippet_elem else "",
+                                'search_query': query,
+                                'domain': 'sports',
+                                'source_type': 'specialized_sports_media'
+                            })
+                            if len(results) >= max_results:
+                                break
+                except Exception as e:
+                    logger.warning(f"Failed to search {source}: {e}")
+                    continue
+                    
+                if len(results) >= max_results:
+                    break
+                    
+        except Exception as e:
+            logger.error(f"Sports domain search failed: {e}")
+        
+        logger.info(f"Sports domain agent found {len(results)} results.")
+        return results
+
+
+class FinancialDomainAgent(BaseSearchAgent):
+    """
+    Specialized agent for financial and economic queries.
+    Searches financial-specific sources: Bloomberg, Reuters Finance, MarketWatch, Financial Times, etc.
+    """
+    def __init__(self):
+        super().__init__("FinancialDomain")
+        self.financial_sources = [
+            "site:bloomberg.com",
+            "site:reuters.com/finance",
+            "site:marketwatch.com",
+            "site:ft.com",
+            "site:wsj.com",
+            "site:cnbc.com",
+            "site:yahoo.com/finance",
+            "site:investing.com"
+        ]
+    
+    def search(self, query: str, max_results: int = 5) -> List[Dict[str, Any]]:
+        """
+        Search financial-specific sources with domain-appropriate rigor.
+        """
+        logger.info(f"Querying {self.name} for financial query: {query}")
+        results = []
+        
+        try:
+            for source in self.financial_sources[:3]:  # Limit to top 3 sources
+                search_query = f"{source} {query}"
+                search_url = f"https://duckduckgo.com/html/?q={quote_plus(search_query)}"
+                
+                try:
+                    response = requests.get(search_url, headers=self.headers, timeout=20)
+                    response.raise_for_status()
+                    soup = BeautifulSoup(response.text, 'html.parser')
+                    
+                    result_elements = soup.select("div.result")
+                    if not result_elements:
+                        result_elements = soup.select("div[data-result]") or soup.select("div.web-result")
+                    
+                    for element in result_elements[:max_results]:
+                        title_elem = (element.select_one("h2.result__title a") or 
+                                    element.select_one("h2 a") or 
+                                    element.select_one("a.result__a"))
+                        
+                        snippet_elem = (element.select_one("div.result__snippet") or 
+                                      element.select_one("div.result__body") or
+                                      element.select_one("span"))
+                        
+                        if title_elem:
+                            results.append({
+                                'source': f"{self.name} ({source.replace('site:', '').replace('/finance', '')})",
+                                'title': title_elem.get_text(strip=True),
+                                'url': title_elem['href'] if 'href' in title_elem.attrs else '',
+                                'snippet': snippet_elem.get_text(strip=True) if snippet_elem else "",
+                                'search_query': query,
+                                'domain': 'financial',
+                                'source_type': 'specialized_financial_media'
+                            })
+                            if len(results) >= max_results:
+                                break
+                except Exception as e:
+                    logger.warning(f"Failed to search {source}: {e}")
+                    continue
+                    
+                if len(results) >= max_results:
+                    break
+                    
+        except Exception as e:
+            logger.error(f"Financial domain search failed: {e}")
+        
+        logger.info(f"Financial domain agent found {len(results)} results.")
+        return results
+
+
+class MusicDomainAgent(BaseSearchAgent):
+    """
+    Specialized agent for music-related queries.
+    Searches music-specific sources: Pitchfork, Rolling Stone, AllMusic, Billboard, etc.
+    """
+    def __init__(self):
+        super().__init__("MusicDomain")
+        self.music_sources = [
+            "site:pitchfork.com",
+            "site:rollingstone.com",
+            "site:allmusic.com",
+            "site:billboard.com",
+            "site:stereogum.com",
+            "site:npr.org/music",
+            "site:theguardian.com/music"
+        ]
+    
+    def search(self, query: str, max_results: int = 5) -> List[Dict[str, Any]]:
+        """
+        Search music-specific sources with domain-appropriate rigor.
+        """
+        logger.info(f"Querying {self.name} for music query: {query}")
+        results = []
+        
+        try:
+            for source in self.music_sources[:3]:  # Limit to top 3 sources
+                search_query = f"{source} {query}"
+                search_url = f"https://duckduckgo.com/html/?q={quote_plus(search_query)}"
+                
+                try:
+                    response = requests.get(search_url, headers=self.headers, timeout=20)
+                    response.raise_for_status()
+                    soup = BeautifulSoup(response.text, 'html.parser')
+                    
+                    result_elements = soup.select("div.result")
+                    if not result_elements:
+                        result_elements = soup.select("div[data-result]") or soup.select("div.web-result")
+                    
+                    for element in result_elements[:max_results]:
+                        title_elem = (element.select_one("h2.result__title a") or 
+                                    element.select_one("h2 a") or 
+                                    element.select_one("a.result__a"))
+                        
+                        snippet_elem = (element.select_one("div.result__snippet") or 
+                                      element.select_one("div.result__body") or
+                                      element.select_one("span"))
+                        
+                        if title_elem:
+                            results.append({
+                                'source': f"{self.name} ({source.replace('site:', '').replace('/music', '')})",
+                                'title': title_elem.get_text(strip=True),
+                                'url': title_elem['href'] if 'href' in title_elem.attrs else '',
+                                'snippet': snippet_elem.get_text(strip=True) if snippet_elem else "",
+                                'search_query': query,
+                                'domain': 'music',
+                                'source_type': 'specialized_music_media'
+                            })
+                            if len(results) >= max_results:
+                                break
+                except Exception as e:
+                    logger.warning(f"Failed to search {source}: {e}")
+                    continue
+                    
+                if len(results) >= max_results:
+                    break
+                    
+        except Exception as e:
+            logger.error(f"Music domain search failed: {e}")
+        
+        logger.info(f"Music domain agent found {len(results)} results.")
+        return results
 
 
 class SearchEngineAgent(BaseSearchAgent):

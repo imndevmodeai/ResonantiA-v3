@@ -485,7 +485,11 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
         reflection_alignment = "Failed to interact with LLM."
         # Add specific error type to issues
         reflection_issues = [f"API/Configuration Error: {type(e_llm).__name__}"]
-        if hasattr(e_llm, 'provider') and e_llm.provider: primary_result["provider_used"] = e_llm.provider # type: ignore
+        # Safely extract provider name from exception
+        if hasattr(e_llm, 'provider') and e_llm.provider:
+            primary_result["provider_used"] = e_llm.provider # type: ignore
+        elif isinstance(e_llm, LLMProviderError) and hasattr(e_llm, 'provider'):
+            primary_result["provider_used"] = getattr(e_llm, 'provider', None) or "unknown"
     except Exception as e_generic:
         # Catch any other unexpected errors
         error_msg = f"Unexpected error during LLM invocation: {e_generic}"
@@ -499,7 +503,21 @@ def invoke_llm(inputs: Dict[str, Any], action_context: Optional[ActionContext] =
 
     # --- Final Return ---
     # Ensure provider/model used are recorded even on failure if determined before error
-    if primary_result["provider_used"] is None and 'provider' in locals(): primary_result["provider_used"] = provider._provider_name # type: ignore
+    # SAFELY check for provider - it might be an exception object, not a provider instance
+    if primary_result["provider_used"] is None:
+        # Check if 'provider' exists in locals and is actually a provider instance (not an exception)
+        if 'provider' in locals():
+            # Check if provider is a valid provider instance (has _provider_name attribute)
+            if hasattr(provider, '_provider_name'):
+                try:
+                    # Double-check it's not an exception object by checking type
+                    if not isinstance(provider, Exception):
+                        primary_result["provider_used"] = provider._provider_name # type: ignore
+                except (AttributeError, TypeError):
+                    pass  # Provider might be an exception object, skip
+            # If it's an LLMProviderError, try to get provider from the error
+            elif isinstance(provider, LLMProviderError) and hasattr(provider, 'provider'):
+                primary_result["provider_used"] = getattr(provider, 'provider', None) or "unknown"
     if primary_result["model_used"] is None and 'model_to_use' in locals(): primary_result["model_used"] = model_to_use
 
     return {**primary_result, "reflection": _create_reflection(reflection_status, reflection_summary, reflection_confidence, reflection_alignment, reflection_issues, reflection_preview)}

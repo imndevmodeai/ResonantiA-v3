@@ -271,3 +271,9 @@ class QueryComplexityAnalyzerService:
 
         Args:
             query_id (str): A unique identifier for the query
+            query_text (str): The raw textual content of the query to analyze
+
+        Returns:
+            QueryAnalysisResult: An object containing the complexity classification,
+                                recommended routing protocol, and confidence score
+        """

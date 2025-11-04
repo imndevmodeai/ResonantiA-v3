@@ -1,0 +1,5 @@
+incoming.telemetry.mozilla.org	0	19989	1758598834591,1,0
+location.services.mozilla.com	0	19989	1758598833493,1,0
+start.ubuntu-mate.org^partitionKey=%28https%2Cubuntu-mate.org%29	0	19989	1742614833663,1,0
+shavar.services.mozilla.com^firstPartyDomain=safebrowsing.86868755-6b82-4842-b301-72671a0db32e.mozilla	0	19989	1758598834034,1,1
+firefox.settings.services.mozilla.com	0	19989	1758598833951,1,0

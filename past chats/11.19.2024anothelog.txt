@@ -1,0 +1,619 @@
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped pipewire.service - PipeWire Multimedia Service.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping pipewire.service - PipeWire Multimedia Service...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped wireplumber.service - Multimedia Service Session Manager.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped xdg-document-portal.service - flatpak document portal service.
+ ESCOC
+113.service - User Runtime Directory /run/user/113...
+ 1.077s CPU time.
+ User Manager for UID 113.
+ted successfully.
+get - Exit the Session.
+ervice - Exit the Session.
+.target - Shutdown.
+ - User Application Slice.
+r.socket - Speech Dispatcher Socket.
+ent.socket - REST API socket for snapd user session agent.
+r.socket - debconf communication socket.
+- PipeWire Multimedia System Socket.
+ocket - PipeWire PulseAudio.
+ - GnuPG cryptographic agent and passphrase cache.
+cket - GnuPG cryptographic agent (ssh-agent emulation).
+socket - GnuPG cryptographic agent and passphrase cache (restricted).
+r.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).
+emon.socket - GNOME Keyring daemon.
+cket - GCR ssh-agent wrapper.
+ GnuPG network certificate management daemon.
+Bus User Message Bus Socket.
+arget - Timers.
+target - Sockets.
+ath - Pending report trigger for Ubuntu Report.
+rget - Paths.
+rget - Basic System.
+lice - User Core Session Slice.
+e - PipeWire Multimedia Service.
+ce - PipeWire Multimedia Service...
+vice - Multimedia Service Session Manager.
+rtal.service - flatpak document portal service.
+ ESCOD
+Nov 19 11:00:10 Windoows7PRO systemd[1]: Stopping user-runtime-dir@113.service - User Runtime Directory /run/user/113...
+Nov 19 11:00:10 Windoows7PRO systemd[1]: user@113.service: Consumed 1.077s CPU time.
+Nov 19 11:00:10 Windoows7PRO systemd[1]: Stopped user@113.service - User Manager for UID 113.
+Nov 19 11:00:10 Windoows7PRO systemd[1]: user@113.service: Deactivated successfully.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Reached target exit.target - Exit the Session.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Finished systemd-exit.service - Exit the Session.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Reached target shutdown.target - Shutdown.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Removed slice app.slice - User Application Slice.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed speech-dispatcher.socket - Speech Dispatcher Socket.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed snapd.session-agent.socket - REST API socket for snapd user session agent.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed pk-debconf-helper.socket - debconf communication socket.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed pipewire.socket - PipeWire Multimedia System Socket.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed pipewire-pulse.socket - PipeWire PulseAudio.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted>
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access f>
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed gnome-keyring-daemon.socket - GNOME Keyring daemon.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed gcr-ssh-agent.socket - GCR ssh-agent wrapper.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed dirmngr.socket - GnuPG network certificate management daemon.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Closed dbus.socket - D-Bus User Message Bus Socket.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped target timers.target - Timers.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped target sockets.target - Sockets.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped ubuntu-report.path - Pending report trigger for Ubuntu Report.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped target paths.target - Paths.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped target basic.target - Basic System.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Removed slice session.slice - User Core Session Slice.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped pipewire.service - PipeWire Multimedia Service.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping pipewire.service - PipeWire Multimedia Service...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped wireplumber.service - Multimedia Service Session Manager.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped xdg-document-portal.service - flatpak document portal service.
+Nov 19 11:00:10 Windoows7PRO wireplumber[1524]: disconnected from pipewire
+Nov 19 11:00:10 Windoows7PRO wireplumber[1524]: stopped by signal: Terminated
+Nov 19 11:00:10 Windoows7PRO systemd[1]: run-user-113-doc.mount: Deactivated successfully.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping wireplumber.service - Multimedia Service Session Manager...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped gvfs-daemon.service - Virtual filesystem service.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped xdg-permission-store.service - sandboxed app permission store.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped filter-chain.service - PipeWire filter chain daemon.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped pipewire-pulse.service - PipeWire PulseAudio.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped dbus.service - D-Bus User Message Bus.
+Nov 19 11:00:10 Windoows7PRO systemd[1]: run-user-113-gvfs.mount: Deactivated successfully.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped gnome-keyring-daemon.service - GNOME Keyring daemon.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped dconf.service - User preferences database.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped at-spi-dbus-bus.service - Accessibility services bus.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping xdg-permission-store.service - sandboxed app permission store...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping xdg-document-portal.service - flatpak document portal service...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping pipewire-pulse.service - PipeWire PulseAudio...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping gvfs-daemon.service - Virtual filesystem service...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping gnome-keyring-daemon.service - GNOME Keyring daemon...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping filter-chain.service - PipeWire filter chain daemon...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping dconf.service - User preferences database...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping dbus.service - D-Bus User Message Bus...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopping at-spi-dbus-bus.service - Accessibility services bus...
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped target default.target - Main User Target.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Stopped target bluetooth.target - Bluetooth.
+Nov 19 11:00:10 Windoows7PRO systemd[1513]: Activating special unit exit.target...
+Nov 19 11:00:10 Windoows7PRO systemd[1]: Stopping user@113.service - User Manager for UID 113...
+Nov 19 11:00:08 Windoows7PRO bluetoothd[1033]: src/profile.c:record_cb() Unable to get Hands-Free Voice gateway SDP record: Host is do>
+Nov 19 11:00:07 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.freedesktop.Notificati>
+Nov 19 11:00:07 Windoows7PRO mate-notificati[3464]: Failed to load module "appmenu-gtk-module"
+Nov 19 11:00:07 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating service name='org.freedesktop.Notifications' re>
+Nov 19 11:00:07 Windoows7PRO systemd-logind[1058]: Watching system buttons on /dev/input/event16 (2BOOM-TWS970 (AVRCP))
+Nov 19 11:00:07 Windoows7PRO kernel: input: 2BOOM-TWS970 (AVRCP) as /devices/virtual/input/input24
+Nov 19 11:00:06 Windoows7PRO dbus-daemon[1035]: [system] Rejected send message, 0 matched rules; type="method_return", sender=":1.59" >
+Nov 19 11:00:05 Windoows7PRO gvfsd[3415]: Device 1 (VID=22b8 and PID=2e81) is a Motorola Moto Z2 (XT1789).
+Nov 19 11:00:05 Windoows7PRO gvfsd[3415]: Device 0 (VID=22b8 and PID=2e76) is a Motorola Moto G (ID1).
+Nov 19 11:00:04 Windoows7PRO gvfsd[3415]: LIBMTP PANIC: Unable to find interface & endpoints of device
+Nov 19 11:00:04 Windoows7PRO snapd-desktop-i[3237]: New theme: gtk=Yaru-MATE-light icon=Yaru-MATE-light cursor=Yaru, sound=arctica-gre>
+Nov 19 11:00:04 Windoows7PRO dnsmasq-dhcp[3393]: DHCP, IP range 10.123.11.2 -- 10.123.11.254, lease time 1h
+Nov 19 11:00:04 Windoows7PRO dnsmasq-dhcp[3393]: DHCP, IP range 192.168.100.2 -- 192.168.100.100, lease time 1d
+Nov 19 11:00:04 Windoows7PRO dnsmasq[3393]: compile time options: IPv6 GNU-getopt DBus no-UBus i18n IDN2 DHCP DHCPv6 no-Lua TFTP connt>
+Nov 19 11:00:04 Windoows7PRO dnsmasq[3393]: started, version 2.90 DNS disabled
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.452:172): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.452:171): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.452:170): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO snapd-desktop-integration.snapd-desktop-integration[3237]: /usr/share/libdrm/amdgpu.ids: No such file or >
+Nov 19 11:00:04 Windoows7PRO systemd[2352]: Started obex.service - Bluetooth OBEX service.
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.bluez.obex'
+Nov 19 11:00:04 Windoows7PRO obexd[3322]: OBEX daemon 5.68
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3876] device (pan1): Activation: successful, device activated.
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3871] device (pan1): state change: secondaries -> activated (re>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3869] device (pan1): state change: ip-check -> secondaries (rea>
+Nov 19 11:00:04 Windoows7PRO systemd[1]: Started NetworkManager-dispatcher.service - Network Manager Script Dispatcher Service.
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[1035]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Nov 19 11:00:04 Windoows7PRO systemd[1]: Starting NetworkManager-dispatcher.service - Network Manager Script Dispatcher Service...
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[1035]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='db>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3671] device (pan1): state change: ip-config -> ip-check (reaso>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3669] device (pan1): state change: config -> ip-config (reason >
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3667] device (pan1): state change: prepare -> config (reason 'n>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3665] device (pan1): state change: disconnected -> prepare (rea>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3664] device (pan1): Activation: starting connection 'pan1' (2b>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3658] device (pan1): state change: unavailable -> disconnected >
+Nov 19 11:00:04 Windoows7PRO systemd[2352]: Starting obex.service - Bluetooth OBEX service...
+Nov 19 11:00:07 Windoows7PRO kernel: input: 2BOOM-TWS970 (AVRCP) as /devices/virtual/input/input24
+Nov 19 11:00:06 Windoows7PRO dbus-daemon[1035]: [system] Rejected send message, 0 matched rules; type="method_return", sender=":1.59" >
+Nov 19 11:00:05 Windoows7PRO gvfsd[3415]: Device 1 (VID=22b8 and PID=2e81) is a Motorola Moto Z2 (XT1789).
+Nov 19 11:00:05 Windoows7PRO gvfsd[3415]: Device 0 (VID=22b8 and PID=2e76) is a Motorola Moto G (ID1).
+Nov 19 11:00:04 Windoows7PRO gvfsd[3415]: LIBMTP PANIC: Unable to find interface & endpoints of device
+Nov 19 11:00:04 Windoows7PRO snapd-desktop-i[3237]: New theme: gtk=Yaru-MATE-light icon=Yaru-MATE-light cursor=Yaru, sound=arctica-gre>
+Nov 19 11:00:04 Windoows7PRO dnsmasq-dhcp[3393]: DHCP, IP range 10.123.11.2 -- 10.123.11.254, lease time 1h
+Nov 19 11:00:04 Windoows7PRO dnsmasq-dhcp[3393]: DHCP, IP range 192.168.100.2 -- 192.168.100.100, lease time 1d
+Nov 19 11:00:04 Windoows7PRO dnsmasq[3393]: compile time options: IPv6 GNU-getopt DBus no-UBus i18n IDN2 DHCP DHCPv6 no-Lua TFTP connt>
+Nov 19 11:00:04 Windoows7PRO dnsmasq[3393]: started, version 2.90 DNS disabled
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.452:172): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.452:171): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.452:170): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO snapd-desktop-integration.snapd-desktop-integration[3237]: /usr/share/libdrm/amdgpu.ids: No such file or >
+Nov 19 11:00:04 Windoows7PRO systemd[2352]: Started obex.service - Bluetooth OBEX service.
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.bluez.obex'
+Nov 19 11:00:04 Windoows7PRO obexd[3322]: OBEX daemon 5.68
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3876] device (pan1): Activation: successful, device activated.
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3871] device (pan1): state change: secondaries -> activated (re>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3869] device (pan1): state change: ip-check -> secondaries (rea>
+Nov 19 11:00:04 Windoows7PRO systemd[1]: Started NetworkManager-dispatcher.service - Network Manager Script Dispatcher Service.
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[1035]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Nov 19 11:00:04 Windoows7PRO systemd[1]: Starting NetworkManager-dispatcher.service - Network Manager Script Dispatcher Service...
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[1035]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='db>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3671] device (pan1): state change: ip-config -> ip-check (reaso>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3669] device (pan1): state change: config -> ip-config (reason >
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3667] device (pan1): state change: prepare -> config (reason 'n>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3665] device (pan1): state change: disconnected -> prepare (rea>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3664] device (pan1): Activation: starting connection 'pan1' (2b>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3658] device (pan1): state change: unavailable -> disconnected >
+Nov 19 11:00:04 Windoows7PRO systemd[2352]: Starting obex.service - Bluetooth OBEX service...
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3639] device (pan1): state change: unmanaged -> unavailable (re>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.344:169): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.344:168): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.344:167): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.344:166): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.344:165): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.336:164): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO kernel: audit: type=1326 audit(1732032004.336:163): auid=1000 uid=1000 gid=1000 ses=2 subj=snap.snapd-des>
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.bluez.obex' unit>
+Nov 19 11:00:04 Windoows7PRO NetworkManager[1104]: <info>  [1732032004.3339] manager: (pan1): new Bridge device (/org/freedesktop/Netw>
+Nov 19 11:00:04 Windoows7PRO snapd-desktop-integration.snapd-desktop-integration[3237]: /usr/share/libdrm/amdgpu.ids: No such file or >
+Nov 19 11:00:04 Windoows7PRO systemd[1]: Started blueman-mechanism.service - Bluetooth management mechanism.
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[1035]: [system] Successfully activated service 'org.blueman.Mechanism'
+Nov 19 11:00:04 Windoows7PRO systemd[1]: Starting blueman-mechanism.service - Bluetooth management mechanism...
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[1035]: [system] Activating via systemd: service name='org.blueman.Mechanism' unit='blueman-me>
+Nov 19 11:00:04 Windoows7PRO systemd[2352]: Started xdg-desktop-portal.service - Portal service.
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.freedesktop.portal.Des>
+Nov 19 11:00:04 Windoows7PRO rtkit-daemon[1555]: Supervising 14 threads of 8 processes of 2 users.
+Nov 19 11:00:04 Windoows7PRO rtkit-daemon[1555]: Supervising 14 threads of 8 processes of 2 users.
+Nov 19 11:00:04 Windoows7PRO rtkit-daemon[1555]: Supervising 14 threads of 8 processes of 2 users.
+Nov 19 11:00:04 Windoows7PRO systemd[2352]: Started evolution-addressbook-factory.service - Evolution address book service.
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gnome.evolution.datase>
+Nov 19 11:00:04 Windoows7PRO systemd[2352]: Started xdg-desktop-portal-gtk.service - Portal service (GTK/GNOME implementation).
+Nov 19 11:00:04 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.freedesktop.impl.porta>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Starting evolution-addressbook-factory.service - Evolution address book service...
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gnome.evolution.>
+Nov 19 11:00:03 Windoows7PRO brisk-menu[2880]: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node bu>
+Nov 19 11:00:03 Windoows7PRO brisk-menu[2880]: Negative content width -1 (allocation 1, extents 1x1) while allocating gadget (node but>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Started evolution-calendar-factory.service - Evolution calendar service.
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gnome.evolution.datase>
+Nov 19 11:00:03 Windoows7PRO brisk-menu[2880]: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+Nov 19 11:00:03 Windoows7PRO brisk-menu[2880]: gdk_window_get_origin: assertion 'GDK_IS_WINDOW (window)' failed
+Nov 19 11:00:03 Windoows7PRO snapd[1057]: devicemgr.go:2499: no NTP sync after 10m0s, trying auto-refresh anyway
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Started gvfs-mtp-volume-monitor.service - Virtual filesystem service - Media Transfer Prot>
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gtk.vfs.MTPVolumeMonit>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Starting evolution-calendar-factory.service - Evolution calendar service...
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gnome.evolution.>
+Nov 19 11:00:03 Windoows7PRO xdg-desktop-por[3177]: Failed to load module "appmenu-gtk-module"
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Started evolution-source-registry.service - Evolution source registry.
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Starting xdg-desktop-portal-gtk.service - Portal service (GTK/GNOME implementation)...
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gnome.evolution.datase>
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.freedesktop.impl>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Started gvfs-metadata.service - Virtual filesystem metadata service.
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gtk.vfs.Metadata'
+Nov 19 11:00:03 Windoows7PRO polkitd[1054]: Registered Authentication Agent for unix-session:c2 (system bus name :1.77 [/usr/libexec/p>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Starting gvfs-mtp-volume-monitor.service - Virtual filesystem service - Media Transfer Pro>
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gtk.vfs.MTPVolum>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Started snap.snapd-desktop-integration.snapd-desktop-integration.service - Service for sna>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Stopped snap.snapd-desktop-integration.snapd-desktop-integration.service - Service for sna>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Starting gvfs-metadata.service - Virtual filesystem metadata service...
+Nov 19 11:00:03 Windoows7PRO systemd-logind[1058]: Watching system buttons on /dev/input/event16 (2BOOM-TWS970 (AVRCP))
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Started gvfs-gphoto2-volume-monitor.service - Virtual filesystem service - digital camera >
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: snap.snapd-desktop-integration.snapd-desktop-integration.service: Scheduled restart job, r>
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gtk.vfs.GPhoto2VolumeM>
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gtk.vfs.Metadata>
+Nov 19 11:00:03 Windoows7PRO kernel: input: 2BOOM-TWS970 (AVRCP) as /devices/virtual/input/input23
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Starting xdg-desktop-portal.service - Portal service...
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.freedesktop.port>
+Nov 19 11:00:03 Windoows7PRO mate-session[2399]: WARNING: Could not launch application 'update-notifier.desktop': Unable to start appl>
+Nov 19 11:00:03 Windoows7PRO bluetoothd[1033]: profiles/audio/a2dp.c:load_remote_sep() Unable to load LastUsed: rseid 1 not found
+Nov 19 11:00:03 Windoows7PRO gnome-keyring-daemon[3065]: discover_other_daemon: 1
+Nov 19 11:00:03 Windoows7PRO gnome-keyring-d[2375]: The PKCS#11 component was already initialized
+Nov 19 11:00:03 Windoows7PRO gnome-keyring-daemon[2375]: The PKCS#11 component was already initialized
+Nov 19 11:00:03 Windoows7PRO mate-session[2399]: WARNING: Could not launch application 'ayatana-indicator-application.desktop': Unable>
+Nov 19 11:00:03 Windoows7PRO systemd[2352]: Starting evolution-source-registry.service - Evolution source registry...
+Nov 19 11:00:03 Windoows7PRO systemd[1]: Started systemd-timedated.service - Time & Date Service.
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[1035]: [system] Successfully activated service 'org.freedesktop.timedate1'
+Nov 19 11:00:03 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gnome.evolution.>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.mate.panel.applet.Noti>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.mate.panel.applet.Indi>
+Nov 19 11:00:02 Windoows7PRO systemd[2352]: Starting gvfs-gphoto2-volume-monitor.service - Virtual filesystem service - digital camera>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gtk.vfs.GPhoto2V>
+Nov 19 11:00:02 Windoows7PRO systemd[1]: Starting systemd-timedated.service - Time & Date Service...
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[1035]: [system] Activating via systemd: service name='org.freedesktop.timedate1' unit='dbus-o>
+Nov 19 11:00:02 Windoows7PRO systemd[2352]: Started gvfs-afc-volume-monitor.service - Virtual filesystem service - Apple File Conduit >
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gtk.vfs.AfcVolumeMonit>
+Nov 19 11:00:02 Windoows7PRO mate-session[2399]: WARNING: Could not launch application 'nm-applet.desktop': Unable to start applicatio>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.mate.panel.applet.Bris>
+Nov 19 11:00:02 Windoows7PRO systemd[2352]: Starting gvfs-afc-volume-monitor.service - Virtual filesystem service - Apple File Conduit>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gtk.vfs.AfcVolum>
+Nov 19 11:00:02 Windoows7PRO systemd[2352]: Started snap.ubuntu-mate-welcome.ubuntu-mate-welcome-f9b04f3a-9d09-40e8-bc1c-8fd5fb69501c.>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.mate.panel.applet.Tras>
+Nov 19 11:00:02 Windoows7PRO systemd[2352]: Started gvfs-goa-volume-monitor.service - Virtual filesystem service - GNOME Online Accoun>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gtk.vfs.GoaVolumeMonit>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.mate.panel.applet.Wnck>
+Nov 19 11:00:02 Windoows7PRO systemd[2352]: Starting gvfs-goa-volume-monitor.service - Virtual filesystem service - GNOME Online Accou>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gtk.vfs.GoaVolum>
+Nov 19 11:00:02 Windoows7PRO spice-vdagent[2940]: vdagent virtio channel /dev/virtio-ports/com.redhat.spice.0 does not exist, exiting
+Nov 19 11:00:02 Windoows7PRO systemd[2352]: Started gvfs-udisks2-volume-monitor.service - Virtual filesystem service - disk device mon>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gtk.vfs.UDisks2VolumeM>
+Nov 19 11:00:02 Windoows7PRO gnome-keyring-daemon[2929]: discover_other_daemon: 1
+Nov 19 11:00:02 Windoows7PRO gnome-keyring-d[2375]: The SSH agent was already initialized
+Nov 19 11:00:02 Windoows7PRO gnome-keyring-daemon[2375]: The SSH agent was already initialized
+Nov 19 11:00:02 Windoows7PRO gnome-keyring-daemon[2928]: discover_other_daemon: 1
+Nov 19 11:00:02 Windoows7PRO gnome-keyring-d[2375]: The Secret Service was already initialized
+Nov 19 11:00:02 Windoows7PRO gnome-keyring-daemon[2375]: The Secret Service was already initialized
+Nov 19 11:00:02 Windoows7PRO mate-session[2399]: WARNING: Could not launch application 'mate-optimus.desktop': Unable to start applica>
+Nov 19 11:00:02 Windoows7PRO mate-session[2399]: WARNING: Could not launch application 'redshift-gtk.desktop': Unable to start applica>
+Nov 19 11:00:02 Windoows7PRO mate-session[2399]: WARNING: Could not launch application 'ubuntu-advantage-notification.desktop': Unable>
+Nov 19 11:00:02 Windoows7PRO notification-ar[2887]: Failed to load module "appmenu-gtk-module"
+Nov 19 11:00:02 Windoows7PRO mate-indicator-[2886]: Failed to load module "appmenu-gtk-module"
+Nov 19 11:00:02 Windoows7PRO systemd[2352]: Starting gvfs-udisks2-volume-monitor.service - Virtual filesystem service - disk device mo>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gtk.vfs.UDisks2V>
+Nov 19 11:00:02 Windoows7PRO brisk-menu[2880]: Failed to load module "appmenu-gtk-module"
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating service name='org.mate.panel.applet.Notificatio>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating service name='org.mate.panel.applet.IndicatorAp>
+Nov 19 11:00:02 Windoows7PRO trashapplet[2879]: Failed to load module "appmenu-gtk-module"
+Nov 19 11:00:02 Windoows7PRO wnck-applet[2876]: Failed to load module "appmenu-gtk-module"
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating service name='org.mate.panel.applet.TrashApplet>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating service name='org.mate.panel.applet.BriskMenuFa>
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating service name='org.mate.panel.applet.WnckletFact>
+Nov 19 11:00:02 Windoows7PRO systemd[1]: Started systemd-hostnamed.service - Hostname Service.
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[1035]: [system] Successfully activated service 'org.freedesktop.hostname1'
+Nov 19 11:00:02 Windoows7PRO systemd[1]: Starting systemd-hostnamed.service - Hostname Service...
+Nov 19 11:00:02 Windoows7PRO dbus-daemon[1035]: [system] Activating via systemd: service name='org.freedesktop.hostname1' unit='dbus-o>
+Nov 19 11:00:01 Windoows7PRO at-spi-bus-launcher[2710]: SpiRegistry daemon is running with well-known name - org.a11y.atspi.Registry
+Nov 19 11:00:01 Windoows7PRO at-spi-bus-launcher[2689]: dbus-daemon[2689]: Successfully activated service 'org.a11y.atspi.Registry'
+Nov 19 11:00:01 Windoows7PRO gnome-keyring-daemon[2706]: discover_other_daemon: 1
+Nov 19 11:00:01 Windoows7PRO gnome-keyring-d[2375]: The PKCS#11 component was already initialized
+Nov 19 11:00:01 Windoows7PRO gnome-keyring-daemon[2375]: The PKCS#11 component was already initialized
+Nov 19 11:00:01 Windoows7PRO gnome-keyring-d[2375]: The Secret Service was already initialized
+Nov 19 11:00:01 Windoows7PRO gnome-keyring-daemon[2375]: The Secret Service was already initialized
+Nov 19 11:00:01 Windoows7PRO at-spi-bus-launcher[2689]: dbus-daemon[2689]: Activating service name='org.a11y.atspi.Registry' requested>
+Nov 19 11:00:01 Windoows7PRO mate-session[2399]: WARNING: Unable to find provider '' of required component 'dock'
+Nov 19 11:00:01 Windoows7PRO systemd[2352]: Started dconf.service - User preferences database.
+Nov 19 11:00:01 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'ca.desrt.dconf'
+Nov 19 11:00:01 Windoows7PRO systemd[2352]: Starting dconf.service - User preferences database...
+Nov 19 11:00:01 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='ca.desrt.dconf' unit>
+Nov 19 11:00:01 Windoows7PRO systemd[2352]: Started at-spi-dbus-bus.service - Accessibility services bus.
+Nov 19 11:00:01 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.a11y.Bus'
+Nov 19 11:00:01 Windoows7PRO systemd[2352]: Starting at-spi-dbus-bus.service - Accessibility services bus...
+Nov 19 11:00:01 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.a11y.Bus' unit='>
+Nov 19 11:00:01 Windoows7PRO systemd[2352]: Started gvfs-daemon.service - Virtual filesystem service.
+Nov 19 11:00:01 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.gtk.vfs.Daemon'
+Nov 19 11:00:01 Windoows7PRO systemd[2352]: Starting gvfs-daemon.service - Virtual filesystem service...
+Nov 19 11:00:01 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.gtk.vfs.Daemon' >
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: BlueZ Battery Provider is not available, won't retry to register it. Make sure you are>
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: Failed to register battery provider. Error: org.freedesktop.DBus.Error.UnknownMethod
+Nov 19 11:00:01 Windoows7PRO snapd-desktop-i[2528]: Loop exited. Forcing reload.
+Nov 19 11:00:01 Windoows7PRO snapd-desktop-i[2528]: Is a desktop session! Forcing a reload.
+Nov 19 11:00:01 Windoows7PRO snapd-desktop-i[2528]: Checking session /org/freedesktop/login1/session/c2...
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: <WpPortalPermissionStorePlugin:0x65533d802e00> Failed to call Lookup: GDBus.Error:org.>
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: <WpPortalPermissionStorePlugin:0x65533d802e00> Failed to call Lookup: GDBus.Error:org.>
+Nov 19 11:00:01 Windoows7PRO snapd-desktop-i[2528]: Failed to do gtk init. Waiting for a new session with desktop capabilities.
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: <WpSiAudioAdapter:0x65533d90c7b0> failed to activate item: Object activation aborted: >
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: <WpSiAudioAdapter:0x65533d90c7b0> Object activation aborted: proxy destroyed
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: <WpNode:0x65533d8f27e0> ignoring set_param on already destroyed objects
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: <WpNode:0x65533d90f860> ignoring set_param on already destroyed objects
+Nov 19 11:00:01 Windoows7PRO wireplumber[2368]: <WpNode:0x65533d8e5e30> ignoring set_param on already destroyed objects
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: profiles/audio/a2dp.c:invalidate_remote_cache() Invalidating Remote SEP from cache
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: profiles/audio/avdtp.c:avdtp_parse_rej() SET_CONFIGURATION request rejected: Stream End>
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/opus_05_duplex
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSink/opus_05_duplex
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/opus_05
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSink/opus_05
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/faststream_duplex
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/faststream
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/aptx_ll_duplex_0
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/aptx_ll_duplex_1
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/aptx_ll_0
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/aptx_ll_1
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/sbc_xq
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSink/sbc_xq
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/sbc
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSink/sbc
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/aptx
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSink/aptx
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/aptx_hd
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSink/aptx_hd
+Nov 19 11:00:01 Windoows7PRO bluetoothd[1033]: Endpoint registered: sender=:1.59 path=/MediaEndpoint/A2DPSource/ldac
+Nov 19 11:00:00 Windoows7PRO wireplumber[2368]: Failed to create 'api.alsa.acp.device' device
+Nov 19 11:00:00 Windoows7PRO wireplumber[2368]: SPA handle 'api.alsa.acp.device' could not be loaded; is it installed?
+Nov 19 11:00:00 Windoows7PRO xdg-document-portal[2395]: Ignoring invalid max threads value 4294967295 > max (100000).
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started xdg-document-portal.service - flatpak document portal service.
+Nov 19 11:00:00 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.freedesktop.portal.Doc>
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started xdg-permission-store.service - sandboxed app permission store.
+Nov 19 11:00:00 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Successfully activated service 'org.freedesktop.impl.porta>
+Nov 19 11:00:00 Windoows7PRO wireplumber[2368]: PipeWire's libcamera SPA missing or broken. libcamera not supported.
+Nov 19 11:00:00 Windoows7PRO wireplumber[2368]: SPA handle 'api.libcamera.enum.manager' could not be loaded; is it installed?
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Starting xdg-permission-store.service - sandboxed app permission store...
+Nov 19 11:00:00 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.freedesktop.impl>
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 14 threads of 8 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Successfully made thread 2398 of process 2372 owned by '1000' RT at priority 20.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 13 threads of 8 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Successfully made thread 2372 of process 2372 owned by '1000' high priority at nice l>
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 12 threads of 7 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 12 threads of 7 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Successfully made thread 2393 of process 2368 owned by '1000' RT at priority 20.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 11 threads of 7 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Successfully made thread 2368 of process 2368 owned by '1000' high priority at nice l>
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 10 threads of 6 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 10 threads of 6 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 10 threads of 6 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Starting xdg-document-portal.service - flatpak document portal service...
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 10 threads of 6 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 10 threads of 6 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Successfully made thread 2390 of process 2364 owned by '1000' RT at priority 20.
+Nov 19 11:00:00 Windoows7PRO lightdm[1773]: pam_env(lightdm:session): deprecated reading of user environment enabled
+Nov 19 11:00:00 Windoows7PRO lightdm[1773]: gkr-pam: unlocked login keyring
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 9 threads of 6 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 9 threads of 6 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Successfully made thread 2389 of process 2366 owned by '1000' RT at priority 20.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 8 threads of 5 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 8 threads of 5 processes of 2 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Successfully made thread 2364 of process 2364 owned by '1000' high priority at nice l>
+Nov 19 11:00:00 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] Activating via systemd: service name='org.freedesktop.port>
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 7 threads of 4 processes of 1 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 7 threads of 4 processes of 1 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 7 threads of 4 processes of 1 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 7 threads of 4 processes of 1 users.
+Nov 19 11:00:00 Windoows7PRO rtkit-daemon[1555]: Supervising 7 threads of 4 processes of 1 users.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started dbus.service - D-Bus User Message Bus.
+Nov 19 11:00:00 Windoows7PRO dbus-daemon[2374]: [session uid=1000 pid=2374] AppArmor D-Bus mediation is enabled
+Nov 19 11:00:00 Windoows7PRO gnome-keyring-daemon[2375]: GNOME_KEYRING_CONTROL=/run/user/1000/keyring
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started gnome-keyring-daemon.service - GNOME Keyring daemon.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Starting dbus.service - D-Bus User Message Bus...
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Startup finished in 220ms.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Reached target default.target - Main User Target.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started pipewire-pulse.service - PipeWire PulseAudio.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started wireplumber.service - Multimedia Service Session Manager.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started snap.snapd-desktop-integration.snapd-desktop-integration.service - Service for sna>
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started filter-chain.service - PipeWire filter chain daemon.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started pipewire.service - PipeWire Multimedia Service.
+Nov 19 11:00:00 Windoows7PRO systemd[1]: Started session-c2.scope - Session c2 of User dev.
+Nov 19 11:00:00 Windoows7PRO systemd[1]: Started user@1000.service - User Manager for UID 1000.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Reached target basic.target - Basic System.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Reached target sockets.target - Sockets.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on dbus.socket - D-Bus User Message Bus Socket.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on speech-dispatcher.socket - Speech Dispatcher Socket.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on snapd.session-agent.socket - REST API socket for snapd user session agent.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on pk-debconf-helper.socket - debconf communication socket.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on pipewire.socket - PipeWire Multimedia System Socket.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on pipewire-pulse.socket - PipeWire PulseAudio.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (rest>
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (ac>
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on gnome-keyring-daemon.socket - GNOME Keyring daemon.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on gcr-ssh-agent.socket - GCR ssh-agent wrapper.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Listening on dirmngr.socket - GnuPG network certificate management daemon.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Starting dbus.socket - D-Bus User Message Bus Socket...
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Reached target timers.target - Timers.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Reached target paths.target - Paths.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Started ubuntu-report.path - Pending report trigger for Ubuntu Report.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Created slice session.slice - User Core Session Slice.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Created slice app.slice - User Application Slice.
+Nov 19 11:00:00 Windoows7PRO systemd[2352]: Queued start job for default target default.target.
+Nov 19 11:00:00 Windoows7PRO systemd-logind[1058]: Removed session c1.
+Nov 19 11:00:00 Windoows7PRO systemd[1]: session-c1.scope: Consumed 2.398s CPU time.
+Nov 19 11:00:00 Windoows7PRO systemd[1]: Stopped session-c1.scope - Session c1 of User lightdm.
+Nov 19 11:00:00 Windoows7PRO systemd[1]: session-c1.scope: Deactivated successfully.
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: /home/dev/.config/autostart/redshift-gtk.desktop: not generating u>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: Exec binary 'redshift-gtk' does not exist: No such file or directo>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: /etc/xdg/autostart/mate-optimus.desktop: not generating unit, erro>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: Exec binary 'mate-optimus-applet' does not exist: No such file or >
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: /etc/xdg/autostart/ayatana-indicator-application.desktop: not gene>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: Exec binary '/usr/libexec/ayatana-indicator-application/ayatana-in>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: /etc/xdg/autostart/nm-applet.desktop: not generating unit, error p>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: Exec binary 'nm-applet' does not exist: No such file or directory
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: /etc/xdg/autostart/ubuntu-advantage-notification.desktop: not gene>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: Exec binary '/usr/lib/update-notifier/ubuntu-advantage-notificatio>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: /etc/xdg/autostart/update-notifier.desktop: not generating unit, e>
+Nov 19 11:00:00 Windoows7PRO systemd-journald[421]: /var/log/journal/8dd266e9c384495bbf9be2a56e8403d3/user-1000.journal: Monotonic clo>
+Nov 19 11:00:00 Windoows7PRO systemd-xdg-autostart-generator[2359]: Exec binary 'update-notifier' does not exist: No such file or dire>
+Nov 19 11:00:00 Windoows7PRO systemd[1513]: Stopped ayatana-indicator-sound.service - Ayatana Indicator Sound Service.
+Nov 19 11:00:00 Windoows7PRO systemd[1513]: Stopping ayatana-indicator-sound.service - Ayatana Indicator Sound Service...
+Nov 19 11:00:00 Windoows7PRO ayatana-indicat[1703]: g_object_ref: assertion '!object_already_finalized' failed
+Nov 19 11:00:00 Windoows7PRO (systemd)[2352]: pam_unix(systemd-user:session): session opened for user dev(uid=1000) by (uid=0)
+Nov 19 11:00:00 Windoows7PRO systemd[1513]: Stopped ayatana-indicator-power.service - Ayatana Indicator Power.
+Nov 19 11:00:00 Windoows7PRO systemd[1513]: Stopping ayatana-indicator-power.service - Ayatana Indicator Power...
+Nov 19 11:00:00 Windoows7PRO systemd[1]: Starting user@1000.service - User Manager for UID 1000...
+Nov 19 11:00:00 Windoows7PRO systemd[1]: Finished user-runtime-dir@1000.service - User Runtime Directory /run/user/1000.
+Nov 19 11:00:00 Windoows7PRO systemd[1513]: Stopped ayatana-indicator-datetime.service - Ayatana Indicator DateTime Service.
+Nov 19 11:00:00 Windoows7PRO systemd-logind[1058]: New session c2 of user dev.
+Nov 19 11:00:00 Windoows7PRO systemd[1513]: Stopping ayatana-indicator-datetime.service - Ayatana Indicator DateTime Service...
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/opus_05_duplex
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSink/opus_05_duplex
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/opus_05
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSink/opus_05
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/faststream_duplex
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/faststream
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/aptx_ll_duplex_0
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/aptx_ll_duplex_1
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/aptx_ll_0
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/aptx_ll_1
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/sbc_xq
+Nov 19 11:00:00 Windoows7PRO systemd[1]: Starting user-runtime-dir@1000.service - User Runtime Directory /run/user/1000...
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSink/sbc_xq
+Nov 19 11:00:00 Windoows7PRO ayatana-indicat[1703]: accounts-service-access.vala:224: unable to sync volume 0.399994 to AccountsServic>
+Nov 19 11:00:00 Windoows7PRO ayatana-indicat[1703]: Failed to connect to proxy
+Nov 19 11:00:00 Windoows7PRO systemd[1]: Created slice user-1000.slice - User Slice of UID 1000.
+Nov 19 11:00:00 Windoows7PRO dbus-daemon[1541]: [session uid=113 pid=1541] Activated service 'org.freedesktop.Notifications' failed: P>
+Nov 19 11:00:00 Windoows7PRO mate-notificati[2340]: cannot open display: 
+Nov 19 11:00:00 Windoows7PRO systemd[1513]: Stopped ayatana-indicator-session.service - Ayatana Indicator Session Service.
+Nov 19 11:00:00 Windoows7PRO lightdm[1773]: pam_unix(lightdm:session): session opened for user dev(uid=1000) by (uid=0)
+Nov 19 11:00:00 Windoows7PRO systemd[1513]: Stopping ayatana-indicator-session.service - Ayatana Indicator Session Service...
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/sbc
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSink/sbc
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/aptx
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSink/aptx
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/aptx_hd
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSink/aptx_hd
+Nov 19 11:00:00 Windoows7PRO dbus-daemon[1541]: [session uid=113 pid=1541] Activating service name='org.freedesktop.Notifications' req>
+Nov 19 11:00:00 Windoows7PRO bluetoothd[1033]: Endpoint unregistered: sender=:1.35 path=/MediaEndpoint/A2DPSource/ldac
+Nov 19 11:00:00 Windoows7PRO systemd[1]: Stopping session-c1.scope - Session c1 of User lightdm...
+Nov 19 11:00:00 Windoows7PRO lightdm[1773]: gkr-pam: stashed password to try later in open session
+Nov 19 11:00:00 Windoows7PRO lightdm[1773]: gkr-pam: unable to locate daemon control file
+Nov 19 10:56:06 Windoows7PRO systemd[1]: systemd-timedated.service: Deactivated successfully.
+Nov 19 10:55:36 Windoows7PRO systemd[1]: Started systemd-timedated.service - Time & Date Service.
+Nov 19 10:55:36 Windoows7PRO dbus-daemon[1035]: [system] Successfully activated service 'org.freedesktop.timedate1'
+Nov 19 10:55:36 Windoows7PRO systemd[1]: Starting systemd-timedated.service - Time & Date Service...
+Nov 19 10:55:36 Windoows7PRO dbus-daemon[1035]: [system] Activating via systemd: service name='org.freedesktop.timedate1' unit='dbus-o>
+Nov 19 10:51:29 Windoows7PRO systemd[1]: dev-disk-by\x2did-usb\x2dMass_Storage_Device_121220160204\x2d0:0.device: Job dev-disk-by\x2di>
+Nov 19 10:51:29 Windoows7PRO systemd[1]: Startup finished in 5.162s (firmware) + 13.517s (loader) + 5.149s (kernel) + 1min 31.396s (us>
+Nov 19 10:51:29 Windoows7PRO systemd[1]: mnt-usb\x2dMass_Storage_Device_121220160204\x2d0:0.mount: Job mnt-usb\x2dMass_Storage_Device_>
+Nov 19 10:51:29 Windoows7PRO systemd[1]: Dependency failed for mnt-usb\x2dMass_Storage_Device_121220160204\x2d0:0.mount - /mnt/usb-Mas>
+Nov 19 10:51:29 Windoows7PRO systemd[1]: Timed out waiting for device dev-disk-by\x2did-usb\x2dMass_Storage_Device_121220160204\x2d0:0>
+Nov 19 10:51:29 Windoows7PRO systemd[1]: dev-disk-by\x2did-usb\x2dMass_Storage_Device_121220160204\x2d0:0.device: Job dev-disk-by\x2di>
+Nov 19 10:51:29 Windoows7PRO systemd[1]: dev-sdb1.device: Job dev-sdb1.device/start failed with result 'timeout'.
+Nov 19 10:51:29 Windoows7PRO systemd[1]: mnt-sdb1.mount: Job mnt-sdb1.mount/start failed with result 'dependency'.
+Nov 19 10:51:29 Windoows7PRO systemd[1]: Dependency failed for mnt-sdb1.mount - /mnt/sdb1.
+Nov 19 10:51:29 Windoows7PRO systemd[1]: Timed out waiting for device dev-sdb1.device - /dev/sdb1.
+Nov 19 10:51:29 Windoows7PRO systemd[1]: dev-sdb1.device: Job dev-sdb1.device/start timed out.
+Nov 19 10:51:06 Windoows7PRO systemd[1]: systemd-timedated.service: Deactivated successfully.
+Nov 19 10:50:36 Windoows7PRO systemd[1]: Started systemd-timedated.service - Time & Date Service.
+Nov 19 10:50:36 Windoows7PRO dbus-daemon[1035]: [system] Successfully activated service 'org.freedesktop.timedate1'
+Nov 19 10:50:36 Windoows7PRO systemd[1]: Starting systemd-timedated.service - Time & Date Service...
+Nov 19 10:50:36 Windoows7PRO dbus-daemon[1035]: [system] Activating via systemd: service name='org.freedesktop.timedate1' unit='dbus-o>
+Nov 19 10:50:36 Windoows7PRO systemd[1]: systemd-timedated.service: Deactivated successfully.
+Nov 19 10:50:36 Windoows7PRO snapd[1057]: stateengine.go:149: state ensure error: Get "https://api.snapcraft.io/api/v1/snaps/sections">
+Nov 19 10:50:31 Windoows7PRO systemd[1]: blueman-mechanism.service: Deactivated successfully.
+Nov 19 10:50:31 Windoows7PRO systemd[1]: systemd-hostnamed.service: Deactivated successfully.
+Nov 19 10:50:29 Windoows7PRO systemd[1]: systemd-fsckd.service: Deactivated successfully.
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.579-05:00 level=INFO source=types.go:123 msg="inference compute" i>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.579-05:00 level=INFO source=gpu.go:384 msg="no compatible GPUs wer>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.579-05:00 level=INFO source=amd_linux.go:399 msg="no compatible am>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.579-05:00 level=INFO source=amd_linux.go:296 msg="unsupported Rade>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.579-05:00 level=WARN source=amd_linux.go:61 msg="ollama recommends>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.577-05:00 level=WARN source=gpu.go:728 msg="unable to locate gpu d>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.573-05:00 level=WARN source=gpu.go:728 msg="unable to locate gpu d>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.573-05:00 level=WARN source=gpu.go:728 msg="unable to locate gpu d>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.573-05:00 level=WARN source=gpu.go:728 msg="unable to locate gpu d>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.573-05:00 level=INFO source=gpu.go:221 msg="looking for compatible>
+Nov 19 10:50:21 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:21.572-05:00 level=INFO source=common.go:49 msg="Dynamic LLM librarie>
+Nov 19 10:50:20 Windoows7PRO ayatana-indicat[1703]: accounts-service-access.vala:224: unable to sync volume 0.188980 to AccountsServic>
+Nov 19 10:50:20 Windoows7PRO ayatana-indicat[1703]: Failed to connect to proxy
+Nov 19 10:50:20 Windoows7PRO dbus-daemon[1541]: [session uid=113 pid=1541] Activated service 'org.freedesktop.Notifications' failed: P>
+Nov 19 10:50:20 Windoows7PRO mate-notificati[2303]: cannot open display: 
+Nov 19 10:50:20 Windoows7PRO dbus-daemon[1541]: [session uid=113 pid=1541] Activating service name='org.freedesktop.Notifications' req>
+Nov 19 10:50:19 Windoows7PRO systemd-logind[1058]: Watching system buttons on /dev/input/event16 (2BOOM-TWS970 (AVRCP))
+Nov 19 10:50:19 Windoows7PRO kernel: input: 2BOOM-TWS970 (AVRCP) as /devices/virtual/input/input22
+Nov 19 10:50:19 Windoows7PRO systemd[1]: NetworkManager-dispatcher.service: Deactivated successfully.
+Nov 19 10:50:18 Windoows7PRO dbus-daemon[1035]: [system] Rejected send message, 0 matched rules; type="method_return", sender=":1.35" >
+Nov 19 10:50:14 Windoows7PRO systemd-logind[1058]: Watching system buttons on /dev/input/event16 (2BOOM-TWS970 (AVRCP))
+Nov 19 10:50:13 Windoows7PRO kernel: input: 2BOOM-TWS970 (AVRCP) as /devices/virtual/input/input21
+Nov 19 10:50:13 Windoows7PRO systemd[1513]: Reached target bluetooth.target - Bluetooth.
+Nov 19 10:50:12 Windoows7PRO bluetoothd[1033]: src/profile.c:record_cb() Unable to get Hands-Free Voice gateway SDP record: Host is do>
+Nov 19 10:50:10 Windoows7PRO systemd[1]: Finished tlp.service - TLP system startup/shutdown.
+Nov 19 10:50:10 Windoows7PRO tlp[2171]: Setting battery charge thresholds...done.
+Nov 19 10:50:10 Windoows7PRO tlp[2171]: Applying power save settings...done.
+Nov 19 10:50:10 Windoows7PRO systemd[1]: Finished systemd-update-utmp-runlevel.service - Record Runlevel Change in UTMP.
+Nov 19 10:50:10 Windoows7PRO systemd[1]: systemd-update-utmp-runlevel.service: Deactivated successfully.
+Nov 19 10:50:10 Windoows7PRO systemd[1]: Starting tlp.service - TLP system startup/shutdown...
+Nov 19 10:50:10 Windoows7PRO systemd[1]: Starting systemd-update-utmp-runlevel.service - Record Runlevel Change in UTMP...
+Nov 19 10:50:10 Windoows7PRO systemd[1]: Reached target graphical.target - Graphical Interface.
+Nov 19 10:50:10 Windoows7PRO systemd[1]: Reached target multi-user.target - Multi-User System.
+Nov 19 10:50:10 Windoows7PRO systemd[1]: postfix.service - Postfix Mail Transport Agent was skipped because of an unmet condition chec>
+Nov 19 10:50:10 Windoows7PRO systemd[1]: Failed to start postfix@-.service - Postfix Mail Transport Agent (instance -).
+Nov 19 10:50:10 Windoows7PRO systemd[1]: postfix@-.service: Failed with result 'exit-code'.
+Nov 19 10:50:10 Windoows7PRO systemd[1]: postfix@-.service: Control process exited, code=exited, status=1/FAILURE
+Nov 19 10:50:09 Windoows7PRO systemd[1]: Started docker.service - Docker Application Container Engine.
+Nov 19 10:50:09 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:09.663919461-05:00" level=info msg="API listen on /run/docker.sock"
+Nov 19 10:50:09 Windoows7PRO configure-instance.sh[2150]: postconf: fatal: open /etc/postfix/main.cf: No such file or directory
+Nov 19 10:50:09 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:09.593049523-05:00" level=info msg="Daemon has completed initializa>
+Nov 19 10:50:09 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:09.592528756-05:00" level=info msg="Docker daemon" commit=cc13f95 c>
+Nov 19 10:50:09 Windoows7PRO systemd[1]: var-lib-docker-overlay2-opaque\x2dbug\x2dcheck1651973275-merged.mount: Deactivated successful>
+Nov 19 10:50:09 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:09.472469087-05:00" level=info msg="Loading containers: done."
+Nov 19 10:50:09 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:09.387538713-05:00" level=info msg="Default bridge (docker0) is ass>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1863] device (docker0): Activation: successful, device activate>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1856] device (docker0): state change: secondaries -> activated >
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1851] device (docker0): state change: ip-check -> secondaries (>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1836] device (docker0): state change: ip-config -> ip-check (re>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1832] device (docker0): state change: config -> ip-config (reas>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1828] device (docker0): state change: prepare -> config (reason>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1823] device (docker0): state change: disconnected -> prepare (>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1820] device (docker0): Activation: starting connection 'docker>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1811] device (docker0): state change: unavailable -> disconnect>
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1801] device (docker0): state change: unmanaged -> unavailable >
+Nov 19 10:50:09 Windoows7PRO NetworkManager[1104]: <info>  [1732031409.1038] manager: (docker0): new Bridge device (/org/freedesktop/N>
+Nov 19 10:50:09 Windoows7PRO kernel: Initializing XFRM netlink socket
+Nov 19 10:50:08 Windoows7PRO kernel: Bridge firewalling registered
+Nov 19 10:50:08 Windoows7PRO kernel: bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to >
+Nov 19 10:50:08 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:08.924791683-05:00" level=info msg="Loading containers: start."
+Nov 19 10:50:08 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:08.914379493-05:00" level=info msg="[graphdriver] using prior stora>
+Nov 19 10:50:08 Windoows7PRO kernel: audit: type=1400 audit(1732031408.852:162): apparmor="STATUS" operation="profile_load" profile="u>
+Nov 19 10:50:08 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:08.769735839-05:00" level=info msg="detected 127.0.0.53 nameserver,>
+Nov 19 10:50:08 Windoows7PRO dockerd[1812]: time="2024-11-19T10:50:08.765907254-05:00" level=info msg="Starting up"
+Nov 19 10:50:08 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:08.665-05:00 level=INFO source=common.go:135 msg="extracting embedded>
+Nov 19 10:50:08 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:08.665-05:00 level=INFO source=routes.go:1205 msg="Listening on 127.0>
+Nov 19 10:50:08 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:08.664-05:00 level=INFO source=images.go:761 msg="total unused blobs >
+Nov 19 10:50:08 Windoows7PRO ollama[1828]: time=2024-11-19T10:50:08.661-05:00 level=INFO source=images.go:754 msg="total blobs: 5"
+Nov 19 10:50:08 Windoows7PRO ollama[1828]: 2024/11/19 10:50:08 routes.go:1158: INFO server config env="map[CUDA_VISIBLE_DEVICES: GPU_D>
+Nov 19 10:50:08 Windoows7PRO systemd[1]: Started kerneloops.service - Tool to automatically collect and submit kernel crash signatures.
+Nov 19 10:50:08 Windoows7PRO systemd[1]: This usually indicates unclean termination of a previous run, or service implementation defic>
+Nov 19 10:50:08 Windoows7PRO systemd[1]: kerneloops.service: Found left-over process 1834 (kerneloops) in control group while starting>
+Nov 19 10:50:08 Windoows7PRO configure-instance.sh[1831]: postconf: fatal: open /etc/postfix/main.cf: No such file or directory
+Nov 19 10:50:08 Windoows7PRO systemd[1]: ubuntu-advantage.service - Ubuntu Pro Background Auto Attach was skipped because no trigger c>
+Nov 19 10:50:08 Windoows7PRO systemd[1]: Starting postfix@-.service - Postfix Mail Transport Agent (instance -)...
+Nov 19 10:50:08 Windoows7PRO systemd[1]: Started ollama.service - Ollama Service.
+Nov 19 10:50:08 Windoows7PRO systemd[1]: Starting kerneloops.service - Tool to automatically collect and submit kernel crash signature>
+Nov 19 10:50:08 Windoows7PRO systemd[1]: Starting docker.service - Docker Application Container Engine...
+Nov 19 10:50:08 Windoows7PRO systemd[1]: Reached target network-online.target - Network is Online.
+Nov 19 10:50:08 Windoows7PRO systemd[1]: Finished NetworkManager-wait-online.service - Network Manager Wait Online.
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.5708] manager: startup complete
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.5702] device (wlp2s0): Activation: successful, device activated.
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.5697] manager: NetworkManager state is now CONNECTED_LOCAL
+Nov 19 10:50:08 Windoows7PRO dnsmasq[1806]: cleared cache
+Nov 19 10:50:08 Windoows7PRO dnsmasq[1806]: using nameserver 127.0.0.53#53
+Nov 19 10:50:08 Windoows7PRO dnsmasq[1806]: reading /etc/resolv.conf
+Nov 19 10:50:08 Windoows7PRO dnsmasq-dhcp[1806]: DHCP, IP range 192.168.69.10 -- 192.168.69.254, lease time 1h
+Nov 19 10:50:08 Windoows7PRO dnsmasq[1806]: chown of PID file /run/nm-dnsmasq-wlp2s0.pid failed: Operation not permitted
+Nov 19 10:50:08 Windoows7PRO dnsmasq[1806]: compile time options: IPv6 GNU-getopt DBus no-UBus i18n IDN2 DHCP DHCPv6 no-Lua TFTP connt>
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.5687] device (wlp2s0): state change: secondaries -> activated (>
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.5685] device (wlp2s0): state change: ip-check -> secondaries (r>
+Nov 19 10:50:08 Windoows7PRO dnsmasq[1806]: started, version 2.90 cachesize 150
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.5652] device (wlp2s0): state change: ip-config -> ip-check (rea>
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.5636] dnsmasq-manager: starting dnsmasq...
+Nov 19 10:50:08 Windoows7PRO wpa_supplicant[1114]: wlp2s0: CTRL-EVENT-SCAN-FAILED ret=-95
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.3852] device (wlp2s0): state change: config -> ip-config (reaso>
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.3850] device (p2p-dev-wlp2s0): supplicant management interface >
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.3850] device (wlp2s0): Activation: (wifi) Stage 2 of 5 (Device >
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.3850] device (wlp2s0): supplicant interface state: inactive -> >
+Nov 19 10:50:08 Windoows7PRO wpa_supplicant[1114]: wlp2s0: CTRL-EVENT-CONNECTED - Connection to 40:1a:58:97:be:39 completed [id=0 id_s>
+Nov 19 10:50:08 Windoows7PRO wpa_supplicant[1114]: wlp2s0: AP-ENABLED
+Nov 19 10:50:08 Windoows7PRO wpa_supplicant[1114]: wlp2s0: interface state UNINITIALIZED->ENABLED
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0354] device (p2p-dev-wlp2s0): supplicant management interface >
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0354] device (wlp2s0): supplicant interface state: interface_di>
+Nov 19 10:50:08 Windoows7PRO wpa_supplicant[1114]: Note: nl80211 driver interface is not designed to be used with ap_scan=2; this can >
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0335] device (p2p-dev-wlp2s0): supplicant management interface >
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0335] device (wlp2s0): supplicant interface state: disconnected>
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0334] Config: added 'key_mgmt' value 'NONE'
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0334] Config: added 'freq_list' value '2412 2417 2422 2427 2432>
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0334] Config: added 'frequency' value '2437'
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0334] Config: added 'mode' value '2'
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0334] Config: added 'ssid' value 'wilson'
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0333] device (wlp2s0): Activation: (wifi) connection 'wilson' r>
+Nov 19 10:50:08 Windoows7PRO NetworkManager[1104]: <info>  [1732031408.0331] device (wlp2s0): state change: prepare -> config (reason >
+Nov 19 10:50:07 Windoows7PRO NetworkManager[1104]: <info>  [1732031407.9125] device (wlp2s0): set-hw-addr: reset MAC address to 40:1A:>
+Nov 19 10:50:07 Windoows7PRO NetworkManager[1104]: <info>  [1732031407.8913] manager: NetworkManager state is now CONNECTING
+Nov 19 10:50:07 Windoows7PRO NetworkManager[1104]: <info>  [1732031407.8912] device (wlp2s0): state change: disconnected -> prepare (r>
+Nov 19 10:50:07 Windoows7PRO NetworkManager[1104]: <info>  [1732031407.8912] device (wlp2s0): Activation: starting connection 'wilson'>
+Nov 19 10:50:07 Windoows7PRO NetworkManager[1104]: <info>  [1732031407.8909] policy: auto-activating connection 'wilson' (b83d927f-6f2>
+Nov 19 10:50:06 Windoows7PRO pipewire[1520]: spa.audioadapter: 0x580da3434db8: scheduling stopped node
+Nov 19 10:50:06 Windoows7PRO lightdm[1773]: pam_succeed_if(lightdm:auth): requirement "user ingroup nopasswdlogin" not met by user "de>
+Nov 19 10:50:06 Windoows7PRO kernel: [drm:link_enc_cfg_validate [amdgpu]] *ERROR* link_enc_cfg_validate: Invalid link encoder assignme>
+Nov 19 10:50:06 Windoows7PRO kernel: ---[ end trace 0000000000000000 ]---
+Nov 19 10:50:06 Windoows7PRO kernel:  </TASK>
+

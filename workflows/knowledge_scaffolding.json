@@ -15,7 +15,8 @@
       "description": "Deconstruct the problem into core components and identify domain requirements",
       "inputs": {
         "prompt": "Analyze the following problem and deconstruct it into core components:\\n\\n{{ problem_description }}\\n\\nIdentify:\\n1. Core domain areas\\n2. Key variables and unknowns\\n3. Strategic requirements\\n4. Risk factors\\n5. Success criteria\\n\\nOutput your analysis as a structured JSON object with a key 'deconstruction_text'.",
-        "model": "{{ model }}",
+        "model": "{{ context.model }}",
+        "provider": "{{ context.provider }}",
         "model_settings": {"temperature": 0.3, "max_tokens": 8192}
       },
       "dependencies": []
@@ -25,6 +26,8 @@
       "description": "Extract the primary domain from the deconstruction analysis into a structured format.",
       "inputs": {
         "prompt": "From the following JSON analysis, identify and extract only the single, most relevant 'Core domain area'. Your output must be a single, clean JSON object with one key: 'domain'. For example: {\\\"domain\\\": \\\"Artificial Intelligence Strategy\\\"}\\n\\nAnalysis:\\n{{ deconstruct_problem.result.generated_text }}",
+        "model": "{{ context.model }}",
+        "provider": "{{ context.provider }}",
         "model_settings": {"temperature": 0.1, "max_tokens": 500}
       },
       "dependencies": ["deconstruct_problem"]
@@ -53,6 +56,8 @@
       "condition": "{{ validate_search_results.result.output.search_is_valid }} == true",
       "inputs": {
         "prompt": "Based on the problem deconstruction and domain knowledge, analyze what specialized capabilities and expertise are required:\\n\\nProblem: {{ problem_description }}\\nDeconstruction: {{ deconstruct_problem.result.generated_text }}\\nDomain Knowledge: {{ acquire_domain_knowledge.result }}\\n\\nIdentify:\\n1. Required specialized knowledge areas\\n2. Critical analytical capabilities\\n3. Strategic thinking patterns\\n4. Risk assessment frameworks\\n5. Implementation expertise",
+        "model": "{{ context.model }}",
+        "provider": "{{ context.provider }}",
         "model_settings": {"temperature": 0.4, "max_tokens": 8192}
       },
       "dependencies": ["validate_search_results"]
@@ -62,6 +67,8 @@
       "description": "Forge a specialized agent with the required capabilities",
       "inputs": {
         "prompt": "Create a specialized agent profile for solving this problem:\\n\\nProblem: {{ problem_description }}\\nDomain: {{ extract_domain_from_deconstruction.result.generated_text }}\\n{% if analyze_specialization_requirements is defined and analyze_specialization_requirements.result is defined %}Requirements: {{ analyze_specialization_requirements.result.generated_text }}{% else %}No specific requirements identified.{% endif %}\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria",
+        "model": "{{ context.model }}",
+        "provider": "{{ context.provider }}",
         "model_settings": {"temperature": 0.3, "max_tokens": 16384}
       },
       "dependencies": ["extract_domain_from_deconstruction"]
@@ -71,6 +78,8 @@
       "description": "Validate that the specialist agent has the required capabilities",
       "inputs": {
         "prompt": "Validate the specialist agent against the original problem requirements:\\n\\nProblem: {{ problem_description }}\\n{% if analyze_specialization_requirements is defined and analyze_specialization_requirements.result is defined %}Requirements: {{ analyze_specialization_requirements.result.generated_text }}{% else %}No specific requirements were identified due to limited search results.{% endif %}\\nSpecialist Agent: {{ forge_specialist_agent.result.generated_text }}\\n\\nAssess:\\n1. Coverage of required capabilities\\n2. Alignment with problem requirements\\n3. Strategic fit and expertise match\\n4. Potential gaps or limitations\\n5. Confidence in agent's ability to solve the problem",
+        "model": "{{ context.model }}",
+        "provider": "{{ context.provider }}",
         "model_settings": {"temperature": 0.2, "max_tokens": 1500}
       },
       "dependencies": ["forge_specialist_agent"]

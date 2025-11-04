@@ -1,0 +1,1114 @@
+﻿Combating prosecutorial misconduct 2024 
+
+
+
+
+
+
+​
+Review
+Volume 70 |
+Number 4
+2018
+Combating
+Prosecutorial Misconduct in Closing Arguments
+Michael D.
+Cicchini
+Follow
+this and additional works at: https://digitalcommons.law.ou.edu/olr
+6 Part of the Courts
+Commons, and the Criminal Law Commons
+Recommended
+Citation
+Michael D.
+Cicchini, Combating Prosecutorial Misconduct in Closing Arguments,
+70 OKLA. L. REv. 887 (2018),
+https://digitalcommons.law.ou.edu/olr/vol70/iss4/4
+This
+Article is brought to you for free and open access by University  College of Law Digital Commons. It has been accepted for inclusion
+inLaw Review by an authorized editor of University ofCollege of Law
+Digital Commons. For more information, please contact
+Law-LibraryDigitalCommons@ou.edu.
+​COMBATING
+PROSECUTORIAL MISCONDUCT IN
+CLOSING ARGUMENTS
+MICHAEL D.
+CICCHINT'
+Prosecutorial misconduct in closing
+arguments is rampant. Prosecutors make improper arguments because it is
+a highly effective, yet virtually riskfree, strategy. That is, even if the
+defense lawyer quickly identifies and objects to the misconduct, the jury
+has already heard the improper argument, the available remedies are
+toothless, and the offending prosecutor rarely suffers any
+consequences. This Article proposes an alternative approach for combating
+this problem. Rather than waiting to object until after the prosecutor
+makes the improper argument, defense counsel should consider a more
+aggressive strategy: the pretrial motion in limine. This motion seeks a pretrial
+order to prevent the misconduct before
+it occurs,
+and in cases where the prosecutor violates the order, it
+establishes a framework for
+addressing the misconduct in a meaningful way.
+This
+preemptive strategy has several advantages over the conventional,
+reactionary approach.
+First, even if the motion in limine fails to deter the misconduct, it alerts the trial
+judge to the improper arguments before the prosecutor makes them. Second, it
+preserves the issue for meaningful trialcourt review, outside of the jury’s
+presence, without defense counsel having to raise difficult and risky
+objections in the middle of closing arguments. Third, the motion-in-limine approach
+also provides a framework for developing meaningful remedies for
+the misconduct. These include providing the opportunity to draft
+thoughtful and effective curative instructions and affording time for
+client consultation before requesting the more serious remedy of a mistrial.
+And fourth, in the event a mistrial is declared, the motion-in-limine
+approach may even protect the defendant from re-prosecution.
+Table of
+Contents
+INErOAUCTION. ...cvviiiii e 888
+ I.Closing Arguments to the
+JUTY ........ccooovviiiiiiiiiiiiiicccecc 890  II.Recognizing IMproper ArgumEnts...........cocveeeeiieiireeniesiesineeneeseens
+895 
+* Criminal
+Defense Lawyer, Cicchini Law Office, LLC, Kenosha, Wisconsin.
+J.D.,
+summa cum
+laude, Marquette University Law School (1999); C.P.A., University
+of Illinois Board of
+Examiners (1997); M.B.A., Marquette University Graduate School
+(1994); B.S., University
+of Wisconsin—Parkside (1990).
+887
+​ Testifying:You’re
+Damned if You Do.......cooveviiviiiiiiniiiiieiienn, 896
+B.  Testifying: You’reDamned if You Don’t........ccccovveiviiiniininnnnenn, 897 C.
+ Liar, Liar (andother Name Calling) ...........ccccoovvieviiiiiiiniicniennnnn. 899 D.  Disparaging
+the Defense LAWYET........cccovveviiiniiiieiiiiiiciiecn, 900 E.  Vouching and
+Personal Opinion............cccoevviiiiiieiiienieiienneenn, 902F.  Prosecutor “TesStimOny™ .........ccccovviiiuiiiieiieiiiieiieiie
+s 903 G. Misstating the Law
+........cccooiiiiiiiiiiiiiiciiecic e ccecse 905H.  Straw MenN.....ooooviiiiiiiii 908
+L  Sweet EMOtION......ccoiiiiiiiiiiicicie ecccc c 909 J.
+ UninvitedRESPONSE ......coveiiiiiiiiiiiiiciiciiecie
+e 911 III.  The ReactionaryApproach ...........ccccevviiiiiniiiiiiiiiiieiiesee s
+ee 913 A.  TheDecision t0 OBJECt .....cuiiiviiviiiiiiiiiiieiiece
+e esec e 913 B. The Problem of Remedies.........c.ccoeriiiiiiininiiiiiicnicicccice 915
+1.  Curative INStructions .........c.coeieeriiicniiicie e916 2  MISHIAL
+o 917 C. The Risk of
+Not ObJecting ........cocvevvuiiriiiriieiiiienieiieii eeci e 920 IV, A SIMPIE Plan .....ooviiiiiiiiiiiiieiccsc e 922
+AL  Plan ObJECtiVES.......iivviiiiiiiiiiiiicciiecit ettt 922B.  Pretrial Motion in
+LIMine .........cccoeveiieniniininicninicnccesecee s 923C.  Trial
+Procedure.........c.coviiiiiiiiiiicinieics e eces e925    
+    
+    
+1. Decide
+Whether t0 ObJect ......cc.evvvviiiiiiiiiiiiiiiiiiicciecie 926
+2. Request
+a Post-argument Hearing.............coocevvvveiienienieinienins
+926
+3.
+Consider a Mistrial Motion..........cccoceveriiiinieniniencnecccec
+927  D.Other Mistrial-Related
+ISSUES.........cccooveviiiiiiiiiiiiicccce 927 
+CONCIUSION...t 930 
+AppendixA: Motion in LIMING.......cccovieviiiiieiiiiiiieiicnieceeeies
+e ie 931 
+AppendixB: Curative InStructions...........ccoevvevieiiienieiiieiiieiiesieseneen
+939
+
+
+Introduction When a prosecutor makes improper
+closing arguments to a jury, he or she violates the defendant’s due
+process and other constitutional rights. Yet, despite the prosecutor’s supposed
+role as “minister of justice,” rampant prosecutorial misconduct in closing
+argument still exists. Anecdotal reports, appellate court decisions, and even
+published studies demonstrate that such misconduct has become the norm
+rather than the exception.
+Prosecutors abuse the closing
+argument process for two primary reasons. First, they know that improper
+arguments are highly effective, stirring jurors’ emotions and inviting them
+to convict for reasons other than proof beyond a reasonable doubt. Second,
+and equally important, prosecutors have learned that this form of
+misconduct is virtually risk free: the difficulty ​defense lawyers face in quickly
+identifying and immediately responding to improper arguments typically results
+in the prosecutor’s misconduct going unchecked and the state gaining an
+illegal advantage without repercussion. Moreover, even when the defense lawyer
+is able to quickly identify and object to the misconduct, doing so may
+cause more harm than good. Further, the available remedies are
+often ineffective.
+Worse yet,
+the conventional, reactionary approach to improper argument
+only encourages this form
+of prosecutorial misconduct. This Article therefore proposes a more aggressive
+strategy for combating—and possibly even deterring—prosecutorial
+misconduct in closing arguments: the pretrial motion in limine.
+Part I
+discusses the importance of closing arguments and the widespread
+nature of prosecutorial
+misconduct in this phase of the criminal trial. Part II takes the first step in combating
+this form of misconduct by helping the defense lawyer identify and
+understand many common forms of improper argument. Part III examines the
+numerous problems with the conventional, after-the-fact approach to dealing
+with prosecutorial misconduct, including the risks associated with objecting
+in the middle of closing arguments and the general ineffectiveness of the
+available remedies when an objection is sustained.
+Part IV of
+this Article then outlines the alternative approach to combating this form of prosecutorial
+misconduct. Instead of waiting for the improper argument and then objecting
+after the jury hears it, defense counsel should anticipate and
+preempt the misconduct via a pretrial motion in limine. This motion-in-limine
+approach educates the trial judge about the various forms of improper argument,
+seeks a pretrial order prohibiting these arguments before the prosecutor can
+make them, and protects the defendant in the event the prosecutor violates
+the court’s order. If granted, the pretrial motion in limine relieves defense
+counsel from having to raise risky, midargument objections to the
+misconduct, yet still preserves the issue for trialand appellate-court review. The
+motion in limine also establishes a framework for developing meaningful
+remedies for the prosecutor’s unethical behavior. It provides
+defense counsel and the trial judge the opportunity to craft effective
+curative instructions and affords defense counsel sufficient time to consult
+with the defendant before requesting the serious remedy of a mistrial.
+Further, in the event the court grants a mistrial request, the motion-in-limine
+approach may even protect the defendant from a retrial.
+Appendix A
+provides a sample motion in limine, and Appendix B provides sample curative
+instructions tailored to specific types of improper
+​arguments. Such instructions can, in
+some cases, provide an adequate remedy for the prosecutor’s
+misconduct.
+ L.Closing Arguments
+to the Jury  Closingarguments are “often viewed as the
+most important part of the  trial,providing the attorneys with their
+last opportunity to convince the jury  ofthe defendant’s guilt or innocence.”'
+More specifically, the closing  argumentallows the attorneys “to sum
+up the evidence within a narrative  frameworkto help the jury understand
+and interpret the evidence.”* This  includesarguing about the “reasonable
+inferences to be drawn from the  evidence,”the “credibility and demeanor
+of witnesses,” and the “credibility  ofevidence generally.” The attorneys
+may also “help the jury understand  theissues by applying the evidence to
+the law.”* In the rebuttal portion of  theclosing argument, the prosecutor may
+“respond to arguments of  [defense]counsel.” 
+With
+regard to criminal prosecutions, courts have stated that the
+prosecutor “occupies a
+semijudicial position,”® and the rules of professional conduct have grandly ordained the
+prosecutor as “minister of justice.”’ Consequently, “a prosecutor’s duty,
+above being an advocate for the State, is to ensure that a defendant is
+afforded a fair trial.”® Yet, despite these grand titles and lofty standards,
+prosecutorial misconduct is rampant in closing argument, its variety
+limited only by the prosecutor’s imagination
+1. Michael
+Lyon, Avoiding the Woodshed: The Third Circuit Examines
+Prosecutorial Misconduct
+in Closing Argument in United States v. Wood, 53 ViLL. L. REv. 689,
+689 (2008) (citing Michael
+Frost, Ethos, Pathos & Legal Audience, 99 Dick. L. REv. 85,
+113
+(1994)).
+2. Mary
+Nicol Bowman, Mitigating Foul Blows, 49 Ga. L. REv. 309, 320 (2015)
+(citing Albert W.
+Alschuler, Courtroom Misconduct by Prosecutors and Trial Judges,
+50
+Tex. L.
+REV. 629, 643 (1972)).
+3. J.
+Thomas Sullivan, Prosecutor Misconduct in Closing Argument in
+Arkansas Criminal Trials,
+20 U. ARK. LITTLE Rock L.J. 213, 219 (1998) (first citing Richmond
+v. State, 899 S.W.2d 64
+(Ark. 1999); then citing Shannon v. State, 942 S.W.2d 591, 597
+(Tex. Crim. App.
+1996)).
+4. Terry
+v. State, 668 So. 2d 954, 963 (Fla. 1996).
+5. Bowman,
+supra note 2, at 320 (citing Craig Lee Montz, Why Lawyers Continue
+to Cross the Line in
+Closing Arguments: An Examination of Federal and State Cases, 28
+OHIO
+N.U.L.REv.
+67, 73 (2001)).
+6. Roach
+v. State, 146 So. 240, 240 (Fla. 1933). 7. MOoDEL RULES OF PROF’L CONDUCT 1.
+3.8 cmt. 1 (AM. BAR Ass’N 2017).
+8. Claire
+Gagnon, 4 Liar by Any Other Name? lowa's Closing Argument
+Conundrum,
+55 DRAKE
+L. REv. 471, 478 (2007) (citing State v. Graves, 668 N.W.2d 860,
+876 (lowa
+2003)).
+​and
+boldness.” In many cases, improper prosecutorial arguments violate
+a defendant’s due process
+rights'® and, depending on the particular argument, other constitutional rights."’
+A prosecutor
+often commits this form of misconduct because, by the end
+of the jury trial, he or she
+“may have become so devoted to winning the case . . . that his or her emotions
+intrude and result in a ‘win at all costs’ closing argument not based on the
+facts brought out during trial.”"> One explanation for this behavior is that
+“[c]Jonfirmation bias leads prosecutors to be overconfident in their
+conclusions about the guilt of particular defendants.”” This process is often
+set in motion when the prosecutor’s office first receives a referral
+from law enforcement and, despite having limited information, concludes that
+the suspect is guilty."* Then, throughout the case, the prosecutor focuses on
+information that confirms this preexisting determination of guilt
+while discounting—or even ignoring— information that contradicts
+it."
+Regardless
+of the underlying explanation, prosecutorial misconduct in
+closing argument can be
+incredibly harmful. “Although argument does not constitute evidence and the jury is
+instructed not to consider it as such, the use of dramatic, compelling, or even
+inflammatory argument reflects a perception that argument is a
+valuable ingredient of the deliberative process. . . .”'° And scientific
+evidence supports this perception: “Empirical research on the ‘recency effect’
+suggests that people tend to remember best
+9. See
+infra Part IL
+10. See,
+e.g., State v. Graves, 668 N.W.2d 860, 867 (lowa 2003); State v.
+Singh, 793 A.2d 226, 232
+(Conn. 2002).
+11. See,
+eg., Griffin v. California, 380 U.S. 609, 615 (1965) (finding that
+the prosecutor’s comment
+on the defendant’s decision not to testify was improper and
+violated the Fifth
+Amendment); State v. Jackson, 444 S.W.3d 554, 589 (Tenn. 2014)
+(same); State v. Jorgensen, 754 N.W.2d 77, 90 (Wis.
+2008) (stating that the prosecutor’s argument about facts not adduced at trial violated
+defendant’s Sixth Amendment right of confrontation). 12. Candice D. Tobin, Prosecutorial
+Misconduct During Closing Argument: Florida
+Case Law,
+22 Nova L. REv. 485, 488 (1997).
+13.
+Bowman, supra note 2, at 329 (citing Keith A. Findley & Michael
+S. Scott, The Multiple
+Dimensions of Tunnel Vision in Criminal Cases, 2006 Wis. L. REv.
+291, 371).
+14. See
+id. (citing Findlay & Scott, supra note 13, at 329-30) (“The
+information provided to
+prosecutors may be incomplete because the police investigation may
+have been shaped by tunnel
+vision.”).
+15. See
+id. (citing Barbara O’Brien, Prime Suspect: An Examination of
+Factors that Aggravate and
+Counteract Confirmation Bias in Criminal Investigations, 15
+PSYCHOL. PUB. PoL’y &
+L. 315, 316 (2009)) (“Because of confirmation bias, people
+unwittingly select and interpret information to support
+their preexisting beliefs.”).
+16.
+Sullivan, supra note 3, at 214.
+​and be
+influenced by the latest event in a sequence more than by earlier
+events.”'” Because jurors
+enter deliberations with closing arguments— especially the prosecutor’s
+rebuttal—still ringing in their ears, those words could have more impact than the actual
+evidence presented much earlier in the case.'
+Although
+other empirical research demonstrates that some jurors will
+have made up their minds by
+the time closing argument begins," such findings do not minimize the harmful
+effects of the prosecutor’s misconduct. Even though some jurors
+may have already decided the defendant’s guilt, the prosecutor’s
+closing argument provides “ammunition for them to use in the jury room ‘so
+that they can become an extension of the advocate.”*
+Further,
+prosecutorial misconduct may be as frequent as it is harmful. As
+far back as 1987, for
+example, one judge conceded that prosecutorial misconduct in closing argument is
+“chronicled with alarming regularity.”*' Nonetheless, he maintained that the
+“majority of prosecutors . . . desire to see that justice is done rather than
+to add another conviction to their record.”” But attributing the
+misconduct to only a few bad apples was probably a naive claim, even in
+1987. Today, any criminal defense lawyer who adopts such a trusting approach
+does so at his or her client’s peril. In my own experience, the majority of
+prosecutors routinely make improper arguments to the jury—indeed,
+prosecutorial misconduct in closing argument seems to be the rule rather
+than the exception. Moreover, some forms of improper argument are
+deployed with such frequency, and by so many different prosecutors, that
+there is reason to speculate that such arguments may be a part of the
+prosecutors’ training. And much of the empirical evidence on the
+pervasiveness of such misconduct supports this
+17.
+Bowman, supra note 2, at 344 (emphasis added) (citing Ryan Patrick
+Alford, Catalyzing More
+Adequate Federal Habeas Review of Summation Misconduct: Persuasion
+Theory and the Sixth
+Amendment Right to an Unbiased Jury, 59 OKLA. L. REv. 479, 518
+(2006)).
+18. See
+Welsh White, Curbing Prosecutorial Misconduct in Capital Cases:
+Imposing Prohibitions on
+Improper Penalty Trial Arguments, 39 Am. CriM. L. REv. 1147, 1149
+(2002) (“[TJn most cases,
+the prosecutor’s final closing argument will be the last words that
+the . . . jury hears from
+either attorney.”).
+19. See
+Gagnon, supra note 8, at 474.
+20.
+Bowman, supra note 2, at 343 (quoting H. Mitchell Caldwell et al., The Art
+and Architecture  ofClosing
+Argument, 76 TUL. L. REv. 961, 972 (2002)).  
+21. Frank
+D. Celebrezze, Prosecutorial Misconduct: Quelling the Tide of
+Improper Comment to the
+Jury, 35 CLEv. ST. L. REv. 237, 238 (1987).
+22. Id.
+at247.
+​anecdotal
+evidence.” Therefore, the well-prepared criminal defense lawyer
+must enter each jury trial
+expecting the prosecutor to strike “foul blows.”**
+The reason
+for this miserable state of affairs is twofold. First, prosecutors
+know they are likely to get
+away with this form of misbehavior, as “misconduct in jury argument proves to
+be one of the most difficult problems to address for criminal
+defense counsel.” This is because defense lawyers are unable to
+recognize many forms of improper argument and, even when they do, the
+misconduct typically happens too quickly to mount a thoughtful and effective
+response.*
+And
+second, appellate courts have proven to be highly tolerant of this
+form of prosecutorial
+misconduct. For example, in Briggs v. State, the defendant’s appellate lawyer argued
+that the Florida Court of Appeals had repeatedly warned prosecutors that a
+particular type of argument was unethical and constituted
+misconduct.”” As such, the lawyer asked the court to make good on its seven previous
+warnings to prosecutors and order a new trial—one where the defendant
+Briggs could be tried free of improper
+argl.lmcnt.28
+The
+court’s response to the lawyer’s request was the same as its
+response in the previous
+seven cases cited by the appellate lawyer: “Jf [the improper
+argument] continues, the
+appellate courts will be compelled, as appellant’s counsel argues, to fashion a special
+remedy and reverse convictions so obtained to provide an effective
+means of deterring further misconduct.”” Despite this further admonishment,
+however, the court again failed to act in a meaningful way to protect Briggs
+(and other future defendants) from
+23. See,
+e.g., Bowman, supra note 2, at 332 (discussing an empirical study
+demonstrating pervasive
+prosecutorial misconduct in California criminal trials); Paul J.
+Spiegelman, Prosecutorial
+Misconduct in Closing Argument: The Role of Intent in Appellate
+Review, 1 1. App. PRAC.
+& PrROCESS 115, 120 (1999) (discussing evidence of
+“‘prosecutorial recidivism’—the tendency of the same
+prosecutor or office to engage in misconduct repeatedly, even in the face of
+admonishments from the court™).
+24.
+Bowman, supra note 2, at 312 (citing the landmark case of Berger v.
+United States,
+295 U.S.
+78 (1935), noting the “striking gap™ between “the strong rhetoric
+of Berger and . . . the
+realities of prosecutors’ behavior,” and explaining how Berger’s
+condemnation of prosecutorial misconduct is
+“routinely cited but largely ignored”).
+25.
+Sullivan, supra note 3, at 214.
+26. See
+Michael D. Cicchini, Prosecutorial Misconduct at Trial: A New
+Perspective Rooted in
+Confrontation Clause Jurisprudence, 37 SETON HALL L. REv. 335,
+340-42 (2007) (discussing
+the challenges facing defense lawyers when attempting to deal with
+trial misconduct
+generally).
+27. Briggs
+v. State, 455 So. 2d 519, 521-22 (Fla. Dist. Ct. App. 1984).
+28. Id. at
+522.
+29. Id.
+(emphasis added).
+​prosecutorial misconduct. Prosecutors
+do not fear such tired judicial mantras, though, as evidenced the
+court’s own admission that “for over 30 years such prosecutorial tactics have
+been disapproved of, yet they continue to occur.” In the absence of
+meaningful action to prevent such misconduct, prosecutors have
+accurately interpreted the court’s eighth warning as yet another idle threat in
+a very long line of idle threats.
+A California
+appellate court dealt with prosecutorial misconduct by using
+similarly empty warnings.
+After repeated incidents of misconduct by the same prosecutor in several cases,
+the court bemoaned:
+[1]t is
+disheartening, to say the least, to learn that [the prosecutor]
+takes ‘pride’ in our
+admonitions, apparently because we did not reverse the judgment rendered. We
+most earnestly urge counsel to reconsider her approach /lest in
+the future it becomes necessary for us to reverse otherwise
+sustainable convictions . . ..”' The problem for California
+defendants, however, is the same as that faced by Florida defendants: the future
+never comes.
+For many
+decades, other courts throughout the country have dealt similarly with the problem of
+prosecutorial misconduct, issuing myriad warnings to prosecutors to stop
+making improper closing arguments.” However, as in Florida and
+California, these judicial threats are nearly always empty and free of consequence
+for the offending prosecutors.
+While most
+appellate judges timidly ask prosecutors to abide by the rules
+of ethics and trial
+procedure, one judge has recognized that this “attitude of
+helpless piety is, I
+think, undesirable.”” Such an attitude is indeed “undesirable” for three reasons.
+First, it demonstrates that appellate courts are unable to control the
+prosecutorial monster they have helped create, thus exposing the courts’ ineffectiveness
+(or, at bare minimum, unwillingness) to put an end to the conduct.
+Second, and more significantly, such “helpless piety” does nothing for the
+defendants who were victimized by the
+30. Id
+31. People
+v. Congious, No. B0202709 (Cal. Ct. App. Dec. 4, 1987) (emphasis
+added), quoted in
+Cicchini, supra note 26, at 348.
+32. See,
+e.g., United States v. Vargas, 583 F.2d 380 (7th Cir. 1978)
+(“Unfortunately, such
+improprieties are not rare grounds for appeal in this Circuit, and
+neither are our . . . cautions to the government in such
+cases.”) (examining numerous cases involving improper
+arguments).
+33. United
+States v. Antonelli Fireworks Co., 155 F.2d 631, 661 (2d Cir. 1946)
+(Frank, J.,
+dissenting).
+​prosecutor’s misconduct. And third,
+it certainly does nothing to prevent the victimization of future
+defendants.
+Given the
+current state of affairs, what, if anything, can criminal defense
+lawyers do at the
+trial-court level to protect their clients? Rather than waiting until closing statements to
+react to improper arguments made by the prosecutor, defense lawyers should
+take preemptive measures in order to effectively battle this form of
+misconduct—one that, all too often, has come to be expected.™
+II.
+Recognizing Improper Arguments
+Battling
+prosecutorial misconduct in closing argument begins with learning what constitutes an
+improper argument. Part I of this Article set forth the bounds of a legally
+proper argument.” In theory, then, anything outside of those bounds is
+improper. But such a formulation is not easily applied in practice. Therefore, the
+following sections provide concrete examples of improper arguments
+grouped into general categories, the goal of which is to make it easier for
+the criminal defense lawyer to recognize prosecutorial misconduct when he or
+she hears it at trial.
+It is
+important, however, to keep three things in mind. First, this
+Article makes no attempt
+to list all examples—or even to identify all categories— of improper argument. The
+variations of misconduct in closing arguments are far too numerous to be easily
+catalogued in a single article. Second, while there is broad agreement
+across jurisdictions as to what constitutes an improper argument, the
+determination sometimes depends on the law of the specific federal circuit, state, or
+federal district within a state. And third, for some types of prosecutorial
+argument, what qualifies as improper may depend upon the facts of the
+particular case.™
+Given
+this, every defense lawyer must become familiar with the law
+applicable to his or her
+case and, equally important, must understand how that law applies to different
+factual scenarios. Keeping these caveats in mind, what follow are examples of
+common—but often improper—closing
+arguments.
+34. See
+infra Part IIL
+35. See
+supra text accompanying notes 1-5.
+36. For a
+single case that highlights the importance of a
+facts-and-circumstances analysis and also demonstrates
+differences between the law of two jurisdictions, see Freeman v. Lane, 962 F.2d 1252,
+1254-56 (7th Cir. 1992).
+​ Testifying:You're
+Damned if You Do  
+As late as
+the 1960s, some prosecutors were able to win convictions by
+preventing defendants from
+testifying at trial.”’ Today, however, courts recognize a defendant’s
+constitutional right to testify in his or her own defense.”® And to ensure this right
+has real meaning, courts often instruct juries that “you should not discredit
+the testimony just because the defendant is charged with a crime.””
+Yet prosecutors have developed arguments to accomplish exactly
+what the law prohibits: they urge juries to disregard the defendant’s testimony
+simply because he or she is the defendant. For example, one
+prosecutor argued to the jury:
+“[Wihat’s
+her interest, bias or prejudice? Well, she’s the Defendant here, she stands a chance
+of getting convicted. That’s one very large reason she should
+have of trying to slant her testimony, of trying to shift the
+blame away. It’s not pleasant to be convicted, especially at her
+age.”*
+In a
+different case, the prosecutor similarly argued:
+“[Wihat
+is his interest, bias or prejudice? Well, he’s the one on
+trial here. You recall
+his testimony. He’s a 17 year old male attending [high school], getting
+ready to enter into adulthood. Do you think he’d want to go through
+the rest of his life with a conviction[?]”"
+In both
+cases, the Illinois court held that this type of argument was
+improper as it “implied
+that the defendant lied simply because of his [or
+37. See
+Ferguson v. Georgia, 365 U.S. 570, 571 (1961) (“In this case, a
+jury . . . convicted the
+appellant of murder, and he is under sentence of death. After the
+State rested its case at
+the trial, the appellant’s counsel called him to the stand, but the
+trial judge sustained the
+State’s objection to counsel’s attempt to question him.”).
+38. See,
+e.g., Rock v. Arkansas, 483 U.S. 44, 62 (1987) (finding that a
+“rule excluding all
+posthypnosis testimony infringers impermissibly on the right of a
+defendant to testify on his own behalf”); see also Timothy
+P. O’Neill, Vindicating the Defendant’s Constitutional Right to Testify at a Criminal
+Trial: The Need for an On-the-Record Waiver, 51 U. PITT. L.
+REV. 809, 809 (1990)
+(“[TThe Supreme Court has directly held that a criminal defendant
+has a constitutional
+right to testify at her trial.”).
+39. Wis.
+J.I. Crim. 300 (2016) (emphasis added).
+40.
+People v. Crowder, 607 N.E.2d 277, 280 (Ill. App. Ct. 1993).
+41.
+People v. Watts, 588 N.E.2d 405, 407 (Ill. App. Ct. 1992).
+Apparently, age is a nowin factor for a defendant; whether
+young or old, the prosecutor will spin it into evidence of
+perjury.
+​her]
+status as a defendant.”* In other words, arguing that a defendant’s
+testimony should be
+discredited, dismissed, or ignored because he or she is the defendant is, in substance, the
+equivalent of preventing him or her from testifying in the first
+place—something the Supreme Court has already deemed unconstitutional.” The
+prosecutor must not be allowed to accomplish the same end by different
+means.
+Worse yet,
+this prosecutorial argument violates an even more important
+constitutional principle:
+the presumption of innocence. This can be demonstrated in three simple but
+irrefutable steps. First, in any criminal case involving the defendant’s
+testimony, the prosecutor takes the position that the defendant is guilty, but
+the defendant testifies that he or she is innocent. Second, to argue that the
+defendant is lying (or slanting his or her testimony or shifting blame)
+because of his or her status as a defendant necessarily implies that the
+defendant is guilty. That, after all, is the whole point of the prosecutor’s argument.
+And third, to argue that a person is guilty merely because he or she has
+been charged with a crime is blatantly unconstitutional, as such arguments
+“diminish the defendant’s fundamental right to the presumption of
+innocence.”*
+Whether
+based on the defendant’s right to testify or his or her right to a
+presumption of innocence,
+arguments that the defendant’s testimony should be disregarded based solely on his
+or her status as the defendant are improper; defense counsel must be
+able to recognize when the prosecutor is engaging in misconduct by making
+such arguments.
+ B.Testifving:
+You're Damned if You Don'’t 
+For a
+variety of reasons, many defendants choose to exercise their
+constitutional right to
+remain silent at trial. “It is not every one who can safely venture on the witness
+stand, though entirely innocent of the charge against him.”* And the law is
+clear: a defendant “has a right to a jury instruction that his silence is not
+evidence of his guilt.”% Yet, in cases where defendants elect to remain
+silent, prosecutors are quick to spin this
+42. Id.;
+cf. People v. Armstrong, 655 N.E.2d 1203, 1205-06 (Ill. App. Ct.
+1995) (“We respectfully
+disagree with our esteemed colleagues [who decided Crowder and
+Watts]. . . . Surely the
+fact that the defendants were charged . . . constituted a bias
+affecting the credibility
+of these defendants.”).
+43. See
+Ferguson v. Georgia, 365 U.S. 570 (1961).
+44.
+Crowder, 607 N.E.2d at 280.
+45.
+Griffin v. California, 380 U.S. 609, 613 (1965).
+46.
+Sharon R. Gromer, Fifth Amendment—The Right to a No “Adverse
+Inference” Jury
+Instruction, 72 J. CRim. L. &
+CrimINoLOGY 1307, 1307 (1
+
+
+​silence to
+the government’s advantage.*” Modern prosecutors normally do
+not explicitly argue that a
+defendant’s silence at trial means that he or she is guilty. Such a bold claim would be a
+blatant (but not necessarily reversible) error.” Instead, prosecutors “seem to
+keep coming up with arguments which can have a double meaning,”®
+thus maintaining the thrust of the message, while at the same time
+giving the abusive prosecutors plausible— or in many cases,
+implausible—deniability.
+Improper
+comments on the defendant’s decision not to testify appear in
+seemingly infinite
+variety. In one recent case, a prosecutor began rebuttal argument “by walking across the
+court room, facing Defendant, and declaring in a loud voice, while
+raising both arms to point at and gesture toward Defendant, ‘Just tell us
+where you were! That’s all we are asking, Noura!”*
+In a more
+subtle example, another prosecutor argued to a jury that “God
+forbid you should believe
+a police officer whose testimony went uncontradicted by these
+Defendants.”' Similarly, another prosecutor argued that there were only two
+people present for an alleged sexual assault, and the “rape victim was
+the only person to have testified concerning events occurring in the
+room where . . . [the] defendant had raped her.”*
+In
+perhaps the height of craftiness, another prosecutor argued to the
+jurors that they “should
+not take into consideration in any way the fact that [the] defendant did not testify,”
+which the court held was a disguised but
+47. This
+Article addresses only improper arguments regarding the defendant’s
+decision to remain silent
+at trial. It does not address pretrial silence, the admissibility
+of which could turn on
+whether the defendant testifies at trial and whether the pre-trial
+silence occurred before
+or after Miranda warnings. See Sandra Guerra Thompson, Evading
+Miranda: How Seibert and
+Patane Failed to “Save” Miranda, 40 VaL. U. L. REv. 645, 647 (2006) (discussing the 
+admissibilityof pre-Miranda
+silence).   
+48. See
+Sullivan, supra note 3, at 230-31 n.98 (discussing the Court’s use
+of the “harmless error”
+test as a way to uphold convictions despite prosecutorial comments
+on the defendant’s
+silence).
+49. Spry
+v. State, 664 So. 2d 41, 41-42 (Fla. Dist. Ct. App. 1995).
+50. State
+v. Jackson, 444 S.W.3d 554, 585 (Tenn. 2014) (finding argument
+improper and reversible
+error).
+51.
+Knight v. State, 672 So. 2d 590, 591 (Fla. Dist. Ct. App. 1996)
+(emphasis added) (finding
+argument improper and reversible error).
+52.
+Sullivan, supra note 3, at 232 (emphasis added) (discussing Bailey
+v. State, 697 S.W.2d 110
+(Ark. 1985) (finding argument improper and reversible error)); see
+also Freeman v. Lane, 962
+F.2d 1252, 1254 (7th Cir. 1992) (finding argument improper and
+reversible error because
+the defendant was the only person who could have rebutted the
+state’s evidence).
+​“deliberate attempt to call attention
+to defendant’s failure to testify.”™ Regardless of the form of the
+argument, however, any direct, indirect, or even disguised comment on the
+defendant’s silence violates the defendant’s due process rights and the Fifth
+Amendment privilege against selfincrimination and are therefore
+improper.
+ C.Liar, Liar
+(and other Name Calling) 
+Prosecutors sometimes argue that
+defendants are not believable simply because they are charged with a
+crime. Other times, however, prosecutors are more direct and simply call the
+defendant (or other defense witness) a liar or brand the person with
+equally harmful labels.
+In some
+jurisdictions, calling the defendant a liar is, at least in theory,
+per se improper as it is
+considered an inflammatory label.”* In other jurisdictions, prosecutors may get
+away with such name-calling if it is closely tied to evidence adduced at
+trial. For example, when “the witness told four different stories” when
+testifying, it may be proper to discuss those conflicting stories and then
+argue that the witness is “the biggest liar in [the] [c]ounty.”” That is, it
+may be permissible “to call the defendant or a witness a ‘liar’ if conflicts in
+evidence make such an assertion a fair inference.”
+Prosecutors are often creative and
+build upon the words “lie” or “lying” or “liar.” One prosecutor went well
+beyond the pale in closing argument when discussing the defendant’s
+testimony:
+Joseph
+Goebbels, who was a propaganda minister for Germany back at the time of Adolf Hitler,
+had a theory. He believed that you should lie to the people but
+that you shouldn’t lie with small lies because you can get caught in
+small lies. What you should do is you should lie big, come up
+with a big lie because that’s something that you might be able to
+have the people buy is the big lie. Of course, at that time it
+was that the Jews were
+53.
+Spiegelman, supra note 23, at 138 n.89 (discussing United States v.
+Roberts, 119 F.3d 1006
+(Ist Cir. 1997) (finding argument improper and, when combined with
+other errors, reversible
+error)).
+54. See
+Gagnon, supra note 8, at 483-84 (discussing how Iowa’s supposed
+“bright line test” is
+“not all that bright”); see also O’Callaghan v. State, 429 So.2d
+691, 696 (Fla. 1983) (stating that it is “unquestionably
+improper” to call the defendant a liar).
+55.
+Chandler v. Moore, 240 F.3d 907, 914 (11th Cir. 2001).
+56.
+People v. Starks, 451 N.E.2d 1298, 1305 (Ill. App. Ct. 1983); see
+also Craig v. State, 510
+So. 2d 857, 865 (Fla. 1987) (finding that the prosecutor may call
+defendant a liar if
+supported by the trial evidence).
+​responsible for everything that was
+wrong in the world and they should be exterminated. Well, the
+defense in this case is nothing but a big lie.”’
+Most
+prosecutors aren’t brash enough to invoke Nazi Germany and then
+strain to find a way to
+associate the defendant with it. Many prosecutors will, however, brand the defendant
+with other negative labels in addition to that of liar. Depending on the facts
+of the case and the nature of the prosecutor’s argument, name-calling
+such as “dope pusher,”** “hoodlum,”* and “unpredictable animal”® could
+very well be considered inflammatory, improper, and even reversible
+error.
+ D.Disparaging
+the Defense Lawyer 
+When
+prosecutors aren’t criticizing the defendant or the defendant’s
+witnesses, they are often
+disparaging the defendant’s lawyer. This type of argument is improper because it
+“can prejudice the defendant by . . . inducing the jury to give greater
+weight to the government’s view of the case.”
+Attacks
+on defense counsel can take several forms, beginning with
+criticism disguised as
+compliment. For example, in a classic case of false flattery, one prosecutor
+“backhandedly compliment[ed] defense counsel on his skill in confusing the alleged
+victim of a sexual assault when crossexamining her,” and then
+distinguished the dishonorable goals of the defense lawyer from the noble
+objectives of “the government and the judge.”® More commonly, prosecutors
+go after defense counsel via a “more direct” route.”’ Instead of arguing
+about the evidence, many prosecutors have attacked “the personal
+integrity of defense counsel by suggesting that counsel was not being truthful.”®
+Not mincing words, one prosecutor told
+57.
+Washington v. State, 687 So. 2d 279 (Fla. Dist. Ct. App. 1997).
+58. Mays
+v. State, 571 S.W.2d 429, 430 (Ark. 1978).
+59. Hall
+v. United States, 419 F.2d 582, 587 (5th Cir. 1969).
+60. State
+v. McGregor, 244 So. 2d 846, 846 (La. 1971). 61. United States v. Xiong, 262
+F.3d 672, 675 (7th Cir. 2001).
+62.
+Spiegelman, supra note 23, at 136 n.83 (discussing United States v.
+Frederick, 78 F.3d 1370
+(9th Cir. 1996) (finding argument improper and, when combined with
+other errors, reversible
+error)).
+63.
+Sullivan, supra note 3, at 246 (discussing indirect and direct
+attacks on defense counsel
+by the prosecutor).
+64.
+Briggs v. State, 455 So. 2d 519, 520 (Fla. Dist. Ct. App. 1984)
+(finding argument improper but also harmless
+error).
+​the jury
+that the defense lawyer “is either confused or she’s lying or
+trying to mislead you.”*
+Such
+misconduct in closing argument “evidences an excessive preoccupation with obtaining a
+conviction at any cost.”® And when prosecutors employ this strategy,
+“the state’s closing argument may cause one to wonder who is on trial, the
+defendant or the defense counsel.”® In perhaps the most extreme (and
+literal) example of putting the defense lawyer on trial, one prosecutor in
+an incest case “suggested that defense counsel was also guilty of
+incest.”*
+Another
+variation on this anti-defense-lawyer theme does not attack the
+defense lawyer as an
+individual, but instead attacks his or her role in the criminal justice system. For
+example, one prosecutor argued that, while the prosecutor’s job is to “determine
+whether I believe a person is guilty and whether I think [the prosecution
+is] just,” the “defense counsel’s job is to get his client off the hook. That’s
+his only job here, not to see justice is done but to see that his client is
+acquitted.”” This common twist on this form of improper argument allows
+prosecutors to kill two birds with one stone: anointing themselves as
+justice-seekers while at the same time branding defense lawyers as
+obfuscators.”
+Prosecutors continue to make these
+and similar arguments even though courts have repeatedly stated that
+such “disparaging remarks directed at defense counsel are
+reprehensible.””" In a broader sense, such remarks also “detract from the dignity of
+judicial proceedings.””* As such, regardless of the prosecutor’s angle, all forms
+of argument directed at defense counsel should be considered improper.
+65. State
+v. Lyles, 996 S.W.2d 713, 716 (Mo. Ct. App. 1999) (finding argument
+improper but not
+preserved at the post-conviction level and not sufficient to
+reverse under the higher
+standard of plain error).
+66.
+Briggs, 455 So. 2d at 520.
+67.
+Tobin, supra note 12, at 495.
+68. See
+id. at 495-96 n.78; see also Douglass v. State, 184 So. 756, 757
+(Fla. 1938).
+69. State
+v. Mayo, 734 N.W.2d 115, 121 (Wis. 2007) (finding argument improper
+but not properly
+preserved at trial and not sufficient to reverse under the
+ineffective assistance of
+counsel
+standard, plain error standard, or interests of justice
+standard).
+70. See,
+e.g., United States v. Friedman, 909 F.2d 705, 708-09 (2d Cir.
+1990) (arguing that the
+role of the defense lawyer is to “try to get them off, perhaps even
+for high fees”); Wilson
+v. State, 938 S.W.2d 57, 58 (Tex. Crim. App. 1996) (arguing that
+defense counsel wishes
+“that you turn a guilty man free” and “he can wish that because he
+doesn’t have the obligation to see that justice is
+done™); People v. Hunt, 242 N.W.2d 45, 47 (Mich. Ct. App.
+1976) (arguing that
+“defense counsel’s job was ‘to get his man acquitted’”).
+71.
+United States v. Xiong, 262 F.3d 672, 675 (7th Cir. 2001).
+72. Id
+​​ Vouchingand
+Personal Opinion  
+Vouching is
+likely the most common form of improper argument, but its
+numerous variations can
+make it difficult to identify. In general, a prosecutor vouches when he or she
+gives a personal opinion about the defendant’s guilt or about a
+particular piece of evidence.” This can be problematic, as “[r]esearch
+consistently shows that jurors inherently find prosecutors to be more credible than
+defense counsel.”” Therefore, “it is improper . . . for a prosecutor to
+express a personal belief in the guilt of the accused, or in the veracity of the
+state’s witnesses.””
+Although
+it occurs with some frequency, “[m]ost courts conclude that it
+is misconduct for
+prosecutors to make ‘I’ statements such as ‘I think’ or ‘I
+believe.”’ Some obvious
+examples of such blatant vouching include, “I think the defendant is guilty,” or,
+“I believe the victim testified truthfully.” Some courts will let prosecutors
+get away with vouching, however, if the “I think™ or “I believe” statements
+are properly disguised. Examples might include, “I think the evidence in
+this case shows the defendant is guilty,” or “I think the physical evidence
+proves the victim told the truth.” Therefore, whether this type of argument is
+improper is depends on how the language is parsed.”’
+In most
+cases, prosecutors express their personal opinion of the defendant’s guilt indirectly by
+giving their opinion that the government’s witnesses testified truthfully and
+therefore the jury should believe them. Prosecutors indirectly vouch for
+many types of government witnesses, but they most commonly do so for the
+police. That is, prosecutors make “inappropriate attempt[s] to
+persuade the jury that the police officer’s testimony should be believed simply
+because the witness is a police officer.””
+While
+offering a personal opinion is, by itself, improper, many
+prosecutors compound this
+offense by bolstering their opinions with reference to matters outside of the
+record. One prosecutor, for example, bolstered his personal opinion of
+the defendant’s guilt by explaining to the jury, “I look up police reports. .
+. . I determine whether I believe a person is
+73. See
+Bowman, supra note 2, at 321.
+74. Id. at
+322-23.
+75.
+Tobin, supra note 12, at 503. 76. Bowman, supra note 2, at
+321-22.
+77. See
+Craig Lee Montz, Trial Objections from Beginning to End: The
+Handboof k or Civil and
+Criminal Trials, 29 Pepp. L. REv. 243, 307-08 (2002) (discussing
+cases where the prosecutor’s personal opinions were
+permitted).
+78.
+Cisneros v. State, 678 So. 2d 888, 890 (Fla. Dist. Ct. App.
+1996).
+​guilty and
+whether I think it’s just. I also have the discretion . . . to
+dismiss the charges if I
+think they’re unjust, if they didn’t happen, if it’s not provable.””
+While
+vouching for several police officers, another prosecutor argued
+that the police witnesses
+must be believed because, before they can become police officers, they “take oaths to
+follow the law and so do not ‘stick’ people with charges.”* The prosecutor
+specifically argued that, during their induction ceremonies, “Officer
+Gammon took an oath to uphold the laws” and “Detective Arkins took the same
+oath.”®' Therefore, in order to acquit the defendant, the prosecutor
+contended, the jurors would have to believe these police witnesses consciously
+violated their oaths, as well as their oaths at trial, and “lied on the
+stand.”® Such vouching, especially when based on facts not in evidence,
+constitutes misconduct by the prosecutor.  F.Prosecutor “Testimony” 
+When
+prosecutors aren’t vouching for the state’s witnesses or evidence,
+they sometimes offer
+their own testimony, thus creating evidence out of thin air. Although the law is clear
+that “counsel has no right to create evidence or to misstate the facts”®
+and that any “[a]Jrgument on matters not in evidence is improper,”*
+prosecutors often “testify” in closing argument nonetheless.
+The most
+egregious example of prosecutor testimony occurs when a prosecutor argues facts that he or
+she knows to be false. For example, in one case a prosecutor argued to the
+jury that the defendant “never denied [committing] the crime until he got
+on the witness stand.”™® This might have been a proper argument had there
+been evidence at trial of the defendant’s pre-arrest and pre-Miranda silence.
+But in this case, the prosecutor “knew
+79. State
+v. Mayo, 2007 WI 78, q 16, 301 Wis. 2d 642, 734 N.W.2d 115
+(alterations in
+original).
+80.
+United States v. Cornett, 232 F.3d 570, 573 (7th Cir. 2000).
+81. Id
+82. Id
+83. State
+v. Thornton, 498 N.W.2d 670, 676 (lowa 1993); see also United
+States v.
+Donato,
+99 F.3d 426 (D.C. Cir. 1996) (reversing in part for prosecutor
+misstating evidence); United States v. Forlorma, 94 F.3d
+91 (2d Cir. 1996) (reversal for prosecutor’s repeated,
+incorrect
+claims about the evidence); Bowman, supra note 2, at 323 (“For
+example,
+prosecutors commit misconduct when
+they exaggerate what the testimony shows, including forensic evidence.”).
+84. State
+v. Neuser, 528 N.W.2d 49, 54 (Ct. App. Wis. 1995) (quoting State v.
+Albright,
+298
+N.W.2d 196, 203 (Wis. Ct. App. 1980)).
+85. State
+v. Weiss, 2008 WI App 72,9 15, 312 Wis. 2d 382, 752 N.W.2d 372.
+​better”
+because she had two different police reports detailing how the
+defendant had denied
+committing the crime long before he took the witness stand.® The argument was therefore
+improper, as “[p]rosecutors may not ask jurors to draw inferences that
+they know or should know are not true.”™’
+In other
+cases, prosecutors argue facts that might be true but prevent the
+introduction of evidence
+proving or disproving the facts and deny defense counsel the opportunity to challenge
+the facts by waiting to discuss them until closing arguments. This tactic
+violates both due process and the right of confrontation: “Testimony from a
+prosecutor is difficult enough to overcome, but it is impossible for
+a defendant to test or counter a prosecutor’s ‘testimony’ when the
+defendant is denied his right to confront the prosecutor as a witness.”™
+In one
+example of this tactic, a defendant testified he was out-of-town
+“at the Luxor Hotel in
+Las Vegas at the time” in question.” Instead of presenting contrary evidence at
+trial, the prosecutor waited until closing argument and “testified” that he
+knew the defendant was not at the Luxor because, the prosecutor said, “I
+was able to have members of my staff telephone the Luxor,” thus implying
+that the defendant had lied.” In a different case—one alleging child
+sexual assault—a prosecutor argued that, because the defendant “had been
+sexually abused” herself as a child, she was “more likely to have committed
+the alleged sexual assaults in this case.””" This prosecutorial
+testimony was a twist on the “battering parent syndrome,” but “was improper . . .
+because it was unsupported by expert testimony™ at trial.”*
+The above
+examples are relatively easy for defense counsel to recognize.
+Sometimes, however,
+prosecutors do a better job of disguising their factual assertions as argument. For
+example, one prosecutor argued that the defendant in a drug case was able
+to post his $10,000 bond because he “could go out the next day and make
+$10,000 up on one transaction.”” This was improper because, during the
+evidence portion of trial, the prosecutor did not “even attempt to prove that
+[the defendant] had received any money
+86. Id.
+87. Id
+88. State
+v. Jorgensen, 2008 W1 60, 38, 310 Wis. 2d 138, 754 N.W.2d 77.
+89.
+Cicchini, supra note 26, at 353. 90. Id.
+91. State
+v. Pulizzano, 456 N.W.2d 3235, 335 (Wis. 1990).
+92. Id. at
+336. 93. United States v.
+Vargas, 583 F.2d 380, 386 (7th Cir. 1978).
+​as a
+result of any [drug] deals”—not even the alleged delivery with
+which the defendant was
+charged.”
+In another
+case, a defendant was charged with arson, and the government
+had seized his clothing to
+test for gasoline.” Defense counsel properly argued that the test came back
+negative, thus pointing to the defendant’s innocence. The prosecutor, however,
+responded “by speculating that the reason for that fact could be that
+the defendant had destroyed the clothes™ he wore when committing the crime.”
+The court held that such argument “was improper because it suggests a
+course of conduct by the defendant . . . for which there was no
+evidence.””’
+In a
+closely related tactic, prosecutors may instead misuse a piece of
+evidence that was
+presented at trial. One amazingly creative prosecutor, for
+example, argued that a
+defense witness’s prior conviction—a conviction admitted into evidence only to
+impeach that witness’s credibility”—was somehow evidence that the defendant
+was guilty of the crime for which he was on trial.” Regardless of
+whether the prosecutor is creating evidence out of thin air or misusing real
+evidence that was introduced at trial, both forms of argument are prejudicial and
+improper.
+ G.Misstating
+the Law 
+Applying
+the law to the facts of the case is proper argument; misstating
+the law when doing so,
+however, is not. Prosecutors have misstated nearly every imaginable legal standard,
+including the law of affirmative defenses'™ and of lesser-included
+crimes.'” But the height of sophistry can be found in prosecutors’
+misstatements of the burden of proof.
+Prosecutors commonly attempt to
+lower the government’s burden of proof, thus raising the odds of
+winning a conviction. For example, one Washington prosecutor argued that
+the jury’s duty in reaching its verdict was to “search for the truth.”'”*
+The appellate court, however, rightly stated that this argument “misstates the
+jury’s duty and sweeps aside the State’s burden.”'” Or, as one federal court
+explained, “‘seeking the truth’ suggests
+94. Id.
+(emphasis added).
+95. State
+v. Singh, 793 A.2d 226, 243 (Conn. 2002).
+96.
+Id.
+97. Id.
+(emphasis added). 98. See
+FED. R. EVID. 609.
+99.
+United States v. Mitchell, 1 F.3d 235 (4th Cir. 1993).
+100. See,
+e.g., State v. Bougneit, 294 N.W.2d 675 (Wis. Ct. App. 1980).
+101. See,
+e.g., State v. Neuser, 528 N.W.2d 49 (Wis. Ct. App. 1995).
+102. State v. Berube, 286
+P.3d 402, 411 (Wash. Ct. App. 2012).
+10

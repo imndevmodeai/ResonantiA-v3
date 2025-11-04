@@ -29,7 +29,7 @@ class TemporalMarker:
     value: Tuple
     confidence: QuantumProbability
 
-class ObjectiveGenerationEngine:
+class ObjectiveGenerationEngine:  # Note: Class name uses PascalCase, SPR ID uses Guardian pointS format
     """Main engine class."""
     def extract_features(self, query: str) -> FeatureVector
     def build_temporal_scope(self, features: FeatureVector) -> TemporalScope
@@ -262,7 +262,7 @@ from Three_PointO_ArchE.spr_manager import SPRManager
 spr_manager = SPRManager('knowledge_graph/spr_definitions_tv.json')
 
 spr_definition = {
-    "spr_id": "ObjectiveGenerationEngine",
+        "spr_id": "Objective generation enginE",
     "term": "Objective Generation Engine",
     # ... full definition from outputs/objective_generation_engine_spr.json
 }
@@ -272,9 +272,9 @@ spr_manager.add_spr(spr_definition, overwrite_if_exists=False)
 
 ### 6.2 Update Related SPRs
 
-- Update `Enhancement Skeleton PatterN` SPR to reference ObjectiveGenerationEngine
-- Update `SIRC ProtocoL` SPR to include ObjectiveGenerationEngine in its components
-- Update `RISE OrchestratoR` SPR to reference ObjectiveGenerationEngine integration
+- Update `Enhancement Skeleton PatterN` SPR to reference Objective generation enginE
+- Update `SIRC ProtocoL` SPR to include Objective generation enginE in its components
+- Update `RISE OrchestratoR` SPR to reference Objective generation enginE integration
 
 ---
 

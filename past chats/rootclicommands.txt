@@ -1,0 +1,69 @@
+dev@Windoows7PRO:~$ sudo -i
+[sudo] password for dev: 
+root@Windoows7PRO:~# systenctl diasble wpa_suplicant.service
+Command 'systenctl' not found, did you mean:
+  command 'systemctl' from deb systemd (253.5-1ubuntu6.1)
+  command 'systemctl' from deb systemctl (1.4.4181-1.1)
+Try: apt install <deb name>
+root@Windoows7PRO:~# systemctl diasble wpa_suplicant.service
+Unknown command verb diasble.
+root@Windoows7PRO:~# systemctl disasble wpa_suplicant.service
+Unknown command verb disasble.
+root@Windoows7PRO:~# systemctl disable wpa_suplicant.service
+Failed to disable unit: Unit file wpa_suplicant.service does not exist.
+root@Windoows7PRO:~# systemctl disable wpa_supplicant.service 
+Removed "/etc/systemd/system/dbus-fi.w1.wpa_supplicant1.service".
+Removed "/etc/systemd/system/multi-user.target.wants/wpa_supplicant.service".
+root@Windoows7PRO:~# systemctl disable docker.s
+docker.service  docker.socket   
+root@Windoows7PRO:~# systemctl disable docker.s
+docker.service  docker.socket   
+root@Windoows7PRO:~# systemctl disable docker.socket dfocker.service 
+Failed to disable unit: Unit file dfocker.service does not exist.
+root@Windoows7PRO:~# systemctl disable docker.socket docker.service 
+Synchronizing state of docker.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install disable docker
+Removed "/etc/systemd/system/sockets.target.wants/docker.socket".
+Removed "/etc/systemd/system/multi-user.target.wants/docker.service".
+root@Windoows7PRO:~# systemctl disable systemd
+Failed to disable unit: Unit file systemd.service does not exist.
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-
+systemd-pstore.service     systemd-timesyncd.service
+systemd-resolved.service   
+root@Windoows7PRO:~# systemctl disable systemd-pstore.service 
+Removed "/etc/systemd/system/sysinit.target.wants/systemd-pstore.service".
+root@Windoows7PRO:~# systemctl disable systemd-resolved.service 
+Removed "/etc/systemd/system/dbus-org.freedesktop.resolve1.service".
+Removed "/etc/systemd/system/sysinit.target.wants/systemd-resolved.service".
+root@Windoows7PRO:~# 
+

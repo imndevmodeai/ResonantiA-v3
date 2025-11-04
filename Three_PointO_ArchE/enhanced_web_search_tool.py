@@ -331,8 +331,14 @@ class EnhancedWebSearchTool:
                 try:
                     driver.quit()
                     logger.debug("Browser driver closed successfully")
+                    driver = None  # Explicitly clear reference
                 except Exception as e:
                     logger.error(f"Failed to close browser driver: {e}")
+                    # Force cleanup
+                    try:
+                        driver = None
+                    except:
+                        pass
     
     def search_with_requests(self, query: str, num_results: int = 10) -> Dict[str, Any]:
         """Fallback search using requests and BeautifulSoup."""

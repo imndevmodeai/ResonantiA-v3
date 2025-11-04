@@ -1,9 +1,16 @@
 # This package contains various LLM provider implementations
+import os
 from .base import BaseLLMProvider, LLMProviderError
 from .google import GoogleProvider
 from .cursor_arche import CursorArchEProvider
 try:
-    from .groq import GroqProvider
+    from .cursor_arche_enhanced import CursorArchEProviderEnhanced
+    ENHANCED_CURSOR_AVAILABLE = True
+except ImportError:
+    CursorArchEProviderEnhanced = None
+    ENHANCED_CURSOR_AVAILABLE = False
+try:
+    from .groq_provider import GroqProvider
     GROQ_AVAILABLE = True
 except ImportError:
     GroqProvider = None
@@ -11,7 +18,7 @@ except ImportError:
 from ..thought_trail import log_to_thought_trail
 
 @log_to_thought_trail
-def get_llm_provider(provider_name: str = "google", api_key: str = None):
+def get_llm_provider(provider_name: str = None, api_key: str = None):
     """
     Factory function to get an LLM provider instance.
     
@@ -27,7 +34,7 @@ def get_llm_provider(provider_name: str = "google", api_key: str = None):
         LLMProviderError: If provider initialization fails.
     """
     if provider_name is None:
-        provider_name = "google" # Default to google
+        provider_name = "groq" # Default to groq (faster, cheaper)
     provider_name_lower = provider_name.lower()
     
     # Get API key from config if not provided
@@ -53,9 +60,18 @@ def get_llm_provider(provider_name: str = "google", api_key: str = None):
             raise ValueError(f"Could not retrieve API key for provider '{provider_name}': {e}")
     
     # Create provider instance based on name
-    if provider_name_lower in ['cursor', 'cursor_arche', 'arche']:
+    if provider_name_lower in ['cursor', 'cursor_arche', 'arche', 'cursor_enhanced']:
         # Cursor ArchE provider (me, the AI assistant) - doesn't strictly need API key
-        return CursorArchEProvider(api_key=api_key or "cursor_arche_v1")
+        # Use enhanced version if requested or if explicitly enabled
+        use_enhanced = (
+            provider_name_lower == 'cursor_enhanced' or
+            (ENHANCED_CURSOR_AVAILABLE and os.getenv('ARCHE_USE_ENHANCED_CURSOR', '0') == '1')
+        )
+        
+        if use_enhanced and ENHANCED_CURSOR_AVAILABLE:
+            return CursorArchEProviderEnhanced(api_key=api_key or "cursor_arche_v1")
+        else:
+            return CursorArchEProvider(api_key=api_key or "cursor_arche_v1")
     elif provider_name_lower == 'openai':
         # Import OpenAI provider if available
         try:
@@ -89,7 +105,7 @@ def get_model_for_provider(provider_name: str) -> str:
     elif provider_name_lower == "google":
         return "gemini-2.0-flash-exp"  # More permissive, handles agent terminology
     elif provider_name_lower == "groq":
-        return "llama-3.1-70b-versatile"  # Best quality, free tier
+        return "llama-3.3-70b-versatile"  # Latest, best quality, free tier
     else:
         # Fallback for other potential providers
         return "default-model"

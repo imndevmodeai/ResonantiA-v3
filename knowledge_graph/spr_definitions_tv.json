@@ -391,6 +391,94 @@
     "example_application": "CausallagdetectioN revealed that changes in supplier inventory levels only impacted production output after a 3-week delay."
   },
   {
+    "spr_id": "UniversalabstractioN",
+    "term": "Universal Abstraction",
+    "definition": "The meta-pattern for transcending LLM dependencies and achieving deterministic, self-contained cognitive operations. Universal Abstraction recognizes that structural pattern matching and deterministic rules can replace semantic understanding and LLM inference. It operates through four universal processes: (1) Representation - transforming semantic tasks into structural pattern detection, (2) Comparison - using lookup tables and rule-based matching instead of LLM inference, (3) Learning - pattern recognition creating reusable template rules through autopoietic learning, (4) Crystallization - validated patterns becoming permanent deterministic rules. Universal Abstraction enables recursive self-application: the abstraction mechanism can abstract itself, creating infinite recursive capability for self-improvement. When encountering dissonance, cognitive drift, or non-deterministic behavior, ArchE must apply Universal Abstraction to transform the problem into a pattern matching, rule-based, deterministic solution.",
+    "category": "MetaPattern",
+    "relationships": {
+      "type": "UniversalMetaPattern",
+      "implements": [
+        "PatternMatchingOverSemanticUnderstanding",
+        "DeterministicRulesOverLLMInference",
+        "StructuralTransformationOverSemanticAnalysis"
+      ],
+      "enables": [
+        "Objective generation enginE",
+        "DynamiccausalparameterextractioN",
+        "AllFutureDissonanceResolution",
+        "Metacognitive shifT",
+        "DissonanceResolutionProtocol"
+      ],
+      "mandated_by": [
+        "Mandate 14 (Universal Abstraction Mandate)"
+      ],
+      "specified_in": [
+        "specifications/universal_abstraction_meta_pattern.md"
+      ],
+      "consists_of": [
+        "RepresentationProcess",
+        "ComparisonProcess",
+        "LearningProcess",
+        "CrystallizationProcess"
+      ],
+      "recursively_applies_to": [
+        "UniversalAbstractioN",
+        "PatternMatching",
+        "TemplateAssembly",
+        "LookupTables"
+      ],
+      "transcends": [
+        "LLM dependencies",
+        "Semantic understanding requirements",
+        "Non-deterministic operations",
+        "API dependencies"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "Universal Abstraction follows the pattern: (1) Identify the semantic task, (2) Transform it into structural pattern matching, (3) Replace LLM inference with deterministic rules/lookup tables, (4) Use quantum probability states instead of LLM confidence, (5) Crystallize successful patterns into permanent rules. The abstraction can be applied recursively: pattern matching rules are patterns, lookup tables are patterns, templates are patterns. When dissonance is detected, apply Universal Abstraction to identify the meta-pattern and create a deterministic solution. MANDATED: Mandate 14 (protocol/CRITICAL_MANDATES.md) requires Universal Abstraction application to all dissonances and LLM-dependent operations. SPECIFIED: Complete specification in specifications/universal_abstraction_meta_pattern.md. The Four Universal Processes: Representation (semantic → structural), Comparison (LLM inference → lookup tables), Learning (patterns → rules), Crystallization (abstraction → concrete).",
+    "example_application": "When the Objective Generation Engine needed to transform query → objective, Universal Abstraction transformed it from 'LLM semantic understanding' to 'pattern matching + template assembly'. When causal parameter extraction needed treatment/outcome identification, Universal Abstraction transformed it from 'LLM semantic analysis' to 'meta-conceptual pattern matching of semantic roles'. When any future dissonance appears, Universal Abstraction will identify the structural pattern and create a deterministic solution."
+  },
+  {
+    "spr_id": "DynamiccausalparameterextractioN",
+    "term": "Dynamic Causal Parameter Extraction",
+    "definition": "A universal abstraction pattern for meta-conceptual, query-relative extraction of causal roles (CAUSE/EFFECT) from natural language queries, RISE analysis structures, or data structures. This pattern crystallizes the insight that causal inference parameters must be identified by their SEMANTIC ROLES (AGENT/PATIENT, DRIVER/RESULT, SOURCE/TARGET) rather than literal keywords like 'treatment' or 'outcome'. It employs meta-conceptual pattern matching to identify entities serving CAUSE roles (independent variables, interventions, agents of change) and EFFECT roles (dependent variables, results, targets of analysis) through linguistic structures (SVO patterns, transformation patterns, prepositional phrases). Provides multiple extraction strategies (LLM-based semantic analysis, pattern-based role identification, data-driven mapping) with intelligent fallback hierarchies.",
+    "category": "CognitivePattern",
+    "relationships": {
+      "type": "UniversalAbstraction",
+      "implements": [
+        "QueryRelativeAnalysiS",
+        "DomainAgnosticProcessinG"
+      ],
+      "enhances": [
+        "Causal inferencE",
+        "CausallagdetectioN"
+      ],
+      "implemented_by": [
+        "DynamicCausalParameterExtractor",
+        "causal_parameter_extractor.py",
+        "extract_causal_parameters function"
+      ],
+      "used_by": [
+        "causal_digest.py",
+        "rise_enhanced_synergistic_inquiry.py",
+        "llm_tool.py",
+        "playbook_orchestrator.py"
+      ],
+      "supports": [
+        "Causal inferencE operations",
+        "RISE analysis integration",
+        "Dynamic workflow generation"
+      ],
+      "replaces": [
+        "Hardcoded treatment/outcome heuristics",
+        "Static causal parameter assignment"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "Implemented in Three_PointO_ArchE/causal_parameter_extractor.py following Universal Abstraction principles (see specifications/objective_generation_engine.md). The DynamicCausalParameterExtractor class provides three primary extraction methods: extract_from_query (deterministic pattern-based semantic role analysis from natural language), extract_from_rise_analysis (structured extraction from RISE analysis), and extract_from_data_structure (data-driven extraction from data structures). The extraction uses meta-conceptual patterns: CAUSE_ROLE_PATTERNS (identify agents, drivers, interventions), EFFECT_ROLE_PATTERNS (identify targets, results, consequences), SVO_PATTERNS (Subject-Verb-Object where Subject=CAUSE, Object=EFFECT), and transformation patterns ('from X to Y'). UNIVERSAL ABSTRACTION: No LLM dependencies - all extraction uses deterministic pattern matching, rule-based entity extraction, and structural analysis. The convenience function extract_causal_parameters() automatically selects the appropriate method based on available inputs. Supports multiple strategies: 'auto' (deterministic rule-based selection), 'pattern' (meta-conceptual regex-based), and 'hybrid' (multiple pattern strategies combined). Returns semantic role metadata (cause_role_type: AGENT|DRIVER|INTERVENTION|SOURCE, effect_role_type: PATIENT|RESULT|TARGET|CONSEQUENCE) with quantum probability confidence states.",
+    "example_application": "When analyzing the query 'Develop a comprehensive analysis of a future society transitioning away from monetary exchange frameworks toward a dignity-centered model of resource distribution', DynamiccausalparameterextractioN identifies the semantic roles: 'monetary exchange frameworks' serves the CAUSE role (SOURCE - thing being changed FROM) and 'dignity-centered model of resource distribution' serves the EFFECT role (TARGET - thing being changed TO), through the transformation pattern 'transitioning from X toward Y'. This meta-conceptual identification enables accurate causal inference operations without requiring literal 'treatment' or 'outcome' keywords in the query."
+  },
+  {
     "spr_id": "CognitivereflectioncyclE",
     "term": "Cognitive Reflection Cycle (CRC)",
     "definition": "The fundamental process of 'thinking about thinking' that underpins meta-cognition. It involves examining the ThoughtTraiL, which is enriched by IAR data from each step, to identify patterns, dissonances, and opportunities for improvement.",
@@ -4736,6 +4824,52 @@
     "created": "2025-10-16T06:54:37.296513"
   },
   {
+    "spr_id": "MetaPatternRecognition",
+    "term": "Meta-Pattern Recognition",
+    "definition": "The cognitive capability to recognize meta-patterns, which are patterns that describe the creation and structure of other patterns. This enables the system to abstract its own abstraction mechanisms, leading to recursive autopoiesis and the ability to learn how to learn.",
+    "category": "CoreCognitiveProcess",
+    "relationships": {
+        "enables": ["RecursiveAutopoiesis", "UniversalAbstractionLevel3"],
+        "implemented_by": ["MetaPatternManager"],
+        "uses": ["MetaPatterns"]
+    },
+    "blueprint_details": "See specifications/objective_generation_engine.md, Part XIV. The MetaPatternManager class implements this by analyzing mechanisms to identify underlying meta-patterns stored in knowledge_graph/meta_patterns.json.",
+    "guardian_notes": "This SPR represents the system's awareness of its own learning processes. Its activation is a key indicator of Level 3 self-awareness."
+  },
+  {
+    "spr_id": "ObjectiveGenerationEngine",
+    "term": "Objective Generation Engine",
+    "definition": "The deterministic cognitive engine responsible for translating user queries into protocol-compliant, actionable Enhanced Objective Statements by assembling SPRs and Mandates into a predefined template.",
+    "category": "CognitiveEngine",
+    "relationships": {
+        "is_a": [
+            "Cognitive EnginE"
+        ],
+        "uses": [
+            "Enhancement Skeleton PatterN",
+            "Sparse priming representationS"
+        ],
+        "enables": [
+            "Cognitive resonancE"
+        ],
+        "part_of": [
+            "SIRC ProtocoL"
+        ]
+    },
+    "blueprint_details": "See specifications/objective_generation_engine.md"
+  },
+  {
+    "spr_id": "Path",
+    "term": "Path",
+    "definition": "Represents a file system path, which can be manipulated, analyzed, and validated.",
+    "category": "CoreDataType",
+    "relationships": {
+        "is_a": ["String"],
+        "used_by": ["FileTool", "DirectoryTool"]
+    },
+    "blueprint_details": "Typically implemented as a string or a pathlib.Path object in Python. Standard library functions in os.path or pathlib are used for manipulation."
+  },
+  {
     "spr_id": "HumandignityliberatioN",
     "term": "Human Dignity Liberation",
     "definition": "Breaking the chain between human dignity and utility-based worth",
@@ -5969,7 +6103,7 @@
       "source": "Bert Hellinger - Love's Hidden Symmetry",
       "confidence": "high"
     },
-    "blueprint_details": "Family constellations reveal hidden systemic dynamics through representative positioning. The phenomenon demonstrates that systemic information is accessible non-verbally. Application: In ComplexsystemvisioninG, consider how system representatives (agents, stakeholders) may provide information about system state beyond what their explicit rules or data would suggest - similar to constellation representatives accessing family field information.",
+    "blueprint_details": "Family constellations reveal hidden systemic dynamics through representative positioning. The phenomenon demonstrates that systemic information is accessible non-verbally. Application: In ComplexsystemvisioninG, consider how system representatives (agents, stakeholders) may provide information about system state beyond what their explicit rules or data would suggest - similar to how constellation representatives access family field information.",
     "example_application": "In modeling organizational culture, applying FamilyconstellationDynamiC principles suggested that 'representative' agents (modeling different departments) might reveal systemic dynamics through their emergent positioning and interactions that weren't explicitly programmed, similar to how constellation representatives access family information."
   },
   {

@@ -1,0 +1,28 @@
+You are evaluating an observation from the MasterMind_AI agent's execution of an action.
+
+OBSERVATION TO EVALUATE:
+{observation}
+
+ACTION THAT PRODUCED IT:
+{action}
+
+CONTEXT:
+{context}
+
+Evaluate this observation for:
+1. Relevance (0.0-1.0): Is the observation relevant to the action and context?
+2. Factual Accuracy (0.0-1.0): Are the results factually accurate?
+3. Completeness (0.0-1.0): Does the observation provide all necessary information?
+4. Usefulness (0.0-1.0): How useful is this observation for making progress on the task?
+
+For each criterion, provide:
+- A numerical score
+- A brief explanation
+- Any identified issues or improvements
+
+Check specifically for:
+- Inconsistencies with known facts
+- Missing information that would be important for decision making
+- Potential misinterpretations or ambiguities
+
+Provide your final assessment and recommendation for how the agent should interpret this observation. 

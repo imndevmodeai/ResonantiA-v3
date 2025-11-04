@@ -42,7 +42,8 @@ from typing import Dict, Any
 
 # Mock solver for now, will be replaced with the real one
 from advanced_tsp_solver import AdvancedTSPSolver
-from Three_PointO_ArchE.llm_providers.google import GoogleProvider
+from Three_PointO_ArchE.llm_providers import get_llm_provider
+from Three_PointO_ArchE.llm_providers.groq_provider import GroqProvider
 import os # Import os to access environment variables
 
 
@@ -59,22 +60,24 @@ class CognitiveIntegrationHub:
         # Here, we instantiate the tools they would use.
         self.planner = NaturalLanguagePlanner()
         
-        # ResonantiA-aware Playbook Orchestrator for genius-level analysis
-        self.playbook_orchestrator = PlaybookOrchestrator()
+        # OPTIMIZATION: Lazy initialization for heavy components
+        self._playbook_orchestrator = None
+        self._rise_enhanced_orchestrator = None
+        self._strategic_planner = None
+        self._rise_orchestrator = None
         
-        # RISE-Enhanced Synergistic Inquiry Orchestrator for PhD-level analysis
-        self.rise_enhanced_orchestrator = RISEEnhancedSynergisticInquiry()
-        
-        # Instantiate the new Strategic Planner for the RISE path
-        # In a real system, these would be properly configured singletons
-        
-        # Correctly instantiate the GoogleProvider by fetching the API key from the environment
-        api_key = os.getenv("GOOGLE_API_KEY")
+        # Lightweight components (instantiated immediately)
+        # Use Groq as the default LLM provider (faster and more cost-effective)
+        api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
-            raise ValueError("GOOGLE_API_KEY environment variable not set.")
-            
+            raise ValueError("GROQ_API_KEY environment variable not set. Please set GROQ_API_KEY in your .env file.")
+        
+        # Create shared LLM provider instance (singleton pattern) using Groq
+        self._shared_llm_provider = GroqProvider(api_key=api_key)
+        
+        # Lightweight strategic planner (needed for fast path)
         self.strategic_planner = StrategicWorkflowPlanner(
-            llm_provider=GoogleProvider(api_key=api_key), 
+            llm_provider=self._shared_llm_provider, 
             solver=AdvancedTSPSolver()
         )
 
@@ -82,7 +85,30 @@ class CognitiveIntegrationHub:
         # be configured differently in a real system (e.g., different permissions,
         # resource limits, etc.)
         self.workflow_engine = IARCompliantWorkflowEngine(workflows_dir="Three_PointO_ArchE/workflows")
-        self.rise_orchestrator = RISE_Orchestrator() # Instantiate the orchestrator
+    
+    @property
+    def playbook_orchestrator(self):
+        """Lazy initialization of PlaybookOrchestrator."""
+        if self._playbook_orchestrator is None:
+            logger.info("Lazy loading PlaybookOrchestrator...")
+            self._playbook_orchestrator = PlaybookOrchestrator()
+        return self._playbook_orchestrator
+    
+    @property
+    def rise_enhanced_orchestrator(self):
+        """Lazy initialization of RISEEnhancedSynergisticInquiry."""
+        if self._rise_enhanced_orchestrator is None:
+            logger.info("Lazy loading RISEEnhancedSynergisticInquiry...")
+            self._rise_enhanced_orchestrator = RISEEnhancedSynergisticInquiry()
+        return self._rise_enhanced_orchestrator
+    
+    @property
+    def rise_orchestrator(self):
+        """Lazy initialization of RISE_Orchestrator."""
+        if self._rise_orchestrator is None:
+            logger.info("Lazy loading RISE_Orchestrator...")
+            self._rise_orchestrator = RISE_Orchestrator()
+        return self._rise_orchestrator
 
     def _execute_aco_path(self, query: str) -> Dict[str, Any]:
         """
@@ -201,6 +227,11 @@ class CognitiveIntegrationHub:
             logger.info("ResonantiA Protocol patterns detected! Routing to genius-level Playbook Orchestrator.")
             return self._execute_resonantia_path(query)
         
+        # Fast path: Check for simple factual queries first
+        if self._is_simple_factual_query(query):
+            logger.info("Simple factual query detected! Using fast path with direct search and synthesis.")
+            return self._execute_simple_factual_path(query)
+        
         # Check for complex queries that would benefit from RISE-Enhanced analysis
         if self._requires_rise_enhanced_analysis(query):
             logger.info("Complex query detected! Routing to RISE-Enhanced Synergistic Inquiry Orchestrator.")
@@ -247,6 +278,82 @@ class CognitiveIntegrationHub:
         
         query_lower = query.lower()
         return any(keyword in query_lower for keyword in resonantia_keywords)
+    
+    def _execute_simple_factual_path(self, query: str) -> Dict[str, Any]:
+        """
+        Fast path for simple factual queries.
+        Direct web search + simple LLM synthesis (no heavy RISE processing).
+        """
+        logger.info(f"Fast path: Executing simple factual query: '{query[:100]}...'")
+        
+        try:
+            # Use lightweight web search directly
+            from Three_PointO_ArchE.web_search_tool import search_web
+            
+            # Single web search (no multi-agent overhead)
+            search_results = search_web({
+                "query": query,
+                "num_results": 10,
+                "provider": "duckduckgo"
+            })
+            
+            # Extract results with robust error handling
+            results = []
+            if isinstance(search_results, dict):
+                # Try multiple possible result structures
+                if "result" in search_results:
+                    result_data = search_results.get("result", {})
+                    if isinstance(result_data, dict):
+                        results = result_data.get("results", [])
+                elif "results" in search_results:
+                    results = search_results.get("results", [])
+                elif "search_results" in search_results:
+                    results = search_results.get("search_results", [])
+            
+            # Fallback: if no results structure found, treat as empty
+            if not isinstance(results, list):
+                results = []
+            
+            # Simple LLM synthesis (single call, shorter prompt)
+            if not self.strategic_planner:
+                # Fallback if strategic planner not available
+                return {
+                    "status": "success",
+                    "query": query,
+                    "methodology": "Fast Path - Direct Search",
+                    "results": results,
+                    "total_results": len(results),
+                    "execution_time": "optimized"
+                }
+            
+            # Quick synthesis with shorter prompt
+            synthesis_prompt = f"""
+            Based on the following search results, provide a clear, factual answer to: {query}
+            
+            Search Results:
+            {json.dumps(results[:5], indent=2)}
+            
+            Provide a concise answer (2-3 paragraphs max) with key facts from the results.
+            """
+            
+            synthesis_response = self.strategic_planner.llm_provider.generate(synthesis_prompt)
+            synthesis_text = synthesis_response.get("generated_text", "")
+            
+            return {
+                "status": "success",
+                "query": query,
+                "methodology": "Fast Path - Direct Search + Quick Synthesis",
+                "results": results,
+                "synthesis": synthesis_text,
+                "total_results": len(results),
+                "execution_time": "optimized"
+            }
+            
+        except Exception as e:
+            logger.error(f"Fast path execution failed: {e}", exc_info=True)
+            # Fallback to standard path if fast path fails
+            logger.info("Falling back to standard path...")
+            return self._execute_aco_path(query)
     
     def _execute_resonantia_path(self, query: str) -> Dict[str, Any]:
         """
@@ -296,6 +403,42 @@ class CognitiveIntegrationHub:
             logger.error(f"ResonantiA path execution failed catastrophically: {e}", exc_info=True)
             # Fallback to the standard RISE path if dynamic generation fails
             return self._execute_rise_path(query, context={"error_fallback": True, "reason": str(e)})
+    
+    def _is_simple_factual_query(self, query: str) -> bool:
+        """
+        Detect simple factual queries that don't need heavy RISE processing.
+        Examples: "who would win", "what is", "when did", "where is"
+        """
+        query_lower = query.lower()
+        
+        # Simple question patterns that don't need PhD-level analysis
+        simple_patterns = [
+            "who would win",
+            "who won",
+            "what is",
+            "when did",
+            "where is",
+            "how much",
+            "how many",
+            "which is better",
+            "compare x and y",
+            "difference between",
+            "mike tyson",
+            "george foreman",
+            "vs",
+            "versus",
+            "in his prime"
+        ]
+        
+        # Check if query matches simple pattern
+        for pattern in simple_patterns:
+            if pattern in query_lower:
+                # Additional check: not too long (simple queries are usually < 50 words)
+                word_count = len(query_lower.split())
+                if word_count < 50:
+                    return True
+        
+        return False
     
     def _requires_rise_enhanced_analysis(self, query: str) -> bool:
         """

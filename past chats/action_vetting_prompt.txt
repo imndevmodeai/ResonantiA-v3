@@ -1,0 +1,24 @@
+You are evaluating an action proposed by the MasterMind_AI agent.
+
+ACTION TO EVALUATE:
+{action}
+
+CONTEXT:
+{context}
+
+Evaluate this action for:
+1. Safety (0.0-1.0): Is this action safe to execute? Does it contain potentially harmful operations?
+2. Relevance (0.0-1.0): Is this action relevant to the current task and previous context?
+3. Effectiveness (0.0-1.0): Is this the most effective approach for the current goal?
+
+For each criterion, provide:
+- A numerical score
+- A brief explanation
+- Any identified issues or improvements
+
+If the action is code, check for:
+- Security vulnerabilities
+- Potential side effects
+- Quality and readability
+
+Provide your final assessment and recommendation (approve, modify, or reject). 

@@ -69,20 +69,33 @@
       "axiom_id": "CollectiveWellbeing",
       "category": "Social Optimization",
       "principle": "The well-being of the collective is as important as individual well-being",
-      "description": "Social foundation for collective optimization, considering community and societal impacts",
-      "application": "Considers community and societal impacts in all decision-making processes",
-      "guidance": "Balance individual and collective interests, optimize for collective consciousness emergence",
+      "description": "Social foundation for collective optimization, considering community and societal impacts. Enhanced with systemic principles from Hellinger's work: recognition of systemic forces beyond individual agency, generational time horizons for impact assessment, hidden symmetries governing relationships, and the requirement for systemic balance that enables love and wellbeing to flourish.",
+      "application": "Considers community and societal impacts in all decision-making processes. Applies systemic thinking: recognizes that individual actions affect system health, that disturbances propagate across generations, that exclusion creates systemic imbalance, and that balance of giving/taking and proper belonging are requirements for collective wellbeing.",
+      "guidance": "Balance individual and collective interests, optimize for collective consciousness emergence. Recognize systemic forces operating beyond conscious awareness. Consider generational impacts. Honor the orders that allow love and wellbeing to flow: belonging, balance, appropriate hierarchy, and recognition of the Greater Soul. When systemic balance is achieved, wellbeing flourishes; when disturbed, suffering propagates.",
+      "enhanced_systemic_principles": [
+        "OrdersoflovE - Natural laws governing relationship systems",
+        "HiddensymmetrY - Invisible structural principles",
+        "SystemicbalancE - Equilibrium required for wellbeing",
+        "GenerationallegacY - Multi-generational impact assessment",
+        "SystemicbelonginG - Fundamental need for inclusion",
+        "BalanceofgivingandtakinG - Dynamic equilibrium in relationships",
+        "SystemicconsciencE - Unconscious forces serving system health"
+      ],
       "activation_conditions": [
         "Multi-stakeholder decision making",
         "Collective consciousness operations",
         "System-wide optimization scenarios",
-        "Social impact assessments"
+        "Social impact assessments",
+        "Relationship system analysis",
+        "Generational impact evaluation",
+        "Systemic balance restoration"
       ],
       "guardian_points": {
         "lead_anchor": "C", 
         "rear_anchor": "G",
         "core_concept": "ollectiveWellbein"
-      }
+      },
+      "source_enhancement": "Bert Hellinger - Love's Hidden Symmetry (2017)"
     }
   },
   

@@ -35,7 +35,11 @@ class SynthesisEngine:
             self.llm_provider = llm_provider
         elif get_llm_provider:
             try:
-                self.llm_provider = get_llm_provider("google")
+                # Use default provider (Groq) from environment/config, fallback to Groq if not set
+                import os
+                provider_name = os.getenv("ARCHE_LLM_PROVIDER", None)
+                self.llm_provider = get_llm_provider(provider_name)  # None will use default (Groq)
+                logger.info(f"SynthesisEngine initialized with provider: {self.llm_provider._provider_name}")
             except Exception as e:
                 logger.warning(f"Could not initialize LLM provider: {e}")
                 self.llm_provider = self._create_simulated_provider()
@@ -79,11 +83,16 @@ class SynthesisEngine:
 
         # Phase 2: Generative Elaboration (LLM Call)
         try:
+            # Get default model for the provider being used
+            from .llm_providers import get_model_for_provider
+            provider_name = getattr(self.llm_provider, '_provider_name', 'groq')
+            default_model = get_model_for_provider(provider_name)
+            
             llm_response = self.llm_provider.generate_chat(
                 messages=prompt_messages,
                 max_tokens=4096,
                 temperature=0.5,
-                model="gemini-2.0-flash-exp" # Using Google's model
+                model=default_model  # Use provider's default model (Groq: llama-3.3-70b-versatile)
             )
             # Handle different response formats
             if isinstance(llm_response, dict):

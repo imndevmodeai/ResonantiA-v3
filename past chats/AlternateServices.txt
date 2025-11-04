@@ -1,0 +1,5 @@
+https:push.services.mozilla.com:443:.::3	0	19989	https:push.services.mozilla.com:443:push.services.mozilla.com:443::n:1729654834:h3:y:1727062832:n::|n:y:
+https:contile.services.mozilla.com:443:.::3	0	19989	https:contile.services.mozilla.com:443:contile.services.mozilla.com:443::n:1729654833:h3:y:1727062832:n::|n:y:
+https:firefox-api-proxy.cdn.mozilla.net:443:.::3	0	19989	https:firefox-api-proxy.cdn.mozilla.net:443:firefox-api-proxy.cdn.mozilla.net:443::n:1729654834:h3:y:1727062832:n::|n:y:
+https:spocs.getpocket.com:443:.::3	0	19989	https:spocs.getpocket.com:443:spocs.getpocket.com:443::n:1729654834:h3:y:1727062832:n::|n:y:
+https:location.services.mozilla.com:443:.::3	0	19989	https:location.services.mozilla.com:443:location.services.mozilla.com:443::n:1729654833:h3:y:1727062832:n::|n:y:

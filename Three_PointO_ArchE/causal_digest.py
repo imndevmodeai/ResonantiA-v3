@@ -9,6 +9,12 @@ except Exception:  # pragma: no cover
     def perform_causal_inference(operation: str, data=None, **kwargs):  # type: ignore
         return {"error": "causal tool unavailable"}
 
+try:
+    from .causal_parameter_extractor import extract_causal_parameters
+except Exception:  # pragma: no cover
+    def extract_causal_parameters(query=None, data=None, **kwargs):  # type: ignore
+        return {"treatment": "unknown_treatment", "outcome": "unknown_outcome", "confidence": 0.1}
+
 
 def build_flux_annotated_digest(raw_events: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Create a flux-annotated digest from raw ThoughtTraiL or logs.
@@ -46,16 +52,28 @@ def build_flux_annotated_digest(raw_events: List[Dict[str, Any]]) -> Dict[str, A
             for k in keys:
                 data[k] = [r.get(k) for r in rows if k in r]
 
-            # Heuristic: use first two numeric keys as (treatment,outcome)
+            # Dynamic extraction: Use universal abstraction to extract treatment/outcome
+            # This replaces the hardcoded heuristic with query-relative extraction
             num_keys = [k for k in keys if k != 'iar_confidence']
             if len(num_keys) >= 2:
-                treatment, outcome = list(num_keys)[:2]
+                # Extract causal parameters from data structure
+                # The extractor will intelligently identify treatment/outcome from the data
+                causal_params = extract_causal_parameters(data=data)
+                
+                treatment = causal_params.get('treatment', num_keys[0] if num_keys else 'unknown')
+                outcome = causal_params.get('outcome', num_keys[1] if len(num_keys) > 1 else 'unknown')
+                confounders = causal_params.get('confounders', [])
+                
+                # If extraction didn't provide confounders, use remaining keys
+                if not confounders and len(num_keys) > 2:
+                    confounders = [k for k in num_keys[2:5] if k not in [treatment, outcome]]
+                
                 ci_res = perform_causal_inference(
                     operation='estimate_effect',
                     data=data,
                     treatment=treatment,
                     outcome=outcome,
-                    confounders=[k for k in num_keys[2:5]]  # small set
+                    confounders=confounders
                 )
                 digest['causal'] = {
                     'treatment': treatment,

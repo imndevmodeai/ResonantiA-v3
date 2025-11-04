@@ -1,0 +1,381 @@
+Build Anything with Perplexity, Here’s How
+
+https://www.youtube.com/watch?v=w_YRnA8RdnU
+
+my name is David Andre and I'm going to show you how to build anything with perplexity if you're new here perplexity
+is an AI tool that specializes in web search for example you can say tell me
+about the Elon Musk and Yan Leon Twitter brief and it will give you the answer because it takes an llm a large language
+model and gives it the power to search the web so in this video I'm going to show you how to use this powerful AI
+tool to make literally anything even if you aren't a programmer now you might be thinking but David CAD GPT can also
+search the web and you're right however perplexity is a completely different level check this out in ch GPT if we
+look at this it's not even five sites it's actually three while perplexity went through 20 different websites and
+we can see all of them are different sources but what's even better is that as you can see I'm using clo fre Opus
+meaning in complexity you can choose which llm you want to use and this is also why a lot of programmers prefer to
+use perplexity because you can use clo fre Opus to generate the code and then switch to GPT 4 to debug the code for
+one subscription you get all of this which is why if I only could pay for one tool it would be perplexity now to be
+honest even the free version is really solid however in this video I'm going to be using the paid version so if you want
+50% off I'm going to include a link in the description now I don't even know what I'm going to build yet I'm going to
+let perplexity choose that list out 10 types of cool projects that I could
+build assume I am not a programmer and what's great is that here in the focus
+button you can actually change what perplexity should focus on by default
+it's on all which means search across the entire internet you know exploring all the sources as we saw before but you
+can also do academic search in published academic papers or writing which is one
+of my favorites generate the text without searching the web so for this I would probably go with writing because I
+just want the ideas I just want the llm to generate ideas not necessarily look online for them right distraction
+blocker oh my God we could actually build a simple productivity extension perhaps okay I have an idea actually
+something that lets you choose between going to your task list and going to the website you want to visit so
+perhaps each time I visit I want to visit wit.com or x.com you know both
+domains I have to be checked in it would give me two buttons one
+redirecting me to my task list and the other allowing me to continue to the
+side give me five potential ideas how we could we could
+execute actually I should probably shouldn't use idea how we could execute upon this idea five
+potential let's say designs okay now we're getting more spefic
+specific and we are going to get into building I have a empty python project which actually I don't even know why I
+have a python project um I guess I didn't know we're going to build a extension obviously for a Chrome
+extension we need HTML CSS and JavaScript but even if you didn't know that I mean we'll see perplexity will
+help us figure that out so uh it's building up upon the chat right that's the beauty of perplexity and especially
+CLA 3 Opus because it's it's using the llm obviously the LM is the brain it's
+the main thing and perplexity just builds very nice search tools and you know behind the scenes prompts on top of
+it CLA free Opus has 200k context window meaning your chat can be very long
+before it runs out of context and it also includes all of the Snippets from
+the websites in the you know all the retrieval in the context window so you
+know it can fill up but with 200k cl if you're using CLA 3E you have 200k you're
+chilling you don't have to worry about that so here are five potential designs for a simple productivity Chrome extension okay popup
+prompt when the user tries to visit a distracting site like Twitter a popup appears the popup has two buttons go to
+task list and continue to site hm almost as if it's just my idea okay let's see
+what it added though yeah task list URL yes okay okay
+to wup could have a simple clean design with a reminder message about staying focused uh I don't like these messages
+to be honest I just want the button like you know okay it could say like are you
+choosing to waste time or back to work or something like that okay sidebar Notch when the distracting side loads a
+sidebar slides in from the right of the browser what
+okay this is just bad full page intertial what what is that word inter
+okay I don't even know extension redirects you you want to
+stay
+focused okay this I don't know what what exactly is different here Omni books action whatever I'm not even going to
+read this I'm I just want the first execution this design is by far the best
+okay assume I am a complete beginner when it comes to
+HTML CSS and JavaScript tell me what to
+do next step by step I do have vs code
+installed and open by the way if you don't have vs code installed and open
+just use perplexity I mean it's amazing how many people even people who are in the AI space are still um not using
+perplexity okay wait this is what I wanted to sear show you if you're using the pro search in perplexity which you
+know is 20 bucks a month or 10 if you use my link below you sometimes get this
+followup question which personally um sometimes I would like to skip it because I just want to go fast but a lot
+of people love this feature because it you can give it more context that you wouldn't think of while writing the
+original prompt so let's see what's the URL of your task list uh I'm just going to do skip for now we'll figure that out
+later I'm going to use todoist but it doesn't matter the design of the Chrome extension is exactly the same no matter
+where you want to redirect so okay let's
+see again goes through 20 different sources and starts giving you Steps step
+by step now yeah as I was saying if you get stuck at any point just please use
+this tool so many people just ask you know even email me questions that could
+be answered by perplexity I'm like baffled every single day I get at least one or two emails that are just simple
+questions that could even chat GPD or Pro answer so please don't be one of
+those people that just consumes videos actually start using this tool in your day-to-day replace your Google if you
+have your default window uh set to Google or what whatever replace it with perplexity or CH GPD that way you start
+building the habits to become an AI focused person which you know actually using the AI tools is how you get the
+benefits not watching videos about it so let's see what CLA free is cooking up great choice blah blah blah step one
+create the project directory in vs code click on file in the top menu and select open folder so let's do that
+actually okay so I'm going to do it like this oh um open folder we have that
+yes okay we we have a folder I just named it code but whatever new file I'm
+going to name it manifest.json okay new file manifest.json again you don't have to know any
+JavaScript here I'm a complete dummy when it comes to JavaScript I mean I made one video on it but that's about it
+so been a few months I probably forgot about a lot but that's the thing
+JavaScript and actually Json is you know um JavaScript object notation if I'm not
+mistaken you don't have to know this you can use the AI tools to do that for you
+you just need to have an idea and make a decision to build that idea that is all you need in this age so don't be
+overwhelmed like oh my God I don't understand every line of code you can build simple Chrome extensions without
+understanding the code it just just watch what I do okay so we have the file
+manifest ad Json and open it copy and paste the following code going to click the copy button plain and simple and
+going to paste it control s to save so just a quick glance we can see that we
+have multiple different categories in the Json file different lists
+permissions host permissions actions default popup some icons or we probably
+need to add those I guess um whatever let's see this manifest file tells
+Chrome about your extension its name version icons blah blah blah step three create the popup HTML file okay I don't
+know why they named it popup but I guess that's going to be the name of our productivity Chrome extension just uh
+popup new file HTML and this is going to be the main HTML and I'm going to Simply
+copy paste this code that perlex gave me okay so this is the text do you want
+to continue to this potentially distracting site or go to your task list instead this is this is so weak we need
+to have do you really want to waste your life away okay I'm just going to do
+David Andre's productivity super extension uh let's go
+back this creates the basic structure of your popups so we need the JavaScript right now so I'm just going to name this
+it's very important to have the exact same name that way there is no conflict when the files want to communicate with
+each other that's why I'm copy pasting it from perplexity instead of manually typing and let's copy the JavaScript
+okay I guess this is missing so we need to expand on this Javascript file maybe
+CL 3 was feeling a bit lazy we'll see this JavaScript waits for the popup well
+actually no it needs to just click and then do nothing right okay maybe we have
+to change this to be replace the current URL instead of opening a new window we'll see we'll see
+the JavaScript waits for the popup HTML to load then finds the two buttons and
+adds click events listeners to them Tas clicks button opens a new tab to
+ur okay we need to change that yeah we need to change that our script okay our
+script needs to change the current website replace the to-do line what
+allow continue to the original side to let the user continue to the original distracting side when they click
+continue replace SL SL Todo line okay I don't know why I didn't
+write that right away but
+sure this code grabs the current Ur and reloads it then closes the pop okay
+style okay now we need to see CSS to you know add some style so it's not
+completely Bare Bones and I did exactly what I advised against doing which is typing the name but since it's so simple
+you know it's hard to mess up anyways we're going to copy this obviously
+CSS no point going over this customizing it um you can customize it endlessly you
+can spend endless hours adjusting colors and borders but we're interested in building a productivity Chrome extension
+that works only using perplexity if you noticed I haven't written a single line
+of code I'm just getting perplexity to search the web and use CLA free as the
+llm to give me the code I mean legit I'm not lying when I
+say like I'm terrible at JavaScript I know this like just the fundamentals of HTML and CSS
+so if you're not into programming if you haven't bu built any websites in your life if you haven't built any Chrome
+extensions you can still do this just ask it to go slower or explain it if you want So Okay add icons download icon
+images for your extensions okay you know what actually why not
+create these why not create these we can create these within perplexity if you most people don't know this but
+perplexity can create images so right here we have the generate image feature and we can do that so choose the style
+we can actually do custom prompt and um
+Let's do an icon a minimalist icon for a
+productivity Chrome extension uh
+simple simple simple minimalist icon whatever
+submit let's see what it Cooks up if it's pretty bad I can always change to uh D free in the settings I mean this is
+okay I guess nothing crazy but the point here is just have an icon so going to
+open Photoshop and just make the three different sizes 16 by 16 okay let's
+start by 128 by 128 so I'm going to do8
+by 128 boom create and this is our
+icon let's take this image and let's you know I'm going to just screenshot it
+paste and obviously it's much bigger than that so we have to center it boom
+boom and realign it obviously this icon I mean I would spend a lot more time on
+the logo but like this is not about the logo so yeah this will work icon 128.
+PNG okay all right so let's go back into Photoshop
+and save this as one icon one 28 and El has to be BNG and the next one
+was 48 and 16 okay so let's do the same simply you know changing the name icon
+48 and then going PNG and you don't have to use Photoshop you can just any image
+edit anything tool and what I just did was very uh stupid because I did not
+even change the size so obviously I have to change CH the size actually 48x 48 boom
+create I'm just going to drag the icon um I don't even mind doing that so
+boom save now we can save this icon
+48 and we need 16 as well so we're going to have our free
+icons for our productivity extension which was generated by perplexity as well it's ni to have everything
+generated by complexity makes it um I don't know makes it more nice more
+complete you know shows you like you can seriously do everything with just one AI
+tool which is kind of insane you know even a year ago you couldn't do that so yeah so this is going to be icon 16 this
+is the last one we need beautiful now we have we have our free
+icons let's go back test your Chrome extension okay
+exciting so actually we need to do one more thing
+right what I'm going to do is I'm going to use Chad gp.com as our productivity
+kind of ironic or actually let's dolex.com why not I mean pity. a not.com
+a that's going to be some different website so I'm going to do the suggestions right I'm going to
+do copy our current JavaScript code and I'm going to explain what I envisioned so again you only need
+the idea and the determination to see it through so I'm going to say um here is
+my current Javascript file boom paste
+it I want to make the following two changes and I'm
+just going to copy this straight from this our skip needs to change the current
+website okay wait what else did I want to do oh yeah
+I know okay the current website and yeah yeah so and
+then current website not a new tab okay our script needs to
+change the current website okay the URL for
+the produ deductive option will be and then we just give it perplexity a but
+like the whole thing right so boom okay this is going to be change
+number one and then change number two change number two is to change the current
+website not a new tab
+um option not just open a new
+tab okay if the user chooses to be
+productive all right I think this is solid let's see how perplexity CLA 3
+updates it here's the updated JavaScript code with the changes as requested
+okay so let me just copy the code and paste it inside save
+and then as you can see it changes the URL to this here is what changed the URL for
+the productive option is now set to perplexity for the second change instead of opening a new tab The Screen Now
+updates the current tabs URL to the protective option URL Chrome tabs query again you don't
+have to understand any of this let's just test it out okay so let me say great now give me step by step
+instructions on how I should test my extension out I still only have it in vs
+code so it's good to remind it of the current state of the project where you're in and give it in as much context
+as possible uh is this necessary I have t project I don't think this is
+necessary so I'm going to skip it it might be necessary though we'll see I guess if it
+struggles H so we might need to do developer mode and and again if you
+haven't built extensions you will not know that but it I'm betting it will tell us that so here are stepbystep
+instructions for testing your Chrome extension from V by the way one thing I should have done with this prompt is
+turn off the pro search that way it was it would be faster because I don't need to go through 20 websites for
+this you know this is a good thing you learn over time when you can trust the llm and when you need external website
+so open your extension um
+okay is the Manifest properly set up pop up
+HTML we'll see I guess the best way is to test it
+out ensure your extensions manifest
+file in Chrome open the extension page actually in Brave so whatever but I
+can open it like this so these are my Chrome extensions as you can see I'm using 1 two three
+4 five for productivity you can say like
+even the you know hu block origin is for productivity but yeah I'm using five
+productivity extensions so time to add a six one if you don't have any extensions obviously it will be empty but you
+probably have a few so you will see them you have to toggle developer mode first
+now let's go back let's follow the instructions I mean I'm I'm not doing anything crazy
+after enabling load unpacked so we have to click on load unpacked this will open
+up um simple folder so I'm going to go into here and we have the code right here
+what do we have to search though let's see H in the file dialogue that appears
+navigate to your extension project folder select folder all right so I have to load
+unpacked and select my folder here select folder boom we have the extension
+with the correct icon loaded helps you stay focused by redirecting from distracting sides where is that written
+in the Manifest yes sir beautiful let's go
+back if the file if the file dialogue that appears
+what okay yeah we did that chome will now load extension if there are no errors you should your extension with
+its icon beautiful if your extension has a popup click the extension puzzle icon
+in the Chrome toolbar and pin your extension for easy to use during testing so we can actually do that you can pin
+it and test it out more easily test your extension functionality
+if it has a popup click the extensions icon to open it interact with your extension and verify it behaves and
+expect it so okay um let's let's try it out right what I'm
+going to do is I'm actually going to turn off this one because I have this setup for Twitter as well as this one so
+I'm going to turn these two off and I'm going to turn our off just to test it out so this is what happens when I go to
+Twitter by default right open up Twitter and it just opens up right going to load
+the feed and we have some posts that are probably just wasting our time by the way this is arav inas the creator of
+perplexity it's kind of ironic that right now I'm making video on perplexity and one of the top tweets is from him so
+now I'm going to close Twitter I'm going to enable our extension productivity extension super original name let's
+rename that let's do David's super duper extension boom save a little bit
+more fun uh I'm going to click on reload boom and we reloaded the name beautiful let's go back to Twitter and test the
+moment of truth it did not
+work maybe it's because of it's x.com yeah it's yeah I think it's
+because of that so let's go back to perplexity and uh mention it I went onto Twitter and it did not
+work maybe it's because recently Elon migrated Twitter to
+x.com but I would rather make the
+extension work on both URLs just to be safe and now we can actually give it the
+code so probably the JavaScript is the most important one and actually it's if
+am I crazy or is it checking the URL somewhere I don't even know man okay
+actually I'm going I'm going to include all that in PR so here is the Json file
+boom then I'm going to do the HTML file here is the HTML
+file boom you know separated with these four dashes um that way you keep the
+prompt organized here is the Javascript file and the reason I'm doing this is to
+give the llm context again to remind it of the current state of the project that
+way it knows what to change and what to keep and here is the Cs s s file
+boom analyze the entire project write down a
+paragraph or two reasoning why it probably doesn't work and then only then
+implement the changes the reason I'm asking to do this is to burn some tokens on reasoning on an analysis before
+it you know starts changing stuff up after analyzing project I can see a couple of reasons functionality is not
+tied to specific websites oh no that is a
+problem yeah okay so to make the extension work specifically for Twitter and x.com you'll need to modify the code
+to check the current website URL and only show the popup or perform actions if the user is on one of those sites
+here's how you can Implement those changes update the JavaScript code right so I'm going to copy this paste into
+JavaScript make sure make sure you paste the correct file you know you don't want to paste JavaScript into CSS or vice
+versa and then we update the CSS update the CSS to
+initially hide the popup wait
+what okay just the body I guess we need to change the CSS body
+boom and then wait what is in this updated code we use chrome. tabs. Query
+to get the current types URL okay if it's Twitter or
+X includes yeah okay that's
+good we showed the popup all right adding display none
+let's let see so I've saved these both files with contrl s make sure everything
+is saved let's go back to our extensions and reload this very important reload it
+now let's open up Twitter again and it still does not work let's
+see why does the extension not work reload it update extensions
+now I think that's going to ignore our extension but whatever uh yeah I don't
+know why this doesn't work wa is it like I have to click this or something oh I have to click the
+extension and then it works go to task list oh so okay the extension is solid but it
+just needs to appear take up the whole screen I see okay
+so all right yeah yeah the extension is basically finished
+maybe this is Famous Last Words except for the fact that I have to click on the
+icon of the extension to make it pop up and redirect me to to the
+productive option this is not how I envisioned the Chrome extension to run
+it has to automatically open while I
+visit either of these two sites taking up the entire screen and not letting me
+browse Twitter the current functionality is I mean okay I'll say
+the core features are there it's just the UI
+that needs to change because right now it's
+not making not going to make me any more
+productive let's be honest all of us need Custom Chrome extensions because all of us has different sites or styles
+of wasting time which is just beautiful now you can build your own Chrome extension 5 years ago was 50 times
+harder let's see if perplexity understands the issue
+actually you know what for this I have an idea we should probably go to a new threet that's just for writing and paste
+that inside I'm going to do that I'm going to go here take this entire
+prompt okay I'm going to take this entire prompt put it
+here and then
+oh actually you know
+what yeah we should probably do this in writing mode that way we don't get
+unnecessary
+interruptions yeah yeah this is my bad I should have not done this so I'm going
+to what changed CSS changed so let's do this uh let's oh my God okay
+whatever all right so I just want to copy this long prompt to be
+honest yeah so I'm going to use the perplexity feature which is for editing the prompt sometime it's kind of annoying
+it's like here edit query but you have to scroll to the bottom of the query find the button could be better could be
+next to the prompt but hey whatever so I'm going to copy this go here create a new threet for writing do not um I'm not
+going to use the pro feature because I I don't need it um okay I'm going to actually send it so we create a new
+thread and then I'm going to change the what do we change we change the
+Javascript file so I'm going to stop the generation and edit the
+prompt Bas on is the same JavaScript file is different boom save oops not
+like this and then CSS file has been altered
+slightly so the extension works but only when I
+click the icon in the top right it has to automat
+that is not ended it it has to automatically
+take up the whole screen when visiting twitter.com or
+x.com preventing me from wasting time on the website okay make the required changes
+beautiful so now we are not going to get any interference from the web search because right now we don't need web
+search before it was useful now it could be potentially distracting the
+llm we just want to use the best of CLA 3 which is amazing at programming to help us fix this so to make the
+extension orally take up the whole screen when visiting twitter.com you need to modify the Manifest file so I'm going to copy this manifest file I'm not
+sure why it's not in what the heck why is not as a code
+block make sure to Output the code in code blocks why did it not do
+that that's very weird yeah much better yeah I don't know why I didn't do
+that so I'm just going to copy this boom this is the Json go back change this up
+and then we need to change the oh new file new file name content JS
+interesting all right why not new file content Js copy the
+code wait remove the popup JS file Jesus okay I'm just going to create a new
+folder. old and drag popup JS into there
+sure and I should probably do new new folder
+icons and then drag everything in there but we have to you know change it
+obviously so we have to do icon slash
+hopefully this works or maybe slash icons or whatever
+we'll see we'll see if it works or not um update CSS
+okay so from the H2 boom save and let's see let's reload the
+extension and see if third time is the charm we have it reloaded let's go
+Twitter can it block it can it block it no it did not block
+it h x.com
+home x.com
+all right so obviously we have to somehow debug it which is kind of tough because I'm a complete Noob when it
+comes to Chrome extensions but hey at least I have the power of AI at my fingertips so
+whatever uh we are right here so I'm going to close this threet I'm not using that one
+anymore I'm going to say the extension still does not work
+when I visit x.com or twitter.com it has
+to it has to take up the entire
+screen before the site even loads and showing the two
+buttons in the center with the text above very simple
+step one brainstorm three paragraphs where you look at all of the
+current files reasoning on why it does not work step
+two implement the changes and give me the
+full code of all changed files in code blocks I don't know why I had to mention
+that last time but it's good to use code blocks for you know just visibility
+because without them it's kind of hard to orient yourself into
+response it appears the main issue lies in the content script script is injected into web page I have to this load
+it it is the overlay is not displayed though like I'm here and overlay does
+not display hm
+TR again then there you know no shame in debugging and this is also maybe a good
+thing that is happening live as I'm doing it is that it's you know if it worked on the first try I think it would
+set unrealistic expectations because you might want to build something more advanced and it might take you few few
+tries to do it you would be like oh my God David why did it work for you doesn't work for me now you can see like
+I have to actually put some effort and F into it to make it happen because AI is not perfect yet now obviously I could
+use more AI tools I could utilize GitHub copilot from vs code I could utilize
+curser IDE CH GPD I was just this video is about building anything with Gemini so I just
+want to not Gemini perplexity I just want to use perplexity to do the entire job so I think we can do that so let's
+see um
+but actually I have an idea earlier if you remember I said that gbd4 is better
+at debugging than perplexity right so what
+I'm going to do is I'm going to copy this go into settings change the AI model to GPT 40 the greatest model from
+open AI which is perhaps the best model at debugging and I'm going to use this to debug the code let's see if it
+figures out let's let's cut to the chase update the Manifest Json
+file okay copy boom save might need to bring this
+guy up revive it inject a full screen overlay when you visit these sides here I can do it so we
+have the new Json file again I'm going to copy paste save Let's see we made the
+changes maybe I should tell it to always output the whole code or something like
+that we'll see I'm going to reload it it is reloaded and actually let's do by
+attacking distracting sides save reload right beautiful let's go Twitter oh
+excuse my language but it actually works I mean I can still scroll it in the background but this is this is
+amazing wow I'm actually going to use this extension I'm not even not even joking
+so go to task list and we go to perplexity which is the URL we set oh my God and okay let's do another test
+it actually works go continue to side and I can continue to side wow obviously this is not perfect you know if I were
+to spend more time on this I could fix it up but like wow okay maybe uh one
+last change I want to do is that you know instead of like lowering the opacity just make the background black
+like fully black uh yeah I mean I'm just going to I'm just going to ask it why not
+wow this is amazing this is actually amazing man I'm going to be using this extension like actually so let's see um
+instead of dimming the background slash lower lowering
+opacity which is what the code is doing is doing now why not just make it fully
+black so I don't even see the tweets below it
+make the necessary changes is it in the CSS I'm going to copy change the CSS
+file and then we do no changes to anything else yes makes sense reload the
+extension and let's see boom fully black background I mean I would say this is
+amazing success as you can see it took me less than an hour to build a Chrome
+extension that will save me many hours in the future and I'm a complete Noob
+when it comes to JavaScript Json HTML and CSS I've built all okay all of the
+Chrome extens I've built in the past were with ch gbt or proxity none of them by myself so don't get scared thinking
+oh my God it involves code I cannot do this you absolutely can just decide what
+you're going to do and start making progress on it and as I always say if you get stuck in anything just ask
+perplexity to help you get unstuck St describe the situation give it all the necessary context and use these AI tools
+to achieve your goals if you found this video valuable Please Subscribe because I'm I'm blown away I'm actually going to
+use this and if you want the code to uh extension I'm going to leave it um in the description below thanks for
+watching

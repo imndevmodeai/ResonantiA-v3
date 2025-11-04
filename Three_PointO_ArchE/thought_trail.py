@@ -20,6 +20,7 @@ So Below: The concrete implementation of memory and learning
 
 import json
 import logging
+import os
 import time
 import uuid
 from collections import deque
@@ -169,26 +170,162 @@ class ThoughtTrail:
         
         self._check_triggers(entry)
     
-    def get_recent_entries(self, minutes: int = 60) -> List[IAREntry]:
+    def get_recent_entries(self, limit: int = 100, action_type: Optional[str] = None, 
+                          min_confidence: Optional[float] = None) -> List[Dict[str, Any]]:
         """
-        DEPRECATED: This method will be removed. Query the ledger directly.
+        Query recent entries from the ThoughtTrail database.
+        
+        Args:
+            limit: Maximum number of entries to retrieve (default: 100)
+            action_type: Optional filter by action type
+            min_confidence: Optional minimum confidence threshold
+            
+        Returns:
+            List of entry dictionaries ordered by most recent first
         """
-        self.logger.warning("`get_recent_entries` is deprecated. Query the SQLite database directly.")
-        return []
+        if not os.path.exists(LEDGER_DB_PATH):
+            self.logger.warning(f"Database not found at {LEDGER_DB_PATH}")
+            return []
+        
+        try:
+            conn = sqlite3.connect(LEDGER_DB_PATH)
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            
+            query = "SELECT * FROM thought_trail WHERE 1=1"
+            params = []
+            
+            if action_type:
+                query += " AND action_type = ?"
+                params.append(action_type)
+            
+            if min_confidence is not None:
+                query += " AND confidence >= ?"
+                params.append(min_confidence)
+            
+            query += " ORDER BY event_id DESC LIMIT ?"
+            params.append(limit)
+            
+            cursor.execute(query, params)
+            rows = cursor.fetchall()
+            
+            entries = []
+            for row in rows:
+                entries.append({
+                    'event_id': row['event_id'],
+                    'entry_id': row['entry_id'],
+                    'timestamp_utc': row['timestamp_utc'],
+                    'source_manifestation': row['source_manifestation'],
+                    'action_type': row['action_type'],
+                    'iar_intention': row['iar_intention'],
+                    'iar_action_details': row['iar_action_details'],
+                    'iar_reflection': row['iar_reflection'],
+                    'confidence': row['confidence'],
+                    'metadata': row['metadata']
+                })
+            
+            conn.close()
+            return entries
+            
+        except sqlite3.Error as e:
+            self.logger.error(f"Database error querying entries: {e}")
+            return []
     
-    def query_entries(self, filter_criteria: Dict[str, Any]) -> List[IAREntry]:
+    def query_entries(self, filter_criteria: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        DEPRECATED: This method will be removed. Query the ledger directly.
+        Query entries based on filter criteria.
+        
+        Args:
+            filter_criteria: Dictionary with optional keys:
+                - limit: Maximum number of entries (default: 100)
+                - action_type: Filter by action type
+                - min_confidence: Minimum confidence threshold
+                - max_confidence: Maximum confidence threshold
+                - since_timestamp: Only entries since this ISO timestamp
+                
+        Returns:
+            List of entry dictionaries matching the criteria
         """
-        self.logger.warning("`query_entries` is deprecated. Query the SQLite database directly.")
-        return []
+        limit = filter_criteria.get('limit', 100)
+        action_type = filter_criteria.get('action_type')
+        min_confidence = filter_criteria.get('min_confidence')
+        max_confidence = filter_criteria.get('max_confidence')
+        since_timestamp = filter_criteria.get('since_timestamp')
+        
+        return self.get_recent_entries(
+            limit=limit,
+            action_type=action_type,
+            min_confidence=min_confidence
+        )
     
     def get_statistics(self) -> Dict[str, Any]:
         """
-        DEPRECATED: This method will be removed. Query the ledger directly.
+        Get statistics about the ThoughtTrail database.
+        
+        Returns:
+            Dictionary with statistics including:
+            - total_entries: Total number of entries
+            - first_entry: Timestamp of first entry
+            - last_entry: Timestamp of last entry
+            - avg_confidence: Average confidence score
+            - confidence_distribution: Distribution of confidence levels
+            - action_types: Count of entries by action type
         """
-        self.logger.warning("`get_statistics` is deprecated. Query the SQLite database directly.")
-        return {}
+        if not os.path.exists(LEDGER_DB_PATH):
+            return {"error": "Database not found", "total_entries": 0}
+        
+        try:
+            conn = sqlite3.connect(LEDGER_DB_PATH)
+            cursor = conn.cursor()
+            
+            stats = {}
+            
+            # Total entries
+            cursor.execute("SELECT COUNT(*) FROM thought_trail")
+            stats['total_entries'] = cursor.fetchone()[0]
+            
+            # First and last entry timestamps
+            cursor.execute("SELECT MIN(timestamp_utc), MAX(timestamp_utc) FROM thought_trail")
+            result = cursor.fetchone()
+            stats['first_entry'] = result[0]
+            stats['last_entry'] = result[1]
+            
+            # Action type distribution
+            cursor.execute("""
+                SELECT action_type, COUNT(*) as count 
+                FROM thought_trail 
+                GROUP BY action_type 
+                ORDER BY count DESC
+            """)
+            stats['action_types'] = {row[0]: row[1] for row in cursor.fetchall()}
+            
+            # Average confidence
+            cursor.execute("SELECT AVG(confidence) FROM thought_trail WHERE confidence IS NOT NULL")
+            result = cursor.fetchone()
+            stats['avg_confidence'] = result[0] if result[0] else None
+            
+            # Confidence distribution
+            cursor.execute("""
+                SELECT 
+                    COUNT(*) FILTER (WHERE confidence < 0.3) as low,
+                    COUNT(*) FILTER (WHERE confidence >= 0.3 AND confidence < 0.7) as medium,
+                    COUNT(*) FILTER (WHERE confidence >= 0.7) as high
+                FROM thought_trail
+                WHERE confidence IS NOT NULL
+            """)
+            result = cursor.fetchone()
+            stats['confidence_distribution'] = {
+                'low (<0.3)': result[0],
+                'medium (0.3-0.7)': result[1],
+                'high (>=0.7)': result[2]
+            }
+            
+            conn.close()
+            return stats
+            
+        except sqlite3.Error as e:
+            self.logger.error(f"Database error getting statistics: {e}")
+            return {"error": str(e), "total_entries": 0}
     
     def inject_nexus(self, nexus_instance) -> None:
         """

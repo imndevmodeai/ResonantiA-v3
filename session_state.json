@@ -18472,9 +18472,534 @@
       "confidence": 0.1,
       "summary": "Code execution failed with return code 1.",
       "ts": "2025-10-27T13:31:52.072667ZZ"
+    },
+    {
+      "task": "deconstruct_problem",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:52:29.405720ZZ"
+    },
+    {
+      "task": "extract_domain_from_deconstruction",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:52:30.417124ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": 0.85,
+      "summary": "Web search completed with fallback mechanism",
+      "ts": "2025-11-02T12:52:32.165156ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-02T12:52:32.347386ZZ"
+    },
+    {
+      "task": "forge_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:52:45.192061ZZ"
+    },
+    {
+      "task": "validate_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:52:52.029109ZZ"
+    },
+    {
+      "task": "pathway_analytical_insight",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:53:04.935480ZZ"
+    },
+    {
+      "task": "pathway_creative_insight",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:53:19.603565ZZ"
+    },
+    {
+      "task": "pathway_specialist_consultation",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:53:41.067264ZZ"
+    },
+    {
+      "task": "synthesize_fused_dossier",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:54:00.752078ZZ"
+    },
+    {
+      "task": "red_team_analysis",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:54:24.087791ZZ"
+    },
+    {
+      "task": "ethical_and_bias_review",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:54:32.899531ZZ"
+    },
+    {
+      "task": "dystopian_simulation",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:54:44.791219ZZ"
+    },
+    {
+      "task": "synthesize_vetting_dossier",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 48877 characters.",
+      "ts": "2025-11-02T12:54:44.924813ZZ"
+    },
+    {
+      "task": "format_distillation_prompt",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 786 characters.",
+      "ts": "2025-11-02T12:55:04.839691ZZ"
+    },
+    {
+      "task": "distill_spr_with_llm",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:55:06.753454ZZ"
+    },
+    {
+      "task": "parse_and_validate_spr",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-02T12:55:07.628764ZZ"
+    },
+    {
+      "task": "red_team_analysis",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:55:16.904275ZZ"
+    },
+    {
+      "task": "ethical_and_bias_review",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:55:24.563978ZZ"
+    },
+    {
+      "task": "dystopian_simulation",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T12:55:35.769877ZZ"
+    },
+    {
+      "task": "synthesize_vetting_dossier",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 44852 characters.",
+      "ts": "2025-11-02T12:55:35.969233ZZ"
+    },
+    {
+      "task": "deconstruct_problem",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T14:17:05.834933ZZ"
+    },
+    {
+      "task": "extract_domain_from_deconstruction",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T14:17:06.119058ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": 0.85,
+      "summary": "Web search completed with fallback mechanism",
+      "ts": "2025-11-02T14:17:07.292034ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-02T14:17:07.570026ZZ"
+    },
+    {
+      "task": "forge_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T14:17:07.799842ZZ"
+    },
+    {
+      "task": "validate_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-02T14:17:08.065875ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-02T19:35:34.238486ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T03:13:54.516578ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T03:27:05.644674ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": 0.85,
+      "summary": "Web search completed with fallback mechanism",
+      "ts": "2025-11-03T09:31:34.768663ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T09:31:35.087056ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": 0.85,
+      "summary": "Web search completed with fallback mechanism",
+      "ts": "2025-11-03T09:46:32.825128ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T09:46:33.076583ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T10:57:06.471862ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T11:02:15.400731ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": 0.85,
+      "summary": "Web search completed with fallback mechanism",
+      "ts": "2025-11-03T11:04:19.507296ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T11:04:19.718687ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": 0.85,
+      "summary": "Web search completed with fallback mechanism",
+      "ts": "2025-11-03T11:14:45.734276ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T11:14:46.068484ZZ"
+    },
+    {
+      "task": "deconstruct_problem",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:17:18.201972ZZ"
+    },
+    {
+      "task": "extract_domain_from_deconstruction",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:17:18.991629ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": 0.85,
+      "summary": "Web search completed with fallback mechanism",
+      "ts": "2025-11-03T11:17:20.485092ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T11:17:21.299998ZZ"
+    },
+    {
+      "task": "forge_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:17:33.726497ZZ"
+    },
+    {
+      "task": "validate_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:17:41.493657ZZ"
+    },
+    {
+      "task": "deconstruct_problem",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:21:58.180674ZZ"
+    },
+    {
+      "task": "extract_domain_from_deconstruction",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:21:59.653813ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge",
+      "status": "success",
+      "confidence": 0.85,
+      "summary": "Web search completed with fallback mechanism",
+      "ts": "2025-11-03T11:22:01.256492ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T11:22:01.587302ZZ"
+    },
+    {
+      "task": "forge_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:22:14.041818ZZ"
+    },
+    {
+      "task": "validate_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:22:22.654617ZZ"
+    },
+    {
+      "task": "pathway_analytical_insight",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:22:41.932599ZZ"
+    },
+    {
+      "task": "pathway_creative_insight",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:22:58.650887ZZ"
+    },
+    {
+      "task": "pathway_specialist_consultation",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:23:01.292194ZZ"
+    },
+    {
+      "task": "synthesize_fused_dossier",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:23:55.913104ZZ"
+    },
+    {
+      "task": "red_team_analysis",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:25:01.331398ZZ"
+    },
+    {
+      "task": "ethical_and_bias_review",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:25:54.639139ZZ"
+    },
+    {
+      "task": "dystopian_simulation",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:26:49.595699ZZ"
+    },
+    {
+      "task": "synthesize_vetting_dossier",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 942083 characters.",
+      "ts": "2025-11-03T11:26:49.965711ZZ"
+    },
+    {
+      "task": "format_distillation_prompt",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 786 characters.",
+      "ts": "2025-11-03T11:27:37.658727ZZ"
+    },
+    {
+      "task": "distill_spr_with_llm",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:27:40.994171ZZ"
+    },
+    {
+      "task": "parse_and_validate_spr",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-03T11:27:41.607255ZZ"
+    },
+    {
+      "task": "red_team_analysis",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:27:50.610736ZZ"
+    },
+    {
+      "task": "ethical_and_bias_review",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:27:57.307093ZZ"
+    },
+    {
+      "task": "dystopian_simulation",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-03T11:28:05.002261ZZ"
+    },
+    {
+      "task": "synthesize_vetting_dossier",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 333398 characters.",
+      "ts": "2025-11-03T11:28:05.174693ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T11:36:06.603620ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-03T12:47:59.235616ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-04T04:51:07.009755ZZ"
+    },
+    {
+      "task": "deconstruct_problem",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-04T05:29:11.307899ZZ"
+    },
+    {
+      "task": "extract_domain_from_deconstruction",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-04T05:29:12.228803ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Code executed successfully.",
+      "ts": "2025-11-04T05:29:12.963426ZZ"
+    },
+    {
+      "task": "forge_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-04T05:29:15.714959ZZ"
+    },
+    {
+      "task": "validate_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-04T05:29:17.808186ZZ"
     }
   ],
-  "updated_at": "2025-10-27T13:31:52.072671ZZ",
+  "updated_at": "2025-11-04T05:29:17.808192ZZ",
   "digests": [
     {
       "summary": "digested 1 events; numeric_rows=1",
@@ -36387,6 +36912,615 @@
         "format_distillation_prompt",
         "distill_spr_with_llm",
         "parse_and_validate_spr"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "deconstruct_problem"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 5 events; numeric_rows=5",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 6 events; numeric_rows=6",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent",
+        "validate_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "pathway_analytical_insight"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "pathway_analytical_insight",
+        "pathway_creative_insight"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "pathway_analytical_insight",
+        "pathway_creative_insight",
+        "pathway_specialist_consultation"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "pathway_analytical_insight",
+        "pathway_creative_insight",
+        "pathway_specialist_consultation",
+        "synthesize_fused_dossier"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "red_team_analysis"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation",
+        "synthesize_vetting_dossier"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "format_distillation_prompt"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "format_distillation_prompt",
+        "distill_spr_with_llm"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "format_distillation_prompt",
+        "distill_spr_with_llm",
+        "parse_and_validate_spr"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "red_team_analysis"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation",
+        "synthesize_vetting_dossier"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "deconstruct_problem"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 5 events; numeric_rows=5",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 6 events; numeric_rows=6",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent",
+        "validate_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "deconstruct_problem"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 5 events; numeric_rows=5",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 6 events; numeric_rows=6",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent",
+        "validate_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "deconstruct_problem"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 5 events; numeric_rows=5",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 6 events; numeric_rows=6",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent",
+        "validate_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "pathway_analytical_insight"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "pathway_analytical_insight",
+        "pathway_creative_insight"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "pathway_analytical_insight",
+        "pathway_creative_insight",
+        "pathway_specialist_consultation"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "pathway_analytical_insight",
+        "pathway_creative_insight",
+        "pathway_specialist_consultation",
+        "synthesize_fused_dossier"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "red_team_analysis"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation",
+        "synthesize_vetting_dossier"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "format_distillation_prompt"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "format_distillation_prompt",
+        "distill_spr_with_llm"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "format_distillation_prompt",
+        "distill_spr_with_llm",
+        "parse_and_validate_spr"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "red_team_analysis"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation",
+        "synthesize_vetting_dossier"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "deconstruct_problem"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 5 events; numeric_rows=5",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 6 events; numeric_rows=6",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_domain_from_deconstruction",
+        "acquire_domain_knowledge",
+        "validate_search_results",
+        "forge_specialist_agent",
+        "validate_specialist_agent"
       ]
     }
   ]
