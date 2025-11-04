@@ -611,7 +611,7 @@ assembly_confidence = QuantumProbability(
 
 ## Part V: The Web of Knowledge (SPR Integration)
 
-### Primary SPR: `ObjectiveGenerationEngine`
+### Primary SPR: `Objective generation enginE`
 
 **Definition**: The deterministic cognitive engine responsible for translating user queries into protocol-compliant, actionable Enhanced Objective Statements by assembling SPRs and Mandates into a predefined template.
 
@@ -979,7 +979,7 @@ def abstract_template_creation(template: str) -> TemplatePattern:
 def abstract_objective_generation_engine() -> MetaAbstraction:
     """Abstract the abstraction mechanism itself."""
     return MetaAbstraction(
-        abstraction_target='ObjectiveGenerationEngine',
+        abstraction_target='Objective generation enginE',
         abstraction_level=2,
         pattern_patterns=[
             PatternPattern('pattern_matching', 'keyword→identifier'),

@@ -1,5 +1,5 @@
 {
-  "spr_id": "ObjectiveGenerationEngine",
+  "spr_id": "Objective generation enginE",
   "term": "Objective Generation Engine",
   "definition": "The deterministic cognitive assembly system that translates raw user queries into protocol-compliant, SPR-enhanced, mandate-aligned Enhanced Objective Statements. It transcends LLM dependencies through Universal Abstraction, using pattern matching, keyword lookup tables, rule-based mandate selection, and template string substitution. The engine follows a 6-step deterministic workflow: (1) Feature extraction via regex/keyword matching, (2) TemporalScope building from rules, (3) SPR activation through keyword lookup, (4) Mandate selection via boolean rules, (5) Template assembly with domain customization, (6) Final string concatenation. All steps use quantum probability states with evidence tracking instead of LLM confidence scores, ensuring deterministic, auditable, and self-contained operation.",
   "category": "CognitiveEngine",
