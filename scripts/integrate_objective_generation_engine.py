@@ -73,12 +73,10 @@ def update_related_sprs(spr_definitions: List[Dict[str, Any]]) -> int:
             'add_to': 'uses',  # Enhancement Skeleton Pattern uses Objective generation enginE
             'relationship': 'Objective generation enginE'
         },
-        # Note: 'RISE OrchestratoR' doesn't exist as SPR yet
-        # If created, add it here:
-        # 'RiseorchestratoR': {  # Note: actual ID would need to be verified
-        #     'add_to': 'integrates_with',
-        #     'relationship': 'Objective generation enginE'
-        # },
+        'Rise OrchestratoR': {  # Now created as SPR
+            'add_to': 'integrates_with',  # RISE Orchestrator integrates with Objective generation enginE
+            'relationship': 'Objective generation enginE'
+        },
     }
     
     for spr in spr_definitions:
