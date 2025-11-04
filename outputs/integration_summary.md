@@ -46,7 +46,7 @@ python scripts/integrate_objective_generation_engine.py
 
 **What It Does**:
 1. ✅ Loads current SPR definitions
-2. ✅ Validates ObjectiveGenerationEngine SPR format
+2. ✅ Validates Objective generation enginE SPR format
 3. ✅ Adds SPR to Knowledge Tapestry
 4. ✅ Updates related SPRs (Enhancement Skeleton Pattern, SIRC Protocol, RISE Orchestrator)
 5. ✅ Creates backup of SPR definitions
@@ -57,10 +57,10 @@ After running the script, verify:
 
 ```bash
 # Check SPR was added
-grep -A 5 "ObjectiveGenerationEngine" knowledge_graph/spr_definitions_tv.json
+grep -A 5 "Objective generation enginE" knowledge_graph/spr_definitions_tv.json
 
 # Check related SPRs were updated
-grep -B 2 -A 2 "ObjectiveGenerationEngine" knowledge_graph/spr_definitions_tv.json
+grep -B 2 -A 2 "Objective generation enginE" knowledge_graph/spr_definitions_tv.json
 ```
 
 ---
@@ -127,7 +127,7 @@ grep -B 2 -A 2 "ObjectiveGenerationEngine" knowledge_graph/spr_definitions_tv.js
 2. **Review Updated SPR Definitions**:
    ```bash
    # View the new SPR
-   jq '.[] | select(.spr_id=="ObjectiveGenerationEngine")' knowledge_graph/spr_definitions_tv.json
+   jq '.[] | select(.spr_id=="Objective generation enginE")' knowledge_graph/spr_definitions_tv.json
    ```
 
 3. **Begin Implementation** (Phase 1):

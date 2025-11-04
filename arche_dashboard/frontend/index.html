@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchE Dashboard - Keyholder Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f1f5f9;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            grid-template-rows: 60px 1fr;
+            height: 100vh;
+            gap: 0;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background: var(--darker);
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--dark);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-item:hover {
+            background: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        /* Query Interface */
+        .query-section {
+            background: var(--dark);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .query-input-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .query-input {
+            flex: 1;
+            background: var(--darker);
+            border: 2px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: var(--light);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .query-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Thought Trail Visualization */
+        .thought-trail-container {
+            background: var(--dark);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .thought-trail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .thought-trail-entry {
+            background: var(--darker);
+            border-left: 4px solid var(--primary);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+
+        .thought-trail-entry:hover {
+            border-left-color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .entry-timestamp {
+            font-size: 0.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .entry-query {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .entry-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        .confidence-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .confidence-high {
+            background: var(--success);
+            color: white;
+        }
+
+        .confidence-medium {
+            background: var(--warning);
+            color: white;
+        }
+
+        .confidence-low {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* Response Display */
+        .response-container {
+            background: var(--dark);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .response-container.active {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* Terminal Output */
+        .terminal-output {
+            background: #000 !important;
+            color: #0f0 !important;
+            font-family: 'Courier New', monospace !important;
+            padding: 1rem !important;
+            border-radius: 0.5rem !important;
+            min-height: 300px !important;
+            max-height: 600px !important;
+            overflow-y: auto !important;
+            white-space: pre-wrap !important;
+            font-size: 0.875rem !important;
+            line-height: 1.5 !important;
+            border: 2px solid #0f0 !important;
+        }
+
+        .terminal-output::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .terminal-output::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        .terminal-output::-webkit-scrollbar-thumb {
+            background: #0f0;
+            border-radius: 4px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .response-text {
+            line-height: 1.8;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            background: var(--darker);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--dark);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Filters */
+        .filters-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-input {
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            color: var(--light);
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>⚡ ArchE Dashboard - Keyholder Interface</h1>
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span id="connection-status">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Navigation</h3>
+                <div class="nav-item active" onclick="showView('query')">
+                    🎯 Query Interface
+                </div>
+                <div class="nav-item" onclick="showView('thought-trail')">
+                    🧠 Thought Trail
+                </div>
+                <div class="nav-item" onclick="showView('sprs')">
+                    🔑 SPR Knowledge
+                </div>
+                <div class="nav-item" onclick="showView('stats')">
+                    📊 Statistics
+                </div>
+                <div class="nav-item" onclick="showView('conversation')">
+                    💬 Conversation Mode
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>System Status</h3>
+                <div id="system-status-sidebar">
+                    <div style="font-size: 0.875rem; color: #94a3b8;">
+                        Loading...
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Quick Stats</h3>
+                <div id="quick-stats">
+                    <div style="font-size: 0.875rem; color: #94a3b8;">
+                        Loading...
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Query Interface View -->
+            <div id="query-view" class="view-container">
+                <div class="query-section">
+                    <h2 style="margin-bottom: 1.5rem;">Ask ArchE</h2>
+                    
+                    <div class="filters-bar">
+                        <select id="provider-select" class="filter-input">
+                            <option value="groq">Groq (Ultra Fast)</option>
+                            <option value="google">Google Gemini</option>
+                            <option value="cursor">Cursor ArchE</option>
+                        </select>
+                        
+                        <select id="model-select" class="filter-input">
+                            <option value="">Default Model</option>
+                        </select>
+                        
+                        <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--light);">
+                            <input type="checkbox" id="use-rise" checked>
+                            Use RISE Methodology
+                        </label>
+                    </div>
+                    
+                    <div class="query-input-container">
+                        <textarea 
+                            id="query-input" 
+                            class="query-input" 
+                            placeholder="Enter your query for ArchE...
+
+Example: Analyze the implications of quantum computing on cryptography...
+Or: Use agent-based modeling to simulate market dynamics..."></textarea>
+                    </div>
+                    
+                    <button id="submit-btn" class="btn btn-primary" onclick="submitQuery()">
+                        <span>🚀 Submit Query</span>
+                    </button>
+                </div>
+
+                <!-- Terminal Output View -->
+                <div id="terminal-output-container" class="response-container" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>🖥️ Terminal Output</h3>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="toggleTerminalOutput()">
+                            <span id="terminal-toggle-text">Hide</span>
+                        </button>
+                    </div>
+                    <div id="terminal-output" class="terminal-output" style="background: #000; color: #0f0; font-family: 'Courier New', monospace; padding: 1rem; border-radius: 0.5rem; min-height: 300px; max-height: 600px; overflow-y: auto; white-space: pre-wrap; font-size: 0.875rem; line-height: 1.5;">
+                        <div style="color: #888;">Terminal output will appear here...</div>
+                    </div>
+                </div>
+
+                <div id="response-container" class="response-container">
+                    <h3 style="margin-bottom: 1rem;">ArchE Response</h3>
+                    <div id="response-text" class="response-text"></div>
+                    
+                    <div id="response-metadata" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <!-- Metadata will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thought Trail View -->
+            <div id="thought-trail-view" class="view-container" style="display: none;">
+                <div class="thought-trail-container">
+                    <div class="thought-trail-header">
+                        <h2>Thought Trail History</h2>
+                        <button class="btn btn-primary" onclick="refreshThoughtTrail()">
+                            🔄 Refresh
+                        </button>
+                    </div>
+
+                    <div class="filters-bar">
+                        <input 
+                            type="text" 
+                            id="trail-search" 
+                            class="filter-input" 
+                            placeholder="Search queries..."
+                            onkeyup="filterThoughtTrail()"
+                        >
+                        
+                        <input 
+                            type="number" 
+                            id="min-confidence" 
+                            class="filter-input" 
+                            placeholder="Min Confidence"
+                            step="0.1"
+                            min="0"
+                            max="1"
+                            onchange="filterThoughtTrail()"
+                        >
+                        
+                        <input 
+                            type="date" 
+                            id="start-date" 
+                            class="filter-input"
+                            onchange="filterThoughtTrail()"
+                        >
+                        
+                        <button class="btn btn-primary" onclick="clearFilters()">
+                            Clear Filters
+                        </button>
+                    </div>
+
+                    <div id="thought-trail-entries">
+                        <div style="text-align: center; padding: 2rem; color: #94a3b8;">
+                            Loading thought trail...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats View -->
+            <div id="stats-view" class="view-container" style="display: none;">
+                <h2 style="margin-bottom: 1.5rem;">System Statistics</h2>
+                <div id="stats-grid" class="stats-grid">
+                    <!-- Stats will be loaded here -->
+                </div>
+            </div>
+
+            <!-- SPR Knowledge View -->
+            <div id="sprs-view" class="view-container" style="display: none;">
+                <h2 style="margin-bottom: 1.5rem;">SPR Knowledge Base</h2>
+                <div id="sprs-container">
+                    <!-- SPRs will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Conversation Mode View -->
+            <div id="conversation-view" class="view-container" style="display: none;">
+                <div style="background: var(--dark); border-radius: 1rem; padding: 2rem;">
+                    <h2 style="margin-bottom: 1.5rem;">Cursor ArchE Conversation Mode</h2>
+                    
+                    <div id="conversation-history" style="background: var(--darker); border-radius: 0.5rem; padding: 1.5rem; min-height: 400px; max-height: 500px; overflow-y: auto; margin-bottom: 1rem;">
+                        <div style="color: #94a3b8; text-align: center;">
+                            Start a conversation with ArchE...
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem;">
+                        <input 
+                            type="text" 
+                            id="conversation-input" 
+                            class="filter-input" 
+                            style="flex: 1; padding: 1rem;"
+                            placeholder="Type your message..."
+                            onkeypress="if(event.key === 'Enter') sendConversationMessage()"
+                        >
+                        <button class="btn btn-primary" onclick="sendConversationMessage()">
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // WebSocket connection
+        let ws = null;
+        let reconnectInterval = null;
+
+        // Connect to WebSocket
+        function connectWebSocket() {
+            const wsUrl = 'ws://localhost:8000/ws/live';
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                console.log('WebSocket connected');
+                document.getElementById('connection-status').textContent = 'Connected';
+                clearInterval(reconnectInterval);
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                handleWebSocketMessage(data);
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                document.getElementById('connection-status').textContent = 'Error';
+            };
+
+            ws.onclose = () => {
+                console.log('WebSocket disconnected');
+                document.getElementById('connection-status').textContent = 'Disconnected';
+                // Attempt to reconnect every 5 seconds
+                reconnectInterval = setInterval(connectWebSocket, 5000);
+            };
+        }
+
+               // Terminal output state
+               let currentTerminalOutput = '';
+               let terminalOutputContainer = null;
+               let terminalOutputEl = null;
+               let terminalVisible = true;
+
+               // Handle WebSocket messages
+               function handleWebSocketMessage(data) {
+                   console.log('WebSocket message:', data);
+                   
+                   if (data.type === 'connected') {
+                       console.log('Successfully connected to ArchE Dashboard');
+                   } else if (data.type === 'query_response') {
+                       displayResponse(data.result);
+                   } else if (data.type === 'processing_start') {
+                       showProcessingIndicator();
+                       // Clear and show terminal output
+                       currentTerminalOutput = '';
+                       showTerminalOutput();
+                   } else if (data.type === 'terminal_output') {
+                       // Append terminal output
+                       const outputText = data.text || data.raw_text || '';
+                       if (outputText) {
+                           appendTerminalOutput(outputText);
+                       }
+                   } else if (data.type === 'error') {
+                       showError(data.message);
+                   }
+               }
+
+               // Terminal output functions
+               function showTerminalOutput() {
+                   if (!terminalOutputContainer) {
+                       terminalOutputContainer = document.getElementById('terminal-output-container');
+                       terminalOutputEl = document.getElementById('terminal-output');
+                   }
+                   terminalOutputContainer.style.display = 'block';
+                   terminalOutputContainer.classList.add('active');
+                   terminalVisible = true;
+                   if (document.getElementById('terminal-toggle-text')) {
+                       document.getElementById('terminal-toggle-text').textContent = 'Hide';
+                   }
+               }
+
+               function appendTerminalOutput(text) {
+                   if (!terminalOutputEl) {
+                       showTerminalOutput();
+                   }
+                   currentTerminalOutput += text;
+                   terminalOutputEl.textContent = currentTerminalOutput;
+                   // Auto-scroll to bottom
+                   terminalOutputEl.scrollTop = terminalOutputEl.scrollHeight;
+               }
+
+               function toggleTerminalOutput() {
+                   if (!terminalOutputContainer) {
+                       terminalOutputContainer = document.getElementById('terminal-output-container');
+                   }
+                   terminalVisible = !terminalVisible;
+                   terminalOutputContainer.style.display = terminalVisible ? 'block' : 'none';
+                   const toggleText = document.getElementById('terminal-toggle-text');
+                   if (toggleText) {
+                       toggleText.textContent = terminalVisible ? 'Hide' : 'Show';
+                   }
+               }
+
+        // Submit query
+        async function submitQuery() {
+            const queryText = document.getElementById('query-input').value.trim();
+            if (!queryText) {
+                alert('Please enter a query');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="spinner"></div> <span>Processing...</span>';
+
+            // Clear terminal output
+            currentTerminalOutput = '';
+            showTerminalOutput();
+
+            try {
+                // Use WebSocket for streaming terminal output
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({
+                        type: 'query',
+                        query: queryText
+                    }));
+                } else {
+                    // Fallback to REST API if WebSocket not available
+                    const response = await fetch('http://localhost:8000/api/query/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            query: queryText,
+                            provider: document.getElementById('provider-select').value,
+                            model: document.getElementById('model-select').value || null,
+                            use_rise: document.getElementById('use-rise').checked
+                        })
+                    });
+
+                    const result = await response.json();
+                    displayResponse(result.result);
+                    
+                    // Refresh thought trail
+                    loadThoughtTrail();
+                }
+                
+            } catch (error) {
+                showError('Query failed: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>🚀 Submit Query</span>';
+            }
+        }
+
+        // Display response
+        function displayResponse(result) {
+            const container = document.getElementById('response-container');
+            const textEl = document.getElementById('response-text');
+            const metadataEl = document.getElementById('response-metadata');
+
+            textEl.textContent = result.response?.text || JSON.stringify(result, null, 2);
+            
+            // Display metadata
+            const metadata = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <strong>Confidence:</strong> 
+                        <span class="confidence-badge ${getConfidenceClass(result.response?.reflection?.confidence || 0)}">
+                            ${((result.response?.reflection?.confidence || 0) * 100).toFixed(1)}%
+                        </span>
+                    </div>
+                    <div><strong>Provider:</strong> ${result.llm_provider || 'Unknown'}</div>
+                    <div><strong>SPRs Primed:</strong> ${result.spr_priming?.sprs_primed || 0}</div>
+                    <div><strong>Processing:</strong> ${result.processing_method || 'Unknown'}</div>
+                </div>
+            `;
+            metadataEl.innerHTML = metadata;
+            
+            container.classList.add('active');
+        }
+
+        // Show error
+        function showError(message) {
+            alert('Error: ' + message);
+        }
+
+        // Show processing indicator
+        function showProcessingIndicator() {
+            const container = document.getElementById('response-container');
+            const textEl = document.getElementById('response-text');
+            textEl.textContent = '⚡ Processing query with ArchE cognitive systems...\n\nThis may take a moment for complex analyses.';
+            container.classList.add('active');
+        }
+
+        // Get confidence class
+        function getConfidenceClass(confidence) {
+            if (confidence >= 0.8) return 'confidence-high';
+            if (confidence >= 0.5) return 'confidence-medium';
+            return 'confidence-low';
+        }
+
+        // Load thought trail
+        async function loadThoughtTrail() {
+            try {
+                const response = await fetch('http://localhost:8000/api/thought-trail/recent?limit=50');
+                const data = await response.json();
+                
+                const container = document.getElementById('thought-trail-entries');
+                container.innerHTML = '';
+                
+                data.entries.forEach(entry => {
+                    const entryEl = document.createElement('div');
+                    entryEl.className = 'thought-trail-entry';
+                    entryEl.innerHTML = `
+                        <div class="entry-timestamp">${new Date(entry.timestamp).toLocaleString()}</div>
+                        <div class="entry-query">${entry.query}</div>
+                        <div class="entry-meta">
+                            <span class="confidence-badge ${getConfidenceClass(entry.confidence)}">
+                                Confidence: ${(entry.confidence * 100).toFixed(1)}%
+                            </span>
+                            <span>Method: ${entry.processing_method}</span>
+                            ${entry.spr_context?.primed_count ? `<span>SPRs: ${entry.spr_context.primed_count}</span>` : ''}
+                        </div>
+                    `;
+                    container.appendChild(entryEl);
+                });
+                
+            } catch (error) {
+                console.error('Failed to load thought trail:', error);
+            }
+        }
+
+        // Refresh thought trail
+        function refreshThoughtTrail() {
+            loadThoughtTrail();
+        }
+
+        // Filter thought trail
+        async function filterThoughtTrail() {
+            const searchText = document.getElementById('trail-search').value;
+            const minConfidence = parseFloat(document.getElementById('min-confidence').value) || null;
+            const startDate = document.getElementById('start-date').value || null;
+
+            try {
+                const response = await fetch('http://localhost:8000/api/thought-trail/search', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        query_text: searchText || null,
+                        min_confidence: minConfidence,
+                        start_date: startDate,
+                        limit: 100
+                    })
+                });
+
+                const data = await response.json();
+                
+                const container = document.getElementById('thought-trail-entries');
+                container.innerHTML = '';
+                
+                if (data.entries.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #94a3b8;">No matching entries found</div>';
+                    return;
+                }
+                
+                data.entries.forEach(entry => {
+                    const entryEl = document.createElement('div');
+                    entryEl.className = 'thought-trail-entry';
+                    entryEl.innerHTML = `
+                        <div class="entry-timestamp">${new Date(entry.timestamp).toLocaleString()}</div>
+                        <div class="entry-query">${entry.query}</div>
+                        <div class="entry-meta">
+                            <span class="confidence-badge ${getConfidenceClass(entry.confidence)}">
+                                ${(entry.confidence * 100).toFixed(1)}%
+                            </span>
+                            <span>${entry.processing_method}</span>
+                        </div>
+                    `;
+                    container.appendChild(entryEl);
+                });
+                
+            } catch (error) {
+                console.error('Filter failed:', error);
+            }
+        }
+
+        // Clear filters
+        function clearFilters() {
+            document.getElementById('trail-search').value = '';
+            document.getElementById('min-confidence').value = '';
+            document.getElementById('start-date').value = '';
+            loadThoughtTrail();
+        }
+
+        // Load statistics
+        async function loadStats() {
+            try {
+                const response = await fetch('http://localhost:8000/api/thought-trail/stats');
+                const stats = await response.json();
+                
+                const statsGrid = document.getElementById('stats-grid');
+                statsGrid.innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.total_entries}</div>
+                        <div class="stat-label">Total Queries</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(stats.average_confidence * 100).toFixed(1)}%</div>
+                        <div class="stat-label">Avg Confidence</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.recent_24h}</div>
+                        <div class="stat-label">Last 24 Hours</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.queries_with_spr_priming}</div>
+                        <div class="stat-label">SPR Primed</div>
+                    </div>
+                `;
+                
+                // Update sidebar quick stats
+                const quickStats = document.getElementById('quick-stats');
+                quickStats.innerHTML = `
+                    <div style="font-size: 0.875rem;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>Total:</strong> ${stats.total_entries}
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>Confidence:</strong> ${(stats.average_confidence * 100).toFixed(1)}%
+                        </div>
+                        <div>
+                            <strong>Today:</strong> ${stats.recent_24h}
+                        </div>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Failed to load stats:', error);
+            }
+        }
+
+        // Load system status
+        async function loadSystemStatus() {
+            try {
+                const response = await fetch('http://localhost:8000/api/status');
+                const status = await response.json();
+                
+                const sidebar = document.getElementById('system-status-sidebar');
+                sidebar.innerHTML = `
+                    <div style="font-size: 0.875rem;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>Status:</strong> 
+                            <span style="color: var(--success);">✅ ${status.status}</span>
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>ArchE:</strong> 
+                            ${status.arche_available ? '✅' : '❌'}
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>Trail DB:</strong> 
+                            ${status.thought_trail_exists ? '✅' : '❌'}
+                        </div>
+                        <div>
+                            <strong>Version:</strong> ${status.version}
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Failed to load system status:', error);
+            }
+        }
+
+        // Show view
+        function showView(viewName) {
+            // Hide all views
+            document.querySelectorAll('.view-container').forEach(view => {
+                view.style.display = 'none';
+            });
+            
+            // Remove active class from nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected view
+            const viewId = viewName + '-view';
+            const viewEl = document.getElementById(viewId);
+            if (viewEl) {
+                viewEl.style.display = 'block';
+            }
+            
+            // Add active class to nav item
+            event.target.classList.add('active');
+            
+            // Load data for specific views
+            if (viewName === 'thought-trail') {
+                loadThoughtTrail();
+            } else if (viewName === 'stats') {
+                loadStats();
+            } else if (viewName === 'sprs') {
+                loadSPRs();
+            }
+        }
+
+        // Load SPRs
+        async function loadSPRs() {
+            try {
+                const response = await fetch('http://localhost:8000/api/sprs/list');
+                const data = await response.json();
+                
+                const container = document.getElementById('sprs-container');
+                container.innerHTML = `
+                    <div style="margin-bottom: 1rem; color: #94a3b8;">
+                        Total SPRs: ${data.count}
+                    </div>
+                `;
+                
+                data.sprs.forEach(spr => {
+                    const sprEl = document.createElement('div');
+                    sprEl.className = 'thought-trail-entry';
+                    sprEl.innerHTML = `
+                        <div style="font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">
+                            ${spr.spr_id} - ${spr.term}
+                        </div>
+                        <div style="margin-bottom: 0.5rem; color: var(--light);">
+                            ${spr.definition}
+                        </div>
+                        <div style="font-size: 0.875rem; color: #94a3b8;">
+                            Category: ${spr.category}
+                        </div>
+                    `;
+                    container.appendChild(sprEl);
+                });
+                
+            } catch (error) {
+                console.error('Failed to load SPRs:', error);
+            }
+        }
+
+        // Send conversation message
+        async function sendConversationMessage() {
+            const input = document.getElementById('conversation-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message to history
+            const historyEl = document.getElementById('conversation-history');
+            const userMsgEl = document.createElement('div');
+            userMsgEl.style.cssText = 'background: var(--primary); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;';
+            userMsgEl.innerHTML = `<strong>You:</strong> ${message}`;
+            historyEl.appendChild(userMsgEl);
+
+            // Clear input
+            input.value = '';
+
+            // Send via WebSocket
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({
+                    type: 'query',
+                    query: message
+                }));
+
+                // Add processing indicator
+                const processingEl = document.createElement('div');
+                processingEl.id = 'processing-indicator';
+                processingEl.style.cssText = 'background: var(--darker); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: #94a3b8;';
+                processingEl.innerHTML = '<div class="spinner" style="display: inline-block; margin-right: 0.5rem;"></div> ArchE is thinking...';
+                historyEl.appendChild(processingEl);
+
+                // Scroll to bottom
+                historyEl.scrollTop = historyEl.scrollHeight;
+            } else {
+                alert('WebSocket not connected. Please refresh the page.');
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            connectWebSocket();
+            loadSystemStatus();
+            loadStats();
+            
+            // Set up periodic updates
+            setInterval(loadSystemStatus, 30000); // Every 30 seconds
+            setInterval(loadStats, 60000); // Every minute
+        });
+    </script>
+</body>
+</html>
+

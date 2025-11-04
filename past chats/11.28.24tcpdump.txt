@@ -1,0 +1,3 @@
+20:24:19.985079 IP Windoows7PRO > igmp.mcast.net: igmp v3 report, 1 group record(s)
+20:24:20.344961 IP Windoows7PRO > igmp.mcast.net: igmp v3 report, 1 group record(s)
+

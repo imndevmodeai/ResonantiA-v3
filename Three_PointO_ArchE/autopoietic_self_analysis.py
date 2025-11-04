@@ -377,35 +377,76 @@ class AutopoieticSelfAnalysis:
             }
             
             # Iterate through top-level nodes to distinguish functions from methods
+            # Ensure tree.body is iterable (should be a list, but defensive check)
+            if not hasattr(tree, 'body') or not isinstance(tree.body, (list, tuple)):
+                raise ValueError(f"AST tree.body is not a list/tuple in {impl_path}")
+            
             for node in tree.body:
-                if isinstance(node, ast.ClassDef):
-                    analysis["classes"].add(node.name)
-                    for item in node.body:
-                        if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                            analysis["methods"][node.name].add(item.name)
-                elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                    analysis["functions"].add(node.name)
-                elif isinstance(node, ast.Import):
-                    for alias in node.names:
-                        analysis["imports"].add(alias.name)
-                elif isinstance(node, ast.ImportFrom):
-                    if node.module:
-                        analysis["imports"].add(node.module)
+                try:
+                    if isinstance(node, ast.ClassDef):
+                        analysis["classes"].add(node.name)
+                        # Ensure node.body is iterable (list of statements)
+                        if hasattr(node, 'body') and isinstance(node.body, (list, tuple)):
+                            for item in node.body:
+                                if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                                    analysis["methods"][node.name].add(item.name)
+                    elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        analysis["functions"].add(node.name)
+                    elif isinstance(node, ast.Import):
+                        # Ensure node.names is a list/sequence (not bool) and is iterable
+                        if hasattr(node, 'names') and node.names:
+                            # Explicit type check: node.names must be iterable (list, tuple, etc.)
+                            if isinstance(node.names, (list, tuple)):
+                                for alias in node.names:
+                                    if isinstance(alias, ast.alias) and hasattr(alias, 'name') and alias.name:
+                                        # Only add string names (exclude None, bool, etc.)
+                                        if isinstance(alias.name, str):
+                                            analysis["imports"].add(alias.name)
+                    elif isinstance(node, ast.ImportFrom):
+                        # Ensure node.module is a string (not bool)
+                        if node.module and isinstance(node.module, str):
+                            analysis["imports"].add(node.module)
+                        # Also handle ImportFrom names (for 'from X import Y' patterns)
+                        if hasattr(node, 'names') and node.names and isinstance(node.names, (list, tuple)):
+                            for alias in node.names:
+                                if isinstance(alias, ast.alias) and hasattr(alias, 'name') and alias.name:
+                                    if isinstance(alias.name, str):
+                                        analysis["imports"].add(alias.name)
+                except Exception as node_error:
+                    logger.warning(f"Error processing node in {impl_path}: {node_error}")
+                    continue
 
             # Quantum IAR Compliance Analysis
             iar_evidence = []
             iar_probability = 0.0
             
-            if any("iar" in imp.lower() for imp in analysis["imports"]):
+            # Ensure imports is a set of strings (handle cases where it might not be)
+            # Filter out any non-string values that might have slipped through
+            import_strings = set()
+            for imp in analysis["imports"]:
+                try:
+                    # Only process string values, skip booleans, None, etc.
+                    if isinstance(imp, str) and imp:
+                        import_strings.add(imp.lower())
+                    elif imp and not isinstance(imp, bool):
+                        # Convert to string if it's not a bool
+                        import_strings.add(str(imp).lower())
+                except (TypeError, AttributeError) as e:
+                    logger.warning(f"Error processing import '{imp}' (type: {type(imp)}): {e}")
+                    continue
+            
+            if any("iar" in imp for imp in import_strings):
                 iar_probability += 0.5
                 iar_evidence.append("iar_imports_detected")
             
-            if any("thought_trail" in imp.lower() for imp in analysis["imports"]):
+            if any("thought_trail" in imp for imp in import_strings):
                 iar_probability += 0.3
                 iar_evidence.append("thought_trail_integration")
             
-            if any("reflection" in str(analysis["functions"]).lower() or 
-                   "reflection" in str(analysis["methods"]).lower()):
+            # Check for reflection methods - safely convert sets to strings
+            functions_str = str(list(analysis["functions"])) if isinstance(analysis["functions"], (set, list, tuple)) else str(analysis["functions"])
+            methods_str = str(dict(analysis["methods"])) if isinstance(analysis["methods"], dict) else str(analysis["methods"])
+            if "reflection" in functions_str.lower() or "reflection" in methods_str.lower():
                 iar_probability += 0.2
                 iar_evidence.append("reflection_methods_found")
             
@@ -418,7 +459,8 @@ class AutopoieticSelfAnalysis:
             spr_evidence = []
             spr_probability = 0.0
             
-            if "spr_manager" in analysis["imports"]:
+            # Use the same import_strings set
+            if any("spr_manager" in imp for imp in import_strings):
                 spr_probability += 0.5
                 spr_evidence.append("spr_manager_imported")
             
@@ -426,7 +468,17 @@ class AutopoieticSelfAnalysis:
                 spr_probability += 0.5
                 spr_evidence.append("spr_manager_class_found")
             
-            if any("spr" in str(f).lower() for f in analysis["functions"]):
+            # Ensure functions is a set before iterating
+            function_strings = set()
+            for f in analysis["functions"]:
+                try:
+                    if isinstance(f, str) and f:
+                        function_strings.add(f.lower())
+                    elif f and not isinstance(f, bool):
+                        function_strings.add(str(f).lower())
+                except (TypeError, AttributeError):
+                    continue
+            if any("spr" in f for f in function_strings):
                 spr_probability += 0.3
                 spr_evidence.append("spr_functions_found")
             
@@ -491,9 +543,15 @@ class AutopoieticSelfAnalysis:
         
         impl_analysis = self.analyze_implementation(impl_path)
         
+        # Ensure we're working with sets (handle error cases)
+        spec_classes = set(spec_reqs.get("classes", set()) or set())
+        spec_functions = set(spec_reqs.get("functions", set()) or set())
+        impl_classes = set(impl_analysis.get("classes", set()) or set())
+        impl_functions = set(impl_analysis.get("functions", set()) or set())
+        
         # Calculate alignment score
-        missing_classes = spec_reqs["classes"] - impl_analysis["classes"]
-        missing_functions = spec_reqs["functions"] - impl_analysis["functions"]
+        missing_classes = spec_classes - impl_classes
+        missing_functions = spec_functions - impl_functions
         
         total_required = len(spec_reqs["classes"]) + len(spec_reqs["functions"])
         total_missing = len(missing_classes) + len(missing_functions)
@@ -562,7 +620,9 @@ class AutopoieticSelfAnalysis:
                     "line_count": impl_analysis["line_count"]
                 },
                 "missing_classes": list(missing_classes),
-                "missing_functions": list(missing_functions)
+                "missing_functions": list(missing_functions),
+                "spec_classes": list(spec_classes),
+                "impl_classes": list(impl_classes)
             }
         )
     
@@ -758,6 +818,131 @@ class AutopoieticSelfAnalysis:
             logger.info(f"JSON export saved to {output_path}")
         
         return json_str
+    
+    def verify_system_alignment(self) -> Dict[str, Any]:
+        """
+        System-wide Above↔Below verification.
+        
+        Provides comprehensive system alignment check returning structured
+        results for system-wide resonance verification.
+        
+        Returns:
+            Dictionary with system alignment status, component details,
+            and resonance status
+        """
+        logger.info("[AutopoieticSelfAnalysis] Verifying system-wide alignment")
+        
+        # Run full analysis if not already done
+        if not self.gaps:
+            self.run_full_analysis()
+        
+        # Calculate component alignments
+        component_alignments = []
+        for gap in self.gaps:
+            alignment_confidence = QuantumProbability(
+                probability=gap.confidence_score,
+                evidence=gap.evidence.get('alignment_evidence', [])
+            )
+            
+            component_alignments.append({
+                "component": gap.component_name,
+                "alignment": float(alignment_confidence),
+                "gap_type": gap.gap_type,
+                "severity": gap.severity,
+                "evidence": gap.evidence,
+                "recommendations": [gap.recommended_action] if gap.severity in ("critical", "high") else []
+            })
+        
+        # Calculate average alignment
+        if component_alignments:
+            avg_alignment = sum(c["alignment"] for c in component_alignments) / len(component_alignments)
+        else:
+            avg_alignment = 0.0
+        
+        # Determine resonance status
+        if avg_alignment >= 0.85:
+            resonance_status = "ACHIEVED"
+        elif avg_alignment >= 0.70:
+            resonance_status = "PARTIAL"
+        else:
+            resonance_status = "BREAK_DETECTED"
+        
+        # Generate IAR
+        self._log_iar(
+            phase="verification",
+            action_type="system_alignment_check",
+            intention="Verify system-wide Above↔Below alignment",
+            action="Completed system alignment verification",
+            reflection=f"System alignment: {resonance_status} (average: {avg_alignment:.2%})",
+            confidence=avg_alignment,
+            metadata={
+                "components_checked": len(component_alignments),
+                "resonance_status": resonance_status,
+                "average_alignment": avg_alignment
+            }
+        )
+        
+        return {
+            "system_alignment": avg_alignment,
+            "components": component_alignments,
+            "resonance_status": resonance_status,
+            "summary": {
+                "total_components": len(component_alignments),
+                "aligned_components": sum(1 for c in component_alignments if c["alignment"] >= 0.85),
+                "misaligned_components": sum(1 for c in component_alignments if c["alignment"] < 0.85),
+                "critical_issues": sum(1 for c in component_alignments if c["severity"] == "critical"),
+                "average_alignment": avg_alignment,
+                "quantum_confidence": QuantumProbability(
+                    probability=avg_alignment,
+                    evidence=[
+                        f"{len(component_alignments)}_components_verified",
+                        f"resonance_status_{resonance_status.lower()}"
+                    ]
+                ).to_dict()
+            },
+            "recommendations": self._generate_alignment_recommendations(component_alignments),
+            "timestamp": now_iso()
+        }
+    
+    def _generate_alignment_recommendations(
+        self,
+        component_alignments: List[Dict[str, Any]]
+    ) -> List[str]:
+        """Generate recommendations for improving system alignment."""
+        recommendations = []
+        
+        # Critical issues
+        critical_components = [c for c in component_alignments if c["severity"] == "critical"]
+        if critical_components:
+            recommendations.append(
+                f"{len(critical_components)} critical alignment issues require immediate attention"
+            )
+        
+        # Low alignment components
+        low_alignment = [c for c in component_alignments if c["alignment"] < 0.70]
+        if low_alignment:
+            recommendations.append(
+                f"{len(low_alignment)} components below 70% alignment threshold"
+            )
+        
+        # Missing implementations
+        missing = [c for c in component_alignments if c["gap_type"] == "missing"]
+        if missing:
+            recommendations.append(
+                f"{len(missing)} components specified but not implemented"
+            )
+        
+        # Undocumented implementations
+        undocumented = [c for c in component_alignments if c["gap_type"] == "undocumented"]
+        if undocumented:
+            recommendations.append(
+                f"{len(undocumented)} implementations lack specifications"
+            )
+        
+        if not recommendations:
+            recommendations.append("System alignment is within acceptable thresholds")
+        
+        return recommendations
 
 
 def main():

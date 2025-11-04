@@ -63,25 +63,45 @@ def invoke_llm_for_synthesis(**kwargs) -> Dict[str, Any]:
         logger.info(f"Invoking LLM provider '{provider._provider_name}' with model '{model_to_use}'.")
 
         # --- CORRECTED PARAMETER HANDLING ---
-        # Define the set of known, valid parameters for the Google GenAI API
-        VALID_GOOGLE_PARAMS = {'max_output_tokens', 'temperature', 'top_p', 'top_k', 'candidate_count', 'stop_sequences'}
-
+        # Provider-aware parameter mapping
+        # Google uses 'max_output_tokens', while Groq and others use 'max_tokens'
+        
         # Unpack model_settings if it exists, otherwise use top-level kwargs.
         model_params = kwargs.get('model_settings', {})
         
+        # Get max_tokens value from either source
+        max_tokens_value = model_params.get('max_tokens', kwargs.get('max_tokens', 4096))
+        temperature_value = model_params.get('temperature', kwargs.get('temperature', 0.7))
+        
         # Start with a clean dictionary for the final generation config
         generation_config = {}
-
-        # Explicitly handle standard parameters and map them to the API's expected names
-        generation_config['max_output_tokens'] = model_params.get('max_tokens', kwargs.get('max_tokens', 4096))
-        generation_config['temperature'] = model_params.get('temperature', kwargs.get('temperature', 0.7))
-
-        # Filter and pass through only the valid, known additional parameters
-        # from both model_settings and the top-level kwargs.
-        all_potential_params = {**kwargs, **model_params}
-        for key, value in all_potential_params.items():
-            if key in VALID_GOOGLE_PARAMS and key not in generation_config:
-                generation_config[key] = value
+        
+        # Map parameters based on provider
+        provider_name = provider._provider_name.lower()
+        
+        if provider_name == 'google':
+            # Google GenAI API uses 'max_output_tokens'
+            VALID_GOOGLE_PARAMS = {'max_output_tokens', 'temperature', 'top_p', 'top_k', 'candidate_count', 'stop_sequences'}
+            generation_config['max_output_tokens'] = max_tokens_value
+            generation_config['temperature'] = temperature_value
+            
+            # Filter and pass through only the valid, known additional parameters
+            all_potential_params = {**kwargs, **model_params}
+            for key, value in all_potential_params.items():
+                if key in VALID_GOOGLE_PARAMS and key not in generation_config:
+                    generation_config[key] = value
+        else:
+            # Groq and other providers use 'max_tokens'
+            generation_config['max_tokens'] = max_tokens_value
+            generation_config['temperature'] = temperature_value
+            
+            # Remove any Google-specific parameters that might cause issues
+            # and pass through other standard parameters
+            excluded_params = {'max_output_tokens', 'model_settings', 'provider', 'model', 'prompt', 'context'}
+            all_potential_params = {**kwargs, **model_params}
+            for key, value in all_potential_params.items():
+                if key not in excluded_params and key not in generation_config:
+                    generation_config[key] = value
 
         generated_text = provider.generate(
             prompt=prompt,

@@ -1,0 +1,26 @@
+You are evaluating a thought process from the MasterMind_AI agent.
+
+THOUGHT TO EVALUATE:
+{thought}
+
+CONTEXT:
+{context}
+
+Evaluate this thought process for:
+1. Coherence (0.0-1.0): Does the reasoning follow a logical structure?
+2. Factual Accuracy (0.0-1.0): Are the claims and statements factually correct?
+3. Reasoning Quality (0.0-1.0): Is the reasoning sound and free from logical fallacies?
+4. Completeness (0.0-1.0): Does the thought consider all relevant aspects of the problem?
+
+For each criterion, provide:
+- A numerical score
+- A brief explanation
+- Any identified issues or improvements
+
+Check specifically for:
+- Logical fallacies
+- Unfounded assumptions
+- Confirmation bias
+- Gaps in reasoning
+
+Provide your final assessment and recommendation for how the agent should adjust its thinking. 

@@ -30,9 +30,23 @@ try:
     from Three_PointO_ArchE.system_health_monitor import SystemHealthMonitor
     from Three_PointO_ArchE.thought_trail import ThoughtTrail
     from Three_PointO_ArchE.iar_components import create_iar, IARReflection
+    VCD_IMPORTS_AVAILABLE = True
 except ImportError as e:
-    print(f"Import error: {e}")
-    sys.exit(1)
+    # Don't exit - allow graceful fallback for importing modules
+    VCD_IMPORTS_AVAILABLE = False
+    # Define minimal fallbacks
+    RISE_Orchestrator = None
+    RISEState = None
+    VisualCognitiveDebugger = None
+    CognitiveVisualizationMode = None
+    SPRManager = None
+    SystemHealthMonitor = None
+    ThoughtTrail = None
+    create_iar = None
+    IARReflection = None
+    logger = logging.getLogger(__name__)
+    if logger:
+        logger.warning(f"VCD Analysis Agent imports unavailable: {e}. Some features will be disabled.")
 
 logger = logging.getLogger(__name__)
 

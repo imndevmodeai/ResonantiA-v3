@@ -25,6 +25,7 @@ import time
 import uuid
 import os
 import sys
+from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
@@ -117,18 +118,34 @@ class RISE_Orchestrator:
             workflow_engine: Optional workflow engine instance
         """
         # --- Environment & Virtualenv Bootstrap (LLM/Search/Tools readiness) ---
+        # MANDATORY: Use arche_env per CRITICAL_ARCHE_ENV_REQUIREMENT.md
         try:
-            # Prefer venv under project root
             project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-            venv_bin = os.path.join(project_root, '.venv', 'bin')
-            if os.path.isdir(venv_bin):
+            # Prefer arche_env (documented requirement) over .venv
+            venv_paths = [
+                os.path.join(project_root, 'arche_env', 'bin'),  # Primary: arche_env (documented requirement)
+                os.path.join(project_root, '.venv', 'bin')       # Fallback: .venv (legacy support)
+            ]
+            
+            venv_bin = None
+            venv_name = None
+            for venv_path in venv_paths:
+                if os.path.isdir(venv_path):
+                    venv_bin = venv_path
+                    venv_name = os.path.basename(os.path.dirname(venv_path))
+                    break
+            
+            if venv_bin:
                 # Prepend venv bin to PATH for subprocess and dynamic imports
                 os.environ['PATH'] = venv_bin + os.pathsep + os.environ.get('PATH', '')
                 # Ensure python in this process also sees venv site-packages
-                site_pkgs = os.path.join(project_root, '.venv', 'lib', f"python{sys.version_info.major}.{sys.version_info.minor}", 'site-packages')
+                venv_root = os.path.dirname(venv_bin)
+                site_pkgs = os.path.join(venv_root, 'lib', f"python{sys.version_info.major}.{sys.version_info.minor}", 'site-packages')
                 if os.path.isdir(site_pkgs) and site_pkgs not in sys.path:
                     sys.path.insert(0, site_pkgs)
-                logger.info("RISE: activated project virtualenv paths for current session")
+                logger.info(f"RISE: activated {venv_name} virtualenv paths for current session")
+            else:
+                logger.warning(f"RISE: No virtual environment found (checked arche_env and .venv). Please ensure arche_env is created and activated.")
         except Exception as e:
             logger.warning(f"RISE: virtualenv bootstrap skipped: {e}")
 
@@ -265,6 +282,20 @@ class RISE_Orchestrator:
         except Exception as e:
             logger.warning(f"Failed to initialize federated agents: {e}")
             self.federated_agents = {}
+        
+        # Initialize Codebase Archaeologist for self-referential synthesis
+        try:
+            from .codebase_archaeologist import CodebaseArchaeologist
+            # Get project root (parent of Three_PointO_ArchE directory)
+            project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            self.codebase_archaeologist = CodebaseArchaeologist(
+                codebase_root=project_root,
+                spr_manager=self.spr_manager
+            )
+            logger.info("🔍 CodebaseArchaeologist initialized - self-referential synthesis enabled")
+        except Exception as e:
+            logger.warning(f"Failed to initialize CodebaseArchaeologist: {e}")
+            self.codebase_archaeologist = None
         
         logger.info(f"🚀 RISE_Orchestrator initialized successfully")
         logger.info(f"📁 Workflows directory: {self.workflows_dir}")
@@ -767,14 +798,54 @@ class RISE_Orchestrator:
             self.emit_sirc_event("Phase_A_Start", "Knowledge Scaffolding & Dynamic Specialization")
             logger.info("🔍 Phase A: Acquiring domain knowledge and forging specialist agent (Enhanced)")
             
-            # Ensure we have a valid model name, defaulting to gemini-2.0-flash-exp if not provided
-            effective_model = model if model else "gemini-2.0-flash-exp"
+            # Determine provider and model - check context, then config, then defaults
+            from .config import get_config
+            config_obj = get_config()
+            
+            # Provider selection priority: context parameter > config default > environment variable > "groq" (default)
+            effective_provider = context.get("provider") if context else None
+            if not effective_provider:
+                # AppConfig uses 'llm' not 'llm_config'
+                # Default to "groq" but allow override via config/env for Gemini/Google
+                effective_provider = config_obj.llm.default_provider if hasattr(config_obj, 'llm') and hasattr(config_obj.llm, 'default_provider') else os.getenv("ARCHE_LLM_PROVIDER", "groq")
+            
+            # Model selection priority: explicit parameter > config default for provider > provider's default
+            if model:
+                effective_model = model
+            else:
+                # AppConfig uses 'llm' not 'llm_config'
+                # Default to Groq model but allow override via config/env
+                effective_model = config_obj.llm.default_model if hasattr(config_obj, 'llm') and hasattr(config_obj.llm, 'default_model') else os.getenv("ARCHE_LLM_MODEL", None)
+                
+                # If no model specified, get provider-specific default
+                from .llm_providers import get_model_for_provider
+                provider_default_model = get_model_for_provider(effective_provider)
+                
+                if not effective_model:
+                    # No model in config/env, use provider default
+                    effective_model = provider_default_model
+                elif effective_provider == "groq" and "llama" not in effective_model.lower() and "groq" not in effective_model.lower():
+                    # If provider is Groq but model doesn't match, use Groq default
+                    effective_model = provider_default_model
+                elif effective_provider == "google" and "gemini" not in effective_model.lower():
+                    # If provider is Google but model doesn't match, use Google default
+                    effective_model = provider_default_model
+                elif effective_provider == "cursor" and "cursor" not in effective_model.lower():
+                    # If provider is Cursor but model doesn't match, use Cursor default
+                    effective_model = provider_default_model
+            
+            # Store in rise_state for access in later phases
+            rise_state.effective_model = effective_model
+            rise_state.effective_provider = effective_provider
+            
+            logger.info(f"📡 RISE LLM Provider: {effective_provider} | Model: {effective_model}")
             
             phase_a_context = {
                 "problem_description": problem_description,  # Must match workflow input key
                 "user_query": problem_description,  # Also keep for compatibility
                 "session_id": self.session_id,
                 "model": effective_model,  # Pass model to the context for use in the workflow
+                "provider": effective_provider,  # Pass provider to use Cursor ArchE
                 # Pass the rich initial analysis into the workflow context if it exists
                 "initial_query_analysis": self.initial_query_analysis
             }
@@ -890,6 +961,70 @@ class RISE_Orchestrator:
             phase_d_result = self._execute_phase_d(rise_state)
             rise_state.final_strategy = phase_d_result.get('refined_utopian_strategy', rise_state.final_strategy)
             rise_state.utopian_trust_packet = phase_d_result.get('trust_packet')
+            
+            # NEW: Iterative Looping - Check if new insights from codebase synthesis require looping
+            max_iterations = 3  # Prevent infinite loops
+            current_iteration = 0
+            
+            # Iterative loop: Continue refining if codebase synthesis reveals new insights
+            while current_iteration < max_iterations:
+                should_continue_loop = False
+                
+                # Check if codebase synthesis revealed insights requiring re-analysis
+                if self.codebase_archaeologist and current_iteration == 0:
+                    # First check after Phase D
+                    codebase_synthesis = phase_b_result.get('codebase_synthesis') or {}
+                elif self.codebase_archaeologist and current_iteration > 0:
+                    # Subsequent iterations - check latest Phase B result
+                    codebase_synthesis = phase_b_result.get('codebase_synthesis') or {}
+                else:
+                    codebase_synthesis = {}
+                
+                novel_combinations = codebase_synthesis.get('novel_combinations', [])
+                implementation_suggestions = codebase_synthesis.get('implementation_suggestions', [])
+                
+                # Trigger loop if novel combinations found or significant implementation suggestions
+                should_continue_loop = (
+                    len(novel_combinations) > 0 and 
+                    len(implementation_suggestions) > 2 and
+                    current_iteration < max_iterations - 1  # Allow one more iteration
+                )
+                
+                if not should_continue_loop:
+                    break  # No more iterations needed
+                
+                current_iteration += 1
+                logger.info(f"🔄 Iterative Loop {current_iteration}/{max_iterations}: {len(novel_combinations)} novel combinations, {len(implementation_suggestions)} implementation suggestions")
+                logger.info(f"   Re-running Phase B→C with codebase synthesis insights")
+                
+                # Update knowledge base with new insights
+                if 'codebase_patterns' not in rise_state.session_knowledge_base:
+                    rise_state.session_knowledge_base['codebase_patterns'] = []
+                
+                # Add novel combinations as new search patterns
+                for combination in novel_combinations[:3]:  # Top 3
+                    rise_state.session_knowledge_base['codebase_patterns'].append({
+                        "type": "novel_combination",
+                        "description": combination.get('description', ''),
+                        "components": combination.get('codebase_components', []),
+                        "iteration": current_iteration
+                    })
+                
+                # Re-execute Phase B with enhanced knowledge base
+                phase_b_result = self._execute_phase_b(rise_state)
+                rise_state.advanced_insights = phase_b_result.get('advanced_insights', [])
+                rise_state.specialist_consultation = phase_b_result.get('specialist_consultation')
+                rise_state.fused_strategic_dossier = phase_b_result.get('fused_strategic_dossier')
+                
+                # Re-execute Phase C with updated dossier
+                phase_c_result = self._execute_phase_c(rise_state)
+                rise_state.vetting_dossier = phase_c_result.get('vetting_dossier')
+                rise_state.final_strategy = phase_c_result.get('final_strategy')
+                
+                logger.info(f"✅ Iterative loop {current_iteration} completed - refined strategy with codebase synthesis")
+            
+            if current_iteration > 0:
+                logger.info(f"🔄 Completed {current_iteration} iterative refinement loop(s)")
             
             # Calculate final metrics
             end_time = datetime.now(timezone.utc)
@@ -1134,7 +1269,7 @@ class RISE_Orchestrator:
                     "metrics": {"fallback_used": True, "error": str(e)}
                 }
             
-            # Ensuref we have a valid session knowledge base
+            # Ensure we have a valid session knowledge base
             session_kb = knowledge_result.get('session_knowledge_base', {})
             if not session_kb:
                 session_kb = {
@@ -1143,6 +1278,32 @@ class RISE_Orchestrator:
                     "search_status": "fallback",
                     "fallback_content": "Using general strategic analysis knowledge"
                 }
+            
+            # NEW: Search codebase for relevant patterns (Self-Referential Synthesis)
+            codebase_patterns = []
+            if self.codebase_archaeologist:
+                try:
+                    logger.info("🔍 Phase A: Searching codebase for relevant patterns...")
+                    codebase_patterns = self.codebase_archaeologist.search_codebase_for_patterns(
+                        query=rise_state.problem_description,
+                        pattern_types=["class", "function", "workflow", "spr", "specification"],
+                        max_results=15,
+                        search_mode="semantic"
+                    )
+                    
+                    # Add codebase patterns to knowledge base
+                    if codebase_patterns:
+                        if "codebase_patterns" not in session_kb:
+                            session_kb["codebase_patterns"] = []
+                        session_kb["codebase_patterns"] = [p.to_dict() for p in codebase_patterns]
+                        session_kb["codebase_patterns_count"] = len(codebase_patterns)
+                        logger.info(f"✅ Found {len(codebase_patterns)} relevant codebase patterns")
+                    else:
+                        logger.info("ℹ️ No relevant codebase patterns found")
+                        
+                except Exception as e:
+                    logger.warning(f"⚠️ Codebase pattern search failed: {e}")
+                    codebase_patterns = []
             
             # Execute metamorphosis protocol to forge specialist agent
             metamorphosis_result = None
@@ -1282,12 +1443,26 @@ class RISE_Orchestrator:
         try:
             # Execute strategy fusion workflow
             fusion_path = os.path.join(self.workflows_dir, "strategy_fusion.json")
+            
+            # Get effective model and provider from rise_state (set in Phase A)
+            # Default to Groq if not set, but preserve what was set in Phase A
+            effective_model = getattr(rise_state, 'effective_model', None)
+            effective_provider = getattr(rise_state, 'effective_provider', None)
+            
+            # Fallback to Groq defaults if not set in Phase A
+            if not effective_model or not effective_provider:
+                from .llm_providers import get_model_for_provider
+                effective_provider = effective_provider or os.getenv("ARCHE_LLM_PROVIDER", "groq")
+                effective_model = effective_model or get_model_for_provider(effective_provider)
+            
             # Seed minimal initial_context for Phase B pathways (causal, ABM, CFP)
             fusion_initial_context = {
                 "problem_description": rise_state.problem_description,
                 "knowledge_base": rise_state.session_knowledge_base,
                 "session_knowledge_base": rise_state.session_knowledge_base,
                 "specialized_agent": rise_state.specialized_agent,
+                "model": effective_model,  # Pass model to Phase B
+                "provider": effective_provider,  # Pass provider to Phase B
                 "initial_context": {
                     "case_event_timeline": [],
                     "core_hypothesis": f"Hypothesis: {rise_state.problem_description[:120]}",
@@ -1304,6 +1479,78 @@ class RISE_Orchestrator:
                 fusion_initial_context
             )
             
+            # NEW: Synthesize external insights with codebase patterns (Self-Referential Synthesis)
+            synthesized_solution = None
+            if self.codebase_archaeologist:
+                try:
+                    # Get codebase patterns from Phase A (if available)
+                    codebase_patterns = []
+                    session_kb = rise_state.session_knowledge_base
+                    if session_kb and "codebase_patterns" in session_kb:
+                        # Reconstruct CodebasePattern objects from dict
+                        from .codebase_archaeologist import CodebasePattern
+                        for p_dict in session_kb.get("codebase_patterns", [])[:10]:  # Top 10
+                            try:
+                                pattern = CodebasePattern(
+                                    pattern_type=p_dict.get("type", "unknown"),
+                                    name=p_dict.get("name", ""),
+                                    file_path=Path(p_dict.get("file_path", "")),
+                                    description=p_dict.get("description", ""),
+                                    relevance_score=p_dict.get("relevance_score", 0.0),
+                                    key_excerpts=p_dict.get("key_excerpts", []),
+                                    relationships=p_dict.get("relationships", []),
+                                    spr_references=p_dict.get("spr_references", []),
+                                    implementation_details=p_dict.get("implementation_details", {})
+                                )
+                                codebase_patterns.append(pattern)
+                            except Exception as e:
+                                logger.debug(f"Error reconstructing pattern: {e}")
+                                continue
+                    
+                    # If no patterns from Phase A, search again with Phase B context
+                    if not codebase_patterns:
+                        logger.info("🔍 Phase B: Searching codebase for pathway implementation patterns...")
+                        # Search for patterns related to each pathway
+                        pathway_patterns = []
+                        for pathway in ["causal inference", "agent based modeling", "comparative fluxual", "simulation"]:
+                            patterns = self.codebase_archaeologist.search_codebase_for_patterns(
+                                query=f"{pathway} implementation pattern",
+                                pattern_types=["class", "function", "workflow"],
+                                max_results=3
+                            )
+                            pathway_patterns.extend(patterns)
+                        codebase_patterns = pathway_patterns[:10]  # Top 10
+                    
+                    # Synthesize external knowledge with codebase patterns
+                    if codebase_patterns:
+                        external_knowledge = {
+                            "summary": fusion_result.get('fused_strategic_dossier', {}),
+                            "insights": fusion_result.get('advanced_insights', []),
+                            "specialist_consultation": fusion_result.get('specialist_consultation')
+                        }
+                        
+                        synthesized_solution = self.codebase_archaeologist.synthesize_from_patterns(
+                            problem_description=rise_state.problem_description,
+                            external_knowledge=external_knowledge,
+                            codebase_patterns=codebase_patterns,
+                            synthesis_mode="hybrid"
+                        )
+                        
+                        logger.info(f"✅ Synthesized solution from {len(codebase_patterns)} codebase patterns")
+                        logger.info(f"   Novel combinations: {len(synthesized_solution.get('novel_combinations', []))}")
+                        
+                        # Enhance fused strategic dossier with synthesis
+                        if synthesized_solution:
+                            fused_dossier = fusion_result.get('fused_strategic_dossier', {})
+                            if isinstance(fused_dossier, dict):
+                                fused_dossier['codebase_synthesis'] = synthesized_solution
+                                fused_dossier['synthesis_confidence'] = synthesized_solution.get('confidence', 0.0)
+                                fusion_result['fused_strategic_dossier'] = fused_dossier
+                        
+                except Exception as e:
+                    logger.warning(f"⚠️ Codebase synthesis failed: {e}")
+                    synthesized_solution = None
+            
             phase_end = datetime.now(timezone.utc)
             phase_duration = (phase_end - phase_start).total_seconds()
             rise_state.execution_metrics['phase_durations']['B'] = phase_duration
@@ -1312,6 +1559,7 @@ class RISE_Orchestrator:
                 'advanced_insights': fusion_result.get('advanced_insights', []),
                 'specialist_consultation': fusion_result.get('specialist_consultation'),
                 'fused_strategic_dossier': fusion_result.get('fused_strategic_dossier'),
+                'codebase_synthesis': synthesized_solution,  # NEW
                 'fusion_metrics': fusion_result.get('metrics', {}),
                 'phase_duration': phase_duration,
                 'status': 'completed'
@@ -1351,15 +1599,51 @@ class RISE_Orchestrator:
         try:
             # Execute high stakes vetting workflow
             vetting_path_c = os.path.join(self.workflows_dir, "high_stakes_vetting.json")
+            # Get effective model and provider from Phase A context (stored in rise_state or use Groq defaults)
+            effective_model = getattr(rise_state, 'effective_model', None)
+            effective_provider = getattr(rise_state, 'effective_provider', None)
+            
+            # Fallback to Groq defaults if not set in Phase A
+            if not effective_model or not effective_provider:
+                from .llm_providers import get_model_for_provider
+                effective_provider = effective_provider or os.getenv("ARCHE_LLM_PROVIDER", "groq")
+                effective_model = effective_model or get_model_for_provider(effective_provider)
+            
             vetting_result = self.workflow_engine.run_workflow(
                 vetting_path_c,
                 {
                     "strategy_dossier": rise_state.fused_strategic_dossier,
                     "problem_description": rise_state.problem_description,
                     "session_id": rise_state.session_id,
-                    "phase": "C"
+                    "phase": "C",
+                    "model": effective_model,  # Pass model to Phase C
+                    "provider": effective_provider  # Pass provider to Phase C
                 }
             )
+            
+            # NEW: Codebase pattern validation after vetting
+            pattern_alignment = None
+            if self.codebase_archaeologist and vetting_result.get('final_strategy'):
+                try:
+                    logger.info("🔍 Phase C: Validating strategy against codebase patterns...")
+                    final_strategy = vetting_result.get('final_strategy')
+                    # Handle case where final_strategy might be a string
+                    if isinstance(final_strategy, str):
+                        # Convert string to dict format for validation
+                        strategy_dict = {"strategy_text": final_strategy, "strategy_type": "text"}
+                    elif isinstance(final_strategy, dict):
+                        strategy_dict = final_strategy
+                    else:
+                        strategy_dict = {"strategy": str(final_strategy)}
+                    
+                    pattern_alignment = self.codebase_archaeologist.validate_against_patterns(
+                        strategy=strategy_dict,
+                        required_patterns=["IAR compliance", "SPR integration", "workflow compatibility"]
+                    )
+                    logger.info(f"✅ Pattern alignment validation: {pattern_alignment.get('alignment_score', 0.0):.2f}")
+                except Exception as e:
+                    logger.warning(f"⚠️ Codebase pattern validation failed: {e}")
+                    pattern_alignment = None
             
             # Execute SPR distillation workflow
             spr_path_c = os.path.join(self.workflows_dir, "distill_spr.json")
@@ -1369,7 +1653,10 @@ class RISE_Orchestrator:
                     "thought_trail": self.thought_trail.get_recent_entries(10) if self.thought_trail else [],
                     "final_strategy": vetting_result.get('final_strategy'),
                     "session_id": rise_state.session_id,
-                    "problem_description": rise_state.problem_description
+                    "problem_description": rise_state.problem_description,
+                    "pattern_alignment": pattern_alignment,  # Pass alignment for SPR refinement
+                    "model": effective_model,  # Pass model to SPR distillation
+                    "provider": effective_provider  # Pass provider to SPR distillation
                 }
             )
             
@@ -1380,6 +1667,7 @@ class RISE_Orchestrator:
             result = {
                 'vetting_dossier': vetting_result.get('vetting_dossier'),
                 'final_strategy': vetting_result.get('final_strategy'),
+                'pattern_alignment': pattern_alignment,  # NEW
                 'spr_definition': spr_result.get('spr_definition'),
                 'vetting_metrics': vetting_result.get('metrics', {}),
                 'spr_metrics': spr_result.get('metrics', {}),
@@ -1418,6 +1706,10 @@ class RISE_Orchestrator:
         logger.info("🎯 Phase D: Final Vetting & Crystallization")
         
         try:
+            # Get effective model and provider from Phase A context
+            effective_model = getattr(rise_state, 'effective_model', 'cursor-arche-v1')
+            effective_provider = getattr(rise_state, 'effective_provider', 'cursor')
+            
             # Execute high stakes vetting workflow on the final strategy from Phase C
             vetting_path_d = os.path.join(self.workflows_dir, "high_stakes_vetting.json")
             vetting_result = self.workflow_engine.run_workflow(
@@ -1426,7 +1718,9 @@ class RISE_Orchestrator:
                     "strategy_dossier": rise_state.final_strategy, # Vet the final strategy
                     "problem_description": rise_state.problem_description,
                     "session_id": rise_state.session_id,
-                    "phase": "D"
+                    "phase": "D",
+                    "model": effective_model,  # Pass model to Phase D
+                    "provider": effective_provider  # Pass provider to Phase D
                 }
             )
 
@@ -1435,6 +1729,32 @@ class RISE_Orchestrator:
             if final_vetted_strategy is None:
                 raise RuntimeError("Phase D vetting failed to produce a final_strategy.")
 
+            # NEW: Identify novel codebase combinations as SPR candidates
+            novel_spr_candidates = []
+            if self.codebase_archaeologist and rise_state.session_knowledge_base.get('codebase_synthesis'):
+                try:
+                    logger.info("🔍 Phase D: Identifying novel codebase combinations as SPR candidates...")
+                    codebase_synthesis = rise_state.session_knowledge_base.get('codebase_synthesis', {})
+                    novel_combinations = codebase_synthesis.get('novel_combinations', [])
+                    
+                    if novel_combinations:
+                        for combination in novel_combinations[:5]:  # Top 5 novel patterns
+                            spr_candidate = {
+                                "spr_id": f"{combination.get('domain', 'SynthesiS')}Pattern",
+                                "name": combination.get('description', 'Novel Synthesis Pattern'),
+                                "pattern": combination,
+                                "codebase_sources": combination.get('codebase_components', []),
+                                "external_sources": combination.get('external_components', []),
+                                "confidence": combination.get('confidence', 0.7),
+                                "created_from": "RISE-SRCS Phase D",
+                                "session_id": rise_state.session_id
+                            }
+                            novel_spr_candidates.append(spr_candidate)
+                        
+                        logger.info(f"✅ Identified {len(novel_spr_candidates)} novel SPR candidates")
+                except Exception as e:
+                    logger.warning(f"⚠️ SPR candidate identification failed: {e}")
+            
             # Execute SPR distillation workflow on the successfully vetted strategy
             spr_path_d = os.path.join(self.workflows_dir, "distill_spr.json")
             spr_result = self.workflow_engine.run_workflow(
@@ -1443,7 +1763,10 @@ class RISE_Orchestrator:
                     "thought_trail": self.thought_trail.get_recent_entries(50) if self.thought_trail else [],
                     "final_strategy": final_vetted_strategy,
                     "session_id": rise_state.session_id,
-                    "problem_description": rise_state.problem_description
+                    "problem_description": rise_state.problem_description,
+                    "novel_spr_candidates": novel_spr_candidates,  # Pass candidates for consideration
+                    "model": effective_model,  # Pass model to SPR distillation
+                    "provider": effective_provider  # Pass provider to SPR distillation
                 }
             )
             
@@ -1454,6 +1777,7 @@ class RISE_Orchestrator:
             result = {
                 'vetting_dossier': vetting_result.get('vetting_dossier'),
                 'final_strategy': final_vetted_strategy,
+                'novel_spr_candidates': novel_spr_candidates,  # NEW
                 'spr_definition': spr_result.get('spr_definition'),
                 'vetting_metrics': vetting_result.get('metrics', {}),
                 'spr_metrics': spr_result.get('metrics', {}),

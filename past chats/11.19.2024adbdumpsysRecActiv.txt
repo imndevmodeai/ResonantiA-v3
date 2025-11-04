@@ -1,0 +1,443 @@
+ACTIVITY MANAGER RECENT TASKS (dumpsys activity recents)
+mRecentsUid=10296
+mRecentsComponent=ComponentInfo{com.motorola.launcher3/com.android.quickstep.RecentsActivity}
+mFreezeTaskListReordering=false
+mFreezeTaskListReorderingPendingTimeout=false
+  Recent tasks:
+  * Recent #0: Task{ea09ee5 #1620 type=standard A=10365:com.hyperionics.avar}
+    userId=0 effectiveUid=u0a365 mCallingUid=u0a296 mUserSetupComplete=true mCallingPackage=com.motorola.launcher3 mCallingFeatureId=null
+    affinity=10365:com.hyperionics.avar
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.hyperionics.avar/.SpeakReferenceActivity}
+    mActivityComponent=com.hyperionics.avar/.SpeakReferenceActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=true mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{36f924f u0 com.hyperionics.avar/.SpeakReferenceActivity t1620}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    mRootProcess=ProcessRecord{1d98e7b 24427:com.hyperionics.avar/u0a365}
+    taskId=1620 rootTaskId=1620
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=23683078 (inactive for 4282s)
+    lastDisplayId=0
+  * Recent #1: Task{d6f503b #1623 type=standard I=android/com.android.internal.app.ResolverActivity}
+    userId=0 effectiveUid=1000 mCallingUid=u0a249 mUserSetupComplete=true mCallingPackage=com.android.chrome mCallingFeatureId=null
+    intent={act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=market://details?id=com.doordash.driverapp&referrer=adjust_reftag%3DcuCrX6RH4RBC8%26utm_source%3DLiftoff%2B-%2BDasher%2BCampaign%26utm_campaign%3Ddx_us_di_ad_ua_acq_5xxxx_liftoff_android_kalamazoo%252C%2Bmi_810%26utm_content%3D%2540Voice%2BAloud%2BReader%2B%2528TTS%2529%26utm_term%3DVungle_30s_Portrait_DoorDash_EN_PLATFORM_EP-2358_Recut_v02-2%2B%25281%2529_320x480 flg=0x14800000 cmp=android/com.android.internal.app.ResolverActivity}
+    mActivityComponent=android/com.android.internal.app.ResolverActivity
+    Activities=[]
+    askedCompatMode=false inRecents=true isAvailable=true
+    taskId=1623 rootTaskId=1623
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=20830168 (inactive for 7135s)
+    lastDisplayId=0
+  * Recent #2: Task{12d7f8a #1619 type=standard A=10249:com.android.chrome}
+    userId=0 effectiveUid=u0a249 mCallingUid=u0a249 mUserSetupComplete=true mCallingPackage=com.android.chrome mCallingFeatureId=null
+    affinity=10249:com.android.chrome
+    intent={act=android.intent.action.VIEW dat=https://click.liftoff.io/v1/campaign_click/bY6QCxSn1uFfxVSBk68mb1yTCYsqcwfJ8Fet7LpHc62V_WQExZfLheR0Kf682amKy1opV2EeRakW7wEaOcXQP-xBr0cPsAZNKrSeEewjQ4ko93nnjsMAcTwwL29Hi3lE7wTyT5AJF8kDKDf-VqpHeGCTlkkDSKsI1WBh8-LPXXq6lHAT8YL1_3qqrQQoHB7wuiy-DGz0-avZtGRYhrtnLkaZOESzrpWLkmu6lhWu64JEjPCeWsWOeIPaNyTK_95iccqaUP5jv0CYGgQhnxdo-gQ_aM4xortxT3tT_epVNgtaGpjDGC7_KFsqvuuIqxrlF4UStzYdahUOTLSkS_5dMlc8mohPBUyWnbAH-GjNzjiAb8VbjwNsC9rbsEl8Ao0TujHUKJjcYpLLRedr-v6fYYJ8vV54pL_9N6AcTRp0eLaWOIHJk5nR9-sh4ov-Q3WIMf0lyk2AXwGXiSI7j04sX0EJHLVdR1vtEHzVjvLyG3suCrZFSZlaYU_7Uvaxc-81KyHLcowiFLX7zs5DBWpkap3d761Lxm896q3Xryx2ljsJTl9vlCOtLl0gfgGxcaZS8F0kpCwf2CMKxxmxsxH7GjL5NVmOfUeFgupNNPb6boZn6bwen9-e?vast_el=2 flg=0x14002000 cmp=com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}
+    mActivityComponent=com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=false mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[]
+    askedCompatMode=false inRecents=true isAvailable=true
+    taskId=1619 rootTaskId=1619
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE mSupportsPictureInPicture=true isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=20828243 (inactive for 7136s)
+    lastDisplayId=0
+  * Recent #3: Task{c9f374f #1612 type=standard A=10377:org.chromium.webapk.a6188197fa05cee27_v2}
+    userId=0 effectiveUid=u0a377 mCallingUid=u0a377 mUserSetupComplete=true mCallingPackage=org.chromium.webapk.a6188197fa05cee27_v2 mCallingFeatureId=null
+    affinity=10377:org.chromium.webapk.a6188197fa05cee27_v2
+    intent={act=android.intent.action.VIEW flg=0x10100000 cmp=org.chromium.webapk.a6188197fa05cee27_v2/org.chromium.webapk.shell_apk.h2o.SplashActivity}
+    mActivityComponent=org.chromium.webapk.a6188197fa05cee27_v2/org.chromium.webapk.shell_apk.h2o.SplashActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=true mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{8fa4e49 u0 org.chromium.webapk.a6188197fa05cee27_v2/org.chromium.webapk.shell_apk.h2o.SplashActivity t1612}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    mRootProcess=ProcessRecord{8f0ee26 22754:org.chromium.webapk.a6188197fa05cee27_v2/u0a377}
+    taskId=1612 rootTaskId=1612
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=20768954 (inactive for 7196s)
+    lastDisplayId=0
+  * Recent #4: Task{f13099f #1603 type=home I=com.motorola.launcher3/com.android.launcher3.CustomizationPanelLauncher}
+    userId=0 effectiveUid=u0a296 mCallingUid=0 mUserSetupComplete=true mCallingPackage=null mCallingFeatureId=null
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.motorola.launcher3/com.android.launcher3.CustomizationPanelLauncher}
+    origActivity=com.motorola.launcher3/com.android.launcher3.CustomizationPanelLauncher
+    mActivityComponent=com.motorola.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher
+    autoRemoveRecents=false isPersistable=true activityType=2
+    rootWasReset=false mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{1c45df2 u0 com.motorola.launcher3/com.android.launcher3.CustomizationPanelLauncher t1603}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    mRootProcess=ProcessRecord{2e216e0 6055:com.motorola.launcher3/u0a296}
+    taskId=1603 rootTaskId=1602
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=home mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=20745665 (inactive for 7219s)
+    lastDisplayId=0
+  * Recent #5: Task{814d8bb #1621 type=standard A=10222:com.google.android.dialer}
+    userId=0 effectiveUid=u0a222 mCallingUid=u0a296 mUserSetupComplete=true mCallingPackage=com.motorola.launcher3 mCallingFeatureId=null
+    affinity=10222:com.google.android.dialer
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.dialer/.extensions.GoogleDialtactsActivity}
+    origActivity=com.google.android.dialer/.extensions.GoogleDialtactsActivity
+    mActivityComponent=com.google.android.dialer/com.android.dialer.main.impl.MainActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=true mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{ae626b5 u0 com.google.android.dialer/.extensions.GoogleDialtactsActivity t1621}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    mRootProcess=ProcessRecord{39b816 27532:com.google.android.dialer/u0a222}
+    taskId=1621 rootTaskId=1621
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=20741035 (inactive for 7224s)
+    lastDisplayId=0
+  * Recent #6: Task{9a34864 #1606 type=standard A=1000:com.android.settings}
+    userId=0 effectiveUid=1000 mCallingUid=u0a293 mUserSetupComplete=true mCallingPackage=com.android.systemui mCallingFeatureId=null
+    affinity=1000:com.android.settings
+    intent={act=android.settings.WIFI_SETTINGS flg=0x14000000 cmp=com.android.settings/.Settings$WifiSettingsActivity}
+    mActivityComponent=com.android.settings/.Settings$WifiSettingsActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=false mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{f356065 u0 com.android.settings/.Settings$WifiSettingsActivity t1606}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    mRootProcess=ProcessRecord{c596bfe 14753:com.android.settings/1000}
+    taskId=1606 rootTaskId=1606
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=20678740 (inactive for 7286s)
+    lastDisplayId=0
+  * Recent #7: Task{19c7377 #1614 type=standard A=1000:com.android.settings.root}
+    userId=0 effectiveUid=1000 mCallingUid=u0a293 mUserSetupComplete=true mCallingPackage=com.android.systemui mCallingFeatureId=null
+    affinity=1000:com.android.settings.root
+    intent={act=android.settings.SETTINGS flg=0x14000000 cmp=com.android.settings/.homepage.SettingsHomepageActivity}
+    mActivityComponent=com.android.settings/.homepage.SettingsHomepageActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=false mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{c08ad9 u0 com.android.settings/.homepage.SettingsHomepageActivity t1614}, ActivityRecord{a7bf8a0 u0 com.android.settings/.SubSettings t1614}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    mRootProcess=ProcessRecord{c596bfe 14753:com.android.settings/1000}
+    taskId=1614 rootTaskId=1614
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=20171361 (inactive for 7793s)
+    lastDisplayId=0
+  * Recent #8: Task{3296ea3 #1613 type=standard A=10340:com.snapchat.android}
+    userId=0 effectiveUid=u0a340 mCallingUid=u0a296 mUserSetupComplete=true mCallingPackage=com.motorola.launcher3 mCallingFeatureId=null
+    affinity=10340:com.snapchat.android
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.snapchat.android/.LandingPageActivity}
+    origActivity=com.snapchat.android/.LandingPageActivity
+    mActivityComponent=com.snapchat.android/com.snap.mushroom.MainActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=true mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{a3cb491 u0 com.snapchat.android/.LandingPageActivity t1613}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    mRootProcess=ProcessRecord{bda51ff 22277:com.snapchat.android/u0a340}
+    taskId=1613 rootTaskId=1613
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION mSupportsPictureInPicture=true isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=19896148 (inactive for 8069s)
+    lastDisplayId=0
+  * Recent #9: Task{b77c088 #1611 type=standard A=10259:com.google.android.gm}
+    userId=0 effectiveUid=u0a259 mCallingUid=u0a296 mUserSetupComplete=true mCallingPackage=com.motorola.launcher3 mCallingFeatureId=null
+    affinity=10259:com.google.android.gm
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.gm/.ConversationListActivityGmail}
+    origActivity=com.google.android.gm/.ConversationListActivityGmail
+    mActivityComponent=com.google.android.gm/.ui.MailActivityGmail
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=true mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[]
+    askedCompatMode=false inRecents=true isAvailable=true
+    taskId=1611 rootTaskId=1611
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=19668673 (inactive for 8296s)
+    lastDisplayId=0
+  * Recent #10: Task{4bc572f #1610 type=standard A=10258:com.google.android.apps.photos}
+    userId=0 effectiveUid=u0a258 mCallingUid=u0a296 mUserSetupComplete=true mCallingPackage=com.motorola.launcher3 mCallingFeatureId=null
+    affinity=10258:com.google.android.apps.photos
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.apps.photos/.home.HomeActivity}
+    mActivityComponent=com.google.android.apps.photos/.home.HomeActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=true mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{a69db09 u0 com.google.android.apps.photos/.home.HomeActivity t1610}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    mRootProcess=ProcessRecord{60d3030 17059:com.google.android.apps.photos/u0a258}
+    taskId=1610 rootTaskId=1610
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(627, 98 - 881, 668)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=19244789 (inactive for 8720s)
+    lastDisplayId=0
+  * Recent #11: Task{425c59d #1607 type=standard A=10176:com.google.android.apps.nbu.files}
+    userId=0 effectiveUid=u0a176 mCallingUid=u0a296 mUserSetupComplete=true mCallingPackage=com.motorola.launcher3 mCallingFeatureId=null
+    affinity=10176:com.google.android.apps.nbu.files
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.apps.nbu.files/.home.HomeActivity}
+    mActivityComponent=com.google.android.apps.nbu.files/.home.HomeActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=true mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[ActivityRecord{6767c47 u0 com.google.android.apps.nbu.files/.home.HomeActivity t1607}]
+    askedCompatMode=false inRecents=true isAvailable=true
+    taskId=1607 rootTaskId=1607
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(627, 98 - 881, 668)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=19179897 (inactive for 8785s)
+    lastDisplayId=0
+  * Recent #12: Task{36a0e97 #1609 type=standard A=10252:com.google.android.apps.docs}
+    userId=0 effectiveUid=u0a252 mCallingUid=u0a176 mUserSetupComplete=true mCallingPackage=com.google.android.apps.nbu.files mCallingFeatureId=null
+    affinity=10252:com.google.android.apps.docs
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.google.android.apps.docs cmp=com.google.android.apps.docs/.app.NewMainProxyActivity}
+    origActivity=com.google.android.apps.docs/.app.NewMainProxyActivity
+    mActivityComponent=com.google.android.apps.docs/.drive.startup.StartupActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=false mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[]
+    askedCompatMode=false inRecents=true isAvailable=true
+    taskId=1609 rootTaskId=1609
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(627, 98 - 881, 668)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w747dp h352dp 306dpi nrml long layoutCompatNeeded land finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1600, 720) mAppBounds=Rect(80, 0 - 1508, 720) mMaxBounds=Rect(0, 0 - 1600, 720) mDisplayRotation=ROTATION_90 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_90} as.5 s.920 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=19160702 (inactive for 8804s)
+    lastDisplayId=0
+  * Recent #13: Task{84990d4 #1608 type=standard I=com.google.android.gms/.nearby.sharing.settings.SettingsActivity}
+    userId=0 effectiveUid=u0a193 mCallingUid=u0a193 mUserSetupComplete=true mCallingPackage=com.google.android.gms mCallingFeatureId=nearby_sharing
+    intent={act=com.google.android.gms.settings.SHARING flg=0x10000000 pkg=com.google.android.gms cmp=com.google.android.gms/.nearby.sharing.settings.SettingsActivity}
+    mActivityComponent=com.google.android.gms/.nearby.sharing.settings.SettingsActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=false mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[]
+    askedCompatMode=false inRecents=true isAvailable=true
+    taskId=1608 rootTaskId=1608
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION mSupportsPictureInPicture=false isResizeable=true
+     mLastNonFullscreenBounds=Rect(627, 98 - 881, 668)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w747dp h352dp 306dpi nrml long layoutCompatNeeded land finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1600, 720) mAppBounds=Rect(80, 0 - 1508, 720) mMaxBounds=Rect(0, 0 - 1600, 720) mDisplayRotation=ROTATION_90 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_90} as.5 s.509 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=18766151 (inactive for 9199s)
+    lastDisplayId=0
+  * Recent #14: Task{792b5ce #1605 type=standard A=10250:com.google.android.youtube}
+    userId=0 effectiveUid=u0a250 mCallingUid=u0a296 mUserSetupComplete=true mCallingPackage=com.motorola.launcher3 mCallingFeatureId=null
+    affinity=10250:com.google.android.youtube
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.youtube/.app.honeycomb.Shell$HomeActivity}
+    origActivity=com.google.android.youtube/.app.honeycomb.Shell$HomeActivity
+    mActivityComponent=com.google.android.youtube/com.google.android.apps.youtube.app.watchwhile.MainActivity
+    autoRemoveRecents=false isPersistable=true activityType=1
+    rootWasReset=true mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[]
+    askedCompatMode=false inRecents=true isAvailable=true
+    taskId=1605 rootTaskId=1605
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_RESIZEABLE mSupportsPictureInPicture=true isResizeable=true
+     mLastNonFullscreenBounds=Rect(179, 434 - 542, 1154)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.989 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=18594327 (inactive for 9370s)
+    lastDisplayId=0
+  * Recent #15: Task{a053702 #5 type=home A=1000:com.android.settings.FallbackHome}
+    userId=0 effectiveUid=1000 mCallingUid=0 mUserSetupComplete=true mCallingPackage=null mCallingFeatureId=null
+    affinity=1000:com.android.settings.FallbackHome
+    intent={act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10800100 cmp=com.android.settings/.FallbackHome}
+    mActivityComponent=com.android.settings/.FallbackHome
+    autoRemoveRecents=false isPersistable=false activityType=2
+    rootWasReset=false mNeverRelinquishIdentity=true mReuseTask=false mLockTaskAuth=LOCK_TASK_AUTH_PINNABLE
+    Activities=[]
+    askedCompatMode=false inRecents=true isAvailable=true
+    taskId=5 rootTaskId=5
+    hasChildPipActivity=false
+    mHasBeenVisible=true
+    mResizeMode=RESIZE_MODE_UNRESIZEABLE mSupportsPictureInPicture=false isResizeable=false
+     mLastNonFullscreenBounds=Rect(198, 440 - 522, 1160)
+    CurrentConfiguration={1.15 311mcc480mnc [en_US] ldltr sw376dp w376dp h747dp 306dpi nrml long layoutCompatNeeded port finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1600) mAppBounds=Rect(0, 80 - 720, 1508) mMaxBounds=Rect(0, 0 - 720, 1600) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=home mAlwaysOnTop=undefined mRotation=ROTATION_0} as.5 s.89 fontWeightAdjustment=0 spnnull gidba01270000000000}
+    lastActiveTime=51145 (inactive for 27914s)
+    lastDisplayId=0
+
+  Visible recent tasks (most recent first):
+  * RecentTaskInfo #0: 
+    id=1620 userId=0 hasTask=true lastActiveTime=23683078
+ isAppLocked=false
+ canKillAndRestart=true
+    baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.hyperionics.avar/.SpeakReferenceActivity }
+    baseActivity={com.hyperionics.avar/com.hyperionics.avar.SpeakReferenceActivity}
+    topActivity={com.hyperionics.avar/com.hyperionics.avar.SpeakReferenceActivity}
+    realActivity={com.hyperionics.avar/com.hyperionics.avar.SpeakReferenceActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#fffafafa colorPrimary=#ff212121 iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #1: 
+    id=1619 userId=0 hasTask=false lastActiveTime=20828243
+ isAppLocked=false
+ canKillAndRestart=false
+    baseIntent=Intent { act=android.intent.action.VIEW dat=https://click.liftoff.io/... flg=0x14002000 cmp=com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity }
+    realActivity={com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffffffff colorPrimary=#ffffffff iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #2: 
+    id=1612 userId=0 hasTask=true lastActiveTime=20768954
+ isAppLocked=false
+ canKillAndRestart=true
+    baseIntent=Intent { act=android.intent.action.VIEW flg=0x10100000 cmp=org.chromium.webapk.a6188197fa05cee27_v2/org.chromium.webapk.shell_apk.h2o.SplashActivity }
+    baseActivity={org.chromium.webapk.a6188197fa05cee27_v2/org.chromium.webapk.shell_apk.h2o.SplashActivity}
+    topActivity={org.chromium.webapk.a6188197fa05cee27_v2/org.chromium.webapk.shell_apk.h2o.SplashActivity}
+    realActivity={org.chromium.webapk.a6188197fa05cee27_v2/org.chromium.webapk.shell_apk.h2o.SplashActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#fff3f3f3 colorPrimary=#ffe6e6e6 iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION minWidth=-1 minHeight=-1 colorBackgroundFloating=#fff3f3f3 }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #3: 
+    id=1621 userId=0 hasTask=true lastActiveTime=20741035
+ isAppLocked=false
+ canKillAndRestart=true
+    baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.dialer/.extensions.GoogleDialtactsActivity }
+    baseActivity={com.google.android.dialer/com.android.dialer.main.impl.MainActivity}
+    topActivity={com.google.android.dialer/com.android.dialer.main.impl.MainActivity}
+    origActivity={com.google.android.dialer/com.google.android.dialer.extensions.GoogleDialtactsActivity}
+    realActivity={com.google.android.dialer/com.android.dialer.main.impl.MainActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#fff6fafe colorPrimary=#ff0b57d0 iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE minWidth=-1 minHeight=-1 colorBackgroundFloating=#fff6fafe }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #4: 
+    id=1606 userId=0 hasTask=true lastActiveTime=20678740
+ isAppLocked=false
+ canKillAndRestart=false
+    baseIntent=Intent { act=android.settings.WIFI_SETTINGS flg=0x14000000 cmp=com.android.settings/.Settings$WifiSettingsActivity }
+    baseActivity={com.android.settings/com.android.settings.Settings$WifiSettingsActivity}
+    topActivity={com.android.settings/com.android.settings.Settings$WifiSettingsActivity}
+    realActivity={com.android.settings/com.android.settings.Settings$WifiSettingsActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffeef1f6 colorPrimary=#ffeef1f6 iconRes=com.android.settings/2131231253 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffeef1f6 }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #5: 
+    id=1614 userId=0 hasTask=true lastActiveTime=20171361
+ isAppLocked=false
+ canKillAndRestart=false
+    baseIntent=Intent { act=android.settings.SETTINGS flg=0x14000000 cmp=com.android.settings/.homepage.SettingsHomepageActivity }
+    baseActivity={com.android.settings/com.android.settings.homepage.SettingsHomepageActivity}
+    topActivity={com.android.settings/com.android.settings.SubSettings}
+    realActivity={com.android.settings/com.android.settings.homepage.SettingsHomepageActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffeef1f6 colorPrimary=#ffeef1f6 iconRes=com.android.settings/2131231253 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffeef1f6 }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #6: 
+    id=1613 userId=0 hasTask=true lastActiveTime=19896148
+ isAppLocked=false
+ canKillAndRestart=true
+    baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.snapchat.android/.LandingPageActivity }
+    baseActivity={com.snapchat.android/com.snap.mushroom.MainActivity}
+    topActivity={com.snapchat.android/com.snap.mushroom.MainActivity}
+    origActivity={com.snapchat.android/com.snapchat.android.LandingPageActivity}
+    realActivity={com.snapchat.android/com.snap.mushroom.MainActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffffffff colorPrimary=#fff5f5f5 iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #7: 
+    id=1611 userId=0 hasTask=false lastActiveTime=19668673
+ isAppLocked=false
+ canKillAndRestart=false
+    baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.gm/.ConversationListActivityGmail }
+    origActivity={com.google.android.gm/com.google.android.gm.ConversationListActivityGmail}
+    realActivity={com.google.android.gm/com.google.android.gm.ui.MailActivityGmail}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffffffff colorPrimary=#ffffffff iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #8: 
+    id=1610 userId=0 hasTask=true lastActiveTime=19244789
+ isAppLocked=false
+ canKillAndRestart=true
+    baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.apps.photos/.home.HomeActivity }
+    baseActivity={com.google.android.apps.photos/com.google.android.apps.photos.home.HomeActivity}
+    topActivity={com.google.android.apps.photos/com.google.android.apps.photos.home.HomeActivity}
+    realActivity={com.google.android.apps.photos/com.google.android.apps.photos.home.HomeActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffffffff colorPrimary=#ff0b57d0 iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+  * RecentTaskInfo #9: 
+    id=1607 userId=0 hasTask=true lastActiveTime=19179897
+ isAppLocked=false
+ canKillAndRestart=true
+    baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.apps.nbu.files/.home.HomeActivity }
+    baseActivity={com.google.android.apps.nbu.files/com.google.android.apps.nbu.files.home.HomeActivity}
+    topActivity={com.google.android.apps.nbu.files/com.google.android.apps.nbu.files.home.HomeActivity}
+    realActivity={com.google.android.apps.nbu.files/com.google.android.apps.nbu.files.home.HomeActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffffffff colorPrimary=#ff0b57d0 iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(1600, 720) contentInsets=Rect(80, 46 - 92, 0) bufferSize=Point(1600, 720) lastDisplayId=0 }
+  * RecentTaskInfo #10: 
+    id=1609 userId=0 hasTask=false lastActiveTime=19160702
+ isAppLocked=false
+ canKillAndRestart=false
+    baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.google.android.apps.docs cmp=com.google.android.apps.docs/.app.NewMainProxyActivity }
+    origActivity={com.google.android.apps.docs/com.google.android.apps.docs.app.NewMainProxyActivity}
+    realActivity={com.google.android.apps.docs/com.google.android.apps.docs.drive.startup.StartupActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffffffff colorPrimary=#ff0b57d0 iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(1600, 720) contentInsets=Rect(80, 46 - 92, 0) bufferSize=Point(1600, 720) lastDisplayId=0 }
+  * RecentTaskInfo #11: 
+    id=1608 userId=0 hasTask=false lastActiveTime=18766151
+ isAppLocked=false
+ canKillAndRestart=false
+    baseIntent=Intent { act=com.google.android.gms.settings.SHARING flg=0x10000000 pkg=com.google.android.gms cmp=com.google.android.gms/.nearby.sharing.settings.SettingsActivity }
+    realActivity={com.google.android.gms/com.google.android.gms.nearby.sharing.settings.SettingsActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#ffffffff colorPrimary=#ff0b57d0 iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(1600, 720) contentInsets=Rect(80, 46 - 92, 0) bufferSize=Point(1600, 720) lastDisplayId=0 }
+  * RecentTaskInfo #12: 
+    id=1605 userId=0 hasTask=false lastActiveTime=18594327
+ isAppLocked=false
+ canKillAndRestart=false
+    baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.google.android.youtube/.app.honeycomb.Shell$HomeActivity }
+    origActivity={com.google.android.youtube/com.google.android.youtube.app.honeycomb.Shell$HomeActivity}
+    realActivity={com.google.android.youtube/com.google.android.apps.youtube.app.watchwhile.MainActivity}
+    isExcluded=false activityType=standard windowingMode=fullscreen supportsGlobalFreeform=true
+ supportsMultiWindow=true
+    taskDescription { colorBackground=#fffafafa colorPrimary=#ffffffff iconRes=/0 iconBitmap=false resizeMode=RESIZE_MODE_RESIZEABLE minWidth=-1 minHeight=-1 colorBackgroundFloating=#ffffffff }
+    lastSnapshotData { taskSize=Point(720, 1600) contentInsets=Rect(0, 80 - 0, 92) bufferSize=Point(720, 1600) lastDisplayId=0 }
+dev@Windoows7PRO:~$ 
+
+

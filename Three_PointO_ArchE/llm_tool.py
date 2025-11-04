@@ -200,18 +200,51 @@ def _execute_abm_analysis(prompt: str, template_vars: Dict[str, Any]) -> str:
         return f"ABM simulation error: {str(e)}"
 
 def _execute_causal_analysis(prompt: str, template_vars: Dict[str, Any]) -> str:
-    """Execute causal inference analysis directly."""
+    """Execute causal inference analysis directly using dynamic parameter extraction."""
     try:
         from .causal_inference_tool import perform_causal_inference
+        from .causal_parameter_extractor import extract_causal_parameters
         
-        # Extract parameters
+        # Extract parameters dynamically from query/data
         data = template_vars.get('data', template_vars.get('time_series_data'))
+        query = template_vars.get('query', prompt)  # Use prompt as query context
         
-        result = perform_causal_inference({
-            'operation': 'discover_temporal_graph',
+        # Dynamic extraction: Extract treatment/outcome from query or data
+        causal_params = extract_causal_parameters(
+            query=query,
+            data=data,
+            domain=template_vars.get('domain')
+        )
+        
+        treatment = causal_params.get('treatment')
+        outcome = causal_params.get('outcome')
+        confounders = causal_params.get('confounders', [])
+        
+        # Validate data is available before proceeding
+        if data is None:
+            logger.warning("Causal inference: No data provided in template_vars. Returning simulation result.")
+            # Still attempt to run (will be simulated if data is None)
+            pass
+        
+        # Use extracted parameters if available, otherwise use operation defaults
+        operation = template_vars.get('operation', 'discover_temporal_graph')
+        inference_kwargs = {
             'data': data,
             'max_lag': template_vars.get('max_lag', 3)
-        })
+        }
+        
+        # Add treatment/outcome if operation requires it and we have them
+        if operation in ['estimate_effect', 'run_granger_causality']:
+            if treatment and treatment != 'unknown_treatment':
+                inference_kwargs['treatment'] = treatment
+            if outcome and outcome != 'unknown_outcome':
+                inference_kwargs['outcome'] = outcome
+            if confounders:
+                inference_kwargs['confounders'] = confounders
+        
+        # Fix: Call perform_causal_inference with correct signature:
+        # operation (str) as first positional argument, then kwargs
+        result = perform_causal_inference(operation, **inference_kwargs)
         
         if result.get('error'):
             return f"Causal inference error: {result.get('error')}"

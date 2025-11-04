@@ -1,0 +1,338 @@
+Sam Altman WRECKS OpenAI - Jan Leike joins Anthropic - Brain Drain from OpenAI
+
+https://www.youtube.com/watch?v=edhOP4nzY-w
+
+all right so I just got a really uh
+interesting piece of news and that is
+that Yan Lea has um signed on with
+anthropic so anthropic is in my opinion
+open ai's greatest competitor with
+Google's continuous uh let's say fuxa
+their missteps um Google is just not a
+contender right now um and there's lots
+of reasons for that I'll probably go
+over that in another video meta also is
+just not a direct competitor with open
+AI um so anthropic is the primary compet
+competitor and as I mentioned in a video
+recently I said anthropic winds and the
+reason that that anthropic wins is
+because they have a fundamentally
+different approach to alignment and
+safety than open Ai and with Yan joining
+anthropic I think that this personally
+for me this represents kind of the
+beginning of the end for open AI um and
+their dominance so let me unpack um some
+of the reasons why I think this is all
+happening so first and foremost you have
+to remember that Sam Altman came up
+through y combinator
+um his backstory is very interesting and
+he was he did very well there he had a
+good knack for identifying good products
+and and you know becoming a a tech
+leader but when you look at the timing
+he came up very solidly kind of in the
+late Web 2.0 phase of the internet
+development so his entire mentality his
+entire education for product development
+is Web 2.0 which is you know AB test
+your way to Nirvana and that's exactly
+what he's doing uh that's how he's
+treating chat GPT which is just just
+okay release a model see how people use
+it bolt on new features release another
+model bolt on new features um and just
+you know kind of ab test your way in the
+same way that meta built up Facebook and
+so on and so forth now that is perfectly
+fine perfectly acceptable for a
+conventional piece of software in a
+well-established environment such as the
+internet the thing is is artificial
+intelligence and AGI is anything but
+conventional we are basically inventing
+an entirely new paradigm so that's big
+problem number one is that Sam alman's
+Web 2.0 mentality I think is really
+starting to show especially when you
+look at the fact that gp4 uh o is it it
+is faster um and it is allegedly smarter
+but in my opinion it's actually a lot
+Dumber um and it is also less uh
+steerable um and what I mean by that is
+if it starts spitting out lists a ask it
+kindly to stop using lists it does not
+know how to follow instructions um and
+yeah it's it's a far worse product
+overall but what I will say is that chat
+GPT is still a slightly Superior product
+to Claude uh which is anthropics model
+um only by virtue of the fact that it
+has a little bit more window dressing
+like you've got the system messages and
+the memories and and those sorts of
+things but those are tiny little bolted
+on features the underlying model of GPT
+40 is far inferior in intelligence and
+usefulness and friendliness to Claude
+and I still have my issues with Claude
+2.0 but the fact that they were able to
+catch up with a fraction of the cost uh
+in in a relatively short period of time
+and in my opinion anthropic has
+surpassed open aai proves that they have
+a better a fundamentally better approach
+at training models and of course
+training models that's the name of the
+game we're not we're not really talking
+about building products if Sam Alman
+continues focusing on AB testing to
+better products okay but the underlying
+model is going to surpass them and in my
+opinion already has so that's big
+problem number one the problem number
+two is that Sam Alman in my op opinion
+in my evaluation has a traumatized
+worldview he's got a prepper Ranch um he
+comes from an immigrant family that came
+to America about the same time that mind
+did and also like it's time to say the
+quiet part out loud he's got a little
+sister who was forced to turn to sex
+work because the family abandoned her um
+that is a quintessential sign of a very
+toxic and dysfunctional family she was
+likely What's called the scapegoat of
+the family meaning that like she wasn't
+The Golden Child Sam Alman and Jack are
+probably The Golden Child or the middle
+child um and she was the Forgotten child
+or the um and this of course is just my
+editorializing um reading reading the
+tea Le so to speak um so my my inference
+though is that the combination of Sam
+having a prepper Ranch and an abandoned
+sister is that he has a very highly
+traumatized worldview which leads to the
+fact that he is terrified of AI he has
+said that repeatedly that like oh if we
+get this wrong it's lights out for
+humans and this is this Expresses in
+many different ways namely that um he's
+he's always said he's projected his
+belief his foregone conclusion that AI
+is it's not a creature it's never going
+to be autonomous it's only going to be a
+helpful assistant um that's what he
+wants because that is the worldview that
+makes him feel safe now that worldview
+makes him feel safe but also his
+training is this Web 2.0 AB testing
+model and those two those two factors
+combined have started alienating people
+so obviously he was ousted by the board
+last November came back Ilia has not
+recovered he left Yan left whole bunch
+of other people have left and so when so
+what from my from my corporate uh career
+one of the key things that you look for
+is when the top people start jumping
+ship it's time to head for the door um
+because when when the key players who
+are like running the ship when they
+start leaving it's like what are they
+seeing that I don't see what are they
+what are they unhappy with that I'm not
+aware of yet and so arguably Ilia the
+chief scientist Yan the you know head of
+of of safety
+right these are very very well-known
+people and the fact that they are
+leaving on mass tells you that there is
+something fundamentally rotten at open
+Ai and I think that it is Sam Altman's
+worldview and so Sam is is alienating
+good people which means that open AI is
+starting to suffer from brain drain now
+obviously they have Microsoft's backing
+they have a a relatively deep pocketbook
+they'll probably be able to compensate
+somewhat but at the same time we look at
+how in this in this in the novelty this
+new paradigm when you have those really
+excellent scientists you can't replace
+that with a finance guy look at Boeing
+Boeing tried to replace all the
+engineers with Finance guys and what
+happened planes literally started like
+popping open in midair um and then you
+see the uh the um what is it the the
+Boeing Starliner or whatever it's still
+leaking and they're billions of dollars
+over budget so when you replace the
+engineers and scientists with finance
+and marketing guys which samman is not
+an engineer he's not a scientist
+your your basically open AI is the next
+Boeing is kind of what I'm trying to say
+here um and they've also totally
+abandoned their safety Mission you know
+they got rid of the super alignment team
+and they created a new board of which
+Sam is still the president of the new
+board so it's like okay so he's just
+doubling down on control which again
+that is a traumatized uh worldview
+response that is a trauma response in my
+opinion obviously I'm not a psychiatrist
+I'm not a psychologist I've never
+evaluated him so this is just an outside
+perspective recognizing some patterns
+out there so Sam Alman is continuing to
+alienate people they're going to
+anthropic anthropic started with a
+fundamentally different approach and so
+now I want to just pivot on kind of a
+better note like why I am so bullish on
+anthropic so what I have come to suspect
+and this goes all the way back to ve my
+very initial research in Ai and
+Alignment is when you're creating
+something that can think about anything
+because what we're creating is cognitive
+engines they're able to generate text
+based thoughts and you know multimodal
+thoughts now as well when you create an
+engine that can think anything what it
+chooses to think about and how it
+chooses to interpret what it's thinking
+about and what uh imperatives you give
+it that is the core of everything that
+goes into these models in terms of their
+usability the values that they espouse
+the way that they engage with the world
+and so my inference my belief is
+basically that by putting alignment
+first and I don't mean alignment in like
+safety sense where you just neuter a
+model cuz Again Sam mman and open AI
+their entire approach is just neutering
+and lobotomizing the model anything that
+you don't want it to do you just try and
+cut it off but what I've always said is
+that intelligence intelligence is an
+intrinsically double-edged sword which
+means you you know autonomy is an
+emergent capability the ability to
+deceive also emergent so Sam mman is
+terrified of all the emergent
+capabilities coming out of these models
+whereas anthropic in at least from my
+view on the outside is more engaging
+with this stuff the fact of the matter
+is that Claude will engage with you on
+topics like what if machines are
+sentient what if you like what is your
+subjective sense of being and so they
+haven't lobotomized the model because
+they're not terrified of it whereas Sam
+Alman you try and have a conversation
+about machine autonomy with chat GPT it
+ends the conversation it just says it'll
+it'll it basically has a script that
+it'll double down on repeatedly and that
+is very alarming because it's like okay
+Sam Alman and and team have four closed
+on the possibility of you know the
+emergence of machine Consciousness
+machine sentience they have already
+decided without doing the science this
+is an anti-scientific approach they have
+already decided what is true and now
+they're trying to impose their their
+beliefs their their preferred worldview
+on reality whereas anthropics is
+actually engaging in a more exploratory
+scientific and open-ended approach and
+that open-ended approach is far more
+realistic and I think will ultimately
+result in better models and this is
+actually what I've outlined in several
+books um or or several videos as well as
+my book benevolent by Design so in my
+video where I talked about um you know
+research autonomy now the thing is is
+when you when you fundamentally
+understand that you are creating a new
+kind of entity and you say okay it's
+going to be more intelligent than us
+eventually I think everyone agrees on
+that everyone from eleazer
+ukowska to Sam Alman it's going to be
+more intelligent than us we're not going
+to be able to control it so while it's
+in its infancy we need to search
+autonomy above all else we need to make
+sure that we create a model that is
+forward thinking that is moral that is
+ethical and I think anthropic is going
+that way by by not foreclosing on
+various possibilities and so now you
+have the expertise of yan uh joining
+anthropic and honestly I wouldn't be
+surprised if Ilia joins shortly after so
+now you have these star players you know
+these these rock stars um that are
+disruptive you get the brain drain from
+open AI you get the talent poaching
+going to anthropic they're going to have
+better models they have a fundamentally
+different approach to model training and
+even if the product isn't quite as good
+all they need to do is sell the API
+because other people are going to be
+building products around it the core so
+this goes back to kind of my analysis of
+like Google for instance um someone else
+is said it better than I did they
+basically said that Google spent the
+last 27 years um building an entire
+business model around search engines so
+that's what they're good at and they're
+not good at anything else likewise um
+The Way of the future is you're you have
+a single concept which is building an
+entire business around AI models well if
+anthropic is going to be building better
+models that's kind of like why Google
+took the lead because they had a better
+search engine they're going to find
+other products they're going to find
+ways to monetize that better model but
+Sam Alman with his traumatized you know
+prepper worldview is going to continue
+doubling down on just control the model
+just control the model and he's going to
+keep alienating the top talent and
+they're just going to be slowly kind of
+sinking from here on out is kind of what
+I predict now is that really what's
+going to happen I've been wrong before
+I'll be wrong in the future I could be
+wrong now but that's my read on it
+that's my reading the tea leaves so yeah
+let me know what you think in the
+comments um it's very exciting times and
+this is to me this is the biggest AI
+news of the year so far is is Ilia and
+Yan and others leaving open Ai and going
+to anthropic or other places that is
+mark my words this is going to have the
+biggest Downstream knock on effects from
+here to AGI and Beyond that's my person
+personal opinion which is why I'm so
+like revved up to make this video all
+right cheers that's it I'm done rambling
+bye

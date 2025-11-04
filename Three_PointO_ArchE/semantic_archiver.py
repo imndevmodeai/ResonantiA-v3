@@ -232,7 +232,7 @@ class SemanticArchiver:
             List of matching archived entries
         """
         try:
-        results = []
+            results = []
             
             # Search through all archive files
             for archive_file in self.archive_dir.glob("thoughttrail_archive_*.json"):
@@ -244,7 +244,7 @@ class SemanticArchiver:
                         results.append(entry)
             
             logger.info(f"[SemanticArchiver] Query returned {len(results)} results")
-        return results
+            return results
 
         except Exception as e:
             logger.error(f"[SemanticArchiver] Error querying archives: {e}")

@@ -1370,21 +1370,40 @@ def execute_action(action_type: str, inputs: Dict[str, Any], **kwargs) -> Dict[s
     try:
         logger.info(f"Executing action '{action_type}'...")
         
-        # Auto-inject model parameter from context if not already in inputs
-        # This allows workflows to omit "model": "{{ model }}" and still use the CLI-specified model
-        if 'model' not in inputs or inputs.get('model') is None:
-            context_for_action = kwargs.get('context_for_action')
-            if context_for_action and hasattr(context_for_action, 'runtime_context'):
-                # Check for model in runtime_context first, then in nested initial_context
-                context_model = context_for_action.runtime_context.get('model')
+        # Auto-inject model and provider parameters from context if not already in inputs
+        # This allows workflows to omit "model": "{{ context.model }}" and "provider": "{{ context.provider }}" and still use the CLI/context-specified values
+        context_for_action = kwargs.get('context_for_action')
+        if context_for_action and hasattr(context_for_action, 'runtime_context'):
+            # Check for model/provider in runtime_context first, then in nested initial_context
+            context_model = context_for_action.runtime_context.get('model')
+            context_provider = context_for_action.runtime_context.get('provider')
+            if not context_model or not context_provider:
+                # Check nested initial_context
+                initial_ctx = context_for_action.runtime_context.get('initial_context', {})
                 if not context_model:
-                    # Check nested initial_context
-                    initial_ctx = context_for_action.runtime_context.get('initial_context', {})
                     context_model = initial_ctx.get('model')
-                
-                if context_model:
-                    inputs = {**inputs, 'model': context_model}
+                if not context_provider:
+                    context_provider = initial_ctx.get('provider')
+            
+            # Auto-inject model if not present, None, or unresolved template string
+            model_value = inputs.get('model')
+            is_template_string = isinstance(model_value, str) and '{{' in model_value and '}}' in model_value
+            if (('model' not in inputs or inputs.get('model') is None or is_template_string) and context_model):
+                inputs = {**inputs, 'model': context_model}
+                if is_template_string:
+                    logger.debug(f"Replaced unresolved template '{model_value}' with model '{context_model}' from workflow context")
+                else:
                     logger.debug(f"Auto-injected model '{context_model}' from workflow context into action '{action_type}'")
+            
+            # Auto-inject provider if not present, None, or unresolved template string (important for LLM provider selection)
+            provider_value = inputs.get('provider')
+            is_template_string = isinstance(provider_value, str) and '{{' in provider_value and '}}' in provider_value
+            if (('provider' not in inputs or inputs.get('provider') is None or is_template_string) and context_provider):
+                inputs = {**inputs, 'provider': context_provider}
+                if is_template_string:
+                    logger.debug(f"Replaced unresolved template '{provider_value}' with provider '{context_provider}' from workflow context")
+                else:
+                    logger.debug(f"Auto-injected provider '{context_provider}' from workflow context into action '{action_type}'")
         
         action_func = main_action_registry.get_action(action_type)
         result = action_func(**inputs)

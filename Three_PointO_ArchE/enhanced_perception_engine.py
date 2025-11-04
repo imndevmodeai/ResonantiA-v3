@@ -27,20 +27,20 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 # Import ArchE components
 try:
-    from .llm_providers import BaseLLMProvider, GoogleProvider
+    from .llm_providers import BaseLLMProvider, get_llm_provider
     from .action_context import ActionContext
     from .utils import create_iar
     from .synergistic_inquiry import SynergisticInquiryOrchestrator
 except ImportError:
     try:
-        from llm_providers import BaseLLMProvider, GoogleProvider
+        from llm_providers import BaseLLMProvider, get_llm_provider
         from action_context import ActionContext
         from utils import create_iar
         from synergistic_inquiry import SynergisticInquiryOrchestrator
     except ImportError:
         # Fallback for standalone usage
         BaseLLMProvider = None
-        GoogleProvider = None
+        get_llm_provider = None
         ActionContext = None
         SynergisticInquiryOrchestrator = None
         create_iar = lambda **kwargs: {
@@ -135,18 +135,18 @@ class EnhancedPerceptionEngine:
         self.close()
 
     def _get_default_llm_provider(self):
-        """Get default LLM provider based on available APIs."""
+        """Get default LLM provider based on available APIs - defaults to Groq."""
         try:
-            if BaseLLMProvider is None:
+            if BaseLLMProvider is None or get_llm_provider is None:
                 return self._create_simulated_provider()
             
-            if os.getenv('OPENAI_API_KEY') and OpenAIProvider is not None:
-                return OpenAIProvider()
-            elif os.getenv('GOOGLE_API_KEY') and GoogleProvider is not None:
-                return GoogleProvider()
-            else:
-                # Fallback to simulated provider
-                return self._create_simulated_provider()
+            # Use get_llm_provider which respects ARCHE_LLM_PROVIDER env var
+            # Defaults to Groq if not specified
+            import os
+            provider_name = os.getenv("ARCHE_LLM_PROVIDER", None)
+            provider = get_llm_provider(provider_name)  # None = use default (Groq)
+            logger.info(f"EnhancedPerceptionEngine using provider: {provider._provider_name}")
+            return provider
         except Exception as e:
             logger.warning(f"Could not initialize LLM provider: {e}")
             return self._create_simulated_provider()
@@ -1124,8 +1124,15 @@ class EnhancedPerceptionEngine:
             try:
                 self.driver.quit()
                 logger.info("Enhanced Perception Engine closed successfully")
+                # Explicitly set to None to prevent reuse
+                self.driver = None
             except Exception as e:
                 logger.error(f"Error closing driver: {e}")
+                # Force cleanup even if quit() fails
+                try:
+                    self.driver = None
+                except:
+                    pass
 
 # --- Action Wrapper Functions for Workflow Engine ---
 

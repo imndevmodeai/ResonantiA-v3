@@ -107,9 +107,15 @@ class APIKeys:
 @dataclass
 class LLMConfig:
     """Configuration for Large Language Models."""
-    # Switch default to Google/Gemini
-    default_provider: str = "google"
-    default_model: str = "gemini-2.0-flash-exp"
+    # Default LLM provider - can be overridden via environment variable or explicit parameter
+    # Options: "groq" (default), "google", "cursor", "openai"
+    default_provider: str = os.getenv("ARCHE_LLM_PROVIDER", "groq")
+    # Default model per provider
+    default_model: str = "llama-3.3-70b-versatile" if default_provider == "groq" else (
+        "gemini-2.0-flash-exp" if default_provider == "google" else (
+            "cursor-arche-v1" if default_provider == "cursor" else "gpt-4o"
+        )
+    )
     temperature: float = 0.7
     max_tokens: int = 4096
 
@@ -117,12 +123,12 @@ class LLMConfig:
     openai_models: list[str] = field(default_factory=lambda: ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"])
     google_models: list[str] = field(default_factory=lambda: ["gemini-2.5-pro", "gemini-2.0-flash-exp", "gemini-1.5-pro-latest", "gemini-1.5-flash-latest", "gemini-pro"])
     
-    # Vetting agent specific configuration
-    vetting_provider: str = "google"
-    vetting_model: str = "gemini-2.0-flash-exp"  # Changed from 2.5-pro (blocks agent prompts)
+    # Vetting agent specific configuration (can override default)
+    vetting_provider: str = os.getenv("ARCHE_VETTING_PROVIDER", default_provider)
+    vetting_model: str = os.getenv("ARCHE_VETTING_MODEL", default_model)
 
 # Legacy compatibility attributes for llm_providers.py
-DEFAULT_LLM_PROVIDER = "google"
+DEFAULT_LLM_PROVIDER = os.getenv("ARCHE_LLM_PROVIDER", "groq")
 LLM_PROVIDERS = {
     "openai": {
         "api_key": os.getenv("OPENAI_API_KEY"),
@@ -142,7 +148,7 @@ LLM_PROVIDERS = {
     "groq": {
         "api_key": os.getenv("GROQ_API_KEY"),
         "base_url": None,
-        "default_model": "llama-3.1-70b-versatile",
+        "default_model": "llama-3.3-70b-versatile",  # Updated to latest model
         "temperature": 0.7,
         "max_tokens": 8192
     }
