@@ -1,0 +1,57 @@
+{
+  "spr_id": "ObjectiveGenerationEngine",
+  "term": "Objective Generation Engine",
+  "definition": "The deterministic cognitive assembly system that translates raw user queries into protocol-compliant, SPR-enhanced, mandate-aligned Enhanced Objective Statements. It transcends LLM dependencies through Universal Abstraction, using pattern matching, keyword lookup tables, rule-based mandate selection, and template string substitution. The engine follows a 6-step deterministic workflow: (1) Feature extraction via regex/keyword matching, (2) TemporalScope building from rules, (3) SPR activation through keyword lookup, (4) Mandate selection via boolean rules, (5) Template assembly with domain customization, (6) Final string concatenation. All steps use quantum probability states with evidence tracking instead of LLM confidence scores, ensuring deterministic, auditable, and self-contained operation.",
+  "category": "CognitiveEngine",
+  "relationships": {
+    "type": "DeterministicTemplateAssembler",
+    "is_a": [
+      "Cognitive EnginE"
+    ],
+    "uses": [
+      "Enhancement Skeleton PatterN",
+      "Sparse priming representationS"
+    ],
+    "enables": [
+      "Cognitive resonancE",
+      "Implementation resonancE"
+    ],
+    "part_of": [
+      "SIRC ProtocoL"
+    ],
+    "integrates_with": [
+      "Knowledge Scaffolding WorkfloW",
+      "RISE OrchestratoR",
+      "Enhanced LLM ProvideR",
+      "Playbook OrchestratoR"
+    ],
+    "comprises": [
+      "Feature Extraction Module",
+      "TemporalScope Builder",
+      "SPR Activation Engine",
+      "Mandate Selector",
+      "Template Assembler",
+      "Domain Customizer"
+    ],
+    "embodies": [
+      "Universal AbstractioN",
+      "As above so beloW"
+    ],
+    "transcends": [
+      "LLM Semantic Understanding",
+      "Non-Deterministic Generation",
+      "API Dependencies",
+      "Opaque Reasoning"
+    ],
+    "confidence": "high"
+  },
+  "blueprint_details": "See specifications/objective_generation_engine.md for complete specification. Protocol reference: ResonantiA Protocol v3.5-GP, Section 8.2 (Enhancement_Skeleton_Pattern). Construction map: outputs/enhanced_objective_construction_map.md",
+  "example_application": "Given query: 'Who would win in a boxing match between Mike Tyson (circa 1986-1988) and George Foreman (circa 1973-1974)?' → Engine extracts temporal markers via regex, matches keywords ('historical', 'emergent', 'predictive') to SPRs, selects Mandate 6 (temporal) and Mandate 9 (complex), assembles objective using Enhancement_Skeleton_Pattern template with boxing-specific explanations. All without LLM semantic understanding—only structural pattern matching.",
+  "implementation_status": "Specification Complete - Implementation Ready",
+  "universal_abstraction_applied": true,
+  "llm_independent": true,
+  "quantum_probability_states": true,
+  "deterministic": true,
+  "autopoietic_learning_support": true
+}
+
