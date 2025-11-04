@@ -64,18 +64,21 @@ def update_related_sprs(spr_definitions: List[Dict[str, Any]]) -> int:
     updates = 0
     
     related_sprs = {
-        'Enhancement Skeleton PatterN': {
-            'add_to': 'uses',
+        # Note: Using actual SPR IDs from Knowledge Tapestry (Guardian pointS format)
+        'SircprotocoL': {  # Corrected from 'SIRC ProtocoL' - this SPR exists
+            'add_to': 'comprises',  # Inverse of 'part_of' - if Objective generation enginE is part_of SIRC, then SIRC comprises it
             'relationship': 'Objective generation enginE'
         },
-        'SIRC ProtocoL': {
-            'add_to': 'comprises',  # or 'part_of' depending on structure
+        'Enhancement skeleton patterN': {  # Now created as SPR
+            'add_to': 'uses',  # Enhancement Skeleton Pattern uses Objective generation enginE
             'relationship': 'Objective generation enginE'
         },
-        'RISE OrchestratoR': {
-            'add_to': 'integrates_with',
-            'relationship': 'Objective generation enginE'
-        }
+        # Note: 'RISE OrchestratoR' doesn't exist as SPR yet
+        # If created, add it here:
+        # 'RiseorchestratoR': {  # Note: actual ID would need to be verified
+        #     'add_to': 'integrates_with',
+        #     'relationship': 'Objective generation enginE'
+        # },
     }
     
     for spr in spr_definitions:
