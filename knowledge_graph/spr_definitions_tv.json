@@ -568,7 +568,7 @@
   {
     "spr_id": "ComplexsystemvisioninG",
     "term": "Complex System Visioning",
-    "definition": "An advanced capability within ResonantiA v3.1-CA to develop high-fidelity simulations and analyses of complex, adaptive systems, often incorporating environmental dynamics, agent-level behaviors, and conceptual HumanFactorModelinG to explore emergent outcomes and strategic trajectories.",
+    "definition": "An advanced capability within ResonantiA v3.1-CA to develop high-fidelity simulations and analyses of complex, adaptive systems, often incorporating environmental dynamics, agent-level behaviors, and conceptual HumanFactorModelinG to explore emergent outcomes and strategic trajectories. Enhanced with systemic principles from Hellinger's work on relationship systems, including OrdersoflovE, HiddensymmetrY, and SystemicbalancE.",
     "category": "CognitiveCapability",
     "status": "Active",
     "maturity_level": "Functional/Developing",
@@ -583,13 +583,23 @@
         "HumanFactorModelinG",
         "EnvironmentalDynamics"
       ],
+      "enhanced_by_systemic_principles": [
+        "OrdersoflovE",
+        "HiddensymmetrY",
+        "SystemicconsciencE",
+        "SystemicbalancE",
+        "FamilyconstellationDynamiC"
+      ],
       "enables": [
         "ScenarioExploration",
-        "StrategicForecasting"
+        "StrategicForecasting",
+        "Relationship system modeling",
+        "Generational pattern analysis"
       ],
       "supports_principle": [
         "4d thinkinG",
-        "Temporal resonancE"
+        "Temporal resonancE",
+        "CollectiveWellbeing"
       ],
       "confidence": "high"
     },
@@ -820,7 +830,7 @@
     "spr_id": "ExecutablespecificationprinciplE",
     "term": "Executable Specification Principle",
     "category": "CorePrinciple",
-    "definition": "The core ResonantiA philosophy, inspired by Sean Grove's 'The New Code,' stating that the primary, most valuable artifact of any process is the specification—a clear, human-readable, and machine-executable expression of intent and values. Code and other artifacts are downstream, lossy projections of this specification.",
+    "definition": "The core ResonantiA philosophy, inspired by Sean Grove's 'The New Code,' stating that the primary, most valuable artifact of any process is the specification\u2014a clear, human-readable, and machine-executable expression of intent and values. Code and other artifacts are downstream, lossy projections of this specification.",
     "relationships": {
       "embodies": "Implementation resonancE",
       "solves": "Execution paradoX",
@@ -1067,7 +1077,7 @@
   {
     "spr_id": "HumanfactormodelinG",
     "term": "Human Factor Modeling",
-    "definition": "A conceptual capability within Complex System Visioning to realistically simulate the influence of human behaviors, cognitive biases, emotional states (e.g., FearLeveL, MoralE), and social interactions on emergent system dynamics. Integrates with Agent-Based Modeling.",
+    "definition": "A conceptual capability within Complex System Visioning to realistically simulate the influence of human behaviors, cognitive biases, emotional states (e.g., FearLeveL, MoralE), and social interactions on emergent system dynamics. Integrates with Agent-Based Modeling. Enhanced with systemic family and relationship dynamics from Hellinger's work, including generational patterns, systemic conscience, belonging needs, and balance of giving/taking.",
     "category": "SimulationComponent",
     "status": "Conceptual",
     "maturity_level": "Research",
@@ -1080,14 +1090,29 @@
       "models_aspects": [
         "CognitiveBiases",
         "EmotionalStates",
-        "SocialInteractions"
+        "SocialInteractions",
+        "Family system dynamics",
+        "Generational patterns",
+        "Systemic relationships"
+      ],
+      "enhanced_by_systemic_principles": [
+        "OrdersoflovE",
+        "SystemicbelonginG",
+        "BalanceofgivingandtakinG",
+        "SystemicentanglemenT",
+        "GenerationallegacY",
+        "SystemicconsciencE"
       ],
       "contributes_to": [
-        "EmergentBehaviorRealism"
+        "EmergentBehaviorRealism",
+        "Relationship system accuracy",
+        "Multi-generational analysis"
       ],
       "supports_conceptual": [
         "PsychologicalProfiling",
-        "BehavioralEconomics"
+        "BehavioralEconomics",
+        "Family systems therapy",
+        "Systemic psychotherapy"
       ],
       "confidence": "high"
     },
@@ -1933,7 +1958,7 @@
   {
     "spr_id": "SprdecompressoR",
     "term": "SPR Decompressor",
-    "definition": "An internal mechanism within ArchE's cognitive architecture that recognizes valid SPR patterns (Guardian pointS format) and facilitates 'cognitive unfolding'—the immediate, resonant activation of the associated concept complex (definition, relationships, blueprint_details) within the KnO.",
+    "definition": "An internal mechanism within ArchE's cognitive architecture that recognizes valid SPR patterns (Guardian pointS format) and facilitates 'cognitive unfolding'\u2014the immediate, resonant activation of the associated concept complex (definition, relationships, blueprint_details) within the KnO.",
     "category": "CoreMechanism",
     "relationships": {
       "type": "CognitiveFunction",
@@ -2082,9 +2107,14 @@
         "TemporalDynamiX",
         "FutureStateAnalysiS"
       ],
+      "enhanced_by_generational_thinking": [
+        "GenerationallegacY",
+        "Multi-generational time horizons",
+        "Systemic pattern propagation"
+      ],
       "confidence": "high"
     },
-    "blueprint_details": "See ResonantiA Protocol v3.0, Section 2.9.",
+    "blueprint_details": "See ResonantiA Protocol v3.0, Section 2.9. Enhanced with generational thinking from Hellinger's work - patterns can propagate across multiple generations, requiring extended temporal horizons in analysis.",
     "metadata": {
       "version": "1.0",
       "status": "active",
@@ -2726,7 +2756,10 @@
         "Capability Mapping",
         "Executable Plans"
       ],
-      "confidence": "high"
+      "confidence": "high",
+      "comprises": [
+        "Objective generation enginE"
+      ]
     },
     "blueprint_details": "SIRC protocol implementation in Three_PointO_ArchE/sirc_intake_handler.py with SIRCIntakeHandler class providing ambiguity detection, contextual suggestions, and objective clarification.",
     "example_application": "The SIRC Protocol translates a vague directive like 'make us more competitive' into specific, measurable objectives with clear success criteria and implementation pathways through iterative clarification and resonance mapping."
@@ -2788,7 +2821,7 @@
       "confidence": "high"
     },
     "blueprint_details": "See specifications/knowledge_scaffolding_workflow.md for complete workflow specification. Implemented in workflows/knowledge_scaffolding.json.",
-    "example_application": "When asked to solve a quantum computing optimization problem, Knowledge Scaffolding acquires quantum mechanics domain knowledge, analyzes required mathematical frameworks (linear algebra, complex numbers, Hilbert spaces), and forges a Quantum Computing Specialist agent with expertise in qubit operations, gate implementations, and error correction—all from zero prior quantum knowledge.",
+    "example_application": "When asked to solve a quantum computing optimization problem, Knowledge Scaffolding acquires quantum mechanics domain knowledge, analyzes required mathematical frameworks (linear algebra, complex numbers, Hilbert spaces), and forges a Quantum Computing Specialist agent with expertise in qubit operations, gate implementations, and error correction\u2014all from zero prior quantum knowledge.",
     "token_optimization": {
       "task_allocation": {
         "deconstruct_problem": 8192,
@@ -2805,7 +2838,7 @@
   {
     "spr_id": "SpecializedcognitiveagenT",
     "term": "Specialized Cognitive Agent (SCA)",
-    "definition": "A domain-specific cognitive tool forged by Knowledge Scaffolding that contains comprehensive expertise, analytical frameworks, strategic thinking patterns, and problem-solving methodologies tailored to a specific problem domain. The SCA is not a separate entity but a cognitive persona that ArchE adopts—like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs are the primary output of RISE Phase A and the foundation for all subsequent strategic analysis in Phases B, C, and D.",
+    "definition": "A domain-specific cognitive tool forged by Knowledge Scaffolding that contains comprehensive expertise, analytical frameworks, strategic thinking patterns, and problem-solving methodologies tailored to a specific problem domain. The SCA is not a separate entity but a cognitive persona that ArchE adopts\u2014like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs are the primary output of RISE Phase A and the foundation for all subsequent strategic analysis in Phases B, C, and D.",
     "category": "CognitiveConstruct",
     "relationships": {
       "type": "DomainExpertiseProfile",
@@ -2955,7 +2988,7 @@
     "token_optimization": {
       "typical_size": "12,000-15,000 tokens",
       "max_allocation": 16384,
-      "rationale": "Must contain complete strategic synthesis without truncation. This is the document that undergoes vetting—incomplete strategies lead to flawed vetting."
+      "rationale": "Must contain complete strategic synthesis without truncation. This is the document that undergoes vetting\u2014incomplete strategies lead to flawed vetting."
     }
   },
   {
@@ -3070,7 +3103,7 @@
   {
     "spr_id": "DystopiansimulatioN",
     "term": "Dystopian Simulation",
-    "definition": "The creative worst-case scenario narrative that vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure that force explicit contingency planning. This mirrors pre-mortem analysis (imagine the project failed—what happened?) but uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios that might not appear in traditional risk assessments.",
+    "definition": "The creative worst-case scenario narrative that vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure that force explicit contingency planning. This mirrors pre-mortem analysis (imagine the project failed\u2014what happened?) but uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios that might not appear in traditional risk assessments.",
     "category": "RiskAnalysis",
     "relationships": {
       "type": "CatastrophicImaginatioN",
@@ -4767,7 +4800,7 @@
       ],
       "confidence": "high"
     },
-    "blueprint_details": "Experience, mastery, connection, and meaning—the unoptimizable domains of the human spirit",
+    "blueprint_details": "Experience, mastery, connection, and meaning\u2014the unoptimizable domains of the human spirit",
     "example_application": "Recognizing and preserving uniquely human experiences and capabilities",
     "created": "2025-10-16T06:54:37.296521"
   },
@@ -5175,7 +5208,7 @@
         "Systematic error log analysis"
       ],
       "learning_process": [
-        "Pattern frequency analysis (≥5 occurrences)",
+        "Pattern frequency analysis (\u22655 occurrences)",
         "Root cause identification and analysis",
         "Automatic fix generation and validation",
         "Knowledge crystallization into SPRs"
@@ -5467,7 +5500,7 @@
         "conceptual": "MCP is the mechanism through which ArchE interacts with the external world",
         "operational": {
           "tool_selection": "Decision matrix based on requirement type",
-          "execution_pattern": "Intent → Select → Execute → Reflect (IAR) → Integrate",
+          "execution_pattern": "Intent \u2192 Select \u2192 Execute \u2192 Reflect (IAR) \u2192 Integrate",
           "validation": "All MCP actions generate IAR and log to ThoughtTrail",
           "error_handling": "Metacognitive shifT triggers on critical failures",
           "catalog": "knowledge_graph/my_mcp_tools_catalog.md contains complete tool inventory"
@@ -5508,7 +5541,7 @@
         ],
         "detailed_walkthrough": "See mcp_tool_selection_walkthrough.md for step-by-step real-world examples"
       },
-      "example_usage": "User asks to run webcam server → Algorithm: intent=execution, requirement=start service, tool=run_terminal_cmd, params=[env, script], validate with IAR"
+      "example_usage": "User asks to run webcam server \u2192 Algorithm: intent=execution, requirement=start service, tool=run_terminal_cmd, params=[env, script], validate with IAR"
     },
     "mcP orchestration pattern": {
       "spr_id": "mcP orchestration pattern",
@@ -5538,13 +5571,13 @@
         },
         "iText": "Each tool generates its own IAR, plus orchestrator generates meta-IAR for overall workflow"
       },
-      "example_usage": "Multi-step web research: browser_navigate → browser_snapshot → extract_content → validate_with_mandates → integrate_into_knowledge_base. Each step has IAR, plus workflow-level meta-IAR."
+      "example_usage": "Multi-step web research: browser_navigate \u2192 browser_snapshot \u2192 extract_content \u2192 validate_with_mandates \u2192 integrate_into_knowledge_base. Each step has IAR, plus workflow-level meta-IAR."
     },
     "KnowledgeTransfeR Pattern": {
       "spr_id": "KnowledgeTransfeR Pattern",
       "name": "Knowledge Transfer to ArchE Pattern",
       "category": "Knowledge Integration Pattern",
-      "definition": "ArchE successfully receives and integrates complex knowledge through structured transfer: Documentation → SPR creation → Practical examples → Integration validation. Pattern includes 5W+1H framework documentation, SPR definition, Python implementation, and usage examples. Evidence: MCP knowledge transfer complete with all components successfully integrated and validated.",
+      "definition": "ArchE successfully receives and integrates complex knowledge through structured transfer: Documentation \u2192 SPR creation \u2192 Practical examples \u2192 Integration validation. Pattern includes 5W+1H framework documentation, SPR definition, Python implementation, and usage examples. Evidence: MCP knowledge transfer complete with all components successfully integrated and validated.",
       "relationships": {
         "type": "Pattern",
         "enables": [
@@ -5580,5 +5613,541 @@
       },
       "example_usage": "To transfer new knowledge domain: 1) Create comprehensive guide with 5W+1H, 2) Add relevant SPRs to knowledge graph, 3) Implement Python examples, 4) Validate integration, 5) Crystallize pattern. Evidence: MCP knowledge transfer session demonstrates complete pattern successfully."
     }
+  },
+  {
+    "spr_id": "OrdersoflovE",
+    "term": "Orders of Love",
+    "definition": "The natural, systemic hierarchical patterns and laws that govern family and relationship systems, as described by Bert Hellinger. These invisible structural principles operate beyond individual awareness, requiring balance, belonging, appropriate hierarchy, and proper sequence for love to flourish. They represent the hidden natural laws that shape and constrain behavior in human relationship systems, incorporating biological forces, evolutionary dynamics, complex systems principles, and the forces of Love's Hidden Symmetry operating within the soul.",
+    "category": "CorePrinciple",
+    "relationships": {
+      "type": "SystemicLaw",
+      "part_of": [
+        "HiddensymmetrY",
+        "SystemicconsciencE"
+      ],
+      "requires": [
+        "BalanceofgivingandtakinG",
+        "SystemicbelonginG",
+        "SystemicbalancE"
+      ],
+      "informs": [
+        "HumanfactormodelinG",
+        "ComplexsystemvisioninG",
+        "CollectiveWellbeing"
+      ],
+      "operates_through": [
+        "FamilyconstellationDynamiC"
+      ],
+      "affects": [
+        "GenerationallegacY"
+      ],
+      "enables": [
+        "Systemic healing",
+        "Relationship restoration",
+        "Love to flourish"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry",
+      "confidence": "high"
+    },
+    "blueprint_details": "Based on Love's Hidden Symmetry by Bert Hellinger, Gunthard Weber, and Hunter Beaumont. These orders include: (1) The need for belonging and bonding, (2) The balance of giving and taking, (3) The appropriate hierarchy and sequence within systems, (4) The recognition of the Greater Soul. Violation of these orders causes suffering; honoring them allows love to flow freely. Application: When modeling complex systems with human factors, these orders provide structural principles for agent behaviors, relationship dynamics, and emergent patterns.",
+    "example_application": "In a ComplexsystemvisioninG simulation of organizational dynamics, applying OrdersoflovE principles revealed how exclusion of key stakeholders created systemic imbalance that propagated across multiple project phases, similar to generational patterns in family systems."
+  },
+  {
+    "spr_id": "HiddensymmetrY",
+    "term": "Hidden Symmetry",
+    "definition": "The invisible structural principles and intelligence operating unseen in relationship systems, as described by Bert Hellinger in 'Love's Hidden Symmetry.' This represents the systemic intelligence that watches over love, operating through consequences rather than direct perception. It is easier to follow than to understand, recognized through subtle movements of inwardness and careful observation of relationships. The hidden symmetry reveals itself when we see whether love increases or diminishes based on our actions. It represents the good beyond guilt and innocence, serving love itself rather than personal conscience or social convention.",
+    "category": "CorePrinciple",
+    "relationships": {
+      "type": "SystemicIntelligence",
+      "comprises": [
+        "OrdersoflovE",
+        "SystemicconsciencE",
+        "GreatersouL"
+      ],
+      "recognized_through": [
+        "Observation of consequences",
+        "Subtle systemic movements",
+        "Love's increase or diminishment"
+      ],
+      "guides": [
+        "SystemicbalancE",
+        "Relationship dynamics",
+        "Therapeutic interventions"
+      ],
+      "transcends": [
+        "Personal conscience",
+        "Social convention",
+        "Individual willpower"
+      ],
+      "serves": [
+        "Love itself",
+        "Systemic health",
+        "CollectiveWellbeing"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry",
+      "confidence": "high"
+    },
+    "blueprint_details": "The intelligence of systemic symmetry operates unseen in relationships, watching over love. It can be recognized by observing whether actions increase or diminish love in systems. Application in ArchE: When performing ComplexsystemvisioninG or analyzing system dynamics, look for hidden symmetries - patterns that maintain or restore balance, principles that govern beyond explicit rules, and intelligence operating at the system level rather than individual level.",
+    "example_application": "In analyzing organizational restructuring, recognizing the HiddensymmetrY revealed how certain changes that appeared logical on the surface actually violated deeper systemic principles, causing cascading effects that reduced trust and cooperation - similar to how disturbances in family systems create suffering that affects future generations."
+  },
+  {
+    "spr_id": "SystemicconsciencE",
+    "term": "Systemic Conscience",
+    "definition": "The hidden conscience operating in relationships beyond personal feelings of guilt and innocence, as described by Bert Hellinger. This systemic conscience has priority over personal conscience and serves the orders of the family system and the Greater Soul. It operates unconsciously but can be recognized by its effects: the suffering that results when it is violated, and the rich, stable love that flourishes when it is honored. This conscience guards the systemic health of families and relationship groups, often conflicting with the personal conscience that guards bonding, giving/taking balance, and social convention. Love flourishes when personal conscience and social convention submit to the orders and hidden symmetry of love.",
+    "category": "CorePrinciple",
+    "relationships": {
+      "type": "UnconsciousSystemicForce",
+      "part_of": [
+        "HiddensymmetrY",
+        "OrdersoflovE"
+      ],
+      "has_priority_over": [
+        "Personal conscience",
+        "Individual feelings",
+        "Social convention"
+      ],
+      "serves": [
+        "GreatersouL",
+        "Systemic health",
+        "Family group integrity"
+      ],
+      "recognized_by": [
+        "Suffering from violations",
+        "Stable love when honored",
+        "Systemic consequences"
+      ],
+      "conflicts_with": [
+        "Personal conscience",
+        "Social convention",
+        "Individual willpower"
+      ],
+      "guards": [
+        "Systemic order",
+        "Appropriate hierarchy",
+        "Generational balance"
+      ],
+      "affects": [
+        "SystemicentanglemenT",
+        "GenerationallegacY"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry, Chapter 1",
+      "confidence": "high"
+    },
+    "blueprint_details": "The systemic conscience operates beyond conscious awareness but can be recognized through its effects. It represents natural forces of biology and evolution, general dynamics of complex systems, and forces of Love's Hidden Symmetry. Application: When modeling human systems, recognize that individual agents operate under both personal conscience (guarding bonding, balance) and systemic conscience (guarding system health). Conflicts between these can explain paradoxical behaviors where individuals act against their apparent self-interest.",
+    "example_application": "In AgentbasedmodelinG simulations, incorporating SystemicconsciencE as an unconscious force affecting agent behaviors explained why individuals in organizations sometimes maintain dysfunctional patterns - they are serving a hidden systemic loyalty that transcends their personal comfort."
+  },
+  {
+    "spr_id": "BalanceofgivingandtakinG",
+    "term": "Balance of Giving and Taking",
+    "definition": "The fundamental equilibrium principle in relationship systems, as described by Bert Hellinger. Love requires a dynamic balance between giving and taking - when this balance is disrupted, relationships suffer. This balance is not about exact equality in transactions, but about maintaining a flow where both partners can give and receive appropriately. In families, this balance must respect generational hierarchy: children take from parents (they cannot give back equally), and parents give to children. The balance of giving and taking is one of the three necessities for love to succeed in intimate relationships, alongside bonding and order.",
+    "category": "CorePrinciple",
+    "relationships": {
+      "type": "EquilibriumPrinciple",
+      "is_requirement_for": [
+        "Love to flourish",
+        "Relationship health",
+        "SystemicbalancE"
+      ],
+      "part_of": [
+        "OrdersoflovE"
+      ],
+      "must_respect": [
+        "Generational hierarchy",
+        "Appropriate roles",
+        "Systemic sequence"
+      ],
+      "violated_by": [
+        "Excessive giving without receiving",
+        "Excessive taking without giving",
+        "Inappropriate generational reversal"
+      ],
+      "restored_through": [
+        "Recognition of imbalance",
+        "Appropriate compensation",
+        "Humility and acceptance"
+      ],
+      "applies_to": [
+        "Intimate partnerships",
+        "Parent-child relationships",
+        "Family systems",
+        "Organizational dynamics"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry, Chapter 1",
+      "confidence": "high"
+    },
+    "blueprint_details": "Balance of giving and taking requires dynamic equilibrium, not static equality. Children take from parents and cannot balance this directly - they balance by giving to their own children. Application: When modeling relationship dynamics in ABM or analyzing organizational systems, track giving/taking flows and identify imbalances that may cause systemic suffering or relationship breakdown.",
+    "example_application": "In analyzing team dynamics, applying BalanceofgivingandtakinG principles revealed that high-performing teams maintained rough equilibrium in contributions, while struggling teams showed persistent imbalances where some members consistently gave more than they received, creating resentment and eventual breakdown."
+  },
+  {
+    "spr_id": "SystemicbelonginG",
+    "term": "Systemic Belonging",
+    "definition": "The fundamental need for inclusion and membership within relationship systems, as described by Bert Hellinger. Belonging is a core requirement for human well-being and system health. Those who conform to system orders belong; those who violate them may be excluded, with profound consequences. The need for belonging can be so strong that people prefer unhappiness within a system to happiness outside of it. Belonging provides natural well-being, clear identity, and sense of place. In family systems, all members have equal right to belong, regardless of their actions or characteristics. Exclusion or attempted exclusion of system members creates disturbances that affect the entire system.",
+    "category": "CorePrinciple",
+    "relationships": {
+      "type": "FundamentalNeed",
+      "is_requirement_for": [
+        "Human wellbeing",
+        "System health",
+        "Identity formation"
+      ],
+      "granted_by": [
+        "Conformity to system orders",
+        "Acknowledgment of membership",
+        "Inclusion in system"
+      ],
+      "threatened_by": [
+        "Violation of orders",
+        "Exclusion attempts",
+        "System rejection"
+      ],
+      "creates_when_fulfilled": [
+        "Natural wellbeing",
+        "Clear identity",
+        "Sense of place",
+        "Systemic stability"
+      ],
+      "creates_when_violated": [
+        "Systemic disturbances",
+        "Generational effects",
+        "Hidden loyalties"
+      ],
+      "related_to": [
+        "SystemicconsciencE",
+        "OrdersoflovE",
+        "SystemicentanglemenT"
+      ],
+      "applies_to": [
+        "All system members",
+        "Family systems",
+        "Organizational groups",
+        "Social systems"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry",
+      "confidence": "high"
+    },
+    "blueprint_details": "Belonging is a fundamental systemic need. All members have equal right to belong in family systems. Exclusion creates disturbances that propagate. Application: When modeling human systems, recognize belonging as a core driver of behavior - individuals will act to maintain belonging even at personal cost, and exclusion of members creates systemic imbalances that must be addressed.",
+    "example_application": "In analyzing why team members tolerated toxic leadership, applying SystemicbelonginG principles revealed they preferred unhappiness within the group to potential exclusion - a pattern also seen in family systems where members maintain harmful relationships to preserve belonging."
+  },
+  {
+    "spr_id": "SystemicbalancE",
+    "term": "Systemic Balance",
+    "definition": "The state of equilibrium and harmony within relationship systems required for love to flourish, as described by Bert Hellinger. This balance encompasses the balance of giving and taking, appropriate hierarchy and sequence, recognition of all members' right to belong, and alignment with the orders of love. Systemic balance cannot be achieved through willpower alone - it requires recognition of and submission to the hidden orders and symmetry that govern relationships. When systemic balance is achieved, love flows freely; when disturbed, it creates suffering. This balance operates at the system level, transcending individual preferences and conscious intentions.",
+    "category": "CorePrinciple",
+    "relationships": {
+      "type": "SystemicState",
+      "requires": [
+        "BalanceofgivingandtakinG",
+        "Appropriate hierarchy",
+        "SystemicbelonginG",
+        "OrdersoflovE"
+      ],
+      "achieved_through": [
+        "Recognition of hidden orders",
+        "Submission to HiddensymmetrY",
+        "Honoring SystemicconsciencE"
+      ],
+      "cannot_be_achieved_by": [
+        "Willpower alone",
+        "Personal effort",
+        "Ignoring systemic forces"
+      ],
+      "enables": [
+        "Love to flow freely",
+        "System health",
+        "Relationship success"
+      ],
+      "disturbed_by": [
+        "Violation of orders",
+        "Exclusion of members",
+        "Generational entanglements",
+        "Systemic imbalances"
+      ],
+      "recognized_by": [
+        "Flourishing love",
+        "System stability",
+        "Absence of systemic suffering"
+      ],
+      "transcends": [
+        "Individual preferences",
+        "Conscious intentions",
+        "Personal will"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry",
+      "confidence": "high"
+    },
+    "blueprint_details": "Systemic balance is a state that emerges when system orders are honored. It cannot be forced through willpower. Application: When analyzing or modeling systems, look for evidence of systemic balance or imbalance - flourishing relationships vs. persistent dysfunction, stable patterns vs. chaotic disruptions. Balance operates at system level, not individual level.",
+    "example_application": "In a ComplexsystemvisioninG analysis of organizational restructuring, applying SystemicbalancE principles helped identify that proposed changes violated systemic orders (exclusion, hierarchy disruption), predicting that despite logical appeal, they would create suffering and reduce effectiveness - similar to how family systems react to order violations."
+  },
+  {
+    "spr_id": "GenerationallegacY",
+    "term": "Generational Legacy",
+    "definition": "The patterns, disturbances, and systemic effects that propagate across multiple generations in family systems, as described by Bert Hellinger. Like waves and ripples in a river caused by an upstream boulder that still affect the flow far downstream, disturbances in earlier generations continue to influence later generations. Children's innocent love can blindly perpetuate harmful patterns. Injuries to the Orders of Love by earlier family members affect the lives of later members. These generational effects operate through systemic conscience, hidden loyalties, and unconscious identifications. Recognition and appropriate acknowledgment of generational patterns can restore balance and allow love to flow again.",
+    "category": "CorePrinciple",
+    "relationships": {
+      "type": "TemporalSystemicPattern",
+      "part_of": [
+        "TemporalDynamiX",
+        "4d thinkinG"
+      ],
+      "propagates_through": [
+        "SystemicconsciencE",
+        "SystemicentanglemenT",
+        "Hidden loyalties"
+      ],
+      "caused_by": [
+        "Violations of OrdersoflovE",
+        "Exclusion of family members",
+        "Unresolved tragedies",
+        "Systemic imbalances"
+      ],
+      "affects": [
+        "Future generations",
+        "Children's behavior",
+        "Relationship patterns",
+        "System health"
+      ],
+      "recognized_through": [
+        "FamilyconstellationDynamiC",
+        "Pattern analysis",
+        "Historical contextualization"
+      ],
+      "restored_through": [
+        "Acknowledgment of patterns",
+        "Recognition of excluded members",
+        "Restoration of systemic balance",
+        "Honoring the orders"
+      ],
+      "temporal_scope": [
+        "Multi-generational",
+        "Decades to centuries",
+        "Beyond individual lifespan"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry, Chapter 4",
+      "confidence": "high"
+    },
+    "blueprint_details": "Generational patterns operate across long time horizons. Children may unconsciously take on parental burdens or identify with excluded ancestors. Application: When performing TemporalDynamiX analysis or FutureStateAnalysiS, consider multi-generational time horizons. Patterns may emerge that require looking back generations to understand current system state.",
+    "example_application": "In analyzing persistent organizational dysfunction, applying GenerationallegacY principles revealed patterns that originated in the organization's founding generation - exclusion of key founders, unresolved conflicts - that continued to affect dynamics decades later, similar to family generational patterns."
+  },
+  {
+    "spr_id": "FamilyconstellationDynamiC",
+    "term": "Family Constellation Dynamics",
+    "definition": "The method and phenomenon of making hidden systemic dynamics visible through representative positioning, as developed and refined by Bert Hellinger. In family constellations, representatives (who don't know the family members) are positioned to represent family members and begin to experience feelings and thoughts very close to those the actual family members felt - without prior knowledge. This phenomenon makes visible the normally hidden dynamics operating in relationship systems. The method extends beyond making destructive dynamics visible - it can help identify what can be done to restore systemic balance and allow the hidden orders that love requires to be reestablished. Sometimes behaviors of family members not even present change for the better after a constellation has been brought to a good resolution.",
+    "category": "Methodology",
+    "relationships": {
+      "type": "SystemicVisualizationMethod",
+      "makes_visible": [
+        "HiddensymmetrY",
+        "SystemicconsciencE",
+        "OrdersoflovE",
+        "SystemicentanglemenT"
+      ],
+      "uses_phenomenon": [
+        "Representative perception",
+        "Non-verbal information access",
+        "Systemic field effects"
+      ],
+      "extends_to": [
+        "Restoring systemic balance",
+        "Identifying interventions",
+        "Reestablishing orders"
+      ],
+      "related_to": [
+        "ComplexsystemvisioninG",
+        "System modeling",
+        "Emergent behavior recognition"
+      ],
+      "applies_principles_of": [
+        "Systemic balance",
+        "Hidden symmetry",
+        "Systemic conscience"
+      ],
+      "demonstrates": [
+        "Systemic forces operating",
+        "Non-local effects",
+        "System intelligence"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry",
+      "confidence": "high"
+    },
+    "blueprint_details": "Family constellations reveal hidden systemic dynamics through representative positioning. The phenomenon demonstrates that systemic information is accessible non-verbally. Application: In ComplexsystemvisioninG, consider how system representatives (agents, stakeholders) may provide information about system state beyond what their explicit rules or data would suggest - similar to constellation representatives accessing family field information.",
+    "example_application": "In modeling organizational culture, applying FamilyconstellationDynamiC principles suggested that 'representative' agents (modeling different departments) might reveal systemic dynamics through their emergent positioning and interactions that weren't explicitly programmed, similar to how constellation representatives access family information."
+  },
+  {
+    "spr_id": "GreatersouL",
+    "term": "Greater Soul",
+    "definition": "The transcendent intelligence and source of systemic wisdom that supports love, as described by Bert Hellinger. The Greater Soul represents the intelligence of the systemic symmetry of love operating unseen in relationships, watching over love itself. It is the source of the orders that govern relationship systems and provides the context within which individual relationships exist. Recognition of the Greater Soul allows one to know the intelligence that supports love and to align actions with systemic wisdom rather than personal will or social convention. This concept acknowledges that relationships exist within a larger spiritual or systemic context that transcends individual consciousness.",
+    "category": "SpiritualPrinciple",
+    "relationships": {
+      "type": "TranscendentIntelligence",
+      "is_source_of": [
+        "OrdersoflovE",
+        "HiddensymmetrY",
+        "Systemic wisdom"
+      ],
+      "supports": [
+        "Love itself",
+        "Systemic health",
+        "Relationship success"
+      ],
+      "transcends": [
+        "Individual consciousness",
+        "Personal will",
+        "Social convention"
+      ],
+      "recognized_through": [
+        "Observation of systemic intelligence",
+        "Love's increase or diminishment",
+        "Alignment with orders"
+      ],
+      "requires": [
+        "Humility",
+        "Recognition of limits",
+        "Submission to orders"
+      ],
+      "guides": [
+        "Systemic balance",
+        "Relationship restoration",
+        "Therapeutic interventions"
+      ],
+      "related_to": [
+        "ResonantgratidsouL",
+        "SynergisticFusionProtocol",
+        "Spiritual technology"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry, Chapter 5",
+      "confidence": "high"
+    },
+    "blueprint_details": "The Greater Soul represents transcendent systemic intelligence supporting love. Recognition requires humility and alignment with orders rather than personal will. Application: In ethical decision-making and high-stakes scenarios, consider alignment with Greater Soul principles - systemic wisdom, love's requirements, orders that serve the whole rather than individual interests.",
+    "example_application": "In evaluating organizational restructuring proposals, applying GreatersouL principles helped recognize that proposals serving individual interests while violating systemic orders would ultimately fail, even if logically sound, because they ignored the intelligence supporting systemic health."
+  },
+  {
+    "spr_id": "SystemicentanglemenT",
+    "term": "Systemic Entanglement",
+    "definition": "Unconscious identifications and loyalties across generations in family systems, as described by Bert Hellinger. Children may unconsciously take on parental burdens, identify with excluded ancestors, or attempt to restore balance by repeating patterns from earlier generations. These entanglements operate through hidden loyalties and unconscious identifications that affect behavior without conscious awareness. Recognition of entanglements through methods like family constellations allows them to be addressed, but they often require acknowledgment of excluded members, restoration of proper hierarchy, or other interventions that restore systemic balance.",
+    "category": "SystemicPattern",
+    "relationships": {
+      "type": "UnconsciousIdentification",
+      "operates_through": [
+        "Hidden loyalties",
+        "Unconscious identifications",
+        "SystemicconsciencE"
+      ],
+      "causes": [
+        "Repeating generational patterns",
+        "Taking on others' burdens",
+        "Attempting to restore balance inappropriately"
+      ],
+      "affects": [
+        "Behavior without awareness",
+        "Relationship choices",
+        "Life patterns"
+      ],
+      "related_to": [
+        "GenerationallegacY",
+        "SystemicbelonginG",
+        "SystemicconsciencE"
+      ],
+      "recognized_through": [
+        "FamilyconstellationDynamiC",
+        "Pattern analysis",
+        "Systemic observation"
+      ],
+      "resolved_through": [
+        "Acknowledgment of patterns",
+        "Recognition of excluded members",
+        "Restoration of proper order",
+        "Systemic balance"
+      ],
+      "source": "Bert Hellinger - Love's Hidden Symmetry, Chapter 4",
+      "confidence": "high"
+    },
+    "blueprint_details": "Systemic entanglements represent unconscious identifications that operate beyond conscious awareness. They explain why individuals repeat patterns, take on burdens, or make choices that seem to contradict their explicit goals. Application: When modeling human behavior in ABM or analyzing organizational patterns, consider unconscious systemic identifications that may drive behavior beyond explicit motivations or incentives.",
+    "example_application": "In analyzing why a manager repeated dysfunctional leadership patterns despite training, applying SystemicentanglemenT principles suggested unconscious identification with an excluded organizational founder, creating hidden loyalty to patterns that maintained connection to the excluded member."
+  },
+  {
+    "spr_id": "Objective generation enginE",
+    "term": "Objective Generation Engine",
+    "definition": "The deterministic cognitive assembly system that translates raw user queries into protocol-compliant, SPR-enhanced, mandate-aligned Enhanced Objective Statements. It transcends LLM dependencies through Universal Abstraction, using pattern matching, keyword lookup tables, rule-based mandate selection, and template string substitution. The engine follows a 6-step deterministic workflow: (1) Feature extraction via regex/keyword matching, (2) TemporalScope building from rules, (3) SPR activation through keyword lookup, (4) Mandate selection via boolean rules, (5) Template assembly with domain customization, (6) Final string concatenation. All steps use quantum probability states with evidence tracking instead of LLM confidence scores, ensuring deterministic, auditable, and self-contained operation.",
+    "category": "CognitiveEngine",
+    "relationships": {
+      "type": "DeterministicTemplateAssembler",
+      "is_a": [
+        "Cognitive EnginE"
+      ],
+      "uses": [
+        "Enhancement Skeleton PatterN",
+        "Sparse priming representationS"
+      ],
+      "enables": [
+        "Cognitive resonancE",
+        "Implementation resonancE"
+      ],
+      "part_of": [
+        "SIRC ProtocoL"
+      ],
+      "integrates_with": [
+        "Knowledge Scaffolding WorkfloW",
+        "RISE OrchestratoR",
+        "Enhanced LLM ProvideR",
+        "Playbook OrchestratoR"
+      ],
+      "comprises": [
+        "Feature Extraction Module",
+        "TemporalScope Builder",
+        "SPR Activation Engine",
+        "Mandate Selector",
+        "Template Assembler",
+        "Domain Customizer"
+      ],
+      "embodies": [
+        "Universal AbstractioN",
+        "As above so beloW"
+      ],
+      "transcends": [
+        "LLM Semantic Understanding",
+        "Non-Deterministic Generation",
+        "API Dependencies",
+        "Opaque Reasoning"
+      ],
+      "confidence": "high"
+    },
+    "blueprint_details": "See specifications/objective_generation_engine.md for complete specification. Protocol reference: ResonantiA Protocol v3.5-GP, Section 8.2 (Enhancement_Skeleton_Pattern). Construction map: outputs/enhanced_objective_construction_map.md",
+    "example_application": "Given query: 'Who would win in a boxing match between Mike Tyson (circa 1986-1988) and George Foreman (circa 1973-1974)?' \u2192 Engine extracts temporal markers via regex, matches keywords ('historical', 'emergent', 'predictive') to SPRs, selects Mandate 6 (temporal) and Mandate 9 (complex), assembles objective using Enhancement_Skeleton_Pattern template with boxing-specific explanations. All without LLM semantic understanding\u2014only structural pattern matching.",
+    "implementation_status": "Specification Complete - Implementation Ready",
+    "universal_abstraction_applied": true,
+    "llm_independent": true,
+    "quantum_probability_states": true,
+    "deterministic": true,
+    "autopoietic_learning_support": true
+  },
+  {
+    "spr_id": "Enhancement skeleton patterN",
+    "term": "Enhancement Skeleton Pattern",
+    "definition": "A structured template and methodology (Section 8.2 of ResonantiA Protocol) designed for deliberate interaction with ArchE to augment standard queries by embedding directives that invoke deep multi-source research (including HistoricalContextualizatioN), validation against prior steps (using IAR), internal modeling (explicitly incorporating temporal prediction, dynamic comparison via CFP with state evolution, and potentially ComplexSystemVisioninG principles), exploration of adjacent possibilities informed by IAR confidence, and rigorous IAR-aware self-assessment and synthesis. It functions as a \"Conductor's Score\" or \"Master Key,\" providing explicit instructions to the Core Workflow Engine.",
+    "category": "InteractionPattern",
+    "relationships": {
+      "type": "StructuredTemplate",
+      "is_a": [
+        "Interaction PatterN",
+        "Prompting TechniquE"
+      ],
+      "uses": [
+        "Objective generation enginE",
+        "Sparse priming representationS",
+        "IAR",
+        "Temporal reasoninG"
+      ],
+      "enables": [
+        "Cognitive resonancE",
+        "Temporal resonancE",
+        "Complex system visioninG"
+      ],
+      "part_of": [
+        "Advanced Interaction PatternS"
+      ],
+      "blueprint_details": "See protocol/ResonantiA_Protocol_v3.0.md Section 8.2, protocol/ResonantiA.AdvancedInteractionPatterns.md Section 8.2"
+    },
+    "blueprint_details": "Defined in protocol/ResonantiA_Protocol_v3.0.md Section 8.2 (General Enhancement Skeleton Prompt). The pattern uses XML-like tags: ->|Enhancement_Skeleton_Pattern|<-, ->|QueryText|<-, ->|EnhancementDirectives|<-, ->|Objective|<-, ->|DirectiveSequence|<- with specific directives for DeconstructPrimeTemporal, MultiSourceResearchValidateTemporal, TemporalModelingPredictEconomic, etc.",
+    "example_application": "Used by the Objective generation enginE to transform a simple user query into a comprehensive, protocol-compliant Enhanced Objective Statement that triggers the full spectrum of ArchE capabilities."
   }
 ]
