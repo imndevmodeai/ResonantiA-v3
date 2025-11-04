@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 Integration Script: Objective Generation Engine
-Solidifies the ObjectiveGenerationEngine SPR and specification into ArchE's Knowledge Tapestry.
+Solidifies the Objective generation enginE SPR and specification into ArchE's Knowledge Tapestry.
 
 This script:
-1. Adds ObjectiveGenerationEngine SPR to knowledge_graph/spr_definitions_tv.json
+1. Adds Objective generation enginE SPR to knowledge_graph/spr_definitions_tv.json
 2. Updates related SPRs with cross-references
 3. Creates initial implementation structure
 4. Validates integration
@@ -47,7 +47,7 @@ def save_spr_definitions(spr_definitions: List[Dict[str, Any]]) -> bool:
     return True
 
 def load_objective_generation_engine_spr() -> Dict[str, Any]:
-    """Load the ObjectiveGenerationEngine SPR definition."""
+    """Load the Objective generation enginE SPR definition."""
     spr_file = project_root / "outputs" / "objective_generation_engine_spr.json"
     if not spr_file.exists():
         raise FileNotFoundError(f"Objective Generation Engine SPR not found: {spr_file}")
@@ -66,15 +66,15 @@ def update_related_sprs(spr_definitions: List[Dict[str, Any]]) -> int:
     related_sprs = {
         'Enhancement Skeleton PatterN': {
             'add_to': 'uses',
-            'relationship': 'ObjectiveGenerationEngine'
+            'relationship': 'Objective generation enginE'
         },
         'SIRC ProtocoL': {
             'add_to': 'comprises',  # or 'part_of' depending on structure
-            'relationship': 'ObjectiveGenerationEngine'
+            'relationship': 'Objective generation enginE'
         },
         'RISE OrchestratoR': {
             'add_to': 'integrates_with',
-            'relationship': 'ObjectiveGenerationEngine'
+            'relationship': 'Objective generation enginE'
         }
     }
     
@@ -153,13 +153,13 @@ def main():
         print(f"✗ Error loading SPR definitions: {e}")
         return 1
     
-    # Step 2: Load ObjectiveGenerationEngine SPR
-    print("\nStep 2: Loading ObjectiveGenerationEngine SPR definition...")
+    # Step 2: Load Objective generation enginE SPR
+    print("\nStep 2: Loading Objective generation enginE SPR definition...")
     try:
         oge_spr = load_objective_generation_engine_spr()
         print(f"✓ Loaded SPR: {oge_spr.get('spr_id')}")
     except Exception as e:
-        print(f"✗ Error loading ObjectiveGenerationEngine SPR: {e}")
+        print(f"✗ Error loading Objective generation enginE SPR: {e}")
         return 1
     
     # Step 3: Validate SPR format
@@ -186,7 +186,7 @@ def main():
     else:
         print(f"✓ SPR '{spr_id}' not found, will add")
     
-    # Step 5: Add ObjectiveGenerationEngine SPR
+    # Step 5: Add Objective generation enginE SPR
     print(f"\nStep 5: Adding SPR '{spr_id}' to Knowledge Tapestry...")
     spr_definitions.append(oge_spr)
     print(f"✓ Added SPR (total SPRs: {len(spr_definitions)})")
