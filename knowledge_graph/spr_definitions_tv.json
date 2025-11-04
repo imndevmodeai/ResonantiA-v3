@@ -6149,5 +6149,50 @@
     },
     "blueprint_details": "Defined in protocol/ResonantiA_Protocol_v3.0.md Section 8.2 (General Enhancement Skeleton Prompt). The pattern uses XML-like tags: ->|Enhancement_Skeleton_Pattern|<-, ->|QueryText|<-, ->|EnhancementDirectives|<-, ->|Objective|<-, ->|DirectiveSequence|<- with specific directives for DeconstructPrimeTemporal, MultiSourceResearchValidateTemporal, TemporalModelingPredictEconomic, etc.",
     "example_application": "Used by the Objective generation enginE to transform a simple user query into a comprehensive, protocol-compliant Enhanced Objective Statement that triggers the full spectrum of ArchE capabilities."
+  },
+  {
+    "spr_id": "Rise OrchestratoR",
+    "term": "RISE Orchestrator",
+    "definition": "The Genesis Engine of ArchE - the master controller that orchestrates the Resonant Insight and Strategy Engine (RISE) v2.0, transforming complex problems into profound strategic solutions through a four-phase cognitive enhancement process. It is not merely a workflow coordinator, but a sophisticated genesis system that can forge specialized expert clones, integrate spiritual technology principles, and achieve unprecedented autonomous strategic reasoning. The orchestrator manages four phases: Knowledge Scaffolding & Dynamic Specialization (Phase A), Fused Insight Generation (Phase B), Fused Strategy Generation & Finalization (Phase C), and Utopian Vetting & Refinement (Phase D). It coordinates the Metamorphosis Protocol for creating specialized expert clones and implements HighStakesVetting for rigorous strategy validation. Enhanced with Synergistic Fusion Protocol, it activates axiomatic knowledge when scope limitations are detected.",
+    "category": "CognitiveEngine",
+    "relationships": {
+      "type": "GenesisEngine",
+      "is_a": [
+        "Cognitive EnginE",
+        "Workflow OrchestratoR"
+      ],
+      "uses": [
+        "Objective generation enginE",
+        "IARCompliantWorkflowEnginE",
+        "SPRManageR",
+        "Metamorphosis ProtocoL",
+        "Synergistic Fusion ProtocoL"
+      ],
+      "enables": [
+        "Cognitive resonancE",
+        "Temporal resonancE",
+        "Complex system visioninG",
+        "Specialized Cognitive AgenT",
+        "Autonomous Strategic ReasoninG"
+      ],
+      "integrates_with": [
+        "Knowledge Scaffolding WorkfloW",
+        "Enhanced LLM ProvideR",
+        "Playbook OrchestratoR",
+        "Objective generation enginE"
+      ],
+      "part_of": [
+        "ResonantiA ProtocoL"
+      ],
+      "has_subcomponents": [
+        "Phase A: Knowledge Scaffolding",
+        "Phase B: Fused Insight Generation",
+        "Phase C: Strategy Generation & Finalization",
+        "Phase D: Utopian Vetting & Refinement"
+      ],
+      "blueprint_details": "See specifications/rise_orchestrator.md; implemented in Three_PointO_ArchE/rise_orchestrator.py with RISE_Orchestrator class"
+    },
+    "blueprint_details": "Defined in specifications/rise_orchestrator.md. Implementation in Three_PointO_ArchE/rise_orchestrator.py. The RISE_Orchestrator class manages the four-phase workflow: Phase A (Knowledge Scaffolding & Dynamic Specialization), Phase B (Fused Insight Generation), Phase C (Fused Strategy Generation & Finalization), and Phase D (Utopian Vetting & Refinement). It includes Synergistic Fusion Protocol for integrating axiomatic knowledge when scope limitations are detected.",
+    "example_application": "The RISE Orchestrator is invoked by the Adaptive Cognitive Orchestrator (ACO) when a query is flagged as novel, strategic, or high-stakes. It transforms raw problems into golden insights through the four-phase genesis process, creating specialized agents, generating fused insights, validating strategies, and distilling reusable patterns."
   }
 ]
