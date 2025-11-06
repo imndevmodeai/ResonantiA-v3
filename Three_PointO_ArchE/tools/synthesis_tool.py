@@ -97,7 +97,14 @@ def invoke_llm_for_synthesis(**kwargs) -> Dict[str, Any]:
             
             # Remove any Google-specific parameters that might cause issues
             # and pass through other standard parameters
-            excluded_params = {'max_output_tokens', 'model_settings', 'provider', 'model', 'prompt', 'context'}
+            # Also exclude RISE workflow context variables that shouldn't be passed to LLM providers
+            excluded_params = {
+                'max_output_tokens', 'model_settings', 'provider', 'model', 'prompt', 'context',
+                # RISE workflow context variables (not valid LLM API parameters)
+                'problem_description', 'strategy_dossier', 'user_query', 'session_id',
+                'workflow_name', 'workflow_run_id', 'initial_context', 'query', 'problem',
+                'vetting_report', 'vetting_dossier', 'original_strategy', 'final_strategy'
+            }
             all_potential_params = {**kwargs, **model_params}
             for key, value in all_potential_params.items():
                 if key not in excluded_params and key not in generation_config:

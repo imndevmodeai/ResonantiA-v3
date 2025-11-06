@@ -29,6 +29,7 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
+from functools import lru_cache
 
 # Import existing components (robust segmented import to avoid unnecessary fallbacks)
 try:
