@@ -1312,6 +1312,188 @@ if ENHANCED_PERCEPTION_AVAILABLE:
     main_action_registry.register_action("enhanced_page_analysis", log_to_thought_trail(enhanced_page_analysis))
     logger.info("Enhanced Perception Engine actions ('enhanced_web_search', 'enhanced_page_analysis') registered.")
 
+# --- Register Universal Zepto SPR Processing Actions ---
+try:
+    from .zepto_spr_processor import (
+        get_zepto_processor,
+        compress_to_zepto,
+        decompress_from_zepto,
+        ZeptoSPRResult,
+        ZeptoSPRDecompressionResult
+    )
+    
+    @log_to_thought_trail
+    def process_zepto_spr_compression(**kwargs) -> Dict[str, Any]:
+        """
+        [IAR Enabled] Universal action for compressing narratives to Zepto SPR form.
+        
+        Args:
+            narrative (str): The verbose narrative to compress
+            target_stage (str): Compression stage target (default: "Zepto")
+            config (dict): Optional processor configuration
+            
+        Returns:
+            IAR-compliant result with Zepto SPR and metadata
+        """
+        try:
+            narrative = kwargs.get('narrative', '')
+            target_stage = kwargs.get('target_stage', 'Zepto')
+            config = kwargs.get('config')
+            
+            if not narrative:
+                return {
+                    'status': 'error',
+                    'message': 'Narrative input is required',
+                    'reflection': {
+                        'status': 'Failed',
+                        'summary': 'Zepto SPR compression failed: missing narrative input',
+                        'confidence': 0.0,
+                        'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                        'potential_issues': ['Missing required input: narrative'],
+                        'raw_output_preview': None
+                    }
+                }
+            
+            result = compress_to_zepto(narrative, target_stage, config)
+            
+            if result.error:
+                return {
+                    'status': 'error',
+                    'message': f'Compression failed: {result.error}',
+                    'reflection': {
+                        'status': 'Failed',
+                        'summary': f'Zepto SPR compression failed: {result.error}',
+                        'confidence': 0.0,
+                        'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                        'potential_issues': [result.error],
+                        'raw_output_preview': None
+                    }
+                }
+            
+            return {
+                'status': 'success',
+                'output': {
+                    'zepto_spr': result.zepto_spr,
+                    'compression_ratio': result.compression_ratio,
+                    'compression_stages': result.compression_stages,
+                    'new_codex_entries': result.new_codex_entries,
+                    'original_length': result.original_length,
+                    'zepto_length': result.zepto_length,
+                    'processing_time_sec': result.processing_time_sec
+                },
+                'reflection': {
+                    'status': 'Success',
+                    'summary': f'Compressed {result.original_length} chars to {result.zepto_length} chars (ratio: {result.compression_ratio:.2f}:1)',
+                    'confidence': 0.95,
+                    'alignment_check': {'objective_alignment': 1.0, 'protocol_alignment': 1.0},
+                    'potential_issues': [],
+                    'raw_output_preview': f'Zepto SPR: {result.zepto_spr[:100]}...'
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in process_zepto_spr_compression: {e}", exc_info=True)
+            return {
+                'status': 'error',
+                'message': f'Compression exception: {str(e)}',
+                'reflection': {
+                    'status': 'Failed',
+                    'summary': f'Zepto SPR compression exception: {str(e)}',
+                    'confidence': 0.0,
+                    'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                    'potential_issues': [f'Exception: {str(e)}'],
+                    'raw_output_preview': None
+                }
+            }
+    
+    @log_to_thought_trail
+    def process_zepto_spr_decompression(**kwargs) -> Dict[str, Any]:
+        """
+        [IAR Enabled] Universal action for decompressing Zepto SPR back to narrative.
+        
+        Args:
+            zepto_spr (str): The Zepto SPR string to decompress
+            codex (dict): Optional symbol codex (uses default if None)
+            config (dict): Optional processor configuration
+            
+        Returns:
+            IAR-compliant result with decompressed narrative and metadata
+        """
+        try:
+            zepto_spr = kwargs.get('zepto_spr', '')
+            codex = kwargs.get('codex')
+            config = kwargs.get('config')
+            
+            if not zepto_spr:
+                return {
+                    'status': 'error',
+                    'message': 'Zepto SPR input is required',
+                    'reflection': {
+                        'status': 'Failed',
+                        'summary': 'Zepto SPR decompression failed: missing zepto_spr input',
+                        'confidence': 0.0,
+                        'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                        'potential_issues': ['Missing required input: zepto_spr'],
+                        'raw_output_preview': None
+                    }
+                }
+            
+            result = decompress_from_zepto(zepto_spr, codex, config)
+            
+            if result.error:
+                return {
+                    'status': 'error',
+                    'message': f'Decompression failed: {result.error}',
+                    'reflection': {
+                        'status': 'Failed',
+                        'summary': f'Zepto SPR decompression failed: {result.error}',
+                        'confidence': 0.0,
+                        'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                        'potential_issues': [result.error],
+                        'raw_output_preview': None
+                    }
+                }
+            
+            return {
+                'status': 'success',
+                'output': {
+                    'decompressed_text': result.decompressed_text,
+                    'symbols_found': result.symbols_found,
+                    'symbols_expanded': result.symbols_expanded,
+                    'decompression_accuracy': result.decompression_accuracy
+                },
+                'reflection': {
+                    'status': 'Success',
+                    'summary': f'Decompressed Zepto SPR ({len(zepto_spr)} chars) to narrative ({len(result.decompressed_text)} chars), expanded {len(result.symbols_expanded)} symbols',
+                    'confidence': 0.95,
+                    'alignment_check': {'objective_alignment': 1.0, 'protocol_alignment': 1.0},
+                    'potential_issues': [],
+                    'raw_output_preview': f'Decompressed: {result.decompressed_text[:200]}...'
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in process_zepto_spr_decompression: {e}", exc_info=True)
+            return {
+                'status': 'error',
+                'message': f'Decompression exception: {str(e)}',
+                'reflection': {
+                    'status': 'Failed',
+                    'summary': f'Zepto SPR decompression exception: {str(e)}',
+                    'confidence': 0.0,
+                    'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                    'potential_issues': [f'Exception: {str(e)}'],
+                    'raw_output_preview': None
+                }
+            }
+    
+    main_action_registry.register_action("compress_to_zepto_spr", process_zepto_spr_compression)
+    main_action_registry.register_action("decompress_from_zepto_spr", process_zepto_spr_decompression)
+    logger.info("Universal Zepto SPR processing actions ('compress_to_zepto_spr', 'decompress_from_zepto_spr') registered.")
+    
+except ImportError as e:
+    logger.warning(f"Could not import zepto_spr_processor: {e}. Zepto SPR actions not available.")
+
 # --- Load Actions from Cache ---
 try:
     cache_path = os.path.join(os.path.dirname(__file__), "action_registry_cache.json")
