@@ -1,0 +1,20 @@
+{
+  "phase": "document_processing",
+  "timestamp": "2025-11-08T22:24:21.404760",
+  "documents_processed": 2,
+  "total_documents": 2,
+  "results": [
+    {
+      "document": "ARCHE_CONSOLIDATED_OPERATIONAL_RULES_v3.5-GP.md",
+      "compression_ratio": 108.07482993197279,
+      "sprs_found": 1,
+      "status": "success"
+    },
+    {
+      "document": "CONSOLIDATION_SUMMARY_2025-11-02.md",
+      "compression_ratio": 27.39664804469274,
+      "sprs_found": 0,
+      "status": "success"
+    }
+  ]
+}

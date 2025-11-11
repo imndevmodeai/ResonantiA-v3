@@ -105,3 +105,4 @@ if __name__ == '__main__':
     # 3. Crystallizing a new mechanism from a meta-rule (conceptual)
     new_mechanism = mpm.crystallize_new_mechanism(new_meta_rule)
     print("\nCrystallized New Mechanism:", new_mechanism)
+

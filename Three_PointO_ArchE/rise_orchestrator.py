@@ -294,6 +294,14 @@ class RISE_Orchestrator:
                 spr_manager=self.spr_manager
             )
             logger.info("🔍 CodebaseArchaeologist initialized - self-referential synthesis enabled")
+            
+            # Link archaeologist to action registry
+            try:
+                from .codebase_archaeology_actions import set_archaeologist
+                set_archaeologist(self.codebase_archaeologist)
+                logger.info("✅ CodebaseArchaeologist linked to action registry")
+            except ImportError:
+                logger.warning("Could not link CodebaseArchaeologist to action registry")
         except Exception as e:
             logger.warning(f"Failed to initialize CodebaseArchaeologist: {e}")
             self.codebase_archaeologist = None
@@ -1442,8 +1450,17 @@ class RISE_Orchestrator:
         logger.info("🧠 Phase B: Generating fused insights through dual analysis")
         
         try:
-            # Execute strategy fusion workflow
-            fusion_path = os.path.join(self.workflows_dir, "strategy_fusion.json")
+            # Execute strategy fusion workflow - Use enhanced version with CFP/ABM/Causal Inference
+            # First try core_workflows version (has tool integration)
+            core_workflows_dir = os.path.join(os.path.dirname(self.workflows_dir), "core_workflows", "1_cognitive_engine")
+            enhanced_fusion_path = os.path.join(core_workflows_dir, "strategy_fusion.json")
+            if os.path.exists(enhanced_fusion_path):
+                fusion_path = enhanced_fusion_path
+                logger.info("✅ Using enhanced strategy_fusion.json with CFP/ABM/Causal Inference pathways")
+            else:
+                # Fallback to basic version
+                fusion_path = os.path.join(self.workflows_dir, "strategy_fusion.json")
+                logger.warning("⚠️ Enhanced strategy_fusion.json not found, using basic version")
             
             # Get effective model and provider from rise_state (set in Phase A)
             # Default to Groq if not set, but preserve what was set in Phase A

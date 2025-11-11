@@ -93,6 +93,13 @@ except ImportError:
             return {"probability": self.probability, "evidence": self.evidence}
     QUANTUM_AVAILABLE = False
 
+try:
+    from .pattern_crystallization_engine import PatternCrystallizationEngine
+    CRYSTALLIZATION_ENGINE_AVAILABLE = True
+except ImportError:
+    CRYSTALLIZATION_ENGINE_AVAILABLE = False
+    logger.warning("PatternCrystallizationEngine not available")
+
 
 @dataclass
 class StardustEntry:
@@ -209,6 +216,7 @@ class AutopoieticLearningLoop:
         self.aco = AdaptiveCognitiveOrchestrator(protocol_chunks or ["default"]) if ACO_AVAILABLE else None
         self.insight_engine = None  # Lazy init
         self.spr_manager = None  # Lazy init
+        self.crystallization_engine = PatternCrystallizationEngine() if CRYSTALLIZATION_ENGINE_AVAILABLE else None
         
         # Learning state
         self.stardust_buffer: deque = deque(maxlen=1000)  # Rolling window
@@ -585,6 +593,33 @@ class PatternController_{pattern.pattern_id}:
         
         logger.info(f"[ALL:Galaxies] Crystallizing wisdom {wisdom.wisdom_id} into Knowledge Tapestry...")
         
+        # Extract wisdom narrative for crystallization
+        wisdom_narrative = self._extract_wisdom_narrative(wisdom)
+        
+        # Use Pattern Crystallization Engine to compress to Zepto SPR (if available)
+        zepto_spr = None
+        symbol_codex_entries = {}
+        compression_stages = []
+        
+        if self.crystallization_engine:
+            try:
+                zepto_spr, symbol_codex_entries = self.crystallization_engine.distill_to_spr(
+                    wisdom_narrative,
+                    target_stage="Zepto"
+                )
+                compression_stages = [
+                    {
+                        "stage": stage.stage_name,
+                        "compression_ratio": stage.compression_ratio,
+                        "symbol_count": stage.symbol_count,
+                        "timestamp": stage.timestamp
+                    }
+                    for stage in self.crystallization_engine.compression_history
+                ]
+                logger.info(f"[ALL:Galaxies] Compressed to Zepto SPR: {len(wisdom_narrative)} → {len(zepto_spr)} chars (ratio: {len(wisdom_narrative)/len(zepto_spr):.1f}:1)")
+            except Exception as e:
+                logger.warning(f"[ALL:Galaxies] Crystallization engine failed: {e}, proceeding without Zepto SPR")
+        
         # Generate SPR definition
         spr_name = f"Pattern_{wisdom.source_pattern.pattern_signature[:16]}_Controller"
         spr_definition = {
@@ -592,6 +627,15 @@ class PatternController_{pattern.pattern_id}:
             "name": spr_name,
             "pattern": wisdom.source_pattern.pattern_signature,
             "description": wisdom.hypothesis,
+            "zepto_spr": zepto_spr,  # NEW: Pure symbolic form
+            "symbol_codex": {  # NEW: Decompression key
+                symbol: {
+                    "meaning": entry.meaning,
+                    "context": entry.context
+                }
+                for symbol, entry in symbol_codex_entries.items()
+            },
+            "compression_stages": compression_stages,  # NEW: Full compression history
             "implementation": wisdom.source_pattern.proposed_solution,
             "confidence": wisdom.source_pattern.success_rate,
             "source": "autopoietic_learning_loop",
@@ -628,6 +672,39 @@ class PatternController_{pattern.pattern_id}:
     # ═══════════════════════════════════════════════════════════════════════
     # Utilities
     # ═══════════════════════════════════════════════════════════════════════
+    
+    def _extract_wisdom_narrative(self, wisdom: IgnitedWisdom) -> str:
+        """
+        Extract a narrative representation of wisdom for crystallization.
+        
+        Combines hypothesis, evidence, and implementation into a verbose narrative
+        that can be compressed by the Pattern Crystallization Engine.
+        """
+        narrative_parts = [
+            f"Hypothesis: {wisdom.hypothesis}",
+            f"Pattern Signature: {wisdom.source_pattern.pattern_signature}",
+            f"Occurrences: {wisdom.source_pattern.occurrences}",
+            f"Success Rate: {wisdom.source_pattern.success_rate:.1%}",
+        ]
+        
+        # Add evidence summary
+        if wisdom.evidence:
+            narrative_parts.append("Evidence:")
+            for ev in wisdom.evidence:
+                if isinstance(ev, dict):
+                    narrative_parts.append(f"  - {ev.get('type', 'unknown')}: {ev}")
+                else:
+                    narrative_parts.append(f"  - {ev}")
+        
+        # Add validation results
+        if wisdom.validation_results:
+            narrative_parts.append(f"Validation: {wisdom.validation_results}")
+        
+        # Add implementation if available
+        if wisdom.source_pattern.proposed_solution:
+            narrative_parts.append(f"Implementation: {wisdom.source_pattern.proposed_solution[:500]}...")
+        
+        return "\n".join(narrative_parts)
     
     def _create_pattern_signature(self, stardust: StardustEntry) -> str:
         """Create a unique signature for pattern matching."""

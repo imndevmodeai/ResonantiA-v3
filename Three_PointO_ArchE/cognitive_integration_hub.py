@@ -135,15 +135,49 @@ class CognitiveIntegrationHub:
         Handles a complex query by invoking the full RISE Orchestrator.
         Can receive additional context from specialized upstream orchestrators.
         """
-        logger.info("Query elevated to RISE. Engaging RISE_Orchestrator.")
+        logger.info("Query elevated to RISE. Engaging Objective Generation Engine.")
+        
+        # NEW: Generate enriched problem_description using Objective Generation Engine
+        enriched_problem_description = query
+        enrichment_metadata = {}
+        
+        try:
+            from Three_PointO_ArchE.objective_generation_engine import ObjectiveGenerationEngine
+            
+            obj_gen_engine = ObjectiveGenerationEngine()
+            enrichment_result = obj_gen_engine.generate_objective(query)
+            
+            enriched_problem_description = enrichment_result['problem_description']
+            enrichment_metadata = {
+                'compression_ratio': enrichment_result.get('compression_ratio', 'N/A'),
+                'activated_sprs': enrichment_result.get('activated_sprs', []),
+                'mandates': enrichment_result.get('mandates', []),
+                'zepto_spr': enrichment_result.get('zepto_spr', ''),
+                'iar': enrichment_result.get('iar', {})
+            }
+            
+            logger.info(f"Objective Generation Engine enriched query. Compression: {enrichment_metadata['compression_ratio']:.2f}:1")
+            logger.debug(f"Activated SPRs: {enrichment_metadata['activated_sprs']}")
+            logger.debug(f"Selected Mandates: {enrichment_metadata['mandates']}")
+            
+        except Exception as e:
+            logger.warning(f"Objective Generation Engine failed, using raw query: {e}")
+            # Continue with raw query if enrichment fails
+        
+        logger.info("Engaging RISE_Orchestrator with enriched problem_description.")
         
         # The new implementation now calls the RISE Orchestrator directly
         try:
-            # Pass the original query and any additional context to the orchestrator
+            # Pass the ENRICHED query to the orchestrator
             rise_results = self.rise_orchestrator.process_query(
-                problem_description=query,
+                problem_description=enriched_problem_description,
                 context=context
             )
+            
+            # Add enrichment metadata to results
+            if enrichment_metadata:
+                rise_results['objective_generation_metadata'] = enrichment_metadata
+            
             logger.info("RISE Orchestrator has completed its workflow.")
             return rise_results
         except Exception as e:
@@ -227,15 +261,16 @@ class CognitiveIntegrationHub:
             logger.info("ResonantiA Protocol patterns detected! Routing to genius-level Playbook Orchestrator.")
             return self._execute_resonantia_path(query)
         
-        # Fast path: Check for simple factual queries first
-        if self._is_simple_factual_query(query):
-            logger.info("Simple factual query detected! Using fast path with direct search and synthesis.")
-            return self._execute_simple_factual_path(query)
-        
-        # Check for complex queries that would benefit from RISE-Enhanced analysis
+        # Check for complex queries that would benefit from RISE-Enhanced analysis FIRST
+        # (This must come before simple factual check to prevent complex queries from being fast-routed)
         if self._requires_rise_enhanced_analysis(query):
             logger.info("Complex query detected! Routing to RISE-Enhanced Synergistic Inquiry Orchestrator.")
             return self._execute_rise_enhanced_path(query)
+        
+        # Fast path: Check for simple factual queries (only if no complexity indicators found)
+        if self._is_simple_factual_query(query):
+            logger.info("Simple factual query detected! Using fast path with direct search and synthesis.")
+            return self._execute_simple_factual_path(query)
         
         # Enhanced routing using superposition context
         if superposition_context:
@@ -336,8 +371,14 @@ class CognitiveIntegrationHub:
             Provide a concise answer (2-3 paragraphs max) with key facts from the results.
             """
             
-            synthesis_response = self.strategic_planner.llm_provider.generate(synthesis_prompt)
-            synthesis_text = synthesis_response.get("generated_text", "")
+            synthesis_response = self.strategic_planner.llm.generate(
+                synthesis_prompt, 
+                model=self._shared_llm_provider.get_default_model() if hasattr(self._shared_llm_provider, 'get_default_model') else "llama-3.3-70b-versatile",
+                max_tokens=500,
+                temperature=0.7
+            )
+            # generate() returns a string directly, not a dict
+            synthesis_text = synthesis_response if isinstance(synthesis_response, str) else str(synthesis_response)
             
             return {
                 "status": "success",
@@ -446,9 +487,12 @@ class CognitiveIntegrationHub:
         """
         complexity_indicators = [
             "tactical analysis", "blow-by-blow", "detailed breakdown", "comprehensive analysis",
+            "comprehensive", "temporally-aware", "temporal", "causal mechanisms", "causal",
+            "emergent", "emergent dynamics", "predictive modeling", "predictive",
             "strategic briefing", "multi-factor", "complex dynamics", "systematic approach",
             "in-depth", "thorough", "extensive", "detailed explanation", "complete analysis",
-            "who would win", "battle analysis", "combat analysis", "tactical breakdown"
+            "historical context", "historical", "multiple time horizons", "time horizons",
+            "battle analysis", "combat analysis", "tactical breakdown", "mechanisms"
         ]
         
         query_lower = query.lower()

@@ -21,57 +21,76 @@
       },
       "dependencies": []
     },
-    "extract_domain_from_deconstruction": {
+    "extract_all_domains_from_deconstruction": {
       "action_type": "generate_text_llm",
-      "description": "Extract the primary domain from the deconstruction analysis into a structured format.",
+      "description": "Extract ALL core domain areas from the deconstruction analysis for comprehensive multi-agent analysis.",
       "inputs": {
-        "prompt": "From the following JSON analysis, identify and extract only the single, most relevant 'Core domain area'. Your output must be a single, clean JSON object with one key: 'domain'. For example: {\\\"domain\\\": \\\"Artificial Intelligence Strategy\\\"}\\n\\nAnalysis:\\n{{ deconstruct_problem.result.generated_text }}",
+        "prompt": "From the following JSON analysis, extract ALL 'Core domain areas' identified in the deconstruction. Your output must be a clean JSON object with a key 'domains' containing an array of all core domain areas. For example: {\\\"domains\\\": [\\\"Quantum Computing\\\", \\\"Neural Network Training\\\", \\\"Geopolitical Analysis\\\", \\\"Market Dynamics\\\"]}\\n\\nIf the analysis identifies multiple core domains, include ALL of them. If only one domain is identified, include it in the array.\\n\\nAnalysis:\\n{{ deconstruct_problem.result.generated_text }}",
         "model": "{{ context.model }}",
         "provider": "{{ context.provider }}",
-        "model_settings": {"temperature": 0.1, "max_tokens": 500}
+        "model_settings": {"temperature": 0.1, "max_tokens": 2000}
       },
       "dependencies": ["deconstruct_problem"]
     },
-    "acquire_domain_knowledge": {
-      "action_type": "search_web",
-      "description": "Acquire relevant domain knowledge through web search",
-      "inputs": {
-        "query": "{% if extract_domain_from_deconstruction.result and extract_domain_from_deconstruction.result.generated_text %}{{ extract_domain_from_deconstruction.result.generated_text }}{% else %}{{ problem_description }}{% endif %} latest developments competitive landscape strategic insights trends key players market dynamics",
-        "num_results": 10
-      },
-      "dependencies": ["extract_domain_from_deconstruction"]
-    },
-    "validate_search_results": {
+    "extract_domain_from_deconstruction": {
       "action_type": "execute_code",
-      "description": "[PhasegateS] Validate that the search tool returned valid, non-empty results.",
+      "description": "Extract the primary domain for backward compatibility (first domain from the list).",
       "inputs": {
         "language": "python",
-        "code": "import json\nsearch_output = {{ acquire_domain_knowledge.result | default('{}') }}\nif not isinstance(search_output, dict):\n    search_output = {}\nresults = search_output.get('results')\nvalid = isinstance(results, list) and len(results) > 0\nprint(json.dumps({'search_is_valid': valid, 'results_count': len(results) if isinstance(results, list) else 0}))"
+        "code": "import json\nimport re\n\n# Get the domains extraction result\ndomains_result = {{ extract_all_domains_from_deconstruction.result.generated_text | default('{\"domains\": []}') }}\n\n# Extract JSON from markdown if present\njson_match = re.search(r'```json\\n(.*?)\\n```', domains_result, re.DOTALL)\nif json_match:\n    json_str = json_match.group(1)\nelse:\n    json_match = re.search(r'\\{.*\\}', domains_result, re.DOTALL)\n    if json_match:\n        json_str = json_match.group(0)\n    else:\n        json_str = domains_result\n\ntry:\n    parsed = json.loads(json_str)\n    domains = parsed.get('domains', [])\n    primary_domain = domains[0] if domains else 'General Analysis'\n    result = json.dumps({\"domain\": primary_domain})\nexcept:\n    result = json.dumps({\"domain\": \"General Analysis\"})\n\nprint(result)"
       },
-      "dependencies": ["acquire_domain_knowledge"]
+      "dependencies": ["extract_all_domains_from_deconstruction"]
     },
     "analyze_specialization_requirements": {
       "action_type": "generate_text_llm",
-      "description": "Analyze what specialized capabilities are needed for this problem",
-      "condition": "{{ validate_search_results.result.output.search_is_valid }} == true",
+      "description": "Analyze what specialized capabilities are needed for this problem (before agent creation)",
       "inputs": {
-        "prompt": "Based on the problem deconstruction and domain knowledge, analyze what specialized capabilities and expertise are required:\\n\\nProblem: {{ problem_description }}\\nDeconstruction: {{ deconstruct_problem.result.generated_text }}\\nDomain Knowledge: {{ acquire_domain_knowledge.result }}\\n\\nIdentify:\\n1. Required specialized knowledge areas\\n2. Critical analytical capabilities\\n3. Strategic thinking patterns\\n4. Risk assessment frameworks\\n5. Implementation expertise",
+        "prompt": "Based on the problem deconstruction, analyze what specialized capabilities and expertise are required:\\n\\nProblem: {{ problem_description }}\\nDeconstruction: {{ deconstruct_problem.result.generated_text }}\\n\\nIdentify:\\n1. Required specialized knowledge areas\\n2. Critical analytical capabilities\\n3. Strategic thinking patterns\\n4. Risk assessment frameworks\\n5. Implementation expertise\\n6. Web search and knowledge acquisition needs",
         "model": "{{ context.model }}",
         "provider": "{{ context.provider }}",
         "model_settings": {"temperature": 0.4, "max_tokens": 8192}
       },
-      "dependencies": ["validate_search_results"]
+      "dependencies": ["extract_domain_from_deconstruction"]
     },
     "forge_specialist_agent": {
       "action_type": "generate_text_llm",
-      "description": "Forge a specialized agent with the required capabilities",
+      "description": "Forge a specialized agent for the primary domain (backward compatibility)",
       "inputs": {
-        "prompt": "Create a specialized agent profile for solving this problem:\\n\\nProblem: {{ problem_description }}\\nDomain: {{ extract_domain_from_deconstruction.result.generated_text }}\\n{% if analyze_specialization_requirements is defined and analyze_specialization_requirements.result is defined %}Requirements: {{ analyze_specialization_requirements.result.generated_text }}{% else %}No specific requirements identified.{% endif %}\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria",
+        "prompt": "Create a specialized agent profile for solving this problem. The agent MUST include web search and knowledge acquisition capabilities:\\n\\nProblem: {{ problem_description }}\\nDomain: {% if extract_domain_from_deconstruction.result and extract_domain_from_deconstruction.result.output %}{% set domain_json = extract_domain_from_deconstruction.result.output | from_json %}{{ domain_json.domain }}{% else %}General Analysis{% endif %}\\n{% if analyze_specialization_requirements.result is defined %}Requirements: {{ analyze_specialization_requirements.result.generated_text }}{% else %}No specific requirements identified.{% endif %}\\n\\nDefine:\\n1. Agent's core expertise and background\\n2. Analytical frameworks and methodologies\\n3. Strategic thinking patterns\\n4. Risk assessment capabilities\\n5. Implementation approach\\n6. Success metrics and validation criteria\\n7. Web search capabilities (MUST include domain-specific search strategies and knowledge acquisition methods)\\n\\nIMPORTANT: The agent MUST be capable of performing domain-specific web searches using appropriate sources and methods for its domain.",
         "model": "{{ context.model }}",
         "provider": "{{ context.provider }}",
         "model_settings": {"temperature": 0.3, "max_tokens": 16384}
       },
-      "dependencies": ["extract_domain_from_deconstruction"]
+      "dependencies": ["extract_domain_from_deconstruction", "analyze_specialization_requirements"]
+    },
+    "forge_all_domain_specialist_agents": {
+      "action_type": "generate_text_llm",
+      "description": "Forge specialized agents for ALL identified core domains to comprehensively assess the issue",
+      "inputs": {
+        "prompt": "Create specialized agent profiles for EACH of the identified core domains. This problem requires comprehensive multi-domain analysis. Each agent MUST include web search and knowledge acquisition capabilities.\\n\\nProblem: {{ problem_description }}\\n\\n=== EXTRACTED CORE DOMAINS (USE THESE EXACT DOMAINS) ===\\nThe following domains were extracted from the problem deconstruction. You MUST use these EXACT domain names:\\n\\n{{ extract_all_domains_from_deconstruction.result.generated_text }}\\n\\nParse the JSON above to extract the 'domains' array. Use ONLY the domains listed in that array.\\n\\n=== PROBLEM DECONSTRUCTION ===\\n{{ deconstruct_problem.result.generated_text }}\\n{% if analyze_specialization_requirements.result is defined %}=== REQUIREMENTS ===\\n{{ analyze_specialization_requirements.result.generated_text }}{% else %}No specific requirements identified.{% endif %}\\n\\n=== INSTRUCTIONS ===\\nFor EACH domain in the extracted domains array, create a specialized agent profile. Output as a JSON object with keys matching each domain name, where each value is a complete agent profile containing:\\n1. Agent's core expertise and background (specific to that domain)\\n2. Analytical frameworks and methodologies (domain-appropriate)\\n3. Strategic thinking patterns (tailored to domain challenges)\\n4. Risk assessment capabilities (domain-specific risks)\\n5. Implementation approach (how this agent would approach the problem)\\n6. Success metrics and validation criteria (domain-relevant metrics)\\n7. Web search capabilities (MUST include domain-specific search strategies, preferred sources, and knowledge acquisition methods)\\n\\nFormat: {\\\"DomainName1\\\": {agent_profile}, \\\"DomainName2\\\": {agent_profile}, ...}\\n\\nIMPORTANT: Each agent MUST specify:\\n- Domain-specific search sources (e.g., sports agents use ESPN, financial agents use Bloomberg)\\n- Search query construction strategies for their domain\\n- Knowledge acquisition and validation methods\\n\\nEnsure each agent is specialized for its domain while maintaining ability to collaborate with other domain agents.",
+        "model": "{{ context.model }}",
+        "provider": "{{ context.provider }}",
+        "model_settings": {"temperature": 0.3, "max_tokens": 32768}
+      },
+      "dependencies": ["extract_all_domains_from_deconstruction", "deconstruct_problem", "analyze_specialization_requirements"]
+    },
+    "acquire_domain_knowledge_via_agents": {
+      "action_type": "execute_code",
+      "description": "Have specialist agents perform domain-specific web searches based on their capabilities",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport re\nimport sys\nimport os\n\n# Add project root to path\nproject_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))\nif project_root not in sys.path:\n    sys.path.insert(0, project_root)\n\nfrom Three_PointO_ArchE.action_registry import web_search_action\nfrom Three_PointO_ArchE.federated_search_agents import DomainDetector\n\n# Get context from workflow (injected by workflow engine)\nagents_text = context.get('forge_all_domain_specialist_agents', {}).get('result', {}).get('generated_text', '{}')\nproblem = context.get('problem_description', context.get('initial_context', {}).get('problem_description', ''))\n\n# Extract domains from agents\nall_results = {}\n\n# Parse agents JSON\ntry:\n    # Extract JSON from markdown if present\n    json_match = re.search(r'```json\\n(.*?)\\n```', agents_text, re.DOTALL)\n    if json_match:\n        agents_json = json.loads(json_match.group(1))\n    else:\n        json_match = re.search(r'\\{.*\\}', agents_text, re.DOTALL)\n        if json_match:\n            agents_json = json.loads(json_match.group(0))\n        else:\n            agents_json = json.loads(agents_text) if agents_text.strip().startswith('{') else {}\n    \n    # For each domain agent, perform domain-specific search\n    detector = DomainDetector()\n    \n    for domain_name, agent_profile in agents_json.items():\n        # Extract search strategy from agent profile\n        search_strategy = agent_profile.get('web_search_capabilities', {})\n        \n        # Construct domain-specific query (simplified)\n        query = f\"{domain_name}\"  # Just the domain name for simpler search\n        \n        # Perform search with domain routing\n        try:\n            search_result = web_search_action(\n                query=query,\n                max_results=10,\n                use_domain_routing=True,\n                simplify_query=True\n            )\n            \n            all_results[domain_name] = {\n                'agent_profile': agent_profile,\n                'search_results': search_result.get('results', []),\n                'search_status': search_result.get('status', 'unknown'),\n                'domain': domain_name,\n                'query_used': query\n            }\n        except Exception as search_error:\n            all_results[domain_name] = {\n                'agent_profile': agent_profile,\n                'search_results': [],\n                'search_status': 'error',\n                'domain': domain_name,\n                'error': str(search_error)\n            }\n        \nexcept Exception as e:\n    all_results = {'error': str(e), 'agents_text_preview': agents_text[:500] if agents_text else 'No agents text'}\n\nprint(json.dumps(all_results, indent=2))"
+      },
+      "dependencies": ["forge_all_domain_specialist_agents"]
+    },
+    "validate_search_results": {
+      "action_type": "execute_code",
+      "description": "[PhasegateS] Validate that the agent-based search tool returned valid, non-empty results.",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nsearch_output = {{ acquire_domain_knowledge_via_agents.result.output | default('{}') }}\nif not isinstance(search_output, dict):\n    try:\n        search_output = json.loads(search_output)\n    except:\n        search_output = {}\n\n# Check if we have results from any domain\nvalid = False\ntotal_results = 0\n\nif 'error' not in search_output:\n    for domain, domain_data in search_output.items():\n        if isinstance(domain_data, dict):\n            results = domain_data.get('search_results', [])\n            if isinstance(results, list) and len(results) > 0:\n                valid = True\n                total_results += len(results)\n\nprint(json.dumps({'search_is_valid': valid, 'results_count': total_results, 'domains_searched': len([k for k in search_output.keys() if k != 'error'])}))"
+      },
+      "dependencies": ["acquire_domain_knowledge_via_agents"]
     },
     "validate_specialist_agent": {
       "action_type": "generate_text_llm",
@@ -87,24 +106,32 @@
   },
   "outputs": {
     "session_knowledge_base": {
-      "description": "Accumulated domain knowledge and insights",
-      "value": "{{ acquire_domain_knowledge.result }}"
+      "description": "Accumulated domain knowledge and insights from agent-based searches",
+      "value": "{{ acquire_domain_knowledge_via_agents.result.output }}"
     },
     "specialized_agent": {
-      "description": "The forged specialist agent with required capabilities",
+      "description": "The forged specialist agent for primary domain (backward compatibility)",
       "value": "{{ forge_specialist_agent.result.generated_text }}"
     },
+    "all_domain_specialist_agents": {
+      "description": "Specialized agents for ALL identified core domains - comprehensive multi-agent analysis",
+      "value": "{{ forge_all_domain_specialist_agents.result.generated_text }}"
+    },
+    "all_core_domains": {
+      "description": "All identified core domain areas",
+      "value": "{{ extract_all_domains_from_deconstruction.result.generated_text }}"
+    },
     "knowledge_acquisition_metrics": {
-      "description": "Metrics on knowledge acquisition effectiveness",
-      "value": "{{ acquire_domain_knowledge.result }}"
+      "description": "Metrics on knowledge acquisition effectiveness from agent searches",
+      "value": "{{ acquire_domain_knowledge_via_agents.result.output }}"
     },
     "problem_deconstruction": {
       "description": "Deconstructed problem analysis",
       "value": "{{ deconstruct_problem.result.generated_text }}"
     },
     "domain_identification": {
-      "description": "Primary domain area identified",
-      "value": "{{ extract_domain_from_deconstruction.result.generated_text }}"
+      "description": "Primary domain area identified (backward compatibility)",
+      "value": "{{ extract_domain_from_deconstruction.result.output }}"
     }
   }
 }

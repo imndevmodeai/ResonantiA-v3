@@ -1,0 +1,58 @@
+{
+    "workflow_name": "Final Prediction Synthesis - Who Would Win",
+    "version": "1.0",
+    "description": "Synthesizes all analysis results (CFP, ABM, Causal Inference, Temporal Analysis) into a final prediction answering 'Who would win?' with probabilities and confidence intervals.",
+    "input_parameters": {
+        "cfp_results": { "type": "dict" },
+        "abm_results": { "type": "dict" },
+        "causal_results": { "type": "dict" },
+        "temporal_analysis": { "type": "dict" },
+        "fighter_comparison": { "type": "dict" }
+    },
+    "tasks": {
+        "extract_tool_predictions": {
+            "action_type": "execute_code",
+            "description": "Extract win probabilities from each tool's results",
+            "inputs": {
+                "language": "python",
+                "code": "import json\nimport re\n\n# Extract predictions from tool results\ncfp = {{ cfp_results | default({}) }}\nabm = {{ abm_results | default({}) }}\ncausal = {{ causal_results | default({}) }}\ntemporal = {{ temporal_analysis | default({}) }}\n\npredictions = {}\n\n# Extract from ABM (most direct)\nif abm and 'result' in abm:\n    abm_result = abm.get('result', {})\n    if 'win_probabilities' in abm_result:\n        predictions['abm'] = abm_result['win_probabilities']\n    elif 'simulation_results' in abm_result:\n        # Try to extract from simulation results\n        sim_results = abm_result.get('simulation_results', {})\n        if 'fighter1_wins' in sim_results and 'fighter2_wins' in sim_results:\n            total = sim_results.get('fighter1_wins', 0) + sim_results.get('fighter2_wins', 0)\n            if total > 0:\n                predictions['abm'] = {\n                    'fighter1': sim_results.get('fighter1_wins', 0) / total,\n                    'fighter2': sim_results.get('fighter2_wins', 0) / total\n                }\n\n# Extract from CFP (trajectory comparison)\nif cfp and 'result' in cfp:\n    cfp_result = cfp.get('result', {})\n    if 'quantum_flux_difference' in cfp_result:\n        # Higher flux = better performance\n        flux_diff = cfp_result.get('quantum_flux_difference', 0)\n        # Convert to probability (normalize)\n        if flux_diff > 0:\n            predictions['cfp'] = {'fighter1': 0.5 + min(flux_diff / 2, 0.3), 'fighter2': 0.5 - min(flux_diff / 2, 0.3)}\n        else:\n            predictions['cfp'] = {'fighter1': 0.5 - min(abs(flux_diff) / 2, 0.3), 'fighter2': 0.5 + min(abs(flux_diff) / 2, 0.3)}\n\n# Extract from Causal Inference\nif causal and 'result' in causal:\n    causal_result = causal.get('result', {})\n    if 'causal_effect' in causal_result:\n        effect = causal_result.get('causal_effect', 0)\n        # Positive effect favors fighter1\n        if effect > 0:\n            predictions['causal'] = {'fighter1': 0.5 + min(effect, 0.25), 'fighter2': 0.5 - min(effect, 0.25)}\n        else:\n            predictions['causal'] = {'fighter1': 0.5 - min(abs(effect), 0.25), 'fighter2': 0.5 + min(abs(effect), 0.25)}\n\n# Extract from Temporal Analysis (text parsing)\nif temporal and 'synthesis' in temporal:\n    temporal_text = str(temporal.get('synthesis', ''))\n    # Look for probability mentions\n    prob_pattern = r'(\\d+(?:\\.\\d+)?)%'\n    probs = re.findall(prob_pattern, temporal_text)\n    if probs:\n        # Use first probability found as fighter1, second as fighter2\n        try:\n            p1 = float(probs[0]) / 100.0\n            p2 = float(probs[1]) / 100.0 if len(probs) > 1 else 1.0 - p1\n            predictions['temporal'] = {'fighter1': p1, 'fighter2': p2}\n        except:\n            pass\n\nresult = {\n    'status': 'success',\n    'tool_predictions': predictions,\n    'tools_used': list(predictions.keys())\n}\n\nprint(json.dumps(result))"
+            },
+            "output_variable": "tool_predictions"
+        },
+        "calculate_aggregate_prediction": {
+            "action_type": "execute_code",
+            "description": "Calculate weighted aggregate prediction from all tools",
+            "dependencies": ["extract_tool_predictions"],
+            "inputs": {
+                "language": "python",
+                "code": "import json\n\npredictions = {{ tool_predictions.result | from_json }}\ntool_preds = predictions.get('tool_predictions', {})\n\n# Weight different tools\n# ABM gets highest weight (direct simulation)\n# CFP and Causal get medium weight\n# Temporal gets lower weight (more qualitative)\nweights = {\n    'abm': 0.4,\n    'cfp': 0.25,\n    'causal': 0.25,\n    'temporal': 0.1\n}\n\n# Calculate weighted average\nfighter1_total = 0.0\nfighter2_total = 0.0\nweight_sum = 0.0\n\nfor tool, weight in weights.items():\n    if tool in tool_preds:\n        pred = tool_preds[tool]\n        fighter1_total += pred.get('fighter1', 0.5) * weight\n        fighter2_total += pred.get('fighter2', 0.5) * weight\n        weight_sum += weight\n\n# Normalize\nif weight_sum > 0:\n    fighter1_prob = fighter1_total / weight_sum\n    fighter2_prob = fighter2_total / weight_sum\nelse:\n    fighter1_prob = 0.5\n    fighter2_prob = 0.5\n\n# Calculate confidence (based on agreement between tools)\nif len(tool_preds) > 1:\n    # Measure variance in predictions\n    fighter1_probs = [p.get('fighter1', 0.5) for p in tool_preds.values()]\n    variance = sum((p - fighter1_prob) ** 2 for p in fighter1_probs) / len(fighter1_probs) if fighter1_probs else 0.25\n    confidence = max(0.0, 1.0 - (variance * 4))  # Lower variance = higher confidence\nelse:\n    confidence = 0.5  # Lower confidence with single tool\n\nresult = {\n    'status': 'success',\n    'final_prediction': {\n        'fighter1_probability': fighter1_prob,\n        'fighter2_probability': fighter2_prob,\n        'confidence': confidence,\n        'winner': 'fighter1' if fighter1_prob > fighter2_prob else 'fighter2',\n        'margin': abs(fighter1_prob - fighter2_prob)\n    },\n    'tool_contributions': {tool: {'weight': weights.get(tool, 0.0), 'prediction': pred} for tool, pred in tool_preds.items()}\n}\n\nprint(json.dumps(result))"
+            },
+            "output_variable": "aggregate_prediction"
+        },
+        "generate_final_answer": {
+            "action_type": "generate_text_llm",
+            "description": "Generate final comprehensive answer to 'Who would win?'",
+            "dependencies": ["calculate_aggregate_prediction"],
+            "inputs": {
+                "prompt": "Based on all analysis, provide a final answer to 'Who would win?'\n\n== AGGREGATE PREDICTION ==\n{{ aggregate_prediction.result }}\n\n== TOOL PREDICTIONS ==\n{{ tool_predictions.result }}\n\n== FIGHTER COMPARISON ==\n{{ fighter_comparison }}\n\n== TEMPORAL ANALYSIS ==\n{{ temporal_analysis }}\n\nProvide:\n1. **Direct Answer**: Who would win and why\n2. **Win Probability**: Percentage chance for each fighter\n3. **Confidence Level**: How confident we are in this prediction\n4. **Key Factors**: What attributes/strategies determine the outcome\n5. **Fight Scenario**: How the fight would likely unfold\n6. **Uncertainty**: What could change the outcome\n\nFormat as a clear, definitive answer suitable for the original query.",
+                "model_settings": { "temperature": 0.3, "max_tokens": 4096 }
+            },
+            "output_variable": "final_answer"
+        }
+    },
+    "output": {
+        "final_prediction": {
+            "winner": "{{ aggregate_prediction.result.final_prediction.winner }}",
+            "probabilities": {
+                "fighter1": "{{ aggregate_prediction.result.final_prediction.fighter1_probability }}",
+                "fighter2": "{{ aggregate_prediction.result.final_prediction.fighter2_probability }}"
+            },
+            "confidence": "{{ aggregate_prediction.result.final_prediction.confidence }}",
+            "answer": "{{ final_answer.result.generated_text }}"
+        }
+    }
+}
+
+
+
+

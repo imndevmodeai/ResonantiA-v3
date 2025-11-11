@@ -101,6 +101,7 @@ class APIKeys:
     openai_api_key: str = os.getenv("OPENAI_API_KEY")
     google_api_key: str = os.getenv("GOOGLE_API_KEY")
     groq_api_key: str = os.getenv("GROQ_API_KEY")
+    mistral_api_key: str = os.getenv("MISTRAL_API_KEY")
     # Add other API keys as needed
     # e.g., github_token: str = os.getenv("GITHUB_TOKEN")
 
@@ -151,6 +152,13 @@ LLM_PROVIDERS = {
         "default_model": "llama-3.3-70b-versatile",  # Updated to latest model
         "temperature": 0.7,
         "max_tokens": 8192
+    },
+    "mistral": {
+        "api_key": os.getenv("MISTRAL_API_KEY"),
+        "base_url": None,
+        "default_model": "mistral-small-latest",  # Recommended for free tier
+        "temperature": 0.7,
+        "max_tokens": 4096
     }
 }
 

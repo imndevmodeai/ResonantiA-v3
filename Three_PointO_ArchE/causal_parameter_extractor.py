@@ -166,6 +166,15 @@ class DynamicCausalParameterExtractor:
             logger.warning("Empty or invalid query provided to extract_from_query")
             return self._fallback_result("Empty query")
         
+        # PRIORITY 1: Transformation patterns (highest confidence, explicit "from X to Y")
+        # Check transformation patterns FIRST before other strategies
+        transform_result = self._extract_transformation_pattern(query, domain)
+        if transform_result.get('treatment') and transform_result.get('outcome') and \
+           transform_result.get('treatment') != 'unknown_treatment' and \
+           transform_result.get('outcome') != 'unknown_outcome':
+            logger.debug(f"Transformation pattern matched: '{transform_result['treatment']}' -> '{transform_result['outcome']}'")
+            return transform_result
+        
         # Strategy selection (Universal Abstraction: all strategies are pattern-based)
         if strategy == 'auto':
             strategy = self._select_strategy(query, domain, context)

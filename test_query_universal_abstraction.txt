@@ -1,0 +1,19 @@
+Test Query for Universal Abstraction & Dynamic Adaptation
+
+Query:
+"Evaluate the projected 10-year economic, social, and environmental consequences of implementing a global carbon pricing mechanism (starting in 2026, with phased rollout through 2030) across developed and developing nations, considering historical policy precedents, emergent market dynamics, causal lag effects between policy implementation and measurable outcomes, predictive modeling across multiple time horizons, and complex system interactions between energy markets, consumer behavior, and geopolitical factors. Provide a comprehensive, temporally-aware analysis that integrates historical context, causal mechanisms, emergent system behaviors, and predictive modeling."
+
+Query Analysis:
+- Temporal Elements: "10-year", "2026", "2030", "historical", "time horizons" → Should activate Mandate 6
+- Complex System Elements: "emergent market dynamics", "complex system interactions" → Should activate Mandate 9
+- Domain Keywords: "economic", "social", "environmental", "carbon pricing", "energy markets" → Multiple domains
+- SPR Keywords: "historical", "emergent", "causal", "predictive", "complex system" → Should activate multiple SPRs
+- Novel Elements: "carbon pricing mechanism" may not be in static keyword map → Tests learning mechanisms
+
+Expected Behavior:
+1. Feature Extraction: Should detect temporal markers, multiple domains, complexity indicators
+2. SPR Activation: HistoricalContextualizatioN, TemporalDynamiX, FutureStateAnalysiS, CausalLagDetectioN, EmergenceOverTimE, ComplexSystemVisioninG
+3. Mandate Selection: M₆ (Temporal Resonance), M₉ (Complex System Visioning), Cognitive Resonance
+4. Domain Customization: Economic/environmental domain rules, or learning new rules if not present
+5. Learning Opportunity: "carbon pricing" may trigger pattern learning if not in static maps
+

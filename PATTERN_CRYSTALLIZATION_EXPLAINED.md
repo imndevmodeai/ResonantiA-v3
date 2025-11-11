@@ -19,6 +19,7 @@ The Pattern Crystallization Engine is your **master distillation apparatus**, a 
 ┌─────────────────────────────────────────────────────────────────┐
 │  THE RAW CAULDRON: Your Verbose Narrative                      │
 │                                                                 │
+
 │  [A massive, murky liquid swirling with:]                      │
 │  • Verbose descriptions                                        │
 │  • Allegorical explanations                                    │

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaturbate Content Aggregator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 Chaturbate Content Aggregator</h1>
+            <p class="subtitle">View live streams and past performances</p>
+        </header>
+        
+        <main>
+            <form action="{{ url_for('process') }}" method="POST" class="input-form">
+                <div class="form-group">
+                    <label for="usernames">Enter Chaturbate Username(s) or URL(s):</label>
+                    <textarea 
+                        id="usernames" 
+                        name="usernames" 
+                        placeholder="Enter username(s) or URL(s)&#10;Examples:&#10;  alicelighthouse&#10;  https://chaturbate.com/alicelighthouse/&#10;  alicelighthouse, username2, username3&#10;&#10;Or paste a list:&#10;  yourguiltypassionn&#10;  eatme_six9&#10;  petite_fuck&#10;  ..."
+                        rows="10"
+                        required
+                    ></textarea>
+                    <small class="help-text">
+                        Supports: usernames, URLs, or comma/newline-separated lists
+                    </small>
+                </div>
+                
+                <button type="submit" class="submit-btn">View Content</button>
+            </form>
+            
+            <div class="info-section">
+                <h2>Features</h2>
+                <ul>
+                    <li>✅ Check if user is currently live on Chaturbate</li>
+                    <li>✅ View past performances from cloudbate.com</li>
+                    <li>✅ Auto-playing preview videos on page load</li>
+                    <li>✅ Multiple username support</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+

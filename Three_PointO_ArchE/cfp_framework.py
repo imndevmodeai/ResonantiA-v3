@@ -306,6 +306,71 @@ class CfpframeworK:
             logger.warning(f"Unknown evolution model type '{self.evolution_model_type}' specified. Returning unchanged state.")
             return initial_state_vector
 
+    def _evolve_state_classical(self, initial_state_vector: np.ndarray, dt: float, system_label: str) -> np.ndarray:
+        """
+        Evolves the state vector over time interval dt using a classical model.
+        This example uses simple linear interpolation towards a fixed point.
+        """
+        # A simple deterministic evolution: linear interpolation towards a fixed point (e.g., origin)
+        # The rate of change can be a property of the system
+        rate = self.system_a_config.get('classical_rate', 0.1) if system_label == 'A' else self.system_b_config.get('classical_rate', 0.1)
+        fixed_point = np.zeros_like(initial_state_vector)
+        
+        # Evolve by moving a fraction of the distance towards the fixed point
+        evolved_state = initial_state_vector + (fixed_point - initial_state_vector) * rate * dt
+        return evolved_state
+
+    def compute_classical_flux_difference(self) -> Optional[float]:
+        """
+        Computes the integrated squared difference in the expectation value of the
+        chosen observable between system A and system B over the time horizon using classical evolution.
+        """
+        logger.info(f"Computing Classical Flux Difference for observable '{self.observable_name}' over T={self.time_horizon}...")
+        try:
+            state_a_initial = superposition_state(self.state_a_initial_raw)
+            state_b_initial = superposition_state(self.state_b_initial_raw)
+        except (ValueError, TypeError) as e_norm:
+            logger.error(f"Invalid initial state vector for classical flux calculation: {e_norm}")
+            return None
+        
+        op = self.observable_operator
+
+        def integrand(t: float) -> float:
+            try:
+                state_a_t = self._evolve_state_classical(state_a_initial, t, 'A')
+                state_b_t = self._evolve_state_classical(state_b_initial, t, 'B')
+
+                if state_a_t.ndim == 1: state_a_t = state_a_t[:, np.newaxis]
+                if state_b_t.ndim == 1: state_b_t = state_b_t[:, np.newaxis]
+
+                exp_a = np.real((state_a_t.conj().T @ op @ state_a_t)[0,0])
+                exp_b = np.real((state_b_t.conj().T @ op @ state_b_t)[0,0])
+
+                diff_sq = (exp_a - exp_b)**2
+                if np.isnan(diff_sq):
+                    logger.warning(f"NaN encountered in classical integrand calculation at t={t}. Returning NaN for this point.")
+                    return np.nan
+                return diff_sq
+            except Exception as e_inner:
+                logger.error(f"Error calculating classical integrand at t={t}: {e_inner}", exc_info=True)
+                return np.nan
+
+        try:
+            integral_result, abserr, infodict = quad(integrand, 0, self.time_horizon, limit=self.integration_steps * 5, full_output=True, epsabs=1.49e-08, epsrel=1.49e-08)
+            num_evals = infodict.get('neval', 0)
+            logger.info(f"Classical integration completed. Result: {integral_result:.6f}, Est. Abs Error: {abserr:.4g}, Function Evals: {num_evals}")
+
+            if 'message' in infodict and infodict['message'] != 'OK':
+                logger.warning(f"Classical integration warning/message: {infodict['message']}")
+            if np.isnan(integral_result):
+                logger.error("Classical integration resulted in NaN.")
+                return None
+            
+            return float(integral_result)
+        except Exception as e_quad:
+            logger.error(f"Error during classical numerical integration (quad): {e_quad}", exc_info=True)
+            return None
+
     def compute_quantum_flux_difference(self) -> Optional[float]:
         """
         Computes the integrated squared difference in the expectation value of the
@@ -462,17 +527,24 @@ class CfpframeworK:
 
     def compute_spooky_flux_divergence(self) -> Optional[float]:
         """
-        Calculates Spooky Flux Divergence (Conceptual).
-        Requires defining and calculating a 'classical' baseline flux for comparison.
-        Currently returns None as baseline is not implemented.
+        Calculates Spooky Flux Divergence by comparing the quantum flux difference
+        to the classical flux difference. Requires both calculations to succeed.
         """
-        logger.warning("Spooky Flux Divergence calculation requires a classical baseline flux which is not implemented in this version. Returning None.")
-        # Conceptual Steps:
-        # 1. Define a classical analogue system or evolution rule.
-        # 2. Calculate the flux difference based on the classical evolution (e.g., classical_flux_difference).
-        # 3. Calculate the quantum flux difference (qfd = self.compute_quantum_flux_difference()).
-        # 4. Compute divergence, e.g., abs(qfd - classical_flux_difference) or a ratio.
-        return None # Return None until implemented
+        logger.info("Computing Spooky Flux Divergence...")
+        
+        qfd = self.compute_quantum_flux_difference()
+        if qfd is None:
+            logger.error("Cannot compute Spooky Flux Divergence: Quantum Flux Difference calculation failed.")
+            return None
+
+        cfd = self.compute_classical_flux_difference()
+        if cfd is None:
+            logger.error("Cannot compute Spooky Flux Divergence: Classical Flux Difference calculation failed.")
+            return None
+
+        divergence = abs(qfd - cfd)
+        logger.info(f"Spooky Flux Divergence calculated: |{qfd:.4f} (QFD) - {cfd:.4f} (CFD)| = {divergence:.4f}")
+        return divergence
 
     def run_analysis(self) -> Dict[str, Any]:
         """
@@ -500,6 +572,10 @@ class CfpframeworK:
             # --- Execute Core Calculations ---
             qfd = self.compute_quantum_flux_difference()
             primary_results['quantum_flux_difference'] = qfd if qfd is not None else None # Store if valid number
+
+            # Also compute classical flux for comparison and to enable spooky flux
+            cfd = self.compute_classical_flux_difference()
+            primary_results['classical_flux_difference'] = cfd if cfd is not None else None
 
             ec = self.quantify_entanglement_correlation()
             primary_results['entanglement_correlation_MI'] = ec if ec is not None else None

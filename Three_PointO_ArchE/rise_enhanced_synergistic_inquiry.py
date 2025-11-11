@@ -171,9 +171,17 @@ class RISEEnhancedSynergisticInquiry:
             6. Knowledge Gaps: What information gaps need to be filled?
             7. Synthesis Requirements: What level of synthesis is needed?
             
-            **CRITICAL: You MUST respond with ONLY a valid JSON object. No additional text, explanations, or markdown formatting outside the JSON.**
+            **CRITICAL JSON FORMAT REQUIREMENTS:**
+            - You MUST respond with ONLY a valid JSON object
+            - NO markdown code fences (no ```json or ```)
+            - NO explanatory text before or after the JSON
+            - ALL property names MUST be in double quotes (e.g., "key" not key)
+            - ALL string values MUST be in double quotes
+            - NO single quotes anywhere
+            - NO trailing commas
+            - Start with {{ and end with }}
             
-            Return a structured JSON analysis with this exact format:
+            Return a structured JSON analysis with this EXACT format (copy this structure exactly):
             {{
                 "resonant_insights": ["insight1", "insight2"],
                 "strategic_requirements": ["requirement1", "requirement2"],
@@ -185,7 +193,8 @@ class RISEEnhancedSynergisticInquiry:
                 "analytical_depth": "surface|deep|comprehensive|genius"
             }}
             
-            Respond with ONLY the JSON object, nothing else.
+            Your response must be valid JSON that can be parsed by json.loads() without any preprocessing.
+            Start your response with {{ and end with }}. Do not include any text outside the JSON object.
             """
             
             llm_response = self.synthesis_engine.llm_provider.generate_chat(
@@ -500,10 +509,14 @@ class RISEEnhancedSynergisticInquiry:
     
     # Helper methods
     def _parse_rise_analysis(self, llm_response: Any) -> Dict[str, Any]:
-        """Parse RISE analysis from LLM response."""
+        """Parse RISE analysis from LLM response with robust error handling."""
         try:
+            # Extract response text
             if isinstance(llm_response, dict):
-                response_text = llm_response.get("generated_text", "")
+                response_text = llm_response.get("generated_text", "") or llm_response.get("content", "") or llm_response.get("text", "")
+                if not response_text:
+                    # Try to get from nested structure
+                    response_text = str(llm_response)
             else:
                 response_text = str(llm_response)
             
@@ -511,7 +524,12 @@ class RISEEnhancedSynergisticInquiry:
                 logger.warning("RISE analysis: Empty response text")
                 return self._fallback_rise_analysis("")
             
-            # Try multiple parsing strategies
+            # Clean up response text
+            response_text = response_text.strip()
+            
+            # Strategy 0: Try to fix common JSON issues before parsing
+            # Remove leading/trailing whitespace, fix common issues
+            cleaned_text = self._clean_json_response(response_text)
             
             # Strategy 1: Try to find JSON block (code fence or plain)
             # First, try to extract from code fences
@@ -521,64 +539,93 @@ class RISEEnhancedSynergisticInquiry:
             ]
             
             for pattern in code_fence_patterns:
-                fence_match = re.search(pattern, response_text, re.DOTALL)
+                fence_match = re.search(pattern, cleaned_text, re.DOTALL)
                 if fence_match:
                     json_str = fence_match.group(1).strip()
                     if json_str.startswith('{'):
                         # Try to extract complete JSON by matching braces
                         json_str = self._extract_complete_json(json_str)
                         if json_str:
-                            try:
-                                parsed = json.loads(json_str)
-                                if isinstance(parsed, dict):
-                                    logger.debug("RISE analysis: Successfully parsed JSON from code fence")
-                                    return parsed
-                            except json.JSONDecodeError as e:
-                                logger.debug(f"RISE analysis: JSON decode error from code fence: {e}")
-                                continue
+                            # Try to fix and parse
+                            fixed_json = self._fix_json_string(json_str)
+                            if fixed_json:
+                                try:
+                                    parsed = json.loads(fixed_json)
+                                    if isinstance(parsed, dict):
+                                        logger.debug("RISE analysis: Successfully parsed JSON from code fence")
+                                        return parsed
+                                except json.JSONDecodeError as e:
+                                    logger.debug(f"RISE analysis: JSON decode error from code fence: {e}")
+                                    continue
             
             # Strategy 1b: Try to find standalone JSON object
             # Find first { and try to extract complete JSON
-            first_brace = response_text.find('{')
+            first_brace = cleaned_text.find('{')
             if first_brace != -1:
-                json_str = self._extract_complete_json(response_text[first_brace:])
+                json_str = self._extract_complete_json(cleaned_text[first_brace:])
                 if json_str:
-                    try:
-                        parsed = json.loads(json_str)
-                        if isinstance(parsed, dict):
-                            logger.debug("RISE analysis: Successfully parsed standalone JSON")
-                            return parsed
-                    except json.JSONDecodeError:
-                        pass
+                    fixed_json = self._fix_json_string(json_str)
+                    if fixed_json:
+                        try:
+                            parsed = json.loads(fixed_json)
+                            if isinstance(parsed, dict):
+                                logger.debug("RISE analysis: Successfully parsed standalone JSON")
+                                return parsed
+                        except json.JSONDecodeError as e:
+                            logger.debug(f"RISE analysis: Standalone JSON parse error: {e}")
             
             # Strategy 2: Try ast.literal_eval for Python dict syntax
             try:
                 import ast
                 # Try to find Python dict-like structure
-                dict_match = re.search(r'\{[^}]*\}', response_text, re.DOTALL)
+                dict_match = re.search(r'\{[^}]*\}', cleaned_text, re.DOTALL)
                 if dict_match:
                     dict_str = dict_match.group(0)
-                    parsed = ast.literal_eval(dict_str)
-                    if isinstance(parsed, dict):
-                        logger.debug("RISE analysis: Successfully parsed using ast.literal_eval")
-                        return parsed
-            except (ValueError, SyntaxError) as e:
-                logger.debug(f"RISE analysis: ast.literal_eval failed: {e}")
+                    # Try to extract complete dict with proper brace matching
+                    dict_str = self._extract_complete_json(dict_str)
+                    if dict_str:
+                        # Convert single quotes to double quotes for JSON
+                        json_compatible = self._fix_json_string(dict_str)
+                        try:
+                            parsed = json.loads(json_compatible)
+                            if isinstance(parsed, dict):
+                                logger.debug("RISE analysis: Successfully parsed using ast.literal_eval path")
+                                return parsed
+                        except json.JSONDecodeError:
+                            # Fallback to ast.literal_eval
+                            try:
+                                parsed = ast.literal_eval(dict_str)
+                                if isinstance(parsed, dict):
+                                    logger.debug("RISE analysis: Successfully parsed using ast.literal_eval")
+                                    return parsed
+                            except (ValueError, SyntaxError):
+                                pass
+            except Exception as e:
+                logger.debug(f"RISE analysis: ast.literal_eval path failed: {e}")
             
             # Strategy 3: Try to extract structured data from markdown or text
             # Look for key-value patterns
-            structured_data = self._extract_structured_data_from_text(response_text)
+            structured_data = self._extract_structured_data_from_text(cleaned_text)
             if structured_data:
                 logger.debug("RISE analysis: Successfully extracted structured data from text")
                 return structured_data
             
             # Fallback parsing
             logger.warning("RISE analysis: All parsing strategies failed, using fallback")
+            # Log full response for debugging (first 500 chars to see structure)
+            response_preview = response_text[:500] if 'response_text' in locals() else str(llm_response)[:500]
+            logger.debug(f"RISE parsing failed - Full response preview (500 chars):\n{response_preview}")
             return self._fallback_rise_analysis(response_text)
             
         except Exception as e:
-            logger.warning(f"RISE analysis parsing failed: {e}", exc_info=True)
-            return self._fallback_rise_analysis("")
+            # Log the problematic response for debugging (truncated to avoid log spam)
+            response_preview = response_text[:500] if 'response_text' in locals() else str(llm_response)[:500]
+            logger.warning(
+                f"RISE analysis parsing failed: {e}. "
+                f"Response preview (500 chars):\n{response_preview}...",
+                exc_info=True
+            )
+            return self._fallback_rise_analysis(response_text if 'response_text' in locals() else "")
     
     def _extract_complete_json(self, text: str) -> Optional[str]:
         """Extract a complete JSON object by matching braces."""
@@ -615,6 +662,90 @@ class RISEEnhancedSynergisticInquiry:
         if json_end > 0:
             return text[:json_end]
         return None
+    
+    def _clean_json_response(self, text: str) -> str:
+        """Clean up response text before JSON parsing."""
+        if not text:
+            return text
+        
+        # Remove common prefixes that might cause issues
+        text = text.strip()
+        
+        # Remove BOM if present
+        if text.startswith('\ufeff'):
+            text = text[1:]
+        
+        # Remove leading/trailing whitespace
+        text = text.strip()
+        
+        return text
+    
+    def _fix_json_string(self, json_str: str) -> Optional[str]:
+        """Fix common JSON issues: single quotes, trailing commas, etc."""
+        if not json_str or not json_str.strip():
+            return None
+        
+        try:
+            # First, try to parse as-is (might already be valid)
+            json.loads(json_str)
+            return json_str
+        except json.JSONDecodeError:
+            pass
+        
+        # Fix common issues
+        fixed = json_str.strip()
+        
+        # Remove leading/trailing whitespace
+        fixed = fixed.strip()
+        
+        # If it doesn't start with {, try to find the first {
+        if not fixed.startswith('{'):
+            first_brace = fixed.find('{')
+            if first_brace != -1:
+                fixed = fixed[first_brace:]
+        
+        # Fix common JSON issues
+        try:
+            # Fix single quotes to double quotes (but preserve escaped quotes)
+            # Strategy: Replace ' with " but only when it's a quote delimiter
+            # Match keys: 'key': -> "key":
+            fixed = re.sub(r"'([^']*)':", r'"\1":', fixed)
+            # Match values: : 'value' -> : "value"
+            fixed = re.sub(r":\s*'([^']*)'", r': "\1"', fixed)
+            # Match array items: 'item' -> "item"
+            fixed = re.sub(r"\[\s*'([^']*)'", r'[ "\1"', fixed)
+            fixed = re.sub(r",\s*'([^']*)'", r', "\1"', fixed)
+            
+            # Fix unquoted keys (e.g., { key: "value" } -> { "key": "value" })
+            fixed = re.sub(r'{\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*:', r'{"\1":', fixed)
+            fixed = re.sub(r',\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*:', r', "\1":', fixed)
+            
+            # Remove trailing commas before } or ]
+            fixed = re.sub(r',(\s*[}\]])', r'\1', fixed)
+            
+            # Remove any leading/trailing whitespace
+            fixed = fixed.strip()
+            
+            # Try parsing again
+            json.loads(fixed)
+            return fixed
+        except (json.JSONDecodeError, re.error) as e:
+            logger.debug(f"JSON fixing failed: {e}, attempting alternative fixes")
+            # Alternative: try to extract just the JSON structure
+            try:
+                # Find the first { and try to extract complete structure
+                first_brace = fixed.find('{')
+                if first_brace != -1:
+                    extracted = self._extract_complete_json(fixed[first_brace:])
+                    if extracted:
+                        # Try one more fix pass
+                        extracted = re.sub(r',(\s*[}\]])', r'\1', extracted)
+                        json.loads(extracted)
+                        return extracted
+            except:
+                pass
+            # If fixing doesn't work, return None to try other strategies
+            return None
     
     def _extract_structured_data_from_text(self, text: str) -> Optional[Dict[str, Any]]:
         """Extract structured data from text using pattern matching."""

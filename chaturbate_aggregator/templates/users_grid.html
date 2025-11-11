@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Rooms Grid - Chaturbate Aggregator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/grid.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 Live Rooms Grid</h1>
+            <a href="{{ url_for('index') }}" class="back-link">← Back to Search</a>
+            <p class="subtitle">{{ users_data|length }} rooms</p>
+        </header>
+        
+        <main>
+            <div class="rooms-grid">
+                {% for user in users_data %}
+                <a href="{{ url_for('user_page', username=user.username) }}" class="room-card">
+                    <div class="room-thumbnail-container">
+                        {% if user.live_status.is_live %}
+                        <div class="live-badge">🔴 LIVE</div>
+                        {% else %}
+                        <div class="offline-badge">⚫ OFFLINE</div>
+                        {% endif %}
+                        {% if user.live_status.mmcdn_thumbnail %}
+                        <img 
+                            src="{{ user.live_status.mmcdn_thumbnail }}" 
+                            alt="{{ user.username }}" 
+                            class="room-thumbnail mmcdn-thumbnail {% if user.live_status.is_live %}live-thumbnail{% else %}offline-thumbnail{% endif %}" 
+                            data-username="{{ user.username }}"
+                            data-mmcdn-base="{{ user.live_status.mmcdn_thumbnail }}"
+                            loading="lazy"
+                        >
+                        {% elif user.live_status.thumbnail %}
+                        <img src="{{ user.live_status.thumbnail }}" alt="{{ user.username }}" class="room-thumbnail" loading="lazy">
+                        {% else %}
+                        <div class="room-thumbnail-placeholder {% if not user.live_status.is_live %}offline{% endif %}">
+                            <span>{{ user.username[0].upper() }}</span>
+                        </div>
+                        {% endif %}
+                        {% if user.live_status.is_live and user.live_status.hls_url %}
+                        <video 
+                            class="room-preview-video" 
+                            muted 
+                            loop 
+                            playsinline 
+                            webkit-playsinline
+                            preload="metadata"
+                            data-hls-url="{{ user.live_status.hls_url }}"
+                        >
+                            <source src="{{ user.live_status.hls_url }}" type="application/x-mpegURL">
+                        </video>
+                        {% endif %}
+                    </div>
+                    <div class="room-info">
+                        <h3 class="room-username">{{ user.username }}</h3>
+                        {% if user.live_status.is_live %}
+                        <div class="room-stats">
+                            {% if user.live_status.viewers %}
+                            <span class="viewers-count">👁️ {{ user.live_status.viewers }}</span>
+                            {% endif %}
+                            <span class="status-text">Live Now</span>
+                        </div>
+                        {% else %}
+                        <div class="room-stats">
+                            <span class="status-text">Offline</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/live-thumbnails.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/grid.js') }}"></script>
+</body>
+</html>
+

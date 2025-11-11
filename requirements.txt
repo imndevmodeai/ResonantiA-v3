@@ -60,6 +60,7 @@ seaborn
 # Added for RISE v2.0 and advanced analytics
 ortools
 selenium
+webdriver-manager  # Required for Enhanced Perception Engine
 dowhy
 mesa
 youtube-transcript-api
@@ -68,3 +69,12 @@ Jinja2
 # Quantum computing for CFP framework enhancement
 qiskit>=1.0.0
 qiskit-aer>=0.15.0
+
+# XAI libraries for Project Illumination
+shap>=0.42.0
+lime>=0.2.0
+
+# Optional dependencies (install if needed for specific features)
+# mediapipe>=0.10.0  # For webcam streaming effects (optional)
+# redis>=5.0.0  # For Redis-based caching/queuing (optional)
+# websockets>=12.0  # For VCD WebSocket server (optional, but recommended)

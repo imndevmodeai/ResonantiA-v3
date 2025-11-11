@@ -126,13 +126,29 @@ class EnhancedLLMProvider(BaseLLMProvider):
         """
         if not self.enable_caching or not self.cache:
             # No caching, use direct generation
-            response = self.base_provider.generate(prompt, model, max_tokens, temperature, **kwargs)
-            return response, {
-                'tokens_used': len(response.split()),  # Rough estimate
-                'cost_estimate': 0.0,  # Would need actual API response for accurate cost
-                'cache_type': 'none',
-                'confidence': 1.0
-            }
+            try:
+                response = self.base_provider.generate(prompt, model, max_tokens, temperature, **kwargs)
+                # Ensure response is a string
+                if not isinstance(response, str):
+                    raise LLMProviderError(
+                        f"Expected string response, got {type(response)}",
+                        provider=self._provider_name
+                    )
+                return response, {
+                    'tokens_used': len(response.split()),  # Rough estimate
+                    'cost_estimate': 0.0,  # Would need actual API response for accurate cost
+                    'cache_type': 'none',
+                    'confidence': 1.0
+                }
+            except Exception as e:
+                logger.error(f"Generation failed in _cached_generate: {e}")
+                if isinstance(e, LLMProviderError):
+                    raise
+                raise LLMProviderError(
+                    f"Generation failed: {str(e)}",
+                    provider=self._provider_name,
+                    original_exception=e
+                )
         
         # Try to get from cache first
         cache_key_params = {
@@ -150,7 +166,23 @@ class EnhancedLLMProvider(BaseLLMProvider):
         # Cache miss, generate new response
         logger.debug(f"Cache MISS for query: {prompt[:50]}...")
         start_time = time.time()
-        response = self.base_provider.generate(prompt, model, max_tokens, temperature, **kwargs)
+        try:
+            response = self.base_provider.generate(prompt, model, max_tokens, temperature, **kwargs)
+            # Ensure response is a string
+            if not isinstance(response, str):
+                raise LLMProviderError(
+                    f"Expected string response, got {type(response)}",
+                    provider=self._provider_name
+                )
+        except Exception as e:
+            logger.error(f"Generation failed in _cached_generate (cached path): {e}")
+            if isinstance(e, LLMProviderError):
+                raise
+            raise LLMProviderError(
+                f"Generation failed: {str(e)}",
+                provider=self._provider_name,
+                original_exception=e
+            )
         generation_time = time.time() - start_time
         
         # Estimate tokens and cost (in production, get from API response)
@@ -812,4 +844,4 @@ def get_enhanced_llm_provider(base_provider_name: Optional[str] = None, **kwargs
     base_provider = get_llm_provider(base_provider_name or "google")
     return EnhancedLLMProvider(base_provider, **kwargs)
 
-# --- END OF FILE Three_PointO_ArchE/enhanced_llm_provider.py --- 
+# --- END OF FILE Three_PointO_ArchE/enhanced_llm_provider.py ---                                                                                                                                                                                       

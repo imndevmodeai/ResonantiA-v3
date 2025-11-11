@@ -32,6 +32,11 @@ from .adaptive_cognitive_orchestrator import AdaptiveCognitiveOrchestrator
 from .executable_spec_parser import ExecutableSpecParser
 from .cfp_framework import CfpFramework
 from .distributed_arche_registry import DistributedArcheRegistry
+from . import phiên_dịch_so_sánh_luồng_tương_tự_được_tăng_cường_lượng_tử
+from . import khai_thác_dữ_liệu_và_lập_hồ_sơ
+from . import trí_tuệ_thích_ứng_cho_an_ninh_mạng_tiên_tiến
+from . import tăng_cường_khả_năng_xử_lý_ngôn_ngữ_tự_nhiên_với_sự_hài_hước_và_thông_minh_nhân_tạo
+from .proposal_framework import ProposalFramework
 
 # --- Singleton Instantiation ---
 # Instantiate and configure the core singleton objects that will be used

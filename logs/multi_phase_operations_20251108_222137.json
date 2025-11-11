@@ -1,0 +1,46 @@
+{
+  "operation": "multi_phase_system_operations",
+  "timestamp": "2025-11-08T22:21:37.924646",
+  "summary": {
+    "success_count": 3,
+    "partial_count": 1,
+    "failed_count": 0,
+    "overall_confidence": 0.7
+  },
+  "phase_results": {
+    "phase1": {
+      "status": "success",
+      "confidence": 0.95,
+      "task_id": "phase1_document_processing",
+      "reflection": "Phase 1 complete: 2/2 documents processed successfully",
+      "potential_issues": [],
+      "alignment_check": "aligned"
+    },
+    "phase2": {
+      "status": "success",
+      "confidence": 0.85,
+      "task_id": "phase2_cognitive_task",
+      "reflection": "Phase 2 complete: Pattern detection executed, 100 entries analyzed",
+      "potential_issues": [],
+      "alignment_check": "aligned"
+    },
+    "phase3": {
+      "status": "success",
+      "confidence": 0.5,
+      "task_id": "phase3_health_review",
+      "reflection": "Phase 3 complete: System health degraded, 1 active alerts",
+      "potential_issues": [],
+      "alignment_check": "aligned"
+    },
+    "phase4": {
+      "status": "partial",
+      "confidence": 0.5,
+      "task_id": "phase4_workflow_execution",
+      "reflection": "Phase 4 complete: Workflow unknown executed",
+      "potential_issues": [
+        "'IARCompliantWorkflowEngine' object has no attribute '_validate_workflow'"
+      ],
+      "alignment_check": "aligned"
+    }
+  }
+}

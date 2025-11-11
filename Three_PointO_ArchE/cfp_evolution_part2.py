@@ -1,8 +1,31 @@
-
 # ============================================================================
 # TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
 # ============================================================================
 from Three_PointO_ArchE.temporal_core import now, now_iso, ago, from_now, format_log, format_filename
+
+from typing import Dict, Any, List, Optional, Tuple
+import logging
+import numpy as np
+import asyncio
+from datetime import datetime
+
+# Import from part1
+try:
+    from .cfp_evolution_part1 import QuantumFluxSimulator, ModuleMetrics, FluxAnalysis, CFPEvolutionResult, EvolutionPhase
+except ImportError:
+    from cfp_evolution_part1 import QuantumFluxSimulator, ModuleMetrics, FluxAnalysis, CFPEvolutionResult, EvolutionPhase
+
+# Optional LLM provider imports
+try:
+    from .llm_providers import BaseLLMProvider, GoogleProvider
+except ImportError:
+    BaseLLMProvider = None
+    try:
+        from .llm_providers.google import GoogleProvider
+    except ImportError:
+        GoogleProvider = None
+
+logger = logging.getLogger(__name__)
 
 class CFPEvolutionEngine:
     """
@@ -10,8 +33,11 @@ class CFPEvolutionEngine:
     Implements CRITICAL_MANDATES.md compliance with advanced synergy analysis
     """
     
-    def __init__(self, llm_provider: Optional[BaseLLMProvider] = None):
-        self.llm_provider = llm_provider or GoogleProvider()
+    def __init__(self, llm_provider=None):
+        if llm_provider is None and GoogleProvider is not None:
+            self.llm_provider = GoogleProvider()
+        else:
+            self.llm_provider = llm_provider
         self.quantum_simulator = QuantumFluxSimulator()
         self.module_registry = {}
         self.synergy_history = []

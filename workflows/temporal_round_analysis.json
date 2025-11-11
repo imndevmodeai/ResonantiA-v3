@@ -1,0 +1,63 @@
+{
+    "workflow_name": "Temporal Round-by-Round Analysis",
+    "version": "1.0",
+    "description": "Performs temporally-aware analysis predicting how the fight evolves round-by-round, accounting for fatigue, momentum shifts, and adaptive strategies.",
+    "input_parameters": {
+        "fighter_attributes": { "type": "dict" },
+        "cfp_results": { "type": "dict" },
+        "abm_results": { "type": "dict" }
+    },
+    "tasks": {
+        "predict_early_rounds": {
+            "action_type": "generate_text_llm",
+            "description": "Predict fight dynamics in early rounds (1-4)",
+            "inputs": {
+                "prompt": "Based on the fighter attributes and tool results, predict how the fight will unfold in rounds 1-4:\n\n== FIGHTER ATTRIBUTES ==\n{{ fighter_attributes }}\n\n== CFP RESULTS ==\n{{ cfp_results }}\n\n== ABM RESULTS ==\n{{ abm_results }}\n\nAnalyze:\n1. **Round 1-2**: Initial strategy, who establishes control\n2. **Round 3-4**: First adjustments, momentum shifts\n3. **Key Events**: Knockdowns, cuts, strategic changes\n4. **Advantage Shifts**: How advantages change over early rounds\n\nOutput predictions with probabilities for each round.",
+                "model_settings": { "temperature": 0.5, "max_tokens": 1536 }
+            },
+            "output_variable": "early_rounds_prediction"
+        },
+        "predict_middle_rounds": {
+            "action_type": "generate_text_llm",
+            "description": "Predict fight dynamics in middle rounds (5-8)",
+            "inputs": {
+                "prompt": "Based on the fighter attributes and tool results, predict how the fight will unfold in rounds 5-8:\n\n== FIGHTER ATTRIBUTES ==\n{{ fighter_attributes }}\n\n== EARLY ROUNDS ==\n{{ early_rounds_prediction.result.generated_text }}\n\n== CFP RESULTS ==\n{{ cfp_results }}\n\nAnalyze:\n1. **Fatigue Effects**: How stamina differences manifest\n2. **Strategic Adaptations**: How each fighter adjusts\n3. **Momentum**: Who gains/loses momentum and why\n4. **Critical Moments**: Potential fight-changing events\n\nOutput predictions with probabilities for each round.",
+                "model_settings": { "temperature": 0.5, "max_tokens": 1536 },
+                "dependencies": ["predict_early_rounds"]
+            },
+            "output_variable": "middle_rounds_prediction"
+        },
+        "predict_late_rounds": {
+            "action_type": "generate_text_llm",
+            "description": "Predict fight dynamics in late rounds (9-12)",
+            "inputs": {
+                "prompt": "Based on the fighter attributes and tool results, predict how the fight will unfold in rounds 9-12:\n\n== FIGHTER ATTRIBUTES ==\n{{ fighter_attributes }}\n\n== EARLY ROUNDS ==\n{{ early_rounds_prediction.result.generated_text }}\n\n== MIDDLE ROUNDS ==\n{{ middle_rounds_prediction.result.generated_text }}\n\n== CFP RESULTS ==\n{{ cfp_results }}\n\nAnalyze:\n1. **Stamina Decay**: How fatigue affects each fighter\n2. **Final Push**: Who has energy for championship rounds\n3. **Decision Factors**: What judges will see in close rounds\n4. **Finish Scenarios**: KO/TKO possibilities vs decision\n\nOutput predictions with probabilities for each round and final outcome.",
+                "model_settings": { "temperature": 0.5, "max_tokens": 1536 },
+                "dependencies": ["predict_early_rounds", "predict_middle_rounds"]
+            },
+            "output_variable": "late_rounds_prediction"
+        },
+        "synthesize_temporal_analysis": {
+            "action_type": "generate_text_llm",
+            "description": "Synthesize complete temporal analysis across all rounds",
+            "dependencies": ["predict_early_rounds", "predict_middle_rounds", "predict_late_rounds"],
+            "inputs": {
+                "prompt": "Synthesize a complete temporally-aware analysis of the fight:\n\n== EARLY ROUNDS (1-4) ==\n{{ early_rounds_prediction.result.generated_text }}\n\n== MIDDLE ROUNDS (5-8) ==\n{{ middle_rounds_prediction.result.generated_text }}\n\n== LATE ROUNDS (9-12) ==\n{{ late_rounds_prediction.result.generated_text }}\n\nCreate a comprehensive temporal analysis that:\n1. Shows how the fight evolves over time\n2. Identifies key turning points and momentum shifts\n3. Explains causal mechanisms (why things change)\n4. Predicts outcome probabilities at different time horizons\n5. Accounts for emergent dynamics (unexpected events)\n\nOutput as structured temporal analysis with clear time progression.",
+                "model_settings": { "temperature": 0.4, "max_tokens": 3072 }
+            },
+            "output_variable": "temporal_analysis"
+        }
+    },
+    "output": {
+        "temporal_analysis": {
+            "early_rounds": "{{ early_rounds_prediction.result.generated_text }}",
+            "middle_rounds": "{{ middle_rounds_prediction.result.generated_text }}",
+            "late_rounds": "{{ late_rounds_prediction.result.generated_text }}",
+            "synthesis": "{{ temporal_analysis.result.generated_text }}"
+        }
+    }
+}
+
+
+
+

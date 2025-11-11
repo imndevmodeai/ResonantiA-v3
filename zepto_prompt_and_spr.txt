@@ -1,0 +1,91 @@
+================================================================================
+ZEPTO COMPRESSION: OBJECTIVE GENERATION ENGINE SPECIFICATION
+================================================================================
+
+COMPRESSED ZEPTO SPR:
+OGE:⟦→⦅→⊢→⊨→⊧→Assemble→◊
+
+Original Size: 48,272 characters
+Compressed Size: 24 characters
+Compression Ratio: 2011.33:1
+
+================================================================================
+LLM DECOMPRESSION PROMPT
+================================================================================
+
+You are an expert at deciphering compressed symbolic representations and technical documentation.
+
+I have a Zepto SPR (Sparse Priming Representation) - a hyper-compressed symbolic form of a technical specification document.
+Your task is to decompress and decipher it, reconstructing the original meaning and structure.
+
+Zepto SPR (compressed specification):
+OGE:⟦→⦅→⊢→⊨→⊧→Assemble→◊
+
+Symbol Codex Entries (for reference):
+{
+  "⊢": {
+    "symbol": "⊢",
+    "meaning": "SPR Activation - keyword lookup, triggering pattern matching and symbol activation.",
+    "context": "Objective Generation Engine Workflow"
+  },
+  "⟦": {
+    "symbol": "⟦",
+    "meaning": "Query Intake - raw user query, denoting the initial input for objective generation.",
+    "context": "Objective Generation Engine Workflow"
+  },
+  "⦅": {
+    "symbol": "⦅",
+    "meaning": "Feature Extraction - pattern matching in objective generation.",
+    "context": "Objective Generation Engine Workflow"
+  },
+  "◊": {
+    "symbol": "◊",
+    "meaning": "Zepto Objective - pure symbolic form",
+    "context": "Pattern Crystallization Meta-Process, Objective Generation Engine Workflow"
+  },
+  "⊧": {
+    "symbol": "⊧",
+    "meaning": "Template Assembly - string substitution",
+    "context": "Pattern Crystallization Meta-Process, specifically the Symbolic Vocabulary for Objective Generation"
+  },
+  "⊨": {
+    "symbol": "⊨",
+    "meaning": "Mandate Selection / Domain Customization - rule-based",
+    "context": "Objective Generation Engine Workflow"
+  }
+}
+
+Original specification was approximately 48,272 characters.
+
+Instructions:
+1. Analyze the Zepto SPR structure and symbols carefully
+2. Decompress it back to readable, comprehensive text
+3. Explain what the original specification was about
+4. Identify key concepts, architecture, components, stages, and technical details
+5. Reconstruct the specification structure (sections, parts, stages, etc.)
+6. Identify the 8-stage crystallization process if present
+7. Extract any code examples, symbolic representations, or implementation details
+8. Provide a detailed summary of the decompressed content
+
+Format your response as:
+## Decompressed Specification Content
+[Full decompressed text - reconstruct as much as possible]
+
+## Analysis & Deciphering
+[Your analysis of what the specification means, its purpose, and structure]
+
+## Key Concepts Identified
+[List of key concepts, components, stages, processes]
+
+## Technical Details
+[Technical architecture, implementation details, code structure, etc.]
+
+## Specification Structure
+[The structure of the original specification - sections, parts, stages]
+
+## Compression Analysis
+[How effective was the compression? What information was preserved? What was lost?]
+
+Begin decompression:
+
+

@@ -111,6 +111,19 @@ class GroqProvider(BaseLLMProvider):
             # Get system prompt from kwargs if provided
             system_prompt = kwargs.pop("system_prompt", None)
             
+            # Remove common non-Groq parameters that might be passed
+            kwargs.pop("prompt_name", None)
+            kwargs.pop("prompt_template_name", None)
+            kwargs.pop("template_vars", None)
+            kwargs.pop("template_vars_from_files", None)
+            
+            # Filter to only Groq-valid parameters
+            groq_valid_params = {
+                "top_p", "stream", "stop", "presence_penalty", "frequency_penalty",
+                "logit_bias", "user", "response_format", "seed", "tools", "tool_choice"
+            }
+            filtered_kwargs = {k: v for k, v in kwargs.items() if k in groq_valid_params}
+            
             # Build messages for Groq chat completion (required format)
             messages = []
             if system_prompt:
@@ -123,7 +136,7 @@ class GroqProvider(BaseLLMProvider):
                 messages=messages,
                 max_tokens=max_tokens if max_tokens > 0 else self.default_max_tokens,
                 temperature=temperature if temperature is not None else self.default_temperature,
-                **kwargs
+                **filtered_kwargs
             )
             
             # Extract response text (Groq returns response.choices[0].message.content)
@@ -173,13 +186,26 @@ class GroqProvider(BaseLLMProvider):
                     raise ValueError(f"Invalid role '{role}'. Groq supports: system, user, assistant")
                 formatted_messages.append({"role": role, "content": content})
             
+            # Remove common non-Groq parameters that might be passed
+            kwargs.pop("prompt_name", None)
+            kwargs.pop("prompt_template_name", None)
+            kwargs.pop("template_vars", None)
+            kwargs.pop("template_vars_from_files", None)
+            
+            # Filter to only Groq-valid parameters
+            groq_valid_params = {
+                "top_p", "stream", "stop", "presence_penalty", "frequency_penalty",
+                "logit_bias", "user", "response_format", "seed", "tools", "tool_choice"
+            }
+            filtered_kwargs = {k: v for k, v in kwargs.items() if k in groq_valid_params}
+            
             # Use Groq chat completions API (correct syntax)
             response = self._client.chat.completions.create(
                 model=model,
                 messages=formatted_messages,
                 max_tokens=max_tokens if max_tokens > 0 else self.default_max_tokens,
                 temperature=temperature if temperature is not None else self.default_temperature,
-                **kwargs
+                **filtered_kwargs
             )
             
             # Extract response text

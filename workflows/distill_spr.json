@@ -54,15 +54,25 @@
             },
             "output_variable": "parsed_spr_result",
             "dependencies": ["distill_spr_with_llm"]
+        },
+        "check_similarity_with_existing_sprs": {
+            "action_type": "execute_code",
+            "description": "Compares the new SPR with existing SPRs to check for similarity and flag for expedited review.",
+            "inputs": {
+                "code": "import json\nimport os\nfrom difflib import SequenceMatcher\n\nparsed_result = {{ tasks.parse_and_validate_spr.output.result }}\nif parsed_result.get('status') != 'success':\n    print(json.dumps(parsed_result))\nelse:\n    new_spr = parsed_result['spr_definition']\n    new_desc = new_spr.get('description', '')\n    expedited_review = False\n    similarity_threshold = 0.9\n    \n    try:\n        spr_file_path = 'knowledge_graph/spr_definitions_tv.json'\n        if os.path.exists(spr_file_path):\n            with open(spr_file_path, 'r', encoding='utf-8') as f:\n                existing_sprs = json.load(f)\n            \n            for existing_spr in existing_sprs:\n                existing_desc = existing_spr.get('definition', '')\n                similarity = SequenceMatcher(None, new_desc, existing_desc).ratio()\n                if similarity >= similarity_threshold:\n                    expedited_review = True\n                    new_spr['expedited_review_reason'] = f'High similarity ({similarity:.2f}) to existing SPR: {existing_spr.get(\"spr_id\")}'\n                    break\n        \n        new_spr['expedited_review'] = expedited_review\n        parsed_result['spr_definition'] = new_spr\n        print(json.dumps(parsed_result))\n\n    except Exception as e:\n        parsed_result['status'] = 'error'\n        parsed_result['message'] = f'Similarity check failed: {str(e)}'\n        print(json.dumps(parsed_result))",
+                "parsed_spr_result": "{{ tasks.parse_and_validate_spr.output.result }}"
+            },
+            "output_variable": "final_spr_result",
+            "dependencies": ["parse_and_validate_spr"]
         }
     },
     "output": {
         "spr_definition": {
-            "value": "{{ parse_and_validate_spr.result.result.spr_definition }}",
+            "value": "{{ final_spr_result.result.spr_definition }}",
             "description": "The newly generated and validated SPR definition."
         },
         "status": {
-            "value": "{{ parse_and_validate_spr.result.result.status }}",
+            "value": "{{ final_spr_result.result.status }}",
             "description": "The final status of the distillation process."
         }
     }

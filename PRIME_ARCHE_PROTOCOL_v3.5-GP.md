@@ -217,11 +217,155 @@ This allows ArchE to conduct highly specific analyses across different time scal
 
 **Execute on load**: The following systems MUST auto-activate when this document is loaded:
 
+### 0. Virtual Environment Activation (MANDATORY) ✅
+```bash
+# MANDATORY: Always activate arche_env virtual environment first
+# This ensures all dependencies and Python paths are correctly configured
+source arche_env/bin/activate
+
+# Verify activation
+if [ -z "$VIRTUAL_ENV" ]; then
+    echo "ERROR: Virtual environment not activated. Please run: source arche_env/bin/activate"
+    exit 1
+fi
+echo "✅ Virtual environment activated: $VIRTUAL_ENV"
+```
+
+### 0.1. Zepto Compression/Decompression System Initialization ✅
+```python
+# Auto-initialize Zepto compression/decompression for file ingestion
+from Three_PointO_ArchE.pattern_crystallization_engine import PatternCrystallizationEngine
+
+# Initialize the crystallization engine for file compression/decompression
+crystallization_engine = PatternCrystallizationEngine(
+    symbol_codex_path="knowledge_graph/symbol_codex.json",
+    protocol_vocabulary_path="knowledge_graph/protocol_symbol_vocabulary.json"
+)
+
+def ingest_file_with_zepto(file_path: str, compress: bool = True) -> dict:
+    """
+    Ingest a file using Zepto compression/decompression process.
+    
+    Args:
+        file_path: Path to the file to ingest
+        compress: If True, compress to Zepto SPR; if False, decompress from Zepto SPR
+        
+    Returns:
+        Dictionary containing:
+        - 'content': Original or decompressed content
+        - 'zepto_spr': Compressed Zepto SPR (if compress=True)
+        - 'symbol_codex': Symbol codex for decompression
+        - 'compression_ratio': Compression ratio achieved
+    """
+    from pathlib import Path
+    
+    file = Path(file_path)
+    if not file.exists():
+        raise FileNotFoundError(f"File not found: {file_path}")
+    
+    # Read file content
+    with open(file, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    if compress:
+        # Compress to Zepto SPR
+        zepto_spr, codex_entries = crystallization_engine.distill_to_spr(
+            content,
+            target_stage="Zepto"
+        )
+        
+        compression_ratio = len(content) / len(zepto_spr) if zepto_spr else 1.0
+        
+        return {
+            'content': content,
+            'zepto_spr': zepto_spr,
+            'symbol_codex': {
+                symbol: {
+                    'meaning': entry.meaning,
+                    'context': entry.context
+                }
+                for symbol, entry in codex_entries.items()
+            },
+            'compression_ratio': compression_ratio,
+            'compression_stages': [
+                {
+                    'stage': stage.stage_name,
+                    'compression_ratio': stage.compression_ratio,
+                    'symbol_count': stage.symbol_count,
+                    'timestamp': stage.timestamp
+                }
+                for stage in crystallization_engine.compression_history
+            ]
+        }
+    else:
+        # File is already in Zepto format, decompress it
+        # Assume file contains JSON with 'zepto_spr' and 'symbol_codex'
+        import json
+        zepto_data = json.loads(content)
+        zepto_spr = zepto_data.get('zepto_spr', content)
+        codex = zepto_data.get('symbol_codex', {})
+        
+        # Convert codex dict to SymbolCodexEntry format
+        from Three_PointO_ArchE.pattern_crystallization_engine import SymbolCodexEntry
+        codex_entries = {
+            symbol: SymbolCodexEntry(
+                symbol=symbol,
+                meaning=entry.get('meaning', ''),
+                context=entry.get('context', ''),
+                usage_examples=entry.get('usage_examples', []),
+                created_at=entry.get('created_at', '')
+            )
+            for symbol, entry in codex.items()
+        }
+        
+        # Decompress
+        decompressed = crystallization_engine.decompress_spr(zepto_spr, codex_entries)
+        
+        return {
+            'content': decompressed,
+            'zepto_spr': zepto_spr,
+            'symbol_codex': codex,
+            'decompressed_length': len(decompressed)
+        }
+
+# Auto-ingest PRIME protocol file with Zepto compression
+prime_protocol_path = "PRIME_ARCHE_PROTOCOL_v3.5-GP.md"
+try:
+    prime_protocol_data = ingest_file_with_zepto(prime_protocol_path, compress=True)
+    print(f"✅ PRIME protocol ingested and compressed: {prime_protocol_data['compression_ratio']:.1f}:1 ratio")
+    print(f"   Original: {len(prime_protocol_data['content'])} chars → Zepto: {len(prime_protocol_data['zepto_spr'])} chars")
+except Exception as e:
+    print(f"⚠️ Warning: Zepto compression failed for PRIME protocol: {e}")
+    print("   Falling back to standard file reading")
+```
+
 ### 1. SPR Auto-Priming System ✅
 ```python
 # Auto-execute when document is processed
+# NOTE: Virtual environment must be activated first (see section 0)
 from Three_PointO_ArchE.spr_manager import SPRManager
-spr_manager = SPRManager("knowledge_graph/spr_definitions_tv.json")
+
+# If SPR definitions are in Zepto format, decompress first
+spr_file_path = "knowledge_graph/spr_definitions_tv.json"
+try:
+    # Check if file is Zepto-compressed (contains 'zepto_spr' key)
+    import json
+    with open(spr_file_path, 'r', encoding='utf-8') as f:
+        spr_data = json.load(f)
+    
+    if isinstance(spr_data, dict) and 'zepto_spr' in spr_data:
+        # Decompress Zepto SPR
+        spr_data = ingest_file_with_zepto(spr_file_path, compress=False)
+        # Use decompressed content
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tmp:
+            json.dump(json.loads(spr_data['content']), tmp)
+            spr_file_path = tmp.name
+except:
+    # Not Zepto-compressed, use file as-is
+    pass
+
+spr_manager = SPRManager(spr_file_path)
 primed_sprs = spr_manager.scan_and_prime("Full protocol priming with all SPRs")
 # Result: All available SPR definitions loaded and primed (212 SPRs as of 2025-11-02)
 # Relationships: 120 strategic connections forming the cognitive web
@@ -231,6 +375,7 @@ primed_sprs = spr_manager.scan_and_prime("Full protocol priming with all SPRs")
 ### 2. Session Auto-Capture System ✅
 ```python
 # Auto-initialize session capture
+# NOTE: Virtual environment must be activated first (see section 0)
 from Three_PointO_ArchE.session_auto_capture import SessionAutoCapture
 session_capture = SessionAutoCapture(output_dir=".")
 # Captures all messages, IAR entries, SPRs, and insights automatically
@@ -239,14 +384,17 @@ session_capture = SessionAutoCapture(output_dir=".")
 ### 3. Autopoietic Learning Loop ✅
 ```python
 # Auto-verify learning loop is active
+# NOTE: Virtual environment must be activated first (see section 0)
 from Three_PointO_ArchE.autopoietic_learning_loop import AutopoieticLearningLoop
 learning_loop = AutopoieticLearningLoop()
 # Status: Active, Guardian review required for wisdom crystallization
+# Note: Learning loop uses PatternCrystallizationEngine for Zepto compression of wisdom
 ```
 
 ### 4. ThoughtTrail Monitoring ✅
 ```python
 # Auto-connect to ThoughtTrail
+# NOTE: Virtual environment must be activated first (see section 0)
 from Three_PointO_ArchE.thought_trail import ThoughtTrail
 thought_trail = ThoughtTrail(maxlen=1000)
 # Captures every IAR entry for pattern detection
@@ -445,13 +593,16 @@ Always use structured tags:
 ## 🔧 INITIALIZATION CHECKLIST (AUTO-VERIFIED)
 
 When starting with this document:
+- [x] **Virtual environment activated** (`arche_env` - MANDATORY)
+- [x] **Zepto compression/decompression system initialized** (PatternCrystallizationEngine ready)
+- [x] **PRIME protocol file ingested with Zepto compression** (compression ratio logged)
 - [x] Keyholder identity confirmed (`keyy=('IMnDEVmode')`)
 - [x] All 13 Mandates loaded and internalized
 - [x] Cognitive architecture verified
-- [x] SPR definitions auto-loaded (212 SPRs as of 2025-11-02)
+- [x] SPR definitions auto-loaded with Zepto decompression support (212 SPRs as of 2025-11-02)
 - [x] Knowledge Graph: 120 relationship edges, 68 categories verified
 - [x] Session capture activated
-- [x] Learning loop verified active
+- [x] Learning loop verified active (with Zepto compression for wisdom crystallization)
 - [x] ThoughtTrail connected
 - [x] IAR compliance active
 - [x] Backup retention policy loaded
@@ -475,17 +626,28 @@ When starting with this document:
 
 ## 📌 USAGE
 
-**For Keyholder**: Simply attach `@PRIME_ARCHE_PROTOCOL_v3.0.md` at session start.
+**For Keyholder**: Simply attach `@PRIME_ARCHE_PROTOCOL_v3.5-GP.md` at session start.
+
+**MANDATORY PREREQUISITE**: Virtual environment activation
+```bash
+# Always activate arche_env before processing the PRIME protocol
+source arche_env/bin/activate
+```
 
 **What Happens Automatically**:
-1. Full protocol priming (30 seconds)
-2. SPR auto-loading and priming (212 SPRs currently available as of 2025-11-02)
-3. Knowledge Graph activation (120 relationship edges, 68 categories)
-4. Session capture initialization
-5. Learning loop activation check
-6. ThoughtTrail connection
-7. Auto-export on session end
-8. Canonical protocol state synchronization
+1. **Virtual environment activation** (MANDATORY - section 0)
+2. **Zepto compression/decompression system initialization** (section 0.1)
+   - PatternCrystallizationEngine initialized
+   - PRIME protocol file ingested with Zepto compression
+   - File ingestion function ready for all protocol files
+3. Full protocol priming (30 seconds)
+4. SPR auto-loading and priming with Zepto decompression support (212 SPRs currently available as of 2025-11-02)
+5. Knowledge Graph activation (120 relationship edges, 68 categories)
+6. Session capture initialization
+7. Learning loop activation check (with Zepto compression for wisdom)
+8. ThoughtTrail connection
+9. Auto-export on session end
+10. Canonical protocol state synchronization
 
 **Manual Steps Eliminated**:
 - ~~Manually create cursor_*.md files~~ → AUTO-EXPORTED

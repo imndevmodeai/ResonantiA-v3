@@ -1,0 +1,58 @@
+{
+  "name": "Zepto SPR Compression Workflow",
+  "description": "Universal workflow for compressing narratives to Zepto SPR form using the universal abstraction",
+  "tasks": {
+    "compress_narrative": {
+      "description": "Compress a narrative to Zepto SPR form",
+      "action_type": "compress_to_zepto_spr",
+      "inputs": {
+        "narrative": "{{initial_context.narrative}}",
+        "target_stage": "{{initial_context.target_stage | default('Zepto')}}"
+      },
+      "outputs": {
+        "zepto_spr": "string",
+        "compression_ratio": "float",
+        "compression_stages": "list",
+        "new_codex_entries": "dict"
+      },
+      "dependencies": []
+    },
+    "validate_compression": {
+      "description": "Validate compression integrity",
+      "action_type": "execute_code",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nresult = {{compress_narrative.output}}\noriginal = {{initial_context.narrative}}\nzepto = result.get('zepto_spr', '')\nratio = result.get('compression_ratio', 1.0)\n\nvalidation = {\n    'compression_ratio': ratio,\n    'target_met': ratio >= 100.0,\n    'zepto_length': len(zepto),\n    'original_length': len(original),\n    'stages_completed': len(result.get('compression_stages', [])),\n    'new_symbols': len(result.get('new_codex_entries', {}))\n}\nprint(json.dumps(validation))"
+      },
+      "outputs": {
+        "validation": "dict"
+      },
+      "dependencies": ["compress_narrative"]
+    },
+    "decompress_verification": {
+      "description": "Decompress Zepto SPR to verify round-trip integrity",
+      "action_type": "decompress_from_zepto_spr",
+      "inputs": {
+        "zepto_spr": "{{compress_narrative.output.zepto_spr}}",
+        "codex": "{{compress_narrative.output.new_codex_entries}}"
+      },
+      "outputs": {
+        "decompressed_text": "string",
+        "symbols_expanded": "dict"
+      },
+      "dependencies": ["compress_narrative"]
+    },
+    "display_results": {
+      "description": "Display compression and validation results",
+      "action_type": "display_output",
+      "inputs": {
+        "content": "# Zepto SPR Compression Results\n\n**Original Length:** {{compress_narrative.output.original_length}} chars\n**Zepto Length:** {{compress_narrative.output.zepto_length}} chars\n**Compression Ratio:** {{compress_narrative.output.compression_ratio:.2f}}:1\n\n**Zepto SPR:**\n```\n{{compress_narrative.output.zepto_spr}}\n```\n\n**Validation:**\n- Target Met: {{validate_compression.validation.target_met}}\n- Stages Completed: {{validate_compression.validation.stages_completed}}\n- New Symbols: {{validate_compression.validation.new_symbols}}\n\n**Decompression Verification:**\n- Symbols Expanded: {{len(decompress_verification.output.symbols_expanded)}}\n- Decompressed Length: {{len(decompress_verification.output.decompressed_text)}} chars"
+      },
+      "outputs": {
+        "status": "string"
+      },
+      "dependencies": ["compress_narrative", "validate_compression", "decompress_verification"]
+    }
+  },
+  "start_tasks": ["compress_narrative"]
+}

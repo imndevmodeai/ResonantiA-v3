@@ -1,0 +1,21 @@
+{
+  "phase": "workflow_execution",
+  "timestamp": "2025-11-08T22:22:23.066930",
+  "workflow_name": "unknown",
+  "execution_result": {
+    "workflow_name": "unknown",
+    "run_id": "061d9f0d-f3ea-4314-b988-1c23defc61be",
+    "start_time": "2025-11-09T03:22:23.053684+00:00",
+    "tasks": {
+      "red_team_analysis": {
+        "status": "Failed",
+        "error": "Task red_team_analysis failed: 'NameError' object has no attribute 'get'"
+      }
+    },
+    "end_time": "2025-11-09T03:22:23.065214+00:00",
+    "workflow_status": "Failed",
+    "error": "'NameError' object has no attribute 'get'",
+    "execution_time_seconds": 0.01153,
+    "timestamp": "20251109_032223"
+  }
+}

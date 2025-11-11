@@ -36,7 +36,7 @@ try:
     )
     from .system_genesis_tool import perform_system_genesis_action
     from .qa_tools import run_code_linter, run_workflow_suite
-    from .output_handler import print_tagged_execution, print_tagged_results, display_output
+    from .output_handler import print_tagged_execution, print_tagged_results, display_output, display_workflow_start, display_workflow_progress, display_task_result, display_workflow_complete, display_workflow_error
     from .custom_json import dumps
     from .workflow_optimizer import WorkflowOptimizer
     from .thought_trail import log_to_thought_trail
@@ -49,6 +49,9 @@ except ImportError as e:
     def execute_action(*args, **kwargs): return {"error": f"Action Registry not available due to import error: {e}"}
     # Add other necessary fallbacks here as needed...
     class SPRManager: pass
+    # Ensure decorator name is defined to avoid NameError in class annotations
+    def log_to_thought_trail(func): 
+        return func
 
 import ast
 from datetime import datetime
@@ -427,7 +430,7 @@ class IARCompliantWorkflowEngine:
     
     @log_to_thought_trail
     def _execute_task(self, task: Dict[str, Any],
-                      results: Dict[str, Any], initial_context: Dict[str, Any] = None) -> Dict[str, Any]:
+                      runtime_context: Dict[str, Any], initial_context: Dict[str, Any] = None, task_key: str = None, workflow_name: str = None, run_id: str = None) -> Dict[str, Any]:
         """Execute a single task with proper action type handling."""
         action_type = task.get("action_type")
         if not action_type:
@@ -437,13 +440,35 @@ class IARCompliantWorkflowEngine:
             raise ValueError(f"Unknown action type: {action_type}")
 
         action_func = self.action_registry[action_type]
+        
+        # Build combined context for template resolution (initial_context + runtime_context)
+        combined_context = {**(initial_context or {}), **runtime_context}
+        
         # Use the robust resolver that supports embedded placeholders and context paths
         resolved_inputs = self._resolve_inputs(
             task.get('inputs'),
-            results,  # runtime_context
+            runtime_context,  # runtime_context
             initial_context,
             task_key
         )
+        
+        # Create ActionContext for actions that need it (like string_template_action)
+        action_context_obj = ActionContext(
+            task_key=task_key or "unknown",
+            action_name=task_key or "unknown",
+            action_type=action_type,
+            workflow_name=workflow_name or "unknown",
+            run_id=run_id or str(uuid.uuid4()),
+            attempt_number=1,
+            max_attempts=1,
+            execution_start_time=now(),
+            runtime_context=combined_context,
+            initial_context=initial_context or {}
+        )
+        
+        # Pass context_for_action to actions that need it
+        if action_type == "string_template":
+            resolved_inputs["context_for_action"] = action_context_obj
 
         try:
             result = action_func(**resolved_inputs)
@@ -456,7 +481,7 @@ class IARCompliantWorkflowEngine:
             
             # Enhanced error reporting with input validation
             if "Missing required input" in str(e):
-                logger.error(f"Input validation failed for task. Provided inputs: {list(inputs.keys())}")
+                logger.error(f"Input validation failed for task. Provided inputs: {list(resolved_inputs.keys())}")
             elif "NoneType" in str(e):
                 logger.error(f"Null value error - check if previous task outputs are properly formatted")
             
@@ -1266,25 +1291,57 @@ class IARCompliantWorkflowEngine:
         """Display workflow execution progress."""
         print(f"\n[{format_log()}] {task_name}: {status}")
 
-    def execute_workflow(self, workflow: Dict[str, Any]) -> Dict[str, Any]:
+    def _validate_workflow(self, workflow: Dict[str, Any]) -> bool:
+        """Validate workflow structure."""
+        if not isinstance(workflow, dict):
+            return False
+        
+        # Check for required top-level fields
+        if 'tasks' not in workflow:
+            return False
+        
+        # Check that tasks is a dictionary
+        if not isinstance(workflow.get('tasks'), dict):
+            return False
+        
+        # Basic validation passed
+        return True
+
+    def execute_workflow(self, workflow: Dict[str, Any], context: Dict[str, Any] = None) -> Dict[str, Any]:
         """Execute a workflow with enhanced terminal output."""
         display_workflow_start(workflow.get('name', 'Unnamed Workflow'))
         
         start_time = now()
         run_id = str(uuid.uuid4())
         
-        try:
-            # Validate workflow
-            if not self._validate_workflow(workflow):
-                raise ValueError("Workflow validation failed")
-            
-            # Initialize results
+        # Initialize context if not provided
+        initial_context = context or {}
+        
+        # Ensure required workflow input_parameters are in initial_context
+        input_params = workflow.get('input_parameters', {})
+        for param_name, param_def in input_params.items():
+            if param_name not in initial_context:
+                # Set default values based on type
+                param_type = param_def.get('type', 'string')
+                if param_type == 'dict':
+                    initial_context[param_name] = {}
+                elif param_type == 'list':
+                    initial_context[param_name] = []
+                else:
+                    initial_context[param_name] = ""
+        
+        # Initialize results early to ensure it exists in exception handler
             results = {
                 "workflow_name": workflow.get("name", "unknown"),
                 "run_id": run_id,
                 "start_time": start_time.isoformat(),
                 "tasks": {}
             }
+        
+        try:
+            # Validate workflow
+            if not self._validate_workflow(workflow):
+                raise ValueError("Workflow validation failed")
             
             # Execute tasks
             for task_name, task in workflow.get("tasks", {}).items():
@@ -1296,9 +1353,25 @@ class IARCompliantWorkflowEngine:
                     if dep not in results["tasks"]:
                         raise ValueError(f"Missing dependency: {dep}")
                 
+                # Build runtime_context for template resolution
+                # Include initial_context values AND task results directly accessible
+                runtime_context = {}
+                # First, add all initial_context values
+                runtime_context.update(initial_context)
+                # Then, add task results (these override initial_context if same name)
+                for completed_task_name, completed_task_result in results["tasks"].items():
+                    runtime_context[completed_task_name] = completed_task_result
+                
                 # Execute task
                 try:
-                    task_result = self._execute_task(task, results, initial_context)
+                    task_result = self._execute_task(
+                        task, 
+                        runtime_context, 
+                        initial_context, 
+                        task_name,
+                        workflow_name=workflow.get("name", "unknown"),
+                        run_id=run_id
+                    )
                     results["tasks"][task_name] = task_result
                     display_task_result(task_name, task_result)
                     display_workflow_progress(task_name, "Completed")
@@ -1324,7 +1397,7 @@ class IARCompliantWorkflowEngine:
             return results
             
         except Exception as e:
-            # Workflow failed
+            # Workflow failed - results is already initialized above
             end_time = now()
             results["end_time"] = end_time.isoformat()
             results["workflow_status"] = "Failed"
@@ -1333,7 +1406,7 @@ class IARCompliantWorkflowEngine:
             
             # Save and display error
             output_path = self._save_workflow_result(results)
-            display_workflow_error(str(e), output_path)
+            display_workflow_error(str(e))
             
             return results
 

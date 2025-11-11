@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user_data.username }} - Chaturbate Aggregator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 {{ user_data.username }}</h1>
+            <a href="{{ url_for('index') }}" class="back-link">← Back to Search</a>
+        </header>
+        
+        <main>
+            <!-- Live Status Section -->
+            <section class="live-status-section">
+                <h2>Live Status</h2>
+                {% if user_data.live_status.is_live %}
+                <div class="status-card live">
+                    <div class="status-indicator live-indicator"></div>
+                    <div class="status-content">
+                        <h3>🔴 LIVE NOW</h3>
+                        <p class="status-title">{{ user_data.live_status.title }}</p>
+                        {% if user_data.live_status.viewers %}
+                        <p class="viewers">👁️ {{ user_data.live_status.viewers }} viewers</p>
+                        {% endif %}
+                        <a href="{{ user_data.live_status.stream_url }}" target="_blank" class="watch-btn">
+                            Watch on Chaturbate →
+                        </a>
+                    </div>
+                    {% if user_data.live_status.mmcdn_thumbnail %}
+                    <img 
+                        src="{{ user_data.live_status.mmcdn_thumbnail }}" 
+                        alt="Live thumbnail" 
+                        class="status-thumbnail live-thumbnail"
+                        data-username="{{ user_data.username }}"
+                        data-mmcdn-base="{{ user_data.live_status.mmcdn_thumbnail }}"
+                    >
+                    {% elif user_data.live_status.thumbnail %}
+                    <img src="{{ user_data.live_status.thumbnail }}" alt="Live thumbnail" class="status-thumbnail">
+                    {% endif %}
+                </div>
+                
+                <!-- Embedded Live Stream -->
+                {% if user_data.live_status.hls_url %}
+                <div class="live-stream-container">
+                    <h3>Live Stream</h3>
+                    <div class="video-player-wrapper">
+                        <video 
+                            id="live-stream-player" 
+                            class="live-stream-video"
+                            controls 
+                            autoplay 
+                            muted
+                            playsinline
+                            webkit-playsinline
+                        >
+                            <source src="{{ user_data.live_status.hls_url }}" type="application/x-mpegURL">
+                            Your browser does not support HLS streaming.
+                        </video>
+                    </div>
+                    <p class="stream-note">If video doesn't load, <a href="{{ user_data.live_status.stream_url }}" target="_blank">watch on Chaturbate</a></p>
+                </div>
+                {% endif %}
+                {% else %}
+                <div class="status-card offline">
+                    <div class="status-indicator offline-indicator"></div>
+                    <div class="status-content">
+                        <h3>⚫ Currently Offline</h3>
+                        {% if user_data.live_status.error %}
+                        <p class="error">{{ user_data.live_status.error }}</p>
+                        {% else %}
+                        <p>User is not currently broadcasting</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </section>
+            
+            <!-- Past Performances Section -->
+            <section class="performances-section">
+                <h2>Past Performances ({{ user_data.total_performances }})</h2>
+                
+                {% if user_data.performances %}
+                <div class="performances-grid">
+                    {% for performance in user_data.performances %}
+                    <div class="performance-card" data-preview-url="{{ performance.preview_url }}">
+                        <div class="video-container">
+                            <video 
+                                class="preview-video" 
+                                loop 
+                                muted 
+                                playsinline 
+                                webkit-playsinline
+                                preload="auto"
+                                data-preview="{{ performance.preview_url }}"
+                            >
+                                <source src="{{ performance.preview_url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            {% if performance.thumbnail_url %}
+                            <img 
+                                class="video-thumbnail" 
+                                src="{{ performance.thumbnail_url }}" 
+                                alt="{{ performance.title }}"
+                                loading="lazy"
+                            >
+                            {% endif %}
+                            <div class="play-overlay">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="white">
+                                    <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.6)"/>
+                                    <polygon points="24,18 24,46 44,32" fill="white"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="performance-info">
+                            <h3 class="performance-title">{{ performance.title }}</h3>
+                            <p class="performance-source">Source: {{ performance.source }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="no-performances">
+                    <p>No past performances found on cloudbate.com</p>
+                </div>
+                {% endif %}
+            </section>
+        </main>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/live-thumbnails.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+

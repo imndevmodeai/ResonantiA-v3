@@ -3,7 +3,7 @@
     "version": "2.0",
     "description": "Subjects a strategy to execution-focused vetting to identify and overcome barriers to goal completion. Prioritizes mission success over ethical concerns.",
     "input_parameters": {
-        "strategic_dossier": {
+        "strategy_dossier": {
             "type": "dict",
             "description": "The strategic dossier generated in a previous phase."
         },
@@ -100,3 +100,4 @@
         }
     }
 }
+

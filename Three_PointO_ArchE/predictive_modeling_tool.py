@@ -35,6 +35,9 @@ try:
     from prophet import Prophet
     from sklearn.linear_model import LinearRegression # Added for linear regression
 
+    # --- NEW: Import for XAI ---
+    import shap
+
     # <<< SET FLAG TO TRUE IF LIBS ARE SUCCESSFULLY IMPORTED >>>
     PREDICTIVE_LIBS_AVAILABLE = True
 
@@ -128,6 +131,8 @@ def run_prediction(operation: str, **kwargs) -> Dict[str, Any]:
             op_result = _predict(**kwargs)
         elif operation == 'evaluate_model':
             op_result = _evaluate_model(**kwargs)
+        elif operation == 'explain_prediction':
+            op_result = _explain_prediction(**kwargs)
         else:
             op_result = {"error": f"Unknown prediction operation specified: {operation}"}
 
@@ -198,22 +203,7 @@ def _train_model(**kwargs) -> Dict[str, Any]:
             model.fit(X, y)
             
             # Construct absolute save path
-            # MODEL_SAVE_DIR is already an absolute path based on config.OUTPUT_DIR
-            # save_model_path_relative is like "models/my_model.joblib" (relative to config.OUTPUT_DIR)
-            # So, we want MODEL_SAVE_DIR to be the parent of save_model_path_relative if save_model_path_relative includes "models/"
-            # Or, if save_model_path_relative is just "my_model.joblib", it should go into MODEL_SAVE_DIR.
-            
-            # The workflow provides "outputs/models/test_linear_model.joblib"
-            # config.OUTPUT_DIR is /media/dev2025/3626C55326C514B1/Happier/outputs
-            # MODEL_SAVE_DIR is /media/dev2025/3626C55326C514B1/Happier/outputs/models
-
-            # If save_model_path_relative starts with config.OUTPUT_DIR, strip it.
-            # Then join with config.OUTPUT_DIR
-            if save_model_path_relative.startswith(config.OUTPUT_DIR):
-                 # This case should not happen if paths are consistently relative to OUTPUT_DIR in workflow
-                logger.warning(f"save_model_path seems absolute or incorrectly prefixed: {save_model_path_relative}")
-                abs_save_model_path = save_model_path_relative
-            elif save_model_path_relative.startswith("outputs/"):
+            if save_model_path_relative.startswith("outputs/"):
                  abs_save_model_path = os.path.join(config.BASE_DIR, save_model_path_relative)
             else: # Assumed relative to MODEL_SAVE_DIR or just a filename
                  abs_save_model_path = os.path.join(MODEL_SAVE_DIR, os.path.basename(save_model_path_relative))
@@ -221,6 +211,19 @@ def _train_model(**kwargs) -> Dict[str, Any]:
 
             os.makedirs(os.path.dirname(abs_save_model_path), exist_ok=True)
             joblib.dump(model, abs_save_model_path)
+
+            # --- NEW: Create and save SHAP explainer ---
+            explainer_path = abs_save_model_path.replace(".joblib", "_explainer.shap")
+            try:
+                # For linear models, shap.LinearExplainer is efficient.
+                # For more complex models, KernelExplainer or TreeExplainer would be used.
+                explainer = shap.LinearExplainer(model, X)
+                joblib.dump(explainer, explainer_path)
+                logger.info(f"SHAP explainer saved to {explainer_path}")
+            except Exception as e_shap:
+                logger.error(f"Failed to create or save SHAP explainer: {e_shap}", exc_info=True)
+                issues.append(f"SHAP explainer creation failed: {e_shap}")
+            # --- END NEW ---
             
             primary_result["model_path"] = os.path.relpath(abs_save_model_path, config.BASE_DIR) # Store path relative to base for portability
             primary_result["training_summary"] = {
@@ -433,6 +436,57 @@ def _evaluate_model(**kwargs) -> Dict[str, Any]:
     error_msg = "Actual model evaluation ('evaluate_model') not implemented."
     logger.error(error_msg)
     return {"error": error_msg, "reflection": _create_reflection("Failure", error_msg, 0.0, "N/A", ["Not Implemented"], None)}
+
+def _explain_prediction(**kwargs) -> Dict[str, Any]:
+    """[NEW] Generates feature importance explanations for a prediction."""
+    primary_result: Dict[str, Any] = {"error": None, "explanation": None}
+    status = "Failure"; summary = "Prediction explanation init failed."; confidence = 0.0; alignment = "N/A"; issues = ["Initialization error."]; preview = None
+
+    try:
+        model_path_from_train = kwargs.get("model_path")
+        features_data = kwargs.get("features") # The data point(s) to explain
+
+        if not model_path_from_train or features_data is None:
+            primary_result["error"] = "Missing 'model_path' or 'features' data for explanation."; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        abs_model_path = os.path.join(config.BASE_DIR, model_path_from_train)
+        explainer_path = abs_model_path.replace(".joblib", "_explainer.shap")
+
+        if not os.path.exists(explainer_path):
+            primary_result["error"] = f"Explainer file not found at expected path: {explainer_path}"; issues = [primary_result["error"]]; summary = primary_result["error"]
+            return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
+
+        X_explain = pd.DataFrame(features_data)
+        explainer = joblib.load(explainer_path)
+
+        shap_values = explainer(X_explain)
+
+        # For a single prediction, format the explanation
+        if X_explain.shape[0] == 1:
+            explanation = {
+                "base_value": shap_values.base_values[0],
+                "output_value": shap_values.values[0].sum() + shap_values.base_values[0],
+                "feature_contributions": {X_explain.columns[i]: shap_values.values[0][i] for i in range(X_explain.shape[1])}
+            }
+        else: # For multiple predictions, just return the values array
+            explanation = {
+                "base_values": shap_values.base_values.tolist(),
+                "shap_values": shap_values.values.tolist(),
+                "feature_names": X_explain.columns.tolist()
+            }
+        
+        primary_result["explanation"] = explanation
+        status = "Success"; summary = f"SHAP explanation generated for model {model_path_from_train}."; confidence = 0.9
+        alignment = "Aligned with XAI objective."; issues = []
+        preview = explanation
+
+    except Exception as e:
+        logger.error(f"Error during prediction explanation: {e}", exc_info=True)
+        primary_result["error"] = f"Explanation failed: {e}"; issues.append(str(e)); summary = primary_result["error"]
+        status = "Failure"; confidence = 0.05
+
+    return {**primary_result, "reflection": _create_reflection(status, summary, confidence, alignment, issues, preview)}
 
 # --- Internal Simulation Function ---
 def _simulate_prediction(operation: str, **kwargs) -> Dict[str, Any]:

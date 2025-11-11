@@ -282,3 +282,151 @@ class SPRManager:
             if query_lower in name or query_lower in description:
                 results.append(spr)
         return results
+    
+    # --- Universal Zepto SPR Integration Methods ---
+    
+    @log_to_thought_trail
+    def compress_spr_to_zepto(
+        self,
+        spr_id: str,
+        target_stage: str = "Zepto"
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Compress an SPR definition to Zepto SPR form using universal abstraction.
+        
+        Args:
+            spr_id: The SPR ID to compress
+            target_stage: Compression stage target (default: "Zepto")
+            
+        Returns:
+            Dictionary with zepto_spr and metadata, or None if SPR not found
+        """
+        try:
+            from .zepto_spr_processor import compress_to_zepto
+            
+            spr = self.get_spr_by_id(spr_id)
+            if not spr:
+                logger.warning(f"SPR '{spr_id}' not found for Zepto compression")
+                return None
+            
+            # Convert SPR definition to narrative form
+            narrative = self._spr_to_narrative(spr)
+            
+            # Compress using universal abstraction
+            result = compress_to_zepto(narrative, target_stage)
+            
+            if result.error:
+                logger.error(f"Zepto compression failed for SPR '{spr_id}': {result.error}")
+                return None
+            
+            return {
+                'spr_id': spr_id,
+                'zepto_spr': result.zepto_spr,
+                'compression_ratio': result.compression_ratio,
+                'compression_stages': result.compression_stages,
+                'new_codex_entries': result.new_codex_entries,
+                'original_length': result.original_length,
+                'zepto_length': result.zepto_length,
+                'processing_time_sec': result.processing_time_sec
+            }
+            
+        except ImportError as e:
+            logger.warning(f"Zepto SPR processor not available: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error compressing SPR '{spr_id}' to Zepto: {e}", exc_info=True)
+            return None
+    
+    @log_to_thought_trail
+    def decompress_zepto_to_spr(
+        self,
+        zepto_spr: str,
+        codex: Optional[Dict[str, Any]] = None
+    ) -> Optional[str]:
+        """
+        Decompress a Zepto SPR back to narrative form using universal abstraction.
+        
+        Args:
+            zepto_spr: The Zepto SPR string to decompress
+            codex: Optional symbol codex (uses default if None)
+            
+        Returns:
+            Decompressed narrative string, or None on error
+        """
+        try:
+            from .zepto_spr_processor import decompress_from_zepto
+            
+            result = decompress_from_zepto(zepto_spr, codex)
+            
+            if result.error:
+                logger.error(f"Zepto decompression failed: {result.error}")
+                return None
+            
+            return result.decompressed_text
+            
+        except ImportError as e:
+            logger.warning(f"Zepto SPR processor not available: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error decompressing Zepto SPR: {e}", exc_info=True)
+            return None
+    
+    def _spr_to_narrative(self, spr: Dict[str, Any]) -> str:
+        """
+        Convert SPR definition dictionary to narrative form for compression.
+        
+        Args:
+            spr: SPR definition dictionary
+            
+        Returns:
+            Narrative string representation
+        """
+        parts = []
+        
+        spr_id = spr.get('spr_id', 'Unknown')
+        name = spr.get('name', spr_id)
+        description = spr.get('description', '')
+        category = spr.get('category', '')
+        relationships = spr.get('relationships', {})
+        blueprint_details = spr.get('blueprint_details', '')
+        
+        parts.append(f"SPR ID: {spr_id}")
+        parts.append(f"Name: {name}")
+        if description:
+            parts.append(f"Description: {description}")
+        if category:
+            parts.append(f"Category: {category}")
+        if relationships:
+            parts.append(f"Relationships: {json.dumps(relationships, indent=2)}")
+        if blueprint_details:
+            parts.append(f"Blueprint Details: {blueprint_details}")
+        
+        return "\n".join(parts)
+    
+    @log_to_thought_trail
+    def batch_compress_sprs_to_zepto(
+        self,
+        spr_ids: Optional[List[str]] = None,
+        target_stage: str = "Zepto"
+    ) -> Dict[str, Dict[str, Any]]:
+        """
+        Batch compress multiple SPRs to Zepto form.
+        
+        Args:
+            spr_ids: List of SPR IDs to compress (None = all SPRs)
+            target_stage: Compression stage target
+            
+        Returns:
+            Dictionary mapping spr_id to compression results
+        """
+        if spr_ids is None:
+            spr_ids = list(self.sprs.keys())
+        
+        results = {}
+        for spr_id in spr_ids:
+            result = self.compress_spr_to_zepto(spr_id, target_stage)
+            if result:
+                results[spr_id] = result
+        
+        logger.info(f"Batch compressed {len(results)} SPRs to Zepto form")
+        return results

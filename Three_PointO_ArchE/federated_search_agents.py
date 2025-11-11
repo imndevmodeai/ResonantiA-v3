@@ -394,25 +394,41 @@ class VisualSynthesisAgent(BaseSearchAgent):
             if "youtube.com" in res['url'] and processed_count < max_transcript_processing:
                 try:
                     transcript_data = get_youtube_transcript(res['url'])
-                    if transcript_data.get("status") == "success" and transcript_data.get("full_transcript"):
-                        # Summarize the transcript
-                        summary_prompt = f"Summarize the key points of the following video transcript titled '{res['title']}':\\n\\n{transcript_data['full_transcript'][:8000]}" # Limit context for performance
-                        summary_result = invoke_llm_for_synthesis(prompt=summary_prompt, max_tokens=300)
+                    
+                    # Check for success and extract transcript properly
+                    if transcript_data.get("status") == "success":
+                        full_transcript = transcript_data.get("full_transcript") or transcript_data.get("transcript_data")
                         
-                        if summary_result.get('result', {}).get('generated_text'):
-                            res['transcript_summary'] = summary_result['result']['generated_text']
+                        if full_transcript:
+                            # Summarize the transcript
+                            summary_prompt = f"Summarize the key points of the following video transcript titled '{res['title']}':\\n\\n{str(full_transcript)[:8000]}" # Limit context for performance
+                            summary_result = invoke_llm_for_synthesis(prompt=summary_prompt, max_tokens=300)
+                            
+                            if summary_result.get('result', {}).get('generated_text'):
+                                res['transcript_summary'] = summary_result['result']['generated_text']
+                                res['transcript_available'] = True
+                            else:
+                                res['transcript_summary'] = "Failed to generate summary for transcript."
+                                res['transcript_available'] = True
                         else:
-                            res['transcript_summary'] = "Failed to generate summary for transcript."
+                            res['transcript_summary'] = "Transcript data received but empty."
+                            res['transcript_available'] = False
                     else:
-                        res['transcript_summary'] = transcript_data.get("message", "Transcript not available.")
+                        error_msg = transcript_data.get("message", "Transcript not available.")
+                        res['transcript_summary'] = error_msg
+                        res['transcript_available'] = False
+                        logger.warning(f"Transcript extraction failed for {res['url']}: {error_msg}")
+                    
                     processed_count += 1
                 except Exception as e:
                     logger.warning(f"Failed to process transcript for video {res['url']}: {e}")
-                    res['transcript_summary'] = "Error during transcript processing."
+                    res['transcript_summary'] = f"Error during transcript processing: {str(e)}"
+                    res['transcript_available'] = False
                     processed_count += 1
             elif "youtube.com" in res['url']:
                 # Skip transcript processing for videos beyond the limit
                 res['transcript_summary'] = "Transcript processing skipped (performance limit reached)."
+                res['transcript_available'] = False
             
             results_with_transcripts.append(res)
         
@@ -809,3 +825,4 @@ class SearchEngineAgent(BaseSearchAgent):
         except Exception as e:
             logger.error(f"{self.engine_name} search failed: {e}")
             return []
+
