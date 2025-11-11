@@ -1,0 +1,34 @@
+# Render.com deployment configuration for FaceCheck service
+services:
+  - type: web
+    name: facecheck-web
+    env: python
+    buildCommand: pip install -r facecheck_requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT facecheck_bot:app
+    envVars:
+      - key: FACECHECK_BOT_TOKEN
+        sync: false  # Set this in Render dashboard
+      - key: FACECHECK_MODE
+        value: both  # Run both bot and web
+      - key: PORT
+        fromService:
+          type: web
+          name: facecheck-web
+          property: port
+    healthCheckPath: /
+
+  # Optional: Separate worker service for Telegram bot
+  - type: worker
+    name: facecheck-bot
+    env: python
+    buildCommand: pip install -r facecheck_requirements.txt
+    startCommand: python facecheck_bot.py
+    envVars:
+      - key: FACECHECK_BOT_TOKEN
+        sync: false
+      - key: FACECHECK_MODE
+        value: bot
+
+
+
+

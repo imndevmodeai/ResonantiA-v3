@@ -1,0 +1,18 @@
+{
+  "specification": {
+    "original_size": 6008,
+    "compressed_size": 54,
+    "compression_ratio": 111.25925925925925,
+    "zepto_spr": "IZeptoSPR:Comp→Decomp.Stages:C→Z.Metrics:CR,SP.Err:SR.",
+    "zepto_decompressed": "IZeptoSPR:Comp[Evolution arrow [Symbol extracted: -] temporal projection]Decomp.Stages:C[Evolution arrow [Symbol extracted: -] temporal projection]Z.Metrics:CR,SP.Err:SR.",
+    "llm_decompressed": null
+  },
+  "code": {
+    "original_size": 16468,
+    "compressed_size": 53,
+    "compression_ratio": 310.7169811320755,
+    "zepto_spr": "IZeptoSPRProc:-c(n:str)→ZSR-d(z:str)→ZSDRImpl:ZPA→PCE",
+    "zepto_decompressed": "IZeptoSPRProc:[Symbol extracted: -]c(n:str)[Evolution arrow [Symbol extracted: -] temporal projection]ZSR[Symbol extracted: -]d(z:str)[Evolution arrow [Symbol extracted: -] temporal projection]ZSDRImpl:ZPA[Evolution arrow [Symbol extracted: -] temporal projection]P[Code Executor]",
+    "llm_decompressed": null
+  }
+}

@@ -1,0 +1,122 @@
+================================================================================
+ZEPTO SPR (Specification + Code) WITH SPR CONTEXT
+================================================================================
+
+Zepto SPR: ⟦→⦅→Δ⦅→⊢→⊨→⊧→◊
+
+Original Size: 65,205 characters
+Compressed Size: 14 characters
+Compression Ratio: 4657.50:1
+
+SPR Context: 7 SPRs in Zepto form
+SPR Context Size: 454 chars
+
+================================================================================
+LLM DECOMPRESSION PROMPT (WITH SPR CONTEXT)
+================================================================================
+
+You are an expert at deciphering compressed symbolic representations, technical documentation, and Python code.
+
+I have a Zepto SPR (Sparse Priming Representation) - a hyper-compressed symbolic form of a technical specification document WITH its complete Python implementation code.
+Your task is to decompress and decipher it, reconstructing BOTH the specification AND the complete Python code.
+
+Zepto SPR (compressed specification + code):
+⟦→⦅→Δ⦅→⊢→⊨→⊧→◊
+
+Symbol Codex Entries (for reference):
+{}
+
+
+## SPR Definitions (Zepto Compressed Context)
+
+The following SPR definitions are provided in Zepto form to provide semantic context:
+
+**FutureStateAnalysiS**:
+  Zepto SPR: `FSA:4Dpredictivemodel.`
+  Compression: 304 → 22 chars (13.8:1)
+
+**CausalLagDetectioN**:
+  Zepto SPR: `SPR:CLD.Definition:CIanalyzingtimeseriesdatafortime-delayedrelationships.`
+  Compression: 264 → 73 chars (3.6:1)
+
+**EmergenceOverTimE**:
+  Zepto SPR: `SPR:EOT=self-org→novelstructviaABM.`
+  Compression: 290 → 35 chars (8.3:1)
+
+**CognitiveresonancE**:
+  Zepto SPR: `SPR:CREDef:Dataalignmentw/objectives&outcomes.`
+  Compression: 204 → 46 chars (4.4:1)
+
+**FourdthinkinG**:
+  Zepto SPR: `SPR:4DDef:ResonantiAv3.0toolsforÆ'sΔviadyn.modeling&pred.Key:hist.ctx,temp.dyn,fut.state,emerg.sim,temp.caus.`
+  Compression: 460 → 109 chars (4.2:1)
+
+**CognitiveResonancE**:
+  Zepto SPR: `SPR:CREDef:Harmoniousalignmentbtwconcept&implementation.Ctx:Cognitivesystems.`
+  Compression: 357 → 77 chars (4.6:1)
+
+**FourDThinking**:
+  Zepto SPR: `SPR:4DTDef:ResonantiAv3.0toolsforÆ'sΔviadynamicsmodeling&prediction.Key:HC,TDM,FSA,EOTS,TCI.`
+  Compression: 460 → 92 chars (5.0:1)
+
+
+
+Original content was approximately 65,205 characters (specification: 48,272 chars + code: 16,735 chars).
+
+CRITICAL: The SPR definitions above are provided in Zepto form. You should decompress them first to understand what each SPR means, then use that context to better understand the specification and code.
+
+Instructions:
+1. First, decompress the SPR definitions in Zepto form to understand their meanings
+2. Analyze the main Zepto SPR structure and symbols carefully
+3. Decompress it back to readable, comprehensive text
+4. Reconstruct the COMPLETE Python implementation code for the CrystallizedObjectiveGenerator class
+5. Use the SPR definitions as semantic anchors to understand the domain and purpose
+6. Explain what the original specification was about
+7. Identify key concepts, architecture, components, stages, and technical details
+8. Reconstruct the specification structure (sections, parts, stages, etc.)
+9. Identify the 8-stage crystallization process
+10. Extract ALL code examples, method implementations, and class structures
+11. Provide a detailed summary of the decompressed content
+
+CRITICAL: You must reconstruct the COMPLETE Python class implementation including:
+- All method signatures
+- All method implementations
+- All data structures (FeatureVector, TemporalScope, ActivatedSPR, Mandate, etc.)
+- All helper methods (_extract_features, _build_temporal_scope, _activate_sprs, etc.)
+- All static data loading methods
+- Complete class structure with proper indentation
+- Use the SPR definitions to understand what SPRs like HistoricalContextualizatioN, TemporalDynamiX, etc. actually mean
+
+Format your response as:
+## Decompressed SPR Definitions
+[Decompress each SPR from Zepto form and explain what it means]
+
+## Decompressed Specification Content
+[Full decompressed specification text - reconstruct as much as possible]
+
+## Complete Python Implementation Code
+```python
+# COMPLETE CrystallizedObjectiveGenerator class implementation
+class CrystallizedObjectiveGenerator:
+    # ... full implementation with all methods ...
+```
+
+## Analysis & Deciphering
+[Your analysis of what the specification means, its purpose, and structure]
+
+## Key Concepts Identified
+[List of key concepts, components, stages, processes]
+
+## Technical Details
+[Technical architecture, implementation details, code structure, etc.]
+
+## Specification Structure
+[The structure of the original specification - sections, parts, stages]
+
+## Code Structure Analysis
+[Analysis of the Python implementation - classes, methods, data structures, etc.]
+
+## Compression Analysis
+[How effective was the compression? What information was preserved? What was lost?]
+
+Begin decompression:

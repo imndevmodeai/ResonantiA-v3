@@ -120,16 +120,44 @@
       "outputs": {
         "uncertainty_metrics": "quantum_uncertainty",
         "confidence_distribution": "probability_amplitudes",
-        "measurement_collapse": "most_probable_state"
+        "measurement_collapse": "most_probable_state",
+        "spooky_flux_divergence": "spooky_flux_divergence_value"
       }
     },
-    
+    "simulate_model_training_for_xai": {
+      "action_type": "run_prediction",
+      "description": "Simulated training of a model to get a model_path for XAI demonstration.",
+      "dependencies": ["phase_2_predictive_modeling"],
+      "inputs": {
+        "operation": "train_model",
+        "model_type": "LinearRegression",
+        "features": "{{phase_2_predictive_modeling.predictions.baseline}}",
+        "target": "{{phase_2_predictive_modeling.predictions.baseline}}",
+        "save_model_path": "outputs/models/xai_demo_model.joblib"
+      },
+      "outputs": {
+        "model_path": "model_path"
+      }
+    },
+    "explain_key_prediction": {
+        "action_type": "run_prediction",
+        "description": "Generate SHAP explanation for a key prediction.",
+        "dependencies": ["simulate_model_training_for_xai"],
+        "inputs": {
+            "operation": "explain_prediction",
+            "model_path": "{{tasks.simulate_model_training_for_xai.output.model_path}}",
+            "features": "{{phase_2_predictive_modeling.predictions.baseline}}"
+        },
+        "outputs": {
+            "explanation": "explanation"
+        }
+    },
     "phase_7_synthesis_and_validation": {
       "action_type": "generate_text_llm",
-      "description": "Synthesize findings with quantum uncertainty quantification",
-      "dependencies": ["phase_6_uncertainty_quantification"],
+      "description": "Synthesize findings with quantum uncertainty and XAI explanation.",
+      "dependencies": ["phase_6_uncertainty_quantification", "explain_key_prediction"],
       "inputs": {
-        "prompt": "Synthesize the quantum-temporal analysis results:\n- Causal Structure: {{phase_1_temporal_causal_discovery.causal_graph}}\n- Predictions: {{phase_2_predictive_modeling.predictions}}\n- Scenarios: {{phase_3_scenario_generation.scenarios}}\n- Quantum Evolution: {{phase_5_temporal_evolution.evolved_states}}\n- Uncertainty: {{phase_6_uncertainty_quantification.uncertainty_metrics}}\n\nProvide:\n1. Most probable outcome with confidence interval\n2. Key uncertainties and their sources\n3. Intervention recommendations based on causal insights\n4. Risk assessment for each scenario",
+        "prompt": "Synthesize the quantum-temporal analysis results:\n- Causal Structure: {{phase_1_temporal_causal_discovery.causal_graph}}\n- Predictions: {{phase_2_predictive_modeling.predictions}}\n- Scenarios: {{phase_3_scenario_generation.scenarios}}\n- Quantum Evolution: {{phase_5_temporal_evolution.evolved_states}}\n- Uncertainty: {{phase_6_uncertainty_quantification.uncertainty_metrics}}\n- Spooky Flux Divergence: {{phase_6_uncertainty_quantification.spooky_flux_divergence_value}}\n- Prediction Explanation (XAI): {{tasks.explain_key_prediction.output.explanation}}\n\nProvide:\n1. Most probable outcome with confidence interval\n2. Key uncertainties and their sources\n3. An interpretation of the Spooky Flux Divergence value.\n4. An interpretation of the Prediction Explanation (XAI) feature contributions.\n5. Intervention recommendations based on causal insights\n6. Risk assessment for each scenario",
         "model": "{{initial_context.model|default('gemini-2.0-flash-exp')}}",
         "temperature": 0.3,
         "max_tokens": 3000

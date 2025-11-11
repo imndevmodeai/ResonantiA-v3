@@ -1,0 +1,37 @@
+{
+  "name": "NFL Game Prediction with Quantum-Hedge Strategy",
+  "description": "Predicts NFL game outcome using Quantum CFP Evolution and applies QuantumHedgeStrategy for marginal games",
+  "version": "1.0",
+  "tasks": {
+    "predict_game": {
+      "action_type": "predict_nfl_game",
+      "description": "Run quantum CFP analysis to predict game outcome",
+      "inputs": {
+        "team1": "{{ game_to_analyze.away_team }}",
+        "team2": "{{ game_to_analyze.home_team }}",
+        "game_date": "{{ game_to_analyze.game_date }}",
+        "home_team": "{{ game_to_analyze.home_team }}"
+      },
+      "dependencies": []
+    },
+    "check_quantum_hedge_trigger": {
+      "action_type": "execute_code",
+      "description": "Check if QuantumHedgeStrategy should be triggered based on CFP results",
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport math\n\n# Get prediction results\nprediction_result = {{ predict_game }}\n\n# Extract quantum metrics\nquantum_metrics = prediction_result.get('quantum_analysis', {})\n\n# Extract raw values\nraw_synergy = quantum_metrics.get('synergy_strength', 0.0)\ncognitive_resonance = quantum_metrics.get('cognitive_resonance', 0.0)\ntemporal_coherence = quantum_metrics.get('temporal_coherence', 0.0)\nimplementation_alignment = quantum_metrics.get('implementation_alignment', 0.0)\n\n# Normalize synergy_strength (it's scaled by 1e15, so divide to get 0-1 range)\n# Then scale to match the range of other metrics\nnormalized_synergy = min(1.0, raw_synergy / 1e15) if raw_synergy > 0 else 0.0\n\n# Calculate system potential metric (Trace of Density Matrix)\n# Based on Nano-Praxis: Tr(ρ) = normalized_synergy + cognitive_resonance + temporal_coherence\n# This gives us a value in the 0-3 range, threshold is 1.75\nsystem_potential = normalized_synergy + cognitive_resonance + temporal_coherence\n\n# Alternative: Use log scale for synergy if it's extremely large\nif raw_synergy > 1e14:\n    # Use logarithmic normalization for very large synergy values\n    log_synergy = math.log10(raw_synergy) / 15.0  # Normalize to 0-1 range\n    system_potential = log_synergy + cognitive_resonance + temporal_coherence\n\n# Check if QuantumHedgeStrategy should trigger (threshold: 1.75)\nquantum_hedge_triggered = system_potential > 1.75\n\n# Get prediction confidence\nconfidence = prediction_result.get('game_prediction', {}).get('confidence', 0.5)\nwinner = prediction_result.get('game_prediction', {}).get('winner', 'Unknown')\n\nresult = {\n    'system_potential_metric': system_potential,\n    'quantum_hedge_triggered': quantum_hedge_triggered,\n    'prediction': {\n        'winner': winner,\n        'confidence': confidence\n    },\n    'quantum_metrics': {\n        'synergy_strength': raw_synergy,\n        'normalized_synergy': normalized_synergy,\n        'cognitive_resonance': cognitive_resonance,\n        'temporal_coherence': temporal_coherence,\n        'implementation_alignment': implementation_alignment,\n        'flux_type': quantum_metrics.get('flux_type', 'unknown')\n    },\n    'strategic_recommendation': 'Quantum-Hedge Strategy TRIGGERED - High probability edge identified' if quantum_hedge_triggered else 'Classical analysis sufficient'\n}\n\nprint(json.dumps(result))"
+      },
+      "dependencies": ["predict_game"]
+    },
+    "display_final_prediction": {
+      "action_type": "display_output",
+      "description": "Display the final prediction with QuantumHedgeStrategy status",
+      "inputs": {
+        "content": "# NFL Game Prediction: {{ game_to_analyze.away_team }} vs {{ game_to_analyze.home_team }}\n\n## Quantum CFP Analysis Results\n\n**Predicted Winner**: {{ check_quantum_hedge_trigger.prediction.winner }}\n**Confidence**: {{ check_quantum_hedge_trigger.prediction.confidence | multiply:100 | round:1 }}%\n\n## System Potential Metric\n\n**Tr(ρ)**: {{ check_quantum_hedge_trigger.system_potential_metric | round:3 }}\n\n## Quantum-Hedge Strategy Status\n\n{% if check_quantum_hedge_trigger.quantum_hedge_triggered %}\n✅ **TRIGGERED** - System potential exceeds threshold (>1.75)\n\n**Strategic Recommendation**: {{ check_quantum_hedge_trigger.strategic_recommendation }}\n\nThis indicates a significant quantum boost has been identified. The prediction carries additional weight beyond classical statistical analysis.\n{% else %}\n⚠️ **NOT TRIGGERED** - System potential below threshold\n\n**Strategic Recommendation**: {{ check_quantum_hedge_trigger.strategic_recommendation }}\n{% endif %}\n\n## Quantum Metrics\n\n- **Synergy Strength**: {{ check_quantum_hedge_trigger.quantum_metrics.synergy_strength | round:3 }}\n- **Cognitive Resonance**: {{ check_quantum_hedge_trigger.quantum_metrics.cognitive_resonance | round:3 }}\n- **Temporal Coherence**: {{ check_quantum_hedge_trigger.quantum_metrics.temporal_coherence | round:3 }}\n\n---\n\n**Game Date**: {{ game_to_analyze.game_date }}\n**Live Validation**: This prediction will be verified after the game concludes."
+      },
+      "dependencies": ["check_quantum_hedge_trigger"]
+    }
+  },
+  "start_tasks": ["predict_game"]
+}
+

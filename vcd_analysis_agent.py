@@ -23,16 +23,36 @@ project_root = os.path.abspath(script_dir)
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
+# Import-guard pattern for relative imports (same as other modules)
 try:
-    from .rise_orchestrator import RISE_Orchestrator, RISEState
-    from .visual_cognitive_debugger_ui import VisualCognitiveDebugger, CognitiveVisualizationMode
-    from .spr_manager import SPRManager
-    from .system_health_monitor import SystemHealthMonitor
-    from .thought_trail import ThoughtTrail
-    from .iar_components import create_iar, IARReflection
-except ImportError as e:
-    print(f"Import error: {e}")
-    sys.exit(1)
+    from Three_PointO_ArchE.rise_orchestrator import RISE_Orchestrator, RISEState
+    from Three_PointO_ArchE.visual_cognitive_debugger_ui import VisualCognitiveDebugger, CognitiveVisualizationMode
+    from Three_PointO_ArchE.spr_manager import SPRManager
+    from Three_PointO_ArchE.system_health_monitor import SystemHealthMonitor
+    from Three_PointO_ArchE.thought_trail import ThoughtTrail
+    from Three_PointO_ArchE.iar_components import create_iar, IARReflection
+except ImportError:
+    # Fallback to relative imports if running as part of package
+    try:
+        from .rise_orchestrator import RISE_Orchestrator, RISEState
+        from .visual_cognitive_debugger_ui import VisualCognitiveDebugger, CognitiveVisualizationMode
+        from .spr_manager import SPRManager
+        from .system_health_monitor import SystemHealthMonitor
+        from .thought_trail import ThoughtTrail
+        from .iar_components import create_iar, IARReflection
+    except ImportError as e:
+        logger = logging.getLogger(__name__)
+        logger.warning(f"Import error in vcd_analysis_agent (soft fallback): {e}")
+        # Define minimal fallbacks to prevent crashes
+        RISE_Orchestrator = None
+        RISEState = None
+        VisualCognitiveDebugger = None
+        CognitiveVisualizationMode = None
+        SPRManager = None
+        SystemHealthMonitor = None
+        ThoughtTrail = None
+        create_iar = None
+        IARReflection = None
 
 logger = logging.getLogger(__name__)
 

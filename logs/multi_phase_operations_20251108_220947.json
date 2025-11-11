@@ -1,0 +1,48 @@
+{
+  "operation": "multi_phase_system_operations",
+  "timestamp": "2025-11-08T22:09:47.127092",
+  "summary": {
+    "success_count": 2,
+    "partial_count": 1,
+    "failed_count": 1,
+    "overall_confidence": 0.575
+  },
+  "phase_results": {
+    "phase1": {
+      "status": "success",
+      "confidence": 0.95,
+      "task_id": "phase1_document_processing",
+      "reflection": "Phase 1 complete: 2/2 documents processed successfully",
+      "potential_issues": [],
+      "alignment_check": "aligned"
+    },
+    "phase2": {
+      "status": "success",
+      "confidence": 0.85,
+      "task_id": "phase2_cognitive_task",
+      "reflection": "Phase 2 complete: Pattern detection executed, 100 entries analyzed",
+      "potential_issues": [],
+      "alignment_check": "aligned"
+    },
+    "phase3": {
+      "status": "failed",
+      "confidence": 0.0,
+      "task_id": "phase3_health_review",
+      "reflection": "Phase 3 failed: 'str' object is not callable",
+      "potential_issues": [
+        "Error: 'str' object is not callable"
+      ],
+      "alignment_check": "misaligned"
+    },
+    "phase4": {
+      "status": "partial",
+      "confidence": 0.5,
+      "task_id": "phase4_workflow_execution",
+      "reflection": "Phase 4 complete: Workflow unknown executed",
+      "potential_issues": [
+        "name 'display_workflow_start' is not defined"
+      ],
+      "alignment_check": "aligned"
+    }
+  }
+}

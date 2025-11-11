@@ -1,0 +1,31 @@
+{
+  "backup_dir": ".backups",
+  "assets": [
+    "knowledge_graph/spr_definitions_tv.json",
+    "zepto_with_spr_context.json",
+    "zepto_with_spr_context_prompt.txt",
+    "workflows",
+    "Three_PointO_ArchE",
+    "compress_with_spr_context.py",
+    "api/mcp_api_server.py",
+    "arche_registry.json",
+    "cleanup.md"
+  ],
+  "include_globs": [
+    "**/*.json",
+    "**/*.md",
+    "**/*.txt",
+    "**/*.py",
+    "**/*.yaml",
+    "**/*.yml"
+  ],
+  "exclude_globs": [
+    ".backups/**",
+    ".git/**",
+    "**/__pycache__/**",
+    "**/*.pyc",
+    "**/.DS_Store"
+  ]
+}
+
+

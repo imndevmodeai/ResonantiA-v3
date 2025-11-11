@@ -1,0 +1,104 @@
+{
+  "workflow_id": "platform_extraction_real_data",
+  "description": "Real data extraction workflow using actual web scraping tools - FetLife, SkipTheGames, Chaturbate with Selenium/Playwright",
+  "version": "2.0",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "target_region": {
+        "type": "string",
+        "description": "Target region for extraction (default: Southwest Michigan)",
+        "default": "Southwest Michigan"
+      },
+      "extraction_mode": {
+        "type": "string",
+        "enum": ["full", "incremental", "test"],
+        "description": "Extraction mode: full (all profiles), incremental (new only), test (limited sample)",
+        "default": "test"
+      },
+      "max_profiles_per_platform": {
+        "type": "integer",
+        "description": "Maximum profiles to extract per platform (for test mode)",
+        "default": 10
+      }
+    }
+  },
+  "tasks": {
+    "search_fetlife_profiles": {
+      "action_type": "enhanced_web_search",
+      "description": "Search for FetLife profiles in Southwest Michigan using enhanced web search",
+      "inputs": {
+        "query": "FetLife female profiles Southwest Michigan Kalamazoo Battle Creek",
+        "max_results": 20,
+        "context": {
+          "platform": "FetLife",
+          "region": "{{context.target_region}}",
+          "filters": ["female", "couples", "Southwest Michigan"]
+        }
+      },
+      "outputs": {
+        "search_results": "{{task_result.result}}"
+      }
+    },
+    "scrape_fetlife_profiles": {
+      "action_type": "execute_code",
+      "description": "Scrape actual FetLife profile data using Selenium",
+      "dependencies": ["search_fetlife_profiles"],
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport time\nimport re\nfrom datetime import datetime\nfrom selenium import webdriver\nfrom selenium.webdriver.chrome.service import Service\nfrom selenium.webdriver.chrome.options import Options\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.support.ui import WebDriverWait\nfrom selenium.webdriver.support import expected_conditions as EC\nfrom webdriver_manager.chrome import ChromeDriverManager\nfrom bs4 import BeautifulSoup\n\n# Get search results from previous task - enhanced_web_search returns {'result': {...}, 'error': None}\nsearch_results_data = {{search_fetlife_profiles.result}}\nsearch_results = search_results_data if isinstance(search_results_data, dict) else {}\n# Extract URLs from results\nurls_to_scrape = []\nif 'results' in search_results:\n    for item in search_results['results'][:max_profiles]:\n        if 'url' in item:\n            urls_to_scrape.append(item['url'])\n\n# Initialize Chrome driver with stealth options\nchrome_options = Options()\nchrome_options.add_argument('--headless=new')\nchrome_options.add_argument('--no-sandbox')\nchrome_options.add_argument('--disable-dev-shm-usage')\nchrome_options.add_argument('--disable-blink-features=AutomationControlled')\nchrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])\nchrome_options.add_experimental_option('useAutomationExtension', False)\nchrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')\n\nservice = Service(ChromeDriverManager().install())\ndriver = webdriver.Chrome(service=service, options=chrome_options)\n\ndriver.execute_script(\"Object.defineProperty(navigator, 'webdriver', {get: () => undefined})\")\n\nprofiles = []\nmax_profiles = {{context.max_profiles_per_platform}}\n\n# Extract URLs from search results\nurls_to_scrape = []\nif 'search_results' in search_results:\n    for result in search_results['search_results'][:max_profiles]:\n        if 'url' in result:\n            urls_to_scrape.append(result['url'])\n\n# If no URLs from search, try direct FetLife search\nif not urls_to_scrape:\n    try:\n        # Navigate to FetLife search\n        search_url = 'https://fetlife.com/search?q=Southwest+Michigan&gender=female'\n        driver.get(search_url)\n        time.sleep(3)\n        \n        # Extract profile links from search results\n        profile_links = driver.find_elements(By.CSS_SELECTOR, 'a[href*=\"/users/\"]')\n        for link in profile_links[:max_profiles]:\n            href = link.get_attribute('href')\n            if href and href not in urls_to_scrape:\n                urls_to_scrape.append(href)\n    except Exception as e:\n        print(f'Search page error: {e}')\n\n# Scrape each profile\nfor url in urls_to_scrape[:max_profiles]:\n    try:\n        driver.get(url)\n        time.sleep(2)\n        \n        page_source = driver.page_source\n        soup = BeautifulSoup(page_source, 'html.parser')\n        \n        # Extract profile data\n        profile_data = {\n            'platform': 'FetLife',\n            'profile_url': url,\n            'username': url.split('/')[-1] if '/' in url else 'unknown',\n            'extraction_timestamp': datetime.now().isoformat()\n        }\n        \n        # Try to extract age\n        age_elem = soup.find('span', class_=re.compile('age|Age'))\n        if age_elem:\n            age_text = age_elem.get_text()\n            age_match = re.search(r'\\d+', age_text)\n            if age_match:\n                profile_data['age'] = int(age_match.group())\n        \n        # Try to extract location\n        location_elem = soup.find('span', class_=re.compile('location|Location|city|City'))\n        if location_elem:\n            profile_data['location'] = location_elem.get_text().strip()\n        \n        # Extract bio/description\n        bio_elem = soup.find('div', class_=re.compile('bio|description|about|Bio'))\n        if bio_elem:\n            profile_data['bio'] = bio_elem.get_text().strip()[:500]\n        \n        # Extract interests\n        interests = []\n        interest_elems = soup.find_all('a', class_=re.compile('interest|tag|kink'))\n        for elem in interest_elems[:10]:\n            interests.append(elem.get_text().strip())\n        if interests:\n            profile_data['interests'] = interests\n        \n        # Extract photo URLs\n        photo_urls = []\n        img_tags = soup.find_all('img', src=re.compile('fetlife|cdn'))\n        for img in img_tags[:5]:\n            src = img.get('src') or img.get('data-src')\n            if src and src.startswith('http'):\n                photo_urls.append(src)\n        if photo_urls:\n            profile_data['photo_urls'] = photo_urls\n        \n        profiles.append(profile_data)\n        \n    except Exception as e:\n        print(f'Error scraping {url}: {e}')\n        continue\n\n# Cleanup\ndriver.quit()\n\n# Return results\nresult = {\n    'profiles': profiles,\n    'metadata': {\n        'total_profiles_found': len(profiles),\n        'extraction_date': datetime.now().isoformat(),\n        'platform': 'FetLife',\n        'region': '{{context.target_region}}'\n    }\n}\n\nprint(json.dumps(result, indent=2))"
+      },
+      "outputs": {
+        "fetlife_data": "{{task_result.result.output}}"
+      }
+    },
+    "search_skipthegames_listings": {
+      "action_type": "enhanced_web_search",
+      "description": "Search for SkipTheGames listings in Southwest Michigan",
+      "inputs": {
+        "query": "SkipTheGames Southwest Michigan Kalamazoo Battle Creek escorts",
+        "max_results": 20,
+        "context": {
+          "platform": "SkipTheGames",
+          "region": "{{context.target_region}}"
+        }
+      },
+      "outputs": {
+        "search_results": "{{task_result.result}}"
+      }
+    },
+    "scrape_skipthegames_listings": {
+      "action_type": "execute_code",
+      "description": "Scrape actual SkipTheGames listings using Selenium",
+      "dependencies": ["search_skipthegames_listings"],
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport time\nimport re\nfrom datetime import datetime\nfrom selenium import webdriver\nfrom selenium.webdriver.chrome.service import Service\nfrom selenium.webdriver.chrome.options import Options\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.support.ui import WebDriverWait\nfrom selenium.webdriver.support import expected_conditions as EC\nfrom webdriver_manager.chrome import ChromeDriverManager\nfrom bs4 import BeautifulSoup\n\n# Get search results - enhanced_web_search returns {'result': {...}, 'error': None}\nsearch_results_data = {{search_skipthegames_listings.result}}\nsearch_results = search_results_data if isinstance(search_results_data, dict) else {}\nurls_to_scrape = []\nif 'results' in search_results:\n    for item in search_results['results'][:max_listings]:\n        if 'url' in item:\n            urls_to_scrape.append(item['url'])\n\n# Initialize Chrome driver\nchrome_options = Options()\nchrome_options.add_argument('--headless=new')\nchrome_options.add_argument('--no-sandbox')\nchrome_options.add_argument('--disable-dev-shm-usage')\nchrome_options.add_argument('--disable-blink-features=AutomationControlled')\nchrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])\nchrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')\n\nservice = Service(ChromeDriverManager().install())\ndriver = webdriver.Chrome(service=service, options=chrome_options)\ndriver.execute_script(\"Object.defineProperty(navigator, 'webdriver', {get: () => undefined})\")\n\nlistings = []\nmax_listings = {{context.max_profiles_per_platform}}\n\n# If no URLs, try direct SkipTheGames search\nif not urls_to_scrape:\n    try:\n        search_url = 'https://skipthegames.com/posts/southwest-michigan'\n        driver.get(search_url)\n        time.sleep(3)\n        \n        listing_links = driver.find_elements(By.CSS_SELECTOR, 'a[href*=\"/posts/\"]')\n        for link in listing_links[:max_listings]:\n            href = link.get_attribute('href')\n            if href and href not in urls_to_scrape:\n                urls_to_scrape.append(href)\n    except Exception as e:\n        print(f'Search error: {e}')\n\n# Scrape each listing\nfor url in urls_to_scrape[:max_listings]:\n    try:\n        driver.get(url)\n        time.sleep(2)\n        \n        page_source = driver.page_source\n        soup = BeautifulSoup(page_source, 'html.parser')\n        \n        listing_data = {\n            'platform': 'SkipTheGames',\n            'listing_url': url,\n            'listing_id': url.split('/')[-1] if '/' in url else 'unknown',\n            'extraction_timestamp': datetime.now().isoformat()\n        }\n        \n        # Extract title\n        title_elem = soup.find('h1') or soup.find('title')\n        if title_elem:\n            listing_data['title'] = title_elem.get_text().strip()\n        \n        # Extract provider name from title or URL\n        if 'title' in listing_data:\n            listing_data['provider_name'] = listing_data['title'].split('-')[0].strip()\n        \n        # Extract description\n        desc_elem = soup.find('div', class_=re.compile('description|content|body|Description'))\n        if desc_elem:\n            listing_data['description'] = desc_elem.get_text().strip()[:1000]\n        \n        # Extract phone number\n        phone_pattern = re.compile(r'(\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4})')\n        phone_match = phone_pattern.search(page_source)\n        if phone_match:\n            listing_data['phone'] = phone_match.group(1)\n        \n        # Extract email\n        email_pattern = re.compile(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')\n        email_match = email_pattern.search(page_source)\n        if email_match:\n            listing_data['email'] = email_match.group(0)\n        \n        # Extract location\n        location_elem = soup.find('span', class_=re.compile('location|city|area|Location'))\n        if location_elem:\n            listing_data['location'] = location_elem.get_text().strip()\n        \n        # Extract photo URLs\n        photo_urls = []\n        img_tags = soup.find_all('img', src=re.compile('skipthegames|cdn|image'))\n        for img in img_tags[:10]:\n            src = img.get('src') or img.get('data-src')\n            if src and src.startswith('http'):\n                photo_urls.append(src)\n        if photo_urls:\n            listing_data['photo_urls'] = photo_urls\n        \n        listings.append(listing_data)\n        \n    except Exception as e:\n        print(f'Error scraping {url}: {e}')\n        continue\n\n# Cleanup\ndriver.quit()\n\n# Return results\nresult = {\n    'listings': listings,\n    'metadata': {\n        'total_listings_found': len(listings),\n        'extraction_date': datetime.now().isoformat(),\n        'platform': 'SkipTheGames',\n        'region': '{{context.target_region}}'\n    }\n}\n\nprint(json.dumps(result, indent=2))"
+      },
+      "outputs": {
+        "skipthegames_data": "{{task_result.result.output}}"
+      }
+    },
+    "search_chaturbate_profiles": {
+      "action_type": "enhanced_web_search",
+      "description": "Search for Chaturbate profiles in Southwest Michigan",
+      "inputs": {
+        "query": "Chaturbate models Southwest Michigan Kalamazoo Battle Creek video creation",
+        "max_results": 20,
+        "context": {
+          "platform": "Chaturbate",
+          "region": "{{context.target_region}}",
+          "services": ["modeling", "video_creation"]
+        }
+      },
+      "outputs": {
+        "search_results": "{{task_result.result}}"
+      }
+    },
+    "scrape_chaturbate_profiles": {
+      "action_type": "execute_code",
+      "description": "Scrape actual Chaturbate profile data using Selenium",
+      "dependencies": ["search_chaturbate_profiles"],
+      "inputs": {
+        "language": "python",
+        "code": "import json\nimport time\nimport re\nfrom datetime import datetime\nfrom selenium import webdriver\nfrom selenium.webdriver.chrome.service import Service\nfrom selenium.webdriver.chrome.options import Options\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.support.ui import WebDriverWait\nfrom selenium.webdriver.support import expected_conditions as EC\nfrom webdriver_manager.chrome import ChromeDriverManager\nfrom bs4 import BeautifulSoup\n\n# Get search results - enhanced_web_search returns {'result': {...}, 'error': None}\nsearch_results_data = {{search_chaturbate_profiles.result}}\nsearch_results = search_results_data if isinstance(search_results_data, dict) else {}\nurls_to_scrape = []\nif 'results' in search_results:\n    for item in search_results['results'][:max_profiles]:\n        if 'url' in item:\n            urls_to_scrape.append(item['url'])\n\n# Initialize Chrome driver\nchrome_options = Options()\nchrome_options.add_argument('--headless=new')\nchrome_options.add_argument('--no-sandbox')\nchrome_options.add_argument('--disable-dev-shm-usage')\nchrome_options.add_argument('--disable-blink-features=AutomationControlled')\nchrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])\nchrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')\n\nservice = Service(ChromeDriverManager().install())\ndriver = webdriver.Chrome(service=service, options=chrome_options)\ndriver.execute_script(\"Object.defineProperty(navigator, 'webdriver', {get: () => undefined})\")\n\nprofiles = []\nmax_profiles = {{context.max_profiles_per_platform}}\n\n# Extract URLs from search results\nurls_to_scrape = []\nif 'search_results' in search_results:\n    for result in search_results['search_results'][:max_profiles]:\n        if 'url' in result:\n            urls_to_scrape.append(result['url'])\n\n# If no URLs, try Chaturbate directory\nif not urls_to_scrape:\n    try:\n        search_url = 'https://chaturbate.com/tags/modeling/'\n        driver.get(search_url)\n        time.sleep(5)  # Wait for dynamic content\n        \n        # Wait for profile links to load\n        WebDriverWait(driver, 10).until(\n            EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href*=\"/\"]'))\n        )\n        \n        profile_links = driver.find_elements(By.CSS_SELECTOR, 'a[href*=\"/\"][href*=\"chaturbate.com\"]')\n        for link in profile_links[:max_profiles]:\n            href = link.get_attribute('href')\n            if href and '/tags/' not in href and href not in urls_to_scrape:\n                urls_to_scrape.append(href)\n    except Exception as e:\n        print(f'Search error: {e}')\n\n# Scrape each profile\nfor url in urls_to_scrape[:max_profiles]:\n    try:\n        driver.get(url)\n        time.sleep(3)  # Wait for dynamic content\n        \n        page_source = driver.

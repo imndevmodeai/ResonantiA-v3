@@ -1,0 +1,17 @@
+# NFL Automated Data Gathering
+# Runs daily at 6 AM, 8 AM, 2 PM, and 5 PM EST
+
+# Daily transaction gathering (6 AM EST = 11 AM UTC in winter, 10 AM UTC in summer)
+0 11 * * * cd /mnt/3626C55326C514B1/Happier && /usr/bin/python3 /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_automated_data_gatherer.py >> /mnt/3626C55326C514B1/Happier/logs/cron.log 2>&1
+
+# Betting line updates (8 AM EST = 1 PM UTC)
+0 13 * * * cd /mnt/3626C55326C514B1/Happier && /usr/bin/python3 /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_automated_data_gatherer.py >> /mnt/3626C55326C514B1/Happier/logs/cron.log 2>&1
+
+# Practice report gathering (2 PM EST = 7 PM UTC)
+0 19 * * * cd /mnt/3626C55326C514B1/Happier && /usr/bin/python3 /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_automated_data_gatherer.py >> /mnt/3626C55326C514B1/Happier/logs/cron.log 2>&1
+
+# Final betting line update (5 PM EST = 10 PM UTC)
+0 22 * * * cd /mnt/3626C55326C514B1/Happier && /usr/bin/python3 /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_automated_data_gatherer.py >> /mnt/3626C55326C514B1/Happier/logs/cron.log 2>&1
+
+# Weekly tasks (Monday 6 AM EST = 11 AM UTC)
+0 11 * * 1 cd /mnt/3626C55326C514B1/Happier && /usr/bin/python3 /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_automated_data_gatherer.py >> /mnt/3626C55326C514B1/Happier/logs/cron.log 2>&1

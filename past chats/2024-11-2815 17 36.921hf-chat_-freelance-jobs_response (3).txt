@@ -20,8 +20,8 @@ No results found for this search query
 ->|vetting|<- To further verify the legitimacy and details of these job postings, I recommend visiting the original sources:
  <sup><a href="https://freelancewritinggigs.com/freelance-writing-jobs-november-26-2024/" target="_blank" rel="noreferrer" style="color: rgb(59, 130, 246); text-decoration: none; hover:text-decoration: underline;">1</a></sup> https://www.indeed.com/ (or the specific job posting URL)
  <sup><a href="https://freelancewritinggigs.com/" target="_blank" rel="noreferrer" style="color: rgb(59, 130, 246); text-decoration: none; hover:text-decoration: underline;">2</a></sup> https://freelancewritinggigs.com/
- <sup><a href="https://www.ziprecruiter.com/Jobs/Remote-Freelance" target="_blank" rel="noreferrer" style="color: rgb(59, 130, 246); text-decoration: none; hover:text-decoration: underline;">3</a></sup> https://www.ziprecruiter.com/ (once the security check is completed)
-->|/vetting|<-
+ <sup><a href="https://www.ziprecruiter.com/Jobs/Remote-Freelance" target="_blank" rel="noreferrer" style="olor: rgb(59, 130, 246); text-decoration: none; hover:text-decoration: underline;">3</a></sup> https://www.ziprecruiter.com/ (once the security check is completed)
+->|/vetting|<-c
 
 ->|step|<-
 

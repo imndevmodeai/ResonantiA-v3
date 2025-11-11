@@ -1,20 +1,37 @@
 import cv2
 import numpy as np
-import mediapipe as mp
+
+# Make mediapipe optional with graceful fallback
+try:
+    import mediapipe as mp
+    MEDIAPIPE_AVAILABLE = True
+except ImportError:
+    MEDIAPIPE_AVAILABLE = False
+    mp = None
 
 class EffectsEngine:
     def __init__(self):
         """
         Initializes the AI Effects Engine.
         """
-        self.mp_selfie_segmentation = mp.solutions.selfie_segmentation
-        self.selfie_segmentation = self.mp_selfie_segmentation.SelfieSegmentation(model_selection=0)
-        print("Effects Engine Initialized.")
+        if not MEDIAPIPE_AVAILABLE:
+            self.mp_selfie_segmentation = None
+            self.selfie_segmentation = None
+            print("Effects Engine Initialized (mediapipe not available - background blur disabled).")
+        else:
+            self.mp_selfie_segmentation = mp.solutions.selfie_segmentation
+            self.selfie_segmentation = self.mp_selfie_segmentation.SelfieSegmentation(model_selection=0)
+            print("Effects Engine Initialized.")
 
     def apply_background_blur(self, frame: np.ndarray, blur_intensity: int = 25) -> np.ndarray:
         """
         Applies a blur effect to the background of the frame.
+        Falls back to simple blur if mediapipe is not available.
         """
+        if not MEDIAPIPE_AVAILABLE or self.selfie_segmentation is None:
+            # Fallback: apply simple blur to entire frame
+            return cv2.GaussianBlur(frame, (blur_intensity, blur_intensity), 0)
+        
         # Convert the BGR image to RGB.
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         
@@ -51,5 +68,6 @@ class EffectsEngine:
         """
         Cleans up resources used by the effects engine.
         """
-        self.selfie_segmentation.close()
+        if self.selfie_segmentation is not None:
+            self.selfie_segmentation.close()
         print("Effects Engine resources released.")

@@ -250,19 +250,27 @@ def run_bot():
         logger.error("Cannot start bot: FACECHECK_BOT_TOKEN not set")
         return
     
-    # Create application
-    application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
-    
-    # Register handlers
-    application.add_handler(CommandHandler("start", start_command))
-    application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(CommandHandler("search", search_command))
-    application.add_handler(CommandHandler("url", url_command))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    
-    # Start the bot
-    logger.info("Starting FaceCheck Telegram bot...")
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    try:
+        # Create application
+        application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+        
+        # Register handlers
+        application.add_handler(CommandHandler("start", start_command))
+        application.add_handler(CommandHandler("help", help_command))
+        application.add_handler(CommandHandler("search", search_command))
+        application.add_handler(CommandHandler("url", url_command))
+        application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+        
+        # Start the bot (use run_polling with proper thread handling)
+        logger.info("Starting FaceCheck Telegram bot...")
+        # Disable signal handlers for threading
+        import signal
+        application.run_polling(
+            allowed_updates=Update.ALL_TYPES,
+            stop_signals=None  # Disable signal handling in thread
+        )
+    except Exception as e:
+        logger.error(f"Error starting bot: {e}", exc_info=True)
 
 def run_flask():
     """Run the Flask web server"""

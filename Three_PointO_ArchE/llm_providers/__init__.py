@@ -3,6 +3,7 @@ import os
 from .base import BaseLLMProvider, LLMProviderError
 from .google import GoogleProvider
 from .cursor_arche import CursorArchEProvider
+from .quota_tracker import QuotaTracker, get_quota_tracker
 try:
     from .cursor_arche_enhanced import CursorArchEProviderEnhanced
     ENHANCED_CURSOR_AVAILABLE = True
@@ -15,6 +16,20 @@ try:
 except ImportError:
     GroqProvider = None
     GROQ_AVAILABLE = False
+try:
+    from .mistral_provider import MistralProvider
+    MISTRAL_AVAILABLE = True
+except ImportError:
+    MistralProvider = None
+    MISTRAL_AVAILABLE = False
+try:
+    from .intelligent_orchestrator import IntelligentLLMOrchestrator
+    from .multi_key_groq_provider import MultiKeyGroqProvider
+    INTELLIGENT_ORCHESTRATOR_AVAILABLE = True
+except ImportError:
+    IntelligentLLMOrchestrator = None
+    MultiKeyGroqProvider = None
+    INTELLIGENT_ORCHESTRATOR_AVAILABLE = False
 from ..thought_trail import log_to_thought_trail
 
 @log_to_thought_trail
@@ -47,6 +62,7 @@ def get_llm_provider(provider_name: str = None, api_key: str = None):
                 'google': 'google_api_key',
                 'openai': 'openai_api_key',
                 'groq': 'groq_api_key',
+                'mistral': 'mistral_api_key',
                 'cursor': 'cursor_arche_key',  # Not required but kept for consistency
                 'cursor_arche': 'cursor_arche_key'
             }
@@ -87,8 +103,20 @@ def get_llm_provider(provider_name: str = None, api_key: str = None):
         if GroqProvider is None:
             raise ValueError(f"Groq provider not available. Install with: pip install groq")
         return GroqProvider(api_key=api_key)
+    elif provider_name_lower == 'mistral':
+        if not MISTRAL_AVAILABLE:
+            raise ValueError(f"Mistral provider not available. Install with: pip install mistralai")
+        if MistralProvider is None:
+            raise ValueError(f"Mistral provider not available. Install with: pip install mistralai")
+        return MistralProvider(api_key=api_key)
+    elif provider_name_lower == 'intelligent' or provider_name_lower == 'orchestrator':
+        if not INTELLIGENT_ORCHESTRATOR_AVAILABLE:
+            raise ValueError("Intelligent orchestrator not available")
+        if IntelligentLLMOrchestrator is None:
+            raise ValueError("Intelligent orchestrator not available")
+        return IntelligentLLMOrchestrator(**kwargs)
     else:
-        raise ValueError(f"Unsupported LLM provider: '{provider_name}'. Supported providers: cursor, openai, google, groq")
+        raise ValueError(f"Unsupported LLM provider: '{provider_name}'. Supported providers: cursor, openai, google, groq, mistral, intelligent")
 
 def get_model_for_provider(provider_name: str) -> str:
     """
@@ -106,6 +134,8 @@ def get_model_for_provider(provider_name: str) -> str:
         return "gemini-2.0-flash-exp"  # More permissive, handles agent terminology
     elif provider_name_lower == "groq":
         return "llama-3.3-70b-versatile"  # Latest, best quality, free tier
+    elif provider_name_lower == "mistral":
+        return "mistral-small-latest"  # Recommended for free tier
     else:
         # Fallback for other potential providers
         return "default-model"

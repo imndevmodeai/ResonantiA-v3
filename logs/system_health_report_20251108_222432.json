@@ -1,0 +1,16 @@
+{
+  "phase": "system_health_review",
+  "timestamp": "2025-11-09T03:24:32.449083Z",
+  "overall_health": "degraded",
+  "overall_confidence": 0.5,
+  "component_health": {},
+  "active_alerts": [
+    {
+      "component": "SystemHealthMonitor",
+      "severity": "warning",
+      "message": "Health snapshot failed: 'str' object is not callable",
+      "timestamp": "2025-11-09T03:24:32.449059Z"
+    }
+  ],
+  "metrics_summary": {}
+}

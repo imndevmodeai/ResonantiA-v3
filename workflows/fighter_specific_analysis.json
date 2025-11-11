@@ -1,0 +1,89 @@
+{
+    "workflow_name": "Fighter-Specific Data Collection and Analysis",
+    "version": "1.0",
+    "description": "Collects detailed, fighter-specific data for boxing match analysis. Extracts stats, styles, strengths, weaknesses, and historical context for each fighter.",
+    "input_parameters": {
+        "problem_description": { "type": "string" },
+        "session_knowledge_base": { "type": "dict" }
+    },
+    "tasks": {
+        "extract_fighter_names": {
+            "action_type": "generate_text_llm",
+            "description": "Extract fighter names and their prime periods from problem description",
+            "inputs": {
+                "prompt": "Extract the fighter names and their prime periods from this problem:\n\n{{ problem_description }}\n\nOutput JSON:\n{\n  \"fighter1\": {\"name\": \"...\", \"prime_period\": \"...\", \"age_range\": \"...\"},\n  \"fighter2\": {\"name\": \"...\", \"prime_period\": \"...\", \"age_range\": \"...\"}\n}",
+                "model_settings": { "temperature": 0.1, "max_tokens": 512 }
+            },
+            "output_variable": "fighter_info"
+        },
+        "collect_fighter1_data": {
+            "action_type": "search_web",
+            "description": "Collect comprehensive data about fighter 1",
+            "dependencies": ["extract_fighter_names"],
+            "inputs": {
+                "query": "{{ fighter_info.result | extract_fighter1_name }} boxing statistics prime {{ fighter_info.result | extract_fighter1_prime }} fighting style strengths weaknesses record",
+                "num_results": 20
+            },
+            "output_variable": "fighter1_data"
+        },
+        "collect_fighter2_data": {
+            "action_type": "search_web",
+            "description": "Collect comprehensive data about fighter 2",
+            "dependencies": ["extract_fighter_names"],
+            "inputs": {
+                "query": "{{ fighter_info.result | extract_fighter2_name }} boxing statistics prime {{ fighter_info.result | extract_fighter2_prime }} fighting style strengths weaknesses record",
+                "num_results": 20
+            },
+            "output_variable": "fighter2_data"
+        },
+        "analyze_fighter1_attributes": {
+            "action_type": "generate_text_llm",
+            "description": "Analyze fighter 1's attributes and create quantified metrics",
+            "dependencies": ["collect_fighter1_data"],
+            "inputs": {
+                "prompt": "Analyze the following data about {{ fighter_info.result | extract_fighter1_name }} and create quantified attributes:\n\n== DATA ==\n{{ fighter1_data.result }}\n\nCreate JSON with normalized scores (0.0-1.0) for:\n{\n  \"power\": 0.95,  // Punching power\n  \"speed\": 0.90,  // Hand speed, footwork\n  \"defense\": 0.75,  // Defensive skills\n  \"stamina\": 0.80,  // Endurance\n  \"technique\": 0.85,  // Technical skill\n  \"aggression\": 0.95,  // Aggressiveness\n  \"reach\": 0.70,  // Reach advantage\n  \"chin\": 0.85,  // Ability to take punches\n  \"fight_iq\": 0.80,  // Ring intelligence\n  \"prime_age\": 22  // Age during prime\n}\n\nBase scores on actual fight records, expert analysis, and historical data.",
+                "model_settings": { "temperature": 0.2, "max_tokens": 1024 }
+            },
+            "output_variable": "fighter1_attributes"
+        },
+        "analyze_fighter2_attributes": {
+            "action_type": "generate_text_llm",
+            "description": "Analyze fighter 2's attributes and create quantified metrics",
+            "dependencies": ["collect_fighter2_data"],
+            "inputs": {
+                "prompt": "Analyze the following data about {{ fighter_info.result | extract_fighter2_name }} and create quantified attributes:\n\n== DATA ==\n{{ fighter2_data.result }}\n\nCreate JSON with normalized scores (0.0-1.0) for:\n{\n  \"power\": 0.98,  // Punching power\n  \"speed\": 0.70,  // Hand speed, footwork\n  \"defense\": 0.85,  // Defensive skills\n  \"stamina\": 0.90,  // Endurance\n  \"technique\": 0.88,  // Technical skill\n  \"aggression\": 0.85,  // Aggressiveness\n  \"reach\": 0.80,  // Reach advantage\n  \"chin\": 0.90,  // Ability to take punches\n  \"fight_iq\": 0.85,  // Ring intelligence\n  \"prime_age\": 24  // Age during prime\n}\n\nBase scores on actual fight records, expert analysis, and historical data.",
+                "model_settings": { "temperature": 0.2, "max_tokens": 1024 }
+            },
+            "output_variable": "fighter2_attributes"
+        },
+        "compare_fighters": {
+            "action_type": "generate_text_llm",
+            "description": "Create detailed comparison analysis of both fighters",
+            "dependencies": ["analyze_fighter1_attributes", "analyze_fighter2_attributes"],
+            "inputs": {
+                "prompt": "Create a comprehensive comparison of the two fighters:\n\n== FIGHTER 1 ==\n{{ fighter1_attributes.result.generated_text }}\n\n== FIGHTER 2 ==\n{{ fighter2_attributes.result.generated_text }}\n\nAnalyze:\n1. **Attribute Advantages**: Which fighter has advantage in each attribute\n2. **Style Matchup**: How their styles interact (e.g., speed vs power)\n3. **Key Factors**: What attributes will most determine the outcome\n4. **Historical Context**: How their primes compare to other great fighters\n5. **Matchup Analysis**: Specific advantages/disadvantages in this matchup\n\nOutput as structured analysis with clear sections.",
+                "model_settings": { "temperature": 0.4, "max_tokens": 2048 }
+            },
+            "output_variable": "fighter_comparison"
+        }
+    },
+    "output": {
+        "fighter_analysis": {
+            "fighter1": {
+                "info": "{{ fighter_info.result.fighter1 }}",
+                "data": "{{ fighter1_data.result }}",
+                "attributes": "{{ fighter1_attributes.result.generated_text }}"
+            },
+            "fighter2": {
+                "info": "{{ fighter_info.result.fighter2 }}",
+                "data": "{{ fighter2_data.result }}",
+                "attributes": "{{ fighter2_attributes.result.generated_text }}"
+            },
+            "comparison": "{{ fighter_comparison.result.generated_text }}"
+        }
+    }
+}
+
+
+
+

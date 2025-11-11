@@ -1,0 +1,83 @@
+{
+    "workflow_name": "Data Preparation for Complex System Visioning Tools",
+    "version": "1.0",
+    "description": "Prepares data structures for CFP, ABM, and Causal Inference tools based on problem domain. Extracts entities, attributes, and relationships from problem description to create tool-ready data structures.",
+    "input_parameters": {
+        "problem_description": { "type": "string" },
+        "session_knowledge_base": { "type": "dict" },
+        "specialized_agent": { "type": "dict" }
+    },
+    "tasks": {
+        "extract_entities_and_attributes": {
+            "action_type": "generate_text_llm",
+            "description": "Extract key entities, their attributes, and relationships from the problem description",
+            "inputs": {
+                "prompt": "Analyze the following problem and extract:\n\n1. **Entities**: Main subjects/objects (e.g., fighters, companies, systems)\n2. **Attributes**: Key characteristics of each entity (e.g., power, speed, defense for fighters)\n3. **Relationships**: How entities interact (e.g., compete, collaborate, influence)\n4. **Temporal Scope**: Time horizons, rounds, phases\n5. **Outcome Variable**: What we're trying to predict/analyze\n\n== PROBLEM ==\n{{ problem_description }}\n\n== KNOWLEDGE BASE ==\n{{ session_knowledge_base }}\n\nOutput as JSON with structure:\n{\n  \"entities\": [{\"name\": \"Entity1\", \"attributes\": {\"attr1\": \"description\", ...}, \"initial_values\": {...}}, ...],\n  \"relationships\": [{\"from\": \"Entity1\", \"to\": \"Entity2\", \"type\": \"competes_with\", \"strength\": 0.8}, ...],\n  \"temporal_scope\": {\"time_horizon\": \"12 rounds\", \"time_steps\": 12, \"time_unit\": \"round\"},\n  \"outcome_variable\": {\"name\": \"winner\", \"type\": \"categorical\", \"possible_values\": [\"Entity1\", \"Entity2\", \"draw\"]},\n  \"cfp_config\": {\"system_a\": \"Entity1\", \"system_b\": \"Entity2\", \"observable\": \"performance_score\"},\n  \"abm_schema\": {\"agent_type\": \"FighterAgent\", \"attributes\": [...], \"rules\": [...]},\n  \"causal_data\": {\"treatment\": \"attribute_name\", \"outcome\": \"outcome_variable\", \"confounders\": [...]}\n}",
+                "model_settings": { "temperature": 0.3, "max_tokens": 4096 }
+            },
+            "output_variable": "extracted_structure"
+        },
+        "collect_historical_data": {
+            "action_type": "search_web",
+            "description": "Collect historical data about entities for causal analysis",
+            "inputs": {
+                "query": "{{ extracted_structure.result.generated_text | extract_entity_names }} historical performance data statistics records",
+                "num_results": 15
+            },
+            "dependencies": ["extract_entities_and_attributes"],
+            "output_variable": "historical_data"
+        },
+        "build_cfp_state_vectors": {
+            "action_type": "execute_code",
+            "description": "Build CFP state vectors from extracted entity attributes",
+            "dependencies": ["extract_entities_and_attributes"],
+            "inputs": {
+                "language": "python",
+                "code": "import json\nimport numpy as np\n\n# Parse extracted structure\nextracted = {{ extracted_structure.result.generated_text | from_json }}\n\nentities = extracted.get('entities', [])\ncfp_config = extracted.get('cfp_config', {})\n\n# Build state vectors for each entity\nstate_vectors = {}\nfor entity in entities:\n    entity_name = entity.get('name', '')\n    attributes = entity.get('attributes', {})\n    initial_values = entity.get('initial_values', {})\n    \n    # Create normalized state vector from attributes\n    # Convert attribute values to 0-1 scale\n    state_values = []\n    for attr_name, attr_value in initial_values.items():\n        if isinstance(attr_value, (int, float)):\n            # Normalize to 0-1 if needed\n            normalized = min(max(attr_value / 100.0, 0.0), 1.0) if attr_value > 1 else attr_value\n            state_values.append(normalized)\n        else:\n            state_values.append(0.5)  # Default\n    \n    # Ensure minimum dimension (at least 2 for quantum state)\n    if len(state_values) < 2:\n        state_values.extend([0.0] * (2 - len(state_values)))\n    \n    # Convert to complex array for quantum state\n    state_vector = [complex(v, 0.0) for v in state_values[:4]]  # Max 4 dimensions\n    \n    state_vectors[entity_name] = {\n        'state_vector': state_vector,\n        'attributes': attributes,\n        'initial_values': initial_values\n    }\n\n# Build CFP configuration\nsystem_a_name = cfp_config.get('system_a', entities[0].get('name', 'SystemA') if entities else 'SystemA')\nsystem_b_name = cfp_config.get('system_b', entities[1].get('name', 'SystemB') if len(entities) > 1 else 'SystemB')\n\ncfp_config_result = {\n    'system_a': {\n        'name': system_a_name,\n        'state_vector': state_vectors.get(system_a_name, {}).get('state_vector', [1.0+0j, 0.0+0j])\n    },\n    'system_b': {\n        'name': system_b_name,\n        'state_vector': state_vectors.get(system_b_name, {}).get('state_vector', [0.0+0j, 1.0+0j])\n    },\n    'observable': cfp_config.get('observable', 'performance_score'),\n    'timeframe': extracted.get('temporal_scope', {}).get('time_steps', 12)\n}\n\nresult = {\n    'status': 'success',\n    'state_vectors': state_vectors,\n    'cfp_config': cfp_config_result,\n    'entities': entities\n}\n\nprint(json.dumps(result))"
+            },
+            "output_variable": "cfp_data"
+        },
+        "build_abm_schema": {
+            "action_type": "execute_code",
+            "description": "Build ABM schema from extracted entities and relationships",
+            "dependencies": ["extract_entities_and_attributes"],
+            "inputs": {
+                "language": "python",
+                "code": "import json\n\n# Parse extracted structure\nextracted = {{ extracted_structure.result.generated_text | from_json }}\n\nentities = extracted.get('entities', [])\nrelationships = extracted.get('relationships', [])\nabm_schema_template = extracted.get('abm_schema', {})\n\n# Build ABM agent schema\nagent_schemas = []\nfor entity in entities:\n    entity_name = entity.get('name', '')\n    attributes = entity.get('attributes', {})\n    initial_values = entity.get('initial_values', {})\n    \n    # Create agent schema\n    agent_schema = {\n        'agent_type': abm_schema_template.get('agent_type', f'{entity_name}Agent'),\n        'attributes': {},\n        'initial_state': {},\n        'behavioral_rules': []\n    }\n    \n    # Map attributes to agent attributes\n    for attr_name, attr_desc in attributes.items():\n        attr_value = initial_values.get(attr_name, 0.5)\n        agent_schema['attributes'][attr_name] = {\n            'type': 'float',\n            'min': 0.0,\n            'max': 1.0,\n            'description': attr_desc\n        }\n        agent_schema['initial_state'][attr_name] = attr_value\n    \n    # Add behavioral rules based on relationships\n    for rel in relationships:\n        if rel.get('from') == entity_name or rel.get('to') == entity_name:\n            rule = {\n                'condition': f\"interaction with {rel.get('to' if rel.get('from') == entity_name else 'from')}\",\n                'action': f\"adjust strategy based on {rel.get('type', 'interaction')}\",\n                'strength': rel.get('strength', 0.5)\n            }\n            agent_schema['behavioral_rules'].append(rule)\n    \n    agent_schemas.append(agent_schema)\n\n# Build environment configuration\nenvironment_config = {\n    'time_steps': extracted.get('temporal_scope', {}).get('time_steps', 100),\n    'interaction_rules': relationships,\n    'outcome_metric': extracted.get('outcome_variable', {}).get('name', 'outcome')\n}\n\nabm_schema_result = {\n    'status': 'success',\n    'agent_schemas': agent_schemas,\n    'environment_config': environment_config,\n    'simulation_steps': environment_config['time_steps']\n}\n\nprint(json.dumps(abm_schema_result))"
+            },
+            "output_variable": "abm_schema"
+        },
+        "prepare_causal_data": {
+            "action_type": "execute_code",
+            "description": "Prepare causal inference data structure from extracted information",
+            "dependencies": ["extract_entities_and_attributes", "collect_historical_data"],
+            "inputs": {
+                "language": "python",
+                "code": "import json\n\n# Parse extracted structure\nextracted = {{ extracted_structure.result.generated_text | from_json }}\ncausal_config = extracted.get('causal_data', {})\nhistorical = {{ historical_data.result | default({}) }}\n\n# Build causal inference configuration\nentities = extracted.get('entities', [])\n\n# Determine treatment and outcome\nif entities:\n    # Use first entity's key attribute as treatment\n    entity1_attrs = entities[0].get('attributes', {})\n    treatment_var = causal_config.get('treatment') or (list(entity1_attrs.keys())[0] if entity1_attrs else 'attribute1')\n    \n    # Outcome is the outcome variable\n    outcome_var = causal_config.get('outcome') or extracted.get('outcome_variable', {}).get('name', 'outcome')\n    \n    # Confounders are other attributes\n    confounders = causal_config.get('confounders', [])\n    if not confounders and len(entities) > 0:\n        all_attrs = set()\n        for entity in entities:\n            all_attrs.update(entity.get('attributes', {}).keys())\n        confounders = [attr for attr in all_attrs if attr != treatment_var][:5]  # Max 5 confounders\n    \n    causal_data_result = {\n        'status': 'success',\n        'treatment_variable': treatment_var,\n        'outcome_variable': outcome_var,\n        'confounders': confounders,\n        'entities': [e.get('name') for e in entities],\n        'max_lag': extracted.get('temporal_scope', {}).get('time_steps', 12),\n        'data_source': 'extracted_from_problem',\n        'historical_data_available': bool(historical)\n    }\nelse:\n    causal_data_result = {\n        'status': 'error',\n        'message': 'No entities found in extracted structure'\n    }\n\nprint(json.dumps(causal_data_result))"
+            },
+            "output_variable": "causal_data"
+        },
+        "synthesize_prepared_data": {
+            "action_type": "generate_text_llm",
+            "description": "Synthesize all prepared data structures into a comprehensive knowledge base",
+            "dependencies": ["build_cfp_state_vectors", "build_abm_schema", "prepare_causal_data"],
+            "inputs": {
+                "prompt": "Synthesize the following prepared data structures for Complex System Visioning tools:\n\n== CFP DATA ==\n{{ cfp_data.result }}\n\n== ABM SCHEMA ==\n{{ abm_schema.result }}\n\n== CAUSAL DATA ==\n{{ causal_data.result }}\n\n== PROBLEM ==\n{{ problem_description }}\n\nCreate a comprehensive summary that:\n1. Explains what data structures were prepared\n2. Describes how they will be used by each tool\n3. Identifies any gaps or missing information\n4. Provides recommendations for tool execution\n\nOutput as structured JSON with sections for each tool's data readiness.",
+                "model_settings": { "temperature": 0.3, "max_tokens": 2048 }
+            },
+            "output_variable": "prepared_data_summary"
+        }
+    },
+    "output": {
+        "prepared_data": {
+            "cfp_config": "{{ cfp_data.result.cfp_config }}",
+            "abm_schema": "{{ abm_schema.result }}",
+            "causal_data": "{{ causal_data.result }}",
+            "summary": "{{ prepared_data_summary.result.generated_text }}"
+        }
+    }
+}
+
+
+
+

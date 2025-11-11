@@ -1027,9 +1027,10 @@ def present_enhanced_results(results: Dict[str, Any], config: EnhancedUnifiedArc
     """Present comprehensive enhanced results"""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    # Use temp directory for reports
-    temp_dir = tempfile.gettempdir()
-    report_path = os.path.join(temp_dir, f"arche_enhanced_v2_report_{timestamp}.md")
+    # Use outputs/query_executions directory for reports
+    outputs_dir = os.path.join(project_root, "outputs", "query_executions")
+    os.makedirs(outputs_dir, exist_ok=True)
+    report_path = os.path.join(outputs_dir, f"arche_enhanced_v2_report_{timestamp}.md")
     
     # Extract response
     if isinstance(results, dict):

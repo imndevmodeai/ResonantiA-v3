@@ -1,0 +1,10 @@
+{
+  "phase": "workflow_execution",
+  "timestamp": "2025-11-08T22:08:57.857443",
+  "workflow_name": "unknown",
+  "execution_result": {
+    "status": "partial",
+    "confidence": 0.5,
+    "error": "IARCompliantWorkflowEngine.execute_workflow() got an unexpected keyword argument 'context'"
+  }
+}

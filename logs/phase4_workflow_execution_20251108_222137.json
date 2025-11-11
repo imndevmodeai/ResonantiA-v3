@@ -1,0 +1,16 @@
+{
+  "phase": "workflow_execution",
+  "timestamp": "2025-11-08T22:21:37.923247",
+  "workflow_name": "unknown",
+  "execution_result": {
+    "workflow_name": "unknown",
+    "run_id": "d73a926d-8bbe-42fc-8781-c459b1efb624",
+    "start_time": "2025-11-09T03:21:37.922036+00:00",
+    "tasks": {},
+    "end_time": "2025-11-09T03:21:37.922078+00:00",
+    "workflow_status": "Failed",
+    "error": "'IARCompliantWorkflowEngine' object has no attribute '_validate_workflow'",
+    "execution_time_seconds": 4.2e-05,
+    "timestamp": "20251109_032137"
+  }
+}

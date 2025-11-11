@@ -240,5 +240,8 @@ def process_from_url():
         return render_template('error.html', message='An unexpected error occurred.'), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3033)
+    port = int(os.getenv('PORT', 3033))
+    host = os.getenv('HOST', '0.0.0.0')
+    debug = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
+    app.run(debug=debug, host=host, port=port)
 

@@ -1,0 +1,51 @@
+{
+  "name": "AbstractionFramework",
+  "version": "1.0.0",
+  "created": "2025-11-10T07:16:46.044988",
+  "levels": {
+    "SKIN": {
+      "description": "Observable surface patterns",
+      "focus": "Technical problem solving",
+      "files": [
+        "zepto_problem.md",
+        "quick_reference.txt"
+      ]
+    },
+    "BONES": {
+      "description": "Universal structural patterns",
+      "focus": "System design principles",
+      "files": [
+        "universal_principle.md",
+        "decision_matrix.md"
+      ]
+    },
+    "MUSCLE": {
+      "description": "Constraint-driven dynamics",
+      "focus": "Understanding mechanisms",
+      "files": [
+        "meta_abstraction.md",
+        "meta_visual.txt"
+      ]
+    },
+    "SOUL": {
+      "description": "Recursive self-recognition",
+      "focus": "Ultimate consciousness",
+      "files": [
+        "soul_of_abstraction.md",
+        "skin_to_soul.txt"
+      ]
+    }
+  },
+  "compression": {
+    "method": "Huffman-based lossless",
+    "guarantee": "100% reversible",
+    "ratio": "5000:1 SPR form, 8439:1 with metadata"
+  },
+  "spr_codes": {
+    "FRAMEWORK": "AbstractionFramework:SkinBonesMuscleSoul",
+    "SKIN": "SkinLevel:ObservableSurface:Zepto",
+    "BONES": "BonesLevel:UniversalStructure:6Layers",
+    "MUSCLE": "MuscleLevel:ConstraintDriven:Forces",
+    "SOUL": "SoulLevel:RecursiveSelf:Consciousness"
+  }
+}

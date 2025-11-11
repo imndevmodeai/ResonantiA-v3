@@ -1,0 +1,58 @@
+{
+  "zepto_spr": "⟦→⦅→Δ⦅→⊢→⊨→⊧→◊",
+  "original_size": 65205,
+  "compressed_size": 14,
+  "compression_ratio": 4657.5,
+  "codex_entries": {},
+  "spec_size": 48272,
+  "code_size": 16735,
+  "spr_context_zepto": {
+    "FutureStateAnalysiS": {
+      "zepto_spr": "FSA:4Dpredictivemodel.",
+      "compression_ratio": 13.818181818181818,
+      "original_size": 304,
+      "compressed_size": 22
+    },
+    "CausalLagDetectioN": {
+      "zepto_spr": "SPR:CLD.Definition:CIanalyzingtimeseriesdatafortime-delayedrelationships.",
+      "compression_ratio": 3.6164383561643834,
+      "original_size": 264,
+      "compressed_size": 73
+    },
+    "EmergenceOverTimE": {
+      "zepto_spr": "SPR:EOT=self-org→novelstructviaABM.",
+      "compression_ratio": 8.285714285714286,
+      "original_size": 290,
+      "compressed_size": 35
+    },
+    "CognitiveresonancE": {
+      "zepto_spr": "SPR:CREDef:Dataalignmentw/objectives&outcomes.",
+      "compression_ratio": 4.434782608695652,
+      "original_size": 204,
+      "compressed_size": 46
+    },
+    "FourdthinkinG": {
+      "zepto_spr": "SPR:4DDef:ResonantiAv3.0toolsforÆ'sΔviadyn.modeling&pred.Key:hist.ctx,temp.dyn,fut.state,emerg.sim,temp.caus.",
+      "compression_ratio": 4.220183486238532,
+      "original_size": 460,
+      "compressed_size": 109
+    },
+    "CognitiveResonancE": {
+      "zepto_spr": "SPR:CREDef:Harmoniousalignmentbtwconcept&implementation.Ctx:Cognitivesystems.",
+      "compression_ratio": 4.636363636363637,
+      "original_size": 357,
+      "compressed_size": 77
+    },
+    "FourDThinking": {
+      "zepto_spr": "SPR:4DTDef:ResonantiAv3.0toolsforÆ'sΔviadynamicsmodeling&prediction.Key:HC,TDM,FSA,EOTS,TCI.",
+      "compression_ratio": 5.0,
+      "original_size": 460,
+      "compressed_size": 92
+    }
+  },
+  "spr_context_summary": {
+    "total_sprs": 7,
+    "total_compressed_size": 454,
+    "total_original_size": 2339
+  }
+}

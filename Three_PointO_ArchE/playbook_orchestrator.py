@@ -398,49 +398,46 @@ class PlaybookActionRegistry:
         }
     
     def _extract_causal_parameters_from_query(self, query: str, domain: str) -> Dict[str, str]:
-        """Extract treatment and outcome parameters dynamically from the original query."""
+        """
+        Extract treatment and outcome parameters dynamically from the original query.
+        Uses Universal Abstraction pattern-based extraction (Mandate 14).
+        """
         try:
-            extraction_prompt = f"""
-            Analyze the following query and identify the causal relationship being investigated:
+            from .causal_parameter_extractor import extract_causal_parameters
             
-            Query: {query}
-            Domain: {domain}
+            # Use pattern-based extraction (LLM-independent, deterministic)
+            causal_params = extract_causal_parameters(
+                query=query,
+                domain=domain,
+                strategy='auto'  # Uses pattern matching, not LLM
+            )
             
-            Look for:
-            1. Treatment variable (the cause/factor being analyzed)
-            2. Outcome variable (the effect/result being measured)
-            3. Causal relationship indicators (e.g., "impact on", "effect of", "influence on")
+            treatment = causal_params.get('treatment', 'unknown_treatment')
+            outcome = causal_params.get('outcome', 'unknown_outcome')
+            confounders = causal_params.get('confounders', [])
             
-            Return a JSON object with:
-            - treatment: the cause/factor
-            - outcome: the effect/result
-            
-            Example: {{"treatment": "Bitcoin adoption", "outcome": "traditional banking disruption"}}
-            """
-            
-            result = invoke_llm_for_synthesis(prompt=extraction_prompt, max_tokens=300)
-            if result and result.get('status') == 'success':
-                content = result.get('content', '')
-                import json
-                try:
-                    params = json.loads(content)
-                    if isinstance(params, dict) and 'treatment' in params and 'outcome' in params:
-                        return params
-                except json.JSONDecodeError:
-                    # If not JSON, try to extract from text
-                    lines = content.split('\n')
-                    treatment = ""
-                    outcome = ""
-                    for line in lines:
-                        if 'treatment' in line.lower():
-                            treatment = line.split(':')[-1].strip()
-                        elif 'outcome' in line.lower():
-                            outcome = line.split(':')[-1].strip()
-                    if treatment and outcome:
-                        return {"treatment": treatment, "outcome": outcome}
+            # Only return if we got valid extractions (not fallback values)
+            if treatment != 'unknown_treatment' and outcome != 'unknown_outcome':
+                logger.info(
+                    f"Dynamic causal extraction succeeded: '{treatment}' -> '{outcome}' "
+                    f"(confidence: {causal_params.get('confidence', 0.0):.2f}, "
+                    f"method: {causal_params.get('extraction_method', 'unknown')})"
+                )
+                return {
+                    "treatment": treatment,
+                    "outcome": outcome,
+                    "confounders": confounders,
+                    "confidence": causal_params.get('confidence', 0.5),
+                    "extraction_method": causal_params.get('extraction_method', 'pattern')
+                }
+            else:
+                logger.debug(
+                    f"Dynamic causal extraction returned fallback values. "
+                    f"Query may not contain explicit causal relationship pattern."
+                )
             
         except Exception as e:
-            logger.warning(f"Dynamic causal parameter extraction failed: {e}")
+            logger.warning(f"Dynamic causal parameter extraction failed: {e}", exc_info=True)
         
         return {}
 

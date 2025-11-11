@@ -107,7 +107,12 @@ class UnifiedSearchTool:
                 self.logger.info(f"Attempting search with {method_name}")
                 
                 # Perform search
-                result = search_tool.search(query, engine, debug)
+                # FallbackSearchTool.search() signature: search(query, engine="duckduckgo", **kwargs)
+                # So we pass debug as a keyword argument
+                if method_name == "fallback_search":
+                    result = search_tool.search(query, engine, debug=debug)
+                else:
+                    result = search_tool.search(query, engine, debug)
                 
                 # Check if successful
                 if result.get("success", False) and result.get("results"):

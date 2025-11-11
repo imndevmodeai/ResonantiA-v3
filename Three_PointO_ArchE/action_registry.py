@@ -51,17 +51,64 @@ try:
     if current_dir not in sys.path:
         sys.path.insert(0, current_dir)
     
+    # Try to add virtual environment site-packages to path for googlemaps (MUST be before TSPSolver import)
+    venv_site_packages = None
+    project_root = os.path.dirname(os.path.dirname(__file__))
+    for python_version in ['3.12', '3.11', '3.10', '3.9']:
+        sp_path = os.path.join(project_root, 'arche_env', 'lib', f'python{python_version}', 'site-packages')
+        if os.path.exists(sp_path) and sp_path not in sys.path:
+            sys.path.insert(0, sp_path)
+            venv_site_packages = sp_path
+            break
+    
     from tools.perception_engine import PerceptionEngine
     from tools.rise_actions import perform_causal_inference as v4_causal_inference, perform_abm as v4_abm, run_cfp as v4_cfp
-    from tsp_solver.solver import TSPSolver
+    
+    # Import TSPSolver - try multiple import paths (googlemaps must be available from venv)
+    TSPSolver = None
+    try:
+        from tsp_solver.solver import TSPSolver
+    except ImportError as e1:
+        # Fallback: try importing from Four_PointO_ArchE package
+        try:
+            from Four_PointO_ArchE.tsp_solver.solver import TSPSolver
+        except ImportError as e2:
+            # Last resort: import directly from file
+            try:
+                import importlib.util
+                tsp_solver_path = os.path.join(four_pointo_path, 'tsp_solver', 'solver.py')
+                if os.path.exists(tsp_solver_path):
+                    spec = importlib.util.spec_from_file_location("tsp_solver.solver", tsp_solver_path)
+                    tsp_module = importlib.util.module_from_spec(spec)
+                    # Ensure venv packages are available when loading the module
+                    if venv_site_packages and venv_site_packages not in sys.path:
+                        sys.path.insert(0, venv_site_packages)
+                    spec.loader.exec_module(tsp_module)
+                    TSPSolver = tsp_module.TSPSolver
+                else:
+                    raise ImportError(f"TSPSolver not found at {tsp_solver_path}")
+            except Exception as e3:
+                # If TSPSolver can't be imported (e.g., missing googlemaps), make it optional
+                logger.debug(f"TSPSolver not available (optional V4 component): {e3}")
+                TSPSolver = None
     V4_REGISTRY_AVAILABLE = True
     V4_PERCEPTION_ENGINE = PerceptionEngine()
-    V4_TSP_SOLVER = None  # Will be initialized when needed with proper API key
+    V4_TSP_SOLVER = TSPSolver  # Store the class, will be initialized when needed with proper API key
+    if venv_site_packages:
+        logger.debug(f"V4 system initialized with venv site-packages: {venv_site_packages}")
+    if TSPSolver:
+        logger.debug("TSPSolver available for V4 system")
+    else:
+        logger.debug("TSPSolver not available (googlemaps or module not found)")
 except ImportError as e:
     V4_REGISTRY_AVAILABLE = False
     V4_PERCEPTION_ENGINE = None
     V4_TSP_SOLVER = None
-    logger.warning(f"V4 system not available: {e}")
+    # Only warn if it's not just googlemaps (which is optional)
+    if 'googlemaps' not in str(e).lower():
+        logger.warning(f"V4 system not available: {e}")
+    else:
+        logger.debug(f"V4 system partially available (googlemaps optional): {e}")
 
 # --- ENHANCED PERCEPTION ENGINE ---
 # Import the enhanced Perception Engine for advanced web capabilities
@@ -164,6 +211,8 @@ class ActionRegistry:
 # --- Singleton Instance ---
 # This is the central, globally accessible registry.
 main_action_registry = ActionRegistry()
+# Backward-compatibility alias expected by some tests
+ACTION_REGISTRY = main_action_registry
 
 
 # --- Core Tool Imports and Registration ---
@@ -378,10 +427,77 @@ def save_to_file_action(**kwargs) -> Dict[str, Any]:
 # --- AI Analysis Actions ---
 @log_to_thought_trail
 def web_search_action(**kwargs) -> Dict[str, Any]:
-    """Enhanced web search action using federated agents for AI analysis queries."""
+    """Enhanced web search action using domain-specific routing and federated agents."""
     try:
         query = kwargs.get('query', '')
-        max_results = kwargs.get('max_results', 10)
+        max_results = kwargs.get('max_results', 10) or kwargs.get('num_results', 10)
+        use_domain_routing = kwargs.get('use_domain_routing', True)
+        simplify_query = kwargs.get('simplify_query', False)
+        
+        # Simplify query if requested (remove overly specific terms)
+        if simplify_query:
+            # Extract just the core domain/keyword, remove boilerplate
+            query_parts = query.split()
+            # Remove common boilerplate terms
+            boilerplate = ['latest', 'developments', 'competitive', 'landscape', 'strategic', 
+                          'insights', 'trends', 'key', 'players', 'market', 'dynamics']
+            query = ' '.join([p for p in query_parts if p.lower() not in boilerplate])
+            logger.info(f"Simplified query: {query}")
+        
+        # Domain detection and routing
+        if use_domain_routing:
+            try:
+                from .federated_search_agents import DomainDetector, SportsDomainAgent, FinancialDomainAgent
+                
+                detector = DomainDetector()
+                domain_info = detector.detect_domain(query)
+                primary_domain = domain_info.get('primary_domain', 'general')
+                confidence = domain_info.get('confidence', 0.0)
+                
+                logger.info(f"Detected domain: {primary_domain} (confidence: {confidence:.2f})")
+                
+                # Route to domain-specific agent if confidence is high enough
+                if confidence >= 0.3:
+                    if primary_domain == 'sports':
+                        agent = SportsDomainAgent()
+                        results = agent.search(query, max_results=max_results)
+                        if results:
+                            return {
+                                'status': 'success',
+                                'results': results,
+                                'query': query,
+                                'max_results': max_results,
+                                'domain': primary_domain,
+                                'reflection': {
+                                    'status': 'Success',
+                                    'summary': f'Domain-specific search completed for {primary_domain} domain',
+                                    'confidence': 0.9,
+                                    'alignment_check': {'objective_alignment': 1.0, 'protocol_alignment': 1.0},
+                                    'potential_issues': [],
+                                    'raw_output_preview': f"{{'status': 'success', 'results_count': {len(results)}, 'domain': '{primary_domain}'}}"
+                                }
+                            }
+                    elif primary_domain == 'financial':
+                        agent = FinancialDomainAgent()
+                        results = agent.search(query, max_results=max_results)
+                        if results:
+                            return {
+                                'status': 'success',
+                                'results': results,
+                                'query': query,
+                                'max_results': max_results,
+                                'domain': primary_domain,
+                                'reflection': {
+                                    'status': 'Success',
+                                    'summary': f'Domain-specific search completed for {primary_domain} domain',
+                                    'confidence': 0.9,
+                                    'alignment_check': {'objective_alignment': 1.0, 'protocol_alignment': 1.0},
+                                    'potential_issues': [],
+                                    'raw_output_preview': f"{{'status': 'success', 'results_count': {len(results)}, 'domain': '{primary_domain}'}}"
+                                }
+                            }
+            except Exception as domain_error:
+                logger.warning(f"Domain routing failed, falling back to general search: {domain_error}")
         
         # Use federated agents for comprehensive search
         try:
@@ -424,10 +540,12 @@ def web_search_action(**kwargs) -> Dict[str, Any]:
                 # Ensure results is a list/dict, not a string
                 if isinstance(results, str):
                     results = [{"title": "Search Result", "content": results, "url": "N/A"}]
+                elif isinstance(results, dict):
+                    results = results.get('results', [])
                 
                 return {
                     'status': 'success',
-                    'results': results,
+                    'results': results if isinstance(results, list) else [],
                     'query': query,
                     'max_results': max_results,
                     'reflection': {
@@ -436,7 +554,7 @@ def web_search_action(**kwargs) -> Dict[str, Any]:
                         'confidence': 0.7,
                         'alignment_check': {'objective_alignment': 1.0, 'protocol_alignment': 1.0},
                         'potential_issues': ['Used basic search due to federated agent failure'],
-                        'raw_output_preview': f"{{'status': 'success', 'results_count': {len(results) if isinstance(results, list) else 'unknown'}}}"
+                        'raw_output_preview': f"{{'status': 'success', 'results_count': {len(results) if isinstance(results, list) else 0}}}"
                     }
                 }
     except Exception as e:
@@ -1129,20 +1247,66 @@ except ImportError as e:
     logger.warning(f"Could not import agent_based_modeling_tool: {e}")
 
 try:
-    # Import run_cfp from the tools.py file directly, not from the tools package
-    import sys
-    import os
-    tools_py_path = os.path.join(os.path.dirname(__file__), 'tools.py')
-    if os.path.exists(tools_py_path):
-        # Add the directory to path temporarily
-        sys.path.insert(0, os.path.dirname(__file__))
-        from tools import run_cfp
-        main_action_registry.register_action("run_cfp", log_to_thought_trail(run_cfp))
-        logger.info("Action 'run_cfp' registered from tools.py.")
-    else:
-        raise ImportError("tools.py not found")
+    # Import CfpframeworK class and create a proper run_cfp wrapper
+    from .cfp_framework import CfpframeworK
+    
+    def run_cfp(inputs: Dict[str, Any], action_context: Optional[Any] = None) -> Dict[str, Any]:
+        """
+        Wrapper function for executing CFP analysis using CfpframeworK class.
+        This is the proper implementation that uses the actual CFP framework.
+        """
+        try:
+            # Extract required inputs
+            system_a_config = inputs.get('system_a_config', inputs.get('system_a'))
+            system_b_config = inputs.get('system_b_config', inputs.get('system_b'))
+            
+            if not system_a_config or not system_b_config:
+                return {
+                    "error": "Missing system_a_config and/or system_b_config",
+                    "reflection": {
+                        "status": "Failure",
+                        "summary": "CFP requires both system_a_config and system_b_config",
+                        "confidence": 0.0,
+                        "alignment_check": "Misaligned - Missing required inputs",
+                        "potential_issues": ["Missing system configurations"],
+                        "raw_output_preview": None
+                    }
+                }
+            
+            # Initialize CFP framework
+            cfp = CfpframeworK(
+                system_a_config=system_a_config,
+                system_b_config=system_b_config,
+                observable=inputs.get('observable', 'position'),
+                time_horizon=inputs.get('timeframe', inputs.get('time_horizon', 1.0)),
+                integration_steps=inputs.get('integration_steps', 100),
+                evolution_model_type=inputs.get('evolution_model', 'placeholder'),
+                hamiltonian_a=inputs.get('hamiltonian_a'),
+                hamiltonian_b=inputs.get('hamiltonian_b')
+            )
+            
+            # Run analysis
+            results = cfp.run_analysis()
+            return results
+            
+        except Exception as e:
+            logger.error(f"Error in run_cfp wrapper: {e}", exc_info=True)
+            return {
+                "error": str(e),
+                "reflection": {
+                    "status": "Failure",
+                    "summary": f"CFP analysis failed: {str(e)}",
+                    "confidence": 0.0,
+                    "alignment_check": "Misaligned - Execution error",
+                    "potential_issues": [f"Exception: {str(e)}"],
+                    "raw_output_preview": None
+                }
+            }
+    
+    main_action_registry.register_action("run_cfp", log_to_thought_trail(run_cfp))
+    logger.info("Action 'run_cfp' registered from CfpframeworK wrapper.")
 except ImportError as e:
-    logger.warning(f"Could not import run_cfp from tools.py: {e}")
+    logger.warning(f"Could not import CfpframeworK: {e}")
     # Try V4 implementation as fallback
     if V4_REGISTRY_AVAILABLE:
         try:
@@ -1238,6 +1402,14 @@ def invoke_specialist_agent(agent_type: str, query: str, max_results: int = 5, *
 main_action_registry.register_action("invoke_specialist_agent", log_to_thought_trail(invoke_specialist_agent))
 logger.info("Action 'invoke_specialist_agent' registered.")
 
+# Backward-compatibility shim: some tests expect this symbol
+def invoke_spr_action(action_type: str, inputs: Dict[str, Any], **kwargs) -> Dict[str, Any]:
+    """
+    Compatibility wrapper that forwards to execute_action. 
+    Tests may import this symbol directly.
+    """
+    return execute_action(action_type, inputs, **kwargs)
+
 # --- NEW: True Autopoietic Self-Analysis Action ---
 @log_to_thought_trail
 def run_autopoietic_self_analysis(**kwargs) -> Dict[str, Any]:
@@ -1308,9 +1480,246 @@ except ImportError as e:
 
 # --- Register Enhanced Perception Engine actions ---
 if ENHANCED_PERCEPTION_AVAILABLE:
-    main_action_registry.register_action("enhanced_web_search", log_to_thought_trail(enhanced_web_search))
-    main_action_registry.register_action("enhanced_page_analysis", log_to_thought_trail(enhanced_page_analysis))
-    logger.info("Enhanced Perception Engine actions ('enhanced_web_search', 'enhanced_page_analysis') registered.")
+    # Wrapper to convert tuple return to dict for workflow engine compatibility
+    @log_to_thought_trail
+    def enhanced_web_search_wrapper(**kwargs) -> Dict[str, Any]:
+        """Wrapper for enhanced_web_search that converts tuple to dict format."""
+        try:
+            # enhanced_web_search expects inputs as a single dict, not **kwargs
+            result_dict, iar_dict = enhanced_web_search(kwargs)
+            # Merge result and IAR into single dict for workflow engine
+            return {
+                "result": result_dict,
+                "iar": iar_dict,
+                "status": "success" if "error" not in result_dict else "error",
+                **result_dict  # Include all result fields at top level for easy access
+            }
+        except TypeError as e:
+            # Handle case where enhanced_web_search might be called incorrectly
+            logger.error(f"Error in enhanced_web_search_wrapper: {e}")
+            return {
+                "status": "error",
+                "error": str(e),
+                "result": {},
+                "iar": {
+                    "status": "Failed",
+                    "summary": f"Wrapper error: {e}",
+                    "confidence": 0.0
+                }
+            }
+    
+    @log_to_thought_trail
+    def enhanced_page_analysis_wrapper(**kwargs) -> Dict[str, Any]:
+        """Wrapper for enhanced_page_analysis that converts tuple to dict format."""
+        try:
+            # enhanced_page_analysis expects inputs as a single dict, not **kwargs
+            result_dict, iar_dict = enhanced_page_analysis(kwargs)
+            # Merge result and IAR into single dict for workflow engine
+            return {
+                "result": result_dict,
+                "iar": iar_dict,
+                "status": "success" if "error" not in result_dict else "error",
+                **result_dict  # Include all result fields at top level for easy access
+            }
+        except TypeError as e:
+            # Handle case where enhanced_page_analysis might be called incorrectly
+            logger.error(f"Error in enhanced_page_analysis_wrapper: {e}")
+            return {
+                "status": "error",
+                "error": str(e),
+                "result": {},
+                "iar": {
+                    "status": "Failed",
+                    "summary": f"Wrapper error: {e}",
+                    "confidence": 0.0
+                }
+            }
+    
+    main_action_registry.register_action("enhanced_web_search", enhanced_web_search_wrapper)
+    main_action_registry.register_action("enhanced_page_analysis", enhanced_page_analysis_wrapper)
+    logger.info("Enhanced Perception Engine actions ('enhanced_web_search', 'enhanced_page_analysis') registered with workflow-compatible wrappers.")
+
+# --- Register Universal Zepto SPR Processing Actions ---
+try:
+    from .zepto_spr_processor import (
+        get_zepto_processor,
+        compress_to_zepto,
+        decompress_from_zepto,
+        ZeptoSPRResult,
+        ZeptoSPRDecompressionResult
+    )
+    
+    @log_to_thought_trail
+    def process_zepto_spr_compression(**kwargs) -> Dict[str, Any]:
+        """
+        [IAR Enabled] Universal action for compressing narratives to Zepto SPR form.
+        
+        Args:
+            narrative (str): The verbose narrative to compress
+            target_stage (str): Compression stage target (default: "Zepto")
+            config (dict): Optional processor configuration
+            
+        Returns:
+            IAR-compliant result with Zepto SPR and metadata
+        """
+        try:
+            narrative = kwargs.get('narrative', '')
+            target_stage = kwargs.get('target_stage', 'Zepto')
+            config = kwargs.get('config')
+            
+            if not narrative:
+                return {
+                    'status': 'error',
+                    'message': 'Narrative input is required',
+                    'reflection': {
+                        'status': 'Failed',
+                        'summary': 'Zepto SPR compression failed: missing narrative input',
+                        'confidence': 0.0,
+                        'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                        'potential_issues': ['Missing required input: narrative'],
+                        'raw_output_preview': None
+                    }
+                }
+            
+            result = compress_to_zepto(narrative, target_stage, config)
+            
+            if result.error:
+                return {
+                    'status': 'error',
+                    'message': f'Compression failed: {result.error}',
+                    'reflection': {
+                        'status': 'Failed',
+                        'summary': f'Zepto SPR compression failed: {result.error}',
+                        'confidence': 0.0,
+                        'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                        'potential_issues': [result.error],
+                        'raw_output_preview': None
+                    }
+                }
+            
+            return {
+                'status': 'success',
+                'output': {
+                    'zepto_spr': result.zepto_spr,
+                    'compression_ratio': result.compression_ratio,
+                    'compression_stages': result.compression_stages,
+                    'new_codex_entries': result.new_codex_entries,
+                    'original_length': result.original_length,
+                    'zepto_length': result.zepto_length,
+                    'processing_time_sec': result.processing_time_sec
+                },
+                'reflection': {
+                    'status': 'Success',
+                    'summary': f'Compressed {result.original_length} chars to {result.zepto_length} chars (ratio: {result.compression_ratio:.2f}:1)',
+                    'confidence': 0.95,
+                    'alignment_check': {'objective_alignment': 1.0, 'protocol_alignment': 1.0},
+                    'potential_issues': [],
+                    'raw_output_preview': f'Zepto SPR: {result.zepto_spr[:100]}...'
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in process_zepto_spr_compression: {e}", exc_info=True)
+            return {
+                'status': 'error',
+                'message': f'Compression exception: {str(e)}',
+                'reflection': {
+                    'status': 'Failed',
+                    'summary': f'Zepto SPR compression exception: {str(e)}',
+                    'confidence': 0.0,
+                    'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                    'potential_issues': [f'Exception: {str(e)}'],
+                    'raw_output_preview': None
+                }
+            }
+    
+    @log_to_thought_trail
+    def process_zepto_spr_decompression(**kwargs) -> Dict[str, Any]:
+        """
+        [IAR Enabled] Universal action for decompressing Zepto SPR back to narrative.
+        
+        Args:
+            zepto_spr (str): The Zepto SPR string to decompress
+            codex (dict): Optional symbol codex (uses default if None)
+            config (dict): Optional processor configuration
+            
+        Returns:
+            IAR-compliant result with decompressed narrative and metadata
+        """
+        try:
+            zepto_spr = kwargs.get('zepto_spr', '')
+            codex = kwargs.get('codex')
+            config = kwargs.get('config')
+            
+            if not zepto_spr:
+                return {
+                    'status': 'error',
+                    'message': 'Zepto SPR input is required',
+                    'reflection': {
+                        'status': 'Failed',
+                        'summary': 'Zepto SPR decompression failed: missing zepto_spr input',
+                        'confidence': 0.0,
+                        'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                        'potential_issues': ['Missing required input: zepto_spr'],
+                        'raw_output_preview': None
+                    }
+                }
+            
+            result = decompress_from_zepto(zepto_spr, codex, config)
+            
+            if result.error:
+                return {
+                    'status': 'error',
+                    'message': f'Decompression failed: {result.error}',
+                    'reflection': {
+                        'status': 'Failed',
+                        'summary': f'Zepto SPR decompression failed: {result.error}',
+                        'confidence': 0.0,
+                        'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                        'potential_issues': [result.error],
+                        'raw_output_preview': None
+                    }
+                }
+            
+            return {
+                'status': 'success',
+                'output': {
+                    'decompressed_text': result.decompressed_text,
+                    'symbols_found': result.symbols_found,
+                    'symbols_expanded': result.symbols_expanded,
+                    'decompression_accuracy': result.decompression_accuracy
+                },
+                'reflection': {
+                    'status': 'Success',
+                    'summary': f'Decompressed Zepto SPR ({len(zepto_spr)} chars) to narrative ({len(result.decompressed_text)} chars), expanded {len(result.symbols_expanded)} symbols',
+                    'confidence': 0.95,
+                    'alignment_check': {'objective_alignment': 1.0, 'protocol_alignment': 1.0},
+                    'potential_issues': [],
+                    'raw_output_preview': f'Decompressed: {result.decompressed_text[:200]}...'
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in process_zepto_spr_decompression: {e}", exc_info=True)
+            return {
+                'status': 'error',
+                'message': f'Decompression exception: {str(e)}',
+                'reflection': {
+                    'status': 'Failed',
+                    'summary': f'Zepto SPR decompression exception: {str(e)}',
+                    'confidence': 0.0,
+                    'alignment_check': {'objective_alignment': 0.0, 'protocol_alignment': 0.0},
+                    'potential_issues': [f'Exception: {str(e)}'],
+                    'raw_output_preview': None
+                }
+            }
+    
+    main_action_registry.register_action("compress_to_zepto_spr", process_zepto_spr_compression)
+    main_action_registry.register_action("decompress_from_zepto_spr", process_zepto_spr_decompression)
+    logger.info("Universal Zepto SPR processing actions ('compress_to_zepto_spr', 'decompress_from_zepto_spr') registered.")
+    
+except ImportError as e:
+    logger.warning(f"Could not import zepto_spr_processor: {e}. Zepto SPR actions not available.")
 
 # --- Load Actions from Cache ---
 try:
