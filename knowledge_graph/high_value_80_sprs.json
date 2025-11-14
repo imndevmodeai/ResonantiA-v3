@@ -1,0 +1,266 @@
+{
+  "total_high_value": 52,
+  "top_80_selected": 52,
+  "sprs": [
+    {
+      "spr_id": "HighstakesvettinG",
+      "term": "High-Stakes Vetting",
+      "score": 50
+    },
+    {
+      "spr_id": "ReproduciblemsrworkfloW",
+      "term": "Reproducible MSR Workflow",
+      "score": 50
+    },
+    {
+      "spr_id": "ActioncontextcognitivE",
+      "term": "Action Context Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "ActionregistrY",
+      "term": "Action Registry",
+      "score": 30
+    },
+    {
+      "spr_id": "BasellmprovidercognitivE",
+      "term": "Base LLM Provider Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "BlockchainintegrationprotocolcognitivE",
+      "term": "Blockchain Integration Protocol Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "CodebaseanalysispatT",
+      "term": "Codebase Analysis Pattern",
+      "score": 30
+    },
+    {
+      "spr_id": "CognitiveoperationalbridgE",
+      "term": "Cognitive Operational Bridge",
+      "score": 30
+    },
+    {
+      "spr_id": "CognitivereflectioncyclecognitivE",
+      "term": "Cognitive Reflection Cycle (CRC) Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "CognitivetoolscognitivE",
+      "term": "Cognitive Tools Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "CrdspcognitivE",
+      "term": "Codebase Reference and Documentation Synchronization Protocol Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "EmergentdomaindetectorcognitivE",
+      "term": "Emergent Domain Detector Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "FilecreationworkfloW",
+      "term": "File Creation Workflow",
+      "score": 30
+    },
+    {
+      "spr_id": "FilereadingtaskpatT",
+      "term": "File Reading Task Pattern",
+      "score": 30
+    },
+    {
+      "spr_id": "FourdthinkingoperationaL",
+      "term": "4D Thinking (Temporal Reasoning) Operational System",
+      "score": 30
+    },
+    {
+      "spr_id": "ImplicitworkflowcontracT",
+      "term": "Implicit Workflow Contract",
+      "score": 30
+    },
+    {
+      "spr_id": "KeyholderoverridE",
+      "term": "Keyholder Override",
+      "score": 30
+    },
+    {
+      "spr_id": "KnowledgecrystallizationsystemcognitivE",
+      "term": "Knowledge Crystallization System Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "KnowledgenetworkonenesS",
+      "term": "Knowledge network onenesS (KnO)",
+      "score": 30
+    },
+    {
+      "spr_id": "KnowledgequarantinE",
+      "term": "Knowledge Quarantine",
+      "score": 30
+    },
+    {
+      "spr_id": "KnowledgetapestrycognitivE",
+      "term": "Knowledge Tapestry Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "MetacognitiveshifT",
+      "term": "Metacognitive shifT",
+      "score": 30
+    },
+    {
+      "spr_id": "MetacognitiveshiftcognitivE",
+      "term": "Metacognitive Shift Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "MetacognitiveshiftprotocolcognitivE",
+      "term": "Metacognitive Shift Protocol Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "MetaPatternRecognition",
+      "term": "Meta-Pattern Recognition",
+      "score": 30
+    },
+    {
+      "spr_id": "ParallelcognitivE",
+      "term": "Parallel Cognitive Processing",
+      "score": 30
+    },
+    {
+      "spr_id": "PatternevolutioN",
+      "term": "Pattern Evolution",
+      "score": 30
+    },
+    {
+      "spr_id": "PatternevolutioncognitivE",
+      "term": "Pattern Evolution Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "PatternrecognitionmasteR",
+      "term": "Pattern Recognition Master",
+      "score": 30
+    },
+    {
+      "spr_id": "PatternrecognitionmasteroperationaL",
+      "term": "Pattern Recognition Master Operational System",
+      "score": 30
+    },
+    {
+      "spr_id": "PersistentknowledgE",
+      "term": "Persistent Knowledge",
+      "score": 30
+    },
+    {
+      "spr_id": "PhasegatescognitivE",
+      "term": "Phasegates Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "RessydmastergenerationworkflowoperationaL",
+      "term": "ReSSyD Master Documentation Generation Workflow Operational System",
+      "score": 30
+    },
+    {
+      "spr_id": "RoboticscontrolsystemcognitivE",
+      "term": "Robotics Control System Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "SircprotocolcognitivE",
+      "term": "Synergistic Intent Resonance Cycle Protocol Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "SynergisticintentresonancecyclE",
+      "term": "Synergistic Intent Resonance CyclE (SIRC)",
+      "score": 30
+    },
+    {
+      "spr_id": "SynergisticintentresonancecyclecognitivE",
+      "term": "Synergistic Intent Resonance Cycle (SIRC) Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "SystemexecutionpatT",
+      "term": "System Execution Pattern",
+      "score": 30
+    },
+    {
+      "spr_id": "VcdcognitivE",
+      "term": "Visual Cognitive Debugger Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "VettingagentcognitivE",
+      "term": "Vetting Agent Cognitive Capability",
+      "score": 30
+    },
+    {
+      "spr_id": "InvariantmininG",
+      "term": "Invariant Mining",
+      "score": 10
+    },
+    {
+      "spr_id": "LlmresponseinterceptoR",
+      "term": "LLM Response Interceptor",
+      "score": 10
+    },
+    {
+      "spr_id": "MultisourcecorroboratioN",
+      "term": "Multi-Source Corroboration",
+      "score": 10
+    },
+    {
+      "spr_id": "StrategyfusioN",
+      "term": "Strategy Fusion",
+      "score": 10
+    },
+    {
+      "spr_id": "AgentbasedmodelinG",
+      "term": "Agent-Based Modeling (ABM)",
+      "score": 5
+    },
+    {
+      "spr_id": "CausalinferencE",
+      "term": "Causal Inference",
+      "score": 5
+    },
+    {
+      "spr_id": "GeminicodeexecutoR",
+      "term": "Gemini Code Executor",
+      "score": 5
+    },
+    {
+      "spr_id": "GeminifileprocessoR",
+      "term": "Gemini File Processor",
+      "score": 5
+    },
+    {
+      "spr_id": "GeminifunctioncallinG",
+      "term": "Gemini Function Calling",
+      "score": 5
+    },
+    {
+      "spr_id": "GroundedgeneratioN",
+      "term": "Grounded Generation",
+      "score": 5
+    },
+    {
+      "spr_id": "PredictivemodelingtooL",
+      "term": "Predictive Modeling Tool",
+      "score": 5
+    },
+    {
+      "spr_id": "StructuredoutputgeneratoR",
+      "term": "Structured Output Generator",
+      "score": 5
+    }
+  ]
+}

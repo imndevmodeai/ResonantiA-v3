@@ -1,0 +1,5 @@
+{
+  "name": "Objective Generation Engine Visualizer",
+  "description": "A web application that visualizes the 8-stage Pattern Crystallization Meta-Process for generating Zepto SPR objectives from raw user queries.",
+  "requestFramePermissions": []
+}

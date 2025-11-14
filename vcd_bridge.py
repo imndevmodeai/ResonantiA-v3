@@ -15,6 +15,8 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional, Union
 from dataclasses import dataclass, asdict
 from enum import Enum
+import logging
+import re
 
 # Ensure the ArchE modules can be imported by adding the project root to the path
 sys.path.insert(0, str(Path(__file__).parent))
@@ -30,6 +32,28 @@ except ImportError as e:
     print(f"❌ Failed to import ArchE core components: {e}")
     print("Ensure you have run `export PYTHONPATH=$PYTHONPATH:./Three_PointO_ArchE:./Four_PointO_ArchE`")
     sys.exit(1)
+
+# Optional: ask_arche_enhanced_v2 integration (flow routing support)
+try:
+    from ask_arche_enhanced_v2 import (  # type: ignore
+        EnhancedUnifiedArchEConfig as ASKV2_Config,
+        EnhancedRealArchEProcessor as ASKV2_Processor
+    )
+    ASK_V2_AVAILABLE = True
+except Exception:
+    ASK_V2_AVAILABLE = False
+
+# Optional: CrystallizedObjectiveGenerator (COG)
+try:
+    from crystallized_objective_generator import (
+        CrystallizedObjectiveGenerator,
+        SPR
+    )
+    COG_AVAILABLE = True
+except ImportError:
+    COG_AVAILABLE = False
+    CrystallizedObjectiveGenerator = None
+    SPR = None
 
 # For running non-async methods in the event loop
 import asyncio
@@ -84,6 +108,12 @@ class VCDBridge:
         self.session_id = f"vcd_session_{uuid.uuid4().hex[:8]}"
         self.current_phase = None
         self.analysis_start_time = None
+        # Current processing flow: 'aco' (default), 'ask_v2' (if available), 'oge' (Objective Generation Engine - server-side)
+        self.current_flow = "aco"
+        self.ask_v2_available = ASK_V2_AVAILABLE
+        # ---- Stream terminal logs to VCD with emojis ----
+        self._install_vcd_logging_handler()
+        self._install_stdout_proxy()
         
         # --- LLM Provider Initialization ---
         try:
@@ -104,6 +134,46 @@ class VCDBridge:
         # Pass the created spr_manager to the SIRC handler.
         self.sirc_handler = SIRCIntakeHandler(spr_manager=self.spr_manager)
         
+        # Initialize COG (CrystallizedObjectiveGenerator) if available
+        self.cog = None
+        if COG_AVAILABLE and SPR is not None:
+            try:
+                def load_spr_bank() -> List[SPR]:
+                    """Load SPRs from SPRManager for COG"""
+                    spr_defs = self.spr_manager.get_all_sprs()
+                    spr_list = []
+                    for spr_id, spr_data in spr_defs.items():
+                        if isinstance(spr_data, dict):
+                            # Map SPRManager format to COG SPR dataclass
+                            spr_list.append(SPR(
+                                id=spr_id,
+                                name=spr_data.get("name", spr_id),
+                                tags=spr_data.get("tags", []) + [spr_data.get("category", "unknown")],
+                                signature=spr_data.get("signature", {}),
+                                pattern=spr_data.get("pattern", spr_id),
+                                preconditions=spr_data.get("preconditions", {}),
+                                effects=spr_data.get("effects", {}),
+                                cost=spr_data.get("cost", 1.0),
+                                temporal_hint=spr_data.get("temporal_hint"),
+                                metadata={
+                                    "definition": spr_data.get("definition", ""),
+                                    "category": spr_data.get("category", "unknown"),
+                                    "relationships": spr_data.get("relationships", {})
+                                }
+                            ))
+                    return spr_list
+                
+                self.cog = CrystallizedObjectiveGenerator(
+                    spr_bank_loader=load_spr_bank,
+                    max_candidates=128
+                )
+                print("✅ CrystallizedObjectiveGenerator (COG) initialized successfully.")
+            except Exception as e:
+                print(f"⚠️  COG initialization failed: {e}")
+                import traceback
+                traceback.print_exc()
+                self.cog = None
+        
         # Instantiate the ACO as the main entry point
         self.aco = AdaptiveCognitiveOrchestrator(
             protocol_chunks=[],  # Let ACO load defaults
@@ -116,6 +186,294 @@ class VCDBridge:
         self.rise_orchestrator = self.aco.rise_orchestrator
 
         print("✅ VCD Bridge initialized with ACO and RISE Engine.")
+
+    # ---- Logging and Stdout streaming to VCD ----
+    def _install_vcd_logging_handler(self):
+        """Attach a logging handler that forwards log records to VCD as rich events with emojis."""
+        bridge = self
+
+        class VCDLogHandler(logging.Handler):
+            LEVEL_EMOJI = {
+                logging.DEBUG: "🧪",
+                logging.INFO: "ℹ️",
+                logging.WARNING: "⚠️",
+                logging.ERROR: "❌",
+                logging.CRITICAL: "🔥",
+            }
+            def emit(self, record: logging.LogRecord):
+                try:
+                    emoji = self.LEVEL_EMOJI.get(record.levelno, "📝")
+                    title = f"{emoji} {record.levelname}"
+                    msg = self.format(record)
+                    context = {
+                        "logger": record.name,
+                        "module": record.module,
+                        "file": record.pathname,
+                        "line": record.lineno,
+                        "function": record.funcName,
+                        "created": datetime.fromtimestamp(record.created).isoformat(),
+                        "process": record.process,
+                        "thread": record.thread,
+                    }
+                    fut = asyncio.run_coroutine_threadsafe(
+                        bridge.emit_thought_process(f"{title}: {msg}", context),
+                        bridge.loop
+                    )
+                    # best-effort; don't wait
+                except Exception:
+                    pass
+
+        handler = VCDLogHandler()
+        formatter = logging.Formatter("%(message)s")
+        handler.setFormatter(formatter)
+        root = logging.getLogger()
+        root.setLevel(logging.INFO)
+        root.addHandler(handler)
+
+    def _install_stdout_proxy(self):
+        """Mirror stdout/stderr lines to VCD as thought events with emojis and image previews."""
+        bridge = self
+        original_stdout = sys.stdout
+        original_stderr = sys.stderr
+        image_pattern = re.compile(r"(https?://\\S+\\.(?:png|jpg|jpeg|gif|webp|svg))", re.IGNORECASE)
+
+        class VCDStreamProxy:
+            def __init__(self, wrapped, loop, bridge_ref):
+                self._wrapped = wrapped
+                self._buffer = []
+                self._loop = loop
+                self._bridge = bridge_ref
+            def _emit_line(self, line: str, stream_name: str):
+                # Emit the raw line
+                asyncio.run_coroutine_threadsafe(
+                    self._bridge.emit_thought_process(f"🖥️ {line}", {"source": stream_name}),
+                    self._loop
+                )
+                # If line contains an image URL, emit a visualization
+                m = image_pattern.search(line)
+                if m:
+                    url = m.group(1)
+                    asyncio.run_coroutine_threadsafe(
+                        self._bridge.emit_data_visualization(
+                            chart_type="image",
+                            data={"images": [url]},
+                            title="Streamed image from logs",
+                            interactive=False
+                        ),
+                        self._loop
+                    )
+            def write(self, data):
+                try:
+                    self._wrapped.write(data)
+                    # accumulate until newline
+                    for ch in data:
+                        if ch == "\n":
+                            line = "".join(self._buffer).strip()
+                            self._buffer.clear()
+                            if line:
+                                self._emit_line(line, "stdout")
+                        else:
+                            self._buffer.append(ch)
+                except Exception:
+                    # ensure stdout never breaks
+                    pass
+            def flush(self):
+                try:
+                    self._wrapped.flush()
+                except Exception:
+                    pass
+
+        try:
+            sys.stdout = VCDStreamProxy(original_stdout, self.loop, self)
+            sys.stderr = VCDStreamProxy(original_stderr, self.loop, self)
+        except Exception:
+            # If proxy fails, keep original stdout
+            sys.stdout = original_stdout
+            sys.stderr = original_stderr
+
+    def _oge_generate_pipeline(self, query: str) -> List[Dict[str, Any]]:
+        """
+        Python adaptation of oge/services/objectiveGenerator.ts (generateObjectivePipeline).
+        Returns a list of stage dictionaries compatible for simple rendering.
+        """
+        def get_compression(input_len: int, output_len: int) -> float:
+            if output_len == 0:
+                return float(input_len)
+            return round(input_len / output_len, 2)
+
+        spr_keyword_map = {
+            'historical': 'H', 'emergent': 'E', 'causal': 'C', 'predictive': 'F',
+            'predicting': 'F', 'temporal': 'T', 'compare': 'Tr', 'matchup': 'Tr',
+            'prime': 'H', 'circa': 'T', 'age': 'T'
+        }
+        import re
+
+        results: List[Dict[str, Any]] = []
+        current_input = query
+        cumulative_compression = 1.0
+
+        # Stage 1: Feature Extraction
+        temporal_markers = ", ".join(re.findall(r"(?:circa\\s+\\d{4}-\\d{4}|age\\s+\\d+-\\d+)", query, flags=re.IGNORECASE))
+        domain_keywords = ", ".join([kw for kw in ['boxing', 'match', 'prime'] if kw in query.lower()])
+        complexity_indicators = [kw for kw in ['emergent', 'causal', 'predictive'] if kw in query.lower()]
+        spr_keywords = [kw for kw in spr_keyword_map.keys() if kw in query.lower()]
+        stage1_output = f"⦅temporal:[{temporal_markers}], domain:[{domain_keywords}], complexity:[{', '.join(complexity_indicators)}]⦆"
+        stage_compression = get_compression(len(current_input), len(stage1_output))
+        cumulative_compression *= stage_compression
+        results.append({
+            "stageNumber": 1, "title": "Feature Extraction", "symbol": "⦅ F ⦆",
+            "input": f"⟦{query}⟧", "output": stage1_output,
+            "stageCompression": stage_compression, "cumulativeCompression": round(cumulative_compression, 2)
+        })
+        current_input = stage1_output
+
+        # Stage 2: TemporalScope Building
+        stage2_output = 'Δ⦅explicit:"Historical primes", implicit:"Round-by-round", contextual:"Era differences"⦆'
+        stage_compression = get_compression(len(current_input), len(stage2_output))
+        cumulative_compression *= stage_compression
+        results.append({
+            "stageNumber": 2, "title": "TemporalScope Building", "symbol": "Δ⦅ T ⦆",
+            "input": current_input, "output": stage2_output,
+            "stageCompression": stage_compression, "cumulativeCompression": round(cumulative_compression, 2)
+        })
+        current_input = stage2_output
+
+        # Stage 3: SPR Activation
+        activated_sprs = []
+        for kw in spr_keywords:
+            sym = spr_keyword_map.get(kw)
+            if sym and sym not in activated_sprs:
+                activated_sprs.append(sym)
+        stage3_output = "⊢" + "⊢".join(activated_sprs) if activated_sprs else ""
+        stage_compression = get_compression(len(current_input), len(stage3_output))
+        cumulative_compression *= stage_compression
+        results.append({
+            "stageNumber": 3, "title": "SPR Activation", "symbol": "⊢ SPR ⊢",
+            "input": current_input, "output": stage3_output,
+            "stageCompression": stage_compression, "cumulativeCompression": round(cumulative_compression, 2)
+        })
+        current_input = stage3_output
+
+        # Stage 4: Mandate Selection
+        mandates = ['⊨Ω']
+        if temporal_markers:
+            mandates.insert(0, '⊨M₆')
+        if len(complexity_indicators) > 0:
+            mandates.insert(0, '⊨M₉')
+        stage4_output = "".join(mandates)
+        stage_compression = get_compression(len(current_input), len(stage4_output))
+        cumulative_compression *= stage_compression
+        results.append({
+            "stageNumber": 4, "title": "Mandate Selection", "symbol": "⊨ M ⊨",
+            "input": current_input, "output": stage4_output,
+            "stageCompression": stage_compression, "cumulativeCompression": round(cumulative_compression, 2)
+        })
+        current_input = stage4_output
+
+        # Stage 5: Template Assembly
+        stage5_output = "⊧{Apply_full_spectrum...}"
+        stage_compression = get_compression(len(current_input), len(stage5_output))
+        cumulative_compression *= stage_compression
+        results.append({
+            "stageNumber": 5, "title": "Template Assembly", "symbol": "⊧ T ⊧",
+            "input": current_input, "output": stage5_output,
+            "stageCompression": stage_compression, "cumulativeCompression": round(cumulative_compression, 2)
+        })
+        current_input = stage5_output
+
+        # Stage 6: Domain Customization
+        stage6_output = "⊨{boxing_explanations}"
+        stage_compression = get_compression(len(current_input), len(stage6_output))
+        cumulative_compression *= stage_compression
+        results.append({
+            "stageNumber": 6, "title": "Domain Customization", "symbol": "⊨ D ⊨",
+            "input": current_input, "output": stage6_output,
+            "stageCompression": stage_compression, "cumulativeCompression": round(cumulative_compression, 2)
+        })
+        current_input = stage6_output
+
+        # Stage 7: Final Assembly
+        stage7_output = "⟧{problem_description}⟧"
+        stage_compression = get_compression(len(current_input), len(stage7_output))
+        cumulative_compression *= stage_compression
+        results.append({
+            "stageNumber": 7, "title": "Final Assembly", "symbol": "⟦ PD ⟧",
+            "input": current_input, "output": stage7_output,
+            "stageCompression": stage_compression, "cumulativeCompression": round(cumulative_compression, 2)
+        })
+        current_input = stage7_output
+
+        # Stage 8: Zepto Objective
+        try:
+            s1 = results[0]["output"]
+            s2 = results[1]["output"]
+            s3 = results[2]["output"]
+            s4 = results[3]["output"]
+        except Exception:
+            s1 = s2 = s3 = s4 = ""
+        zepto_spr = f"⟦Q⟧→{s1[:15]}...→{s2[:10]}...→{s3}→{s4}→⊧T→⊨D→⟧PD⟧"
+        final_cumulative = get_compression(len(query), len(zepto_spr))
+        results.append({
+            "stageNumber": 8, "title": "Zepto Objective", "symbol": "◊ Z ◊",
+            "input": current_input, "output": zepto_spr,
+            "stageCompression": get_compression(len(current_input), len(zepto_spr)),
+            "cumulativeCompression": round(final_cumulative, 2)
+        })
+        # Stage 9: Crystallized Zepto Objective (display)
+        results.append({
+            "stageNumber": 9, "title": "Crystallized Zepto Objective", "symbol": "◊",
+            "input": query, "output": zepto_spr,
+            "stageCompression": 0, "cumulativeCompression": round(final_cumulative, 2)
+        })
+        return results
+
+    async def process_query_routed(self, prompt: str) -> str:
+        """
+        Route the query through the selected flow and return a final response string.
+        Flows:
+          - 'aco' (default): AdaptiveCognitiveOrchestrator.process_query_with_evolution (sync, run in thread)
+          - 'ask_v2' (optional): EnhancedRealArchEProcessor.process_query (async)
+          - 'oge' (server-side Objective Generation Engine adaptation)
+        """
+        flow = (self.current_flow or "aco").lower()
+        if flow == "ask_v2" and self.ask_v2_available:
+            try:
+                # Initialize a minimal EnhancedRealArchEProcessor without VCD loopback
+                cfg = ASKV2_Config()
+                processor = ASKV2_Processor(vcd=None, config=cfg)
+                results = await processor.process_query(prompt)
+                if isinstance(results, dict) and "response" in results:
+                    return str(results["response"])
+                return str(results)
+            except Exception as e:
+                # Fallback to ACO on failure
+                await self.emit_thought_process(
+                    f"ask_v2 flow failed, falling back to ACO: {e}",
+                    {"flow": "ask_v2", "fallback": "aco"}
+                )
+                return await asyncio.to_thread(self.aco.process_query_with_evolution, prompt)
+        if flow == "oge":
+            try:
+                stages = self._oge_generate_pipeline(prompt)
+                # Emit a rich event for visualization (optional)
+                try:
+                    await self.emit_thought_process("OGE pipeline generated", {"stage_count": len(stages)})
+                except Exception:
+                    pass
+                # Format a readable summary
+                lines = []
+                for s in stages:
+                    lines.append(f"[{s['stageNumber']}] {s['title']} {s['symbol']}")
+                    lines.append(f"  input:  {s['input']}")
+                    lines.append(f"  output: {s['output']}")
+                    lines.append(f"  compression: x{s['stageCompression']}  cumulative: x{s['cumulativeCompression']}")
+                return "\n".join(lines)
+            except Exception as e:
+                await self.emit_thought_process(f"OGE flow failed: {e}", {"flow": "oge"})
+                return f"OGE processing failed: {e}"
+
+        # Default ACO path
+        return await asyncio.to_thread(self.aco.process_query_with_evolution, prompt)
 
     async def broadcast_event_to_vcd(self, event_data: dict):
         """Callback for ACO/RISE to send events to the VCD."""
@@ -141,24 +499,55 @@ class VCDBridge:
             "message_type": "system",
             "content": "VCD Bridge connected to LIVE ArchE Core. Ready for directives.",
             "timestamp": datetime.now().isoformat(),
+            "flow": self.current_flow,
         })
         
         try:
             async for message in websocket:
                 try:
                     data = json.loads(message)
-                    if data.get("type") == "query" and "payload" in data:
+                    msg_type = data.get("type")
+                    if msg_type == "set_flow":
+                        requested = (data.get("flow") or "").lower()
+                        allowed = ["aco", "oge"] + (["ask_v2"] if self.ask_v2_available else [])
+                        if requested in allowed:
+                            self.current_flow = requested
+                            await self.send_to_client(websocket, {
+                                "type": "system",
+                                "message_type": "flow_changed",
+                                "content": f"Flow set to {self.current_flow}",
+                                "flow": self.current_flow,
+                                "timestamp": datetime.now().isoformat(),
+                            })
+                        else:
+                            await self.send_to_client(websocket, {
+                                "type": "system",
+                                "message_type": "error",
+                                "content": f"Unsupported flow '{requested}'. Allowed: {allowed}",
+                                "timestamp": datetime.now().isoformat(),
+                            })
+                    elif msg_type == "get_cognitive_state":
+                        await self.send_to_client(websocket, {
+                            "type": "cognitive_state",
+                            "flow": self.current_flow,
+                            "session_id": self.session_id,
+                            "timestamp": datetime.now().isoformat(),
+                        })
+                    elif msg_type == "handshake":
+                        await self.send_to_client(websocket, {
+                            "type": "system",
+                            "message_type": "handshake_ack",
+                            "content": "Handshake acknowledged by VCD Bridge",
+                            "flow": self.current_flow,
+                            "timestamp": datetime.now().isoformat(),
+                        })
+                    elif msg_type == "query" and "payload" in data:
                         prompt = data["payload"]
-                        print(f"▶️ Received query. Passing to ACO: {prompt[:80]}...")
-                        
-                        # Use asyncio.to_thread to run the synchronous function in a separate thread
-                        final_response = await asyncio.to_thread(
-                            self.aco.process_query_with_evolution, 
-                            prompt
-                        )
+                        print(f"▶️ Received query. Flow={self.current_flow} Prompt: {prompt[:80]}...")
+                        final_response = await self.process_query_routed(prompt)
 
                         # Now, broadcast the final response back to the VCD
-                        print(f"✅ ACO processing complete. Broadcasting final response.")
+                        print(f"✅ Processing complete. Broadcasting final response.")
                         await self.broadcast_to_all({
                             "type": "event",
                             "event": "final_response",

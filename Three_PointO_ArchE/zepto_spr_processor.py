@@ -264,7 +264,23 @@ class ZeptoSPRProcessorAdapter(IZeptoSPRProcessor):
                 codex_entries = {}
                 for symbol, entry_data in codex.items():
                     if isinstance(entry_data, dict):
-                        codex_entries[symbol] = SymbolCodexEntry(**entry_data)
+                        # Handle both full SymbolCodexEntry format and simple dict format
+                        try:
+                            # Try to create SymbolCodexEntry if all required fields present
+                            if 'symbol' in entry_data and 'meaning' in entry_data:
+                                codex_entries[symbol] = SymbolCodexEntry(
+                                    symbol=entry_data.get('symbol', symbol),
+                                    meaning=entry_data.get('meaning', ''),
+                                    context=entry_data.get('context', ''),
+                                    usage_examples=entry_data.get('usage_examples', []),
+                                    created_at=entry_data.get('created_at', '')
+                                )
+                            else:
+                                # Simple dict format - use as-is, engine will handle it
+                                codex_entries[symbol] = entry_data
+                        except Exception:
+                            # Fallback: use as dict
+                            codex_entries[symbol] = entry_data
                     else:
                         codex_entries[symbol] = entry_data
             

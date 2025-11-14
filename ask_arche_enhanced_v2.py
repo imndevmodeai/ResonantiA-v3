@@ -260,6 +260,48 @@ try:
 except ImportError:
     VCD_ANALYSIS_AVAILABLE = False
 
+# --- ZEPTO SPR PROCESSOR ---
+try:
+    from Three_PointO_ArchE.zepto_spr_processor import (
+        compress_to_zepto,
+        decompress_from_zepto,
+        get_zepto_processor,
+        ZeptoSPRResult,
+        ZeptoSPRDecompressionResult
+    )
+    ZEPTO_AVAILABLE = True
+except ImportError:
+    ZEPTO_AVAILABLE = False
+    compress_to_zepto = None
+    decompress_from_zepto = None
+    get_zepto_processor = None
+
+# --- CRYSTALLIZED OBJECTIVE GENERATOR (COG) ---
+try:
+    from crystallized_objective_generator import (
+        CrystallizedObjectiveGenerator,
+        Mandate,
+        CrystallizedObjective
+    )
+    COG_AVAILABLE = True
+except ImportError:
+    COG_AVAILABLE = False
+    CrystallizedObjectiveGenerator = None
+
+# --- THOUGHT TRAIL (Updated API) ---
+try:
+    from Three_PointO_ArchE.thought_trail import (
+        ThoughtTrail,
+        IAREntry,
+        create_manual_entry
+    )
+    THOUGHT_TRAIL_AVAILABLE = True
+except ImportError:
+    THOUGHT_TRAIL_AVAILABLE = False
+    ThoughtTrail = None
+    IAREntry = None
+    create_manual_entry = None
+
 # --- CONFIGURATION ---
 class EnhancedUnifiedArchEConfig:
     """Enhanced unified configuration with auto-detection"""
@@ -279,8 +321,38 @@ class EnhancedUnifiedArchEConfig:
         self.enable_vcd_analysis = VCD_ANALYSIS_AVAILABLE
         self.enable_quantum_verification = True
         self.enable_cursor_auto_config = True
+        self.enable_zepto_compression = ZEPTO_AVAILABLE
+        self.enable_cog = COG_AVAILABLE
+        self.enable_thought_trail = THOUGHT_TRAIL_AVAILABLE
         self.output_dir = "outputs"
         self.session_id = f"enhanced_v2_session_{int(time.time())}"
+        
+        # Initialize ThoughtTrail if available
+        self.thought_trail = None
+        if THOUGHT_TRAIL_AVAILABLE:
+            try:
+                self.thought_trail = ThoughtTrail(maxlen=1000, max_history=1000)
+                console.print("[green]✅ ThoughtTrail initialized with updated API[/green]")
+            except Exception as e:
+                console.print(f"[yellow]⚠️  ThoughtTrail initialization failed: {e}[/yellow]")
+        
+        # Initialize COG if available
+        self.cog = None
+        if COG_AVAILABLE:
+            try:
+                self.cog = CrystallizedObjectiveGenerator()
+                console.print("[green]✅ CrystallizedObjectiveGenerator initialized[/green]")
+            except Exception as e:
+                console.print(f"[yellow]⚠️  COG initialization failed: {e}[/yellow]")
+        
+        # Initialize VCDAnalysisAgent if available
+        self.vcd_analysis_agent = None
+        if VCD_ANALYSIS_AVAILABLE:
+            try:
+                self.vcd_analysis_agent = VCDAnalysisAgent(session_id=self.session_id)
+                console.print("[green]✅ VCDAnalysisAgent initialized[/green]")
+            except Exception as e:
+                console.print(f"[yellow]⚠️  VCDAnalysisAgent initialization failed: {e}[/yellow]")
         
         # Store detection results
         self.cursor_detection = cursor_detection
@@ -569,6 +641,12 @@ class EnhancedRealArchEProcessor:
     def __init__(self, vcd: Optional[EnhancedVCDIntegration] = None, config: Optional[EnhancedUnifiedArchEConfig] = None):
         self.vcd = vcd
         self.config = config
+        self.zepto_processor = None
+        if ZEPTO_AVAILABLE and get_zepto_processor:
+            try:
+                self.zepto_processor = get_zepto_processor()
+            except Exception as e:
+                console.print(f"[yellow]⚠️  Could not initialize Zepto processor: {e}[/yellow]")
         
     async def process_query(self, query: str) -> Dict[str, Any]:
         """Process query with comprehensive analysis"""
@@ -627,6 +705,55 @@ class EnhancedRealArchEProcessor:
             "total_sprs_available": self.config.spr_count if self.config else 0
         }
         
+        # Zepto compression of SPR context (if available)
+        zepto_info = {}
+        if self.config and self.config.enable_zepto_compression and spr_context and self.zepto_processor:
+            try:
+                # Compress SPR context to Zepto
+                spr_context_json = json.dumps(spr_context, indent=2)
+                zepto_result = compress_to_zepto(spr_context_json, target_stage="Zepto")
+                if zepto_result and not zepto_result.error:
+                    zepto_info = {
+                        "compressed": True,
+                        "original_size": zepto_result.original_length,
+                        "zepto_size": zepto_result.zepto_length,
+                        "compression_ratio": zepto_result.compression_ratio,
+                        "zepto_spr": zepto_result.zepto_spr[:200] + "..." if len(zepto_result.zepto_spr) > 200 else zepto_result.zepto_spr
+                    }
+                    if self.vcd and self.vcd.connected:
+                        await self.vcd.emit_thought_process(
+                            f"SPR context compressed to Zepto: {zepto_result.compression_ratio:.1f}:1",
+                            {"zepto_compression": zepto_info}
+                        )
+            except Exception as e:
+                console.print(f"[yellow]⚠️  Zepto compression failed: {e}[/yellow]")
+        
+        # Log to ThoughtTrail (if available)
+        if self.config and self.config.thought_trail:
+            try:
+                from Three_PointO_ArchE.thought_trail import IAREntry
+                thought_entry = IAREntry(
+                    task_id=f"query_{int(time.time())}",
+                    action_type="query_processing",
+                    inputs={"query": query, "spr_context": spr_context},
+                    outputs={"response": response[:500] + "..." if len(response) > 500 else response},
+                    iar={
+                        "intention": "Process user query with full ArchE capabilities",
+                        "action": "Generated comprehensive response with SPR priming and Zepto compression",
+                        "reflection": f"Processed query with {spr_stats['sprs_primed']} SPRs primed, Zepto: {zepto_info.get('compressed', False)}"
+                    },
+                    timestamp=now_iso(),
+                    confidence=0.95,
+                    metadata={
+                        "spr_stats": spr_stats,
+                        "zepto_info": zepto_info,
+                        "llm_provider": self.config.llm_config["provider"] if self.config else "unknown"
+                    }
+                )
+                self.config.thought_trail.add_entry(thought_entry)
+            except Exception as e:
+                console.print(f"[yellow]⚠️  ThoughtTrail logging failed: {e}[/yellow]")
+        
         return {
             "query": query,
             "response": response,
@@ -636,7 +763,8 @@ class EnhancedRealArchEProcessor:
             "llm_provider": self.config.llm_config["provider"] if self.config else "unknown",
             "quantum_processing": self.config.quantum_verification["qiskit_available"] if self.config else False,
             "spr_priming": spr_stats,
-            "spr_context": spr_context
+            "spr_context": spr_context,
+            "zepto_compression": zepto_info
         }
     
     async def generate_comprehensive_response(self, query: str, spr_context: Dict[str, Any] = None) -> str:
@@ -926,9 +1054,47 @@ class EnhancedUnifiedArchEProcessor:
             console.print(f"  Status: ✅ ACTIVE")
             console.print(f"  SPR Definitions Loaded: {self.config.spr_count}")
             console.print(f"  System: Auto-priming ready for query processing")
+            # Check for Zepto compression capabilities
+            if hasattr(self.config.spr_manager, 'compress_spr_to_zepto'):
+                console.print(f"  Zepto Compression: ✅ Available")
+            else:
+                console.print(f"  Zepto Compression: ⚠️  Not available")
         else:
             console.print(f"  Status: ⚠️  INACTIVE")
             console.print(f"  Reason: SPR Manager not available or file not found")
+        
+        # Display Zepto Status
+        console.print("\n[bold cyan]⚡ Zepto SPR Compression:[/bold cyan]")
+        if self.config.enable_zepto_compression:
+            console.print(f"  Status: ✅ AVAILABLE")
+            console.print(f"  Features: Compression, Decompression, Symbol Codex")
+        else:
+            console.print(f"  Status: ⚠️  NOT AVAILABLE")
+            console.print(f"  Reason: zepto_spr_processor module not found")
+        
+        # Display COG Status
+        console.print("\n[bold cyan]🎯 CrystallizedObjectiveGenerator:[/bold cyan]")
+        if self.config.enable_cog and self.config.cog:
+            console.print(f"  Status: ✅ ACTIVE")
+            console.print(f"  Features: Mandate-to-Objective transformation, 8-stage process")
+        else:
+            console.print(f"  Status: ⚠️  NOT AVAILABLE")
+        
+        # Display ThoughtTrail Status
+        console.print("\n[bold cyan]📚 ThoughtTrail (Updated API):[/bold cyan]")
+        if self.config.enable_thought_trail and self.config.thought_trail:
+            console.print(f"  Status: ✅ ACTIVE")
+            console.print(f"  API: Updated with IAREntry objects, entries deque, enhanced queries")
+        else:
+            console.print(f"  Status: ⚠️  NOT AVAILABLE")
+        
+        # Display VCDAnalysisAgent Status
+        console.print("\n[bold cyan]🔬 VCDAnalysisAgent:[/bold cyan]")
+        if self.config.enable_vcd_analysis and self.config.vcd_analysis_agent:
+            console.print(f"  Status: ✅ ACTIVE")
+            console.print(f"  Features: Comprehensive VCD analysis, RISE integration")
+        else:
+            console.print(f"  Status: ⚠️  NOT AVAILABLE")
         
         # Setup logging
         if LOGGING_AVAILABLE:
@@ -967,6 +1133,23 @@ class EnhancedUnifiedArchEProcessor:
         
         # Start analysis
         await self.vcd.start_analysis(query)
+        
+        # Perform VCD comprehensive analysis if available
+        vcd_analysis_result = None
+        if self.config.enable_vcd_analysis and self.config.vcd_analysis_agent:
+            try:
+                console.print("[blue]🔬 Performing comprehensive VCD analysis...[/blue]")
+                vcd_analysis_result = await self.config.vcd_analysis_agent.perform_comprehensive_vcd_analysis()
+                if vcd_analysis_result:
+                    console.print(f"[green]✅ VCD Analysis Complete: {vcd_analysis_result.analysis_type}[/green]")
+                    if self.vcd.connected:
+                        await self.vcd.send_message({
+                            "type": "vcd_analysis_complete",
+                            "analysis_result": vcd_analysis_result.__dict__ if hasattr(vcd_analysis_result, '__dict__') else str(vcd_analysis_result),
+                            "timestamp": now_iso()
+                        })
+            except Exception as e:
+                console.print(f"[yellow]⚠️  VCD analysis failed: {e}[/yellow]")
         
         # Try CognitiveHub first, fallback to RealProcessor
         if self.cognitive_hub:
@@ -1064,7 +1247,11 @@ def present_enhanced_results(results: Dict[str, Any], config: EnhancedUnifiedArc
         f.write(f"- Real Processor: {'✅' if config.enable_real_processor else '❌'}\n")
         f.write(f"- Quantum Verification: {'✅' if config.enable_quantum_verification else '❌'}\n")
         f.write(f"- Cursor Auto-Config: {'✅' if config.enable_cursor_auto_config else '❌'}\n")
-        f.write(f"- SPR Auto-Priming: {'✅' if config.spr_manager else '❌'} ({config.spr_count} SPRs available)\n\n")
+        f.write(f"- SPR Auto-Priming: {'✅' if config.spr_manager else '❌'} ({config.spr_count} SPRs available)\n")
+        f.write(f"- Zepto Compression: {'✅' if config.enable_zepto_compression else '❌'}\n")
+        f.write(f"- COG (CrystallizedObjectiveGenerator): {'✅' if config.enable_cog else '❌'}\n")
+        f.write(f"- ThoughtTrail (Updated API): {'✅' if config.enable_thought_trail else '❌'}\n")
+        f.write(f"- VCDAnalysisAgent: {'✅' if config.enable_vcd_analysis else '❌'}\n\n")
         
         # Add SPR priming details if available
         if isinstance(results, dict) and results.get("spr_priming"):
@@ -1083,6 +1270,15 @@ def present_enhanced_results(results: Dict[str, Any], config: EnhancedUnifiedArc
                     f.write(f"- Definition: {spr_data.get('definition', '')[:200]}...\n\n")
                 if len(results["spr_context"]["spr_definitions"]) > 10:
                     f.write(f"*... and {len(results['spr_context']['spr_definitions']) - 10} more SPRs*\n\n")
+        
+        # Add Zepto compression details if available
+        if isinstance(results, dict) and results.get("zepto_compression") and results["zepto_compression"].get("compressed"):
+            zepto = results["zepto_compression"]
+            f.write("## Zepto SPR Compression Results\n\n")
+            f.write(f"- Compression Ratio: {zepto.get('compression_ratio', 0):.1f}:1\n")
+            f.write(f"- Original Size: {zepto.get('original_size', 0)} characters\n")
+            f.write(f"- Zepto Size: {zepto.get('zepto_size', 0)} characters\n")
+            f.write(f"- Zepto SPR Preview: `{zepto.get('zepto_spr', '')}`\n\n")
         
         f.write("## Analysis Results\n\n")
         f.write(response)
@@ -1104,7 +1300,7 @@ async def main_async():
     
     # Display enhanced banner
     banner = """
-🧠 **ArchE Enhanced Unified Query Interface v2.0**
+🧠 **ArchE Enhanced Unified Query Interface v2.0+**
 ═══════════════════════════════════════════════════════════
 ✨ **Comprehensive Integration of ALL Features**
 🔬 Query Superposition Analysis (Quantum Verified)
@@ -1116,6 +1312,10 @@ async def main_async():
 ⚛️ Quantum Processing Verification
 🎯 Cursor Environment Auto-Detection
 🔧 LLM Provider Auto-Configuration
+⚡ Zepto SPR Compression (NEW)
+🎯 CrystallizedObjectiveGenerator (NEW)
+📚 ThoughtTrail Updated API (NEW)
+🔬 VCDAnalysisAgent Integration (NEW)
 ═══════════════════════════════════════════════════════════
     """
     console.print(Panel(banner, border_style="bold cyan", expand=False))
