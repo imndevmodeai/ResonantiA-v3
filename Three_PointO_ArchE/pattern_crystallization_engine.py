@@ -385,6 +385,9 @@ Symbolized text:"""
                 print(f"Warning: LLM symbolization failed: {e}, using direct substitutions")
                 pass
         
+        # ALWAYS apply aggressive symbol replacement at the end (even if LLM failed)
+        result = self._apply_aggressive_symbol_replacement(result)
+        
         return result
     
     def _apply_aggressive_symbol_replacement(self, text: str) -> str:
@@ -576,7 +579,14 @@ CONTEXT: [context domain]"""
         result = zepto_spr
         for symbol, entry in sorted(codex.items(), key=lambda x: len(x[0]), reverse=True):
             if symbol in result:
-                result = result.replace(symbol, f"[{entry.meaning}]")
+                # Handle both SymbolCodexEntry objects and dict format
+                if isinstance(entry, SymbolCodexEntry):
+                    meaning = entry.meaning
+                elif isinstance(entry, dict):
+                    meaning = entry.get('meaning', entry.get('symbol', symbol))
+                else:
+                    meaning = str(entry)
+                result = result.replace(symbol, f"[{meaning}]")
         
         return result
     

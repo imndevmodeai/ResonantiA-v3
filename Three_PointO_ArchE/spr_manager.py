@@ -119,34 +119,72 @@ class SPRManager:
                     }
                 })
         
-        # Sort by activation level (highest first)
-        detected_sprs.sort(key=lambda x: x['activation_level'], reverse=True)
+        # Sort by confidence score (highest first), then by activation level as tiebreaker
+        detected_sprs.sort(key=lambda x: (x['confidence_score'], x['activation_level']), reverse=True)
         
         return detected_sprs
     
     def _calculate_spr_activation(self, text: str, spr_id: str) -> float:
         """Calculate SPR activation level using fuzzy matching techniques."""
+        spr_data = self.sprs.get(spr_id, {})
+        spr_term = spr_data.get('term', '').lower()
+        spr_definition = spr_data.get('definition', '').lower()
         lower_spr = spr_id.lower()
         
-        # Check for exact matches
+        # Common words that should not match very short SPRs (1-2 chars)
+        common_words = {'in', 'on', 'at', 'to', 'of', 'for', 'is', 'it', 'as', 'an', 'or', 'be', 'we', 'if', 'my', 'up', 'so', 'no', 'go', 'do', 'by', 'me', 'he', 'us', 'am', 'id'}
+        
+        # Penalty for very short SPRs matching common words
+        if len(spr_id) <= 2 and spr_id.upper() in common_words:
+            # Only match if it's a whole word with word boundaries
+            import re
+            pattern = r'\b' + re.escape(spr_id.lower()) + r'\b'
+            if not re.search(pattern, text):
+                return 0.0  # Reject substring matches for common short SPRs
+        
+        # Check for exact SPR ID matches (highest priority)
         if lower_spr in text:
-            return 0.9
+            return 0.95
+        
+        # Check SPR term and definition for semantic relevance (high priority)
+        term_score = 0.0
+        if spr_term:
+            # Exact term match
+            if spr_term in text:
+                term_score = 0.9
+            else:
+                # Check if key words from term are in text
+                term_words = spr_term.split()
+                matching_words = sum(1 for word in term_words if len(word) > 2 and word in text)
+                if matching_words > 0:
+                    term_score = min(0.8, matching_words * 0.3)
+        
+        definition_score = 0.0
+        if spr_definition:
+            # Check if key words from definition are in text
+            def_words = spr_definition.split()
+            matching_words = sum(1 for word in def_words if len(word) > 3 and word in text)
+            if matching_words > 0:
+                definition_score = min(0.6, matching_words * 0.15)
         
         # Check for partial matches using CamelCase decomposition
         words = self._decompose_camelcase(spr_id)
-        match_score = 0
-        
+        camelcase_score = 0.0
         for word in words:
-            if word.lower() in text:
-                match_score += 0.2
+            if len(word) > 2 and word.lower() in text:
+                camelcase_score += 0.15
         
         # Check for semantic variations
         variations = self._get_semantic_variations(spr_id)
+        variation_score = 0.0
         for variation in variations:
             if variation.lower() in text:
-                match_score += 0.15
+                variation_score += 0.2
         
-        return min(0.9, match_score)
+        # Combine scores with priority: term > definition > camelcase > variations
+        match_score = max(term_score, definition_score * 0.8, camelcase_score, variation_score)
+        
+        return min(0.95, match_score)
     
     def _calculate_spr_confidence(self, text: str, spr_id: str, activation_level: float) -> float:
         """Calculate confidence score using weighted factors."""
@@ -162,6 +200,24 @@ class SPRManager:
     
     def _get_semantic_variations(self, spr_id: str) -> List[str]:
         """Get semantic variations for SPR detection."""
+        spr_data = self.sprs.get(spr_id, {})
+        spr_term = spr_data.get('term', '').lower()
+        
+        # Build variations from SPR term if available
+        variations = []
+        if spr_term:
+            # Add the term itself as a variation
+            variations.append(spr_term)
+            # Add key phrases from term (2-3 word combinations)
+            term_words = spr_term.split()
+            if len(term_words) >= 2:
+                # Add bigrams
+                for i in range(len(term_words) - 1):
+                    bigram = f"{term_words[i]} {term_words[i+1]}"
+                    if len(bigram) > 5:  # Only meaningful bigrams
+                        variations.append(bigram)
+        
+        # Hardcoded variations for known SPRs
         variations_map = {
             'ExecutableSpecificationPrinciple': ['specification principle', 'executable principle', 'spec principle'],
             'AutopoieticSystemGenesis': ['autopoietic genesis', 'system genesis', 'self-creation'],
@@ -170,14 +226,57 @@ class SPRManager:
             'VisualCognitiveDebugger': ['visual debugger', 'cognitive debugger', 'VCD'],
             'ResonantInsightStrategyEngine': ['resonant insight', 'strategy engine', 'RISE'],
             'SynergisticIntentResonanceCycle': ['synergistic intent', 'resonance cycle', 'SIRC'],
-            'CognitiveResonanceCycle': ['cognitive resonance', 'resonance cycle', 'CRC']
+            'CognitiveResonanceCycle': ['cognitive resonance', 'resonance cycle', 'CRC'],
+            'CoreworkflowenginE': ['workflow engine', 'core workflow', 'workflow system'],
+            'IarcompliantworkflowenginE': ['IAR workflow', 'workflow engine', 'IAR compliant'],
+            'WorkflowchainingenginE': ['workflow engine', 'workflow chaining', 'chaining engine']
         }
-        return variations_map.get(spr_id, [])
+        
+        # Merge hardcoded variations with term-based variations
+        hardcoded = variations_map.get(spr_id, [])
+        variations.extend(hardcoded)
+        
+        # Remove duplicates while preserving order
+        seen = set()
+        unique_variations = []
+        for v in variations:
+            v_lower = v.lower()
+            if v_lower not in seen:
+                seen.add(v_lower)
+                unique_variations.append(v)
+        
+        return unique_variations
     
     def _calculate_context_relevance(self, text: str, spr_id: str) -> float:
         """Calculate how well the SPR fits the current context."""
-        # This would analyze semantic context - for now return a base score
-        return 0.7
+        spr_data = self.sprs.get(spr_id, {})
+        spr_term = spr_data.get('term', '').lower()
+        spr_definition = spr_data.get('definition', '').lower()
+        
+        if not spr_term and not spr_definition:
+            return 0.5  # Low relevance if no term/definition
+        
+        # Extract key query words (longer than 3 chars, not common stop words)
+        stop_words = {'what', 'is', 'are', 'the', 'a', 'an', 'this', 'that', 'these', 'those', 'how', 'does', 'do', 'tell', 'me', 'about', 'explain', 'define'}
+        query_words = [w for w in text.split() if len(w) > 3 and w.lower() not in stop_words]
+        
+        if not query_words:
+            return 0.6  # Base relevance if no meaningful query words
+        
+        # Check how many query words appear in SPR term/definition
+        term_matches = sum(1 for word in query_words if word.lower() in spr_term)
+        def_matches = sum(1 for word in query_words if word.lower() in spr_definition)
+        
+        # Calculate relevance score
+        total_matches = term_matches + (def_matches * 0.5)  # Term matches weighted higher
+        max_possible = len(query_words) * 1.5  # Max possible matches
+        
+        if max_possible > 0:
+            relevance = min(1.0, total_matches / max_possible)
+        else:
+            relevance = 0.6
+        
+        return relevance
     
     def _calculate_semantic_clarity(self, text: str, spr_id: str) -> float:
         """Calculate semantic clarity of the SPR in context."""

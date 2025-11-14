@@ -1,0 +1,218 @@
+[
+  {
+    "spr_id": "KnowledgeextractoR",
+    "term": "Knowledge Extractor",
+    "definition": "Extracts core principles (signal) from verbose LLM outputs, removing noise and redundancy; returns universalized pattern, related SPRs, and confidence.",
+    "category": "CognitiveCapability",
+    "relationships": {
+      "type": "CapturePipeline",
+      "enables": ["ZeptopatterncompressoR", "KnowledgegraphintegratoR"],
+      "triggered_by": ["LlmresponseinterceptoR"],
+      "related_to": ["UniversalabstractioN", "EmergentdomaindetectoR"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "ZeptopatterncompressoR",
+    "term": "Zepto Pattern Compressor",
+    "definition": "Compresses extracted patterns to Zepto SPR with symbol codex and compression stages, preserving semantic essence for efficient storage/transfer.",
+    "category": "CognitiveTool",
+    "relationships": {
+      "type": "Compression",
+      "used_by": ["KnowledgegraphintegratoR", "KnowledgegraphrouteR"],
+      "implements": ["UniversalabstractioN"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "KnowledgegraphintegratoR",
+    "term": "Knowledge Graph Integrator",
+    "definition": "Mints SPR definitions from compressed patterns, updates Tapestry nodes/edges, attaches provenance and learning metrics.",
+    "category": "SystemComponent",
+    "relationships": {
+      "type": "Integration",
+      "consumes": ["KnowledgeextractoR", "ZeptopatterncompressoR"],
+      "updates": ["knowledge_tapestry", "spr_definitions"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "LlmresponseinterceptoR",
+    "term": "LLM Response Interceptor",
+    "definition": "Post-LLM hook that triggers extraction → compression → integration, with confidence thresholds and dedup gates.",
+    "category": "WorkflowPattern",
+    "relationships": {
+      "type": "Interceptor",
+      "enables": ["KnowledgeextractoR", "ZeptopatterncompressoR", "KnowledgegraphintegratoR"],
+      "governed_by": ["VettingagenT", "IarcompliancevettinG"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "KnowledgegraphrouteR",
+    "term": "Knowledge Graph Router",
+    "definition": "Routes queries to the Knowledge Graph first; on hit, decompresses Zepto SPR; on miss, falls back to LLM and triggers capture; tracks autonomy_rate.",
+    "category": "SystemComponent",
+    "relationships": {
+      "type": "Routing",
+      "enables": ["AutonomyMetricS"],
+      "related_to": ["UniversalabstractioN"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "InvariantmininG",
+    "term": "Invariant Mining",
+    "definition": "Committee-of-teachers and prompt-perturbation procedure to mine statements that remain invariant across contexts/providers; outputs consensus principles.",
+    "category": "AnalyticalTechnique",
+    "relationships": {
+      "type": "ConsensusDerivation",
+      "supplies": ["KnowledgeextractoR"],
+      "governed_by": ["VettingagenT"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "ExecutiongroundedknowledgE",
+    "term": "Execution-Grounded Knowledge",
+    "definition": "Admits knowledge only when backed by passing tests, executable examples, or reproducible calculations; stores proofs alongside SPRs.",
+    "category": "SystemPolicy",
+    "relationships": {
+      "type": "AdmissionPolicy",
+      "enforced_by": ["VettingagenT", "IarcompliancevettinG"],
+      "applies_to": ["KnowledgegraphintegratoR"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "RoundtripcompressionaudiT",
+    "term": "Round-Trip Compression Audit",
+    "definition": "Idempotence check for Zepto: zepto→decompress→recompress must remain within tolerance; rejects drift-prone patterns.",
+    "category": "SystemPolicy",
+    "relationships": {
+      "type": "QualityGate",
+      "applies_to": ["ZeptopatterncompressoR"],
+      "signals": ["PromotionPolicY"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "NoveltyutilitygatinG",
+    "term": "Novelty×Utility Gating",
+    "definition": "Deduplicates with MinHash/embeddings and admits only high-utility patterns based on predicted query frequency × impact.",
+    "category": "SystemPolicy",
+    "relationships": {
+      "type": "AdmissionGate",
+      "precedes": ["KnowledgegraphintegratoR"],
+      "related_to": ["EmergentdomaindetectoR"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "CounterfactualnormalizatioN",
+    "term": "Counterfactual Normalization",
+    "definition": "Before persistence, run ablations/counterfactuals to minimize conditions and capture robust, context-light rules.",
+    "category": "AnalyticalTechnique",
+    "relationships": {
+      "type": "Refinement",
+      "used_by": ["KnowledgeextractoR", "VettingagenT"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "MacroSprSkillbooK",
+    "term": "Macro-SPR Skillbook",
+    "definition": "Converts stable patterns into executable skills/playbooks with pre/post-conditions, parameters, and tests.",
+    "category": "CognitivePattern",
+    "relationships": {
+      "type": "Operationalization",
+      "produced_by": ["KnowledgeextractoR", "ExecutiongroundedknowledgE"],
+      "consumed_by": ["KnowledgegraphrouteR"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "KnowledgequarantinE",
+    "term": "Knowledge Quarantine",
+    "definition": "Staging area for low-confidence patterns; requires N validated hits, audits, and corroboration before promotion.",
+    "category": "SystemPolicy",
+    "relationships": {
+      "type": "Lifecycle",
+      "feeds": ["PromotionPolicY"],
+      "applies_to": ["KnowledgegraphintegratoR"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "PromotionPolicY",
+    "term": "Promotion Policy",
+    "definition": "Policy that promotes quarantined knowledge to canonical SPRs upon meeting thresholds (validated uses, tests, corroboration).",
+    "category": "SystemPolicy",
+    "relationships": {
+      "type": "Lifecycle",
+      "consumes": ["KnowledgequarantinE", "RoundtripcompressionaudiT", "MultisourcecorroboratioN"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "MultisourcecorroboratioN",
+    "term": "Multi-Source Corroboration",
+    "definition": "Requires independent sources/datasets supporting a pattern before persistence; stores provenance hashes.",
+    "category": "SystemPolicy",
+    "relationships": {
+      "type": "Validation",
+      "enforced_by": ["VettingagenT"],
+      "applies_to": ["KnowledgegraphintegratoR"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "ClustrecentroidcompressioN",
+    "term": "Cluster Centroid Compression",
+    "definition": "Clusters similar LLM outputs and compresses only centroids to Zepto, reducing redundancy while retaining coverage.",
+    "category": "AnalyticalTechnique",
+    "relationships": {
+      "type": "DimensionalityReduction",
+      "used_by": ["KnowledgeextractoR", "ZeptopatterncompressoR"],
+      "related_to": ["EmergentdomaindetectoR"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "TokenbudgetmicroprimeR",
+    "term": "Token-Budget Micro-Primer",
+    "definition": "Tiny Zepto primers injected at inference to seed context and minimize token usage while maintaining capability.",
+    "category": "CognitivePattern",
+    "relationships": {
+      "type": "PromptOptimization",
+      "enables": ["KnowledgegraphrouteR"],
+      "related_to": ["UniversalabstractioN"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "InferencetimeinvariantchecK",
+    "term": "Inference-Time Invariant Check",
+    "definition": "Before returning a KG answer, verifies core invariants via lightweight decompressions/tests; fails closed to LLM fallback upon violation.",
+    "category": "SystemPolicy",
+    "relationships": {
+      "type": "RuntimeGuard",
+      "applies_to": ["KnowledgegraphrouteR"],
+      "signals": ["LlmresponseinterceptoR"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  },
+  {
+    "spr_id": "LearningmetricS",
+    "term": "Learning Metrics",
+    "definition": "Tracks autonomy_rate, patterns_stored, llm_calls_saved, avg_compression_ratio, avg_confidence to govern capture and routing.",
+    "category": "SystemCapability",
+    "relationships": {
+      "type": "Telemetry",
+      "used_by": ["KnowledgegraphrouteR", "PromotionPolicY"],
+      "reported_to": ["VettingagenT"]
+    },
+    "metadata": { "status": "draft", "source": "lossy_kg_design", "created_date": "2025-11-13" }
+  }
+]
+

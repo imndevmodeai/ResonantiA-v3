@@ -1,0 +1,3 @@
+#!/media/newbu/3626C55326C514B1/Happier/arche_env/bin/python3
+from tsp_solver.demo import numpy2svg
+numpy2svg.main()

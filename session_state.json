@@ -21244,9 +21244,226 @@
       "confidence": 1.0,
       "summary": "Displayed content of 1431 characters.",
       "ts": "2025-11-09T20:39:29.947093ZZ"
+    },
+    {
+      "task": "extract_domain_from_deconstruction",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-11T21:47:59.221748ZZ"
+    },
+    {
+      "task": "analyze_specialization_requirements",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-11T21:48:04.816919ZZ"
+    },
+    {
+      "task": "forge_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-11T21:48:09.650235ZZ"
+    },
+    {
+      "task": "forge_all_domain_specialist_agents",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-11T21:48:15.168840ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge_via_agents",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-11T21:48:40.813855ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-11T21:48:41.738281ZZ"
+    },
+    {
+      "task": "validate_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-11T21:48:45.191009ZZ"
+    },
+    {
+      "task": "deconstruct_problem",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:09.725420ZZ"
+    },
+    {
+      "task": "extract_all_domains_from_deconstruction",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:10.294184ZZ"
+    },
+    {
+      "task": "extract_domain_from_deconstruction",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-12T07:30:11.155987ZZ"
+    },
+    {
+      "task": "analyze_specialization_requirements",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:13.921586ZZ"
+    },
+    {
+      "task": "forge_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:16.917310ZZ"
+    },
+    {
+      "task": "forge_all_domain_specialist_agents",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:19.943201ZZ"
+    },
+    {
+      "task": "acquire_domain_knowledge_via_agents",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-12T07:30:20.495010ZZ"
+    },
+    {
+      "task": "validate_search_results",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-12T07:30:21.252951ZZ"
+    },
+    {
+      "task": "validate_specialist_agent",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:24.087877ZZ"
+    },
+    {
+      "task": "pathway_integrity_check",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-12T07:30:25.255396ZZ"
+    },
+    {
+      "task": "synthesize_fused_dossier",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:28.614824ZZ"
+    },
+    {
+      "task": "handle_synthesis_failure",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Displayed content of 333 characters.",
+      "ts": "2025-11-12T07:30:28.840210ZZ"
+    },
+    {
+      "task": "red_team_analysis",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:47.237209ZZ"
+    },
+    {
+      "task": "ethical_and_bias_review",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:49.367600ZZ"
+    },
+    {
+      "task": "dystopian_simulation",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:30:51.776033ZZ"
+    },
+    {
+      "task": "synthesize_vetting_dossier",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 20543 characters.",
+      "ts": "2025-11-12T07:30:52.128948ZZ"
+    },
+    {
+      "task": "format_distillation_prompt",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 786 characters.",
+      "ts": "2025-11-12T07:31:05.803884ZZ"
+    },
+    {
+      "task": "distill_spr_with_llm",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:31:07.191186ZZ"
+    },
+    {
+      "task": "parse_and_validate_spr",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-12T07:31:07.786531ZZ"
+    },
+    {
+      "task": "check_similarity_with_existing_sprs",
+      "status": "success",
+      "confidence": 0.1,
+      "summary": "Code execution failed with return code 1.",
+      "ts": "2025-11-12T07:31:08.712677ZZ"
+    },
+    {
+      "task": "red_team_analysis",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:31:11.068725ZZ"
+    },
+    {
+      "task": "ethical_and_bias_review",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:31:12.953992ZZ"
+    },
+    {
+      "task": "dystopian_simulation",
+      "status": "success",
+      "confidence": 0.9,
+      "summary": "Action completed successfully.",
+      "ts": "2025-11-12T07:31:15.164608ZZ"
+    },
+    {
+      "task": "synthesize_vetting_dossier",
+      "status": "success",
+      "confidence": 1.0,
+      "summary": "Template rendered successfully. Result length: 22269 characters.",
+      "ts": "2025-11-12T07:31:15.428961ZZ"
     }
   ],
-  "updated_at": "2025-11-09T20:39:29.947115ZZ",
+  "updated_at": "2025-11-12T07:31:15.428965ZZ",
   "digests": [
     {
       "summary": "digested 1 events; numeric_rows=1",
@@ -42613,6 +42830,296 @@
         "predict_game",
         "check_quantum_hedge_trigger",
         "display_final_prediction"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements"
+      ]
+    },
+    {
+      "summary": "digested 5 events; numeric_rows=5",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 6 events; numeric_rows=6",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent",
+        "forge_all_domain_specialist_agents"
+      ]
+    },
+    {
+      "summary": "digested 7 events; numeric_rows=7",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent",
+        "forge_all_domain_specialist_agents",
+        "acquire_domain_knowledge_via_agents"
+      ]
+    },
+    {
+      "summary": "digested 8 events; numeric_rows=8",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent",
+        "forge_all_domain_specialist_agents",
+        "acquire_domain_knowledge_via_agents",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 9 events; numeric_rows=9",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent",
+        "forge_all_domain_specialist_agents",
+        "acquire_domain_knowledge_via_agents",
+        "validate_search_results",
+        "validate_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "deconstruct_problem"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements"
+      ]
+    },
+    {
+      "summary": "digested 5 events; numeric_rows=5",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 6 events; numeric_rows=6",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent",
+        "forge_all_domain_specialist_agents"
+      ]
+    },
+    {
+      "summary": "digested 7 events; numeric_rows=7",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent",
+        "forge_all_domain_specialist_agents",
+        "acquire_domain_knowledge_via_agents"
+      ]
+    },
+    {
+      "summary": "digested 8 events; numeric_rows=8",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent",
+        "forge_all_domain_specialist_agents",
+        "acquire_domain_knowledge_via_agents",
+        "validate_search_results"
+      ]
+    },
+    {
+      "summary": "digested 9 events; numeric_rows=9",
+      "events_sample": [
+        "deconstruct_problem",
+        "extract_all_domains_from_deconstruction",
+        "extract_domain_from_deconstruction",
+        "analyze_specialization_requirements",
+        "forge_specialist_agent",
+        "forge_all_domain_specialist_agents",
+        "acquire_domain_knowledge_via_agents",
+        "validate_search_results",
+        "validate_specialist_agent"
+      ]
+    },
+    {
+      "summary": "digested 5 events; numeric_rows=5",
+      "events_sample": [
+        "pathway_causal_analysis",
+        "pathway_simulation_abm",
+        "pathway_comparative_cfp",
+        "pathway_specialist_consultation",
+        "pathway_integrity_check"
+      ]
+    },
+    {
+      "summary": "digested 6 events; numeric_rows=6",
+      "events_sample": [
+        "pathway_causal_analysis",
+        "pathway_simulation_abm",
+        "pathway_comparative_cfp",
+        "pathway_specialist_consultation",
+        "pathway_integrity_check",
+        "synthesize_fused_dossier"
+      ]
+    },
+    {
+      "summary": "digested 7 events; numeric_rows=7",
+      "events_sample": [
+        "pathway_causal_analysis",
+        "pathway_simulation_abm",
+        "pathway_comparative_cfp",
+        "pathway_specialist_consultation",
+        "pathway_integrity_check",
+        "synthesize_fused_dossier",
+        "handle_synthesis_failure"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "red_team_analysis"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation",
+        "synthesize_vetting_dossier"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "format_distillation_prompt"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "format_distillation_prompt",
+        "distill_spr_with_llm"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "format_distillation_prompt",
+        "distill_spr_with_llm",
+        "parse_and_validate_spr"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "format_distillation_prompt",
+        "distill_spr_with_llm",
+        "parse_and_validate_spr",
+        "check_similarity_with_existing_sprs"
+      ]
+    },
+    {
+      "summary": "digested 1 events; numeric_rows=1",
+      "events_sample": [
+        "red_team_analysis"
+      ]
+    },
+    {
+      "summary": "digested 2 events; numeric_rows=2",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review"
+      ]
+    },
+    {
+      "summary": "digested 3 events; numeric_rows=3",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation"
+      ]
+    },
+    {
+      "summary": "digested 4 events; numeric_rows=4",
+      "events_sample": [
+        "red_team_analysis",
+        "ethical_and_bias_review",
+        "dystopian_simulation",
+        "synthesize_vetting_dossier"
       ]
     }
   ]

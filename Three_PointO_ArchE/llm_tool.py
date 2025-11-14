@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Tuple
 import json
 import os
 import google.generativeai as genai
@@ -9,8 +9,20 @@ from .utils.reflection_utils import create_reflection, ExecutionStatus
 from .llm_providers import get_llm_provider, get_model_for_provider, LLMProviderError
 import time
 import base64
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
+
+# KG-First Router imports
+try:
+    from .spr_manager import SPRManager
+    from .zepto_spr_processor import ZeptoSPRProcessorAdapter, decompress_from_zepto
+    KG_ROUTER_AVAILABLE = True
+except ImportError as e:
+    logger.warning(f"KG Router components not available: {e}")
+    KG_ROUTER_AVAILABLE = False
+    SPRManager = None
+    ZeptoSPRProcessorAdapter = None
 
 # Load environment variables
 load_dotenv()
@@ -31,6 +43,132 @@ else:
 # --- Gemini API Configuration (moved to provider) ---
 # We still detect key presence for early diagnostics, but provider handles client init.
 GEMINI_API_AVAILABLE = bool(os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY"))
+
+# --- KG-First Router: Lazy initialization ---
+_kg_router_spr_manager = None
+_kg_router_zepto_processor = None
+
+def _get_kg_router():
+    """Lazy initialization of KG router components."""
+    global _kg_router_spr_manager, _kg_router_zepto_processor
+    
+    if not KG_ROUTER_AVAILABLE:
+        return None, None
+    
+    if _kg_router_spr_manager is None:
+        try:
+            spr_file = Path(__file__).parent.parent / "knowledge_graph" / "spr_definitions_tv.json"
+            if spr_file.exists():
+                _kg_router_spr_manager = SPRManager(str(spr_file))
+                _kg_router_zepto_processor = ZeptoSPRProcessorAdapter()
+                logger.info(f"KG-First Router initialized with {len(_kg_router_spr_manager.sprs)} SPRs")
+            else:
+                logger.warning(f"SPR file not found at {spr_file}, KG routing disabled")
+        except Exception as e:
+            logger.error(f"Failed to initialize KG router: {e}", exc_info=True)
+    
+    return _kg_router_spr_manager, _kg_router_zepto_processor
+
+def _route_query_to_kg(query: str, min_confidence: float = 0.3) -> Optional[Tuple[str, Dict[str, Any]]]:
+    """
+    Route query to Knowledge Graph first, return response if found.
+    
+    Args:
+        query: User query text
+        min_confidence: Minimum confidence threshold for SPR match
+        
+    Returns:
+        Tuple of (response_text, metadata) if KG hit, None if miss
+    """
+    spr_manager, zepto_processor = _get_kg_router()
+    
+    if not spr_manager or not zepto_processor:
+        return None
+    
+    try:
+        # Step 1: Detect relevant SPRs with confidence scoring
+        detected_sprs = spr_manager.detect_sprs_with_confidence(query)
+        
+        if not detected_sprs:
+            logger.debug("No SPRs detected for query, routing to LLM")
+            return None
+        
+        # Step 2: Find best matching SPR (highest confidence_score)
+        best_match = max(detected_sprs, key=lambda s: s.get('confidence_score', s.get('activation_level', 0.0)))
+        confidence = best_match.get('confidence_score', best_match.get('activation_level', 0.0))
+        
+        if confidence < min_confidence:
+            logger.debug(f"Best SPR match confidence {confidence:.2f} below threshold {min_confidence}, routing to LLM")
+            return None
+        
+        # Extract SPR data from nested structure
+        best_spr = best_match.get('spr_data', {})
+        if not best_spr:
+            logger.debug("SPR data not found in match, routing to LLM")
+            return None
+        
+        # Step 3: Decompress Zepto SPR if available
+        zepto_spr = best_spr.get('zepto_spr', '')
+        symbol_codex = best_spr.get('symbol_codex', {})
+        
+        if not zepto_spr:
+            # Fallback: use definition if no Zepto SPR
+            response_text = best_spr.get('definition', '')
+            if not response_text:
+                logger.debug(f"SPR {best_spr.get('spr_id')} has no Zepto SPR or definition, routing to LLM")
+                return None
+        else:
+            # Decompress Zepto SPR
+            try:
+                decomp_result = zepto_processor.decompress_from_zepto(
+                    zepto_spr=zepto_spr,
+                    codex=symbol_codex
+                )
+                response_text = decomp_result.decompressed_text
+                
+                if not response_text or decomp_result.error:
+                    logger.warning(f"Zepto decompression failed for {best_spr.get('spr_id')}: {decomp_result.error}")
+                    # Fallback to definition
+                    response_text = best_spr.get('definition', '')
+                    if not response_text:
+                        return None
+            except Exception as e:
+                logger.warning(f"Zepto decompression error: {e}, falling back to definition")
+                response_text = best_spr.get('definition', '')
+                if not response_text:
+                    return None
+        
+        # Step 4: Format response with SPR context
+        spr_id = best_spr.get('spr_id', 'Unknown')
+        spr_term = best_spr.get('term', spr_id)
+        category = best_spr.get('category', 'Unknown')
+        
+        formatted_response = f"""## {spr_term}
+
+{response_text}
+
+---
+*Source: Knowledge Graph (SPR: {spr_id}, Category: {category}, Confidence: {confidence:.2f})*
+*Response generated autonomously from compressed knowledge - zero LLM cost*
+"""
+        
+        metadata = {
+            "source": "knowledge_graph",
+            "spr_id": spr_id,
+            "spr_term": spr_term,
+            "category": category,
+            "confidence": confidence,
+            "autonomous": True,
+            "llm_bypassed": True,
+            "compression_ratio": best_spr.get('compression_ratio', 1.0)
+        }
+        
+        logger.info(f"✓ KG-First Router HIT: {spr_id} (confidence: {confidence:.2f})")
+        return formatted_response, metadata
+        
+    except Exception as e:
+        logger.error(f"KG routing error: {e}", exc_info=True)
+        return None
 
 # --- ArchE Direct Execution: Analysis Keywords ---
 ANALYSIS_KEYWORDS = {
@@ -399,7 +537,39 @@ def generate_text_llm(inputs: Dict[str, Any]) -> Dict[str, Any]:
             )
         }
 
-    # ALWAYS try ArchE direct execution first
+    # PRIORITY 1: Check if this is a definition/explanation query → KG-First Router
+    # (For "what is", "explain", "tell me about", "how does X work" queries)
+    definition_keywords = ['what is', 'what are', 'explain', 'tell me about', 'how does', 'how do', 'define', 'definition']
+    is_definition_query = any(keyword in final_prompt.lower() for keyword in definition_keywords)
+    
+    if is_definition_query:
+        kg_result = _route_query_to_kg(final_prompt, min_confidence=0.3)
+        if kg_result:
+            response_text, kg_metadata = kg_result
+            response_text = (response_text or "").strip()
+            
+            if encode_output_base64:
+                response_text = base64.b64encode(response_text.encode('utf-8')).decode('utf-8')
+            
+            execution_time = time.time() - start_time
+            outputs = {"response_text": response_text}
+            
+            return {
+                "result": outputs,
+                "reflection": create_reflection(
+                    action_name=action_name,
+                    status=ExecutionStatus.SUCCESS,
+                    message=f"Response from Knowledge Graph (autonomous mode, SPR: {kg_metadata.get('spr_id')})",
+                    inputs=inputs,
+                    outputs=outputs,
+                    confidence=kg_metadata.get('confidence', 0.9),
+                    execution_time=execution_time,
+                    metadata=kg_metadata
+                )
+            }
+        # If KG miss, fall through to direct execution
+
+    # PRIORITY 2: Try ArchE direct execution (CFP, ABM, Causal, etc.)
     try:
         logger.info("Attempting ArchE direct execution for request")
         response_text = execute_arche_analysis(final_prompt, template_vars)
@@ -425,12 +595,38 @@ def generate_text_llm(inputs: Dict[str, Any]) -> Dict[str, Any]:
             )
         }
     except Exception as arch_e_error:
-        logger.warning(f"ArchE direct execution failed: {arch_e_error}. Falling back to external LLM.")
-        # Fall through to external LLM if ArchE execution fails
+        logger.warning(f"ArchE direct execution failed: {arch_e_error}. Trying KG-First Router...")
+        # Fall through to KG-First Router, then LLM if needed
         pass
 
-    # Fallback to external LLM if ArchE execution failed
-    logger.info("Falling back to external LLM provider")
+    # PRIORITY 3: Try KG-First Router (for non-definition queries that missed direct execution)
+    kg_result = _route_query_to_kg(final_prompt, min_confidence=0.3)
+    if kg_result:
+        response_text, kg_metadata = kg_result
+        response_text = (response_text or "").strip()
+        
+        if encode_output_base64:
+            response_text = base64.b64encode(response_text.encode('utf-8')).decode('utf-8')
+        
+        execution_time = time.time() - start_time
+        outputs = {"response_text": response_text}
+        
+        return {
+            "result": outputs,
+            "reflection": create_reflection(
+                action_name=action_name,
+                status=ExecutionStatus.SUCCESS,
+                message=f"Response from Knowledge Graph (autonomous mode, SPR: {kg_metadata.get('spr_id')})",
+                inputs=inputs,
+                outputs=outputs,
+                confidence=kg_metadata.get('confidence', 0.9),
+                execution_time=execution_time,
+                metadata=kg_metadata
+            )
+        }
+
+    # PRIORITY 3: Fallback to external LLM if KG miss
+    logger.info("KG miss - Falling back to external LLM provider")
     # Initialize provider (Google/Gemini)
     try:
         base_provider = get_llm_provider(provider)

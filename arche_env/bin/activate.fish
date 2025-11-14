@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /media/newbu/3626C55326C514B1/Happier/arche_env
+set -gx VIRTUAL_ENV /mnt/3626C55326C514B1/Happier/arche_env
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

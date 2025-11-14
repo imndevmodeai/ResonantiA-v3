@@ -53,6 +53,56 @@ except ImportError as e:
     print(f"Details: {e}")
     sys.exit(1)
 
+# --- ZEPTO SPR PROCESSOR ---
+try:
+    from Three_PointO_ArchE.zepto_spr_processor import (
+        compress_to_zepto,
+        decompress_from_zepto,
+        get_zepto_processor,
+        ZeptoSPRResult,
+        ZeptoSPRDecompressionResult
+    )
+    ZEPTO_AVAILABLE = True
+except ImportError:
+    ZEPTO_AVAILABLE = False
+    compress_to_zepto = None
+    decompress_from_zepto = None
+    get_zepto_processor = None
+
+# --- CRYSTALLIZED OBJECTIVE GENERATOR (COG) ---
+try:
+    from crystallized_objective_generator import (
+        CrystallizedObjectiveGenerator,
+        Mandate,
+        CrystallizedObjective
+    )
+    COG_AVAILABLE = True
+except ImportError:
+    COG_AVAILABLE = False
+    CrystallizedObjectiveGenerator = None
+
+# --- THOUGHT TRAIL (Updated API) ---
+try:
+    from Three_PointO_ArchE.thought_trail import (
+        ThoughtTrail,
+        IAREntry,
+        create_manual_entry
+    )
+    THOUGHT_TRAIL_AVAILABLE = True
+except ImportError:
+    THOUGHT_TRAIL_AVAILABLE = False
+    ThoughtTrail = None
+    IAREntry = None
+    create_manual_entry = None
+
+# --- VCD ANALYSIS AGENT ---
+try:
+    from vcd_analysis_agent import VCDAnalysisAgent, VCDAnalysisResult
+    VCD_ANALYSIS_AVAILABLE = True
+except ImportError:
+    VCD_ANALYSIS_AVAILABLE = False
+    VCDAnalysisAgent = None
+
 # Initialize Rich Console
 console = Console()
 
@@ -179,12 +229,16 @@ class VCDIntegration:
 def display_system_banner():
     """Display the comprehensive ArchE system banner"""
     banner_text = """
-🧠 **ArchE Enhanced Query Interface with VCD Integration**
+🧠 **ArchE Enhanced Query Interface with VCD Integration v2.0+**
 ═══════════════════════════════════════════════════════════════════════════════
 🎯 **Comprehensive Cognitive Architecture**
 🔬 **Real-time Visual Cognitive Debugging**
 🛠️ **Complete Tool Inventory & Capability Reporting**
 🌐 **Multi-modal Analysis & Synthesis**
+⚡ **Zepto SPR Compression (NEW)**
+🎯 **CrystallizedObjectiveGenerator (NEW)**
+📚 **ThoughtTrail Updated API (NEW)**
+🔬 **VCDAnalysisAgent Integration (NEW)**
 ═══════════════════════════════════════════════════════════════════════════════
 """
     console.print(Panel(banner_text, border_style="bold cyan", expand=False))
@@ -388,19 +442,77 @@ async def main_async():
     # Initialize SPR manager with proper filepath
     spr_filepath = os.path.join(project_root, "knowledge_tapestry.json")
     if not os.path.exists(spr_filepath):
-        # Create a basic knowledge tapestry file if it doesn't exist
-        basic_tapestry = {
-            "spr_definitions": [],
-            "total_sprs": 0,
-            "creation_date": now_iso(),
-            "version": "1.0"
-        }
-        with open(spr_filepath, 'w') as f:
-            json.dump(basic_tapestry, f, indent=2)
+        # Try alternative paths
+        spr_paths = [
+            os.path.join(project_root, "knowledge_graph", "spr_definitions_tv.json"),
+            os.path.join(project_root, "Three_PointO_ArchE", "knowledge_graph", "spr_definitions_tv.json"),
+            spr_filepath
+        ]
+        spr_filepath = None
+        for path in spr_paths:
+            if os.path.exists(path):
+                spr_filepath = path
+                break
+        
+        if not spr_filepath:
+            # Create a basic knowledge tapestry file if it doesn't exist
+            spr_filepath = os.path.join(project_root, "knowledge_tapestry.json")
+            basic_tapestry = {
+                "spr_definitions": [],
+                "total_sprs": 0,
+                "creation_date": now_iso(),
+                "version": "1.0"
+            }
+            with open(spr_filepath, 'w') as f:
+                json.dump(basic_tapestry, f, indent=2)
     
     spr_manager = SPRManager(spr_filepath=spr_filepath)
     
+    # Initialize ThoughtTrail (Updated API)
+    thought_trail = None
+    if THOUGHT_TRAIL_AVAILABLE:
+        try:
+            thought_trail = ThoughtTrail(maxlen=1000, max_history=1000)
+            console.print("[green]✅ ThoughtTrail initialized with updated API[/green]")
+        except Exception as e:
+            console.print(f"[yellow]⚠️  ThoughtTrail initialization failed: {e}[/yellow]")
+    
+    # Initialize COG
+    cog = None
+    if COG_AVAILABLE:
+        try:
+            cog = CrystallizedObjectiveGenerator()
+            console.print("[green]✅ CrystallizedObjectiveGenerator initialized[/green]")
+        except Exception as e:
+            console.print(f"[yellow]⚠️  COG initialization failed: {e}[/yellow]")
+    
+    # Initialize VCDAnalysisAgent
+    vcd_analysis_agent = None
+    if VCD_ANALYSIS_AVAILABLE:
+        try:
+            session_id = f"ask_arche_tools_{int(time.time())}"
+            vcd_analysis_agent = VCDAnalysisAgent(session_id=session_id)
+            console.print("[green]✅ VCDAnalysisAgent initialized[/green]")
+        except Exception as e:
+            console.print(f"[yellow]⚠️  VCDAnalysisAgent initialization failed: {e}[/yellow]")
+    
+    # Initialize Zepto processor
+    zepto_processor = None
+    if ZEPTO_AVAILABLE and get_zepto_processor:
+        try:
+            zepto_processor = get_zepto_processor()
+            console.print("[green]✅ Zepto SPR processor initialized[/green]")
+        except Exception as e:
+            console.print(f"[yellow]⚠️  Zepto processor initialization failed: {e}[/yellow]")
+    
     console.print("[green]✅ Core components initialized successfully[/green]")
+    
+    # Display feature status
+    console.print("\n[bold cyan]📊 Feature Status:[/bold cyan]")
+    console.print(f"  Zepto Compression: {'✅' if ZEPTO_AVAILABLE else '❌'}")
+    console.print(f"  COG: {'✅' if COG_AVAILABLE and cog else '❌'}")
+    console.print(f"  ThoughtTrail (Updated API): {'✅' if THOUGHT_TRAIL_AVAILABLE and thought_trail else '❌'}")
+    console.print(f"  VCDAnalysisAgent: {'✅' if VCD_ANALYSIS_AVAILABLE and vcd_analysis_agent else '❌'}")
     
     # --- Display Comprehensive Tool Inventory ---
     tool_inventory = display_tool_inventory(action_registry, vcd)
@@ -422,8 +534,28 @@ async def main_async():
         await vcd.emit_thought_process("Starting ArchE cognitive processing with full tool inventory", {
             "query": query,
             "total_tools": tool_inventory["total_tools"],
-            "registered_actions": tool_inventory["registered_actions"]
+            "registered_actions": tool_inventory["registered_actions"],
+            "zepto_available": ZEPTO_AVAILABLE,
+            "cog_available": COG_AVAILABLE,
+            "thought_trail_available": THOUGHT_TRAIL_AVAILABLE,
+            "vcd_analysis_available": VCD_ANALYSIS_AVAILABLE
         })
+    
+    # Perform VCD comprehensive analysis if available
+    if VCD_ANALYSIS_AVAILABLE and vcd_analysis_agent:
+        try:
+            console.print("[blue]🔬 Performing comprehensive VCD analysis...[/blue]")
+            vcd_analysis_result = await vcd_analysis_agent.perform_comprehensive_vcd_analysis()
+            if vcd_analysis_result:
+                console.print(f"[green]✅ VCD Analysis Complete: {vcd_analysis_result.analysis_type}[/green]")
+                if vcd_connected:
+                    await vcd.send_message({
+                        "type": "vcd_analysis_complete",
+                        "analysis_result": vcd_analysis_result.__dict__ if hasattr(vcd_analysis_result, '__dict__') else str(vcd_analysis_result),
+                        "timestamp": now_iso()
+                    })
+        except Exception as e:
+            console.print(f"[yellow]⚠️  VCD analysis failed: {e}[/yellow]")
     
     # --- Execution ---
     try:
@@ -441,6 +573,50 @@ async def main_async():
             })
         
         results = cognitive_hub.route_query(query)
+        
+        # Log to ThoughtTrail if available
+        if thought_trail:
+            try:
+                thought_entry = IAREntry(
+                    task_id=f"query_{int(time.time())}",
+                    action_type="query_processing",
+                    inputs={"query": query, "tool_inventory": tool_inventory},
+                    outputs={"results": str(results)[:500] + "..." if len(str(results)) > 500 else str(results)},
+                    iar={
+                        "intention": "Process user query with full ArchE capabilities and tool inventory",
+                        "action": "Executed query through CognitiveIntegrationHub",
+                        "reflection": f"Processed query with {tool_inventory['total_tools']} tools available"
+                    },
+                    timestamp=now_iso(),
+                    confidence=0.95,
+                    metadata={
+                        "total_tools": tool_inventory["total_tools"],
+                        "zepto_available": ZEPTO_AVAILABLE,
+                        "cog_available": COG_AVAILABLE
+                    }
+                )
+                thought_trail.add_entry(thought_entry)
+            except Exception as e:
+                console.print(f"[yellow]⚠️  ThoughtTrail logging failed: {e}[/yellow]")
+        
+        # Zepto compression of results if available
+        if ZEPTO_AVAILABLE and zepto_processor and results:
+            try:
+                results_json = json.dumps(str(results), indent=2)
+                zepto_result = compress_to_zepto(results_json, target_stage="Zepto")
+                if zepto_result and not zepto_result.error:
+                    console.print(f"[cyan]⚡ Zepto Compression: {zepto_result.compression_ratio:.1f}:1 ratio[/cyan]")
+                    if vcd_connected:
+                        await vcd.emit_thought_process(
+                            f"Results compressed to Zepto: {zepto_result.compression_ratio:.1f}:1",
+                            {"zepto_compression": {
+                                "ratio": zepto_result.compression_ratio,
+                                "original_size": zepto_result.original_length,
+                                "zepto_size": zepto_result.zepto_length
+                            }}
+                        )
+            except Exception as e:
+                console.print(f"[yellow]⚠️  Zepto compression failed: {e}[/yellow]")
         
         if vcd_connected:
             await vcd.emit_phase_complete("ArchE Processing", "Query execution completed successfully with full tool inventory")
