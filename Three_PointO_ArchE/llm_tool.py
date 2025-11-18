@@ -24,6 +24,19 @@ except ImportError as e:
     SPRManager = None
     ZeptoSPRProcessorAdapter = None
 
+# LKCS (Lossy Knowledge Capture System) imports
+try:
+    from .knowledge_capture.lkcs_system import (
+        get_lkcs_system,
+        intercept_llm_response,
+        route_query_to_kg as lkcs_route_query,
+        get_lkcs_metrics
+    )
+    LKCS_AVAILABLE = True
+except ImportError as e:
+    logger.debug(f"LKCS not available: {e}")
+    LKCS_AVAILABLE = False
+
 # Load environment variables
 load_dotenv()
 
@@ -600,9 +613,26 @@ def generate_text_llm(inputs: Dict[str, Any]) -> Dict[str, Any]:
         pass
 
     # PRIORITY 3: Try KG-First Router (for non-definition queries that missed direct execution)
-    kg_result = _route_query_to_kg(final_prompt, min_confidence=0.3)
+    # Use LKCS router if available, otherwise fallback to legacy router
+    kg_result = None
+    if LKCS_AVAILABLE:
+        try:
+            kg_response, source, kg_metadata = lkcs_route_query(final_prompt, {"query": final_prompt})
+            if kg_response and source == "kg":
+                kg_result = (kg_response, kg_metadata)
+        except Exception as e:
+            logger.warning(f"LKCS router failed, falling back to legacy: {e}")
+    
+    # Fallback to legacy router if LKCS not available or failed
+    if not kg_result:
+        kg_result = _route_query_to_kg(final_prompt, min_confidence=0.3)
+    
     if kg_result:
-        response_text, kg_metadata = kg_result
+        if isinstance(kg_result, tuple) and len(kg_result) == 2:
+            response_text, kg_metadata = kg_result
+        else:
+            # Legacy format
+            response_text, kg_metadata = kg_result
         response_text = (response_text or "").strip()
         
         if encode_output_base64:
@@ -616,16 +646,16 @@ def generate_text_llm(inputs: Dict[str, Any]) -> Dict[str, Any]:
             "reflection": create_reflection(
                 action_name=action_name,
                 status=ExecutionStatus.SUCCESS,
-                message=f"Response from Knowledge Graph (autonomous mode, SPR: {kg_metadata.get('spr_id')})",
+                message=f"Response from Knowledge Graph (autonomous mode, SPR: {kg_metadata.get('spr_id', 'unknown') if isinstance(kg_metadata, dict) else 'unknown'})",
                 inputs=inputs,
                 outputs=outputs,
-                confidence=kg_metadata.get('confidence', 0.9),
+                confidence=kg_metadata.get('confidence', 0.9) if isinstance(kg_metadata, dict) else 0.9,
                 execution_time=execution_time,
-                metadata=kg_metadata
+                metadata=kg_metadata if isinstance(kg_metadata, dict) else {}
             )
         }
 
-    # PRIORITY 3: Fallback to external LLM if KG miss
+    # PRIORITY 4: Fallback to external LLM if KG miss
     logger.info("KG miss - Falling back to external LLM provider")
     # Initialize provider (Google/Gemini)
     try:
@@ -650,11 +680,41 @@ def generate_text_llm(inputs: Dict[str, Any]) -> Dict[str, Any]:
         response_text = base_provider.generate(final_prompt, model=model, temperature=temperature)
         response_text = (response_text or "").strip()
         
+        # NEW: Intercept LLM response for knowledge capture (LKCS)
+        if LKCS_AVAILABLE and response_text:
+            try:
+                query_context = {
+                    "query": final_prompt,
+                    "user_id": inputs.get("user_id"),
+                    "session_id": inputs.get("session_id")
+                }
+                llm_metadata = {
+                    "provider": provider,
+                    "model": model,
+                    "temperature": temperature,
+                    "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S")
+                }
+                
+                capture_result = intercept_llm_response(
+                    llm_response=response_text,
+                    query_context=query_context,
+                    llm_metadata=llm_metadata
+                )
+                
+                if capture_result.get("captured"):
+                    logger.info(f"✓ Knowledge captured: {capture_result.get('pattern_id')} (compression: {capture_result.get('compression_ratio', 0):.1f}:1)")
+            except Exception as e:
+                logger.warning(f"LKCS interception failed: {e}")
+        
         if encode_output_base64:
             response_text = base64.b64encode(response_text.encode('utf-8')).decode('utf-8')
 
         execution_time = time.time() - start_time
         outputs = {"response_text": response_text}
+        
+        metadata = {"execution_mode": "llm_fallback", "bypassed_llm": False}
+        if LKCS_AVAILABLE:
+            metadata["knowledge_captured"] = capture_result.get("captured", False) if 'capture_result' in locals() else False
         
         return {
             "result": outputs,
@@ -666,7 +726,7 @@ def generate_text_llm(inputs: Dict[str, Any]) -> Dict[str, Any]:
                 outputs=outputs,
                 confidence=0.9,
                 execution_time=execution_time,
-                metadata={"execution_mode": "llm_fallback", "bypassed_llm": False}
+                metadata=metadata
             )
         }
     except LLMProviderError as e:

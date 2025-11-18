@@ -49,12 +49,45 @@ class CompressionStage:
 
 @dataclass
 class SymbolCodexEntry:
-    """A single entry in the Symbol Codex."""
+    """
+    Enhanced Symbol Codex Entry for preserving nuanced knowledge.
+    
+    Stores not just the meaning, but also:
+    - Original patterns/phrases that map to this symbol
+    - Relationships to other concepts
+    - Critical specifics that must be preserved
+    - Generalizable patterns
+    - Contextual variations
+    """
     symbol: str
-    meaning: str
-    context: str
-    usage_examples: List[str]
-    created_at: str
+    meaning: str  # Core definition
+    context: str  # Domain/context
+    usage_examples: List[str]  # Example SPRs using this symbol
+    
+    # Enhanced fields for nuanced knowledge preservation
+    original_patterns: List[str] = None  # Original phrases/terms that compress to this symbol
+    relationships: Dict[str, str] = None  # Related symbols/concepts: {"type": "related_symbol"}
+    critical_specifics: List[str] = None  # Specific details that must be preserved (not generalized)
+    generalizable_patterns: List[str] = None  # Patterns that can be generalized
+    contextual_variations: Dict[str, str] = None  # Different meanings in different contexts
+    decompression_template: str = None  # Template for reconstructing nuanced knowledge
+    
+    created_at: str = None
+    
+    def __post_init__(self):
+        """Initialize optional fields with defaults."""
+        if self.original_patterns is None:
+            self.original_patterns = []
+        if self.relationships is None:
+            self.relationships = {}
+        if self.critical_specifics is None:
+            self.critical_specifics = []
+        if self.generalizable_patterns is None:
+            self.generalizable_patterns = []
+        if self.contextual_variations is None:
+            self.contextual_variations = {}
+        if self.decompression_template is None:
+            self.decompression_template = self.meaning
 
 
 class PatternCrystallizationEngine:
@@ -81,35 +114,93 @@ class PatternCrystallizationEngine:
         self.compression_history: List[CompressionStage] = []
         
     def _load_codex(self) -> Dict[str, SymbolCodexEntry]:
-        """Load the Symbol Codex from persistent storage."""
-        if self.codex_path.exists():
+        """Load the Symbol Codex from persistent storage.
+        
+        Handles concurrent access gracefully with retries for parallel processing.
+        """
+        if not self.codex_path.exists():
+            return {}
+        
+        # Retry logic for concurrent file access (parallel processing)
+        max_retries = 3
+        retry_delay = 0.1  # 100ms
+        
+        for attempt in range(max_retries):
             try:
+                # Use file locking for safe concurrent reads
+                import fcntl
                 with open(self.codex_path, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
+                    try:
+                        fcntl.flock(f.fileno(), fcntl.LOCK_SH)  # Shared lock for reading
+                        data = json.load(f)
+                        fcntl.flock(f.fileno(), fcntl.LOCK_UN)  # Release lock
+                    except (OSError, AttributeError):
+                        # fcntl not available on Windows, fall back to regular read
+                        f.seek(0)
+                        data = json.load(f)
+                    
                     return {
                         symbol: SymbolCodexEntry(**entry)
                         for symbol, entry in data.items()
                     }
-            except Exception as e:
-                print(f"Warning: Failed to load codex: {e}")
+            except (json.JSONDecodeError, ValueError) as e:
+                # JSON parse error - might be due to concurrent write or corruption
+                if attempt < max_retries - 1:
+                    import time
+                    time.sleep(retry_delay * (2 ** attempt))  # Exponential backoff
+                    continue
+                # Last attempt failed - return empty codex (will be rebuilt)
                 return {}
+            except Exception as e:
+                # Other errors (file not found, permission, etc.) - return empty
+                return {}
+        
         return {}
     
     def _load_protocol_vocabulary(self) -> Dict[str, SymbolCodexEntry]:
-        """Load protocol-specific symbol vocabulary."""
-        if self.protocol_vocab_path.exists():
+        """Load protocol-specific symbol vocabulary.
+        
+        Handles concurrent access gracefully with retries for parallel processing.
+        """
+        if not self.protocol_vocab_path.exists():
+            return {}
+        
+        # Retry logic for concurrent file access (parallel processing)
+        max_retries = 3
+        retry_delay = 0.1  # 100ms
+        
+        for attempt in range(max_retries):
             try:
+                # Use file locking for safe concurrent reads
+                import fcntl
                 with open(self.protocol_vocab_path, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
+                    try:
+                        fcntl.flock(f.fileno(), fcntl.LOCK_SH)  # Shared lock for reading
+                        data = json.load(f)
+                        fcntl.flock(f.fileno(), fcntl.LOCK_UN)  # Release lock
+                    except (OSError, AttributeError):
+                        # fcntl not available on Windows, fall back to regular read
+                        f.seek(0)
+                        data = json.load(f)
+                    
                     vocab = {}
                     # Flatten nested structure (protocol_core_symbols, mandate_symbols, etc.)
                     for category, symbols in data.items():
                         for symbol, entry in symbols.items():
                             vocab[symbol] = SymbolCodexEntry(**entry)
                     return vocab
-            except Exception as e:
-                print(f"Warning: Failed to load protocol vocabulary: {e}")
+            except (json.JSONDecodeError, ValueError) as e:
+                # JSON parse error - might be due to concurrent write or corruption
+                if attempt < max_retries - 1:
+                    import time
+                    time.sleep(retry_delay * (2 ** attempt))  # Exponential backoff
+                    continue
+                # Last attempt failed - return empty vocab
                 return {}
+            except Exception as e:
+                # Other errors - return empty vocab
+                return {}
+        
         return {}
     
     def _save_codex(self):
@@ -130,20 +221,35 @@ class PatternCrystallizationEngine:
         self,
         thought_trail_entry: str,
         target_stage: str = "Zepto"
-    ) -> Tuple[str, Dict[str, SymbolCodexEntry]]:
+    ) -> Tuple[str, Dict[str, SymbolCodexEntry], List[CompressionStage]]:
         """
         Performs the multi-stage distillation of a narrative into a symbolic SPR.
+        
+        Russian Doll Architecture: Creates nested layers of compression, each preserving
+        different levels of detail. All layers are stored for progressive retrieval.
         
         Args:
             thought_trail_entry: The verbose narrative to compress
             target_stage: The final compression stage ("Concise", "Nano", "Micro", "Pico", "Femto", "Atto", "Zepto")
             
         Returns:
-            Tuple of (pure_spr_string, new_codex_entries)
+            Tuple of (pure_spr_string, new_codex_entries, compression_stages)
+            - pure_spr_string: The final Zepto SPR (innermost doll)
+            - new_codex_entries: Enhanced symbol codex with nuanced knowledge
+            - compression_stages: All compression layers (Russian dolls) for layered retrieval
         """
         # Reset compression history for new run
         self.compression_history = []
         initial_len = len(thought_trail_entry)
+        
+        # Stage 0: Narrative layer (outermost Russian doll - complete original content)
+        self.compression_history.append(CompressionStage(
+            stage_name="Narrative",
+            content=thought_trail_entry,
+            compression_ratio=1.0,  # No compression - complete preservation
+            symbol_count=len(thought_trail_entry),
+            timestamp=now_iso()
+        ))
         
         # Stage 1: Narrative to Concise Form (LLM-assisted summarization)
         concise_form = self._summarize(thought_trail_entry)
@@ -190,7 +296,8 @@ class PatternCrystallizationEngine:
         # Save updated codex
         self._save_codex()
         
-        return pure_spr, new_codex_entries
+        # Return SPR, codex entries, AND compression stages (Russian dolls)
+        return pure_spr, new_codex_entries, self.compression_history.copy()
     
     def _summarize(self, narrative: str) -> str:
         """
@@ -277,14 +384,26 @@ Compressed form (dense, no redundancy, preserve critical logic only):"""
     
     def _symbolize(self, text: str, stage: str) -> str:
         """
-        Stage 2-7: Progressive Symbolic Substitution with Semantic Matching.
+        Stage 2-7: Progressive Symbolic Substitution - LLM-FREE RULE-BASED COMPRESSION.
         
-        Applies aggressive rule-based and LLM-assisted semantic substitution
-        to replace protocol concepts with symbols from the codex.
+        Applies progressively more aggressive rule-based compression at each stage.
+        Each stage compresses more than the previous, creating true Russian Doll layers.
         """
+        import re
         result = text
+        original_len = len(result)
         
-        # First pass: Direct symbol substitutions from codex (longest meaning first)
+        # Stage-specific compression aggressiveness
+        stage_levels = {
+            "Nano": 1,    # Light compression
+            "Micro": 2,   # Moderate compression
+            "Pico": 3,    # Aggressive compression
+            "Femto": 4,   # Very aggressive compression
+            "Atto": 5     # Maximum compression before Zepto
+        }
+        compression_level = stage_levels.get(stage, 1)
+        
+        # Pass 1: Direct symbol substitutions from codex (longest meaning first)
         # Prioritize protocol vocabulary symbols
         protocol_symbols = [(s, e) for s, e in self.codex.items() if s in self.protocol_vocab]
         other_symbols = [(s, e) for s, e in self.codex.items() if s not in self.protocol_vocab]
@@ -296,97 +415,85 @@ Compressed form (dense, no redundancy, preserve critical logic only):"""
             meaning_short = meaning_full.split(' - ')[0].strip()
             
             # Strategy 1: Direct phrase matching (case-insensitive)
-            if meaning_short and len(meaning_short) > 3 and symbol:  # Ensure symbol is not empty
-                import re
+            if meaning_short and len(meaning_short) > 3 and symbol:
                 try:
-                    # Escape special regex characters in the meaning
                     escaped_meaning = re.escape(meaning_short)
                     pattern = re.compile(escaped_meaning, re.IGNORECASE)
-                    # Escape special characters in symbol for replacement
                     escaped_symbol = symbol.replace('\\', '\\\\').replace('$', '\\$')
                     result = pattern.sub(escaped_symbol, result)
-                except re.error as e:
-                    # Skip symbols that cause regex errors
-                    print(f"Warning: Regex error for symbol '{symbol}': {e}")
+                except re.error:
                     continue
             
-            # Strategy 2: Extract key terms from meaning and match
-            key_terms = meaning_short.split()
-            if len(key_terms) >= 2:
-                # Try matching the most distinctive terms
+            # Strategy 2: Key term matching (for higher compression levels)
+            if compression_level >= 2:
+                key_terms = meaning_short.split()
                 for term in key_terms:
                     if len(term) > 4:  # Only substantial terms
-                        # Match whole word only
+                        # Replace whole words that match key terms
                         pattern = re.compile(r'\b' + re.escape(term) + r'\b', re.IGNORECASE)
-                        # Only replace if it's part of a longer phrase that matches the meaning
-                        # This is a heuristic - in practice, LLM will do better
-                        pass
+                        result = pattern.sub(symbol, result)
         
-        # Second pass: LLM-assisted semantic symbol matching (if available)
-        if LLM_AVAILABLE and get_llm_provider and len(text) > 200:
-            try:
-                provider = get_llm_provider("groq")
-                
-                # Build comprehensive symbol list (prioritize protocol symbols)
-                protocol_symbol_list = [
-                    f"{s} ({e.meaning})" 
-                    for s, e in sorted(self.protocol_vocab.items(), key=lambda x: len(x[1].meaning), reverse=True)
-                ]
-                other_symbol_list = [
-                    f"{s} ({e.meaning})" 
-                    for s, e in sorted(other_symbols, key=lambda x: len(x[1].meaning), reverse=True)[:20]
-                ]
-                
-                # Limit total symbols for prompt efficiency
-                all_symbols = protocol_symbol_list[:30] + other_symbol_list[:20]
-                symbol_list_text = "\n".join(all_symbols[:50])  # Max 50 symbols
-                
-                # Chunk text if too long
-                text_chunk = text[:4000] if len(text) > 4000 else text
-                remaining_text = text[4000:] if len(text) > 4000 else ""
-                
-                prompt = f"""You are the Pattern Crystallization Engine's semantic symbolization stage.
-
-Replace protocol concepts and phrases in the text with their corresponding symbols from the codex.
-PRIORITIZE protocol-specific symbols (Æ, Ω, Δ, Φ, Θ, etc.) over generic ones.
-
-Available symbols (protocol symbols first):
-{symbol_list_text}
-
-Text to symbolize:
-{text_chunk}
-
-Rules:
-1. Replace exact phrase matches with their symbols
-2. Replace semantic equivalents (e.g., "Cognitive Resonance" → Ω, "IAR" → Φ)
-3. Replace protocol terms (e.g., "Pattern Crystallization" → Π, "Mandate 1" → M₁)
-4. Keep text structure but maximize symbol usage
-5. Output ONLY the symbolized text, no explanations
-
-Symbolized text:"""
-                
-                symbolized = provider.generate(
-                    prompt=prompt,
-                    model="llama-3.3-70b-versatile",
-                    temperature=0.15,  # Very low for precise replacement
-                    max_tokens=min(len(text) + 500, 4500)  # Allow some expansion for symbols
-                )
-                
-                if symbolized and len(symbolized.strip()) > 0:
-                    symbolized = symbolized.strip()
-                    # Use LLM result if it's shorter or similar length (symbols are more compact)
-                    if len(symbolized) <= len(result) * 1.1:  # Allow up to 10% increase (symbols might be longer Unicode)
-                        result = symbolized + remaining_text
-                        # Additional pass: remove any remaining obvious phrases
-                        result = self._apply_aggressive_symbol_replacement(result)
-                        
-            except Exception as e:
-                # Fallback: continue with direct substitutions
-                print(f"Warning: LLM symbolization failed: {e}, using direct substitutions")
-                pass
-        
-        # ALWAYS apply aggressive symbol replacement at the end (even if LLM failed)
+        # Pass 2: Aggressive symbol replacement (always applied)
         result = self._apply_aggressive_symbol_replacement(result)
+        
+        # Pass 3: Progressive text compression based on stage level
+        if compression_level >= 2:
+            # Remove common connecting words
+            common_words = ['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 
+                          'that', 'with', 'have', 'this', 'from', 'when', 'where', 'what', 
+                          'which', 'will', 'would', 'could', 'should', 'may', 'might']
+            for word in common_words:
+                result = re.sub(r'\b' + word + r'\b', '', result, flags=re.IGNORECASE)
+            result = re.sub(r'\s+', ' ', result).strip()
+        
+        if compression_level >= 3:
+            # Abbreviate common phrases
+            abbreviations = {
+                r'\baction\s+context\b': 'AC',
+                r'\bworkflow\s+engine\b': 'WE',
+                r'\btask\s+metadata\b': 'TM',
+                r'\bexecution\s+state\b': 'ES',
+                r'\bruntime\s+context\b': 'RC',
+                r'\bknowledge\s+graph\b': 'KG',
+                r'\bsymbol\s+codex\b': 'SC',
+            }
+            for pattern, abbrev in abbreviations.items():
+                result = re.sub(pattern, abbrev, result, flags=re.IGNORECASE)
+        
+        if compression_level >= 4:
+            # Remove articles and prepositions
+            articles_preps = ['a', 'an', 'the', 'in', 'on', 'at', 'to', 'of', 'for', 
+                            'with', 'by', 'from', 'as', 'is', 'was', 'be', 'been']
+            for word in articles_preps:
+                result = re.sub(r'\b' + word + r'\b', '', result, flags=re.IGNORECASE)
+            result = re.sub(r'\s+', ' ', result).strip()
+        
+        if compression_level >= 5:
+            # Maximum compression: Keep only key terms and symbols
+            # Extract capitalized words and symbols, remove lowercase words
+            words = result.split()
+            key_terms = []
+            for word in words:
+                # Keep: symbols, capitalized words, abbreviations, numbers
+                if (any(c in word for c in 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩÆ') or
+                    word[0].isupper() or 
+                    word.isupper() or
+                    word.isdigit() or
+                    len(word) <= 2):  # Keep short abbreviations
+                    key_terms.append(word)
+            result = ' '.join(key_terms)
+            result = re.sub(r'\s+', ' ', result).strip()
+        
+        # Ensure we actually compressed (if not, apply fallback compression)
+        if len(result) >= original_len * 0.95:  # Less than 5% compression
+            # Fallback: aggressive word removal
+            words = result.split()
+            # Keep only: symbols, capitalized words, words > 4 chars
+            filtered = [w for w in words if 
+                       any(c in w for c in 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩÆ') or
+                       w[0].isupper() or len(w) > 4]
+            result = ' '.join(filtered) if filtered else result
+            result = re.sub(r'\s+', ' ', result).strip()
         
         return result
     
@@ -394,38 +501,66 @@ Symbolized text:"""
         """Apply aggressive rule-based symbol replacement for common patterns."""
         result = text
         
-        # Common protocol phrase patterns
+        # Common protocol phrase patterns (case-insensitive matching)
         replacements = {
-            "Cognitive resonancE": "Ω",
-            "Cognitive Resonance": "Ω",
+            # Core concepts
             "cognitive resonance": "Ω",
-            "Temporal resonancE": "Δ",
-            "Temporal Resonance": "Δ",
             "temporal resonance": "Δ",
-            "Integrated Action Reflection": "Φ",
-            "IAR": "Φ",
-            "Sparse Priming Representation": "Θ",
-            "SPR": "Θ",
-            "Pattern Crystallization": "Π",
+            "integrated action reflection": "Φ",
+            "iar": "Φ",
+            "sparse priming representation": "Θ",
+            "spr": "Θ",
             "pattern crystallization": "Π",
-            "As Above, So Below": "Λ",
             "as above so below": "Λ",
-            "ThoughtTrail": "Σ",
             "thought trail": "Σ",
-            "ArchE": "Æ",
+            "thoughttrail": "Σ",
+            "arche": "Æ",
+            # System components
+            "guardian points": "G",
+            "guardian pointS": "G",
+            "workflow engine": "W",
+            "knowledge graph": "K",
+            "symbol codex": "C",
+            "knowledge network oneness": "KnO",
+            "kno": "KnO",
+            # Common technical terms
+            "definition": "D",
+            "implementation": "I",
+            "preservation": "P",
+            "format": "F",
+            "mechanism": "M",
+            "system": "S",
+            "process": "P",
+            "protocol": "P",
+            "mandate": "M",
+            # Action types
+            "action reflection": "Φ",
+            "metacognitive shift": "MS",
+            "sirc": "SIRC",
+            "insight solidification": "IS",
         }
         
-        # Add mandate replacements (using Unicode subscripts from codex)
+        # Apply replacements (case-insensitive)
+        import re
+        for phrase, symbol in replacements.items():
+            # Case-insensitive replacement
+            pattern = re.compile(re.escape(phrase), re.IGNORECASE)
+            result = pattern.sub(symbol, result)
+        
+        # Add mandate replacements (using Unicode subscripts)
         mandate_subscripts = ['₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉', '₁₀', '₁₁', '₁₂']
         for i in range(1, 13):
             subscript = mandate_subscripts[i-1]
-            result = result.replace(f"Mandate {i}", f"M{subscript}")
-            result = result.replace(f"mandate {i}", f"M{subscript}")
-            result = result.replace(f"M{i}", f"M{subscript}")  # Also handle M1, M2, etc.
+            result = re.sub(rf'\b[Mm]andate\s+{i}\b', f'M{subscript}', result, flags=re.IGNORECASE)
+            result = re.sub(rf'\bM{i}\b', f'M{subscript}', result)
         
-        # Apply direct replacements
-        for phrase, symbol in replacements.items():
-            result = result.replace(phrase, symbol)
+        # Remove common English words that shouldn't be in symbolic form
+        common_words = ['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'that', 'with', 'have', 'this', 'from', 'when', 'where', 'what', 'which']
+        for word in common_words:
+            result = re.sub(rf'\b{word}\b', '', result, flags=re.IGNORECASE)
+        
+        # Clean up multiple spaces
+        result = re.sub(r'\s+', ' ', result).strip()
         
         return result
     
@@ -435,12 +570,84 @@ Symbolized text:"""
         
         Applies final optimizations to create the pure Zepto SPR:
         - Removes remaining linguistic artifacts
+        - Converts remaining text to symbols
         - Optimizes symbol density
         - Validates symbolic integrity
+        
+        CRITICAL: This must produce actual symbolic output, not readable text.
         """
-        # Remove whitespace, optimize symbol sequences
-        # This is a simplified version - in production, would validate mathematical/symbolic consistency
-        return ''.join(symbolic_form.split()).strip()
+        result = symbolic_form
+        
+        # Step 1: Remove whitespace
+        result = ''.join(result.split()).strip()
+        
+        # Step 2: If result is still readable text (contains lowercase letters, spaces, common words),
+        # apply aggressive symbolization to convert it to actual symbols
+        if len(result) > 50 or self._is_readable_text(result):
+            # Apply aggressive symbol replacement one more time
+            result = self._apply_aggressive_symbol_replacement(result)
+            
+            # If still readable, try to extract key concepts and create minimal symbolic representation
+            if self._is_readable_text(result) and len(result) > 20:
+                # Extract key symbols that are already present
+                existing_symbols = re.findall(r'[ΓΣΔΘΛΞΠΦΨΩΑΒΕΗΙΚΜΝΟΡΤΥΧÆ]', result)
+                
+                # Try to create a minimal symbolic representation
+                # Use first letters of key words as fallback symbols
+                words = re.findall(r'[A-Z][a-z]+', result)
+                if words and len(existing_symbols) == 0:
+                    # No existing symbols, create minimal representation from key concepts
+                    key_concepts = [w[0].upper() for w in words[:5]]
+                    result = '|'.join(key_concepts) if len(key_concepts) > 1 else key_concepts[0] if key_concepts else 'Ξ'
+                elif existing_symbols:
+                    # Use existing symbols, combine them
+                    result = '|'.join(existing_symbols[:5])
+                else:
+                    # Ultimate fallback: single symbol
+                    result = 'Ξ'
+        
+        # Step 3: Remove any remaining lowercase letters and common words
+        # Keep only symbols, uppercase abbreviations, and special characters
+        result = re.sub(r'[a-z]+', '', result)  # Remove lowercase words
+        result = re.sub(r'\b(the|and|for|are|but|not|you|all|can|had|her|was|one|our|out|day|get|has|him|his|how)\b', '', result, flags=re.IGNORECASE)
+        
+        # Step 4: Clean up and optimize
+        result = result.strip()
+        
+        # If result is empty or too long, create minimal symbolic representation
+        if not result or len(result) > 50:
+            # Extract any symbols present
+            symbols = re.findall(r'[ΓΣΔΘΛΞΠΦΨΩΑΒΕΗΙΚΜΝΟΡΤΥΧÆ|]', result)
+            if symbols:
+                result = '|'.join(symbols[:5])
+            else:
+                result = 'Ξ'  # Unknown symbol
+        
+        return result
+    
+    def _is_readable_text(self, text: str) -> bool:
+        """Check if text is readable (contains lowercase letters, common words) rather than symbolic."""
+        if not text:
+            return False
+        
+        # Count lowercase letters
+        lowercase_count = len([c for c in text if c.islower()])
+        total_alpha = len([c for c in text if c.isalpha()])
+        
+        # If more than 30% lowercase, it's readable text
+        if total_alpha > 0 and lowercase_count / total_alpha > 0.3:
+            return True
+        
+        # Check for common English words
+        common_words = ['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'that', 'with', 'have', 'this']
+        text_lower = text.lower()
+        word_count = sum(1 for word in common_words if word in text_lower)
+        
+        # If contains common words, it's readable
+        if word_count > 0:
+            return True
+        
+        return False
     
     def _update_codex(
         self,
@@ -458,19 +665,30 @@ Symbolized text:"""
         # Extract symbols from SPR
         symbols = self._extract_symbols(pure_spr)
         
-        # For each symbol, infer meaning from original narrative
+        # For each symbol, infer enhanced meaning from original narrative
         for symbol in symbols:
             if symbol not in self.codex:
-                meaning = self._infer_symbol_meaning(symbol, original_narrative)
+                meaning_data = self._infer_symbol_meaning(symbol, original_narrative)
                 entry = SymbolCodexEntry(
                     symbol=symbol,
-                    meaning=meaning["definition"],
-                    context=meaning["context"],
+                    meaning=meaning_data["definition"],
+                    context=meaning_data["context"],
                     usage_examples=[pure_spr],
+                    original_patterns=meaning_data.get("original_patterns", []),
+                    relationships=meaning_data.get("relationships", {}),
+                    critical_specifics=meaning_data.get("critical_specifics", []),
+                    generalizable_patterns=meaning_data.get("generalizable_patterns", []),
+                    contextual_variations=meaning_data.get("contextual_variations", {}),
+                    decompression_template=meaning_data.get("decompression_template", meaning_data["definition"]),
                     created_at=now_iso()
                 )
                 new_entries[symbol] = entry
                 self.codex[symbol] = entry
+            else:
+                # Update existing entry with new usage example
+                existing_entry = self.codex[symbol]
+                if pure_spr not in existing_entry.usage_examples:
+                    existing_entry.usage_examples.append(pure_spr)
         
         return new_entries
     
@@ -481,105 +699,270 @@ Symbolized text:"""
         symbols = re.findall(r'[^\w\s,.!?;:"\'\[\](){}]', spr)
         return list(set(symbols))
     
-    def _infer_symbol_meaning(self, symbol: str, narrative: str) -> Dict[str, str]:
+    def _infer_symbol_meaning(self, symbol: str, narrative: str) -> Dict[str, Any]:
         """
-        Infer symbol meaning from narrative context using LLM.
+        Enhanced symbol meaning inference that preserves nuanced knowledge.
         
-        This is critical for creating meaningful Symbol Codex entries
-        that enable proper decompression.
+        Extracts:
+        - Core definition
+        - Original patterns/phrases
+        - Critical specifics (must preserve)
+        - Generalizable patterns (can abstract)
+        - Relationships to other concepts
+        - Contextual variations
+        - Decompression template
         """
-        if not LLM_AVAILABLE or not generate_text_llm:
-            # Fallback: Basic placeholder
+        if not LLM_AVAILABLE or not get_llm_provider:
+            # Fallback: Basic extraction
             return {
                 "definition": f"Symbol extracted: {symbol}",
-                "context": "Inferred from narrative context"
+                "context": "Inferred from narrative context",
+                "original_patterns": [],
+                "critical_specifics": [],
+                "generalizable_patterns": [],
+                "relationships": {},
+                "contextual_variations": {},
+                "decompression_template": f"Symbol extracted: {symbol}"
             }
         
         try:
-            # Use LLM provider directly to bypass ArchE execution path
             if get_llm_provider:
-                provider = get_llm_provider("groq")  # Use Groq (faster, cheaper, no rate limits)
+                provider = get_llm_provider("groq")
                 
-                prompt = f"""You are the Pattern Crystallization Engine's symbol inference stage.
+                prompt = f"""You are the Pattern Crystallization Engine's enhanced symbol inference stage.
 
 A symbol "{symbol}" was extracted from the following narrative. 
-Determine what this symbol represents based on its context and usage.
+Your task is to extract COMPLETE nuanced knowledge about this symbol to enable:
+1. Accurate decompression with all specifics preserved
+2. Pattern generalization where appropriate
+3. Novel application of observed patterns
 
 Narrative context:
-{narrative[:2000]}
+{narrative[:3000]}
 
-Provide:
-1. A concise definition of what this symbol represents (max 50 words)
-2. The context domain (e.g., "CFP Analysis", "Protocol Definition", "System Architecture")
+Extract and provide:
+
+1. DEFINITION: Core meaning (max 50 words)
+2. CONTEXT: Domain/context (e.g., "CFP Analysis", "Protocol Definition")
+3. ORIGINAL_PATTERNS: List of original phrases/terms from the narrative that map to this symbol (comma-separated)
+4. CRITICAL_SPECIFICS: Specific details that MUST be preserved (not generalized) - these are unique, important specifics (one per line)
+5. GENERALIZABLE_PATTERNS: Patterns that can be abstracted/generalized for novel applications (one per line)
+6. RELATIONSHIPS: Related symbols/concepts in format "symbol:relationship_type" (one per line, e.g., "Ω:core_concept", "Δ:temporal_related")
+7. CONTEXTUAL_VARIATIONS: Different meanings in different contexts in format "context:meaning" (one per line)
+8. DECOMPRESSION_TEMPLATE: Template for reconstructing nuanced knowledge (include placeholders for specifics)
 
 Format your response as:
-DEFINITION: [concise definition]
-CONTEXT: [context domain]"""
+DEFINITION: [definition]
+CONTEXT: [context]
+ORIGINAL_PATTERNS: [pattern1, pattern2, ...]
+CRITICAL_SPECIFICS:
+- [specific detail 1]
+- [specific detail 2]
+GENERALIZABLE_PATTERNS:
+- [pattern 1]
+- [pattern 2]
+RELATIONSHIPS:
+- [symbol:type]
+CONTEXTUAL_VARIATIONS:
+- [context:meaning]
+DECOMPRESSION_TEMPLATE: [template with {placeholders} for specifics]"""
                 
-                # Call provider directly (bypasses ArchE execution)
                 response = provider.generate(
                     prompt=prompt,
                     model="llama-3.3-70b-versatile",
-                    temperature=0.4,
-                    max_tokens=200
+                    temperature=0.3,  # Lower for more precise extraction
+                    max_tokens=800  # More tokens for nuanced extraction
                 )
                 
                 if response and len(response.strip()) > 0:
-                    response = response.strip()
-                    
-                    # Parse response
-                    definition = response
-                    context = "Inferred from narrative context"
-                    
-                    # Try to extract structured parts
-                    if "DEFINITION:" in response:
-                        parts = response.split("DEFINITION:")
-                        if len(parts) > 1:
-                            def_part = parts[1].split("CONTEXT:")[0].strip()
-                            definition = def_part if def_part else definition
-                    
-                    if "CONTEXT:" in response:
-                        context_part = response.split("CONTEXT:")[-1].strip()
-                        context = context_part if context_part else context
-                    
-                    return {
-                        "definition": definition[:200],  # Limit length
-                        "context": context[:100]
-                    }
+                    return self._parse_enhanced_symbol_response(response, symbol)
             
             # Fallback
-            return {
-                "definition": f"Symbol extracted: {symbol}",
-                "context": "Inferred from narrative context"
-            }
+            return self._create_fallback_symbol_data(symbol)
             
         except Exception as e:
-            # Fallback on error
-            print(f"Warning: LLM symbol inference failed: {e}, using fallback")
-            return {
+            print(f"Warning: Enhanced LLM symbol inference failed: {e}, using fallback")
+            return self._create_fallback_symbol_data(symbol)
+    
+    def _parse_enhanced_symbol_response(self, response: str, symbol: str) -> Dict[str, Any]:
+        """Parse the enhanced LLM response into structured data."""
+        result = {
                 "definition": f"Symbol extracted: {symbol}",
-                "context": "Inferred from narrative context"
-            }
+            "context": "Inferred from narrative context",
+            "original_patterns": [],
+            "critical_specifics": [],
+            "generalizable_patterns": [],
+            "relationships": {},
+            "contextual_variations": {},
+            "decompression_template": f"Symbol extracted: {symbol}"
+        }
+        
+        lines = response.split('\n')
+        current_section = None
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            
+            # Detect section headers
+            if line.startswith("DEFINITION:"):
+                result["definition"] = line.replace("DEFINITION:", "").strip()[:200]
+                current_section = None
+            elif line.startswith("CONTEXT:"):
+                result["context"] = line.replace("CONTEXT:", "").strip()[:100]
+                current_section = None
+            elif line.startswith("ORIGINAL_PATTERNS:"):
+                patterns = line.replace("ORIGINAL_PATTERNS:", "").strip()
+                result["original_patterns"] = [p.strip() for p in patterns.split(',') if p.strip()]
+                current_section = None
+            elif line.startswith("CRITICAL_SPECIFICS:"):
+                current_section = "critical_specifics"
+            elif line.startswith("GENERALIZABLE_PATTERNS:"):
+                current_section = "generalizable_patterns"
+            elif line.startswith("RELATIONSHIPS:"):
+                current_section = "relationships"
+            elif line.startswith("CONTEXTUAL_VARIATIONS:"):
+                current_section = "contextual_variations"
+            elif line.startswith("DECOMPRESSION_TEMPLATE:"):
+                result["decompression_template"] = line.replace("DECOMPRESSION_TEMPLATE:", "").strip()[:500]
+                current_section = None
+            elif current_section == "critical_specifics" and line.startswith("-"):
+                result["critical_specifics"].append(line[1:].strip())
+            elif current_section == "generalizable_patterns" and line.startswith("-"):
+                result["generalizable_patterns"].append(line[1:].strip())
+            elif current_section == "relationships" and line.startswith("-"):
+                rel_line = line[1:].strip()
+                if ":" in rel_line:
+                    parts = rel_line.split(":", 1)
+                    result["relationships"][parts[0].strip()] = parts[1].strip()
+            elif current_section == "contextual_variations" and line.startswith("-"):
+                var_line = line[1:].strip()
+                if ":" in var_line:
+                    parts = var_line.split(":", 1)
+                    result["contextual_variations"][parts[0].strip()] = parts[1].strip()
+        
+        return result
+    
+    def _create_fallback_symbol_data(self, symbol: str) -> Dict[str, Any]:
+        """Create fallback symbol data structure."""
+        return {
+            "definition": f"Symbol extracted: {symbol}",
+            "context": "Inferred from narrative context",
+            "original_patterns": [],
+            "critical_specifics": [],
+            "generalizable_patterns": [],
+            "relationships": {},
+            "contextual_variations": {},
+            "decompression_template": f"Symbol extracted: {symbol}"
+        }
     
     def decompress_spr(
         self,
         zepto_spr: str,
-        codex: Optional[Dict[str, SymbolCodexEntry]] = None
+        codex: Optional[Dict[str, SymbolCodexEntry]] = None,
+        target_layer: Optional[str] = None,
+        compression_stages: Optional[List[CompressionStage]] = None
     ) -> str:
         """
-        Reverse Process: Decompress Zepto SPR back to narrative.
+        Layered Decompression: Russian Doll Architecture
         
-        Uses the Symbol Codex to reconstruct the original meaning.
+        Decompresses Zepto SPR through progressive layers, like Russian dolls.
+        Each layer adds more detail and nuance.
+        
+        Args:
+            zepto_spr: The Zepto SPR to decompress
+            codex: Symbol codex (uses default if None)
+            target_layer: Target decompression layer ("Zepto", "Atto", "Femto", "Pico", "Micro", "Nano", "Concise", "Narrative")
+                         If None, decompresses to most detailed available layer
+            compression_stages: Optional list of compression stages for layered retrieval
+            
+        Returns:
+            Decompressed text at the specified layer
         """
         if codex is None:
             codex = self.codex
         
-        # Replace symbols with their meanings (longest first to avoid partial matches)
-        # This ensures multi-character symbols (like "𝔗𝔯") are replaced before single-character ones
+        # If compression stages provided, use layered retrieval
+        if compression_stages and target_layer:
+            return self._retrieve_from_layer(zepto_spr, target_layer, compression_stages, codex)
+        
+        # Progressive layered decompression: Start from Zepto and work outward
+        # Each layer adds more nuance and detail
         result = zepto_spr
+        
+        # Layer 1: Basic symbol replacement (Zepto → Atto level)
+        result = self._decompress_layer_symbols(result, codex, layer="symbolic")
+        
+        # Layer 2: Add critical specifics (Atto → Femto level)
+        result = self._decompress_layer_specifics(result, codex)
+        
+        # Layer 3: Add relationships and context (Femto → Pico level)
+        result = self._decompress_layer_relationships(result, codex)
+        
+        # Layer 4: Add generalizable patterns (Pico → Micro level)
+        result = self._decompress_layer_patterns(result, codex)
+        
+        # Layer 5: Full nuanced reconstruction (Micro → Narrative level)
+        result = self._decompress_layer_nuanced(result, codex)
+        
+        return result
+    
+    def _retrieve_from_layer(
+        self,
+        zepto_spr: str,
+        target_layer: str,
+        compression_stages: List[CompressionStage],
+        codex: Dict[str, SymbolCodexEntry]
+    ) -> str:
+        """
+        Retrieve content from a specific compression layer (Russian doll retrieval).
+        
+        This allows accessing knowledge at the appropriate level of detail.
+        """
+        # Find the stage matching target_layer
+        stage_map = {stage.stage_name: stage for stage in compression_stages}
+        
+        if target_layer in stage_map:
+            # Return the content at that layer
+            layer_content = stage_map[target_layer].content
+            
+            # Apply appropriate decompression for that layer
+            if target_layer == "Zepto":
+                # Pure symbolic - minimal decompression
+                return self._decompress_layer_symbols(layer_content, codex, layer="symbolic")
+            elif target_layer in ["Atto", "Femto"]:
+                # Symbolic with some specifics
+                result = self._decompress_layer_symbols(layer_content, codex, layer="symbolic")
+                return self._decompress_layer_specifics(result, codex)
+            elif target_layer in ["Pico", "Micro"]:
+                # With relationships
+                result = self._decompress_layer_symbols(layer_content, codex, layer="symbolic")
+                result = self._decompress_layer_specifics(result, codex)
+                return self._decompress_layer_relationships(result, codex)
+            elif target_layer in ["Nano", "Concise"]:
+                # With patterns
+                result = self._decompress_layer_symbols(layer_content, codex, layer="symbolic")
+                result = self._decompress_layer_specifics(result, codex)
+                result = self._decompress_layer_relationships(result, codex)
+                return self._decompress_layer_patterns(result, codex)
+            else:
+                # Narrative level - return as-is or with full decompression
+                return layer_content
+        
+        # Fallback: progressive decompression
+        return self.decompress_spr(zepto_spr, codex)
+    
+    def _decompress_layer_symbols(
+        self,
+        text: str,
+        codex: Dict[str, SymbolCodexEntry],
+        layer: str = "symbolic"
+    ) -> str:
+        """Layer 1: Replace symbols with basic meanings."""
+        result = text
         for symbol, entry in sorted(codex.items(), key=lambda x: len(x[0]), reverse=True):
             if symbol in result:
-                # Handle both SymbolCodexEntry objects and dict format
                 if isinstance(entry, SymbolCodexEntry):
                     meaning = entry.meaning
                 elif isinstance(entry, dict):
@@ -587,7 +970,127 @@ CONTEXT: [context domain]"""
                 else:
                     meaning = str(entry)
                 result = result.replace(symbol, f"[{meaning}]")
-        
+        return result
+    
+    def _decompress_layer_specifics(
+        self,
+        text: str,
+        codex: Dict[str, SymbolCodexEntry]
+    ) -> str:
+        """Layer 2: Add critical specifics that must be preserved."""
+        result = text
+        for symbol, entry in sorted(codex.items(), key=lambda x: len(x[0]), reverse=True):
+            if symbol in result or f"[{entry.meaning if isinstance(entry, SymbolCodexEntry) else entry.get('meaning', '')}]" in result:
+                if isinstance(entry, SymbolCodexEntry):
+                    if entry.critical_specifics:
+                        # Add critical specifics as annotations
+                        specifics_text = "; ".join(entry.critical_specifics[:3])  # Limit to 3 most important
+                        result = result.replace(
+                            f"[{entry.meaning}]",
+                            f"[{entry.meaning} | Critical: {specifics_text}]"
+                        )
+                elif isinstance(entry, dict):
+                    specifics = entry.get('critical_specifics', [])
+                    if specifics:
+                        meaning = entry.get('meaning', '')
+                        specifics_text = "; ".join(specifics[:3])
+                        result = result.replace(
+                            f"[{meaning}]",
+                            f"[{meaning} | Critical: {specifics_text}]"
+                        )
+        return result
+    
+    def _decompress_layer_relationships(
+        self,
+        text: str,
+        codex: Dict[str, SymbolCodexEntry]
+    ) -> str:
+        """Layer 3: Add relationships and contextual information."""
+        result = text
+        for symbol, entry in sorted(codex.items(), key=lambda x: len(x[0]), reverse=True):
+            if isinstance(entry, SymbolCodexEntry):
+                if entry.relationships:
+                    # Add relationship annotations
+                    rels_text = ", ".join([f"{k}:{v}" for k, v in list(entry.relationships.items())[:3]])
+                    if rels_text:
+                        result = result.replace(
+                            f"[{entry.meaning}",
+                            f"[{entry.meaning} | Related: {rels_text}"
+                        )
+            elif isinstance(entry, dict):
+                rels = entry.get('relationships', {})
+                if rels:
+                    meaning = entry.get('meaning', '')
+                    rels_text = ", ".join([f"{k}:{v}" for k, v in list(rels.items())[:3]])
+                    if rels_text:
+                        result = result.replace(
+                            f"[{meaning}",
+                            f"[{meaning} | Related: {rels_text}"
+                        )
+        return result
+    
+    def _decompress_layer_patterns(
+        self,
+        text: str,
+        codex: Dict[str, SymbolCodexEntry]
+    ) -> str:
+        """Layer 4: Add generalizable patterns for novel applications."""
+        result = text
+        for symbol, entry in sorted(codex.items(), key=lambda x: len(x[0]), reverse=True):
+            if isinstance(entry, SymbolCodexEntry):
+                if entry.generalizable_patterns:
+                    # Add pattern annotations
+                    patterns_text = "; ".join(entry.generalizable_patterns[:2])
+                    if patterns_text:
+                        result = result.replace(
+                            f"[{entry.meaning}",
+                            f"[{entry.meaning} | Patterns: {patterns_text}"
+                        )
+            elif isinstance(entry, dict):
+                patterns = entry.get('generalizable_patterns', [])
+                if patterns:
+                    meaning = entry.get('meaning', '')
+                    patterns_text = "; ".join(patterns[:2])
+                    if patterns_text:
+                        result = result.replace(
+                            f"[{meaning}",
+                            f"[{meaning} | Patterns: {patterns_text}"
+                        )
+        return result
+    
+    def _decompress_layer_nuanced(
+        self,
+        text: str,
+        codex: Dict[str, SymbolCodexEntry]
+    ) -> str:
+        """Layer 5: Full nuanced reconstruction with all details."""
+        result = text
+        for symbol, entry in sorted(codex.items(), key=lambda x: len(x[0]), reverse=True):
+            if isinstance(entry, SymbolCodexEntry):
+                # Use decompression template if available
+                if entry.decompression_template and entry.decompression_template != entry.meaning:
+                    # Replace with template, filling in specifics
+                    template = entry.decompression_template
+                    if entry.critical_specifics:
+                        # Fill template placeholders with specifics
+                        for i, spec in enumerate(entry.critical_specifics[:3]):
+                            template = template.replace(f"{{specific_{i+1}}}", spec)
+                    result = result.replace(f"[{entry.meaning}", f"[{template}")
+                
+                # Add original patterns if available
+                if entry.original_patterns:
+                    orig_text = " | Original: " + ", ".join(entry.original_patterns[:3])
+                    result = result.replace(
+                        f"[{entry.meaning}",
+                        f"[{entry.meaning}{orig_text}"
+                    )
+            elif isinstance(entry, dict):
+                template = entry.get('decompression_template', entry.get('meaning', ''))
+                if template and template != entry.get('meaning', ''):
+                    result = result.replace(
+                        f"[{entry.get('meaning', '')}",
+                        f"[{template}"
+                    )
         return result
     
     def validate_compression(

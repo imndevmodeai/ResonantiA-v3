@@ -641,6 +641,27 @@ class AdaptiveCognitiveOrchestrator:
         # Performance tracking for adaptive tuning
         self.performance_history = deque(maxlen=100)
         
+        # Russian Doll Layer Learning System
+        try:
+            from .aco_layer_learning import ACOLayerLearningSystem
+            self.layer_learning = ACOLayerLearningSystem()
+            logger.info("[ACO] Layer learning system initialized")
+        except Exception as e:
+            logger.warning(f"[ACO] Layer learning system not available: {e}")
+            self.layer_learning = None
+        
+        # SPR Manager for layer-aware retrieval
+        try:
+            from .spr_manager import SPRManager
+            from .config import Config
+            config = Config()
+            spr_filepath = config.get('spr_filepath', 'knowledge_graph/spr_definitions_tv.json')
+            self.spr_manager = SPRManager(spr_filepath)
+            logger.info("[ACO] SPR Manager initialized for layer-aware retrieval")
+        except Exception as e:
+            logger.warning(f"[ACO] SPR Manager not available: {e}")
+            self.spr_manager = None
+        
         self.learning_metrics = {
             'total_queries': 0,
             'successful_queries': 0,
@@ -648,7 +669,7 @@ class AdaptiveCognitiveOrchestrator:
             'controllers_created': 0
         }
         
-        logger.info("[ACO] Initialized with evolution capabilities")
+        logger.info("[ACO] Initialized with evolution capabilities and Russian Doll layer learning")
     
     def process_query_with_evolution(self, query: str) -> Tuple[str, Dict[str, Any]]:
         """Process query with potential evolution."""
@@ -683,15 +704,53 @@ class AdaptiveCognitiveOrchestrator:
                     'escalated': False
                 }
 
+            # --- Russian Doll Layer Selection (ACO-Orchestrated) ---
+            selected_layer = None
+            layer_source = "default"
+            if self.layer_learning:
+                selected_layer, layer_source = self.layer_learning.select_optimal_layer(
+                    query, 
+                    context={'task_type': 'query_processing'}
+                )
+                self.emit_aco_event(
+                    "LayerSelection", 
+                    f"ACO auto-selected layer: {selected_layer} (source: {layer_source})", 
+                    {"layer": selected_layer, "source": layer_source}
+                )
+            
+            # --- SPR Retrieval with Layer Awareness ---
+            spr_context = ""
+            if self.spr_manager and selected_layer:
+                try:
+                    # ACO automatically retrieves SPRs at optimal layer
+                    primed_sprs = self.spr_manager.scan_and_prime(
+                        query, 
+                        target_layer=selected_layer,
+                        auto_select_layer=False  # Already selected by ACO
+                    )
+                    if primed_sprs:
+                        spr_context = self._format_spr_context(primed_sprs, selected_layer)
+                        self.emit_aco_event(
+                            "SPRPriming", 
+                            f"Primed {len(primed_sprs)} SPRs at {selected_layer} layer", 
+                            {"spr_count": len(primed_sprs), "layer": selected_layer}
+                        )
+                except Exception as e:
+                    logger.warning(f"[ACO] SPR priming failed: {e}")
+            
             # --- Base System Processing (if available) ---
             if self.base_system:
                 self.emit_aco_event("Routing", "Routing to Cognitive Resonant Controller System (CRCS).", {})
-                context, base_metrics = self.base_system.process_query(query)
+                # Include SPR context in query for base system
+                enhanced_query = f"{query}\n\n{spr_context}" if spr_context else query
+                context, base_metrics = self.base_system.process_query(enhanced_query)
                 success = bool(context)
                 active_domain = base_metrics.get('active_domain', 'standalone')
             else:
                 # Standalone processing with intelligent response generation
-                context = self._generate_intelligent_response(query)
+                # Include SPR context
+                enhanced_query = f"{query}\n\n{spr_context}" if spr_context else query
+                context = self._generate_intelligent_response(enhanced_query)
                 base_metrics = {}
                 success = True
                 active_domain = "standalone"
@@ -700,6 +759,36 @@ class AdaptiveCognitiveOrchestrator:
             pattern_analysis = self.pattern_engine.analyze_query_pattern(
                 query, success=success, active_domain=active_domain
             )
+            
+            # --- Track Layer Selection for Learning ---
+            if self.layer_learning and selected_layer:
+                # Determine success metrics from response
+                user_satisfaction = self._estimate_satisfaction(context, success)
+                response_quality = self._estimate_quality(context, base_metrics)
+                
+                # Track conversation for learning
+                self.layer_learning.track_conversation(
+                    query=query,
+                    selected_layer=selected_layer,
+                    success=success,
+                    user_satisfaction=user_satisfaction,
+                    response_quality=response_quality
+                )
+                
+                # If conversation proves successful, reinforce pattern
+                if success and user_satisfaction and user_satisfaction > 0.8:
+                    query_signature = self.layer_learning._create_query_signature(query)
+                    pattern_data = self.layer_learning.query_patterns.get(query_signature, {})
+                    success_rate = pattern_data.get('success_rate', 0.0)
+                    if success_rate > 0.8:
+                        self.layer_learning.reinforce_successful_pattern(
+                            query_signature, selected_layer, success_rate
+                        )
+                        self.emit_aco_event(
+                            "Learning", 
+                            f"ACO learned pattern: {query_signature[:8]}... → {selected_layer} (success: {success_rate:.1%})", 
+                            {"pattern": query_signature[:8], "layer": selected_layer, "success_rate": success_rate}
+                        )
             
             # --- Adaptation and Evolution ---
             evolution_opportunity = self._attempt_adaptation(query, pattern_analysis)
@@ -787,6 +876,99 @@ class AdaptiveCognitiveOrchestrator:
             return "cognitive science and AI"
         else:
             return "general inquiry"
+    
+    def _estimate_satisfaction(self, response: str, success: bool) -> Optional[float]:
+        """
+        Estimate user satisfaction from response quality and success.
+        
+        Args:
+            response: The response text
+            success: Whether the query was successful
+            
+        Returns:
+            Estimated satisfaction score (0.0-1.0) or None
+        """
+        if not success:
+            return 0.3  # Low satisfaction if unsuccessful
+        
+        # Simple heuristics for satisfaction estimation
+        response_lower = response.lower()
+        
+        # Positive indicators
+        positive_indicators = ['success', 'complete', 'analysis', 'detailed', 'comprehensive']
+        positive_count = sum(1 for word in positive_indicators if word in response_lower)
+        
+        # Negative indicators
+        negative_indicators = ['error', 'failed', 'unavailable', 'cannot', 'unable']
+        negative_count = sum(1 for word in negative_indicators if word in response_lower)
+        
+        # Base satisfaction
+        base_satisfaction = 0.7 if success else 0.3
+        
+        # Adjust based on indicators
+        satisfaction = base_satisfaction + (positive_count * 0.05) - (negative_count * 0.1)
+        
+        # Clamp to [0.0, 1.0]
+        return max(0.0, min(1.0, satisfaction))
+    
+    def _estimate_quality(self, response: str, metrics: Dict[str, Any]) -> Optional[float]:
+        """
+        Estimate response quality from metrics and content.
+        
+        Args:
+            response: The response text
+            metrics: Response metrics dictionary
+            
+        Returns:
+            Estimated quality score (0.0-1.0) or None
+        """
+        # Base quality from response length and content
+        response_length = len(response) if response else 0
+        base_quality = min(0.9, 0.5 + (response_length / 10000))  # Longer responses generally better
+        
+        # Adjust based on metrics
+        if metrics:
+            # Check for successful processing
+            if metrics.get('success', False):
+                base_quality += 0.1
+            
+            # Check for pattern analysis
+            if metrics.get('pattern_analysis'):
+                base_quality += 0.05
+            
+            # Check for evolution opportunities
+            if metrics.get('evolution_opportunity', {}).get('adaptation_type'):
+                base_quality += 0.05
+        
+        # Clamp to [0.0, 1.0]
+        return max(0.0, min(1.0, base_quality))
+    
+    def _format_spr_context(self, primed_sprs: List[Dict[str, Any]], layer: str) -> str:
+        """
+        Format primed SPRs into context string for query enhancement.
+        
+        Args:
+            primed_sprs: List of primed SPR definitions
+            layer: The layer at which SPRs were retrieved
+            
+        Returns:
+            Formatted context string
+        """
+        if not primed_sprs:
+            return ""
+        
+        context_parts = [f"[SPR Context - {layer} layer]:\n"]
+        
+        for spr in primed_sprs[:5]:  # Limit to 5 SPRs to avoid overwhelming
+            spr_id = spr.get('spr_id', spr.get('term', 'Unknown'))
+            content = spr.get('content', spr.get('definition', ''))
+            if content:
+                # Truncate if too long
+                if len(content) > 500:
+                    content = content[:500] + "..."
+                context_parts.append(f"{spr_id}: {content}\n")
+        
+        return "\n".join(context_parts)
     
     def _attempt_adaptation(self, query: str, pattern_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """Attempt to adapt the system based on pattern analysis."""

@@ -7,6 +7,22 @@ from .thought_trail import log_to_thought_trail
 
 logger = logging.getLogger(__name__)
 
+# Lazy import for Zepto compression (optional dependency)
+_zepto_processor = None
+
+def _get_zepto_processor():
+    """Lazy initialization of Zepto processor."""
+    global _zepto_processor
+    if _zepto_processor is None:
+        try:
+            from .zepto_spr_processor import ZeptoSPRProcessorAdapter
+            _zepto_processor = ZeptoSPRProcessorAdapter()
+            logger.info("Zepto SPR processor initialized for automatic compression")
+        except Exception as e:
+            logger.warning(f"Zepto SPR processor not available: {e}. Zepto compression will be skipped.")
+            _zepto_processor = False  # Mark as unavailable
+    return _zepto_processor if _zepto_processor is not False else None
+
 class SPRManager:
     """Manages Synergistic Protocol Resonance (SPR) definitions from a JSON file."""
 
@@ -73,10 +89,18 @@ class SPRManager:
         logger.info(f"Compiled SPR pattern for {len(spr_keys)} keys.")
 
     @log_to_thought_trail
-    def scan_and_prime(self, text: str) -> List[Dict[str, Any]]:
+    def scan_and_prime(self, text: str, target_layer: Optional[str] = None, auto_select_layer: bool = True) -> List[Dict[str, Any]]:
         """
         Scans a given text for all occurrences of registered SPR keys and returns
         the full definitions for each unique SPR found. This is 'striking the bells'.
+        
+        Args:
+            text: Text to scan for SPRs
+            target_layer: Optional target compression layer for Russian Doll retrieval
+            auto_select_layer: If True and target_layer is None, automatically select layer from query
+            
+        Returns:
+            List of SPR definitions (or layer-specific content if target_layer specified)
         """
         if not self.spr_pattern or not isinstance(text, str):
             return []
@@ -86,6 +110,25 @@ class SPRManager:
         if found_sprs:
             logger.debug(f"Primed {len(found_sprs)} unique SPRs: {', '.join(sorted(list(found_sprs)))}")
         
+        # Automatic layer selection if enabled and no layer specified
+        if target_layer is None and auto_select_layer:
+            try:
+                from .russian_doll_retrieval import select_layer_from_query
+                target_layer = select_layer_from_query(text)
+                logger.debug(f"Auto-selected layer '{target_layer}' for query: {text[:50]}...")
+            except Exception as e:
+                logger.debug(f"Auto layer selection failed: {e}, using full SPRs")
+                target_layer = None
+        
+        if target_layer:
+            # Return layer-specific content
+            return [
+                self.get_spr_content_at_layer(key, target_layer)
+                for key in sorted(list(found_sprs))
+                if key in self.sprs
+            ]
+        else:
+            # Return full SPR definitions
         return [self.sprs[key] for key in sorted(list(found_sprs)) if key in self.sprs]
     
     @log_to_thought_trail
@@ -315,10 +358,20 @@ class SPRManager:
             return False
 
     @log_to_thought_trail
-    def add_spr(self, spr_definition: Dict[str, Any], save_to_file: bool = True) -> bool:
+    def add_spr(self, spr_definition: Dict[str, Any], save_to_file: bool = True, overwrite_if_exists: bool = True) -> bool:
         """
         Adds a new SPR to the manager and optionally saves the updated ledger to file.
         This is 'forging a new bell'.
+        
+        Automatically compresses to Zepto SPR if zepto_spr is missing or empty.
+        
+        Args:
+            spr_definition: SPR definition dictionary
+            save_to_file: Whether to save to file immediately
+            overwrite_if_exists: Whether to overwrite if SPR already exists
+            
+        Returns:
+            True if successful, False otherwise
         """
         spr_id = spr_definition.get("spr_id")
         if not spr_id:
@@ -326,8 +379,66 @@ class SPRManager:
             return False
             
         if spr_id in self.sprs:
+            if not overwrite_if_exists:
+                logger.warning(f"SPR with id '{spr_id}' already exists and overwrite_if_exists=False. Skipping.")
+                return False
             logger.warning(f"SPR with id '{spr_id}' already exists. Overwriting.")
             
+        # AUTOMATIC ZEPTO COMPRESSION: If zepto_spr is missing or empty, compress automatically
+        zepto_spr = spr_definition.get("zepto_spr", "")
+        if not zepto_spr or zepto_spr.strip() == "" or zepto_spr == "Ξ":
+            # Build narrative from definition
+            definition = spr_definition.get("definition", "")
+            term = spr_definition.get("term", spr_id)
+            
+            # Create narrative for compression
+            narrative_parts = []
+            if term:
+                narrative_parts.append(term)
+            if definition:
+                narrative_parts.append(definition)
+            
+            narrative = " ".join(narrative_parts).strip()
+            
+            if narrative and len(narrative) > 10:
+                # Compress to Zepto
+                zepto_processor = _get_zepto_processor()
+                if zepto_processor:
+                    try:
+                        result = zepto_processor.compress_to_zepto(
+                            narrative=narrative,
+                            target_stage="Zepto"
+                        )
+                        
+                        if result and not result.error and result.zepto_spr:
+                            spr_definition["zepto_spr"] = result.zepto_spr
+                            
+                            # Update symbol_codex if new entries were created
+                            if result.new_codex_entries:
+                                existing_codex = spr_definition.get("symbol_codex", {})
+                                # Convert SymbolCodexEntry objects to dicts
+                                from dataclasses import asdict
+                                for symbol, entry in result.new_codex_entries.items():
+                                    if hasattr(entry, '__dict__'):
+                                        existing_codex[symbol] = asdict(entry)
+                                    else:
+                                        existing_codex[symbol] = entry
+                                spr_definition["symbol_codex"] = existing_codex
+                            
+                            logger.info(f"Auto-compressed SPR '{spr_id}' to Zepto: {len(narrative)} → {len(result.zepto_spr)} chars ({result.compression_ratio:.1f}:1)")
+                        else:
+                            logger.warning(f"Zepto compression failed for SPR '{spr_id}': {result.error if result else 'Unknown error'}")
+                            spr_definition["zepto_spr"] = "Ξ"  # Default unknown symbol
+                    except Exception as e:
+                        logger.warning(f"Exception during Zepto compression for SPR '{spr_id}': {e}")
+                        spr_definition["zepto_spr"] = "Ξ"  # Default unknown symbol
+                else:
+                    logger.debug(f"Zepto processor not available, skipping compression for SPR '{spr_id}'")
+                    spr_definition["zepto_spr"] = "Ξ"  # Default unknown symbol
+            else:
+                logger.debug(f"Insufficient narrative for Zepto compression of SPR '{spr_id}'")
+                spr_definition["zepto_spr"] = "Ξ"  # Default unknown symbol
+        
         self.sprs[spr_id] = spr_definition
         logger.info(f"Added/Updated SPR '{spr_id}' in memory.")
         
@@ -340,17 +451,123 @@ class SPRManager:
         return True
 
     @log_to_thought_trail
-    def get_spr_by_id(self, spr_id: str) -> Optional[Dict[str, Any]]:
+    def get_spr_by_id(self, spr_id: str, target_layer: Optional[str] = None) -> Optional[Dict[str, Any]]:
         """
-        Retrieves a single SPR definition by its ID.
+        Retrieves a single SPR definition by its ID, optionally at a specific Russian Doll layer.
 
         Args:
             spr_id: The ID of the SPR to retrieve.
+            target_layer: Optional target compression layer ("Zepto", "Atto", "Femto", "Pico", 
+                         "Micro", "Nano", "Concise", "Narrative"). If None, returns full SPR definition.
 
         Returns:
-            A dictionary containing the SPR definition, or None if not found.
+            A dictionary containing the SPR definition (or layer-specific content), or None if not found.
         """
-        return self.sprs.get(spr_id)
+        spr = self.sprs.get(spr_id)
+        if not spr:
+            return None
+        
+        # If no target layer specified, return full SPR
+        if target_layer is None:
+            return spr
+        
+        # Retrieve content at specific layer using Russian Doll architecture
+        return self.get_spr_content_at_layer(spr_id, target_layer)
+    
+    @log_to_thought_trail
+    def get_spr_content_at_layer(
+        self,
+        spr_id: str,
+        target_layer: str = "Narrative"
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Retrieves SPR content at a specific Russian Doll compression layer.
+        
+        This enables adaptive retrieval based on detail needs:
+        - "Zepto": Maximum compression (9-15 chars) - quick lookup
+        - "Atto"/"Femto": High compression - key points
+        - "Pico"/"Micro": Moderate compression - balanced detail
+        - "Nano"/"Concise": Light compression - summary
+        - "Narrative": Full original (5,000+ chars) - complete context
+        
+        Args:
+            spr_id: The SPR ID to retrieve
+            target_layer: Target layer name (default: "Narrative")
+            
+        Returns:
+            Dictionary with layer-specific content, or None if SPR/layer not found
+        """
+        spr = self.sprs.get(spr_id)
+        if not spr:
+            logger.warning(f"SPR '{spr_id}' not found for layer retrieval")
+            return None
+        
+        # Check if SPR has compression_stages (Russian Doll architecture)
+        compression_stages = spr.get('compression_stages', [])
+        
+        if not compression_stages:
+            # No Russian Doll layers - return definition as fallback
+            logger.debug(f"SPR '{spr_id}' has no compression_stages, returning definition")
+            return {
+                'spr_id': spr_id,
+                'term': spr.get('term', ''),
+                'content': spr.get('definition', ''),
+                'layer': 'definition',
+                'source': 'fallback'
+            }
+        
+        # Find the target layer
+        stage_map = {stage.get('stage_name', ''): stage for stage in compression_stages}
+        
+        if target_layer in stage_map:
+            stage = stage_map[target_layer]
+            return {
+                'spr_id': spr_id,
+                'term': spr.get('term', ''),
+                'content': stage.get('content', ''),
+                'layer': target_layer,
+                'compression_ratio': stage.get('compression_ratio', 1.0),
+                'symbol_count': stage.get('symbol_count', 0),
+                'source': 'compression_stages'
+            }
+        
+        # Layer not found - try to decompress from Zepto
+        zepto_spr = spr.get('zepto_spr', '')
+        symbol_codex = spr.get('symbol_codex', {})
+        
+        if zepto_spr and symbol_codex:
+            try:
+                from .zepto_spr_processor import ZeptoSPRProcessorAdapter
+                processor = ZeptoSPRProcessorAdapter()
+                
+                result = processor.decompress_from_zepto(
+                    zepto_spr=zepto_spr,
+                    codex=symbol_codex,
+                    target_layer=target_layer,
+                    compression_stages=compression_stages
+                )
+                
+                if result and not result.error:
+                    return {
+                        'spr_id': spr_id,
+                        'term': spr.get('term', ''),
+                        'content': result.decompressed_text,
+                        'layer': target_layer,
+                        'source': 'decompressed',
+                        'symbols_expanded': result.symbols_expanded
+                    }
+            except Exception as e:
+                logger.warning(f"Failed to decompress SPR '{spr_id}' to layer '{target_layer}': {e}")
+        
+        # Fallback: return definition
+        logger.debug(f"Layer '{target_layer}' not found for SPR '{spr_id}', returning definition")
+        return {
+            'spr_id': spr_id,
+            'term': spr.get('term', ''),
+            'content': spr.get('definition', ''),
+            'layer': 'definition',
+            'source': 'fallback'
+        }
 
     @log_to_thought_trail
     def get_all_sprs(self) -> List[Dict[str, Any]]:
