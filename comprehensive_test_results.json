@@ -1,0 +1,634 @@
+[
+  {
+    "test_id": 1,
+    "category": "SPR_Detection_Quick",
+    "query": "What is Cognitive resonancE and how does it relate to Temporal resonancE?",
+    "timestamp": "2025-11-18T07:10:50.793351",
+    "expected_activation": {
+      "tools": [
+        "SPRManager",
+        "Russian Doll retrieval"
+      ],
+      "sprs": [
+        "Cognitive resonancE",
+        "Temporal resonancE"
+      ],
+      "layers": [
+        "Zepto",
+        "Atto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 2,
+    "category": "SPR_Detection_Code",
+    "query": "Show me the complete implementation of ActionregistrY including all its methods and how it integrates with the Workflow enginE",
+    "timestamp": "2025-11-18T07:10:50.793407",
+    "expected_activation": {
+      "tools": [
+        "SPRManager",
+        "Russian Doll retrieval"
+      ],
+      "sprs": [
+        "ActionregistrY",
+        "Workflow enginE"
+      ],
+      "layers": [
+        "Narrative"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 3,
+    "category": "SPR_Detection_Workflow",
+    "query": "I need to use ComparativE fluxuaL processinG and Agent based modelinG together in a workflow to analyze market dynamics",
+    "timestamp": "2025-11-18T07:10:50.793419",
+    "expected_activation": {
+      "tools": [
+        "SPRManager",
+        "Workflow Engine",
+        "CFP",
+        "ABM"
+      ],
+      "sprs": [
+        "ComparativE fluxuaL processinG",
+        "Agent based modelinG"
+      ],
+      "layers": [
+        "Micro",
+        "Pico"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 4,
+    "category": "CFP_Analysis",
+    "query": "Compare the trajectory of two economic systems: System A starts with high innovation but low stability, System B starts with high stability but low innovation. Model their evolution over 5 years using quantum flux principles",
+    "timestamp": "2025-11-18T07:10:50.793430",
+    "expected_activation": {
+      "tools": [
+        "CFP Framework",
+        "Quantum Utils",
+        "State Evolution"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "cfp_analysis",
+        "trajectory_comparison"
+      ]
+    }
+  },
+  {
+    "test_id": 5,
+    "category": "CFP_Complex",
+    "query": "Analyze the quantum flux differences between a traditional centralized organization and a decentralized network organization, considering entanglement correlations and spooky flux divergence",
+    "timestamp": "2025-11-18T07:10:50.793441",
+    "expected_activation": {
+      "tools": [
+        "CFP Framework",
+        "Quantum Utils",
+        "Entanglement Analysis"
+      ],
+      "sprs": [
+        "Spooky flux divergencE",
+        "Entanglement correlatioN"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 6,
+    "category": "ABM_Simulation",
+    "query": "Simulate a population of 1000 agents representing consumers in a market. Each agent has awareness level, adoption threshold, and price sensitivity. Model how a new product launch affects adoption rates over 6 months",
+    "timestamp": "2025-11-18T07:10:50.793464",
+    "expected_activation": {
+      "tools": [
+        "Agent Based ModelinG",
+        "EmergenceOverTimE"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "abm_simulation"
+      ]
+    }
+  },
+  {
+    "test_id": 7,
+    "category": "ABM_ComplexSystem",
+    "query": "Model a complex system where agents have FearLeveL and MoralE attributes. Simulate how panic spreads through the network when a critical event occurs, including coordination behaviors and emergent patterns",
+    "timestamp": "2025-11-18T07:10:50.793472",
+    "expected_activation": {
+      "tools": [
+        "Agent Based ModelinG",
+        "Complex system visioninG",
+        "HumanFactorModelinG"
+      ],
+      "sprs": [
+        "FearLeveL",
+        "MoralE",
+        "EmergenceOverTimE"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 8,
+    "category": "Causal_Analysis",
+    "query": "Determine the causal impact of marketing campaign intensity on product adoption, considering competitor pricing as a confounder. Analyze time-lagged effects over the past year",
+    "timestamp": "2025-11-18T07:10:50.793480",
+    "expected_activation": {
+      "tools": [
+        "Causal inferencE",
+        "CausalLagDetectioN"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "causal_analysis"
+      ]
+    }
+  },
+  {
+    "test_id": 9,
+    "category": "Causal_Temporal",
+    "query": "Discover the temporal causal graph for a system with variables: economic growth, innovation rate, education spending, and technology adoption. Identify lagged causal relationships using PCMCI+",
+    "timestamp": "2025-11-18T07:10:50.793490",
+    "expected_activation": {
+      "tools": [
+        "Causal inferencE",
+        "CausalLagDetectioN",
+        "Temporal causalitY"
+      ],
+      "sprs": [
+        "Temporal causalitY",
+        "CausalLagDetectioN"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 10,
+    "category": "Predictive_Forecast",
+    "query": "Forecast the next 5 years of economic indicators (GDP growth, inflation, unemployment) for region Alpha based on historical data. Provide confidence intervals and model performance metrics",
+    "timestamp": "2025-11-18T07:10:50.793498",
+    "expected_activation": {
+      "tools": [
+        "PredictivE modelinG tooL",
+        "FutureStateAnalysiS"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "predictive_forecasting"
+      ]
+    }
+  },
+  {
+    "test_id": 11,
+    "category": "Predictive_TimeSeries",
+    "query": "Build time series models for stock market volatility prediction. Use VAR models for multivariate analysis and Prophet for trend decomposition. Compare forecast accuracy",
+    "timestamp": "2025-11-18T07:10:50.793508",
+    "expected_activation": {
+      "tools": [
+        "PredictivE modelinG tooL",
+        "TemporalDynamiX"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 12,
+    "category": "Integrated_Causal_ABM",
+    "query": "First, determine the lagged causal impact of policy changes on social outcomes. Then use those causal insights to parameterize an agent-based model simulating how the policy affects different population segments over 2 years. Finally, compare the baseline vs policy scenarios using CFP",
+    "timestamp": "2025-11-18T07:10:50.793519",
+    "expected_activation": {
+      "tools": [
+        "Causal inferencE",
+        "Agent Based ModelinG",
+        "CFP Framework"
+      ],
+      "sprs": [
+        "Causal abm integratioN",
+        "TrajectoryComparisoN"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "causal_abm_integration"
+      ]
+    }
+  },
+  {
+    "test_id": 13,
+    "category": "Integrated_ComplexSystem",
+    "query": "Perform a comprehensive Complex system visioninG analysis: identify causal mechanisms, simulate emergent behaviors with ABM, and compare potential future trajectories using CFP. Include human factor modeling and scenario realism assessment",
+    "timestamp": "2025-11-18T07:10:50.793582",
+    "expected_activation": {
+      "tools": [
+        "Complex system visioninG",
+        "Causal inferencE",
+        "ABM",
+        "CFP",
+        "ScenarioRealismAssessmenT"
+      ],
+      "sprs": [
+        "Complex system visioninG",
+        "HumanFactorModelinG"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 14,
+    "category": "RISE_Strategic",
+    "query": "Design a strategic framework for dynamically adjusting analytical strategies based on real-time IAR feedback loops and predicted task difficulty. This requires novel design and creative problem-solving",
+    "timestamp": "2025-11-18T07:10:50.793590",
+    "expected_activation": {
+      "tools": [
+        "RISE Engine",
+        "Tesla visioning workfloW"
+      ],
+      "sprs": [
+        "Tesla visioning workfloW",
+        "Resonant_Insight_And_Strategy_Engine"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "tesla_visioning_workflow"
+      ]
+    }
+  },
+  {
+    "test_id": 15,
+    "category": "RISE_Complex",
+    "query": "Create a novel workflow that combines Sparse priming representationS, Metacognitive shifT, and Synergistic intent resonance cyclE to enable autonomous system evolution",
+    "timestamp": "2025-11-18T07:10:50.793598",
+    "expected_activation": {
+      "tools": [
+        "RISE Engine",
+        "SIRC",
+        "Metacognitive shifT"
+      ],
+      "sprs": [
+        "Sparse priming representationS",
+        "Metacognitive shifT",
+        "Synergistic intent resonance cyclE"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 16,
+    "category": "Workflow_Execution",
+    "query": "Execute the spr_cognitive_unfolding_workflow for the query: 'Explain how IntegratedActionReflectioN enables Metacognitive shifT'",
+    "timestamp": "2025-11-18T07:10:50.793606",
+    "expected_activation": {
+      "tools": [
+        "Workflow enginE",
+        "IARCompliantWorkflowEngine"
+      ],
+      "sprs": [
+        "IntegratedActionReflectioN",
+        "Metacognitive shifT"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "spr_cognitive_unfolding_workflow"
+      ]
+    }
+  },
+  {
+    "test_id": 17,
+    "category": "Workflow_Phasegate",
+    "query": "Run a workflow that uses PhasegateS to check IAR confidence scores before proceeding. If confidence drops below 0.8, trigger a Metacognitive shifT",
+    "timestamp": "2025-11-18T07:10:50.793616",
+    "expected_activation": {
+      "tools": [
+        "Workflow enginE",
+        "PhasegateS",
+        "Metacognitive shifT"
+      ],
+      "sprs": [
+        "PhasegateS",
+        "Metacognitive shifT"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 18,
+    "category": "Knowledge_Solidification",
+    "query": "I've learned that PCMCI+ is a temporal causal discovery algorithm suitable for high-dimensional time series. Create an SPR for this knowledge and integrate it into the Knowledge tapestrY",
+    "timestamp": "2025-11-18T07:10:50.793624",
+    "expected_activation": {
+      "tools": [
+        "Insight solidificatioN",
+        "SPRManageR"
+      ],
+      "sprs": [
+        "Insight solidificatioN",
+        "Knowledge tapestrY"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "insight_solidification"
+      ]
+    }
+  },
+  {
+    "test_id": 19,
+    "category": "Knowledge_Pattern",
+    "query": "Analyze the ThoughtTraiL for recurring patterns. If you find a successful pattern for handling 'code generation requests', crystallize it into a reusable workflow template",
+    "timestamp": "2025-11-18T07:10:50.793631",
+    "expected_activation": {
+      "tools": [
+        "Pattern crystallizatioN",
+        "ThoughtTraiL"
+      ],
+      "sprs": [
+        "Pattern crystallizatioN",
+        "ThoughtTraiL"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 20,
+    "category": "Metacognitive_Correction",
+    "query": "I noticed that in a previous analysis, the CFP comparison used placeholder evolution instead of actual state evolution. This caused incorrect trajectory predictions. Please correct this using Metacognitive shifT",
+    "timestamp": "2025-11-18T07:10:50.793638",
+    "expected_activation": {
+      "tools": [
+        "Metacognitive shifT",
+        "CFP Framework"
+      ],
+      "sprs": [
+        "Metacognitive shifT",
+        "ComparativE fluxuaL processinG"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 21,
+    "category": "SIRC_Alignment",
+    "query": "I want to align ArchE's capabilities with a new strategic objective: autonomous code generation with safety validation. Use SIRC to plan the necessary adaptations",
+    "timestamp": "2025-11-18T07:10:50.793646",
+    "expected_activation": {
+      "tools": [
+        "Synergistic intent resonance cyclE",
+        "SIRC"
+      ],
+      "sprs": [
+        "Synergistic intent resonance cyclE"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": [
+        "sirc_workflow"
+      ]
+    }
+  },
+  {
+    "test_id": 22,
+    "category": "Temporal_Analysis",
+    "query": "Analyze the historical evolution of the Workflow enginE from its initial design to current implementation. Then project how it might evolve over the next 2 years based on current patterns",
+    "timestamp": "2025-11-18T07:10:50.793653",
+    "expected_activation": {
+      "tools": [
+        "Temporal reasoninG",
+        "4d thinkinG",
+        "HistoricalContextualizatioN",
+        "FutureStateAnalysiS"
+      ],
+      "sprs": [
+        "Temporal resonancE",
+        "4d thinkinG",
+        "HistoricalContextualizatioN"
+      ],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 23,
+    "category": "Temporal_Causal",
+    "query": "Identify the temporal causal relationships in a system where policy changes (X) affect economic outcomes (Y) with a 6-month lag, while external factors (Z) act as confounders. Model the causal lag detection",
+    "timestamp": "2025-11-18T07:10:50.793660",
+    "expected_activation": {
+      "tools": [
+        "Causal inferencE",
+        "CausalLagDetectioN",
+        "TemporalDynamiX"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 24,
+    "category": "Code_Execution",
+    "query": "Write and execute Python code to analyze a dataset of 10,000 records. Calculate statistical summaries, perform correlation analysis, and generate visualizations. Use the Code executoR safely",
+    "timestamp": "2025-11-18T07:10:50.793667",
+    "expected_activation": {
+      "tools": [
+        "Code executoR",
+        "Data CollectioN"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 25,
+    "category": "Data_Collection",
+    "query": "Collect data from multiple sources: fetch the latest economic indicators from a public API, read historical data from a CSV file, and extract information from a PDF report. Integrate all sources",
+    "timestamp": "2025-11-18T07:10:50.793680",
+    "expected_activation": {
+      "tools": [
+        "Data CollectioN",
+        "Grounded Analysis"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 26,
+    "category": "Complex_Integration",
+    "query": "Perform a complete analysis: (1) Use Causal inferencE to identify key drivers, (2) Build predictive models for future states, (3) Simulate scenarios with ABM, (4) Compare trajectories with CFP, (5) Assess realism with ScenarioRealismAssessmenT, (6) Generate insights using RISE",
+    "timestamp": "2025-11-18T07:10:50.793696",
+    "expected_activation": {
+      "tools": [
+        "Causal inferencE",
+        "PredictivE modelinG tooL",
+        "ABM",
+        "CFP",
+        "RISE Engine",
+        "ScenarioRealismAssessmenT"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 27,
+    "category": "Complex_Strategic",
+    "query": "Design a comprehensive strategy for a new product launch: analyze market dynamics with CFP, model consumer behavior with ABM, identify key success factors with Causal inferencE, forecast outcomes with Predictive Modeling, and create an implementation plan using Tesla Visioning",
+    "timestamp": "2025-11-18T07:10:50.793704",
+    "expected_activation": {
+      "tools": [
+        "CFP",
+        "ABM",
+        "Causal inferencE",
+        "PredictivE modelinG tooL",
+        "Tesla visioning workfloW"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 28,
+    "category": "ACO_Learning",
+    "query": "What is ActioncontexT? Then show me its implementation. Then use it in a workflow example",
+    "timestamp": "2025-11-18T07:10:50.793711",
+    "expected_activation": {
+      "tools": [
+        "ACO",
+        "SPRManager",
+        "Layer Learning"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 29,
+    "category": "ACO_Adaptation",
+    "query": "I've noticed that when I ask 'what is [SPR]?' you always give me too much detail. Can you learn to give shorter answers for quick questions?",
+    "timestamp": "2025-11-18T07:10:50.793720",
+    "expected_activation": {
+      "tools": [
+        "ACO",
+        "Layer Learning",
+        "Metacognitive shifT"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 30,
+    "category": "Edge_Multiple_SPRs",
+    "query": "Explain how Cognitive resonancE, Temporal resonancE, Implementation resonancE, and Execution paradoX all relate to each other in the ResonantiA Protocol",
+    "timestamp": "2025-11-18T07:10:50.793727",
+    "expected_activation": {
+      "tools": [
+        "SPRManager",
+        "Russian Doll retrieval"
+      ],
+      "sprs": [
+        "Cognitive resonancE",
+        "Temporal resonancE",
+        "Implementation resonancE",
+        "Execution paradoX"
+      ],
+      "layers": [
+        "Micro",
+        "Concise"
+      ],
+      "workflows": []
+    }
+  },
+  {
+    "test_id": 31,
+    "category": "Edge_Ambiguous",
+    "query": "I need help with something related to workflows and actions and context",
+    "timestamp": "2025-11-18T07:10:50.793734",
+    "expected_activation": {
+      "tools": [
+        "ACO",
+        "Fuzzy Intent Mapping",
+        "SPR Detection"
+      ],
+      "sprs": [],
+      "layers": [
+        "Auto"
+      ],
+      "workflows": []
+    }
+  }
+]

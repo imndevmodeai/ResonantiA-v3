@@ -603,18 +603,21 @@ class PatternController_{pattern.pattern_id}:
         
         if self.crystallization_engine:
             try:
-                zepto_spr, symbol_codex_entries = self.crystallization_engine.distill_to_spr(
+                # Russian Doll Architecture: Get SPR, codex, and all compression layers
+                zepto_spr, symbol_codex_entries, compression_stages_list = self.crystallization_engine.distill_to_spr(
                     wisdom_narrative,
                     target_stage="Zepto"
                 )
+                # Store all layers (Russian dolls) for progressive retrieval
                 compression_stages = [
                     {
-                        "stage": stage.stage_name,
+                        "stage_name": stage.stage_name,
+                        "content": stage.content,  # Store layer content for retrieval
                         "compression_ratio": stage.compression_ratio,
                         "symbol_count": stage.symbol_count,
                         "timestamp": stage.timestamp
                     }
-                    for stage in self.crystallization_engine.compression_history
+                    for stage in compression_stages_list
                 ]
                 logger.info(f"[ALL:Galaxies] Compressed to Zepto SPR: {len(wisdom_narrative)} → {len(zepto_spr)} chars (ratio: {len(wisdom_narrative)/len(zepto_spr):.1f}:1)")
             except Exception as e:
@@ -628,10 +631,16 @@ class PatternController_{pattern.pattern_id}:
             "pattern": wisdom.source_pattern.pattern_signature,
             "description": wisdom.hypothesis,
             "zepto_spr": zepto_spr,  # NEW: Pure symbolic form
-            "symbol_codex": {  # NEW: Decompression key
+            "symbol_codex": {  # NEW: Enhanced decompression key with nuanced knowledge
                 symbol: {
                     "meaning": entry.meaning,
-                    "context": entry.context
+                    "context": entry.context,
+                    "original_patterns": entry.original_patterns,
+                    "relationships": entry.relationships,
+                    "critical_specifics": entry.critical_specifics,
+                    "generalizable_patterns": entry.generalizable_patterns,
+                    "contextual_variations": entry.contextual_variations,
+                    "decompression_template": entry.decompression_template
                 }
                 for symbol, entry in symbol_codex_entries.items()
             },

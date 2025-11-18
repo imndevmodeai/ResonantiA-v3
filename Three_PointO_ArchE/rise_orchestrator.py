@@ -901,8 +901,30 @@ class RISE_Orchestrator:
             # The workflow engine resolves the 'outputs' section and places them in runtime_context.
             if phase_a_results.get("workflow_status") == "Completed Successfully":
                 # Access the resolved outputs directly from the results
-                rise_state.specialized_agent = phase_a_results.get("specialized_agent")
-                rise_state.session_knowledge_base = phase_a_results.get("session_knowledge_base")
+                # Ensure values are properly typed (parse JSON strings if needed)
+                specialized_agent_raw = phase_a_results.get("specialized_agent")
+                if isinstance(specialized_agent_raw, str):
+                    try:
+                        import json
+                        specialized_agent_raw = json.loads(specialized_agent_raw)
+                    except (json.JSONDecodeError, ValueError):
+                        pass  # Keep as string if not JSON
+                rise_state.specialized_agent = specialized_agent_raw
+                
+                session_kb_raw = phase_a_results.get("session_knowledge_base")
+                if isinstance(session_kb_raw, str):
+                    try:
+                        import json
+                        session_kb_raw = json.loads(session_kb_raw)
+                    except (json.JSONDecodeError, ValueError):
+                        # If it's not JSON, create a dict wrapper
+                        session_kb_raw = {"raw_data": session_kb_raw}
+                elif session_kb_raw is None:
+                    session_kb_raw = {}
+                elif not isinstance(session_kb_raw, dict):
+                    # Convert non-dict, non-string to dict
+                    session_kb_raw = {"raw_data": str(session_kb_raw)}
+                rise_state.session_knowledge_base = session_kb_raw
                 
                 if rise_state.specialized_agent:
                     logger.info("Successfully integrated specialized_agent into RISE state.")
@@ -1079,8 +1101,88 @@ class RISE_Orchestrator:
                 'final_strategy_confidence': final_strategy_confidence
             })
             
+            # === PHASE E: Execution-Based Answering (NEW) ===
+            # If query qualifies, execute the plan using ArchE tools
+            execution_answer = None
+            execution_results = None
+            
+            try:
+                from .rise_execution_phase import RISEExecutionPhase
+                from .action_registry import main_action_registry
+                
+                execution_phase = RISEExecutionPhase(
+                    workflow_engine=self.workflow_engine,
+                    action_registry=main_action_registry,
+                    spr_manager=self.spr_manager
+                )
+                
+                # Check if query qualifies for execution-based answering
+                qualification = execution_phase.qualify_query_for_execution(
+                    query=problem_description,
+                    context=context
+                )
+                
+                if qualification.get('qualifies', False):
+                    logger.info(f"🔧 Phase E: Query qualifies for execution-based answering")
+                    logger.info(f"   Complexity: {qualification.get('execution_complexity')}")
+                    logger.info(f"   Recommended tools: {qualification.get('recommended_tools')}")
+                    
+                    # Generate execution plan from final strategy
+                    execution_plan = execution_phase.generate_execution_plan(
+                        query=problem_description,
+                        strategy=rise_state.final_strategy,
+                        context={
+                            'provider': effective_provider,
+                            'model': effective_model,
+                            'original_query': problem_description
+                        }
+                    )
+                    
+                    if execution_plan.get('execution_steps'):
+                        # Execute the plan
+                        execution_results = execution_phase.execute_plan(
+                            execution_plan=execution_plan,
+                            context={
+                                'provider': effective_provider,
+                                'model': effective_model,
+                                'original_query': problem_description,
+                                'strategy': rise_state.final_strategy
+                            }
+                        )
+                        
+                        execution_answer = execution_results.get('final_answer', '')
+                        logger.info(f"✅ Phase E completed - Generated execution-based answer ({len(execution_answer)} chars)")
+                    else:
+                        logger.warning("⚠️ Phase E: Execution plan generation failed or returned no steps")
+                else:
+                    logger.info(f"ℹ️ Phase E: Query does not qualify for execution-based answering: {qualification.get('reason')}")
+                    
+            except Exception as e:
+                logger.warning(f"⚠️ Phase E (Execution) failed: {e}")
+                # Don't fail the entire workflow if execution phase fails
+                execution_answer = None
+                execution_results = {'error': str(e)}
+            
             logger.info(f"✅ RISE v2.0 workflow completed successfully for session {self.session_id}")
             logger.info(f"Total duration: {total_duration:.2f}s")
+            
+            # Add execution results to final output
+            final_results['execution_phase'] = {
+                'qualification': qualification if 'qualification' in locals() else None,
+                'execution_results': execution_results,
+                'execution_answer': execution_answer
+            }
+            
+            # If we have an execution answer, use it as the primary response
+            if execution_answer:
+                final_results['final_answer'] = execution_answer
+                logger.info(f"📝 Final answer generated from execution phase ({len(execution_answer)} chars)")
+            elif isinstance(rise_state.final_strategy, str):
+                # Fallback to strategy if no execution answer
+                final_results['final_answer'] = rise_state.final_strategy
+            elif isinstance(rise_state.final_strategy, dict):
+                # Extract text from strategy dict
+                final_results['final_answer'] = rise_state.final_strategy.get('strategy_text', str(rise_state.final_strategy))
             
             final_return_value = final_results
             return final_results
@@ -1454,13 +1556,7 @@ class RISE_Orchestrator:
             # First try core_workflows version (has tool integration)
             core_workflows_dir = os.path.join(os.path.dirname(self.workflows_dir), "core_workflows", "1_cognitive_engine")
             enhanced_fusion_path = os.path.join(core_workflows_dir, "strategy_fusion.json")
-            if os.path.exists(enhanced_fusion_path):
-                fusion_path = enhanced_fusion_path
-                logger.info("✅ Using enhanced strategy_fusion.json with CFP/ABM/Causal Inference pathways")
-            else:
-                # Fallback to basic version
-                fusion_path = os.path.join(self.workflows_dir, "strategy_fusion.json")
-                logger.warning("⚠️ Enhanced strategy_fusion.json not found, using basic version")
+            basic_fusion_path = os.path.join(self.workflows_dir, "strategy_fusion.json")
             
             # Get effective model and provider from rise_state (set in Phase A)
             # Default to Groq if not set, but preserve what was set in Phase A
@@ -1492,23 +1588,66 @@ class RISE_Orchestrator:
                 "session_id": rise_state.session_id,
                 "phase": "B"
             }
-            fusion_result = self.workflow_engine.run_workflow(
-                fusion_path,
-                fusion_initial_context
-            )
+            
+            # Try enhanced version first, fall back to basic if it fails
+            fusion_path = None
+            fusion_result = None
+            
+            if os.path.exists(enhanced_fusion_path):
+                try:
+                    logger.info("✅ Attempting enhanced strategy_fusion.json with CFP/ABM/Causal Inference pathways")
+                    fusion_result = self.workflow_engine.run_workflow(
+                        enhanced_fusion_path,
+                        fusion_initial_context
+                    )
+                    # Check if workflow actually succeeded (not just loaded)
+                    if isinstance(fusion_result, dict) and fusion_result.get('status') != 'Failed':
+                        fusion_path = enhanced_fusion_path
+                        logger.info("✅ Enhanced strategy_fusion.json executed successfully")
+                    else:
+                        raise ValueError("Enhanced workflow returned failure status")
+                except (ValueError, FileNotFoundError, TypeError) as e:
+                    logger.warning(f"⚠️ Enhanced strategy_fusion.json failed: {e}. Falling back to basic version.")
+                    fusion_result = None
+            
+            # Fallback to basic version if enhanced failed or doesn't exist
+            if fusion_result is None:
+                if os.path.exists(basic_fusion_path):
+                    fusion_path = basic_fusion_path
+                    logger.info("Using basic strategy_fusion.json")
+                    fusion_result = self.workflow_engine.run_workflow(
+                        basic_fusion_path,
+                        fusion_initial_context
+                    )
+                else:
+                    raise FileNotFoundError(f"Neither enhanced nor basic strategy_fusion.json found")
+            
+            # Validate fusion_result is a dict before proceeding
+            if not isinstance(fusion_result, dict):
+                logger.error(f"❌ Phase B workflow returned non-dict result: {type(fusion_result)}")
+                fusion_result = {"error": str(fusion_result) if fusion_result else "Unknown error", "status": "failed"}
             
             # NEW: Synthesize external insights with codebase patterns (Self-Referential Synthesis)
             synthesized_solution = None
-            if self.codebase_archaeologist:
+            if self.codebase_archaeologist and isinstance(fusion_result, dict):
                 try:
                     # Get codebase patterns from Phase A (if available)
                     codebase_patterns = []
                     session_kb = rise_state.session_knowledge_base
-                    if session_kb and "codebase_patterns" in session_kb:
+                    # Ensure session_kb is a dict
+                    if isinstance(session_kb, str):
+                        try:
+                            import json
+                            session_kb = json.loads(session_kb)
+                        except (json.JSONDecodeError, ValueError):
+                            session_kb = {}
+                    if session_kb and isinstance(session_kb, dict) and "codebase_patterns" in session_kb:
                         # Reconstruct CodebasePattern objects from dict
                         from .codebase_archaeologist import CodebasePattern
                         for p_dict in session_kb.get("codebase_patterns", [])[:10]:  # Top 10
                             try:
+                                if not isinstance(p_dict, dict):
+                                    continue
                                 pattern = CodebasePattern(
                                     pattern_type=p_dict.get("type", "unknown"),
                                     name=p_dict.get("name", ""),
@@ -1531,20 +1670,25 @@ class RISE_Orchestrator:
                         # Search for patterns related to each pathway
                         pathway_patterns = []
                         for pathway in ["causal inference", "agent based modeling", "comparative fluxual", "simulation"]:
-                            patterns = self.codebase_archaeologist.search_codebase_for_patterns(
-                                query=f"{pathway} implementation pattern",
-                                pattern_types=["class", "function", "workflow"],
-                                max_results=3
-                            )
-                            pathway_patterns.extend(patterns)
+                            try:
+                                patterns = self.codebase_archaeologist.search_codebase_for_patterns(
+                                    query=f"{pathway} implementation pattern",
+                                    pattern_types=["class", "function", "workflow"],
+                                    max_results=3
+                                )
+                                if patterns:
+                                    pathway_patterns.extend(patterns)
+                            except Exception as e:
+                                logger.debug(f"Error searching for {pathway} patterns: {e}")
+                                continue
                         codebase_patterns = pathway_patterns[:10]  # Top 10
                     
                     # Synthesize external knowledge with codebase patterns
                     if codebase_patterns:
                         external_knowledge = {
-                            "summary": fusion_result.get('fused_strategic_dossier', {}),
-                            "insights": fusion_result.get('advanced_insights', []),
-                            "specialist_consultation": fusion_result.get('specialist_consultation')
+                            "summary": fusion_result.get('fused_strategic_dossier', {}) if isinstance(fusion_result, dict) else {},
+                            "insights": fusion_result.get('advanced_insights', []) if isinstance(fusion_result, dict) else [],
+                            "specialist_consultation": fusion_result.get('specialist_consultation') if isinstance(fusion_result, dict) else None
                         }
                         
                         synthesized_solution = self.codebase_archaeologist.synthesize_from_patterns(
@@ -1554,16 +1698,17 @@ class RISE_Orchestrator:
                             synthesis_mode="hybrid"
                         )
                         
-                        logger.info(f"✅ Synthesized solution from {len(codebase_patterns)} codebase patterns")
-                        logger.info(f"   Novel combinations: {len(synthesized_solution.get('novel_combinations', []))}")
-                        
-                        # Enhance fused strategic dossier with synthesis
-                        if synthesized_solution:
-                            fused_dossier = fusion_result.get('fused_strategic_dossier', {})
-                            if isinstance(fused_dossier, dict):
-                                fused_dossier['codebase_synthesis'] = synthesized_solution
-                                fused_dossier['synthesis_confidence'] = synthesized_solution.get('confidence', 0.0)
-                                fusion_result['fused_strategic_dossier'] = fused_dossier
+                        if synthesized_solution and isinstance(synthesized_solution, dict):
+                            logger.info(f"✅ Synthesized solution from {len(codebase_patterns)} codebase patterns")
+                            logger.info(f"   Novel combinations: {len(synthesized_solution.get('novel_combinations', []))}")
+                            
+                            # Enhance fused strategic dossier with synthesis
+                            if isinstance(fusion_result, dict):
+                                fused_dossier = fusion_result.get('fused_strategic_dossier', {})
+                                if isinstance(fused_dossier, dict):
+                                    fused_dossier['codebase_synthesis'] = synthesized_solution
+                                    fused_dossier['synthesis_confidence'] = synthesized_solution.get('confidence', 0.0)
+                                    fusion_result['fused_strategic_dossier'] = fused_dossier
                         
                 except Exception as e:
                     logger.warning(f"⚠️ Codebase synthesis failed: {e}")
@@ -1573,14 +1718,16 @@ class RISE_Orchestrator:
             phase_duration = (phase_end - phase_start).total_seconds()
             rise_state.execution_metrics['phase_durations']['B'] = phase_duration
             
+            # Safely extract results from fusion_result
             result = {
-                'advanced_insights': fusion_result.get('advanced_insights', []),
-                'specialist_consultation': fusion_result.get('specialist_consultation'),
-                'fused_strategic_dossier': fusion_result.get('fused_strategic_dossier'),
+                'advanced_insights': fusion_result.get('advanced_insights', []) if isinstance(fusion_result, dict) else [],
+                'specialist_consultation': fusion_result.get('specialist_consultation') if isinstance(fusion_result, dict) else None,
+                'fused_strategic_dossier': fusion_result.get('fused_strategic_dossier') if isinstance(fusion_result, dict) else None,
                 'codebase_synthesis': synthesized_solution,  # NEW
-                'fusion_metrics': fusion_result.get('metrics', {}),
+                'fusion_metrics': fusion_result.get('metrics', {}) if isinstance(fusion_result, dict) else {},
                 'phase_duration': phase_duration,
-                'status': 'completed'
+                'status': 'completed' if isinstance(fusion_result, dict) and fusion_result.get('status') != 'failed' else 'failed',
+                'error': fusion_result.get('error') if isinstance(fusion_result, dict) else None
             }
             
             logger.info(f"✅ Phase B completed in {phase_duration:.2f}s")
@@ -1749,11 +1896,14 @@ class RISE_Orchestrator:
 
             # NEW: Identify novel codebase combinations as SPR candidates
             novel_spr_candidates = []
-            if self.codebase_archaeologist and rise_state.session_knowledge_base.get('codebase_synthesis'):
+            if self.codebase_archaeologist and isinstance(rise_state.session_knowledge_base, dict) and rise_state.session_knowledge_base.get('codebase_synthesis'):
                 try:
                     logger.info("🔍 Phase D: Identifying novel codebase combinations as SPR candidates...")
                     codebase_synthesis = rise_state.session_knowledge_base.get('codebase_synthesis', {})
-                    novel_combinations = codebase_synthesis.get('novel_combinations', [])
+                    if isinstance(codebase_synthesis, dict):
+                        novel_combinations = codebase_synthesis.get('novel_combinations', [])
+                    else:
+                        novel_combinations = []
                     
                     if novel_combinations:
                         for combination in novel_combinations[:5]:  # Top 5 novel patterns

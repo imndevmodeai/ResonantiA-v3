@@ -1,8 +1,15 @@
 # This package contains various LLM provider implementations
 import os
 from .base import BaseLLMProvider, LLMProviderError
-from .google import GoogleProvider
 from .cursor_arche import CursorArchEProvider
+
+# Optional imports - handle missing dependencies gracefully
+try:
+    from .google import GoogleProvider
+    GOOGLE_AVAILABLE = True
+except ImportError:
+    GoogleProvider = None
+    GOOGLE_AVAILABLE = False
 from .quota_tracker import QuotaTracker, get_quota_tracker
 try:
     from .cursor_arche_enhanced import CursorArchEProviderEnhanced

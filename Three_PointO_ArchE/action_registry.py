@@ -36,6 +36,9 @@ except ImportError as e:
     # Add other necessary fallbacks here...
     GoogleProvider = None
     GeminiCapabilities = None
+    # NFL prediction fallback
+    def predict_nfl_game(*args, **kwargs):
+        return {"error": "predict_nfl_game not available", "status": "error"}
 
 # V4 UNIFICATION PROXY is now after the logger, which is correct.
 # --- V4 UNIFICATION PROXY ---

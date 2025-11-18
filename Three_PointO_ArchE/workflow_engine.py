@@ -38,20 +38,28 @@ try:
     from .qa_tools import run_code_linter, run_workflow_suite
     from .output_handler import print_tagged_execution, print_tagged_results, display_output, display_workflow_start, display_workflow_progress, display_task_result, display_workflow_complete, display_workflow_error
     from .custom_json import dumps
-    from .workflow_optimizer import WorkflowOptimizer
     from .thought_trail import log_to_thought_trail
 except ImportError as e:
     # This block should ideally not be hit if run as part of the package,
     # but serves as a fallback and clear error indicator.
     import logging
+    _import_error_msg = str(e)  # Capture error message as string
     logging.getLogger(__name__).critical(f"A critical relative import failed in workflow_engine: {e}", exc_info=True)
+    # Set WorkflowOptimizer to None so code can check for it
+    WorkflowOptimizer = None
     # Define dummy fallbacks to prevent outright crashing where possible
-    def execute_action(*args, **kwargs): return {"error": f"Action Registry not available due to import error: {e}"}
+    def execute_action(*args, **kwargs): return {"error": f"Action Registry not available due to import error: {_import_error_msg}"}
     # Add other necessary fallbacks here as needed...
     class SPRManager: pass
     # Ensure decorator name is defined to avoid NameError in class annotations
     def log_to_thought_trail(func): 
         return func
+
+# Optional import for WorkflowOptimizer (requires networkx)
+try:
+    from .workflow_optimizer import WorkflowOptimizer
+except ImportError:
+    WorkflowOptimizer = None
 
 import ast
 from datetime import datetime
@@ -513,8 +521,15 @@ class IARCompliantWorkflowEngine:
                 # NEW: Add support for initial_context via `context.` prefix
                 if parts[0] == 'context':
                     context_key = parts[1] if len(parts) > 1 else None
+                    # Check if key exists directly in initial_context (e.g., model, provider)
                     if context_key and context_key in initial_context:
                         resolved[key] = initial_context[context_key]
+                    # Also check if there's a nested 'context' dict
+                    elif context_key and 'context' in initial_context and isinstance(initial_context['context'], dict):
+                        if context_key in initial_context['context']:
+                            resolved[key] = initial_context['context'][context_key]
+                        else:
+                            resolved[key] = default_value if default_value is not None else value
                     else:
                         resolved[key] = default_value if default_value is not None else value
                     continue
@@ -943,12 +958,18 @@ class IARCompliantWorkflowEngine:
         task_statuses = {key: "pending" for key in tasks}
 
         # --- OPTIMIZATION INJECTION ---
+        # Initialize execution_plan with default order (all tasks in one stage)
+        execution_plan = [[key for key in tasks.keys() if not dependencies.get(key)]]
+        
         try:
-            optimizer = WorkflowOptimizer({"tasks": [{"id": tid} for tid in tasks.keys()], "dependencies": dependencies})
-            execution_plan = optimizer.get_optimized_execution_plan()
-            logger.info(f"Workflow plan optimized. Executing in {len(execution_plan)} parallel stage(s).")
-            self._emit_event("ThoughtTrail", {"message": f"Optimal execution path calculated: {len(execution_plan)} stages."})
-        except ValueError as e:
+            if WorkflowOptimizer is not None:
+                optimizer = WorkflowOptimizer({"tasks": [{"id": tid} for tid in tasks.keys()], "dependencies": dependencies})
+                execution_plan = optimizer.get_optimized_execution_plan()
+                logger.info(f"Workflow plan optimized. Executing in {len(execution_plan)} parallel stage(s).")
+                self._emit_event("ThoughtTrail", {"message": f"Optimal execution path calculated: {len(execution_plan)} stages."})
+            else:
+                logger.debug("WorkflowOptimizer not available (networkx missing), using default execution order.")
+        except (ValueError, AttributeError, TypeError) as e:
             logger.error(f"Could not optimize workflow: {e}. Falling back to naive execution order.")
             # Fallback to a simple, potentially incorrect order if optimization fails
             execution_plan = [[key for key in tasks.keys() if not dependencies.get(key)]]

@@ -752,3 +752,669 @@ Call stack:
 2025-11-14 22:00:06,028 - __main__ - WARNING - Found 1 high-priority alerts
 2025-11-14 22:00:06,028 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
 2025-11-14 22:00:06,028 - __main__ - INFO - Daily gathering complete
+2025-11-15 19:00:01,600 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-15 19:00:01,601 - __main__ - INFO - ============================================================
+2025-11-15 19:00:01,601 - __main__ - INFO - Starting daily NFL data gathering
+2025-11-15 19:00:01,602 - __main__ - INFO - ============================================================
+2025-11-15 19:00:01,603 - __main__ - INFO - Starting transaction gathering...
+2025-11-15 19:00:02,292 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 13 trades transactions
+2025-11-15 19:00:03,127 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 signings transactions
+2025-11-15 19:00:03,991 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 waivers transactions
+2025-11-15 19:00:04,409 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 reserve-list transactions
+2025-11-15 19:00:05,184 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 5 terminations transactions
+2025-11-15 19:00:05,676 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 4 other transactions
+2025-11-15 19:00:05,676 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Total scraped 97 transactions from NFL.com
+2025-11-15 19:00:05,841 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-15 19:00:05,841 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-15 19:00:05,841 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-15 19:00:05,841 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-15 19:00:05,842 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-15 19:00:05,842 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-15 19:00:05,842 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-15 19:00:05,843 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-15 19:00:05,843 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-15 19:00:05,843 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-15 19:00:05,843 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-15 19:00:05,843 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-15 19:00:05,843 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-15 19:00:05,844 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-15 19:00:05,844 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-15 19:00:05,844 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-15 19:00:05,844 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-15 19:00:05,844 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-15 19:00:05,844 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mike White from Panthers to None
+2025-11-15 19:00:05,845 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jammie Robinson from Lions to None
+2025-11-15 19:00:05,845 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Quandre Diggs from Titans to None
+2025-11-15 19:00:05,845 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-15 19:00:05,848 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-15 19:00:05,848 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sebastian Castro from Buccaneers to None
+2025-11-15 19:00:05,848 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Shemar Stewart from Bengals to None
+2025-11-15 19:00:05,848 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam LaPorta from Lions to None
+2025-11-15 19:00:05,849 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mack Wilson from Cardinals to None
+2025-11-15 19:00:05,849 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Bryce Oliver from Titans to None
+2025-11-15 19:00:05,849 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Harrison Bryant from Texans to None
+2025-11-15 19:00:05,849 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jay Higgins from Ravens to None
+2025-11-15 19:00:05,849 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Milton Williams from Patriots to None
+2025-11-15 19:00:05,849 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jalen Sundell from Seahawks to None
+2025-11-15 19:00:05,850 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Evan Neal from Giants to None
+2025-11-15 19:00:05,850 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: J.K. Dobbins from Broncos to None
+2025-11-15 19:00:05,850 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam Roberts from Falcons to None
+2025-11-15 19:00:05,850 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-15 19:00:05,850 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Garrett Wilson from Jets to None
+2025-11-15 19:00:05,850 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeAngelo Malone from Falcons to None
+2025-11-15 19:00:05,851 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jaire Alexander from Eagles to None
+2025-11-15 19:00:05,851 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: M.J. Stewart from Texans to None
+2025-11-15 19:00:05,851 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Simi Fehoko from Cardinals to None
+2025-11-15 19:00:05,851 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Zay Jones from Cardinals to None
+2025-11-15 19:00:05,851 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Graham Gano from Giants to None
+2025-11-15 19:00:05,851 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jackson Powers-Johnson from Raiders to None
+2025-11-15 19:00:05,852 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josh Williams from Buccaneers to None
+2025-11-15 19:00:05,852 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Amos from Commanders to None
+2025-11-15 19:00:05,852 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Karene Reid from Broncos to None
+2025-11-15 19:00:05,852 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Elgton Jenkins from Packers to None
+2025-11-15 19:00:05,852 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Landon Jackson from Bills to None
+2025-11-15 19:00:05,852 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Herron from Lions to None
+2025-11-15 19:00:05,853 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Patrick Johnson from Eagles to None
+2025-11-15 19:00:05,853 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josiah Deguara from Cardinals to None
+2025-11-15 19:00:05,853 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kristian Welch from Packers to None
+2025-11-15 19:00:05,853 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeeJay Dallas from Panthers to None
+2025-11-15 19:00:05,853 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Isaiah Buggs from None to None
+2025-11-15 19:00:05,853 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Tucker from None to None
+2025-11-15 19:00:05,854 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Frankie Luvu from Commanders to None
+2025-11-15 19:00:05,854 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jahmal Banks from None to None
+2025-11-15 19:00:05,858 - __main__ - INFO - Gathered 39 new transactions
+2025-11-15 19:00:05,859 - __main__ - INFO - Starting betting line gathering...
+2025-11-15 19:00:05,861 - Three_PointO_ArchE.nfl_betting_line_fetcher - INFO - Fetching betting lines...
+2025-11-15 19:00:05,861 - __main__ - INFO - Gathered 1 betting lines
+2025-11-15 19:00:05,863 - __main__ - INFO - Starting injury report gathering...
+2025-11-15 19:00:05,864 - Three_PointO_ArchE.nfl_injury_scraper - INFO - Scraping injury reports for week 11...
+2025-11-15 19:00:05,864 - __main__ - INFO - Gathered 1 injury reports
+2025-11-15 19:00:05,867 - __main__ - WARNING - Found 1 high-priority alerts
+2025-11-15 19:00:05,868 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
+2025-11-15 19:00:05,868 - __main__ - INFO - Daily gathering complete
+2025-11-15 22:00:01,453 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-15 22:00:01,454 - __main__ - INFO - ============================================================
+2025-11-15 22:00:01,455 - __main__ - INFO - Starting daily NFL data gathering
+2025-11-15 22:00:01,455 - __main__ - INFO - ============================================================
+2025-11-15 22:00:01,455 - __main__ - INFO - Starting transaction gathering...
+2025-11-15 22:00:02,717 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 13 trades transactions
+2025-11-15 22:00:03,240 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 signings transactions
+2025-11-15 22:00:04,160 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 waivers transactions
+2025-11-15 22:00:05,025 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 reserve-list transactions
+2025-11-15 22:00:05,613 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 5 terminations transactions
+2025-11-15 22:00:05,907 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 4 other transactions
+2025-11-15 22:00:05,908 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Total scraped 97 transactions from NFL.com
+2025-11-15 22:00:06,095 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-15 22:00:06,095 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-15 22:00:06,095 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-15 22:00:06,095 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-15 22:00:06,096 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-15 22:00:06,096 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-15 22:00:06,096 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-15 22:00:06,097 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-15 22:00:06,097 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-15 22:00:06,097 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-15 22:00:06,097 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-15 22:00:06,098 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-15 22:00:06,098 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-15 22:00:06,098 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-15 22:00:06,099 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-15 22:00:06,099 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-15 22:00:06,099 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-15 22:00:06,099 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-15 22:00:06,099 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mike White from Panthers to None
+2025-11-15 22:00:06,100 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jammie Robinson from Lions to None
+2025-11-15 22:00:06,100 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Quandre Diggs from Titans to None
+2025-11-15 22:00:06,100 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-15 22:00:06,104 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-15 22:00:06,104 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sebastian Castro from Buccaneers to None
+2025-11-15 22:00:06,105 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Shemar Stewart from Bengals to None
+2025-11-15 22:00:06,105 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam LaPorta from Lions to None
+2025-11-15 22:00:06,106 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mack Wilson from Cardinals to None
+2025-11-15 22:00:06,106 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Bryce Oliver from Titans to None
+2025-11-15 22:00:06,106 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Harrison Bryant from Texans to None
+2025-11-15 22:00:06,107 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jay Higgins from Ravens to None
+2025-11-15 22:00:06,107 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Milton Williams from Patriots to None
+2025-11-15 22:00:06,107 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jalen Sundell from Seahawks to None
+2025-11-15 22:00:06,108 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Evan Neal from Giants to None
+2025-11-15 22:00:06,108 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: J.K. Dobbins from Broncos to None
+2025-11-15 22:00:06,108 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam Roberts from Falcons to None
+2025-11-15 22:00:06,108 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-15 22:00:06,108 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Garrett Wilson from Jets to None
+2025-11-15 22:00:06,109 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeAngelo Malone from Falcons to None
+2025-11-15 22:00:06,109 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jaire Alexander from Eagles to None
+2025-11-15 22:00:06,109 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: M.J. Stewart from Texans to None
+2025-11-15 22:00:06,109 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Simi Fehoko from Cardinals to None
+2025-11-15 22:00:06,109 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Zay Jones from Cardinals to None
+2025-11-15 22:00:06,110 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Graham Gano from Giants to None
+2025-11-15 22:00:06,110 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jackson Powers-Johnson from Raiders to None
+2025-11-15 22:00:06,111 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josh Williams from Buccaneers to None
+2025-11-15 22:00:06,111 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Amos from Commanders to None
+2025-11-15 22:00:06,111 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Karene Reid from Broncos to None
+2025-11-15 22:00:06,111 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Elgton Jenkins from Packers to None
+2025-11-15 22:00:06,112 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Landon Jackson from Bills to None
+2025-11-15 22:00:06,112 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Herron from Lions to None
+2025-11-15 22:00:06,112 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Patrick Johnson from Eagles to None
+2025-11-15 22:00:06,112 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josiah Deguara from Cardinals to None
+2025-11-15 22:00:06,112 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kristian Welch from Packers to None
+2025-11-15 22:00:06,113 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeeJay Dallas from Panthers to None
+2025-11-15 22:00:06,113 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Isaiah Buggs from None to None
+2025-11-15 22:00:06,113 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Tucker from None to None
+2025-11-15 22:00:06,113 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Frankie Luvu from Commanders to None
+2025-11-15 22:00:06,113 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jahmal Banks from None to None
+2025-11-15 22:00:06,117 - __main__ - INFO - Gathered 39 new transactions
+2025-11-15 22:00:06,118 - __main__ - INFO - Starting betting line gathering...
+2025-11-15 22:00:06,119 - Three_PointO_ArchE.nfl_betting_line_fetcher - INFO - Fetching betting lines...
+2025-11-15 22:00:06,120 - __main__ - INFO - Gathered 1 betting lines
+2025-11-15 22:00:06,124 - __main__ - INFO - Starting injury report gathering...
+2025-11-15 22:00:06,125 - Three_PointO_ArchE.nfl_injury_scraper - INFO - Scraping injury reports for week 11...
+2025-11-15 22:00:06,125 - __main__ - INFO - Gathered 1 injury reports
+2025-11-15 22:00:06,129 - __main__ - WARNING - Found 1 high-priority alerts
+2025-11-15 22:00:06,130 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
+2025-11-15 22:00:06,130 - __main__ - INFO - Daily gathering complete
+2025-11-16 11:00:01,467 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-16 11:00:01,468 - __main__ - INFO - ============================================================
+2025-11-16 11:00:01,469 - __main__ - INFO - Starting daily NFL data gathering
+2025-11-16 11:00:01,469 - __main__ - INFO - ============================================================
+2025-11-16 11:00:01,469 - __main__ - INFO - Starting transaction gathering...
+2025-11-16 11:00:02,265 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 13 trades transactions
+2025-11-16 11:00:02,758 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 signings transactions
+2025-11-16 11:00:03,473 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 waivers transactions
+2025-11-16 11:00:03,781 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 reserve-list transactions
+2025-11-16 11:00:04,501 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 5 terminations transactions
+2025-11-16 11:00:04,811 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 4 other transactions
+2025-11-16 11:00:04,812 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Total scraped 97 transactions from NFL.com
+2025-11-16 11:00:04,999 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-16 11:00:04,999 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-16 11:00:05,000 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-16 11:00:05,000 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-16 11:00:05,000 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-16 11:00:05,000 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-16 11:00:05,001 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-16 11:00:05,001 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-16 11:00:05,001 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-16 11:00:05,001 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-16 11:00:05,001 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-16 11:00:05,002 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-16 11:00:05,002 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-16 11:00:05,002 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-16 11:00:05,002 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-16 11:00:05,002 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-16 11:00:05,003 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-16 11:00:05,003 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-16 11:00:05,003 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mike White from Panthers to None
+2025-11-16 11:00:05,004 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jammie Robinson from Lions to None
+2025-11-16 11:00:05,004 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Quandre Diggs from Titans to None
+2025-11-16 11:00:05,004 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-16 11:00:05,008 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-16 11:00:05,009 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sebastian Castro from Buccaneers to None
+2025-11-16 11:00:05,009 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Shemar Stewart from Bengals to None
+2025-11-16 11:00:05,009 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam LaPorta from Lions to None
+2025-11-16 11:00:05,009 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mack Wilson from Cardinals to None
+2025-11-16 11:00:05,010 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Bryce Oliver from Titans to None
+2025-11-16 11:00:05,010 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Harrison Bryant from Texans to None
+2025-11-16 11:00:05,010 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jay Higgins from Ravens to None
+2025-11-16 11:00:05,010 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Milton Williams from Patriots to None
+2025-11-16 11:00:05,010 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jalen Sundell from Seahawks to None
+2025-11-16 11:00:05,011 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Evan Neal from Giants to None
+2025-11-16 11:00:05,011 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: J.K. Dobbins from Broncos to None
+2025-11-16 11:00:05,012 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam Roberts from Falcons to None
+2025-11-16 11:00:05,012 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-16 11:00:05,012 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Garrett Wilson from Jets to None
+2025-11-16 11:00:05,012 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeAngelo Malone from Falcons to None
+2025-11-16 11:00:05,012 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jaire Alexander from Eagles to None
+2025-11-16 11:00:05,012 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: M.J. Stewart from Texans to None
+2025-11-16 11:00:05,012 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Simi Fehoko from Cardinals to None
+2025-11-16 11:00:05,013 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Zay Jones from Cardinals to None
+2025-11-16 11:00:05,013 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Graham Gano from Giants to None
+2025-11-16 11:00:05,013 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jackson Powers-Johnson from Raiders to None
+2025-11-16 11:00:05,013 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josh Williams from Buccaneers to None
+2025-11-16 11:00:05,014 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Amos from Commanders to None
+2025-11-16 11:00:05,014 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Karene Reid from Broncos to None
+2025-11-16 11:00:05,014 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Elgton Jenkins from Packers to None
+2025-11-16 11:00:05,014 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Landon Jackson from Bills to None
+2025-11-16 11:00:05,014 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Herron from Lions to None
+2025-11-16 11:00:05,015 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Patrick Johnson from Eagles to None
+2025-11-16 11:00:05,015 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josiah Deguara from Cardinals to None
+2025-11-16 11:00:05,015 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kristian Welch from Packers to None
+2025-11-16 11:00:05,015 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeeJay Dallas from Panthers to None
+2025-11-16 11:00:05,015 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Isaiah Buggs from None to None
+2025-11-16 11:00:05,016 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Tucker from None to None
+2025-11-16 11:00:05,016 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Frankie Luvu from Commanders to None
+2025-11-16 11:00:05,016 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jahmal Banks from None to None
+2025-11-16 11:00:05,020 - __main__ - INFO - Gathered 39 new transactions
+2025-11-16 11:00:05,020 - __main__ - INFO - Starting betting line gathering...
+2025-11-16 11:00:05,022 - Three_PointO_ArchE.nfl_betting_line_fetcher - INFO - Fetching betting lines...
+2025-11-16 11:00:05,022 - __main__ - INFO - Gathered 1 betting lines
+2025-11-16 11:00:05,025 - __main__ - INFO - Starting injury report gathering...
+2025-11-16 11:00:05,026 - Three_PointO_ArchE.nfl_injury_scraper - INFO - Scraping injury reports for week 11...
+2025-11-16 11:00:05,027 - __main__ - INFO - Gathered 1 injury reports
+2025-11-16 11:00:05,031 - __main__ - WARNING - Found 1 high-priority alerts
+2025-11-16 11:00:05,031 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
+2025-11-16 11:00:05,031 - __main__ - INFO - Daily gathering complete
+2025-11-16 13:00:01,572 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-16 13:00:01,573 - __main__ - INFO - ============================================================
+2025-11-16 13:00:01,573 - __main__ - INFO - Starting daily NFL data gathering
+2025-11-16 13:00:01,573 - __main__ - INFO - ============================================================
+2025-11-16 13:00:01,573 - __main__ - INFO - Starting transaction gathering...
+2025-11-16 13:00:02,117 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 13 trades transactions
+2025-11-16 13:00:02,438 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 signings transactions
+2025-11-16 13:00:02,928 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 waivers transactions
+2025-11-16 13:00:04,107 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 reserve-list transactions
+2025-11-16 13:00:04,715 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 5 terminations transactions
+2025-11-16 13:00:13,262 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 4 other transactions
+2025-11-16 13:00:13,263 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Total scraped 97 transactions from NFL.com
+2025-11-16 13:00:13,453 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-16 13:00:13,454 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-16 13:00:13,454 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-16 13:00:13,454 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-16 13:00:13,454 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-16 13:00:13,455 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-16 13:00:13,455 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-16 13:00:13,455 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-16 13:00:13,455 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-16 13:00:13,455 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-16 13:00:13,456 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-16 13:00:13,456 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-16 13:00:13,456 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-16 13:00:13,456 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-16 13:00:13,457 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-16 13:00:13,457 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-16 13:00:13,457 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-16 13:00:13,457 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-16 13:00:13,458 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mike White from Panthers to None
+2025-11-16 13:00:13,458 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jammie Robinson from Lions to None
+2025-11-16 13:00:13,458 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Quandre Diggs from Titans to None
+2025-11-16 13:00:13,458 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-16 13:00:13,467 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-16 13:00:13,467 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sebastian Castro from Buccaneers to None
+2025-11-16 13:00:13,468 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Shemar Stewart from Bengals to None
+2025-11-16 13:00:13,468 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam LaPorta from Lions to None
+2025-11-16 13:00:13,468 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mack Wilson from Cardinals to None
+2025-11-16 13:00:13,468 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Bryce Oliver from Titans to None
+2025-11-16 13:00:13,469 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Harrison Bryant from Texans to None
+2025-11-16 13:00:13,469 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jay Higgins from Ravens to None
+2025-11-16 13:00:13,469 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Milton Williams from Patriots to None
+2025-11-16 13:00:13,469 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jalen Sundell from Seahawks to None
+2025-11-16 13:00:13,469 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Evan Neal from Giants to None
+2025-11-16 13:00:13,470 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: J.K. Dobbins from Broncos to None
+2025-11-16 13:00:13,470 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam Roberts from Falcons to None
+2025-11-16 13:00:13,470 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-16 13:00:13,470 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Garrett Wilson from Jets to None
+2025-11-16 13:00:13,470 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeAngelo Malone from Falcons to None
+2025-11-16 13:00:13,470 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jaire Alexander from Eagles to None
+2025-11-16 13:00:13,471 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: M.J. Stewart from Texans to None
+2025-11-16 13:00:13,471 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Simi Fehoko from Cardinals to None
+2025-11-16 13:00:13,471 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Zay Jones from Cardinals to None
+2025-11-16 13:00:13,471 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Graham Gano from Giants to None
+2025-11-16 13:00:13,472 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jackson Powers-Johnson from Raiders to None
+2025-11-16 13:00:13,472 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josh Williams from Buccaneers to None
+2025-11-16 13:00:13,472 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Amos from Commanders to None
+2025-11-16 13:00:13,472 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Karene Reid from Broncos to None
+2025-11-16 13:00:13,472 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Elgton Jenkins from Packers to None
+2025-11-16 13:00:13,472 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Landon Jackson from Bills to None
+2025-11-16 13:00:13,473 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Herron from Lions to None
+2025-11-16 13:00:13,473 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Patrick Johnson from Eagles to None
+2025-11-16 13:00:13,473 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josiah Deguara from Cardinals to None
+2025-11-16 13:00:13,473 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kristian Welch from Packers to None
+2025-11-16 13:00:13,473 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeeJay Dallas from Panthers to None
+2025-11-16 13:00:13,473 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Isaiah Buggs from None to None
+2025-11-16 13:00:13,474 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Tucker from None to None
+2025-11-16 13:00:13,474 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Frankie Luvu from Commanders to None
+2025-11-16 13:00:13,474 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jahmal Banks from None to None
+2025-11-16 13:00:13,478 - __main__ - INFO - Gathered 39 new transactions
+2025-11-16 13:00:13,479 - __main__ - INFO - Starting betting line gathering...
+2025-11-16 13:00:13,480 - Three_PointO_ArchE.nfl_betting_line_fetcher - INFO - Fetching betting lines...
+2025-11-16 13:00:13,480 - __main__ - INFO - Gathered 1 betting lines
+2025-11-16 13:00:13,484 - __main__ - INFO - Starting injury report gathering...
+2025-11-16 13:00:13,485 - Three_PointO_ArchE.nfl_injury_scraper - INFO - Scraping injury reports for week 11...
+2025-11-16 13:00:13,485 - __main__ - INFO - Gathered 1 injury reports
+2025-11-16 13:00:13,488 - __main__ - WARNING - Found 1 high-priority alerts
+2025-11-16 13:00:13,489 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
+2025-11-16 13:00:13,489 - __main__ - INFO - Daily gathering complete
+2025-11-16 19:00:01,734 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-16 19:00:01,735 - __main__ - INFO - ============================================================
+2025-11-16 19:00:01,736 - __main__ - INFO - Starting daily NFL data gathering
+2025-11-16 19:00:01,738 - __main__ - INFO - ============================================================
+2025-11-16 19:00:01,738 - __main__ - INFO - Starting transaction gathering...
+2025-11-16 19:00:02,364 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 13 trades transactions
+2025-11-16 19:00:02,611 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 signings transactions
+2025-11-16 19:00:03,213 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 waivers transactions
+2025-11-16 19:00:05,113 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 reserve-list transactions
+2025-11-16 19:00:05,818 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 5 terminations transactions
+2025-11-16 19:00:06,340 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 4 other transactions
+2025-11-16 19:00:06,349 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Total scraped 97 transactions from NFL.com
+2025-11-16 19:00:06,558 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-16 19:00:06,559 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-16 19:00:06,561 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-16 19:00:06,561 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-16 19:00:06,561 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-16 19:00:06,561 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-16 19:00:06,562 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-16 19:00:06,562 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-16 19:00:06,563 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-16 19:00:06,563 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-16 19:00:06,564 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-16 19:00:06,565 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-16 19:00:06,566 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-16 19:00:06,566 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-16 19:00:06,567 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-16 19:00:06,567 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-16 19:00:06,567 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-16 19:00:06,568 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-16 19:00:06,570 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mike White from Panthers to None
+2025-11-16 19:00:06,572 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jammie Robinson from Lions to None
+2025-11-16 19:00:06,573 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Quandre Diggs from Titans to None
+2025-11-16 19:00:06,575 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-16 19:00:06,582 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-16 19:00:06,582 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sebastian Castro from Buccaneers to None
+2025-11-16 19:00:06,582 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Shemar Stewart from Bengals to None
+2025-11-16 19:00:06,582 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam LaPorta from Lions to None
+2025-11-16 19:00:06,583 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mack Wilson from Cardinals to None
+2025-11-16 19:00:06,583 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Bryce Oliver from Titans to None
+2025-11-16 19:00:06,583 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Harrison Bryant from Texans to None
+2025-11-16 19:00:06,584 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jay Higgins from Ravens to None
+2025-11-16 19:00:06,585 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Milton Williams from Patriots to None
+2025-11-16 19:00:06,586 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jalen Sundell from Seahawks to None
+2025-11-16 19:00:06,586 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Evan Neal from Giants to None
+2025-11-16 19:00:06,587 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: J.K. Dobbins from Broncos to None
+2025-11-16 19:00:06,588 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam Roberts from Falcons to None
+2025-11-16 19:00:06,591 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-16 19:00:06,591 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Garrett Wilson from Jets to None
+2025-11-16 19:00:06,591 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeAngelo Malone from Falcons to None
+2025-11-16 19:00:06,592 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jaire Alexander from Eagles to None
+2025-11-16 19:00:06,592 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: M.J. Stewart from Texans to None
+2025-11-16 19:00:06,592 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Simi Fehoko from Cardinals to None
+2025-11-16 19:00:06,592 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Zay Jones from Cardinals to None
+2025-11-16 19:00:06,593 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Graham Gano from Giants to None
+2025-11-16 19:00:06,594 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jackson Powers-Johnson from Raiders to None
+2025-11-16 19:00:06,595 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josh Williams from Buccaneers to None
+2025-11-16 19:00:06,596 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Amos from Commanders to None
+2025-11-16 19:00:06,597 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Karene Reid from Broncos to None
+2025-11-16 19:00:06,597 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Elgton Jenkins from Packers to None
+2025-11-16 19:00:06,597 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Landon Jackson from Bills to None
+2025-11-16 19:00:06,597 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Herron from Lions to None
+2025-11-16 19:00:06,597 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Patrick Johnson from Eagles to None
+2025-11-16 19:00:06,597 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josiah Deguara from Cardinals to None
+2025-11-16 19:00:06,598 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kristian Welch from Packers to None
+2025-11-16 19:00:06,598 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeeJay Dallas from Panthers to None
+2025-11-16 19:00:06,598 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Isaiah Buggs from None to None
+2025-11-16 19:00:06,598 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Tucker from None to None
+2025-11-16 19:00:06,598 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Frankie Luvu from Commanders to None
+2025-11-16 19:00:06,599 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jahmal Banks from None to None
+2025-11-16 19:00:06,605 - __main__ - INFO - Gathered 39 new transactions
+2025-11-16 19:00:06,605 - __main__ - INFO - Starting betting line gathering...
+2025-11-16 19:00:06,607 - Three_PointO_ArchE.nfl_betting_line_fetcher - INFO - Fetching betting lines...
+2025-11-16 19:00:06,608 - __main__ - INFO - Gathered 1 betting lines
+2025-11-16 19:00:06,611 - __main__ - INFO - Starting injury report gathering...
+2025-11-16 19:00:06,612 - Three_PointO_ArchE.nfl_injury_scraper - INFO - Scraping injury reports for week 11...
+2025-11-16 19:00:06,613 - __main__ - INFO - Gathered 1 injury reports
+2025-11-16 19:00:06,615 - __main__ - WARNING - Found 1 high-priority alerts
+2025-11-16 19:00:06,615 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
+2025-11-16 19:00:06,615 - __main__ - INFO - Daily gathering complete
+2025-11-16 22:00:01,280 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-16 22:00:01,281 - __main__ - INFO - ============================================================
+2025-11-16 22:00:01,281 - __main__ - INFO - Starting daily NFL data gathering
+2025-11-16 22:00:01,281 - __main__ - INFO - ============================================================
+2025-11-16 22:00:01,281 - __main__ - INFO - Starting transaction gathering...
+2025-11-16 22:00:01,891 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 13 trades transactions
+2025-11-16 22:00:02,659 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 signings transactions
+2025-11-16 22:00:03,321 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 waivers transactions
+2025-11-16 22:00:04,260 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 reserve-list transactions
+2025-11-16 22:00:05,018 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 5 terminations transactions
+2025-11-16 22:00:05,549 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 4 other transactions
+2025-11-16 22:00:05,550 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Total scraped 97 transactions from NFL.com
+2025-11-16 22:00:05,697 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-16 22:00:05,698 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-16 22:00:05,698 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-16 22:00:05,698 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-16 22:00:05,699 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-16 22:00:05,699 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-16 22:00:05,699 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-16 22:00:05,699 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-16 22:00:05,699 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-16 22:00:05,700 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-16 22:00:05,700 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-16 22:00:05,700 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-16 22:00:05,700 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-16 22:00:05,701 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-16 22:00:05,701 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-16 22:00:05,701 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-16 22:00:05,701 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-16 22:00:05,701 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-16 22:00:05,702 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mike White from Panthers to None
+2025-11-16 22:00:05,702 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jammie Robinson from Lions to None
+2025-11-16 22:00:05,702 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Quandre Diggs from Titans to None
+2025-11-16 22:00:05,702 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Alex Ward from Rams to None
+2025-11-16 22:00:05,706 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Juan Thornhill from Steelers to None
+2025-11-16 22:00:05,706 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sebastian Castro from Buccaneers to None
+2025-11-16 22:00:05,706 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Shemar Stewart from Bengals to None
+2025-11-16 22:00:05,707 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam LaPorta from Lions to None
+2025-11-16 22:00:05,707 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mack Wilson from Cardinals to None
+2025-11-16 22:00:05,707 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Bryce Oliver from Titans to None
+2025-11-16 22:00:05,708 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Harrison Bryant from Texans to None
+2025-11-16 22:00:05,708 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jay Higgins from Ravens to None
+2025-11-16 22:00:05,708 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Milton Williams from Patriots to None
+2025-11-16 22:00:05,708 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jalen Sundell from Seahawks to None
+2025-11-16 22:00:05,708 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Evan Neal from Giants to None
+2025-11-16 22:00:05,708 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: J.K. Dobbins from Broncos to None
+2025-11-16 22:00:05,709 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam Roberts from Falcons to None
+2025-11-16 22:00:05,709 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-16 22:00:05,709 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Garrett Wilson from Jets to None
+2025-11-16 22:00:05,709 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeAngelo Malone from Falcons to None
+2025-11-16 22:00:05,709 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jaire Alexander from Eagles to None
+2025-11-16 22:00:05,709 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: M.J. Stewart from Texans to None
+2025-11-16 22:00:05,710 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Simi Fehoko from Cardinals to None
+2025-11-16 22:00:05,710 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Zay Jones from Cardinals to None
+2025-11-16 22:00:05,710 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Graham Gano from Giants to None
+2025-11-16 22:00:05,710 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jackson Powers-Johnson from Raiders to None
+2025-11-16 22:00:05,711 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josh Williams from Buccaneers to None
+2025-11-16 22:00:05,711 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Amos from Commanders to None
+2025-11-16 22:00:05,711 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Karene Reid from Broncos to None
+2025-11-16 22:00:05,711 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Elgton Jenkins from Packers to None
+2025-11-16 22:00:05,711 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Landon Jackson from Bills to None
+2025-11-16 22:00:05,712 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Herron from Lions to None
+2025-11-16 22:00:05,712 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Patrick Johnson from Eagles to None
+2025-11-16 22:00:05,712 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josiah Deguara from Cardinals to None
+2025-11-16 22:00:05,712 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kristian Welch from Packers to None
+2025-11-16 22:00:05,712 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeeJay Dallas from Panthers to None
+2025-11-16 22:00:05,712 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Isaiah Buggs from None to None
+2025-11-16 22:00:05,713 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Tucker from None to None
+2025-11-16 22:00:05,713 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Frankie Luvu from Commanders to None
+2025-11-16 22:00:05,713 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jahmal Banks from None to None
+2025-11-16 22:00:05,715 - __main__ - INFO - Gathered 39 new transactions
+2025-11-16 22:00:05,716 - __main__ - INFO - Starting betting line gathering...
+2025-11-16 22:00:05,716 - Three_PointO_ArchE.nfl_betting_line_fetcher - INFO - Fetching betting lines...
+2025-11-16 22:00:05,716 - __main__ - INFO - Gathered 1 betting lines
+2025-11-16 22:00:05,720 - __main__ - INFO - Starting injury report gathering...
+2025-11-16 22:00:05,720 - Three_PointO_ArchE.nfl_injury_scraper - INFO - Scraping injury reports for week 11...
+2025-11-16 22:00:05,721 - __main__ - INFO - Gathered 1 injury reports
+2025-11-16 22:00:05,724 - __main__ - WARNING - Found 1 high-priority alerts
+2025-11-16 22:00:05,724 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
+2025-11-16 22:00:05,724 - __main__ - INFO - Daily gathering complete
+2025-11-17 11:00:01,978 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-17 11:00:01,978 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-17 11:00:01,979 - __main__ - INFO - ============================================================
+2025-11-17 11:00:01,980 - __main__ - INFO - ============================================================
+2025-11-17 11:00:01,980 - __main__ - INFO - Starting weekly NFL data gathering
+2025-11-17 11:00:01,981 - __main__ - INFO - Starting weekly NFL data gathering
+2025-11-17 11:00:01,981 - __main__ - INFO - ============================================================
+2025-11-17 11:00:01,981 - __main__ - INFO - ============================================================
+2025-11-17 11:00:01,981 - __main__ - INFO - Weekly gathering complete
+2025-11-17 11:00:01,981 - __main__ - INFO - Weekly gathering complete
+2025-11-17 13:00:01,289 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-17 13:00:01,289 - __main__ - INFO - ============================================================
+2025-11-17 13:00:01,289 - __main__ - INFO - Starting weekly NFL data gathering
+2025-11-17 13:00:01,290 - __main__ - INFO - ============================================================
+2025-11-17 13:00:01,290 - __main__ - INFO - Weekly gathering complete
+2025-11-17 19:00:01,907 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-17 19:00:01,908 - __main__ - INFO - ============================================================
+2025-11-17 19:00:01,908 - __main__ - INFO - Starting weekly NFL data gathering
+2025-11-17 19:00:01,908 - __main__ - INFO - ============================================================
+2025-11-17 19:00:01,908 - __main__ - INFO - Weekly gathering complete
+2025-11-18 11:00:01,751 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-18 11:00:01,751 - __main__ - INFO - ============================================================
+2025-11-18 11:00:01,751 - __main__ - INFO - Starting daily NFL data gathering
+2025-11-18 11:00:01,752 - __main__ - INFO - ============================================================
+2025-11-18 11:00:01,752 - __main__ - INFO - Starting transaction gathering...
+2025-11-18 11:00:02,916 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 13 trades transactions
+2025-11-18 11:00:03,427 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 signings transactions
+2025-11-18 11:00:04,242 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 waivers transactions
+2025-11-18 11:00:04,612 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 reserve-list transactions
+2025-11-18 11:00:05,139 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 5 terminations transactions
+2025-11-18 11:00:05,684 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 6 other transactions
+2025-11-18 11:00:05,684 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Total scraped 99 transactions from NFL.com
+2025-11-18 11:00:05,868 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-18 11:00:05,869 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-18 11:00:05,869 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-18 11:00:05,869 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-18 11:00:05,870 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-18 11:00:05,870 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-18 11:00:05,870 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kahlef Hailassie from Jaguars to None
+2025-11-18 11:00:05,871 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: John Saunders Jr. from Patriots to None
+2025-11-18 11:00:05,871 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jared Bartlett from Cardinals to None
+2025-11-18 11:00:05,872 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Matt Gay from Commanders to None
+2025-11-18 11:00:05,872 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tomon Fox from Giants to None
+2025-11-18 11:00:05,873 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-18 11:00:05,873 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-18 11:00:05,874 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-18 11:00:05,874 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-18 11:00:05,874 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-18 11:00:05,874 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-18 11:00:05,875 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-18 11:00:05,875 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-18 11:00:05,875 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-18 11:00:05,876 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-18 11:00:05,877 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-18 11:00:05,877 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-18 11:00:05,878 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-18 11:00:05,878 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-18 11:00:05,879 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Ajani Cornelius from Cowboys to None
+2025-11-18 11:00:05,879 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Ja'Marr Chase from Bengals to None
+2025-11-18 11:00:05,879 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Shemar Stewart from Bengals to None
+2025-11-18 11:00:05,879 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam LaPorta from Lions to None
+2025-11-18 11:00:05,880 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mack Wilson from Cardinals to None
+2025-11-18 11:00:05,880 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Bryce Oliver from Titans to None
+2025-11-18 11:00:05,880 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Harrison Bryant from Texans to None
+2025-11-18 11:00:05,881 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jay Higgins from Ravens to None
+2025-11-18 11:00:05,881 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Milton Williams from Patriots to None
+2025-11-18 11:00:05,881 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jalen Sundell from Seahawks to None
+2025-11-18 11:00:05,881 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Evan Neal from Giants to None
+2025-11-18 11:00:05,881 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: J.K. Dobbins from Broncos to None
+2025-11-18 11:00:05,882 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam Roberts from Falcons to None
+2025-11-18 11:00:05,882 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-18 11:00:05,882 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Garrett Wilson from Jets to None
+2025-11-18 11:00:05,882 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeAngelo Malone from Falcons to None
+2025-11-18 11:00:05,882 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jaire Alexander from Eagles to None
+2025-11-18 11:00:05,883 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: M.J. Stewart from Texans to None
+2025-11-18 11:00:05,883 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Simi Fehoko from Cardinals to None
+2025-11-18 11:00:05,883 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Zay Jones from Cardinals to None
+2025-11-18 11:00:05,883 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Graham Gano from Giants to None
+2025-11-18 11:00:05,883 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jackson Powers-Johnson from Raiders to None
+2025-11-18 11:00:05,884 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josh Williams from Buccaneers to None
+2025-11-18 11:00:05,884 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Amos from Commanders to None
+2025-11-18 11:00:05,884 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Karene Reid from Broncos to None
+2025-11-18 11:00:05,884 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Herron from Lions to None
+2025-11-18 11:00:05,884 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Patrick Johnson from Eagles to None
+2025-11-18 11:00:05,885 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josiah Deguara from Cardinals to None
+2025-11-18 11:00:05,885 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kristian Welch from Packers to None
+2025-11-18 11:00:05,885 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeeJay Dallas from Panthers to None
+2025-11-18 11:00:05,885 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Daron Payne from Commanders to None
+2025-11-18 11:00:05,887 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Daron Payne from Commanders to None
+2025-11-18 11:00:05,888 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Isaiah Buggs from None to None
+2025-11-18 11:00:05,889 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Tucker from None to None
+2025-11-18 11:00:05,889 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Frankie Luvu from Commanders to None
+2025-11-18 11:00:05,889 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jahmal Banks from None to None
+2025-11-18 11:00:05,893 - __main__ - INFO - Gathered 38 new transactions
+2025-11-18 11:00:05,893 - __main__ - INFO - Starting betting line gathering...
+2025-11-18 11:00:05,894 - Three_PointO_ArchE.nfl_betting_line_fetcher - INFO - Fetching betting lines...
+2025-11-18 11:00:05,895 - __main__ - INFO - Gathered 1 betting lines
+2025-11-18 11:00:05,897 - __main__ - INFO - Starting injury report gathering...
+2025-11-18 11:00:05,899 - Three_PointO_ArchE.nfl_injury_scraper - INFO - Scraping injury reports for week 11...
+2025-11-18 11:00:05,899 - __main__ - INFO - Gathered 1 injury reports
+2025-11-18 11:00:05,903 - __main__ - WARNING - Found 1 high-priority alerts
+2025-11-18 11:00:05,904 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
+2025-11-18 11:00:05,904 - __main__ - INFO - Daily gathering complete
+2025-11-18 13:00:01,314 - Three_PointO_ArchE.nfl_insider_database - INFO - Database initialized at data/nfl_insider_intelligence.db
+2025-11-18 13:00:01,314 - __main__ - INFO - ============================================================
+2025-11-18 13:00:01,314 - __main__ - INFO - Starting daily NFL data gathering
+2025-11-18 13:00:01,314 - __main__ - INFO - ============================================================
+2025-11-18 13:00:01,314 - __main__ - INFO - Starting transaction gathering...
+2025-11-18 13:00:01,970 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 13 trades transactions
+2025-11-18 13:00:02,560 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 signings transactions
+2025-11-18 13:00:03,314 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 waivers transactions
+2025-11-18 13:00:04,365 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 25 reserve-list transactions
+2025-11-18 13:00:04,878 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 5 terminations transactions
+2025-11-18 13:00:05,377 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Scraped 6 other transactions
+2025-11-18 13:00:05,378 - Three_PointO_ArchE.nfl_transaction_scraper - INFO - Total scraped 99 transactions from NFL.com
+2025-11-18 13:00:05,547 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-18 13:00:05,547 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-18 13:00:05,547 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-18 13:00:05,547 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-18 13:00:05,547 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-18 13:00:05,548 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-18 13:00:05,548 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kahlef Hailassie from Jaguars to None
+2025-11-18 13:00:05,548 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: John Saunders Jr. from Patriots to None
+2025-11-18 13:00:05,548 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jared Bartlett from Cardinals to None
+2025-11-18 13:00:05,548 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Matt Gay from Commanders to None
+2025-11-18 13:00:05,549 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tomon Fox from Giants to None
+2025-11-18 13:00:05,549 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Andrew Stueber from Falcons to None
+2025-11-18 13:00:05,549 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Brandon Codrington from Bills to None
+2025-11-18 13:00:05,549 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Damon Arnette from Texans to None
+2025-11-18 13:00:05,549 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-18 13:00:05,549 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Adrian Martinez from 49ers to None
+2025-11-18 13:00:05,549 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trent Sherfield from Broncos to None
+2025-11-18 13:00:05,549 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-18 13:00:05,550 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-18 13:00:05,550 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-18 13:00:05,550 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Khalen Saunders from Jaguars to None
+2025-11-18 13:00:05,550 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Tre Avery from Browns to None
+2025-11-18 13:00:05,550 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Michael Bandy from Broncos to None
+2025-11-18 13:00:05,550 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Sermon from Steelers to None
+2025-11-18 13:00:05,550 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Cameron Johnston from Bills to None
+2025-11-18 13:00:05,550 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Ajani Cornelius from Cowboys to None
+2025-11-18 13:00:05,551 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Ja'Marr Chase from Bengals to None
+2025-11-18 13:00:05,551 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Shemar Stewart from Bengals to None
+2025-11-18 13:00:05,551 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam LaPorta from Lions to None
+2025-11-18 13:00:05,551 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Mack Wilson from Cardinals to None
+2025-11-18 13:00:05,551 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Bryce Oliver from Titans to None
+2025-11-18 13:00:05,551 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Harrison Bryant from Texans to None
+2025-11-18 13:00:05,551 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jay Higgins from Ravens to None
+2025-11-18 13:00:05,551 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Milton Williams from Patriots to None
+2025-11-18 13:00:05,552 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jalen Sundell from Seahawks to None
+2025-11-18 13:00:05,552 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Evan Neal from Giants to None
+2025-11-18 13:00:05,552 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: J.K. Dobbins from Broncos to None
+2025-11-18 13:00:05,552 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Sam Roberts from Falcons to None
+2025-11-18 13:00:05,552 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Pat O'Connor from Lions to None
+2025-11-18 13:00:05,552 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Garrett Wilson from Jets to None
+2025-11-18 13:00:05,552 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeAngelo Malone from Falcons to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jaire Alexander from Eagles to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: M.J. Stewart from Texans to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Simi Fehoko from Cardinals to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Zay Jones from Cardinals to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Graham Gano from Giants to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jackson Powers-Johnson from Raiders to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josh Williams from Buccaneers to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Trey Amos from Commanders to None
+2025-11-18 13:00:05,553 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Karene Reid from Broncos to None
+2025-11-18 13:00:05,554 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Herron from Lions to None
+2025-11-18 13:00:05,554 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Patrick Johnson from Eagles to None
+2025-11-18 13:00:05,554 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Josiah Deguara from Cardinals to None
+2025-11-18 13:00:05,554 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Kristian Welch from Packers to None
+2025-11-18 13:00:05,554 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: DeeJay Dallas from Panthers to None
+2025-11-18 13:00:05,554 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Daron Payne from Commanders to None
+2025-11-18 13:00:05,554 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Daron Payne from Commanders to None
+2025-11-18 13:00:05,554 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Isaiah Buggs from None to None
+2025-11-18 13:00:05,555 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Justin Tucker from None to None
+2025-11-18 13:00:05,555 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Frankie Luvu from Commanders to None
+2025-11-18 13:00:05,555 - Three_PointO_ArchE.nfl_insider_database - WARNING - Duplicate movement: Jahmal Banks from None to None
+2025-11-18 13:00:05,557 - __main__ - INFO - Gathered 38 new transactions
+2025-11-18 13:00:05,558 - __main__ - INFO - Starting betting line gathering...
+2025-11-18 13:00:05,559 - Three_PointO_ArchE.nfl_betting_line_fetcher - INFO - Fetching betting lines...
+2025-11-18 13:00:05,559 - __main__ - INFO - Gathered 1 betting lines
+2025-11-18 13:00:05,562 - __main__ - INFO - Starting injury report gathering...
+2025-11-18 13:00:05,563 - Three_PointO_ArchE.nfl_injury_scraper - INFO - Scraping injury reports for week 11...
+2025-11-18 13:00:05,564 - __main__ - INFO - Gathered 1 injury reports
+2025-11-18 13:00:05,566 - __main__ - WARNING - Found 1 high-priority alerts
+2025-11-18 13:00:05,567 - __main__ - WARNING - ALERT [high]: Transaction gathering failed: table insider_connections has no column named updated_at
+2025-11-18 13:00:05,567 - __main__ - INFO - Daily gathering complete

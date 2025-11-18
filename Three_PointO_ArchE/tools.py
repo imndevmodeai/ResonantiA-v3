@@ -703,6 +703,7 @@ def retrieve_spr_definitions(inputs: Dict[str, Any], context_for_action: ActionC
     logger_tools_diag.info(f"TOOLS.PY: Task '{task_key}' (Action: {action_name}) - Starting SPR retrieval.")
 
     spr_ids_input = inputs.get("spr_ids")
+    target_layer = inputs.get("target_layer")  # NEW: Russian Doll layer selection
     spr_details_output: Dict[str, Any] = {}
     retrieval_errors: Dict[str, str] = {}
     all_found = True
@@ -721,9 +722,25 @@ def retrieve_spr_definitions(inputs: Dict[str, Any], context_for_action: ActionC
                 "reflection": default_failure_reflection_local("Input validation failed: 'spr_ids' missing or invalid type.")
             }
 
+        # Validate target_layer if provided
+        valid_layers = ["Zepto", "Atto", "Femto", "Pico", "Micro", "Nano", "Concise", "Narrative"]
+        if target_layer and target_layer not in valid_layers:
+            logger_tools_diag.warning(f"Task '{task_key}': Invalid target_layer '{target_layer}'. Valid: {valid_layers}. Using default (full SPR).")
+            target_layer = None
+
         if spr_ids_input == "ALL":
             all_sprs = spr_manager_instance.get_all_sprs()
-            spr_details_output = {spr.spr_id: spr.to_dict() for spr in all_sprs}
+            if target_layer:
+                # Retrieve all SPRs at specific layer
+                spr_details_output = {}
+                for spr in all_sprs:
+                    spr_id = spr.get('spr_id') if isinstance(spr, dict) else (spr.spr_id if hasattr(spr, 'spr_id') else None)
+                    if spr_id:
+                        layer_content = spr_manager_instance.get_spr_content_at_layer(spr_id, target_layer)
+                        if layer_content:
+                            spr_details_output[spr_id] = layer_content
+            else:
+                spr_details_output = {spr.spr_id: spr.to_dict() for spr in all_sprs if hasattr(spr, 'spr_id')}
         else:
             for spr_id in spr_ids_input:
                 if not isinstance(spr_id, str):
@@ -731,28 +748,40 @@ def retrieve_spr_definitions(inputs: Dict[str, Any], context_for_action: ActionC
                     all_found = False
                     continue
                 
-                spr_detail = spr_manager_instance.get_spr(spr_id)
+                if target_layer:
+                    # Retrieve at specific Russian Doll layer
+                    spr_detail = spr_manager_instance.get_spr_content_at_layer(spr_id, target_layer)
+                    if spr_detail:
+                        spr_details_output[spr_id] = spr_detail
+                    else:
+                        retrieval_errors[spr_id] = f"SPR not found or layer '{target_layer}' unavailable."
+                        all_found = False
+                else:
+                    # Retrieve full SPR definition
+                    spr_detail = spr_manager_instance.get_spr_by_id(spr_id)
                 if spr_detail:
                     spr_details_output[spr_id] = spr_detail.to_dict() if hasattr(spr_detail, 'to_dict') else spr_detail
                 else:
                     retrieval_errors[spr_id] = "SPR not found."
                     all_found = False
         
-        summary = "Successfully retrieved all specified SPRs." if all_found and spr_details_output else "Completed SPR retrieval with some issues or no results."
+        layer_info = f" at layer '{target_layer}'" if target_layer else ""
+        summary = f"Successfully retrieved all specified SPRs{layer_info}." if all_found and spr_details_output else f"Completed SPR retrieval{layer_info} with some issues or no results."
         if retrieval_errors: summary += f" Errors: {len(retrieval_errors)}"
-        if spr_ids_input == "ALL": summary = f"Successfully retrieved all {len(spr_details_output)} SPRs from the Knowledge Graph."
+        if spr_ids_input == "ALL": summary = f"Successfully retrieved all {len(spr_details_output)} SPRs{layer_info} from the Knowledge Graph."
 
 
         return {
             "spr_details": spr_details_output,
             "errors": retrieval_errors,
+            "target_layer": target_layer,  # Include in response
             "reflection": _create_reflection(
                 status="Success" if spr_details_output else "Failure",
                 summary=summary,
                 confidence=0.95 if spr_details_output else 0.4,
                 alignment="High",
                 potential_issues=list(retrieval_errors.values()),
-                raw_output_preview=f"Retrieved: {list(spr_details_output.keys())[:5]}"
+                raw_output_preview=f"Retrieved: {list(spr_details_output.keys())[:5]}{layer_info}"
             )
         }
 

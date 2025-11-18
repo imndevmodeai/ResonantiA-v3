@@ -191,8 +191,8 @@ class ZeptoSPRProcessorAdapter(IZeptoSPRProcessor):
             
             original_length = len(narrative)
             
-            # Delegate to PatternCrystallizationEngine
-            zepto_spr, new_codex_entries = self.engine.distill_to_spr(
+            # Delegate to PatternCrystallizationEngine (Russian Doll Architecture)
+            zepto_spr, new_codex_entries, compression_stages_list = self.engine.distill_to_spr(
                 thought_trail_entry=narrative,
                 target_stage=target_stage
             )
@@ -200,15 +200,16 @@ class ZeptoSPRProcessorAdapter(IZeptoSPRProcessor):
             zepto_length = len(zepto_spr) if zepto_spr else 0
             compression_ratio = original_length / zepto_length if zepto_length > 0 else 1.0
             
-            # Convert compression stages to serializable format
+            # Convert compression stages to serializable format (Russian dolls)
             compression_stages = [
                 {
                     "stage_name": stage.stage_name,
+                    "content": stage.content,  # Store layer content for retrieval
                     "compression_ratio": stage.compression_ratio,
                     "symbol_count": stage.symbol_count,
                     "timestamp": stage.timestamp
                 }
-                for stage in self.engine.compression_history
+                for stage in compression_stages_list
             ]
             
             # Convert SymbolCodexEntry objects to dicts
@@ -246,9 +247,16 @@ class ZeptoSPRProcessorAdapter(IZeptoSPRProcessor):
         self,
         zepto_spr: str,
         codex: Optional[Dict[str, Any]] = None,
-        context: Optional[Dict[str, Any]] = None
+        context: Optional[Dict[str, Any]] = None,
+        target_layer: Optional[str] = None,
+        compression_stages: Optional[List[Dict[str, Any]]] = None
     ) -> ZeptoSPRDecompressionResult:
-        """Decompress Zepto SPR using PatternCrystallizationEngine."""
+        """
+        Layered Decompression: Russian Doll Architecture
+        
+        Decompresses Zepto SPR through progressive layers, like Russian dolls.
+        Each layer adds more detail and nuance.
+        """
         try:
             if not zepto_spr or not isinstance(zepto_spr, str):
                 return ZeptoSPRDecompressionResult(
@@ -264,15 +272,20 @@ class ZeptoSPRProcessorAdapter(IZeptoSPRProcessor):
                 codex_entries = {}
                 for symbol, entry_data in codex.items():
                     if isinstance(entry_data, dict):
-                        # Handle both full SymbolCodexEntry format and simple dict format
+                        # Handle enhanced SymbolCodexEntry format with nuanced knowledge
                         try:
-                            # Try to create SymbolCodexEntry if all required fields present
                             if 'symbol' in entry_data and 'meaning' in entry_data:
                                 codex_entries[symbol] = SymbolCodexEntry(
                                     symbol=entry_data.get('symbol', symbol),
                                     meaning=entry_data.get('meaning', ''),
                                     context=entry_data.get('context', ''),
                                     usage_examples=entry_data.get('usage_examples', []),
+                                    original_patterns=entry_data.get('original_patterns', []),
+                                    relationships=entry_data.get('relationships', {}),
+                                    critical_specifics=entry_data.get('critical_specifics', []),
+                                    generalizable_patterns=entry_data.get('generalizable_patterns', []),
+                                    contextual_variations=entry_data.get('contextual_variations', {}),
+                                    decompression_template=entry_data.get('decompression_template', entry_data.get('meaning', '')),
                                     created_at=entry_data.get('created_at', '')
                                 )
                             else:
@@ -284,10 +297,27 @@ class ZeptoSPRProcessorAdapter(IZeptoSPRProcessor):
                     else:
                         codex_entries[symbol] = entry_data
             
-            # Delegate to engine
+            # Convert compression_stages dicts to CompressionStage objects if provided
+            compression_stages_objects = None
+            if compression_stages:
+                from .pattern_crystallization_engine import CompressionStage
+                compression_stages_objects = [
+                    CompressionStage(
+                        stage_name=stage.get('stage_name', ''),
+                        content=stage.get('content', ''),
+                        compression_ratio=stage.get('compression_ratio', 1.0),
+                        symbol_count=stage.get('symbol_count', 0),
+                        timestamp=stage.get('timestamp', '')
+                    )
+                    for stage in compression_stages
+                ]
+            
+            # Delegate to engine with layered decompression support
             decompressed = self.engine.decompress_spr(
                 zepto_spr=zepto_spr,
-                codex=codex_entries
+                codex=codex_entries,
+                target_layer=target_layer,
+                compression_stages=compression_stages_objects
             )
             
             # Extract symbols found

@@ -14,6 +14,15 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+# Import Zepto compression system
+try:
+    from Three_PointO_ArchE.zepto_spr_processor import ZeptoSPRProcessorAdapter
+    ZEPTO_AVAILABLE = True
+except ImportError:
+    ZEPTO_AVAILABLE = False
+    ZeptoSPRProcessorAdapter = None
+
+# Fallback symbol map (only used if Zepto compression fails)
 SYMBOL_MAP = {
     'Cognitive': 'Γ', 'Pattern': 'Π', 'Resonance': 'Ρ', 'Knowledge': 'Κ',
     'Action': 'Α', 'Temporal': 'Τ', 'Workflow': 'Ω', 'Meta': 'Μ',
@@ -28,6 +37,31 @@ SYMBOL_MAP = {
     'Model': 'Μ', 'Training': 'Τ', 'Dataset': 'Δ', 'Search': 'Σ',
     'Retrieval': 'Ρ', 'Storage': 'Σ', 'Database': 'Δ',
 }
+
+# Global Zepto processor (lazy initialization)
+_zepto_processor = None
+
+def _get_zepto_processor():
+    """Get or create Zepto processor."""
+    global _zepto_processor
+    if _zepto_processor is None and ZEPTO_AVAILABLE:
+        try:
+            _zepto_processor = ZeptoSPRProcessorAdapter()
+        except Exception as e:
+            print(f"⚠️  Warning: Failed to initialize Zepto processor: {e}")
+            return None
+    return _zepto_processor
+
+def _fallback_symbol_mapping(text: str) -> str:
+    """Fallback symbol mapping when Zepto compression is not available."""
+    text_lower = text.lower()
+    symbols = []
+    for keyword, symbol in SYMBOL_MAP.items():
+        if keyword.lower() in text_lower and symbol not in symbols:
+            symbols.append(symbol)
+    if not symbols:
+        symbols = ['Ξ']
+    return '|'.join(symbols[:5])
 
 def extract_spr_definitions_from_agi(file_path: Path) -> List[Dict[str, Any]]:
     """Extract SPR definitions from agi.txt, recognizing them even without Guardian pointS format."""
@@ -357,44 +391,85 @@ def create_or_enrich_spr(spr_def: Dict[str, Any], existing_sprs: List[Dict[str, 
             existing_spr['definition'] = definition + '\n\n[From agi.txt]: ' + new_def[:1500]
             existing_spr['enriched_from'] = 'agi.txt'
             
-            # Update zepto_spr
-            text = (existing_spr.get('term', '') + ' ' + existing_spr['definition']).lower()
-            symbols = []
-            for keyword, symbol in SYMBOL_MAP.items():
-                if keyword.lower() in text and symbol not in symbols:
-                    symbols.append(symbol)
-            if not symbols:
-                symbols = ['Ξ']
-            existing_spr['zepto_spr'] = '|'.join(symbols[:5])
+            # Update zepto_spr using proper Zepto compression
+            narrative = (existing_spr.get('term', '') + ' ' + existing_spr['definition']).strip()
+            zepto_processor = _get_zepto_processor()
             
-            # Update symbol codex
+            if zepto_processor and narrative and len(narrative) > 10:
+                try:
+                    result = zepto_processor.compress_to_zepto(narrative, target_stage="Zepto")
+                    if result and not result.error and result.zepto_spr:
+                        existing_spr['zepto_spr'] = result.zepto_spr
+                        # Update symbol codex with new entries
             symbol_codex = existing_spr.get('symbol_codex', {})
-            for keyword, sym in SYMBOL_MAP.items():
-                if sym in symbols and sym not in symbol_codex:
-                    symbol_codex[sym] = {"meaning": keyword, "context": "Protocol"}
+                        from dataclasses import asdict
+                        for symbol, entry in result.new_codex_entries.items():
+                            if hasattr(entry, '__dict__'):
+                                symbol_codex[symbol] = asdict(entry)
+                            else:
+                                symbol_codex[symbol] = entry
             existing_spr['symbol_codex'] = symbol_codex
+                    else:
+                        # Fallback to simple symbol mapping
+                        existing_spr['zepto_spr'] = _fallback_symbol_mapping(narrative)
+                except Exception as e:
+                    print(f"  ⚠️  Zepto compression failed for {guardian_name}: {e}")
+                    existing_spr['zepto_spr'] = _fallback_symbol_mapping(narrative)
+            else:
+                # Fallback to simple symbol mapping
+                existing_spr['zepto_spr'] = _fallback_symbol_mapping(narrative)
         
         return (existing_spr, True)  # Enriched
     else:
-        # Create new SPR
-        text = (spr_name + ' ' + spr_def['definition']).lower()
-        symbols = []
-        for keyword, symbol in SYMBOL_MAP.items():
-            if keyword.lower() in text and symbol not in symbols:
-                symbols.append(symbol)
-        if not symbols:
-            symbols = ['Ξ']
+        # Create new SPR - use proper Zepto compression
+        narrative = (spr_name + ' ' + spr_def['definition']).strip()
+        zepto_processor = _get_zepto_processor()
         
-        zepto_str = '|'.join(symbols[:5])
-        symbol_codex = {sym: {"meaning": k, "context": "Protocol"} 
-                       for k, sym in SYMBOL_MAP.items() if sym in symbols}
+        zepto_str = 'Ξ'  # Default
+        symbol_codex = {}
+        original_len = len(narrative)
+        compressed_len = 1
+        ratio = original_len
+        
+        if zepto_processor and narrative and len(narrative) > 10:
+            try:
+                result = zepto_processor.compress_to_zepto(narrative, target_stage="Zepto")
+                if result and not result.error and result.zepto_spr:
+                    zepto_str = result.zepto_spr
+                    compressed_len = len(zepto_str)
+                    ratio = result.compression_ratio
+                    # Update symbol codex with new entries
+                    from dataclasses import asdict
+                    for symbol, entry in result.new_codex_entries.items():
+                        if hasattr(entry, '__dict__'):
+                            symbol_codex[symbol] = asdict(entry)
+                        else:
+                            symbol_codex[symbol] = entry
+                else:
+                    # Fallback to simple symbol mapping
+                    zepto_str = _fallback_symbol_mapping(narrative)
+                    compressed_len = len(zepto_str)
+                    ratio = original_len / compressed_len if compressed_len > 0 else 0
+                    # Create basic symbol codex from fallback
+                    text_lower = narrative.lower()
+                    symbols = zepto_str.split('|')
+                    for keyword, sym in SYMBOL_MAP.items():
+                        if sym in symbols and sym not in symbol_codex:
+                            symbol_codex[sym] = {"meaning": keyword, "context": "Protocol"}
+            except Exception as e:
+                print(f"  ⚠️  Zepto compression failed for {guardian_name}: {e}")
+                zepto_str = _fallback_symbol_mapping(narrative)
+                compressed_len = len(zepto_str)
+                ratio = original_len / compressed_len if compressed_len > 0 else 0
+        else:
+            # Fallback to simple symbol mapping
+            zepto_str = _fallback_symbol_mapping(narrative)
+            compressed_len = len(zepto_str)
+            ratio = original_len / compressed_len if compressed_len > 0 else 0
+        
         # Ensure default symbol has codex entry
-        if 'Ξ' in symbols and 'Ξ' not in symbol_codex:
+        if 'Ξ' in zepto_str and 'Ξ' not in symbol_codex:
             symbol_codex['Ξ'] = {"meaning": "Generic/Universal", "context": "Protocol"}
-        
-        original_len = len(spr_name) + len(spr_def['definition'])
-        compressed_len = len(zepto_str)
-        ratio = original_len / compressed_len if compressed_len > 0 else 0
         
         # Build comprehensive definition with all knowledge
         full_definition = f"{concept_name}: {spr_def['definition']}"

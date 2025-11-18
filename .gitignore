@@ -117,3 +117,27 @@ cursor_discuss_protocol_files_and_spec10.19.25i.md
 nextjs-chat_backup_quarantine/
 outputs/
 cursor_*.deb
+
+# Accidental pip install log artifacts (files starting with =)
+=*
+
+# Large files excluded from git
+Three_PointO_ArchE/ledgers/thought_trail.db
+knowledge_graph/spr_definitions_tv.json
+*.db
+*.json.backup.*
+
+# Exclude all backup and large data files
+*.backup
+*.backup.*
+*.db
+*.zip
+knowledge_graph/*.json
+!knowledge_graph/*.json.txt
+
+# Large files excluded from git
+Three_PointO_ArchE/ledgers/thought_trail.db
+knowledge_graph/spr_definitions_tv.json
+knowledge_graph/spr_definitions_tv.json.*
+*.db
+
