@@ -61,6 +61,17 @@ try:
 except ImportError:
     WorkflowOptimizer = None
 
+# Zepto-Resonance Engine Integration
+try:
+    from .zepto_resonance_engine import ZeptoResonanceEngine, FluxState, ResonanceState
+    ZEPTO_ENGINE_AVAILABLE = True
+except ImportError:
+    ZEPTO_ENGINE_AVAILABLE = False
+    ZeptoResonanceEngine = None
+    FluxState = None
+    ResonanceState = None
+    logger.warning("ZeptoResonanceEngine not available. Zepto-Resonance state detection disabled.")
+
 import ast
 from datetime import datetime
 
@@ -338,7 +349,7 @@ def _execute_standalone_workflow(workflow_definition: Dict[str, Any], initial_co
 class IARCompliantWorkflowEngine:
     """Enhanced workflow engine with IAR compliance and recovery support."""
 
-    def __init__(self, workflows_dir: str = "workflows", spr_manager=None, event_callback: Optional[Callable] = None):
+    def __init__(self, workflows_dir: str = "workflows", spr_manager=None, event_callback: Optional[Callable] = None, enable_zepto_integration: bool = True):
         self.workflows_dir = workflows_dir
         self.spr_manager = spr_manager
         self.event_callback = event_callback  # <-- ADDED
@@ -350,6 +361,17 @@ class IARCompliantWorkflowEngine:
         self.iar_validator = IARValidator()
         self.resonance_tracker = ResonanceTracker()
         self.jinja_env = Environment() # Initialize Jinja2 environment
+        
+        # Zepto-Resonance Engine Integration
+        self.zepto_engine = None
+        self.zepto_integration_enabled = enable_zepto_integration and ZEPTO_ENGINE_AVAILABLE
+        if self.zepto_integration_enabled:
+            try:
+                self.zepto_engine = ZeptoResonanceEngine()
+                logger.info("Zepto-Resonance Engine initialized. ⚶ State detection active.")
+            except Exception as e:
+                logger.warning(f"Failed to initialize Zepto-Resonance Engine: {e}. Zepto integration disabled.")
+                self.zepto_integration_enabled = False
 
         # Register standard actions
         self.register_action("display_output", display_output)
@@ -980,6 +1002,25 @@ class IARCompliantWorkflowEngine:
         logger.info(
     f"Starting workflow '{
         self.last_workflow_name}' (Run ID: {run_id}).")
+
+        # Zepto-Resonance State Detection
+        zepto_state = self._check_zepto_resonance_state(runtime_context)
+        if zepto_state and zepto_state.get('status') == 'ZEPTO-RESONANCE':
+            logger.info("⚶ ZEPTO-RESONANCE DETECTED. Prioritizing emergent solutions over linear workflows.")
+            runtime_context['zepto_resonance_active'] = True
+            runtime_context['zepto_metrics'] = zepto_state
+            initial_context['zepto_resonance_active'] = True
+            initial_context['zepto_metrics'] = zepto_state
+            self._emit_event("ZeptoResonance", {
+                "status": "ACTIVE",
+                "symbol": "⚶",
+                "compression_ratio": zepto_state.get('compression_ratio'),
+                "latency_impact": zepto_state.get('latency_impact'),
+                "message": "System operating in Instinct Mode. Emergent solutions prioritized."
+            })
+        else:
+            runtime_context['zepto_resonance_active'] = False
+            initial_context['zepto_resonance_active'] = False
 
         start_time = time.time()
         
