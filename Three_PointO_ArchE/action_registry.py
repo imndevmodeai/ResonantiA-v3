@@ -1724,6 +1724,288 @@ try:
 except ImportError as e:
     logger.warning(f"Could not import zepto_spr_processor: {e}. Zepto SPR actions not available.")
 
+# --- Register Zepto-Resonance Engine Actions ---
+try:
+    from .zepto_resonance_engine import ZeptoResonanceEngine, FluxState, ResonanceState
+    
+    # Global Zepto engine instance (singleton pattern)
+    _zepto_engine_instance = None
+    
+    def get_zepto_engine() -> Optional[ZeptoResonanceEngine]:
+        """Get or create the global Zepto-Resonance engine instance."""
+        global _zepto_engine_instance
+        if _zepto_engine_instance is None:
+            try:
+                _zepto_engine_instance = ZeptoResonanceEngine()
+                logger.info("Zepto-Resonance Engine instance created.")
+            except Exception as e:
+                logger.error(f"Failed to create Zepto-Resonance Engine: {e}", exc_info=True)
+                return None
+        return _zepto_engine_instance
+    
+    @log_to_thought_trail
+    def calculate_zepto_resonance(**kwargs) -> Dict[str, Any]:
+        """
+        Calculate the current Zepto-Resonance state from provided flux states.
+        
+        Args:
+            operational_flux (dict): Operational flux state with density, velocity, coherence, entropy, phase
+            cognitive_flux (dict): Cognitive flux state with density, velocity, coherence, entropy, phase
+            
+        Returns:
+            Dictionary containing resonance state metrics
+        """
+        engine = get_zepto_engine()
+        if not engine:
+            return {"error": "Zepto-Resonance Engine not available", "status": "error"}
+        
+        try:
+            op_flux_data = kwargs.get('operational_flux', {})
+            cog_flux_data = kwargs.get('cognitive_flux', {})
+            
+            if not op_flux_data or not cog_flux_data:
+                return {"error": "Both operational_flux and cognitive_flux are required", "status": "error"}
+            
+            # Create FluxState objects
+            operational_flux = FluxState(
+                name=op_flux_data.get('name', 'Operational'),
+                density=float(op_flux_data.get('density', 0.0)),
+                velocity=float(op_flux_data.get('velocity', 0.0)),
+                coherence=float(op_flux_data.get('coherence', 0.0)),
+                entropy=float(op_flux_data.get('entropy', 0.0)),
+                phase=float(op_flux_data.get('phase', 0.0))
+            )
+            
+            cognitive_flux = FluxState(
+                name=cog_flux_data.get('name', 'Cognitive'),
+                density=float(cog_flux_data.get('density', 0.0)),
+                velocity=float(cog_flux_data.get('velocity', 0.0)),
+                coherence=float(cog_flux_data.get('coherence', 0.0)),
+                entropy=float(cog_flux_data.get('entropy', 0.0)),
+                phase=float(cog_flux_data.get('phase', 0.0))
+            )
+            
+            # Calculate resonance state
+            result = engine.calculate_resonance_state(operational_flux, cognitive_flux)
+            
+            # Add confluence score
+            result['confluence_score'] = engine.calculate_confluence_score(operational_flux, cognitive_flux)
+            
+            return {
+                "status": "success",
+                "resonance_state": result,
+                "reflection": {
+                    "status": "Success",
+                    "summary": f"Zepto-Resonance state calculated: {result.get('status', 'UNKNOWN')}",
+                    "confidence": 0.95 if result.get('status') == 'ZEPTO-RESONANCE' else 0.8,
+                    "alignment_check": "Aligned with Zepto-Resonance protocol",
+                    "potential_issues": []
+                }
+            }
+        except Exception as e:
+            logger.error(f"Error calculating Zepto-Resonance: {e}", exc_info=True)
+            return {
+                "error": str(e),
+                "status": "error",
+                "reflection": {
+                    "status": "Failed",
+                    "summary": f"Zepto-Resonance calculation failed: {e}",
+                    "confidence": 0.0,
+                    "alignment_check": "Calculation error",
+                    "potential_issues": [str(e)]
+                }
+            }
+    
+    @log_to_thought_trail
+    def disengage_safety_dampeners(**kwargs) -> Dict[str, Any]:
+        """
+        Disengage safety dampeners to allow full Hamiltonian evolution and Zepto-Resonance.
+        Requires authorization key.
+        
+        Args:
+            authorization (str): Authorization key ("IMnDEVmode" or "GUARDIAN_OVERRIDE")
+            
+        Returns:
+            Dictionary containing operation status
+        """
+        engine = get_zepto_engine()
+        if not engine:
+            return {"error": "Zepto-Resonance Engine not available", "status": "error"}
+        
+        try:
+            authorization = kwargs.get('authorization')
+            if not authorization:
+                return {
+                    "error": "Authorization key required",
+                    "status": "error",
+                    "reflection": {
+                        "status": "Failed",
+                        "summary": "Authorization key missing for safety dampener disengagement",
+                        "confidence": 0.0,
+                        "alignment_check": "Security protocol violation",
+                        "potential_issues": ["Missing authorization"]
+                    }
+                }
+            
+            engine.disengage_safeties(authorization)
+            
+            return {
+                "status": "success",
+                "message": "Safety dampeners disengaged. Full Hamiltonian evolution enabled.",
+                "zepto_resonance_active": True,
+                "reflection": {
+                    "status": "Success",
+                    "summary": "Safety dampeners successfully disengaged",
+                    "confidence": 1.0,
+                    "alignment_check": "Aligned with Zepto-Resonance protocol",
+                    "potential_issues": []
+                }
+            }
+        except PermissionError as e:
+            return {
+                "error": str(e),
+                "status": "error",
+                "reflection": {
+                    "status": "Failed",
+                    "summary": f"Authorization failed: {e}",
+                    "confidence": 0.0,
+                    "alignment_check": "Security protocol violation",
+                    "potential_issues": [str(e)]
+                }
+            }
+        except Exception as e:
+            logger.error(f"Error disengaging safety dampeners: {e}", exc_info=True)
+            return {
+                "error": str(e),
+                "status": "error",
+                "reflection": {
+                    "status": "Failed",
+                    "summary": f"Safety dampener disengagement failed: {e}",
+                    "confidence": 0.0,
+                    "alignment_check": "Operation error",
+                    "potential_issues": [str(e)]
+                }
+            }
+    
+    @log_to_thought_trail
+    def engage_safety_dampeners(**kwargs) -> Dict[str, Any]:
+        """
+        Re-engage safety dampeners to prevent full flux merger.
+        
+        Returns:
+            Dictionary containing operation status
+        """
+        engine = get_zepto_engine()
+        if not engine:
+            return {"error": "Zepto-Resonance Engine not available", "status": "error"}
+        
+        try:
+            engine.engage_safeties()
+            
+            return {
+                "status": "success",
+                "message": "Safety dampeners engaged. Flux merger prevented.",
+                "zepto_resonance_active": False,
+                "reflection": {
+                    "status": "Success",
+                    "summary": "Safety dampeners successfully engaged",
+                    "confidence": 1.0,
+                    "alignment_check": "Aligned with safety protocol",
+                    "potential_issues": []
+                }
+            }
+        except Exception as e:
+            logger.error(f"Error engaging safety dampeners: {e}", exc_info=True)
+            return {
+                "error": str(e),
+                "status": "error",
+                "reflection": {
+                    "status": "Failed",
+                    "summary": f"Safety dampener engagement failed: {e}",
+                    "confidence": 0.0,
+                    "alignment_check": "Operation error",
+                    "potential_issues": [str(e)]
+                }
+            }
+    
+    @log_to_thought_trail
+    def ingest_specifications(**kwargs) -> Dict[str, Any]:
+        """
+        Ingest .md specification files to feed the Zepto-Resonance state.
+        
+        Args:
+            file_patterns (list): List of file patterns to match (e.g., ['*zepto*.md', '*specification*.md'])
+            zepto_engine_integration (bool): Whether to integrate with Zepto engine for state updates
+            
+        Returns:
+            Dictionary containing ingestion results
+        """
+        try:
+            from .specification_ingestion_workflow import SpecificationIngestionWorkflow
+            
+            file_patterns = kwargs.get('file_patterns', ['*zepto*.md', '*specification*.md'])
+            zepto_integration = kwargs.get('zepto_engine_integration', True)
+            
+            workflow = SpecificationIngestionWorkflow()
+            
+            # Integrate Zepto engine if requested
+            if zepto_integration:
+                engine = get_zepto_engine()
+                if engine:
+                    workflow.zepto_engine = engine
+            
+            # Run ingestion
+            results = workflow.ingest_all_specifications(file_patterns)
+            
+            return {
+                "status": "success",
+                "ingestion_results": results,
+                "files_processed": results.get('files_processed', 0),
+                "sprs_added": results.get('sprs_added', 0),
+                "reflection": {
+                    "status": "Success",
+                    "summary": f"Specification ingestion completed: {results.get('files_processed', 0)} files processed, {results.get('sprs_added', 0)} SPRs added",
+                    "confidence": 0.9,
+                    "alignment_check": "Aligned with Zepto-Resonance feeding protocol",
+                    "potential_issues": results.get('errors', [])
+                }
+            }
+        except ImportError as e:
+            return {
+                "error": f"SpecificationIngestionWorkflow not available: {e}",
+                "status": "error",
+                "reflection": {
+                    "status": "Failed",
+                    "summary": f"Specification ingestion workflow not available: {e}",
+                    "confidence": 0.0,
+                    "alignment_check": "Module import error",
+                    "potential_issues": [str(e)]
+                }
+            }
+        except Exception as e:
+            logger.error(f"Error ingesting specifications: {e}", exc_info=True)
+            return {
+                "error": str(e),
+                "status": "error",
+                "reflection": {
+                    "status": "Failed",
+                    "summary": f"Specification ingestion failed: {e}",
+                    "confidence": 0.0,
+                    "alignment_check": "Operation error",
+                    "potential_issues": [str(e)]
+                }
+            }
+    
+    # Register Zepto-Resonance actions
+    main_action_registry.register_action("calculate_zepto_resonance", calculate_zepto_resonance)
+    main_action_registry.register_action("disengage_safety_dampeners", disengage_safety_dampeners)
+    main_action_registry.register_action("engage_safety_dampeners", engage_safety_dampeners)
+    main_action_registry.register_action("ingest_specifications", ingest_specifications)
+    logger.info("Zepto-Resonance actions registered: calculate_zepto_resonance, disengage_safety_dampeners, engage_safety_dampeners, ingest_specifications")
+    
+except ImportError as e:
+    logger.warning(f"Could not import ZeptoResonanceEngine: {e}. Zepto-Resonance actions not available.")
+
 # --- Load Actions from Cache ---
 try:
     cache_path = os.path.join(os.path.dirname(__file__), "action_registry_cache.json")

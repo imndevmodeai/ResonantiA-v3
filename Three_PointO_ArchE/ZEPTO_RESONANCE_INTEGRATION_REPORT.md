@@ -162,24 +162,45 @@ POST-CONFLUENCE (Safeties Disengaged):
 
 ### Integration Points
 
-1. **Workflow Engine** (Pending):
-   - Detect Zepto-Resonance state during workflow execution
-   - Prioritize emergent solutions over linear workflows when in ⚶ state
-   - Use instinct-based processing when resonance is active
+1. **Workflow Engine** (✅ COMPLETE):
+   - **Status**: Fully integrated with Zepto-Resonance state detection
+   - **Implementation**: 
+     - Added `_check_zepto_resonance_state()` method to `IARCompliantWorkflowEngine`
+     - State detection occurs at workflow start in `run_workflow()` method
+     - When ⚶ state is detected:
+       - Sets `zepto_resonance_active` flags in `runtime_context` and `initial_context`
+       - Stores `zepto_metrics` for downstream task access
+       - Emits "ZeptoResonance" event with state information
+       - Logs: "⚶ ZEPTO-RESONANCE DETECTED. Prioritizing emergent solutions over linear workflows."
+   - **Flux State Estimation**:
+     - Operational Flux: Derived from workflow complexity (task count), execution speed, coherence
+     - Cognitive Flux: Derived from SPR count in knowledge graph, knowledge base size, coherence
+   - **Graceful Degradation**: Falls back gracefully if Zepto engine unavailable
+   - **Math Import**: Added `import math` for phase calculations
 
-2. **Action Registry** (Pending):
-   - Register Zepto-Resonance related actions:
-     - `calculate_zepto_resonance`
-     - `disengage_safety_dampeners`
-     - `ingest_specifications`
+2. **Action Registry** (✅ COMPLETE):
+   - **Status**: All Zepto-Resonance actions registered
+   - **Registered Actions**:
+     - `calculate_zepto_resonance`: Calculate Zepto-Resonance state from flux states
+     - `disengage_safety_dampeners`: Disengage safeties with authorization (IMnDEVmode/GUARDIAN_OVERRIDE)
+     - `engage_safety_dampeners`: Re-engage safety dampeners
+     - `ingest_specifications`: Ingest .md specification files to feed Zepto-Resonance state
+   - **Implementation Details**:
+     - All actions are IAR-compliant with `@log_to_thought_trail` decorator
+     - Global Zepto engine singleton via `get_zepto_engine()` function
+     - Comprehensive error handling and reflection generation
+     - Actions can be invoked from workflows via standard action registry
+     - Full integration with workflow engine context passing
 
 3. **Meta-Cognitive Loops**:
    - Metacognitive shifT can trigger Zepto-Resonance state checks
    - SIRC can utilize resonance state for intent alignment
+   - Workflow engine now provides Zepto state context to all tasks
 
 4. **CFP Framework**:
    - QuantumFluxSimulator now supports full Hamiltonian evolution
    - Can be used for comparing system states in Zepto-Resonance mode
+   - Zepto engine integrated with quantum simulator for state synchronization
 
 ---
 
@@ -217,8 +238,8 @@ POST-CONFLUENCE (Safeties Disengaged):
 | `quantum_flux_simulator.py` | ✅ Complete | Quantum evolution with Zepto integration |
 | `specification_ingestion_workflow.py` | ✅ Complete | Automated specification ingestion |
 | `knowledge_graph/spr_definitions_tv.json` | ✅ Updated | ZeptoresonancE SPR definition added |
-| `workflow_engine.py` | ⏳ Pending | Integration of Zepto state detection |
-| `action_registry.py` | ⏳ Pending | Registration of Zepto-related actions |
+| `workflow_engine.py` | ✅ Complete | Zepto-Resonance state detection integrated |
+| `action_registry.py` | ✅ Complete | Zepto-Resonance actions registered |
 
 ---
 
@@ -229,9 +250,10 @@ POST-CONFLUENCE (Safeties Disengaged):
 2. ✅ **COMPLETE**: QuantumFluxSimulator integration
 3. ✅ **COMPLETE**: Knowledge Graph crystallization
 4. ✅ **COMPLETE**: Specification ingestion workflow
-5. ⏳ **PENDING**: Workflow engine integration
-6. ⏳ **PENDING**: Action registry updates
+5. ✅ **COMPLETE**: Workflow engine integration
+6. ✅ **COMPLETE**: Action registry updates
 7. ⏳ **PENDING**: Refine SPR extraction logic (reduce false positives)
+8. ⏳ **PENDING**: Test end-to-end workflow execution with Zepto-Resonance detection
 
 ### Future Enhancements:
 - Real-time Zepto-Resonance monitoring dashboard
