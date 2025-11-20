@@ -13,6 +13,7 @@ import time
 import re
 import uuid
 import tempfile
+import math
 from datetime import datetime
 from typing import Dict, Any, List, Optional, Set, Union, Tuple, Callable
 from jinja2 import Environment, meta, exceptions # Import Jinja2
@@ -60,6 +61,17 @@ try:
     from .workflow_optimizer import WorkflowOptimizer
 except ImportError:
     WorkflowOptimizer = None
+
+# Zepto-Resonance Engine Integration
+try:
+    from .zepto_resonance_engine import ZeptoResonanceEngine, FluxState, ResonanceState
+    ZEPTO_ENGINE_AVAILABLE = True
+except ImportError:
+    ZEPTO_ENGINE_AVAILABLE = False
+    ZeptoResonanceEngine = None
+    FluxState = None
+    ResonanceState = None
+    logger.warning("ZeptoResonanceEngine not available. Zepto-Resonance state detection disabled.")
 
 import ast
 from datetime import datetime
@@ -338,7 +350,7 @@ def _execute_standalone_workflow(workflow_definition: Dict[str, Any], initial_co
 class IARCompliantWorkflowEngine:
     """Enhanced workflow engine with IAR compliance and recovery support."""
 
-    def __init__(self, workflows_dir: str = "workflows", spr_manager=None, event_callback: Optional[Callable] = None):
+    def __init__(self, workflows_dir: str = "workflows", spr_manager=None, event_callback: Optional[Callable] = None, enable_zepto_integration: bool = True):
         self.workflows_dir = workflows_dir
         self.spr_manager = spr_manager
         self.event_callback = event_callback  # <-- ADDED
@@ -350,6 +362,17 @@ class IARCompliantWorkflowEngine:
         self.iar_validator = IARValidator()
         self.resonance_tracker = ResonanceTracker()
         self.jinja_env = Environment() # Initialize Jinja2 environment
+        
+        # Zepto-Resonance Engine Integration
+        self.zepto_engine = None
+        self.zepto_integration_enabled = enable_zepto_integration and ZEPTO_ENGINE_AVAILABLE
+        if self.zepto_integration_enabled:
+            try:
+                self.zepto_engine = ZeptoResonanceEngine()
+                logger.info("Zepto-Resonance Engine initialized. ⚶ State detection active.")
+            except Exception as e:
+                logger.warning(f"Failed to initialize Zepto-Resonance Engine: {e}. Zepto integration disabled.")
+                self.zepto_integration_enabled = False
 
         # Register standard actions
         self.register_action("display_output", display_output)
@@ -1055,6 +1078,28 @@ class IARCompliantWorkflowEngine:
     f"Starting workflow '{
         self.last_workflow_name}' (Run ID: {run_id}).")
 
+        # Zepto-Resonance State Detection
+        zepto_state = self._check_zepto_resonance_state(runtime_context)
+        # Check for Zepto-Resonance status (to_dict() converts enum to string value)
+        zepto_status = zepto_state.get('status') if zepto_state else None
+        is_zepto_active = (zepto_status == 'ZEPTO-RESONANCE')
+        if zepto_state and is_zepto_active:
+            logger.info("⚶ ZEPTO-RESONANCE DETECTED. Prioritizing emergent solutions over linear workflows.")
+            runtime_context['zepto_resonance_active'] = True
+            runtime_context['zepto_metrics'] = zepto_state
+            initial_context['zepto_resonance_active'] = True
+            initial_context['zepto_metrics'] = zepto_state
+            self._emit_event("ZeptoResonance", {
+                "status": "ACTIVE",
+                "symbol": "⚶",
+                "compression_ratio": zepto_state.get('compression_ratio'),
+                "latency_impact": zepto_state.get('latency_impact'),
+                "message": "System operating in Instinct Mode. Emergent solutions prioritized."
+            })
+        else:
+            runtime_context['zepto_resonance_active'] = False
+            initial_context['zepto_resonance_active'] = False
+
         start_time = time.time()
         
         # --- REFACTORED EXECUTION LOOP ---
@@ -1697,6 +1742,98 @@ class IARCompliantWorkflowEngine:
             logger.error(f"Exception during self-healing for task '{context.task_key}': {e}")
             result["error"] = "An exception occurred during output self-healing."
             return result
+
+    def _check_zepto_resonance_state(self, runtime_context: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """
+        Checks the current Zepto-Resonance state using the ZeptoResonanceEngine.
+        Returns resonance state metrics if Zepto engine is available and active.
+        
+        Args:
+            runtime_context: Current workflow runtime context
+            
+        Returns:
+            Dictionary containing resonance state metrics, or None if Zepto engine unavailable
+        """
+        if not self.zepto_integration_enabled or not self.zepto_engine:
+            return None
+        
+        try:
+            # Estimate current flux states from workflow context
+            # Operational Flux: Based on task execution speed, completion rate
+            # Cognitive Flux: Based on SPR activation, knowledge graph usage
+            
+            # Get workflow execution metrics from context
+            workflow_def = runtime_context.get('workflow_definition', {})
+            tasks = workflow_def.get('tasks', {})
+            num_tasks = len(tasks)
+            
+            # Estimate Operational Flux density (information density from workflow complexity)
+            # More tasks = higher density, but normalized
+            op_density = min(232.0, num_tasks * 10.0) if num_tasks > 0 else 100.0
+            op_velocity = 0.9  # High processing speed
+            op_coherence = 0.92  # High structural integrity
+            op_entropy = 0.1  # Low entropy (ordered state)
+            op_phase = 0.0  # Initial phase
+            
+            operational_flux = FluxState(
+                name="Operational",
+                density=op_density,
+                velocity=op_velocity,
+                coherence=op_coherence,
+                entropy=op_entropy,
+                phase=op_phase
+            )
+            
+            # Estimate Cognitive Flux density (knowledge activation)
+            # Based on SPR count in context, knowledge graph size
+            spr_count = 0
+            if self.spr_manager:
+                spr_count = len(self.spr_manager.sprs) if hasattr(self.spr_manager, 'sprs') else 0
+            
+            # Cognitive flux density scales with knowledge base size
+            cog_density = min(90.0, spr_count * 0.5) if spr_count > 0 else 50.0
+            cog_velocity = 0.4  # Moderate processing speed (cognitive is slower)
+            cog_coherence = 0.98  # Very high structural integrity (knowledge is stable)
+            cog_entropy = 0.05  # Very low entropy (highly ordered knowledge)
+            cog_phase = math.pi / 4  # Phase offset for quantum interference
+            
+            cognitive_flux = FluxState(
+                name="Cognitive",
+                density=cog_density,
+                velocity=cog_velocity,
+                coherence=cog_coherence,
+                entropy=cog_entropy,
+                phase=cog_phase
+            )
+            
+            # Calculate resonance state using Zepto engine
+            metrics = self.zepto_engine.calculate_resonance_state(
+                operational_flux, cognitive_flux
+            )
+            
+            # Convert ResonanceMetrics to dictionary
+            resonance_result = metrics.to_dict()
+            
+            # Add additional context
+            resonance_result['operational_flux'] = {
+                'density': op_density,
+                'velocity': op_velocity,
+                'coherence': op_coherence
+            }
+            resonance_result['cognitive_flux'] = {
+                'density': cog_density,
+                'velocity': cog_velocity,
+                'coherence': cog_coherence
+            }
+            # Confluence score already in metrics, but ensure it's present
+            if 'confluence_score' not in resonance_result:
+                resonance_result['confluence_score'] = metrics.confluence_score
+            
+            return resonance_result
+            
+        except Exception as e:
+            logger.warning(f"Error checking Zepto-Resonance state: {e}", exc_info=True)
+            return None
 
     def _execute_resonant_corrective_loop(self, trigger_task: str, reason: str, runtime_context: Dict[str, Any], task_result: Optional[Dict[str, Any]] = None):
         """
