@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Distributed Computing\n\nDEFINITION:\nDistributed Computing: designed to scale horizontally and vertically to meet the demands of large-scale applications:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Distributed Computing'\n\nEXAMPLE APPLICATION:\nnsights and recommendations to support human decision-making.\n\nI have reached the context limit again. Please type \"continue\" to proceed.\n\ncontinue\n\n16. Scalability and Performance: Mastermind_AI is designed to scale horizontally and vertically to meet the demands of large-scale applications:\n    * Distributed Computing: Utilizing distributed computing frameworks to process large amounts of data and scale the system horizontally.\n    * Cloud Computing: Leveraging cloud computing platforms to pro\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1132,
+    "timestamp": "2025-11-18T10:47:28.733535Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Distributed Computing\n\nDEFINITION:\nDistributed Computing: designed to scale horizontally and vertically to meet the demands of large-scale applications:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Distributed Computing'\n\nEXAMPLE APPLICATION:\nnsights and recommendations to support human decision-making.\n\nI have reached the context limit again. Please type \"continue\" to proceed.\n\ncontinue\n\n16. Scalability and Performance: Mastermind_AI is designed to scale horizontally and vertically to meet the dem",
+    "compression_ratio": 2.0,
+    "symbol_count": 566,
+    "timestamp": "2025-11-18T10:47:28.733563Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Distributed Computing D: Distributed Computing: designed to scale horizontally vertically to meet demands of large-scale applications: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Distributed Computing' EXAMPLE APPLICATION: nsights recommendations to support human decision-making. I reached context limit again. Please type \"continue\" to proceed. continue 16. Scalability Performance: Mastermind_AI is designed to scale horizontally vertically to meet dem",
+    "compression_ratio": 2.223968565815324,
+    "symbol_count": 509,
+    "timestamp": "2025-11-18T10:47:28.734568Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Distributed Computing D: Distributed Computing: designed scale horizontally vertically demands large-scale applications: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Distributed Computing' EXAMPLE APPLICATION: nsights recommendations support human decision-making. I reached context limit again. Please \"continue\" proceed. continue Scalability Performance: Mastermind_AI designed scale horizontally vertically",
+    "compression_ratio": 2.466230936819172,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:28.738708Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Distributed Computing D: Distributed Computing: designed scale horizontally vertically demands large-scale applications: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Distributed Computing' EXAMPLE APPLICATION: nsights recommendations support human decision-making. I reached context limit again. Please \"continue\" proceed. continue Scalability Performance: Mastermind_AI designed scale horizontally vertically",
+    "compression_ratio": 2.466230936819172,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:28.748928Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Distributed Computing D: Distributed Computing: designed scale horizontally vertically demands large-scale applications: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Distributed Computing' EXAMPLE APPLICATION: nsights recommendations support human decision-making. I reached context limit again. Please \"continue\" proceed. continue Scalability Performance: Mastermind_AI designed scale horizontally vertically",
+    "compression_ratio": 2.466230936819172,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:28.760894Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Distributed Computing D: Distributed Computing: BLUEPRINT DETAILS: Θ Node Original Θ Computing' EXAMPLE APPLICATION: I Please Scalability Performance: Mastermind_AI",
+    "compression_ratio": 6.658823529411765,
+    "symbol_count": 170,
+    "timestamp": "2025-11-18T10:47:28.777349Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 377.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:28.784191Z"
+  }
+]

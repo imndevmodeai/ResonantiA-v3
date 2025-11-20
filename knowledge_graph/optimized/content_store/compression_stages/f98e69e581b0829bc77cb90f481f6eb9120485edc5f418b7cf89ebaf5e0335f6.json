@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Human-Machine Interface\n\nDEFINITION:\nHuman-Machine Interface: Voice Recognition:\n\nGesture Recognition:\n\nAugmented Reality:\n\nBy integrating advanced HMI technologies into the SPR_compressor system, we can enable the system to interact with users in a more intuitive and effective way, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced data visualization and business intelligence tools to enable the system to provide insights and trends in complex data.\n\nConfidence: 2.875\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 555, type: node_format. Original SPR name: 'Human-Machine Interface'\n\nEXAMPLE APPLICATION:\nNode 555: Human-Machine Interface\n\nSPR: 2.875, \"Human-Machine Interface\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 555\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1129,
+    "timestamp": "2025-11-18T10:47:10.979360Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Human-Machine Interface\n\nDEFINITION:\nHuman-Machine Interface: Voice Recognition:\n\nGesture Recognition:\n\nAugmented Reality:\n\nBy integrating advanced HMI technologies into the SPR_compressor system, we can enable the system to interact with users in a more intuitive and effective way, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced data visualization and business intelligence tools to enable the system to provide insights and trends in complex data.\n\nConfidence: ",
+    "compression_ratio": 2.00177304964539,
+    "symbol_count": 564,
+    "timestamp": "2025-11-18T10:47:10.979413Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Human-Machine Interface D: Human-Machine Interface: Voice Recognition: Gesture Recognition: Augmented Reality: By integrating advanced HMI technologies into Θ_compressor S, we enable S to interact users in a more intuitive effective way, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced data visualization business intelligence tools to enable S to provide insights trends in complex data. Confidence:",
+    "compression_ratio": 2.3230452674897117,
+    "symbol_count": 486,
+    "timestamp": "2025-11-18T10:47:10.983857Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Human-Machine Interface D: Human-Machine Interface: Voice Recognition: Gesture Recognition: Augmented Reality: By integrating advanced HMI technologies Θ_compressor S, enable S interact users intuitive effective enhancing ability support decision-making problem-solving. Another potential exploration integration advanced visualization business intelligence tools enable S provide insights trends complex data. Confidence:",
+    "compression_ratio": 2.6378504672897196,
+    "symbol_count": 428,
+    "timestamp": "2025-11-18T10:47:10.989711Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Human-Machine Interface D: Human-Machine Interface: Voice Recognition: Gesture Recognition: Augmented Reality: By integrating advanced HMI technologies Θ_compressor S, enable S interact users intuitive effective enhancing ability support decision-making problem-solving. Another potential exploration integration advanced visualization business intelligence tools enable S provide insights trends complex data. Confidence:",
+    "compression_ratio": 2.6378504672897196,
+    "symbol_count": 428,
+    "timestamp": "2025-11-18T10:47:10.996281Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Human-Machine Interface D: Human-Machine Interface: Voice Recognition: Gesture Recognition: Augmented Reality: integrating advanced HMI technologies Θ_compressor S, enable S interact users intuitive effective enhancing ability support decision-making problem-solving. Another potential exploration integration advanced visualization business intelligence tools enable S provide insights trends complex data. Confidence:",
+    "compression_ratio": 2.656470588235294,
+    "symbol_count": 425,
+    "timestamp": "2025-11-18T10:47:11.002534Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Human-Machine Interface D: Human-Machine Interface: Voice Recognition: Gesture Recognition: Augmented Reality: HMI Θ_compressor S, S Another S Confidence:",
+    "compression_ratio": 7.05625,
+    "symbol_count": 160,
+    "timestamp": "2025-11-18T10:47:11.007959Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ",
+    "compression_ratio": 1129.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:47:11.009102Z"
+  }
+]

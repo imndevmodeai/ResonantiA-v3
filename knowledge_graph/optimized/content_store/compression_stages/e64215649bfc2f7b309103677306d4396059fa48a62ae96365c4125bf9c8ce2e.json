@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Geospatial Analysis and Mapping\n\nDEFINITION:\nGeospatial Analysis and Mapping: Geographic Information Systems (GIS):\n\nRemote Sensing:\n\nGeospatial Modeling:\n\nBy integrating advanced geospatial analysis and mapping into the SPR_compressor system, we can enable the system to understand and interpret geospatial data, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced cybersecurity and threat detection to enable the system to protect itself and its users from cyber threats.\n\nConfidence: 3.785\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 737, type: node_format. Original SPR name: 'Geospatial Analysis and Mapping'\n\nEXAMPLE APPLICATION:\nNode 737: Geospatial Analysis and Mapping\n\nSPR: 3.785, \"Geospatial Analysis and Mapping\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 737\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1171,
+    "timestamp": "2025-11-18T10:47:11.381209Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Geospatial Analysis and Mapping\n\nDEFINITION:\nGeospatial Analysis and Mapping: Geographic Information Systems (GIS):\n\nRemote Sensing:\n\nGeospatial Modeling:\n\nBy integrating advanced geospatial analysis and mapping into the SPR_compressor system, we can enable the system to understand and interpret geospatial data, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced cybersecurity and threat detection to enable the system to protect itself and its users from cyber threats.\n\nConfidence: 3.7",
+    "compression_ratio": 2.0017094017094017,
+    "symbol_count": 585,
+    "timestamp": "2025-11-18T10:47:11.381235Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Geospatial Analysis Mapping D: Geospatial Analysis Mapping: Geographic InFion Ss (GIS): Remote Sensing: Geospatial Modeling: By integrating advanced geospatial analysis mapping into Θ_compressor S, we enable S to understand interpret geospatial data, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced cybersecurity threat detection to enable S to protect itself its users cyber threats. Confidence: 3.7",
+    "compression_ratio": 2.409465020576132,
+    "symbol_count": 486,
+    "timestamp": "2025-11-18T10:47:11.384305Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Geospatial Analysis Mapping D: Geospatial Analysis Mapping: Geographic InFion Ss (GIS): Remote Sensing: Geospatial ABM: By integrating advanced geospatial analysis mapping Θ_compressor S, enable S understand interpret geospatial data, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced cybersecurity threat detection enable S protect itself users cyber threats. Confidence:",
+    "compression_ratio": 2.67351598173516,
+    "symbol_count": 438,
+    "timestamp": "2025-11-18T10:47:11.387150Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Geospatial Analysis Mapping D: Geospatial Analysis Mapping: Geographic InFion Ss (GIS): Remote Sensing: Geospatial ABM: By integrating advanced geospatial analysis mapping Θ_compressor S, enable S understand interpret geospatial data, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced cybersecurity threat detection enable S protect itself users cyber threats. Confidence:",
+    "compression_ratio": 2.67351598173516,
+    "symbol_count": 438,
+    "timestamp": "2025-11-18T10:47:11.390459Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Geospatial Analysis Mapping D: Geospatial Analysis Mapping: Geographic InFion Ss (GIS): Remote Sensing: Geospatial ABM: integrating advanced geospatial analysis mapping Θ_compressor S, enable S understand interpret geospatial data, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced cybersecurity threat detection enable S protect itself users cyber threats. Confidence:",
+    "compression_ratio": 2.6919540229885057,
+    "symbol_count": 435,
+    "timestamp": "2025-11-18T10:47:11.394610Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Geospatial Analysis Mapping D: Geospatial Analysis Mapping: Geographic InFion Ss (GIS): Remote Sensing: Geospatial ABM: Θ_compressor S, S Another S Confidence:",
+    "compression_ratio": 7.096969696969697,
+    "symbol_count": 165,
+    "timestamp": "2025-11-18T10:47:11.397071Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ",
+    "compression_ratio": 1171.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:47:11.397358Z"
+  }
+]

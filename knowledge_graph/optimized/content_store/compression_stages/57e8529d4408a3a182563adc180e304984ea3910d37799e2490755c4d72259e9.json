@@ -1,0 +1,51 @@
+[
+  {
+    "stage_name": "Concise",
+    "content": "Gemini LLM: calls predefined fns based on user prompt, gen'g fn name & args.",
+    "compression_ratio": 3.6052631578947367,
+    "symbol_count": 76,
+    "timestamp": "2025-11-17T12:13:20.511862Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "Gemini LLM: calls predefined fns based on user prompt, gen'g fn name & args.",
+    "compression_ratio": 3.6052631578947367,
+    "symbol_count": 76,
+    "timestamp": "2025-11-17T12:13:20.514548Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "Gemini LLM: calls predefined fns based on user prompt, gen'g fn name & args.",
+    "compression_ratio": 3.6052631578947367,
+    "symbol_count": 76,
+    "timestamp": "2025-11-17T12:13:20.516428Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "Gemini LLM: calls predefined fns based on user prompt, gen'g fn name & args.",
+    "compression_ratio": 3.6052631578947367,
+    "symbol_count": 76,
+    "timestamp": "2025-11-17T12:13:20.517619Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "Gemini LLM: calls predefined fns based on user prompt, gen'g fn name & args.",
+    "compression_ratio": 3.6052631578947367,
+    "symbol_count": 76,
+    "timestamp": "2025-11-17T12:13:20.518171Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "Gemini LLM: calls predefined fns based on user prompt, gen'g fn name & args.",
+    "compression_ratio": 3.6052631578947367,
+    "symbol_count": 76,
+    "timestamp": "2025-11-17T12:13:20.518627Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ",
+    "compression_ratio": 274.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-17T12:13:20.518816Z"
+  }
+]

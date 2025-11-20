@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Natural Language Processing\nNode\n\nDEFINITION:\nNatural Language Processing\nNode: Detailed description of the system's architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Natural Language Processing\nNode'\n\nEXAMPLE APPLICATION:\n scope, and goals.\nEdges:\nNode 2: System Architecture\nNode 3: System Requirements\nNode 2: System Architecture\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows.\nEdges:\nNode 4: Cognitive Architecture\nNode 5: Machine Learning\nNode 6: Natural Language Processing\nNode 3: System Requirements\n\nDescription: Detailed description of the system's requirements, including its functional, performance, and security requirements.\nEdges:\nNode 7\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1174,
+    "timestamp": "2025-11-18T10:47:40.510077Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Natural Language Processing\nNode\n\nDEFINITION:\nNatural Language Processing\nNode: Detailed description of the system's architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Natural Language Processing\nNode'\n\nEXAMPLE APPLICATION:\n scope, and goals.\nEdges:\nNode 2: System Architecture\nNode 3: System Requirements\nNode 2: System Architecture\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows.\nEdges:\nNod",
+    "compression_ratio": 2.0,
+    "symbol_count": 587,
+    "timestamp": "2025-11-18T10:47:40.510103Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Natural Language Ping Node D: Natural Language Ping Node: Detailed description of S's architecture, including its components, interfaces, data flows BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Natural Language Ping Node' EXAMPLE APPLICATION: scope, goals. Edges: Node 2: S Architecture Node 3: S Requirements Node 2: S Architecture Description: Detailed description of S's architecture, including its components, interfaces, data flows. Edges: Nod",
+    "compression_ratio": 2.343313373253493,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:40.516609Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Natural Language Ping Node D: Natural Language Ping Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Node' EXAMPLE APPLICATION: scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. Edges: Nod",
+    "compression_ratio": 2.524731182795699,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:40.520975Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Natural Language Ping Node D: Natural Language Ping Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Node' EXAMPLE APPLICATION: scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. Edges: Nod",
+    "compression_ratio": 2.524731182795699,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:40.527296Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Natural Language Ping Node D: Natural Language Ping Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Node' EXAMPLE APPLICATION: scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. Edges: Nod",
+    "compression_ratio": 2.524731182795699,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:40.530253Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Natural Language Ping Node D: Natural Language Ping Node: Detailed S's BLUEPRINT DETAILS: Θ Node Original Θ Language Ping Node' EXAMPLE APPLICATION: Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed S's Edges: Nod",
+    "compression_ratio": 4.550387596899225,
+    "symbol_count": 258,
+    "timestamp": "2025-11-18T10:47:40.533070Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 391.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:40.533625Z"
+  }
+]

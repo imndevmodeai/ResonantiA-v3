@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Disease Diagnosis\n\nDEFINITION:\nDisease Diagnosis: Mastermind_AI is designed to provide advanced healthcare capabilities to improve patient outcomes:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Disease Diagnosis'\n\nEXAMPLE APPLICATION:\n   * Assessment and Evaluation: Creating assessment and evaluation techniques that enable the AI system to measure student progress and identify areas for improvement.\n\n62. AI-Driven Healthcare: Mastermind_AI is designed to provide advanced healthcare capabilities to improve patient outcomes:\n    * Disease Diagnosis: Developing disease diagnosis techniques that enable the AI system to accurately diagnose diseases and conditions.\n    * Personalized Medicine: Implementing personalized medicine tec\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1124,
+    "timestamp": "2025-11-18T10:47:35.591952Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Disease Diagnosis\n\nDEFINITION:\nDisease Diagnosis: Mastermind_AI is designed to provide advanced healthcare capabilities to improve patient outcomes:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Disease Diagnosis'\n\nEXAMPLE APPLICATION:\n   * Assessment and Evaluation: Creating assessment and evaluation techniques that enable the AI system to measure student progress and identify areas for improvement.\n\n62. AI-Driven Healthcare: Mastermind_AI is designed to provide advanced healthcare capabilities",
+    "compression_ratio": 2.0,
+    "symbol_count": 562,
+    "timestamp": "2025-11-18T10:47:35.591998Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Disease Diagnosis D: Disease Diagnosis: Mastermind_AI is designed to provide advanced healthcare capabilities to improve patient outcomes: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Disease Diagnosis' EXAMPLE APPLICATION: * Assessment Evaluation: Creating assessment evaluation techniques enable AI S to measure student progress identify areas improvement. 62. AI-Driven Healthcare: Mastermind_AI is designed to provide advanced healthcare capabilities",
+    "compression_ratio": 2.2169625246548326,
+    "symbol_count": 507,
+    "timestamp": "2025-11-18T10:47:35.598245Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Disease Diagnosis D: Disease Diagnosis: Mastermind_AI designed provide advanced healthcare capabilities improve patient outcomes: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Disease Diagnosis' EXAMPLE APPLICATION: Assessment Evaluation: Creating assessment evaluation techniques enable AI S measure student progress identify areas improvement. AI-Driven Healthcare: Mastermind_AI designed provide advanced healthcare capabilities",
+    "compression_ratio": 2.341666666666667,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:35.619257Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Disease Diagnosis D: Disease Diagnosis: Mastermind_AI designed provide advanced healthcare capabilities improve patient outcomes: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Disease Diagnosis' EXAMPLE APPLICATION: Assessment Evaluation: Creating assessment evaluation techniques enable AI S measure student progress identify areas improvement. AI-Driven Healthcare: Mastermind_AI designed provide advanced healthcare capabilities",
+    "compression_ratio": 2.341666666666667,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:35.639497Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Disease Diagnosis D: Disease Diagnosis: Mastermind_AI designed provide advanced healthcare capabilities improve patient outcomes: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Disease Diagnosis' EXAMPLE APPLICATION: Assessment Evaluation: Creating assessment evaluation techniques enable AI S measure student progress identify areas improvement. AI-Driven Healthcare: Mastermind_AI designed provide advanced healthcare capabilities",
+    "compression_ratio": 2.341666666666667,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:35.648160Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Disease Diagnosis D: Disease Diagnosis: Mastermind_AI BLUEPRINT DETAILS: Θ Node Original Θ Diagnosis' EXAMPLE APPLICATION: Assessment Evaluation: Creating AI S AI-Driven Healthcare: Mastermind_AI",
+    "compression_ratio": 5.592039800995025,
+    "symbol_count": 201,
+    "timestamp": "2025-11-18T10:47:35.657237Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 374.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:35.659460Z"
+  }
+]

@@ -34,7 +34,15 @@ from pydantic import BaseModel
 import uvicorn
 
 # Import terminal capturer
-from .terminal_capturer import TerminalOutputCapturer, RichConsoleCapturer, stream_terminal_output
+try:
+    from .terminal_capturer import TerminalOutputCapturer, RichConsoleCapturer, stream_terminal_output
+except ImportError:
+    # Fallback for direct execution
+    import sys
+    from pathlib import Path
+    backend_dir = Path(__file__).parent
+    sys.path.insert(0, str(backend_dir))
+    from terminal_capturer import TerminalOutputCapturer, RichConsoleCapturer, stream_terminal_output
 
 # Import ArchE components
 try:
@@ -107,6 +115,38 @@ class ConnectionManager:
             del self.query_output_queues[query_id]
 
 manager = ConnectionManager()
+
+# Helper function to clean result for JSON serialization
+def clean_result_for_json(result: Any) -> Any:
+    """Recursively clean result dictionary to remove non-serializable objects."""
+    if isinstance(result, dict):
+        cleaned = {}
+        for key, value in result.items():
+            # Skip config objects and other non-serializable objects
+            if key == 'config' or 'EnhancedUnifiedArchEConfig' in str(type(value)):
+                continue
+            # Skip other complex objects that can't be serialized
+            if hasattr(value, '__dict__') and not isinstance(value, (str, int, float, bool, type(None))):
+                # Try to extract serializable attributes if it's a simple object
+                try:
+                    cleaned[key] = {k: v for k, v in value.__dict__.items() 
+                                   if isinstance(v, (str, int, float, bool, type(None), dict, list))}
+                except:
+                    continue
+            else:
+                cleaned[key] = clean_result_for_json(value)
+        return cleaned
+    elif isinstance(result, list):
+        return [clean_result_for_json(item) for item in result]
+    else:
+        # For primitive types, return as-is
+        if isinstance(result, (str, int, float, bool, type(None))):
+            return result
+        # For other types, try to convert to string or skip
+        try:
+            return str(result)
+        except:
+            return None
 
 # Pydantic models for request/response
 class QueryRequest(BaseModel):
@@ -277,14 +317,16 @@ async def get_thought_trail_stats():
 async def submit_query(request: QueryRequest, background_tasks: BackgroundTasks):
     """Submit a query to ArchE for processing."""
     
+    processor = None
     try:
         # Import ask_arche functionality
         sys.path.insert(0, str(PROJECT_ROOT))
-        from ask_arche_enhanced_v2 import EnhancedRealArchEProcessor, EnhancedUnifiedArchEConfig
+        from ask_arche_enhanced_v2 import EnhancedRealArchEProcessor, EnhancedUnifiedArchEConfig, EnhancedVCDIntegration
         
         # Initialize config and processor
         config = EnhancedUnifiedArchEConfig()
-        processor = EnhancedRealArchEProcessor(config)
+        vcd = EnhancedVCDIntegration(config)
+        processor = EnhancedRealArchEProcessor(vcd, config)
         
         # Process query
         result = await processor.process_query(request.query)
@@ -297,27 +339,47 @@ async def submit_query(request: QueryRequest, background_tasks: BackgroundTasks)
             "confidence": result.get("response", {}).get("reflection", {}).get("confidence", 0.0)
         })
         
+        # Clean result to remove non-serializable objects
+        clean_result = clean_result_for_json(result)
+        
         return {
             "status": "success",
             "query": request.query,
-            "result": result,
+            "result": clean_result,
             "timestamp": datetime.now().isoformat()
         }
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Query processing error: {str(e)}")
+    finally:
+        # CRITICAL: Always shutdown processor to close browser instances
+        if processor:
+            try:
+                await processor.shutdown()
+            except Exception as e:
+                logger.error(f"Error during processor shutdown: {e}")
+        
+        # Additional safety: Force cleanup of any orphaned browser processes
+        try:
+            sys.path.insert(0, os.path.join(str(PROJECT_ROOT), "Three_PointO_ArchE"))
+            from browser_cleanup import cleanup_browser_processes
+            cleanup_browser_processes()
+        except Exception as e:
+            logger.debug(f"Browser cleanup utility not available or failed: {e}")
 
 @app.post("/api/query/stream")
 async def stream_query(request: QueryRequest):
     """Stream query responses in real-time using Server-Sent Events."""
     
     async def event_generator():
+        processor = None
         try:
             sys.path.insert(0, str(PROJECT_ROOT))
-            from ask_arche_enhanced_v2 import EnhancedRealArchEProcessor, EnhancedUnifiedArchEConfig
+            from ask_arche_enhanced_v2 import EnhancedRealArchEProcessor, EnhancedUnifiedArchEConfig, EnhancedVCDIntegration
             
             config = EnhancedUnifiedArchEConfig()
-            processor = EnhancedRealArchEProcessor(config)
+            vcd = EnhancedVCDIntegration(config)
+            processor = EnhancedRealArchEProcessor(vcd, config)
             
             # Send initial event
             yield f"data: {json.dumps({'type': 'start', 'query': request.query})}\n\n"
@@ -339,6 +401,21 @@ async def stream_query(request: QueryRequest):
             
         except Exception as e:
             yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
+        finally:
+            # CRITICAL: Always shutdown processor to close browser instances
+            if processor:
+                try:
+                    await processor.shutdown()
+                except Exception as e:
+                    logger.error(f"Error during processor shutdown: {e}")
+            
+            # Additional safety: Force cleanup of any orphaned browser processes
+            try:
+                sys.path.insert(0, os.path.join(str(PROJECT_ROOT), "Three_PointO_ArchE"))
+                from browser_cleanup import cleanup_browser_processes
+                cleanup_browser_processes()
+            except Exception as e:
+                logger.debug(f"Browser cleanup utility not available or failed: {e}")
     
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
@@ -418,7 +495,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 
                 try:
                     sys.path.insert(0, str(PROJECT_ROOT))
-                    from ask_arche_enhanced_v2 import EnhancedRealArchEProcessor, EnhancedUnifiedArchEConfig
+                    from ask_arche_enhanced_v2 import EnhancedRealArchEProcessor, EnhancedUnifiedArchEConfig, EnhancedVCDIntegration
                     
                     # Create output queue for this query
                     output_queue = manager.create_output_queue(query_id)
@@ -455,13 +532,15 @@ async def websocket_endpoint(websocket: WebSocket):
                     if original_console:
                         ask_arche_enhanced_v2.console = rich_capturer.get_console()
                     
+                    processor = None
                     try:
                         # Start capturing
                         capturer.start_capture()
                         
                         # Initialize config and processor
                         config = EnhancedUnifiedArchEConfig()
-                        processor = EnhancedRealArchEProcessor(config)
+                        vcd = EnhancedVCDIntegration(config)
+                        processor = EnhancedRealArchEProcessor(vcd, config)
                         
                         # Process query
                         result = await processor.process_query(query_text)
@@ -476,6 +555,21 @@ async def websocket_endpoint(websocket: WebSocket):
                         })
                         
                     finally:
+                        # CRITICAL: Always shutdown processor to close browser instances
+                        if processor:
+                            try:
+                                await processor.shutdown()
+                            except Exception as e:
+                                logger.error(f"Error during processor shutdown: {e}")
+                        
+                        # Additional safety: Force cleanup of any orphaned browser processes
+                        try:
+                            sys.path.insert(0, os.path.join(str(PROJECT_ROOT), "Three_PointO_ArchE"))
+                            from browser_cleanup import cleanup_browser_processes
+                            cleanup_browser_processes()
+                        except Exception as e:
+                            logger.debug(f"Browser cleanup utility not available or failed: {e}")
+                        
                         # Stop capturing and restore console
                         capturer.stop_capture()
                         if original_console:
@@ -491,12 +585,15 @@ async def websocket_endpoint(websocket: WebSocket):
                         # Clean up queue
                         manager.remove_output_queue(query_id)
                     
+                    # Clean result - remove non-serializable objects
+                    clean_result = clean_result_for_json(result)
+                    
                     # Send result
                     await websocket.send_json({
                         "type": "query_response",
                         "query": query_text,
                         "query_id": query_id,
-                        "result": result,
+                        "result": clean_result,
                         "timestamp": datetime.now().isoformat()
                     })
                     

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Query Execution\n\nDEFINITION:\nQuery Execution: the stage where the system retrieves data from the specified sources based on the optimized plan\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Query Execution'\n\nEXAMPLE APPLICATION:\nURL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750\nEpoch Time: 1738044185\nDate: 2025-01-2806:03:05.106\nTitle: 🤖 Machine Learning Engine\n\nThe Crucial Role of Query Execution in Data Extraction\nQuery execution is the stage where the system retrieves data from the specified sources based on the optimized plan. It's a critical step in the data extraction pipeline, acting as the bridge between the planned approach and the actual data retrieval.\nThe sources discuss query exe\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1116,
+    "timestamp": "2025-11-18T10:47:23.675481Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Query Execution\n\nDEFINITION:\nQuery Execution: the stage where the system retrieves data from the specified sources based on the optimized plan\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Query Execution'\n\nEXAMPLE APPLICATION:\nURL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750\nEpoch Time: 1738044185\nDate: 2025-01-2806:03:05.106\nTitle: 🤖 Machine Learning Engine\n\nThe Crucial Role of Query Execution in Data Extraction\nQuery execution is the stage where the system ret",
+    "compression_ratio": 2.0,
+    "symbol_count": 558,
+    "timestamp": "2025-11-18T10:47:23.675508Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Query Execution D: Query Execution: stage S retrieves data specified sources based on optimized plan BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Query Execution' EXAMPLE APPLICATION: URL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750 Epoch Time: 1738044185 Date: 2025-01-2806:03:05.106 Title: 🤖 Machine Learning Engine Crucial Role of Query Execution in Data Extraction Query execution is stage S ret",
+    "compression_ratio": 2.32016632016632,
+    "symbol_count": 481,
+    "timestamp": "2025-11-18T10:47:23.681882Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Query Execution D: Query Execution: stage S retrieves specified sources ABM optimized BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Execution' EXAMPLE APPLICATION: URL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750 Epoch Time: 1738044185 Date: 2025-01-2806:03:05.106 Title: Machine Learning Engine Crucial Role Query Execution Data Extraction Query execution stage S",
+    "compression_ratio": 2.4910714285714284,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:23.685020Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Query Execution D: Query Execution: stage S retrieves specified sources ABM optimized BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Execution' EXAMPLE APPLICATION: URL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750 Epoch Time: 1738044185 Date: 2025-01-2806:03:05.106 Title: Machine Learning Engine Crucial Role Query Execution Data Extraction Query execution stage S",
+    "compression_ratio": 2.4910714285714284,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:23.687586Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Query Execution D: Query Execution: stage S retrieves specified sources ABM optimized BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Execution' EXAMPLE APPLICATION: URL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750 Epoch Time: 1738044185 Date: 2025-01-2806:03:05.106 Title: Machine Learning Engine Crucial Role Query Execution Data Extraction Query execution stage S",
+    "compression_ratio": 2.4910714285714284,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:23.690727Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Query Execution D: Query Execution: S ABM BLUEPRINT DETAILS: Θ Node Original Θ Execution' EXAMPLE APPLICATION: URL: Epoch Time: 1738044185 Date: Title: Machine Learning Engine Crucial Role Query Execution Data Extraction Query S",
+    "compression_ratio": 4.769230769230769,
+    "symbol_count": 234,
+    "timestamp": "2025-11-18T10:47:23.693243Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 372.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.693600Z"
+  }
+]

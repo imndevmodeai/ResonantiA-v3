@@ -164,11 +164,10 @@ def reject_review(
 if __name__ == "__main__":
     # A quick mock for testing the CLI
     from datetime import datetime
-
-# ============================================================================
-# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
-# ============================================================================
-from .temporal_core import now_iso, format_filename, format_log, Timer
+    # ============================================================================
+    # TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+    # ============================================================================
+    from .temporal_core import now_iso, format_filename, format_log, Timer
     
     # Create a fake review package for demonstration
     mock_insight_id = f"insight_{int(datetime.utcnow().timestamp())}"

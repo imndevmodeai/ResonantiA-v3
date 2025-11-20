@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Terrence Howard\n\nDEFINITION:\nTerrence Howard: taking place it's all speculation and the fact that hydrogen is even an element I mean according to Terrence Howard yes it's an element but it's all based on pressure and waves which seems to make more sense as though I think about this things because how do you if we looked at an ant an ant started to move around bits of sand gather food and do all the things that did and it considered itself evolving and making itself better because it turned a piece of sand into a chair by digging out a hole and resting it against another piece of sand does that mean it's technology and if 10 generations later something s\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Terrence Howard'\n\nEXAMPLE APPLICATION:\nther side of the Galaxy to tell me that that's what we're in I don't know if anybody that's been witnessed the surface of the Sun to tell me that that's hydrogen fusion or fission whichever one it is taking place it's all speculation and the fact that hydrogen is even an element I mean according to Terrence Howard yes it's an element but it's all based on pressure and waves which seems to make more sense as though I think about this things because how do you if we looked at an ant an ant started\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1635,
+    "timestamp": "2025-11-18T10:47:28.041181Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Terrence Howard\n\nDEFINITION:\nTerrence Howard: taking place it's all speculation and the fact that hydrogen is even an element I mean according to Terrence Howard yes it's an element but it's all based on pressure and waves which seems to make more sense as though I think about this things because how do you if we looked at an ant an ant started to move around bits of sand gather food and do all the things that did and it considered itself evolving and making itself better because it turned a piece of sand into a chair by digging out a hole and resting it against another piece of sand does that mean it's technology and if 10 generations later something s\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Terrence Howard'\n\nEXAMPLE APPLICATION:\nther sid",
+    "compression_ratio": 2.001223990208078,
+    "symbol_count": 817,
+    "timestamp": "2025-11-18T10:47:28.041202Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Terrence Howard D: Terrence Howard: taking place it's speculation fact hydrogen is even an element I mean according to Terrence Howard yes it's an element it's based on pressure waves seems to make more sense as though I think about things because how do if we looked at an ant an ant started to move around bits of sand gather food do things did it considered itself evolving making itself better because it turned a piece of sand into a chair by digging out a hole resting it against another piece of sand does mean it's technology if 10 generations later something s BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Terrence Howard' EXAMPLE APPLICATION: ther sid",
+    "compression_ratio": 2.2899159663865545,
+    "symbol_count": 714,
+    "timestamp": "2025-11-18T10:47:28.047195Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Terrence Howard D: Terrence Howard: taking place speculation hydrogen element I according Terrence Howard element ABM pressure waves seems sense though I think about things because looked started around gather things considered itself evolving making itself better because turned piece chair digging resting against another piece technology generations later something BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Terrence Howard' EXAMPLE APPLICATION:",
+    "compression_ratio": 3.2634730538922154,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:28.055639Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Terrence Howard D: Terrence Howard: taking place speculation hydrogen element I according Terrence Howard element ABM pressure waves seems sense though I think about things because looked started around gather things considered itself evolving making itself better because turned piece chair digging resting against another piece technology generations later something BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Terrence Howard' EXAMPLE APPLICATION:",
+    "compression_ratio": 3.2634730538922154,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:28.058746Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Terrence Howard D: Terrence Howard: taking place speculation hydrogen element I according Terrence Howard element ABM pressure waves seems sense though I think about things because looked started around gather things considered itself evolving making itself better because turned piece chair digging resting against another piece technology generations later something BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Terrence Howard' EXAMPLE APPLICATION:",
+    "compression_ratio": 3.2634730538922154,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:28.061650Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Terrence Howard D: Terrence Howard: I Terrence Howard ABM I BLUEPRINT DETAILS: Θ Node Original Θ Howard' EXAMPLE APPLICATION:",
+    "compression_ratio": 12.48091603053435,
+    "symbol_count": 131,
+    "timestamp": "2025-11-18T10:47:28.063804Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 545.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:28.064668Z"
+  }
+]

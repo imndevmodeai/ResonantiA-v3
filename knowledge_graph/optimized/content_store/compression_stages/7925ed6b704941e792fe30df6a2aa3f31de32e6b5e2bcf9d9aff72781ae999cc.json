@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: IAR Compliance Vetting\n\nDEFINITION:\nA non-negotiable step performed by the Core Workflow Engine after every tool execution to ensure the output contains a valid, parsable Integrated Action Reflection (IAR) dictionary. Failure to pass this check is treated as a critical execution failure, triggering a Metacognitive Shift by default.\n\n[From agi.txt]: Verification of the step using credible sources, including URLs and links to relevant information.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Story Synopsis.\n\nEXAMPLE APPLICATION:\nGenerating structured self-assessment data for continuous learning and adaptation\n\nCATEGORY: SystemProcess\n\nRELATIONSHIPS:\ntype: ValidationCheck; performed_by: CoreworkflowenginE; validates: IAR; on_failure_triggers: Metacognitive shifT; ensures: SystemSelfAwarenessIntegrity; confidence: high\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1045,
+    "timestamp": "2025-11-18T10:46:48.814045Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: IAR Compliance Vetting\n\nDEFINITION:\nA non-negotiable step performed by the Core Workflow Engine after every tool execution to ensure the output contains a valid, parsable Integrated Action Reflection (IAR) dictionary. Failure to pass this check is treated as a critical execution failure, triggering a Metacognitive Shift by default.\n\n[From agi.txt]: Verification of the step using credible sources, including URLs and links to relevant information.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Story Synopsis.\n",
+    "compression_ratio": 2.0019157088122603,
+    "symbol_count": 522,
+    "timestamp": "2025-11-18T10:46:48.814074Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Φ Compliance Vetting D: A non-negotiable step performed by Core W after every tool execution to ensure output contains a valid, parsable Φ (Φ) dictionary. Failure to pass check is treated as a critical execution failure, triggering a MS by default. [ agi.txt]: Verification of step using credible sources, including URLs links to relevant inFion. BLUEPRINT DETAILS: See ResonantiA P v3.0, Story Synopsis.",
+    "compression_ratio": 2.548780487804878,
+    "symbol_count": 410,
+    "timestamp": "2025-11-18T10:46:48.814972Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Φ Compliance Vetting D: A non-negotiable performed Core W after every execution ensure output contains valid, parsable Φ (Φ) dictionary. Failure check treated critical execution failure, triggering MS default. agi.txt]: Verification using credible sources, including URLs links relevant inFion. BLUEPRINT DETAILS: See ResonantiA P v3.0, Story Synopsis.",
+    "compression_ratio": 2.9189944134078214,
+    "symbol_count": 358,
+    "timestamp": "2025-11-18T10:46:48.816702Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Φ Compliance Vetting D: A non-negotiable performed Core W after every execution ensure output contains valid, parsable Φ (Φ) dictionary. Failure check treated critical execution failure, triggering MS default. agi.txt]: Verification using credible sources, including URLs links relevant inFion. BLUEPRINT DETAILS: See ResonantiA P v3.0, Story Synopsis.",
+    "compression_ratio": 2.9189944134078214,
+    "symbol_count": 358,
+    "timestamp": "2025-11-18T10:46:48.818170Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Φ Compliance Vetting D: non-negotiable performed Core W after every execution ensure output contains valid, parsable Φ (Φ) dictionary. Failure check treated critical execution failure, triggering MS default. agi.txt]: Verification using credible sources, including URLs links relevant inFion. BLUEPRINT DETAILS: See ResonantiA P v3.0, Story Synopsis.",
+    "compression_ratio": 2.9353932584269664,
+    "symbol_count": 356,
+    "timestamp": "2025-11-18T10:46:48.819749Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Φ Compliance Vetting D: Core W Φ (Φ) Failure MS Verification URLs BLUEPRINT DETAILS: See ResonantiA P Story Synopsis.",
+    "compression_ratio": 8.495934959349594,
+    "symbol_count": 123,
+    "timestamp": "2025-11-18T10:46:48.825348Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Φ|Φ|Φ",
+    "compression_ratio": 209.0,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:46:48.826428Z"
+  }
+]

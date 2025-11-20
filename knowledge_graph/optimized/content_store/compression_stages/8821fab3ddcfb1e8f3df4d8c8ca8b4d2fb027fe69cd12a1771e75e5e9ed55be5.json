@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Transportation\n\nDEFINITION:\nDriven Transportation: designed to provide advanced transportation capabilities to improve safety and efficiency:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Transportation'\n\nEXAMPLE APPLICATION:\nized Medicine: Implementing personalized medicine techniques that enable the AI system to tailor treatment plans to individual patients' needs.\n    * Health Monitoring: Creating health monitoring techniques that enable the AI system to track patient health and detect potential health risks.\n\n63. AI-Driven Transportation: Mastermind_AI is designed to provide advanced transportation capabilities to improve safety and efficiency:\n    * Autonomous Vehicles: Developing autonomous vehicle techniques t\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1128,
+    "timestamp": "2025-11-18T10:47:35.800862Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Transportation\n\nDEFINITION:\nDriven Transportation: designed to provide advanced transportation capabilities to improve safety and efficiency:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Transportation'\n\nEXAMPLE APPLICATION:\nized Medicine: Implementing personalized medicine techniques that enable the AI system to tailor treatment plans to individual patients' needs.\n    * Health Monitoring: Creating health monitoring techniques that enable the AI system to track patient health and d",
+    "compression_ratio": 2.0,
+    "symbol_count": 564,
+    "timestamp": "2025-11-18T10:47:35.800886Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Transportation D: Driven Transportation: designed to provide advanced transportation capabilities to improve safety efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Transportation' EXAMPLE APPLICATION: ized Medicine: Implementing personalized medicine techniques enable AI S to tailor treatment plans to individual patients' needs. * Health Monitoring: Creating health monitoring techniques enable AI S to track patient health d",
+    "compression_ratio": 2.242544731610338,
+    "symbol_count": 503,
+    "timestamp": "2025-11-18T10:47:35.801846Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Transportation D: Driven Transportation: designed provide advanced transportation capabilities improve safety efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Transportation' EXAMPLE APPLICATION: Medicine: Implementing personalized medicine techniques enable AI S tailor treatment plans individual patients' needs. Health Monitoring: Creating health monitoring techniques enable AI S track patient health",
+    "compression_ratio": 2.369747899159664,
+    "symbol_count": 476,
+    "timestamp": "2025-11-18T10:47:35.803834Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Transportation D: Driven Transportation: designed provide advanced transportation capabilities improve safety efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Transportation' EXAMPLE APPLICATION: Medicine: Implementing personalized medicine techniques enable AI S tailor treatment plans individual patients' needs. Health Monitoring: Creating health monitoring techniques enable AI S track patient health",
+    "compression_ratio": 2.369747899159664,
+    "symbol_count": 476,
+    "timestamp": "2025-11-18T10:47:35.807897Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Transportation D: Driven Transportation: designed provide advanced transportation capabilities improve safety efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Transportation' EXAMPLE APPLICATION: Medicine: Implementing personalized medicine techniques enable AI S tailor treatment plans individual patients' needs. Health Monitoring: Creating health monitoring techniques enable AI S track patient health",
+    "compression_ratio": 2.369747899159664,
+    "symbol_count": 476,
+    "timestamp": "2025-11-18T10:47:35.812826Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Transportation D: Driven Transportation: BLUEPRINT DETAILS: Θ Node Original Θ Transportation' EXAMPLE APPLICATION: Medicine: Implementing AI S Health Monitoring: Creating AI S",
+    "compression_ratio": 6.0,
+    "symbol_count": 188,
+    "timestamp": "2025-11-18T10:47:35.815855Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 376.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:35.816193Z"
+  }
+]

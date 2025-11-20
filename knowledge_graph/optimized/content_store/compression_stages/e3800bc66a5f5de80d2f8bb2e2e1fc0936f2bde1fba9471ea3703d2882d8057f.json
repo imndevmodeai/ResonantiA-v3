@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Class: PatternManager\n\nDEFINITION:\nClass: PatternManager\n\nManages patterns identified by the system, such as recurring\nsequences of actions or common data structures.\n\nMethods: __init__, add_pattern, get_patterns\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/pattern_manager.py, type: python_class\n\nFULL IMPLEMENTATION CODE (pattern_manager.py):\n```python\nfrom typing import Dict, Any, List\n\nclass PatternManager:\n    \"\"\"\n    Manages patterns identified by the system, such as recurring\n    sequences of actions or common data structures.\n    \"\"\"\n    def __init__(self):\n        self.patterns = []\n\n    def add_pattern(self, pattern: Dict[str, Any]):\n        \"\"\"Adds a new pattern to the manager.\"\"\"\n        self.patterns.append(pattern)\n\n    def get_patterns(self) -> List[Dict[str, Any]]:\n        \"\"\"Returns all identified patterns.\"\"\"\n        return self.patterns \n```\n\nEXAMPLE APPLICATION:\nClass: PatternManager\n\nManages patterns identified by the system, such as recurring\nsequences of actions or common data structures.\n\nMethods: __init__, add_pattern, get_patterns\n\nCATEGORY: CodeKnowledge\n\nRELATIONSHIPS:\ntype: FromCodebase; source: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/pattern_manager.py; source_type: python_class",
+    "compression_ratio": 1.0,
+    "symbol_count": 1279,
+    "timestamp": "2025-11-18T11:00:52.652791Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Class: PatternManager\n\nDEFINITION:\nClass: PatternManager\n\nManages patterns identified by the system, such as recurring\nsequences of actions or common data structures.\n\nMethods: __init__, add_pattern, get_patterns\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/pattern_manager.py, type: python_class\n\nFULL IMPLEMENTATION CODE (pattern_manager.py):\n```python\nfrom typing import Dict, Any, List\n\nclass PatternManager:\n    \"\"\"\n    Manages patterns identified by the system, such as recurring\n    sequences of actions or common data structures.\n    \"\"\"\n    def __init__(self):\n        self.patterns = ",
+    "compression_ratio": 2.001564945226917,
+    "symbol_count": 639,
+    "timestamp": "2025-11-18T11:00:52.652820Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Class: PatternManager D: Class: PatternManager Manages patterns identified by S, such as recurring sequences of actions or common data structures. Methods: __init__, add_pattern, get_patterns BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/pattern_manager.py, type: python_class FULL I CODE (pattern_manager.py): ```python typing import Dict, Any, List class PatternManager: \"\"\" Manages patterns identified by S, such as recurring sequences of actions or common data structures. \"\"\" def __init__(self): self.patterns =",
+    "compression_ratio": 2.3254545454545457,
+    "symbol_count": 550,
+    "timestamp": "2025-11-18T11:00:52.655020Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Class: PatternManager D: Class: PatternManager Manages patterns identified S, recurring sequences actions common structures. Methods: __init__, add_pattern, get_patterns BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/pattern_manager.py, type: python_class FULL I CODE (pattern_manager.py): ```python typing import Dict, Any, List class PatternManager: Manages patterns identified S, recurring sequences actions common structures. __init__(self): self.patterns",
+    "compression_ratio": 2.5995934959349594,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T11:00:52.666900Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Class: PatternManager D: Class: PatternManager Manages patterns identified S, recurring sequences actions common structures. Methods: __init__, add_pattern, get_patterns BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/pattern_manager.py, type: python_class FULL I CODE (pattern_manager.py): ```python typing import Dict, Any, List class PatternManager: Manages patterns identified S, recurring sequences actions common structures. __init__(self): self.patterns",
+    "compression_ratio": 2.5995934959349594,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T11:00:52.673982Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Class: PatternManager D: Class: PatternManager Manages patterns identified S, recurring sequences actions common structures. Methods: __init__, add_pattern, get_patterns BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/pattern_manager.py, type: python_class FULL I CODE (pattern_manager.py): ```python typing import Dict, Any, List class PatternManager: Manages patterns identified S, recurring sequences actions common structures. __init__(self): self.patterns",
+    "compression_ratio": 2.5995934959349594,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T11:00:52.685120Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Class: PatternManager D: Class: PatternManager Manages S, Methods: BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/pattern_manager.py, FULL I CODE Dict, Any, List PatternManager: Manages S,",
+    "compression_ratio": 5.787330316742081,
+    "symbol_count": 221,
+    "timestamp": "2025-11-18T11:00:52.699151Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 1279.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T11:00:52.706664Z"
+  }
+]

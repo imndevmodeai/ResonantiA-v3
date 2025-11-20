@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Small Business\n\nDEFINITION:\nSmall Business: a starting point, and future updates will refine and elaborate on the concepts and technologies presented\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Small Business'\n\nEXAMPLE APPLICATION:\no provide updates and expansions as needed. The current version is a starting point, and future updates will refine and elaborate on the concepts and technologies presented.\n\nPlease type \"continue\" to proceed with the next section of the blueprint.\n\nContinue\n\n91. AI-Driven Financial Forecasting for Small Business: Mastermind_AI is designed to provide advanced financial forecasting capabilities for small businesses to improve their financial planning and decision-making:\n    * Financial Modeling:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1122,
+    "timestamp": "2025-11-18T10:47:39.349144Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Small Business\n\nDEFINITION:\nSmall Business: a starting point, and future updates will refine and elaborate on the concepts and technologies presented\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Small Business'\n\nEXAMPLE APPLICATION:\no provide updates and expansions as needed. The current version is a starting point, and future updates will refine and elaborate on the concepts and technologies presented.\n\nPlease type \"continue\" to proceed with the next section of the blueprint.\n\nContinue\n\n91. A",
+    "compression_ratio": 2.0,
+    "symbol_count": 561,
+    "timestamp": "2025-11-18T10:47:39.349168Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Small Business D: Small Business: a starting point, future updates will refine elaborate on concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Small Business' EXAMPLE APPLICATION: o provide updates expansions as needed. current version is a starting point, future updates will refine elaborate on concepts technologies presented. Please type \"continue\" to proceed next section of blueprint. Continue 91. A",
+    "compression_ratio": 2.3181818181818183,
+    "symbol_count": 484,
+    "timestamp": "2025-11-18T10:47:39.353918Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Small Business D: Small Business: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Small Business' EXAMPLE APPLICATION: provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed section blueprint. Continue A",
+    "compression_ratio": 2.5912240184757507,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:39.357237Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Small Business D: Small Business: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Small Business' EXAMPLE APPLICATION: provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed section blueprint. Continue A",
+    "compression_ratio": 2.5912240184757507,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:39.362595Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Small Business D: Small Business: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Small Business' EXAMPLE APPLICATION: provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed section blueprint. Continue",
+    "compression_ratio": 2.6032482598607887,
+    "symbol_count": 431,
+    "timestamp": "2025-11-18T10:47:39.365618Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Small Business D: Small Business: BLUEPRINT DETAILS: Θ Node Original Θ Business' EXAMPLE APPLICATION: Please Continue",
+    "compression_ratio": 9.121951219512194,
+    "symbol_count": 123,
+    "timestamp": "2025-11-18T10:47:39.367834Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 374.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:39.368114Z"
+  }
+]

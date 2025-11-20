@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Query Syntax\n\nDEFINITION:\nQuery Syntax: fundamental to extracting specific data [3]\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Query Syntax'\n\nEXAMPLE APPLICATION:\n Users can write queries in a JSON-like syntax to pinpoint the desired data elements, while AgentQL leverages a smart locator, powered by heuristics and machine learning algorithms, to accurately identify the corresponding elements on the web page [1, 2].\n\nTo effectively utilize AgentQL:\n\nLearn its Query Syntax: Understanding how to structure queries is fundamental to extracting specific data [3].\nUtilize the Chrome Extension: The extension facilitates real-time query testing, allowing users to \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1054,
+    "timestamp": "2025-11-18T10:47:24.888122Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Query Syntax\n\nDEFINITION:\nQuery Syntax: fundamental to extracting specific data [3]\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Query Syntax'\n\nEXAMPLE APPLICATION:\n Users can write queries in a JSON-like syntax to pinpoint the desired data elements, while AgentQL leverages a smart locator, powered by heuristics and machine learning algorithms, to accurately identify the corresponding elements on the web page [1, 2].\n\nTo effectively utilize AgentQL:\n\nLearn its",
+    "compression_ratio": 2.0,
+    "symbol_count": 527,
+    "timestamp": "2025-11-18T10:47:24.888158Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Query Syntax D: Query Syntax: fundamental to extracting specific data [3] BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Query Syntax' EXAMPLE APPLICATION: Users write queries in a JSON-like syntax to pinpoint desired data elements, while AgentQL leverages a smart locator, powered by heuristics machine learning algorithms, to accurately identify corresponding elements on web page [1, 2]. To effectively utilize AgentQL: Learn its",
+    "compression_ratio": 2.1821946169772257,
+    "symbol_count": 483,
+    "timestamp": "2025-11-18T10:47:24.889105Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Query Syntax D: Query Syntax: fundamental extracting specific BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Syntax' EXAMPLE APPLICATION: Users write queries JSON-like syntax pinpoint desired elements, while AgentQL leverages smart locator, powered heuristics machine learning algorithms, accurately identify corresponding elements To effectively utilize AgentQL: Learn",
+    "compression_ratio": 2.491725768321513,
+    "symbol_count": 423,
+    "timestamp": "2025-11-18T10:47:24.899606Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Query Syntax D: Query Syntax: fundamental extracting specific BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Syntax' EXAMPLE APPLICATION: Users write queries JSON-like syntax pinpoint desired elements, while AgentQL leverages smart locator, powered heuristics machine learning algorithms, accurately identify corresponding elements To effectively utilize AgentQL: Learn",
+    "compression_ratio": 2.491725768321513,
+    "symbol_count": 423,
+    "timestamp": "2025-11-18T10:47:24.903277Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Query Syntax D: Query Syntax: fundamental extracting specific BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Syntax' EXAMPLE APPLICATION: Users write queries JSON-like syntax pinpoint desired elements, while AgentQL leverages smart locator, powered heuristics machine learning algorithms, accurately identify corresponding elements effectively utilize AgentQL: Learn",
+    "compression_ratio": 2.5095238095238095,
+    "symbol_count": 420,
+    "timestamp": "2025-11-18T10:47:24.910236Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Query Syntax D: Query Syntax: BLUEPRINT DETAILS: Θ Node Original Θ Syntax' EXAMPLE APPLICATION: Users JSON-like AgentQL AgentQL: Learn",
+    "compression_ratio": 7.5285714285714285,
+    "symbol_count": 140,
+    "timestamp": "2025-11-18T10:47:24.914742Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 351.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.915019Z"
+  }
+]

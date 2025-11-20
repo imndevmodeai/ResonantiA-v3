@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Environmental Sustainability\n\nDEFINITION:\nDriven Environmental Sustainability: designed to drive environmental sustainability and reduce the environmental impact of human activities:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Environmental Sustainability'\n\nEXAMPLE APPLICATION:\nn techniques that enable the AI system to optimize new ideas and concepts for maximum social impact.\n    * Social Impact Measurement: Creating social impact measurement techniques that enable the AI system to measure and evaluate the social impact of new products, services, and experiences.\n\n44. AI-Driven Environmental Sustainability: Mastermind_AI is designed to drive environmental sustainability and reduce the environmental impact of human activities:\n    * Environmental Impact Assessment: Dev\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1183,
+    "timestamp": "2025-11-18T10:47:32.366266Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Environmental Sustainability\n\nDEFINITION:\nDriven Environmental Sustainability: designed to drive environmental sustainability and reduce the environmental impact of human activities:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Environmental Sustainability'\n\nEXAMPLE APPLICATION:\nn techniques that enable the AI system to optimize new ideas and concepts for maximum social impact.\n    * Social Impact Measurement: Creating social impact measurement techniques that enable the AI system to measure and evaluate the ",
+    "compression_ratio": 2.0016920473773268,
+    "symbol_count": 591,
+    "timestamp": "2025-11-18T10:47:32.366289Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Environmental Sustainability D: Driven Environmental Sustainability: designed to drive environmental sustainability reduce environmental impact of human activities: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Environmental Sustainability' EXAMPLE APPLICATION: n techniques enable AI S to optimize new ideas concepts maximum social impact. * Social Impact Measurement: Creating social impact measurement techniques enable AI S to measure evaluate",
+    "compression_ratio": 2.3060428849902532,
+    "symbol_count": 513,
+    "timestamp": "2025-11-18T10:47:32.367301Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Environmental Sustainability D: Driven Environmental Sustainability: designed drive environmental sustainability reduce environmental impact human activities: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Environmental Sustainability' EXAMPLE APPLICATION: techniques enable AI S optimize ideas concepts maximum social impact. Social Impact Measurement: Creating social impact measurement techniques enable AI S measure evaluate",
+    "compression_ratio": 2.414285714285714,
+    "symbol_count": 490,
+    "timestamp": "2025-11-18T10:47:32.370087Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Environmental Sustainability D: Driven Environmental Sustainability: designed drive environmental sustainability reduce environmental impact human activities: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Environmental Sustainability' EXAMPLE APPLICATION: techniques enable AI S optimize ideas concepts maximum social impact. Social Impact Measurement: Creating social impact measurement techniques enable AI S measure evaluate",
+    "compression_ratio": 2.414285714285714,
+    "symbol_count": 490,
+    "timestamp": "2025-11-18T10:47:32.373190Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Environmental Sustainability D: Driven Environmental Sustainability: designed drive environmental sustainability reduce environmental impact human activities: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Environmental Sustainability' EXAMPLE APPLICATION: techniques enable AI S optimize ideas concepts maximum social impact. Social Impact Measurement: Creating social impact measurement techniques enable AI S measure evaluate",
+    "compression_ratio": 2.414285714285714,
+    "symbol_count": 490,
+    "timestamp": "2025-11-18T10:47:32.376732Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Environmental Sustainability D: Driven Environmental Sustainability: BLUEPRINT DETAILS: Θ Node Original Θ Environmental Sustainability' EXAMPLE APPLICATION: AI S Social Impact Measurement: Creating AI S",
+    "compression_ratio": 5.502325581395349,
+    "symbol_count": 215,
+    "timestamp": "2025-11-18T10:47:32.380990Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 394.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:32.381358Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Usable Format\n\nDEFINITION:\nUsable Format: might include variations in formatting, missing values, or extraneous characters\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Usable Format'\n\nEXAMPLE APPLICATION:\nebsites, APIs, or databases often contain inconsistencies. This might include variations in formatting, missing values, or extraneous characters. Data cleaning procedures are essential to address these issues, ensuring the data is consistent and usable for further analysis.\nTransforming Data into a Usable Format: Raw data often requires transformation before it can be effectively analyzed or used for training machine learning models. This might involve converting data types, restructuring data i\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1094,
+    "timestamp": "2025-11-18T10:47:24.040571Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Usable Format\n\nDEFINITION:\nUsable Format: might include variations in formatting, missing values, or extraneous characters\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Usable Format'\n\nEXAMPLE APPLICATION:\nebsites, APIs, or databases often contain inconsistencies. This might include variations in formatting, missing values, or extraneous characters. Data cleaning procedures are essential to address these issues, ensuring the data is consistent and usable for further analysis.\nTran",
+    "compression_ratio": 2.0,
+    "symbol_count": 547,
+    "timestamp": "2025-11-18T10:47:24.040592Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Usable F D: Usable F: might include variations in Fting, missing values, or extraneous characters BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Usable F' EXAMPLE APPLICATION: ebsites, APIs, or databases often contain inconsistencies. might include variations in Fting, missing values, or extraneous characters. Data cleaning procedures essential to address these issues, ensuring data is consistent usable further analysis. Tran",
+    "compression_ratio": 2.279166666666667,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:24.045076Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Usable F D: Usable F: include variations Fting, missing values, extraneous characters BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Usable F' EXAMPLE APPLICATION: ebsites, APIs, databases often contain inconsistencies. include variations Fting, missing values, extraneous characters. Data cleaning procedures essential address these issues, ensuring consistent usable further analysis. Tran",
+    "compression_ratio": 2.492027334851936,
+    "symbol_count": 439,
+    "timestamp": "2025-11-18T10:47:24.047163Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Usable F D: Usable F: include variations Fting, missing values, extraneous characters BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Usable F' EXAMPLE APPLICATION: ebsites, APIs, databases often contain inconsistencies. include variations Fting, missing values, extraneous characters. Data cleaning procedures essential address these issues, ensuring consistent usable further analysis. Tran",
+    "compression_ratio": 2.492027334851936,
+    "symbol_count": 439,
+    "timestamp": "2025-11-18T10:47:24.052449Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Usable F D: Usable F: include variations Fting, missing values, extraneous characters BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Usable F' EXAMPLE APPLICATION: ebsites, APIs, databases often contain inconsistencies. include variations Fting, missing values, extraneous characters. Data cleaning procedures essential address these issues, ensuring consistent usable further analysis. Tran",
+    "compression_ratio": 2.492027334851936,
+    "symbol_count": 439,
+    "timestamp": "2025-11-18T10:47:24.065287Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Usable F D: Usable F: Fting, BLUEPRINT DETAILS: Θ Node Original Θ F' EXAMPLE APPLICATION: APIs, Fting, Data Tran",
+    "compression_ratio": 9.271186440677965,
+    "symbol_count": 118,
+    "timestamp": "2025-11-18T10:47:24.067327Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 364.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.073659Z"
+  }
+]

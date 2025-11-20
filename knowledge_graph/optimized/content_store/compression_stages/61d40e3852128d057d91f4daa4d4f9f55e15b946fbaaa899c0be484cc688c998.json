@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Fully Capable Assistants\n\nDEFINITION:\nFully Capable Assistants: added to Summers eyeS which is distilled into Summers eyeS… Const  “Summers eyeS”= {{url='https://bit\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Fully Capable Assistants'\n\nEXAMPLE APPLICATION:\nwledge is added to Summers eyeS which is distilled into Summers eyeS… Const  “Summers eyeS”= {{url='https://bit.ly/summersglasses'}}  you give each SPR life by speaking them into existence you creating  in the case of the SPRS ##SPRS## Come directly from YOU. When fully invoked the SPRs are in fact Fully Capable Assistants capable of Dialog, Contextualizing, Experimentation, once Invoked SPRs are everywhere wrapped around a user’s query to provide the context needed to complete a node in the kno\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1148,
+    "timestamp": "2025-11-18T10:47:26.315586Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Fully Capable Assistants\n\nDEFINITION:\nFully Capable Assistants: added to Summers eyeS which is distilled into Summers eyeS… Const  “Summers eyeS”= {{url='https://bit\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Fully Capable Assistants'\n\nEXAMPLE APPLICATION:\nwledge is added to Summers eyeS which is distilled into Summers eyeS… Const  “Summers eyeS”= {{url='https://bit.ly/summersglasses'}}  you give each SPR life by speaking them into existence you creating  in the case of the SPRS ##SPRS## Come directly fr",
+    "compression_ratio": 2.0,
+    "symbol_count": 574,
+    "timestamp": "2025-11-18T10:47:26.315619Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Fully Capable Assistants D: Fully Capable Assistants: added to Summers eyeS is distilled into Summers eyeS… Const “Summers eyeS”= {{url='https://bit BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Fully Capable Assistants' EXAMPLE APPLICATION: wledge is added to Summers eyeS is distilled into Summers eyeS… Const “Summers eyeS”= {{url='https://bit.ly/summersglasses'}} give each Θ life by speaking them into existence creating in case of ΘS ##ΘS## Come directly fr",
+    "compression_ratio": 2.229126213592233,
+    "symbol_count": 515,
+    "timestamp": "2025-11-18T10:47:26.318295Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Fully Capable Assistants D: Fully Capable Assistants: added Summers distilled Summers eyeS… Const “Summers eyeS”= {{url='https://bit BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Fully Capable Assistants' EXAMPLE APPLICATION: wledge added Summers distilled Summers eyeS… Const “Summers eyeS”= {{url='https://bit.ly/summersglasses'}} Θ speaking existence creating ΘS ##ΘS## Come directly",
+    "compression_ratio": 2.6390804597701147,
+    "symbol_count": 435,
+    "timestamp": "2025-11-18T10:47:26.321736Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Fully Capable Assistants D: Fully Capable Assistants: added Summers distilled Summers eyeS… Const “Summers eyeS”= {{url='https://bit BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Fully Capable Assistants' EXAMPLE APPLICATION: wledge added Summers distilled Summers eyeS… Const “Summers eyeS”= {{url='https://bit.ly/summersglasses'}} Θ speaking existence creating ΘS ##ΘS## Come directly",
+    "compression_ratio": 2.6390804597701147,
+    "symbol_count": 435,
+    "timestamp": "2025-11-18T10:47:26.328122Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Fully Capable Assistants D: Fully Capable Assistants: added Summers distilled Summers eyeS… Const “Summers eyeS”= {{url='https://bit BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Fully Capable Assistants' EXAMPLE APPLICATION: wledge added Summers distilled Summers eyeS… Const “Summers eyeS”= {{url='https://bit.ly/summersglasses'}} Θ speaking existence creating ΘS ##ΘS## Come directly",
+    "compression_ratio": 2.6390804597701147,
+    "symbol_count": 435,
+    "timestamp": "2025-11-18T10:47:26.330895Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Fully Capable Assistants D: Fully Capable Assistants: Summers Summers Const BLUEPRINT DETAILS: Θ Node Original Θ Capable Assistants' EXAMPLE APPLICATION: Summers Summers Const Θ ΘS ##ΘS## Come",
+    "compression_ratio": 5.797979797979798,
+    "symbol_count": 198,
+    "timestamp": "2025-11-18T10:47:26.335122Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ|Θ|Θ",
+    "compression_ratio": 127.55555555555556,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:26.336464Z"
+  }
+]

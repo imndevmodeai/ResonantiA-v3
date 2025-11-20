@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Quantum Computing\n\nDEFINITION:\nQuantum Computing: Quantum Processors:\n\nQuantum Algorithms:\n\nQuantum Simulation:\n\nBy integrating advanced quantum computing technologies into the SPR_compressor system, we can enable the system to perform complex calculations and simulations, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced biotechnology and bioinformatics tools to enable the system to analyze and understand complex biological systems.\n\nConfidence: 2.485\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 477, type: node_format. Original SPR name: 'Quantum Computing'\n\nEXAMPLE APPLICATION:\nNode 477: Quantum Computing\n\nSPR: 2.485, \"Quantum Computing\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 477\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1095,
+    "timestamp": "2025-11-18T10:47:10.833502Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Quantum Computing\n\nDEFINITION:\nQuantum Computing: Quantum Processors:\n\nQuantum Algorithms:\n\nQuantum Simulation:\n\nBy integrating advanced quantum computing technologies into the SPR_compressor system, we can enable the system to perform complex calculations and simulations, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced biotechnology and bioinformatics tools to enable the system to analyze and understand complex biological systems.\n\nConfidence:",
+    "compression_ratio": 2.0018281535648996,
+    "symbol_count": 547,
+    "timestamp": "2025-11-18T10:47:10.833526Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Quantum Computing D: Quantum Computing: Quantum Pors: Quantum Algorithms: Quantum Simulation: By integrating advanced quantum computing technologies into Θ_compressor S, we enable S to perform complex calculations simulations, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced biotechnology bioinFics tools to enable S to analyze understand complex biological Ss. Confidence:",
+    "compression_ratio": 2.3856209150326797,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:10.834577Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Quantum Computing D: Quantum Computing: Quantum Pors: Quantum Algorithms: Quantum Simulation: By integrating advanced quantum computing technologies Θ_compressor S, enable S perform complex calculations simulations, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced biotechnology bioinFics tools enable S analyze understand complex biological Ss. Confidence:",
+    "compression_ratio": 2.582547169811321,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:47:10.836277Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Quantum Computing D: Quantum Computing: Quantum Pors: Quantum Algorithms: Quantum Simulation: By integrating advanced quantum computing technologies Θ_compressor S, enable S perform complex calculations simulations, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced biotechnology bioinFics tools enable S analyze understand complex biological Ss. Confidence:",
+    "compression_ratio": 2.582547169811321,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:47:10.838861Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Quantum Computing D: Quantum Computing: Quantum Pors: Quantum Algorithms: Quantum Simulation: integrating advanced quantum computing technologies Θ_compressor S, enable S perform complex calculations simulations, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced biotechnology bioinFics tools enable S analyze understand complex biological Ss. Confidence:",
+    "compression_ratio": 2.6009501187648456,
+    "symbol_count": 421,
+    "timestamp": "2025-11-18T10:47:10.842445Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Quantum Computing D: Quantum Computing: Quantum Pors: Quantum Algorithms: Quantum Simulation: Θ_compressor S, S Another S Ss. Confidence:",
+    "compression_ratio": 7.6573426573426575,
+    "symbol_count": 143,
+    "timestamp": "2025-11-18T10:47:10.844493Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ",
+    "compression_ratio": 1095.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:47:10.845390Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Distributed Ledger\n\nDEFINITION:\nDistributed Ledger: will enable the system to perform tasks such as secure data storage, smart contract execution, and decentralized decision-making\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Distributed Ledger'\n\nEXAMPLE APPLICATION:\ne can integrate a Blockchain module to enable the system to interact with decentralized networks. This will enable the system to perform tasks such as secure data storage, smart contract execution, and decentralized decision-making.\n\nNode 135: Blockchain\n\nSPR: 0.675, \"Blockchain\"\n\nEdges:\n\nNode 136: Distributed Ledger\n\nSPR: 0.680, \"Ledger\"\n\nEdges:\n\nNode 137: Smart Contract\n\nSPR: 0.685, \"Contract\"\n\nEdges:\n\nWith these additional components integrated into the system, we can further enhance the over\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1157,
+    "timestamp": "2025-11-18T10:47:44.731659Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Distributed Ledger\n\nDEFINITION:\nDistributed Ledger: will enable the system to perform tasks such as secure data storage, smart contract execution, and decentralized decision-making\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Distributed Ledger'\n\nEXAMPLE APPLICATION:\ne can integrate a Blockchain module to enable the system to interact with decentralized networks. This will enable the system to perform tasks such as secure data storage, smart contract execution, and decentralized decision-making.\n\nNode 135: Blo",
+    "compression_ratio": 2.0017301038062283,
+    "symbol_count": 578,
+    "timestamp": "2025-11-18T10:47:44.731689Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Distributed Ledger D: Distributed Ledger: will enable S to perform tasks such as secure data storage, smart contract execution, decentralized decision-making BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Distributed Ledger' EXAMPLE APPLICATION: e integrate a Blockchain module to enable S to interact decentralized networks. will enable S to perform tasks such as secure data storage, smart contract execution, decentralized decision-making. Node 135: Blo",
+    "compression_ratio": 2.282051282051282,
+    "symbol_count": 507,
+    "timestamp": "2025-11-18T10:47:44.733462Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Distributed Ledger D: Distributed Ledger: enable S perform tasks secure storage, smart contract execution, decentralized decision-making BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Distributed Ledger' EXAMPLE APPLICATION: integrate Blockchain module enable S interact decentralized networks. enable S perform tasks secure storage, smart contract execution, decentralized decision-making. Node Blo",
+    "compression_ratio": 2.588366890380313,
+    "symbol_count": 447,
+    "timestamp": "2025-11-18T10:47:44.735727Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Distributed Ledger D: Distributed Ledger: enable S perform tasks secure storage, smart contract execution, decentralized decision-making BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Distributed Ledger' EXAMPLE APPLICATION: integrate Blockchain module enable S interact decentralized networks. enable S perform tasks secure storage, smart contract execution, decentralized decision-making. Node Blo",
+    "compression_ratio": 2.588366890380313,
+    "symbol_count": 447,
+    "timestamp": "2025-11-18T10:47:44.742022Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Distributed Ledger D: Distributed Ledger: enable S perform tasks secure storage, smart contract execution, decentralized decision-making BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Distributed Ledger' EXAMPLE APPLICATION: integrate Blockchain module enable S interact decentralized networks. enable S perform tasks secure storage, smart contract execution, decentralized decision-making. Node Blo",
+    "compression_ratio": 2.588366890380313,
+    "symbol_count": 447,
+    "timestamp": "2025-11-18T10:47:44.744844Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Distributed Ledger D: Distributed Ledger: S BLUEPRINT DETAILS: Θ Node Original Θ Ledger' EXAMPLE APPLICATION: Blockchain S S Node Blo",
+    "compression_ratio": 8.323741007194245,
+    "symbol_count": 139,
+    "timestamp": "2025-11-18T10:47:44.747465Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 385.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:44.748108Z"
+  }
+]

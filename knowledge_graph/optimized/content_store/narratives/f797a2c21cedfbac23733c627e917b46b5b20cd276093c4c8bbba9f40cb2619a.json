@@ -1,0 +1,1 @@
+{"content": "A specialized text generation capability that constrains the LLM's output to be grounded in a set of provided source materials. This ensures factual consistency and reduces hallucination by requiring citation or direct reference to the sources."}

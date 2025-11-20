@@ -19,7 +19,7 @@ import scipy.stats
 from pathlib import Path
 import matplotlib.pyplot as plt
 try:
-import seaborn as sns
+    import seaborn as sns
 except ImportError:
     sns = None  # Optional dependency
 

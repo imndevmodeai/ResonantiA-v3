@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Emotional Intelligence Capabilities\n\nDEFINITION:\nArchE capabilities for recognizing, simulating, and empathizing with emotions\n\nBLUEPRINT DETAILS:\nEnables ArchE to understand emotions through language, tone, and facial expressions\n\nEXAMPLE APPLICATION:\nProviding support, comfort, and understanding in human interactions\n\nCATEGORY: EmotionalCapability\n\nRELATIONSHIPS:\ntype: EmotionalCapability; recognizes: Human emotions; simulates: Emotional responses; empathizes: With humans; supports: Natural interaction; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 533,
+    "timestamp": "2025-11-18T10:46:47.030571Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Emotional Intelligence Capabilities\n\nDEFINITION:\nArchE capabilities for recognizing, simulating, and empathizing with emotions\n\nBLUEPRINT DETAILS:\nEnables ArchE to understand emotions through language, tone, and facial expressions\n\nEXAMPLE APPLICATION:\nProvidi",
+    "compression_ratio": 2.0037593984962405,
+    "symbol_count": 266,
+    "timestamp": "2025-11-18T10:46:47.030595Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Emotional Intelligence Capabilities D: Æ capabilities recognizing, simulating, empathizing emotions BLUEPRINT DETAILS: Enables Æ to understand emotions through language, tone, facial expressions EXAMPLE APPLICATION: Providi",
+    "compression_ratio": 2.3275109170305677,
+    "symbol_count": 229,
+    "timestamp": "2025-11-18T10:46:47.033907Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Emotional Intelligence Capabilities D: Æ capabilities recognizing, simulating, empathizing emotions BLUEPRINT DETAILS: Enables Æ understand emotions through language, tone, facial expressions EXAMPLE APPLICATION: Providi",
+    "compression_ratio": 2.3584070796460175,
+    "symbol_count": 226,
+    "timestamp": "2025-11-18T10:46:47.046401Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Emotional Intelligence Capabilities D: Æ capabilities recognizing, simulating, empathizing emotions BLUEPRINT DETAILS: Enables Æ understand emotions through language, tone, facial expressions EXAMPLE APPLICATION: Providi",
+    "compression_ratio": 2.3584070796460175,
+    "symbol_count": 226,
+    "timestamp": "2025-11-18T10:46:47.054349Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Emotional Intelligence Capabilities D: Æ capabilities recognizing, simulating, empathizing emotions BLUEPRINT DETAILS: Enables Æ understand emotions through language, tone, facial expressions EXAMPLE APPLICATION: Providi",
+    "compression_ratio": 2.3584070796460175,
+    "symbol_count": 226,
+    "timestamp": "2025-11-18T10:46:47.061397Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Emotional Intelligence Capabilities D: Æ BLUEPRINT DETAILS: Enables Æ EXAMPLE APPLICATION: Providi",
+    "compression_ratio": 5.125,
+    "symbol_count": 104,
+    "timestamp": "2025-11-18T10:46:47.070747Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Æ",
+    "compression_ratio": 177.66666666666666,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:47.071014Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Centered Design\n\nDEFINITION:\nCentered Design: designed with a human-centered approach, prioritizing human needs and values:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Centered Design'\n\nEXAMPLE APPLICATION:\n feature importance and partial dependence plots to understand how the system's models work.\n    * Model Explainability: Providing explanations for the system's decisions and actions.\n    * Transparency: Providing transparency into the system's decision-making processes and data sources.\n\n23. Human-Centered Design: Mastermind_AI is designed with a human-centered approach, prioritizing human needs and values:\n    * Human-Centered Design Principles: Incorporating human-centered design principles t\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1097,
+    "timestamp": "2025-11-18T10:47:29.708415Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Centered Design\n\nDEFINITION:\nCentered Design: designed with a human-centered approach, prioritizing human needs and values:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Centered Design'\n\nEXAMPLE APPLICATION:\n feature importance and partial dependence plots to understand how the system's models work.\n    * Model Explainability: Providing explanations for the system's decisions and actions.\n    * Transparency: Providing transparency into the system's decision-making processes and da",
+    "compression_ratio": 2.0018248175182483,
+    "symbol_count": 548,
+    "timestamp": "2025-11-18T10:47:29.708441Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Centered Design D: Centered Design: designed a human-centered approach, prioritizing human needs values: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Centered Design' EXAMPLE APPLICATION: feature importance partial dependence plots to understand how S's models work. * Model Explainability: Providing explanations S's decisions actions. * Transparency: Providing transparency into S's decision-making Pes da",
+    "compression_ratio": 2.384782608695652,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:29.712444Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Centered Design D: Centered Design: designed human-centered approach, prioritizing human needs values: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Centered Design' EXAMPLE APPLICATION: feature importance partial dependence plots understand S's models work. Model Explainability: Providing explanations S's decisions actions. Transparency: Providing transparency S's decision-making Pes",
+    "compression_ratio": 2.5160550458715596,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:29.724210Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Centered Design D: Centered Design: designed human-centered approach, prioritizing human needs values: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Centered Design' EXAMPLE APPLICATION: feature importance partial dependence plots understand S's models work. Model Explainability: Providing explanations S's decisions actions. Transparency: Providing transparency S's decision-making Pes",
+    "compression_ratio": 2.5160550458715596,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:29.728778Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Centered Design D: Centered Design: designed human-centered approach, prioritizing human needs values: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Centered Design' EXAMPLE APPLICATION: feature importance partial dependence plots understand S's models work. Model Explainability: Providing explanations S's decisions actions. Transparency: Providing transparency S's decision-making Pes",
+    "compression_ratio": 2.5160550458715596,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:29.733242Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Centered Design D: Centered Design: BLUEPRINT DETAILS: Θ Node Original Θ Design' EXAMPLE APPLICATION: S's Model Explainability: Providing S's Transparency: Providing S's Pes",
+    "compression_ratio": 6.128491620111732,
+    "symbol_count": 179,
+    "timestamp": "2025-11-18T10:47:29.740952Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 365.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:29.741303Z"
+  }
+]

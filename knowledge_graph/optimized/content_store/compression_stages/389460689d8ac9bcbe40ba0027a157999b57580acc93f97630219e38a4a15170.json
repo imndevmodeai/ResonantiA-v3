@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Creativity and Imagination System\n\nDEFINITION:\nArchE system for creative and imaginative capabilities\n\nBLUEPRINT DETAILS:\nUses GANs, VAEs for creative writing, art, and innovative problem-solving\n\nEXAMPLE APPLICATION:\nGenerating stories, poems, images, and developing innovative solutions\n\nCATEGORY: CreativeCapability\n\nRELATIONSHIPS:\ntype: CreativeCapability; uses: Generative models; creates: Original content; solves: Complex problems; develops: Innovative solutions; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 493,
+    "timestamp": "2025-11-18T10:45:52.122915Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Creativity and Imagination System\n\nDEFINITION:\nArchE system for creative and imaginative capabilities\n\nBLUEPRINT DETAILS:\nUses GANs, VAEs for creative writing, art, and innovative problem-solving\n\nEXAMPLE APPLICATION:\nGenerating stories, po",
+    "compression_ratio": 2.0040650406504064,
+    "symbol_count": 246,
+    "timestamp": "2025-11-18T10:45:52.122941Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Creativity Imagination S D: Æ S creative imaginative capabilities BLUEPRINT DETAILS: Uses GANs, VAEs creative writing, art, innovative problem-solving EXAMPLE APPLICATION: Generating stories, po",
+    "compression_ratio": 2.465,
+    "symbol_count": 200,
+    "timestamp": "2025-11-18T10:45:52.124279Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Creativity Imagination S D: Æ S creative imaginative capabilities BLUEPRINT DETAILS: Uses GANs, VAEs creative writing, innovative problem-solving EXAMPLE APPLICATION: Generating stories,",
+    "compression_ratio": 2.5677083333333335,
+    "symbol_count": 192,
+    "timestamp": "2025-11-18T10:45:52.126114Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Creativity Imagination S D: Æ S creative imaginative capabilities BLUEPRINT DETAILS: Uses GANs, VAEs creative writing, innovative problem-solving EXAMPLE APPLICATION: Generating stories,",
+    "compression_ratio": 2.5677083333333335,
+    "symbol_count": 192,
+    "timestamp": "2025-11-18T10:45:52.129100Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Creativity Imagination S D: Æ S creative imaginative capabilities BLUEPRINT DETAILS: Uses GANs, VAEs creative writing, innovative problem-solving EXAMPLE APPLICATION: Generating stories,",
+    "compression_ratio": 2.5677083333333335,
+    "symbol_count": 192,
+    "timestamp": "2025-11-18T10:45:52.132094Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Creativity Imagination S D: Æ S BLUEPRINT DETAILS: Uses GANs, VAEs EXAMPLE APPLICATION: Generating",
+    "compression_ratio": 4.740384615384615,
+    "symbol_count": 104,
+    "timestamp": "2025-11-18T10:45:52.133332Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 493.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:45:52.133586Z"
+  }
+]

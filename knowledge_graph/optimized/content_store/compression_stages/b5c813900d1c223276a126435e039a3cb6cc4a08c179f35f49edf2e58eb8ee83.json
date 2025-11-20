@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Life Insurance\n\nDEFINITION:\nLife Insurance: taken care of:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Life Insurance'\n\nEXAMPLE APPLICATION:\nanced financial planning capabilities for insurance planning to help individuals protect their assets and ensure their loved ones are taken care of:\n    * Insurance Planning: Developing insurance planning techniques that enable the AI system to provide personalized insurance plans and advice.\n    * Life Insurance: Implementing life insurance techniques that enable the AI system to help individuals determine the right amount of life insurance coverage.\n    * Disability Insurance: Creating disabil\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1031,
+    "timestamp": "2025-11-18T10:47:39.928191Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Life Insurance\n\nDEFINITION:\nLife Insurance: taken care of:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Life Insurance'\n\nEXAMPLE APPLICATION:\nanced financial planning capabilities for insurance planning to help individuals protect their assets and ensure their loved ones are taken care of:\n    * Insurance Planning: Developing insurance planning techniques that enable the AI system to provide personalized insurance plans and advice.\n    * Life Insur",
+    "compression_ratio": 2.0019417475728156,
+    "symbol_count": 515,
+    "timestamp": "2025-11-18T10:47:39.928216Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Life Insurance D: Life Insurance: taken care of: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Life Insurance' EXAMPLE APPLICATION: anced financial planning capabilities insurance planning to help individuals protect their assets ensure their loved ones taken care of: * Insurance Planning: Developing insurance planning techniques enable AI S to provide personalized insurance plans advice. * Life Insur",
+    "compression_ratio": 2.2609649122807016,
+    "symbol_count": 456,
+    "timestamp": "2025-11-18T10:47:39.929601Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Life Insurance D: Life Insurance: taken BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Life Insurance' EXAMPLE APPLICATION: anced financial planning capabilities insurance planning individuals protect their assets ensure their loved taken Insurance Planning: Developing insurance planning techniques enable AI S provide personalized insurance plans advice. Life Insur",
+    "compression_ratio": 2.4843373493975904,
+    "symbol_count": 415,
+    "timestamp": "2025-11-18T10:47:39.935891Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Life Insurance D: Life Insurance: taken BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Life Insurance' EXAMPLE APPLICATION: anced financial planning capabilities insurance planning individuals protect their assets ensure their loved taken Insurance Planning: Developing insurance planning techniques enable AI S provide personalized insurance plans advice. Life Insur",
+    "compression_ratio": 2.4843373493975904,
+    "symbol_count": 415,
+    "timestamp": "2025-11-18T10:47:39.950660Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Life Insurance D: Life Insurance: taken BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Life Insurance' EXAMPLE APPLICATION: anced financial planning capabilities insurance planning individuals protect their assets ensure their loved taken Insurance Planning: Developing insurance planning techniques enable AI S provide personalized insurance plans advice. Life Insur",
+    "compression_ratio": 2.4843373493975904,
+    "symbol_count": 415,
+    "timestamp": "2025-11-18T10:47:39.959001Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Life Insurance D: Life Insurance: BLUEPRINT DETAILS: Θ Node Original Θ Insurance' EXAMPLE APPLICATION: Insurance Planning: Developing AI S Life Insur",
+    "compression_ratio": 6.651612903225806,
+    "symbol_count": 155,
+    "timestamp": "2025-11-18T10:47:39.965388Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 343.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:39.965704Z"
+  }
+]

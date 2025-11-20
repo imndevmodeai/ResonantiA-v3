@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Natural Language      Text Analysis            Meaningful\n\nDEFINITION:\nNatural Language      Text Analysis            Meaningful: Meaningful Insights\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Natural Language      Text Analysis            Meaningful'\n\nEXAMPLE APPLICATION:\nmation in a concise and meaningful way.\n\n[3] https://en.wikipedia.org/wiki/Source,_Process,_Result\n->|/vetting|<-\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nSPRs:\n          Source          Process                  Result\n0  Machine Learning  Data Extraction  Contextually Reasoned Responses\n1  Natural Language      Text Analysis            Meaningful Insights\n->|/results|<-\n->|conditional|<-\nIf inconsistencies are found in the SPRs, trigger a conditional step to revise and revalidate them.\n\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1165,
+    "timestamp": "2025-11-18T10:47:26.213021Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Natural Language      Text Analysis            Meaningful\n\nDEFINITION:\nNatural Language      Text Analysis            Meaningful: Meaningful Insights\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Natural Language      Text Analysis            Meaningful'\n\nEXAMPLE APPLICATION:\nmation in a concise and meaningful way.\n\n[3] https://en.wikipedia.org/wiki/Source,_Process,_Result\n->|/vetting|<-\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nSPRs:\n          Source          Process                  Result\n0  Machine Learn",
+    "compression_ratio": 2.0017182130584192,
+    "symbol_count": 582,
+    "timestamp": "2025-11-18T10:47:26.213052Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Natural Language Text Analysis Meaningful D: Natural Language Text Analysis Meaningful: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Natural Language Text Analysis Meaningful' EXAMPLE APPLICATION: mation in a concise meaningful way. [3] https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/execution|<- ->|results|<- Θs: Source P Result 0 Machine Learn",
+    "compression_ratio": 2.5604395604395602,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:26.215042Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Natural Language Text Analysis Meaningful D: Natural Language Text Analysis Meaningful: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Text Analysis Meaningful' EXAMPLE APPLICATION: mation concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/execution|<- ->|results|<- Θs: Source P Result Machine Learn",
+    "compression_ratio": 2.6720183486238533,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:26.216981Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Natural Language Text Analysis Meaningful D: Natural Language Text Analysis Meaningful: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Text Analysis Meaningful' EXAMPLE APPLICATION: mation concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/execution|<- ->|results|<- Θs: Source P Result Machine Learn",
+    "compression_ratio": 2.6720183486238533,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:26.220538Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Natural Language Text Analysis Meaningful D: Natural Language Text Analysis Meaningful: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Text Analysis Meaningful' EXAMPLE APPLICATION: mation concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/execution|<- ->|results|<- Θs: Source P Result Machine Learn",
+    "compression_ratio": 2.6720183486238533,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:26.222938Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Natural Language Text Analysis Meaningful D: Natural Language Text Analysis Meaningful: Meaningful Insights BLUEPRINT DETAILS: Θ Node Original Θ Language Text Analysis Meaningful' EXAMPLE APPLICATION: Θs: Source P Result Machine Learn",
+    "compression_ratio": 4.854166666666667,
+    "symbol_count": 240,
+    "timestamp": "2025-11-18T10:47:26.225889Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 233.0,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:26.226462Z"
+  }
+]

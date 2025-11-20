@@ -1,0 +1,51 @@
+[
+  {
+    "stage_name": "Concise",
+    "content": "WebSearchToolErrorHandling: Automatic error handling pattern for web search tool failures, specifically addressing data type mismatches and function signature issues in enhanced perception engi",
+    "compression_ratio": 2.0,
+    "symbol_count": 193,
+    "timestamp": "2025-11-17T12:16:27.795196Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "WebSearchToolErrorHandling: Automatic error handling pattern web search tool failures, specifically addressing data type mismatches function signature issues in enhanced perception engi",
+    "compression_ratio": 2.0864864864864865,
+    "symbol_count": 185,
+    "timestamp": "2025-11-17T12:16:27.801319Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "WebSearchToolErrorHandling: Automatic error handling pattern web search tool failures, specifically addressing data type mismatches function signature issues in enhanced perception engi",
+    "compression_ratio": 2.0864864864864865,
+    "symbol_count": 185,
+    "timestamp": "2025-11-17T12:16:27.805586Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "WebSearchToolErrorHandling: Automatic error handling pattern web search tool failures, specifically addressing data type mismatches function signature issues in enhanced perception engi",
+    "compression_ratio": 2.0864864864864865,
+    "symbol_count": 185,
+    "timestamp": "2025-11-17T12:16:27.809381Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "WebSearchToolErrorHandling: Automatic error handling pattern web search tool failures, specifically addressing data type mismatches function signature issues in enhanced perception engi",
+    "compression_ratio": 2.0864864864864865,
+    "symbol_count": 185,
+    "timestamp": "2025-11-17T12:16:27.811495Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "WebSearchToolErrorHandling: Automatic error handling pattern web search tool failures, specifically addressing data type mismatches function signature issues in enhanced perception engi",
+    "compression_ratio": 2.0864864864864865,
+    "symbol_count": 185,
+    "timestamp": "2025-11-17T12:16:27.813092Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "W|S|T|E|H",
+    "compression_ratio": 42.888888888888886,
+    "symbol_count": 9,
+    "timestamp": "2025-11-17T12:16:27.813927Z"
+  }
+]

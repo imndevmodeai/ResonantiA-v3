@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Renewable Energy\n\nDEFINITION:\nRenewable Energy: designed to provide advanced energy capabilities to improve energy efficiency and sustainability:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Renewable Energy'\n\nEXAMPLE APPLICATION:\ns for vehicles.\n\n64. AI-Driven Energy: Mastermind_AI is designed to provide advanced energy capabilities to improve energy efficiency and sustainability:\n    * Energy Management: Developing energy management techniques that enable the AI system to optimize energy consumption and reduce waste.\n    * Renewable Energy: Implementing renewable energy techniques that enable the AI system to integrate renewable energy sources into the grid.\n    * Energy Storage: Creating energy storage techniques that \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1120,
+    "timestamp": "2025-11-18T10:47:36.111412Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Renewable Energy\n\nDEFINITION:\nRenewable Energy: designed to provide advanced energy capabilities to improve energy efficiency and sustainability:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Renewable Energy'\n\nEXAMPLE APPLICATION:\ns for vehicles.\n\n64. AI-Driven Energy: Mastermind_AI is designed to provide advanced energy capabilities to improve energy efficiency and sustainability:\n    * Energy Management: Developing energy management techniques that enable the AI system to optimize energy co",
+    "compression_ratio": 2.0,
+    "symbol_count": 560,
+    "timestamp": "2025-11-18T10:47:36.112131Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Renewable Energy D: Renewable Energy: designed to provide advanced energy capabilities to improve energy efficiency sustainability: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Renewable Energy' EXAMPLE APPLICATION: s vehicles. 64. AI-Driven Energy: Mastermind_AI is designed to provide advanced energy capabilities to improve energy efficiency sustainability: * Energy Management: Developing energy management techniques enable AI S to optimize energy co",
+    "compression_ratio": 2.204724409448819,
+    "symbol_count": 508,
+    "timestamp": "2025-11-18T10:47:36.120514Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Renewable Energy D: Renewable Energy: designed provide advanced energy capabilities improve energy efficiency sustainability: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Renewable Energy' EXAMPLE APPLICATION: vehicles. AI-Driven Energy: Mastermind_AI designed provide advanced energy capabilities improve energy efficiency sustainability: Energy Management: Developing energy management techniques enable AI S optimize energy",
+    "compression_ratio": 2.3529411764705883,
+    "symbol_count": 476,
+    "timestamp": "2025-11-18T10:47:36.122853Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Renewable Energy D: Renewable Energy: designed provide advanced energy capabilities improve energy efficiency sustainability: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Renewable Energy' EXAMPLE APPLICATION: vehicles. AI-Driven Energy: Mastermind_AI designed provide advanced energy capabilities improve energy efficiency sustainability: Energy Management: Developing energy management techniques enable AI S optimize energy",
+    "compression_ratio": 2.3529411764705883,
+    "symbol_count": 476,
+    "timestamp": "2025-11-18T10:47:36.131255Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Renewable Energy D: Renewable Energy: designed provide advanced energy capabilities improve energy efficiency sustainability: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Renewable Energy' EXAMPLE APPLICATION: vehicles. AI-Driven Energy: Mastermind_AI designed provide advanced energy capabilities improve energy efficiency sustainability: Energy Management: Developing energy management techniques enable AI S optimize energy",
+    "compression_ratio": 2.3529411764705883,
+    "symbol_count": 476,
+    "timestamp": "2025-11-18T10:47:36.137878Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Renewable Energy D: Renewable Energy: BLUEPRINT DETAILS: Θ Node Original Θ Energy' EXAMPLE APPLICATION: AI-Driven Energy: Mastermind_AI Energy Management: Developing AI S",
+    "compression_ratio": 6.363636363636363,
+    "symbol_count": 176,
+    "timestamp": "2025-11-18T10:47:36.159727Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 373.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:36.161786Z"
+  }
+]

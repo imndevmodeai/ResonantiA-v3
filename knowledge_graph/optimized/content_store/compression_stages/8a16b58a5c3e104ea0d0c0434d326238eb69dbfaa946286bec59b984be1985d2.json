@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Causal Lag Detection\n\nDEFINITION:\nA specific temporal capability within Causal Inference that analyzes time series data to identify and quantify time-delayed cause-and-effect relationships between variables.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 3.12, 7.13.\n\nEXAMPLE APPLICATION:\nCausallagdetectioN revealed that changes in supplier inventory levels only impacted production output after a 3-week delay.\n\nCATEGORY: AnalyticalTechnique\n\nRELATIONSHIPS:\ntype: TemporalAnalysis; is_part_of: Causal inferencE; implemented_in: CausalInferenceTool; analyzes: TimeSeriesData; informs: PredictivE modelinG tooL, ABM rule timing; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 662,
+    "timestamp": "2025-11-18T10:45:50.876623Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Causal Lag Detection\n\nDEFINITION:\nA specific temporal capability within Causal Inference that analyzes time series data to identify and quantify time-delayed cause-and-effect relationships between variables.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 3.12, 7.13.\n\nEXAMPLE APPLICATION:\nCausallagdetectioN reveal",
+    "compression_ratio": 2.0,
+    "symbol_count": 331,
+    "timestamp": "2025-11-18T10:45:50.876653Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Causal Lag Detection D: A specific temporal capability within CI analyzes time series data to identify quantify time-delayed cause--effect relationships between variables. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.12, 7.13. EXAMPLE APPLICATION: CausallagdetectioN reveal",
+    "compression_ratio": 2.3146853146853146,
+    "symbol_count": 286,
+    "timestamp": "2025-11-18T10:45:50.877516Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: CI Lag Detection D: A specific Δ capability within CI analyzes series identify quantify time-delayed cause--effect relationships between variables. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.12, 7.13. EXAMPLE APPLICATION: CausallagdetectioN reveal",
+    "compression_ratio": 2.5267175572519083,
+    "symbol_count": 262,
+    "timestamp": "2025-11-18T10:45:50.882164Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: CI Lag Detection D: A specific Δ capability within CI analyzes series identify quantify time-delayed cause--effect relationships between variables. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.12, 7.13. EXAMPLE APPLICATION: CausallagdetectioN reveal",
+    "compression_ratio": 2.5267175572519083,
+    "symbol_count": 262,
+    "timestamp": "2025-11-18T10:45:50.888864Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: CI Lag Detection D: specific Δ capability within CI analyzes series identify quantify time-delayed cause--effect relationships between variables. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.12, 7.13. EXAMPLE APPLICATION: CausallagdetectioN reveal",
+    "compression_ratio": 2.546153846153846,
+    "symbol_count": 260,
+    "timestamp": "2025-11-18T10:45:50.897638Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: CI Lag Detection D: Δ CI BLUEPRINT DETAILS: See ResonantiA P Section EXAMPLE APPLICATION: CausallagdetectioN",
+    "compression_ratio": 5.807017543859649,
+    "symbol_count": 114,
+    "timestamp": "2025-11-18T10:45:50.904038Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Δ",
+    "compression_ratio": 662.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:45:50.904350Z"
+  }
+]

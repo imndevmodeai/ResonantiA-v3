@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Vulnerability Management\n\nDEFINITION:\nVulnerability Management: designed to provide advanced endpoint security capabilities to protect against endpoint-based threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Vulnerability Management'\n\nEXAMPLE APPLICATION:\nstermind_AI is designed to provide advanced endpoint security capabilities to protect against endpoint-based threats:\n    * Endpoint Detection and Response: Developing endpoint detection and response techniques that enable the AI system to detect and respond to potential threats on endpoints.\n    * Vulnerability Management: Implementing vulnerability management techniques that enable the AI system to identify and remediate vulnerabilities on endpoints.\n    * Patch Management: Creating patch mana\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1149,
+    "timestamp": "2025-11-18T10:47:37.163452Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Vulnerability Management\n\nDEFINITION:\nVulnerability Management: designed to provide advanced endpoint security capabilities to protect against endpoint-based threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Vulnerability Management'\n\nEXAMPLE APPLICATION:\nstermind_AI is designed to provide advanced endpoint security capabilities to protect against endpoint-based threats:\n    * Endpoint Detection and Response: Developing endpoint detection and response techniques that enable the AI system to detect and ",
+    "compression_ratio": 2.0017421602787455,
+    "symbol_count": 574,
+    "timestamp": "2025-11-18T10:47:37.163478Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Vulnerability Management D: Vulnerability Management: designed to provide advanced endpoint security capabilities to protect against endpoint-based threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Vulnerability Management' EXAMPLE APPLICATION: stermind_AI is designed to provide advanced endpoint security capabilities to protect against endpoint-based threats: * Endpoint Detection Response: Developing endpoint detection response techniques enable AI S to detect",
+    "compression_ratio": 2.2011494252873565,
+    "symbol_count": 522,
+    "timestamp": "2025-11-18T10:47:37.164481Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Vulnerability Management D: Vulnerability Management: designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vulnerability Management' EXAMPLE APPLICATION: stermind_AI designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: Endpoint Detection Response: Developing endpoint detection response techniques enable AI S detect",
+    "compression_ratio": 2.3212121212121213,
+    "symbol_count": 495,
+    "timestamp": "2025-11-18T10:47:37.186067Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Vulnerability Management D: Vulnerability Management: designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vulnerability Management' EXAMPLE APPLICATION: stermind_AI designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: Endpoint Detection Response: Developing endpoint detection response techniques enable AI S detect",
+    "compression_ratio": 2.3212121212121213,
+    "symbol_count": 495,
+    "timestamp": "2025-11-18T10:47:37.202755Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Vulnerability Management D: Vulnerability Management: designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vulnerability Management' EXAMPLE APPLICATION: stermind_AI designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: Endpoint Detection Response: Developing endpoint detection response techniques enable AI S detect",
+    "compression_ratio": 2.3212121212121213,
+    "symbol_count": 495,
+    "timestamp": "2025-11-18T10:47:37.214586Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Vulnerability Management D: Vulnerability Management: BLUEPRINT DETAILS: Θ Node Original Θ Management' EXAMPLE APPLICATION: Endpoint Detection Response: Developing AI S",
+    "compression_ratio": 6.603448275862069,
+    "symbol_count": 174,
+    "timestamp": "2025-11-18T10:47:37.237302Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 383.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:37.239796Z"
+  }
+]

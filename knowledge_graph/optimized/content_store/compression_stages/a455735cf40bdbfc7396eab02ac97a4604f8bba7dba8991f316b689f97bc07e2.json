@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Query Executor\n\nDEFINITION:\nQuery Executor: might include websites, APIs, databases, or even files stored locally or on cloud platforms [1]\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Query Executor'\n\nEXAMPLE APPLICATION:\nd on the optimized plan. It's a critical step in the data extraction pipeline, acting as the bridge between the planned approach and the actual data retrieval.\nThe sources discuss query execution in the context of creating a machine learning engine like AgentQL. They emphasize the need for a robust Query Executor component capable of handling diverse data sources efficiently.\nHere's a breakdown of key aspects related to query execution, drawing upon the provided sources:\nHandling Diverse Data So\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1112,
+    "timestamp": "2025-11-18T10:47:23.722938Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Query Executor\n\nDEFINITION:\nQuery Executor: might include websites, APIs, databases, or even files stored locally or on cloud platforms [1]\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Query Executor'\n\nEXAMPLE APPLICATION:\nd on the optimized plan. It's a critical step in the data extraction pipeline, acting as the bridge between the planned approach and the actual data retrieval.\nThe sources discuss query execution in the context of creating a machine learning engine like AgentQL. They em",
+    "compression_ratio": 2.0,
+    "symbol_count": 556,
+    "timestamp": "2025-11-18T10:47:23.722966Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Query Executor D: Query Executor: might include websites, APIs, databases, or even files stored locally or on cloud platforms [1] BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Query Executor' EXAMPLE APPLICATION: d on optimized plan. It's a critical step in data extraction pipeline, acting as bridge between planned approach actual data retrieval. sources discuss query execution in context of creating a machine learning engine like AgentQL. They em",
+    "compression_ratio": 2.210735586481113,
+    "symbol_count": 503,
+    "timestamp": "2025-11-18T10:47:23.724077Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Query CE D: Query CE: include websites, APIs, databases, files stored locally cloud platforms BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query CE' EXAMPLE APPLICATION: optimized plan. It's critical extraction pipeline, acting bridge between planned approach actual retrieval. sources discuss query execution context creating machine learning engine AgentQL. They",
+    "compression_ratio": 2.685990338164251,
+    "symbol_count": 414,
+    "timestamp": "2025-11-18T10:47:23.730624Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Query CE D: Query CE: include websites, APIs, databases, files stored locally cloud platforms BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query CE' EXAMPLE APPLICATION: optimized plan. It's critical extraction pipeline, acting bridge between planned approach actual retrieval. sources discuss query execution context creating machine learning engine AgentQL. They",
+    "compression_ratio": 2.685990338164251,
+    "symbol_count": 414,
+    "timestamp": "2025-11-18T10:47:23.732722Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Query CE D: Query CE: include websites, APIs, databases, files stored locally cloud platforms BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query CE' EXAMPLE APPLICATION: optimized plan. It's critical extraction pipeline, acting bridge between planned approach actual retrieval. sources discuss query execution context creating machine learning engine AgentQL. They",
+    "compression_ratio": 2.685990338164251,
+    "symbol_count": 414,
+    "timestamp": "2025-11-18T10:47:23.735517Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Query CE D: Query CE: APIs, BLUEPRINT DETAILS: Θ Node Original Θ CE' EXAMPLE APPLICATION: It's AgentQL. They",
+    "compression_ratio": 9.75438596491228,
+    "symbol_count": 114,
+    "timestamp": "2025-11-18T10:47:23.739689Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 370.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.739980Z"
+  }
+]

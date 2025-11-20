@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Task Similarity Detection\n\nDEFINITION:\nTask Similarity Detection: information to inform the priming mechanism\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Task Similarity Detection'\n\nEXAMPLE APPLICATION:\n able to use the selected datasets and models as primers to boost the model's performance on complex problem-solving tasks.\n->|priming|<- : Use the selected dataset and model as primers to boost the model's performance.\n->|priming_evaluation|<- : Evaluate the effectiveness of the priming mechanism.\nTask Similarity Detection: The system needs to be able to detect similar tasks and problems in the dataset and utilize this information to inform the priming mechanism.\n->|task_similarity_detection|<-\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1093,
+    "timestamp": "2025-11-18T10:47:25.428901Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Task Similarity Detection\n\nDEFINITION:\nTask Similarity Detection: information to inform the priming mechanism\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Task Similarity Detection'\n\nEXAMPLE APPLICATION:\n able to use the selected datasets and models as primers to boost the model's performance on complex problem-solving tasks.\n->|priming|<- : Use the selected dataset and model as primers to boost the model's performance.\n->|priming_evaluation|<- : Evaluate the effectiveness of th",
+    "compression_ratio": 2.001831501831502,
+    "symbol_count": 546,
+    "timestamp": "2025-11-18T10:47:25.428924Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Task Similarity Detection D: Task Similarity Detection: inFion to inform priming M BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Task Similarity Detection' EXAMPLE APPLICATION: able to use selected datasets models as primers to boost model's performance on complex problem-solving tasks. ->|priming|<- : Use selected dataset model as primers to boost model's performance. ->|priming_evaluation|<- : Evaluate effectiveness of th",
+    "compression_ratio": 2.2818371607515657,
+    "symbol_count": 479,
+    "timestamp": "2025-11-18T10:47:25.430342Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Task Similarity Detection D: Task Similarity Detection: inFion inform priming M BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Task Similarity Detection' EXAMPLE APPLICATION: selected datasets models primers boost model's performance complex problem-solving tasks. ->|priming|<- Use selected dataset model primers boost model's performance. ->|priming_evaluation|<- Evaluate effectiveness",
+    "compression_ratio": 2.506880733944954,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:25.435413Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Task Similarity Detection D: Task Similarity Detection: inFion inform priming M BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Task Similarity Detection' EXAMPLE APPLICATION: selected datasets models primers boost model's performance complex problem-solving tasks. ->|priming|<- Use selected dataset model primers boost model's performance. ->|priming_evaluation|<- Evaluate effectiveness",
+    "compression_ratio": 2.506880733944954,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:25.445698Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Task Similarity Detection D: Task Similarity Detection: inFion inform priming M BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Task Similarity Detection' EXAMPLE APPLICATION: selected datasets models primers boost model's performance complex problem-solving tasks. ->|priming|<- Use selected dataset model primers boost model's performance. ->|priming_evaluation|<- Evaluate effectiveness",
+    "compression_ratio": 2.506880733944954,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:25.451071Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Task Similarity Detection D: Task Similarity Detection: M BLUEPRINT DETAILS: Θ Node Original Θ Similarity Detection' EXAMPLE APPLICATION: Use Evaluate",
+    "compression_ratio": 7.006410256410256,
+    "symbol_count": 156,
+    "timestamp": "2025-11-18T10:47:25.453445Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 364.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:25.453899Z"
+  }
+]

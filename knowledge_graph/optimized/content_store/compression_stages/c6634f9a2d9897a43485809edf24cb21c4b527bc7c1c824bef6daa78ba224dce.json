@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Speed\n\nDEFINITION:\nSpeed: Node 22: Speed\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 22, type: node_format. Original SPR name: 'Speed'\n\nEXAMPLE APPLICATION:\nNode 22: Speed\nNode 23: Accuracy\nNode 24: Scalability\nNode 9: Security Requirements\n\nDescription: Detailed description of the system's security requirements, including its authentication, authorization, and encrypt\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 22\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 737,
+    "timestamp": "2025-11-18T10:47:23.089749Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Speed\n\nDEFINITION:\nSpeed: Node 22: Speed\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 22, type: node_format. Original SPR name: 'Speed'\n\nEXAMPLE APPLICATION:\nNode 22: Speed\nNode 23: Accuracy\nNode 24: Scalability\nNode 9: Security Requirements\n\nDescription: Detailed description of the system's security requirements, including its authenti",
+    "compression_ratio": 2.0027173913043477,
+    "symbol_count": 368,
+    "timestamp": "2025-11-18T10:47:23.089774Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Speed D: Speed: Node 22: Speed Confidence: 0.5 BLUEPRINT DETAILS: Θ extracted agi.txt Node 22, type: node_F. Original Θ name: 'Speed' EXAMPLE APPLICATION: Node 22: Speed Node 23: Accuracy Node 24: Scalability Node 9: Security Requirements Description: Detailed description of S's security requirements, including its authenti",
+    "compression_ratio": 2.226586102719033,
+    "symbol_count": 331,
+    "timestamp": "2025-11-18T10:47:23.090527Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Speed D: Speed: Node Speed Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Speed' EXAMPLE APPLICATION: Node Speed Node Accuracy Node Scalability Node Security Requirements Description: Detailed description S's security requirements, including authenti",
+    "compression_ratio": 2.4814814814814814,
+    "symbol_count": 297,
+    "timestamp": "2025-11-18T10:47:23.097520Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Speed D: Speed: Node Speed Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Speed' EXAMPLE APPLICATION: Node Speed Node Accuracy Node Scalability Node Security Requirements Description: Detailed description S's security requirements, including authenti",
+    "compression_ratio": 2.4814814814814814,
+    "symbol_count": 297,
+    "timestamp": "2025-11-18T10:47:23.100103Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Speed D: Speed: Node Speed Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Speed' EXAMPLE APPLICATION: Node Speed Node Accuracy Node Scalability Node Security Requirements Description: Detailed description S's security requirements, including authenti",
+    "compression_ratio": 2.4814814814814814,
+    "symbol_count": 297,
+    "timestamp": "2025-11-18T10:47:23.109937Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Speed D: Speed: Node Speed Confidence: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: Node Speed Node Accuracy Node Scalability Node Security Requirements Description: Detailed S's",
+    "compression_ratio": 3.7411167512690353,
+    "symbol_count": 197,
+    "timestamp": "2025-11-18T10:47:23.120182Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 245.66666666666666,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.120542Z"
+  }
+]

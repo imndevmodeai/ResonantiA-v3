@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: LLM Response Interceptor\n\nDEFINITION:\nPost-LLM hook that triggers extraction → compression → integration, with confidence thresholds and dedup gates.\n\nBLUEPRINT DETAILS:\nPost-LLM hook around llm_tool; triggers extract→compress→integrate with confidence and dedup gates.\n\nEXAMPLE APPLICATION:\nCaptured three compact rules from a long policy answer, persisting only high-confidence patterns.\n\nCATEGORY: WorkflowPattern\n\nRELATIONSHIPS:\ntype: Interceptor; enables: KnowledgeextractoR, ZeptopatterncompressoR, KnowledgegraphintegratoR; governed_by: VettingagenT, IarcompliancevettinG",
+    "compression_ratio": 1.0,
+    "symbol_count": 584,
+    "timestamp": "2025-11-18T10:46:50.023652Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: LLM Response Interceptor\n\nDEFINITION:\nPost-LLM hook that triggers extraction → compression → integration, with confidence thresholds and dedup gates.\n\nBLUEPRINT DETAILS:\nPost-LLM hook around llm_tool; triggers extract→compress→integrate with confidence and dedup gates.\n\nEXAMPLE APPLICA",
+    "compression_ratio": 2.0,
+    "symbol_count": 292,
+    "timestamp": "2025-11-18T10:46:50.023684Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: LLM Response Interceptor D: Post-LLM hook triggers extraction → compression → integration, confidence thresholds dedup gates. BLUEPRINT DETAILS: Post-LLM hook around llm_tool; triggers extract→compress→integrate confidence dedup gates. EXAMPLE APPLICA",
+    "compression_ratio": 2.272373540856031,
+    "symbol_count": 257,
+    "timestamp": "2025-11-18T10:46:50.024964Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: LLM Response Interceptor D: Post-LLM triggers extraction compression integration, confidence thresholds dedup gates. BLUEPRINT DETAILS: Post-LLM around llm_tool; triggers extract→compress→integrate confidence dedup gates. EXAMPLE APPLICA",
+    "compression_ratio": 2.403292181069959,
+    "symbol_count": 243,
+    "timestamp": "2025-11-18T10:46:50.040423Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: LLM Response Interceptor D: Post-LLM triggers extraction compression integration, confidence thresholds dedup gates. BLUEPRINT DETAILS: Post-LLM around llm_tool; triggers extract→compress→integrate confidence dedup gates. EXAMPLE APPLICA",
+    "compression_ratio": 2.403292181069959,
+    "symbol_count": 243,
+    "timestamp": "2025-11-18T10:46:50.047605Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: LLM Response Interceptor D: Post-LLM triggers extraction compression integration, confidence thresholds dedup gates. BLUEPRINT DETAILS: Post-LLM around llm_tool; triggers extract→compress→integrate confidence dedup gates. EXAMPLE APPLICA",
+    "compression_ratio": 2.403292181069959,
+    "symbol_count": 243,
+    "timestamp": "2025-11-18T10:46:50.051286Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: LLM Response Interceptor D: Post-LLM BLUEPRINT DETAILS: Post-LLM EXAMPLE APPLICA",
+    "compression_ratio": 6.790697674418604,
+    "symbol_count": 86,
+    "timestamp": "2025-11-18T10:46:50.057810Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "R|I|P|P",
+    "compression_ratio": 83.42857142857143,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:46:50.062038Z"
+  }
+]

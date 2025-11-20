@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Future State Analysis\n\nDEFINITION:\nA capability, primarily executed by the Predictive Modeling Tool, that involves projecting potential future outcomes or values based on historical data, trends, and models. It is a core component of 4D Thinking.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 3.8, 7.19.\n\nEXAMPLE APPLICATION:\nFuturestateanalysiS indicated a high probability of resource shortages within the next six months if current consumption rates continued.\n\nCATEGORY: AnalyticalTechnique\n\nRELATIONSHIPS:\ntype: Forecasting; is_a_part_of: 4d thinkinG; performed_by: PredictivE modelinG tooL; produces: Predictions, Forecasts; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 665,
+    "timestamp": "2025-11-18T10:46:47.927044Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Future State Analysis\n\nDEFINITION:\nA capability, primarily executed by the Predictive Modeling Tool, that involves projecting potential future outcomes or values based on historical data, trends, and models. It is a core component of 4D Thinking.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 3.8, 7.19.\n\nEXAMPLE A",
+    "compression_ratio": 2.003012048192771,
+    "symbol_count": 332,
+    "timestamp": "2025-11-18T10:46:47.927071Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Future State Analysis D: A capability, primarily executed by PMT, involves projecting potential future outcomes or values based on historical data, trends, models. It is a core component of 4D Thinking. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.8, 7.19. EXAMPLE A",
+    "compression_ratio": 2.3835125448028673,
+    "symbol_count": 279,
+    "timestamp": "2025-11-18T10:46:47.927720Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Future State Analysis D: A capability, primarily executed PMT, involves projecting potential future outcomes values ABM historical data, trends, models. It component Thinking. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 7.19. EXAMPLE A",
+    "compression_ratio": 2.6923076923076925,
+    "symbol_count": 247,
+    "timestamp": "2025-11-18T10:46:47.934948Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Future State Analysis D: A capability, primarily executed PMT, involves projecting potential future outcomes values ABM historical data, trends, models. It component Thinking. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 7.19. EXAMPLE A",
+    "compression_ratio": 2.6923076923076925,
+    "symbol_count": 247,
+    "timestamp": "2025-11-18T10:46:47.936051Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Future State Analysis D: capability, primarily executed PMT, involves projecting potential future outcomes values ABM historical data, trends, models. It component Thinking. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 7.19. EXAMPLE",
+    "compression_ratio": 2.736625514403292,
+    "symbol_count": 243,
+    "timestamp": "2025-11-18T10:46:47.942919Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Future State Analysis D: PMT, ABM It Thinking. BLUEPRINT DETAILS: See ResonantiA P Section EXAMPLE",
+    "compression_ratio": 6.394230769230769,
+    "symbol_count": 104,
+    "timestamp": "2025-11-18T10:46:47.949845Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "F|S|A|I|T",
+    "compression_ratio": 73.88888888888889,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:47.950094Z"
+  }
+]

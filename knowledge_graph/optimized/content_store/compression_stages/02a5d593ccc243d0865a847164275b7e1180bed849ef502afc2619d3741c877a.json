@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Onion Layer Analysis\n\nDEFINITION:\nMethod for peeling back layers to reveal deeper system components\n\nBLUEPRINT DETAILS:\nLike chef peeling onion - be prepared to shed tears when going deep\n\nEXAMPLE APPLICATION:\nIdentifying potential tasks, actions, components, functions, and steps\n\nCATEGORY: AnalysisMethod\n\nRELATIONSHIPS:\ntype: AnalysisMethod; peels: System layers; reveals: Deeper components; identifies: Tasks, actions, components, functions; supports: System decomposition; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:46:54.003106Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Onion Layer Analysis\n\nDEFINITION:\nMethod for peeling back layers to reveal deeper system components\n\nBLUEPRINT DETAILS:\nLike chef peeling onion - be prepared to shed tears when going deep\n\nEXAMPLE APPLICATION:\nIdentifying potential tasks, actio",
+    "compression_ratio": 2.0,
+    "symbol_count": 250,
+    "timestamp": "2025-11-18T10:46:54.003129Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Onion Layer Analysis D: Method peeling back layers to reveal deeper S components BLUEPRINT DETAILS: Like chef peeling onion - be prepared to shed tears going deep EXAMPLE APPLICATION: Identifying potential tasks, actio",
+    "compression_ratio": 2.232142857142857,
+    "symbol_count": 224,
+    "timestamp": "2025-11-18T10:46:54.003680Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Onion Layer Analysis D: Method peeling layers reveal deeper S components BLUEPRINT DETAILS: Like peeling onion prepared tears going EXAMPLE APPLICATION: Identifying potential tasks, actio",
+    "compression_ratio": 2.5906735751295336,
+    "symbol_count": 193,
+    "timestamp": "2025-11-18T10:46:54.004648Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Onion Layer Analysis D: Method peeling layers reveal deeper S components BLUEPRINT DETAILS: Like peeling onion prepared tears going EXAMPLE APPLICATION: Identifying potential tasks, actio",
+    "compression_ratio": 2.5906735751295336,
+    "symbol_count": 193,
+    "timestamp": "2025-11-18T10:46:54.006100Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Onion Layer Analysis D: Method peeling layers reveal deeper S components BLUEPRINT DETAILS: Like peeling onion prepared tears going EXAMPLE APPLICATION: Identifying potential tasks, actio",
+    "compression_ratio": 2.5906735751295336,
+    "symbol_count": 193,
+    "timestamp": "2025-11-18T10:46:54.010751Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Onion Layer Analysis D: Method S BLUEPRINT DETAILS: Like EXAMPLE APPLICATION: Identifying",
+    "compression_ratio": 5.2631578947368425,
+    "symbol_count": 95,
+    "timestamp": "2025-11-18T10:46:54.012295Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "O|L|A|M|L",
+    "compression_ratio": 55.55555555555556,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:54.012880Z"
+  }
+]

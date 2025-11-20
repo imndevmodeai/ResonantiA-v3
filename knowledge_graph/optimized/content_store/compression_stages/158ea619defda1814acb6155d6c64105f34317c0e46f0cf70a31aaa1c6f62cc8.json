@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Quality Assurance\n\nDEFINITION:\nQuality Assurance: and sensory devices with their VR platforms\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Quality Assurance'\n\nEXAMPLE APPLICATION:\npotential products:\n\nPartnership and Integration:\n\nWe will partner with the selected VR players and integrate our software and sensory devices with their VR platforms. This will involve working closely with their development teams to ensure seamless integration and optimal performance.\n\nTesting and Quality Assurance:\n\nWe will test and quality assure our software and sensory devices to ensure that they meet the highest standards of quality and performance. This will involve conducting thorough te\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1069,
+    "timestamp": "2025-11-18T10:47:52.176978Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Quality Assurance\n\nDEFINITION:\nQuality Assurance: and sensory devices with their VR platforms\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Quality Assurance'\n\nEXAMPLE APPLICATION:\npotential products:\n\nPartnership and Integration:\n\nWe will partner with the selected VR players and integrate our software and sensory devices with their VR platforms. This will involve working closely with their development teams to ensure seamless integration and optimal performance.\n\nTes",
+    "compression_ratio": 2.00187265917603,
+    "symbol_count": 534,
+    "timestamp": "2025-11-18T10:47:52.177000Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Quality Assurance D: Quality Assurance: sensory devices their VR platforms BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Quality Assurance' EXAMPLE APPLICATION: potential products: Partnership Integration: We will partner selected VR players integrate our software sensory devices their VR platforms. will involve working closely their development teams to ensure seamless integration optimal performance. Tes",
+    "compression_ratio": 2.3188720173535793,
+    "symbol_count": 461,
+    "timestamp": "2025-11-18T10:47:52.178355Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Quality Assurance D: Quality Assurance: sensory devices their VR platforms BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Quality Assurance' EXAMPLE APPLICATION: potential products: Partnership Integration: We partner selected VR players integrate software sensory devices their VR platforms. involve working closely their development teams ensure seamless integration optimal performance. Tes",
+    "compression_ratio": 2.4240362811791383,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:52.180126Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Quality Assurance D: Quality Assurance: sensory devices their VR platforms BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Quality Assurance' EXAMPLE APPLICATION: potential products: Partnership Integration: We partner selected VR players integrate software sensory devices their VR platforms. involve working closely their development teams ensure seamless integration optimal performance. Tes",
+    "compression_ratio": 2.4240362811791383,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:52.182396Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Quality Assurance D: Quality Assurance: sensory devices their VR platforms BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Quality Assurance' EXAMPLE APPLICATION: potential products: Partnership Integration: We partner selected VR players integrate software sensory devices their VR platforms. involve working closely their development teams ensure seamless integration optimal performance. Tes",
+    "compression_ratio": 2.4240362811791383,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:52.184854Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Quality Assurance D: Quality Assurance: VR BLUEPRINT DETAILS: Θ Node Original Θ Assurance' EXAMPLE APPLICATION: Partnership Integration: We VR VR Tes",
+    "compression_ratio": 6.896774193548387,
+    "symbol_count": 155,
+    "timestamp": "2025-11-18T10:47:52.187193Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 356.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:52.187472Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Cognitive Architecture\nNode\n\nDEFINITION:\nCognitive Architecture\nNode: Detailed description of the system's architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cognitive Architecture\nNode'\n\nEXAMPLE APPLICATION:\nigh-level overview of the system, including its purpose, scope, and goals.\nEdges:\nNode 2: System Architecture\nNode 3: System Requirements\nNode 2: System Architecture\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows.\nEdges:\nNode 4: Cognitive Architecture\nNode 5: Machine Learning\nNode 6: Natural Language Processing\nNode 3: System Requirements\n\nDescription: Detailed description of the system's requirements, including its functiona\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1159,
+    "timestamp": "2025-11-18T10:47:40.412871Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Cognitive Architecture\nNode\n\nDEFINITION:\nCognitive Architecture\nNode: Detailed description of the system's architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cognitive Architecture\nNode'\n\nEXAMPLE APPLICATION:\nigh-level overview of the system, including its purpose, scope, and goals.\nEdges:\nNode 2: System Architecture\nNode 3: System Requirements\nNode 2: System Architecture\n\nDescription: Detailed description of the system's architecture, including its c",
+    "compression_ratio": 2.001727115716753,
+    "symbol_count": 579,
+    "timestamp": "2025-11-18T10:47:40.412893Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Cognitive Architecture Node D: Cognitive Architecture Node: Detailed description of S's architecture, including its components, interfaces, data flows BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Cognitive Architecture Node' EXAMPLE APPLICATION: igh-level overview of S, including its purpose, scope, goals. Edges: Node 2: S Architecture Node 3: S Requirements Node 2: S Architecture Description: Detailed description of S's architecture, including its c",
+    "compression_ratio": 2.2859960552268244,
+    "symbol_count": 507,
+    "timestamp": "2025-11-18T10:47:40.413971Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ω Architecture Node D: Ω Architecture Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Architecture Node' EXAMPLE APPLICATION: igh-level overview S, including purpose, scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including",
+    "compression_ratio": 2.616252821670429,
+    "symbol_count": 443,
+    "timestamp": "2025-11-18T10:47:40.420407Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ω Architecture Node D: Ω Architecture Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Architecture Node' EXAMPLE APPLICATION: igh-level overview S, including purpose, scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including",
+    "compression_ratio": 2.616252821670429,
+    "symbol_count": 443,
+    "timestamp": "2025-11-18T10:47:40.428403Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ω Architecture Node D: Ω Architecture Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Architecture Node' EXAMPLE APPLICATION: igh-level overview S, including purpose, scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including",
+    "compression_ratio": 2.616252821670429,
+    "symbol_count": 443,
+    "timestamp": "2025-11-18T10:47:40.432520Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ω Architecture Node D: Ω Architecture Node: Detailed S's BLUEPRINT DETAILS: Θ Node Original Θ 'Ω Architecture Node' EXAMPLE APPLICATION: S, Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed S's",
+    "compression_ratio": 4.869747899159663,
+    "symbol_count": 238,
+    "timestamp": "2025-11-18T10:47:40.434753Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Θ|Θ|Ω",
+    "compression_ratio": 128.77777777777777,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:40.436256Z"
+  }
+]

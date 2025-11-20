@@ -158,8 +158,24 @@ def present_results(results: Dict[str, Any]):
     thought_trail = ""
 
     if results:
-        # First, robustly find the final synthesis task output, accounting for IAR nesting
-        if "output" in results and "K11_genius_synthesis" in results["output"]:
+        # Try multiple locations for the final answer (RISE orchestrator can store it in different places)
+        # Priority 1: Direct final_answer key (from RISE execution phase)
+        if "final_answer" in results:
+            final_answer = results["final_answer"]
+        # Priority 2: Execution phase answer
+        elif "execution_phase" in results and isinstance(results["execution_phase"], dict):
+            execution_phase = results["execution_phase"]
+            if "execution_answer" in execution_phase:
+                final_answer = execution_phase["execution_answer"]
+        # Priority 3: Final strategy (fallback from planning phases)
+        elif "final_strategy" in results:
+            final_strategy = results["final_strategy"]
+            if isinstance(final_strategy, str):
+                final_answer = final_strategy
+            elif isinstance(final_strategy, dict):
+                final_answer = final_strategy.get("strategy_text", str(final_strategy))
+        # Priority 4: Legacy K11_genius_synthesis location
+        elif "output" in results and "K11_genius_synthesis" in results["output"]:
             synthesis_output = results["output"]["K11_genius_synthesis"]
             # The IAR_Prepper nests the result dictionary. We must look inside the 'result' key.
             if "result" in synthesis_output and isinstance(synthesis_output["result"], dict):

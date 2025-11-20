@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Engineering Instance\n\nDEFINITION:\nAn ArchE instance with specific configurations and tool access (e.g., direct file system write, Git command execution, IDE integration) that is specialized for tasks related to software development, codebase maintenance, and protocol implementation. It is expected to strictly adhere to the CRDSP.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.1-CA, Section 3.16.\n\nEXAMPLE APPLICATION:\nPractical application of Engineering Instance within the ResonantiA Protocol framework\n\nCATEGORY: SystemRole\n\nRELATIONSHIPS:\ntype: InstanceSpecialization; has_capabilities: CodeGeneration, CodeExecution, FileSystemAccess, VersionControl; must_adhere_to: Codebase Reference and Documentation Synchronization Protocol (CRDSP) v3.1; is_a_type_of: Arche systeM; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 801,
+    "timestamp": "2025-11-18T10:46:47.154576Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Engineering Instance\n\nDEFINITION:\nAn ArchE instance with specific configurations and tool access (e.g., direct file system write, Git command execution, IDE integration) that is specialized for tasks related to software development, codebase maintenance, and protocol implementation. It is expected to strictly adhere to the CRDSP.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.1-CA, Section 3",
+    "compression_ratio": 2.0025,
+    "symbol_count": 400,
+    "timestamp": "2025-11-18T10:46:47.154594Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Engineering Instance D: An Æ instance specific configurations tool access (e.g., direct file S write, Git command execution, IDE integration) is specialized tasks related to software development, codebase maintenance, P I. It is expected to strictly adhere to CRDSP. BLUEPRINT DETAILS: See ResonantiA P v3.1-CA, Section 3",
+    "compression_ratio": 2.44954128440367,
+    "symbol_count": 327,
+    "timestamp": "2025-11-18T10:46:47.155322Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Engineering Instance D: An Æ instance specific configurations access (e.g., direct S write, Git command execution, IDE integration) specialized tasks related software development, codebase maintenance, P I. It expected strictly adhere CRDSP. BLUEPRINT DETAILS: See ResonantiA P v3.1-CA, Section",
+    "compression_ratio": 2.67,
+    "symbol_count": 300,
+    "timestamp": "2025-11-18T10:46:47.161643Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Engineering Instance D: An Æ instance specific configurations access (e.g., direct S write, Git command execution, IDE integration) specialized tasks related software development, codebase maintenance, P I. It expected strictly adhere CRDSP. BLUEPRINT DETAILS: See ResonantiA P v3.1-CA, Section",
+    "compression_ratio": 2.67,
+    "symbol_count": 300,
+    "timestamp": "2025-11-18T10:46:47.170959Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Engineering Instance D: Æ instance specific configurations access (e.g., direct S write, Git command execution, IDE integration) specialized tasks related software development, codebase maintenance, P I. It expected strictly adhere CRDSP. BLUEPRINT DETAILS: See ResonantiA P v3.1-CA, Section",
+    "compression_ratio": 2.696969696969697,
+    "symbol_count": 297,
+    "timestamp": "2025-11-18T10:46:47.176987Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Engineering Instance D: Æ S Git IDE P I. It CRDSP. BLUEPRINT DETAILS: See ResonantiA P Section",
+    "compression_ratio": 8.01,
+    "symbol_count": 100,
+    "timestamp": "2025-11-18T10:46:47.184403Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 801.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:47.184673Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Collaborative Design\n\nDEFINITION:\nCollaborative Design: designed to enable humans and AI to co-create new products, services, and experiences:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Collaborative Design'\n\nEXAMPLE APPLICATION:\nepts.\n    * Prototyping and Testing: Creating prototyping and testing techniques that enable the AI system to quickly and effectively test new ideas and concepts.\n\n42. Human-AI Co-Creation: Mastermind_AI is designed to enable humans and AI to co-create new products, services, and experiences:\n    * Collaborative Design: Developing collaborative design techniques that enable humans and AI to work together to design new products and services.\n    * Co-Creation Tools: Implementing co-creation tools\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1121,
+    "timestamp": "2025-11-18T10:47:32.036768Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Collaborative Design\n\nDEFINITION:\nCollaborative Design: designed to enable humans and AI to co-create new products, services, and experiences:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Collaborative Design'\n\nEXAMPLE APPLICATION:\nepts.\n    * Prototyping and Testing: Creating prototyping and testing techniques that enable the AI system to quickly and effectively test new ideas and concepts.\n\n42. Human-AI Co-Creation: Mastermind_AI is designed to enable humans and AI to co-create new products",
+    "compression_ratio": 2.0017857142857145,
+    "symbol_count": 560,
+    "timestamp": "2025-11-18T10:47:32.036793Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Collaborative Design D: Collaborative Design: designed to enable humans AI to co-create new products, services, experiences: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Collaborative Design' EXAMPLE APPLICATION: epts. * Prototyping Testing: Creating prototyping testing techniques enable AI S to quickly effectively test new ideas concepts. 42. Human-AI Co-Creation: Mastermind_AI is designed to enable humans AI to co-create new products",
+    "compression_ratio": 2.2784552845528454,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:32.037808Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Collaborative Design D: Collaborative Design: designed enable humans AI co-create products, services, experiences: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Collaborative Design' EXAMPLE APPLICATION: epts. Prototyping Testing: Creating prototyping testing techniques enable AI S quickly effectively ideas concepts. Human-AI Co-Creation: Mastermind_AI designed enable humans AI co-create products",
+    "compression_ratio": 2.502232142857143,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:32.043356Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Collaborative Design D: Collaborative Design: designed enable humans AI co-create products, services, experiences: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Collaborative Design' EXAMPLE APPLICATION: epts. Prototyping Testing: Creating prototyping testing techniques enable AI S quickly effectively ideas concepts. Human-AI Co-Creation: Mastermind_AI designed enable humans AI co-create products",
+    "compression_ratio": 2.502232142857143,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:32.051188Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Collaborative Design D: Collaborative Design: designed enable humans AI co-create products, services, experiences: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Collaborative Design' EXAMPLE APPLICATION: epts. Prototyping Testing: Creating prototyping testing techniques enable AI S quickly effectively ideas concepts. Human-AI Co-Creation: Mastermind_AI designed enable humans AI co-create products",
+    "compression_ratio": 2.502232142857143,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:32.056477Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Collaborative Design D: Collaborative Design: AI BLUEPRINT DETAILS: Θ Node Original Θ Design' EXAMPLE APPLICATION: Prototyping Testing: Creating AI S Human-AI Co-Creation: Mastermind_AI AI",
+    "compression_ratio": 5.778350515463917,
+    "symbol_count": 194,
+    "timestamp": "2025-11-18T10:47:32.059205Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 373.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:32.060273Z"
+  }
+]

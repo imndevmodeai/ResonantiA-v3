@@ -243,11 +243,10 @@ class MastermindServer:
         """
         import time
         from datetime import datetime
-
-# ============================================================================
-# TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
-# ============================================================================
-from .temporal_core import now_iso, format_filename, format_log, Timer
+        # ============================================================================
+        # TEMPORAL CORE INTEGRATION (CANONICAL DATETIME SYSTEM)
+        # ============================================================================
+        from .temporal_core import now_iso, format_filename, format_log, Timer
         
         # Determine confidence based on response content
         confidence = 0.9

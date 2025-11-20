@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Reasoned Responses\n\nDEFINITION:\nReasoned Responses: Meaningful Insights\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Reasoned Responses'\n\nEXAMPLE APPLICATION:\nepresent complex information in a concise and meaningful way.\n\n[3] https://en.wikipedia.org/wiki/Source,_Process,_Result\n->|/vetting|<-\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nSPRs:\n          Source          Process                  Result\n0  Machine Learning  Data Extraction  Contextually Reasoned Responses\n1  Natural Language      Text Analysis            Meaningful Insights\n->|/results|<-\n->|conditional|<-\nIf inconsistencies are found in the SPRs, trigger a conditional step to revise\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1048,
+    "timestamp": "2025-11-18T10:47:26.188556Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Reasoned Responses\n\nDEFINITION:\nReasoned Responses: Meaningful Insights\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Reasoned Responses'\n\nEXAMPLE APPLICATION:\nepresent complex information in a concise and meaningful way.\n\n[3] https://en.wikipedia.org/wiki/Source,_Process,_Result\n->|/vetting|<-\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nSPRs:\n          Source          Process                  Result\n0  Machine Learning  Data Extraction  Contextually Re",
+    "compression_ratio": 2.0,
+    "symbol_count": 524,
+    "timestamp": "2025-11-18T10:47:26.188581Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Reasoned Responses D: Reasoned Responses: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Reasoned Responses' EXAMPLE APPLICATION: epresent complex inFion in a concise meaningful way. [3] https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/execution|<- ->|results|<- Θs: Source P Result 0 Machine Learning Data Extraction Contextually Re",
+    "compression_ratio": 2.3926940639269407,
+    "symbol_count": 438,
+    "timestamp": "2025-11-18T10:47:26.194095Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Reasoned Responses D: Reasoned Responses: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Reasoned Responses' EXAMPLE APPLICATION: epresent complex inFion concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/execution|<- ->|results|<- Θs: Source P Result Machine Learning Data Extraction Contextually Re",
+    "compression_ratio": 2.5011933174224343,
+    "symbol_count": 419,
+    "timestamp": "2025-11-18T10:47:26.196507Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Reasoned Responses D: Reasoned Responses: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Reasoned Responses' EXAMPLE APPLICATION: epresent complex inFion concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/execution|<- ->|results|<- Θs: Source P Result Machine Learning Data Extraction Contextually Re",
+    "compression_ratio": 2.5011933174224343,
+    "symbol_count": 419,
+    "timestamp": "2025-11-18T10:47:26.199235Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Reasoned Responses D: Reasoned Responses: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Reasoned Responses' EXAMPLE APPLICATION: epresent complex inFion concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/execution|<- ->|results|<- Θs: Source P Result Machine Learning Data Extraction Contextually Re",
+    "compression_ratio": 2.5011933174224343,
+    "symbol_count": 419,
+    "timestamp": "2025-11-18T10:47:26.204327Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Reasoned Responses D: Reasoned Responses: Meaningful Insights BLUEPRINT DETAILS: Θ Node Original Θ Responses' EXAMPLE APPLICATION: Θs: Source P Result Machine Learning Data Extraction Contextually Re",
+    "compression_ratio": 5.11219512195122,
+    "symbol_count": 205,
+    "timestamp": "2025-11-18T10:47:26.206692Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 209.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:26.207073Z"
+  }
+]

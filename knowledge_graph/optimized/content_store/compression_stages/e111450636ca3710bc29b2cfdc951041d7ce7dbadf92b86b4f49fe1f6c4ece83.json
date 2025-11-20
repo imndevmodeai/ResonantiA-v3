@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Next\n\nNow\n\nDEFINITION:\nNext\n\nNow: rough and may vary depending on the specific requirements and circumstances of the project\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Next\n\nNow'\n\nEXAMPLE APPLICATION:\nre's a rough estimate of the timeframe:\n\nPlease note that these estimates are rough and may vary depending on the specific requirements and circumstances of the project.\n\nIf you have any further questions or would like to discuss any aspect of the development process, please don't hesitate to ask.\n\nNext\n\nNow that we have a comprehensive blueprint for Mastermind_AI and a high-level overview of the development process, let's dive deeper into the technical details.\n\nTechnical Requirements\n\nTo devel\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1092,
+    "timestamp": "2025-11-18T10:47:40.092742Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Next\n\nNow\n\nDEFINITION:\nNext\n\nNow: rough and may vary depending on the specific requirements and circumstances of the project\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Next\n\nNow'\n\nEXAMPLE APPLICATION:\nre's a rough estimate of the timeframe:\n\nPlease note that these estimates are rough and may vary depending on the specific requirements and circumstances of the project.\n\nIf you have any further questions or would like to discuss any aspect of the development process, please don'",
+    "compression_ratio": 2.0,
+    "symbol_count": 546,
+    "timestamp": "2025-11-18T10:47:40.092764Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Next Now D: Next Now: rough may vary depending on specific requirements circumstances of project BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Next Now' EXAMPLE APPLICATION: re's a rough estimate of timeframe: Please note these estimates rough may vary depending on specific requirements circumstances of project. If any further questions or would like to discuss any aspect of development P, please don'",
+    "compression_ratio": 2.3947368421052633,
+    "symbol_count": 456,
+    "timestamp": "2025-11-18T10:47:40.094514Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Next Now D: Next Now: rough depending specific requirements circumstances project BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Next Now' EXAMPLE APPLICATION: rough estimate timeframe: Please these estimates rough depending specific requirements circumstances project. If further questions discuss aspect development P, please",
+    "compression_ratio": 2.912,
+    "symbol_count": 375,
+    "timestamp": "2025-11-18T10:47:40.097453Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Next Now D: Next Now: rough depending specific requirements circumstances project BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Next Now' EXAMPLE APPLICATION: rough estimate timeframe: Please these estimates rough depending specific requirements circumstances project. If further questions discuss aspect development P, please",
+    "compression_ratio": 2.912,
+    "symbol_count": 375,
+    "timestamp": "2025-11-18T10:47:40.099457Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Next Now D: Next Now: rough depending specific requirements circumstances project BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Next Now' EXAMPLE APPLICATION: rough estimate timeframe: Please these estimates rough depending specific requirements circumstances project. If further questions discuss aspect development P, please",
+    "compression_ratio": 2.912,
+    "symbol_count": 375,
+    "timestamp": "2025-11-18T10:47:40.101447Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Next Now D: Next Now: BLUEPRINT DETAILS: Θ Node Original Θ Now' EXAMPLE APPLICATION: Please If P,",
+    "compression_ratio": 10.601941747572816,
+    "symbol_count": 103,
+    "timestamp": "2025-11-18T10:47:40.105034Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 364.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:40.105342Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: File Reading Task Pattern\n\nDEFINITION:\nFile reading operations are consistently used across sessions. High success rate for file reading operations indicates reliable capability. Recommendation: Consider creating specialized file reading SPR for efficiency\n\nBLUEPRINT DETAILS:\nCrystallized from Autopoietic Learning Loop analysis. Guardian approved by B.J. Lewis (IMnDEVmode).\n\nEXAMPLE APPLICATION:\nConsider creating specialized file reading SPR for efficiency\n\nCATEGORY: LearnedWisdom\n\nRELATIONSHIPS:\ntype: AutopoieticInsight; confidence: 0.88; occurrences: 2; success_rate: 1.0; source: Task pattern analysis; guardian_approved: True; crystallization_date: 2025-10-16T05:53:55.304701",
+    "compression_ratio": 1.0,
+    "symbol_count": 691,
+    "timestamp": "2025-11-18T10:46:47.557307Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: File Reading Task Pattern\n\nDEFINITION:\nFile reading operations are consistently used across sessions. High success rate for file reading operations indicates reliable capability. Recommendation: Consider creating specialized file reading SPR for efficiency\n\nBLUEPRINT DETAILS:\nCrystallized from Autopoietic Learning Loop analysis. Guardian",
+    "compression_ratio": 2.0028985507246375,
+    "symbol_count": 345,
+    "timestamp": "2025-11-18T10:46:47.557329Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: File Reading Task Pattern D: File reading operations consistently used across sessions. High success rate file reading operations indicates reliable capability. Recommendation: Consider creating specialized file reading Θ efficiency BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop analysis. Guardian",
+    "compression_ratio": 2.193650793650794,
+    "symbol_count": 315,
+    "timestamp": "2025-11-18T10:46:47.558066Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: File Reading Task Π D: File reading operations consistently across sessions. High success reading operations indicates reliable capability. Recommendation: Consider creating specialized reading Θ efficiency BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop analysis. M₇",
+    "compression_ratio": 2.441696113074205,
+    "symbol_count": 283,
+    "timestamp": "2025-11-18T10:46:47.569027Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: File Reading Task Π D: File reading operations consistently across sessions. High success reading operations indicates reliable capability. Recommendation: Consider creating specialized reading Θ efficiency BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop analysis. M₇",
+    "compression_ratio": 2.441696113074205,
+    "symbol_count": 283,
+    "timestamp": "2025-11-18T10:46:47.572509Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: File Reading Task Π D: File reading operations consistently across sessions. High success reading operations indicates reliable capability. Recommendation: Consider creating specialized reading Θ efficiency BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop analysis. M₇",
+    "compression_ratio": 2.441696113074205,
+    "symbol_count": 283,
+    "timestamp": "2025-11-18T10:46:47.576129Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: File Reading Task Π D: File High Recommendation: Consider Θ BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop M₇",
+    "compression_ratio": 5.484126984126984,
+    "symbol_count": 126,
+    "timestamp": "2025-11-18T10:46:47.579635Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Π|Θ",
+    "compression_ratio": 230.33333333333334,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:47.579938Z"
+  }
+]

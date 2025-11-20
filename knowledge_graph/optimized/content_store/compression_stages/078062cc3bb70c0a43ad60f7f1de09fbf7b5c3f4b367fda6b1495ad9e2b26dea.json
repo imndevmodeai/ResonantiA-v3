@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Functionality\n\nDEFINITION:\nFunctionality: Node 21: Functionality\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 21, type: node_format. Original SPR name: 'Functionality'\n\nEXAMPLE APPLICATION:\nNode 21: Functionality\nNode 8: Performance Requirements\n\nDescription: Detailed description of the system's performance requirements, including its speed, accuracy, and scalability.\nEdges:\nNode 22: Speed\nNode 23: Accuracy\nN\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 21\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 777,
+    "timestamp": "2025-11-18T10:47:23.040103Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Functionality\n\nDEFINITION:\nFunctionality: Node 21: Functionality\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 21, type: node_format. Original SPR name: 'Functionality'\n\nEXAMPLE APPLICATION:\nNode 21: Functionality\nNode 8: Performance Requirements\n\nDescription: Detailed description of the system's performance requirements, including its speed, accuracy, and ",
+    "compression_ratio": 2.002577319587629,
+    "symbol_count": 388,
+    "timestamp": "2025-11-18T10:47:23.040132Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Functionality D: Functionality: Node 21: Functionality Confidence: 0.5 BLUEPRINT DETAILS: Θ extracted agi.txt Node 21, type: node_F. Original Θ name: 'Functionality' EXAMPLE APPLICATION: Node 21: Functionality Node 8: Performance Requirements Description: Detailed description of S's performance requirements, including its speed, accuracy,",
+    "compression_ratio": 2.245664739884393,
+    "symbol_count": 346,
+    "timestamp": "2025-11-18T10:47:23.044594Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Functionality D: Functionality: Node Functionality Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Functionality' EXAMPLE APPLICATION: Node Functionality Node Performance Requirements Description: Detailed description S's performance requirements, including speed, accuracy,",
+    "compression_ratio": 2.428125,
+    "symbol_count": 320,
+    "timestamp": "2025-11-18T10:47:23.048260Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Functionality D: Functionality: Node Functionality Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Functionality' EXAMPLE APPLICATION: Node Functionality Node Performance Requirements Description: Detailed description S's performance requirements, including speed, accuracy,",
+    "compression_ratio": 2.428125,
+    "symbol_count": 320,
+    "timestamp": "2025-11-18T10:47:23.053427Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Functionality D: Functionality: Node Functionality Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Functionality' EXAMPLE APPLICATION: Node Functionality Node Performance Requirements Description: Detailed description S's performance requirements, including speed, accuracy,",
+    "compression_ratio": 2.428125,
+    "symbol_count": 320,
+    "timestamp": "2025-11-18T10:47:23.058239Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Functionality D: Functionality: Node Functionality Confidence: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: Node Functionality Node Performance Requirements Description: Detailed S's",
+    "compression_ratio": 3.8656716417910446,
+    "symbol_count": 201,
+    "timestamp": "2025-11-18T10:47:23.062269Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 259.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.064551Z"
+  }
+]

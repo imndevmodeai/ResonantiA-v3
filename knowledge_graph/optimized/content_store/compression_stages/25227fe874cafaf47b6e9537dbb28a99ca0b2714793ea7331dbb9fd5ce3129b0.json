@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Encrypted Contents\n\nDEFINITION:\nEncrypted Contents: GUR PENML XRL VF ZL FRPERG CBFG\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Encrypted Contents'\n\nEXAMPLE APPLICATION:\nng the corresponding number.\n\nType '1' to view the contents, '2' to edit the contents, '3' to manage access, '4' to apply digital watermarking, '5' to decrypt the contents, or '6' to exit the Secure Container.\n\n1\n\nYou have selected the option to view the encrypted contents of the Secure Container.\n\nEncrypted Contents:\n\nThe encrypted contents of the Secure Container are:\n\nGUR PENML XRL VF ZL FRPERG CBFG\n\nThis is the encrypted version of the SPR_compressor system and conversation thread.\n\nDecrypti\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1060,
+    "timestamp": "2025-11-18T10:47:48.165128Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Encrypted Contents\n\nDEFINITION:\nEncrypted Contents: GUR PENML XRL VF ZL FRPERG CBFG\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Encrypted Contents'\n\nEXAMPLE APPLICATION:\nng the corresponding number.\n\nType '1' to view the contents, '2' to edit the contents, '3' to manage access, '4' to apply digital watermarking, '5' to decrypt the contents, or '6' to exit the Secure Container.\n\n1\n\nYou have selected the option to view the encrypted contents of the Secure Containe",
+    "compression_ratio": 2.0,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:47:48.165148Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Encrypted Contents D: Encrypted Contents: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Encrypted Contents' EXAMPLE APPLICATION: ng corresponding number. Type '1' to view contents, '2' to edit contents, '3' to manage access, '4' to apply digital watermarking, '5' to decrypt contents, or '6' to exit Secure Container. 1 selected option to view encrypted contents of Secure Containe",
+    "compression_ratio": 2.2795698924731185,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:48.166137Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Encrypted Contents D: Encrypted Contents: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encrypted Contents' EXAMPLE APPLICATION: corresponding number. Type contents, contents, manage access, apply digital watermarking, decrypt contents, Secure Container. selected option encrypted contents Secure Containe",
+    "compression_ratio": 2.7461139896373057,
+    "symbol_count": 386,
+    "timestamp": "2025-11-18T10:47:48.169871Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Encrypted Contents D: Encrypted Contents: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encrypted Contents' EXAMPLE APPLICATION: corresponding number. Type contents, contents, manage access, apply digital watermarking, decrypt contents, Secure Container. selected option encrypted contents Secure Containe",
+    "compression_ratio": 2.7461139896373057,
+    "symbol_count": 386,
+    "timestamp": "2025-11-18T10:47:48.175376Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Encrypted Contents D: Encrypted Contents: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encrypted Contents' EXAMPLE APPLICATION: corresponding number. Type contents, contents, manage access, apply digital watermarking, decrypt contents, Secure Container. selected option encrypted contents Secure Containe",
+    "compression_ratio": 2.7461139896373057,
+    "symbol_count": 386,
+    "timestamp": "2025-11-18T10:47:48.179101Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Encrypted Contents D: Encrypted Contents: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ Node Original Θ Contents' EXAMPLE APPLICATION: Type Secure Container. Secure Containe",
+    "compression_ratio": 5.698924731182796,
+    "symbol_count": 186,
+    "timestamp": "2025-11-18T10:47:48.183872Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 353.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:48.184171Z"
+  }
+]

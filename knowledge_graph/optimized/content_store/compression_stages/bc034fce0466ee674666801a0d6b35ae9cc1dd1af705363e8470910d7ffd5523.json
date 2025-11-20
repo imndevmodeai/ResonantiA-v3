@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Encryption Process\n\nDEFINITION:\nEncryption Process: complete, the contents of the Secure Container will be encrypted using the RSA-4096 encryption algorithm with a password-based key\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Encryption Process'\n\nEXAMPLE APPLICATION:\n\n\nOnce you have entered and confirmed the password, I will generate a password-based key using the RSA-4096 encryption algorithm and use it to encrypt the contents of the Secure Container.\n\nPlease enter the password:\n\n(Note: Please enter a password, and I will proceed with the encryption process.)\n\nEncryption Process:\n\nThe encryption process will begin once you have entered and confirmed the password. The process may take some time, depending on the size of the contents of the Secure Container a\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1159,
+    "timestamp": "2025-11-18T10:47:47.946020Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Encryption Process\n\nDEFINITION:\nEncryption Process: complete, the contents of the Secure Container will be encrypted using the RSA-4096 encryption algorithm with a password-based key\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Encryption Process'\n\nEXAMPLE APPLICATION:\n\n\nOnce you have entered and confirmed the password, I will generate a password-based key using the RSA-4096 encryption algorithm and use it to encrypt the contents of the Secure Container.\n\nPlease enter the password:\n\n(Note: Please enter a passwo",
+    "compression_ratio": 2.001727115716753,
+    "symbol_count": 579,
+    "timestamp": "2025-11-18T10:47:47.946041Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Encryption P D: Encryption P: complete, contents of Secure Container will be encrypted using RSA-4096 encryption algorithm a password-based key BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Encryption P' EXAMPLE APPLICATION: Once entered confirmed password, I will generate a password-based key using RSA-4096 encryption algorithm use it to encrypt contents of Secure Container. Please enter password: (Note: Please enter a passwo",
+    "compression_ratio": 2.404564315352697,
+    "symbol_count": 482,
+    "timestamp": "2025-11-18T10:47:47.952683Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Encryption P D: Encryption P: complete, contents Secure Container encrypted using RSA-4096 encryption algorithm password-ABM BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encryption P' EXAMPLE APPLICATION: Once entered confirmed password, I generate password-ABM using RSA-4096 encryption algorithm encrypt contents Secure Container. Please enter password: (Note: Please enter passwo",
+    "compression_ratio": 2.6828703703703702,
+    "symbol_count": 432,
+    "timestamp": "2025-11-18T10:47:47.956337Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Encryption P D: Encryption P: complete, contents Secure Container encrypted using RSA-4096 encryption algorithm password-ABM BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encryption P' EXAMPLE APPLICATION: Once entered confirmed password, I generate password-ABM using RSA-4096 encryption algorithm encrypt contents Secure Container. Please enter password: (Note: Please enter passwo",
+    "compression_ratio": 2.6828703703703702,
+    "symbol_count": 432,
+    "timestamp": "2025-11-18T10:47:47.965059Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Encryption P D: Encryption P: complete, contents Secure Container encrypted using RSA-4096 encryption algorithm password-ABM BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encryption P' EXAMPLE APPLICATION: Once entered confirmed password, I generate password-ABM using RSA-4096 encryption algorithm encrypt contents Secure Container. Please enter password: (Note: Please enter passwo",
+    "compression_ratio": 2.6828703703703702,
+    "symbol_count": 432,
+    "timestamp": "2025-11-18T10:47:47.971612Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Encryption P D: Encryption P: Secure Container RSA-4096 BLUEPRINT DETAILS: Θ Node Original Θ P' EXAMPLE APPLICATION: Once I RSA-4096 Secure Container. Please Please",
+    "compression_ratio": 6.817647058823529,
+    "symbol_count": 170,
+    "timestamp": "2025-11-18T10:47:47.977778Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 386.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:47.978094Z"
+  }
+]

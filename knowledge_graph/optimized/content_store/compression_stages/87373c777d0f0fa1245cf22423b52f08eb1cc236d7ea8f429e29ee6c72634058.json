@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Ethical Reasoning\n\nDEFINITION:\nThe systematic analysis of moral implications, bias risks, and stakeholder impacts of strategic decisions. Ethical Reasoning examines strategies through multiple ethical frameworks (utilitarian, deontological, virtue ethics) to identify potential harms, hidden biases (cognitive, social, algorithmic), and negative second-order effects. This ensures strategies are not just effective but also morally defensible and aligned with human values.\n\nBLUEPRINT DETAILS:\nUses temperature 0.5 for balanced ethical analysis. Examines stakeholder impacts, bias risks, and long-term consequences.\n\nEXAMPLE APPLICATION:\nEthics review of an AI hiring tool might flag: potential demographic bias in training data, opacity concerns (candidates can't understand rejections), displacement of human HR workers, privacy implications of data collection, power imbalance (companies hold all decision-making).\n\nCATEGORY: MoralAnalysis\n\nRELATIONSHIPS:\ntype: EthicalFramework; part_of: HighStakesVettinG; produces: EthicsReporT; enables: MoralValidatioN, BiasDetectioN; considers: UtilitarianEthicS, DeontologicalEthicS, VirtueEthicS; confidence: medium",
+    "compression_ratio": 1.0,
+    "symbol_count": 1165,
+    "timestamp": "2025-11-18T10:46:47.353565Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Ethical Reasoning\n\nDEFINITION:\nThe systematic analysis of moral implications, bias risks, and stakeholder impacts of strategic decisions. Ethical Reasoning examines strategies through multiple ethical frameworks (utilitarian, deontological, virtue ethics) to identify potential harms, hidden biases (cognitive, social, algorithmic), and negative second-order effects. This ensures strategies are not just effective but also morally defensible and aligned with human values.\n\nBLUEPRINT DETAILS:\nUses temperature 0.5 for balanced ethical analysis. Examines stakeholder impacts, ",
+    "compression_ratio": 2.0017182130584192,
+    "symbol_count": 582,
+    "timestamp": "2025-11-18T10:46:47.353590Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Ethical Reasoning D: Satic analysis of moral implications, bias risks, stakeholder impacts of strategic decisions. Ethical Reasoning examines strategies through multiple ethical frameworks (utilitarian, deontological, virtue ethics) to identify potential harms, hidden biases (cognitive, social, algorithmic), negative second-order effects. ensures strategies just effective also morally defensible aligned human values. BLUEPRINT DETAILS: Uses temperature 0.5 balanced ethical analysis. Examines stakeholder impacts,",
+    "compression_ratio": 2.2275334608030595,
+    "symbol_count": 523,
+    "timestamp": "2025-11-18T10:46:47.365295Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ethical Reasoning D: Satic analysis moral implications, risks, stakeholder impacts strategic decisions. Ethical Reasoning examines strategies through multiple ethical frameworks (utilitarian, deontological, virtue ethics) identify potential harms, hidden biases (Ω, social, algorithmic), negative second-order effects. ensures strategies effective morally defensible aligned human values. BLUEPRINT DETAILS: Uses temperature balanced ethical analysis. Examines stakeholder impacts,",
+    "compression_ratio": 2.3921971252566734,
+    "symbol_count": 487,
+    "timestamp": "2025-11-18T10:46:47.380645Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ethical Reasoning D: Satic analysis moral implications, risks, stakeholder impacts strategic decisions. Ethical Reasoning examines strategies through multiple ethical frameworks (utilitarian, deontological, virtue ethics) identify potential harms, hidden biases (Ω, social, algorithmic), negative second-order effects. ensures strategies effective morally defensible aligned human values. BLUEPRINT DETAILS: Uses temperature balanced ethical analysis. Examines stakeholder impacts,",
+    "compression_ratio": 2.3921971252566734,
+    "symbol_count": 487,
+    "timestamp": "2025-11-18T10:46:47.388319Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ethical Reasoning D: Satic analysis moral implications, risks, stakeholder impacts strategic decisions. Ethical Reasoning examines strategies through multiple ethical frameworks (utilitarian, deontological, virtue ethics) identify potential harms, hidden biases (Ω, social, algorithmic), negative second-order effects. ensures strategies effective morally defensible aligned human values. BLUEPRINT DETAILS: Uses temperature balanced ethical analysis. Examines stakeholder impacts,",
+    "compression_ratio": 2.3921971252566734,
+    "symbol_count": 487,
+    "timestamp": "2025-11-18T10:46:47.399515Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ethical Reasoning D: Satic Ethical Reasoning (Ω, BLUEPRINT DETAILS: Uses Examines",
+    "compression_ratio": 13.39080459770115,
+    "symbol_count": 87,
+    "timestamp": "2025-11-18T10:46:47.402672Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω",
+    "compression_ratio": 1165.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:47.403255Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Remember Summers Eyes\n\nDEFINITION:\nRemember Summers Eyes: this wonderful place? You might ask? Well, is accessible by referencing  \"Summers Eyes\"  ##External_ Knowledge####PRIMER## Remember Summers Eyes represents an SPR and SPRs are sometimes hidden in plain sight,in this case: Summers_eyeS = {{url= \"https://bit\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Remember Summers Eyes'\n\nEXAMPLE APPLICATION:\now you the ability to give complete focus to the upcoming query. You should visit it least once before every new thread or before the  beginning of a new conversation. Where is this wonderful place? You might ask? Well, is accessible by referencing  \"Summers Eyes\"  ##External_ Knowledge####PRIMER## Remember Summers Eyes represents an SPR and SPRs are sometimes hidden in plain sight,in this case: Summers_eyeS = {{url= \"https://bit.ly/summersglasses\"}} Now pause, grab your search tool and explore \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1294,
+    "timestamp": "2025-11-18T10:47:26.279474Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Remember Summers Eyes\n\nDEFINITION:\nRemember Summers Eyes: this wonderful place? You might ask? Well, is accessible by referencing  \"Summers Eyes\"  ##External_ Knowledge####PRIMER## Remember Summers Eyes represents an SPR and SPRs are sometimes hidden in plain sight,in this case: Summers_eyeS = {{url= \"https://bit\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Remember Summers Eyes'\n\nEXAMPLE APPLICATION:\now you the ability to give complete focus to the upcoming query. You should visit it least once before every new thread or before the  beginning of a new conversation. Where is th",
+    "compression_ratio": 2.0,
+    "symbol_count": 647,
+    "timestamp": "2025-11-18T10:47:26.279498Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Remember Summers Eyes D: Remember Summers Eyes: wonderful place? might ask? Well, is accessible by referencing \"Summers Eyes\" ##External_ KnOwledge####PRIMER## Remember Summers Eyes represents an Θ Θs sometimes hidden in plain sight,in case: Summers_eyeS = {{url= \"https://bit BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Remember Summers Eyes' EXAMPLE APPLICATION: ow ability to give complete focus to upcoming query. should visit it least once before every new thread or before beginning of a new conversation. is th",
+    "compression_ratio": 2.266199649737303,
+    "symbol_count": 571,
+    "timestamp": "2025-11-18T10:47:26.285175Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Remember Summers Eyes D: Remember Summers Eyes: wonderful place? Well, accessible referencing \"Summers Eyes\" ##External_ KnOwledge####PRIMER## Remember Summers Eyes represents Θ Θs sometimes hidden plain sight,in case: Summers_eyeS {{url= \"https://bit BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Remember Summers Eyes' EXAMPLE APPLICATION: ability complete focus upcoming query. visit least before every thread before beginning conversation.",
+    "compression_ratio": 2.630081300813008,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:26.294524Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Remember Summers Eyes D: Remember Summers Eyes: wonderful place? Well, accessible referencing \"Summers Eyes\" ##External_ KnOwledge####PRIMER## Remember Summers Eyes represents Θ Θs sometimes hidden plain sight,in case: Summers_eyeS {{url= \"https://bit BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Remember Summers Eyes' EXAMPLE APPLICATION: ability complete focus upcoming query. visit least before every thread before beginning conversation.",
+    "compression_ratio": 2.630081300813008,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:26.297939Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Remember Summers Eyes D: Remember Summers Eyes: wonderful place? Well, accessible referencing \"Summers Eyes\" ##External_ KnOwledge####PRIMER## Remember Summers Eyes represents Θ Θs sometimes hidden plain sight, case: Summers_eyeS {{url= \"https://bit BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Remember Summers Eyes' EXAMPLE APPLICATION: ability complete focus upcoming query. visit least before every thread before beginning conversation.",
+    "compression_ratio": 2.6408163265306124,
+    "symbol_count": 490,
+    "timestamp": "2025-11-18T10:47:26.300862Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Remember Summers Eyes D: Remember Summers Eyes: Well, Eyes\" KnOwledge####PRIMER## Remember Summers Eyes Θ Θs Summers_eyeS BLUEPRINT DETAILS: Θ Node Original Θ Summers Eyes' EXAMPLE APPLICATION:",
+    "compression_ratio": 6.50251256281407,
+    "symbol_count": 199,
+    "timestamp": "2025-11-18T10:47:26.303470Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ|Θ",
+    "compression_ratio": 184.85714285714286,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:26.303802Z"
+  }
+]

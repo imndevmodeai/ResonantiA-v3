@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Data Analytics\n\nDEFINITION:\nData Analytics: Finally, we can integrate a Blockchain module to enable the system to interact with decentralized networks. This will enable the system to perform tasks such as secure data storage, smart contract execution, and decentralized decision-making.\n\nConfidence: 0.65\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 130, type: node_format. Original SPR name: 'Analytics'\n\nEXAMPLE APPLICATION:\nNode 130: Data Analytics\n\nSPR: 0.650, \"Analytics\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 130\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 833,
+    "timestamp": "2025-11-18T10:47:06.623704Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Data Analytics\n\nDEFINITION:\nData Analytics: Finally, we can integrate a Blockchain module to enable the system to interact with decentralized networks. This will enable the system to perform tasks such as secure data storage, smart contract execution, and decentralized decision-making.\n\nConfidence: 0.65\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 130, type: node_format. Original SPR name: 'Analytics",
+    "compression_ratio": 2.0024038461538463,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:06.623727Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Data Analytics D: Data Analytics: Finally, we integrate a Blockchain module to enable S to interact decentralized networks. will enable S to perform tasks such as secure data storage, smart contract execution, decentralized decision-making. Confidence: 0.65 BLUEPRINT DETAILS: Θ extracted agi.txt Node 130, type: node_F. Original Θ name: 'Analytics",
+    "compression_ratio": 2.353107344632768,
+    "symbol_count": 354,
+    "timestamp": "2025-11-18T10:47:06.626605Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Data Analytics D: Data Analytics: Finally, integrate Blockchain module enable S interact decentralized networks. enable S perform tasks secure storage, smart contract execution, decentralized decision-making. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Analytics",
+    "compression_ratio": 2.6698717948717947,
+    "symbol_count": 312,
+    "timestamp": "2025-11-18T10:47:06.628937Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Data Analytics D: Data Analytics: Finally, integrate Blockchain module enable S interact decentralized networks. enable S perform tasks secure storage, smart contract execution, decentralized decision-making. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Analytics",
+    "compression_ratio": 2.6698717948717947,
+    "symbol_count": 312,
+    "timestamp": "2025-11-18T10:47:06.632298Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Data Analytics D: Data Analytics: Finally, integrate Blockchain module enable S interact decentralized networks. enable S perform tasks secure storage, smart contract execution, decentralized decision-making. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Analytics",
+    "compression_ratio": 2.6698717948717947,
+    "symbol_count": 312,
+    "timestamp": "2025-11-18T10:47:06.634159Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Data Analytics D: Data Analytics: Finally, Blockchain S S Confidence: BLUEPRINT DETAILS: Θ Node Original Θ",
+    "compression_ratio": 7.4375,
+    "symbol_count": 112,
+    "timestamp": "2025-11-18T10:47:06.640162Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 277.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:06.640471Z"
+  }
+]

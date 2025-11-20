@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: SPR Usage Optimization\n\nDEFINITION:\nNFL, CFP, SPR, RISE, IAR are most frequently used SPRs. These SPRs represent core cognitive capabilities that are consistently activated. Recommendation: Prioritize these SPRs for faster access and optimization\n\n[From agi.txt]: SPR: 0.720, \"Optimization\"\n\nBLUEPRINT DETAILS:\nCrystallized from Autopoietic Learning Loop analysis. Guardian approved by B.J. Lewis (IMnDEVmode).\n\nEXAMPLE APPLICATION:\nPrioritize these SPRs for faster access and optimization\n\nCATEGORY: LearnedWisdom\n\nRELATIONSHIPS:\ntype: AutopoieticInsight; confidence: 0.92; occurrences: 11553; success_rate: 0.85; source: Session file analysis; guardian_approved: True; crystallization_date: 2025-10-16T05:53:55.304662\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 933,
+    "timestamp": "2025-11-18T10:46:59.620050Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: SPR Usage Optimization\n\nDEFINITION:\nNFL, CFP, SPR, RISE, IAR are most frequently used SPRs. These SPRs represent core cognitive capabilities that are consistently activated. Recommendation: Prioritize these SPRs for faster access and optimization\n\n[From agi.txt]: SPR: 0.720, \"Optimization\"\n\nBLUEPRINT DETAILS:\nCrystallized from Autopoietic Learning Loop analysis. Guardian approved by B.J. Lewis (IMnDEVmode).\n\nEXAMPLE APPLICATION:\nPrioritize these SPRs for f",
+    "compression_ratio": 2.0021459227467813,
+    "symbol_count": 466,
+    "timestamp": "2025-11-18T10:46:59.620082Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Θ Usage Optimization D: NFL, CFP, Θ, RISE, Φ most frequently used Θs. These Θs represent core cognitive capabilities consistently activated. Recommendation: Prioritize these Θs faster access optimization [ agi.txt]: Θ: 0.720, \"Optimization\" BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop analysis. Guardian approved by B.J. Lewis (IMnDEVmode). EXAMPLE APPLICATION: Prioritize these Θs f",
+    "compression_ratio": 2.315136476426799,
+    "symbol_count": 403,
+    "timestamp": "2025-11-18T10:46:59.622015Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Θ Usage Optimization D: NFL, CFP, Θ, RISE, Φ frequently Θs. These Θs represent Ω capabilities consistently activated. Recommendation: Prioritize these Θs faster access optimization agi.txt]: Θ: 0.720, \"Optimization\" BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop analysis. M₇ approved B.J. Lewis (IMnDEVmode). EXAMPLE APPLICATION: Prioritize these Θs",
+    "compression_ratio": 2.542234332425068,
+    "symbol_count": 367,
+    "timestamp": "2025-11-18T10:46:59.634891Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Θ Usage Optimization D: NFL, CFP, Θ, RISE, Φ frequently Θs. These Θs represent Ω capabilities consistently activated. Recommendation: Prioritize these Θs faster access optimization agi.txt]: Θ: 0.720, \"Optimization\" BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop analysis. M₇ approved B.J. Lewis (IMnDEVmode). EXAMPLE APPLICATION: Prioritize these Θs",
+    "compression_ratio": 2.542234332425068,
+    "symbol_count": 367,
+    "timestamp": "2025-11-18T10:46:59.641002Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Θ Usage Optimization D: NFL, CFP, Θ, RISE, Φ frequently Θs. These Θs represent Ω capabilities consistently activated. Recommendation: Prioritize these Θs faster access optimization agi.txt]: Θ: 0.720, \"Optimization\" BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop analysis. M₇ approved B.J. Lewis (IMnDEVmode). EXAMPLE APPLICATION: Prioritize these Θs",
+    "compression_ratio": 2.542234332425068,
+    "symbol_count": 367,
+    "timestamp": "2025-11-18T10:46:59.652753Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Θ Usage Optimization D: NFL, CFP, Θ, RISE, Φ Θs. These Θs Ω Recommendation: Prioritize Θs Θ: BLUEPRINT DETAILS: Crystallized Autopoietic Learning Loop M₇ B.J. Lewis EXAMPLE APPLICATION: Prioritize Θs",
+    "compression_ratio": 4.5512195121951216,
+    "symbol_count": 205,
+    "timestamp": "2025-11-18T10:46:59.658881Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Φ|Θ|Θ",
+    "compression_ratio": 103.66666666666667,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:59.660843Z"
+  }
+]

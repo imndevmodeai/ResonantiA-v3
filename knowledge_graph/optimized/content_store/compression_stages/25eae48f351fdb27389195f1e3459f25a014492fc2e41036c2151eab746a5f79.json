@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Class: CustomEncoder\n\nDEFINITION:\nClass: CustomEncoder\n\nMethods: default\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/custom_json.py, type: python_class\n\nFULL IMPLEMENTATION CODE (custom_json.py):\n```python\nimport json\nfrom datetime import datetime\n\nclass CustomEncoder(json.JSONEncoder):\n    def default(self, obj):\n        if isinstance(obj, datetime):\n            return obj.isoformat()\n        return super().default(obj)\n\ndef dumps(obj, **kwargs):\n    kwargs.setdefault('cls', CustomEncoder)\n    return json.dumps(obj, **kwargs)\n\ndef loads(s, **kwargs):\n    return json.loads(s, **kwargs) \n```\n\nEXAMPLE APPLICATION:\nClass: CustomEncoder\n\nMethods: default\n\nCATEGORY: CodeKnowledge\n\nRELATIONSHIPS:\ntype: FromCodebase; source: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/custom_json.py; source_type: python_class",
+    "compression_ratio": 1.0,
+    "symbol_count": 864,
+    "timestamp": "2025-11-18T11:00:32.081625Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Class: CustomEncoder\n\nDEFINITION:\nClass: CustomEncoder\n\nMethods: default\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/custom_json.py, type: python_class\n\nFULL IMPLEMENTATION CODE (custom_json.py):\n```python\nimport json\nfrom datetime import datetime\n\nclass CustomEncoder(json.JSONEncoder):\n    def default(self, obj):\n        if isinstance(obj, datetime):\n            return obj.isoformat",
+    "compression_ratio": 2.0,
+    "symbol_count": 432,
+    "timestamp": "2025-11-18T11:00:32.081654Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Class: CustomEncoder D: Class: CustomEncoder Methods: default BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/custom_json.py, type: python_class FULL I CODE (custom_json.py): ```python import json datetime import datetime class CustomEncoder(json.JSONEncoder): def default(self, obj): if isinstance(obj, datetime): return obj.isoF",
+    "compression_ratio": 2.386740331491713,
+    "symbol_count": 362,
+    "timestamp": "2025-11-18T11:00:32.082457Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Class: CustomEncoder D: Class: CustomEncoder Methods: default BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/custom_json.py, type: python_class FULL I CODE (custom_json.py): ```python import datetime import datetime class CustomEncoder(json.JSONEncoder): default(self, obj): isinstance(obj, datetime): return obj.isoF",
+    "compression_ratio": 2.4685714285714284,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T11:00:32.096225Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Class: CustomEncoder D: Class: CustomEncoder Methods: default BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/custom_json.py, type: python_class FULL I CODE (custom_json.py): ```python import datetime import datetime class CustomEncoder(json.JSONEncoder): default(self, obj): isinstance(obj, datetime): return obj.isoF",
+    "compression_ratio": 2.4685714285714284,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T11:00:32.112971Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Class: CustomEncoder D: Class: CustomEncoder Methods: default BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/custom_json.py, type: python_class FULL I CODE (custom_json.py): ```python import datetime import datetime class CustomEncoder(json.JSONEncoder): default(self, obj): isinstance(obj, datetime): return obj.isoF",
+    "compression_ratio": 2.4685714285714284,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T11:00:32.130666Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Class: CustomEncoder D: Class: CustomEncoder Methods: BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/custom_json.py, FULL I CODE CustomEncoder(json.JSONEncoder):",
+    "compression_ratio": 4.453608247422681,
+    "symbol_count": 194,
+    "timestamp": "2025-11-18T11:00:32.143242Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 864.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T11:00:32.148860Z"
+  }
+]

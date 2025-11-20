@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Arche System Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to Arche System. Provides the higher-order cognitive support for the operational Arche System system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Arche System system.\n\nEXAMPLE APPLICATION:\nProviding cognitive guidance for Arche System operational processes.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: CognitiveCorrespondence; confidence: 0.85; corresponds_to: ArchesysteM; level: Above; enables: CognitiveSupport, HigherOrderProcessing, StrategicGuidance, SymmetricalArchitecture",
+    "compression_ratio": 1.0,
+    "symbol_count": 679,
+    "timestamp": "2025-11-18T10:45:50.271973Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Arche System Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to Arche System. Provides the higher-order cognitive support for the operational Arche System system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Arc",
+    "compression_ratio": 2.0029498525073746,
+    "symbol_count": 339,
+    "timestamp": "2025-11-18T10:45:50.272002Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Æ S Cognitive Capability D: Cognitive capability corresponding to Æ S. Provides higher-order cognitive support operational Æ S S, ensuring symmetrical architecture between cognitive operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture Arc",
+    "compression_ratio": 2.4690909090909092,
+    "symbol_count": 275,
+    "timestamp": "2025-11-18T10:45:50.280887Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Æ S Ω Capability D: Ω capability corresponding to Æ S. Provides higher-order Ω support operational Æ S S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture Arc",
+    "compression_ratio": 2.794238683127572,
+    "symbol_count": 243,
+    "timestamp": "2025-11-18T10:45:50.288139Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Æ S Ω Capability D: Ω capability corresponding Æ S. Provides higher-order Ω support operational Æ S S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture Arc",
+    "compression_ratio": 2.8649789029535864,
+    "symbol_count": 237,
+    "timestamp": "2025-11-18T10:45:50.302098Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Æ S Ω Capability D: Ω capability corresponding Æ S. Provides higher-order Ω support operational Æ S S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture Arc",
+    "compression_ratio": 2.8649789029535864,
+    "symbol_count": 237,
+    "timestamp": "2025-11-18T10:45:50.322963Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Æ S Ω Capability D: Ω Æ S. Provides Ω Æ S S, Ω BLUEPRINT DETAILS: Created Arc",
+    "compression_ratio": 8.180722891566266,
+    "symbol_count": 83,
+    "timestamp": "2025-11-18T10:45:50.324200Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Ω|Ω|Æ|Ω",
+    "compression_ratio": 75.44444444444444,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:45:50.340541Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Vatican City\n\nDEFINITION:\nVatican City: the capital of France?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Vatican City'\n\nEXAMPLE APPLICATION:\ne to provide you with a summary of the concepts we have covered so far:\n\nYes, I would like to learn more about AGI\n\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nReasoning about: What is the capital of France?\nAnswer: The capital of France is Paris.\nLearning: The smallest country in the world is Vatican City.\n->|/results|<-\n->|conditional|<- \nIf the AGI system is not reasoning or learning correctly, trigger a conditional step to revise and revalidate the system.\n->|/conditional|<-\n->|/step|<-\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1033,
+    "timestamp": "2025-11-18T10:47:27.500073Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Vatican City\n\nDEFINITION:\nVatican City: the capital of France?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Vatican City'\n\nEXAMPLE APPLICATION:\ne to provide you with a summary of the concepts we have covered so far:\n\nYes, I would like to learn more about AGI\n\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nReasoning about: What is the capital of France?\nAnswer: The capital of France is Paris.\nLearning: The smallest country in the world is Vatican C",
+    "compression_ratio": 2.001937984496124,
+    "symbol_count": 516,
+    "timestamp": "2025-11-18T10:47:27.500100Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Vatican City D: Vatican City: capital of France? BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Vatican City' EXAMPLE APPLICATION: e to provide a summary of concepts we covered so far: Yes, I would like to learn more about AGI ->|execution|<- ->|/execution|<- ->|results|<- Reasoning about: is capital of France? Answer: capital of France is Paris. Learning: smallest country in world is Vatican C",
+    "compression_ratio": 2.3058035714285716,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:27.509032Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Vatican City D: Vatican City: capital France? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vatican City' EXAMPLE APPLICATION: provide summary concepts covered Yes, I learn about AGI ->|execution|<- ->|/execution|<- ->|results|<- Reasoning about: capital France? Answer: capital France Paris. Learning: smallest country world Vatican C",
+    "compression_ratio": 2.6901041666666665,
+    "symbol_count": 384,
+    "timestamp": "2025-11-18T10:47:27.523226Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Vatican City D: Vatican City: capital France? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vatican City' EXAMPLE APPLICATION: provide summary concepts covered Yes, I learn about AGI ->|execution|<- ->|/execution|<- ->|results|<- Reasoning about: capital France? Answer: capital France Paris. Learning: smallest country world Vatican C",
+    "compression_ratio": 2.6901041666666665,
+    "symbol_count": 384,
+    "timestamp": "2025-11-18T10:47:27.545877Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Vatican City D: Vatican City: capital France? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vatican City' EXAMPLE APPLICATION: provide summary concepts covered Yes, I learn about AGI ->|execution|<- ->|/execution|<- ->|results|<- Reasoning about: capital France? Answer: capital France Paris. Learning: smallest country world Vatican C",
+    "compression_ratio": 2.6901041666666665,
+    "symbol_count": 384,
+    "timestamp": "2025-11-18T10:47:27.561407Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Vatican City D: Vatican City: France? BLUEPRINT DETAILS: Θ Node Original Θ City' EXAMPLE APPLICATION: Yes, I AGI Reasoning France? Answer: France Paris. Learning: Vatican C",
+    "compression_ratio": 5.803370786516854,
+    "symbol_count": 178,
+    "timestamp": "2025-11-18T10:47:27.579486Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 344.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:27.579871Z"
+  }
+]

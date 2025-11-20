@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Metacognitive shifT\n\nDEFINITION:\nDynamic cognitive adaptation triggered by dissonance detection\n\nBLUEPRINT DETAILS:\nDissonance will trigger Metacognitive shifT\n\nEXAMPLE APPLICATION:\nWhen system detects misalignment, triggers adaptive cognitive shifts\n\nCATEGORY: CognitiveProcess\n\nRELATIONSHIPS:\ntype: CognitiveProcess; triggered_by: Dissonance detection; enables: Cognitive adaptation; supports: Resonant Corrective Loop; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 444,
+    "timestamp": "2025-11-18T10:46:51.609127Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Metacognitive shifT\n\nDEFINITION:\nDynamic cognitive adaptation triggered by dissonance detection\n\nBLUEPRINT DETAILS:\nDissonance will trigger Metacognitive shifT\n\nEXAMPLE APPLICATION:\nWhen system detects misalignment, ",
+    "compression_ratio": 2.0,
+    "symbol_count": 222,
+    "timestamp": "2025-11-18T10:46:51.609163Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: MS D: Dynamic cognitive adaptation triggered by dissonance detection BLUEPRINT DETAILS: Dissonance will trigger MS EXAMPLE APPLICATION: S detects misalignment,",
+    "compression_ratio": 2.690909090909091,
+    "symbol_count": 165,
+    "timestamp": "2025-11-18T10:46:51.609920Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: MS D: Dynamic Ω adaptation triggered by dissonance detection BLUEPRINT DETAILS: Dissonance trigger MS EXAMPLE APPLICATION: S detects misalignment,",
+    "compression_ratio": 2.9210526315789473,
+    "symbol_count": 152,
+    "timestamp": "2025-11-18T10:46:51.610800Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: MS D: Dynamic Ω adaptation triggered dissonance detection BLUEPRINT DETAILS: Dissonance trigger MS EXAMPLE APPLICATION: S detects misalignment,",
+    "compression_ratio": 2.9798657718120807,
+    "symbol_count": 149,
+    "timestamp": "2025-11-18T10:46:51.612079Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: MS D: Dynamic Ω adaptation triggered dissonance detection BLUEPRINT DETAILS: Dissonance trigger MS EXAMPLE APPLICATION: S detects misalignment,",
+    "compression_ratio": 2.9798657718120807,
+    "symbol_count": 149,
+    "timestamp": "2025-11-18T10:46:51.616934Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: MS D: Dynamic Ω BLUEPRINT DETAILS: Dissonance MS EXAMPLE APPLICATION: S",
+    "compression_ratio": 5.766233766233766,
+    "symbol_count": 77,
+    "timestamp": "2025-11-18T10:46:51.621331Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω",
+    "compression_ratio": 444.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:51.621591Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Deep Learning Framework\n\nDEFINITION:\nComprehensive framework for deep learning, neural networks, and advanced machine learning. Enables ArchE to implement convolutional neural networks, recurrent neural networks, and generative models for complex pattern recognition and prediction tasks.\n\n[From agi.txt]: Deep Learning:\n\nBLUEPRINT DETAILS:\nReincorporated from historical wayback exploration. Provides deep learning capabilities for advanced pattern recognition.\n\nEXAMPLE APPLICATION:\nTraining neural networks for image classification or using GANs for data generation.\n\nCATEGORY: AnalyticalTechnique\n\nRELATIONSHIPS:\ntype: DeepLearningCapability; confidence: 0.92; historical_source: wayback_29_occurrences; enables: ConvolutionalNeuralNetworks, RecurrentNeuralNetworks, GenerativeAdversarialNetworks, TransferLearning, NeuralArchitectureSearch; supports_principle: PatternRecognition, PredictiveAnalysis\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1118,
+    "timestamp": "2025-11-18T10:46:46.145469Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Deep Learning Framework\n\nDEFINITION:\nComprehensive framework for deep learning, neural networks, and advanced machine learning. Enables ArchE to implement convolutional neural networks, recurrent neural networks, and generative models for complex pattern recognition and prediction tasks.\n\n[From agi.txt]: Deep Learning:\n\nBLUEPRINT DETAILS:\nReincorporated from historical wayback exploration. Provides deep learning capabilities for advanced pattern recognition.\n\nEXAMPLE APPLICATION:\nTraining neural networks for image classification or using GANs for ",
+    "compression_ratio": 2.0,
+    "symbol_count": 559,
+    "timestamp": "2025-11-18T10:46:46.145505Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Deep Learning Framework D: Comprehensive framework deep learning, neural networks, advanced machine learning. Enables Æ to implement convolutional neural networks, recurrent neural networks, generative models complex pattern recognition prediction tasks. [ agi.txt]: Deep Learning: BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides deep learning capabilities advanced pattern recognition. EXAMPLE APPLICATION: Training neural networks image classification or using GANs",
+    "compression_ratio": 2.236,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:46:46.149753Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Deep Learning Framework D: Comprehensive framework learning, neural networks, advanced machine learning. Enables Æ implement convolutional neural networks, recurrent neural networks, generative models complex Π recognition prediction tasks. agi.txt]: Deep Learning: BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides learning capabilities advanced Π recognition. EXAMPLE APPLICATION: Training neural networks image classification using GANs",
+    "compression_ratio": 2.3787234042553194,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:46:46.152694Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Deep Learning Framework D: Comprehensive framework learning, neural networks, advanced machine learning. Enables Æ implement convolutional neural networks, recurrent neural networks, generative models complex Π recognition prediction tasks. agi.txt]: Deep Learning: BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides learning capabilities advanced Π recognition. EXAMPLE APPLICATION: Training neural networks image classification using GANs",
+    "compression_ratio": 2.3787234042553194,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:46:46.163346Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Deep Learning Framework D: Comprehensive framework learning, neural networks, advanced machine learning. Enables Æ implement convolutional neural networks, recurrent neural networks, generative models complex Π recognition prediction tasks. agi.txt]: Deep Learning: BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides learning capabilities advanced Π recognition. EXAMPLE APPLICATION: Training neural networks image classification using GANs",
+    "compression_ratio": 2.3787234042553194,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:46:46.171760Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Deep Learning Framework D: Comprehensive Enables Æ Π Deep Learning: BLUEPRINT DETAILS: Reincorporated Provides Π EXAMPLE APPLICATION: Training GANs",
+    "compression_ratio": 7.30718954248366,
+    "symbol_count": 153,
+    "timestamp": "2025-11-18T10:46:46.178680Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Π|Π",
+    "compression_ratio": 223.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:46:46.178989Z"
+  }
+]

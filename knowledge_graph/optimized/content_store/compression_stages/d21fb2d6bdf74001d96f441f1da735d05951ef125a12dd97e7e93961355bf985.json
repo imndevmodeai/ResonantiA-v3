@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Example Format\n\nDEFINITION:\nExample Format: taking a large step towards your growth\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Example Format'\n\nEXAMPLE APPLICATION:\n you are taking a large step towards your growth. \nVetting: Verification of the step using credible sources, including URLs and links to relevant information.\nURLs and Links: Inclusion of URLs and links to support the vetting process, allowing users to verify the reasoning and accuracy of the plan.\nExample Format\n\n->|step|<-\n->|thinking|<- [Insert thinking and analysis of the step] ->|/thinking|<-\n->|reflection|<- [Insert reflection and analysis of the step, considering alternative approaches an\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1056,
+    "timestamp": "2025-11-18T10:47:25.583807Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Example Format\n\nDEFINITION:\nExample Format: taking a large step towards your growth\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Example Format'\n\nEXAMPLE APPLICATION:\n you are taking a large step towards your growth. \nVetting: Verification of the step using credible sources, including URLs and links to relevant information.\nURLs and Links: Inclusion of URLs and links to support the vetting process, allowing users to verify the reasoning and accuracy of the plan",
+    "compression_ratio": 2.0,
+    "symbol_count": 528,
+    "timestamp": "2025-11-18T10:47:25.583830Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Example F D: Example F: taking a large step towards your growth BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Example F' EXAMPLE APPLICATION: taking a large step towards your growth. Vetting: Verification of step using credible sources, including URLs links to relevant inFion. URLs Links: Inclusion of URLs links to support vetting P, allowing users to verify reasoning accuracy of plan",
+    "compression_ratio": 2.4054669703872436,
+    "symbol_count": 439,
+    "timestamp": "2025-11-18T10:47:25.587479Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Example F D: Example F: taking large towards growth BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Example F' EXAMPLE APPLICATION: taking large towards growth. Vetting: Verification using credible sources, including URLs links relevant inFion. URLs Links: Inclusion URLs links support vetting P, allowing users verify reasoning accuracy",
+    "compression_ratio": 2.75,
+    "symbol_count": 384,
+    "timestamp": "2025-11-18T10:47:25.591946Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Example F D: Example F: taking large towards growth BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Example F' EXAMPLE APPLICATION: taking large towards growth. Vetting: Verification using credible sources, including URLs links relevant inFion. URLs Links: Inclusion URLs links support vetting P, allowing users verify reasoning accuracy",
+    "compression_ratio": 2.75,
+    "symbol_count": 384,
+    "timestamp": "2025-11-18T10:47:25.598779Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Example F D: Example F: taking large towards growth BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Example F' EXAMPLE APPLICATION: taking large towards growth. Vetting: Verification using credible sources, including URLs links relevant inFion. URLs Links: Inclusion URLs links support vetting P, allowing users verify reasoning accuracy",
+    "compression_ratio": 2.75,
+    "symbol_count": 384,
+    "timestamp": "2025-11-18T10:47:25.601753Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Example F D: Example F: BLUEPRINT DETAILS: Θ Node Original Θ F' EXAMPLE APPLICATION: Vetting: Verification URLs URLs Links: Inclusion URLs P,",
+    "compression_ratio": 7.183673469387755,
+    "symbol_count": 147,
+    "timestamp": "2025-11-18T10:47:25.611848Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 352.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:25.612494Z"
+  }
+]

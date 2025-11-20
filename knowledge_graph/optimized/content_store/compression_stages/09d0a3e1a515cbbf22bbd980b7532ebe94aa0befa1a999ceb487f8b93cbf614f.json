@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Error Handling\n\nDEFINITION:\nError Handling: includes handling issues like network connectivity problems, unresponsive data sources, or invalid data formats [4]\n\n[From Codebase]: All methods return structured result objects with error fields:\n- `ZeptoSPRResult.error`: Compression error message (if any)\n- `ZeptoSPRDecompressionResult.error`: Decompression error message (if any)\n\nMethods gracefully handle:\n- Missing dependencies (PatternCrystallizationEngine unavailable)\n- Invalid inputs (empty narratives, malformed Zepto SPRs)\n- Codex mismatches (missing symbols during decompression)\n\n[From Codebase]: - LLM timeout → Retry with exponential backoff\n- Unparsable response → Log to ThoughtTrail, return error dict\n- Syntax errors in generated code → Include in metadata, flag for Guardian review\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Error Handling'\n\nEXAMPLE APPLICATION:\n in the query.\nUtilizing caching mechanisms: The executor could cache frequently accessed data to reduce redundant requests to the data source.\nOptimizing data transfer: Techniques like data compression can be used to minimize the amount of data transferred between the data source and the executor.\nError Handling and Robustness: The query executor must be resilient to errors and unexpected situations that might arise during data retrieval. This includes handling issues like network connectivity \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1771,
+    "timestamp": "2025-11-18T10:47:23.814907Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Error Handling\n\nDEFINITION:\nError Handling: includes handling issues like network connectivity problems, unresponsive data sources, or invalid data formats [4]\n\n[From Codebase]: All methods return structured result objects with error fields:\n- `ZeptoSPRResult.error`: Compression error message (if any)\n- `ZeptoSPRDecompressionResult.error`: Decompression error message (if any)\n\nMethods gracefully handle:\n- Missing dependencies (PatternCrystallizationEngine unavailable)\n- Invalid inputs (empty narratives, malformed Zepto SPRs)\n- Codex mismatches (missing symbols during decompression)\n\n[From Codebase]: - LLM timeout → Retry with exponential backoff\n- Unparsable response → Log to ThoughtTrail, return error dict\n- Syntax errors in generated code → Include in metadata, flag for Guardian review\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept",
+    "compression_ratio": 2.001129943502825,
+    "symbol_count": 885,
+    "timestamp": "2025-11-18T10:47:23.814931Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Error Handling D: Error Handling: includes handling issues like network connectivity problems, unresponsive data sources, or invalid data Fs [4] [ Codebase]: methods return structured result objects error fields: - `ZeptoΘResult.error`: Compression error message (if any) - `ZeptoΘDecompressionResult.error`: Decompression error message (if any) Methods gracefully handle: - Missing dependencies (PatternCrystallizationEngine unavailable) - Invalid inputs (empty narratives, malformed Zepto Θs) - Codex mismatches (missing symbols during decompression) [ Codebase]: - LLM timeout → Retry exponential backoff - Unparsable response → Log to Σ, return error dict - Syntax errors in generated code → Include in metadata, flag Guardian review BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept",
+    "compression_ratio": 2.170343137254902,
+    "symbol_count": 816,
+    "timestamp": "2025-11-18T10:47:23.816864Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Error Handling D: Error Handling: includes handling issues network connectivity problems, unresponsive sources, invalid Fs Codebase]: methods return structured result objects error fields: `ZeptoΘResult.error`: Compression error message `ZeptoΘDecompressionResult.error`: Decompression error message Methods gracefully handle: Missing dependencies (PatternCrystallizationEngine unavailable) Invalid inputs (empty narratives, malformed Zepto Θs) Codex mismatches (missing symbols during decompression) Codebase]: LLM timeout Retry exponential backoff Unparsable response Log Σ, return error Syntax errors generated Include metadata, M₇ review BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept",
+    "compression_ratio": 2.470013947001395,
+    "symbol_count": 717,
+    "timestamp": "2025-11-18T10:47:23.820413Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Error Handling D: Error Handling: includes handling issues network connectivity problems, unresponsive sources, invalid Fs Codebase]: methods return structured result objects error fields: `ZeptoΘResult.error`: Compression error message `ZeptoΘDecompressionResult.error`: Decompression error message Methods gracefully handle: Missing dependencies (PatternCrystallizationEngine unavailable) Invalid inputs (empty narratives, malformed Zepto Θs) Codex mismatches (missing symbols during decompression) Codebase]: LLM timeout Retry exponential backoff Unparsable response Log Σ, return error Syntax errors generated Include metadata, M₇ review BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept",
+    "compression_ratio": 2.470013947001395,
+    "symbol_count": 717,
+    "timestamp": "2025-11-18T10:47:23.827957Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Error Handling D: Error Handling: includes handling issues network connectivity problems, unresponsive sources, invalid Fs Codebase]: methods return structured result objects error fields: `ZeptoΘResult.error`: Compression error message `ZeptoΘDecompressionResult.error`: Decompression error message Methods gracefully handle: Missing dependencies (PatternCrystallizationEngine unavailable) Invalid inputs (empty narratives, malformed Zepto Θs) Codex mismatches (missing symbols during decompression) Codebase]: LLM timeout Retry exponential backoff Unparsable response Log Σ, return error Syntax errors generated Include metadata, M₇ review BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept",
+    "compression_ratio": 2.470013947001395,
+    "symbol_count": 717,
+    "timestamp": "2025-11-18T10:47:23.838828Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Error Handling D: Error Handling: Fs Codebase]: `ZeptoΘResult.error`: Compression `ZeptoΘDecompressionResult.error`: Decompression Methods Missing Invalid Zepto Θs) Codex Codebase]: LLM Retry Unparsable Log Σ, Syntax Include M₇ BLUEPRINT DETAILS: Θ Node",
+    "compression_ratio": 6.837837837837838,
+    "symbol_count": 259,
+    "timestamp": "2025-11-18T10:47:23.844173Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ|Σ|Θ",
+    "compression_ratio": 196.77777777777777,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:23.845069Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Milky Way\n\nDEFINITION:\nMilky Way: the things that we talked about before you brought this up now to talk about this climate change if you believe the experts and the scientists of today then change in the climate is inevitable ebbs employee Milky Way galaxy our relation to the sun and ever-changing seemingly scales whether it be 500 year periods 19,000 year\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Milky Way'\n\nEXAMPLE APPLICATION:\nnable I would think that the most pressing areas of in challenges that face humans today are the things that we talked about before you brought this up now to talk about this climate change if you believe the experts and the scientists of today then change in the climate is inevitable ebbs employee Milky Way galaxy our relation to the sun and ever-changing seemingly scales whether it be 500 year periods 19,000 year. where we fall in and out of the Galaxy that is beyond me and I do try to underst\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1327,
+    "timestamp": "2025-11-18T10:47:28.101998Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Milky Way\n\nDEFINITION:\nMilky Way: the things that we talked about before you brought this up now to talk about this climate change if you believe the experts and the scientists of today then change in the climate is inevitable ebbs employee Milky Way galaxy our relation to the sun and ever-changing seemingly scales whether it be 500 year periods 19,000 year\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Milky Way'\n\nEXAMPLE APPLICATION:\nnable I would think that the most pressing areas of in challenges that face humans today are the things that we talked about before you brought this up now to tal",
+    "compression_ratio": 2.0015082956259427,
+    "symbol_count": 663,
+    "timestamp": "2025-11-18T10:47:28.102025Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Milky Way D: Milky Way: things we talked about before brought up now to talk about climate change if believe experts scientists of today then change in climate is inevitable ebbs employee Milky Way galaxy our relation to sun ever-changing seemingly scales whether it be 500 year periods 19,000 year BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Milky Way' EXAMPLE APPLICATION: nable I would think most pressing areas of in challenges face humans today things we talked about before brought up now to tal",
+    "compression_ratio": 2.390990990990991,
+    "symbol_count": 555,
+    "timestamp": "2025-11-18T10:47:28.110639Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Milky Way D: Milky Way: things talked about before brought about climate change believe experts scientists today change climate inevitable employee Milky Way galaxy relation ever-changing seemingly scales whether periods 19,000 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Milky Way' EXAMPLE APPLICATION: nable I think pressing areas challenges humans today things talked about before brought",
+    "compression_ratio": 3.002262443438914,
+    "symbol_count": 442,
+    "timestamp": "2025-11-18T10:47:28.113163Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Milky Way D: Milky Way: things talked about before brought about climate change believe experts scientists today change climate inevitable employee Milky Way galaxy relation ever-changing seemingly scales whether periods 19,000 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Milky Way' EXAMPLE APPLICATION: nable I think pressing areas challenges humans today things talked about before brought",
+    "compression_ratio": 3.002262443438914,
+    "symbol_count": 442,
+    "timestamp": "2025-11-18T10:47:28.122309Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Milky Way D: Milky Way: things talked about before brought about climate change believe experts scientists today change climate inevitable employee Milky Way galaxy relation ever-changing seemingly scales whether periods 19,000 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Milky Way' EXAMPLE APPLICATION: nable I think pressing areas challenges humans today things talked about before brought",
+    "compression_ratio": 3.002262443438914,
+    "symbol_count": 442,
+    "timestamp": "2025-11-18T10:47:28.125274Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Milky Way D: Milky Way: Milky Way BLUEPRINT DETAILS: Θ Node Original Θ Way' EXAMPLE APPLICATION: I",
+    "compression_ratio": 12.759615384615385,
+    "symbol_count": 104,
+    "timestamp": "2025-11-18T10:47:28.129555Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 442.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:28.129843Z"
+  }
+]

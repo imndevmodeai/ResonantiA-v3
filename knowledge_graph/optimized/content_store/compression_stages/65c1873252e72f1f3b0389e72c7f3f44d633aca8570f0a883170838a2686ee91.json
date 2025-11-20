@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Audit Planning\n\nDEFINITION:\nAudit Planning: designed to provide advanced audit and assurance capabilities to improve the accuracy and reliability of financial statements:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Audit Planning'\n\nEXAMPLE APPLICATION:\nance management techniques that enable the AI system to ensure regulatory compliance and manage compliance risks.\n\n78. AI-Driven Audit and Assurance: Mastermind_AI is designed to provide advanced audit and assurance capabilities to improve the accuracy and reliability of financial statements:\n    * Audit Planning: Developing audit planning techniques that enable the AI system to plan and conduct audits.\n    * Audit Execution: Implementing audit execution techniques that enable the AI system to e\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1143,
+    "timestamp": "2025-11-18T10:47:38.226632Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Audit Planning\n\nDEFINITION:\nAudit Planning: designed to provide advanced audit and assurance capabilities to improve the accuracy and reliability of financial statements:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Audit Planning'\n\nEXAMPLE APPLICATION:\nance management techniques that enable the AI system to ensure regulatory compliance and manage compliance risks.\n\n78. AI-Driven Audit and Assurance: Mastermind_AI is designed to provide advanced audit and assurance capabilities to improve the accuracy a",
+    "compression_ratio": 2.001751313485114,
+    "symbol_count": 571,
+    "timestamp": "2025-11-18T10:47:38.226657Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Audit Planning D: Audit Planning: designed to provide advanced audit assurance capabilities to improve accuracy reliability of financial statements: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Audit Planning' EXAMPLE APPLICATION: ance management techniques enable AI S to ensure regulatory compliance manage compliance risks. 78. AI-Driven Audit Assurance: Mastermind_AI is designed to provide advanced audit assurance capabilities to improve accuracy a",
+    "compression_ratio": 2.2544378698224854,
+    "symbol_count": 507,
+    "timestamp": "2025-11-18T10:47:38.227797Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Audit Planning D: Audit Planning: designed provide advanced audit assurance capabilities improve accuracy reliability financial statements: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Audit Planning' EXAMPLE APPLICATION: management techniques enable AI S ensure regulatory compliance manage compliance risks. AI-Driven Audit Assurance: Mastermind_AI designed provide advanced audit assurance capabilities improve accuracy",
+    "compression_ratio": 2.4216101694915255,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:38.231975Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Audit Planning D: Audit Planning: designed provide advanced audit assurance capabilities improve accuracy reliability financial statements: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Audit Planning' EXAMPLE APPLICATION: management techniques enable AI S ensure regulatory compliance manage compliance risks. AI-Driven Audit Assurance: Mastermind_AI designed provide advanced audit assurance capabilities improve accuracy",
+    "compression_ratio": 2.4216101694915255,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:38.234221Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Audit Planning D: Audit Planning: designed provide advanced audit assurance capabilities improve accuracy reliability financial statements: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Audit Planning' EXAMPLE APPLICATION: management techniques enable AI S ensure regulatory compliance manage compliance risks. AI-Driven Audit Assurance: Mastermind_AI designed provide advanced audit assurance capabilities improve accuracy",
+    "compression_ratio": 2.4216101694915255,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:38.237587Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Audit Planning D: Audit Planning: BLUEPRINT DETAILS: Θ Node Original Θ Planning' EXAMPLE APPLICATION: AI S AI-Driven Audit Assurance: Mastermind_AI",
+    "compression_ratio": 7.470588235294118,
+    "symbol_count": 153,
+    "timestamp": "2025-11-18T10:47:38.244560Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 381.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.244866Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Metacognitive Shift Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to Metacognitive Shift. Provides the higher-order cognitive support for the operational Metacognitive Shift system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Metacognitive Shift system.\n\nEXAMPLE APPLICATION:\nProviding cognitive guidance for Metacognitive Shift operational processes.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: CognitiveCorrespondence; confidence: 0.85; corresponds_to: MetacognitiveshifT; level: Above; enables: CognitiveSupport, HigherOrderProcessing, StrategicGuidance, SymmetricalArchitecture",
+    "compression_ratio": 1.0,
+    "symbol_count": 721,
+    "timestamp": "2025-11-18T10:46:51.642942Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Metacognitive Shift Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to Metacognitive Shift. Provides the higher-order cognitive support for the operational Metacognitive Shift system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Met",
+    "compression_ratio": 2.0027777777777778,
+    "symbol_count": 360,
+    "timestamp": "2025-11-18T10:46:51.642973Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: MS Cognitive Capability D: Cognitive capability corresponding to MS. Provides higher-order cognitive support operational MS S, ensuring symmetrical architecture between cognitive operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture Met",
+    "compression_ratio": 2.650735294117647,
+    "symbol_count": 272,
+    "timestamp": "2025-11-18T10:46:51.649826Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: MS Ω Capability D: Ω capability corresponding to MS. Provides higher-order Ω support operational MS S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture Met",
+    "compression_ratio": 3.004166666666667,
+    "symbol_count": 240,
+    "timestamp": "2025-11-18T10:46:51.664061Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: MS Ω Capability D: Ω capability corresponding MS. Provides higher-order Ω support operational MS S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture Met",
+    "compression_ratio": 3.0811965811965814,
+    "symbol_count": 234,
+    "timestamp": "2025-11-18T10:46:51.678223Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: MS Ω Capability D: Ω capability corresponding MS. Provides higher-order Ω support operational MS S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture Met",
+    "compression_ratio": 3.0811965811965814,
+    "symbol_count": 234,
+    "timestamp": "2025-11-18T10:46:51.684210Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: MS Ω Capability D: Ω MS. Provides Ω MS S, Ω BLUEPRINT DETAILS: Created Met",
+    "compression_ratio": 9.0125,
+    "symbol_count": 80,
+    "timestamp": "2025-11-18T10:46:51.685473Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Ω|Ω",
+    "compression_ratio": 103.0,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:46:51.685679Z"
+  }
+]

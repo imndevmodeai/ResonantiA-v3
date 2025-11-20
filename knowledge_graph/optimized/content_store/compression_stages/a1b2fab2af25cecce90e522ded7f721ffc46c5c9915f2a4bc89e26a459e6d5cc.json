@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Machine Learning\nNode\n\nDEFINITION:\nMachine Learning\nNode: Detailed description of the system's architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Machine Learning\nNode'\n\nEXAMPLE APPLICATION:\nm, including its purpose, scope, and goals.\nEdges:\nNode 2: System Architecture\nNode 3: System Requirements\nNode 2: System Architecture\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows.\nEdges:\nNode 4: Cognitive Architecture\nNode 5: Machine Learning\nNode 6: Natural Language Processing\nNode 3: System Requirements\n\nDescription: Detailed description of the system's requirements, including its functional, performance, and security re\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1141,
+    "timestamp": "2025-11-18T10:47:40.443557Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Machine Learning\nNode\n\nDEFINITION:\nMachine Learning\nNode: Detailed description of the system's architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Machine Learning\nNode'\n\nEXAMPLE APPLICATION:\nm, including its purpose, scope, and goals.\nEdges:\nNode 2: System Architecture\nNode 3: System Requirements\nNode 2: System Architecture\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows.\nE",
+    "compression_ratio": 2.001754385964912,
+    "symbol_count": 570,
+    "timestamp": "2025-11-18T10:47:40.443579Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Machine Learning Node D: Machine Learning Node: Detailed description of S's architecture, including its components, interfaces, data flows BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Machine Learning Node' EXAMPLE APPLICATION: m, including its purpose, scope, goals. Edges: Node 2: S Architecture Node 3: S Requirements Node 2: S Architecture Description: Detailed description of S's architecture, including its components, interfaces, data flows. E",
+    "compression_ratio": 2.268389662027833,
+    "symbol_count": 503,
+    "timestamp": "2025-11-18T10:47:40.445078Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Machine Learning Node D: Machine Learning Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Node' EXAMPLE APPLICATION: including purpose, scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. E",
+    "compression_ratio": 2.4804347826086954,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:40.447295Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Machine Learning Node D: Machine Learning Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Node' EXAMPLE APPLICATION: including purpose, scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. E",
+    "compression_ratio": 2.4804347826086954,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:40.453483Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Machine Learning Node D: Machine Learning Node: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Node' EXAMPLE APPLICATION: including purpose, scope, goals. Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. E",
+    "compression_ratio": 2.4804347826086954,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:40.471200Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Machine Learning Node D: Machine Learning Node: Detailed S's BLUEPRINT DETAILS: Θ Node Original Θ Learning Node' EXAMPLE APPLICATION: Edges: Node S Architecture Node S Requirements Node S Architecture Description: Detailed S's E",
+    "compression_ratio": 4.8760683760683765,
+    "symbol_count": 234,
+    "timestamp": "2025-11-18T10:47:40.482836Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 380.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:40.483201Z"
+  }
+]

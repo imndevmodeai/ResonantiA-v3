@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Financial Statement Preparation\n\nDEFINITION:\nFinancial Statement Preparation: designed to provide advanced financial reporting capabilities to improve the accuracy and transparency of financial reports:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Financial Statement Preparation'\n\nEXAMPLE APPLICATION:\nliance: Creating tax compliance techniques that enable the AI system to ensure tax compliance and manage tax risks.\n\n80. AI-Driven Financial Reporting: Mastermind_AI is designed to provide advanced financial reporting capabilities to improve the accuracy and transparency of financial reports:\n    * Financial Statement Preparation: Developing financial statement preparation techniques that enable the AI system to prepare accurate and complete financial statements.\n    * Financial Analysis: Implem\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1192,
+    "timestamp": "2025-11-18T10:47:38.512053Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Financial Statement Preparation\n\nDEFINITION:\nFinancial Statement Preparation: designed to provide advanced financial reporting capabilities to improve the accuracy and transparency of financial reports:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Financial Statement Preparation'\n\nEXAMPLE APPLICATION:\nliance: Creating tax compliance techniques that enable the AI system to ensure tax compliance and manage tax risks.\n\n80. AI-Driven Financial Reporting: Mastermind_AI is designed to provide advanced financial reporting capabilities",
+    "compression_ratio": 2.0,
+    "symbol_count": 596,
+    "timestamp": "2025-11-18T10:47:38.512078Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Financial Statement Preparation D: Financial Statement Preparation: designed to provide advanced financial reporting capabilities to improve accuracy transparency of financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Financial Statement Preparation' EXAMPLE APPLICATION: liance: Creating tax compliance techniques enable AI S to ensure tax compliance manage tax risks. 80. AI-Driven Financial Reporting: Mastermind_AI is designed to provide advanced financial reporting capabilities",
+    "compression_ratio": 2.1751824817518246,
+    "symbol_count": 548,
+    "timestamp": "2025-11-18T10:47:38.513403Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Financial Statement Preparation D: Financial Statement Preparation: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Statement Preparation' EXAMPLE APPLICATION: liance: Creating compliance techniques enable AI S ensure compliance manage risks. AI-Driven Financial Reporting: Mastermind_AI designed provide advanced financial reporting capabilities",
+    "compression_ratio": 2.3326810176125243,
+    "symbol_count": 511,
+    "timestamp": "2025-11-18T10:47:38.515871Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Financial Statement Preparation D: Financial Statement Preparation: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Statement Preparation' EXAMPLE APPLICATION: liance: Creating compliance techniques enable AI S ensure compliance manage risks. AI-Driven Financial Reporting: Mastermind_AI designed provide advanced financial reporting capabilities",
+    "compression_ratio": 2.3326810176125243,
+    "symbol_count": 511,
+    "timestamp": "2025-11-18T10:47:38.522203Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Financial Statement Preparation D: Financial Statement Preparation: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Statement Preparation' EXAMPLE APPLICATION: liance: Creating compliance techniques enable AI S ensure compliance manage risks. AI-Driven Financial Reporting: Mastermind_AI designed provide advanced financial reporting capabilities",
+    "compression_ratio": 2.3326810176125243,
+    "symbol_count": 511,
+    "timestamp": "2025-11-18T10:47:38.525437Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Financial Statement Preparation D: Financial Statement Preparation: BLUEPRINT DETAILS: Θ Node Original Θ Statement Preparation' EXAMPLE APPLICATION: Creating AI S AI-Driven Financial Reporting: Mastermind_AI",
+    "compression_ratio": 5.596244131455399,
+    "symbol_count": 213,
+    "timestamp": "2025-11-18T10:47:38.529277Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 397.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.529690Z"
+  }
+]

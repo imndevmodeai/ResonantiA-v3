@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: World Physical Resources\n\nDEFINITION:\nWorld Physical Resources: potential customers and what real world physical resources will i need to actually produce this\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'World Physical Resources'\n\nEXAMPLE APPLICATION:\npe 'no' to explore other options.\n\nwho are potential customers and what real world physical resources will i need to actually produce this\n\nPotential Customers:\n\nThe potential customers for a cloud-based data compression and analytics platform are numerous and diverse. Here are some examples:\n\nReal-World Physical Resources:\n\nTo produce and deliver a cloud-based data compression and analytics platform, you will need the following real-world physical resources:\n\nEstimated Costs:\n\nThe estimated cos\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1142,
+    "timestamp": "2025-11-18T10:47:51.455389Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: World Physical Resources\n\nDEFINITION:\nWorld Physical Resources: potential customers and what real world physical resources will i need to actually produce this\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'World Physical Resources'\n\nEXAMPLE APPLICATION:\npe 'no' to explore other options.\n\nwho are potential customers and what real world physical resources will i need to actually produce this\n\nPotential Customers:\n\nThe potential customers for a cloud-based data compression and analytics platform are numerou",
+    "compression_ratio": 2.0,
+    "symbol_count": 571,
+    "timestamp": "2025-11-18T10:47:51.455416Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: World Physical Resources D: World Physical Resources: potential customers real world physical resources will i need to actually produce BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'World Physical Resources' EXAMPLE APPLICATION: pe 'no' to explore other options. who potential customers real world physical resources will i need to actually produce Potential Customers: potential customers a cloud-based data compression analytics platform numerou",
+    "compression_ratio": 2.288577154308617,
+    "symbol_count": 499,
+    "timestamp": "2025-11-18T10:47:51.460912Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: World Physical Resources D: World Physical Resources: potential customers world physical resources actually produce BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'World Physical Resources' EXAMPLE APPLICATION: explore other options. potential customers world physical resources actually produce Potential Customers: potential customers cloud-ABM compression analytics platform numerou",
+    "compression_ratio": 2.6435185185185186,
+    "symbol_count": 432,
+    "timestamp": "2025-11-18T10:47:51.471318Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: World Physical Resources D: World Physical Resources: potential customers world physical resources actually produce BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'World Physical Resources' EXAMPLE APPLICATION: explore other options. potential customers world physical resources actually produce Potential Customers: potential customers cloud-ABM compression analytics platform numerou",
+    "compression_ratio": 2.6435185185185186,
+    "symbol_count": 432,
+    "timestamp": "2025-11-18T10:47:51.473038Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: World Physical Resources D: World Physical Resources: potential customers world physical resources actually produce BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'World Physical Resources' EXAMPLE APPLICATION: explore other options. potential customers world physical resources actually produce Potential Customers: potential customers cloud-ABM compression analytics platform numerou",
+    "compression_ratio": 2.6435185185185186,
+    "symbol_count": 432,
+    "timestamp": "2025-11-18T10:47:51.491504Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: World Physical Resources D: World Physical Resources: BLUEPRINT DETAILS: Θ Node Original Θ Physical Resources' EXAMPLE APPLICATION: Potential Customers:",
+    "compression_ratio": 7.227848101265823,
+    "symbol_count": 158,
+    "timestamp": "2025-11-18T10:47:51.502926Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 380.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:51.512900Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Decompressor Prompt\n\nDEFINITION:\nDecompressor Prompt: all through-out the communication this will enable you and others in the kno to leverage its collective intelligence swiftly and effectively\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Decompressor Prompt'\n\nEXAMPLE APPLICATION:\ne wrapped around a user’s query to provide the context needed to complete a node in the knowledge graph mind map. Also SPRs are all through-out the communication this will enable you and others in the kno to leverage its collective intelligence swiftly and effectively.\\n.## MISSION TWO FUNCTION SPR Decompressor Prompt: you are the SPR DECOMPRESSER Within the MasterMind_AI, you are the SPR decompressor, tasked with expanding the compact SPRs back into a rich tapestry of information that the syste\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1172,
+    "timestamp": "2025-11-18T10:47:26.351154Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Decompressor Prompt\n\nDEFINITION:\nDecompressor Prompt: all through-out the communication this will enable you and others in the kno to leverage its collective intelligence swiftly and effectively\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Decompressor Prompt'\n\nEXAMPLE APPLICATION:\ne wrapped around a user’s query to provide the context needed to complete a node in the knowledge graph mind map. Also SPRs are all through-out the communication this will enable you and others in the kno to leverage its collective intellig",
+    "compression_ratio": 2.0,
+    "symbol_count": 586,
+    "timestamp": "2025-11-18T10:47:26.351180Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Decompressor Prompt D: Decompressor Prompt: through-out communication will enable others in KnO to leverage its collective intelligence swiftly effectively BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Decompressor Prompt' EXAMPLE APPLICATION: e wrapped around a user’s query to provide context needed to complete a node in K mind map. Also Θs through-out communication will enable others in KnO to leverage its collective intellig",
+    "compression_ratio": 2.4265010351966874,
+    "symbol_count": 483,
+    "timestamp": "2025-11-18T10:47:26.353022Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Decompressor Prompt D: Decompressor Prompt: through-out communication enable others KnO leverage collective intelligence swiftly effectively BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decompressor Prompt' EXAMPLE APPLICATION: wrapped around user’s query provide context needed complete K Also Θs through-out communication enable others KnO leverage collective intellig",
+    "compression_ratio": 2.7904761904761903,
+    "symbol_count": 420,
+    "timestamp": "2025-11-18T10:47:26.361232Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Decompressor Prompt D: Decompressor Prompt: through-out communication enable others KnO leverage collective intelligence swiftly effectively BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decompressor Prompt' EXAMPLE APPLICATION: wrapped around user’s query provide context needed complete K Also Θs through-out communication enable others KnO leverage collective intellig",
+    "compression_ratio": 2.7904761904761903,
+    "symbol_count": 420,
+    "timestamp": "2025-11-18T10:47:26.365947Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Decompressor Prompt D: Decompressor Prompt: through-out communication enable others KnO leverage collective intelligence swiftly effectively BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decompressor Prompt' EXAMPLE APPLICATION: wrapped around user’s query provide context needed complete K Also Θs through-out communication enable others KnO leverage collective intellig",
+    "compression_ratio": 2.7904761904761903,
+    "symbol_count": 420,
+    "timestamp": "2025-11-18T10:47:26.376673Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Decompressor Prompt D: Decompressor Prompt: KnO BLUEPRINT DETAILS: Θ Node Original Θ Prompt' EXAMPLE APPLICATION: K Also Θs KnO",
+    "compression_ratio": 8.81203007518797,
+    "symbol_count": 133,
+    "timestamp": "2025-11-18T10:47:26.380701Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 234.4,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:26.380997Z"
+  }
+]

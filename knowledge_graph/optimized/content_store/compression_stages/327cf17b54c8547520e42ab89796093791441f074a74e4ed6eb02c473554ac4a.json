@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Manufacturing Optimization\n\nDEFINITION:\nDriven Manufacturing Optimization: designed to provide advanced manufacturing optimization capabilities to improve manufacturing efficiency and effectiveness:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Manufacturing Optimization'\n\nEXAMPLE APPLICATION:\nive Analytics: Implementing predictive analytics techniques that enable the AI system to predict and respond to supply chain disruptions and changes.\n    * Inventory Management: Creating inventory management techniques that enable the AI system to optimize inventory levels and reduce waste.\n\n74. AI-Driven Manufacturing Optimization: Mastermind_AI is designed to provide advanced manufacturing optimization capabilities to improve manufacturing efficiency and effectiveness:\n    * Manufacturing Mode\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1197,
+    "timestamp": "2025-11-18T10:47:37.814620Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Manufacturing Optimization\n\nDEFINITION:\nDriven Manufacturing Optimization: designed to provide advanced manufacturing optimization capabilities to improve manufacturing efficiency and effectiveness:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Manufacturing Optimization'\n\nEXAMPLE APPLICATION:\nive Analytics: Implementing predictive analytics techniques that enable the AI system to predict and respond to supply chain disruptions and changes.\n    * Inventory Management: Creating inventory management techniques that ena",
+    "compression_ratio": 2.0016722408026757,
+    "symbol_count": 598,
+    "timestamp": "2025-11-18T10:47:37.814644Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Manufacturing Optimization D: Driven Manufacturing Optimization: designed to provide advanced manufacturing optimization capabilities to improve manufacturing efficiency effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Manufacturing Optimization' EXAMPLE APPLICATION: ive Analytics: Implementing predictive analytics techniques enable AI S to predict respond to supply chain disruptions changes. * Inventory Management: Creating inventory management techniques ena",
+    "compression_ratio": 2.208487084870849,
+    "symbol_count": 542,
+    "timestamp": "2025-11-18T10:47:37.817020Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Manufacturing Optimization D: Driven Manufacturing Optimization: designed provide advanced manufacturing optimization capabilities improve manufacturing efficiency effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Manufacturing Optimization' EXAMPLE APPLICATION: Analytics: Implementing PMT analytics techniques enable AI S predict respond supply chain disruptions changes. Inventory Management: Creating inventory management techniques",
+    "compression_ratio": 2.347058823529412,
+    "symbol_count": 510,
+    "timestamp": "2025-11-18T10:47:37.821758Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Manufacturing Optimization D: Driven Manufacturing Optimization: designed provide advanced manufacturing optimization capabilities improve manufacturing efficiency effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Manufacturing Optimization' EXAMPLE APPLICATION: Analytics: Implementing PMT analytics techniques enable AI S predict respond supply chain disruptions changes. Inventory Management: Creating inventory management techniques",
+    "compression_ratio": 2.347058823529412,
+    "symbol_count": 510,
+    "timestamp": "2025-11-18T10:47:37.829953Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Manufacturing Optimization D: Driven Manufacturing Optimization: designed provide advanced manufacturing optimization capabilities improve manufacturing efficiency effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Manufacturing Optimization' EXAMPLE APPLICATION: Analytics: Implementing PMT analytics techniques enable AI S predict respond supply chain disruptions changes. Inventory Management: Creating inventory management techniques",
+    "compression_ratio": 2.347058823529412,
+    "symbol_count": 510,
+    "timestamp": "2025-11-18T10:47:37.836664Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Manufacturing Optimization D: Driven Manufacturing Optimization: BLUEPRINT DETAILS: Θ Node Original Θ Manufacturing Optimization' EXAMPLE APPLICATION: Analytics: Implementing PMT AI S Inventory Management: Creating",
+    "compression_ratio": 5.273127753303965,
+    "symbol_count": 227,
+    "timestamp": "2025-11-18T10:47:37.842938Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 399.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:37.843323Z"
+  }
+]

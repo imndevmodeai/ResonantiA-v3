@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Vetting Agent\n\nDEFINITION:\nAn internal cognitive process or role responsible for critically reviewing ArchE's outputs, reasoning, and plans. It checks for logical consistency, ethical alignment, factual accuracy, and compliance with the ResonantiA Protocol, leveraging IAR data for context-aware analysis. It can trigger a Metacognitive Shift if significant dissonance is found.\n\n[From Codebase]: The Guardian of ArchE - Canonical Implementation\n    \n    This is THE vetting agent that validates all outputs and ensures quality.\n    It embodies the King's Council allegory with three advisors:\n    - Advisor of Truth (Logical Consistency)\n    - Advisor of Ethics (Synergistic Fusion Protocol)\n    - Advisor of Quality (Resonance & Clarity)\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 3.4, 7.11.\n\nEXAMPLE APPLICATION:\nModeling market dynamics through individual trader behaviors and interactions\n\nCATEGORY: CoreProcess\n\nRELATIONSHIPS:\ntype: QualityControl; performs: EthicalChecks, LogicalConsistencyAnalysis, FactualVetting, ProtocolComplianceReview, ScenarioRealismAssessmenT; utilizes: IAR, vetting_prompts.py; can_trigger: Metacognitive shifT; is_part_of: CognitiveArchitecture; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1218,
+    "timestamp": "2025-11-18T10:47:01.975902Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Vetting Agent\n\nDEFINITION:\nAn internal cognitive process or role responsible for critically reviewing ArchE's outputs, reasoning, and plans. It checks for logical consistency, ethical alignment, factual accuracy, and compliance with the ResonantiA Protocol, leveraging IAR data for context-aware analysis. It can trigger a Metacognitive Shift if significant dissonance is found.\n\n[From Codebase]: The Guardian of ArchE - Canonical Implementation\n    \n    This is THE vetting agent that validates all outputs and ensures quality.\n    It embodies the King's Council allegory with three advisors:\n    - Adv",
+    "compression_ratio": 2.0,
+    "symbol_count": 609,
+    "timestamp": "2025-11-18T10:47:01.976465Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Vetting Agent D: An internal cognitive P or role responsible critically reviewing Æ's outputs, reasoning, plans. It checks logical consistency, ethical alignment, factual accuracy, compliance ResonantiA P, leveraging Φ data context-aware analysis. It trigger a MS if significant dissonance is found. [ Codebase]: Guardian of Æ - Canonical I is vetting agent validates outputs ensures quality. It embodies King's Council allegory three advisors: - Adv",
+    "compression_ratio": 2.6710526315789473,
+    "symbol_count": 456,
+    "timestamp": "2025-11-18T10:47:01.979104Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Vetting ABM D: An internal Ω P responsible critically reviewing Æ's outputs, reasoning, plans. It checks logical consistency, ethical alignment, factual accuracy, compliance ResonantiA P, leveraging Φ context-aware analysis. It trigger MS significant dissonance found. Codebase]: M₇ Æ Canonical I vetting ABM validates outputs ensures quality. It embodies King's Council allegory three advisors: Adv",
+    "compression_ratio": 3.0074074074074075,
+    "symbol_count": 405,
+    "timestamp": "2025-11-18T10:47:01.982282Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Vetting ABM D: An internal Ω P responsible critically reviewing Æ's outputs, reasoning, plans. It checks logical consistency, ethical alignment, factual accuracy, compliance ResonantiA P, leveraging Φ context-aware analysis. It trigger MS significant dissonance found. Codebase]: M₇ Æ Canonical I vetting ABM validates outputs ensures quality. It embodies King's Council allegory three advisors: Adv",
+    "compression_ratio": 3.0074074074074075,
+    "symbol_count": 405,
+    "timestamp": "2025-11-18T10:47:01.985333Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Vetting ABM D: internal Ω P responsible critically reviewing Æ's outputs, reasoning, plans. It checks logical consistency, ethical alignment, factual accuracy, compliance ResonantiA P, leveraging Φ context-aware analysis. It trigger MS significant dissonance found. Codebase]: M₇ Æ Canonical I vetting ABM validates outputs ensures quality. It embodies King's Council allegory three advisors: Adv",
+    "compression_ratio": 3.029850746268657,
+    "symbol_count": 402,
+    "timestamp": "2025-11-18T10:47:01.993259Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Vetting ABM D: Ω P Æ's It ResonantiA P, Φ It MS Codebase]: M₇ Æ Canonical I ABM It King's Council Adv",
+    "compression_ratio": 11.383177570093459,
+    "symbol_count": 107,
+    "timestamp": "2025-11-18T10:47:01.998482Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Æ|Φ|Æ",
+    "compression_ratio": 174.0,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:01.998757Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Knowledge Crystallization System Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to Knowledge Crystallization System. Provides the higher-order cognitive support for the operational Knowledge Crystallization System system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Knowledge Crystallization System system.\n\nEXAMPLE APPLICATION:\nProviding cognitive guidance for Knowledge Crystallization System operational processes.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: CognitiveCorrespondence; confidence: 0.85; corresponds_to: KnowledgecrystallizationsysteM; level: Above; enables: CognitiveSupport, HigherOrderProcessing, StrategicGuidance, SymmetricalArchitecture",
+    "compression_ratio": 1.0,
+    "symbol_count": 798,
+    "timestamp": "2025-11-18T10:46:49.310324Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Knowledge Crystallization System Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to Knowledge Crystallization System. Provides the higher-order cognitive support for the operational Knowledge Crystallization System system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Kno",
+    "compression_ratio": 2.0,
+    "symbol_count": 399,
+    "timestamp": "2025-11-18T10:46:49.310346Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: KnOwledge Crystallization S Cognitive Capability D: Cognitive capability corresponding to KnOwledge Crystallization S. Provides higher-order cognitive support operational KnOwledge Crystallization S S, ensuring symmetrical architecture between cognitive operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture KnO",
+    "compression_ratio": 2.2997118155619596,
+    "symbol_count": 347,
+    "timestamp": "2025-11-18T10:46:49.311029Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: KnOwledge Π S Ω Capability D: Ω capability corresponding to KnOwledge Π S. Provides higher-order Ω support operational KnOwledge Π S S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture KnO",
+    "compression_ratio": 2.923076923076923,
+    "symbol_count": 273,
+    "timestamp": "2025-11-18T10:46:49.312155Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: KnOwledge Π S Ω Capability D: Ω capability corresponding KnOwledge Π S. Provides higher-order Ω support operational KnOwledge Π S S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture KnO",
+    "compression_ratio": 2.9887640449438204,
+    "symbol_count": 267,
+    "timestamp": "2025-11-18T10:46:49.318149Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: KnOwledge Π S Ω Capability D: Ω capability corresponding KnOwledge Π S. Provides higher-order Ω support operational KnOwledge Π S S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture KnO",
+    "compression_ratio": 2.9887640449438204,
+    "symbol_count": 267,
+    "timestamp": "2025-11-18T10:46:49.319843Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: KnOwledge Π S Ω Capability D: Ω KnOwledge Π S. Provides Ω KnOwledge Π S S, Ω BLUEPRINT DETAILS: Created KnO",
+    "compression_ratio": 7.061946902654867,
+    "symbol_count": 113,
+    "timestamp": "2025-11-18T10:46:49.326531Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Π|Ω|Ω|Π|Ω",
+    "compression_ratio": 88.66666666666667,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:49.326815Z"
+  }
+]

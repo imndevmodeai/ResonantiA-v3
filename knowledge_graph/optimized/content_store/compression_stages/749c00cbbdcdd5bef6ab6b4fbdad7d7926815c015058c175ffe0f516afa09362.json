@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Robot Action\n\nDEFINITION:\nRobot Action: Next, we can integrate an Internet of Things (IoT) module to enable the system to interact with smart devices. This will enable the system to collect data from various sensors and devices, and make decisions based on that data.\n\nConfidence: 0.615\n\n[From Codebase]: The action is the invocation of the `generate_code_from_spec` method. The inputs logged to the ThoughtTrail will include:\n- Specification hash (for traceability)\n- Target file path\n- Model used\n- Timestamp\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 123, type: node_format. Original SPR name: 'Action'\n\nEXAMPLE APPLICATION:\nNode 123: Robot Action\n\nSPR: 0.615, \"Action\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 123\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1031,
+    "timestamp": "2025-11-18T10:47:06.413883Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Robot Action\n\nDEFINITION:\nRobot Action: Next, we can integrate an Internet of Things (IoT) module to enable the system to interact with smart devices. This will enable the system to collect data from various sensors and devices, and make decisions based on that data.\n\nConfidence: 0.615\n\n[From Codebase]: The action is the invocation of the `generate_code_from_spec` method. The inputs logged to the ThoughtTrail will include:\n- Specification hash (for traceability)\n- Target file path\n- Model used\n- Timestam",
+    "compression_ratio": 2.0019417475728156,
+    "symbol_count": 515,
+    "timestamp": "2025-11-18T10:47:06.413909Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Robot Action D: Robot Action: Next, we integrate an Internet of Things (IoT) module to enable S to interact smart devices. will enable S to collect data various sensors devices, make decisions based on data. Confidence: 0.615 [ Codebase]: action is invocation of `generate_code_from_spec` method. inputs logged to Σ will include: - Specification hash ( traceability) - Target file path - Model used - Timestam",
+    "compression_ratio": 2.4843373493975904,
+    "symbol_count": 415,
+    "timestamp": "2025-11-18T10:47:06.414886Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Robot Action D: Robot Action: Next, integrate Internet Things (IoT) module enable S interact smart devices. enable S collect various sensors devices, decisions ABM data. Confidence: 0.615 Codebase]: action invocation `generate_code_from_spec` method. inputs logged Σ include: Specification traceability) Target Model Timestam",
+    "compression_ratio": 3.1148036253776437,
+    "symbol_count": 331,
+    "timestamp": "2025-11-18T10:47:06.417754Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Robot Action D: Robot Action: Next, integrate Internet Things (IoT) module enable S interact smart devices. enable S collect various sensors devices, decisions ABM data. Confidence: 0.615 Codebase]: action invocation `generate_code_from_spec` method. inputs logged Σ include: Specification traceability) Target Model Timestam",
+    "compression_ratio": 3.1148036253776437,
+    "symbol_count": 331,
+    "timestamp": "2025-11-18T10:47:06.425290Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Robot Action D: Robot Action: Next, integrate Internet Things (IoT) module enable S interact smart devices. enable S collect various sensors devices, decisions ABM data. Confidence: 0.615 Codebase]: action invocation `generate_code_from_spec` method. inputs logged Σ include: Specification traceability) Target Model Timestam",
+    "compression_ratio": 3.1148036253776437,
+    "symbol_count": 331,
+    "timestamp": "2025-11-18T10:47:06.427979Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Robot Action D: Robot Action: Next, Internet Things S S ABM Confidence: Codebase]: Σ Specification Target Model Timestam",
+    "compression_ratio": 8.182539682539682,
+    "symbol_count": 126,
+    "timestamp": "2025-11-18T10:47:06.430130Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Σ",
+    "compression_ratio": 1031.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:47:06.430498Z"
+  }
+]

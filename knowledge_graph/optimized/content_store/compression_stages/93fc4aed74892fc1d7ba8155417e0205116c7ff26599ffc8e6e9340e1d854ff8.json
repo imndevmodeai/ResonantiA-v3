@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Simplifying Data Extraction\n\nDEFINITION:\nSimplifying Data Extraction: or processing\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Simplifying Data Extraction'\n\nEXAMPLE APPLICATION:\ning data from various sources, often for further analysis or processing. This discussion will examine data extraction in the context of AgentQL, a tool designed for extracting information from web pages, and consider the development of a machine learning engine with similar functionality.\n\nAgentQL: Simplifying Data Extraction from Web Pages\nAgentQL simplifies data extraction from websites using a user-friendly query language and tools like a Chrome extension and a Python SDK [1, 2]. Users can wr\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1069,
+    "timestamp": "2025-11-18T10:47:24.754024Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Simplifying Data Extraction\n\nDEFINITION:\nSimplifying Data Extraction: or processing\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Simplifying Data Extraction'\n\nEXAMPLE APPLICATION:\ning data from various sources, often for further analysis or processing. This discussion will examine data extraction in the context of AgentQL, a tool designed for extracting information from web pages, and consider the development of a machine learning engine with similar functionality.\n\n",
+    "compression_ratio": 2.00187265917603,
+    "symbol_count": 534,
+    "timestamp": "2025-11-18T10:47:24.754045Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Simplifying Data Extraction D: Simplifying Data Extraction: or Ping BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Simplifying Data Extraction' EXAMPLE APPLICATION: ing data various sources, often further analysis or Ping. discussion will examine data extraction in context of AgentQL, a tool designed extracting inFion web pages, consider development of a machine learning engine similar functionality.",
+    "compression_ratio": 2.354625550660793,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:24.754972Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Simplifying Data Extraction D: Simplifying Data Extraction: Ping BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Simplifying Data Extraction' EXAMPLE APPLICATION: various sources, often further analysis Ping. discussion examine extraction context AgentQL, designed extracting inFion pages, consider development machine learning engine similar functionality.",
+    "compression_ratio": 2.646039603960396,
+    "symbol_count": 404,
+    "timestamp": "2025-11-18T10:47:24.760909Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Simplifying Data Extraction D: Simplifying Data Extraction: Ping BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Simplifying Data Extraction' EXAMPLE APPLICATION: various sources, often further analysis Ping. discussion examine extraction context AgentQL, designed extracting inFion pages, consider development machine learning engine similar functionality.",
+    "compression_ratio": 2.646039603960396,
+    "symbol_count": 404,
+    "timestamp": "2025-11-18T10:47:24.775077Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Simplifying Data Extraction D: Simplifying Data Extraction: Ping BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Simplifying Data Extraction' EXAMPLE APPLICATION: various sources, often further analysis Ping. discussion examine extraction context AgentQL, designed extracting inFion pages, consider development machine learning engine similar functionality.",
+    "compression_ratio": 2.646039603960396,
+    "symbol_count": 404,
+    "timestamp": "2025-11-18T10:47:24.783225Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Simplifying Data Extraction D: Simplifying Data Extraction: Ping BLUEPRINT DETAILS: Θ Node Original Θ Data Extraction' EXAMPLE APPLICATION: Ping. AgentQL,",
+    "compression_ratio": 6.68125,
+    "symbol_count": 160,
+    "timestamp": "2025-11-18T10:47:24.801721Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 356.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.802038Z"
+  }
+]

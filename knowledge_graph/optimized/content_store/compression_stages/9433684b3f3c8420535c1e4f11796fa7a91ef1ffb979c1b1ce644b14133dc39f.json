@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Value Framework\n\nDEFINITION:\nValue Framework: designed to align with human values and ethics, ensuring the system operates in a responsible and beneficial manner:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Value Framework'\n\nEXAMPLE APPLICATION:\nction experience.\n    * Empathy and Compassion: Developing empathy and compassion in the system to provide emotional support and comfort.\n\n20. Value Alignment: Mastermind_AI is designed to align with human values and ethics, ensuring the system operates in a responsible and beneficial manner:\n    * Value Framework: Developing a value framework that prioritizes human well-being, dignity, and autonomy.\n    * Ethics and Moral Reasoning: Incorporating ethics and moral reasoning into the system's dec\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1136,
+    "timestamp": "2025-11-18T10:47:29.388148Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Value Framework\n\nDEFINITION:\nValue Framework: designed to align with human values and ethics, ensuring the system operates in a responsible and beneficial manner:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Value Framework'\n\nEXAMPLE APPLICATION:\nction experience.\n    * Empathy and Compassion: Developing empathy and compassion in the system to provide emotional support and comfort.\n\n20. Value Alignment: Mastermind_AI is designed to align with human values and ethics, ensuring the system operates in a",
+    "compression_ratio": 2.0,
+    "symbol_count": 568,
+    "timestamp": "2025-11-18T10:47:29.388172Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Value Framework D: Value Framework: designed to align human values ethics, ensuring S operates in a responsible beneficial manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Value Framework' EXAMPLE APPLICATION: ction experience. * Empathy Compassion: Developing empathy compassion in S to provide emotional support comfort. 20. Value Alignment: Mastermind_AI is designed to align human values ethics, ensuring S operates in a",
+    "compression_ratio": 2.361746361746362,
+    "symbol_count": 481,
+    "timestamp": "2025-11-18T10:47:29.390437Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Value Framework D: Value Framework: designed align human values ethics, ensuring S operates responsible beneficial manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Value Framework' EXAMPLE APPLICATION: ction experience. Empathy Compassion: Developing empathy compassion S provide emotional support comfort. Value Alignment: Mastermind_AI designed align human values ethics, ensuring S operates",
+    "compression_ratio": 2.5413870246085013,
+    "symbol_count": 447,
+    "timestamp": "2025-11-18T10:47:29.394303Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Value Framework D: Value Framework: designed align human values ethics, ensuring S operates responsible beneficial manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Value Framework' EXAMPLE APPLICATION: ction experience. Empathy Compassion: Developing empathy compassion S provide emotional support comfort. Value Alignment: Mastermind_AI designed align human values ethics, ensuring S operates",
+    "compression_ratio": 2.5413870246085013,
+    "symbol_count": 447,
+    "timestamp": "2025-11-18T10:47:29.401050Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Value Framework D: Value Framework: designed align human values ethics, ensuring S operates responsible beneficial manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Value Framework' EXAMPLE APPLICATION: ction experience. Empathy Compassion: Developing empathy compassion S provide emotional support comfort. Value Alignment: Mastermind_AI designed align human values ethics, ensuring S operates",
+    "compression_ratio": 2.5413870246085013,
+    "symbol_count": 447,
+    "timestamp": "2025-11-18T10:47:29.409230Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Value Framework D: Value Framework: S BLUEPRINT DETAILS: Θ Node Original Θ Framework' EXAMPLE APPLICATION: Empathy Compassion: Developing S Value Alignment: Mastermind_AI S",
+    "compression_ratio": 6.382022471910112,
+    "symbol_count": 178,
+    "timestamp": "2025-11-18T10:47:29.414511Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 378.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:29.414838Z"
+  }
+]

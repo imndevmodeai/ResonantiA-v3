@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: SPR Manager Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to SPR Manager. Provides the higher-order cognitive support for the operational SPR Manager system, ensuring symmetrical architecture between cognitive and operational levels.\n\n[From agi.txt]: SPR: 0.010, \"Architecture\"\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with SPR Manager system.\n\nEXAMPLE APPLICATION:\nProviding cognitive guidance for SPR Manager operational processes.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: CognitiveCorrespondence; confidence: 0.85; corresponds_to: SPRmanageR; level: Above; enables: CognitiveSupport, HigherOrderProcessing, StrategicGuidance, SymmetricalArchitecture\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 925,
+    "timestamp": "2025-11-18T10:46:59.553977Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: SPR Manager Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to SPR Manager. Provides the higher-order cognitive support for the operational SPR Manager system, ensuring symmetrical architecture between cognitive and operational levels.\n\n[From agi.txt]: SPR: 0.010, \"Architecture\"\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with SPR Manager system.\n\nEXAMPLE APPLICATION:\nProviding cognitive guidance for SPR Manage",
+    "compression_ratio": 2.002164502164502,
+    "symbol_count": 462,
+    "timestamp": "2025-11-18T10:46:59.554008Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Θ Manager Cognitive Capability D: Cognitive capability corresponding to Θ Manager. Provides higher-order cognitive support operational Θ Manager S, ensuring symmetrical architecture between cognitive operational levels. [ agi.txt]: Θ: 0.010, \"Architecture\" BLUEPRINT DETAILS: Created to maintain symmetrical architecture Θ Manager S. EXAMPLE APPLICATION: Providing cognitive guidance Θ Manage",
+    "compression_ratio": 2.3241206030150754,
+    "symbol_count": 398,
+    "timestamp": "2025-11-18T10:46:59.554871Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Θ Manager Ω Capability D: Ω capability corresponding to Θ Manager. Provides higher-order Ω support operational Θ Manager S, ensuring symmetrical architecture between Ω operational levels. [ agi.txt]: Θ: 0.010, \"Architecture\" BLUEPRINT DETAILS: Created to maintain symmetrical architecture Θ Manager S. EXAMPLE APPLICATION: Providing Ω guidance Θ Manage",
+    "compression_ratio": 2.583798882681564,
+    "symbol_count": 358,
+    "timestamp": "2025-11-18T10:46:59.561533Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Θ Manager Ω Capability D: Ω capability corresponding Θ Manager. Provides higher-order Ω support operational Θ Manager S, ensuring symmetrical architecture between Ω operational levels. agi.txt]: Θ: 0.010, \"Architecture\" BLUEPRINT DETAILS: Created maintain symmetrical architecture Θ Manager S. EXAMPLE APPLICATION: Providing Ω guidance Θ Manage",
+    "compression_ratio": 2.642857142857143,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T10:46:59.569026Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Θ Manager Ω Capability D: Ω capability corresponding Θ Manager. Provides higher-order Ω support operational Θ Manager S, ensuring symmetrical architecture between Ω operational levels. agi.txt]: Θ: 0.010, \"Architecture\" BLUEPRINT DETAILS: Created maintain symmetrical architecture Θ Manager S. EXAMPLE APPLICATION: Providing Ω guidance Θ Manage",
+    "compression_ratio": 2.642857142857143,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T10:46:59.577337Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Θ Manager Ω Capability D: Ω Θ Manager. Provides Ω Θ Manager S, Ω Θ: BLUEPRINT DETAILS: Created Θ Manager S. EXAMPLE APPLICATION: Providing Ω Θ Manage",
+    "compression_ratio": 5.967741935483871,
+    "symbol_count": 155,
+    "timestamp": "2025-11-18T10:46:59.583180Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Ω|Ω|Θ|Ω",
+    "compression_ratio": 102.77777777777777,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:59.586132Z"
+  }
+]

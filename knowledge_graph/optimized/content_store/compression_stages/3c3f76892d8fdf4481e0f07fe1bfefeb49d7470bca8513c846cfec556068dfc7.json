@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Function: run_strategic_intelligence_workflow\n\nDEFINITION:\nFunction: run_strategic_intelligence_workflow\n\nA meta-tool that executes the strategic intelligence workflow.\n\nParameters: \n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_playbooks.py, type: python_function\n\nFULL IMPLEMENTATION CODE (workflow_playbooks.py):\n```python\nimport logging\nfrom typing import Dict, Any\nfrom Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine as WorkflowEngine\nfrom Three_PointO_ArchE.spr_manager import SPRManager\nfrom Three_PointO_ArchE import config\nfrom Three_PointO_ArchE.playbook_orchestrator import run_playbook as execute_playbook\nfrom .config import configure_logging\nimport logging\nimport os\n\n# Configure logging for this module\nconfigure_logging()\nlogger = logging.getLogger(__name__)\n\ndef run_strategic_intelligence_workflow():\n    \"\"\"\n    A meta-tool that executes the strategic intelligence workflow.\n    \"\"\"\n    logger.info(\"Executing the Strategic Intelligence Workflow Playbook.\")\n    # Assuming the playbook is in the 'workflows' directory relative to the project root\n    # A more robust solution would use the project root from config.\n    playbook_path = os.path.join(os.path.dirname(__file__), '..', 'workflows', 'strategic_intelligence_workflow.json')\n    \n    if not os.path.exists(playbook_path):\n        error_msg = f\"Playbook not found at path: {playbook_path}\"\n        logger.critical(error_msg)\n        return {\"status\": \"error\", \"message\": error_msg}\n        \n    return execute_playbook(playbook_path)\n\ndef run_playbook(playbook_name: str):\n    \"\"\"\n    A generic meta-tool that executes a specified workflow playbook.\n\n    Args:\n        playbook_name (str): The filename of the playbook in the /workflows directory.\n                             Example: 'asymmetric_warfare_analysis.json'\n    \"\"\"\n    logger.info(f\"Executing the '{playbook_name}' Playbook.\")\n    playbook_path = os.path.join(os.path.dirname(__file__), '..', 'workflows', playbook_name)\n\n    if not os.path.exists(playbook_path):\n        error_msg = f\"Playbook not found at path: {playbook_path}\"\n        logger.critical(error_msg)\n        return {\"status\": \"error\", \"message\": error_msg}\n\n    return execute_playbook(playbook_path)\n\n```\n\nEXAMPLE APPLICATION:\nFunction: run_strategic_intelligence_workflow\n\nA meta-tool that executes the strategic intelligence workflow.\n\nParameters: \n\nCATEGORY: CodeKnowledge\n\nRELATIONSHIPS:\ntype: FromCodebase; source: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_playbooks.py; source_type: python_function",
+    "compression_ratio": 1.0,
+    "symbol_count": 2604,
+    "timestamp": "2025-11-18T10:59:58.720296Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Function: run_strategic_intelligence_workflow\n\nDEFINITION:\nFunction: run_strategic_intelligence_workflow\n\nA meta-tool that executes the strategic intelligence workflow.\n\nParameters: \n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/workflow_playbooks.py, type: python_function\n\nFULL IMPLEMENTATION CODE (workflow_playbooks.py):\n```python\nimport logging\nfrom typing import Dict, Any\nfrom Three_PointO_ArchE.workflow_engine import IARCompliantWorkflowEngine as WorkflowEngine\nfrom Three_PointO_ArchE.spr_manager import SPRManager\nfrom Three_PointO_ArchE import config\nfrom Three_PointO_ArchE.playbook_orchestrator import run_playbook as execute_playbook\nfrom .config import configure_logging\nimport logging\nimport os\n\n# Configure logging for this module\nconfigure_logging()\nlogger = logging.getLogger(__name__)\n\ndef run_strategic_intelligence_workflow():\n    \"\"\"\n    A meta-tool that executes the strategic intelligence workflow.\n    \"\"\"\n    logger.info(\"Executing the Strategic Intelligence Workflow Playbook.\")\n    # Assuming the playbook is in the 'workflows' directory relative to the project root\n    # A more robust solution would use the project root from config.\n    playbook_path = os.path.join(os.path.dirname(__file__), '..', 'workflows', 'strategic_in",
+    "compression_ratio": 2.0,
+    "symbol_count": 1302,
+    "timestamp": "2025-11-18T10:59:58.720324Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Function: run_strategic_intelligence_workflow D: Function: run_strategic_intelligence_workflow A meta-tool executes strategic intelligence workflow. Parameters: BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/workflow_playbooks.py, type: python_function FULL I CODE (workflow_playbooks.py): ```python import logging typing import Dict, Any Three_PointO_Æ.workflow_engine import ΦCompliantWorkflowEngine as WorkflowEngine Three_PointO_Æ.Θ_manager import ΘManager Three_PointO_Æ import config Three_PointO_Æ.playbook_orchestrator import run_playbook as execute_playbook .config import configure_logging import logging import os # Configure logging module configure_logging() logger = logging.getLogger(__name__) def run_strategic_intelligence_workflow(): \"\"\" A meta-tool executes strategic intelligence workflow. \"\"\" logger.info(\"Executing Strategic Intelligence Workflow Playbook.\") # Assuming playbook is in 'workflows' directory relative to project root # A more robust solution would use project root config. playbook_path = os.path.join(os.path.dirname(__file__), '..', 'workflows', 'strategic_in",
+    "compression_ratio": 2.302387267904509,
+    "symbol_count": 1131,
+    "timestamp": "2025-11-18T10:59:58.733110Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Function: run_strategic_intelligence_workflow D: Function: run_strategic_intelligence_workflow A meta-tool executes strategic intelligence workflow. Parameters: BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/workflow_playbooks.py, type: python_function FULL I CODE (workflow_playbooks.py): ```python import logging typing import Dict, Any Three_PointO_Æ.workflow_engine import ΦCompliantWorkflowEngine WorkflowEngine Three_PointO_Æ.Θ_manager import ΘManager Three_PointO_Æ import config Three_PointO_Æ.playbook_orchestrator import run_playbook execute_playbook .config import configure_logging import logging import Configure logging module configure_logging() logger logging.getLogger(__name__) run_strategic_intelligence_workflow(): A meta-tool executes strategic intelligence workflow. logger.info(\"Executing Strategic Intelligence Workflow Playbook.\") Assuming playbook 'workflows' directory relative project A robust solution project config. playbook_path os.path.join(os.path.dirname(__file__), '..', 'workflows', 'strategic_in",
+    "compression_ratio": 2.4427767354596623,
+    "symbol_count": 1066,
+    "timestamp": "2025-11-18T10:59:58.746817Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Function: run_strategic_intelligence_workflow D: Function: run_strategic_intelligence_workflow A meta-tool executes strategic intelligence workflow. Parameters: BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/workflow_playbooks.py, type: python_function FULL I CODE (workflow_playbooks.py): ```python import logging typing import Dict, Any Three_PointO_Æ.workflow_engine import ΦCompliantWorkflowEngine WorkflowEngine Three_PointO_Æ.Θ_manager import ΘManager Three_PointO_Æ import config Three_PointO_Æ.playbook_orchestrator import run_playbook execute_playbook .config import configure_logging import logging import Configure logging module configure_logging() logger logging.getLogger(__name__) run_strategic_intelligence_workflow(): A meta-tool executes strategic intelligence workflow. logger.info(\"Executing Strategic Intelligence Workflow Playbook.\") Assuming playbook 'workflows' directory relative project A robust solution project config. playbook_path os.path.join(os.path.dirname(__file__), '..', 'workflows', 'strategic_in",
+    "compression_ratio": 2.4427767354596623,
+    "symbol_count": 1066,
+    "timestamp": "2025-11-18T10:59:58.756755Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Function: run_strategic_intelligence_workflow D: Function: run_strategic_intelligence_workflow meta-tool executes strategic intelligence workflow. Parameters: BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/workflow_playbooks.py, type: python_function FULL I CODE (workflow_playbooks.py): ```python import logging typing import Dict, Any Three_PointO_Æ.workflow_engine import ΦCompliantWorkflowEngine WorkflowEngine Three_PointO_Æ.Θ_manager import ΘManager Three_PointO_Æ import config Three_PointO_Æ.playbook_orchestrator import run_playbook execute_playbook .config import configure_logging import logging import Configure logging module configure_logging() logger logging.getLogger(__name__) run_strategic_intelligence_workflow(): meta-tool executes strategic intelligence workflow. logger.info(\"Executing Strategic Intelligence Workflow Playbook.\") Assuming playbook 'workflows' directory relative project robust solution project config. playbook_path os.path.join(os.path.dirname(__file__), '..', 'workflows', 'strategic_in",
+    "compression_ratio": 2.456603773584906,
+    "symbol_count": 1060,
+    "timestamp": "2025-11-18T10:59:58.769103Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Function: D: Function: Parameters: BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/workflow_playbooks.py, FULL I CODE Dict, Any Three_PointO_Æ.workflow_engine ΦCompliantWorkflowEngine WorkflowEngine Three_PointO_Æ.Θ_manager ΘManager Three_PointO_Æ Three_PointO_Æ.playbook_orchestrator Configure Strategic Intelligence Workflow Playbook.\") Assuming",
+    "compression_ratio": 6.870712401055409,
+    "symbol_count": 379,
+    "timestamp": "2025-11-18T10:59:58.781145Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Æ|Φ|Æ|Θ",
+    "compression_ratio": 289.3333333333333,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:59:58.781707Z"
+  }
+]

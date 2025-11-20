@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: The Importance\n\nDEFINITION:\nThe Importance: a crucial stage in any data extraction pipeline, particularly when building a machine learning engine like AgentQL\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'The Importance'\n\nEXAMPLE APPLICATION:\nnt of any data extraction engine, responsible for translating the optimized query plan into actions that retrieve the desired information from various sources. Its design and implementation significantly impact the efficiency, robustness, and overall effectiveness of the data extraction process.\n\n\n\nThe Importance of Data Processing in Data Extraction\nData processing is a crucial stage in any data extraction pipeline, particularly when building a machine learning engine like AgentQL. While the so\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1131,
+    "timestamp": "2025-11-18T10:47:23.879097Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: The Importance\n\nDEFINITION:\nThe Importance: a crucial stage in any data extraction pipeline, particularly when building a machine learning engine like AgentQL\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'The Importance'\n\nEXAMPLE APPLICATION:\nnt of any data extraction engine, responsible for translating the optimized query plan into actions that retrieve the desired information from various sources. Its design and implementation significantly impact the efficiency, robustness, and overall effective",
+    "compression_ratio": 2.0017699115044247,
+    "symbol_count": 565,
+    "timestamp": "2025-11-18T10:47:23.879117Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Importance D: Importance: a crucial stage in any data extraction pipeline, particularly building a machine learning engine like AgentQL BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: ' Importance' EXAMPLE APPLICATION: nt of any data extraction engine, responsible translating optimized query plan into actions retrieve desired inFion various sources. Its design I significantly impact efficiency, robustness, overall effective",
+    "compression_ratio": 2.3760504201680672,
+    "symbol_count": 476,
+    "timestamp": "2025-11-18T10:47:23.880097Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Importance D: Importance: crucial stage extraction pipeline, particularly building machine learning engine AgentQL BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Importance' EXAMPLE APPLICATION: extraction engine, responsible translating optimized query actions retrieve desired inFion various sources. Its design I significantly impact efficiency, robustness, overall effective",
+    "compression_ratio": 2.6611764705882353,
+    "symbol_count": 425,
+    "timestamp": "2025-11-18T10:47:23.882075Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Importance D: Importance: crucial stage extraction pipeline, particularly building machine learning engine AgentQL BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Importance' EXAMPLE APPLICATION: extraction engine, responsible translating optimized query actions retrieve desired inFion various sources. Its design I significantly impact efficiency, robustness, overall effective",
+    "compression_ratio": 2.6611764705882353,
+    "symbol_count": 425,
+    "timestamp": "2025-11-18T10:47:23.888201Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Importance D: Importance: crucial stage extraction pipeline, particularly building machine learning engine AgentQL BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Importance' EXAMPLE APPLICATION: extraction engine, responsible translating optimized query actions retrieve desired inFion various sources. Its design I significantly impact efficiency, robustness, overall effective",
+    "compression_ratio": 2.6611764705882353,
+    "symbol_count": 425,
+    "timestamp": "2025-11-18T10:47:23.892559Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Importance D: Importance: AgentQL BLUEPRINT DETAILS: Θ Node Original Θ Importance' EXAMPLE APPLICATION: Its I",
+    "compression_ratio": 9.834782608695653,
+    "symbol_count": 115,
+    "timestamp": "2025-11-18T10:47:23.896304Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 377.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.896580Z"
+  }
+]

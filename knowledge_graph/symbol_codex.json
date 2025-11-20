@@ -453,7 +453,8 @@
       "Æ|Π|Æ|Π|Æ",
       "W|F|A|S|W",
       "Ω|Ω|Ω",
-      "Ω|Ω|Æ|Ω|Θ"
+      "Ω|Ω|Æ|Ω|Θ",
+      "Æ|Θ"
     ],
     "original_patterns": [],
     "relationships": {},
@@ -462,5 +463,36 @@
     "contextual_variations": {},
     "decompression_template": "Symbol extracted: |",
     "created_at": "2025-11-18T11:00:50.577553Z"
+  },
+  "*": {
+    "symbol": "*",
+    "meaning": "Symbol extracted: *",
+    "context": "Inferred from narrative context",
+    "usage_examples": [
+      "**PRIME**:V3.5.C:KO,ΘM.GP:RCL.ID:ACE",
+      "**PRIME**:V3.5.**ID**:Æ."
+    ],
+    "original_patterns": [],
+    "relationships": {},
+    "critical_specifics": [],
+    "generalizable_patterns": [],
+    "contextual_variations": {},
+    "decompression_template": "Symbol extracted: *",
+    "created_at": "2025-11-19T12:59:15.009455Z"
+  },
+  "+": {
+    "symbol": "+",
+    "meaning": "Symbol extracted: +",
+    "context": "Inferred from narrative context",
+    "usage_examples": [
+      "V3.5:EVRE,KO+ΘM,IRFDR,RCL,CP."
+    ],
+    "original_patterns": [],
+    "relationships": {},
+    "critical_specifics": [],
+    "generalizable_patterns": [],
+    "contextual_variations": {},
+    "decompression_template": "Symbol extracted: +",
+    "created_at": "2025-11-19T13:09:21.059803Z"
   }
 }

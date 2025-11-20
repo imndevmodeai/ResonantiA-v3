@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Financial Access\n\nDEFINITION:\nFinancial Access: designed to provide advanced financial inclusion capabilities to improve access to financial services for underserved populations:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Financial Access'\n\nEXAMPLE APPLICATION:\nstermind_AI is designed to provide advanced financial inclusion capabilities to improve access to financial services for underserved populations:\n    * Financial Literacy: Developing financial literacy techniques that enable the AI system to educate users on financial concepts and principles.\n    * Financial Access: Implementing financial access techniques that enable the AI system to provide access to financial services for underserved populations.\n    * Financial Empowerment: Creating financia\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1153,
+    "timestamp": "2025-11-18T10:47:38.975889Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Financial Access\n\nDEFINITION:\nFinancial Access: designed to provide advanced financial inclusion capabilities to improve access to financial services for underserved populations:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Financial Access'\n\nEXAMPLE APPLICATION:\nstermind_AI is designed to provide advanced financial inclusion capabilities to improve access to financial services for underserved populations:\n    * Financial Literacy: Developing financial literacy techniques that enable the AI system to educate",
+    "compression_ratio": 2.001736111111111,
+    "symbol_count": 576,
+    "timestamp": "2025-11-18T10:47:38.976247Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Financial Access D: Financial Access: designed to provide advanced financial inclusion capabilities to improve access to financial services underserved populations: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Financial Access' EXAMPLE APPLICATION: stermind_AI is designed to provide advanced financial inclusion capabilities to improve access to financial services underserved populations: * Financial Literacy: Developing financial literacy techniques enable AI S to educate",
+    "compression_ratio": 2.179584120982987,
+    "symbol_count": 529,
+    "timestamp": "2025-11-18T10:47:38.978894Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Financial Access D: Financial Access: designed provide advanced financial inclusion capabilities improve access financial services underserved populations: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Access' EXAMPLE APPLICATION: stermind_AI designed provide advanced financial inclusion capabilities improve access financial services underserved populations: Financial Literacy: Developing financial literacy techniques enable AI S educate",
+    "compression_ratio": 2.306,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:38.981273Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Financial Access D: Financial Access: designed provide advanced financial inclusion capabilities improve access financial services underserved populations: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Access' EXAMPLE APPLICATION: stermind_AI designed provide advanced financial inclusion capabilities improve access financial services underserved populations: Financial Literacy: Developing financial literacy techniques enable AI S educate",
+    "compression_ratio": 2.306,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:38.984144Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Financial Access D: Financial Access: designed provide advanced financial inclusion capabilities improve access financial services underserved populations: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Access' EXAMPLE APPLICATION: stermind_AI designed provide advanced financial inclusion capabilities improve access financial services underserved populations: Financial Literacy: Developing financial literacy techniques enable AI S educate",
+    "compression_ratio": 2.306,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:38.988723Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Financial Access D: Financial Access: BLUEPRINT DETAILS: Θ Node Original Θ Access' EXAMPLE APPLICATION: Financial Literacy: Developing AI S",
+    "compression_ratio": 7.951724137931034,
+    "symbol_count": 145,
+    "timestamp": "2025-11-18T10:47:38.992913Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 384.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.993478Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: User Experience\n\nDEFINITION:\nUser Experience: Node 20: User Experience\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 20, type: node_format. Original SPR name: 'User Experience'\n\nEXAMPLE APPLICATION:\nNode 20: User Experience\nNode 21: Functionality\nNode 8: Performance Requirements\n\nDescription: Detailed description of the system's performance requirements, including its speed, accuracy, and scalability.\nEdges:\nNode 22: Sp\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 20\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 787,
+    "timestamp": "2025-11-18T10:47:22.995335Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: User Experience\n\nDEFINITION:\nUser Experience: Node 20: User Experience\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 20, type: node_format. Original SPR name: 'User Experience'\n\nEXAMPLE APPLICATION:\nNode 20: User Experience\nNode 21: Functionality\nNode 8: Performance Requirements\n\nDescription: Detailed description of the system's performance requirements, includi",
+    "compression_ratio": 2.0025445292620865,
+    "symbol_count": 393,
+    "timestamp": "2025-11-18T10:47:22.995360Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: User Experience D: User Experience: Node 20: User Experience Confidence: 0.5 BLUEPRINT DETAILS: Θ extracted agi.txt Node 20, type: node_F. Original Θ name: 'User Experience' EXAMPLE APPLICATION: Node 20: User Experience Node 21: Functionality Node 8: Performance Requirements Description: Detailed description of S's performance requirements, includi",
+    "compression_ratio": 2.210674157303371,
+    "symbol_count": 356,
+    "timestamp": "2025-11-18T10:47:22.996232Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: User Experience D: User Experience: Node User Experience Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'User Experience' EXAMPLE APPLICATION: Node User Experience Node Functionality Node Performance Requirements Description: Detailed description S's performance requirements, includi",
+    "compression_ratio": 2.3848484848484848,
+    "symbol_count": 330,
+    "timestamp": "2025-11-18T10:47:23.002952Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: User Experience D: User Experience: Node User Experience Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'User Experience' EXAMPLE APPLICATION: Node User Experience Node Functionality Node Performance Requirements Description: Detailed description S's performance requirements, includi",
+    "compression_ratio": 2.3848484848484848,
+    "symbol_count": 330,
+    "timestamp": "2025-11-18T10:47:23.011614Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: User Experience D: User Experience: Node User Experience Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'User Experience' EXAMPLE APPLICATION: Node User Experience Node Functionality Node Performance Requirements Description: Detailed description S's performance requirements, includi",
+    "compression_ratio": 2.3848484848484848,
+    "symbol_count": 330,
+    "timestamp": "2025-11-18T10:47:23.015704Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: User Experience D: User Experience: Node User Experience Confidence: BLUEPRINT DETAILS: Θ Node Original Θ Experience' EXAMPLE APPLICATION: Node User Experience Node Functionality Node Performance Requirements Description: Detailed S's",
+    "compression_ratio": 3.279166666666667,
+    "symbol_count": 240,
+    "timestamp": "2025-11-18T10:47:23.026236Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 262.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.027260Z"
+  }
+]

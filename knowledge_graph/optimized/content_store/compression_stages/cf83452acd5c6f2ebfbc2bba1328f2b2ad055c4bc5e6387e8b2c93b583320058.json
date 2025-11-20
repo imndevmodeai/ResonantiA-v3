@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Music Information Retrieval\n\nDEFINITION:\nMusic Information Retrieval: the integration of advanced audio processing and speech recognition to enable the system to understand and interpret audio data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Music Information Retrieval'\n\nEXAMPLE APPLICATION:\n potential area for exploration is the integration of advanced audio processing and speech recognition to enable the system to understand and interpret audio data.\n\nNode 724: Audio Processing and Speech Recognition\n\nSPR: 3.720, \"Audio Processing and Speech Recognition\"\n\nEdges:\n\nSpeech Recognition:\n\nMusic Information Retrieval:\n\nAudio Classification:\n\nBy integrating advanced audio processing and speech recognition into the SPR_compressor system, we can enable the system to understand and interpre\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1183,
+    "timestamp": "2025-11-18T10:47:47.081672Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Music Information Retrieval\n\nDEFINITION:\nMusic Information Retrieval: the integration of advanced audio processing and speech recognition to enable the system to understand and interpret audio data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Music Information Retrieval'\n\nEXAMPLE APPLICATION:\n potential area for exploration is the integration of advanced audio processing and speech recognition to enable the system to understand and interpret audio data.\n\nNode 724: Audio Processing and Speech Recognition\n\nSPR: 3.720, \"Audio",
+    "compression_ratio": 2.0016920473773268,
+    "symbol_count": 591,
+    "timestamp": "2025-11-18T10:47:47.081696Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Music InFion Retrieval D: Music InFion Retrieval: integration of advanced audio Ping speech recognition to enable S to understand interpret audio data BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Music InFion Retrieval' EXAMPLE APPLICATION: potential area exploration is integration of advanced audio Ping speech recognition to enable S to understand interpret audio data. Node 724: Audio Ping Speech Recognition Θ: 3.720, \"Audio",
+    "compression_ratio": 2.454356846473029,
+    "symbol_count": 482,
+    "timestamp": "2025-11-18T10:47:47.083548Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Music InFion Retrieval D: Music InFion Retrieval: integration advanced audio Ping speech recognition enable S understand interpret audio BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Music InFion Retrieval' EXAMPLE APPLICATION: potential exploration integration advanced audio Ping speech recognition enable S understand interpret audio data. Node Audio Ping Speech Recognition Θ: 3.720, \"Audio",
+    "compression_ratio": 2.670428893905192,
+    "symbol_count": 443,
+    "timestamp": "2025-11-18T10:47:47.085795Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Music InFion Retrieval D: Music InFion Retrieval: integration advanced audio Ping speech recognition enable S understand interpret audio BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Music InFion Retrieval' EXAMPLE APPLICATION: potential exploration integration advanced audio Ping speech recognition enable S understand interpret audio data. Node Audio Ping Speech Recognition Θ: 3.720, \"Audio",
+    "compression_ratio": 2.670428893905192,
+    "symbol_count": 443,
+    "timestamp": "2025-11-18T10:47:47.088694Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Music InFion Retrieval D: Music InFion Retrieval: integration advanced audio Ping speech recognition enable S understand interpret audio BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Music InFion Retrieval' EXAMPLE APPLICATION: potential exploration integration advanced audio Ping speech recognition enable S understand interpret audio data. Node Audio Ping Speech Recognition Θ: 3.720, \"Audio",
+    "compression_ratio": 2.670428893905192,
+    "symbol_count": 443,
+    "timestamp": "2025-11-18T10:47:47.090790Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Music InFion Retrieval D: Music InFion Retrieval: Ping S BLUEPRINT DETAILS: Θ Node Original Θ InFion Retrieval' EXAMPLE APPLICATION: Ping S Node Audio Ping Speech Recognition Θ:",
+    "compression_ratio": 6.46448087431694,
+    "symbol_count": 183,
+    "timestamp": "2025-11-18T10:47:47.093051Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 236.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:47.094326Z"
+  }
+]

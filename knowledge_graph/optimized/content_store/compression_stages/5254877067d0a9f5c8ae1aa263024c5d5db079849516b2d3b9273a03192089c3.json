@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Security\n\nVerification Result\n\nDEFINITION:\nSecurity\n\nVerification Result: functioning correctly\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Security\n\nVerification Result'\n\nEXAMPLE APPLICATION:\nn to verify that all system components are functioning correctly.\n\nSystem Component Verification:\n\nI will verify that all system components are functioning correctly.\n\nComponent 1: Data Ingestion\n\nComponent 2: Data Processing\n\nComponent 3: Data Storage\n\nComponent 4: Data Visualization\n\nComponent 5: Security\n\nVerification Result:\n\nAll system components are functioning correctly.\n\nNext Step:\n\nPlease proceed to the next step in the final steps.\n\nFinal Steps:\n\nType '2' to test the system with a smal\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1083,
+    "timestamp": "2025-11-18T10:47:50.478454Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Security\n\nVerification Result\n\nDEFINITION:\nSecurity\n\nVerification Result: functioning correctly\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Security\n\nVerification Result'\n\nEXAMPLE APPLICATION:\nn to verify that all system components are functioning correctly.\n\nSystem Component Verification:\n\nI will verify that all system components are functioning correctly.\n\nComponent 1: Data Ingestion\n\nComponent 2: Data Processing\n\nComponent 3: Data Storage\n\nComponent 4: Data Visualizatio",
+    "compression_ratio": 2.0018484288354896,
+    "symbol_count": 541,
+    "timestamp": "2025-11-18T10:47:50.478478Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Security Verification Result D: Security Verification Result: functioning correctly BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Security Verification Result' EXAMPLE APPLICATION: n to verify S components functioning correctly. S Component Verification: I will verify S components functioning correctly. Component 1: Data Ingestion Component 2: Data Ping Component 3: Data Storage Component 4: Data Visualizatio",
+    "compression_ratio": 2.334051724137931,
+    "symbol_count": 464,
+    "timestamp": "2025-11-18T10:47:50.479431Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Security Verification Result D: Security Verification Result: functioning correctly BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Security Verification Result' EXAMPLE APPLICATION: verify S components functioning correctly. S Component Verification: I verify S components functioning correctly. Component Data Ingestion Component Data Ping Component Data Storage Component Data Visualizatio",
+    "compression_ratio": 2.4669703872437356,
+    "symbol_count": 439,
+    "timestamp": "2025-11-18T10:47:50.481444Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Security Verification Result D: Security Verification Result: functioning correctly BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Security Verification Result' EXAMPLE APPLICATION: verify S components functioning correctly. S Component Verification: I verify S components functioning correctly. Component Data Ingestion Component Data Ping Component Data Storage Component Data Visualizatio",
+    "compression_ratio": 2.4669703872437356,
+    "symbol_count": 439,
+    "timestamp": "2025-11-18T10:47:50.489585Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Security Verification Result D: Security Verification Result: functioning correctly BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Security Verification Result' EXAMPLE APPLICATION: verify S components functioning correctly. S Component Verification: I verify S components functioning correctly. Component Data Ingestion Component Data Ping Component Data Storage Component Data Visualizatio",
+    "compression_ratio": 2.4669703872437356,
+    "symbol_count": 439,
+    "timestamp": "2025-11-18T10:47:50.495437Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Security Verification Result D: Security Verification Result: BLUEPRINT DETAILS: Θ Node Original Θ Verification Result' EXAMPLE APPLICATION: S S Component Verification: I S Component Data Ingestion Component Data Ping Component Data Storage Component Data Visualizatio",
+    "compression_ratio": 3.9525547445255476,
+    "symbol_count": 274,
+    "timestamp": "2025-11-18T10:47:50.502345Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 361.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:50.504299Z"
+  }
+]

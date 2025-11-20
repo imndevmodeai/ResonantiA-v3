@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Machine Learning Engine\n\nThe Crucial\n\nDEFINITION:\nMachine Learning Engine\n\nThe Crucial: the stage where the system retrieves data from the specified sources based on the optimized plan\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Machine Learning Engine\n\nThe Crucial'\n\nEXAMPLE APPLICATION:\nURL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750\nEpoch Time: 1738044185\nDate: 2025-01-2806:03:05.106\nTitle: 🤖 Machine Learning Engine\n\nThe Crucial Role of Query Execution in Data Extraction\nQuery execution is the stage where the system retrieves data from the specified sources based on the optimized plan. It's a critical step in the data extraction pipeline, acting as the bridge between the planned approach and the actual data retrieval.\nThe sources discuss query exe\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1179,
+    "timestamp": "2025-11-18T10:47:23.624947Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Machine Learning Engine\n\nThe Crucial\n\nDEFINITION:\nMachine Learning Engine\n\nThe Crucial: the stage where the system retrieves data from the specified sources based on the optimized plan\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Machine Learning Engine\n\nThe Crucial'\n\nEXAMPLE APPLICATION:\nURL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750\nEpoch Time: 1738044185\nDate: 2025-01-2806:03:05.106\nTitle: 🤖 Machine Learning Engine\n\nThe Crucial Role of Query Execution in Data Extraction\nQuery execution i",
+    "compression_ratio": 2.00169779286927,
+    "symbol_count": 589,
+    "timestamp": "2025-11-18T10:47:23.624971Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Machine Learning Engine Crucial D: Machine Learning Engine Crucial: stage S retrieves data specified sources based on optimized plan BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Machine Learning Engine Crucial' EXAMPLE APPLICATION: URL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750 Epoch Time: 1738044185 Date: 2025-01-2806:03:05.106 Title: 🤖 Machine Learning Engine Crucial Role of Query Execution in Data Extraction Query execution i",
+    "compression_ratio": 2.2848837209302326,
+    "symbol_count": 516,
+    "timestamp": "2025-11-18T10:47:23.626222Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Machine Learning Engine Crucial D: Machine Learning Engine Crucial: stage S retrieves specified sources ABM optimized BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Engine Crucial' EXAMPLE APPLICATION: URL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750 Epoch Time: 1738044185 Date: 2025-01-2806:03:05.106 Title: Machine Learning Engine Crucial Role Query Execution Data Extraction Query execution",
+    "compression_ratio": 2.415983606557377,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:23.630474Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Machine Learning Engine Crucial D: Machine Learning Engine Crucial: stage S retrieves specified sources ABM optimized BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Engine Crucial' EXAMPLE APPLICATION: URL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750 Epoch Time: 1738044185 Date: 2025-01-2806:03:05.106 Title: Machine Learning Engine Crucial Role Query Execution Data Extraction Query execution",
+    "compression_ratio": 2.415983606557377,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:23.632877Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Machine Learning Engine Crucial D: Machine Learning Engine Crucial: stage S retrieves specified sources ABM optimized BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Engine Crucial' EXAMPLE APPLICATION: URL: https://hf.co/chat/r/9XLrvSb?leafId=5833aefc-4ecb-49a6-bbb4-033760bd8750 Epoch Time: 1738044185 Date: 2025-01-2806:03:05.106 Title: Machine Learning Engine Crucial Role Query Execution Data Extraction Query execution",
+    "compression_ratio": 2.415983606557377,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:23.639381Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Machine Learning Engine Crucial D: Machine Learning Engine Crucial: S ABM BLUEPRINT DETAILS: Θ Node Original Θ Learning Engine Crucial' EXAMPLE APPLICATION: URL: Epoch Time: 1738044185 Date: Title: Machine Learning Engine Crucial Role Query Execution Data Extraction Query",
+    "compression_ratio": 4.241007194244604,
+    "symbol_count": 278,
+    "timestamp": "2025-11-18T10:47:23.647433Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 393.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.653596Z"
+  }
+]

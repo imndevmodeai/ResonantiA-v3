@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Financial Forecasting\n\nDEFINITION:\nDriven Financial Forecasting: a starting point, and future updates will refine and elaborate on the concepts and technologies presented\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Financial Forecasting'\n\nEXAMPLE APPLICATION:\nx document, and I will continue to provide updates and expansions as needed. The current version is a starting point, and future updates will refine and elaborate on the concepts and technologies presented.\n\nPlease type \"continue\" to proceed with the next section of the blueprint.\n\nContinue\n\n81. AI-Driven Financial Forecasting: Mastermind_AI is designed to provide advanced financial forecasting capabilities to improve the accuracy and reliability of financial predictions:\n    * Financial Modelin\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1164,
+    "timestamp": "2025-11-18T10:47:38.564518Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Financial Forecasting\n\nDEFINITION:\nDriven Financial Forecasting: a starting point, and future updates will refine and elaborate on the concepts and technologies presented\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Financial Forecasting'\n\nEXAMPLE APPLICATION:\nx document, and I will continue to provide updates and expansions as needed. The current version is a starting point, and future updates will refine and elaborate on the concepts and technologies presented.\n\nPlease type \"continue\" to proceed wi",
+    "compression_ratio": 2.0,
+    "symbol_count": 582,
+    "timestamp": "2025-11-18T10:47:38.564549Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Financial Forecasting D: Driven Financial Forecasting: a starting point, future updates will refine elaborate on concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Financial Forecasting' EXAMPLE APPLICATION: x document, I will continue to provide updates expansions as needed. current version is a starting point, future updates will refine elaborate on concepts technologies presented. Please type \"continue\" to proceed wi",
+    "compression_ratio": 2.255813953488372,
+    "symbol_count": 516,
+    "timestamp": "2025-11-18T10:47:38.565620Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Financial Forecasting D: Driven Financial Forecasting: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Forecasting' EXAMPLE APPLICATION: document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed",
+    "compression_ratio": 2.4978540772532187,
+    "symbol_count": 466,
+    "timestamp": "2025-11-18T10:47:38.572949Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Financial Forecasting D: Driven Financial Forecasting: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Forecasting' EXAMPLE APPLICATION: document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed",
+    "compression_ratio": 2.4978540772532187,
+    "symbol_count": 466,
+    "timestamp": "2025-11-18T10:47:38.575361Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Financial Forecasting D: Driven Financial Forecasting: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Forecasting' EXAMPLE APPLICATION: document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed",
+    "compression_ratio": 2.4978540772532187,
+    "symbol_count": 466,
+    "timestamp": "2025-11-18T10:47:38.577783Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Financial Forecasting D: Driven Financial Forecasting: BLUEPRINT DETAILS: Θ Node Original Θ Financial Forecasting' EXAMPLE APPLICATION: I Please",
+    "compression_ratio": 7.414012738853503,
+    "symbol_count": 157,
+    "timestamp": "2025-11-18T10:47:38.580079Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 388.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.580400Z"
+  }
+]

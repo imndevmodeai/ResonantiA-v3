@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Financial Empowerment\n\nDEFINITION:\nFinancial Empowerment: designed to provide advanced financial wellness capabilities to improve the financial well-being of individuals and households:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Financial Empowerment'\n\nEXAMPLE APPLICATION:\nl Literacy: Developing financial literacy techniques that enable the AI system to educate users on financial concepts and principles.\n    * Financial Access: Implementing financial access techniques that enable the AI system to provide access to financial services for underserved populations.\n    * Financial Empowerment: Creating financial empowerment techniques that enable the AI system to empower users to make informed financial decisions.\n\n87. AI-Driven Financial Wellness: Mastermind_AI is de\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1165,
+    "timestamp": "2025-11-18T10:47:39.002076Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Financial Empowerment\n\nDEFINITION:\nFinancial Empowerment: designed to provide advanced financial wellness capabilities to improve the financial well-being of individuals and households:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Financial Empowerment'\n\nEXAMPLE APPLICATION:\nl Literacy: Developing financial literacy techniques that enable the AI system to educate users on financial concepts and principles.\n    * Financial Access: Implementing financial access techniques that enable the AI system to provide access ",
+    "compression_ratio": 2.0017182130584192,
+    "symbol_count": 582,
+    "timestamp": "2025-11-18T10:47:39.002098Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Financial Empowerment D: Financial Empowerment: designed to provide advanced financial wellness capabilities to improve financial well-being of individuals households: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Financial Empowerment' EXAMPLE APPLICATION: l Literacy: Developing financial literacy techniques enable AI S to educate users on financial concepts principles. * Financial Access: Implementing financial access techniques enable AI S to provide access",
+    "compression_ratio": 2.257751937984496,
+    "symbol_count": 516,
+    "timestamp": "2025-11-18T10:47:39.003272Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Financial Empowerment D: Financial Empowerment: designed provide advanced financial wellness capabilities improve financial well-being individuals households: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Empowerment' EXAMPLE APPLICATION: Literacy: Developing financial literacy techniques enable AI S educate users financial concepts principles. Financial Access: Implementing financial access techniques enable AI S provide access",
+    "compression_ratio": 2.3727087576374744,
+    "symbol_count": 491,
+    "timestamp": "2025-11-18T10:47:39.008311Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Financial Empowerment D: Financial Empowerment: designed provide advanced financial wellness capabilities improve financial well-being individuals households: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Empowerment' EXAMPLE APPLICATION: Literacy: Developing financial literacy techniques enable AI S educate users financial concepts principles. Financial Access: Implementing financial access techniques enable AI S provide access",
+    "compression_ratio": 2.3727087576374744,
+    "symbol_count": 491,
+    "timestamp": "2025-11-18T10:47:39.014610Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Financial Empowerment D: Financial Empowerment: designed provide advanced financial wellness capabilities improve financial well-being individuals households: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Empowerment' EXAMPLE APPLICATION: Literacy: Developing financial literacy techniques enable AI S educate users financial concepts principles. Financial Access: Implementing financial access techniques enable AI S provide access",
+    "compression_ratio": 2.3727087576374744,
+    "symbol_count": 491,
+    "timestamp": "2025-11-18T10:47:39.018186Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Financial Empowerment D: Financial Empowerment: BLUEPRINT DETAILS: Θ Node Original Θ Empowerment' EXAMPLE APPLICATION: Literacy: Developing AI S Financial Access: Implementing AI S",
+    "compression_ratio": 6.263440860215054,
+    "symbol_count": 186,
+    "timestamp": "2025-11-18T10:47:39.025275Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 388.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:39.025970Z"
+  }
+]

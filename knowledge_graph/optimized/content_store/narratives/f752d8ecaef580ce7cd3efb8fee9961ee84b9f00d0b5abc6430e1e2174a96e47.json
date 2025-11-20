@@ -1,0 +1,1 @@
+{"content": "A cognitive tool that forces the Gemini LLM's output to conform to a specific, predefined JSON schema. This is essential for reliable data extraction and integration with other systems that expect a specific data format."}

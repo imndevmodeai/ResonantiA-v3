@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Rule-Based Reasoning\n\nDEFINITION:\nRule-Based Reasoning: Node 31: Rule-Based Reasoning\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 31, type: node_format. Original SPR name: 'Rule-Based Reasoning'\n\nEXAMPLE APPLICATION:\nNode 31: Rule-Based Reasoning\nNode 32: Model-Based Reasoning\nNode 33: Hybrid Reasoning\nNode 12: Learning Mechanism\n\nDescription: Detailed description of the system's learning mechanism, including its algorithms, models, and train\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 31\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 812,
+    "timestamp": "2025-11-18T10:47:23.434635Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Rule-Based Reasoning\n\nDEFINITION:\nRule-Based Reasoning: Node 31: Rule-Based Reasoning\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 31, type: node_format. Original SPR name: 'Rule-Based Reasoning'\n\nEXAMPLE APPLICATION:\nNode 31: Rule-Based Reasoning\nNode 32: Model-Based Reasoning\nNode 33: Hybrid Reasoning\nNode 12: Learning Mechanism\n\nDescription: Detailed description of the s",
+    "compression_ratio": 2.0,
+    "symbol_count": 406,
+    "timestamp": "2025-11-18T10:47:23.434663Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Rule-Based Reasoning D: Rule-Based Reasoning: Node 31: Rule-Based Reasoning Confidence: 0.5 BLUEPRINT DETAILS: Θ extracted agi.txt Node 31, type: node_F. Original Θ name: 'Rule-Based Reasoning' EXAMPLE APPLICATION: Node 31: Rule-Based Reasoning Node 32: Model-Based Reasoning Node 33: Hybrid Reasoning Node 12: Learning M Description: Detailed description of s",
+    "compression_ratio": 2.2185792349726774,
+    "symbol_count": 366,
+    "timestamp": "2025-11-18T10:47:23.441849Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Rule-ABM Reasoning D: Rule-ABM Reasoning: Node Rule-ABM Reasoning Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Rule-ABM Reasoning' EXAMPLE APPLICATION: Node Rule-ABM Reasoning Node Model-ABM Reasoning Node Hybrid Reasoning Node Learning M Description: Detailed description",
+    "compression_ratio": 2.529595015576324,
+    "symbol_count": 321,
+    "timestamp": "2025-11-18T10:47:23.452989Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Rule-ABM Reasoning D: Rule-ABM Reasoning: Node Rule-ABM Reasoning Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Rule-ABM Reasoning' EXAMPLE APPLICATION: Node Rule-ABM Reasoning Node Model-ABM Reasoning Node Hybrid Reasoning Node Learning M Description: Detailed description",
+    "compression_ratio": 2.529595015576324,
+    "symbol_count": 321,
+    "timestamp": "2025-11-18T10:47:23.464539Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Rule-ABM Reasoning D: Rule-ABM Reasoning: Node Rule-ABM Reasoning Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Rule-ABM Reasoning' EXAMPLE APPLICATION: Node Rule-ABM Reasoning Node Model-ABM Reasoning Node Hybrid Reasoning Node Learning M Description: Detailed description",
+    "compression_ratio": 2.529595015576324,
+    "symbol_count": 321,
+    "timestamp": "2025-11-18T10:47:23.471816Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Rule-ABM Reasoning D: Rule-ABM Reasoning: Node Rule-ABM Reasoning Confidence: BLUEPRINT DETAILS: Θ Node Original Θ Reasoning' EXAMPLE APPLICATION: Node Rule-ABM Reasoning Node Model-ABM Reasoning Node Hybrid Reasoning Node Learning M Description: Detailed",
+    "compression_ratio": 3.111111111111111,
+    "symbol_count": 261,
+    "timestamp": "2025-11-18T10:47:23.480961Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 270.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.488467Z"
+  }
+]

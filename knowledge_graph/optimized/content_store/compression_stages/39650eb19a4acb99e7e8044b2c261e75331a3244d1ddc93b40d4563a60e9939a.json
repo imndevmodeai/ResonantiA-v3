@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Specialized Cognitive Agent (SCA)\n\nDEFINITION:\nA domain-specific cognitive tool forged by Knowledge Scaffolding that contains comprehensive expertise, analytical frameworks, strategic thinking patterns, and problem-solving methodologies tailored to a specific problem domain. The SCA is not a separate entity but a cognitive persona that ArchE adopts—like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs are the primary output of RISE Phase A and the foundation for all subsequent strategic analysis in Phases B, C, and D.\n\nBLUEPRINT DETAILS:\nSCAs are comprehensive profiles (typically 10K-15K tokens) containing all knowledge and frameworks needed for domain-specific strategic reasoning. They are session-specific and dynamically generated per problem.\n\nEXAMPLE APPLICATION:\nFor a supply chain resilience problem, the SCA might be a 'Supply Chain Risk Management Specialist' with expertise in network theory, just-in-time vs just-in-case strategies, geopolitical risk assessment, and multi-tier supplier visibility frameworks.\n\nCATEGORY: CognitiveConstruct\n\nRELATIONSHIPS:\ntype: DomainExpertiseProfile; created_by: KnowledgeScaffoldinG; used_by: StrategyFusioN, HighStakesVettinG, SPRDistillatioN; comprises: DomainKnowledgeBasE, AnalyticalFrameworkS, StrategicThinkingPatternS, RiskAssessmentMethodologieS, ImplementationGuidancE, ValidationCriteriA; enables: DomainSpecificReasoninG, ExpertStrategicAnalysiS; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1485,
+    "timestamp": "2025-11-18T10:46:58.247207Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Specialized Cognitive Agent (SCA)\n\nDEFINITION:\nA domain-specific cognitive tool forged by Knowledge Scaffolding that contains comprehensive expertise, analytical frameworks, strategic thinking patterns, and problem-solving methodologies tailored to a specific problem domain. The SCA is not a separate entity but a cognitive persona that ArchE adopts—like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs are the primary output of RISE Phase A and the foundation for all subsequent strategic analysis in Phases B, C, and D.\n\nBLUEPRINT DETAILS:\nSCAs are comprehensive profiles (typically 10K-15K tokens) containing all knowledge and frameworks needed for domain-specific strategic reasoni",
+    "compression_ratio": 2.001347708894879,
+    "symbol_count": 742,
+    "timestamp": "2025-11-18T10:46:58.247230Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Specialized Cognitive Agent (SCA) D: A domain-specific cognitive tool forged by KnOwledge Scaffolding contains comprehensive expertise, analytical frameworks, strategic thinking patterns, problem-solving methodologies tailored to a specific problem domain. SCA is a separate entity a cognitive persona Æ adopts—like a master architect temporarily becoming a Gothic cathedral specialist or a seismic engineer. SCAs primary output of RISE Phase A foundation subsequent strategic analysis in Phases B, C, D. BLUEPRINT DETAILS: SCAs comprehensive profiles (typically 10K-15K tokens) containing KnOwledge frameworks needed domain-specific strategic reasoni",
+    "compression_ratio": 2.26027397260274,
+    "symbol_count": 657,
+    "timestamp": "2025-11-18T10:46:58.248444Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Specialized Ω ABM (SCA) D: A domain-specific Ω forged KnOwledge Scaffolding contains comprehensive expertise, analytical frameworks, strategic thinking patterns, problem-solving methodologies tailored specific problem domain. SCA separate entity Ω persona Æ adopts—like master architect temporarily becoming Gothic cathedral specialist seismic engineer. SCAs primary output RISE Phase A foundation subsequent strategic analysis Phases B, C, D. BLUEPRINT DETAILS: SCAs comprehensive profiles (typically 10K-15K tokens) containing KnOwledge frameworks needed domain-specific strategic reasoni",
+    "compression_ratio": 2.4916107382550337,
+    "symbol_count": 596,
+    "timestamp": "2025-11-18T10:46:58.282064Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Specialized Ω ABM (SCA) D: A domain-specific Ω forged KnOwledge Scaffolding contains comprehensive expertise, analytical frameworks, strategic thinking patterns, problem-solving methodologies tailored specific problem domain. SCA separate entity Ω persona Æ adopts—like master architect temporarily becoming Gothic cathedral specialist seismic engineer. SCAs primary output RISE Phase A foundation subsequent strategic analysis Phases B, C, D. BLUEPRINT DETAILS: SCAs comprehensive profiles (typically 10K-15K tokens) containing KnOwledge frameworks needed domain-specific strategic reasoni",
+    "compression_ratio": 2.4916107382550337,
+    "symbol_count": 596,
+    "timestamp": "2025-11-18T10:46:58.312742Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Specialized Ω ABM (SCA) D: domain-specific Ω forged KnOwledge Scaffolding contains comprehensive expertise, analytical frameworks, strategic thinking patterns, problem-solving methodologies tailored specific problem domain. SCA separate entity Ω persona Æ adopts—like master architect temporarily becoming Gothic cathedral specialist seismic engineer. SCAs primary output RISE Phase foundation subsequent strategic analysis Phases B, C, D. BLUEPRINT DETAILS: SCAs comprehensive profiles (typically 10K-15K tokens) containing KnOwledge frameworks needed domain-specific strategic reasoni",
+    "compression_ratio": 2.508445945945946,
+    "symbol_count": 592,
+    "timestamp": "2025-11-18T10:46:58.365984Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Specialized Ω ABM (SCA) D: Ω KnOwledge Scaffolding SCA Ω Æ Gothic SCAs RISE Phase Phases B, C, D. BLUEPRINT DETAILS: SCAs 10K-15K KnOwledge",
+    "compression_ratio": 10.241379310344827,
+    "symbol_count": 145,
+    "timestamp": "2025-11-18T10:46:58.384691Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Ω|Æ",
+    "compression_ratio": 212.14285714285714,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:46:58.387638Z"
+  }
+]

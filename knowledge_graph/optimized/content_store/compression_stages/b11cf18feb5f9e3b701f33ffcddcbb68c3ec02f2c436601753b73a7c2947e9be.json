@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Incident Response\n\nDEFINITION:\nIncident Response: designed to provide advanced cybersecurity operations capabilities to protect against cyber threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Incident Response'\n\nEXAMPLE APPLICATION:\n AI-Driven Cybersecurity Operations: Mastermind_AI is designed to provide advanced cybersecurity operations capabilities to protect against cyber threats:\n    * Threat Hunting: Developing threat hunting techniques that enable the AI system to proactively identify and detect potential threats.\n    * Incident Response: Implementing incident response techniques that enable the AI system to quickly and effectively respond to security incidents.\n    * Security Orchestration: Creating security orchest\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1126,
+    "timestamp": "2025-11-18T10:47:36.524643Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Incident Response\n\nDEFINITION:\nIncident Response: designed to provide advanced cybersecurity operations capabilities to protect against cyber threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Incident Response'\n\nEXAMPLE APPLICATION:\n AI-Driven Cybersecurity Operations: Mastermind_AI is designed to provide advanced cybersecurity operations capabilities to protect against cyber threats:\n    * Threat Hunting: Developing threat hunting techniques that enable the AI system to proactively identify",
+    "compression_ratio": 2.0,
+    "symbol_count": 563,
+    "timestamp": "2025-11-18T10:47:36.525063Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Incident Response D: Incident Response: designed to provide advanced cybersecurity operations capabilities to protect against cyber threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Incident Response' EXAMPLE APPLICATION: AI-Driven Cybersecurity Operations: Mastermind_AI is designed to provide advanced cybersecurity operations capabilities to protect against cyber threats: * Threat Hunting: Developing threat hunting techniques enable AI S to proactively identify",
+    "compression_ratio": 2.152963671128107,
+    "symbol_count": 523,
+    "timestamp": "2025-11-18T10:47:36.527634Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Incident Response D: Incident Response: designed provide advanced cybersecurity operations capabilities protect against cyber threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Incident Response' EXAMPLE APPLICATION: AI-Driven Cybersecurity Operations: Mastermind_AI designed provide advanced cybersecurity operations capabilities protect against cyber threats: Threat Hunting: Developing threat hunting techniques enable AI S proactively identify",
+    "compression_ratio": 2.252,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:36.532066Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Incident Response D: Incident Response: designed provide advanced cybersecurity operations capabilities protect against cyber threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Incident Response' EXAMPLE APPLICATION: AI-Driven Cybersecurity Operations: Mastermind_AI designed provide advanced cybersecurity operations capabilities protect against cyber threats: Threat Hunting: Developing threat hunting techniques enable AI S proactively identify",
+    "compression_ratio": 2.252,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:36.535658Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Incident Response D: Incident Response: designed provide advanced cybersecurity operations capabilities protect against cyber threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Incident Response' EXAMPLE APPLICATION: AI-Driven Cybersecurity Operations: Mastermind_AI designed provide advanced cybersecurity operations capabilities protect against cyber threats: Threat Hunting: Developing threat hunting techniques enable AI S proactively identify",
+    "compression_ratio": 2.252,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:36.538532Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Incident Response D: Incident Response: BLUEPRINT DETAILS: Θ Node Original Θ Response' EXAMPLE APPLICATION: AI-Driven Cybersecurity Operations: Mastermind_AI Threat Hunting: Developing AI S",
+    "compression_ratio": 5.774358974358974,
+    "symbol_count": 195,
+    "timestamp": "2025-11-18T10:47:36.546705Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 375.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:36.547465Z"
+  }
+]

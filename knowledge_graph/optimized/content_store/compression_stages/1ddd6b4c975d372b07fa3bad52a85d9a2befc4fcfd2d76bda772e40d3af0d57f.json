@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: File Creation Workflow\n\nDEFINITION:\nStandardized workflow for file creation, editing, and management including validation, backup creation, content verification, and error recovery.\n\nBLUEPRINT DETAILS:\nCrystallized from 341+ file operations. Provides reliable pattern for systematic file management.\n\nEXAMPLE APPLICATION:\nCreating files with validation, automatic backup creation, content verification, and error recovery mechanisms.\n\nCATEGORY: LearnedWisdom\n\nRELATIONSHIPS:\ntype: AutopoieticInsight; confidence: 0.9; occurrences: 341; success_rate: 0.95; context: Most frequent operation requiring systematic approach for reliability; recommendation: Standardize file operations with comprehensive validation and backup; guardian_approved: True; crystallization_date: 2025-10-16T06:13:20.615200; enables: FileValidation, BackupCreation, ContentVerification, ErrorRecovery, SystematicFileOps",
+    "compression_ratio": 1.0,
+    "symbol_count": 897,
+    "timestamp": "2025-11-18T10:46:47.526647Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: File Creation Workflow\n\nDEFINITION:\nStandardized workflow for file creation, editing, and management including validation, backup creation, content verification, and error recovery.\n\nBLUEPRINT DETAILS:\nCrystallized from 341+ file operations. Provides reliable pattern for systematic file management.\n\nEXAMPLE APPLICATION:\nCreating files with validation, automatic backup creation, content verification, and error recovery mechanisms.\n\nCATEGOR",
+    "compression_ratio": 2.002232142857143,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:46:47.526674Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: File Creation Workflow D: Standardized workflow file creation, editing, management including validation, backup creation, content verification, error recovery. BLUEPRINT DETAILS: Crystallized 341+ file operations. Provides reliable pattern Satic file management. EXAMPLE APPLICATION: Creating files validation, automatic backup creation, content verification, error recovery Ms. CATEGOR",
+    "compression_ratio": 2.288265306122449,
+    "symbol_count": 392,
+    "timestamp": "2025-11-18T10:46:47.527722Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: File Creation Workflow D: Standardized workflow creation, editing, management including validation, backup creation, content verification, error recovery. BLUEPRINT DETAILS: Crystallized operations. Provides reliable Π Satic management. EXAMPLE APPLICATION: Creating files validation, automatic backup creation, content verification, error recovery Ms. CATEGOR",
+    "compression_ratio": 2.4508196721311477,
+    "symbol_count": 366,
+    "timestamp": "2025-11-18T10:46:47.532938Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: File Creation Workflow D: Standardized workflow creation, editing, management including validation, backup creation, content verification, error recovery. BLUEPRINT DETAILS: Crystallized operations. Provides reliable Π Satic management. EXAMPLE APPLICATION: Creating files validation, automatic backup creation, content verification, error recovery Ms. CATEGOR",
+    "compression_ratio": 2.4508196721311477,
+    "symbol_count": 366,
+    "timestamp": "2025-11-18T10:46:47.538128Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: File Creation Workflow D: Standardized workflow creation, editing, management including validation, backup creation, content verification, error recovery. BLUEPRINT DETAILS: Crystallized operations. Provides reliable Π Satic management. EXAMPLE APPLICATION: Creating files validation, automatic backup creation, content verification, error recovery Ms. CATEGOR",
+    "compression_ratio": 2.4508196721311477,
+    "symbol_count": 366,
+    "timestamp": "2025-11-18T10:46:47.543999Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: File Creation Workflow D: Standardized BLUEPRINT DETAILS: Crystallized Provides Π Satic EXAMPLE APPLICATION: Creating Ms. CATEGOR",
+    "compression_ratio": 6.644444444444445,
+    "symbol_count": 135,
+    "timestamp": "2025-11-18T10:46:47.546493Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Π",
+    "compression_ratio": 897.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:47.546775Z"
+  }
+]

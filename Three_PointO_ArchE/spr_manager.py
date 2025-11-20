@@ -129,7 +129,7 @@ class SPRManager:
             ]
         else:
             # Return full SPR definitions
-        return [self.sprs[key] for key in sorted(list(found_sprs)) if key in self.sprs]
+            return [self.sprs[key] for key in sorted(list(found_sprs)) if key in self.sprs]
     
     @log_to_thought_trail
     def detect_sprs_with_confidence(self, text: str) -> List[Dict[str, Any]]:

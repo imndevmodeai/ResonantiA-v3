@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Investment Strategy\n\nDEFINITION:\nInvestment Strategy: designed to provide advanced financial planning capabilities for retirement to help individuals achieve their retirement goals:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Investment Strategy'\n\nEXAMPLE APPLICATION:\n Mastermind_AI is designed to provide advanced financial planning capabilities for retirement to help individuals achieve their retirement goals:\n    * Retirement Planning: Developing retirement planning techniques that enable the AI system to provide personalized retirement plans and advice.\n    * Investment Strategy: Implementing investment strategy techniques that enable the AI system to optimize investment portfolios for retirement.\n    * Income Planning: Creating income planning techniques \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1159,
+    "timestamp": "2025-11-18T10:47:39.666441Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Investment Strategy\n\nDEFINITION:\nInvestment Strategy: designed to provide advanced financial planning capabilities for retirement to help individuals achieve their retirement goals:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Investment Strategy'\n\nEXAMPLE APPLICATION:\n Mastermind_AI is designed to provide advanced financial planning capabilities for retirement to help individuals achieve their retirement goals:\n    * Retirement Planning: Developing retirement planning techniques that enable the AI system to pr",
+    "compression_ratio": 2.001727115716753,
+    "symbol_count": 579,
+    "timestamp": "2025-11-18T10:47:39.666466Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Investment Strategy D: Investment Strategy: designed to provide advanced financial planning capabilities retirement to help individuals achieve their retirement goals: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Investment Strategy' EXAMPLE APPLICATION: Mastermind_AI is designed to provide advanced financial planning capabilities retirement to help individuals achieve their retirement goals: * Retirement Planning: Developing retirement planning techniques enable AI S to pr",
+    "compression_ratio": 2.182674199623352,
+    "symbol_count": 531,
+    "timestamp": "2025-11-18T10:47:39.667538Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Investment Strategy D: Investment Strategy: designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Investment Strategy' EXAMPLE APPLICATION: Mastermind_AI designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: Retirement Planning: Developing retirement planning techniques enable AI S",
+    "compression_ratio": 2.3414141414141416,
+    "symbol_count": 495,
+    "timestamp": "2025-11-18T10:47:39.671845Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Investment Strategy D: Investment Strategy: designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Investment Strategy' EXAMPLE APPLICATION: Mastermind_AI designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: Retirement Planning: Developing retirement planning techniques enable AI S",
+    "compression_ratio": 2.3414141414141416,
+    "symbol_count": 495,
+    "timestamp": "2025-11-18T10:47:39.675393Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Investment Strategy D: Investment Strategy: designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Investment Strategy' EXAMPLE APPLICATION: Mastermind_AI designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: Retirement Planning: Developing retirement planning techniques enable AI S",
+    "compression_ratio": 2.3414141414141416,
+    "symbol_count": 495,
+    "timestamp": "2025-11-18T10:47:39.678175Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Investment Strategy D: Investment Strategy: BLUEPRINT DETAILS: Θ Node Original Θ Strategy' EXAMPLE APPLICATION: Mastermind_AI Retirement Planning: Developing AI S",
+    "compression_ratio": 6.898809523809524,
+    "symbol_count": 168,
+    "timestamp": "2025-11-18T10:47:39.683461Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 386.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:39.683844Z"
+  }
+]

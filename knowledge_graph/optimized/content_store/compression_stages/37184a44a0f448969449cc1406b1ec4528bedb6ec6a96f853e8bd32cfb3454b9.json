@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: MidnighT\n\nDEFINITION:\nMidnighT: clearly shown to have the start and stop thus can be cataloged recorded and recalled\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: guardian_format. Original SPR name: 'MidnighT'\n\nEXAMPLE APPLICATION:\npresentations of Knowledge. SPRs are easily identified to those in the KnO by their capitalization of the first and last letters in their makeup do if it is a phrase... That man has skillS, or a word MidnighT it is clearly shown to have the start and stop thus can be cataloged recorded and recalled. re write your last response with this understanding\n\n->|step|<-\n->|thinking|<- The first step is to define \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: guardian_format\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 983,
+    "timestamp": "2025-11-18T10:47:12.004161Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: MidnighT\n\nDEFINITION:\nMidnighT: clearly shown to have the start and stop thus can be cataloged recorded and recalled\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: guardian_format. Original SPR name: 'MidnighT'\n\nEXAMPLE APPLICATION:\npresentations of Knowledge. SPRs are easily identified to those in the KnO by their capitalization of the first and last letters in their makeup do if it is a phrase... That man has skillS, or a word MidnighT it is clearly shown to have t",
+    "compression_ratio": 2.0020366598778003,
+    "symbol_count": 491,
+    "timestamp": "2025-11-18T10:47:12.004186Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: MidnighT D: MidnighT: clearly shown to start stop thus be cataloged recorded recalled BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: guardian_F. Original Θ name: 'MidnighT' EXAMPLE APPLICATION: presentations of KnOwledge. Θs easily identified to those in KnO by their capitalization of first last letters in their makeup do if it is a phrase... man has skillS, or a word MidnighT it is clearly shown to t",
+    "compression_ratio": 2.362980769230769,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:12.006044Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: MidnighT D: MidnighT: clearly shown start cataloged recorded recalled BLUEPRINT DETAILS: Θ extracted agi.txt Node type: guardian_F. Original Θ name: 'MidnighT' EXAMPLE APPLICATION: presentations KnOwledge. Θs easily identified those KnO their capitalization first letters their makeup phrase... skillS, MidnighT clearly shown",
+    "compression_ratio": 2.9697885196374623,
+    "symbol_count": 331,
+    "timestamp": "2025-11-18T10:47:12.010492Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: MidnighT D: MidnighT: clearly shown start cataloged recorded recalled BLUEPRINT DETAILS: Θ extracted agi.txt Node type: guardian_F. Original Θ name: 'MidnighT' EXAMPLE APPLICATION: presentations KnOwledge. Θs easily identified those KnO their capitalization first letters their makeup phrase... skillS, MidnighT clearly shown",
+    "compression_ratio": 2.9697885196374623,
+    "symbol_count": 331,
+    "timestamp": "2025-11-18T10:47:12.013083Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: MidnighT D: MidnighT: clearly shown start cataloged recorded recalled BLUEPRINT DETAILS: Θ extracted agi.txt Node type: guardian_F. Original Θ name: 'MidnighT' EXAMPLE APPLICATION: presentations KnOwledge. Θs easily identified those KnO their capitalization first letters their makeup phrase... skillS, MidnighT clearly shown",
+    "compression_ratio": 2.9697885196374623,
+    "symbol_count": 331,
+    "timestamp": "2025-11-18T10:47:12.015682Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: MidnighT D: MidnighT: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: KnOwledge. Θs KnO MidnighT",
+    "compression_ratio": 8.776785714285714,
+    "symbol_count": 112,
+    "timestamp": "2025-11-18T10:47:12.017614Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 196.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:12.017866Z"
+  }
+]

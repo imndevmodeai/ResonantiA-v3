@@ -1,0 +1,1 @@
+{"content": "An advanced capability of the Gemini LLM to intelligently decide when to call predefined functions or tools based on the user's prompt. The model generates the name of the function to call and the arguments to use, which the system can then execute."}

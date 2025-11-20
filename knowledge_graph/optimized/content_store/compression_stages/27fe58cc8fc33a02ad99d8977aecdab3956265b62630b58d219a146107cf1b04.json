@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Module: nfl_injury_scraper\n\nDEFINITION:\nNFL Injury Report Scraper\nScrapes official NFL injury reports\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_injury_scraper.py, type: python_module\n\nFULL IMPLEMENTATION CODE (nfl_injury_scraper.py):\n```python\n#!/usr/bin/env python3\n\"\"\"\nNFL Injury Report Scraper\nScrapes official NFL injury reports\n\"\"\"\n\nimport logging\nfrom typing import List, Dict\n\nlogger = logging.getLogger(__name__)\n\ndef scrape_injury_reports(week: int) -> List[Dict]:\n    \"\"\"\n    Scrape NFL injury reports for a given week\n    \n    Args:\n        week: NFL week number (1-18)\n    \n    Returns:\n        List of injury dictionaries\n    \"\"\"\n    # Placeholder - would implement real scraping\n    logger.info(f\"Scraping injury reports for week {week}...\")\n    \n    # Example structure\n    injuries = [\n        {\n            'player_name': 'Example Player',\n            'team': 'Detroit Lions',\n            'injury': 'Ankle',\n            'status': 'Questionable',\n            'practice_status': 'Limited',\n            'source': 'Official NFL Report'\n        }\n    ]\n    \n    return injuries\n\n\n```\n\nEXAMPLE APPLICATION:\nNFL Injury Report Scraper\nScrapes official NFL injury reports\n\nCATEGORY: CodeKnowledge\n\nRELATIONSHIPS:\ntype: FromCodebase; source: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_injury_scraper.py; source_type: python_module",
+    "compression_ratio": 1.0,
+    "symbol_count": 1399,
+    "timestamp": "2025-11-18T11:00:45.319468Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Module: nfl_injury_scraper\n\nDEFINITION:\nNFL Injury Report Scraper\nScrapes official NFL injury reports\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_injury_scraper.py, type: python_module\n\nFULL IMPLEMENTATION CODE (nfl_injury_scraper.py):\n```python\n#!/usr/bin/env python3\n\"\"\"\nNFL Injury Report Scraper\nScrapes official NFL injury reports\n\"\"\"\n\nimport logging\nfrom typing import List, Dict\n\nlogger = logging.getLogger(__name__)\n\ndef scrape_injury_reports(week: int) -> List[Dict]:\n    \"\"\"\n    Scrape NFL injury reports for a given week\n    \n    Args:\n        week: NFL week number (1-18)\n    \n    Returns:\n        List of injury dictionaries\n    \"\"\"\n    ",
+    "compression_ratio": 2.0014306151645207,
+    "symbol_count": 699,
+    "timestamp": "2025-11-18T11:00:45.319495Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Module: nfl_injury_scraper D: NFL Injury Report Scraper Scrapes official NFL injury reports BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_injury_scraper.py, type: python_module FULL I CODE (nfl_injury_scraper.py): ```python #!/usr/bin/env python3 \"\"\" NFL Injury Report Scraper Scrapes official NFL injury reports \"\"\" import logging typing import List, Dict logger = logging.getLogger(__name__) def scrape_injury_reports(week: int) -> List[Dict]: \"\"\" Scrape NFL injury reports a given week Args: week: NFL week number (1-18) Returns: List of injury dictionaries \"\"\"",
+    "compression_ratio": 2.323920265780731,
+    "symbol_count": 602,
+    "timestamp": "2025-11-18T11:00:45.327844Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Module: nfl_injury_scraper D: NFL Injury Report Scraper Scrapes official NFL injury reports BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_injury_scraper.py, type: python_module FULL I CODE (nfl_injury_scraper.py): ```python #!/usr/bin/env python3 NFL Injury Report Scraper Scrapes official NFL injury reports import logging typing import List, Dict logger logging.getLogger(__name__) scrape_injury_reports(week: List[Dict]: Scrape NFL injury reports given Args: week: NFL number (1-18) Returns: List injury dictionaries",
+    "compression_ratio": 2.511669658886894,
+    "symbol_count": 557,
+    "timestamp": "2025-11-18T11:00:45.331194Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Module: nfl_injury_scraper D: NFL Injury Report Scraper Scrapes official NFL injury reports BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_injury_scraper.py, type: python_module FULL I CODE (nfl_injury_scraper.py): ```python #!/usr/bin/env python3 NFL Injury Report Scraper Scrapes official NFL injury reports import logging typing import List, Dict logger logging.getLogger(__name__) scrape_injury_reports(week: List[Dict]: Scrape NFL injury reports given Args: week: NFL number (1-18) Returns: List injury dictionaries",
+    "compression_ratio": 2.511669658886894,
+    "symbol_count": 557,
+    "timestamp": "2025-11-18T11:00:45.333263Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Module: nfl_injury_scraper D: NFL Injury Report Scraper Scrapes official NFL injury reports BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_injury_scraper.py, type: python_module FULL I CODE (nfl_injury_scraper.py): ```python #!/usr/bin/env python3 NFL Injury Report Scraper Scrapes official NFL injury reports import logging typing import List, Dict logger logging.getLogger(__name__) scrape_injury_reports(week: List[Dict]: Scrape NFL injury reports given Args: week: NFL number (1-18) Returns: List injury dictionaries",
+    "compression_ratio": 2.511669658886894,
+    "symbol_count": 557,
+    "timestamp": "2025-11-18T11:00:45.336333Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Module: D: NFL Injury Report Scraper Scrapes NFL BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_injury_scraper.py, FULL I CODE NFL Injury Report Scraper Scrapes NFL List, Dict List[Dict]: Scrape NFL Args: NFL Returns: List",
+    "compression_ratio": 5.401544401544402,
+    "symbol_count": 259,
+    "timestamp": "2025-11-18T11:00:45.338555Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 1399.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T11:00:45.338959Z"
+  }
+]

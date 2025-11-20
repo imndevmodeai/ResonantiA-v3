@@ -1,0 +1,53 @@
+======================================================================
+ZEPTO-OPTIMIZED STORAGE MIGRATION
+======================================================================
+📚 Loading KG from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (171.5MB)...
+✅ Loaded 3589 SPRs (list format)
+✅ Created output directories in /mnt/3626C55326C514B1/Happier/knowledge_graph/optimized
+
+🔄 Processing 3589 SPRs...
+  Processed 500/3589 SPRs...
+  Processed 1000/3589 SPRs...
+  Processed 1500/3589 SPRs...
+  Processed 2000/3589 SPRs...
+  Processed 2500/3589 SPRs...
+  Processed 3000/3589 SPRs...
+  Processed 3500/3589 SPRs...
+✅ Processed all 3589 SPRs
+
+💾 Saving index file (/mnt/3626C55326C514B1/Happier/knowledge_graph/optimized/spr_index.json)...
+✅ Index saved: 6.56 MB (3589 SPRs)
+
+💾 Saving Zepto index (/mnt/3626C55326C514B1/Happier/knowledge_graph/optimized/content_store/zepto_index.json)...
+✅ Zepto index saved: 0.55 MB (1511 unique Zepto hashes)
+
+💾 Saving narratives to content store...
+✅ Saved 1508 narratives: 21.36 MB
+
+💾 Saving compression stages to content store...
+✅ Saved 1493 compression stage sets: 68.24 MB
+
+💾 Creating SQLite database (/mnt/3626C55326C514B1/Happier/knowledge_graph/optimized/kg_metadata.db)...
+✅ Database created: 2.90 MB
+
+======================================================================
+MIGRATION SUMMARY
+======================================================================
+✅ Index file: 6.56 MB (3589 SPRs)
+✅ Zepto index: 0.55 MB (1511 unique Zepto hashes)
+✅ Narratives: 21.36 MB (1508 files)
+✅ Compression stages: 68.24 MB (1493 files)
+✅ Database: 2.90 MB
+✅ Total optimized size: 99.59 MB
+📊 Original size: 171.51 MB
+🎉 Memory savings: 96.2%
+📁 Output directory: /mnt/3626C55326C514B1/Happier/knowledge_graph/optimized
+======================================================================
+
+✅ Migration complete!
+
+📝 Next steps:
+  1. Test the optimized storage with: python3 test_zepto_optimized_storage.py
+  2. Update SPRManager to use optimized storage
+  3. Update workflows to use new structure
+  4. Once validated, replace original KG with optimized version

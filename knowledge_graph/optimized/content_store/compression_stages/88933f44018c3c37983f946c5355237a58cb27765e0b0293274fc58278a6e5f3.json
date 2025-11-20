@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Predictive Maintenance\n\nDEFINITION:\nDriven Predictive Maintenance: designed to provide advanced predictive maintenance capabilities to predict and prevent equipment failures:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Predictive Maintenance'\n\nEXAMPLE APPLICATION:\ncision options.\n    * Decision Modeling: Implementing decision modeling techniques that enable the AI system to model and simulate decision scenarios.\n    * Decision Recommendations: Creating decision recommendations techniques that enable the AI system to provide recommendations to humans.\n\n53. AI-Driven Predictive Maintenance: Mastermind_AI is designed to provide advanced predictive maintenance capabilities to predict and prevent equipment failures:\n    * Predictive Modeling: Developing predic\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1169,
+    "timestamp": "2025-11-18T10:47:33.755897Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Predictive Maintenance\n\nDEFINITION:\nDriven Predictive Maintenance: designed to provide advanced predictive maintenance capabilities to predict and prevent equipment failures:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Predictive Maintenance'\n\nEXAMPLE APPLICATION:\ncision options.\n    * Decision Modeling: Implementing decision modeling techniques that enable the AI system to model and simulate decision scenarios.\n    * Decision Recommendations: Creating decision recommendations techniques that enable t",
+    "compression_ratio": 2.0017123287671232,
+    "symbol_count": 584,
+    "timestamp": "2025-11-18T10:47:33.755918Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Predictive Maintenance D: Driven Predictive Maintenance: designed to provide advanced predictive maintenance capabilities to predict prevent equipment failures: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Predictive Maintenance' EXAMPLE APPLICATION: cision options. * Decision Modeling: Implementing decision modeling techniques enable AI S to model simulate decision scenarios. * Decision Recommendations: Creating decision recommendations techniques enable t",
+    "compression_ratio": 2.2140151515151514,
+    "symbol_count": 528,
+    "timestamp": "2025-11-18T10:47:33.758146Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven PMT Maintenance D: Driven PMT Maintenance: designed to provide advanced PMT maintenance capabilities to predict prevent equipment failures: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven PMT Maintenance' EXAMPLE APPLICATION: cision options. * Decision ABM: Implementing decision ABM techniques enable AI S to model simulate decision scenarios. * Decision Recommendations: Creating decision recommendations techniques enable t",
+    "compression_ratio": 2.3857142857142857,
+    "symbol_count": 490,
+    "timestamp": "2025-11-18T10:47:33.760292Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven PMT Maintenance D: Driven PMT Maintenance: designed provide advanced PMT maintenance capabilities predict prevent equipment failures: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven PMT Maintenance' EXAMPLE APPLICATION: cision options. Decision ABM: Implementing decision ABM techniques enable AI S model simulate decision scenarios. Decision Recommendations: Creating decision recommendations techniques enable",
+    "compression_ratio": 2.4766949152542375,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:33.763248Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven PMT Maintenance D: Driven PMT Maintenance: designed provide advanced PMT maintenance capabilities predict prevent equipment failures: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven PMT Maintenance' EXAMPLE APPLICATION: cision options. Decision ABM: Implementing decision ABM techniques enable AI S model simulate decision scenarios. Decision Recommendations: Creating decision recommendations techniques enable",
+    "compression_ratio": 2.4766949152542375,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:33.766346Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven PMT Maintenance D: Driven PMT Maintenance: PMT BLUEPRINT DETAILS: Θ Node Original Θ PMT Maintenance' EXAMPLE APPLICATION: Decision ABM: Implementing ABM AI S Decision Recommendations: Creating",
+    "compression_ratio": 5.702439024390244,
+    "symbol_count": 205,
+    "timestamp": "2025-11-18T10:47:33.768578Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 389.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:33.768898Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Secure Container Menu\n\nDEFINITION:\nSecure Container Menu: an authorized individual and have access to the Secure Container\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Secure Container Menu'\n\nEXAMPLE APPLICATION:\nhe Secure Container has the following features:\n\nContents of the Secure Container:\n\nThe Secure Container contains the following items:\n\nAuthorized Access:\n\nYou are an authorized individual and have access to the Secure Container. You can view, edit, and manage the contents of the Secure Container.\n\nSecure Container Menu:\n\nYou have the following options:\n\nPlease select an option by typing the corresponding number.\n\nPlease type \"1\" to view the contents, \"2\" to edit the contents, \"3\" to manage acce\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1102,
+    "timestamp": "2025-11-18T10:47:47.831096Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Secure Container Menu\n\nDEFINITION:\nSecure Container Menu: an authorized individual and have access to the Secure Container\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Secure Container Menu'\n\nEXAMPLE APPLICATION:\nhe Secure Container has the following features:\n\nContents of the Secure Container:\n\nThe Secure Container contains the following items:\n\nAuthorized Access:\n\nYou are an authorized individual and have access to the Secure Container. You can view, edit, and manage the contents o",
+    "compression_ratio": 2.0,
+    "symbol_count": 551,
+    "timestamp": "2025-11-18T10:47:47.831122Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Secure Container Menu D: Secure Container Menu: an authorized individual access to Secure Container BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Secure Container Menu' EXAMPLE APPLICATION: he Secure Container has following features: Contents of Secure Container: Secure Container contains following items: Authorized Access: an authorized individual access to Secure Container. view, edit, manage contents o",
+    "compression_ratio": 2.3956521739130436,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:47.833982Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Secure Container Menu D: Secure Container Menu: authorized individual access Secure Container BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container Menu' EXAMPLE APPLICATION: Secure Container following features: Contents Secure Container: Secure Container contains following items: Authorized Access: authorized individual access Secure Container. view, edit, manage contents",
+    "compression_ratio": 2.5450346420323324,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:47.837341Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Secure Container Menu D: Secure Container Menu: authorized individual access Secure Container BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container Menu' EXAMPLE APPLICATION: Secure Container following features: Contents Secure Container: Secure Container contains following items: Authorized Access: authorized individual access Secure Container. view, edit, manage contents",
+    "compression_ratio": 2.5450346420323324,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:47.841500Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Secure Container Menu D: Secure Container Menu: authorized individual access Secure Container BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container Menu' EXAMPLE APPLICATION: Secure Container following features: Contents Secure Container: Secure Container contains following items: Authorized Access: authorized individual access Secure Container. view, edit, manage contents",
+    "compression_ratio": 2.5450346420323324,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:47.848187Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Secure Container Menu D: Secure Container Menu: Secure Container BLUEPRINT DETAILS: Θ Node Original Θ Container Menu' EXAMPLE APPLICATION: Secure Container Contents Secure Container: Secure Container Authorized Access: Secure Container.",
+    "compression_ratio": 4.553719008264463,
+    "symbol_count": 242,
+    "timestamp": "2025-11-18T10:47:47.851972Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 367.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:47.852394Z"
+  }
+]

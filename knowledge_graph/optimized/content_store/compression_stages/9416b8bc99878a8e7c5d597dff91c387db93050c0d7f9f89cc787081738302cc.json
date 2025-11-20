@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Technical Requirements\n\nDEFINITION:\nTechnical Requirements: essential to ensure accuracy and efficiency [10]\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Technical Requirements'\n\nEXAMPLE APPLICATION:\nsing functionalities [10].\nDevelop the Machine Learning Model: Choose a suitable machine learning model for the desired tasks [10].\nTrain the Machine Learning Model: Train the model using the extracted data [10].\nTest the System: Thorough testing is essential to ensure accuracy and efficiency [10].\nTechnical Requirements:\n\nProgramming Language: Select a language like Python, Java, or C++ for system implementation [11].\nData Storage: Choose a suitable storage solution, such as a relational or NoS\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1089,
+    "timestamp": "2025-11-18T10:47:25.157534Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Technical Requirements\n\nDEFINITION:\nTechnical Requirements: essential to ensure accuracy and efficiency [10]\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Technical Requirements'\n\nEXAMPLE APPLICATION:\nsing functionalities [10].\nDevelop the Machine Learning Model: Choose a suitable machine learning model for the desired tasks [10].\nTrain the Machine Learning Model: Train the model using the extracted data [10].\nTest the System: Thorough testing is essential to ensure accuracy an",
+    "compression_ratio": 2.0018382352941178,
+    "symbol_count": 544,
+    "timestamp": "2025-11-18T10:47:25.157558Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Technical Requirements D: Technical Requirements: essential to ensure accuracy efficiency [10] BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Technical Requirements' EXAMPLE APPLICATION: sing functionalities [10]. Develop Machine Learning Model: Choose a suitable machine learning model desired tasks [10]. Train Machine Learning Model: Train model using extracted data [10]. Test S: Thorough testing is essential to ensure accuracy an",
+    "compression_ratio": 2.240740740740741,
+    "symbol_count": 486,
+    "timestamp": "2025-11-18T10:47:25.160188Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Technical Requirements D: Technical Requirements: essential ensure accuracy efficiency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Technical Requirements' EXAMPLE APPLICATION: functionalities [10]. Develop Machine Learning Model: Choose suitable machine learning model desired tasks [10]. Train Machine Learning Model: Train model using extracted [10]. Test S: Thorough testing essential ensure accuracy",
+    "compression_ratio": 2.398678414096916,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:25.169686Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Technical Requirements D: Technical Requirements: essential ensure accuracy efficiency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Technical Requirements' EXAMPLE APPLICATION: functionalities [10]. Develop Machine Learning Model: Choose suitable machine learning model desired tasks [10]. Train Machine Learning Model: Train model using extracted [10]. Test S: Thorough testing essential ensure accuracy",
+    "compression_ratio": 2.398678414096916,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:25.176219Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Technical Requirements D: Technical Requirements: essential ensure accuracy efficiency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Technical Requirements' EXAMPLE APPLICATION: functionalities [10]. Develop Machine Learning Model: Choose suitable machine learning model desired tasks [10]. Train Machine Learning Model: Train model using extracted [10]. Test S: Thorough testing essential ensure accuracy",
+    "compression_ratio": 2.398678414096916,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:25.180919Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Technical Requirements D: Technical Requirements: BLUEPRINT DETAILS: Θ Node Original Θ Requirements' EXAMPLE APPLICATION: Develop Machine Learning Model: Choose Train Machine Learning Model: Train Test S: Thorough",
+    "compression_ratio": 4.972602739726027,
+    "symbol_count": 219,
+    "timestamp": "2025-11-18T10:47:25.183305Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 363.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:25.190629Z"
+  }
+]

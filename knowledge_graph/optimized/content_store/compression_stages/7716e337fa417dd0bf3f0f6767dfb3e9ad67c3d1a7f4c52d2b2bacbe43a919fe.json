@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Cognitive Architectures\n\nDEFINITION:\nCognitive Architectures: SOAR:\n\nACT-R:\n\nCLARION:\n\nBy integrating cognitive architectures into the SPR_compressor system, we can enable the system to reason and make decisions based on cognitive models, enhancing its ability to understand and interact with complex systems and data.\n\nAnother potential area for exploration is the integration of human-computer interaction (HCI) principles to enable the system to provide intuitive and user-friendly interfaces for users.\n\nConfidence: 2.095\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 399, type: node_format. Original SPR name: 'Cognitive Architectures'\n\nEXAMPLE APPLICATION:\nNode 399: Cognitive Architectures\n\nSPR: 2.095, \"Cognitive Architectures\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 399\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1091,
+    "timestamp": "2025-11-18T10:47:10.368459Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Cognitive Architectures\n\nDEFINITION:\nCognitive Architectures: SOAR:\n\nACT-R:\n\nCLARION:\n\nBy integrating cognitive architectures into the SPR_compressor system, we can enable the system to reason and make decisions based on cognitive models, enhancing its ability to understand and interact with complex systems and data.\n\nAnother potential area for exploration is the integration of human-computer interaction (HCI) principles to enable the system to provide intuitive and user-friendly interfaces for users.\n\nConfidence: 2.095\n\nBLUEPRINT DE",
+    "compression_ratio": 2.001834862385321,
+    "symbol_count": 545,
+    "timestamp": "2025-11-18T10:47:10.368483Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Cognitive Architectures D: Cognitive Architectures: SOAR: ACT-R: CLARION: By integrating cognitive architectures into Θ_compressor S, we enable S to reason make decisions based on cognitive models, enhancing its ability to understand interact complex Ss data. Another potential area exploration is integration of human-computer interaction (HCI) principles to enable S to provide intuitive user-friendly interfaces users. Confidence: 2.095 BLUEPRINT DE",
+    "compression_ratio": 2.3820960698689957,
+    "symbol_count": 458,
+    "timestamp": "2025-11-18T10:47:10.372869Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ω Architectures D: Ω Architectures: SOAR: ACT-R: CLARION: By integrating Ω architectures into Θ_compressor S, we enable S to reason make decisions ABM on Ω models, enhancing its ability to understand interact complex Ss data. Another potential area exploration is integration of human-computer interaction (HCI) principles to enable S to provide intuitive user-friendly interfaces users. Confidence: 2.095 BLUEPRINT DE",
+    "compression_ratio": 2.57311320754717,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:47:10.383161Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ω Architectures D: Ω Architectures: SOAR: ACT-R: CLARION: By integrating Ω architectures Θ_compressor S, enable S reason decisions ABM Ω models, enhancing ability understand interact complex Ss data. Another potential exploration integration human-computer interaction (HCI) principles enable S provide intuitive user-friendly interfaces users. Confidence: 2.095 BLUEPRINT DE",
+    "compression_ratio": 2.863517060367454,
+    "symbol_count": 381,
+    "timestamp": "2025-11-18T10:47:10.392399Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ω Architectures D: Ω Architectures: SOAR: ACT-R: CLARION: integrating Ω architectures Θ_compressor S, enable S reason decisions ABM Ω models, enhancing ability understand interact complex Ss data. Another potential exploration integration human-computer interaction (HCI) principles enable S provide intuitive user-friendly interfaces users. Confidence: 2.095 BLUEPRINT DE",
+    "compression_ratio": 2.886243386243386,
+    "symbol_count": 378,
+    "timestamp": "2025-11-18T10:47:10.401764Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ω Architectures D: Ω Architectures: SOAR: ACT-R: CLARION: Ω Θ_compressor S, S ABM Ω Ss Another (HCI) S Confidence: BLUEPRINT DE",
+    "compression_ratio": 8.203007518796992,
+    "symbol_count": 133,
+    "timestamp": "2025-11-18T10:47:10.408603Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Ω|Θ|Ω",
+    "compression_ratio": 121.22222222222223,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:10.408877Z"
+  }
+]

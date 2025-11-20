@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Regulatory Compliance\n\nDEFINITION:\nRegulatory Compliance: designed to provide advanced financial regulation capabilities to improve the effectiveness and efficiency of financial regulation:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Regulatory Compliance'\n\nEXAMPLE APPLICATION:\ninancial research techniques that enable the AI system to conduct in-depth financial research and analysis.\n\n85. AI-Driven Financial Regulation: Mastermind_AI is designed to provide advanced financial regulation capabilities to improve the effectiveness and efficiency of financial regulation:\n    * Regulatory Compliance: Developing regulatory compliance techniques that enable the AI system to ensure compliance with financial regulations.\n    * Risk Management: Implementing risk management techni\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1169,
+    "timestamp": "2025-11-18T10:47:38.881612Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Regulatory Compliance\n\nDEFINITION:\nRegulatory Compliance: designed to provide advanced financial regulation capabilities to improve the effectiveness and efficiency of financial regulation:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Regulatory Compliance'\n\nEXAMPLE APPLICATION:\ninancial research techniques that enable the AI system to conduct in-depth financial research and analysis.\n\n85. AI-Driven Financial Regulation: Mastermind_AI is designed to provide advanced financial regulation capabilities to improve the e",
+    "compression_ratio": 2.0017123287671232,
+    "symbol_count": 584,
+    "timestamp": "2025-11-18T10:47:38.881636Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Regulatory Compliance D: Regulatory Compliance: designed to provide advanced financial regulation capabilities to improve effectiveness efficiency of financial regulation: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Regulatory Compliance' EXAMPLE APPLICATION: inancial research techniques enable AI S to conduct in-depth financial research analysis. 85. AI-Driven Financial Regulation: Mastermind_AI is designed to provide advanced financial regulation capabilities to improve e",
+    "compression_ratio": 2.1973684210526314,
+    "symbol_count": 532,
+    "timestamp": "2025-11-18T10:47:38.882687Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Regulatory Compliance D: Regulatory Compliance: designed provide advanced financial regulation capabilities improve effectiveness efficiency financial regulation: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Regulatory Compliance' EXAMPLE APPLICATION: inancial research techniques enable AI S conduct in-depth financial research analysis. AI-Driven Financial Regulation: Mastermind_AI designed provide advanced financial regulation capabilities improve",
+    "compression_ratio": 2.3286852589641436,
+    "symbol_count": 502,
+    "timestamp": "2025-11-18T10:47:38.885823Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Regulatory Compliance D: Regulatory Compliance: designed provide advanced financial regulation capabilities improve effectiveness efficiency financial regulation: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Regulatory Compliance' EXAMPLE APPLICATION: inancial research techniques enable AI S conduct in-depth financial research analysis. AI-Driven Financial Regulation: Mastermind_AI designed provide advanced financial regulation capabilities improve",
+    "compression_ratio": 2.3286852589641436,
+    "symbol_count": 502,
+    "timestamp": "2025-11-18T10:47:38.889139Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Regulatory Compliance D: Regulatory Compliance: designed provide advanced financial regulation capabilities improve effectiveness efficiency financial regulation: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Regulatory Compliance' EXAMPLE APPLICATION: inancial research techniques enable AI S conduct -depth financial research analysis. AI-Driven Financial Regulation: Mastermind_AI designed provide advanced financial regulation capabilities improve",
+    "compression_ratio": 2.338,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:38.893898Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Regulatory Compliance D: Regulatory Compliance: BLUEPRINT DETAILS: Θ Node Original Θ Compliance' EXAMPLE APPLICATION: AI S AI-Driven Financial Regulation: Mastermind_AI",
+    "compression_ratio": 6.718390804597701,
+    "symbol_count": 174,
+    "timestamp": "2025-11-18T10:47:38.896045Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 389.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.896351Z"
+  }
+]

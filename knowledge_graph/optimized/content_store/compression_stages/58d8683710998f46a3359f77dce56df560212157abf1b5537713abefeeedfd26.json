@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Programming Language\n\nDEFINITION:\nProgramming Language: the technical prerequisites for developing this engine?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Programming Language'\n\nEXAMPLE APPLICATION:\n.\nQuery Optimization: Learns from past queries to continuously improve the efficiency of data retrieval.\nData Processing: Can be used for tasks like data cleaning, transformation, and identifying patterns within the extracted data.\n5. What are the technical prerequisites for developing this engine?\nProgramming Language: Python, Java, or C++ are suitable choices for implementation.\nData Storage: A robust database solution (relational or NoSQL) is needed to store the extracted data.\nMachine Learni\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1090,
+    "timestamp": "2025-11-18T10:47:24.422388Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Programming Language\n\nDEFINITION:\nProgramming Language: the technical prerequisites for developing this engine?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Programming Language'\n\nEXAMPLE APPLICATION:\n.\nQuery Optimization: Learns from past queries to continuously improve the efficiency of data retrieval.\nData Processing: Can be used for tasks like data cleaning, transformation, and identifying patterns within the extracted data.\n5. What are the technical prerequisites for devel",
+    "compression_ratio": 2.0,
+    "symbol_count": 545,
+    "timestamp": "2025-11-18T10:47:24.422417Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Programming Language D: Programming Language: technical prerequisites developing engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Programming Language' EXAMPLE APPLICATION: . Query Optimization: Learns past queries to continuously improve efficiency of data retrieval. Data Ping: be used tasks like data cleaning, transFion, identifying patterns within extracted data. 5. technical prerequisites devel",
+    "compression_ratio": 2.3799126637554586,
+    "symbol_count": 458,
+    "timestamp": "2025-11-18T10:47:24.423379Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Programming Language D: Programming Language: technical prerequisites developing engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Programming Language' EXAMPLE APPLICATION: Query Optimization: Learns queries continuously improve efficiency retrieval. Data Ping: tasks cleaning, transFion, identifying patterns within extracted data. technical prerequisites devel",
+    "compression_ratio": 2.6201923076923075,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:24.428649Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Programming Language D: Programming Language: technical prerequisites developing engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Programming Language' EXAMPLE APPLICATION: Query Optimization: Learns queries continuously improve efficiency retrieval. Data Ping: tasks cleaning, transFion, identifying patterns within extracted data. technical prerequisites devel",
+    "compression_ratio": 2.6201923076923075,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:24.435398Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Programming Language D: Programming Language: technical prerequisites developing engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Programming Language' EXAMPLE APPLICATION: Query Optimization: Learns queries continuously improve efficiency retrieval. Data Ping: tasks cleaning, transFion, identifying patterns within extracted data. technical prerequisites devel",
+    "compression_ratio": 2.6201923076923075,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:24.440215Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Programming Language D: Programming Language: BLUEPRINT DETAILS: Θ Node Original Θ Language' EXAMPLE APPLICATION: Query Optimization: Learns Data Ping:",
+    "compression_ratio": 6.942675159235669,
+    "symbol_count": 157,
+    "timestamp": "2025-11-18T10:47:24.446730Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 363.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.447041Z"
+  }
+]

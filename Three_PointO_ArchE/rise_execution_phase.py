@@ -226,8 +226,19 @@ Focus on steps that will actually ANSWER the query: "{query}"
                 
                 try:
                     # Get the action function from registry
-                    if tool in self.action_registry:
-                        action_func = self.action_registry[tool]
+                    # ActionRegistry stores actions in .actions dict, so check there
+                    if hasattr(self.action_registry, 'actions') and tool in self.action_registry.actions:
+                        action_func = self.action_registry.actions[tool]
+                    elif hasattr(self.action_registry, 'get_action'):
+                        # Try using get_action method if available
+                        try:
+                            action_func = self.action_registry.get_action(tool)
+                        except (KeyError, AttributeError):
+                            action_func = None
+                    else:
+                        action_func = None
+                    
+                    if action_func:
                         
                         # Merge inputs with accumulated context
                         merged_inputs = {**accumulated_context, **inputs}

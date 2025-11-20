@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Collaborative Problem\n\nDEFINITION:\nCollaborative Problem: designed to collaborate with humans in a seamless and effective manner:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Collaborative Problem'\n\nEXAMPLE APPLICATION:\nehensive audit trail to track system activities and changes.\n\n15. Human-AI Collaboration: Mastermind_AI is designed to collaborate with humans in a seamless and effective manner:\n    * Human-AI Interface: Providing intuitive and user-friendly interfaces for humans to interact with the system.\n    * Collaborative Problem-Solving: Enabling humans and AI to work together to solve complex problems and make decisions.\n    * AI-Assisted Human Decision-Making: Using AI to provide insights and recommend\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1109,
+    "timestamp": "2025-11-18T10:47:28.612284Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Collaborative Problem\n\nDEFINITION:\nCollaborative Problem: designed to collaborate with humans in a seamless and effective manner:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Collaborative Problem'\n\nEXAMPLE APPLICATION:\nehensive audit trail to track system activities and changes.\n\n15. Human-AI Collaboration: Mastermind_AI is designed to collaborate with humans in a seamless and effective manner:\n    * Human-AI Interface: Providing intuitive and user-friendly interfaces for humans to int",
+    "compression_ratio": 2.0018050541516246,
+    "symbol_count": 554,
+    "timestamp": "2025-11-18T10:47:28.612309Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Collaborative Problem D: Collaborative Problem: designed to collaborate humans in a seamless effective manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Collaborative Problem' EXAMPLE APPLICATION: ehensive audit trail to track S activities changes. 15. Human-AI Collaboration: Mastermind_AI is designed to collaborate humans in a seamless effective manner: * Human-AI Interface: Providing intuitive user-friendly interfaces humans to int",
+    "compression_ratio": 2.2494929006085194,
+    "symbol_count": 493,
+    "timestamp": "2025-11-18T10:47:28.621580Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Collaborative Problem D: Collaborative Problem: designed collaborate humans seamless effective manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Collaborative Problem' EXAMPLE APPLICATION: ehensive audit trail track S activities changes. Human-AI Collaboration: Mastermind_AI designed collaborate humans seamless effective manner: Human-AI Interface: Providing intuitive user-friendly interfaces humans",
+    "compression_ratio": 2.437362637362637,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:28.628802Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Collaborative Problem D: Collaborative Problem: designed collaborate humans seamless effective manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Collaborative Problem' EXAMPLE APPLICATION: ehensive audit trail track S activities changes. Human-AI Collaboration: Mastermind_AI designed collaborate humans seamless effective manner: Human-AI Interface: Providing intuitive user-friendly interfaces humans",
+    "compression_ratio": 2.437362637362637,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:28.636898Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Collaborative Problem D: Collaborative Problem: designed collaborate humans seamless effective manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Collaborative Problem' EXAMPLE APPLICATION: ehensive audit trail track S activities changes. Human-AI Collaboration: Mastermind_AI designed collaborate humans seamless effective manner: Human-AI Interface: Providing intuitive user-friendly interfaces humans",
+    "compression_ratio": 2.437362637362637,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:28.652228Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Collaborative Problem D: Collaborative Problem: BLUEPRINT DETAILS: Θ Node Original Θ Problem' EXAMPLE APPLICATION: S Human-AI Collaboration: Mastermind_AI Human-AI Interface: Providing",
+    "compression_ratio": 5.836842105263158,
+    "symbol_count": 190,
+    "timestamp": "2025-11-18T10:47:28.657118Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 369.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:28.660703Z"
+  }
+]

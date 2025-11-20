@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Part-of-Speech Tagging\n\nDEFINITION:\nPart-of-Speech Tagging: Node 17: Part-of-Speech Tagging\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 17, type: node_format. Original SPR name: 'Part-of-Speech Tagging'\n\nEXAMPLE APPLICATION:\nNode 17: Part-of-Speech Tagging\nNode 18: Named Entity Recognition\nNode 7: Functional Requirements\n\nDescription: Detailed description of the system's functional requirements, including its user interface, user experience, and functi\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 17\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 822,
+    "timestamp": "2025-11-18T10:47:22.837105Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Part-of-Speech Tagging\n\nDEFINITION:\nPart-of-Speech Tagging: Node 17: Part-of-Speech Tagging\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 17, type: node_format. Original SPR name: 'Part-of-Speech Tagging'\n\nEXAMPLE APPLICATION:\nNode 17: Part-of-Speech Tagging\nNode 18: Named Entity Recognition\nNode 7: Functional Requirements\n\nDescription: Detailed description of the system's functi",
+    "compression_ratio": 2.0,
+    "symbol_count": 411,
+    "timestamp": "2025-11-18T10:47:22.837131Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Part-of-Speech Tagging D: Part-of-Speech Tagging: Node 17: Part-of-Speech Tagging Confidence: 0.5 BLUEPRINT DETAILS: Θ extracted agi.txt Node 17, type: node_F. Original Θ name: 'Part-of-Speech Tagging' EXAMPLE APPLICATION: Node 17: Part-of-Speech Tagging Node 18: Named Entity Recognition Node 7: Functional Requirements Description: Detailed description of S's functi",
+    "compression_ratio": 2.197860962566845,
+    "symbol_count": 374,
+    "timestamp": "2025-11-18T10:47:22.845585Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Part-of-Speech Tagging D: Part-of-Speech Tagging: Node Part-of-Speech Tagging Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Part-of-Speech Tagging' EXAMPLE APPLICATION: Node Part-of-Speech Tagging Node Named Entity Recognition Node Functional Requirements Description: Detailed description S's functi",
+    "compression_ratio": 2.3620689655172415,
+    "symbol_count": 348,
+    "timestamp": "2025-11-18T10:47:22.852197Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Part-of-Speech Tagging D: Part-of-Speech Tagging: Node Part-of-Speech Tagging Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Part-of-Speech Tagging' EXAMPLE APPLICATION: Node Part-of-Speech Tagging Node Named Entity Recognition Node Functional Requirements Description: Detailed description S's functi",
+    "compression_ratio": 2.3620689655172415,
+    "symbol_count": 348,
+    "timestamp": "2025-11-18T10:47:22.855178Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Part--Speech Tagging D: Part--Speech Tagging: Node Part--Speech Tagging Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Part--Speech Tagging' EXAMPLE APPLICATION: Node Part--Speech Tagging Node Named Entity Recognition Node Functional Requirements Description: Detailed description S's functi",
+    "compression_ratio": 2.4319526627218937,
+    "symbol_count": 338,
+    "timestamp": "2025-11-18T10:47:22.869267Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Part--Speech Tagging D: Part--Speech Tagging: Node Part--Speech Tagging Confidence: BLUEPRINT DETAILS: Θ Node Original Θ Tagging' EXAMPLE APPLICATION: Node Part--Speech Tagging Node Named Entity Recognition Node Functional Requirements Description: Detailed S's",
+    "compression_ratio": 3.0786516853932584,
+    "symbol_count": 267,
+    "timestamp": "2025-11-18T10:47:22.878759Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 274.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:22.879195Z"
+  }
+]

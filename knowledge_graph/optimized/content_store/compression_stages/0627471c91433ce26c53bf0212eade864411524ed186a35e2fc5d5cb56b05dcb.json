@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: American Medical Association\n\nDEFINITION:\nAmerican Medical Association: includes using tools such as fact-checking websites, academic databases, and government reports to verify the information\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'American Medical Association'\n\nEXAMPLE APPLICATION:\numptions and connections within the project using alternative perspectives as needed to ensure robustness\n->|vetting|< This includes using tools such as fact-checking websites, academic databases, and government reports to verify the information. For example, a study published in the Journal of the American Medical Association found that \"the use of fact-checking websites can improve the accuracy of information\" [6]. The study also notes that \"the use of academic databases, such as PubMed, can p\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1180,
+    "timestamp": "2025-11-18T10:47:25.528948Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: American Medical Association\n\nDEFINITION:\nAmerican Medical Association: includes using tools such as fact-checking websites, academic databases, and government reports to verify the information\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'American Medical Association'\n\nEXAMPLE APPLICATION:\numptions and connections within the project using alternative perspectives as needed to ensure robustness\n->|vetting|< This includes using tools such as fact-checking websites, academic databases, and government reports to verify the in",
+    "compression_ratio": 2.0,
+    "symbol_count": 590,
+    "timestamp": "2025-11-18T10:47:25.528969Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: American Medical Association D: American Medical Association: includes using tools such as fact-checking websites, academic databases, government reports to verify inFion BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'American Medical Association' EXAMPLE APPLICATION: umptions connections within project using alternative perspectives as needed to ensure robustness ->|vetting|< includes using tools such as fact-checking websites, academic databases, government reports to verify in",
+    "compression_ratio": 2.205607476635514,
+    "symbol_count": 535,
+    "timestamp": "2025-11-18T10:47:25.531106Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: American Medical Association D: American Medical Association: includes using tools fact-checking websites, academic databases, government reports verify inFion BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'American Medical Association' EXAMPLE APPLICATION: umptions connections within project using alternative perspectives needed ensure robustness ->|vetting|< includes using tools fact-checking websites, academic databases, government reports verify",
+    "compression_ratio": 2.3552894211576847,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:25.533808Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: American Medical Association D: American Medical Association: includes using tools fact-checking websites, academic databases, government reports verify inFion BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'American Medical Association' EXAMPLE APPLICATION: umptions connections within project using alternative perspectives needed ensure robustness ->|vetting|< includes using tools fact-checking websites, academic databases, government reports verify",
+    "compression_ratio": 2.3552894211576847,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:25.537088Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: American Medical Association D: American Medical Association: includes using tools fact-checking websites, academic databases, government reports verify inFion BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'American Medical Association' EXAMPLE APPLICATION: umptions connections within project using alternative perspectives needed ensure robustness ->|vetting|< includes using tools fact-checking websites, academic databases, government reports verify",
+    "compression_ratio": 2.3552894211576847,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:25.539464Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: American Medical Association D: American Medical Association: BLUEPRINT DETAILS: Θ Node Original Θ Medical Association' EXAMPLE APPLICATION:",
+    "compression_ratio": 8.082191780821917,
+    "symbol_count": 146,
+    "timestamp": "2025-11-18T10:47:25.543098Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 393.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:25.543428Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Preference Override Handling\n\nDEFINITION:\nA flexible response processing system that handles Keyholder feedback to leading questions, managing option selections, custom alternatives, modification requests, and rejections while maintaining iterative refinement within cognitive load limits.\n\nBLUEPRINT DETAILS:\nStandard implementation blueprint for PreferenceoverridehandlinG\n\nEXAMPLE APPLICATION:\nHandles 'Like option A but make it 25% instead of 30%' by adapting the suggestion and confirming: 'Reduce API response time by 25% (200ms to 150ms) within 2 weeks - proceed with this refined target?'\n\nCATEGORY: ResponseProcessor\n\nRELATIONSHIPS:\ntype: FeedbackProcessor; part_of: ObjectiveClarificationProtocoL; receives_input_from: LeadingQueryFormulationN; handles: OptionSelection, CustomAlternatives, ModificationRequests, RejectionResponses; outputs_to: FinalizeResonantObjective, ContextualSuggestionGeneratioN; implements: IterativeRefinement, AnalysisParalysisPreventioN; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 998,
+    "timestamp": "2025-11-18T10:46:54.708362Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Preference Override Handling\n\nDEFINITION:\nA flexible response processing system that handles Keyholder feedback to leading questions, managing option selections, custom alternatives, modification requests, and rejections while maintaining iterative refinement within cognitive load limits.\n\nBLUEPRINT DETAILS:\nStandard implementation blueprint for PreferenceoverridehandlinG\n\nEXAMPLE APPLICATION:\nHandles 'Like option A but make it 25% instead of 30%' by adapting the suggestion and confirming",
+    "compression_ratio": 2.0,
+    "symbol_count": 499,
+    "timestamp": "2025-11-18T10:46:54.708402Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Preference Override Handling D: A flexible response Ping S handles Keyholder feedback to leading questions, managing option selections, custom alternatives, modification requests, rejections while maintaining iterative refinement within cognitive load limits. BLUEPRINT DETAILS: Standard I blueprint PreferenceoverridehandlinG EXAMPLE APPLICATION: Handles 'Like option A make it 25% instead of 30%' by adapting suggestion confirming",
+    "compression_ratio": 2.278538812785388,
+    "symbol_count": 438,
+    "timestamp": "2025-11-18T10:46:54.710511Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Preference Override Handling D: A flexible response Ping S handles Keyholder feedback leading questions, managing option selections, custom alternatives, modification requests, rejections while maintaining iterative refinement within Ω limits. BLUEPRINT DETAILS: Standard I blueprint PreferenceoverridehandlinG EXAMPLE APPLICATION: Handles 'Like option A instead adapting suggestion confirming",
+    "compression_ratio": 2.50125313283208,
+    "symbol_count": 399,
+    "timestamp": "2025-11-18T10:46:54.712728Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Preference Override Handling D: A flexible response Ping S handles Keyholder feedback leading questions, managing option selections, custom alternatives, modification requests, rejections while maintaining iterative refinement within Ω limits. BLUEPRINT DETAILS: Standard I blueprint PreferenceoverridehandlinG EXAMPLE APPLICATION: Handles 'Like option A instead adapting suggestion confirming",
+    "compression_ratio": 2.50125313283208,
+    "symbol_count": 399,
+    "timestamp": "2025-11-18T10:46:54.716866Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Preference Override Handling D: flexible response Ping S handles Keyholder feedback leading questions, managing option selections, custom alternatives, modification requests, rejections while maintaining iterative refinement within Ω limits. BLUEPRINT DETAILS: Standard I blueprint PreferenceoverridehandlinG EXAMPLE APPLICATION: Handles 'Like option instead adapting suggestion confirming",
+    "compression_ratio": 2.526582278481013,
+    "symbol_count": 395,
+    "timestamp": "2025-11-18T10:46:54.719628Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Preference Override Handling D: Ping S Keyholder Ω BLUEPRINT DETAILS: Standard I PreferenceoverridehandlinG EXAMPLE APPLICATION: Handles",
+    "compression_ratio": 7.028169014084507,
+    "symbol_count": 142,
+    "timestamp": "2025-11-18T10:46:54.723543Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω",
+    "compression_ratio": 998.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:54.724050Z"
+  }
+]

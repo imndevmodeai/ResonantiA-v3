@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Step Instructions\n\nDEFINITION:\nStep Instructions: key to the efficiency and compatibility across industries, domains, disciplines, and ez-way to sync those in the kno\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Step Instructions'\n\nEXAMPLE APPLICATION:\n instructions for building it. Use Sparse Priming Representations (SPRs) to distill complex information into concise and meaningful representations. Identify the key concepts and relationships involved in the project, and create a set of SPRs that capture these concepts and relationships.\n**Step-by-Step Instructions**\n1. Break down the process into its component parts, and provide a clear and robust overview of each part.\n2. Use SPRs to identify potential tasks , actions, components,  functions,\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1142,
+    "timestamp": "2025-11-18T10:47:25.241651Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Step Instructions\n\nDEFINITION:\nStep Instructions: key to the efficiency and compatibility across industries, domains, disciplines, and ez-way to sync those in the kno\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Step Instructions'\n\nEXAMPLE APPLICATION:\n instructions for building it. Use Sparse Priming Representations (SPRs) to distill complex information into concise and meaningful representations. Identify the key concepts and relationships involved in the project, and create a set of SPRs that capture",
+    "compression_ratio": 2.0,
+    "symbol_count": 571,
+    "timestamp": "2025-11-18T10:47:25.241674Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Step Instructions D: Step Instructions: key to efficiency compatibility across industries, domains, disciplines, ez-way to sync those in KnO BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Step Instructions' EXAMPLE APPLICATION: instructions building it. Use Θs (Θs) to distill complex inFion into concise meaningful representations. Identify key concepts relationships involved in project, create a set of Θs capture",
+    "compression_ratio": 2.445396145610278,
+    "symbol_count": 467,
+    "timestamp": "2025-11-18T10:47:25.242675Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Step Instructions D: Step Instructions: efficiency compatibility across industries, domains, disciplines, ez-way those KnO BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Step Instructions' EXAMPLE APPLICATION: instructions building Use Θs (Θs) distill complex inFion concise meaningful representations. Identify concepts relationships involved project, create Θs capture",
+    "compression_ratio": 2.7320574162679425,
+    "symbol_count": 418,
+    "timestamp": "2025-11-18T10:47:25.244802Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Step Instructions D: Step Instructions: efficiency compatibility across industries, domains, disciplines, ez-way those KnO BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Step Instructions' EXAMPLE APPLICATION: instructions building Use Θs (Θs) distill complex inFion concise meaningful representations. Identify concepts relationships involved project, create Θs capture",
+    "compression_ratio": 2.7320574162679425,
+    "symbol_count": 418,
+    "timestamp": "2025-11-18T10:47:25.252374Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Step Instructions D: Step Instructions: efficiency compatibility across industries, domains, disciplines, ez-way those KnO BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Step Instructions' EXAMPLE APPLICATION: instructions building Use Θs (Θs) distill complex inFion concise meaningful representations. Identify concepts relationships involved project, create Θs capture",
+    "compression_ratio": 2.7320574162679425,
+    "symbol_count": 418,
+    "timestamp": "2025-11-18T10:47:25.255325Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Step Instructions D: Step Instructions: KnO BLUEPRINT DETAILS: Θ Node Original Θ Instructions' EXAMPLE APPLICATION: Use Θs (Θs) Identify Θs",
+    "compression_ratio": 7.875862068965517,
+    "symbol_count": 145,
+    "timestamp": "2025-11-18T10:47:25.261219Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ|Θ|Θ",
+    "compression_ratio": 126.88888888888889,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:25.264229Z"
+  }
+]

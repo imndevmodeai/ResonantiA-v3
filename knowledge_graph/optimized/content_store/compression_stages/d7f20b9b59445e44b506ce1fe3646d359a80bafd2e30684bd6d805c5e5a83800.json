@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Semantic Analyzer\n\nDEFINITION:\nSemantic Analyzer: the key components involved in building such an engine?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Semantic Analyzer'\n\nEXAMPLE APPLICATION:\nparsing the query, optimizing its execution, and extracting the requested data.\n\n3. What are the key components involved in building such an engine?\nQuery Language: A user-friendly language for defining data extraction tasks.\nParser: Translates the query language into an abstract syntax tree (AST).\nSemantic Analyzer: Interprets the AST to understand the query's meaning and intent.\nQuery Optimizer: Devises the most efficient plan for executing the query across different data sources.\nQuery Execut\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1081,
+    "timestamp": "2025-11-18T10:47:24.273681Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Semantic Analyzer\n\nDEFINITION:\nSemantic Analyzer: the key components involved in building such an engine?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Semantic Analyzer'\n\nEXAMPLE APPLICATION:\nparsing the query, optimizing its execution, and extracting the requested data.\n\n3. What are the key components involved in building such an engine?\nQuery Language: A user-friendly language for defining data extraction tasks.\nParser: Translates the query language into an abstract synt",
+    "compression_ratio": 2.001851851851852,
+    "symbol_count": 540,
+    "timestamp": "2025-11-18T10:47:24.273703Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Semantic Analyzer D: Semantic Analyzer: key components involved in building such an engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Semantic Analyzer' EXAMPLE APPLICATION: parsing query, optimizing its execution, extracting requested data. 3. key components involved in building such an engine? Query Language: A user-friendly language defining data extraction tasks. Parser: Translates query language into an abstract synt",
+    "compression_ratio": 2.2474012474012475,
+    "symbol_count": 481,
+    "timestamp": "2025-11-18T10:47:24.274795Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Semantic Analyzer D: Semantic Analyzer: components involved building engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Semantic Analyzer' EXAMPLE APPLICATION: parsing query, optimizing execution, extracting requested data. components involved building engine? Query Language: A user-friendly language defining extraction tasks. Parser: Translates query language abstract",
+    "compression_ratio": 2.5555555555555554,
+    "symbol_count": 423,
+    "timestamp": "2025-11-18T10:47:24.280480Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Semantic Analyzer D: Semantic Analyzer: components involved building engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Semantic Analyzer' EXAMPLE APPLICATION: parsing query, optimizing execution, extracting requested data. components involved building engine? Query Language: A user-friendly language defining extraction tasks. Parser: Translates query language abstract",
+    "compression_ratio": 2.5555555555555554,
+    "symbol_count": 423,
+    "timestamp": "2025-11-18T10:47:24.282738Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Semantic Analyzer D: Semantic Analyzer: components involved building engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Semantic Analyzer' EXAMPLE APPLICATION: parsing query, optimizing execution, extracting requested data. components involved building engine? Query Language: user-friendly language defining extraction tasks. Parser: Translates query language abstract",
+    "compression_ratio": 2.5676959619952493,
+    "symbol_count": 421,
+    "timestamp": "2025-11-18T10:47:24.285932Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Semantic Analyzer D: Semantic Analyzer: BLUEPRINT DETAILS: Θ Node Original Θ Analyzer' EXAMPLE APPLICATION: Query Language: Parser: Translates",
+    "compression_ratio": 7.304054054054054,
+    "symbol_count": 148,
+    "timestamp": "2025-11-18T10:47:24.292904Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 360.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.295581Z"
+  }
+]

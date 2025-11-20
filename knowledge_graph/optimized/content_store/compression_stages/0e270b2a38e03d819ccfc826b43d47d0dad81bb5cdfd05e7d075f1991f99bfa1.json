@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Machine Learning Library\n\nDEFINITION:\nMachine Learning Library: the technical prerequisites for developing this engine?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Machine Learning Library'\n\nEXAMPLE APPLICATION:\nentifying patterns within the extracted data.\n5. What are the technical prerequisites for developing this engine?\nProgramming Language: Python, Java, or C++ are suitable choices for implementation.\nData Storage: A robust database solution (relational or NoSQL) is needed to store the extracted data.\nMachine Learning Library: TensorFlow, PyTorch, or Scikit-learn can be used for developing the machine learning model.\nWeb Crawling Library: Libraries like Scrapy or BeautifulSoup are essential for ext\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1102,
+    "timestamp": "2025-11-18T10:47:24.530775Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Machine Learning Library\n\nDEFINITION:\nMachine Learning Library: the technical prerequisites for developing this engine?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Machine Learning Library'\n\nEXAMPLE APPLICATION:\nentifying patterns within the extracted data.\n5. What are the technical prerequisites for developing this engine?\nProgramming Language: Python, Java, or C++ are suitable choices for implementation.\nData Storage: A robust database solution (relational or NoSQL) is needed to s",
+    "compression_ratio": 2.0,
+    "symbol_count": 551,
+    "timestamp": "2025-11-18T10:47:24.530801Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Machine Learning Library D: Machine Learning Library: technical prerequisites developing engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Machine Learning Library' EXAMPLE APPLICATION: entifying patterns within extracted data. 5. technical prerequisites developing engine? Programming Language: Python, Java, or C++ suitable choices I. Data Storage: A robust database solution (relational or NoSQL) is needed to s",
+    "compression_ratio": 2.34468085106383,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:47:24.531783Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Machine Learning Library D: Machine Learning Library: technical prerequisites developing engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Library' EXAMPLE APPLICATION: entifying patterns within extracted data. technical prerequisites developing engine? Programming Language: Python, Java, C++ suitable choices I. Data Storage: A robust database solution (relational NoSQL) needed",
+    "compression_ratio": 2.448888888888889,
+    "symbol_count": 450,
+    "timestamp": "2025-11-18T10:47:24.536864Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Machine Learning Library D: Machine Learning Library: technical prerequisites developing engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Library' EXAMPLE APPLICATION: entifying patterns within extracted data. technical prerequisites developing engine? Programming Language: Python, Java, C++ suitable choices I. Data Storage: A robust database solution (relational NoSQL) needed",
+    "compression_ratio": 2.448888888888889,
+    "symbol_count": 450,
+    "timestamp": "2025-11-18T10:47:24.542949Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Machine Learning Library D: Machine Learning Library: technical prerequisites developing engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Library' EXAMPLE APPLICATION: entifying patterns within extracted data. technical prerequisites developing engine? Programming Language: Python, Java, C++ suitable choices I. Data Storage: robust database solution (relational NoSQL) needed",
+    "compression_ratio": 2.4598214285714284,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:24.556461Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Machine Learning Library D: Machine Learning Library: BLUEPRINT DETAILS: Θ Node Original Θ Learning Library' EXAMPLE APPLICATION: Programming Language: Python, Java, C++ I. Data Storage: NoSQL)",
+    "compression_ratio": 5.5376884422110555,
+    "symbol_count": 199,
+    "timestamp": "2025-11-18T10:47:24.563465Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 367.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.563813Z"
+  }
+]

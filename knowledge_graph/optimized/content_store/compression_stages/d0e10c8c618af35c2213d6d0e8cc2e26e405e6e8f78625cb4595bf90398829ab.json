@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "CATEGORY: PhilosophicalPrinciple",
+    "compression_ratio": 1.0,
+    "symbol_count": 32,
+    "timestamp": "2025-11-18T10:46:58.403236Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "CATEGORY: PhilosophicalPrinciple",
+    "compression_ratio": 1.0,
+    "symbol_count": 32,
+    "timestamp": "2025-11-18T10:46:58.403258Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "CATEGORY: PhilosophicalPrinciple",
+    "compression_ratio": 1.0,
+    "symbol_count": 32,
+    "timestamp": "2025-11-18T10:46:58.404478Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "CATEGORY: PhilosophicalPrinciple",
+    "compression_ratio": 1.0,
+    "symbol_count": 32,
+    "timestamp": "2025-11-18T10:46:58.405009Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "CATEGORY: PhilosophicalPrinciple",
+    "compression_ratio": 1.0,
+    "symbol_count": 32,
+    "timestamp": "2025-11-18T10:46:58.405521Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "CATEGORY: PhilosophicalPrinciple",
+    "compression_ratio": 1.0,
+    "symbol_count": 32,
+    "timestamp": "2025-11-18T10:46:58.408823Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "CATEGORY: PhilosophicalPrinciple",
+    "compression_ratio": 1.0,
+    "symbol_count": 32,
+    "timestamp": "2025-11-18T10:46:58.409348Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "P|P",
+    "compression_ratio": 10.666666666666666,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:58.409523Z"
+  }
+]

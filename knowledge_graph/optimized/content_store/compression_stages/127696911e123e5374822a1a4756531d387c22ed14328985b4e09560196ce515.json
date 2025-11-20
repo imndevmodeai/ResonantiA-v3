@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Endpoint Detection\n\nDEFINITION:\nEndpoint Detection: designed to provide advanced endpoint security capabilities to protect against endpoint-based threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Endpoint Detection'\n\nEXAMPLE APPLICATION:\n.\n    * Intrusion Detection: Creating intrusion detection techniques that enable the AI system to detect and alert on potential intrusions.\n\n68. AI-Driven Endpoint Security: Mastermind_AI is designed to provide advanced endpoint security capabilities to protect against endpoint-based threats:\n    * Endpoint Detection and Response: Developing endpoint detection and response techniques that enable the AI system to detect and respond to potential threats on endpoints.\n    * Vulnerability Management\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1131,
+    "timestamp": "2025-11-18T10:47:37.099167Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Endpoint Detection\n\nDEFINITION:\nEndpoint Detection: designed to provide advanced endpoint security capabilities to protect against endpoint-based threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Endpoint Detection'\n\nEXAMPLE APPLICATION:\n.\n    * Intrusion Detection: Creating intrusion detection techniques that enable the AI system to detect and alert on potential intrusions.\n\n68. AI-Driven Endpoint Security: Mastermind_AI is designed to provide advanced endpoint security capabilities to protec",
+    "compression_ratio": 2.0017699115044247,
+    "symbol_count": 565,
+    "timestamp": "2025-11-18T10:47:37.099192Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Endpoint Detection D: Endpoint Detection: designed to provide advanced endpoint security capabilities to protect against endpoint-based threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Endpoint Detection' EXAMPLE APPLICATION: . * Intrusion Detection: Creating intrusion detection techniques enable AI S to detect alert on potential intrusions. 68. AI-Driven Endpoint Security: Mastermind_AI is designed to provide advanced endpoint security capabilities to protec",
+    "compression_ratio": 2.1708253358925145,
+    "symbol_count": 521,
+    "timestamp": "2025-11-18T10:47:37.105208Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Endpoint Detection D: Endpoint Detection: designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Endpoint Detection' EXAMPLE APPLICATION: Intrusion Detection: Creating intrusion detection techniques enable AI S detect alert potential intrusions. AI-Driven Endpoint Security: Mastermind_AI designed provide advanced endpoint security capabilities protec",
+    "compression_ratio": 2.3223819301848048,
+    "symbol_count": 487,
+    "timestamp": "2025-11-18T10:47:37.116958Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Endpoint Detection D: Endpoint Detection: designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Endpoint Detection' EXAMPLE APPLICATION: Intrusion Detection: Creating intrusion detection techniques enable AI S detect alert potential intrusions. AI-Driven Endpoint Security: Mastermind_AI designed provide advanced endpoint security capabilities protec",
+    "compression_ratio": 2.3223819301848048,
+    "symbol_count": 487,
+    "timestamp": "2025-11-18T10:47:37.123358Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Endpoint Detection D: Endpoint Detection: designed provide advanced endpoint security capabilities protect against endpoint-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Endpoint Detection' EXAMPLE APPLICATION: Intrusion Detection: Creating intrusion detection techniques enable AI S detect alert potential intrusions. AI-Driven Endpoint Security: Mastermind_AI designed provide advanced endpoint security capabilities protec",
+    "compression_ratio": 2.3223819301848048,
+    "symbol_count": 487,
+    "timestamp": "2025-11-18T10:47:37.129671Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Endpoint Detection D: Endpoint Detection: BLUEPRINT DETAILS: Θ Node Original Θ Detection' EXAMPLE APPLICATION: Intrusion Detection: Creating AI S AI-Driven Endpoint Security: Mastermind_AI",
+    "compression_ratio": 5.829896907216495,
+    "symbol_count": 194,
+    "timestamp": "2025-11-18T10:47:37.135113Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 377.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:37.138204Z"
+  }
+]

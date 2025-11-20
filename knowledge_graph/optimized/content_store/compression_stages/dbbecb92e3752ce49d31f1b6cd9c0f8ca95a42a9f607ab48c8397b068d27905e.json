@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Neural Network Framework\nIntegrating\n\nDEFINITION:\nNeural Network Framework\nIntegrating: not integrating or deploying the cognitive systems correctly, trigger a conditional step to revise and revalidate the framework\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Neural Network Framework\nIntegrating'\n\nEXAMPLE APPLICATION:\n me know if you have any questions or need further clarification on any of these concepts.\n\nYes, I would like to learn more about the Cognitive Computing Framework\n\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nIntegrating cognitive systems...\nIntegrating: Hybrid Intelligence System\nIntegrating: Neural Network Framework\nIntegrating: Cognitive Architecture\nDeploying cognitive systems...\nDeploying: Hybrid Intelligence System\nDeploying: Neural Network Framework\nDeploying: Cognitive Architecture\n\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1210,
+    "timestamp": "2025-11-18T10:47:27.318799Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Neural Network Framework\nIntegrating\n\nDEFINITION:\nNeural Network Framework\nIntegrating: not integrating or deploying the cognitive systems correctly, trigger a conditional step to revise and revalidate the framework\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Neural Network Framework\nIntegrating'\n\nEXAMPLE APPLICATION:\n me know if you have any questions or need further clarification on any of these concepts.\n\nYes, I would like to learn more about the Cognitive Computing Framework\n\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nIntegra",
+    "compression_ratio": 2.0,
+    "symbol_count": 605,
+    "timestamp": "2025-11-18T10:47:27.318821Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Neural Network Framework Integrating D: Neural Network Framework Integrating: integrating or deploying cognitive Ss correctly, trigger a conditional step to revise revalidate framework BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Neural Network Framework Integrating' EXAMPLE APPLICATION: me KnOw if any questions or need further clarification on any of these concepts. Yes, I would like to learn more about Cognitive Computing Framework ->|execution|<- ->|/execution|<- ->|results|<- Integra",
+    "compression_ratio": 2.220183486238532,
+    "symbol_count": 545,
+    "timestamp": "2025-11-18T10:47:27.319955Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Neural Network Framework Integrating D: Neural Network Framework Integrating: integrating deploying Ω Ss correctly, trigger conditional revise revalidate framework BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neural Network Framework Integrating' EXAMPLE APPLICATION: KnOw questions further clarification these concepts. Yes, I learn about Ω Computing Framework ->|execution|<- ->|/execution|<- ->|results|<- Integra",
+    "compression_ratio": 2.59656652360515,
+    "symbol_count": 466,
+    "timestamp": "2025-11-18T10:47:27.324569Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Neural Network Framework Integrating D: Neural Network Framework Integrating: integrating deploying Ω Ss correctly, trigger conditional revise revalidate framework BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neural Network Framework Integrating' EXAMPLE APPLICATION: KnOw questions further clarification these concepts. Yes, I learn about Ω Computing Framework ->|execution|<- ->|/execution|<- ->|results|<- Integra",
+    "compression_ratio": 2.59656652360515,
+    "symbol_count": 466,
+    "timestamp": "2025-11-18T10:47:27.326868Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Neural Network Framework Integrating D: Neural Network Framework Integrating: integrating deploying Ω Ss correctly, trigger conditional revise revalidate framework BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neural Network Framework Integrating' EXAMPLE APPLICATION: KnOw questions further clarification these concepts. Yes, I learn about Ω Computing Framework ->|execution|<- ->|/execution|<- ->|results|<- Integra",
+    "compression_ratio": 2.59656652360515,
+    "symbol_count": 466,
+    "timestamp": "2025-11-18T10:47:27.329636Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Neural Network Framework Integrating D: Neural Network Framework Integrating: Ω Ss BLUEPRINT DETAILS: Θ Node Original Θ Network Framework Integrating' EXAMPLE APPLICATION: KnOw Yes, I Ω Computing Framework Integra",
+    "compression_ratio": 5.525114155251141,
+    "symbol_count": 219,
+    "timestamp": "2025-11-18T10:47:27.331963Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Θ|Θ|Ω",
+    "compression_ratio": 172.85714285714286,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:27.332803Z"
+  }
+]

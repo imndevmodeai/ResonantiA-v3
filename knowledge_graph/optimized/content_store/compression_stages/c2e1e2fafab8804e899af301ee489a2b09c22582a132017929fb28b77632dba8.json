@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Dialogue Policy\n\nDEFINITION:\nDialogue Policy: To integrate the Sentiment Analysis module, we can add the following nodes and edges to the knowledge graph:\n\nConfidence: 0.23\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 46, type: node_format. Original SPR name: 'Policy'\n\nEXAMPLE APPLICATION:\nNode 46: Dialogue Policy\n\nSPR: 0.230, \"Policy\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 46\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 693,
+    "timestamp": "2025-11-18T10:47:04.034032Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Dialogue Policy\n\nDEFINITION:\nDialogue Policy: To integrate the Sentiment Analysis module, we can add the following nodes and edges to the knowledge graph:\n\nConfidence: 0.23\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 46, type: node_format. Original SPR name: 'Policy'\n\nEXAMPLE APPLICATION:\nNode 46: Dialogue Policy\n\nSPR: 0.230, \"Pol",
+    "compression_ratio": 2.0028901734104045,
+    "symbol_count": 346,
+    "timestamp": "2025-11-18T10:47:04.034434Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Dialogue Policy D: Dialogue Policy: To integrate Sentiment Analysis module, we add following nodes edges to K: Confidence: 0.23 BLUEPRINT DETAILS: Θ extracted agi.txt Node 46, type: node_F. Original Θ name: 'Policy' EXAMPLE APPLICATION: Node 46: Dialogue Policy Θ: 0.230, \"Pol",
+    "compression_ratio": 2.4574468085106385,
+    "symbol_count": 282,
+    "timestamp": "2025-11-18T10:47:04.035741Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Dialogue Policy D: Dialogue Policy: To integrate Sentiment Analysis module, following nodes edges K: Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Policy' EXAMPLE APPLICATION: Node Dialogue Policy Θ: 0.230,",
+    "compression_ratio": 2.7283464566929134,
+    "symbol_count": 254,
+    "timestamp": "2025-11-18T10:47:04.037542Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Dialogue Policy D: Dialogue Policy: To integrate Sentiment Analysis module, following nodes edges K: Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Policy' EXAMPLE APPLICATION: Node Dialogue Policy Θ: 0.230,",
+    "compression_ratio": 2.7283464566929134,
+    "symbol_count": 254,
+    "timestamp": "2025-11-18T10:47:04.042426Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Dialogue Policy D: Dialogue Policy: integrate Sentiment Analysis module, following nodes edges K: Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Policy' EXAMPLE APPLICATION: Node Dialogue Policy Θ: 0.230,",
+    "compression_ratio": 2.760956175298805,
+    "symbol_count": 251,
+    "timestamp": "2025-11-18T10:47:04.046392Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Dialogue Policy D: Dialogue Policy: Sentiment Analysis K: Confidence: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: Node Dialogue Policy Θ:",
+    "compression_ratio": 4.414012738853503,
+    "symbol_count": 157,
+    "timestamp": "2025-11-18T10:47:04.047748Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 138.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:04.048032Z"
+  }
+]

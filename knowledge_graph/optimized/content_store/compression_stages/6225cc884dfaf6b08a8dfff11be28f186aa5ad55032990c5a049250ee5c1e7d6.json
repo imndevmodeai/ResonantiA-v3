@@ -1,0 +1,51 @@
+[
+  {
+    "stage_name": "Concise",
+    "content": "GCE: Gemini API sandboxed Python executor for dynamic code execution.",
+    "compression_ratio": 3.753623188405797,
+    "symbol_count": 69,
+    "timestamp": "2025-11-17T12:13:15.474438Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "GCE: Gemini API sandboxed Python executor dynamic code execution.",
+    "compression_ratio": 3.9846153846153847,
+    "symbol_count": 65,
+    "timestamp": "2025-11-17T12:13:15.475456Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "GCE: Gemini API sandboxed Python executor dynamic code execution.",
+    "compression_ratio": 3.9846153846153847,
+    "symbol_count": 65,
+    "timestamp": "2025-11-17T12:13:15.475973Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "GCE: Gemini API sandboxed Python executor dynamic code execution.",
+    "compression_ratio": 3.9846153846153847,
+    "symbol_count": 65,
+    "timestamp": "2025-11-17T12:13:15.476531Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "GCE: Gemini API sandboxed Python executor dynamic code execution.",
+    "compression_ratio": 3.9846153846153847,
+    "symbol_count": 65,
+    "timestamp": "2025-11-17T12:13:15.476978Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "GCE: Gemini API sandboxed Python executor dynamic code execution.",
+    "compression_ratio": 3.9846153846153847,
+    "symbol_count": 65,
+    "timestamp": "2025-11-17T12:13:15.477382Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "G|I|P",
+    "compression_ratio": 51.8,
+    "symbol_count": 5,
+    "timestamp": "2025-11-17T12:13:15.477556Z"
+  }
+]

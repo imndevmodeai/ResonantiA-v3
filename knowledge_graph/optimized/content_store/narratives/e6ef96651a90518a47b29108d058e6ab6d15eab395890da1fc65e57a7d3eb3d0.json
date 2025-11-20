@@ -1,0 +1,1 @@
+{"content": "Configurable checkpoints within Process Blueprints that enable adaptive, metric-driven execution. The Core Workflow Engine pauses at a Phasegate to evaluate specified conditions (based on IAR data, analytical results, etc.) before deciding to continue, branch, or halt the workflow."}

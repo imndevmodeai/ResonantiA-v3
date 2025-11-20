@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Inference-Time Invariant Check\n\nDEFINITION:\nBefore returning a KG answer, verifies core invariants via lightweight decompressions/tests; fails closed to LLM fallback upon violation.\n\nBLUEPRINT DETAILS:\nRuntime invariants guard KG answers; on violation, fails closed and routes to LLM fallback; logs event.\n\nEXAMPLE APPLICATION:\nGuard detected configuration mismatch; routed to LLM for verification.\n\nCATEGORY: SystemPolicy\n\nRELATIONSHIPS:\ntype: RuntimeGuard; applies_to: KnowledgegraphrouteR; signals: LlmresponseinterceptoR",
+    "compression_ratio": 1.0,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:46:49.042890Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Inference-Time Invariant Check\n\nDEFINITION:\nBefore returning a KG answer, verifies core invariants via lightweight decompressions/tests; fails closed to LLM fallback upon violation.\n\nBLUEPRINT DETAILS:\nRuntime invariants guard KG answers; on violation, fails ",
+    "compression_ratio": 2.0,
+    "symbol_count": 265,
+    "timestamp": "2025-11-18T10:46:49.042914Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Inference-Time Invariant Check D: Before returning KG answer, verifies invariants lightweight decompressions/tests; fails closed LLM fallback violation. BLUEPRINT DETAILS: Runtime invariants guard KG answers; violation, fails",
+    "compression_ratio": 2.294372294372294,
+    "symbol_count": 231,
+    "timestamp": "2025-11-18T10:46:49.043570Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: CI-Time Invariant Check D: Before returning KG answer, verifies invariants lightweight decompressions/tests; fails closed LLM fallback violation. BLUEPRINT DETAILS: Runtime invariants guard KG answers; violation, fails",
+    "compression_ratio": 2.3660714285714284,
+    "symbol_count": 224,
+    "timestamp": "2025-11-18T10:46:49.047505Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: CI-Time Invariant Check D: Before returning KG answer, verifies invariants lightweight decompressions/tests; fails closed LLM fallback violation. BLUEPRINT DETAILS: Runtime invariants guard KG answers; violation, fails",
+    "compression_ratio": 2.3660714285714284,
+    "symbol_count": 224,
+    "timestamp": "2025-11-18T10:46:49.048559Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: CI-Time Invariant Check D: Before returning KG answer, verifies invariants lightweight decompressions/tests; fails closed LLM fallback violation. BLUEPRINT DETAILS: Runtime invariants guard KG answers; violation, fails",
+    "compression_ratio": 2.3660714285714284,
+    "symbol_count": 224,
+    "timestamp": "2025-11-18T10:46:49.052686Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: CI-Time Invariant Check D: Before KG LLM BLUEPRINT DETAILS: Runtime KG",
+    "compression_ratio": 6.973684210526316,
+    "symbol_count": 76,
+    "timestamp": "2025-11-18T10:46:49.056434Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "T|I|C|B|R",
+    "compression_ratio": 58.888888888888886,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:49.056771Z"
+  }
+]

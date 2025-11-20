@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Hybrid Intelligence System\n\nDEFINITION:\nHybrid Intelligence System: a system that combines the strengths of human intelligence and artificial intelligence to achieve more advanced and sophisticated cognitive capabilities\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Hybrid Intelligence System'\n\nEXAMPLE APPLICATION:\nof your chosen option.\n\nNote: The next step will involve using the Neural Network Framework to support a specific application. Please be prepared to provide the necessary input and guidance to ensure the successful completion of the task.\n\nAdditionally, I would like to introduce a new concept: the \"Hybrid Intelligence System\". The Hybrid Intelligence System is a system that combines the strengths of human intelligence and artificial intelligence to achieve more advanced and sophisticated cogniti\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1205,
+    "timestamp": "2025-11-18T10:47:27.118786Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Hybrid Intelligence System\n\nDEFINITION:\nHybrid Intelligence System: a system that combines the strengths of human intelligence and artificial intelligence to achieve more advanced and sophisticated cognitive capabilities\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Hybrid Intelligence System'\n\nEXAMPLE APPLICATION:\nof your chosen option.\n\nNote: The next step will involve using the Neural Network Framework to support a specific application. Please be prepared to provide the necessary input and guidance to ensure the successful completi",
+    "compression_ratio": 2.0016611295681064,
+    "symbol_count": 602,
+    "timestamp": "2025-11-18T10:47:27.118807Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Hybrid Intelligence S D: Hybrid Intelligence S: a S combines strengths of human intelligence artificial intelligence to achieve more advanced sophisticated cognitive capabilities BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Hybrid Intelligence S' EXAMPLE APPLICATION: of your chosen option. Note: next step will involve using Neural Network Framework to support a specific application. Please be prepared to provide necessary input guidance to ensure successful completi",
+    "compression_ratio": 2.3040152963671128,
+    "symbol_count": 523,
+    "timestamp": "2025-11-18T10:47:27.122160Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Hybrid Intelligence S D: Hybrid Intelligence S: S combines strengths human intelligence artificial intelligence achieve advanced sophisticated Ω capabilities BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Hybrid Intelligence S' EXAMPLE APPLICATION: chosen option. Note: involve using Neural Network Framework support specific application. Please prepared provide necessary input guidance ensure successful completi",
+    "compression_ratio": 2.6082251082251084,
+    "symbol_count": 462,
+    "timestamp": "2025-11-18T10:47:27.128008Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Hybrid Intelligence S D: Hybrid Intelligence S: S combines strengths human intelligence artificial intelligence achieve advanced sophisticated Ω capabilities BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Hybrid Intelligence S' EXAMPLE APPLICATION: chosen option. Note: involve using Neural Network Framework support specific application. Please prepared provide necessary input guidance ensure successful completi",
+    "compression_ratio": 2.6082251082251084,
+    "symbol_count": 462,
+    "timestamp": "2025-11-18T10:47:27.131325Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Hybrid Intelligence S D: Hybrid Intelligence S: S combines strengths human intelligence artificial intelligence achieve advanced sophisticated Ω capabilities BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Hybrid Intelligence S' EXAMPLE APPLICATION: chosen option. Note: involve using Neural Network Framework support specific application. Please prepared provide necessary input guidance ensure successful completi",
+    "compression_ratio": 2.6082251082251084,
+    "symbol_count": 462,
+    "timestamp": "2025-11-18T10:47:27.134099Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Hybrid Intelligence S D: Hybrid Intelligence S: S Ω BLUEPRINT DETAILS: Θ Node Original Θ Intelligence S' EXAMPLE APPLICATION: Note: Neural Network Framework Please",
+    "compression_ratio": 7.1301775147929,
+    "symbol_count": 169,
+    "timestamp": "2025-11-18T10:47:27.140379Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Θ|Θ",
+    "compression_ratio": 241.0,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:27.140725Z"
+  }
+]

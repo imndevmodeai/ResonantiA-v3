@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: ResonantiA Protocol\n\nDEFINITION:\nThe comprehensive document and conceptual framework that defines the architecture, operational logic, core principles, and evolutionary mechanisms of the ArchE system. It is the blueprint for achieving Cognitive Resonance.\n\nBLUEPRINT DETAILS:\nThis entire document.\n\nEXAMPLE APPLICATION:\nBefore implementing a new tool, the engineer consulted the ResonantiaprotocoL to ensure its design was compliant with IAR standards.\n\nCATEGORY: CoreConcept\n\nRELATIONSHIPS:\ntype: GoverningFramework; defines: Arche systeM, Cognitive resonancE, IAR, SPR, Metacognitive shifT, SIRC, 4d thinkinG; version: 3.0, 3.1-CA; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 656,
+    "timestamp": "2025-11-18T10:46:55.078922Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: ResonantiA Protocol\n\nDEFINITION:\nThe comprehensive document and conceptual framework that defines the architecture, operational logic, core principles, and evolutionary mechanisms of the ArchE system. It is the blueprint for achieving Cognitive Resonance.\n\nBLUEPRINT DETAILS:\nThis entire document.\n\nEXAMPLE APPLICATION:\nBe",
+    "compression_ratio": 2.0,
+    "symbol_count": 328,
+    "timestamp": "2025-11-18T10:46:55.078949Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: ResonantiA P D: comprehensive document conceptual framework defines architecture, operational logic, core principles, evolutionary Ms of Æ S. It is blueprint achieving Ω. BLUEPRINT DETAILS: entire document. EXAMPLE APPLICATION: Be",
+    "compression_ratio": 2.7796610169491527,
+    "symbol_count": 236,
+    "timestamp": "2025-11-18T10:46:55.079628Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: ResonantiA P D: comprehensive document conceptual framework defines architecture, operational logic, principles, evolutionary Ms Æ S. It blueprint achieving Ω. BLUEPRINT DETAILS: entire document. EXAMPLE APPLICATION: Be",
+    "compression_ratio": 2.9155555555555557,
+    "symbol_count": 225,
+    "timestamp": "2025-11-18T10:46:55.086862Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: ResonantiA P D: comprehensive document conceptual framework defines architecture, operational logic, principles, evolutionary Ms Æ S. It blueprint achieving Ω. BLUEPRINT DETAILS: entire document. EXAMPLE APPLICATION: Be",
+    "compression_ratio": 2.9155555555555557,
+    "symbol_count": 225,
+    "timestamp": "2025-11-18T10:46:55.095297Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: ResonantiA P D: comprehensive document conceptual framework defines architecture, operational logic, principles, evolutionary Ms Æ S. It blueprint achieving Ω. BLUEPRINT DETAILS: entire document. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.954954954954955,
+    "symbol_count": 222,
+    "timestamp": "2025-11-18T10:46:55.102955Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: ResonantiA P D: Ms Æ S. It Ω. BLUEPRINT DETAILS: EXAMPLE APPLICATION:",
+    "compression_ratio": 8.746666666666666,
+    "symbol_count": 75,
+    "timestamp": "2025-11-18T10:46:55.110381Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Ω",
+    "compression_ratio": 218.66666666666666,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:55.110615Z"
+  }
+]

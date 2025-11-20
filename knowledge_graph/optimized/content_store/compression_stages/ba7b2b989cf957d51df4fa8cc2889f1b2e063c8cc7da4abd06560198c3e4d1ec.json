@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Language Generation\n\nDEFINITION:\nLanguage Generation: Next, we can integrate a Computer Vision module to enable the system to understand and interpret visual data. This will enable the system to recognize and classify objects, detect patterns, and track movements.\n\nConfidence: 0.93\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 186, type: node_format. Original SPR name: 'Generation'\n\nEXAMPLE APPLICATION:\nNode 186: Language Generation\n\nSPR: 0.930, \"Generation\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 186\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 818,
+    "timestamp": "2025-11-18T10:47:08.136008Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Language Generation\n\nDEFINITION:\nLanguage Generation: Next, we can integrate a Computer Vision module to enable the system to understand and interpret visual data. This will enable the system to recognize and classify objects, detect patterns, and track movements.\n\nConfidence: 0.93\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 186, type: node_format. Original SPR name: 'Generation'\n\nEXAMPLE APP",
+    "compression_ratio": 2.0,
+    "symbol_count": 409,
+    "timestamp": "2025-11-18T10:47:08.136033Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Language Generation D: Language Generation: Next, we integrate a Computer Vision module to enable S to understand interpret visual data. will enable S to recognize classify objects, detect patterns, track movements. Confidence: 0.93 BLUEPRINT DETAILS: Θ extracted agi.txt Node 186, type: node_F. Original Θ name: 'Generation' EXAMPLE APP",
+    "compression_ratio": 2.3848396501457727,
+    "symbol_count": 343,
+    "timestamp": "2025-11-18T10:47:08.137726Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Language Generation D: Language Generation: Next, integrate Computer Vision module enable S understand interpret visual data. enable S recognize classify objects, detect patterns, track movements. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Generation' EXAMPLE APP",
+    "compression_ratio": 2.605095541401274,
+    "symbol_count": 314,
+    "timestamp": "2025-11-18T10:47:08.146704Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Language Generation D: Language Generation: Next, integrate Computer Vision module enable S understand interpret visual data. enable S recognize classify objects, detect patterns, track movements. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Generation' EXAMPLE APP",
+    "compression_ratio": 2.605095541401274,
+    "symbol_count": 314,
+    "timestamp": "2025-11-18T10:47:08.152305Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Language Generation D: Language Generation: Next, integrate Computer Vision module enable S understand interpret visual data. enable S recognize classify objects, detect patterns, track movements. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Generation' EXAMPLE APP",
+    "compression_ratio": 2.605095541401274,
+    "symbol_count": 314,
+    "timestamp": "2025-11-18T10:47:08.162756Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Language Generation D: Language Generation: Next, Computer Vision S S Confidence: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APP",
+    "compression_ratio": 6.014705882352941,
+    "symbol_count": 136,
+    "timestamp": "2025-11-18T10:47:08.170676Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 272.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:08.173528Z"
+  }
+]

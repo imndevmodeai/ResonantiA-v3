@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Autopoietic Learning Integration\n\nDEFINITION:\nThe integration of Autopoietic Learning Loop (4-epoch learning cycle) into the Objective Generation Engine, enabling the system to learn new patterns, adapt keyword mappings, evolve domain rules, and improve SPR activation strategies from each query processed. The integration includes: (1) Query pattern history tracking (deque with maxlen=1000), (2) Learned keyword patterns dictionary (autopoietically validated), (3) Learned domain rules dictionary (evolved from experience), (4) Pattern evolution engine integration (recognizes emergent domains). The learning is triggered after each successful objective generation, storing patterns for future use.\n\nBLUEPRINT DETAILS:\nThe Autopoietic Learning Integration operates through: (1) _learn_from_query() method stores query patterns after successful generation, (2) Learned patterns are validated before use, (3) Pattern evolution engine analyzes patterns for emergent domains, (4) MetaPatternManager identifies meta-patterns in learning mechanisms, (5) Graceful fallback if learning components unavailable. Learning uses quantum probability states with evidence tracking.\n\nEXAMPLE APPLICATION:\nAfter processing a query about 'quantum computing applications', the system learns the keyword pattern 'quantum computing' → 'QuantumcomputinG' SPR, stores it in learned_keyword_patterns, and uses it in future queries, improving activation accuracy over time.\n\nCATEGORY: LearningIntegration\n\nRELATIONSHIPS:\ntype: LearningMechanism; integrates: AutopoieticlearninglooP; into: ObjectiveGenerationEngine; enables: PatternLearning, AdaptiveEvolution, ExperienceBasedImprovement; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1688,
+    "timestamp": "2025-11-18T10:45:50.392625Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Autopoietic Learning Integration\n\nDEFINITION:\nThe integration of Autopoietic Learning Loop (4-epoch learning cycle) into the Objective Generation Engine, enabling the system to learn new patterns, adapt keyword mappings, evolve domain rules, and improve SPR activation strategies from each query processed. The integration includes: (1) Query pattern history tracking (deque with maxlen=1000), (2) Learned keyword patterns dictionary (autopoietically validated), (3) Learned domain rules dictionary (evolved from experience), (4) Pattern evolution engine integration (recognizes emergent domains). The learning is triggered after each successful objective generation, storing patterns for future use.\n\nBLUEPRINT DETAILS:\nThe Autopoietic Learning Integration operates through: (1) _learn_from_query() method stores query patterns after suc",
+    "compression_ratio": 2.0,
+    "symbol_count": 844,
+    "timestamp": "2025-11-18T10:45:50.392653Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Autopoietic Learning Integration D: integration of Autopoietic Learning Loop (4-epoch learning cycle) into Objective Generation Engine, enabling S to learn new patterns, adapt keyword mappings, evolve domain rules, improve Θ activation strategies each query Ped. integration includes: (1) Query pattern history tracking (deque maxlen=1000), (2) Learned keyword patterns dictionary (autopoietically validated), (3) Learned domain rules dictionary (evolved experience), (4) Pattern evolution engine integration (recognizes emergent domains). learning is triggered after each successful objective generation, storing patterns future use. BLUEPRINT DETAILS: Autopoietic Learning Integration operates through: (1) _learn_from_query() method stores query patterns after suc",
+    "compression_ratio": 2.1836998706338937,
+    "symbol_count": 773,
+    "timestamp": "2025-11-18T10:45:50.407003Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Autopoietic Learning Integration D: integration Autopoietic Learning Loop (4-epoch learning SIRC) Objective Generation Engine, enabling S learn patterns, adapt keyword mappings, evolve domain rules, improve Θ activation strategies query Ped. integration includes: Query Π history tracking (deque maxlen=1000), Learned keyword patterns dictionary (autopoietically validated), Learned domain rules dictionary (evolved experience), Π evolution engine integration (recognizes emergent domains). learning triggered after successful objective generation, storing patterns future BLUEPRINT DETAILS: Autopoietic Learning Integration operates through: _learn_from_query() method stores query patterns after",
+    "compression_ratio": 2.4011379800853483,
+    "symbol_count": 703,
+    "timestamp": "2025-11-18T10:45:50.431406Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Autopoietic Learning Integration D: integration Autopoietic Learning Loop (4-epoch learning SIRC) Objective Generation Engine, enabling S learn patterns, adapt keyword mappings, evolve domain rules, improve Θ activation strategies query Ped. integration includes: Query Π history tracking (deque maxlen=1000), Learned keyword patterns dictionary (autopoietically validated), Learned domain rules dictionary (evolved experience), Π evolution engine integration (recognizes emergent domains). learning triggered after successful objective generation, storing patterns future BLUEPRINT DETAILS: Autopoietic Learning Integration operates through: _learn_from_query() method stores query patterns after",
+    "compression_ratio": 2.4011379800853483,
+    "symbol_count": 703,
+    "timestamp": "2025-11-18T10:45:50.443892Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Autopoietic Learning Integration D: integration Autopoietic Learning Loop (4-epoch learning SIRC) Objective Generation Engine, enabling S learn patterns, adapt keyword mappings, evolve domain rules, improve Θ activation strategies query Ped. integration includes: Query Π history tracking (deque maxlen=1000), Learned keyword patterns dictionary (autopoietically validated), Learned domain rules dictionary (evolved experience), Π evolution engine integration (recognizes emergent domains). learning triggered after successful objective generation, storing patterns future BLUEPRINT DETAILS: Autopoietic Learning Integration operates through: _learn_from_query() method stores query patterns after",
+    "compression_ratio": 2.4011379800853483,
+    "symbol_count": 703,
+    "timestamp": "2025-11-18T10:45:50.472076Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Autopoietic Learning Integration D: Autopoietic Learning Loop SIRC) Objective Generation Engine, S Θ Ped. Query Π Learned Learned Π BLUEPRINT DETAILS: Autopoietic Learning Integration",
+    "compression_ratio": 8.931216931216932,
+    "symbol_count": 189,
+    "timestamp": "2025-11-18T10:45:50.483235Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Π|Π",
+    "compression_ratio": 337.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:45:50.490322Z"
+  }
+]

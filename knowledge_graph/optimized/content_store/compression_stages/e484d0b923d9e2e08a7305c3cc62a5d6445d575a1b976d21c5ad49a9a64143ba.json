@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Predictive Problem Solving\n\nDEFINITION:\nA proactive capability where ArchE uses its predictive and analytical tools to forecast potential future problems, bottlenecks, or dissonances within a system or plan, and then formulates strategies to mitigate or prevent them before they occur.\n\nBLUEPRINT DETAILS:\nEmergent capability from the integration of predictive tools. See ResonantiA Protocol v3.1-CA Preamble.\n\nEXAMPLE APPLICATION:\nBy forecasting a future surge in user requests, PredictiveproblemsolvinG recommended scaling up server resources in advance to prevent a service outage.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: ProactiveIntervention; uses: PredictivE modelinG tooL, FutureStateAnalysiS, Causal inferencE, Agent based modelinG; aims_to_prevent: Dissonance, SystemFailure, Inefficiency; is_an_application_of: 4d thinkinG; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 869,
+    "timestamp": "2025-11-18T10:46:54.674988Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Predictive Problem Solving\n\nDEFINITION:\nA proactive capability where ArchE uses its predictive and analytical tools to forecast potential future problems, bottlenecks, or dissonances within a system or plan, and then formulates strategies to mitigate or prevent them before they occur.\n\nBLUEPRINT DETAILS:\nEmergent capability from the integration of predictive tools. See ResonantiA Protocol v3.1-CA Preamble.\n\nEXAMPLE APPLICATI",
+    "compression_ratio": 2.0023041474654377,
+    "symbol_count": 434,
+    "timestamp": "2025-11-18T10:46:54.675012Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Predictive Problem Solving D: A proactive capability Æ uses its predictive analytical tools to forecast potential future problems, bottlenecks, or dissonances within a S or plan, then formulates strategies to mitigate or prevent them before they occur. BLUEPRINT DETAILS: Emergent capability integration of predictive tools. See ResonantiA P v3.1-CA Preamble. EXAMPLE APPLICATI",
+    "compression_ratio": 2.268929503916449,
+    "symbol_count": 383,
+    "timestamp": "2025-11-18T10:46:54.675951Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: PMT Problem Solving D: A proactive capability Æ uses its PMT analytical tools to forecast potential future problems, bottlenecks, or dissonances within a S or plan, then formulates strategies to mitigate or prevent them before they occur. BLUEPRINT DETAILS: Emergent capability integration of PMT tools. See ResonantiA P v3.1-CA Preamble. EXAMPLE APPLICATI",
+    "compression_ratio": 2.4005524861878453,
+    "symbol_count": 362,
+    "timestamp": "2025-11-18T10:46:54.677252Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: PMT Problem Solving D: A proactive capability Æ PMT analytical tools forecast potential future problems, bottlenecks, dissonances within S plan, formulates strategies mitigate prevent before occur. BLUEPRINT DETAILS: Emergent capability integration PMT tools. See ResonantiA P v3.1-CA Preamble. EXAMPLE APPLICATI",
+    "compression_ratio": 2.7327044025157234,
+    "symbol_count": 318,
+    "timestamp": "2025-11-18T10:46:54.680214Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: PMT Problem Solving D: proactive capability Æ PMT analytical tools forecast potential future problems, bottlenecks, dissonances within S plan, formulates strategies mitigate prevent before occur. BLUEPRINT DETAILS: Emergent capability integration PMT tools. See ResonantiA P v3.1-CA Preamble. EXAMPLE APPLICATI",
+    "compression_ratio": 2.75,
+    "symbol_count": 316,
+    "timestamp": "2025-11-18T10:46:54.683844Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: PMT Problem Solving D: Æ PMT S BLUEPRINT DETAILS: Emergent PMT See ResonantiA P Preamble. EXAMPLE APPLICATI",
+    "compression_ratio": 7.6902654867256635,
+    "symbol_count": 113,
+    "timestamp": "2025-11-18T10:46:54.685499Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 869.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:54.685796Z"
+  }
+]

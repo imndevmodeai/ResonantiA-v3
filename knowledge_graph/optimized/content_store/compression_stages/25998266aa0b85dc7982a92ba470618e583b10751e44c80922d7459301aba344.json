@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Scenario Planning\n\nDEFINITION:\nScenario Planning: designed to provide advanced financial optimization capabilities to improve financial performance and efficiency:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Scenario Planning'\n\nEXAMPLE APPLICATION:\nty of financial predictions:\n    * Financial Modeling: Developing financial modeling techniques that enable the AI system to analyze and predict financial trends.\n    * Predictive Analytics: Implementing predictive analytics techniques that enable the AI system to forecast financial outcomes.\n    * Scenario Planning: Creating scenario planning techniques that enable the AI system to model and analyze different financial scenarios.\n\n82. AI-Driven Financial Optimization: Mastermind_AI is designed \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1139,
+    "timestamp": "2025-11-18T10:47:38.587614Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Scenario Planning\n\nDEFINITION:\nScenario Planning: designed to provide advanced financial optimization capabilities to improve financial performance and efficiency:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Scenario Planning'\n\nEXAMPLE APPLICATION:\nty of financial predictions:\n    * Financial Modeling: Developing financial modeling techniques that enable the AI system to analyze and predict financial trends.\n    * Predictive Analytics: Implementing predictive analytics techniques that enable the AI s",
+    "compression_ratio": 2.0017574692442883,
+    "symbol_count": 569,
+    "timestamp": "2025-11-18T10:47:38.587636Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Scenario Planning D: Scenario Planning: designed to provide advanced financial optimization capabilities to improve financial performance efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Scenario Planning' EXAMPLE APPLICATION: ty of financial predictions: * Financial Modeling: Developing financial modeling techniques enable AI S to analyze predict financial trends. * Predictive Analytics: Implementing predictive analytics techniques enable AI s",
+    "compression_ratio": 2.237721021611002,
+    "symbol_count": 509,
+    "timestamp": "2025-11-18T10:47:38.588833Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Scenario Planning D: Scenario Planning: designed provide advanced financial optimization capabilities improve financial performance efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Scenario Planning' EXAMPLE APPLICATION: financial predictions: Financial ABM: Developing financial ABM techniques enable AI S analyze predict financial trends. PMT Analytics: Implementing PMT analytics techniques enable AI",
+    "compression_ratio": 2.470715835140998,
+    "symbol_count": 461,
+    "timestamp": "2025-11-18T10:47:38.591677Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Scenario Planning D: Scenario Planning: designed provide advanced financial optimization capabilities improve financial performance efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Scenario Planning' EXAMPLE APPLICATION: financial predictions: Financial ABM: Developing financial ABM techniques enable AI S analyze predict financial trends. PMT Analytics: Implementing PMT analytics techniques enable AI",
+    "compression_ratio": 2.470715835140998,
+    "symbol_count": 461,
+    "timestamp": "2025-11-18T10:47:38.595519Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Scenario Planning D: Scenario Planning: designed provide advanced financial optimization capabilities improve financial performance efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Scenario Planning' EXAMPLE APPLICATION: financial predictions: Financial ABM: Developing financial ABM techniques enable AI S analyze predict financial trends. PMT Analytics: Implementing PMT analytics techniques enable AI",
+    "compression_ratio": 2.470715835140998,
+    "symbol_count": 461,
+    "timestamp": "2025-11-18T10:47:38.597662Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Scenario Planning D: Scenario Planning: BLUEPRINT DETAILS: Θ Node Original Θ Planning' EXAMPLE APPLICATION: Financial ABM: Developing ABM AI S PMT Analytics: Implementing PMT AI",
+    "compression_ratio": 6.224043715846994,
+    "symbol_count": 183,
+    "timestamp": "2025-11-18T10:47:38.599617Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 379.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.599906Z"
+  }
+]

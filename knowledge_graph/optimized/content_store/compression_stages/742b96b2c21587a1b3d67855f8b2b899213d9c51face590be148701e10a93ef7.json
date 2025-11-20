@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Knowledge Graph Integrator\n\nDEFINITION:\nMints SPR definitions from compressed patterns, updates Tapestry nodes/edges, attaches provenance and learning metrics.\n\n[From agi.txt]: (['Data Extraction', 'Natural Language Processing', 'Machine Learning'], [('Data Extraction', 'Natural Language Processing'), ('Natural Language Processing', 'Machine Learning')])\n\n[From Codebase]: Class: KnowledgeGraphIntegrator\n\nKnowledge Graph Integrator - PhD-Level Implementation\nExplicitly integrates with knowledge graph for enhanced synergy analysis\n\nMethods: __init__, load_knowledge_graph, _create_fallback_graph, _build_module_mappings, get_module_node_info, calculate_spr_synergy, find_relationships, get_capability_overlap\n\nBLUEPRINT DETAILS:\nMints new or reuses existing SPRs; updates knowledge_tapestry.json with typed relationships and attaches provenance/metrics.\n\nEXAMPLE APPLICATION:\nAdded 'InvariantmininG' SPR with links to VettingAgenT and UniversalabstractioN; recorded source and excerpt hash.\n\nCATEGORY: SystemComponent\n\nRELATIONSHIPS:\ntype: Integration; consumes: KnowledgeextractoR, ZeptopatterncompressoR; updates: knowledge_tapestry, spr_definitions\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1369,
+    "timestamp": "2025-11-18T10:46:49.347274Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Knowledge Graph Integrator\n\nDEFINITION:\nMints SPR definitions from compressed patterns, updates Tapestry nodes/edges, attaches provenance and learning metrics.\n\n[From agi.txt]: (['Data Extraction', 'Natural Language Processing', 'Machine Learning'], [('Data Extraction', 'Natural Language Processing'), ('Natural Language Processing', 'Machine Learning')])\n\n[From Codebase]: Class: KnowledgeGraphIntegrator\n\nKnowledge Graph Integrator - PhD-Level Implementation\nExplicitly integrates with knowledge graph for enhanced synergy analysis\n\nMethods: __init__, load_knowledge_graph, _create_fallback_graph, _build_module_mappings, get_module_node_info, calculate_spr_synergy, find_rel",
+    "compression_ratio": 2.0014619883040936,
+    "symbol_count": 684,
+    "timestamp": "2025-11-18T10:46:49.347303Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: K Integrator D: Mints Θ Ds compressed patterns, updates Tapestry nodes/edges, attaches provenance learning metrics. [ agi.txt]: (['Data Extraction', 'Natural Language Ping', 'Machine Learning'], [('Data Extraction', 'Natural Language Ping'), ('Natural Language Ping', 'Machine Learning')]) [ Codebase]: Class: KnOwledgeGraphIntegrator K Integrator - PhD-Level I Explicitly integrates K enhanced synergy analysis Methods: __init__, load_KnOwledge_graph, _create_fallback_graph, _build_module_mappings, get_module_node_info, calculate_Θ_synergy, find_rel",
+    "compression_ratio": 2.453405017921147,
+    "symbol_count": 558,
+    "timestamp": "2025-11-18T10:46:49.350942Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: K Integrator D: Mints Θ Ds compressed patterns, updates Tapestry nodes/edges, attaches provenance learning metrics. agi.txt]: (['Data Extraction', 'Natural Language Ping', 'Machine Learning'], [('Data Extraction', 'Natural Language Ping'), ('Natural Language Ping', 'Machine Learning')]) Codebase]: Class: KnOwledgeGraphIntegrator K Integrator PhD-Level I Explicitly integrates K enhanced synergy analysis Methods: __init__, load_KnOwledge_graph, _create_fallback_graph, _build_module_mappings, get_module_node_info, calculate_Θ_synergy, find_rel",
+    "compression_ratio": 2.4800724637681157,
+    "symbol_count": 552,
+    "timestamp": "2025-11-18T10:46:49.354589Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: K Integrator D: Mints Θ Ds compressed patterns, updates Tapestry nodes/edges, attaches provenance learning metrics. agi.txt]: (['Data Extraction', 'Natural Language Ping', 'Machine Learning'], [('Data Extraction', 'Natural Language Ping'), ('Natural Language Ping', 'Machine Learning')]) Codebase]: Class: KnOwledgeGraphIntegrator K Integrator PhD-Level I Explicitly integrates K enhanced synergy analysis Methods: __init__, load_KnOwledge_graph, _create_fallback_graph, _build_module_mappings, get_module_node_info, calculate_Θ_synergy, find_rel",
+    "compression_ratio": 2.4800724637681157,
+    "symbol_count": 552,
+    "timestamp": "2025-11-18T10:46:49.360128Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: K Integrator D: Mints Θ Ds compressed patterns, updates Tapestry nodes/edges, attaches provenance learning metrics. agi.txt]: (['Data Extraction', 'Natural Language Ping', 'Machine Learning'], [('Data Extraction', 'Natural Language Ping'), ('Natural Language Ping', 'Machine Learning')]) Codebase]: Class: KnOwledgeGraphIntegrator K Integrator PhD-Level I Explicitly integrates K enhanced synergy analysis Methods: __init__, load_KnOwledge_graph, _create_fallback_graph, _build_module_mappings, get_module_node_info, calculate_Θ_synergy, find_rel",
+    "compression_ratio": 2.4800724637681157,
+    "symbol_count": 552,
+    "timestamp": "2025-11-18T10:46:49.370683Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: K Integrator D: Mints Θ Ds Tapestry Extraction', Language Ping', Learning'], Extraction', Language Ping'), Language Ping', Learning')]) Codebase]: Class: KnOwledgeGraphIntegrator K Integrator PhD-Level I Explicitly K Methods: calculate_Θ_synergy,",
+    "compression_ratio": 5.432539682539683,
+    "symbol_count": 252,
+    "timestamp": "2025-11-18T10:46:49.376762Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 456.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:49.377172Z"
+  }
+]

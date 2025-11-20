@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: User Account Management\n\nDEFINITION:\nUser Account Management: available:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'User Account Management'\n\nEXAMPLE APPLICATION:\nhe following user roles are available:\n\nUser Accounts:\n\nYou can create new user accounts or manage existing ones. Please select an option:\n\nUser Account Creation:\n\nIf you select option 1, I will guide you through the process of creating a new user account. Please provide the following information:\n\nUser Account Management:\n\nIf you select option 2, I will guide you through the process of managing an existing user account. Please provide the username of the account you want to manage.\n\nUser Accoun\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1054,
+    "timestamp": "2025-11-18T10:47:49.584162Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: User Account Management\n\nDEFINITION:\nUser Account Management: available:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'User Account Management'\n\nEXAMPLE APPLICATION:\nhe following user roles are available:\n\nUser Accounts:\n\nYou can create new user accounts or manage existing ones. Please select an option:\n\nUser Account Creation:\n\nIf you select option 1, I will guide you through the process of creating a new user account. Please provide the following information:\n",
+    "compression_ratio": 2.0,
+    "symbol_count": 527,
+    "timestamp": "2025-11-18T10:47:49.584185Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: User Account Management D: User Account Management: available: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'User Account Management' EXAMPLE APPLICATION: he following user roles available: User Accounts: create new user accounts or manage existing ones. Please select an option: User Account Creation: If select option 1, I will guide through P of creating a new user account. Please provide following inFion:",
+    "compression_ratio": 2.2813852813852815,
+    "symbol_count": 462,
+    "timestamp": "2025-11-18T10:47:49.585176Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: User Account Management D: User Account Management: available: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'User Account Management' EXAMPLE APPLICATION: following roles available: User Accounts: create accounts manage existing ones. Please select option: User Account Creation: If select option I guide through P creating account. Please provide following inFion:",
+    "compression_ratio": 2.5458937198067635,
+    "symbol_count": 414,
+    "timestamp": "2025-11-18T10:47:49.596025Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: User Account Management D: User Account Management: available: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'User Account Management' EXAMPLE APPLICATION: following roles available: User Accounts: create accounts manage existing ones. Please select option: User Account Creation: If select option I guide through P creating account. Please provide following inFion:",
+    "compression_ratio": 2.5458937198067635,
+    "symbol_count": 414,
+    "timestamp": "2025-11-18T10:47:49.602651Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: User Account Management D: User Account Management: available: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'User Account Management' EXAMPLE APPLICATION: following roles available: User Accounts: create accounts manage existing ones. Please select option: User Account Creation: If select option I guide through P creating account. Please provide following inFion:",
+    "compression_ratio": 2.5458937198067635,
+    "symbol_count": 414,
+    "timestamp": "2025-11-18T10:47:49.615798Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: User Account Management D: User Account Management: BLUEPRINT DETAILS: Θ Node Original Θ Account Management' EXAMPLE APPLICATION: User Accounts: Please User Account Creation: If I P Please",
+    "compression_ratio": 5.43298969072165,
+    "symbol_count": 194,
+    "timestamp": "2025-11-18T10:47:49.624916Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 351.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:49.625271Z"
+  }
+]

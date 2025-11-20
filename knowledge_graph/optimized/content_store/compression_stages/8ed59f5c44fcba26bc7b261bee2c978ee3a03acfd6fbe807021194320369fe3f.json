@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Human Factor Modeling\n\nDEFINITION:\nA conceptual capability within Complex System Visioning to realistically simulate the influence of human behaviors, cognitive biases, emotional states (e.g., FearLeveL, MoralE), and social interactions on emergent system dynamics. Integrates with Agent-Based Modeling. Enhanced with systemic family and relationship dynamics from Hellinger's work, including generational patterns, systemic conscience, belonging needs, and balance of giving/taking.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.1-CA, Section 3.15, Section 7.14 (ABM enhancements).\n\nEXAMPLE APPLICATION:\nPractical application of Human Factor Modeling within the ResonantiA Protocol framework\n\nCATEGORY: SimulationComponent\n\nRELATIONSHIPS:\ntype: SimulationAttribute; part_of: Complex system visioninG, Agent based modelinG; models_aspects: CognitiveBiases, EmotionalStates, SocialInteractions, Family system dynamics, Generational patterns, Systemic relationships; enhanced_by_systemic_principles: OrdersoflovE, SystemicbelonginG, BalanceofgivingandtakinG, SystemicentanglemenT, GenerationallegacY, SystemicconsciencE; contributes_to: EmergentBehaviorRealism, Relationship system accuracy, Multi-generational analysis; supports_conceptual: PsychologicalProfiling, BehavioralEconomics, Family systems therapy, Systemic psychotherapy; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1356,
+    "timestamp": "2025-11-18T10:46:48.743799Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Human Factor Modeling\n\nDEFINITION:\nA conceptual capability within Complex System Visioning to realistically simulate the influence of human behaviors, cognitive biases, emotional states (e.g., FearLeveL, MoralE), and social interactions on emergent system dynamics. Integrates with Agent-Based Modeling. Enhanced with systemic family and relationship dynamics from Hellinger's work, including generational patterns, systemic conscience, belonging needs, and balance of giving/taking.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.1-CA, Section 3.15, Section 7.14 (ABM enhancements).\n\nEXAMPLE APPLICATION:\nPractical application of Human Factor Modeling within the Resonant",
+    "compression_ratio": 2.0,
+    "symbol_count": 678,
+    "timestamp": "2025-11-18T10:46:48.743820Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Human Factor Modeling D: A conceptual capability within Complex S Visioning to realistically simulate influence of human behaviors, cognitive biases, emotional states (e.g., FearLeveL, MoralE), social interactions on emergent S dynamics. Integrates Agent-Based Modeling. Enhanced Sic family relationship dynamics Hellinger's work, including generational patterns, Sic conscience, belonging needs, balance of giving/taking. BLUEPRINT DETAILS: See ResonantiA P v3.1-CA, Section 3.15, Section 7.14 (ABM enhancements). EXAMPLE APPLICATION: Practical application of Human Factor Modeling within Resonant",
+    "compression_ratio": 2.2450331125827816,
+    "symbol_count": 604,
+    "timestamp": "2025-11-18T10:46:48.744850Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Human Factor ABM D: A conceptual capability within Complex S Visioning realistically simulate influence human behaviors, Ω biases, emotional states (e.g., FearLeveL, MoralE), social interactions emergent S dynamics. Integrates ABM-ABM ABM. Enhanced Sic family relationship dynamics Hellinger's work, including generational patterns, Sic conscience, belonging needs, balance giving/taking. BLUEPRINT DETAILS: See ResonantiA P v3.1-CA, Section 3.15, Section enhancements). EXAMPLE APPLICATION: Practical application Human Factor ABM within Resonant",
+    "compression_ratio": 2.4565217391304346,
+    "symbol_count": 552,
+    "timestamp": "2025-11-18T10:46:48.751192Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Human Factor ABM D: A conceptual capability within Complex S Visioning realistically simulate influence human behaviors, Ω biases, emotional states (e.g., FearLeveL, MoralE), social interactions emergent S dynamics. Integrates ABM-ABM ABM. Enhanced Sic family relationship dynamics Hellinger's work, including generational patterns, Sic conscience, belonging needs, balance giving/taking. BLUEPRINT DETAILS: See ResonantiA P v3.1-CA, Section 3.15, Section enhancements). EXAMPLE APPLICATION: Practical application Human Factor ABM within Resonant",
+    "compression_ratio": 2.4565217391304346,
+    "symbol_count": 552,
+    "timestamp": "2025-11-18T10:46:48.757637Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Human Factor ABM D: conceptual capability within Complex S Visioning realistically simulate influence human behaviors, Ω biases, emotional states (e.g., FearLeveL, MoralE), social interactions emergent S dynamics. Integrates ABM-ABM ABM. Enhanced Sic family relationship dynamics Hellinger's work, including generational patterns, Sic conscience, belonging needs, balance giving/taking. BLUEPRINT DETAILS: See ResonantiA P v3.1-CA, Section 3.15, Section enhancements). EXAMPLE APPLICATION: Practical application Human Factor ABM within Resonant",
+    "compression_ratio": 2.4654545454545453,
+    "symbol_count": 550,
+    "timestamp": "2025-11-18T10:46:48.763609Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Human Factor ABM D: Complex S Visioning Ω FearLeveL, MoralE), S Integrates ABM-ABM ABM. Enhanced Sic Hellinger's Sic BLUEPRINT DETAILS: See ResonantiA P Section Section EXAMPLE APPLICATION: Practical Human Factor ABM Resonant",
+    "compression_ratio": 5.87012987012987,
+    "symbol_count": 231,
+    "timestamp": "2025-11-18T10:46:48.769700Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω",
+    "compression_ratio": 1356.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:48.771057Z"
+  }
+]

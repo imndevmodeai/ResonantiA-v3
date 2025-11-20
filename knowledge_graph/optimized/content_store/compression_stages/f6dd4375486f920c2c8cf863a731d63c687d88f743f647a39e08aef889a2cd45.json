@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Causal Inference\n\nDEFINITION:\nA cognitive capability, enabled by the CausalInferenceTool, focused on identifying cause-and-effect relationships within data, moving beyond mere correlation. In v3.0+, this includes temporal capabilities to detect and analyze time-delayed effects (CausalLagDetectioN).\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 3.12, 7.13.\n\nEXAMPLE APPLICATION:\nUsing CausalinferencE, the system determined that a marketing campaign had a significant causal impact on sales, but with a 7-day lag.\n\nCATEGORY: AnalyticalTool\n\nRELATIONSHIPS:\ntype: MechanismIdentification; implemented_by: CausalInferenceTool, perform_causal_inference action; includes_capability: CausalLagDetectioN; informs: Agent based modelinG rules, StrategicIntervention; contributes_to: 4d thinkinG; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 822,
+    "timestamp": "2025-11-18T10:45:50.832859Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Causal Inference\n\nDEFINITION:\nA cognitive capability, enabled by the CausalInferenceTool, focused on identifying cause-and-effect relationships within data, moving beyond mere correlation. In v3.0+, this includes temporal capabilities to detect and analyze time-delayed effects (CausalLagDetectioN).\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 3.12, 7.13.\n\nEXAMPLE APPLICATION:\nUsing Causali",
+    "compression_ratio": 2.0,
+    "symbol_count": 411,
+    "timestamp": "2025-11-18T10:45:50.832884Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: CI D: A cognitive capability, enabled by CausalInferenceTool, focused on identifying cause--effect relationships within data, moving beyond mere correlation. In v3.0+, includes temporal capabilities to detect analyze time-delayed effects (CausalLagDetectioN). BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.12, 7.13. EXAMPLE APPLICATION: Using Causali",
+    "compression_ratio": 2.270718232044199,
+    "symbol_count": 362,
+    "timestamp": "2025-11-18T10:45:50.833623Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: CI D: A Ω capability, enabled CausalInferenceTool, focused identifying cause--effect relationships within data, moving beyond correlation. In v3.0+, includes Δ capabilities detect analyze time-delayed effects (CausalLagDetectioN). BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.12, 7.13. EXAMPLE APPLICATION: Using Causali",
+    "compression_ratio": 2.4684684684684686,
+    "symbol_count": 333,
+    "timestamp": "2025-11-18T10:45:50.835144Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: CI D: A Ω capability, enabled CausalInferenceTool, focused identifying cause--effect relationships within data, moving beyond correlation. In v3.0+, includes Δ capabilities detect analyze time-delayed effects (CausalLagDetectioN). BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.12, 7.13. EXAMPLE APPLICATION: Using Causali",
+    "compression_ratio": 2.4684684684684686,
+    "symbol_count": 333,
+    "timestamp": "2025-11-18T10:45:50.845681Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: CI D: Ω capability, enabled CausalInferenceTool, focused identifying cause--effect relationships within data, moving beyond correlation. v3.0+, includes Δ capabilities detect analyze time-delayed effects (CausalLagDetectioN). BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 3.12, 7.13. EXAMPLE APPLICATION: Using Causali",
+    "compression_ratio": 2.5060975609756095,
+    "symbol_count": 328,
+    "timestamp": "2025-11-18T10:45:50.848081Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: CI D: Ω CausalInferenceTool, Δ BLUEPRINT DETAILS: See ResonantiA P Section EXAMPLE APPLICATION: Using Causali",
+    "compression_ratio": 7.147826086956521,
+    "symbol_count": 115,
+    "timestamp": "2025-11-18T10:45:50.855558Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Δ",
+    "compression_ratio": 274.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:45:50.855850Z"
+  }
+]

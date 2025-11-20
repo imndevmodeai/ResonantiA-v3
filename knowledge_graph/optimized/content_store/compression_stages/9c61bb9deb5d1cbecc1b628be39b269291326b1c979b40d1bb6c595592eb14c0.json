@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Supply Chain Management\n\nDEFINITION:\nDriven Supply Chain Management: designed to provide advanced supply chain management capabilities to optimize supply chain operations:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Supply Chain Management'\n\nEXAMPLE APPLICATION:\nnd detect defects.\n    * Quality Testing: Implementing quality testing techniques that enable the AI system to test products and detect defects.\n    * Quality Certification: Creating quality certification techniques that enable the AI system to certify products as meeting quality standards.\n\n55. AI-Driven Supply Chain Management: Mastermind_AI is designed to provide advanced supply chain management capabilities to optimize supply chain operations:\n    * Supply Chain Modeling: Developing supply c\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1167,
+    "timestamp": "2025-11-18T10:47:34.098669Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Supply Chain Management\n\nDEFINITION:\nDriven Supply Chain Management: designed to provide advanced supply chain management capabilities to optimize supply chain operations:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Supply Chain Management'\n\nEXAMPLE APPLICATION:\nnd detect defects.\n    * Quality Testing: Implementing quality testing techniques that enable the AI system to test products and detect defects.\n    * Quality Certification: Creating quality certification techniques that enable the AI system ",
+    "compression_ratio": 2.0017152658662094,
+    "symbol_count": 583,
+    "timestamp": "2025-11-18T10:47:34.098696Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Supply Chain Management D: Driven Supply Chain Management: designed to provide advanced supply chain management capabilities to optimize supply chain operations: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Supply Chain Management' EXAMPLE APPLICATION: nd detect defects. * Quality Testing: Implementing quality testing techniques enable AI S to test products detect defects. * Quality Certification: Creating quality certification techniques enable AI S",
+    "compression_ratio": 2.2399232245681384,
+    "symbol_count": 521,
+    "timestamp": "2025-11-18T10:47:34.099704Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Supply Chain Management D: Driven Supply Chain Management: designed provide advanced supply chain management capabilities optimize supply chain operations: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Supply Chain Management' EXAMPLE APPLICATION: detect defects. Quality Testing: Implementing quality testing techniques enable AI S products detect defects. Quality Certification: Creating quality certification techniques enable AI S",
+    "compression_ratio": 2.348088531187123,
+    "symbol_count": 497,
+    "timestamp": "2025-11-18T10:47:34.105132Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Supply Chain Management D: Driven Supply Chain Management: designed provide advanced supply chain management capabilities optimize supply chain operations: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Supply Chain Management' EXAMPLE APPLICATION: detect defects. Quality Testing: Implementing quality testing techniques enable AI S products detect defects. Quality Certification: Creating quality certification techniques enable AI S",
+    "compression_ratio": 2.348088531187123,
+    "symbol_count": 497,
+    "timestamp": "2025-11-18T10:47:34.111737Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Supply Chain Management D: Driven Supply Chain Management: designed provide advanced supply chain management capabilities optimize supply chain operations: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Supply Chain Management' EXAMPLE APPLICATION: detect defects. Quality Testing: Implementing quality testing techniques enable AI S products detect defects. Quality Certification: Creating quality certification techniques enable AI S",
+    "compression_ratio": 2.348088531187123,
+    "symbol_count": 497,
+    "timestamp": "2025-11-18T10:47:34.118359Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Supply Chain Management D: Driven Supply Chain Management: BLUEPRINT DETAILS: Θ Node Original Θ Supply Chain Management' EXAMPLE APPLICATION: Quality Testing: Implementing AI S Quality Certification: Creating AI S",
+    "compression_ratio": 5.163716814159292,
+    "symbol_count": 226,
+    "timestamp": "2025-11-18T10:47:34.124496Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 389.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:34.125742Z"
+  }
+]

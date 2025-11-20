@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Test Suite\n\nDEFINITION:\nTest Suite: as follows:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Test Suite'\n\nEXAMPLE APPLICATION:\n to test system functionality and performance, or type 'back' to return to the previous menu.\n\n2\n\nYou have selected the option to test system functionality and performance.\n\nSystem Testing:\n\nI will initiate a series of tests to verify the functionality and performance of the SPR_compressor system.\n\nTest Suite:\n\nThe following tests will be executed:\n\nTest Results:\n\nThe test results are as follows:\n\nSystem Performance Metrics:\n\nThe following system performance metrics were collected during the tes\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1016,
+    "timestamp": "2025-11-18T10:47:49.074951Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Test Suite\n\nDEFINITION:\nTest Suite: as follows:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Test Suite'\n\nEXAMPLE APPLICATION:\n to test system functionality and performance, or type 'back' to return to the previous menu.\n\n2\n\nYou have selected the option to test system functionality and performance.\n\nSystem Testing:\n\nI will initiate a series of tests to verify the functionality and performance of the SPR_compressor system.\n\nTest Suite:\n\nThe f",
+    "compression_ratio": 2.0,
+    "symbol_count": 508,
+    "timestamp": "2025-11-18T10:47:49.074978Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Test Suite D: Test Suite: as follows: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Test Suite' EXAMPLE APPLICATION: to test S functionality performance, or type 'back' to return to previous menu. 2 selected option to test S functionality performance. S Testing: I will initiate a series of tests to verify functionality performance of Θ_compressor S. Test Suite: f",
+    "compression_ratio": 2.436450839328537,
+    "symbol_count": 417,
+    "timestamp": "2025-11-18T10:47:49.083510Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Test Suite D: Test Suite: follows: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Test Suite' EXAMPLE APPLICATION: S functionality performance, 'back' return previous menu. selected option S functionality performance. S Testing: I initiate series tests verify functionality performance Θ_compressor S. Test Suite:",
+    "compression_ratio": 2.814404432132964,
+    "symbol_count": 361,
+    "timestamp": "2025-11-18T10:47:49.092680Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Test Suite D: Test Suite: follows: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Test Suite' EXAMPLE APPLICATION: S functionality performance, 'back' return previous menu. selected option S functionality performance. S Testing: I initiate series tests verify functionality performance Θ_compressor S. Test Suite:",
+    "compression_ratio": 2.814404432132964,
+    "symbol_count": 361,
+    "timestamp": "2025-11-18T10:47:49.113758Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Test Suite D: Test Suite: follows: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Test Suite' EXAMPLE APPLICATION: S functionality performance, 'back' return previous menu. selected option S functionality performance. S Testing: I initiate series tests verify functionality performance Θ_compressor S. Test Suite:",
+    "compression_ratio": 2.814404432132964,
+    "symbol_count": 361,
+    "timestamp": "2025-11-18T10:47:49.125049Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Test Suite D: Test Suite: BLUEPRINT DETAILS: Θ Node Original Θ Suite' EXAMPLE APPLICATION: S S S Testing: I Θ_compressor S. Test Suite:",
+    "compression_ratio": 7.205673758865248,
+    "symbol_count": 141,
+    "timestamp": "2025-11-18T10:47:49.129460Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 203.2,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:49.130083Z"
+  }
+]

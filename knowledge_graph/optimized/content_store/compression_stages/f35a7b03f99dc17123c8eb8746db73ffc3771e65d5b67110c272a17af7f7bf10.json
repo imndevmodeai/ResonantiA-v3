@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Documentation Review\n\nDEFINITION:\nDocumentation Review: running smoothly and securely\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Documentation Review'\n\nEXAMPLE APPLICATION:\ning and logging. Please ensure that you review the metrics and logs regularly to ensure the system is running smoothly and securely.\n\n5\n\nYou have selected the option to review and update system documentation.\n\nSystem Documentation:\n\nI will provide you with the system documentation, which includes:\n\nDocumentation Review:\n\nPlease review the system documentation to ensure that it is accurate and up-to-date.\n\nDocumentation Update:\n\nIf you need to update any part of the documentation, please let me k\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1064,
+    "timestamp": "2025-11-18T10:47:50.157152Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Documentation Review\n\nDEFINITION:\nDocumentation Review: running smoothly and securely\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Documentation Review'\n\nEXAMPLE APPLICATION:\ning and logging. Please ensure that you review the metrics and logs regularly to ensure the system is running smoothly and securely.\n\n5\n\nYou have selected the option to review and update system documentation.\n\nSystem Documentation:\n\nI will provide you with the system documentation, which inclu",
+    "compression_ratio": 2.0,
+    "symbol_count": 532,
+    "timestamp": "2025-11-18T10:47:50.157178Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Documentation Review D: Documentation Review: running smoothly securely BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Documentation Review' EXAMPLE APPLICATION: ing logging. Please ensure review metrics logs regularly to ensure S is running smoothly securely. 5 selected option to review update S documentation. S Documentation: I will provide S documentation, inclu",
+    "compression_ratio": 2.5454545454545454,
+    "symbol_count": 418,
+    "timestamp": "2025-11-18T10:47:50.158189Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Documentation Review D: Documentation Review: running smoothly securely BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Review' EXAMPLE APPLICATION: logging. Please ensure review metrics regularly ensure S running smoothly securely. selected option review update S documentation. S Documentation: I provide S documentation, inclu",
+    "compression_ratio": 2.7282051282051283,
+    "symbol_count": 390,
+    "timestamp": "2025-11-18T10:47:50.161978Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Documentation Review D: Documentation Review: running smoothly securely BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Review' EXAMPLE APPLICATION: logging. Please ensure review metrics regularly ensure S running smoothly securely. selected option review update S documentation. S Documentation: I provide S documentation, inclu",
+    "compression_ratio": 2.7282051282051283,
+    "symbol_count": 390,
+    "timestamp": "2025-11-18T10:47:50.163915Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Documentation Review D: Documentation Review: running smoothly securely BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Review' EXAMPLE APPLICATION: logging. Please ensure review metrics regularly ensure S running smoothly securely. selected option review update S documentation. S Documentation: I provide S documentation, inclu",
+    "compression_ratio": 2.7282051282051283,
+    "symbol_count": 390,
+    "timestamp": "2025-11-18T10:47:50.167922Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Documentation Review D: Documentation Review: BLUEPRINT DETAILS: Θ Node Original Θ Review' EXAMPLE APPLICATION: Please S S S Documentation: I S",
+    "compression_ratio": 7.140939597315437,
+    "symbol_count": 149,
+    "timestamp": "2025-11-18T10:47:50.169716Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 354.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:50.170029Z"
+  }
+]

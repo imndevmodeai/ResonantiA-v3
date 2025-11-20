@@ -36,14 +36,29 @@ init_status = {
 # 0. Virtual Environment Verification
 # ============================================================================
 print("\n[0] Verifying Virtual Environment Activation...")
-if os.environ.get('VIRTUAL_ENV'):
-    print(f"✅ Virtual environment activated: {os.environ.get('VIRTUAL_ENV')}")
-    init_status["virtual_env"] = True
+# Check for VIRTUAL_ENV environment variable (set when venv is activated)
+virtual_env_path = os.environ.get('VIRTUAL_ENV')
+# Also check if Python executable is inside a venv directory (for direct execution)
+python_executable = sys.executable
+venv_detected = False
+
+if virtual_env_path:
+    print(f"✅ Virtual environment activated: {virtual_env_path}")
+    venv_detected = True
+elif 'arche_env' in python_executable or 'venv' in python_executable or '.venv' in python_executable:
+    # Python executable is inside a venv directory
+    venv_path = Path(python_executable).parent.parent
+    print(f"✅ Virtual environment detected via Python path: {venv_path}")
+    print(f"   Python executable: {python_executable}")
+    venv_detected = True
 else:
-    print("⚠️  WARNING: Virtual environment not detected in environment variables")
-    print("   Please ensure 'arche_env' is activated before running this script")
-    print("   Run: source arche_env/bin/activate")
-    # Continue anyway for testing, but warn user
+    print("⚠️  WARNING: Virtual environment not detected")
+    print(f"   Python executable: {python_executable}")
+    print("   To activate: source arche_env/bin/activate")
+    print("   Or run using: arche_env/bin/python arche_initialization.py")
+
+if venv_detected:
+    init_status["virtual_env"] = True
 
 # ============================================================================
 # 0.1. Zepto Compression/Decompression System Initialization
@@ -92,7 +107,7 @@ try:
         
         if compress:
             # Compress to Zepto SPR
-            zepto_spr, codex_entries = crystallization_engine.distill_to_spr(
+            zepto_spr, codex_entries, compression_stages_list = crystallization_engine.distill_to_spr(
                 content,
                 target_stage="Zepto"
             )
@@ -117,7 +132,7 @@ try:
                         'symbol_count': stage.symbol_count,
                         'timestamp': stage.timestamp
                     }
-                    for stage in crystallization_engine.compression_history
+                    for stage in compression_stages_list
                 ]
             }
         else:
@@ -308,6 +323,12 @@ if all_systems_online:
     print("✅ Systems stored and ready for use")
 
 print("\n🚀 ArchE Initialization Complete!")
+
+
+
+
+
+
 
 
 

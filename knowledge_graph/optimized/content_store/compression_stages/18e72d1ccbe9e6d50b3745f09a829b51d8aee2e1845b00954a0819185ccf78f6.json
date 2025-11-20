@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Supervised Learning\nNode\n\nDEFINITION:\nSupervised Learning\nNode: Detailed description of the system's machine learning capabilities, including its algorithms, models, and training data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Supervised Learning\nNode'\n\nEXAMPLE APPLICATION:\nmponents, interfaces, and data flows.\nEdges:\nNode 10: Knowledge Graph\nNode 11: Reasoning Engine\nNode 12: Learning Mechanism\nNode 5: Machine Learning\n\nDescription: Detailed description of the system's machine learning capabilities, including its algorithms, models, and training data.\nEdges:\nNode 13: Supervised Learning\nNode 14: Unsupervised Learning\nNode 15: Reinforcement Learning\nNode 6: Natural Language Processing\n\nDescription: Detailed description of the system's natural language processing ca\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1166,
+    "timestamp": "2025-11-18T10:47:40.881815Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Supervised Learning\nNode\n\nDEFINITION:\nSupervised Learning\nNode: Detailed description of the system's machine learning capabilities, including its algorithms, models, and training data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Supervised Learning\nNode'\n\nEXAMPLE APPLICATION:\nmponents, interfaces, and data flows.\nEdges:\nNode 10: Knowledge Graph\nNode 11: Reasoning Engine\nNode 12: Learning Mechanism\nNode 5: Machine Learning\n\nDescription: Detailed description of the system's machine learning capabilities, including it",
+    "compression_ratio": 2.0,
+    "symbol_count": 583,
+    "timestamp": "2025-11-18T10:47:40.881840Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Supervised Learning Node D: Supervised Learning Node: Detailed description of S's machine learning capabilities, including its algorithms, models, training data BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Supervised Learning Node' EXAMPLE APPLICATION: mponents, interfaces, data flows. Edges: Node 10: K Node 11: Reasoning Engine Node 12: Learning M Node 5: Machine Learning Description: Detailed description of S's machine learning capabilities, including it",
+    "compression_ratio": 2.2729044834307994,
+    "symbol_count": 513,
+    "timestamp": "2025-11-18T10:47:40.884302Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Supervised Learning Node D: Supervised Learning Node: Detailed description S's machine learning capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Supervised Learning Node' EXAMPLE APPLICATION: mponents, interfaces, flows. Edges: Node K Node Reasoning Engine Node Learning M Node Machine Learning Description: Detailed description S's machine learning capabilities, including",
+    "compression_ratio": 2.4703389830508473,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:40.888486Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Supervised Learning Node D: Supervised Learning Node: Detailed description S's machine learning capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Supervised Learning Node' EXAMPLE APPLICATION: mponents, interfaces, flows. Edges: Node K Node Reasoning Engine Node Learning M Node Machine Learning Description: Detailed description S's machine learning capabilities, including",
+    "compression_ratio": 2.4703389830508473,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:40.894807Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Supervised Learning Node D: Supervised Learning Node: Detailed description S's machine learning capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Supervised Learning Node' EXAMPLE APPLICATION: mponents, interfaces, flows. Edges: Node K Node Reasoning Engine Node Learning M Node Machine Learning Description: Detailed description S's machine learning capabilities, including",
+    "compression_ratio": 2.4703389830508473,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:40.902159Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Supervised Learning Node D: Supervised Learning Node: Detailed S's BLUEPRINT DETAILS: Θ Node Original Θ Learning Node' EXAMPLE APPLICATION: Edges: Node K Node Reasoning Engine Node Learning M Node Machine Learning Description: Detailed S's",
+    "compression_ratio": 4.759183673469388,
+    "symbol_count": 245,
+    "timestamp": "2025-11-18T10:47:40.908668Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 388.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:40.909069Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Supply Chain Visibility\n\nDEFINITION:\nSupply Chain Visibility: a comprehensive and complex document, and I will continue to provide updates and expansions as needed\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Supply Chain Visibility'\n\nEXAMPLE APPLICATION:\n:\n    * Supply Chain Modeling: Developing supply chain modeling techniques that enable the AI system to model and simulate supply chain operations.\n    * Supply Chain Optimization: Implementing supply chain optimization techniques that enable the AI system to optimize supply chain operations.\n    * Supply Chain Visibility: Creating supply chain visibility techniques that enable the AI system to provide real-time visibility into supply chain operations.\n\nI have reached the context limit again. Pl\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1145,
+    "timestamp": "2025-11-18T10:47:34.230658Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Supply Chain Visibility\n\nDEFINITION:\nSupply Chain Visibility: a comprehensive and complex document, and I will continue to provide updates and expansions as needed\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Supply Chain Visibility'\n\nEXAMPLE APPLICATION:\n:\n    * Supply Chain Modeling: Developing supply chain modeling techniques that enable the AI system to model and simulate supply chain operations.\n    * Supply Chain Optimization: Implementing supply chain optimization techniques that enable the AI sys",
+    "compression_ratio": 2.0017482517482517,
+    "symbol_count": 572,
+    "timestamp": "2025-11-18T10:47:34.230699Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Supply Chain Visibility D: Supply Chain Visibility: a comprehensive complex document, I will continue to provide updates expansions as needed BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Supply Chain Visibility' EXAMPLE APPLICATION: : * Supply Chain Modeling: Developing supply chain modeling techniques enable AI S to model simulate supply chain operations. * Supply Chain Optimization: Implementing supply chain optimization techniques enable AI sys",
+    "compression_ratio": 2.2718253968253967,
+    "symbol_count": 504,
+    "timestamp": "2025-11-18T10:47:34.236618Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Supply Chain Visibility D: Supply Chain Visibility: comprehensive complex document, I continue provide updates expansions needed BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Supply Chain Visibility' EXAMPLE APPLICATION: Supply Chain ABM: Developing supply chain ABM techniques enable AI S model simulate supply chain operations. Supply Chain Optimization: Implementing supply chain optimization techniques enable AI",
+    "compression_ratio": 2.4623655913978495,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:34.244835Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Supply Chain Visibility D: Supply Chain Visibility: comprehensive complex document, I continue provide updates expansions needed BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Supply Chain Visibility' EXAMPLE APPLICATION: Supply Chain ABM: Developing supply chain ABM techniques enable AI S model simulate supply chain operations. Supply Chain Optimization: Implementing supply chain optimization techniques enable AI",
+    "compression_ratio": 2.4623655913978495,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:34.252834Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Supply Chain Visibility D: Supply Chain Visibility: comprehensive complex document, I continue provide updates expansions needed BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Supply Chain Visibility' EXAMPLE APPLICATION: Supply Chain ABM: Developing supply chain ABM techniques enable AI S model simulate supply chain operations. Supply Chain Optimization: Implementing supply chain optimization techniques enable AI",
+    "compression_ratio": 2.4623655913978495,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:34.267209Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Supply Chain Visibility D: Supply Chain Visibility: I BLUEPRINT DETAILS: Θ Node Original Θ Chain Visibility' EXAMPLE APPLICATION: Supply Chain ABM: Developing ABM AI S Supply Chain Optimization: Implementing AI",
+    "compression_ratio": 5.300925925925926,
+    "symbol_count": 216,
+    "timestamp": "2025-11-18T10:47:34.275714Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 381.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:34.276073Z"
+  }
+]

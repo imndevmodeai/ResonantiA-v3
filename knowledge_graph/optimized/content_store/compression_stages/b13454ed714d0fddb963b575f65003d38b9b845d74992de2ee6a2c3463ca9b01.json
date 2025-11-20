@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Text Preprocessing\n\nDEFINITION:\nText Preprocessing: Node 16: Text Preprocessing\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 16, type: node_format. Original SPR name: 'Text Preprocessing'\n\nEXAMPLE APPLICATION:\nNode 16: Text Preprocessing\nNode 17: Part-of-Speech Tagging\nNode 18: Named Entity Recognition\nNode 7: Functional Requirements\n\nDescription: Detailed description of the system's functional requirements, including its user interf\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 16\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 802,
+    "timestamp": "2025-11-18T10:47:22.750735Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Text Preprocessing\n\nDEFINITION:\nText Preprocessing: Node 16: Text Preprocessing\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 16, type: node_format. Original SPR name: 'Text Preprocessing'\n\nEXAMPLE APPLICATION:\nNode 16: Text Preprocessing\nNode 17: Part-of-Speech Tagging\nNode 18: Named Entity Recognition\nNode 7: Functional Requirements\n\nDescription: Detailed description ",
+    "compression_ratio": 2.0,
+    "symbol_count": 401,
+    "timestamp": "2025-11-18T10:47:22.750768Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Text PrePing D: Text PrePing: Node 16: Text PrePing Confidence: 0.5 BLUEPRINT DETAILS: Θ extracted agi.txt Node 16, type: node_F. Original Θ name: 'Text PrePing' EXAMPLE APPLICATION: Node 16: Text PrePing Node 17: Part-of-Speech Tagging Node 18: Named Entity Recognition Node 7: Functional Requirements Description: Detailed description",
+    "compression_ratio": 2.345029239766082,
+    "symbol_count": 342,
+    "timestamp": "2025-11-18T10:47:22.751689Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Text PrePing D: Text PrePing: Node Text PrePing Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Text PrePing' EXAMPLE APPLICATION: Node Text PrePing Node Part-of-Speech Tagging Node Named Entity Recognition Node Functional Requirements Description: Detailed description",
+    "compression_ratio": 2.546031746031746,
+    "symbol_count": 315,
+    "timestamp": "2025-11-18T10:47:22.760456Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Text PrePing D: Text PrePing: Node Text PrePing Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Text PrePing' EXAMPLE APPLICATION: Node Text PrePing Node Part-of-Speech Tagging Node Named Entity Recognition Node Functional Requirements Description: Detailed description",
+    "compression_ratio": 2.546031746031746,
+    "symbol_count": 315,
+    "timestamp": "2025-11-18T10:47:22.780158Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Text PrePing D: Text PrePing: Node Text PrePing Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Text PrePing' EXAMPLE APPLICATION: Node Text PrePing Node Part--Speech Tagging Node Named Entity Recognition Node Functional Requirements Description: Detailed description",
+    "compression_ratio": 2.562300319488818,
+    "symbol_count": 313,
+    "timestamp": "2025-11-18T10:47:22.789568Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Text PrePing D: Text PrePing: Node Text PrePing Confidence: BLUEPRINT DETAILS: Θ Node Original Θ PrePing' EXAMPLE APPLICATION: Node Text PrePing Node Part--Speech Tagging Node Named Entity Recognition Node Functional Requirements Description: Detailed",
+    "compression_ratio": 3.1206225680933852,
+    "symbol_count": 257,
+    "timestamp": "2025-11-18T10:47:22.801247Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 267.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:22.811602Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Cognitive Architecture\n\nDescription\n\nDEFINITION:\nCognitive Architecture\n\nDescription: Detailed description of the system's requirements, including its functional, performance, and security requirements\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cognitive Architecture\n\nDescription'\n\nEXAMPLE APPLICATION:\n6: Natural Language Processing\nNode 3: System Requirements\n\nDescription: Detailed description of the system's requirements, including its functional, performance, and security requirements.\nEdges:\nNode 7: Functional Requirements\nNode 8: Performance Requirements\nNode 9: Security Requirements\nNode 4: Cognitive Architecture\n\nDescription: Detailed description of the system's cognitive architecture, including its components, interfaces, and data flows.\nEdges:\nNode 10: Knowledge Graph\nNode 11: Reasoni\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1195,
+    "timestamp": "2025-11-18T10:47:40.707191Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Cognitive Architecture\n\nDescription\n\nDEFINITION:\nCognitive Architecture\n\nDescription: Detailed description of the system's requirements, including its functional, performance, and security requirements\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cognitive Architecture\n\nDescription'\n\nEXAMPLE APPLICATION:\n6: Natural Language Processing\nNode 3: System Requirements\n\nDescription: Detailed description of the system's requirements, including its functional, performance, and security requirements.\nEdges:\nNode 7: Functional Requirements",
+    "compression_ratio": 2.0016750418760467,
+    "symbol_count": 597,
+    "timestamp": "2025-11-18T10:47:40.707214Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Cognitive Architecture Description D: Cognitive Architecture Description: Detailed description of S's requirements, including its functional, performance, security requirements BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Cognitive Architecture Description' EXAMPLE APPLICATION: 6: Natural Language Ping Node 3: S Requirements Description: Detailed description of S's requirements, including its functional, performance, security requirements. Edges: Node 7: Functional Requirements",
+    "compression_ratio": 2.2336448598130842,
+    "symbol_count": 535,
+    "timestamp": "2025-11-18T10:47:40.709155Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ω Architecture Description D: Ω Architecture Description: Detailed description S's requirements, including functional, performance, security requirements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Architecture Description' EXAMPLE APPLICATION: Natural Language Ping Node S Requirements Description: Detailed description S's requirements, including functional, performance, security requirements. Edges: Node Functional Requirements",
+    "compression_ratio": 2.463917525773196,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:40.715191Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ω Architecture Description D: Ω Architecture Description: Detailed description S's requirements, including functional, performance, security requirements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Architecture Description' EXAMPLE APPLICATION: Natural Language Ping Node S Requirements Description: Detailed description S's requirements, including functional, performance, security requirements. Edges: Node Functional Requirements",
+    "compression_ratio": 2.463917525773196,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:40.722574Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ω Architecture Description D: Ω Architecture Description: Detailed description S's requirements, including functional, performance, security requirements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Architecture Description' EXAMPLE APPLICATION: Natural Language Ping Node S Requirements Description: Detailed description S's requirements, including functional, performance, security requirements. Edges: Node Functional Requirements",
+    "compression_ratio": 2.463917525773196,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:40.727723Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ω Architecture Description D: Ω Architecture Description: Detailed S's BLUEPRINT DETAILS: Θ Node Original Θ 'Ω Architecture Description' EXAMPLE APPLICATION: Natural Language Ping Node S Requirements Description: Detailed S's Edges: Node Functional Requirements",
+    "compression_ratio": 4.47565543071161,
+    "symbol_count": 267,
+    "timestamp": "2025-11-18T10:47:40.729919Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Θ|Θ|Ω",
+    "compression_ratio": 132.77777777777777,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:40.730304Z"
+  }
+]

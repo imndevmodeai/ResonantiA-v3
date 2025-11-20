@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: ArchE Instance Registry\n\nDEFINITION:\nA conceptual (or implemented in distributed_arche_registry.py) component that maintains a record of all active ArchE instances, their capabilities, current status, and communication endpoints. It is essential for enabling Distributed Coordination.\n\n[From Codebase]: Class: ArchEInstanceRegistry\n\nRegistry system for ArchE instances to discover and communicate with each other\nImplements distributed coordination and capability matching\n\nMethods: __init__, register_instance, find_instances_with_capability, get_network_status\n\nBLUEPRINT DETAILS:\nConceptual in ResonantiA v3.1-CA. See Section 3.17, 7.31.\n\nEXAMPLE APPLICATION:\nThe SIRC process queried the ArcheinstanceregistrY to find an available instance with specialized image analysis tools.\n\nCATEGORY: SystemComponent\n\nRELATIONSHIPS:\ntype: ServiceDiscovery; tracks: Arche systeM instances; enables: Distributed coordinatioN, Cross instance learninG; manages: InstanceCapabilities, InstanceStatus; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1011,
+    "timestamp": "2025-11-18T10:45:50.123465Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: ArchE Instance Registry\n\nDEFINITION:\nA conceptual (or implemented in distributed_arche_registry.py) component that maintains a record of all active ArchE instances, their capabilities, current status, and communication endpoints. It is essential for enabling Distributed Coordination.\n\n[From Codebase]: Class: ArchEInstanceRegistry\n\nRegistry system for ArchE instances to discover and communicate with each other\nImplements distributed coordination and capability matching\n\nMethods: __init__, regist",
+    "compression_ratio": 2.001980198019802,
+    "symbol_count": 505,
+    "timestamp": "2025-11-18T10:45:50.123494Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Æ Instance Registry D: A conceptual (or implemented in distributed_Æ_registry.py) component maintains a record of active Æ instances, their capabilities, current status, communication endpoints. It is essential enabling Distributed Coordination. [ Codebase]: Class: ÆInstanceRegistry Registry S Æ instances to discover communicate each other Implements distributed coordination capability matching Methods: __init__, regist",
+    "compression_ratio": 2.3566433566433567,
+    "symbol_count": 429,
+    "timestamp": "2025-11-18T10:45:50.125428Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Æ Instance Registry D: A conceptual implemented distributed_Æ_registry.py) component maintains record active Æ instances, their capabilities, current status, communication endpoints. It essential enabling Distributed Coordination. Codebase]: Class: ÆInstanceRegistry Registry S Æ instances discover communicate other Implements distributed coordination capability matching Methods: __init__, regist",
+    "compression_ratio": 2.5024752475247523,
+    "symbol_count": 404,
+    "timestamp": "2025-11-18T10:45:50.137786Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Æ Instance Registry D: A conceptual implemented distributed_Æ_registry.py) component maintains record active Æ instances, their capabilities, current status, communication endpoints. It essential enabling Distributed Coordination. Codebase]: Class: ÆInstanceRegistry Registry S Æ instances discover communicate other Implements distributed coordination capability matching Methods: __init__, regist",
+    "compression_ratio": 2.5024752475247523,
+    "symbol_count": 404,
+    "timestamp": "2025-11-18T10:45:50.141333Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Æ Instance Registry D: conceptual implemented distributed_Æ_registry.py) component maintains record active Æ instances, their capabilities, current status, communication endpoints. It essential enabling Distributed Coordination. Codebase]: Class: ÆInstanceRegistry Registry S Æ instances discover communicate other Implements distributed coordination capability matching Methods: __init__, regist",
+    "compression_ratio": 2.514925373134328,
+    "symbol_count": 402,
+    "timestamp": "2025-11-18T10:45:50.148629Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Æ Instance Registry D: distributed_Æ_registry.py) Æ It Distributed Coordination. Codebase]: Class: ÆInstanceRegistry Registry S Æ Implements Methods:",
+    "compression_ratio": 6.52258064516129,
+    "symbol_count": 155,
+    "timestamp": "2025-11-18T10:45:50.150282Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Æ|Æ|Æ|Æ",
+    "compression_ratio": 112.33333333333333,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:45:50.156184Z"
+  }
+]

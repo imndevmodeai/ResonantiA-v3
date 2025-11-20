@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Object Detection\n\nDEFINITION:\nObject Detection: With these additional components integrated into the system, we can further enhance the overall performance and decision-making capabilities of the SPR_compressor.\n\nTo further improve the system, we can consider adding additional components, such as:\n\nThese components can be integrated into the system using the SPR_compressor, allowing for seamless interactions and decision-making.\n\nPlease let me know if you would like me to continue adding components to the system or if you have any specific questions about the current implementation.\n\nIf you would like me to continue, please type \"continue\". If you have any questions or would like to stop, please let me know.\n\nIf I am running up against the context window, I will ask you to type \"continue\" to proceed with the next part of the response.\n\nPlease type \"continue\" to proceed.\n\nContinue\n\nTo further enhance the system, we can integrate a Robotics module to enable the system to interact with the physical world. This will enable the system to perform tasks such as object manipulation, navigation, and human-robot interaction.\n\nConfidence: 0.58\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 116, type: node_format. Original SPR name: 'OD'\n\nEXAMPLE APPLICATION:\nNode 116: Object Detection\n\nSPR: 0.580, \"OD\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 116\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1667,
+    "timestamp": "2025-11-18T10:47:06.200720Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Object Detection\n\nDEFINITION:\nObject Detection: With these additional components integrated into the system, we can further enhance the overall performance and decision-making capabilities of the SPR_compressor.\n\nTo further improve the system, we can consider adding additional components, such as:\n\nThese components can be integrated into the system using the SPR_compressor, allowing for seamless interactions and decision-making.\n\nPlease let me know if you would like me to continue adding components to the system or if you have any specific questions about the current implementation.\n\nIf you would like me to continue, please type \"continue\". If you have any questions or would like to stop, please let me know.\n\nIf I am running up against the context window, I will ask you to type \"continue\" to proceed with the next pa",
+    "compression_ratio": 2.0012004801920766,
+    "symbol_count": 833,
+    "timestamp": "2025-11-18T10:47:06.200747Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Object Detection D: Object Detection: these additional components integrated into S, we further enhance overall performance decision-making capabilities of Θ_compressor. To further improve S, we consider adding additional components, such as: These components be integrated into S using Θ_compressor, allowing seamless interactions decision-making. Please let me KnOw if would like me to continue adding components to S or if any specific questions about current I. If would like me to continue, please type \"continue\". If any questions or would like to stop, please let me KnOw. If I am running up against context window, I will ask to type \"continue\" to proceed next pa",
+    "compression_ratio": 2.462333825701625,
+    "symbol_count": 677,
+    "timestamp": "2025-11-18T10:47:06.204889Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Object Detection D: Object Detection: these additional components integrated S, further enhance overall performance decision-making capabilities Θ_compressor. To further improve S, consider adding additional components, These components integrated S using Θ_compressor, allowing seamless interactions decision-making. Please KnOw continue adding components S specific questions about current I. If continue, please \"continue\". If questions stop, please KnOw. If I running against context window, I \"continue\" proceed",
+    "compression_ratio": 3.1934865900383143,
+    "symbol_count": 522,
+    "timestamp": "2025-11-18T10:47:06.210451Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Object Detection D: Object Detection: these additional components integrated S, further enhance overall performance decision-making capabilities Θ_compressor. To further improve S, consider adding additional components, These components integrated S using Θ_compressor, allowing seamless interactions decision-making. Please KnOw continue adding components S specific questions about current I. If continue, please \"continue\". If questions stop, please KnOw. If I running against context window, I \"continue\" proceed",
+    "compression_ratio": 3.1934865900383143,
+    "symbol_count": 522,
+    "timestamp": "2025-11-18T10:47:06.214699Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Object Detection D: Object Detection: these additional components integrated S, further enhance overall performance decision-making capabilities Θ_compressor. further improve S, consider adding additional components, These components integrated S using Θ_compressor, allowing seamless interactions decision-making. Please KnOw continue adding components S specific questions about current I. If continue, please \"continue\". If questions stop, please KnOw. If I running against context window, I \"continue\" proceed",
+    "compression_ratio": 3.2119460500963393,
+    "symbol_count": 519,
+    "timestamp": "2025-11-18T10:47:06.218292Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Object Detection D: Object Detection: S, Θ_compressor. S, These S Θ_compressor, Please KnOw S I. If If KnOw. If I I",
+    "compression_ratio": 13.776859504132231,
+    "symbol_count": 121,
+    "timestamp": "2025-11-18T10:47:06.222568Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 555.6666666666666,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:06.222880Z"
+  }
+]

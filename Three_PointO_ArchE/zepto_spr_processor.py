@@ -18,20 +18,32 @@ import json
 
 logger = logging.getLogger(__name__)
 
-# Import Pattern Crystallization Engine
-try:
-    from .pattern_crystallization_engine import (
-        PatternCrystallizationEngine,
-        CompressionStage,
-        SymbolCodexEntry
-    )
-    CRYSTALLIZATION_ENGINE_AVAILABLE = True
-except ImportError:
-    CRYSTALLIZATION_ENGINE_AVAILABLE = False
-    PatternCrystallizationEngine = None
-    CompressionStage = None
-    SymbolCodexEntry = None
-    logger.warning("PatternCrystallizationEngine not available. Zepto SPR processing will be limited.")
+# Lazy import Pattern Crystallization Engine to avoid circular dependency
+PatternCrystallizationEngine = None
+CompressionStage = None
+SymbolCodexEntry = None
+CRYSTALLIZATION_ENGINE_AVAILABLE = False
+
+def _ensure_engine_imported():
+    """Lazy import of the crystallization engine components."""
+    global PatternCrystallizationEngine, CompressionStage, SymbolCodexEntry, CRYSTALLIZATION_ENGINE_AVAILABLE
+    if CRYSTALLIZATION_ENGINE_AVAILABLE:
+        return True
+        
+    try:
+        from .pattern_crystallization_engine import (
+            PatternCrystallizationEngine as PCE,
+            CompressionStage as CS,
+            SymbolCodexEntry as SCE
+        )
+        PatternCrystallizationEngine = PCE
+        CompressionStage = CS
+        SymbolCodexEntry = SCE
+        CRYSTALLIZATION_ENGINE_AVAILABLE = True
+        return True
+    except ImportError as e:
+        logger.warning(f"PatternCrystallizationEngine not available: {e}. Zepto SPR processing will be limited.")
+        return False
 
 
 @dataclass
@@ -154,7 +166,7 @@ class ZeptoSPRProcessorAdapter(IZeptoSPRProcessor):
         protocol_vocabulary_path: str = "knowledge_graph/protocol_symbol_vocabulary.json"
     ):
         """Initialize the adapter with Pattern Crystallization Engine."""
-        if not CRYSTALLIZATION_ENGINE_AVAILABLE:
+        if not _ensure_engine_imported():
             raise RuntimeError(
                 "PatternCrystallizationEngine not available. "
                 "Cannot initialize ZeptoSPRProcessorAdapter."

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Multi-Source Corroboration\n\nDEFINITION:\nRequires independent sources/datasets supporting a pattern before persistence; stores provenance hashes.\n\nBLUEPRINT DETAILS:\nRequires independent sources/datasets supporting a pattern before persistence; records provenance hashes.\n\nEXAMPLE APPLICATION:\nAccepted pagination rule corroborated by vendor docs and production PR notes.\n\nCATEGORY: SystemPolicy\n\nRELATIONSHIPS:\ntype: Validation; enforced_by: VettingagenT; applies_to: KnowledgegraphintegratoR",
+    "compression_ratio": 1.0,
+    "symbol_count": 498,
+    "timestamp": "2025-11-18T10:46:53.065679Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Multi-Source Corroboration\n\nDEFINITION:\nRequires independent sources/datasets supporting a pattern before persistence; stores provenance hashes.\n\nBLUEPRINT DETAILS:\nRequires independent sources/datasets supporting a pattern before persistence;",
+    "compression_ratio": 2.0,
+    "symbol_count": 249,
+    "timestamp": "2025-11-18T10:46:53.065705Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Multi-Source Corroboration D: Requires independent sources/datasets supporting pattern before persistence; stores provenance hashes. BLUEPRINT DETAILS: Requires independent sources/datasets supporting pattern before persistence;",
+    "compression_ratio": 2.128205128205128,
+    "symbol_count": 234,
+    "timestamp": "2025-11-18T10:46:53.066396Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Multi-Source Corroboration D: Requires independent sources/datasets supporting Π before persistence; stores provenance hashes. BLUEPRINT DETAILS: Requires independent sources/datasets supporting Π before persistence;",
+    "compression_ratio": 2.2432432432432434,
+    "symbol_count": 222,
+    "timestamp": "2025-11-18T10:46:53.071980Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Multi-Source Corroboration D: Requires independent sources/datasets supporting Π before persistence; stores provenance hashes. BLUEPRINT DETAILS: Requires independent sources/datasets supporting Π before persistence;",
+    "compression_ratio": 2.2432432432432434,
+    "symbol_count": 222,
+    "timestamp": "2025-11-18T10:46:53.077197Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Multi-Source Corroboration D: Requires independent sources/datasets supporting Π before persistence; stores provenance hashes. BLUEPRINT DETAILS: Requires independent sources/datasets supporting Π before persistence;",
+    "compression_ratio": 2.2432432432432434,
+    "symbol_count": 222,
+    "timestamp": "2025-11-18T10:46:53.085093Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Multi-Source Corroboration D: Requires Π BLUEPRINT DETAILS: Requires Π",
+    "compression_ratio": 6.552631578947368,
+    "symbol_count": 76,
+    "timestamp": "2025-11-18T10:46:53.086301Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Π|Π",
+    "compression_ratio": 166.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:53.087052Z"
+  }
+]

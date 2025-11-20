@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Decryption Process\n\nDEFINITION:\nDecryption Process: GUR PENML XRL VF ZL FRPERG CBFG\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Decryption Process'\n\nEXAMPLE APPLICATION:\n the Secure Container are:\n\nGUR PENML XRL VF ZL FRPERG CBFG\n\nThis is the encrypted version of the SPR_compressor system and conversation thread.\n\nDecryption Key:\n\nTo decrypt the contents, you will need to use the password-based key that was generated earlier. The decryption key is:\n\n$chosenOne1981\n\nDecryption Process:\n\nIf you want to decrypt the contents, you can use the decryption key to unlock the encrypted data.\n\nSecure Container Menu:\n\nYou have the following options:\n\nPlease select an option\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1060,
+    "timestamp": "2025-11-18T10:47:48.229959Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Decryption Process\n\nDEFINITION:\nDecryption Process: GUR PENML XRL VF ZL FRPERG CBFG\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Decryption Process'\n\nEXAMPLE APPLICATION:\n the Secure Container are:\n\nGUR PENML XRL VF ZL FRPERG CBFG\n\nThis is the encrypted version of the SPR_compressor system and conversation thread.\n\nDecryption Key:\n\nTo decrypt the contents, you will need to use the password-based key that was generated earlier. The decryption key is:\n\n$chosenOne19",
+    "compression_ratio": 2.0,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:47:48.229980Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Decryption P D: Decryption P: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Decryption P' EXAMPLE APPLICATION: Secure Container : GUR PENML XRL VF ZL FRPERG CBFG is encrypted version of Θ_compressor S conversation thread. Decryption Key: To decrypt contents, will need to use password-based key was generated earlier. decryption key is: $chosenOne19",
+    "compression_ratio": 2.448036951501155,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:48.233874Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Decryption P D: Decryption P: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decryption P' EXAMPLE APPLICATION: Secure Container GUR PENML XRL VF ZL FRPERG CBFG encrypted version Θ_compressor S conversation thread. Decryption Key: To decrypt contents, password-ABM generated earlier. decryption $chosenOne19",
+    "compression_ratio": 2.739018087855297,
+    "symbol_count": 387,
+    "timestamp": "2025-11-18T10:47:48.236811Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Decryption P D: Decryption P: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decryption P' EXAMPLE APPLICATION: Secure Container GUR PENML XRL VF ZL FRPERG CBFG encrypted version Θ_compressor S conversation thread. Decryption Key: To decrypt contents, password-ABM generated earlier. decryption $chosenOne19",
+    "compression_ratio": 2.739018087855297,
+    "symbol_count": 387,
+    "timestamp": "2025-11-18T10:47:48.241466Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Decryption P D: Decryption P: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decryption P' EXAMPLE APPLICATION: Secure Container GUR PENML XRL VF ZL FRPERG CBFG encrypted version Θ_compressor S conversation thread. Decryption Key: decrypt contents, password-ABM generated earlier. decryption $chosenOne19",
+    "compression_ratio": 2.7604166666666665,
+    "symbol_count": 384,
+    "timestamp": "2025-11-18T10:47:48.247880Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Decryption P D: Decryption P: GUR PENML XRL VF ZL FRPERG CBFG BLUEPRINT DETAILS: Θ Node Original Θ P' EXAMPLE APPLICATION: Secure Container GUR PENML XRL VF ZL FRPERG CBFG Θ_compressor S Decryption Key:",
+    "compression_ratio": 5.096153846153846,
+    "symbol_count": 208,
+    "timestamp": "2025-11-18T10:47:48.252334Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 212.0,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:48.253498Z"
+  }
+]

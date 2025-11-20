@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Assisted Human Decision\n\nDEFINITION:\nAssisted Human Decision: designed to scale horizontally and vertically to meet the demands of large-scale applications:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Assisted Human Decision'\n\nEXAMPLE APPLICATION:\nrate with humans in a seamless and effective manner:\n    * Human-AI Interface: Providing intuitive and user-friendly interfaces for humans to interact with the system.\n    * Collaborative Problem-Solving: Enabling humans and AI to work together to solve complex problems and make decisions.\n    * AI-Assisted Human Decision-Making: Using AI to provide insights and recommendations to support human decision-making.\n\nI have reached the context limit again. Please type \"continue\" to proceed.\n\ncontinue\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1138,
+    "timestamp": "2025-11-18T10:47:28.676612Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Assisted Human Decision\n\nDEFINITION:\nAssisted Human Decision: designed to scale horizontally and vertically to meet the demands of large-scale applications:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Assisted Human Decision'\n\nEXAMPLE APPLICATION:\nrate with humans in a seamless and effective manner:\n    * Human-AI Interface: Providing intuitive and user-friendly interfaces for humans to interact with the system.\n    * Collaborative Problem-Solving: Enabling humans and AI to work together to solve com",
+    "compression_ratio": 2.0,
+    "symbol_count": 569,
+    "timestamp": "2025-11-18T10:47:28.676639Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Assisted Human Decision D: Assisted Human Decision: designed to scale horizontally vertically to meet demands of large-scale applications: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Assisted Human Decision' EXAMPLE APPLICATION: rate humans in a seamless effective manner: * Human-AI Interface: Providing intuitive user-friendly interfaces humans to interact S. * Collaborative Problem-Solving: Enabling humans AI to work together to solve com",
+    "compression_ratio": 2.289738430583501,
+    "symbol_count": 497,
+    "timestamp": "2025-11-18T10:47:28.678077Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Assisted Human Decision D: Assisted Human Decision: designed scale horizontally vertically demands large-scale applications: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Assisted Human Decision' EXAMPLE APPLICATION: humans seamless effective manner: Human-AI Interface: Providing intuitive user-friendly interfaces humans interact S. Collaborative Problem-Solving: Enabling humans AI together solve",
+    "compression_ratio": 2.5401785714285716,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:28.689847Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Assisted Human Decision D: Assisted Human Decision: designed scale horizontally vertically demands large-scale applications: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Assisted Human Decision' EXAMPLE APPLICATION: humans seamless effective manner: Human-AI Interface: Providing intuitive user-friendly interfaces humans interact S. Collaborative Problem-Solving: Enabling humans AI together solve",
+    "compression_ratio": 2.5401785714285716,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:28.697642Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Assisted Human Decision D: Assisted Human Decision: designed scale horizontally vertically demands large-scale applications: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Assisted Human Decision' EXAMPLE APPLICATION: humans seamless effective manner: Human-AI Interface: Providing intuitive user-friendly interfaces humans interact S. Collaborative Problem-Solving: Enabling humans AI together solve",
+    "compression_ratio": 2.5401785714285716,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:28.705955Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Assisted Human Decision D: Assisted Human Decision: BLUEPRINT DETAILS: Θ Node Original Θ Human Decision' EXAMPLE APPLICATION: Human-AI Interface: Providing S. Collaborative Problem-Solving: Enabling AI",
+    "compression_ratio": 5.497584541062802,
+    "symbol_count": 207,
+    "timestamp": "2025-11-18T10:47:28.715301Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 379.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:28.716846Z"
+  }
+]

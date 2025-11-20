@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Machine Learning Model\n\nDEFINITION:\nMachine Learning Model: data extraction process?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Machine Learning Model'\n\nEXAMPLE APPLICATION:\nrstand the query's meaning and intent.\nQuery Optimizer: Devises the most efficient plan for executing the query across different data sources.\nQuery Executor: Carries out the optimized query plan and fetches the data.\nData Processing: Cleans, transforms, and aggregates the extracted data as needed.\nMachine Learning Model: Trained on extracted data to make predictions or classify information.\n4. How does machine learning enhance this data extraction process?\nMachine learning plays a crucial role \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1065,
+    "timestamp": "2025-11-18T10:47:24.320253Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Machine Learning Model\n\nDEFINITION:\nMachine Learning Model: data extraction process?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Machine Learning Model'\n\nEXAMPLE APPLICATION:\nrstand the query's meaning and intent.\nQuery Optimizer: Devises the most efficient plan for executing the query across different data sources.\nQuery Executor: Carries out the optimized query plan and fetches the data.\nData Processing: Cleans, transforms, and aggregates the extracted data as n",
+    "compression_ratio": 2.0018796992481205,
+    "symbol_count": 532,
+    "timestamp": "2025-11-18T10:47:24.320276Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Machine Learning Model D: Machine Learning Model: data extraction P? BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Machine Learning Model' EXAMPLE APPLICATION: rstand query's meaning intent. Query Optimizer: Devises most efficient plan executing query across different data sources. Query Executor: Carries out optimized query plan fetches data. Data Ping: Cleans, transforms, aggregates extracted data as n",
+    "compression_ratio": 2.320261437908497,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:24.322994Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Machine Learning Model D: Machine Learning Model: extraction P? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Model' EXAMPLE APPLICATION: rstand query's meaning SIRC. Query Optimizer: Devises efficient executing query across different sources. Query CE: Carries optimized query fetches data. Data Ping: Cleans, transforms, aggregates extracted",
+    "compression_ratio": 2.6039119804400976,
+    "symbol_count": 409,
+    "timestamp": "2025-11-18T10:47:24.332400Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Machine Learning Model D: Machine Learning Model: extraction P? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Model' EXAMPLE APPLICATION: rstand query's meaning SIRC. Query Optimizer: Devises efficient executing query across different sources. Query CE: Carries optimized query fetches data. Data Ping: Cleans, transforms, aggregates extracted",
+    "compression_ratio": 2.6039119804400976,
+    "symbol_count": 409,
+    "timestamp": "2025-11-18T10:47:24.337966Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Machine Learning Model D: Machine Learning Model: extraction P? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Machine Learning Model' EXAMPLE APPLICATION: rstand query's meaning SIRC. Query Optimizer: Devises efficient executing query across different sources. Query CE: Carries optimized query fetches data. Data Ping: Cleans, transforms, aggregates extracted",
+    "compression_ratio": 2.6039119804400976,
+    "symbol_count": 409,
+    "timestamp": "2025-11-18T10:47:24.345142Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Machine Learning Model D: Machine Learning Model: P? BLUEPRINT DETAILS: Θ Node Original Θ Learning Model' EXAMPLE APPLICATION: SIRC. Query Optimizer: Devises Query CE: Carries Data Ping: Cleans,",
+    "compression_ratio": 5.325,
+    "symbol_count": 200,
+    "timestamp": "2025-11-18T10:47:24.349869Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 355.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.350218Z"
+  }
+]
