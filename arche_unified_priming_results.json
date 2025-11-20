@@ -1,0 +1,61 @@
+{
+  "timestamp": "2025-11-20T02:29:14.935552",
+  "protocol_version": "3.5-GP",
+  "keyholder": "B.J. Lewis",
+  "project_root": "/mnt/3626C55326C514B1/Happier",
+  "python_executable": "/usr/bin/python3",
+  "virtual_env": null,
+  "directives": {
+    "virtual_env": {
+      "status": "activated",
+      "path": "/mnt/3626C55326C514B1/Happier/arche_env",
+      "python": "/mnt/3626C55326C514B1/Happier/arche_env/bin/python3",
+      "error": null
+    },
+    "zepto_system": {
+      "status": "initialized",
+      "prime_protocol_ingested": false,
+      "compression_ratio": null,
+      "error": null
+    },
+    "spr_priming": {
+      "status": "initialized",
+      "sprs_loaded": 3589,
+      "test_priming_count": 0,
+      "error": null
+    },
+    "session_capture": {
+      "status": "initialized",
+      "output_dir": "/mnt/3626C55326C514B1/Happier",
+      "error": null
+    },
+    "learning_loop": {
+      "status": "initialized",
+      "guardian_review": true,
+      "stardust_captured": 0,
+      "error": null
+    },
+    "thought_trail": {
+      "status": "connected",
+      "trail_length": 1,
+      "ledger_path": "Three_PointO_ArchE/ledgers/thought_trail.db",
+      "error": null
+    }
+  },
+  "initialized_objects": {
+    "crystallization_engine": "stored",
+    "spr_manager": "stored",
+    "session_capture": "stored",
+    "learning_loop": "stored",
+    "thought_trail": "stored",
+    "ingest_file_with_zepto": "stored",
+    "references": {
+      "crystallization_engine": true,
+      "spr_manager": true,
+      "session_capture": true,
+      "learning_loop": true,
+      "thought_trail": true,
+      "ingest_file_with_zepto": true
+    }
+  }
+}

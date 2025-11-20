@@ -112,7 +112,7 @@ def execute_priming_sequence():
         
         # Test compression capability
         test_content = "This is a test of the Zepto compression system."
-        compressed, codex_entries = zepto_engine.distill_to_spr(test_content, target_stage="Zepto")
+        compressed, codex_entries, compression_stages = zepto_engine.distill_to_spr(test_content, target_stage="Zepto")
         
         logger.info(f"✓ Zepto Compression Engine initialized")
         logger.info(f"  - Codex entries loaded: {len(zepto_engine.codex)}")

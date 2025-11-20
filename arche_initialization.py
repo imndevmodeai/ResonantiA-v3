@@ -33,29 +33,65 @@ init_status = {
 }
 
 # ============================================================================
-# 0. Virtual Environment Verification
+# 0. Virtual Environment Verification and Activation
 # ============================================================================
-print("\n[0] Verifying Virtual Environment Activation...")
+print("\n[0] Verifying and Activating Virtual Environment (arche_env)...")
 # Check for VIRTUAL_ENV environment variable (set when venv is activated)
 virtual_env_path = os.environ.get('VIRTUAL_ENV')
-# Also check if Python executable is inside a venv directory (for direct execution)
 python_executable = sys.executable
 venv_detected = False
+arche_env_path = project_root / "arche_env"
 
+# Check if arche_env exists
+if not arche_env_path.exists():
+    print(f"❌ ERROR: arche_env virtual environment not found at {arche_env_path}")
+    print("   Please create it with: python3 -m venv arche_env")
+    sys.exit(1)
+
+# Check if already activated
 if virtual_env_path:
-    print(f"✅ Virtual environment activated: {virtual_env_path}")
-    venv_detected = True
-elif 'arche_env' in python_executable or 'venv' in python_executable or '.venv' in python_executable:
-    # Python executable is inside a venv directory
-    venv_path = Path(python_executable).parent.parent
-    print(f"✅ Virtual environment detected via Python path: {venv_path}")
+    if 'arche_env' in virtual_env_path or Path(virtual_env_path).samefile(arche_env_path):
+        print(f"✅ Virtual environment already activated: {virtual_env_path}")
+        venv_detected = True
+    else:
+        print(f"⚠️  Different venv activated: {virtual_env_path}")
+        print(f"   Switching to arche_env...")
+        venv_detected = False
+elif 'arche_env' in python_executable:
+    # Python executable is inside arche_env directory
+    print(f"✅ Virtual environment detected via Python path: {arche_env_path}")
     print(f"   Python executable: {python_executable}")
     venv_detected = True
 else:
-    print("⚠️  WARNING: Virtual environment not detected")
+    print("⚠️  Virtual environment not activated")
     print(f"   Python executable: {python_executable}")
-    print("   To activate: source arche_env/bin/activate")
-    print("   Or run using: arche_env/bin/python arche_initialization.py")
+
+# Activate arche_env if not already active
+if not venv_detected:
+    print(f"🔄 Activating arche_env virtual environment...")
+    venv_python = arche_env_path / "bin" / "python3"
+    if not venv_python.exists():
+        venv_python = arche_env_path / "bin" / "python"
+    
+    if venv_python.exists():
+        # Update Python executable path
+        sys.executable = str(venv_python)
+        # Add venv site-packages to path
+        venv_site_packages = arche_env_path / "lib" / f"python{sys.version_info.major}.{sys.version_info.minor}" / "site-packages"
+        if venv_site_packages.exists():
+            sys.path.insert(0, str(venv_site_packages))
+        
+        # Set VIRTUAL_ENV environment variable
+        os.environ['VIRTUAL_ENV'] = str(arche_env_path)
+        os.environ['PATH'] = str(arche_env_path / "bin") + os.pathsep + os.environ.get('PATH', '')
+        
+        print(f"✅ Activated arche_env: {arche_env_path}")
+        print(f"   Using Python: {sys.executable}")
+        venv_detected = True
+    else:
+        print(f"❌ ERROR: Python executable not found in arche_env at {venv_python}")
+        print("   Please ensure arche_env is properly created")
+        sys.exit(1)
 
 if venv_detected:
     init_status["virtual_env"] = True

@@ -487,9 +487,31 @@ Example: Analyze the implications of quantum computing on cryptography...
 Or: Use agent-based modeling to simulate market dynamics..."></textarea>
                     </div>
                     
-                    <button id="submit-btn" class="btn btn-primary" onclick="submitQuery()">
-                        <span>🚀 Submit Query</span>
-                    </button>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button id="enhance-btn" class="btn btn-secondary" onclick="enhanceQuery()" style="flex: 0 0 auto;">
+                            <span>✨ Enhance Query</span>
+                        </button>
+                        <button id="submit-btn" class="btn btn-primary" onclick="submitQuery()" style="flex: 1;">
+                            <span>🚀 Submit Query</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Enhanced Query Display -->
+                    <div id="enhanced-query-container" style="display: none; margin-top: 1.5rem; padding: 1.5rem; background: var(--darker); border-radius: 0.5rem; border: 2px solid var(--primary);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 style="margin: 0; color: var(--primary);">✨ Enhanced Query</h3>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="useEnhancedQuery()">
+                                    Use This Query
+                                </button>
+                                <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="hideEnhancedQuery()">
+                                    Hide
+                                </button>
+                            </div>
+                        </div>
+                        <div id="enhanced-query-text" style="white-space: pre-wrap; color: var(--light); line-height: 1.6; max-height: 400px; overflow-y: auto; padding: 1rem; background: var(--dark); border-radius: 0.5rem;"></div>
+                        <div id="enhancement-analysis" style="margin-top: 1rem; padding: 1rem; background: var(--dark); border-radius: 0.5rem; font-size: 0.875rem; color: #94a3b8;"></div>
+                    </div>
                 </div>
 
                 <!-- Terminal Output View -->
@@ -615,9 +637,18 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
         let ws = null;
         let reconnectInterval = null;
 
+        // Get dashboard port from environment or use default
+        function getDashboardPort() {
+            // Try to get port from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const port = urlParams.get('port') || localStorage.getItem('dashboard_port') || '8000';
+            return port;
+        }
+
         // Connect to WebSocket
         function connectWebSocket() {
-            const wsUrl = 'ws://localhost:8000/ws/live';
+            const port = getDashboardPort();
+            const wsUrl = `ws://localhost:${port}/ws/live`;
             ws = new WebSocket(wsUrl);
 
             ws.onopen = () => {
@@ -627,8 +658,13 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
             };
 
             ws.onmessage = (event) => {
-                const data = JSON.parse(event.data);
-                handleWebSocketMessage(data);
+                try {
+                    const data = JSON.parse(event.data);
+                    handleWebSocketMessage(data);
+                } catch (error) {
+                    console.error('Failed to parse WebSocket message:', error);
+                    showError('Invalid message format from server');
+                }
             };
 
             ws.onerror = (error) => {
@@ -657,6 +693,11 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
                    if (data.type === 'connected') {
                        console.log('Successfully connected to ArchE Dashboard');
                    } else if (data.type === 'query_response') {
+                       // Validate result structure before displaying
+                       if (!data || !data.result) {
+                           showError('Invalid response structure from server');
+                           return;
+                       }
                        displayResponse(data.result);
                    } else if (data.type === 'processing_start') {
                        showProcessingIndicator();
@@ -710,6 +751,108 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
                    }
                }
 
+        // Enhance query
+        async function enhanceQuery() {
+            const queryText = document.getElementById('query-input').value.trim();
+            if (!queryText) {
+                alert('Please enter a query to enhance');
+                return;
+            }
+
+            const enhanceBtn = document.getElementById('enhance-btn');
+            const originalText = enhanceBtn.innerHTML;
+            enhanceBtn.disabled = true;
+            enhanceBtn.innerHTML = '<div class="spinner"></div> <span>Enhancing...</span>';
+
+            try {
+                const port = getDashboardPort();
+                const response = await fetch(`http://localhost:${port}/api/query/enhance`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: queryText,
+                        enhancement_level: 'auto'
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Enhancement failed: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.status === 'success' && result.result) {
+                    // Display enhanced query
+                    document.getElementById('enhanced-query-text').textContent = result.result.enhanced_query;
+                    
+                    // Display analysis
+                    const analysis = result.result.analysis;
+                    const metadata = result.result.enhancement_metadata;
+                    const analysisHtml = `
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div>
+                                <strong>Intent:</strong> ${analysis.intent}<br>
+                                <strong>Original Complexity:</strong> ${analysis.complexity}<br>
+                                ${analysis.enhanced_complexity ? `<strong>Enhanced Complexity:</strong> <span style="color: var(--primary); font-weight: bold;">${analysis.enhanced_complexity}</span>` : ''}
+                            </div>
+                            <div>
+                                <strong>Capabilities:</strong> ${metadata.capabilities_used}<br>
+                                <strong>SPRs Activated:</strong> ${metadata.sprs_activated}<br>
+                                ${metadata.complexity_increase ? `<strong>Complexity Change:</strong> ${metadata.complexity_increase}` : ''}
+                            </div>
+                            <div>
+                                <strong>Confidence:</strong> ${(analysis.confidence * 100).toFixed(1)}%<br>
+                                <strong>Improvement:</strong> ${metadata.improvement_estimate}
+                            </div>
+                        </div>
+                        ${analysis.required_capabilities.length > 0 ? `
+                            <div style="margin-top: 1rem;">
+                                <strong>Required Capabilities:</strong><br>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+                                    ${analysis.required_capabilities.map(cap => `<span style="padding: 0.25rem 0.75rem; background: var(--primary); color: white; border-radius: 1rem; font-size: 0.75rem;">${cap}</span>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    `;
+                    document.getElementById('enhancement-analysis').innerHTML = analysisHtml;
+                    
+                    // Show enhanced query container
+                    document.getElementById('enhanced-query-container').style.display = 'block';
+                    
+                    // Store enhanced query and metadata for use
+                    window.enhancedQuery = result.result.enhanced_query;
+                    window.enhancedQueryMetadata = {
+                        detected_sprs: analysis.detected_sprs || [],
+                        required_capabilities: analysis.required_capabilities || []
+                    };
+                } else {
+                    throw new Error('Invalid enhancement result');
+                }
+            } catch (error) {
+                showError('Query enhancement failed: ' + error.message);
+            } finally {
+                enhanceBtn.disabled = false;
+                enhanceBtn.innerHTML = originalText;
+            }
+        }
+
+        // Use enhanced query
+        function useEnhancedQuery() {
+            if (window.enhancedQuery) {
+                document.getElementById('query-input').value = window.enhancedQuery;
+                hideEnhancedQuery();
+            }
+        }
+
+        // Hide enhanced query
+        function hideEnhancedQuery() {
+            document.getElementById('enhanced-query-container').style.display = 'none';
+            window.enhancedQuery = null;
+            window.enhancedQueryMetadata = null;
+        }
+
         // Submit query
         async function submitQuery() {
             const queryText = document.getElementById('query-input').value.trim();
@@ -726,29 +869,58 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
             currentTerminalOutput = '';
             showTerminalOutput();
 
+            // Use enhanced query if available, otherwise use original
+            const queryToSubmit = window.enhancedQuery || queryText;
+            
+            // If using enhanced query, show notification
+            if (window.enhancedQuery && window.enhancedQuery !== queryText) {
+                appendTerminalOutput(`[INFO] Using enhanced query with ${window.enhancedQuery.split(' ').length} words (original: ${queryText.split(' ').length} words)\n`);
+            }
+
             try {
                 // Use WebSocket for streaming terminal output
                 if (ws && ws.readyState === WebSocket.OPEN) {
                     ws.send(JSON.stringify({
                         type: 'query',
-                        query: queryText
+                        query: queryToSubmit,
+                        provider: document.getElementById('provider-select').value,
+                        model: document.getElementById('model-select').value || null,
+                        use_rise: document.getElementById('use-rise').checked,
+                        enhanced_query: window.enhancedQuery || null,
+                        detected_sprs: window.enhancedQueryMetadata?.detected_sprs || null,
+                        required_capabilities: window.enhancedQueryMetadata?.required_capabilities || null
                     }));
                 } else {
                     // Fallback to REST API if WebSocket not available
-                    const response = await fetch('http://localhost:8000/api/query/submit', {
+                    const port = getDashboardPort();
+                    const response = await fetch(`http://localhost:${port}/api/query/submit`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            query: queryText,
+                            query: queryText,  // Original query for reference
+                            enhanced_query: window.enhancedQuery || null,  // Enhanced query to use
+                            detected_sprs: window.enhancedQueryMetadata?.detected_sprs || null,
+                            required_capabilities: window.enhancedQueryMetadata?.required_capabilities || null,
                             provider: document.getElementById('provider-select').value,
                             model: document.getElementById('model-select').value || null,
                             use_rise: document.getElementById('use-rise').checked
                         })
                     });
 
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.detail || `HTTP ${response.status}: ${response.statusText}`);
+                    }
+
                     const result = await response.json();
+                    
+                    // Check if result structure is valid
+                    if (!result || !result.result) {
+                        throw new Error('Invalid response structure from server');
+                    }
+                    
                     displayResponse(result.result);
                     
                     // Refresh thought trail
@@ -765,6 +937,12 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
 
         // Display response
         function displayResponse(result) {
+            // Validate result is not undefined/null
+            if (!result) {
+                showError('Received empty or invalid response from server');
+                return;
+            }
+
             const container = document.getElementById('response-container');
             const textEl = document.getElementById('response-text');
             const metadataEl = document.getElementById('response-metadata');
@@ -813,7 +991,8 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
         // Load thought trail
         async function loadThoughtTrail() {
             try {
-                const response = await fetch('http://localhost:8000/api/thought-trail/recent?limit=50');
+                const port = getDashboardPort();
+                const response = await fetch(`http://localhost:${port}/api/thought-trail/recent?limit=50`);
                 const data = await response.json();
                 
                 const container = document.getElementById('thought-trail-entries');
@@ -853,7 +1032,8 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
             const startDate = document.getElementById('start-date').value || null;
 
             try {
-                const response = await fetch('http://localhost:8000/api/thought-trail/search', {
+                const port = getDashboardPort();
+                const response = await fetch(`http://localhost:${port}/api/thought-trail/search`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
@@ -906,7 +1086,8 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
         // Load statistics
         async function loadStats() {
             try {
-                const response = await fetch('http://localhost:8000/api/thought-trail/stats');
+                const port = getDashboardPort();
+                const response = await fetch(`http://localhost:${port}/api/thought-trail/stats`);
                 const stats = await response.json();
                 
                 const statsGrid = document.getElementById('stats-grid');
@@ -953,7 +1134,8 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
         // Load system status
         async function loadSystemStatus() {
             try {
-                const response = await fetch('http://localhost:8000/api/status');
+                const port = getDashboardPort();
+                const response = await fetch(`http://localhost:${port}/api/status`);
                 const status = await response.json();
                 
                 const sidebar = document.getElementById('system-status-sidebar');
@@ -1016,7 +1198,8 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
         // Load SPRs
         async function loadSPRs() {
             try {
-                const response = await fetch('http://localhost:8000/api/sprs/list');
+                const port = getDashboardPort();
+                const response = await fetch(`http://localhost:${port}/api/sprs/list`);
                 const data = await response.json();
                 
                 const container = document.getElementById('sprs-container');
