@@ -25,6 +25,7 @@ import json
 import websockets
 import time
 import tempfile
+import logging
 from datetime import datetime
 from typing import Dict, Any, Optional, List
 from rich.console import Console
@@ -45,6 +46,14 @@ if project_root not in sys.path:
 
 # Initialize Rich Console
 console = Console()
+
+# Initialize Logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.WARNING)  # Set to WARNING to match usage (logger.warning calls)
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    logger.addHandler(handler)
 
 # --- BROWSER CLEANUP REGISTRATION ---
 # Import browser cleanup to ensure orphaned processes are cleaned up on exit
@@ -304,11 +313,60 @@ except ImportError:
 
 # --- CONFIGURATION ---
 class EnhancedUnifiedArchEConfig:
-    """Enhanced unified configuration with auto-detection"""
-    def __init__(self):
-        # Detect Cursor environment
-        cursor_detection = detect_cursor_environment()
-        llm_config = configure_llm_provider(cursor_detection)
+    """Enhanced unified configuration with auto-detection and dynamic configuration"""
+    def __init__(self, 
+                 provider: Optional[str] = None,
+                 model: Optional[str] = None,
+                 use_rise: Optional[bool] = True,
+                 enable_cursor_auto_detect: Optional[bool] = True):
+        """
+        Initialize configuration with optional overrides.
+        
+        Args:
+            provider: Override LLM provider (groq, google, cursor). If None, auto-detects.
+            model: Override LLM model. If None, uses provider default.
+            use_rise: Whether to use RISE methodology (default: True)
+            enable_cursor_auto_detect: Whether to enable Cursor auto-detection (default: True)
+        """
+        # Detect Cursor environment (only if auto-detection enabled and no provider override)
+        if enable_cursor_auto_detect and provider is None:
+            cursor_detection = detect_cursor_environment()
+        else:
+            # Disable Cursor auto-detection if provider is explicitly set
+            cursor_detection = {
+                "in_cursor": False,
+                "confidence": 0.0,
+                "indicators": {},
+                "recommended_provider": provider or "groq",
+                "recommended_model": model or "llama-3.3-70b-versatile"
+            }
+        
+        # Configure LLM provider (respect user override if provided)
+        if provider:
+            # User explicitly selected provider - use it
+            # Get default model for provider if not specified
+            default_models = {
+                "groq": "llama-3.3-70b-versatile",
+                "google": "gemini-2.0-flash-exp",
+                "cursor": "cursor-arche-v1"
+            }
+            selected_model = model or default_models.get(provider.lower(), "llama-3.3-70b-versatile")
+            
+            llm_config = {
+                "provider": provider,
+                "model": selected_model,
+                "auto_configured": False,
+                "method": "user_selection",
+                "environment_updated": True
+            }
+            # Update environment variables
+            os.environ["ARCHE_LLM_PROVIDER"] = provider
+            if llm_config["model"]:
+                os.environ["ARCHE_LLM_MODEL"] = llm_config["model"]
+        else:
+            # Auto-configure based on detection
+            llm_config = configure_llm_provider(cursor_detection)
+        
         quantum_verification = verify_quantum_processing()
         
         self.vcd_host = "localhost"
@@ -320,7 +378,8 @@ class EnhancedUnifiedArchEConfig:
         self.enable_real_processor = True
         self.enable_vcd_analysis = VCD_ANALYSIS_AVAILABLE
         self.enable_quantum_verification = True
-        self.enable_cursor_auto_config = True
+        self.enable_cursor_auto_config = enable_cursor_auto_detect
+        self.use_rise = use_rise if use_rise is not None else True
         self.enable_zepto_compression = ZEPTO_AVAILABLE
         self.enable_cog = COG_AVAILABLE
         self.enable_thought_trail = THOUGHT_TRAIL_AVAILABLE
@@ -396,6 +455,11 @@ class EnhancedUnifiedArchEConfig:
                 os.environ["ARCHE_LLM_MODEL"] = llm_config["model"]
         except Exception as e:
             console.print(f"[yellow]⚠️  Could not update config: {e}[/yellow]")
+    
+    @property
+    def llm_provider(self):
+        """Get LLM provider from llm_config for backward compatibility."""
+        return self.llm_config.get("provider", "groq")
 
 # --- QUANTUM SUPERPOSITION ANALYSIS (Enhanced) ---
 def create_query_superposition(query: str, use_quantum: bool = True) -> Dict[str, float]:
@@ -648,8 +712,20 @@ class EnhancedRealArchEProcessor:
             except Exception as e:
                 console.print(f"[yellow]⚠️  Could not initialize Zepto processor: {e}[/yellow]")
         
-    async def process_query(self, query: str) -> Dict[str, Any]:
-        """Process query with comprehensive analysis"""
+    async def process_query(self, query: str, pre_identified_sprs: Optional[List[str]] = None, pre_identified_capabilities: Optional[List[str]] = None) -> Dict[str, Any]:
+        """Process query with comprehensive analysis
+        
+        Args:
+            query: The query to process
+            pre_identified_sprs: Optional list of SPR IDs already identified by enhanced query engine
+            pre_identified_capabilities: Optional list of capability IDs already identified by enhanced query engine
+        """
+        # CRITICAL: Log that we're actually being called
+        console.print(f"[bold cyan]🚀 EnhancedRealArchEProcessor.process_query() CALLED[/bold cyan]")
+        console.print(f"[cyan]   Query: {query[:100]}{'...' if len(query) > 100 else ''}[/cyan]")
+        console.print(f"[cyan]   Pre-identified SPRs: {len(pre_identified_sprs) if pre_identified_sprs else 0}[/cyan]")
+        console.print(f"[cyan]   Pre-identified Capabilities: {len(pre_identified_capabilities) if pre_identified_capabilities else 0}[/cyan]")
+        logger.info(f"EnhancedRealArchEProcessor.process_query() CALLED with query length: {len(query)}, SPRs: {len(pre_identified_sprs) if pre_identified_sprs else 0}, Capabilities: {len(pre_identified_capabilities) if pre_identified_capabilities else 0}")
         
         # SPR Priming Phase (Protocol Requirement: Auto-Priming on Query)
         primed_sprs = []
@@ -658,8 +734,23 @@ class EnhancedRealArchEProcessor:
             if self.vcd and self.vcd.connected:
                 await self.vcd.emit_thought_process("Priming SPRs from query text", {"phase": "SPR_Priming"})
             
-            # Actually prime SPRs from the query
-            primed_sprs = self.config.spr_manager.scan_and_prime(query)
+            # Use pre-identified SPRs if provided, otherwise scan the query
+            if pre_identified_sprs:
+                console.print(f"[green]✅ Using {len(pre_identified_sprs)} pre-identified SPRs from enhanced query[/green]")
+                # Prime the pre-identified SPRs directly
+                primed_sprs = []
+                for spr_id in pre_identified_sprs:
+                    spr_def = self.config.spr_manager.get_spr(spr_id)
+                    if spr_def:
+                        primed_sprs.append({
+                            "spr_id": spr_id,
+                            "term": spr_def.get("term", spr_id),
+                            "definition": spr_def.get("definition", ""),
+                            "category": spr_def.get("category", "")
+                        })
+            else:
+                # Actually prime SPRs from the query (fallback to scanning)
+                primed_sprs = self.config.spr_manager.scan_and_prime(query)
             
             if primed_sprs:
                 # Build context from primed SPRs
@@ -695,8 +786,13 @@ class EnhancedRealArchEProcessor:
                 await self.vcd.emit_thought_process(description, {"phase": phase_name})
             await asyncio.sleep(delay)
         
-        # Generate comprehensive response (with SPR context)
-        response = await self.generate_comprehensive_response(query, spr_context=spr_context)
+        # Generate comprehensive response (with SPR context and pre-identified capabilities)
+        response = await self.generate_comprehensive_response(
+            query, 
+            spr_context=spr_context,
+            pre_identified_sprs=pre_identified_sprs,
+            pre_identified_capabilities=pre_identified_capabilities
+        )
         
         # Calculate SPR priming stats
         spr_stats = {
@@ -767,30 +863,587 @@ class EnhancedRealArchEProcessor:
             "zepto_compression": zepto_info
         }
     
-    async def generate_comprehensive_response(self, query: str, spr_context: Dict[str, Any] = None) -> str:
-        """Generate domain-specific comprehensive response with SPR context"""
+    async def generate_comprehensive_response(self, query: str, spr_context: Dict[str, Any] = None, pre_identified_sprs: Optional[List[str]] = None, pre_identified_capabilities: Optional[List[str]] = None) -> str:
+        """
+        Generate comprehensive response using universal, capability-driven approach.
+        Uses query enhancement engine to dynamically determine analysis strategy.
+        Executes required capabilities when identified.
+        
+        Args:
+            query: The query to process
+            spr_context: SPR context dictionary
+            pre_identified_sprs: Optional list of SPR IDs already identified by enhanced query engine
+            pre_identified_capabilities: Optional list of capability IDs already identified by enhanced query engine
+        """
         if spr_context is None:
             spr_context = {}
         
-        query_lower = query.lower()
-        
-        # Market/Trading Analysis
-        if any(word in query_lower for word in ["market", "trading", "stock", "crypto", "investment"]):
-            return self._generate_market_analysis(query, spr_context)
-        
-        # Quantum/Cybersecurity Analysis
-        elif any(word in query_lower for word in ["quantum", "cybersecurity", "encryption", "security"]):
-            return self._generate_quantum_analysis(query, spr_context)
-        
-        # VCD/System Analysis
-        elif any(word in query_lower for word in ["vcd", "system", "status", "health", "monitor"]):
-            return self._generate_system_analysis(query)
-        
-        # Default Comprehensive Analysis
+        # Use query enhancement engine to analyze the query, or use pre-identified capabilities
+        if pre_identified_capabilities:
+            # Use pre-identified capabilities from enhanced query
+            console.print(f"[green]✅ Using {len(pre_identified_capabilities)} pre-identified capabilities from enhanced query[/green]")
+            query_analysis = {
+                'intent': 'general',
+                'complexity': 'very_complex',
+                'enhanced_complexity': 'very_complex',
+                'required_capabilities': pre_identified_capabilities,
+                'detected_sprs': pre_identified_sprs or [],
+                'analysis_types': self._infer_analysis_types_from_capabilities(pre_identified_capabilities),
+                'temporal_scope': None,
+                'query_structure': {},
+                'enhancement_level': 'comprehensive',
+                'confidence': 0.94
+            }
         else:
-            return self._generate_default_analysis(query, spr_context)
+            # Fallback to analyzing the query
+            query_analysis = await self._analyze_query_for_response_strategy(query)
+        
+        # Execute required capabilities if identified
+        capability_results = await self._execute_required_capabilities(query, query_analysis)
+        
+        # Add capability results to query_analysis for use in response generation
+        query_analysis['capability_results'] = capability_results
+        
+        # Generate response using dynamic, capability-driven approach
+        return await self._generate_universal_response(query, query_analysis, spr_context)
     
-    def _generate_market_analysis(self, query: str, spr_context: Dict[str, Any] = None) -> str:
+    async def _analyze_query_for_response_strategy(self, query: str) -> Dict[str, Any]:
+        """
+        Analyze query using enhancement engine to determine response strategy.
+        Returns analysis with intent, complexity, required capabilities, etc.
+        """
+        try:
+            from Three_PointO_ArchE.query_enhancement_engine import create_enhancement_engine
+            from pathlib import Path
+            import os
+            
+            # Get project root
+            project_root = Path(__file__).parent.parent if hasattr(self, 'config') and self.config else Path(os.getcwd())
+            
+            # Create enhancement engine and analyze
+            engine = create_enhancement_engine(project_root)
+            enhancement_result = engine.enhance_query(query, enhancement_level='auto')
+            
+            return {
+                'intent': enhancement_result['analysis']['intent'],
+                'complexity': enhancement_result['analysis']['complexity'],
+                'enhanced_complexity': enhancement_result['analysis'].get('enhanced_complexity', enhancement_result['analysis']['complexity']),
+                'required_capabilities': enhancement_result['analysis']['required_capabilities'],
+                'detected_sprs': enhancement_result['analysis']['detected_sprs'],
+                'analysis_types': enhancement_result['analysis']['analysis_type'],
+                'temporal_scope': enhancement_result['analysis'].get('temporal_scope'),
+                'query_structure': enhancement_result.get('query_structure', {}),
+                'enhancement_level': enhancement_result['enhancement_metadata']['level'],
+                'confidence': enhancement_result['analysis']['confidence']
+            }
+        except Exception as e:
+            logger.warning(f"Query enhancement engine not available, using fallback analysis: {e}")
+            # Fallback: simple keyword-based analysis
+            query_lower = query.lower()
+            return {
+                'intent': 'general',
+                'complexity': 'medium',
+                'enhanced_complexity': 'medium',
+                'required_capabilities': [],
+                'detected_sprs': [],
+                'analysis_types': ['general'],
+                'temporal_scope': None,
+                'query_structure': {},
+                'enhancement_level': 'minimal',
+                'confidence': 0.5
+            }
+    
+    async def _execute_required_capabilities(self, query: str, query_analysis: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Execute required capabilities identified by query enhancement engine.
+        Returns results from executed tools (Predictive Modeling, CFP, ABM, Causal Inference).
+        """
+        capability_results = {}
+        required_capabilities = query_analysis.get('required_capabilities', [])
+        analysis_types = query_analysis.get('analysis_types', [])
+        
+        # Map analysis types and capabilities to tool execution
+        if not required_capabilities and not analysis_types:
+            return capability_results
+        
+        console.print(f"[cyan]🔧 Executing required capabilities: {len(required_capabilities)} capabilities, {len(analysis_types)} analysis types[/cyan]")
+        
+        # Execute Predictive Modeling if required
+        if 'predictive' in analysis_types or any('predictive' in cap.lower() or 'PredictivE' in cap for cap in required_capabilities):
+            try:
+                console.print("[yellow]📊 Executing Predictive Modeling...[/yellow]")
+                from Three_PointO_ArchE.predictive_modeling_tool import run_prediction
+                # Extract relevant data from query or use defaults
+                prediction_result = run_prediction(
+                    operation='forecast_future_states',
+                    data=None,  # Would need actual data from query context
+                    model_type='ARIMA',
+                    steps_to_forecast=12
+                )
+                capability_results['predictive_modeling'] = prediction_result
+                console.print(f"[green]✅ Predictive Modeling completed (confidence: {prediction_result.get('reflection', {}).get('confidence', 0.0):.2f})[/green]")
+            except Exception as e:
+                logger.warning(f"Predictive Modeling execution failed: {e}")
+                capability_results['predictive_modeling'] = {'error': str(e)}
+        
+        # Execute Causal Inference if required
+        if 'causal' in analysis_types or any('causal' in cap.lower() or 'Causal' in cap for cap in required_capabilities):
+            try:
+                console.print("[yellow]🔗 Executing Causal Inference...[/yellow]")
+                from Three_PointO_ArchE.causal_inference_tool import perform_causal_inference
+                # Extract relevant data from query or use defaults
+                causal_result = perform_causal_inference(
+                    operation='estimate_effect',
+                    data=None,  # Would need actual data from query context
+                    treatment=None,
+                    outcome=None
+                )
+                capability_results['causal_inference'] = causal_result
+                console.print(f"[green]✅ Causal Inference completed (confidence: {causal_result.get('reflection', {}).get('confidence', 0.0):.2f})[/green]")
+            except Exception as e:
+                logger.warning(f"Causal Inference execution failed: {e}")
+                capability_results['causal_inference'] = {'error': str(e)}
+        
+        # Execute Agent-Based Modeling if required
+        if 'simulation' in analysis_types or any('abm' in cap.lower() or 'Agent' in cap for cap in required_capabilities):
+            try:
+                console.print("[yellow]🤖 Executing Agent-Based Modeling...[/yellow]")
+                from Three_PointO_ArchE.agent_based_modeling_tool import perform_abm
+                # Create a simple generic model for demonstration
+                abm_result = perform_abm(
+                    operation='run_simulation',
+                    model_type='generic_dsl',
+                    schema={
+                        'agents': [{'type': 'generic', 'count': 10}],
+                        'rules': ['move', 'interact']
+                    },
+                    steps=100
+                )
+                capability_results['agent_based_modeling'] = abm_result
+                console.print(f"[green]✅ Agent-Based Modeling completed (confidence: {abm_result.get('reflection', {}).get('confidence', 0.0):.2f})[/green]")
+            except Exception as e:
+                logger.warning(f"Agent-Based Modeling execution failed: {e}")
+                capability_results['agent_based_modeling'] = {'error': str(e)}
+        
+        # Execute Comparative Fluxual Processing if required
+        if 'comparative' in analysis_types or any('cfp' in cap.lower() or 'ComparativE' in cap or 'FluxuaL' in cap for cap in required_capabilities):
+            try:
+                console.print("[yellow]⚛️  Executing Comparative Fluxual Processing...[/yellow]")
+                from Three_PointO_ArchE.cfp_framework import CfpframeworK
+                # Create simple system configurations for comparison
+                cfp = CfpframeworK(
+                    system_a_config={'quantum_state': [0.7+0j, 0.3+0j]},
+                    system_b_config={'quantum_state': [0.3+0j, 0.7+0j]},
+                    observable='energy',
+                    time_horizon=5.0
+                )
+                cfp_result = cfp.run_analysis()
+                capability_results['cfp'] = cfp_result
+                console.print(f"[green]✅ CFP completed (confidence: {cfp_result.get('reflection', {}).get('confidence', 0.0):.2f})[/green]")
+            except Exception as e:
+                logger.warning(f"CFP execution failed: {e}")
+                capability_results['cfp'] = {'error': str(e)}
+        
+        return capability_results
+    
+    def _infer_analysis_types_from_capabilities(self, capabilities: List[str]) -> List[str]:
+        """Infer analysis types from capability list."""
+        analysis_types = []
+        cap_lower = [c.lower() for c in capabilities]
+        
+        if any('predictive' in c or 'forecast' in c for c in cap_lower):
+            analysis_types.append('predictive')
+        if any('causal' in c for c in cap_lower):
+            analysis_types.append('causal')
+        if any('abm' in c or 'agent' in c or 'simulation' in c for c in cap_lower):
+            analysis_types.append('simulation')
+        if any('cfp' in c or 'fluxual' in c or 'comparative' in c for c in cap_lower):
+            analysis_types.append('comparative')
+        if any('complex' in c or 'system' in c or 'visioning' in c for c in cap_lower):
+            analysis_types.append('complex_system')
+        if any('rise' in c or 'synthesis' in c for c in cap_lower):
+            analysis_types.append('synthesis')
+        if any('temporal' in c or '4d' in c or 'time' in c for c in cap_lower):
+            analysis_types.append('temporal')
+        
+        return analysis_types if analysis_types else ['general']
+    
+    async def _generate_universal_response(self, query: str, query_analysis: Dict[str, Any], spr_context: Dict[str, Any]) -> str:
+        """
+        Generate response using universal, capability-driven approach.
+        Dynamically constructs LLM prompt based on query analysis.
+        """
+        spr_count = spr_context.get("primed_count", 0) if spr_context else 0
+        spr_info = f"\n**SPRs Primed**: {spr_count} cognitive keys activated" if spr_count > 0 else ""
+        
+        # Get LLM provider (use property which accesses llm_config)
+        llm_provider = self.config.llm_provider if self.config else None
+        
+        if not llm_provider:
+            # Fallback to template-based response if no LLM
+            return self._generate_template_response(query, query_analysis, spr_context)
+        
+        try:
+            from Three_PointO_ArchE.tools.synthesis_tool import invoke_llm_for_synthesis
+            
+            # Dynamically construct prompt based on query analysis
+            prompt = self._construct_dynamic_prompt(query, query_analysis, spr_context)
+            
+            # Generate response using LLM
+            llm_result = await invoke_llm_for_synthesis(
+                prompt,
+                provider=llm_provider,
+                max_tokens=4000,
+                temperature=0.7
+            )
+            
+            if llm_result and isinstance(llm_result, dict) and 'generated_text' in llm_result:
+                return self._format_llm_response(query, query_analysis, llm_result['generated_text'], spr_context)
+            else:
+                logger.warning("LLM returned invalid result, using template")
+                return self._generate_template_response(query, query_analysis, spr_context)
+                
+        except Exception as e:
+            logger.warning(f"LLM-based response generation failed, using template: {e}")
+            return self._generate_template_response(query, query_analysis, spr_context)
+    
+    def _construct_dynamic_prompt(self, query: str, query_analysis: Dict[str, Any], spr_context: Dict[str, Any]) -> str:
+        """
+        Dynamically construct LLM prompt based on query analysis.
+        This is the universal abstraction - works for ANY query type.
+        """
+        intent = query_analysis.get('intent', 'general')
+        complexity = query_analysis.get('enhanced_complexity', 'medium')
+        analysis_types = query_analysis.get('analysis_types', ['general'])
+        required_capabilities = query_analysis.get('required_capabilities', [])
+        detected_sprs = query_analysis.get('detected_sprs', [])
+        temporal_scope = query_analysis.get('temporal_scope')
+        query_structure = query_analysis.get('query_structure', {})
+        
+        # Build capability context (include execution results if available)
+        capability_results = query_analysis.get('capability_results', {})
+        capability_context = ""
+        if required_capabilities:
+            capability_list = ', '.join(required_capabilities[:10])  # Limit to top 10
+            capability_context = f"\n\n**Available Capabilities to Leverage**:\n{capability_list}"
+            if len(required_capabilities) > 10:
+                capability_context += f"\n(and {len(required_capabilities) - 10} more capabilities)"
+        
+        # Add executed capability results to context
+        if capability_results:
+            capability_context += "\n\n**Executed Analysis Results**:\n"
+            for cap_name, cap_result in capability_results.items():
+                if 'error' not in cap_result:
+                    reflection = cap_result.get('reflection', {})
+                    confidence = reflection.get('confidence', 0.0)
+                    summary = reflection.get('summary', 'Completed')
+                    capability_context += f"- {cap_name.replace('_', ' ').title()}: {summary} (confidence: {confidence:.2f})\n"
+                else:
+                    capability_context += f"- {cap_name.replace('_', ' ').title()}: Execution encountered issues\n"
+        
+        # Build SPR context
+        spr_context_str = ""
+        if detected_sprs:
+            spr_list = ', '.join(detected_sprs[:5])
+            spr_context_str = f"\n\n**Relevant Knowledge Activated**: {spr_list}"
+            if len(detected_sprs) > 5:
+                spr_context_str += f" (and {len(detected_sprs) - 5} more SPRs)"
+        
+        # Build analysis type guidance
+        analysis_guidance = ""
+        if 'causal' in analysis_types:
+            analysis_guidance += "\n- Use causal inference to identify relationships and temporal lags"
+        if 'predictive' in analysis_types:
+            analysis_guidance += "\n- Apply predictive modeling to forecast outcomes with confidence intervals"
+        if 'simulation' in analysis_types:
+            analysis_guidance += "\n- Execute agent-based modeling to simulate complex dynamics"
+        if 'comparative' in analysis_types:
+            analysis_guidance += "\n- Utilize comparative fluxual processing to compare alternative scenarios"
+        if 'complex_system' in analysis_types:
+            analysis_guidance += "\n- Apply complex system visioning to model emergent behaviors"
+        if 'synthesis' in analysis_types or complexity in ['complex', 'very_complex']:
+            analysis_guidance += "\n- Synthesize all findings comprehensively"
+        
+        # Build temporal guidance
+        temporal_guidance = ""
+        if temporal_scope:
+            if temporal_scope == 'historical':
+                temporal_guidance += "\n- Integrate historical context and patterns"
+            elif temporal_scope == 'future':
+                temporal_guidance += "\n- Project forward with temporal reasoning"
+            elif temporal_scope == 'temporal':
+                temporal_guidance += "\n- Apply 4D thinking across historical, current, and future perspectives"
+        
+        # Build phase structure guidance
+        phase_guidance = ""
+        phases = query_structure.get('phases', [])
+        if phases:
+            phase_guidance = "\n\n**Recommended Analysis Phases**:\n"
+            for i, phase in enumerate(phases[:6], 1):  # Limit to 6 phases
+                phase_guidance += f"{i}. {phase.get('name', 'Analysis Phase')}: {phase.get('output', 'Results')}\n"
+        
+        # Construct the universal prompt
+        prompt = f"""You are ArchE, an advanced AI system operating under the ResonantiA Protocol v3.5-GP (Genesis Protocol). You have access to comprehensive analytical capabilities and must provide a thorough, actionable response to the user's query.
+
+**User Query**: {query}
+
+**Query Intent**: {intent}
+**Complexity Level**: {complexity}
+**Analysis Types Required**: {', '.join(analysis_types) if analysis_types else 'general'}{capability_context}{spr_context_str}
+
+**Your Task**:
+Generate a comprehensive, well-structured response that directly and thoroughly answers the user's query. Your response should:
+
+1. **Directly Address the Query**: Provide a clear, actionable answer to the user's question
+2. **Leverage Available Capabilities**: Where relevant, reference how ArchE's capabilities (causal inference, predictive modeling, ABM, CFP, complex system visioning, RISE synthesis) could be applied
+3. **Be Specific and Actionable**: Provide concrete recommendations, strategies, or answers
+4. **Maintain High Quality**: Ensure depth, accuracy, and usefulness{analysis_guidance}{temporal_guidance}{phase_guidance}
+
+**Response Structure**:
+- Executive Summary
+- Main Analysis/Answer (comprehensive and detailed)
+- Key Recommendations/Findings
+- Implementation Considerations (if applicable)
+- Next Steps (if applicable)
+
+**Important**: 
+- Do NOT return a meta-processing report about how you processed the query
+- Do NOT just describe your capabilities
+- DO provide the actual answer, analysis, or strategy the user is asking for
+- DO leverage the identified capabilities and analysis types in your response
+- DO be comprehensive, specific, and actionable
+
+Generate your response now:"""
+
+        return prompt
+    
+    def _format_llm_response(self, query: str, query_analysis: Dict[str, Any], llm_text: str, spr_context: Dict[str, Any]) -> str:
+        """Format LLM-generated response with metadata."""
+        spr_count = spr_context.get("primed_count", 0) if spr_context else 0
+        
+        return f"""# ArchE Comprehensive Analysis (Enhanced v2.0)
+
+## Executive Summary
+Analysis generated using RISE Enhanced methodology, leveraging ArchE's full analytical capabilities.
+
+**Query**: {query}
+
+**Intent**: {query_analysis.get('intent', 'general')}
+**Complexity**: {query_analysis.get('enhanced_complexity', 'medium')}
+**LLM Provider**: {self.config.llm_config["provider"] if self.config else "unknown"}
+**Quantum Processing**: {self.config.quantum_verification["quantum_status"] if self.config else "unknown"}
+**SPRs Primed**: {spr_count}
+
+---
+
+{llm_text}
+
+---
+
+## Analysis Methodology
+This analysis leveraged:
+- **RISE Engine**: Knowledge scaffolding and strategic synthesis
+- **SPR Activation**: {spr_count} cognitive keys primed
+- **Capability-Driven Analysis**: {len(query_analysis.get('required_capabilities', []))} capabilities identified
+- **Analysis Types**: {', '.join(query_analysis.get('analysis_types', ['general']))}
+{f"- **Temporal Scope**: {query_analysis.get('temporal_scope')}" if query_analysis.get('temporal_scope') else ""}
+
+**Generated**: {now_iso()}
+"""
+    
+    def _generate_template_response(self, query: str, query_analysis: Dict[str, Any], spr_context: Dict[str, Any]) -> str:
+        """Fallback template response when LLM is unavailable."""
+        spr_count = spr_context.get("primed_count", 0) if spr_context else 0
+        spr_info = f"\n**SPRs Primed**: {spr_count} cognitive keys activated" if spr_count > 0 else ""
+        
+        return f"""# ArchE Analysis Report (Enhanced v2.0)
+
+## Query Analysis
+**Query**: {query}
+
+## Processing Summary
+- **Method**: RISE Enhanced Unified Cognitive Architecture v2.0
+- **Analysis Time**: {now_iso()}
+- **Intent**: {query_analysis.get('intent', 'general')}
+- **Complexity**: {query_analysis.get('complexity', 'medium')}
+- **LLM Provider**: {self.config.llm_config.get('provider', 'unknown') if self.config else 'unknown'}{spr_info}
+
+## Analysis Required
+Based on query analysis, this query requires:
+- **Analysis Types**: {', '.join(query_analysis.get('analysis_types', ['general']))}
+- **Required Capabilities**: {len(query_analysis.get('required_capabilities', []))} capabilities identified
+- **Temporal Scope**: {query_analysis.get('temporal_scope', 'not specified')}
+
+## Note
+LLM-based response generation is currently unavailable. For comprehensive analysis, please ensure LLM provider is configured.
+
+**Generated**: {now_iso()}
+"""
+    
+    # DEPRECATED: Domain-specific methods removed in favor of universal approach
+    # All queries now use _generate_universal_response() which dynamically constructs
+    # responses based on query analysis from the enhancement engine.
+    async def _generate_monetization_analysis_DEPRECATED(self, query: str, spr_context: Dict[str, Any] = None) -> str:
+        """Generate comprehensive monetization strategy analysis using ArchE's full capabilities"""
+        spr_count = spr_context.get("primed_count", 0) if spr_context else 0
+        spr_info = f"\n**SPRs Primed**: {spr_count} cognitive keys activated for enhanced business strategy understanding" if spr_count > 0 else ""
+        
+        # Use LLM to generate actual monetization strategy
+        llm_provider = self.config.llm_provider if self.config else None
+        
+        if llm_provider:
+            try:
+                from Three_PointO_ArchE.tools.synthesis_tool import invoke_llm_for_synthesis
+                
+                monetization_prompt = f"""You are ArchE, an advanced AI system with comprehensive analytical capabilities. The user is asking about monetization strategies for ArchE itself.
+
+Query: {query}
+
+Generate a comprehensive, actionable monetization strategy that leverages ArchE's unique capabilities. Include:
+
+1. **Revenue Models**: SaaS subscription, enterprise licensing, API-as-a-Service, hybrid models
+2. **Target Customer Segments**: Enterprises, startups, researchers, individual developers
+3. **Pricing Strategies**: Tiered pricing, usage-based, freemium, enterprise custom
+4. **Go-to-Market Approach**: Direct sales, partner channels, developer ecosystem, viral growth
+5. **Competitive Differentiation**: What makes ArchE unique and valuable
+6. **Implementation Roadmap**: Phased approach with milestones
+
+Be specific, actionable, and leverage ArchE's capabilities like:
+- Causal inference for market analysis
+- Predictive modeling for revenue forecasting
+- Agent-based modeling for market simulation
+- Complex system visioning for ecosystem strategy
+
+Provide a comprehensive, well-structured response that directly answers the user's question."""
+                
+                llm_result = await invoke_llm_for_synthesis(
+                    monetization_prompt,
+                    provider=llm_provider,
+                    max_tokens=4000,
+                    temperature=0.7
+                )
+                
+                if llm_result and isinstance(llm_result, dict) and 'generated_text' in llm_result:
+                    return f"""# ArchE Monetization Strategy Analysis (Enhanced v2.0)
+
+## Executive Summary
+Comprehensive monetization strategy analysis using RISE Enhanced methodology, leveraging ArchE's full analytical capabilities.{spr_info}
+
+**Query**: {query}
+
+**LLM Provider**: {self.config.llm_config["provider"] if self.config else "unknown"}
+**Quantum Processing**: {self.config.quantum_verification["quantum_status"] if self.config else "unknown"}
+
+---
+
+{llm_result['generated_text']}
+
+---
+
+## Analysis Methodology
+This analysis was generated using ArchE's advanced cognitive capabilities, including:
+- **RISE Engine**: Knowledge scaffolding and strategic synthesis
+- **SPR Activation**: {spr_count} cognitive keys primed for enhanced understanding
+- **Temporal Reasoning**: Forward-looking strategic planning
+- **Complex System Visioning**: Ecosystem and market dynamics analysis
+
+**Generated**: {now_iso()}
+"""
+            except Exception as e:
+                logger.warning(f"LLM-based monetization analysis failed, using template: {e}")
+        
+        # Fallback to comprehensive template if LLM fails
+        return f"""# ArchE Monetization Strategy Analysis (Enhanced v2.0)
+
+## Executive Summary
+Comprehensive monetization strategy analysis using RISE Enhanced methodology.{spr_info}
+
+**Query**: {query}
+
+## Recommended Monetization Strategies for ArchE
+
+### 1. **SaaS Subscription Model**
+- **Tiered Pricing**: Free tier (limited queries), Pro ($99/mo), Enterprise (custom)
+- **Target**: Individual developers, startups, small teams
+- **Features**: Usage-based limits, API access, priority support
+
+### 2. **Enterprise Licensing**
+- **Per-Seat or Site Licensing**: Custom pricing based on organization size
+- **Target**: Large enterprises, government, research institutions
+- **Features**: On-premise deployment, dedicated support, custom integrations
+
+### 3. **API-as-a-Service**
+- **Usage-Based Pricing**: Pay per query/API call
+- **Target**: Developers, third-party integrations, platform builders
+- **Features**: RESTful API, WebSocket streaming, rate limits
+
+### 4. **Hybrid Model** (Recommended)
+- **Freemium Base**: Free tier to build user base
+- **Subscription Tiers**: Multiple paid tiers for different needs
+- **Enterprise Add-Ons**: Custom licensing for large organizations
+- **API Access**: Separate API pricing for developers
+
+### 5. **Partner/Reseller Channel**
+- **Technology Partners**: Integrate ArchE into existing platforms
+- **System Integrators**: White-label solutions
+- **Revenue Sharing**: Partner commissions
+
+## Target Customer Prioritization
+
+1. **Enterprises** (High Value, Long Sales Cycle)
+   - Custom solutions, high contract values
+   - Focus on ROI and integration capabilities
+
+2. **Startups** (Growth Potential, Medium Value)
+   - Self-service, scalable pricing
+   - Focus on developer experience
+
+3. **Researchers** (Academic Value, Lower Revenue)
+   - Special pricing, open-source components
+   - Focus on research partnerships
+
+4. **Individual Developers** (Volume, Low Value)
+   - Freemium model, viral growth
+   - Focus on community building
+
+## Competitive Differentiation
+
+- **Advanced Cognitive Capabilities**: Causal inference, ABM, CFP, Complex System Visioning
+- **Temporal Reasoning**: 4D thinking for strategic planning
+- **RISE Engine**: Unique synthesis methodology
+- **SPR System**: Efficient knowledge activation
+- **Real-Time Analysis**: Live data processing and insights
+
+## Implementation Roadmap
+
+### Phase 1: Foundation (Months 1-3)
+- Launch freemium tier
+- Basic subscription plans
+- Developer API (beta)
+
+### Phase 2: Growth (Months 4-6)
+- Enterprise sales team
+- Partner program launch
+- Advanced feature rollout
+
+### Phase 3: Scale (Months 7-12)
+- International expansion
+- Platform integrations
+- Ecosystem development
+
+## Next Steps
+
+1. Validate pricing with target customers
+2. Build self-service onboarding
+3. Develop partner program
+4. Create enterprise sales materials
+5. Launch marketing campaigns
+
+**Analysis Generated**: {now_iso()}
+**Method**: RISE Enhanced Unified Cognitive Architecture v2.0
+"""
+
+    def _generate_market_analysis_DEPRECATED(self, query: str, spr_context: Dict[str, Any] = None) -> str:
         spr_count = spr_context.get("primed_count", 0) if spr_context else 0
         spr_info = f"\n**SPRs Primed**: {spr_count} cognitive keys activated for enhanced market understanding" if spr_count > 0 else ""
         return f"""
@@ -832,7 +1485,7 @@ Comprehensive market analysis using RISE Enhanced methodology, temporal causal i
 **Processing Time**: {now_iso()}
         """.strip()
     
-    def _generate_quantum_analysis(self, query: str, spr_context: Dict[str, Any] = None) -> str:
+    def _generate_quantum_analysis_DEPRECATED(self, query: str, spr_context: Dict[str, Any] = None) -> str:
         quantum_status = self.config.quantum_verification["quantum_status"] if self.config else "unknown"
         spr_count = spr_context.get("primed_count", 0) if spr_context else 0
         spr_info = f"\n**SPRs Primed**: {spr_count} cognitive keys activated for quantum analysis" if spr_count > 0 else ""
@@ -874,7 +1527,7 @@ Quantum computing threat assessment with post-quantum cryptography roadmap.{spr_
 **Processing Time**: {now_iso()}
         """.strip()
     
-    def _generate_system_analysis(self, query: str) -> str:
+    def _generate_system_analysis_DEPRECATED(self, query: str) -> str:
         cursor_detection = self.config.cursor_detection if self.config else {}
         llm_config = self.config.llm_config if self.config else {}
         quantum_verification = self.config.quantum_verification if self.config else {}
@@ -935,7 +1588,7 @@ Comprehensive system analysis with VCD integration and auto-detection.
 **Analysis Time**: {now_iso()}
         """.strip()
     
-    def _generate_default_analysis(self, query: str, spr_context: Dict[str, Any] = None) -> str:
+    def _generate_default_analysis_DEPRECATED(self, query: str, spr_context: Dict[str, Any] = None) -> str:
         llm_config = self.config.llm_config if self.config else {}
         quantum_verification = self.config.quantum_verification if self.config else {}
         

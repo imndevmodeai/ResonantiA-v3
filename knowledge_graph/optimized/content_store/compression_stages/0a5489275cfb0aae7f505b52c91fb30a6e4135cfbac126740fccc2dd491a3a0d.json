@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Maintenance Scheduling\n\nDEFINITION:\nMaintenance Scheduling: designed to provide advanced quality control capabilities to ensure product quality:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Maintenance Scheduling'\n\nEXAMPLE APPLICATION:\nict and prevent equipment failures:\n    * Predictive Modeling: Developing predictive modeling techniques that enable the AI system to predict equipment failures.\n    * Condition Monitoring: Implementing condition monitoring techniques that enable the AI system to monitor equipment conditions.\n    * Maintenance Scheduling: Creating maintenance scheduling techniques that enable the AI system to schedule maintenance activities.\n\n54. AI-Driven Quality Control: Mastermind_AI is designed to provide ad\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1125,
+    "timestamp": "2025-11-18T10:47:33.892083Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Maintenance Scheduling\n\nDEFINITION:\nMaintenance Scheduling: designed to provide advanced quality control capabilities to ensure product quality:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Maintenance Scheduling'\n\nEXAMPLE APPLICATION:\nict and prevent equipment failures:\n    * Predictive Modeling: Developing predictive modeling techniques that enable the AI system to predict equipment failures.\n    * Condition Monitoring: Implementing condition monitoring techniques that enable the AI system to",
+    "compression_ratio": 2.001779359430605,
+    "symbol_count": 562,
+    "timestamp": "2025-11-18T10:47:33.892108Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Maintenance Scheduling D: Maintenance Scheduling: designed to provide advanced quality control capabilities to ensure product quality: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Maintenance Scheduling' EXAMPLE APPLICATION: ict prevent equipment failures: * Predictive Modeling: Developing predictive modeling techniques enable AI S to predict equipment failures. * Condition Monitoring: Implementing condition monitoring techniques enable AI S to",
+    "compression_ratio": 2.245508982035928,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:33.894041Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Maintenance Scheduling D: Maintenance Scheduling: designed provide advanced quality control capabilities ensure product quality: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Maintenance Scheduling' EXAMPLE APPLICATION: prevent equipment failures: PMT ABM: Developing PMT ABM techniques enable AI S predict equipment failures. Condition Monitoring: Implementing condition monitoring techniques enable AI S",
+    "compression_ratio": 2.4779735682819384,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:33.897646Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Maintenance Scheduling D: Maintenance Scheduling: designed provide advanced quality control capabilities ensure product quality: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Maintenance Scheduling' EXAMPLE APPLICATION: prevent equipment failures: PMT ABM: Developing PMT ABM techniques enable AI S predict equipment failures. Condition Monitoring: Implementing condition monitoring techniques enable AI S",
+    "compression_ratio": 2.4779735682819384,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:33.900021Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Maintenance Scheduling D: Maintenance Scheduling: designed provide advanced quality control capabilities ensure product quality: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Maintenance Scheduling' EXAMPLE APPLICATION: prevent equipment failures: PMT ABM: Developing PMT ABM techniques enable AI S predict equipment failures. Condition Monitoring: Implementing condition monitoring techniques enable AI S",
+    "compression_ratio": 2.4779735682819384,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:33.904068Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Maintenance Scheduling D: Maintenance Scheduling: BLUEPRINT DETAILS: Θ Node Original Θ Scheduling' EXAMPLE APPLICATION: PMT ABM: Developing PMT ABM AI S Condition Monitoring: Implementing AI S",
+    "compression_ratio": 5.681818181818182,
+    "symbol_count": 198,
+    "timestamp": "2025-11-18T10:47:33.907198Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 375.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:33.907664Z"
+  }
+]

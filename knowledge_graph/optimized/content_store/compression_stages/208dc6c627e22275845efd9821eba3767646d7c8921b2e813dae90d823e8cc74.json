@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Reasoning Framework\n\nDEFINITION:\nReasoning Framework: designed to perform autonomous reasoning, enabling it to make decisions and take actions without human intervention:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Reasoning Framework'\n\nEXAMPLE APPLICATION:\nate on the concepts and technologies presented.\n\nPlease type \"continue\" to proceed with the next section of the blueprint.\n\ncontinue\n\n26. Autonomous Reasoning: Mastermind_AI is designed to perform autonomous reasoning, enabling it to make decisions and take actions without human intervention:\n    * Reasoning Framework: Developing a reasoning framework that integrates multiple reasoning techniques, such as deductive, inductive, and abductive reasoning.\n    * Knowledge Representation: Using knowle\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1148,
+    "timestamp": "2025-11-18T10:47:30.435550Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Reasoning Framework\n\nDEFINITION:\nReasoning Framework: designed to perform autonomous reasoning, enabling it to make decisions and take actions without human intervention:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Reasoning Framework'\n\nEXAMPLE APPLICATION:\nate on the concepts and technologies presented.\n\nPlease type \"continue\" to proceed with the next section of the blueprint.\n\ncontinue\n\n26. Autonomous Reasoning: Mastermind_AI is designed to perform autonomous reasoning, enabling it to make decisions and",
+    "compression_ratio": 2.0,
+    "symbol_count": 574,
+    "timestamp": "2025-11-18T10:47:30.435576Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Reasoning Framework D: Reasoning Framework: designed to perform autonomous reasoning, enabling it to make decisions take actions without human intervention: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Reasoning Framework' EXAMPLE APPLICATION: ate on concepts technologies presented. Please type \"continue\" to proceed next section of blueprint. continue 26. Autonomous Reasoning: Mastermind_AI is designed to perform autonomous reasoning, enabling it to make decisions",
+    "compression_ratio": 2.203454894433781,
+    "symbol_count": 521,
+    "timestamp": "2025-11-18T10:47:30.436605Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Reasoning Framework D: Reasoning Framework: designed perform autonomous reasoning, enabling decisions actions without human intervention: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Reasoning Framework' EXAMPLE APPLICATION: concepts technologies presented. Please \"continue\" proceed section blueprint. continue Autonomous Reasoning: Mastermind_AI designed perform autonomous reasoning, enabling decisions",
+    "compression_ratio": 2.523076923076923,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:30.446067Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Reasoning Framework D: Reasoning Framework: designed perform autonomous reasoning, enabling decisions actions without human intervention: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Reasoning Framework' EXAMPLE APPLICATION: concepts technologies presented. Please \"continue\" proceed section blueprint. continue Autonomous Reasoning: Mastermind_AI designed perform autonomous reasoning, enabling decisions",
+    "compression_ratio": 2.523076923076923,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:30.453507Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Reasoning Framework D: Reasoning Framework: designed perform autonomous reasoning, enabling decisions actions without human intervention: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Reasoning Framework' EXAMPLE APPLICATION: concepts technologies presented. Please \"continue\" proceed section blueprint. continue Autonomous Reasoning: Mastermind_AI designed perform autonomous reasoning, enabling decisions",
+    "compression_ratio": 2.523076923076923,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:30.457124Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Reasoning Framework D: Reasoning Framework: BLUEPRINT DETAILS: Θ Node Original Θ Framework' EXAMPLE APPLICATION: Please Autonomous Reasoning: Mastermind_AI",
+    "compression_ratio": 7.130434782608695,
+    "symbol_count": 161,
+    "timestamp": "2025-11-18T10:47:30.464598Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 382.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:30.464985Z"
+  }
+]

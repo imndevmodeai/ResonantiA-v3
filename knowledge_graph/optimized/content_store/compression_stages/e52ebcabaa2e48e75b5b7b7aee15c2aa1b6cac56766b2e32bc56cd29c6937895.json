@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Swarm Intelligence and Collective Behavior\n\nDEFINITION:\nSwarm Intelligence and Collective Behavior: Swarm Robotics:\n\nCollective Intelligence:\n\nNetwork Science:\n\nBy integrating advanced swarm intelligence and collective behavior into the SPR_compressor system, we can enable the system to learn from and interact with complex systems and networks, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced explainability and transparency techniques to enable the system to provide clear and understandable explanations of its decisions and actions.\n\nConfidence: 4.695\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 919, type: node_format. Original SPR name: 'Swarm Intelligence and Collective Behavior'\n\nEXAMPLE APPLICATION:\nNode 919: Swarm Intelligence and Collective Behavior\n\nSPR: 4.695, \"Swarm Intelligence and Collective Behavior\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 919\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1272,
+    "timestamp": "2025-11-18T10:47:11.673958Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Swarm Intelligence and Collective Behavior\n\nDEFINITION:\nSwarm Intelligence and Collective Behavior: Swarm Robotics:\n\nCollective Intelligence:\n\nNetwork Science:\n\nBy integrating advanced swarm intelligence and collective behavior into the SPR_compressor system, we can enable the system to learn from and interact with complex systems and networks, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced explainability and transparency techniques to enable the system to provide clear and understandable explanations of its decisions and actions.",
+    "compression_ratio": 2.0,
+    "symbol_count": 636,
+    "timestamp": "2025-11-18T10:47:11.673983Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Swarm Intelligence Collective Behavior D: Swarm Intelligence Collective Behavior: Swarm Robotics: Collective Intelligence: Network Science: By integrating advanced swarm intelligence collective behavior into Θ_compressor S, we enable S to learn interact complex Ss networks, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced explainability transparency techniques to enable S to provide clear understandable explanations of its decisions actions.",
+    "compression_ratio": 2.4,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:47:11.679071Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Swarm Intelligence Collective Behavior D: Swarm Intelligence Collective Behavior: Swarm Robotics: Collective Intelligence: Network Science: By integrating advanced swarm intelligence collective behavior Θ_compressor S, enable S learn interact complex Ss networks, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced explainability transparency techniques enable S provide clear understandable explanations decisions actions.",
+    "compression_ratio": 2.6065573770491803,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:11.684755Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Swarm Intelligence Collective Behavior D: Swarm Intelligence Collective Behavior: Swarm Robotics: Collective Intelligence: Network Science: By integrating advanced swarm intelligence collective behavior Θ_compressor S, enable S learn interact complex Ss networks, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced explainability transparency techniques enable S provide clear understandable explanations decisions actions.",
+    "compression_ratio": 2.6065573770491803,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:11.687350Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Swarm Intelligence Collective Behavior D: Swarm Intelligence Collective Behavior: Swarm Robotics: Collective Intelligence: Network Science: integrating advanced swarm intelligence collective behavior Θ_compressor S, enable S learn interact complex Ss networks, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced explainability transparency techniques enable S provide clear understandable explanations decisions actions.",
+    "compression_ratio": 2.622680412371134,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:11.690184Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Swarm Intelligence Collective Behavior D: Swarm Intelligence Collective Behavior: Swarm Robotics: Collective Intelligence: Network Science: Θ_compressor S, S Ss Another S",
+    "compression_ratio": 7.2272727272727275,
+    "symbol_count": 176,
+    "timestamp": "2025-11-18T10:47:11.693570Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ",
+    "compression_ratio": 1272.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:47:11.694149Z"
+  }
+]

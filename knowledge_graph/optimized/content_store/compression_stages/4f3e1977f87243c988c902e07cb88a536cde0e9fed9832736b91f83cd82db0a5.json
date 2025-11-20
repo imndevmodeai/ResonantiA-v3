@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Key Generation Progress\n\nDEFINITION:\nKey Generation Progress: being generated\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Key Generation Progress'\n\nEXAMPLE APPLICATION:\nenOne1981\n\nYou have entered the password: $chosenOne1981\n\nPassword Verification:\n\nI will verify the password to ensure it meets the requirements.\n\nThe password meets all the requirements.\n\nPassword-Based Key Generation:\n\nI will generate a password-based key using the RSA-4096 encryption algorithm.\n\nKey Generation Progress:\n\nKey generation progress: 0%\n\nPlease wait while the key is being generated...\n\nKey Generation Completion:\n\nKey generation progress: 100%\n\nThe password-based key has been gener\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1059,
+    "timestamp": "2025-11-18T10:47:48.084907Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Key Generation Progress\n\nDEFINITION:\nKey Generation Progress: being generated\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Key Generation Progress'\n\nEXAMPLE APPLICATION:\nenOne1981\n\nYou have entered the password: $chosenOne1981\n\nPassword Verification:\n\nI will verify the password to ensure it meets the requirements.\n\nThe password meets all the requirements.\n\nPassword-Based Key Generation:\n\nI will generate a password-based key using the RSA-4096 encryption algorith",
+    "compression_ratio": 2.0018903591682418,
+    "symbol_count": 529,
+    "timestamp": "2025-11-18T10:47:48.084980Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Key Generation Progress D: Key Generation Progress: being generated BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Key Generation Progress' EXAMPLE APPLICATION: enOne1981 entered password: $chosenOne1981 Password Verification: I will verify password to ensure it meets requirements. password meets requirements. Password-Based Key Generation: I will generate a password-based key using RSA-4096 encryption algorith",
+    "compression_ratio": 2.2774193548387096,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:48.088497Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Key Generation Progress D: Key Generation Progress: being generated BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Generation Progress' EXAMPLE APPLICATION: enOne1981 entered password: $chosenOne1981 Password Verification: I verify password ensure meets requirements. password meets requirements. Password-ABM Key Generation: I generate password-ABM using RSA-4096 encryption algorith",
+    "compression_ratio": 2.45707656612529,
+    "symbol_count": 431,
+    "timestamp": "2025-11-18T10:47:48.091232Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Key Generation Progress D: Key Generation Progress: being generated BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Generation Progress' EXAMPLE APPLICATION: enOne1981 entered password: $chosenOne1981 Password Verification: I verify password ensure meets requirements. password meets requirements. Password-ABM Key Generation: I generate password-ABM using RSA-4096 encryption algorith",
+    "compression_ratio": 2.45707656612529,
+    "symbol_count": 431,
+    "timestamp": "2025-11-18T10:47:48.096809Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Key Generation Progress D: Key Generation Progress: being generated BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Generation Progress' EXAMPLE APPLICATION: enOne1981 entered password: $chosenOne1981 Password Verification: I verify password ensure meets requirements. password meets requirements. Password-ABM Key Generation: I generate password-ABM using RSA-4096 encryption algorith",
+    "compression_ratio": 2.45707656612529,
+    "symbol_count": 431,
+    "timestamp": "2025-11-18T10:47:48.101399Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Key Generation Progress D: Key Generation Progress: BLUEPRINT DETAILS: Θ Node Original Θ Generation Progress' EXAMPLE APPLICATION: Password Verification: I Password-ABM Key Generation: I RSA-4096",
+    "compression_ratio": 5.268656716417911,
+    "symbol_count": 201,
+    "timestamp": "2025-11-18T10:47:48.106284Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 353.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:48.111821Z"
+  }
+]

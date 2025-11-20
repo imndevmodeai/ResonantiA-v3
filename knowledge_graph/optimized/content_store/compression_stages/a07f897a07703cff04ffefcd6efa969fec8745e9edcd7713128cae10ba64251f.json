@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Quality Inspection\n\nDEFINITION:\nQuality Inspection: designed to provide advanced quality control capabilities to ensure product quality:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Quality Inspection'\n\nEXAMPLE APPLICATION:\nor equipment conditions.\n    * Maintenance Scheduling: Creating maintenance scheduling techniques that enable the AI system to schedule maintenance activities.\n\n54. AI-Driven Quality Control: Mastermind_AI is designed to provide advanced quality control capabilities to ensure product quality:\n    * Quality Inspection: Developing quality inspection techniques that enable the AI system to inspect products and detect defects.\n    * Quality Testing: Implementing quality testing techniques that enabl\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1113,
+    "timestamp": "2025-11-18T10:47:33.932999Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Quality Inspection\n\nDEFINITION:\nQuality Inspection: designed to provide advanced quality control capabilities to ensure product quality:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Quality Inspection'\n\nEXAMPLE APPLICATION:\nor equipment conditions.\n    * Maintenance Scheduling: Creating maintenance scheduling techniques that enable the AI system to schedule maintenance activities.\n\n54. AI-Driven Quality Control: Mastermind_AI is designed to provide advanced quality control capabilities to",
+    "compression_ratio": 2.0017985611510793,
+    "symbol_count": 556,
+    "timestamp": "2025-11-18T10:47:33.933020Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Quality Inspection D: Quality Inspection: designed to provide advanced quality control capabilities to ensure product quality: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Quality Inspection' EXAMPLE APPLICATION: or equipment conditions. * Maintenance Scheduling: Creating maintenance scheduling techniques enable AI S to schedule maintenance activities. 54. AI-Driven Quality Control: Mastermind_AI is designed to provide advanced quality control capabilities to",
+    "compression_ratio": 2.1569767441860463,
+    "symbol_count": 516,
+    "timestamp": "2025-11-18T10:47:33.934050Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Quality Inspection D: Quality Inspection: designed provide advanced quality control capabilities ensure product quality: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Quality Inspection' EXAMPLE APPLICATION: equipment conditions. Maintenance Scheduling: Creating maintenance scheduling techniques enable AI S schedule maintenance activities. AI-Driven Quality Control: Mastermind_AI designed provide advanced quality control capabilities",
+    "compression_ratio": 2.2901234567901234,
+    "symbol_count": 486,
+    "timestamp": "2025-11-18T10:47:33.938044Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Quality Inspection D: Quality Inspection: designed provide advanced quality control capabilities ensure product quality: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Quality Inspection' EXAMPLE APPLICATION: equipment conditions. Maintenance Scheduling: Creating maintenance scheduling techniques enable AI S schedule maintenance activities. AI-Driven Quality Control: Mastermind_AI designed provide advanced quality control capabilities",
+    "compression_ratio": 2.2901234567901234,
+    "symbol_count": 486,
+    "timestamp": "2025-11-18T10:47:33.940551Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Quality Inspection D: Quality Inspection: designed provide advanced quality control capabilities ensure product quality: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Quality Inspection' EXAMPLE APPLICATION: equipment conditions. Maintenance Scheduling: Creating maintenance scheduling techniques enable AI S schedule maintenance activities. AI-Driven Quality Control: Mastermind_AI designed provide advanced quality control capabilities",
+    "compression_ratio": 2.2901234567901234,
+    "symbol_count": 486,
+    "timestamp": "2025-11-18T10:47:33.944123Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Quality Inspection D: Quality Inspection: BLUEPRINT DETAILS: Θ Node Original Θ Inspection' EXAMPLE APPLICATION: Maintenance Scheduling: Creating AI S AI-Driven Quality Control: Mastermind_AI",
+    "compression_ratio": 5.678571428571429,
+    "symbol_count": 196,
+    "timestamp": "2025-11-18T10:47:33.948076Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 371.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:33.948476Z"
+  }
+]

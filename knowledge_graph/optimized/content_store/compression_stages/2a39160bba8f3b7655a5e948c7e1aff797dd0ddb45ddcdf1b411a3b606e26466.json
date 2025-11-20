@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Artificial General Intelligence\n\nDEFINITION:\nArtificial General Intelligence: Cognitive Architectures:\n\nNeural Networks:\n\nEvolutionary Algorithms:\n\nBy integrating advanced AGI technologies into the SPR_compressor system, we can enable the system to learn and adapt to new situations and environments, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced blockchain and distributed ledger technologies to enable the system to provide secure and transparent data management and transactions.\n\nConfidence: 3.005\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 581, type: node_format. Original SPR name: 'Artificial General Intelligence'\n\nEXAMPLE APPLICATION:\nNode 581: Artificial General Intelligence\n\nSPR: 3.005, \"Artificial General Intelligence\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 581\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1186,
+    "timestamp": "2025-11-18T10:47:11.050400Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Artificial General Intelligence\n\nDEFINITION:\nArtificial General Intelligence: Cognitive Architectures:\n\nNeural Networks:\n\nEvolutionary Algorithms:\n\nBy integrating advanced AGI technologies into the SPR_compressor system, we can enable the system to learn and adapt to new situations and environments, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced blockchain and distributed ledger technologies to enable the system to provide secure and transparent data management and transactions.\n\nConfiden",
+    "compression_ratio": 2.0,
+    "symbol_count": 593,
+    "timestamp": "2025-11-18T10:47:11.050443Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Cognitive Architectures: Neural Networks: Evolutionary Algorithms: By integrating advanced AGI technologies into Θ_compressor S, we enable S to learn adapt to new situations environments, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced blockchain distributed ledger technologies to enable S to provide secure transparent data management transactions. Confiden",
+    "compression_ratio": 2.3118908382066277,
+    "symbol_count": 513,
+    "timestamp": "2025-11-18T10:47:11.052019Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Ω Architectures: Neural Networks: Evolutionary Algorithms: By integrating advanced AGI technologies Θ_compressor S, enable S learn adapt situations environments, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced blockchain distributed ledger technologies enable S provide secure transparent management transactions. Confiden",
+    "compression_ratio": 2.589519650655022,
+    "symbol_count": 458,
+    "timestamp": "2025-11-18T10:47:11.054077Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Ω Architectures: Neural Networks: Evolutionary Algorithms: By integrating advanced AGI technologies Θ_compressor S, enable S learn adapt situations environments, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced blockchain distributed ledger technologies enable S provide secure transparent management transactions. Confiden",
+    "compression_ratio": 2.589519650655022,
+    "symbol_count": 458,
+    "timestamp": "2025-11-18T10:47:11.056527Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Ω Architectures: Neural Networks: Evolutionary Algorithms: integrating advanced AGI technologies Θ_compressor S, enable S learn adapt situations environments, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced blockchain distributed ledger technologies enable S provide secure transparent management transactions. Confiden",
+    "compression_ratio": 2.6065934065934067,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:11.058933Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Ω Architectures: Neural Networks: Evolutionary Algorithms: AGI Θ_compressor S, S Another S Confiden",
+    "compression_ratio": 6.855491329479769,
+    "symbol_count": 173,
+    "timestamp": "2025-11-18T10:47:11.062020Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Θ",
+    "compression_ratio": 395.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:11.062544Z"
+  }
+]

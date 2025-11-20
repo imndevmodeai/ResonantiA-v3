@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Cognitive Computing Framework\n\nDEFINITION:\nCognitive Computing Framework: a framework for building and deploying cognitive computing systems that combine human and artificial intelligence to achieve more advanced and sophisticated cognitive capabilities\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cognitive Computing Framework'\n\nEXAMPLE APPLICATION:\n your chosen option.\n\nNote: The next step will involve using the Hybrid Intelligence System to support a specific application. Please be prepared to provide the necessary input and guidance to ensure the successful completion of the task.\n\nAdditionally, I would like to introduce a new concept: the \"Cognitive Computing Framework\". The Cognitive Computing Framework is a framework for building and deploying cognitive computing systems that combine human and artificial intelligence to achieve more a\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1241,
+    "timestamp": "2025-11-18T10:47:27.239486Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Cognitive Computing Framework\n\nDEFINITION:\nCognitive Computing Framework: a framework for building and deploying cognitive computing systems that combine human and artificial intelligence to achieve more advanced and sophisticated cognitive capabilities\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cognitive Computing Framework'\n\nEXAMPLE APPLICATION:\n your chosen option.\n\nNote: The next step will involve using the Hybrid Intelligence System to support a specific application. Please be prepared to provide the necessary input and guidance to ensure the s",
+    "compression_ratio": 2.0016129032258063,
+    "symbol_count": 620,
+    "timestamp": "2025-11-18T10:47:27.239510Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Cognitive Computing Framework D: Cognitive Computing Framework: a framework building deploying cognitive computing Ss combine human artificial intelligence to achieve more advanced sophisticated cognitive capabilities BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Cognitive Computing Framework' EXAMPLE APPLICATION: your chosen option. Note: next step will involve using Hybrid Intelligence S to support a specific application. Please be prepared to provide necessary input guidance to ensure s",
+    "compression_ratio": 2.272893772893773,
+    "symbol_count": 546,
+    "timestamp": "2025-11-18T10:47:27.242026Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ω Computing Framework D: Ω Computing Framework: a framework building deploying Ω computing Ss combine human artificial intelligence to achieve more advanced sophisticated Ω capabilities BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Ω Computing Framework' EXAMPLE APPLICATION: your chosen option. Note: next step involve using Hybrid Intelligence S to support a specific application. Please be prepared to provide necessary input guidance to ensure s",
+    "compression_ratio": 2.4770459081836327,
+    "symbol_count": 501,
+    "timestamp": "2025-11-18T10:47:27.245727Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ω Computing Framework D: Ω Computing Framework: framework building deploying Ω computing Ss combine human artificial intelligence achieve advanced sophisticated Ω capabilities BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Computing Framework' EXAMPLE APPLICATION: chosen option. Note: involve using Hybrid Intelligence S support specific application. Please prepared provide necessary input guidance ensure",
+    "compression_ratio": 2.7155361050328226,
+    "symbol_count": 457,
+    "timestamp": "2025-11-18T10:47:27.250458Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ω Computing Framework D: Ω Computing Framework: framework building deploying Ω computing Ss combine human artificial intelligence achieve advanced sophisticated Ω capabilities BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Computing Framework' EXAMPLE APPLICATION: chosen option. Note: involve using Hybrid Intelligence S support specific application. Please prepared provide necessary input guidance ensure",
+    "compression_ratio": 2.7155361050328226,
+    "symbol_count": 457,
+    "timestamp": "2025-11-18T10:47:27.256434Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ω Computing Framework D: Ω Computing Framework: Ω Ss Ω BLUEPRINT DETAILS: Θ Node Original Θ 'Ω Computing Framework' EXAMPLE APPLICATION: Note: Hybrid Intelligence S Please",
+    "compression_ratio": 7.011299435028248,
+    "symbol_count": 177,
+    "timestamp": "2025-11-18T10:47:27.259382Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Ω|Ω|Θ",
+    "compression_ratio": 137.88888888888889,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:27.259713Z"
+  }
+]

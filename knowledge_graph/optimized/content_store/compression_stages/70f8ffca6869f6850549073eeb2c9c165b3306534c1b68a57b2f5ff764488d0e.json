@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Test Metrics\n\nDEFINITION:\nTest Metrics: working as expected\n\n[From Codebase]: - Test execution time\n- Pass/fail rates\n- Coverage percentages\n- Performance benchmarks\n- Error frequency\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Test Metrics'\n\nEXAMPLE APPLICATION:\ne that it is working as expected.\n\nSystem Testing:\n\nI will test the system with a small dataset to ensure that it is working as expected.\n\nTest Dataset:\n\nI will use a small dataset consisting of 100 records to test the system.\n\nTest Results:\n\nThe system has processed the test dataset successfully.\n\nTest Metrics:\n\nTest Result:\n\nThe system has passed the test with flying colors. The processing time, memory usage, and CPU usage are all within the expected ranges.\n\nNext Step:\n\nPlease proceed to the \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1154,
+    "timestamp": "2025-11-18T10:47:50.573243Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Test Metrics\n\nDEFINITION:\nTest Metrics: working as expected\n\n[From Codebase]: - Test execution time\n- Pass/fail rates\n- Coverage percentages\n- Performance benchmarks\n- Error frequency\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Test Metrics'\n\nEXAMPLE APPLICATION:\ne that it is working as expected.\n\nSystem Testing:\n\nI will test the system with a small dataset to ensure that it is working as expected.\n\nTest Dataset:\n\nI will use a small dataset consisting of 100 records to test the system.\n\nTest Results:\n\nThe sy",
+    "compression_ratio": 2.0,
+    "symbol_count": 577,
+    "timestamp": "2025-11-18T10:47:50.573266Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Test Metrics D: Test Metrics: working as expected [ Codebase]: - Test execution time - Pass/fail rates - Coverage percentages - Performance benchmarks - Error frequency BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Test Metrics' EXAMPLE APPLICATION: e it is working as expected. S Testing: I will test S a small dataset to ensure it is working as expected. Test Dataset: I will use a small dataset consisting of 100 records to test S. Test Results: sy",
+    "compression_ratio": 2.2942345924453282,
+    "symbol_count": 503,
+    "timestamp": "2025-11-18T10:47:50.575921Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Test Metrics D: Test Metrics: working expected Codebase]: Test execution Pass/fail rates Coverage percentages Performance benchmarks Error frequency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Test Metrics' EXAMPLE APPLICATION: working expected. S Testing: I S small dataset ensure working expected. Test Dataset: I small dataset consisting records S. Test Results:",
+    "compression_ratio": 2.7740384615384617,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:50.578672Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Test Metrics D: Test Metrics: working expected Codebase]: Test execution Pass/fail rates Coverage percentages Performance benchmarks Error frequency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Test Metrics' EXAMPLE APPLICATION: working expected. S Testing: I S small dataset ensure working expected. Test Dataset: I small dataset consisting records S. Test Results:",
+    "compression_ratio": 2.7740384615384617,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:50.580737Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Test Metrics D: Test Metrics: working expected Codebase]: Test execution Pass/fail rates Coverage percentages Performance benchmarks Error frequency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Test Metrics' EXAMPLE APPLICATION: working expected. S Testing: I S small dataset ensure working expected. Test Dataset: I small dataset consisting records S. Test Results:",
+    "compression_ratio": 2.7740384615384617,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:50.583640Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Test Metrics D: Test Metrics: Codebase]: Test Pass/fail Coverage Performance Error BLUEPRINT DETAILS: Θ Node Original Θ Metrics' EXAMPLE APPLICATION: S Testing: I S Test Dataset: I S. Test Results:",
+    "compression_ratio": 5.684729064039409,
+    "symbol_count": 203,
+    "timestamp": "2025-11-18T10:47:50.591590Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 384.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:50.593682Z"
+  }
+]

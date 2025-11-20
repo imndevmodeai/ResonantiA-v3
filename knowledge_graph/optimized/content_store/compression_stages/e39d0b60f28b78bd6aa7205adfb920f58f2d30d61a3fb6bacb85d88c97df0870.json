@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: AI/ML Integration\n\nDEFINITION:\nAI/ML Integration: Machine Learning Algorithms:\n\nDeep Learning Algorithms:\n\nNatural Language Processing:\n\nBy integrating AI and ML algorithms into the SPR_compressor system, we can enable the system to learn from data, make predictions, and provide insights and recommendations to users.\n\nAnother potential area for exploration is the integration of Internet of Things (IoT) devices and sensors to enable the system to collect and analyze data from a wide range of sources.\n\nConfidence: 1.835\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 347, type: node_format. Original SPR name: 'AI/ML Integration'\n\nEXAMPLE APPLICATION:\nNode 347: AI/ML Integration\n\nSPR: 1.835, \"AI/ML Integration\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 347\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1071,
+    "timestamp": "2025-11-18T10:47:10.211414Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: AI/ML Integration\n\nDEFINITION:\nAI/ML Integration: Machine Learning Algorithms:\n\nDeep Learning Algorithms:\n\nNatural Language Processing:\n\nBy integrating AI and ML algorithms into the SPR_compressor system, we can enable the system to learn from data, make predictions, and provide insights and recommendations to users.\n\nAnother potential area for exploration is the integration of Internet of Things (IoT) devices and sensors to enable the system to collect and analyze data from a wide range of sources.\n\nConfidence: 1.835\n\nBLUE",
+    "compression_ratio": 2.0018691588785047,
+    "symbol_count": 535,
+    "timestamp": "2025-11-18T10:47:10.211445Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: AI/ML Integration D: AI/ML Integration: Machine Learning Algorithms: Deep Learning Algorithms: Natural Language Ping: By integrating AI ML algorithms into Θ_compressor S, we enable S to learn data, make predictions, provide insights recommendations to users. Another potential area exploration is integration of Internet of Things (IoT) devices sensors to enable S to collect analyze data a wide range of sources. Confidence: 1.835 BLUE",
+    "compression_ratio": 2.423076923076923,
+    "symbol_count": 442,
+    "timestamp": "2025-11-18T10:47:10.213611Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: AI/ML Integration D: AI/ML Integration: Machine Learning Algorithms: Deep Learning Algorithms: Natural Language Ping: By integrating AI ML algorithms Θ_compressor S, enable S learn data, predictions, provide insights recommendations users. Another potential exploration integration Internet Things (IoT) devices sensors enable S collect analyze range sources. Confidence: 1.835 BLUE",
+    "compression_ratio": 2.7603092783505154,
+    "symbol_count": 388,
+    "timestamp": "2025-11-18T10:47:10.217515Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: AI/ML Integration D: AI/ML Integration: Machine Learning Algorithms: Deep Learning Algorithms: Natural Language Ping: By integrating AI ML algorithms Θ_compressor S, enable S learn data, predictions, provide insights recommendations users. Another potential exploration integration Internet Things (IoT) devices sensors enable S collect analyze range sources. Confidence: 1.835 BLUE",
+    "compression_ratio": 2.7603092783505154,
+    "symbol_count": 388,
+    "timestamp": "2025-11-18T10:47:10.220876Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: AI/ML Integration D: AI/ML Integration: Machine Learning Algorithms: Deep Learning Algorithms: Natural Language Ping: integrating AI ML algorithms Θ_compressor S, enable S learn data, predictions, provide insights recommendations users. Another potential exploration integration Internet Things (IoT) devices sensors enable S collect analyze range sources. Confidence: 1.835 BLUE",
+    "compression_ratio": 2.7818181818181817,
+    "symbol_count": 385,
+    "timestamp": "2025-11-18T10:47:10.226998Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: AI/ML Integration D: AI/ML Integration: Machine Learning Algorithms: Deep Learning Algorithms: Natural Language Ping: AI ML Θ_compressor S, S Another Internet Things S Confidence: BLUE",
+    "compression_ratio": 5.636842105263158,
+    "symbol_count": 190,
+    "timestamp": "2025-11-18T10:47:10.232832Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ",
+    "compression_ratio": 1071.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:47:10.233960Z"
+  }
+]

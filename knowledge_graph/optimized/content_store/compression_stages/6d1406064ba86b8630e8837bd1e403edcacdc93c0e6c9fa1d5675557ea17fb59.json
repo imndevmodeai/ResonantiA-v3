@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Human Factors\n\nDEFINITION:\nHuman Factors: intuitive, user-friendly, and meets human needs\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Human Factors'\n\nEXAMPLE APPLICATION:\n * Human-Centered Design Principles: Incorporating human-centered design principles to ensure the system is intuitive, user-friendly, and meets human needs.\n    * User Experience: Focusing on creating a positive user experience, including aspects like usability, accessibility, and engagement.\n    * Human Factors: Considering human factors, such as cognitive biases, emotions, and social influences, to design a system that is effective and beneficial for humans.\n\n24. Social and Emotional Learning:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1061,
+    "timestamp": "2025-11-18T10:47:29.827842Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Human Factors\n\nDEFINITION:\nHuman Factors: intuitive, user-friendly, and meets human needs\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Human Factors'\n\nEXAMPLE APPLICATION:\n * Human-Centered Design Principles: Incorporating human-centered design principles to ensure the system is intuitive, user-friendly, and meets human needs.\n    * User Experience: Focusing on creating a positive user experience, including aspects like usability, accessibility, and engagement.\n ",
+    "compression_ratio": 2.0018867924528303,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:47:29.828669Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Human Factors D: Human Factors: intuitive, user-friendly, meets human needs BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Human Factors' EXAMPLE APPLICATION: * Human-Centered Design Principles: Incorporating human-centered design principles to ensure S is intuitive, user-friendly, meets human needs. * User Experience: Focusing on creating a positive user experience, including aspects like usability, accessibility, engagement.",
+    "compression_ratio": 2.2058212058212057,
+    "symbol_count": 481,
+    "timestamp": "2025-11-18T10:47:29.838412Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Human Factors D: Human Factors: intuitive, user-friendly, meets human needs BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Human Factors' EXAMPLE APPLICATION: Human-Centered Design Principles: Incorporating human-centered design principles ensure S intuitive, user-friendly, meets human needs. User Experience: Focusing creating positive experience, including aspects usability, accessibility, engagement.",
+    "compression_ratio": 2.3421633554083887,
+    "symbol_count": 453,
+    "timestamp": "2025-11-18T10:47:29.850782Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Human Factors D: Human Factors: intuitive, user-friendly, meets human needs BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Human Factors' EXAMPLE APPLICATION: Human-Centered Design Principles: Incorporating human-centered design principles ensure S intuitive, user-friendly, meets human needs. User Experience: Focusing creating positive experience, including aspects usability, accessibility, engagement.",
+    "compression_ratio": 2.3421633554083887,
+    "symbol_count": 453,
+    "timestamp": "2025-11-18T10:47:29.881007Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Human Factors D: Human Factors: intuitive, user-friendly, meets human needs BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Human Factors' EXAMPLE APPLICATION: Human-Centered Design Principles: Incorporating human-centered design principles ensure S intuitive, user-friendly, meets human needs. User Experience: Focusing creating positive experience, including aspects usability, accessibility, engagement.",
+    "compression_ratio": 2.3421633554083887,
+    "symbol_count": 453,
+    "timestamp": "2025-11-18T10:47:29.898273Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Human Factors D: Human Factors: BLUEPRINT DETAILS: Θ Node Original Θ Factors' EXAMPLE APPLICATION: Human-Centered Design Principles: Incorporating S User Experience: Focusing",
+    "compression_ratio": 5.894444444444445,
+    "symbol_count": 180,
+    "timestamp": "2025-11-18T10:47:29.911144Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 353.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:29.921223Z"
+  }
+]

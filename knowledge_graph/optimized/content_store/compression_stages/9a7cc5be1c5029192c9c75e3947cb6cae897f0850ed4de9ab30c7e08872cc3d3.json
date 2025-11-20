@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: 4D Thinking (Temporal Reasoning) Operational System\n\nDEFINITION:\nOperational implementation of 4D Thinking (Temporal Reasoning). Provides the foundational system-level support for the higher-order 4D Thinking (Temporal Reasoning) capability, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with 4D Thinking (Temporal Reasoning) capability.\n\nEXAMPLE APPLICATION:\nProviding operational support for 4D Thinking (Temporal Reasoning) cognitive processes.\n\nCATEGORY: SystemComponent\n\nRELATIONSHIPS:\ntype: OperationalCorrespondence; confidence: 0.85; corresponds_to: 4dthinkinG; level: Below; enables: OperationalImplementation, SystemLevelSupport, FoundationalExecution, SymmetricalArchitecture",
+    "compression_ratio": 1.0,
+    "symbol_count": 787,
+    "timestamp": "2025-11-18T10:46:47.696496Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: 4D Thinking (Temporal Reasoning) Operational System\n\nDEFINITION:\nOperational implementation of 4D Thinking (Temporal Reasoning). Provides the foundational system-level support for the higher-order 4D Thinking (Temporal Reasoning) capability, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with",
+    "compression_ratio": 2.0025445292620865,
+    "symbol_count": 393,
+    "timestamp": "2025-11-18T10:46:47.696529Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: 4D Thinking (Temporal Reasoning) Operational S D: Operational I of 4D Thinking (Temporal Reasoning). Provides foundational S-level support higher-order 4D Thinking (Temporal Reasoning) capability, ensuring symmetrical architecture between cognitive operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture",
+    "compression_ratio": 2.328402366863905,
+    "symbol_count": 338,
+    "timestamp": "2025-11-18T10:46:47.697235Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: 4D Thinking (Δ Reasoning) Operational S D: Operational I of 4D Thinking (Δ Reasoning). Provides foundational S-level support higher-order 4D Thinking (Δ Reasoning) capability, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture",
+    "compression_ratio": 2.546925566343042,
+    "symbol_count": 309,
+    "timestamp": "2025-11-18T10:46:47.706926Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Thinking (Δ Reasoning) Operational S D: Operational I Thinking (Δ Reasoning). Provides foundational S-level support higher-order Thinking (Δ Reasoning) capability, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture",
+    "compression_ratio": 2.67687074829932,
+    "symbol_count": 294,
+    "timestamp": "2025-11-18T10:46:47.714724Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Thinking (Δ Reasoning) Operational S D: Operational I Thinking (Δ Reasoning). Provides foundational S-level support higher-order Thinking (Δ Reasoning) capability, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture",
+    "compression_ratio": 2.67687074829932,
+    "symbol_count": 294,
+    "timestamp": "2025-11-18T10:46:47.716178Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Thinking (Δ Reasoning) Operational S D: Operational I Thinking (Δ Reasoning). Provides S-level Thinking (Δ Reasoning) Ω BLUEPRINT DETAILS: Created",
+    "compression_ratio": 5.177631578947368,
+    "symbol_count": 152,
+    "timestamp": "2025-11-18T10:46:47.720741Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Δ|Δ|Δ|Ω",
+    "compression_ratio": 112.42857142857143,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:46:47.723179Z"
+  }
+]

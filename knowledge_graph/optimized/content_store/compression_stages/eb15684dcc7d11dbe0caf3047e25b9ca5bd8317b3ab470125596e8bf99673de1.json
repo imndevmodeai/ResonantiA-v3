@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Encryption Options\n\nDEFINITION:\nEncryption Options: already encrypted using a secure encryption algorithm\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Encryption Options'\n\nEXAMPLE APPLICATION:\nto exit the Secure Container.\n\nencryption\n\nYou have selected the encryption option.\n\nEncryption:\n\nThe Secure Container is already encrypted using a secure encryption algorithm. However, you can choose to re-encrypt the contents of the Secure Container using a different encryption algorithm or key.\n\nEncryption Options:\n\nYou have the following encryption options:\n\nEncryption Key:\n\nYou will need to provide an encryption key to re-encrypt the contents of the Secure Container. You can generate a new \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1082,
+    "timestamp": "2025-11-18T10:47:47.870490Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Encryption Options\n\nDEFINITION:\nEncryption Options: already encrypted using a secure encryption algorithm\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Encryption Options'\n\nEXAMPLE APPLICATION:\nto exit the Secure Container.\n\nencryption\n\nYou have selected the encryption option.\n\nEncryption:\n\nThe Secure Container is already encrypted using a secure encryption algorithm. However, you can choose to re-encrypt the contents of the Secure Container using a different encryption algo",
+    "compression_ratio": 2.0,
+    "symbol_count": 541,
+    "timestamp": "2025-11-18T10:47:47.870573Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Encryption Options D: Encryption Options: already encrypted using a secure encryption algorithm BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Encryption Options' EXAMPLE APPLICATION: to exit Secure Container. encryption selected encryption option. Encryption: Secure Container is already encrypted using a secure encryption algorithm. However, choose to re-encrypt contents of Secure Container using a different encryption algo",
+    "compression_ratio": 2.258872651356994,
+    "symbol_count": 479,
+    "timestamp": "2025-11-18T10:47:47.871733Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Encryption Options D: Encryption Options: already encrypted using secure encryption algorithm BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encryption Options' EXAMPLE APPLICATION: Secure Container. encryption selected encryption option. Encryption: Secure Container already encrypted using secure encryption algorithm. However, choose re-encrypt contents Secure Container using different encryption",
+    "compression_ratio": 2.4151785714285716,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:47.884496Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Encryption Options D: Encryption Options: already encrypted using secure encryption algorithm BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encryption Options' EXAMPLE APPLICATION: Secure Container. encryption selected encryption option. Encryption: Secure Container already encrypted using secure encryption algorithm. However, choose re-encrypt contents Secure Container using different encryption",
+    "compression_ratio": 2.4151785714285716,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:47.887539Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Encryption Options D: Encryption Options: already encrypted using secure encryption algorithm BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Encryption Options' EXAMPLE APPLICATION: Secure Container. encryption selected encryption option. Encryption: Secure Container already encrypted using secure encryption algorithm. However, choose re-encrypt contents Secure Container using different encryption",
+    "compression_ratio": 2.4151785714285716,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:47.889883Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Encryption Options D: Encryption Options: BLUEPRINT DETAILS: Θ Node Original Θ Options' EXAMPLE APPLICATION: Secure Container. Encryption: Secure Container However, Secure Container",
+    "compression_ratio": 5.786096256684492,
+    "symbol_count": 187,
+    "timestamp": "2025-11-18T10:47:47.892892Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 360.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:47.894418Z"
+  }
+]

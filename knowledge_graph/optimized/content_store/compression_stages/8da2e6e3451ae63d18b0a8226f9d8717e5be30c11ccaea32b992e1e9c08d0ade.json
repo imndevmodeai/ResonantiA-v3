@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Authorized Access\n\nDEFINITION:\nAuthorized Access: a virtual environment that can be used to store and manage sensitive information, and can be accessed only by authorized individuals\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Authorized Access'\n\nEXAMPLE APPLICATION:\ner:\n\nThe Secure Container is a virtual environment that can be used to store and manage sensitive information, and can be accessed only by authorized individuals. The Secure Container has the following features:\n\nContents of the Secure Container:\n\nThe Secure Container contains the following items:\n\nAuthorized Access:\n\nYou are an authorized individual and have access to the Secure Container. You can view, edit, and manage the contents of the Secure Container.\n\nSecure Container Menu:\n\nYou have the\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1158,
+    "timestamp": "2025-11-18T10:47:47.800774Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Authorized Access\n\nDEFINITION:\nAuthorized Access: a virtual environment that can be used to store and manage sensitive information, and can be accessed only by authorized individuals\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Authorized Access'\n\nEXAMPLE APPLICATION:\ner:\n\nThe Secure Container is a virtual environment that can be used to store and manage sensitive information, and can be accessed only by authorized individuals. The Secure Container has the following features:\n\nContents of the Secure Container:\n",
+    "compression_ratio": 2.0,
+    "symbol_count": 579,
+    "timestamp": "2025-11-18T10:47:47.800843Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Authorized Access D: Authorized Access: a virtual environment be used to store manage sensitive inFion, be accessed only by authorized individuals BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Authorized Access' EXAMPLE APPLICATION: er: Secure Container is a virtual environment be used to store manage sensitive inFion, be accessed only by authorized individuals. Secure Container has following features: Contents of Secure Container:",
+    "compression_ratio": 2.37782340862423,
+    "symbol_count": 487,
+    "timestamp": "2025-11-18T10:47:47.804030Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Authorized Access D: Authorized Access: virtual environment store manage sensitive inFion, accessed authorized individuals BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Authorized Access' EXAMPLE APPLICATION: Secure Container virtual environment store manage sensitive inFion, accessed authorized individuals. Secure Container following features: Contents Secure Container:",
+    "compression_ratio": 2.744075829383886,
+    "symbol_count": 422,
+    "timestamp": "2025-11-18T10:47:47.812001Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Authorized Access D: Authorized Access: virtual environment store manage sensitive inFion, accessed authorized individuals BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Authorized Access' EXAMPLE APPLICATION: Secure Container virtual environment store manage sensitive inFion, accessed authorized individuals. Secure Container following features: Contents Secure Container:",
+    "compression_ratio": 2.744075829383886,
+    "symbol_count": 422,
+    "timestamp": "2025-11-18T10:47:47.814293Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Authorized Access D: Authorized Access: virtual environment store manage sensitive inFion, accessed authorized individuals BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Authorized Access' EXAMPLE APPLICATION: Secure Container virtual environment store manage sensitive inFion, accessed authorized individuals. Secure Container following features: Contents Secure Container:",
+    "compression_ratio": 2.744075829383886,
+    "symbol_count": 422,
+    "timestamp": "2025-11-18T10:47:47.817777Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Authorized Access D: Authorized Access: BLUEPRINT DETAILS: Θ Node Original Θ Access' EXAMPLE APPLICATION: Secure Container Secure Container Contents Secure Container:",
+    "compression_ratio": 6.732558139534884,
+    "symbol_count": 172,
+    "timestamp": "2025-11-18T10:47:47.823505Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 386.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:47.823821Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Product Development\n\nDEFINITION:\nProduct Development: a great goal\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Product Development'\n\nEXAMPLE APPLICATION:\nour financial position is a great goal. With the SPR_compressor system, you can leverage its advanced technologies to create innovative products that can help you achieve financial success.\n\nProduct Ideas:\n\nHere are some product ideas that you can consider producing with the SPR_compressor system:\n\nProduct Development:\n\nTo develop these products, you can use the SPR_compressor system's advanced technologies, such as:\n\nMarket Analysis:\n\nTo determine the viability of your products, you can conduct\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1044,
+    "timestamp": "2025-11-18T10:47:51.047709Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Product Development\n\nDEFINITION:\nProduct Development: a great goal\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Product Development'\n\nEXAMPLE APPLICATION:\nour financial position is a great goal. With the SPR_compressor system, you can leverage its advanced technologies to create innovative products that can help you achieve financial success.\n\nProduct Ideas:\n\nHere are some product ideas that you can consider producing with the SPR_compressor system:\n\nProd",
+    "compression_ratio": 2.0,
+    "symbol_count": 522,
+    "timestamp": "2025-11-18T10:47:51.047734Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Product Development D: Product Development: a great goal BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Product Development' EXAMPLE APPLICATION: our financial position is a great goal. Θ_compressor S, leverage its advanced technologies to create innovative products help achieve financial success. Product Ideas: Here some product ideas consider producing Θ_compressor S: Prod",
+    "compression_ratio": 2.439252336448598,
+    "symbol_count": 428,
+    "timestamp": "2025-11-18T10:47:51.049068Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Product Development D: Product Development: great BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Product Development' EXAMPLE APPLICATION: financial position great goal. Θ_compressor S, leverage advanced technologies create innovative products achieve financial success. Product Ideas: Here product ideas consider producing Θ_compressor S: Prod",
+    "compression_ratio": 2.663265306122449,
+    "symbol_count": 392,
+    "timestamp": "2025-11-18T10:47:51.051581Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Product Development D: Product Development: great BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Product Development' EXAMPLE APPLICATION: financial position great goal. Θ_compressor S, leverage advanced technologies create innovative products achieve financial success. Product Ideas: Here product ideas consider producing Θ_compressor S: Prod",
+    "compression_ratio": 2.663265306122449,
+    "symbol_count": 392,
+    "timestamp": "2025-11-18T10:47:51.054029Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Product Development D: Product Development: great BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Product Development' EXAMPLE APPLICATION: financial position great goal. Θ_compressor S, leverage advanced technologies create innovative products achieve financial success. Product Ideas: Here product ideas consider producing Θ_compressor S: Prod",
+    "compression_ratio": 2.663265306122449,
+    "symbol_count": 392,
+    "timestamp": "2025-11-18T10:47:51.056228Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Product Development D: Product Development: BLUEPRINT DETAILS: Θ Node Original Θ Development' EXAMPLE APPLICATION: Θ_compressor S, Product Ideas: Here Θ_compressor S: Prod",
+    "compression_ratio": 5.898305084745763,
+    "symbol_count": 177,
+    "timestamp": "2025-11-18T10:47:51.058154Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ|Θ",
+    "compression_ratio": 149.14285714285714,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:51.058520Z"
+  }
+]

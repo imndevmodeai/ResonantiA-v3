@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Web Crawling Library\n\nDEFINITION:\nWeb Crawling Library: suitable choices for implementation\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Web Crawling Library'\n\nEXAMPLE APPLICATION:\nramming Language: Python, Java, or C++ are suitable choices for implementation.\nData Storage: A robust database solution (relational or NoSQL) is needed to store the extracted data.\nMachine Learning Library: TensorFlow, PyTorch, or Scikit-learn can be used for developing the machine learning model.\nWeb Crawling Library: Libraries like Scrapy or BeautifulSoup are essential for extracting data from websites.\nAPI Library: Libraries like 'requests' or 'urllib' are required for interacting with APIs.\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1070,
+    "timestamp": "2025-11-18T10:47:24.593584Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Web Crawling Library\n\nDEFINITION:\nWeb Crawling Library: suitable choices for implementation\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Web Crawling Library'\n\nEXAMPLE APPLICATION:\nramming Language: Python, Java, or C++ are suitable choices for implementation.\nData Storage: A robust database solution (relational or NoSQL) is needed to store the extracted data.\nMachine Learning Library: TensorFlow, PyTorch, or Scikit-learn can be used for developing the machine learnin",
+    "compression_ratio": 2.0,
+    "symbol_count": 535,
+    "timestamp": "2025-11-18T10:47:24.593614Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Web Crawling Library D: Web Crawling Library: suitable choices I BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Web Crawling Library' EXAMPLE APPLICATION: ramming Language: Python, Java, or C++ suitable choices I. Data Storage: A robust database solution (relational or NoSQL) is needed to store extracted data. Machine Learning Library: TensorFlow, PyTorch, or Scikit-learn be used developing machine learnin",
+    "compression_ratio": 2.3260869565217392,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:24.594866Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Web Crawling Library D: Web Crawling Library: suitable choices I BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Crawling Library' EXAMPLE APPLICATION: ramming Language: Python, Java, C++ suitable choices I. Data Storage: A robust database solution (relational NoSQL) needed store extracted data. Machine Learning Library: TensorFlow, PyTorch, Scikit-learn developing machine learnin",
+    "compression_ratio": 2.4941724941724943,
+    "symbol_count": 429,
+    "timestamp": "2025-11-18T10:47:24.604799Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Web Crawling Library D: Web Crawling Library: suitable choices I BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Crawling Library' EXAMPLE APPLICATION: ramming Language: Python, Java, C++ suitable choices I. Data Storage: A robust database solution (relational NoSQL) needed store extracted data. Machine Learning Library: TensorFlow, PyTorch, Scikit-learn developing machine learnin",
+    "compression_ratio": 2.4941724941724943,
+    "symbol_count": 429,
+    "timestamp": "2025-11-18T10:47:24.611978Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Web Crawling Library D: Web Crawling Library: suitable choices I BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Crawling Library' EXAMPLE APPLICATION: ramming Language: Python, Java, C++ suitable choices I. Data Storage: robust database solution (relational NoSQL) needed store extracted data. Machine Learning Library: TensorFlow, PyTorch, Scikit-learn developing machine learnin",
+    "compression_ratio": 2.5058548009367683,
+    "symbol_count": 427,
+    "timestamp": "2025-11-18T10:47:24.621800Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Web Crawling Library D: Web Crawling Library: I BLUEPRINT DETAILS: Θ Node Original Θ Crawling Library' EXAMPLE APPLICATION: Language: Python, Java, C++ I. Data Storage: NoSQL) Machine Learning Library: TensorFlow, PyTorch, Scikit-learn",
+    "compression_ratio": 4.439834024896266,
+    "symbol_count": 241,
+    "timestamp": "2025-11-18T10:47:24.626387Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 356.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.626757Z"
+  }
+]

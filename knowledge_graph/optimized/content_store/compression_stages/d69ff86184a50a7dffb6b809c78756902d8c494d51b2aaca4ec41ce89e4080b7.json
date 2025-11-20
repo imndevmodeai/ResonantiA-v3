@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Emergent Domain Detector\n\nDEFINITION:\nA sub-process of the Adaptive Cognitive Orchestrator that analyzes the patterns identified by the Pattern Evolution engine, performs clustering to identify significant groups of related queries, and flags them as 'emergent domains' ripe for optimization via a new, specialized controller.\n\nBLUEPRINT DETAILS:\nProcess workflow for EmergentDomainDetectoR with phase gates and validation checkpoints\n\nEXAMPLE APPLICATION:\nPractical application of Emergent Domain Detector within the ResonantiA Protocol framework\n\nCATEGORY: CoreProcess\n\nRELATIONSHIPS:\nis_a_part_of: Adaptive Cognitive OrchestratoR; is_enabled_by: Pattern EvolutioN; type: ConceptualEntity; confidence: medium",
+    "compression_ratio": 1.0,
+    "symbol_count": 716,
+    "timestamp": "2025-11-18T10:46:46.861780Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Emergent Domain Detector\n\nDEFINITION:\nA sub-process of the Adaptive Cognitive Orchestrator that analyzes the patterns identified by the Pattern Evolution engine, performs clustering to identify significant groups of related queries, and flags them as 'emergent domains' ripe for optimization via a new, specialized controller.\n\nBLUEPRINT DETAILS:\nProce",
+    "compression_ratio": 2.0,
+    "symbol_count": 358,
+    "timestamp": "2025-11-18T10:46:46.861804Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Emergent Domain Detector D: A sub-P of Adaptive Cognitive Orchestrator analyzes patterns identified by Pattern Evolution engine, performs clustering to identify significant groups of related queries, flags them as 'emergent domains' ripe optimization via a new, specialized controller. BLUEPRINT DETAILS: Proce",
+    "compression_ratio": 2.2658227848101267,
+    "symbol_count": 316,
+    "timestamp": "2025-11-18T10:46:46.868052Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Emergent Domain Detector D: A sub-P Adaptive Ω Orchestrator analyzes patterns identified Π Evolution engine, performs clustering identify significant groups related queries, flags 'emergent domains' optimization specialized controller. BLUEPRINT DETAILS: Proce",
+    "compression_ratio": 2.691729323308271,
+    "symbol_count": 266,
+    "timestamp": "2025-11-18T10:46:46.887839Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Emergent Domain Detector D: A sub-P Adaptive Ω Orchestrator analyzes patterns identified Π Evolution engine, performs clustering identify significant groups related queries, flags 'emergent domains' optimization specialized controller. BLUEPRINT DETAILS: Proce",
+    "compression_ratio": 2.691729323308271,
+    "symbol_count": 266,
+    "timestamp": "2025-11-18T10:46:46.904720Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Emergent Domain Detector D: sub-P Adaptive Ω Orchestrator analyzes patterns identified Π Evolution engine, performs clustering identify significant groups related queries, flags 'emergent domains' optimization specialized controller. BLUEPRINT DETAILS: Proce",
+    "compression_ratio": 2.712121212121212,
+    "symbol_count": 264,
+    "timestamp": "2025-11-18T10:46:46.913257Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Emergent Domain Detector D: Adaptive Ω Orchestrator Π Evolution BLUEPRINT DETAILS: Proce",
+    "compression_ratio": 7.617021276595745,
+    "symbol_count": 94,
+    "timestamp": "2025-11-18T10:46:46.926462Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Π",
+    "compression_ratio": 238.66666666666666,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:46.926734Z"
+  }
+]

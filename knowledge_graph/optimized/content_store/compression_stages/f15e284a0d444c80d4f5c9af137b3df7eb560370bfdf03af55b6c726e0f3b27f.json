@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Cognitive Tools\n\nDEFINITION:\nThe suite of specialized functions and modules that ArchE can invoke to perform specific tasks such as code execution, web search, causal inference, predictive modeling, and agent-based simulation. All tools are mandated to return an IAR alongside their primary output.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 7.\n\nEXAMPLE APPLICATION:\nPractical application of Cognitive Tools within the ResonantiA Protocol framework\n\nCATEGORY: SystemComponent\n\nRELATIONSHIPS:\ntype: CapabilitySet; includes: Code executoR, Search tooL, PredictivE modelinG tooL, CausalInferenceTool, AgentBasedModelingTool, CfpframeworK, LlmTooL; invoked_by: CoreworkflowenginE; must_produce: IAR; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 733,
+    "timestamp": "2025-11-18T10:45:51.633250Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Cognitive Tools\n\nDEFINITION:\nThe suite of specialized functions and modules that ArchE can invoke to perform specific tasks such as code execution, web search, causal inference, predictive modeling, and agent-based simulation. All tools are mandated to return an IAR alongside their primary output.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 7.\n",
+    "compression_ratio": 2.0027322404371586,
+    "symbol_count": 366,
+    "timestamp": "2025-11-18T10:45:51.633296Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Cognitive Tools D: suite of specialized functions modules Æ invoke to perform specific tasks such as code execution, web search, CI, predictive modeling, agent-based simulation. tools Md to return an Φ alongside their primary output. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 7.",
+    "compression_ratio": 2.51027397260274,
+    "symbol_count": 292,
+    "timestamp": "2025-11-18T10:45:51.634162Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ω Tools D: suite of specialized functions modules Æ invoke to perform specific tasks such as code execution, web search, CI, PMT ABM, ABM-ABM simulation. tools Md to return an Φ alongside their primary output. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section 7.",
+    "compression_ratio": 2.735074626865672,
+    "symbol_count": 268,
+    "timestamp": "2025-11-18T10:45:51.636966Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ω Tools D: suite specialized functions modules Æ invoke perform specific tasks execution, search, CI, PMT ABM, ABM-ABM simulation. tools Md return Φ alongside their primary output. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section",
+    "compression_ratio": 3.1059322033898304,
+    "symbol_count": 236,
+    "timestamp": "2025-11-18T10:45:51.641672Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ω Tools D: suite specialized functions modules Æ invoke perform specific tasks execution, search, CI, PMT ABM, ABM-ABM simulation. tools Md return Φ alongside their primary output. BLUEPRINT DETAILS: See ResonantiA P v3.0, Section",
+    "compression_ratio": 3.1059322033898304,
+    "symbol_count": 236,
+    "timestamp": "2025-11-18T10:45:51.651415Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ω Tools D: Æ CI, PMT ABM, ABM-ABM Md Φ BLUEPRINT DETAILS: See ResonantiA P Section",
+    "compression_ratio": 8.329545454545455,
+    "symbol_count": 88,
+    "timestamp": "2025-11-18T10:45:51.655172Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Æ|Φ",
+    "compression_ratio": 146.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:45:51.655940Z"
+  }
+]

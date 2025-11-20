@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Codebase Reference and Documentation Synchronization Protocol\n\nDEFINITION:\nA critical protocol for maintaining synchronization between codebase references and documentation. It ensures that implementation details remain aligned with specifications and documentation.\n\nBLUEPRINT DETAILS:\nCRDSP protocol implementation across the entire codebase, ensuring that all code references, documentation, and specifications remain synchronized and aligned with Implementation Resonance principles.\n\nEXAMPLE APPLICATION:\nThe CRDSP ensures that when the Perception Engine implementation is updated, all related documentation, specifications, and code references are automatically synchronized to maintain Implementation Resonance.\n\nCATEGORY: SystemProtocol\n\nRELATIONSHIPS:\ntype: SynchronizationProtocol; ensures: Implementation Resonance, Documentation Accuracy, Code-Doc Alignment; governs: Code References, Documentation Updates, Specification Alignment; enables: As Above, So Below, Consistency Maintenance, Quality Assurance; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1040,
+    "timestamp": "2025-11-18T10:45:51.068582Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Codebase Reference and Documentation Synchronization Protocol\n\nDEFINITION:\nA critical protocol for maintaining synchronization between codebase references and documentation. It ensures that implementation details remain aligned with specifications and documentation.\n\nBLUEPRINT DETAILS:\nCRDSP protocol implementation across the entire codebase, ensuring that all code references, documentation, and specifications remain synchronized and aligned with Implementation Resonance principles.\n\nEXAMPLE APPLICATION:\nThe ",
+    "compression_ratio": 2.0,
+    "symbol_count": 520,
+    "timestamp": "2025-11-18T10:45:51.068606Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Codebase Reference Documentation Synchronization P D: A critical P maintaining synchronization between codebase references documentation. It ensures I details remain aligned specifications documentation. BLUEPRINT DETAILS: CRDSP P I across entire codebase, ensuring code references, documentation, specifications remain synchronized aligned I Resonance principles. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.659846547314578,
+    "symbol_count": 391,
+    "timestamp": "2025-11-18T10:45:51.070468Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Codebase Reference Documentation Synchronization P D: A critical P maintaining synchronization between codebase references documentation. It ensures I details remain aligned specifications documentation. BLUEPRINT DETAILS: CRDSP P I across entire codebase, ensuring references, documentation, specifications remain synchronized aligned I Ω principles. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.751322751322751,
+    "symbol_count": 378,
+    "timestamp": "2025-11-18T10:45:51.077451Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Codebase Reference Documentation Synchronization P D: A critical P maintaining synchronization between codebase references documentation. It ensures I details remain aligned specifications documentation. BLUEPRINT DETAILS: CRDSP P I across entire codebase, ensuring references, documentation, specifications remain synchronized aligned I Ω principles. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.751322751322751,
+    "symbol_count": 378,
+    "timestamp": "2025-11-18T10:45:51.088406Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Codebase Reference Documentation Synchronization P D: critical P maintaining synchronization between codebase references documentation. It ensures I details remain aligned specifications documentation. BLUEPRINT DETAILS: CRDSP P I across entire codebase, ensuring references, documentation, specifications remain synchronized aligned I Ω principles. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.765957446808511,
+    "symbol_count": 376,
+    "timestamp": "2025-11-18T10:45:51.094431Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Codebase Reference Documentation Synchronization P D: P It I BLUEPRINT DETAILS: CRDSP P I I Ω EXAMPLE APPLICATION:",
+    "compression_ratio": 8.666666666666666,
+    "symbol_count": 120,
+    "timestamp": "2025-11-18T10:45:51.101074Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω",
+    "compression_ratio": 1040.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:45:51.101339Z"
+  }
+]

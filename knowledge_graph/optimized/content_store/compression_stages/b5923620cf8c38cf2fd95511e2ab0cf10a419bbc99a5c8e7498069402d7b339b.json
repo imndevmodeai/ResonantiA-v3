@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Religion as Sanctuary\n\nDEFINITION:\nReligion, faith, and spirituality as protected sanctuaries of human experience. System cannot render judgment on metaphysical truth claims - the divine question is outside system purview. Faith communities flourish with freedom and resources while preventing imposition of unverifiable truths through force.\n\nBLUEPRINT DETAILS:\nEnsure freedom and resources for faith communities to flourish while preventing imposition of unverifiable truths through force.\n\nEXAMPLE APPLICATION:\nSupporting diverse religious communities with resources and protection while maintaining strict neutrality on metaphysical claims and preventing religious coercion.\n\nCATEGORY: CorePrinciple\n\nRELATIONSHIPS:\ntype: SpiritualFramework; supports: HumanDignityLiberation, UnoptimizableHumanDomains; enables: Faith community protection, Spiritual freedom, Metaphysical respect; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 907,
+    "timestamp": "2025-11-18T10:46:55.004156Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Religion as Sanctuary\n\nDEFINITION:\nReligion, faith, and spirituality as protected sanctuaries of human experience. System cannot render judgment on metaphysical truth claims - the divine question is outside system purview. Faith communities flourish with freedom and resources while preventing imposition of unverifiable truths through force.\n\nBLUEPRINT DETAILS:\nEnsure freedom and resources for faith communities to flourish while preventing impo",
+    "compression_ratio": 2.0022075055187636,
+    "symbol_count": 453,
+    "timestamp": "2025-11-18T10:46:55.004183Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Religion as Sanctuary D: Religion, faith, spirituality as protected sanctuaries of human experience. S cannot render judgment on metaphysical truth claims - divine question is outside S purview. Faith communities flourish freedom resources while preventing imposition of unverifiable truths through force. BLUEPRINT DETAILS: Ensure freedom resources faith communities to flourish while preventing impo",
+    "compression_ratio": 2.2285012285012287,
+    "symbol_count": 407,
+    "timestamp": "2025-11-18T10:46:55.004978Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Religion Sanctuary D: Religion, faith, spirituality protected sanctuaries human experience. S cannot render judgment metaphysical truth claims divine question outside S purview. Faith communities flourish freedom resources while preventing imposition unverifiable truths through force. BLUEPRINT DETAILS: Ensure freedom resources faith communities flourish while preventing",
+    "compression_ratio": 2.3931398416886545,
+    "symbol_count": 379,
+    "timestamp": "2025-11-18T10:46:55.015941Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Religion Sanctuary D: Religion, faith, spirituality protected sanctuaries human experience. S cannot render judgment metaphysical truth claims divine question outside S purview. Faith communities flourish freedom resources while preventing imposition unverifiable truths through force. BLUEPRINT DETAILS: Ensure freedom resources faith communities flourish while preventing",
+    "compression_ratio": 2.3931398416886545,
+    "symbol_count": 379,
+    "timestamp": "2025-11-18T10:46:55.022278Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Religion Sanctuary D: Religion, faith, spirituality protected sanctuaries human experience. S cannot render judgment metaphysical truth claims divine question outside S purview. Faith communities flourish freedom resources while preventing imposition unverifiable truths through force. BLUEPRINT DETAILS: Ensure freedom resources faith communities flourish while preventing",
+    "compression_ratio": 2.3931398416886545,
+    "symbol_count": 379,
+    "timestamp": "2025-11-18T10:46:55.026274Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Religion Sanctuary D: Religion, S S Faith BLUEPRINT DETAILS: Ensure",
+    "compression_ratio": 12.424657534246576,
+    "symbol_count": 73,
+    "timestamp": "2025-11-18T10:46:55.029122Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "R|S|R|F|E",
+    "compression_ratio": 100.77777777777777,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:55.029375Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "CATEGORY: EconomicPhilosophy",
+    "compression_ratio": 1.0,
+    "symbol_count": 28,
+    "timestamp": "2025-11-18T10:46:53.051803Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "CATEGORY: EconomicPhilosophy",
+    "compression_ratio": 1.0,
+    "symbol_count": 28,
+    "timestamp": "2025-11-18T10:46:53.051830Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "CATEGORY: EconomicPhilosophy",
+    "compression_ratio": 1.0,
+    "symbol_count": 28,
+    "timestamp": "2025-11-18T10:46:53.052164Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "CATEGORY: EconomicPhilosophy",
+    "compression_ratio": 1.0,
+    "symbol_count": 28,
+    "timestamp": "2025-11-18T10:46:53.052638Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "CATEGORY: EconomicPhilosophy",
+    "compression_ratio": 1.0,
+    "symbol_count": 28,
+    "timestamp": "2025-11-18T10:46:53.053083Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "CATEGORY: EconomicPhilosophy",
+    "compression_ratio": 1.0,
+    "symbol_count": 28,
+    "timestamp": "2025-11-18T10:46:53.058379Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "CATEGORY: EconomicPhilosophy",
+    "compression_ratio": 1.0,
+    "symbol_count": 28,
+    "timestamp": "2025-11-18T10:46:53.058927Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "E|P",
+    "compression_ratio": 9.333333333333334,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:53.059089Z"
+  }
+]

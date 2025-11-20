@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Convolutional Neural Network\n\nDEFINITION:\nConvolutional Neural Network: example, the Neural Network Framework is used to train and use three different types of neural networks: Convolutional Neural Network, Recurrent Neural Network, and Deep Neural Network\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Convolutional Neural Network'\n\nEXAMPLE APPLICATION:\nd training neural networks to support complex cognitive tasks. It provides a way to integrate multiple neural networks to achieve more advanced and sophisticated cognitive capabilities.\n\nIn this example, the Neural Network Framework is used to train and use three different types of neural networks: Convolutional Neural Network, Recurrent Neural Network, and Deep Neural Network. The framework provides a way to train these neural networks using a dataset and then use them to make predictions.\n\nThe\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1243,
+    "timestamp": "2025-11-18T10:47:27.016024Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Convolutional Neural Network\n\nDEFINITION:\nConvolutional Neural Network: example, the Neural Network Framework is used to train and use three different types of neural networks: Convolutional Neural Network, Recurrent Neural Network, and Deep Neural Network\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Convolutional Neural Network'\n\nEXAMPLE APPLICATION:\nd training neural networks to support complex cognitive tasks. It provides a way to integrate multiple neural networks to achieve more advanced and sophisticated cognitive capabilities.\n\nIn this example, ",
+    "compression_ratio": 2.001610305958132,
+    "symbol_count": 621,
+    "timestamp": "2025-11-18T10:47:27.016049Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Convolutional Neural Network D: Convolutional Neural Network: example, Neural Network Framework is used to train use three different types of neural networks: Convolutional Neural Network, Recurrent Neural Network, Deep Neural Network BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Convolutional Neural Network' EXAMPLE APPLICATION: d training neural networks to support complex cognitive tasks. It provides a way to integrate multiple neural networks to achieve more advanced sophisticated cognitive capabilities. In example,",
+    "compression_ratio": 2.1542461005199307,
+    "symbol_count": 577,
+    "timestamp": "2025-11-18T10:47:27.019786Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Convolutional Neural Network D: Convolutional Neural Network: example, Neural Network Framework train three different types neural networks: Convolutional Neural Network, Recurrent Neural Network, Deep Neural Network BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Convolutional Neural Network' EXAMPLE APPLICATION: training neural networks support complex Ω tasks. It provides integrate multiple neural networks achieve advanced sophisticated Ω capabilities. In example,",
+    "compression_ratio": 2.3996138996139,
+    "symbol_count": 518,
+    "timestamp": "2025-11-18T10:47:27.026947Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Convolutional Neural Network D: Convolutional Neural Network: example, Neural Network Framework train three different types neural networks: Convolutional Neural Network, Recurrent Neural Network, Deep Neural Network BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Convolutional Neural Network' EXAMPLE APPLICATION: training neural networks support complex Ω tasks. It provides integrate multiple neural networks achieve advanced sophisticated Ω capabilities. In example,",
+    "compression_ratio": 2.3996138996139,
+    "symbol_count": 518,
+    "timestamp": "2025-11-18T10:47:27.037747Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Convolutional Neural Network D: Convolutional Neural Network: example, Neural Network Framework train three different types neural networks: Convolutional Neural Network, Recurrent Neural Network, Deep Neural Network BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Convolutional Neural Network' EXAMPLE APPLICATION: training neural networks support complex Ω tasks. It provides integrate multiple neural networks achieve advanced sophisticated Ω capabilities. example,",
+    "compression_ratio": 2.413592233009709,
+    "symbol_count": 515,
+    "timestamp": "2025-11-18T10:47:27.052049Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Convolutional Neural Network D: Convolutional Neural Network: Neural Network Framework Convolutional Neural Network, Recurrent Neural Network, Deep Neural Network BLUEPRINT DETAILS: Θ Node Original Θ Neural Network' EXAMPLE APPLICATION: Ω It Ω",
+    "compression_ratio": 4.991967871485944,
+    "symbol_count": 249,
+    "timestamp": "2025-11-18T10:47:27.056177Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Ω|Ω",
+    "compression_ratio": 177.57142857142858,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:27.059050Z"
+  }
+]

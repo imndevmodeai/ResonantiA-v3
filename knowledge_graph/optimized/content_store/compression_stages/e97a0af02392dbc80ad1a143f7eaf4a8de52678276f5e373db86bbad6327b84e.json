@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Autonomous Vehicles\n\nDEFINITION:\nAutonomous Vehicles: designed to provide advanced transportation capabilities to improve safety and efficiency:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Autonomous Vehicles'\n\nEXAMPLE APPLICATION:\nneeds.\n    * Health Monitoring: Creating health monitoring techniques that enable the AI system to track patient health and detect potential health risks.\n\n63. AI-Driven Transportation: Mastermind_AI is designed to provide advanced transportation capabilities to improve safety and efficiency:\n    * Autonomous Vehicles: Developing autonomous vehicle techniques that enable the AI system to control and navigate vehicles.\n    * Traffic Management: Implementing traffic management techniques that enab\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1122,
+    "timestamp": "2025-11-18T10:47:35.822594Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Autonomous Vehicles\n\nDEFINITION:\nAutonomous Vehicles: designed to provide advanced transportation capabilities to improve safety and efficiency:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Autonomous Vehicles'\n\nEXAMPLE APPLICATION:\nneeds.\n    * Health Monitoring: Creating health monitoring techniques that enable the AI system to track patient health and detect potential health risks.\n\n63. AI-Driven Transportation: Mastermind_AI is designed to provide advanced transportation capabilities to im",
+    "compression_ratio": 2.0,
+    "symbol_count": 561,
+    "timestamp": "2025-11-18T10:47:35.822618Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Autonomous Vehicles D: Autonomous Vehicles: designed to provide advanced transportation capabilities to improve safety efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Autonomous Vehicles' EXAMPLE APPLICATION: needs. * Health Monitoring: Creating health monitoring techniques enable AI S to track patient health detect potential health risks. 63. AI-Driven Transportation: Mastermind_AI is designed to provide advanced transportation capabilities to im",
+    "compression_ratio": 2.1871345029239766,
+    "symbol_count": 513,
+    "timestamp": "2025-11-18T10:47:35.823983Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Autonomous Vehicles D: Autonomous Vehicles: designed provide advanced transportation capabilities improve safety efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Autonomous Vehicles' EXAMPLE APPLICATION: needs. Health Monitoring: Creating health monitoring techniques enable AI S track patient health detect potential health risks. AI-Driven Transportation: Mastermind_AI designed provide advanced transportation capabilities",
+    "compression_ratio": 2.3229813664596275,
+    "symbol_count": 483,
+    "timestamp": "2025-11-18T10:47:35.829061Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Autonomous Vehicles D: Autonomous Vehicles: designed provide advanced transportation capabilities improve safety efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Autonomous Vehicles' EXAMPLE APPLICATION: needs. Health Monitoring: Creating health monitoring techniques enable AI S track patient health detect potential health risks. AI-Driven Transportation: Mastermind_AI designed provide advanced transportation capabilities",
+    "compression_ratio": 2.3229813664596275,
+    "symbol_count": 483,
+    "timestamp": "2025-11-18T10:47:35.856492Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Autonomous Vehicles D: Autonomous Vehicles: designed provide advanced transportation capabilities improve safety efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Autonomous Vehicles' EXAMPLE APPLICATION: needs. Health Monitoring: Creating health monitoring techniques enable AI S track patient health detect potential health risks. AI-Driven Transportation: Mastermind_AI designed provide advanced transportation capabilities",
+    "compression_ratio": 2.3229813664596275,
+    "symbol_count": 483,
+    "timestamp": "2025-11-18T10:47:35.866189Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Autonomous Vehicles D: Autonomous Vehicles: BLUEPRINT DETAILS: Θ Node Original Θ Vehicles' EXAMPLE APPLICATION: Health Monitoring: Creating AI S AI-Driven Transportation: Mastermind_AI",
+    "compression_ratio": 5.905263157894737,
+    "symbol_count": 190,
+    "timestamp": "2025-11-18T10:47:35.886788Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 374.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:35.889822Z"
+  }
+]

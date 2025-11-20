@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Documentation Update\n\nDEFINITION:\nDocumentation Update: accurate and up-to-date\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Documentation Update'\n\nEXAMPLE APPLICATION:\n smoothly and securely.\n\n5\n\nYou have selected the option to review and update system documentation.\n\nSystem Documentation:\n\nI will provide you with the system documentation, which includes:\n\nDocumentation Review:\n\nPlease review the system documentation to ensure that it is accurate and up-to-date.\n\nDocumentation Update:\n\nIf you need to update any part of the documentation, please let me know and I will assist you with the process.\n\nDocumentation Completion:\n\nThe review and update of system docum\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1058,
+    "timestamp": "2025-11-18T10:47:50.183104Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Documentation Update\n\nDEFINITION:\nDocumentation Update: accurate and up-to-date\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Documentation Update'\n\nEXAMPLE APPLICATION:\n smoothly and securely.\n\n5\n\nYou have selected the option to review and update system documentation.\n\nSystem Documentation:\n\nI will provide you with the system documentation, which includes:\n\nDocumentation Review:\n\nPlease review the system documentation to ensure that it is accurate and up-to-date",
+    "compression_ratio": 2.0,
+    "symbol_count": 529,
+    "timestamp": "2025-11-18T10:47:50.183128Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Documentation Update D: Documentation Update: accurate up-to-date BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Documentation Update' EXAMPLE APPLICATION: smoothly securely. 5 selected option to review update S documentation. S Documentation: I will provide S documentation, includes: Documentation Review: Please review S documentation to ensure it is accurate up-to-date",
+    "compression_ratio": 2.4952830188679247,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:47:50.184481Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Documentation Update D: Documentation Update: accurate up-to-date BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Update' EXAMPLE APPLICATION: smoothly securely. selected option review update S documentation. S Documentation: I provide S documentation, includes: Documentation Review: Please review S documentation ensure accurate up-to-date",
+    "compression_ratio": 2.6318407960199006,
+    "symbol_count": 402,
+    "timestamp": "2025-11-18T10:47:50.187013Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Documentation Update D: Documentation Update: accurate up-to-date BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Update' EXAMPLE APPLICATION: smoothly securely. selected option review update S documentation. S Documentation: I provide S documentation, includes: Documentation Review: Please review S documentation ensure accurate up-to-date",
+    "compression_ratio": 2.6318407960199006,
+    "symbol_count": 402,
+    "timestamp": "2025-11-18T10:47:50.192298Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Documentation Update D: Documentation Update: accurate up--date BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Update' EXAMPLE APPLICATION: smoothly securely. selected option review update S documentation. S Documentation: I provide S documentation, includes: Documentation Review: Please review S documentation ensure accurate up--date",
+    "compression_ratio": 2.658291457286432,
+    "symbol_count": 398,
+    "timestamp": "2025-11-18T10:47:50.196115Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Documentation Update D: Documentation Update: BLUEPRINT DETAILS: Θ Node Original Θ Update' EXAMPLE APPLICATION: S S Documentation: I S Documentation Review: Please S",
+    "compression_ratio": 6.187134502923977,
+    "symbol_count": 171,
+    "timestamp": "2025-11-18T10:47:50.198479Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 352.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:50.198774Z"
+  }
+]

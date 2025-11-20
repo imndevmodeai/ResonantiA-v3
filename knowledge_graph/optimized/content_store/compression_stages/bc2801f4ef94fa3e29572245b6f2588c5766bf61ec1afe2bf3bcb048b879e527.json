@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Sales Forecasting\n\nDEFINITION:\nSales Forecasting: designed to provide advanced sales capabilities to improve sales effectiveness:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Sales Forecasting'\n\nEXAMPLE APPLICATION:\ng messages to individual customers.\n    * Predictive Modeling: Creating predictive modeling techniques that enable the AI system to predict customer behavior and preferences.\n\n58. AI-Driven Sales: Mastermind_AI is designed to provide advanced sales capabilities to improve sales effectiveness:\n    * Sales Forecasting: Developing sales forecasting techniques that enable the AI system to predict sales trends and customer behavior.\n    * Lead Scoring: Implementing lead scoring techniques that enable\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1105,
+    "timestamp": "2025-11-18T10:47:34.794919Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Sales Forecasting\n\nDEFINITION:\nSales Forecasting: designed to provide advanced sales capabilities to improve sales effectiveness:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Sales Forecasting'\n\nEXAMPLE APPLICATION:\ng messages to individual customers.\n    * Predictive Modeling: Creating predictive modeling techniques that enable the AI system to predict customer behavior and preferences.\n\n58. AI-Driven Sales: Mastermind_AI is designed to provide advanced sales capabilities to improve ",
+    "compression_ratio": 2.0018115942028984,
+    "symbol_count": 552,
+    "timestamp": "2025-11-18T10:47:34.794945Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Sales Forecasting D: Sales Forecasting: designed to provide advanced sales capabilities to improve sales effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Sales Forecasting' EXAMPLE APPLICATION: g messages to individual customers. * Predictive Modeling: Creating predictive modeling techniques enable AI S to predict customer behavior preferences. 58. AI-Driven Sales: Mastermind_AI is designed to provide advanced sales capabilities to improve",
+    "compression_ratio": 2.1794871794871793,
+    "symbol_count": 507,
+    "timestamp": "2025-11-18T10:47:34.803821Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Sales Forecasting D: Sales Forecasting: designed provide advanced sales capabilities improve sales effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Sales Forecasting' EXAMPLE APPLICATION: messages individual customers. PMT ABM: Creating PMT ABM techniques enable AI S predict customer behavior preferences. AI-Driven Sales: Mastermind_AI designed provide advanced sales capabilities improve",
+    "compression_ratio": 2.450110864745011,
+    "symbol_count": 451,
+    "timestamp": "2025-11-18T10:47:34.810683Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Sales Forecasting D: Sales Forecasting: designed provide advanced sales capabilities improve sales effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Sales Forecasting' EXAMPLE APPLICATION: messages individual customers. PMT ABM: Creating PMT ABM techniques enable AI S predict customer behavior preferences. AI-Driven Sales: Mastermind_AI designed provide advanced sales capabilities improve",
+    "compression_ratio": 2.450110864745011,
+    "symbol_count": 451,
+    "timestamp": "2025-11-18T10:47:34.818679Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Sales Forecasting D: Sales Forecasting: designed provide advanced sales capabilities improve sales effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Sales Forecasting' EXAMPLE APPLICATION: messages individual customers. PMT ABM: Creating PMT ABM techniques enable AI S predict customer behavior preferences. AI-Driven Sales: Mastermind_AI designed provide advanced sales capabilities improve",
+    "compression_ratio": 2.450110864745011,
+    "symbol_count": 451,
+    "timestamp": "2025-11-18T10:47:34.833070Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Sales Forecasting D: Sales Forecasting: BLUEPRINT DETAILS: Θ Node Original Θ Forecasting' EXAMPLE APPLICATION: PMT ABM: Creating PMT ABM AI S AI-Driven Sales: Mastermind_AI",
+    "compression_ratio": 6.207865168539326,
+    "symbol_count": 178,
+    "timestamp": "2025-11-18T10:47:34.837874Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 368.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:34.838206Z"
+  }
+]

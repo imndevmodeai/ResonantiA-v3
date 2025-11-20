@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Learning Mechanism\n\nDescription\n\nDEFINITION:\nLearning Mechanism\n\nDescription: Detailed description of the system's reasoning engine, including its algorithms, models, and decision-making processes\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Learning Mechanism\n\nDescription'\n\nEXAMPLE APPLICATION:\nation\nNode 30: Relationship Creation\nNode 11: Reasoning Engine\n\nDescription: Detailed description of the system's reasoning engine, including its algorithms, models, and decision-making processes.\nEdges:\nNode 31: Rule-Based Reasoning\nNode 32: Model-Based Reasoning\nNode 33: Hybrid Reasoning\nNode 12: Learning Mechanism\n\nDescription: Detailed description of the system's learning mechanism, including its algorithms, models, and training data.\nEdges:\nNode 34: Supervised Learning\nNode 35: Unsupervised\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1186,
+    "timestamp": "2025-11-18T10:47:42.864038Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Learning Mechanism\n\nDescription\n\nDEFINITION:\nLearning Mechanism\n\nDescription: Detailed description of the system's reasoning engine, including its algorithms, models, and decision-making processes\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Learning Mechanism\n\nDescription'\n\nEXAMPLE APPLICATION:\nation\nNode 30: Relationship Creation\nNode 11: Reasoning Engine\n\nDescription: Detailed description of the system's reasoning engine, including its algorithms, models, and decision-making processes.\nEdges:\nNode 31: Rule-Based Reasoning",
+    "compression_ratio": 2.0,
+    "symbol_count": 593,
+    "timestamp": "2025-11-18T10:47:42.864063Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Learning M Description D: Learning M Description: Detailed description of S's reasoning engine, including its algorithms, models, decision-making Pes BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Learning M Description' EXAMPLE APPLICATION: ation Node 30: Relationship Creation Node 11: Reasoning Engine Description: Detailed description of S's reasoning engine, including its algorithms, models, decision-making Pes. Edges: Node 31: Rule-Based Reasoning",
+    "compression_ratio": 2.343873517786561,
+    "symbol_count": 506,
+    "timestamp": "2025-11-18T10:47:42.869237Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Learning M Description D: Learning M Description: Detailed description S's reasoning engine, including algorithms, models, decision-making Pes BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Learning M Description' EXAMPLE APPLICATION: ation Node Relationship Creation Node Reasoning Engine Description: Detailed description S's reasoning engine, including algorithms, models, decision-making Pes. Edges: Node Rule-ABM Reasoning",
+    "compression_ratio": 2.4968421052631578,
+    "symbol_count": 475,
+    "timestamp": "2025-11-18T10:47:42.884148Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Learning M Description D: Learning M Description: Detailed description S's reasoning engine, including algorithms, models, decision-making Pes BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Learning M Description' EXAMPLE APPLICATION: ation Node Relationship Creation Node Reasoning Engine Description: Detailed description S's reasoning engine, including algorithms, models, decision-making Pes. Edges: Node Rule-ABM Reasoning",
+    "compression_ratio": 2.4968421052631578,
+    "symbol_count": 475,
+    "timestamp": "2025-11-18T10:47:42.894237Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Learning M Description D: Learning M Description: Detailed description S's reasoning engine, including algorithms, models, decision-making Pes BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Learning M Description' EXAMPLE APPLICATION: ation Node Relationship Creation Node Reasoning Engine Description: Detailed description S's reasoning engine, including algorithms, models, decision-making Pes. Edges: Node Rule-ABM Reasoning",
+    "compression_ratio": 2.4968421052631578,
+    "symbol_count": 475,
+    "timestamp": "2025-11-18T10:47:42.898465Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Learning M Description D: Learning M Description: Detailed S's Pes BLUEPRINT DETAILS: Θ Node Original Θ M Description' EXAMPLE APPLICATION: Node Relationship Creation Node Reasoning Engine Description: Detailed S's Pes. Edges: Node Rule-ABM Reasoning",
+    "compression_ratio": 4.6328125,
+    "symbol_count": 256,
+    "timestamp": "2025-11-18T10:47:42.907021Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 395.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:42.907847Z"
+  }
+]

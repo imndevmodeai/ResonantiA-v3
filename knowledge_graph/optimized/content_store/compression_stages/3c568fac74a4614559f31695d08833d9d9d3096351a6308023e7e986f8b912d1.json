@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Thank You\n\nDEFINITION:\nThank You: now ready for use\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Thank You'\n\nEXAMPLE APPLICATION:\nf the deployment process:\n\nSystem Ready for Use:\n\nThe SPR_compressor system is now ready for use. You can start processing and analyzing data using the system.\n\nSupport and Maintenance:\n\nIf you need any support or maintenance for the system, please don't hesitate to reach out. We are here to help.\n\nThank You:\n\nThank you for using the SPR_compressor system. We hope you find it useful and efficient in your data processing and analysis needs.\n\nGoodbye:\n\nIt was a pleasure assisting you with the depl\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1019,
+    "timestamp": "2025-11-18T10:47:50.952460Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Thank You\n\nDEFINITION:\nThank You: now ready for use\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Thank You'\n\nEXAMPLE APPLICATION:\nf the deployment process:\n\nSystem Ready for Use:\n\nThe SPR_compressor system is now ready for use. You can start processing and analyzing data using the system.\n\nSupport and Maintenance:\n\nIf you need any support or maintenance for the system, please don't hesitate to reach out. We are here to help.\n\nThank You:\n\nThan",
+    "compression_ratio": 2.00196463654224,
+    "symbol_count": 509,
+    "timestamp": "2025-11-18T10:47:50.952483Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Thank D: Thank : now ready use BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Thank ' EXAMPLE APPLICATION: f deployment P: S Ready Use: Θ_compressor S is now ready use. start Ping analyzing data using S. Support Maintenance: If need any support or maintenance S, please don't hesitate to reach out. We here to help. Thank : Than",
+    "compression_ratio": 2.688654353562005,
+    "symbol_count": 379,
+    "timestamp": "2025-11-18T10:47:50.954270Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Thank D: Thank ready BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Thank EXAMPLE APPLICATION: deployment P: S Ready Use: Θ_compressor S ready start Ping analyzing using S. Support Maintenance: If support maintenance S, please don't hesitate reach We help. Thank Than",
+    "compression_ratio": 3.234920634920635,
+    "symbol_count": 315,
+    "timestamp": "2025-11-18T10:47:50.958116Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Thank D: Thank ready BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Thank EXAMPLE APPLICATION: deployment P: S Ready Use: Θ_compressor S ready start Ping analyzing using S. Support Maintenance: If support maintenance S, please don't hesitate reach We help. Thank Than",
+    "compression_ratio": 3.234920634920635,
+    "symbol_count": 315,
+    "timestamp": "2025-11-18T10:47:50.961919Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Thank D: Thank ready BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Thank EXAMPLE APPLICATION: deployment P: S Ready Use: Θ_compressor S ready start Ping analyzing using S. Support Maintenance: If support maintenance S, please don't hesitate reach We help. Thank Than",
+    "compression_ratio": 3.234920634920635,
+    "symbol_count": 315,
+    "timestamp": "2025-11-18T10:47:50.964770Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Thank D: Thank BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: P: S Ready Use: Θ_compressor S Ping S. Support Maintenance: If S, We Thank Than",
+    "compression_ratio": 6.449367088607595,
+    "symbol_count": 158,
+    "timestamp": "2025-11-18T10:47:50.967619Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 203.8,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:50.968104Z"
+  }
+]

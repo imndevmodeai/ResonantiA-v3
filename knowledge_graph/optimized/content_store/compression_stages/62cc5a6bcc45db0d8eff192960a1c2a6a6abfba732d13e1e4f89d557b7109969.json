@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Extraction\n\nDEFINITION:\nExtraction: SPR mentioned in list from agi.txt: Extraction\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: list_mention. Original SPR name: 'Extraction'\n\nEXAMPLE APPLICATION:\nSPRs:\n          Source          Process                  Result\n0  Machine Learning  Data Extraction  Contextually Reasoned Responses\n1  Natural Language      Text Analysis            Meaningful Insights\n\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: list_mention\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 741,
+    "timestamp": "2025-11-18T10:47:14.458722Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Extraction\n\nDEFINITION:\nExtraction: SPR mentioned in list from agi.txt: Extraction\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: list_mention. Original SPR name: 'Extraction'\n\nEXAMPLE APPLICATION:\nSPRs:\n          Source          Process                  Result\n0  Machine Learning  Data Extraction  Contextually Reasoned Responses\n1  Natural Languag",
+    "compression_ratio": 2.002702702702703,
+    "symbol_count": 370,
+    "timestamp": "2025-11-18T10:47:14.458743Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Extraction D: Extraction: Θ mentioned in list agi.txt: Extraction BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: list_mention. Original Θ name: 'Extraction' EXAMPLE APPLICATION: Θs: Source P Result 0 Machine Learning Data Extraction Contextually Reasoned Responses 1 Natural Languag",
+    "compression_ratio": 2.520408163265306,
+    "symbol_count": 294,
+    "timestamp": "2025-11-18T10:47:14.459496Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Extraction D: Extraction: Θ mentioned agi.txt: Extraction BLUEPRINT DETAILS: Θ extracted agi.txt Node type: list_mention. Original Θ name: 'Extraction' EXAMPLE APPLICATION: Θs: Source P Result Machine Learning Data Extraction Contextually Reasoned Responses Natural Languag",
+    "compression_ratio": 2.6559139784946235,
+    "symbol_count": 279,
+    "timestamp": "2025-11-18T10:47:14.463606Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Extraction D: Extraction: Θ mentioned agi.txt: Extraction BLUEPRINT DETAILS: Θ extracted agi.txt Node type: list_mention. Original Θ name: 'Extraction' EXAMPLE APPLICATION: Θs: Source P Result Machine Learning Data Extraction Contextually Reasoned Responses Natural Languag",
+    "compression_ratio": 2.6559139784946235,
+    "symbol_count": 279,
+    "timestamp": "2025-11-18T10:47:14.468530Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Extraction D: Extraction: Θ mentioned agi.txt: Extraction BLUEPRINT DETAILS: Θ extracted agi.txt Node type: list_mention. Original Θ name: 'Extraction' EXAMPLE APPLICATION: Θs: Source P Result Machine Learning Data Extraction Contextually Reasoned Responses Natural Languag",
+    "compression_ratio": 2.6559139784946235,
+    "symbol_count": 279,
+    "timestamp": "2025-11-18T10:47:14.472984Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Extraction D: Extraction: Θ Extraction BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: Θs: Source P Result Machine Learning Data Extraction Contextually Reasoned Responses Natural Languag",
+    "compression_ratio": 3.6502463054187193,
+    "symbol_count": 203,
+    "timestamp": "2025-11-18T10:47:14.474981Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ|Θ",
+    "compression_ratio": 105.85714285714286,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:14.476178Z"
+  }
+]

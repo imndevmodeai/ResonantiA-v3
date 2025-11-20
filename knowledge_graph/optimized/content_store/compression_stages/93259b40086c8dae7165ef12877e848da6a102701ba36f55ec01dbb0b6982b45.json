@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Social Impact Assessment\n\nDEFINITION:\nSocial Impact Assessment: designed to drive social impact and create positive change in the world:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Social Impact Assessment'\n\nEXAMPLE APPLICATION:\np new ideas and concepts.\n    * Partnership Models: Creating partnership models that enable humans and AI to work together to create new products, services, and experiences.\n\n43. AI-Driven Social Impact: Mastermind_AI is designed to drive social impact and create positive change in the world:\n    * Social Impact Assessment: Developing social impact assessment techniques that enable the AI system to assess the potential social impact of new ideas and concepts.\n    * Social Impact Optimization: Im\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1119,
+    "timestamp": "2025-11-18T10:47:32.226963Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Social Impact Assessment\n\nDEFINITION:\nSocial Impact Assessment: designed to drive social impact and create positive change in the world:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Social Impact Assessment'\n\nEXAMPLE APPLICATION:\np new ideas and concepts.\n    * Partnership Models: Creating partnership models that enable humans and AI to work together to create new products, services, and experiences.\n\n43. AI-Driven Social Impact: Mastermind_AI is designed to drive social impact and create po",
+    "compression_ratio": 2.001788908765653,
+    "symbol_count": 559,
+    "timestamp": "2025-11-18T10:47:32.226992Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Social Impact Assessment D: Social Impact Assessment: designed to drive social impact create positive change in world: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Social Impact Assessment' EXAMPLE APPLICATION: p new ideas concepts. * Partnership Models: Creating partnership models enable humans AI to work together to create new products, services, experiences. 43. AI-Driven Social Impact: Mastermind_AI is designed to drive social impact create po",
+    "compression_ratio": 2.2202380952380953,
+    "symbol_count": 504,
+    "timestamp": "2025-11-18T10:47:32.230478Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Social Impact Assessment D: Social Impact Assessment: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Social Impact Assessment' EXAMPLE APPLICATION: ideas concepts. Partnership Models: Creating partnership models enable humans AI together create products, services, experiences. AI-Driven Social Impact: Mastermind_AI designed drive social impact create",
+    "compression_ratio": 2.4379084967320264,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:32.241142Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Social Impact Assessment D: Social Impact Assessment: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Social Impact Assessment' EXAMPLE APPLICATION: ideas concepts. Partnership Models: Creating partnership models enable humans AI together create products, services, experiences. AI-Driven Social Impact: Mastermind_AI designed drive social impact create",
+    "compression_ratio": 2.4379084967320264,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:32.245176Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Social Impact Assessment D: Social Impact Assessment: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Social Impact Assessment' EXAMPLE APPLICATION: ideas concepts. Partnership Models: Creating partnership models enable humans AI together create products, services, experiences. AI-Driven Social Impact: Mastermind_AI designed drive social impact create",
+    "compression_ratio": 2.4379084967320264,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:32.252590Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Social Impact Assessment D: Social Impact Assessment: BLUEPRINT DETAILS: Θ Node Original Θ Impact Assessment' EXAMPLE APPLICATION: Partnership Models: Creating AI AI-Driven Social Impact: Mastermind_AI",
+    "compression_ratio": 5.405797101449275,
+    "symbol_count": 207,
+    "timestamp": "2025-11-18T10:47:32.255287Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 373.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:32.255747Z"
+  }
+]

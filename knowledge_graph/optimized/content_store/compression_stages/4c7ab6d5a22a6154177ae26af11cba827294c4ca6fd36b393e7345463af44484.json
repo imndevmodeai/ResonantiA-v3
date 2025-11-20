@@ -1,0 +1,44 @@
+[
+  {
+    "stage_name": "Concise",
+    "compression_ratio": 2.0045045045045047,
+    "symbol_count": 222,
+    "timestamp": "2025-11-13T11:27:01.254049Z"
+  },
+  {
+    "stage_name": "Nano",
+    "compression_ratio": 2.022727272727273,
+    "symbol_count": 220,
+    "timestamp": "2025-11-13T11:27:01.254514Z"
+  },
+  {
+    "stage_name": "Micro",
+    "compression_ratio": 2.022727272727273,
+    "symbol_count": 220,
+    "timestamp": "2025-11-13T11:27:01.254904Z"
+  },
+  {
+    "stage_name": "Pico",
+    "compression_ratio": 2.022727272727273,
+    "symbol_count": 220,
+    "timestamp": "2025-11-13T11:27:01.255291Z"
+  },
+  {
+    "stage_name": "Femto",
+    "compression_ratio": 2.022727272727273,
+    "symbol_count": 220,
+    "timestamp": "2025-11-13T11:27:01.255670Z"
+  },
+  {
+    "stage_name": "Atto",
+    "compression_ratio": 2.022727272727273,
+    "symbol_count": 220,
+    "timestamp": "2025-11-13T11:27:01.265162Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "compression_ratio": 2.3177083333333335,
+    "symbol_count": 192,
+    "timestamp": "2025-11-13T11:27:01.265193Z"
+  }
+]

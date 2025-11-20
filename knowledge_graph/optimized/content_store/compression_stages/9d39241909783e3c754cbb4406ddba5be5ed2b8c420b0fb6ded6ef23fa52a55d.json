@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Ethics and Values Framework\n\nDEFINITION:\nStrong ethical foundation for ArchE system operation\n\nBLUEPRINT DETAILS:\nPrioritizes human decision-making, dignity, and provides clear explanations\n\nEXAMPLE APPLICATION:\nEnsuring ArchE operates in responsible and beneficial manner\n\nCATEGORY: EthicalFramework\n\nRELATIONSHIPS:\ntype: EthicalFramework; respects: Human autonomy; protects: Human rights; ensures: Transparency and accountability; supports: Responsible AI operation; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 491,
+    "timestamp": "2025-11-18T10:46:47.418691Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Ethics and Values Framework\n\nDEFINITION:\nStrong ethical foundation for ArchE system operation\n\nBLUEPRINT DETAILS:\nPrioritizes human decision-making, dignity, and provides clear explanations\n\nEXAMPLE APPLICATION:\nEnsuring ArchE operates in ",
+    "compression_ratio": 2.0040816326530613,
+    "symbol_count": 245,
+    "timestamp": "2025-11-18T10:46:47.418712Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Ethics Values Framework D: Strong ethical foundation Æ S operation BLUEPRINT DETAILS: Prioritizes human decision-making, dignity, provides clear explanations EXAMPLE APPLICATION: Ensuring Æ operates in",
+    "compression_ratio": 2.3719806763285023,
+    "symbol_count": 207,
+    "timestamp": "2025-11-18T10:46:47.419233Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ethics Values Framework D: Strong ethical foundation Æ S operation BLUEPRINT DETAILS: Prioritizes human decision-making, dignity, provides clear explanations EXAMPLE APPLICATION: Ensuring Æ operates",
+    "compression_ratio": 2.406862745098039,
+    "symbol_count": 204,
+    "timestamp": "2025-11-18T10:46:47.427619Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ethics Values Framework D: Strong ethical foundation Æ S operation BLUEPRINT DETAILS: Prioritizes human decision-making, dignity, provides clear explanations EXAMPLE APPLICATION: Ensuring Æ operates",
+    "compression_ratio": 2.406862745098039,
+    "symbol_count": 204,
+    "timestamp": "2025-11-18T10:46:47.428606Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ethics Values Framework D: Strong ethical foundation Æ S operation BLUEPRINT DETAILS: Prioritizes human decision-making, dignity, provides clear explanations EXAMPLE APPLICATION: Ensuring Æ operates",
+    "compression_ratio": 2.406862745098039,
+    "symbol_count": 204,
+    "timestamp": "2025-11-18T10:46:47.432818Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ethics Values Framework D: Strong Æ S BLUEPRINT DETAILS: Prioritizes EXAMPLE APPLICATION: Ensuring Æ",
+    "compression_ratio": 4.632075471698113,
+    "symbol_count": 106,
+    "timestamp": "2025-11-18T10:46:47.433813Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Æ",
+    "compression_ratio": 163.66666666666666,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:47.434017Z"
+  }
+]

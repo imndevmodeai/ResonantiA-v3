@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Adult Market\n\nDEFINITION:\nAdult Market: an innovative and potentially lucrative idea\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Adult Market'\n\nEXAMPLE APPLICATION:\nith developing the data compression software, or type 'no' to explore other options.\n\nwhat about creating a ar glasses and other sensory stimulation wearables for the adult market which interface with camming communities like chaturbate\n\nCreating AR Glasses and Sensory Stimulation Wearables for the Adult Market:\n\nDeveloping AR glasses and sensory stimulation wearables for the adult market, specifically designed to interface with camming communities like Chaturbate, is an innovative and potential\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1055,
+    "timestamp": "2025-11-18T10:47:51.929656Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Adult Market\n\nDEFINITION:\nAdult Market: an innovative and potentially lucrative idea\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Adult Market'\n\nEXAMPLE APPLICATION:\nith developing the data compression software, or type 'no' to explore other options.\n\nwhat about creating a ar glasses and other sensory stimulation wearables for the adult market which interface with camming communities like chaturbate\n\nCreating AR Glasses and Sensory Stimulation Wearables for th",
+    "compression_ratio": 2.001897533206831,
+    "symbol_count": 527,
+    "timestamp": "2025-11-18T10:47:51.929678Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Adult Market D: Adult Market: an innovative potentially lucrative idea BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Adult Market' EXAMPLE APPLICATION: ith developing data compression software, or type 'no' to explore other options. about creating a ar glasses other sensory stimulation wearables adult market interface camming communities like chaturbate Creating AR Glasses Sensory Stimulation Wearables th",
+    "compression_ratio": 2.2934782608695654,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:51.931251Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Adult Market D: Adult Market: innovative potentially lucrative BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Adult Market' EXAMPLE APPLICATION: developing compression software, explore other options. about creating glasses other sensory stimulation wearables adult market interface camming communities chaturbate Creating AR Glasses Sensory Stimulation Wearables",
+    "compression_ratio": 2.5669099756690996,
+    "symbol_count": 411,
+    "timestamp": "2025-11-18T10:47:51.933938Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Adult Market D: Adult Market: innovative potentially lucrative BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Adult Market' EXAMPLE APPLICATION: developing compression software, explore other options. about creating glasses other sensory stimulation wearables adult market interface camming communities chaturbate Creating AR Glasses Sensory Stimulation Wearables",
+    "compression_ratio": 2.5669099756690996,
+    "symbol_count": 411,
+    "timestamp": "2025-11-18T10:47:51.936974Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Adult Market D: Adult Market: innovative potentially lucrative BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Adult Market' EXAMPLE APPLICATION: developing compression software, explore other options. about creating glasses other sensory stimulation wearables adult market interface camming communities chaturbate Creating AR Glasses Sensory Stimulation Wearables",
+    "compression_ratio": 2.5669099756690996,
+    "symbol_count": 411,
+    "timestamp": "2025-11-18T10:47:51.938915Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Adult Market D: Adult Market: BLUEPRINT DETAILS: Θ Node Original Θ Market' EXAMPLE APPLICATION: Creating AR Glasses Sensory Stimulation Wearables",
+    "compression_ratio": 6.986754966887418,
+    "symbol_count": 151,
+    "timestamp": "2025-11-18T10:47:51.943337Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 351.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:51.946080Z"
+  }
+]

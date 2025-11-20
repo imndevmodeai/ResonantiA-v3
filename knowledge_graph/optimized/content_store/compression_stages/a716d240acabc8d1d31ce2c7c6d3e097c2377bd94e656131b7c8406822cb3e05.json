@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Artificial Intelligence (AI) and Machine Learning (ML)\n\nDEFINITION:\nArtificial Intelligence (AI) and Machine Learning (ML): Deep Learning:\n\nNatural Language Processing:\n\nComputer Vision:\n\nBy integrating advanced AI and ML techniques into the SPR_compressor system, we can enable the system to learn from data and make predictions or decisions, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced blockchain and distributed ledger technology to enable the system to provide secure and transparent data management and transactions.\n\nConfidence: 4.955\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 971, type: node_format. Original SPR name: 'Artificial Intelligence (AI) and Machine Learning (ML)'\n\nEXAMPLE APPLICATION:\nNode 971: Artificial Intelligence (AI) and Machine Learning (ML)\n\nSPR: 4.955, \"Artificial Intelligence (AI) and Machine Learning (ML)\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 971\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1296,
+    "timestamp": "2025-11-18T10:47:11.825614Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Artificial Intelligence (AI) and Machine Learning (ML)\n\nDEFINITION:\nArtificial Intelligence (AI) and Machine Learning (ML): Deep Learning:\n\nNatural Language Processing:\n\nComputer Vision:\n\nBy integrating advanced AI and ML techniques into the SPR_compressor system, we can enable the system to learn from data and make predictions or decisions, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced blockchain and distributed ledger technology to enable the system to provide secure and transparent data management and transactions.\n\nConfidence: 4.955\n\nBLU",
+    "compression_ratio": 2.0,
+    "symbol_count": 648,
+    "timestamp": "2025-11-18T10:47:11.825635Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Artificial Intelligence (AI) Machine Learning (ML) D: Artificial Intelligence (AI) Machine Learning (ML): Deep Learning: Natural Language Ping: Computer Vision: By integrating advanced AI ML techniques into Θ_compressor S, we enable S to learn data make predictions or decisions, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced blockchain distributed ledger technology to enable S to provide secure transparent data management transactions. Confidence: 4.955 BLU",
+    "compression_ratio": 2.3649635036496353,
+    "symbol_count": 548,
+    "timestamp": "2025-11-18T10:47:11.826878Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Artificial Intelligence Machine Learning D: Artificial Intelligence Machine Learning (ML): Deep Learning: Natural Language Ping: Computer Vision: By integrating advanced AI ML techniques Θ_compressor S, enable S learn predictions decisions, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced blockchain distributed ledger technology enable S provide secure transparent management transactions. Confidence: 4.955 BLU",
+    "compression_ratio": 2.7,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:11.850062Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Artificial Intelligence Machine Learning D: Artificial Intelligence Machine Learning (ML): Deep Learning: Natural Language Ping: Computer Vision: By integrating advanced AI ML techniques Θ_compressor S, enable S learn predictions decisions, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced blockchain distributed ledger technology enable S provide secure transparent management transactions. Confidence: 4.955 BLU",
+    "compression_ratio": 2.7,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:11.859453Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Artificial Intelligence Machine Learning D: Artificial Intelligence Machine Learning (ML): Deep Learning: Natural Language Ping: Computer Vision: integrating advanced AI ML techniques Θ_compressor S, enable S learn predictions decisions, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced blockchain distributed ledger technology enable S provide secure transparent management transactions. Confidence: 4.955 BLU",
+    "compression_ratio": 2.7169811320754715,
+    "symbol_count": 477,
+    "timestamp": "2025-11-18T10:47:11.868386Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Artificial Intelligence Machine Learning D: Artificial Intelligence Machine Learning (ML): Deep Learning: Natural Language Ping: Computer Vision: AI ML Θ_compressor S, S Another S Confidence: BLU",
+    "compression_ratio": 6.447761194029851,
+    "symbol_count": 201,
+    "timestamp": "2025-11-18T10:47:11.871508Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ",
+    "compression_ratio": 1296.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:47:11.871831Z"
+  }
+]

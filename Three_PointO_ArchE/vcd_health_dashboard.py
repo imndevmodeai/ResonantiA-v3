@@ -355,8 +355,19 @@ class VCDHealthCollector:
             metrics: PerformanceMetrics to store
         """
         # Already stored in metrics_history deque
-        # In production, would also write to time-series database
-        pass
+        # Also write to persistent storage
+        try:
+            history_dir = Path("logs/vcd_health_history")
+            history_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Store daily files
+            date_str = datetime.fromisoformat(metrics.timestamp).strftime("%Y-%m-%d")
+            history_file = history_dir / f"metrics_{date_str}.jsonl"
+            
+            with open(history_file, 'a') as f:
+                f.write(json.dumps(asdict(metrics)) + '\n')
+        except Exception as e:
+            logger.warning(f"Failed to store historical data: {e}")
     
     def get_historical_metrics(
         self,
@@ -562,6 +573,266 @@ class VCDHealthDashboardAPI:
                 alert.status = "resolved"
                 return True, "Alert resolved"
         return False, "Alert not found"
+    
+    def get_trend_analysis(
+        self,
+        metric_name: str,
+        time_window_hours: int = 24
+    ) -> Dict[str, Any]:
+        """
+        Get trend analysis for a specific metric.
+        
+        Args:
+            metric_name: Name of metric to analyze
+            time_window_hours: Time window in hours
+            
+        Returns:
+            Dictionary with trend analysis
+        """
+        end_time = datetime.now()
+        start_time = end_time - timedelta(hours=time_window_hours)
+        
+        metrics = self.collector.get_historical_metrics(start_time, end_time)
+        
+        if not metrics:
+            return {
+                "metric_name": metric_name,
+                "trend": "insufficient_data",
+                "data_points": 0,
+                "analysis": {}
+            }
+        
+        # Extract metric values
+        metric_values = []
+        for m in metrics:
+            if hasattr(m, metric_name):
+                metric_values.append(getattr(m, metric_name))
+        
+        if not metric_values:
+            return {
+                "metric_name": metric_name,
+                "trend": "no_data",
+                "data_points": 0,
+                "analysis": {}
+            }
+        
+        # Calculate trend
+        if len(metric_values) >= 2:
+            first_half = metric_values[:len(metric_values)//2]
+            second_half = metric_values[len(metric_values)//2:]
+            first_avg = statistics.mean(first_half)
+            second_avg = statistics.mean(second_half)
+            
+            if second_avg > first_avg * 1.1:
+                trend = "increasing"
+            elif second_avg < first_avg * 0.9:
+                trend = "decreasing"
+            else:
+                trend = "stable"
+        else:
+            trend = "insufficient_data"
+        
+        return {
+            "metric_name": metric_name,
+            "trend": trend,
+            "data_points": len(metric_values),
+            "analysis": {
+                "current": metric_values[-1] if metric_values else None,
+                "average": statistics.mean(metric_values),
+                "min": min(metric_values),
+                "max": max(metric_values),
+                "std_dev": statistics.stdev(metric_values) if len(metric_values) > 1 else 0.0
+            }
+        }
+    
+    def get_alert_history(
+        self,
+        hours: int = 24,
+        level: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Get alert history.
+        
+        Args:
+            hours: Number of hours to look back
+            level: Optional filter by alert level
+            
+        Returns:
+            Dictionary with alert history
+        """
+        cutoff_time = datetime.now() - timedelta(hours=hours)
+        
+        filtered_alerts = []
+        for alert in self.collector.alerts:
+            alert_time = datetime.fromisoformat(alert.timestamp)
+            if alert_time >= cutoff_time:
+                if level is None or alert.level == level:
+                    filtered_alerts.append(alert)
+        
+        # Group by type
+        alerts_by_type = {}
+        for alert in filtered_alerts:
+            alert_type = alert.type
+            if alert_type not in alerts_by_type:
+                alerts_by_type[alert_type] = []
+            alerts_by_type[alert_type].append(asdict(alert))
+        
+        return {
+            "timestamp": now_iso(),
+            "time_window_hours": hours,
+            "total_alerts": len(filtered_alerts),
+            "alerts_by_type": alerts_by_type,
+            "alerts_by_level": {
+                "critical": sum(1 for a in filtered_alerts if a.level == "critical"),
+                "warning": sum(1 for a in filtered_alerts if a.level == "warning"),
+                "info": sum(1 for a in filtered_alerts if a.level == "info")
+            },
+            "alerts": [asdict(a) for a in filtered_alerts]
+        }
+    
+    def get_performance_benchmark(self) -> Dict[str, Any]:
+        """
+        Get performance benchmarks and comparisons.
+        
+        Returns:
+            Dictionary with benchmark data
+        """
+        metrics = list(self.collector.metrics_history)
+        
+        if not metrics:
+            return {
+                "timestamp": now_iso(),
+                "status": "insufficient_data",
+                "benchmarks": {}
+            }
+        
+        # Calculate benchmarks
+        response_times = [m.response_time for m in metrics]
+        memory_usages = [m.memory_usage for m in metrics]
+        cpu_usages = [m.cpu_usage for m in metrics]
+        throughputs = [m.message_throughput for m in metrics]
+        
+        benchmarks = {
+            "response_time": {
+                "p50": statistics.median(response_times) if response_times else 0,
+                "p95": sorted(response_times)[int(len(response_times) * 0.95)] if response_times else 0,
+                "p99": sorted(response_times)[int(len(response_times) * 0.99)] if response_times else 0,
+                "target": 100.0,  # 100ms target
+                "meets_target": statistics.median(response_times) <= 100.0 if response_times else False
+            },
+            "memory_usage": {
+                "average": statistics.mean(memory_usages) if memory_usages else 0,
+                "peak": max(memory_usages) if memory_usages else 0,
+                "target": 0.8,  # 80% target
+                "meets_target": statistics.mean(memory_usages) <= 0.8 if memory_usages else False
+            },
+            "cpu_usage": {
+                "average": statistics.mean(cpu_usages) if cpu_usages else 0,
+                "peak": max(cpu_usages) if cpu_usages else 0,
+                "target": 0.8,  # 80% target
+                "meets_target": statistics.mean(cpu_usages) <= 0.8 if cpu_usages else False
+            },
+            "throughput": {
+                "average": statistics.mean(throughputs) if throughputs else 0,
+                "peak": max(throughputs) if throughputs else 0,
+                "target": 100,  # 100 messages/sec target
+                "meets_target": statistics.mean(throughputs) >= 100 if throughputs else False
+            }
+        }
+        
+        overall_meets_target = all(
+            b.get("meets_target", False) for b in benchmarks.values()
+        )
+        
+        return {
+            "timestamp": now_iso(),
+            "status": "complete",
+            "overall_meets_target": overall_meets_target,
+            "benchmarks": benchmarks,
+            "data_points": len(metrics)
+        }
+    
+    def export_health_report(
+        self,
+        output_path: Optional[Path] = None,
+        format: str = "json"
+    ) -> Tuple[bool, str]:
+        """
+        Export comprehensive health report.
+        
+        Args:
+            output_path: Path to save report
+            format: Report format ("json" or "yaml")
+            
+        Returns:
+            Tuple of (success, message)
+        """
+        if output_path is None:
+            output_path = Path(f"logs/vcd_health_report_{int(datetime.now().timestamp())}.{format}")
+        
+        try:
+            report = {
+                "timestamp": now_iso(),
+                "health_overview": self.get_health_overview(),
+                "component_health": self.get_component_health(),
+                "performance_metrics": self.get_performance_metrics(),
+                "alerts": self.get_alerts(),
+                "trend_analysis": {
+                    "response_time": self.get_trend_analysis("response_time"),
+                    "memory_usage": self.get_trend_analysis("memory_usage"),
+                    "cpu_usage": self.get_trend_analysis("cpu_usage")
+                },
+                "benchmarks": self.get_performance_benchmark(),
+                "alert_history": self.get_alert_history(hours=24)
+            }
+            
+            if format == "json":
+                with open(output_path, 'w') as f:
+                    json.dump(report, f, indent=2)
+            elif format == "yaml":
+                try:
+                    import yaml
+                    with open(output_path, 'w') as f:
+                        yaml.dump(report, f, default_flow_style=False)
+                except ImportError:
+                    return False, "YAML format requires PyYAML package"
+            else:
+                return False, f"Unsupported format: {format}"
+            
+            return True, f"Health report exported to {output_path}"
+            
+        except Exception as e:
+            return False, f"Failed to export health report: {e}"
+    
+    def get_guide_access(self) -> Dict[str, Any]:
+        """
+        Get access to VCD guides for help and documentation.
+        
+        Returns:
+            Dictionary with guide access information
+        """
+        try:
+            from .vcd_guide_accessor import VCDGuideAccessor
+            guide_accessor = VCDGuideAccessor()
+            
+            return {
+                "timestamp": now_iso(),
+                "guides_available": True,
+                "total_guides": len(guide_accessor.list_guides()),
+                "guide_index": guide_accessor.get_guide_index(),
+                "usage": {
+                    "get_guide": "guide_accessor.get_guide('component_name')",
+                    "list_guides": "guide_accessor.list_guides()",
+                    "search_guides": "guide_accessor.search_guides('query')"
+                }
+            }
+        except Exception as e:
+            logger.warning(f"Guide accessor not available: {e}")
+            return {
+                "timestamp": now_iso(),
+                "guides_available": False,
+                "error": str(e)
+            }
 
 
 def main():

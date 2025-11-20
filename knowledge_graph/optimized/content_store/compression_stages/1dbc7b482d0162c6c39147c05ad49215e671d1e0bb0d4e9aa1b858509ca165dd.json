@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Counterfactual Normalization\n\nDEFINITION:\nBefore persistence, run ablations/counterfactuals to minimize conditions and capture robust, context-light rules.\n\nBLUEPRINT DETAILS:\nAblation/counterfactual Q&A to minimize conditions and capture robust, context-light rules.\n\nEXAMPLE APPLICATION:\nRemoved 'Linux-only' clause after counterfactual success; kept OS‑agnostic rule.\n\nCATEGORY: AnalyticalTechnique\n\nRELATIONSHIPS:\ntype: Refinement; used_by: KnowledgeextractoR, VettingagenT",
+    "compression_ratio": 1.0,
+    "symbol_count": 483,
+    "timestamp": "2025-11-18T10:45:52.036265Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Counterfactual Normalization\n\nDEFINITION:\nBefore persistence, run ablations/counterfactuals to minimize conditions and capture robust, context-light rules.\n\nBLUEPRINT DETAILS:\nAblation/counterfactual Q&A to minimize conditions and capt",
+    "compression_ratio": 2.004149377593361,
+    "symbol_count": 241,
+    "timestamp": "2025-11-18T10:45:52.036294Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Counterfactual Normalization D: Before persistence, run ablations/counterfactuals to minimize conditions capture robust, context-light rules. BLUEPRINT DETAILS: Ablation/counterfactual Q&A to minimize conditions capt",
+    "compression_ratio": 2.175675675675676,
+    "symbol_count": 222,
+    "timestamp": "2025-11-18T10:45:52.036900Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Counterfactual Normalization D: Before persistence, ablations/counterfactuals minimize conditions capture robust, context-light rules. BLUEPRINT DETAILS: Ablation/counterfactual Q&A minimize conditions",
+    "compression_ratio": 2.3333333333333335,
+    "symbol_count": 207,
+    "timestamp": "2025-11-18T10:45:52.044099Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Counterfactual Normalization D: Before persistence, ablations/counterfactuals minimize conditions capture robust, context-light rules. BLUEPRINT DETAILS: Ablation/counterfactual Q&A minimize conditions",
+    "compression_ratio": 2.3333333333333335,
+    "symbol_count": 207,
+    "timestamp": "2025-11-18T10:45:52.049291Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Counterfactual Normalization D: Before persistence, ablations/counterfactuals minimize conditions capture robust, context-light rules. BLUEPRINT DETAILS: Ablation/counterfactual Q& minimize conditions",
+    "compression_ratio": 2.3446601941747574,
+    "symbol_count": 206,
+    "timestamp": "2025-11-18T10:45:52.051592Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Counterfactual Normalization D: Before BLUEPRINT DETAILS: Ablation/counterfactual Q&",
+    "compression_ratio": 5.366666666666666,
+    "symbol_count": 90,
+    "timestamp": "2025-11-18T10:45:52.055310Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "C|N|B|A",
+    "compression_ratio": 69.0,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:45:52.055586Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Hybrid Reasoning\n\nDEFINITION:\nHybrid Reasoning: Node 33: Hybrid Reasoning\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 33, type: node_format. Original SPR name: 'Hybrid Reasoning'\n\nEXAMPLE APPLICATION:\nNode 33: Hybrid Reasoning\nNode 12: Learning Mechanism\n\nDescription: Detailed description of the system's learning mechanism, including its algorithms, models, and training data.\nEdges:\nNode 34: Supervised Learning\nNode 35: Un\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 33\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 792,
+    "timestamp": "2025-11-18T10:47:23.549596Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Hybrid Reasoning\n\nDEFINITION:\nHybrid Reasoning: Node 33: Hybrid Reasoning\n\nConfidence: 0.5\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 33, type: node_format. Original SPR name: 'Hybrid Reasoning'\n\nEXAMPLE APPLICATION:\nNode 33: Hybrid Reasoning\nNode 12: Learning Mechanism\n\nDescription: Detailed description of the system's learning mechanism, including its algorithms, models, and t",
+    "compression_ratio": 2.0,
+    "symbol_count": 396,
+    "timestamp": "2025-11-18T10:47:23.549682Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Hybrid Reasoning D: Hybrid Reasoning: Node 33: Hybrid Reasoning Confidence: 0.5 BLUEPRINT DETAILS: Θ extracted agi.txt Node 33, type: node_F. Original Θ name: 'Hybrid Reasoning' EXAMPLE APPLICATION: Node 33: Hybrid Reasoning Node 12: Learning M Description: Detailed description of S's learning M, including its algorithms, models, t",
+    "compression_ratio": 2.336283185840708,
+    "symbol_count": 339,
+    "timestamp": "2025-11-18T10:47:23.550759Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Hybrid Reasoning D: Hybrid Reasoning: Node Hybrid Reasoning Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Hybrid Reasoning' EXAMPLE APPLICATION: Node Hybrid Reasoning Node Learning M Description: Detailed description S's learning M, including algorithms, models,",
+    "compression_ratio": 2.554838709677419,
+    "symbol_count": 310,
+    "timestamp": "2025-11-18T10:47:23.555876Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Hybrid Reasoning D: Hybrid Reasoning: Node Hybrid Reasoning Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Hybrid Reasoning' EXAMPLE APPLICATION: Node Hybrid Reasoning Node Learning M Description: Detailed description S's learning M, including algorithms, models,",
+    "compression_ratio": 2.554838709677419,
+    "symbol_count": 310,
+    "timestamp": "2025-11-18T10:47:23.557305Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Hybrid Reasoning D: Hybrid Reasoning: Node Hybrid Reasoning Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Hybrid Reasoning' EXAMPLE APPLICATION: Node Hybrid Reasoning Node Learning M Description: Detailed description S's learning M, including algorithms, models,",
+    "compression_ratio": 2.554838709677419,
+    "symbol_count": 310,
+    "timestamp": "2025-11-18T10:47:23.569608Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Hybrid Reasoning D: Hybrid Reasoning: Node Hybrid Reasoning Confidence: BLUEPRINT DETAILS: Θ Node Original Θ Reasoning' EXAMPLE APPLICATION: Node Hybrid Reasoning Node Learning M Description: Detailed S's M,",
+    "compression_ratio": 3.7183098591549295,
+    "symbol_count": 213,
+    "timestamp": "2025-11-18T10:47:23.577511Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 264.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.577889Z"
+  }
+]

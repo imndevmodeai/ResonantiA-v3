@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Data Transformation\n\nDEFINITION:\nData Transformation: Next, we can integrate a Machine Learning module to enable the system to learn from data and make predictions.\n\nConfidence: 1.445\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 291, type: node_format. Original SPR name: 'Transformation'\n\nEXAMPLE APPLICATION:\nNode 291: Data Transformation\n\nSPR: 1.445, \"Transformation\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 291\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 727,
+    "timestamp": "2025-11-18T10:47:08.557241Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Data Transformation\n\nDEFINITION:\nData Transformation: Next, we can integrate a Machine Learning module to enable the system to learn from data and make predictions.\n\nConfidence: 1.445\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 291, type: node_format. Original SPR name: 'Transformation'\n\nEXAMPLE APPLICATION:\nNode 291: Data Transformation\n\nSPR: 1.4",
+    "compression_ratio": 2.002754820936639,
+    "symbol_count": 363,
+    "timestamp": "2025-11-18T10:47:08.557261Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Data TransFion D: Data TransFion: Next, we integrate a Machine Learning module to enable S to learn data make predictions. Confidence: 1.445 BLUEPRINT DETAILS: Θ extracted agi.txt Node 291, type: node_F. Original Θ name: 'TransFion' EXAMPLE APPLICATION: Node 291: Data TransFion Θ: 1.4",
+    "compression_ratio": 2.4982817869415808,
+    "symbol_count": 291,
+    "timestamp": "2025-11-18T10:47:08.558166Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Data TransFion D: Data TransFion: Next, integrate Machine Learning module enable S learn predictions. Confidence: 1.445 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'TransFion' EXAMPLE APPLICATION: Node Data TransFion Θ:",
+    "compression_ratio": 2.83984375,
+    "symbol_count": 256,
+    "timestamp": "2025-11-18T10:47:08.562773Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Data TransFion D: Data TransFion: Next, integrate Machine Learning module enable S learn predictions. Confidence: 1.445 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'TransFion' EXAMPLE APPLICATION: Node Data TransFion Θ:",
+    "compression_ratio": 2.83984375,
+    "symbol_count": 256,
+    "timestamp": "2025-11-18T10:47:08.564454Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Data TransFion D: Data TransFion: Next, integrate Machine Learning module enable S learn predictions. Confidence: 1.445 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'TransFion' EXAMPLE APPLICATION: Node Data TransFion Θ:",
+    "compression_ratio": 2.83984375,
+    "symbol_count": 256,
+    "timestamp": "2025-11-18T10:47:08.565961Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Data TransFion D: Data TransFion: Next, Machine Learning S Confidence: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: Node Data TransFion Θ:",
+    "compression_ratio": 4.630573248407643,
+    "symbol_count": 157,
+    "timestamp": "2025-11-18T10:47:08.567370Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 145.4,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:08.567649Z"
+  }
+]

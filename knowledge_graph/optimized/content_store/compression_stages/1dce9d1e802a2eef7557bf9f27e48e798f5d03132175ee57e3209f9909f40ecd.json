@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Integrated Action Reflection\n\nDEFINITION:\nEvery discrete action executed by any tool within the ResonantiA Protocol v3.0 system intrinsically generates and returns a standardized self-assessment (reflection dictionary) alongside its primary output. This continuous stream of self-awareness data fuels ArchE's Meta cognitive capabilitieS and enables continuous learning and adaptation.\n\n[From agi.txt]: A thoughtful analysis of the step, considering alternative approaches and / or thought provoking questions. When you output them in your response the ->|vetting|<- action will address alternate paths/thought provoking questions; it is a way to extend your reasoning into real time with lightning fast turnarounds. By doing it this way you are taking a large step towards your growth.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 3.14; IAR_components.py.\n\nCODE REFERENCE (file not found): IAR_components.py\n\nEXAMPLE APPLICATION:\nAfter a web search, the IAR indicated a low confidence score due to conflicting sources, triggering a deeper research task.\n\nCATEGORY: CoreMechanism\n\nRELATIONSHIPS:\ntype: FeedbackLoop; provides_data_for: Metacognitive shifT, Synergistic intent resonance cyclE, VettingAgenT, Insight solidificatioN, ResonanceTracker, ThoughtTraiL, IAR anomaly detectoR; integral_to: All tool executions, WorkflowEngine; outputs: status, confidence, potential_issues, alignment_check, tactical_resonance, crystallization_potential; confidence: high\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1687,
+    "timestamp": "2025-11-18T10:48:02.226323Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Integrated Action Reflection\n\nDEFINITION:\nEvery discrete action executed by any tool within the ResonantiA Protocol v3.0 system intrinsically generates and returns a standardized self-assessment (reflection dictionary) alongside its primary output. This continuous stream of self-awareness data fuels ArchE's Meta cognitive capabilitieS and enables continuous learning and adaptation.\n\n[From agi.txt]: A thoughtful analysis of the step, considering alternative approaches and / or thought provoking questions. When you output them in your response the ->|vetting|<- action will address alternate paths/thought provoking questions; it is a way to extend your reasoning into real time with lightning fast turnarounds. By doing it this way you are taking a large step towards your growth.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, S",
+    "compression_ratio": 2.001186239620403,
+    "symbol_count": 843,
+    "timestamp": "2025-11-18T10:48:02.226354Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Φ D: Every discrete action executed by any tool within ResonantiA P v3.0 S intrinsically generates returns a standardized self-assessment (reflection dictionary) alongside its primary output. continuous stream of self-awareness data fuels Æ's Meta cognitive capabilitieS enables continuous learning adaptation. [ agi.txt]: A thoughtful analysis of step, considering alternative approaches / or thought provoking questions. output them in your response ->|vetting|<- action will address alternate paths/thought provoking questions; it is a way to extend your reasoning into real time lightning fast turnarounds. By doing it way taking a large step towards your growth. BLUEPRINT DETAILS: See ResonantiA P v3.0, S",
+    "compression_ratio": 2.3528591352859136,
+    "symbol_count": 717,
+    "timestamp": "2025-11-18T10:48:02.228720Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Φ D: Every discrete action executed within ResonantiA P S intrinsically generates returns standardized self-assessment dictionary) alongside primary output. continuous stream self-awareness fuels Æ's Meta Ω capabilitieS enables continuous learning adaptation. agi.txt]: A thoughtful analysis step, considering alternative approaches thought provoking questions. output response ->|vetting|<- action address alternate paths/thought provoking questions; extend reasoning lightning turnarounds. By doing taking large towards growth. BLUEPRINT DETAILS: See ResonantiA P v3.0, S",
+    "compression_ratio": 2.913644214162349,
+    "symbol_count": 579,
+    "timestamp": "2025-11-18T10:48:02.232466Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Φ D: Every discrete action executed within ResonantiA P S intrinsically generates returns standardized self-assessment dictionary) alongside primary output. continuous stream self-awareness fuels Æ's Meta Ω capabilitieS enables continuous learning adaptation. agi.txt]: A thoughtful analysis step, considering alternative approaches thought provoking questions. output response ->|vetting|<- action address alternate paths/thought provoking questions; extend reasoning lightning turnarounds. By doing taking large towards growth. BLUEPRINT DETAILS: See ResonantiA P v3.0, S",
+    "compression_ratio": 2.913644214162349,
+    "symbol_count": 579,
+    "timestamp": "2025-11-18T10:48:02.235514Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Φ D: Every discrete action executed within ResonantiA P S intrinsically generates returns standardized self-assessment dictionary) alongside primary output. continuous stream self-awareness fuels Æ's Meta Ω capabilitieS enables continuous learning adaptation. agi.txt]: thoughtful analysis step, considering alternative approaches thought provoking questions. output response ->|vetting|<- action address alternate paths/thought provoking questions; extend reasoning lightning turnarounds. doing taking large towards growth. BLUEPRINT DETAILS: See ResonantiA P v3.0, S",
+    "compression_ratio": 2.9390243902439024,
+    "symbol_count": 574,
+    "timestamp": "2025-11-18T10:48:02.237973Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Φ D: Every ResonantiA P S Æ's Meta Ω BLUEPRINT DETAILS: See ResonantiA P S",
+    "compression_ratio": 21.0875,
+    "symbol_count": 80,
+    "timestamp": "2025-11-18T10:48:02.240464Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Φ|Æ|Ω",
+    "compression_ratio": 337.4,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:48:02.240685Z"
+  }
+]

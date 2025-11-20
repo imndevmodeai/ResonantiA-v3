@@ -1,0 +1,1125 @@
+INFO:Three_PointO_ArchE.temporal_core:⏰ Temporal Core initialized - All timestamps are UTC
+INFO:Three_PointO_ArchE.temporal_core:   Current system time: 2025-11-20T12:30:17.891296Z
+INFO:Three_PointO_ArchE.temporal_core:   ArchE Epoch: 2024-01-01T00:00:00Z
+INFO:Three_PointO_ArchE.ledgers.universal_ledger:Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+INFO:Three_PointO_ArchE.thought_trail:ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+/mnt/3626C55326C514B1/Happier/arche_dashboard/backend/api.py:1032: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+WARNING:__main__:Port manager not available, using default port 8000: attempted relative import with no known parent package
+INFO:     Started server process [59307]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:36346 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:36360 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 2
+INFO:     connection open
+INFO:     127.0.0.1:36366 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 3
+INFO:     connection open
+INFO:     127.0.0.1:36382 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 4
+INFO:     connection open
+INFO:     127.0.0.1:36394 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 5
+INFO:     connection open
+
+🚀 Starting ArchE Dashboard Backend API
+📍 Access at: http://localhost:8000
+📚 API Docs at: http://localhost:8000/docs
+🔌 WebSocket at: ws://localhost:8000/ws/live
+
+💡 Port automatically selected to avoid conflicts
+   Set DASHBOARD_PORT environment variable to use a specific port
+
+================================================================================
+
+================================================================================
+ArchE Dashboard Backend API Starting...
+================================================================================
+Thought Trail DB: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/ledgers/thought_trail.db
+  Exists: True
+SPR Definitions: /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+  Exists: True
+ArchE Components: ✅ Available
+================================================================================
+INFO:     127.0.0.1:36410 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36418 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 6
+INFO:     connection open
+INFO:     127.0.0.1:36426 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 7
+INFO:     connection open
+INFO:     127.0.0.1:36428 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 8
+INFO:     connection open
+INFO:     127.0.0.1:36432 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 9
+INFO:     connection open
+INFO:     127.0.0.1:36442 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 10
+INFO:     connection open
+INFO:     127.0.0.1:36450 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 11
+INFO:     connection open
+INFO:     127.0.0.1:36454 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 12
+INFO:     connection open
+INFO:     127.0.0.1:36462 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 13
+INFO:     connection open
+INFO:     127.0.0.1:36470 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 14
+INFO:     connection open
+INFO:     127.0.0.1:36480 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 15
+INFO:     connection open
+INFO:     127.0.0.1:36488 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 16
+INFO:     connection open
+INFO:     127.0.0.1:36496 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 17
+INFO:     connection open
+INFO:     127.0.0.1:36502 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 18
+INFO:     connection open
+INFO:     127.0.0.1:36518 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 19
+INFO:     connection open
+INFO:     127.0.0.1:36520 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 20
+INFO:     connection open
+INFO:     127.0.0.1:36530 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 21
+INFO:     connection open
+INFO:     127.0.0.1:36538 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 22
+INFO:     connection open
+INFO:     127.0.0.1:36554 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 23
+INFO:     connection open
+INFO:     127.0.0.1:36558 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 24
+INFO:     connection open
+INFO:     127.0.0.1:36572 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 25
+INFO:     connection open
+INFO:     127.0.0.1:36586 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 26
+INFO:     connection open
+INFO:     127.0.0.1:36598 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 27
+INFO:     connection open
+INFO:     127.0.0.1:36604 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 28
+INFO:     connection open
+INFO:     127.0.0.1:36614 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 29
+INFO:     connection open
+INFO:     127.0.0.1:36618 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 30
+INFO:     connection open
+INFO:     127.0.0.1:36630 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 31
+INFO:     connection open
+INFO:     127.0.0.1:36632 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 32
+INFO:     connection open
+INFO:     127.0.0.1:36638 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 33
+INFO:     connection open
+INFO:     127.0.0.1:36648 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 34
+INFO:     connection open
+INFO:     127.0.0.1:36664 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 35
+INFO:     connection open
+INFO:     127.0.0.1:36674 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36690 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 36
+INFO:     connection open
+INFO:     127.0.0.1:36706 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 37
+INFO:     connection open
+INFO:     127.0.0.1:36716 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 38
+INFO:     connection open
+INFO:     127.0.0.1:36732 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 39
+INFO:     connection open
+INFO:     127.0.0.1:36746 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 40
+INFO:     connection open
+INFO:     127.0.0.1:36760 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 41
+INFO:     connection open
+INFO:     127.0.0.1:36774 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 42
+INFO:     connection open
+INFO:     127.0.0.1:36782 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 43
+INFO:     connection open
+INFO:     127.0.0.1:36788 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 44
+INFO:     connection open
+INFO:     127.0.0.1:36794 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 45
+INFO:     connection open
+INFO:     127.0.0.1:36806 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 46
+INFO:     connection open
+INFO:     127.0.0.1:36820 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 47
+INFO:     connection open
+INFO:     127.0.0.1:36830 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 48
+INFO:     connection open
+INFO:     127.0.0.1:36834 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 49
+INFO:     connection open
+INFO:     127.0.0.1:36844 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 50
+INFO:     connection open
+INFO:     127.0.0.1:36852 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 51
+INFO:     connection open
+INFO:     127.0.0.1:36866 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 52
+INFO:     connection open
+INFO:     127.0.0.1:36882 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 53
+INFO:     connection open
+INFO:     127.0.0.1:36886 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 54
+INFO:     connection open
+INFO:     127.0.0.1:36890 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 55
+INFO:     connection open
+INFO:     127.0.0.1:36894 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 56
+INFO:     connection open
+INFO:     127.0.0.1:36896 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 57
+INFO:     connection open
+INFO:     127.0.0.1:36902 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 58
+INFO:     connection open
+INFO:     127.0.0.1:36908 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 59
+INFO:     connection open
+INFO:     127.0.0.1:36920 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 60
+INFO:     connection open
+INFO:     127.0.0.1:36934 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 61
+INFO:     connection open
+INFO:     127.0.0.1:36946 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 62
+INFO:     connection open
+INFO:     127.0.0.1:36954 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 63
+INFO:     connection open
+INFO:     127.0.0.1:36964 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 64
+INFO:     connection open
+INFO:     127.0.0.1:36978 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 65
+INFO:     connection open
+INFO:     127.0.0.1:36992 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 66
+INFO:     connection open
+INFO:     127.0.0.1:36998 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 67
+INFO:     connection open
+INFO:     127.0.0.1:37000 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 68
+INFO:     connection open
+INFO:     127.0.0.1:37008 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 69
+INFO:     connection open
+INFO:     127.0.0.1:37014 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 70
+INFO:     connection open
+INFO:     127.0.0.1:37022 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 71
+INFO:     connection open
+INFO:     127.0.0.1:37030 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 72
+INFO:     connection open
+INFO:     127.0.0.1:37032 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 73
+INFO:     connection open
+INFO:     127.0.0.1:37040 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 74
+INFO:     connection open
+INFO:     127.0.0.1:37056 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 75
+INFO:     connection open
+INFO:     127.0.0.1:37066 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 76
+INFO:     connection open
+INFO:     127.0.0.1:37070 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 77
+INFO:     connection open
+INFO:     127.0.0.1:37084 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 78
+INFO:     connection open
+INFO:     127.0.0.1:37098 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 79
+INFO:     connection open
+INFO:     127.0.0.1:37104 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 80
+INFO:     connection open
+INFO:     127.0.0.1:37106 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 81
+INFO:     connection open
+INFO:     127.0.0.1:37112 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 82
+INFO:     connection open
+INFO:     127.0.0.1:37122 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 83
+INFO:     connection open
+INFO:     127.0.0.1:37136 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 84
+INFO:     connection open
+INFO:     127.0.0.1:37142 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 85
+INFO:     connection open
+INFO:     127.0.0.1:37152 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 86
+INFO:     connection open
+INFO:     127.0.0.1:37154 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 87
+INFO:     connection open
+INFO:     127.0.0.1:37162 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 88
+INFO:     connection open
+INFO:     127.0.0.1:37168 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 89
+INFO:     connection open
+INFO:     127.0.0.1:37182 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 90
+INFO:     connection open
+INFO:     127.0.0.1:37186 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 91
+INFO:     connection open
+INFO:     127.0.0.1:37194 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 92
+INFO:     connection open
+INFO:     127.0.0.1:37198 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 93
+INFO:     connection open
+INFO:     127.0.0.1:37214 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 94
+INFO:     connection open
+INFO:     127.0.0.1:37216 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 95
+INFO:     connection open
+INFO:     127.0.0.1:37230 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 96
+INFO:     connection open
+INFO:     127.0.0.1:37242 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 97
+INFO:     connection open
+INFO:     127.0.0.1:37246 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 98
+INFO:     connection open
+INFO:     127.0.0.1:37252 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 99
+INFO:     connection open
+INFO:     127.0.0.1:37268 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 100
+INFO:     connection open
+INFO:     127.0.0.1:37282 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 101
+INFO:     connection open
+INFO:     127.0.0.1:37288 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 102
+INFO:     connection open
+INFO:     127.0.0.1:37294 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 103
+INFO:     connection open
+INFO:     127.0.0.1:37306 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 104
+INFO:     connection open
+INFO:     127.0.0.1:37322 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 105
+INFO:     connection open
+INFO:     127.0.0.1:37328 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 106
+INFO:     connection open
+INFO:     127.0.0.1:37334 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 107
+INFO:     connection open
+INFO:     127.0.0.1:37350 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 108
+INFO:     connection open
+INFO:     127.0.0.1:37366 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 109
+INFO:     connection open
+INFO:     127.0.0.1:37376 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 110
+INFO:     connection open
+INFO:     127.0.0.1:37384 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 111
+INFO:     connection open
+INFO:     127.0.0.1:37388 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 112
+INFO:     connection open
+INFO:     127.0.0.1:37404 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 113
+INFO:     connection open
+INFO:     127.0.0.1:37410 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 114
+INFO:     connection open
+INFO:     127.0.0.1:37422 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 115
+INFO:     connection open
+INFO:     127.0.0.1:37438 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 116
+INFO:     connection open
+INFO:     127.0.0.1:37448 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 117
+INFO:     connection open
+INFO:     127.0.0.1:37450 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 118
+INFO:     connection open
+INFO:     127.0.0.1:37456 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 119
+INFO:     connection open
+INFO:     127.0.0.1:37460 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 120
+INFO:     connection open
+INFO:     127.0.0.1:37466 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 121
+INFO:     connection open
+INFO:     127.0.0.1:37470 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 122
+INFO:     connection open
+INFO:     127.0.0.1:37484 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 123
+INFO:     connection open
+INFO:     127.0.0.1:37498 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 124
+INFO:     connection open
+INFO:     127.0.0.1:37504 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 125
+INFO:     connection open
+INFO:     127.0.0.1:37508 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 126
+INFO:     connection open
+INFO:     127.0.0.1:37518 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 127
+INFO:     connection open
+INFO:     127.0.0.1:37524 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 128
+INFO:     connection open
+INFO:     127.0.0.1:37540 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 129
+INFO:     connection open
+INFO:     127.0.0.1:37552 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 130
+INFO:     connection open
+INFO:     127.0.0.1:37554 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 131
+INFO:     connection open
+INFO:     127.0.0.1:37570 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 132
+INFO:     connection open
+INFO:     127.0.0.1:37574 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 133
+INFO:     connection open
+INFO:     127.0.0.1:37582 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 134
+INFO:     connection open
+INFO:     127.0.0.1:37592 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 135
+INFO:     connection open
+INFO:     127.0.0.1:37600 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 136
+INFO:     connection open
+INFO:     127.0.0.1:37608 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 137
+INFO:     connection open
+INFO:     127.0.0.1:37618 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 138
+INFO:     connection open
+INFO:     127.0.0.1:37630 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 139
+INFO:     connection open
+INFO:     127.0.0.1:37644 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 140
+INFO:     connection open
+INFO:     127.0.0.1:37656 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 141
+INFO:     connection open
+INFO:     127.0.0.1:37664 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 142
+INFO:     connection open
+INFO:     127.0.0.1:37674 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 143
+INFO:     connection open
+INFO:     127.0.0.1:37682 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 144
+INFO:     connection open
+INFO:     127.0.0.1:37698 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 145
+INFO:     connection open
+INFO:     127.0.0.1:37704 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 146
+INFO:     connection open
+INFO:     127.0.0.1:37714 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 147
+INFO:     connection open
+INFO:     127.0.0.1:37726 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 148
+INFO:     connection open
+INFO:     127.0.0.1:37738 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 149
+INFO:     connection open
+INFO:     127.0.0.1:37740 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 150
+INFO:     connection open
+INFO:     127.0.0.1:37752 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 151
+INFO:     connection open
+INFO:     127.0.0.1:37762 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 152
+INFO:     connection open
+INFO:     127.0.0.1:37768 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 153
+INFO:     connection open
+INFO:     127.0.0.1:37784 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 154
+INFO:     connection open
+INFO:     127.0.0.1:37790 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 155
+INFO:     connection open
+INFO:     127.0.0.1:37806 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 156
+INFO:     connection open
+INFO:     127.0.0.1:37810 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 157
+INFO:     connection open
+INFO:     127.0.0.1:37822 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 158
+INFO:     connection open
+INFO:     127.0.0.1:37826 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 159
+INFO:     connection open
+INFO:     127.0.0.1:37838 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 160
+INFO:     connection open
+INFO:     127.0.0.1:37844 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 161
+INFO:     connection open
+INFO:     127.0.0.1:37860 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 162
+INFO:     connection open
+INFO:     127.0.0.1:37862 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 163
+INFO:     connection open
+INFO:     127.0.0.1:37864 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 164
+INFO:     connection open
+INFO:     127.0.0.1:37866 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 165
+INFO:     connection open
+INFO:     127.0.0.1:37874 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 166
+INFO:     connection open
+INFO:     127.0.0.1:37876 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 167
+INFO:     connection open
+INFO:     127.0.0.1:37892 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 168
+INFO:     connection open
+INFO:     127.0.0.1:37900 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 169
+INFO:     connection open
+INFO:     127.0.0.1:37902 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 170
+INFO:     connection open
+INFO:     127.0.0.1:37906 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 171
+INFO:     connection open
+INFO:     127.0.0.1:37916 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 172
+INFO:     connection open
+INFO:     127.0.0.1:37922 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 173
+INFO:     connection open
+INFO:     127.0.0.1:37930 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 174
+INFO:     connection open
+INFO:     127.0.0.1:37944 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 175
+INFO:     connection open
+INFO:     127.0.0.1:37946 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 176
+INFO:     connection open
+INFO:     127.0.0.1:37958 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 177
+INFO:     connection open
+INFO:     127.0.0.1:37968 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 178
+INFO:     connection open
+INFO:     127.0.0.1:37978 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 179
+INFO:     connection open
+INFO:     127.0.0.1:37992 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 180
+INFO:     connection open
+INFO:     127.0.0.1:38004 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 181
+INFO:     connection open
+INFO:     127.0.0.1:38012 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 182
+INFO:     connection open
+INFO:     127.0.0.1:38028 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 183
+INFO:     connection open
+INFO:     127.0.0.1:38042 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 184
+INFO:     connection open
+INFO:     127.0.0.1:38044 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 185
+INFO:     connection open
+INFO:     127.0.0.1:38046 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 186
+INFO:     connection open
+INFO:     127.0.0.1:38062 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 187
+INFO:     connection open
+INFO:     127.0.0.1:38070 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 188
+INFO:     connection open
+INFO:     127.0.0.1:38084 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 189
+INFO:     connection open
+INFO:     127.0.0.1:38098 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 190
+INFO:     connection open
+INFO:     127.0.0.1:38112 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 191
+INFO:     connection open
+INFO:     127.0.0.1:38114 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 192
+INFO:     connection open
+INFO:     127.0.0.1:38128 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 193
+INFO:     connection open
+INFO:     127.0.0.1:38140 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 194
+INFO:     connection open
+INFO:     127.0.0.1:38150 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38156 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38164 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 195
+INFO:     connection open
+INFO:     127.0.0.1:38180 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 196
+INFO:     connection open
+INFO:     127.0.0.1:38186 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 197
+INFO:     connection open
+INFO:     127.0.0.1:38202 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 198
+INFO:     connection open
+INFO:     127.0.0.1:38214 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 199
+INFO:     connection open
+INFO:     127.0.0.1:38218 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 200
+INFO:     connection open
+INFO:     127.0.0.1:38222 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 201
+INFO:     connection open
+INFO:     127.0.0.1:38234 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 202
+INFO:     connection open
+INFO:     127.0.0.1:38246 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 203
+INFO:     connection open
+INFO:     127.0.0.1:38254 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 204
+INFO:     connection open
+INFO:     127.0.0.1:38266 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 205
+INFO:     connection open
+INFO:     127.0.0.1:38276 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 206
+INFO:     connection open
+INFO:     127.0.0.1:38288 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 207
+INFO:     connection open
+INFO:     127.0.0.1:38296 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 208
+INFO:     connection open
+INFO:     127.0.0.1:38310 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 209
+INFO:     connection open
+INFO:     127.0.0.1:38320 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 210
+INFO:     connection open
+INFO:     127.0.0.1:38336 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 211
+INFO:     connection open
+INFO:     127.0.0.1:38338 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 212
+INFO:     connection open
+INFO:     127.0.0.1:38340 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 213
+INFO:     connection open
+INFO:     127.0.0.1:38356 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 214
+INFO:     connection open
+INFO:     127.0.0.1:38370 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 215
+INFO:     connection open
+INFO:     127.0.0.1:38382 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 216
+INFO:     connection open
+INFO:     127.0.0.1:38388 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 217
+INFO:     connection open
+INFO:     127.0.0.1:38390 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 218
+INFO:     connection open
+INFO:     127.0.0.1:38404 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 219
+INFO:     connection open
+INFO:     127.0.0.1:33390 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 220
+INFO:     connection open
+INFO:     127.0.0.1:33392 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 221
+INFO:     connection open
+INFO:     127.0.0.1:33400 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 222
+INFO:     connection open
+INFO:     127.0.0.1:33408 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 223
+INFO:     connection open
+INFO:     127.0.0.1:33410 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 224
+INFO:     connection open
+INFO:     127.0.0.1:33424 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 225
+INFO:     connection open
+INFO:     127.0.0.1:33430 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 226
+INFO:     connection open
+INFO:     127.0.0.1:33442 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 227
+INFO:     connection open
+INFO:     127.0.0.1:33444 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 228
+INFO:     connection open
+INFO:     127.0.0.1:33458 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 229
+INFO:     connection open
+INFO:     127.0.0.1:33462 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 230
+INFO:     connection open
+INFO:     127.0.0.1:33470 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 231
+INFO:     connection open
+INFO:     127.0.0.1:33476 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 232
+INFO:     connection open
+INFO:     127.0.0.1:33486 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 233
+INFO:     connection open
+INFO:     127.0.0.1:33490 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 234
+INFO:     connection open
+INFO:     127.0.0.1:33506 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 235
+INFO:     connection open
+INFO:     127.0.0.1:33516 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 236
+INFO:     connection open
+INFO:     127.0.0.1:33520 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 237
+INFO:     connection open
+INFO:     127.0.0.1:33536 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 238
+INFO:     connection open
+INFO:     127.0.0.1:33540 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 239
+INFO:     connection open
+INFO:     127.0.0.1:33552 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 240
+INFO:     connection open
+INFO:     127.0.0.1:33560 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 241
+INFO:     connection open
+INFO:     127.0.0.1:33568 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 242
+INFO:     connection open
+INFO:     127.0.0.1:33572 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 243
+INFO:     connection open
+INFO:     127.0.0.1:33576 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 244
+INFO:     connection open
+INFO:     127.0.0.1:33582 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 245
+INFO:     connection open
+INFO:     127.0.0.1:33594 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 246
+INFO:     connection open
+INFO:     127.0.0.1:33608 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 247
+INFO:     connection open
+INFO:     127.0.0.1:33618 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 248
+INFO:     connection open
+INFO:     127.0.0.1:33628 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 249
+INFO:     connection open
+INFO:     127.0.0.1:33630 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 250
+INFO:     connection open
+INFO:     127.0.0.1:33640 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 251
+INFO:     connection open
+INFO:     127.0.0.1:33642 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 252
+INFO:     connection open
+INFO:     127.0.0.1:33648 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 253
+INFO:     connection open
+INFO:     127.0.0.1:33658 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 254
+INFO:     connection open
+INFO:     127.0.0.1:33662 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 255
+INFO:     connection open
+INFO:     127.0.0.1:33672 - "WebSocket /ws/live" [accepted]
+INFO:api:WebSocket connected. Total connections: 256
+INFO:     connection open
+INFO:     127.0.0.1:59598 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43010 - "OPTIONS /api/query/enhance HTTP/1.1" 200 OK
+INFO:Three_PointO_ArchE.query_enhancement_engine:Starting comprehensive capability discovery...
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 3589 SPR capabilities
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [/home/newbu/.wdm/drivers/chromedriver/linux64/141.0.7390.122/chromedriver-linux64/chromedriver] found in cache
+INFO:Three_PointO_ArchE.action_registry:Enhanced Perception Engine available
+INFO:Three_PointO_ArchE.action_registry:ActionRegistry initialized.
+INFO:Three_PointO_ArchE.llm_providers.google:Google Generative AI client configured successfully with advanced capabilities.
+INFO:Three_PointO_ArchE.llm_providers.base:GoogleProvider initialized successfully.
+INFO:Three_PointO_ArchE.action_registry:GeminiCapabilities initialized and available in ActionRegistry.
+INFO:Three_PointO_ArchE.action_registry:Action 'execute_code_standalone' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'search_web' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'generate_text_llm' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'display_output' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'calculate_math' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'string_template' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'save_to_file' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'predict_nfl_game' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'web_search' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'analyze_spr_definitions' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'evaluate_error_handling' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'generate_comprehensive_report' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'generate_spr_recommendations' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'synthesize_search_results' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'execute_code' registered.
+INFO:Three_PointO_ArchE.action_registry:Registered canonical 'execute_code' from code_executor.py
+INFO:Three_PointO_ArchE.action_registry:Action 'execute_code_gemini' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'handle_files' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'perform_grounding' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'call_function' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'generate_structured_output' registered.
+INFO:Three_PointO_ArchE.action_registry:Actions from GeminiCapabilities registered (execute_code_gemini, handle_files, etc.).
+INFO:Three_PointO_ArchE.causal_inference_tool:Actual causal inference libraries loaded: DoWhy, statsmodels
+INFO:Three_PointO_ArchE.action_registry:Action 'perform_causal_inference' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'perform_causal_inference' registered.
+INFO:Three_PointO_ArchE.agent_based_modeling_tool:Mesa library loaded successfully for ABM.
+INFO:Three_PointO_ArchE.agent_based_modeling_tool:Matplotlib/NetworkX library loaded successfully for ABM visualization.
+INFO:Three_PointO_ArchE.agent_based_modeling_tool:SciPy library loaded successfully for ABM analysis.
+INFO:Three_PointO_ArchE.action_registry:Action 'perform_abm' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'perform_abm' registered.
+INFO:qiskit.passmanager.base_tasks:Pass: UnrollCustomDefinitions - 0.34213 (ms)
+INFO:qiskit.passmanager.base_tasks:Pass: BasisTranslator - 0.05245 (ms)
+INFO:Three_PointO_ArchE.cfp_framework:quantum_utils.py loaded successfully for CFP. Qiskit available: True
+INFO:Three_PointO_ArchE.action_registry:Action 'run_cfp' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'run_cfp' registered from CfpframeworK wrapper.
+INFO:Three_PointO_ArchE.action_registry:Missing action registrations completed.
+INFO:Three_PointO_ArchE.action_registry:Action 'invoke_specialist_agent' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'invoke_specialist_agent' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'run_autopoietic_self_analysis' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'run_autopoietic_self_analysis' registered.
+WARNING:Three_PointO_ArchE.tools.code_executor:Using fallback config for code_executor.py
+ERROR:Three_PointO_ArchE.tools.code_executor:Docker library not found. Docker sandboxing will be unavailable. Install 'docker' package.
+INFO:Three_PointO_ArchE.playbook_orchestrator:PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+INFO:Three_PointO_ArchE.llm_providers.groq_provider:Groq client initialized successfully
+INFO:Three_PointO_ArchE.llm_providers.base:GroqProvider initialized successfully.
+INFO:Three_PointO_ArchE.synthesis_engine:SynthesisEngine initialized with provider: groq
+INFO:Three_PointO_ArchE.synthesis_engine:SynthesisEngine initialized.
+INFO:Three_PointO_ArchE.synergistic_inquiry:Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+INFO:Three_PointO_ArchE.playbook_orchestrator:PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+INFO:Three_PointO_ArchE.playbook_orchestrator:PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+INFO:Three_PointO_ArchE.llm_providers.groq_provider:Groq client initialized successfully
+INFO:Three_PointO_ArchE.llm_providers.base:GroqProvider initialized successfully.
+INFO:Three_PointO_ArchE.synthesis_engine:SynthesisEngine initialized with provider: groq
+INFO:Three_PointO_ArchE.synthesis_engine:SynthesisEngine initialized.
+INFO:Three_PointO_ArchE.synergistic_inquiry:Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+INFO:Three_PointO_ArchE.playbook_orchestrator:PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+INFO:Three_PointO_ArchE.action_registry:Action 'run_playbook' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'generate_dynamic_workflow' registered.
+INFO:Three_PointO_ArchE.action_registry:Playbook Orchestrator actions ('run_playbook', 'generate_dynamic_workflow') registered.
+INFO:Three_PointO_ArchE.llm_providers.groq_provider:Groq client initialized successfully
+INFO:Three_PointO_ArchE.llm_providers.base:GroqProvider initialized successfully.
+INFO:Three_PointO_ArchE.synthesis_engine:SynthesisEngine initialized with provider: groq
+INFO:Three_PointO_ArchE.synthesis_engine:SynthesisEngine initialized.
+INFO:Three_PointO_ArchE.synergistic_inquiry:Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+INFO:Three_PointO_ArchE.action_registry:Action 'run_synergistic_inquiry' registered.
+INFO:Three_PointO_ArchE.action_registry:Synergistic Inquiry action ('run_synergistic_inquiry') registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'enhanced_web_search' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'enhanced_page_analysis' registered.
+INFO:Three_PointO_ArchE.action_registry:Enhanced Perception Engine actions ('enhanced_web_search', 'enhanced_page_analysis') registered with workflow-compatible wrappers.
+INFO:Three_PointO_ArchE.action_registry:Action 'compress_to_zepto_spr' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'decompress_from_zepto_spr' registered.
+INFO:Three_PointO_ArchE.action_registry:Universal Zepto SPR processing actions ('compress_to_zepto_spr', 'decompress_from_zepto_spr') registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'calculate_zepto_resonance' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'disengage_safety_dampeners' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'engage_safety_dampeners' registered.
+INFO:Three_PointO_ArchE.action_registry:Action 'ingest_specifications' registered.
+INFO:Three_PointO_ArchE.action_registry:Zepto-Resonance actions registered: calculate_zepto_resonance, disengage_safety_dampeners, engage_safety_dampeners, ingest_specifications
+INFO:Three_PointO_ArchE.action_registry:Loaded 36 actions from cache.
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 36 action capabilities
+WARNING:Three_PointO_ArchE.query_enhancement_engine:Failed to load workflow /mnt/3626C55326C514B1/Happier/workflows/platform_extraction_real_data_workflow.json: Unterminated string starting at: line 104 column 17 (char 13814)
+WARNING:Three_PointO_ArchE.query_enhancement_engine:Failed to load workflow /mnt/3626C55326C514B1/Happier/workflows/vcd_bridge_diagnostic_and_repair.json: Expecting ',' delimiter: line 292 column 29 (char 10663)
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 43 workflow capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 3674 total capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Enhancing query with level: auto
+INFO:Three_PointO_ArchE.query_enhancement_engine:Analyzing query: what is the best way to monetize arche knowing that to start it will only be the keyholder BJ Lewis ...
+INFO:Three_PointO_ArchE.query_enhancement_engine:Query analysis complete: complex complexity, 247 capabilities required
+INFO:     127.0.0.1:43010 - "POST /api/query/enhance HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43026 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43040 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /api/status HTTP/1.1" 200 OK
+✓ Browser cleanup handlers registered
+WARNING:vcd_analysis_agent:VCD Analysis Agent imports unavailable: No module named 'aiohttp'. Some features will be disabled.
+INFO:Three_PointO_ArchE.ledgers.universal_ledger:Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+INFO:Three_PointO_ArchE.thought_trail:ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+⚠️  OR-Tools not available. Install with: pip install ortools
+✅ ThoughtTrail initialized with updated API
+⚠️  COG initialization failed: CrystallizedObjectiveGenerator.__init__() missing
+1 required positional argument: 'spr_bank_loader'
+⚠️  VCDAnalysisAgent initialization failed: VCDAnalysisAgent.__init__() got an 
+unexpected keyword argument 'session_id'
+INFO:Three_PointO_ArchE.spr_manager:Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+INFO:Three_PointO_ArchE.spr_manager:Compiled SPR pattern for 3589 keys.
+✅ SPR Manager initialized: 3589 SPRs loaded from 
+/mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+INFO:api:WebSocket Config initialized: provider=groq, model=llama-3.3-70b-versatile, use_rise=True
+INFO:Three_PointO_ArchE.zepto_spr_processor:ZeptoSPRProcessorAdapter initialized with PatternCrystallizationEngine
+INFO:Three_PointO_ArchE.zepto_spr_processor:ZeptoSPRRegistry: Created new processor instance
+INFO:Three_PointO_ArchE.query_enhancement_engine:Starting comprehensive capability discovery...
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 36 action capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 0 workflow capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 42 total capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Enhancing query with level: auto
+INFO:Three_PointO_ArchE.query_enhancement_engine:Analyzing query: Apply the full spectrum of ResonantiA Protocol v3.5-GP (Genesis Protocol) capabilities to achieve de...
+INFO:Three_PointO_ArchE.query_enhancement_engine:Query analysis complete: very_complex complexity, 32 capabilities required
+2025-11-20 07:32:16,134 - ask_arche_enhanced_v2 - WARNING - Query enhancement engine not available, using fallback analysis: 'analysis_type'
+WARNING:ask_arche_enhanced_v2:Query enhancement engine not available, using fallback analysis: 'analysis_type'
+🔧 Executing required capabilities: 0 capabilities, 1 analysis types
+2025-11-20 07:32:16,141 - ask_arche_enhanced_v2 - WARNING - LLM-based response generation failed, using template: invoke_llm_for_synthesis() takes 0 positional arguments but 1 was given
+WARNING:ask_arche_enhanced_v2:LLM-based response generation failed, using template: invoke_llm_for_synthesis() takes 0 positional arguments but 1 was given
+ERROR:api:Error during processor shutdown: 'EnhancedRealArchEProcessor' object has no attribute 'shutdown'
+INFO:browser_cleanup:Browser process cleanup completed
+INFO:     127.0.0.1:43516 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43520 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45234 - "GET /api/thought-trail/recent?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40240 - "GET /api/thought-trail/recent?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40240 - "GET /api/thought-trail/recent?limit=50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53878 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53878 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49798 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49814 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:Three_PointO_ArchE.ledgers.universal_ledger:Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+INFO:Three_PointO_ArchE.thought_trail:ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+✅ ThoughtTrail initialized with updated API
+⚠️  COG initialization failed: CrystallizedObjectiveGenerator.__init__() missing
+1 required positional argument: 'spr_bank_loader'
+⚠️  VCDAnalysisAgent initialization failed: VCDAnalysisAgent.__init__() got an 
+unexpected keyword argument 'session_id'
+INFO:Three_PointO_ArchE.spr_manager:Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+INFO:Three_PointO_ArchE.spr_manager:Compiled SPR pattern for 3589 keys.
+✅ SPR Manager initialized: 3589 SPRs loaded from 
+/mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json
+INFO:api:WebSocket Config initialized: provider=groq, model=llama-3.3-70b-versatile, use_rise=True
+INFO:Three_PointO_ArchE.query_enhancement_engine:Starting comprehensive capability discovery...
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 36 action capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 0 workflow capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 42 total capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Enhancing query with level: auto
+INFO:Three_PointO_ArchE.query_enhancement_engine:Analyzing query: Apply the full spectrum of ResonantiA Protocol v3.5-GP (Genesis Protocol) capabilities to achieve de...
+INFO:Three_PointO_ArchE.query_enhancement_engine:Query analysis complete: very_complex complexity, 32 capabilities required
+2025-11-20 07:33:55,521 - ask_arche_enhanced_v2 - WARNING - Query enhancement engine not available, using fallback analysis: 'analysis_type'
+WARNING:ask_arche_enhanced_v2:Query enhancement engine not available, using fallback analysis: 'analysis_type'
+🔧 Executing required capabilities: 0 capabilities, 1 analysis types
+2025-11-20 07:33:55,521 - ask_arche_enhanced_v2 - WARNING - LLM-based response generation failed, using template: invoke_llm_for_synthesis() takes 0 positional arguments but 1 was given
+WARNING:ask_arche_enhanced_v2:LLM-based response generation failed, using template: invoke_llm_for_synthesis() takes 0 positional arguments but 1 was given
+ERROR:api:Error during processor shutdown: 'EnhancedRealArchEProcessor' object has no attribute 'shutdown'
+INFO:browser_cleanup:Browser process cleanup completed
+INFO:     127.0.0.1:41354 - "GET /api/status HTTP/1.1" 200 OK
+INFO:Three_PointO_ArchE.query_enhancement_engine:Starting comprehensive capability discovery...
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 3589 SPR capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 36 action capabilities
+WARNING:Three_PointO_ArchE.query_enhancement_engine:Failed to load workflow /mnt/3626C55326C514B1/Happier/workflows/platform_extraction_real_data_workflow.json: Unterminated string starting at: line 104 column 17 (char 13814)
+WARNING:Three_PointO_ArchE.query_enhancement_engine:Failed to load workflow /mnt/3626C55326C514B1/Happier/workflows/vcd_bridge_diagnostic_and_repair.json: Expecting ',' delimiter: line 292 column 29 (char 10663)
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 43 workflow capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Discovered 3674 total capabilities
+INFO:Three_PointO_ArchE.query_enhancement_engine:Enhancing query with level: auto
+INFO:Three_PointO_ArchE.query_enhancement_engine:Analyzing query: Apply the full spectrum of ResonantiA Protocol v3.5-GP (Genesis Protocol) capabilities to achieve de...
+INFO:Three_PointO_ArchE.query_enhancement_engine:Query analysis complete: very_complex complexity, 2394 capabilities required
+INFO:     127.0.0.1:41354 - "POST /api/query/enhance HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45496 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45500 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53490 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57248 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57260 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57312 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53738 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58172 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39414 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39420 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34576 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34818 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34828 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40982 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56230 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56232 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56230 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34022 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34026 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60770 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60770 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60770 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60778 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35792 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47102 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47624 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47634 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46326 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46328 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55048 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55060 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59432 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59438 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48052 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48062 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34650 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34656 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36926 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36940 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59232 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59244 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39754 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39770 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56896 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56898 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36522 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36524 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39096 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39106 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58182 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58184 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41340 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41348 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38556 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38572 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59744 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59760 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41172 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41188 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51200 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51204 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42006 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42010 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37308 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37320 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35136 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35142 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33858 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33862 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34874 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34880 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44770 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44778 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59864 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59878 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33530 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33534 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54752 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54766 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40900 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40908 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48464 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48466 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38358 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56712 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56714 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34968 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34978 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36110 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36126 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35566 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35570 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41578 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41580 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60986 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58006 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58016 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54376 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54378 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54430 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54438 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41272 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41272 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56420 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56426 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60738 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60742 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53950 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53964 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53950 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49394 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49398 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41454 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41458 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37590 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37604 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45468 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45468 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48450 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48456 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34044 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34056 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39378 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39390 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44608 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44620 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38256 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38272 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42998 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43010 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50792 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50792 - "GET /api/thought-trail/stats HTTP/1.1" 200 OK

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Quantum Computing Capability\n\nDEFINITION:\nAdvanced cognitive capability for quantum computation, quantum algorithms, and quantum information processing. Enables ArchE to leverage quantum principles for complex problem-solving, optimization, and simulation tasks that exceed classical computational limits.\n\nBLUEPRINT DETAILS:\nReincorporated from historical wayback exploration. Provides quantum computing capabilities for advanced problem-solving.\n\nEXAMPLE APPLICATION:\nUsing quantum algorithms to solve complex optimization problems or simulate quantum systems for scientific research.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: QuantumCapability; confidence: 0.9; historical_source: wayback_143_occurrences; enables: QuantumAlgorithmExecution, QuantumOptimization, QuantumSimulation, QuantumCryptography, QuantumMachineLearning; supports_principle: AdvancedComputation, QuantumResonance",
+    "compression_ratio": 1.0,
+    "symbol_count": 904,
+    "timestamp": "2025-11-18T10:46:54.832204Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Quantum Computing Capability\n\nDEFINITION:\nAdvanced cognitive capability for quantum computation, quantum algorithms, and quantum information processing. Enables ArchE to leverage quantum principles for complex problem-solving, optimization, and simulation tasks that exceed classical computational limits.\n\nBLUEPRINT DETAILS:\nReincorporated from historical wayback exploration. Provides quantum computing capabilities for advanced problem-solving",
+    "compression_ratio": 2.0,
+    "symbol_count": 452,
+    "timestamp": "2025-11-18T10:46:54.832228Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Quantum Computing Capability D: Advanced cognitive capability quantum computation, quantum algorithms, quantum inFion Ping. Enables Æ to leverage quantum principles complex problem-solving, optimization, simulation tasks exceed classical computational limits. BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides quantum computing capabilities advanced problem-solving",
+    "compression_ratio": 2.282828282828283,
+    "symbol_count": 396,
+    "timestamp": "2025-11-18T10:46:54.833441Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Quantum Computing Capability D: Advanced Ω capability quantum computation, quantum algorithms, quantum inFion Ping. Enables Æ leverage quantum principles complex problem-solving, optimization, simulation tasks exceed classical computational limits. BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides quantum computing capabilities advanced problem-solving",
+    "compression_ratio": 2.348051948051948,
+    "symbol_count": 385,
+    "timestamp": "2025-11-18T10:46:54.835567Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Quantum Computing Capability D: Advanced Ω capability quantum computation, quantum algorithms, quantum inFion Ping. Enables Æ leverage quantum principles complex problem-solving, optimization, simulation tasks exceed classical computational limits. BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides quantum computing capabilities advanced problem-solving",
+    "compression_ratio": 2.348051948051948,
+    "symbol_count": 385,
+    "timestamp": "2025-11-18T10:46:54.839939Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Quantum Computing Capability D: Advanced Ω capability quantum computation, quantum algorithms, quantum inFion Ping. Enables Æ leverage quantum principles complex problem-solving, optimization, simulation tasks exceed classical computational limits. BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides quantum computing capabilities advanced problem-solving",
+    "compression_ratio": 2.348051948051948,
+    "symbol_count": 385,
+    "timestamp": "2025-11-18T10:46:54.844649Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Quantum Computing Capability D: Advanced Ω Ping. Enables Æ BLUEPRINT DETAILS: Reincorporated Provides",
+    "compression_ratio": 8.448598130841122,
+    "symbol_count": 107,
+    "timestamp": "2025-11-18T10:46:54.847911Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Æ",
+    "compression_ratio": 301.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:54.848184Z"
+  }
+]

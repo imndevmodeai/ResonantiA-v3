@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Neural Network Framework\n\nDEFINITION:\nNeural Network Framework: a set of tools and techniques for building and training neural networks to support complex cognitive tasks\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Neural Network Framework'\n\nEXAMPLE APPLICATION:\nr of your chosen option.\n\nNote: The next step will involve using the Cognitive Architecture to support a specific application. Please be prepared to provide the necessary input and guidance to ensure the successful completion of the task.\n\nAdditionally, I would like to introduce a new concept: the \"Neural Network Framework\". The Neural Network Framework is a set of tools and techniques for building and training neural networks to support complex cognitive tasks.\n\nWould you like to learn more abo\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1153,
+    "timestamp": "2025-11-18T10:47:26.724999Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Neural Network Framework\n\nDEFINITION:\nNeural Network Framework: a set of tools and techniques for building and training neural networks to support complex cognitive tasks\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Neural Network Framework'\n\nEXAMPLE APPLICATION:\nr of your chosen option.\n\nNote: The next step will involve using the Cognitive Architecture to support a specific application. Please be prepared to provide the necessary input and guidance to ensure the successful completion of the task.\n\nAdditiona",
+    "compression_ratio": 2.001736111111111,
+    "symbol_count": 576,
+    "timestamp": "2025-11-18T10:47:26.725027Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Neural Network Framework D: Neural Network Framework: a set of tools techniques building training neural networks to support complex cognitive tasks BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Neural Network Framework' EXAMPLE APPLICATION: r of your chosen option. Note: next step will involve using Cognitive Architecture to support a specific application. Please be prepared to provide necessary input guidance to ensure successful completion of task. Additiona",
+    "compression_ratio": 2.230174081237911,
+    "symbol_count": 517,
+    "timestamp": "2025-11-18T10:47:26.735788Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Neural Network Framework D: Neural Network Framework: tools techniques building training neural networks support complex Ω tasks BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neural Network Framework' EXAMPLE APPLICATION: chosen option. Note: involve using Ω Architecture support specific application. Please prepared provide necessary input guidance ensure successful completion task. Additiona",
+    "compression_ratio": 2.5968468468468466,
+    "symbol_count": 444,
+    "timestamp": "2025-11-18T10:47:26.748247Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Neural Network Framework D: Neural Network Framework: tools techniques building training neural networks support complex Ω tasks BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neural Network Framework' EXAMPLE APPLICATION: chosen option. Note: involve using Ω Architecture support specific application. Please prepared provide necessary input guidance ensure successful completion task. Additiona",
+    "compression_ratio": 2.5968468468468466,
+    "symbol_count": 444,
+    "timestamp": "2025-11-18T10:47:26.752593Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Neural Network Framework D: Neural Network Framework: tools techniques building training neural networks support complex Ω tasks BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neural Network Framework' EXAMPLE APPLICATION: chosen option. Note: involve using Ω Architecture support specific application. Please prepared provide necessary input guidance ensure successful completion task. Additiona",
+    "compression_ratio": 2.5968468468468466,
+    "symbol_count": 444,
+    "timestamp": "2025-11-18T10:47:26.757170Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Neural Network Framework D: Neural Network Framework: Ω BLUEPRINT DETAILS: Θ Node Original Θ Network Framework' EXAMPLE APPLICATION: Note: Ω Architecture Please Additiona",
+    "compression_ratio": 6.551136363636363,
+    "symbol_count": 176,
+    "timestamp": "2025-11-18T10:47:26.760564Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Θ|Θ|Ω",
+    "compression_ratio": 164.71428571428572,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:26.760932Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: LLM Validation Framework\n\nDEFINITION:\nComprehensive validation framework for LLM outputs in repository mining tasks. Implements PRIMES Stage 4 methodology for detecting hallucinations, ensuring consistent formatting, tracking provenance, and automating validation.\n\nBLUEPRINT DETAILS:\nImplements PRIMES validation methodology for ensuring LLM output reliability.\n\nEXAMPLE APPLICATION:\nValidating ArchE LLM outputs for repository mining tasks with systematic quality assurance.\n\nCATEGORY: QualityAssurance\n\nRELATIONSHIPS:\ntype: ValidationFramework; confidence: 0.92; source: PRIMES Stage 4; enables: HallucinationDetection, FormatConsistency, ProvenanceTracking, AutomatedValidation, OutputReliability; supports_principle: OutputValidation, ReliabilityAssurance",
+    "compression_ratio": 1.0,
+    "symbol_count": 766,
+    "timestamp": "2025-11-18T10:46:50.905778Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: LLM Validation Framework\n\nDEFINITION:\nComprehensive validation framework for LLM outputs in repository mining tasks. Implements PRIMES Stage 4 methodology for detecting hallucinations, ensuring consistent formatting, tracking provenance, and automating validation.\n\nBLUEPRINT DETAILS:\nImplements PRIMES validation methodology for ensuring LLM output reliability.\n\nEXAMPLE APPLI",
+    "compression_ratio": 2.0,
+    "symbol_count": 383,
+    "timestamp": "2025-11-18T10:46:50.905806Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: LLM Validation Framework D: Comprehensive validation framework LLM outputs in repository mining tasks. Implements PRIMES Stage 4 methodology detecting hallucinations, ensuring consistent Fting, tracking provenance, automating validation. BLUEPRINT DETAILS: Implements PRIMES validation methodology ensuring LLM output reliability. EXAMPLE APPLI",
+    "compression_ratio": 2.1885714285714286,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T10:46:50.906530Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: LLM Validation Framework D: Comprehensive validation framework LLM outputs repository mining tasks. Implements PRIMES Stage methodology detecting hallucinations, ensuring consistent Fting, tracking provenance, automating validation. BLUEPRINT DETAILS: Implements PRIMES validation methodology ensuring LLM output reliability. EXAMPLE APPLI",
+    "compression_ratio": 2.2202898550724637,
+    "symbol_count": 345,
+    "timestamp": "2025-11-18T10:46:50.908271Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: LLM Validation Framework D: Comprehensive validation framework LLM outputs repository mining tasks. Implements PRIMES Stage methodology detecting hallucinations, ensuring consistent Fting, tracking provenance, automating validation. BLUEPRINT DETAILS: Implements PRIMES validation methodology ensuring LLM output reliability. EXAMPLE APPLI",
+    "compression_ratio": 2.2202898550724637,
+    "symbol_count": 345,
+    "timestamp": "2025-11-18T10:46:50.915009Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: LLM Validation Framework D: Comprehensive validation framework LLM outputs repository mining tasks. Implements PRIMES Stage methodology detecting hallucinations, ensuring consistent Fting, tracking provenance, automating validation. BLUEPRINT DETAILS: Implements PRIMES validation methodology ensuring LLM output reliability. EXAMPLE APPLI",
+    "compression_ratio": 2.2202898550724637,
+    "symbol_count": 345,
+    "timestamp": "2025-11-18T10:46:50.920417Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: LLM Validation Framework D: Comprehensive LLM Implements PRIMES Stage Fting, BLUEPRINT DETAILS: Implements PRIMES LLM EXAMPLE APPLI",
+    "compression_ratio": 5.591240875912408,
+    "symbol_count": 137,
+    "timestamp": "2025-11-18T10:46:50.927912Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 255.33333333333334,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:50.928213Z"
+  }
+]

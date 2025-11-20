@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Fused Strategic Dossier\n\nDEFINITION:\nThe comprehensive strategic document produced by Strategy Fusion (Phase B) that integrates analytical rigor, creative innovation, and specialist wisdom into a unified strategic plan. The dossier contains executive summary, analytical foundations, creative breakthroughs, specialist recommendations, integrated strategy, actionable steps, risk assessment, and success metrics. It is the primary input to High-Stakes Vetting (Phase C) and represents the system's best strategic thinking before adversarial validation.\n\nBLUEPRINT DETAILS:\nTypically 12K-15K tokens in length. Contains synthesis of three parallel pathway analyses.\n\nEXAMPLE APPLICATION:\nA Fused Strategic Dossier for market entry might show: Analytical foundation (TAM $2B, CAGR 15%, 3 major competitors), Creative innovation (freemium-to-enterprise funnel), Specialist wisdom (regulatory approval timeline 18 months), Integrated strategy (phase regulatory while building freemium base), with specific quarterly milestones.\n\nCATEGORY: StrategicArtifact\n\nRELATIONSHIPS:\ntype: StrategicDocument; produced_by: StrategyFusioN; input_to: HighStakesVettinG; comprises: ExecutiveSummarY, AnalyticalFoundatioN, CreativeInnovatioN, SpecialistRecommendatioN, IntegratedStrategY, ActionableStepS, RiskAssessmenT, SuccessMetricS; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1339,
+    "timestamp": "2025-11-18T10:46:47.813312Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Fused Strategic Dossier\n\nDEFINITION:\nThe comprehensive strategic document produced by Strategy Fusion (Phase B) that integrates analytical rigor, creative innovation, and specialist wisdom into a unified strategic plan. The dossier contains executive summary, analytical foundations, creative breakthroughs, specialist recommendations, integrated strategy, actionable steps, risk assessment, and success metrics. It is the primary input to High-Stakes Vetting (Phase C) and represents the system's best strategic thinking before adversarial validation.\n\nBLUEPRINT DETAILS:\nTypically 12K-15K tokens in length. Contains synthesis of three parallel pathway analyses.",
+    "compression_ratio": 2.001494768310912,
+    "symbol_count": 669,
+    "timestamp": "2025-11-18T10:46:47.813334Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Fused Strategic Dossier D: comprehensive strategic document produced by Strategy Fusion (Phase B) integrates analytical rigor, creative innovation, specialist wisdom into a unified strategic plan. dossier contains executive summary, analytical foundations, creative breakthroughs, specialist recommendations, integrated strategy, actionable steps, risk assessment, success metrics. It is primary input to High-Stakes Vetting (Phase C) represents S's best strategic thinking before adversarial validation. BLUEPRINT DETAILS: Typically 12K-15K tokens in length. Contains synthesis of three parallel pathway analyses.",
+    "compression_ratio": 2.1596774193548387,
+    "symbol_count": 620,
+    "timestamp": "2025-11-18T10:46:47.814328Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Fused Strategic Dossier D: comprehensive strategic document produced Strategy Fusion (Phase B) integrates analytical rigor, creative innovation, specialist wisdom unified strategic plan. dossier contains executive summary, analytical foundations, creative breakthroughs, specialist recommendations, integrated strategy, actionable steps, assessment, success metrics. It primary input High-Stakes Vetting (Phase C) represents S's strategic thinking before adversarial validation. BLUEPRINT DETAILS: Typically 12K-15K tokens length. Contains synthesis three parallel pathway analyses.",
+    "compression_ratio": 2.2772108843537415,
+    "symbol_count": 588,
+    "timestamp": "2025-11-18T10:46:47.826803Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Fused Strategic Dossier D: comprehensive strategic document produced Strategy Fusion (Phase B) integrates analytical rigor, creative innovation, specialist wisdom unified strategic plan. dossier contains executive summary, analytical foundations, creative breakthroughs, specialist recommendations, integrated strategy, actionable steps, assessment, success metrics. It primary input High-Stakes Vetting (Phase C) represents S's strategic thinking before adversarial validation. BLUEPRINT DETAILS: Typically 12K-15K tokens length. Contains synthesis three parallel pathway analyses.",
+    "compression_ratio": 2.2772108843537415,
+    "symbol_count": 588,
+    "timestamp": "2025-11-18T10:46:47.832804Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Fused Strategic Dossier D: comprehensive strategic document produced Strategy Fusion (Phase B) integrates analytical rigor, creative innovation, specialist wisdom unified strategic plan. dossier contains executive summary, analytical foundations, creative breakthroughs, specialist recommendations, integrated strategy, actionable steps, assessment, success metrics. It primary input High-Stakes Vetting (Phase C) represents S's strategic thinking before adversarial validation. BLUEPRINT DETAILS: Typically 12K-15K tokens length. Contains synthesis three parallel pathway analyses.",
+    "compression_ratio": 2.2772108843537415,
+    "symbol_count": 588,
+    "timestamp": "2025-11-18T10:46:47.837592Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Fused Strategic Dossier D: Strategy Fusion B) It High-Stakes Vetting C) S's BLUEPRINT DETAILS: Typically 12K-15K Contains",
+    "compression_ratio": 10.543307086614174,
+    "symbol_count": 127,
+    "timestamp": "2025-11-18T10:46:47.846170Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "F|S|D|S|F",
+    "compression_ratio": 148.77777777777777,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:47.846469Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Strategic Thinking Framework\n\nDEFINITION:\nHigh-level cognitive capability for strategic planning, long-term thinking, resource optimization, and multi-objective decision making. Integrates temporal reasoning with strategic vision.\n\nBLUEPRINT DETAILS:\nCritical capability for high-level strategic thinking and long-term planning.\n\nEXAMPLE APPLICATION:\nDeveloping a multi-phase evolution strategy for ArchE that balances immediate needs with long-term capabilities.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: StrategicCapability; confidence: 0.92; enables: StrategicPlanning, LongTermThinking, ResourceOptimization, MultiObjectiveDecisionMaking, TemporalStrategicAnalysis; supports_principle: StrategicResonance, TemporalResonance",
+    "compression_ratio": 1.0,
+    "symbol_count": 744,
+    "timestamp": "2025-11-18T10:46:59.677215Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Strategic Thinking Framework\n\nDEFINITION:\nHigh-level cognitive capability for strategic planning, long-term thinking, resource optimization, and multi-objective decision making. Integrates temporal reasoning with strategic vision.\n\nBLUEPRINT DETAILS:\nCritical capability for high-level strategic thinking and long-term planning.\n\nEXAMPLE APPLICATION:\nDeveloping a mu",
+    "compression_ratio": 2.0,
+    "symbol_count": 372,
+    "timestamp": "2025-11-18T10:46:59.677240Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Strategic Thinking Framework D: High-level cognitive capability strategic planning, long-term thinking, resource optimization, multi-objective decision making. Integrates temporal reasoning strategic vision. BLUEPRINT DETAILS: Critical capability high-level strategic thinking long-term planning. EXAMPLE APPLICATION: Developing a mu",
+    "compression_ratio": 2.1946902654867255,
+    "symbol_count": 339,
+    "timestamp": "2025-11-18T10:46:59.677932Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Strategic Thinking Framework D: High-level Ω capability strategic planning, long-term thinking, resource optimization, multi-objective decision making. Integrates Δ reasoning strategic vision. BLUEPRINT DETAILS: Critical capability high-level strategic thinking long-term planning. EXAMPLE APPLICATION: Developing",
+    "compression_ratio": 2.3322884012539187,
+    "symbol_count": 319,
+    "timestamp": "2025-11-18T10:46:59.684466Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Strategic Thinking Framework D: High-level Ω capability strategic planning, long-term thinking, resource optimization, multi-objective decision making. Integrates Δ reasoning strategic vision. BLUEPRINT DETAILS: Critical capability high-level strategic thinking long-term planning. EXAMPLE APPLICATION: Developing",
+    "compression_ratio": 2.3322884012539187,
+    "symbol_count": 319,
+    "timestamp": "2025-11-18T10:46:59.685864Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Strategic Thinking Framework D: High-level Ω capability strategic planning, long-term thinking, resource optimization, multi-objective decision making. Integrates Δ reasoning strategic vision. BLUEPRINT DETAILS: Critical capability high-level strategic thinking long-term planning. EXAMPLE APPLICATION: Developing",
+    "compression_ratio": 2.3322884012539187,
+    "symbol_count": 319,
+    "timestamp": "2025-11-18T10:46:59.695779Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Strategic Thinking Framework D: High-level Ω Integrates Δ BLUEPRINT DETAILS: Critical EXAMPLE APPLICATION: Developing",
+    "compression_ratio": 6.048780487804878,
+    "symbol_count": 123,
+    "timestamp": "2025-11-18T10:46:59.704478Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Δ",
+    "compression_ratio": 248.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:59.704764Z"
+  }
+]

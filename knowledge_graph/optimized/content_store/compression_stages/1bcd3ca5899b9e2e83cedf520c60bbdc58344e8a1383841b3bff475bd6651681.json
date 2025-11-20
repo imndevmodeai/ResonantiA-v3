@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Cognitive Flexibility\n\nDEFINITION:\nCognitive Flexibility: designed to demonstrate cognitive flexibility, enabling it to adapt to new situations and challenges:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cognitive Flexibility'\n\nEXAMPLE APPLICATION:\nedge Representation: Using knowledge representation techniques, such as ontologies and semantic networks, to represent and reason about complex knowledge domains.\n    * Decision-Making: Implementing decision-making algorithms that can handle uncertainty, ambiguity, and conflicting information.\n\n27. Cognitive Flexibility: Mastermind_AI is designed to demonstrate cognitive flexibility, enabling it to adapt to new situations and challenges:\n    * Context-Awareness: Developing context-awareness capa\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1139,
+    "timestamp": "2025-11-18T10:47:30.548945Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Cognitive Flexibility\n\nDEFINITION:\nCognitive Flexibility: designed to demonstrate cognitive flexibility, enabling it to adapt to new situations and challenges:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cognitive Flexibility'\n\nEXAMPLE APPLICATION:\nedge Representation: Using knowledge representation techniques, such as ontologies and semantic networks, to represent and reason about complex knowledge domains.\n    * Decision-Making: Implementing decision-making algorithms that can handle uncertainty, a",
+    "compression_ratio": 2.0017574692442883,
+    "symbol_count": 569,
+    "timestamp": "2025-11-18T10:47:30.548970Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Cognitive Flexibility D: Cognitive Flexibility: designed to demonstrate cognitive flexibility, enabling it to adapt to new situations challenges: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Cognitive Flexibility' EXAMPLE APPLICATION: edge Representation: Using KnOwledge representation techniques, such as ontologies semantic networks, to represent reason about complex KnOwledge domains. * Decision-Making: Implementing decision-making algorithms handle uncertainty, a",
+    "compression_ratio": 2.1778202676864247,
+    "symbol_count": 523,
+    "timestamp": "2025-11-18T10:47:30.554121Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ω Flexibility D: Ω Flexibility: designed to demonstrate Ω flexibility, enabling it to adapt to new situations challenges: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Ω Flexibility' EXAMPLE APPLICATION: edge Representation: Using KnOwledge representation techniques, such as ontologies semantic networks, to represent reason about complex KnOwledge domains. * Decision-Making: Implementing decision-making algorithms handle uncertainty, a",
+    "compression_ratio": 2.319755600814664,
+    "symbol_count": 491,
+    "timestamp": "2025-11-18T10:47:30.565901Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ω Flexibility D: Ω Flexibility: designed demonstrate Ω flexibility, enabling adapt situations challenges: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Flexibility' EXAMPLE APPLICATION: Representation: Using KnOwledge representation techniques, ontologies semantic networks, represent reason about complex KnOwledge domains. Decision-Making: Implementing decision-making algorithms handle uncertainty,",
+    "compression_ratio": 2.519911504424779,
+    "symbol_count": 452,
+    "timestamp": "2025-11-18T10:47:30.567876Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ω Flexibility D: Ω Flexibility: designed demonstrate Ω flexibility, enabling adapt situations challenges: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Ω Flexibility' EXAMPLE APPLICATION: Representation: Using KnOwledge representation techniques, ontologies semantic networks, represent reason about complex KnOwledge domains. Decision-Making: Implementing decision-making algorithms handle uncertainty,",
+    "compression_ratio": 2.519911504424779,
+    "symbol_count": 452,
+    "timestamp": "2025-11-18T10:47:30.575752Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ω Flexibility D: Ω Flexibility: Ω BLUEPRINT DETAILS: Θ Node Original Θ 'Ω Flexibility' EXAMPLE APPLICATION: Representation: Using KnOwledge KnOwledge Decision-Making: Implementing",
+    "compression_ratio": 6.1567567567567565,
+    "symbol_count": 185,
+    "timestamp": "2025-11-18T10:47:30.577676Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Ω|Θ|Θ",
+    "compression_ratio": 126.55555555555556,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:30.580762Z"
+  }
+]

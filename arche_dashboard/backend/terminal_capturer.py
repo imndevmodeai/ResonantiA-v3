@@ -13,7 +13,7 @@ ResonantiA Protocol v3.5-GP
 import sys
 import io
 import asyncio
-from typing import Optional, Callable, Any
+from typing import Optional, Callable, Any, TextIO
 from queue import Queue
 from datetime import datetime
 from rich.console import Console
@@ -117,7 +117,7 @@ class RichConsoleCapturer:
     that forwards output to both the terminal and a queue.
     """
     
-    def __init__(self, output_queue: Optional[Queue] = None, file: Optional[io.TextIO] = None):
+    def __init__(self, output_queue: Optional[Queue] = None, file: Optional[TextIO] = None):
         """
         Initialize the rich console capturer.
         

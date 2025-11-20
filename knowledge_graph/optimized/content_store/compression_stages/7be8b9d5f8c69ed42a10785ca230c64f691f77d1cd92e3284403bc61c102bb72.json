@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Retirement Planning\n\nDEFINITION:\nRetirement Planning: designed to provide advanced financial planning capabilities for retirement to help individuals achieve their retirement goals:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Retirement Planning'\n\nEXAMPLE APPLICATION:\nes presented.\n\nPlease type \"continue\" to proceed with the next section of the blueprint.\n\nContinue\n\n96. AI-Driven Financial Planning for Retirement: Mastermind_AI is designed to provide advanced financial planning capabilities for retirement to help individuals achieve their retirement goals:\n    * Retirement Planning: Developing retirement planning techniques that enable the AI system to provide personalized retirement plans and advice.\n    * Investment Strategy: Implementing investment strateg\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1159,
+    "timestamp": "2025-11-18T10:47:39.614413Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Retirement Planning\n\nDEFINITION:\nRetirement Planning: designed to provide advanced financial planning capabilities for retirement to help individuals achieve their retirement goals:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Retirement Planning'\n\nEXAMPLE APPLICATION:\nes presented.\n\nPlease type \"continue\" to proceed with the next section of the blueprint.\n\nContinue\n\n96. AI-Driven Financial Planning for Retirement: Mastermind_AI is designed to provide advanced financial planning capabilities for retirement to h",
+    "compression_ratio": 2.001727115716753,
+    "symbol_count": 579,
+    "timestamp": "2025-11-18T10:47:39.614436Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Retirement Planning D: Retirement Planning: designed to provide advanced financial planning capabilities retirement to help individuals achieve their retirement goals: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Retirement Planning' EXAMPLE APPLICATION: es presented. Please type \"continue\" to proceed next section of blueprint. Continue 96. AI-Driven Financial Planning Retirement: Mastermind_AI is designed to provide advanced financial planning capabilities retirement to h",
+    "compression_ratio": 2.1867924528301885,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:47:39.620290Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Retirement Planning D: Retirement Planning: designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Retirement Planning' EXAMPLE APPLICATION: presented. Please \"continue\" proceed section blueprint. Continue AI-Driven Financial Planning Retirement: Mastermind_AI designed provide advanced financial planning capabilities retirement",
+    "compression_ratio": 2.404564315352697,
+    "symbol_count": 482,
+    "timestamp": "2025-11-18T10:47:39.630108Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Retirement Planning D: Retirement Planning: designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Retirement Planning' EXAMPLE APPLICATION: presented. Please \"continue\" proceed section blueprint. Continue AI-Driven Financial Planning Retirement: Mastermind_AI designed provide advanced financial planning capabilities retirement",
+    "compression_ratio": 2.404564315352697,
+    "symbol_count": 482,
+    "timestamp": "2025-11-18T10:47:39.638449Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Retirement Planning D: Retirement Planning: designed provide advanced financial planning capabilities retirement individuals achieve their retirement goals: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Retirement Planning' EXAMPLE APPLICATION: presented. Please \"continue\" proceed section blueprint. Continue AI-Driven Financial Planning Retirement: Mastermind_AI designed provide advanced financial planning capabilities retirement",
+    "compression_ratio": 2.404564315352697,
+    "symbol_count": 482,
+    "timestamp": "2025-11-18T10:47:39.650684Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Retirement Planning D: Retirement Planning: BLUEPRINT DETAILS: Θ Node Original Θ Planning' EXAMPLE APPLICATION: Please Continue AI-Driven Financial Planning Retirement: Mastermind_AI",
+    "compression_ratio": 6.164893617021277,
+    "symbol_count": 188,
+    "timestamp": "2025-11-18T10:47:39.659147Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 386.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:39.659517Z"
+  }
+]

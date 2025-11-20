@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Requirements\n\nArchitecture\n\nComponents\n\nTraining\n\nDEFINITION:\nRequirements\n\nArchitecture\n\nComponents\n\nTraining: engineering\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Requirements\n\nArchitecture\n\nComponents\n\nTraining'\n\nEXAMPLE APPLICATION:\nke place of the teams of development software engineering\n\nTo create an AI agent that can take the place of teams of development software engineers, we'll need to design a highly advanced and sophisticated system. Here's a high-level overview of the requirements and architecture for such a system:\n\nRequirements\n\nArchitecture\n\nComponents\n\nTraining and Evaluation\n\nChallenges and Limitations\n\nPlease let me know if you would like me to elaborate on any of these points or if you have any specific que\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1130,
+    "timestamp": "2025-11-18T10:47:40.172734Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Requirements\n\nArchitecture\n\nComponents\n\nTraining\n\nDEFINITION:\nRequirements\n\nArchitecture\n\nComponents\n\nTraining: engineering\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Requirements\n\nArchitecture\n\nComponents\n\nTraining'\n\nEXAMPLE APPLICATION:\nke place of the teams of development software engineering\n\nTo create an AI agent that can take the place of teams of development software engineers, we'll need to design a highly advanced and sophisticated system. Here's a high-level overview of the requirement",
+    "compression_ratio": 2.0,
+    "symbol_count": 565,
+    "timestamp": "2025-11-18T10:47:40.172783Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Requirements Architecture Components Training D: Requirements Architecture Components Training: engineering BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Requirements Architecture Components Training' EXAMPLE APPLICATION: ke place of teams of development software engineering To create an AI agent take place of teams of development software engineers, we'll need to design a highly advanced sophisticated S. Here's a high-level overview of requirement",
+    "compression_ratio": 2.242063492063492,
+    "symbol_count": 504,
+    "timestamp": "2025-11-18T10:47:40.173967Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Requirements Architecture Components Training D: Requirements Architecture Components Training: engineering BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Requirements Architecture Components Training' EXAMPLE APPLICATION: place teams development software engineering To create AI ABM place teams development software engineers, we'll design highly advanced sophisticated S. Here's high-level overview requirement",
+    "compression_ratio": 2.4511930585683297,
+    "symbol_count": 461,
+    "timestamp": "2025-11-18T10:47:40.176497Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Requirements Architecture Components Training D: Requirements Architecture Components Training: engineering BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Requirements Architecture Components Training' EXAMPLE APPLICATION: place teams development software engineering To create AI ABM place teams development software engineers, we'll design highly advanced sophisticated S. Here's high-level overview requirement",
+    "compression_ratio": 2.4511930585683297,
+    "symbol_count": 461,
+    "timestamp": "2025-11-18T10:47:40.179234Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Requirements Architecture Components Training D: Requirements Architecture Components Training: engineering BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Requirements Architecture Components Training' EXAMPLE APPLICATION: place teams development software engineering create AI ABM place teams development software engineers, we'll design highly advanced sophisticated S. Here's high-level overview requirement",
+    "compression_ratio": 2.467248908296943,
+    "symbol_count": 458,
+    "timestamp": "2025-11-18T10:47:40.183940Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Requirements Architecture Components Training D: Requirements Architecture Components Training: BLUEPRINT DETAILS: Θ Node Original Θ Architecture Components Training' EXAMPLE APPLICATION: AI ABM S. Here's",
+    "compression_ratio": 5.380952380952381,
+    "symbol_count": 210,
+    "timestamp": "2025-11-18T10:47:40.186640Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 376.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:40.187012Z"
+  }
+]

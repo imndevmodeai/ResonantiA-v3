@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Human Resources\n\nDEFINITION:\nDriven Human Resources: designed to provide advanced human resources capabilities to improve employee experience and productivity:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Human Resources'\n\nEXAMPLE APPLICATION:\ntem to predict sales trends and customer behavior.\n    * Lead Scoring: Implementing lead scoring techniques that enable the AI system to identify high-quality leads.\n    * Sales Automation: Creating sales automation techniques that enable the AI system to automate sales tasks and workflows.\n\n59. AI-Driven Human Resources: Mastermind_AI is designed to provide advanced human resources capabilities to improve employee experience and productivity:\n    * Talent Acquisition: Developing talent acquisit\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1147,
+    "timestamp": "2025-11-18T10:47:35.057439Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Human Resources\n\nDEFINITION:\nDriven Human Resources: designed to provide advanced human resources capabilities to improve employee experience and productivity:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Human Resources'\n\nEXAMPLE APPLICATION:\ntem to predict sales trends and customer behavior.\n    * Lead Scoring: Implementing lead scoring techniques that enable the AI system to identify high-quality leads.\n    * Sales Automation: Creating sales automation techniques that enable the AI system",
+    "compression_ratio": 2.0017452006980805,
+    "symbol_count": 573,
+    "timestamp": "2025-11-18T10:47:35.057460Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Human Resources D: Driven Human Resources: designed to provide advanced human resources capabilities to improve employee experience productivity: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Human Resources' EXAMPLE APPLICATION: tem to predict sales trends customer behavior. * Lead Scoring: Implementing lead scoring techniques enable AI S to identify high-quality leads. * Sales Automation: Creating sales automation techniques enable AI S",
+    "compression_ratio": 2.2578740157480315,
+    "symbol_count": 508,
+    "timestamp": "2025-11-18T10:47:35.059870Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Human Resources D: Driven Human Resources: designed provide advanced human resources capabilities improve employee experience productivity: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Human Resources' EXAMPLE APPLICATION: predict sales trends customer behavior. Lead Scoring: Implementing scoring techniques enable AI S identify high-quality leads. Sales Automation: Creating sales automation techniques enable AI S",
+    "compression_ratio": 2.3895833333333334,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:35.066049Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Human Resources D: Driven Human Resources: designed provide advanced human resources capabilities improve employee experience productivity: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Human Resources' EXAMPLE APPLICATION: predict sales trends customer behavior. Lead Scoring: Implementing scoring techniques enable AI S identify high-quality leads. Sales Automation: Creating sales automation techniques enable AI S",
+    "compression_ratio": 2.3895833333333334,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:35.069946Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Human Resources D: Driven Human Resources: designed provide advanced human resources capabilities improve employee experience productivity: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Human Resources' EXAMPLE APPLICATION: predict sales trends customer behavior. Lead Scoring: Implementing scoring techniques enable AI S identify high-quality leads. Sales Automation: Creating sales automation techniques enable AI S",
+    "compression_ratio": 2.3895833333333334,
+    "symbol_count": 480,
+    "timestamp": "2025-11-18T10:47:35.074519Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Human Resources D: Driven Human Resources: BLUEPRINT DETAILS: Θ Node Original Θ Human Resources' EXAMPLE APPLICATION: Lead Scoring: Implementing AI S Sales Automation: Creating AI S",
+    "compression_ratio": 5.912371134020619,
+    "symbol_count": 194,
+    "timestamp": "2025-11-18T10:47:35.079225Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 382.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:35.080489Z"
+  }
+]

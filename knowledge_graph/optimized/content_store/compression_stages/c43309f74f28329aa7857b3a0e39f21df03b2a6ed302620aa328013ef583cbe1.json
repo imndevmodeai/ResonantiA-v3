@@ -1,0 +1,51 @@
+[
+  {
+    "stage_name": "Concise",
+    "content": "Structured Output Generator: A cognitive tool that forces the Gemini LLM's output to conform to a specific, predefined JSON ",
+    "compression_ratio": 2.0080645161290325,
+    "symbol_count": 124,
+    "timestamp": "2025-11-17T12:16:15.795360Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "Structured Output Generator: A cognitive tool forces Gemini LLM's output to conform to a specific, predefined JSON",
+    "compression_ratio": 2.1842105263157894,
+    "symbol_count": 114,
+    "timestamp": "2025-11-17T12:16:15.796028Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "Structured Output Generator: A cognitive tool forces Gemini LLM's output to conform to a specific, predefined JSON",
+    "compression_ratio": 2.1842105263157894,
+    "symbol_count": 114,
+    "timestamp": "2025-11-17T12:16:15.796518Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "Structured Output Generator: A cognitive tool forces Gemini LLM's output to conform to a specific, predefined JSON",
+    "compression_ratio": 2.1842105263157894,
+    "symbol_count": 114,
+    "timestamp": "2025-11-17T12:16:15.805385Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "Structured Output Generator: A cognitive tool forces Gemini LLM's output to conform to a specific, predefined JSON",
+    "compression_ratio": 2.1842105263157894,
+    "symbol_count": 114,
+    "timestamp": "2025-11-17T12:16:15.808653Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "Structured Output Generator: A cognitive tool forces Gemini LLM's output to conform to a specific, predefined JSON",
+    "compression_ratio": 2.1842105263157894,
+    "symbol_count": 114,
+    "timestamp": "2025-11-17T12:16:15.809230Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "S|O|G|A|G",
+    "compression_ratio": 27.666666666666668,
+    "symbol_count": 9,
+    "timestamp": "2025-11-17T12:16:15.809443Z"
+  }
+]

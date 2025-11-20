@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Potential Customers\n\nDEFINITION:\nPotential Customers: sound? Type 'yes' to proceed with developing the platform, or type 'no' to explore other options\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Potential Customers'\n\nEXAMPLE APPLICATION:\ncan provide a significant and quick solution to enhance your financial position.\n\nHow does this sound? Type 'yes' to proceed with developing the platform, or type 'no' to explore other options.\n\nwho are potential customers and what real world physical resources will i need to actually produce this\n\nPotential Customers:\n\nThe potential customers for a cloud-based data compression and analytics platform are numerous and diverse. Here are some examples:\n\nReal-World Physical Resources:\n\nTo produce an\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1128,
+    "timestamp": "2025-11-18T10:47:51.423427Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Potential Customers\n\nDEFINITION:\nPotential Customers: sound? Type 'yes' to proceed with developing the platform, or type 'no' to explore other options\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Potential Customers'\n\nEXAMPLE APPLICATION:\ncan provide a significant and quick solution to enhance your financial position.\n\nHow does this sound? Type 'yes' to proceed with developing the platform, or type 'no' to explore other options.\n\nwho are potential customers and what real world physical resources ",
+    "compression_ratio": 2.0,
+    "symbol_count": 564,
+    "timestamp": "2025-11-18T10:47:51.423448Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Potential Customers D: Potential Customers: sound? Type 'yes' to proceed developing platform, or type 'no' to explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Potential Customers' EXAMPLE APPLICATION: provide a significant quick solution to enhance your financial position. How does sound? Type 'yes' to proceed developing platform, or type 'no' to explore other options. who potential customers real world physical resources",
+    "compression_ratio": 2.274193548387097,
+    "symbol_count": 496,
+    "timestamp": "2025-11-18T10:47:51.428538Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Potential Customers D: Potential Customers: sound? Type 'yes' proceed developing platform, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Potential Customers' EXAMPLE APPLICATION: provide significant quick solution enhance financial position. How sound? Type 'yes' proceed developing platform, explore other options. potential customers world physical resources",
+    "compression_ratio": 2.617169373549884,
+    "symbol_count": 431,
+    "timestamp": "2025-11-18T10:47:51.431389Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Potential Customers D: Potential Customers: sound? Type 'yes' proceed developing platform, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Potential Customers' EXAMPLE APPLICATION: provide significant quick solution enhance financial position. How sound? Type 'yes' proceed developing platform, explore other options. potential customers world physical resources",
+    "compression_ratio": 2.617169373549884,
+    "symbol_count": 431,
+    "timestamp": "2025-11-18T10:47:51.433971Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Potential Customers D: Potential Customers: sound? Type 'yes' proceed developing platform, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Potential Customers' EXAMPLE APPLICATION: provide significant quick solution enhance financial position. How sound? Type 'yes' proceed developing platform, explore other options. potential customers world physical resources",
+    "compression_ratio": 2.617169373549884,
+    "symbol_count": 431,
+    "timestamp": "2025-11-18T10:47:51.438642Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Potential Customers D: Potential Customers: Type BLUEPRINT DETAILS: Θ Node Original Θ Customers' EXAMPLE APPLICATION: How Type",
+    "compression_ratio": 8.545454545454545,
+    "symbol_count": 132,
+    "timestamp": "2025-11-18T10:47:51.446684Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 376.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:51.446978Z"
+  }
+]

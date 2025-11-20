@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Deep Reinforcement Learning\n\nDEFINITION:\nDeep Reinforcement Learning: Finally, we can integrate a Transfer Learning module to enable the system to transfer knowledge across different domains and tasks. This will enable the system to learn from one task and apply that knowledge to another task.\n\nConfidence: 0.86\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 172, type: node_format. Original SPR name: 'DRL'\n\nEXAMPLE APPLICATION:\nNode 172: Deep Reinforcement Learning\n\nSPR: 0.860, \"DRL\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 172\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 842,
+    "timestamp": "2025-11-18T10:47:07.864446Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Deep Reinforcement Learning\n\nDEFINITION:\nDeep Reinforcement Learning: Finally, we can integrate a Transfer Learning module to enable the system to transfer knowledge across different domains and tasks. This will enable the system to learn from one task and apply that knowledge to another task.\n\nConfidence: 0.86\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 172, type: node_format. Original SPR name: 'DRL'\n\n",
+    "compression_ratio": 2.0,
+    "symbol_count": 421,
+    "timestamp": "2025-11-18T10:47:07.864467Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Deep Reinforcement Learning D: Deep Reinforcement Learning: Finally, we integrate a Transfer Learning module to enable S to transfer KnOwledge across different domains tasks. will enable S to learn one task apply KnOwledge to another task. Confidence: 0.86 BLUEPRINT DETAILS: Θ extracted agi.txt Node 172, type: node_F. Original Θ name: 'DRL'",
+    "compression_ratio": 2.4195402298850577,
+    "symbol_count": 348,
+    "timestamp": "2025-11-18T10:47:07.866270Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Deep Reinforcement Learning D: Deep Reinforcement Learning: Finally, integrate Transfer Learning module enable S transfer KnOwledge across different domains tasks. enable S learn apply KnOwledge another task. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'DRL'",
+    "compression_ratio": 2.742671009771987,
+    "symbol_count": 307,
+    "timestamp": "2025-11-18T10:47:07.869461Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Deep Reinforcement Learning D: Deep Reinforcement Learning: Finally, integrate Transfer Learning module enable S transfer KnOwledge across different domains tasks. enable S learn apply KnOwledge another task. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'DRL'",
+    "compression_ratio": 2.742671009771987,
+    "symbol_count": 307,
+    "timestamp": "2025-11-18T10:47:07.876820Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Deep Reinforcement Learning D: Deep Reinforcement Learning: Finally, integrate Transfer Learning module enable S transfer KnOwledge across different domains tasks. enable S learn apply KnOwledge another task. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'DRL'",
+    "compression_ratio": 2.742671009771987,
+    "symbol_count": 307,
+    "timestamp": "2025-11-18T10:47:07.882008Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Deep Reinforcement Learning D: Deep Reinforcement Learning: Finally, Transfer Learning S KnOwledge S KnOwledge Confidence: BLUEPRINT DETAILS: Θ Node Original Θ 'DRL'",
+    "compression_ratio": 4.923976608187134,
+    "symbol_count": 171,
+    "timestamp": "2025-11-18T10:47:07.900612Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 280.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:07.900972Z"
+  }
+]

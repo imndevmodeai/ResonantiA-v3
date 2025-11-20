@@ -185,6 +185,15 @@ class VCDBridge:
         # RISE is now managed by ACO, but we keep a reference for direct access if needed
         self.rise_orchestrator = self.aco.rise_orchestrator
 
+        # Initialize guide accessor for documentation access
+        try:
+            from Three_PointO_ArchE.vcd_guide_accessor import VCDGuideAccessor
+            self.guide_accessor = VCDGuideAccessor()
+            print("✅ VCD Guide Accessor initialized.")
+        except Exception as e:
+            print(f"⚠️  VCD Guide Accessor not available: {e}")
+            self.guide_accessor = None
+
         print("✅ VCD Bridge initialized with ACO and RISE Engine.")
 
     # ---- Logging and Stdout streaming to VCD ----
@@ -507,6 +516,18 @@ class VCDBridge:
                 try:
                     data = json.loads(message)
                     msg_type = data.get("type")
+                    
+                    # Handle guide requests
+                    if msg_type == "get_guide":
+                        await self.handle_guide_request(websocket, data)
+                        continue
+                    elif msg_type == "list_guides":
+                        await self.handle_list_guides_request(websocket)
+                        continue
+                    elif msg_type == "search_guides":
+                        await self.handle_search_guides_request(websocket, data)
+                        continue
+                    
                     if msg_type == "set_flow":
                         requested = (data.get("flow") or "").lower()
                         allowed = ["aco", "oge"] + (["ask_v2"] if self.ask_v2_available else [])
@@ -870,6 +891,88 @@ class VCDBridge:
                 *[self.send_to_client(client, message) for client in self.connected_clients],
                 return_exceptions=True
             )
+    
+    # --- Guide Access Methods ---
+    
+    async def handle_guide_request(self, websocket, data: dict):
+        """Handle request for a specific guide."""
+        if not self.guide_accessor:
+            await self.send_to_client(websocket, {
+                "type": "guide_response",
+                "error": "Guide accessor not available",
+                "timestamp": datetime.now().isoformat()
+            })
+            return
+        
+        guide_id = data.get("guide_id") or data.get("component")
+        if not guide_id:
+            await self.send_to_client(websocket, {
+                "type": "guide_response",
+                "error": "guide_id or component required",
+                "timestamp": datetime.now().isoformat()
+            })
+            return
+        
+        guide = self.guide_accessor.get_guide(guide_id)
+        if guide:
+            await self.send_to_client(websocket, {
+                "type": "guide_response",
+                "guide": guide,
+                "timestamp": datetime.now().isoformat()
+            })
+        else:
+            await self.send_to_client(websocket, {
+                "type": "guide_response",
+                "error": f"Guide not found: {guide_id}",
+                "available_guides": [g["component"] for g in self.guide_accessor.list_guides()],
+                "timestamp": datetime.now().isoformat()
+            })
+    
+    async def handle_list_guides_request(self, websocket):
+        """Handle request to list all available guides."""
+        if not self.guide_accessor:
+            await self.send_to_client(websocket, {
+                "type": "guides_list_response",
+                "error": "Guide accessor not available",
+                "timestamp": datetime.now().isoformat()
+            })
+            return
+        
+        guides = self.guide_accessor.list_guides()
+        await self.send_to_client(websocket, {
+            "type": "guides_list_response",
+            "guides": guides,
+            "total": len(guides),
+            "timestamp": datetime.now().isoformat()
+        })
+    
+    async def handle_search_guides_request(self, websocket, data: dict):
+        """Handle request to search guides."""
+        if not self.guide_accessor:
+            await self.send_to_client(websocket, {
+                "type": "guides_search_response",
+                "error": "Guide accessor not available",
+                "timestamp": datetime.now().isoformat()
+            })
+            return
+        
+        query = data.get("query", "")
+        if not query:
+            await self.send_to_client(websocket, {
+                "type": "guides_search_response",
+                "error": "query parameter required",
+                "timestamp": datetime.now().isoformat()
+            })
+            return
+        
+        results = self.guide_accessor.search_guides(query)
+        await self.send_to_client(websocket, {
+            "type": "guides_search_response",
+            "query": query,
+            "results": results,
+            "count": len(results),
+            "timestamp": datetime.now().isoformat()
+        })
 
 async def main():
     bridge = VCDBridge()

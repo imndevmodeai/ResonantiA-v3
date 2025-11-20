@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Tax Compliance\n\nDEFINITION:\nTax Compliance: designed to provide advanced financial reporting capabilities to improve the accuracy and transparency of financial reports:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Tax Compliance'\n\nEXAMPLE APPLICATION:\nze tax liabilities and optimize tax strategies:\n    * Tax Modeling: Developing tax modeling techniques that enable the AI system to analyze and optimize tax liabilities.\n    * Tax Planning: Implementing tax planning techniques that enable the AI system to develop and implement tax strategies.\n    * Tax Compliance: Creating tax compliance techniques that enable the AI system to ensure tax compliance and manage tax risks.\n\n80. AI-Driven Financial Reporting: Mastermind_AI is designed to provide adv\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1141,
+    "timestamp": "2025-11-18T10:47:38.461021Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Tax Compliance\n\nDEFINITION:\nTax Compliance: designed to provide advanced financial reporting capabilities to improve the accuracy and transparency of financial reports:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Tax Compliance'\n\nEXAMPLE APPLICATION:\nze tax liabilities and optimize tax strategies:\n    * Tax Modeling: Developing tax modeling techniques that enable the AI system to analyze and optimize tax liabilities.\n    * Tax Planning: Implementing tax planning techniques that enable the AI system to",
+    "compression_ratio": 2.001754385964912,
+    "symbol_count": 570,
+    "timestamp": "2025-11-18T10:47:38.461043Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Tax Compliance D: Tax Compliance: designed to provide advanced financial reporting capabilities to improve accuracy transparency of financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Tax Compliance' EXAMPLE APPLICATION: ze tax liabilities optimize tax strategies: * Tax Modeling: Developing tax modeling techniques enable AI S to analyze optimize tax liabilities. * Tax Planning: Implementing tax planning techniques enable AI S to",
+    "compression_ratio": 2.295774647887324,
+    "symbol_count": 497,
+    "timestamp": "2025-11-18T10:47:38.462352Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Tax Compliance D: Tax Compliance: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Compliance' EXAMPLE APPLICATION: liabilities optimize strategies: Tax ABM: Developing ABM techniques enable AI S analyze optimize liabilities. Tax Planning: Implementing planning techniques enable AI S",
+    "compression_ratio": 2.610983981693364,
+    "symbol_count": 437,
+    "timestamp": "2025-11-18T10:47:38.467065Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Tax Compliance D: Tax Compliance: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Compliance' EXAMPLE APPLICATION: liabilities optimize strategies: Tax ABM: Developing ABM techniques enable AI S analyze optimize liabilities. Tax Planning: Implementing planning techniques enable AI S",
+    "compression_ratio": 2.610983981693364,
+    "symbol_count": 437,
+    "timestamp": "2025-11-18T10:47:38.469700Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Tax Compliance D: Tax Compliance: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Compliance' EXAMPLE APPLICATION: liabilities optimize strategies: Tax ABM: Developing ABM techniques enable AI S analyze optimize liabilities. Tax Planning: Implementing planning techniques enable AI S",
+    "compression_ratio": 2.610983981693364,
+    "symbol_count": 437,
+    "timestamp": "2025-11-18T10:47:38.472140Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Tax Compliance D: Tax Compliance: BLUEPRINT DETAILS: Θ Node Original Θ Compliance' EXAMPLE APPLICATION: Tax ABM: Developing ABM AI S Tax Planning: Implementing AI S",
+    "compression_ratio": 6.711764705882353,
+    "symbol_count": 170,
+    "timestamp": "2025-11-18T10:47:38.476130Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 380.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.476959Z"
+  }
+]

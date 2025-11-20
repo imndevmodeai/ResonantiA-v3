@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Natural Language Processing\n\nDescription\n\nDEFINITION:\nNatural Language Processing\n\nDescription: Detailed description of the system's machine learning capabilities, including its algorithms, models, and training data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Natural Language Processing\n\nDescription'\n\nEXAMPLE APPLICATION:\ngine\nNode 12: Learning Mechanism\nNode 5: Machine Learning\n\nDescription: Detailed description of the system's machine learning capabilities, including its algorithms, models, and training data.\nEdges:\nNode 13: Supervised Learning\nNode 14: Unsupervised Learning\nNode 15: Reinforcement Learning\nNode 6: Natural Language Processing\n\nDescription: Detailed description of the system's natural language processing capabilities, including its algorithms, models, and training data.\nEdges:\nNode 16: Text Prepr\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1214,
+    "timestamp": "2025-11-18T10:47:40.987654Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Natural Language Processing\n\nDescription\n\nDEFINITION:\nNatural Language Processing\n\nDescription: Detailed description of the system's machine learning capabilities, including its algorithms, models, and training data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Natural Language Processing\n\nDescription'\n\nEXAMPLE APPLICATION:\ngine\nNode 12: Learning Mechanism\nNode 5: Machine Learning\n\nDescription: Detailed description of the system's machine learning capabilities, including its algorithms, models, and training data.\nEdges:\nNode 13: Supervised",
+    "compression_ratio": 2.0,
+    "symbol_count": 607,
+    "timestamp": "2025-11-18T10:47:40.987679Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Natural Language Ping Description D: Natural Language Ping Description: Detailed description of S's machine learning capabilities, including its algorithms, models, training data BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Natural Language Ping Description' EXAMPLE APPLICATION: gine Node 12: Learning M Node 5: Machine Learning Description: Detailed description of S's machine learning capabilities, including its algorithms, models, training data. Edges: Node 13: Supervised",
+    "compression_ratio": 2.290566037735849,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:47:40.990973Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Natural Language Ping Description D: Natural Language Ping Description: Detailed description S's machine learning capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Description' EXAMPLE APPLICATION: Node Learning M Node Machine Learning Description: Detailed description S's machine learning capabilities, including algorithms, models, training data. Edges: Node Supervised",
+    "compression_ratio": 2.467479674796748,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:40.997623Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Natural Language Ping Description D: Natural Language Ping Description: Detailed description S's machine learning capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Description' EXAMPLE APPLICATION: Node Learning M Node Machine Learning Description: Detailed description S's machine learning capabilities, including algorithms, models, training data. Edges: Node Supervised",
+    "compression_ratio": 2.467479674796748,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:41.002751Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Natural Language Ping Description D: Natural Language Ping Description: Detailed description S's machine learning capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Description' EXAMPLE APPLICATION: Node Learning M Node Machine Learning Description: Detailed description S's machine learning capabilities, including algorithms, models, training data. Edges: Node Supervised",
+    "compression_ratio": 2.467479674796748,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:41.008726Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Natural Language Ping Description D: Natural Language Ping Description: Detailed S's BLUEPRINT DETAILS: Θ Node Original Θ Language Ping Description' EXAMPLE APPLICATION: Node Learning M Node Machine Learning Description: Detailed S's Edges: Node Supervised",
+    "compression_ratio": 4.633587786259542,
+    "symbol_count": 262,
+    "timestamp": "2025-11-18T10:47:41.014061Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 404.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:41.016351Z"
+  }
+]

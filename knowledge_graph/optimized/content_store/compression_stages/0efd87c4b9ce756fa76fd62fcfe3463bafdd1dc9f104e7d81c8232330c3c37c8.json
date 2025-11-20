@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Financial Reporting\n\nDEFINITION:\nFinancial Reporting: accurate and complete financial statements\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Financial Reporting'\n\nEXAMPLE APPLICATION:\nStatement Preparation: Developing financial statement preparation techniques that enable the AI system to prepare accurate and complete financial statements.\n    * Financial Analysis: Implementing financial analysis techniques that enable the AI system to analyze and interpret financial data.\n    * Financial Reporting: Creating financial reporting techniques that enable the AI system to provide transparent and informative financial reports.\n\nI have reached the context limit again. Please type \"c\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1074,
+    "timestamp": "2025-11-18T10:47:38.537694Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Financial Reporting\n\nDEFINITION:\nFinancial Reporting: accurate and complete financial statements\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Financial Reporting'\n\nEXAMPLE APPLICATION:\nStatement Preparation: Developing financial statement preparation techniques that enable the AI system to prepare accurate and complete financial statements.\n    * Financial Analysis: Implementing financial analysis techniques that enable the AI system to analyze and interpret financial d",
+    "compression_ratio": 2.0,
+    "symbol_count": 537,
+    "timestamp": "2025-11-18T10:47:38.537718Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Financial Reporting D: Financial Reporting: accurate complete financial statements BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Financial Reporting' EXAMPLE APPLICATION: Statement Preparation: Developing financial statement preparation techniques enable AI S to prepare accurate complete financial statements. * Financial Analysis: Implementing financial analysis techniques enable AI S to analyze interpret financial d",
+    "compression_ratio": 2.2754237288135593,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:38.540564Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Financial Reporting D: Financial Reporting: accurate complete financial statements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Reporting' EXAMPLE APPLICATION: Statement Preparation: Developing financial statement preparation techniques enable AI S prepare accurate complete financial statements. Financial Analysis: Implementing financial analysis techniques enable AI S analyze interpret financial",
+    "compression_ratio": 2.3398692810457518,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:38.544706Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Financial Reporting D: Financial Reporting: accurate complete financial statements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Reporting' EXAMPLE APPLICATION: Statement Preparation: Developing financial statement preparation techniques enable AI S prepare accurate complete financial statements. Financial Analysis: Implementing financial analysis techniques enable AI S analyze interpret financial",
+    "compression_ratio": 2.3398692810457518,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:38.546715Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Financial Reporting D: Financial Reporting: accurate complete financial statements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Financial Reporting' EXAMPLE APPLICATION: Statement Preparation: Developing financial statement preparation techniques enable AI S prepare accurate complete financial statements. Financial Analysis: Implementing financial analysis techniques enable AI S analyze interpret financial",
+    "compression_ratio": 2.3398692810457518,
+    "symbol_count": 459,
+    "timestamp": "2025-11-18T10:47:38.551696Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Financial Reporting D: Financial Reporting: BLUEPRINT DETAILS: Θ Node Original Θ Reporting' EXAMPLE APPLICATION: Statement Preparation: Developing AI S Financial Analysis: Implementing AI S",
+    "compression_ratio": 5.507692307692308,
+    "symbol_count": 195,
+    "timestamp": "2025-11-18T10:47:38.554845Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 358.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.555507Z"
+  }
+]

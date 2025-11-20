@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Conversation Thread\n\nDEFINITION:\nConversation Thread: in progress\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Conversation Thread'\n\nEXAMPLE APPLICATION:\nease wait while the decryption process is in progress...\n\nDecryption Completion:\n\nDecryption progress: 100%\n\nThe decryption process is complete. The contents of the Secure Container are now decrypted.\n\nDecrypted Contents:\n\nThe decrypted contents of the Secure Container are:\n\nSPR_compressor System:\n\nConversation Thread:\n\nSecure Container Menu:\n\nYou have the following options:\n\nPlease select an option by typing the corresponding number.\n\nType '1' to view the contents, '2' to edit the contents, '3'\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1043,
+    "timestamp": "2025-11-18T10:47:48.368042Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Conversation Thread\n\nDEFINITION:\nConversation Thread: in progress\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Conversation Thread'\n\nEXAMPLE APPLICATION:\nease wait while the decryption process is in progress...\n\nDecryption Completion:\n\nDecryption progress: 100%\n\nThe decryption process is complete. The contents of the Secure Container are now decrypted.\n\nDecrypted Contents:\n\nThe decrypted contents of the Secure Container are:\n\nSPR_compressor System:\n\nConv",
+    "compression_ratio": 2.001919385796545,
+    "symbol_count": 521,
+    "timestamp": "2025-11-18T10:47:48.368188Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Conversation Thread D: Conversation Thread: in progress BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Conversation Thread' EXAMPLE APPLICATION: ease wait while decryption P is in progress... Decryption Completion: Decryption progress: 100% decryption P is complete. contents of Secure Container now decrypted. Decrypted Contents: decrypted contents of Secure Container : Θ_compressor S: Conv",
+    "compression_ratio": 2.3544018058690743,
+    "symbol_count": 443,
+    "timestamp": "2025-11-18T10:47:48.369704Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Conversation Thread D: Conversation Thread: progress BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Conversation Thread' EXAMPLE APPLICATION: while decryption P progress... Decryption Completion: Decryption progress: decryption P complete. contents Secure Container decrypted. Decrypted Contents: decrypted contents Secure Container Θ_compressor S: Conv",
+    "compression_ratio": 2.600997506234414,
+    "symbol_count": 401,
+    "timestamp": "2025-11-18T10:47:48.371938Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Conversation Thread D: Conversation Thread: progress BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Conversation Thread' EXAMPLE APPLICATION: while decryption P progress... Decryption Completion: Decryption progress: decryption P complete. contents Secure Container decrypted. Decrypted Contents: decrypted contents Secure Container Θ_compressor S: Conv",
+    "compression_ratio": 2.600997506234414,
+    "symbol_count": 401,
+    "timestamp": "2025-11-18T10:47:48.375939Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Conversation Thread D: Conversation Thread: progress BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Conversation Thread' EXAMPLE APPLICATION: while decryption P progress... Decryption Completion: Decryption progress: decryption P complete. contents Secure Container decrypted. Decrypted Contents: decrypted contents Secure Container Θ_compressor S: Conv",
+    "compression_ratio": 2.600997506234414,
+    "symbol_count": 401,
+    "timestamp": "2025-11-18T10:47:48.378819Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Conversation Thread D: Conversation Thread: BLUEPRINT DETAILS: Θ Node Original Θ Thread' EXAMPLE APPLICATION: P Decryption Completion: Decryption P Secure Container Decrypted Contents: Secure Container Θ_compressor S: Conv",
+    "compression_ratio": 4.574561403508772,
+    "symbol_count": 228,
+    "timestamp": "2025-11-18T10:47:48.385284Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 208.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:48.386176Z"
+  }
+]

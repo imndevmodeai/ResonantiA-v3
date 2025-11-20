@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Blockchain Integration Protocol\n\nDEFINITION:\nSystematic protocol for integrating blockchain technology, smart contracts, and distributed ledger systems. Enables secure, transparent, and decentralized data management, transaction processing, and trust mechanisms.\n\nBLUEPRINT DETAILS:\nReincorporated from historical wayback exploration. Provides blockchain integration capabilities for secure systems.\n\nEXAMPLE APPLICATION:\nImplementing smart contracts for automated decision-making or using blockchain for secure data verification.\n\nCATEGORY: SystemProtocol\n\nRELATIONSHIPS:\ntype: BlockchainCapability; confidence: 0.85; historical_source: wayback_59_occurrences; enables: SmartContractExecution, DistributedLedgerManagement, CryptographicSecurity, DecentralizedConsensus, TrustlessTransactions; supports_principle: SystemSecurity, Transparency",
+    "compression_ratio": 1.0,
+    "symbol_count": 848,
+    "timestamp": "2025-11-18T10:45:50.740806Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Blockchain Integration Protocol\n\nDEFINITION:\nSystematic protocol for integrating blockchain technology, smart contracts, and distributed ledger systems. Enables secure, transparent, and decentralized data management, transaction processing, and trust mechanisms.\n\nBLUEPRINT DETAILS:\nReincorporated from historical wayback exploration. Provides blockchain integration capabilities for secure systems.\n\nEXAMPLE APPLICATI",
+    "compression_ratio": 2.0,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:45:50.740855Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Blockchain Integration P D: Satic P integrating blockchain technology, smart contracts, distributed ledger Ss. Enables secure, transparent, decentralized data management, transaction Ping, trust Ms. BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides blockchain integration capabilities secure Ss. EXAMPLE APPLICATI",
+    "compression_ratio": 2.4651162790697674,
+    "symbol_count": 344,
+    "timestamp": "2025-11-18T10:45:50.741713Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Blockchain Integration P D: Satic P integrating blockchain technology, smart contracts, distributed ledger Ss. Enables secure, transparent, decentralized management, transaction Ping, trust Ms. BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides blockchain integration capabilities secure Ss. EXAMPLE APPLICATI",
+    "compression_ratio": 2.5014749262536875,
+    "symbol_count": 339,
+    "timestamp": "2025-11-18T10:45:50.755614Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Blockchain Integration P D: Satic P integrating blockchain technology, smart contracts, distributed ledger Ss. Enables secure, transparent, decentralized management, transaction Ping, trust Ms. BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides blockchain integration capabilities secure Ss. EXAMPLE APPLICATI",
+    "compression_ratio": 2.5014749262536875,
+    "symbol_count": 339,
+    "timestamp": "2025-11-18T10:45:50.760973Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Blockchain Integration P D: Satic P integrating blockchain technology, smart contracts, distributed ledger Ss. Enables secure, transparent, decentralized management, transaction Ping, trust Ms. BLUEPRINT DETAILS: Reincorporated historical wayback exploration. Provides blockchain integration capabilities secure Ss. EXAMPLE APPLICATI",
+    "compression_ratio": 2.5014749262536875,
+    "symbol_count": 339,
+    "timestamp": "2025-11-18T10:45:50.772863Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Blockchain Integration P D: Satic P Ss. Enables Ping, Ms. BLUEPRINT DETAILS: Reincorporated Provides Ss. EXAMPLE APPLICATI",
+    "compression_ratio": 6.625,
+    "symbol_count": 128,
+    "timestamp": "2025-11-18T10:45:50.778622Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "B|I|S|S|E",
+    "compression_ratio": 94.22222222222223,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:45:50.780594Z"
+  }
+]

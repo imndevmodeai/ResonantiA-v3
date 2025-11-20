@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Audit Trail\n\nDEFINITION:\nAudit Trail: designed to collaborate with humans in a seamless and effective manner:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Audit Trail'\n\nEXAMPLE APPLICATION:\ns decision-making processes and actions:\n    * Model Interpretability: Using techniques like feature importance and partial dependence plots to understand how the system's models work.\n    * Decision Explanation: Providing clear and concise explanations for the system's decisions and actions.\n    * Audit Trail: Maintaining a comprehensive audit trail to track system activities and changes.\n\n15. Human-AI Collaboration: Mastermind_AI is designed to collaborate with humans in a seamless and effecti\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1079,
+    "timestamp": "2025-11-18T10:47:28.561794Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Audit Trail\n\nDEFINITION:\nAudit Trail: designed to collaborate with humans in a seamless and effective manner:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Audit Trail'\n\nEXAMPLE APPLICATION:\ns decision-making processes and actions:\n    * Model Interpretability: Using techniques like feature importance and partial dependence plots to understand how the system's models work.\n    * Decision Explanation: Providing clear and concise explanations for the system's decisions and a",
+    "compression_ratio": 2.0018552875695734,
+    "symbol_count": 539,
+    "timestamp": "2025-11-18T10:47:28.561817Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Audit Trail D: Audit Trail: designed to collaborate humans in a seamless effective manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Audit Trail' EXAMPLE APPLICATION: s decision-making Pes actions: * Model Interpretability: Using techniques like feature importance partial dependence plots to understand how S's models work. * Decision Explanation: Providing clear concise explanations S's decisions a",
+    "compression_ratio": 2.361050328227571,
+    "symbol_count": 457,
+    "timestamp": "2025-11-18T10:47:28.562781Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Audit Trail D: Audit Trail: designed collaborate humans seamless effective manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Audit Trail' EXAMPLE APPLICATION: decision-making Pes actions: Model Interpretability: Using techniques feature importance partial dependence plots understand S's models work. Decision Explanation: Providing clear concise explanations S's decisions",
+    "compression_ratio": 2.532863849765258,
+    "symbol_count": 426,
+    "timestamp": "2025-11-18T10:47:28.571451Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Audit Trail D: Audit Trail: designed collaborate humans seamless effective manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Audit Trail' EXAMPLE APPLICATION: decision-making Pes actions: Model Interpretability: Using techniques feature importance partial dependence plots understand S's models work. Decision Explanation: Providing clear concise explanations S's decisions",
+    "compression_ratio": 2.532863849765258,
+    "symbol_count": 426,
+    "timestamp": "2025-11-18T10:47:28.573201Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Audit Trail D: Audit Trail: designed collaborate humans seamless effective manner: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Audit Trail' EXAMPLE APPLICATION: decision-making Pes actions: Model Interpretability: Using techniques feature importance partial dependence plots understand S's models work. Decision Explanation: Providing clear concise explanations S's decisions",
+    "compression_ratio": 2.532863849765258,
+    "symbol_count": 426,
+    "timestamp": "2025-11-18T10:47:28.582294Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Audit Trail D: Audit Trail: BLUEPRINT DETAILS: Θ Node Original Θ Trail' EXAMPLE APPLICATION: Pes Model Interpretability: Using S's Decision Explanation: Providing S's",
+    "compression_ratio": 6.273255813953488,
+    "symbol_count": 172,
+    "timestamp": "2025-11-18T10:47:28.588675Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 359.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:28.589002Z"
+  }
+]

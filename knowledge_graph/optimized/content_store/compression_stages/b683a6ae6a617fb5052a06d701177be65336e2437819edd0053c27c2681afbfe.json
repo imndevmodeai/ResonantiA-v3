@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: vetting\n\nDEFINITION:\nvetting: Workflow SPR pattern from agi.txt: vetting\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: workflow_spr. Original SPR name: 'vetting'\n\nEXAMPLE APPLICATION:\n-\n**Task:** Perform a thorough web search using credible sources.\n**Speculation:** Consider if there might be bias in the sources and how this could affect the outcome.\n->|/thinking|<-\n->|reflection|<-\nReflect on the relevance of the sources and ensure they align with the problem.\n->|/reflection|<-\n->|vetting|<-\nValidate the sources for credibility and relevance.\n\n[2] https://example.com/credible-sources\n->|/vetting|<-\n->|conditional|<-\nIf fewer than expected sources are found, trigger a conditi\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: workflow_spr\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1024,
+    "timestamp": "2025-11-18T10:47:21.958301Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: vetting\n\nDEFINITION:\nvetting: Workflow SPR pattern from agi.txt: vetting\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: workflow_spr. Original SPR name: 'vetting'\n\nEXAMPLE APPLICATION:\n-\n**Task:** Perform a thorough web search using credible sources.\n**Speculation:** Consider if there might be bias in the sources and how this could affect the outcome.\n->|/thinking|<-\n->|reflection|<-\nReflect on the relevance of the sources and ensure they align with the problem.\n->|/reflection|<-\n->|vett",
+    "compression_ratio": 2.0,
+    "symbol_count": 512,
+    "timestamp": "2025-11-18T10:47:21.958327Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: vetting D: vetting: Workflow Θ pattern agi.txt: vetting BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: workflow_Θ. Original Θ name: 'vetting' EXAMPLE APPLICATION: - **Task:** Perform a thorough web search using credible sources. **Speculation:** Consider if there might be bias in sources how could affect outcome. ->|/thinking|<- ->|reflection|<- Reflect on relevance of sources ensure they align problem. ->|/reflection|<- ->|vett",
+    "compression_ratio": 2.3063063063063063,
+    "symbol_count": 444,
+    "timestamp": "2025-11-18T10:47:21.961461Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: vetting D: vetting: Workflow Θ Π agi.txt: vetting BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: workflow_Θ. Original Θ name: 'vetting' EXAMPLE APPLICATION: - **Task:** Perform a thorough web search using credible sources. **Speculation:** Consider if there be bias in sources how affect outcome. ->|/thinking|<- ->|CRC|<- Reflect on relevance of sources ensure they align problem. ->|/CRC|<- ->|vett",
+    "compression_ratio": 2.4854368932038833,
+    "symbol_count": 412,
+    "timestamp": "2025-11-18T10:47:21.968961Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: vetting D: vetting: Workflow Θ Π agi.txt: vetting BLUEPRINT DETAILS: Θ extracted agi.txt Node type: workflow_Θ. Original Θ name: 'vetting' EXAMPLE APPLICATION: **Task:** Perform thorough search using credible sources. **Speculation:** Consider there sources affect outcome. ->|/thinking|<- ->|CRC|<- Reflect relevance sources ensure align problem. ->|/CRC|<- ->|vett",
+    "compression_ratio": 2.752688172043011,
+    "symbol_count": 372,
+    "timestamp": "2025-11-18T10:47:21.979291Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: vetting D: vetting: Workflow Θ Π agi.txt: vetting BLUEPRINT DETAILS: Θ extracted agi.txt Node type: workflow_Θ. Original Θ name: 'vetting' EXAMPLE APPLICATION: **Task:** Perform thorough search using credible sources. **Speculation:** Consider there sources affect outcome. ->|/thinking|<- ->|CRC|<- Reflect relevance sources ensure align problem. ->|/CRC|<- ->|vett",
+    "compression_ratio": 2.752688172043011,
+    "symbol_count": 372,
+    "timestamp": "2025-11-18T10:47:21.988314Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: D: Workflow Θ Π BLUEPRINT DETAILS: Θ Node workflow_Θ. Original Θ EXAMPLE APPLICATION: Perform Consider ->|CRC|<- Reflect ->|/CRC|<-",
+    "compression_ratio": 7.474452554744525,
+    "symbol_count": 137,
+    "timestamp": "2025-11-18T10:47:21.994126Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Π|Θ|Θ|Θ",
+    "compression_ratio": 113.77777777777777,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:21.998663Z"
+  }
+]

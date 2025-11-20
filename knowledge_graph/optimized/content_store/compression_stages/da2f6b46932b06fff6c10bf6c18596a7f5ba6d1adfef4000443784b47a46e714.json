@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Portfolio Optimization\n\nDEFINITION:\nPortfolio Optimization: designed to provide advanced financial optimization capabilities to improve financial performance and efficiency:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Portfolio Optimization'\n\nEXAMPLE APPLICATION:\ntimization: Mastermind_AI is designed to provide advanced financial optimization capabilities to improve financial performance and efficiency:\n    * Financial Optimization: Developing financial optimization techniques that enable the AI system to identify and optimize financial opportunities.\n    * Portfolio Optimization: Implementing portfolio optimization techniques that enable the AI system to optimize investment portfolios.\n    * Risk Management: Creating risk management techniques that enab\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1154,
+    "timestamp": "2025-11-18T10:47:38.653745Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Portfolio Optimization\n\nDEFINITION:\nPortfolio Optimization: designed to provide advanced financial optimization capabilities to improve financial performance and efficiency:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Portfolio Optimization'\n\nEXAMPLE APPLICATION:\ntimization: Mastermind_AI is designed to provide advanced financial optimization capabilities to improve financial performance and efficiency:\n    * Financial Optimization: Developing financial optimization techniques that enable the AI system to id",
+    "compression_ratio": 2.0,
+    "symbol_count": 577,
+    "timestamp": "2025-11-18T10:47:38.653768Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Portfolio Optimization D: Portfolio Optimization: designed to provide advanced financial optimization capabilities to improve financial performance efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Portfolio Optimization' EXAMPLE APPLICATION: timization: Mastermind_AI is designed to provide advanced financial optimization capabilities to improve financial performance efficiency: * Financial Optimization: Developing financial optimization techniques enable AI S to id",
+    "compression_ratio": 2.177358490566038,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:47:38.655224Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Portfolio Optimization D: Portfolio Optimization: designed provide advanced financial optimization capabilities improve financial performance efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Portfolio Optimization' EXAMPLE APPLICATION: timization: Mastermind_AI designed provide advanced financial optimization capabilities improve financial performance efficiency: Financial Optimization: Developing financial optimization techniques enable AI S",
+    "compression_ratio": 2.2896825396825395,
+    "symbol_count": 504,
+    "timestamp": "2025-11-18T10:47:38.660846Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Portfolio Optimization D: Portfolio Optimization: designed provide advanced financial optimization capabilities improve financial performance efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Portfolio Optimization' EXAMPLE APPLICATION: timization: Mastermind_AI designed provide advanced financial optimization capabilities improve financial performance efficiency: Financial Optimization: Developing financial optimization techniques enable AI S",
+    "compression_ratio": 2.2896825396825395,
+    "symbol_count": 504,
+    "timestamp": "2025-11-18T10:47:38.663353Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Portfolio Optimization D: Portfolio Optimization: designed provide advanced financial optimization capabilities improve financial performance efficiency: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Portfolio Optimization' EXAMPLE APPLICATION: timization: Mastermind_AI designed provide advanced financial optimization capabilities improve financial performance efficiency: Financial Optimization: Developing financial optimization techniques enable AI S",
+    "compression_ratio": 2.2896825396825395,
+    "symbol_count": 504,
+    "timestamp": "2025-11-18T10:47:38.668838Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Portfolio Optimization D: Portfolio Optimization: BLUEPRINT DETAILS: Θ Node Original Θ Optimization' EXAMPLE APPLICATION: Mastermind_AI Financial Optimization: Developing AI S",
+    "compression_ratio": 6.375690607734807,
+    "symbol_count": 181,
+    "timestamp": "2025-11-18T10:47:38.674104Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 384.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.674823Z"
+  }
+]

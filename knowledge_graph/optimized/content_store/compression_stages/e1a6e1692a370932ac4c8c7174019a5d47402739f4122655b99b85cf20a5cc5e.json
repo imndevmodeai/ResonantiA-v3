@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: ArchE Instance Registry Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to ArchE Instance Registry. Provides the higher-order cognitive support for the operational ArchE Instance Registry system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with ArchE Instance Registry system.\n\nEXAMPLE APPLICATION:\nProviding cognitive guidance for ArchE Instance Registry operational processes.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: CognitiveCorrespondence; confidence: 0.85; corresponds_to: ArcheinstanceregistrY; level: Above; enables: CognitiveSupport, HigherOrderProcessing, StrategicGuidance, SymmetricalArchitecture",
+    "compression_ratio": 1.0,
+    "symbol_count": 744,
+    "timestamp": "2025-11-18T10:45:50.169180Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: ArchE Instance Registry Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to ArchE Instance Registry. Provides the higher-order cognitive support for the operational ArchE Instance Registry system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Arc",
+    "compression_ratio": 2.0,
+    "symbol_count": 372,
+    "timestamp": "2025-11-18T10:45:50.169214Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Æ Instance Registry Cognitive Capability D: Cognitive capability corresponding to Æ Instance Registry. Provides higher-order cognitive support operational Æ Instance Registry S, ensuring symmetrical architecture between cognitive operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture Arc",
+    "compression_ratio": 2.303405572755418,
+    "symbol_count": 323,
+    "timestamp": "2025-11-18T10:45:50.171991Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Æ Instance Registry Ω Capability D: Ω capability corresponding to Æ Instance Registry. Provides higher-order Ω support operational Æ Instance Registry S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture Arc",
+    "compression_ratio": 2.556701030927835,
+    "symbol_count": 291,
+    "timestamp": "2025-11-18T10:45:50.178110Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Æ Instance Registry Ω Capability D: Ω capability corresponding Æ Instance Registry. Provides higher-order Ω support operational Æ Instance Registry S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture Arc",
+    "compression_ratio": 2.610526315789474,
+    "symbol_count": 285,
+    "timestamp": "2025-11-18T10:45:50.185961Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Æ Instance Registry Ω Capability D: Ω capability corresponding Æ Instance Registry. Provides higher-order Ω support operational Æ Instance Registry S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture Arc",
+    "compression_ratio": 2.610526315789474,
+    "symbol_count": 285,
+    "timestamp": "2025-11-18T10:45:50.188689Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Æ Instance Registry Ω Capability D: Ω Æ Instance Registry. Provides Ω Æ Instance Registry S, Ω BLUEPRINT DETAILS: Created Arc",
+    "compression_ratio": 5.679389312977099,
+    "symbol_count": 131,
+    "timestamp": "2025-11-18T10:45:50.197341Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Ω|Ω|Æ|Ω",
+    "compression_ratio": 82.66666666666667,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:45:50.197680Z"
+  }
+]

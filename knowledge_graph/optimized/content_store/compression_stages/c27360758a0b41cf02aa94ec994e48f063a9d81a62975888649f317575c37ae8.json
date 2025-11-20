@@ -1,0 +1,51 @@
+[
+  {
+    "stage_name": "Concise",
+    "content": "GG: LLM output constrained to source materials, ensuring factual consistency via citation/reference.",
+    "compression_ratio": 2.65,
+    "symbol_count": 100,
+    "timestamp": "2025-11-17T12:13:29.808422Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "GG: LLM output constrained to source materials, ensuring factual consistency via citation/reference.",
+    "compression_ratio": 2.65,
+    "symbol_count": 100,
+    "timestamp": "2025-11-17T12:13:29.809463Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "GG: LLM output constrained to source materials, ensuring factual consistency via citation/reference.",
+    "compression_ratio": 2.65,
+    "symbol_count": 100,
+    "timestamp": "2025-11-17T12:13:29.809977Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "GG: LLM output constrained to source materials, ensuring factual consistency via citation/reference.",
+    "compression_ratio": 2.65,
+    "symbol_count": 100,
+    "timestamp": "2025-11-17T12:13:29.810897Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "GG: LLM output constrained to source materials, ensuring factual consistency via citation/reference.",
+    "compression_ratio": 2.65,
+    "symbol_count": 100,
+    "timestamp": "2025-11-17T12:13:29.811375Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "GG: LLM output constrained to source materials, ensuring factual consistency via citation/reference.",
+    "compression_ratio": 2.65,
+    "symbol_count": 100,
+    "timestamp": "2025-11-17T12:13:29.811799Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "M",
+    "compression_ratio": 265.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-17T12:13:29.813474Z"
+  }
+]

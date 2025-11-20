@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Financial Wellness\n\nDEFINITION:\nDriven Financial Wellness: designed to provide advanced financial wellness capabilities to improve the financial well-being of individuals and households:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Financial Wellness'\n\nEXAMPLE APPLICATION:\nss: Implementing financial access techniques that enable the AI system to provide access to financial services for underserved populations.\n    * Financial Empowerment: Creating financial empowerment techniques that enable the AI system to empower users to make informed financial decisions.\n\n87. AI-Driven Financial Wellness: Mastermind_AI is designed to provide advanced financial wellness capabilities to improve the financial well-being of individuals and households:\n    * Financial Planning: De\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1177,
+    "timestamp": "2025-11-18T10:47:39.039051Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Financial Wellness\n\nDEFINITION:\nDriven Financial Wellness: designed to provide advanced financial wellness capabilities to improve the financial well-being of individuals and households:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Financial Wellness'\n\nEXAMPLE APPLICATION:\nss: Implementing financial access techniques that enable the AI system to provide access to financial services for underserved populations.\n    * Financial Empowerment: Creating financial empowerment techniques that enable the AI system ",
+    "compression_ratio": 2.001700680272109,
+    "symbol_count": 588,
+    "timestamp": "2025-11-18T10:47:39.039100Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Financial Wellness D: Driven Financial Wellness: designed to provide advanced financial wellness capabilities to improve financial well-being of individuals households: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Financial Wellness' EXAMPLE APPLICATION: ss: Implementing financial access techniques enable AI S to provide access to financial services underserved populations. * Financial Empowerment: Creating financial empowerment techniques enable AI S",
+    "compression_ratio": 2.2547892720306515,
+    "symbol_count": 522,
+    "timestamp": "2025-11-18T10:47:39.044259Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Financial Wellness D: Driven Financial Wellness: designed provide advanced financial wellness capabilities improve financial well-being individuals households: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Wellness' EXAMPLE APPLICATION: Implementing financial access techniques enable AI S provide access financial services underserved populations. Financial Empowerment: Creating financial empowerment techniques enable AI S",
+    "compression_ratio": 2.3634538152610443,
+    "symbol_count": 498,
+    "timestamp": "2025-11-18T10:47:39.049253Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Financial Wellness D: Driven Financial Wellness: designed provide advanced financial wellness capabilities improve financial well-being individuals households: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Wellness' EXAMPLE APPLICATION: Implementing financial access techniques enable AI S provide access financial services underserved populations. Financial Empowerment: Creating financial empowerment techniques enable AI S",
+    "compression_ratio": 2.3634538152610443,
+    "symbol_count": 498,
+    "timestamp": "2025-11-18T10:47:39.067270Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Financial Wellness D: Driven Financial Wellness: designed provide advanced financial wellness capabilities improve financial well-being individuals households: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Wellness' EXAMPLE APPLICATION: Implementing financial access techniques enable AI S provide access financial services underserved populations. Financial Empowerment: Creating financial empowerment techniques enable AI S",
+    "compression_ratio": 2.3634538152610443,
+    "symbol_count": 498,
+    "timestamp": "2025-11-18T10:47:39.077289Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Financial Wellness D: Driven Financial Wellness: BLUEPRINT DETAILS: Θ Node Original Θ Financial Wellness' EXAMPLE APPLICATION: Implementing AI S Financial Empowerment: Creating AI S",
+    "compression_ratio": 6.06701030927835,
+    "symbol_count": 194,
+    "timestamp": "2025-11-18T10:47:39.088274Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 392.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:39.090646Z"
+  }
+]

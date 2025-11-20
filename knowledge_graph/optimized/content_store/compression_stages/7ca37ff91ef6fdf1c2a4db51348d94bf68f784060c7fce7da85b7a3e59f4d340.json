@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Data Export\n\nDEFINITION:\nData Export: Next, we can integrate a Workflow Management module to enable the system to manage and automate complex workflows and business processes.\n\nConfidence: 1.615\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 323, type: node_format. Original SPR name: 'Export'\n\nEXAMPLE APPLICATION:\nNode 323: Data Export\n\nSPR: 1.615, \"Export\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 323\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 714,
+    "timestamp": "2025-11-18T10:47:09.547208Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Data Export\n\nDEFINITION:\nData Export: Next, we can integrate a Workflow Management module to enable the system to manage and automate complex workflows and business processes.\n\nConfidence: 1.615\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 323, type: node_format. Original SPR name: 'Export'\n\nEXAMPLE APPLICATION:\nNode 323: Data Export\n\nSPR: 1.",
+    "compression_ratio": 2.0,
+    "symbol_count": 357,
+    "timestamp": "2025-11-18T10:47:09.547234Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Data Export D: Data Export: Next, we integrate a Workflow Management module to enable S to manage automate complex workflows business Pes. Confidence: 1.615 BLUEPRINT DETAILS: Θ extracted agi.txt Node 323, type: node_F. Original Θ name: 'Export' EXAMPLE APPLICATION: Node 323: Data Export Θ: 1.",
+    "compression_ratio": 2.38,
+    "symbol_count": 300,
+    "timestamp": "2025-11-18T10:47:09.548094Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Data Export D: Data Export: Next, integrate Workflow Management module enable S manage automate complex workflows business Pes. Confidence: 1.615 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Export' EXAMPLE APPLICATION: Node Data Export Θ:",
+    "compression_ratio": 2.5869565217391304,
+    "symbol_count": 276,
+    "timestamp": "2025-11-18T10:47:09.553233Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Data Export D: Data Export: Next, integrate Workflow Management module enable S manage automate complex workflows business Pes. Confidence: 1.615 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Export' EXAMPLE APPLICATION: Node Data Export Θ:",
+    "compression_ratio": 2.5869565217391304,
+    "symbol_count": 276,
+    "timestamp": "2025-11-18T10:47:09.563698Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Data Export D: Data Export: Next, integrate Workflow Management module enable S manage automate complex workflows business Pes. Confidence: 1.615 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Export' EXAMPLE APPLICATION: Node Data Export Θ:",
+    "compression_ratio": 2.5869565217391304,
+    "symbol_count": 276,
+    "timestamp": "2025-11-18T10:47:09.571212Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Data Export D: Data Export: Next, Workflow Management S Pes. Confidence: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: Node Data Export Θ:",
+    "compression_ratio": 4.576923076923077,
+    "symbol_count": 156,
+    "timestamp": "2025-11-18T10:47:09.584389Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 142.8,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:09.584703Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Compliance Monitoring\n\nDEFINITION:\nCompliance Monitoring: designed to provide advanced compliance capabilities to ensure regulatory compliance:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Compliance Monitoring'\n\nEXAMPLE APPLICATION:\no sensitive data.\n\n48. AI-Driven Compliance: Mastermind_AI is designed to provide advanced compliance capabilities to ensure regulatory compliance:\n    * Regulatory Analysis: Developing regulatory analysis techniques that enable the AI system to analyze and understand regulatory requirements.\n    * Compliance Monitoring: Implementing compliance monitoring techniques that enable the AI system to monitor and detect non-compliance.\n    * Compliance Reporting: Creating compliance reporting technique\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1123,
+    "timestamp": "2025-11-18T10:47:33.178158Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Compliance Monitoring\n\nDEFINITION:\nCompliance Monitoring: designed to provide advanced compliance capabilities to ensure regulatory compliance:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Compliance Monitoring'\n\nEXAMPLE APPLICATION:\no sensitive data.\n\n48. AI-Driven Compliance: Mastermind_AI is designed to provide advanced compliance capabilities to ensure regulatory compliance:\n    * Regulatory Analysis: Developing regulatory analysis techniques that enable the AI system to analyze and unders",
+    "compression_ratio": 2.001782531194296,
+    "symbol_count": 561,
+    "timestamp": "2025-11-18T10:47:33.178184Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Compliance Monitoring D: Compliance Monitoring: designed to provide advanced compliance capabilities to ensure regulatory compliance: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Compliance Monitoring' EXAMPLE APPLICATION: o sensitive data. 48. AI-Driven Compliance: Mastermind_AI is designed to provide advanced compliance capabilities to ensure regulatory compliance: * Regulatory Analysis: Developing regulatory analysis techniques enable AI S to analyze unders",
+    "compression_ratio": 2.172147001934236,
+    "symbol_count": 517,
+    "timestamp": "2025-11-18T10:47:33.182046Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Compliance Monitoring D: Compliance Monitoring: designed provide advanced compliance capabilities ensure regulatory compliance: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Compliance Monitoring' EXAMPLE APPLICATION: sensitive data. AI-Driven Compliance: Mastermind_AI designed provide advanced compliance capabilities ensure regulatory compliance: Regulatory Analysis: Developing regulatory analysis techniques enable AI S analyze unders",
+    "compression_ratio": 2.3012295081967213,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:33.186553Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Compliance Monitoring D: Compliance Monitoring: designed provide advanced compliance capabilities ensure regulatory compliance: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Compliance Monitoring' EXAMPLE APPLICATION: sensitive data. AI-Driven Compliance: Mastermind_AI designed provide advanced compliance capabilities ensure regulatory compliance: Regulatory Analysis: Developing regulatory analysis techniques enable AI S analyze unders",
+    "compression_ratio": 2.3012295081967213,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:33.188872Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Compliance Monitoring D: Compliance Monitoring: designed provide advanced compliance capabilities ensure regulatory compliance: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Compliance Monitoring' EXAMPLE APPLICATION: sensitive data. AI-Driven Compliance: Mastermind_AI designed provide advanced compliance capabilities ensure regulatory compliance: Regulatory Analysis: Developing regulatory analysis techniques enable AI S analyze unders",
+    "compression_ratio": 2.3012295081967213,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:33.191954Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Compliance Monitoring D: Compliance Monitoring: BLUEPRINT DETAILS: Θ Node Original Θ Monitoring' EXAMPLE APPLICATION: AI-Driven Compliance: Mastermind_AI Regulatory Analysis: Developing AI S",
+    "compression_ratio": 5.729591836734694,
+    "symbol_count": 196,
+    "timestamp": "2025-11-18T10:47:33.200644Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 374.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:33.200998Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Growth Potential\n\nDEFINITION:\nGrowth Potential: a niche score of 6 out of 10\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Growth Potential'\n\nEXAMPLE APPLICATION:\nestimates:\n\nNiche Score:\n\nBased on the market size, target audience, and competition, I would give the data compression software a niche score of 6 out of 10. This means that the product has a significant potential market, but it is still a relatively niche product with a specific target audience.\n\nGrowth Potential:\n\nThe growth potential for the data compression software is significant, with a potential for expansion into new markets and industries. Here are some potential growth areas:\n\nHow doe\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1051,
+    "timestamp": "2025-11-18T10:47:51.823303Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Growth Potential\n\nDEFINITION:\nGrowth Potential: a niche score of 6 out of 10\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Growth Potential'\n\nEXAMPLE APPLICATION:\nestimates:\n\nNiche Score:\n\nBased on the market size, target audience, and competition, I would give the data compression software a niche score of 6 out of 10. This means that the product has a significant potential market, but it is still a relatively niche product with a specific target audience.\n\n",
+    "compression_ratio": 2.001904761904762,
+    "symbol_count": 525,
+    "timestamp": "2025-11-18T10:47:51.823447Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Growth Potential D: Growth Potential: a niche score of 6 out of 10 BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Growth Potential' EXAMPLE APPLICATION: estimates: Niche Score: Based on market size, target audience, competition, I would give data compression software a niche score of 6 out of 10. means product has a significant potential market, it is still a relatively niche product a specific target audience.",
+    "compression_ratio": 2.260215053763441,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:51.825579Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Growth Potential D: Growth Potential: niche score BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Growth Potential' EXAMPLE APPLICATION: estimates: Niche Score: ABM market size, target audience, competition, I compression software niche score means product significant potential market, still relatively niche product specific target audience.",
+    "compression_ratio": 2.694871794871795,
+    "symbol_count": 390,
+    "timestamp": "2025-11-18T10:47:51.828776Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Growth Potential D: Growth Potential: niche score BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Growth Potential' EXAMPLE APPLICATION: estimates: Niche Score: ABM market size, target audience, competition, I compression software niche score means product significant potential market, still relatively niche product specific target audience.",
+    "compression_ratio": 2.694871794871795,
+    "symbol_count": 390,
+    "timestamp": "2025-11-18T10:47:51.832475Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Growth Potential D: Growth Potential: niche score BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Growth Potential' EXAMPLE APPLICATION: estimates: Niche Score: ABM market size, target audience, competition, I compression software niche score means product significant potential market, still relatively niche product specific target audience.",
+    "compression_ratio": 2.694871794871795,
+    "symbol_count": 390,
+    "timestamp": "2025-11-18T10:47:51.835652Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Growth Potential D: Growth Potential: BLUEPRINT DETAILS: Θ Node Original Θ Potential' EXAMPLE APPLICATION: Niche Score: ABM I",
+    "compression_ratio": 8.022900763358779,
+    "symbol_count": 131,
+    "timestamp": "2025-11-18T10:47:51.841938Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 350.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:51.842219Z"
+  }
+]

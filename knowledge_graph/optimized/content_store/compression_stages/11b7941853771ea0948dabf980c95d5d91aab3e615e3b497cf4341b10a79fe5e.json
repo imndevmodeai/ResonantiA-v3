@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Tax Planning\n\nDEFINITION:\nTax Planning: designed to provide advanced tax planning capabilities to minimize tax liabilities and optimize tax strategies:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Tax Planning'\n\nEXAMPLE APPLICATION:\nther reports.\n\n79. AI-Driven Tax Planning: Mastermind_AI is designed to provide advanced tax planning capabilities to minimize tax liabilities and optimize tax strategies:\n    * Tax Modeling: Developing tax modeling techniques that enable the AI system to analyze and optimize tax liabilities.\n    * Tax Planning: Implementing tax planning techniques that enable the AI system to develop and implement tax strategies.\n    * Tax Compliance: Creating tax compliance techniques that enable the AI system\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1122,
+    "timestamp": "2025-11-18T10:47:38.406290Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Tax Planning\n\nDEFINITION:\nTax Planning: designed to provide advanced tax planning capabilities to minimize tax liabilities and optimize tax strategies:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Tax Planning'\n\nEXAMPLE APPLICATION:\nther reports.\n\n79. AI-Driven Tax Planning: Mastermind_AI is designed to provide advanced tax planning capabilities to minimize tax liabilities and optimize tax strategies:\n    * Tax Modeling: Developing tax modeling techniques that enable the AI system to analyze a",
+    "compression_ratio": 2.0,
+    "symbol_count": 561,
+    "timestamp": "2025-11-18T10:47:38.406315Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Tax Planning D: Tax Planning: designed to provide advanced tax planning capabilities to minimize tax liabilities optimize tax strategies: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Tax Planning' EXAMPLE APPLICATION: ther reports. 79. AI-Driven Tax Planning: Mastermind_AI is designed to provide advanced tax planning capabilities to minimize tax liabilities optimize tax strategies: * Tax Modeling: Developing tax modeling techniques enable AI S to analyze a",
+    "compression_ratio": 2.1871345029239766,
+    "symbol_count": 513,
+    "timestamp": "2025-11-18T10:47:38.407864Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Tax Planning D: Tax Planning: designed provide advanced planning capabilities minimize liabilities optimize strategies: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Planning' EXAMPLE APPLICATION: reports. AI-Driven Tax Planning: Mastermind_AI designed provide advanced planning capabilities minimize liabilities optimize strategies: Tax ABM: Developing ABM techniques enable AI S analyze",
+    "compression_ratio": 2.573394495412844,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:38.410128Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Tax Planning D: Tax Planning: designed provide advanced planning capabilities minimize liabilities optimize strategies: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Planning' EXAMPLE APPLICATION: reports. AI-Driven Tax Planning: Mastermind_AI designed provide advanced planning capabilities minimize liabilities optimize strategies: Tax ABM: Developing ABM techniques enable AI S analyze",
+    "compression_ratio": 2.573394495412844,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:38.423654Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Tax Planning D: Tax Planning: designed provide advanced planning capabilities minimize liabilities optimize strategies: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Planning' EXAMPLE APPLICATION: reports. AI-Driven Tax Planning: Mastermind_AI designed provide advanced planning capabilities minimize liabilities optimize strategies: Tax ABM: Developing ABM techniques enable AI S analyze",
+    "compression_ratio": 2.573394495412844,
+    "symbol_count": 436,
+    "timestamp": "2025-11-18T10:47:38.438783Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Tax Planning D: Tax Planning: BLUEPRINT DETAILS: Θ Node Original Θ Planning' EXAMPLE APPLICATION: AI-Driven Tax Planning: Mastermind_AI Tax ABM: Developing ABM AI S",
+    "compression_ratio": 6.6,
+    "symbol_count": 170,
+    "timestamp": "2025-11-18T10:47:38.451734Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 374.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.452068Z"
+  }
+]

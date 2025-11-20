@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Vetting Reflect\n\nDEFINITION:\nVetting Reflect: 6 — Encourage Reflection and Vetting Reflect on the [step/task] to ensure it's accurate and comprehensive Vet the [step/task] using reputable sources, such as academic papers or industry reports\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Vetting Reflect'\n\nEXAMPLE APPLICATION:\nl goals and objectives and explore new branches . ->|/reflection|<-\n->|vetting|<- Validate step outcomes and overall coherence using real world URLs . eg\nhttps://en.wikipedia.org/wiki/Cumulative_reasoning\nhttps://www.simulink.com/\n->|/vetting|<-\n->|/plan_creation|<-\n\n\n0.6 — Encourage Reflection and Vetting Reflect on the [step/task] to ensure it's accurate and comprehensive Vet the [step/task] using reputable sources, such as academic papers or industry reports\n\n->|conditional|<- insert applicab\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1214,
+    "timestamp": "2025-11-18T10:47:25.505872Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Vetting Reflect\n\nDEFINITION:\nVetting Reflect: 6 — Encourage Reflection and Vetting Reflect on the [step/task] to ensure it's accurate and comprehensive Vet the [step/task] using reputable sources, such as academic papers or industry reports\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Vetting Reflect'\n\nEXAMPLE APPLICATION:\nl goals and objectives and explore new branches . ->|/reflection|<-\n->|vetting|<- Validate step outcomes and overall coherence using real world URLs . eg\nhttps://en.wikipedia.org/wiki/Cumulative_reasoning\nhttps://www.si",
+    "compression_ratio": 2.0,
+    "symbol_count": 607,
+    "timestamp": "2025-11-18T10:47:25.505895Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Vetting Reflect D: Vetting Reflect: 6 — Encourage Reflection Vetting Reflect on [step/task] to ensure it's accurate comprehensive Vet [step/task] using reputable sources, such as academic papers or industry reports BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Vetting Reflect' EXAMPLE APPLICATION: l goals objectives explore new branches . ->|/reflection|<- ->|vetting|<- Validate step outcomes overall coherence using real world URLs . eg https://en.wikipedia.org/wiki/Cumulative_reasoning https://www.si",
+    "compression_ratio": 2.175627240143369,
+    "symbol_count": 558,
+    "timestamp": "2025-11-18T10:47:25.508903Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Vetting Reflect D: Vetting Reflect: Encourage CRC Vetting Reflect [step/task] ensure accurate comprehensive Vet [step/task] using reputable sources, academic papers industry reports BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vetting Reflect' EXAMPLE APPLICATION: goals objectives explore branches ->|/CRC|<- ->|vetting|<- Validate outcomes overall coherence using world URLs https://en.wikipedia.org/wiki/Cumulative_reasoning https://www.si",
+    "compression_ratio": 2.467479674796748,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:25.514972Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Vetting Reflect D: Vetting Reflect: Encourage CRC Vetting Reflect [step/task] ensure accurate comprehensive Vet [step/task] using reputable sources, academic papers industry reports BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vetting Reflect' EXAMPLE APPLICATION: goals objectives explore branches ->|/CRC|<- ->|vetting|<- Validate outcomes overall coherence using world URLs https://en.wikipedia.org/wiki/Cumulative_reasoning https://www.si",
+    "compression_ratio": 2.467479674796748,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:25.517499Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Vetting Reflect D: Vetting Reflect: Encourage CRC Vetting Reflect [step/task] ensure accurate comprehensive Vet [step/task] using reputable sources, academic papers industry reports BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Vetting Reflect' EXAMPLE APPLICATION: goals objectives explore branches ->|/CRC|<- ->|vetting|<- Validate outcomes overall coherence using world URLs https://en.wikipedia.org/wiki/Cumulative_reasoning https://www.si",
+    "compression_ratio": 2.467479674796748,
+    "symbol_count": 492,
+    "timestamp": "2025-11-18T10:47:25.520226Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Vetting Reflect D: Vetting Reflect: Encourage CRC Vetting Reflect Vet BLUEPRINT DETAILS: Θ Node Original Θ Reflect' EXAMPLE APPLICATION: ->|/CRC|<- Validate URLs",
+    "compression_ratio": 7.269461077844311,
+    "symbol_count": 167,
+    "timestamp": "2025-11-18T10:47:25.522839Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 404.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:25.523205Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Implementation\nData\n\nDEFINITION:\nImplementation\nData: the process of retrieving data from various sources, often for further analysis or processing\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Implementation\nData'\n\nEXAMPLE APPLICATION:\n existing tools like AgentQL to understand their architecture and functionality.\nExplore resources on natural language processing, machine learning, and data extraction techniques.\nStudy open-source projects related to web scraping, data mining, and query processing.\n\n\nData Extraction: Concepts and Implementation\nData extraction is the process of retrieving data from various sources, often for further analysis or processing. This discussion will examine data extraction in the context of AgentQL,\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1125,
+    "timestamp": "2025-11-18T10:47:24.708147Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Implementation\nData\n\nDEFINITION:\nImplementation\nData: the process of retrieving data from various sources, often for further analysis or processing\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Implementation\nData'\n\nEXAMPLE APPLICATION:\n existing tools like AgentQL to understand their architecture and functionality.\nExplore resources on natural language processing, machine learning, and data extraction techniques.\nStudy open-source projects related to web scraping, data mining, and query process",
+    "compression_ratio": 2.001779359430605,
+    "symbol_count": 562,
+    "timestamp": "2025-11-18T10:47:24.708173Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: I Data D: I Data: P of retrieving data various sources, often further analysis or Ping BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'I Data' EXAMPLE APPLICATION: existing tools like AgentQL to understand their architecture functionality. Explore resources on natural language Ping, machine learning, data extraction techniques. Study open-source projects related to web scraping, data mining, query P",
+    "compression_ratio": 2.4889380530973453,
+    "symbol_count": 452,
+    "timestamp": "2025-11-18T10:47:24.709406Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: I Data D: I Data: P retrieving various sources, often further analysis Ping BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Data' EXAMPLE APPLICATION: existing tools AgentQL understand their architecture functionality. Explore resources natural language Ping, machine learning, extraction techniques. Study open-source projects related scraping, mining, query P",
+    "compression_ratio": 2.764127764127764,
+    "symbol_count": 407,
+    "timestamp": "2025-11-18T10:47:24.719693Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: I Data D: I Data: P retrieving various sources, often further analysis Ping BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Data' EXAMPLE APPLICATION: existing tools AgentQL understand their architecture functionality. Explore resources natural language Ping, machine learning, extraction techniques. Study open-source projects related scraping, mining, query P",
+    "compression_ratio": 2.764127764127764,
+    "symbol_count": 407,
+    "timestamp": "2025-11-18T10:47:24.727666Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: I Data D: I Data: P retrieving various sources, often further analysis Ping BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Data' EXAMPLE APPLICATION: existing tools AgentQL understand their architecture functionality. Explore resources natural language Ping, machine learning, extraction techniques. Study open-source projects related scraping, mining, query P",
+    "compression_ratio": 2.764127764127764,
+    "symbol_count": 407,
+    "timestamp": "2025-11-18T10:47:24.732166Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: I Data D: I Data: P Ping BLUEPRINT DETAILS: Θ Node Original Θ Data' EXAMPLE APPLICATION: AgentQL Explore Ping, Study P",
+    "compression_ratio": 9.07258064516129,
+    "symbol_count": 124,
+    "timestamp": "2025-11-18T10:47:24.736616Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 375.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.738027Z"
+  }
+]

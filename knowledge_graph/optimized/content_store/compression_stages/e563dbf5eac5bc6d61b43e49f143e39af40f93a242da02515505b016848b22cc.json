@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Named Entity Recognition\nNode\n\nDEFINITION:\nNamed Entity Recognition\nNode: Detailed description of the system's natural language processing capabilities, including its algorithms, models, and training data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Named Entity Recognition\nNode'\n\nEXAMPLE APPLICATION:\n Learning\nNode 15: Reinforcement Learning\nNode 6: Natural Language Processing\n\nDescription: Detailed description of the system's natural language processing capabilities, including its algorithms, models, and training data.\nEdges:\nNode 16: Text Preprocessing\nNode 17: Part-of-Speech Tagging\nNode 18: Named Entity Recognition\nNode 7: Functional Requirements\n\nDescription: Detailed description of the system's functional requirements, including its user interface, user experience, and functionality.\nE\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1192,
+    "timestamp": "2025-11-18T10:47:41.142323Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Named Entity Recognition\nNode\n\nDEFINITION:\nNamed Entity Recognition\nNode: Detailed description of the system's natural language processing capabilities, including its algorithms, models, and training data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Named Entity Recognition\nNode'\n\nEXAMPLE APPLICATION:\n Learning\nNode 15: Reinforcement Learning\nNode 6: Natural Language Processing\n\nDescription: Detailed description of the system's natural language processing capabilities, including its algorithms, models, and training data.\nEdges:",
+    "compression_ratio": 2.0,
+    "symbol_count": 596,
+    "timestamp": "2025-11-18T10:47:41.142711Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Named Entity Recognition Node D: Named Entity Recognition Node: Detailed description of S's natural language Ping capabilities, including its algorithms, models, training data BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Named Entity Recognition Node' EXAMPLE APPLICATION: Learning Node 15: Reinforcement Learning Node 6: Natural Language Ping Description: Detailed description of S's natural language Ping capabilities, including its algorithms, models, training data. Edges:",
+    "compression_ratio": 2.2533081285444236,
+    "symbol_count": 529,
+    "timestamp": "2025-11-18T10:47:41.143787Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Named Entity Recognition Node D: Named Entity Recognition Node: Detailed description S's natural language Ping capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Named Entity Recognition Node' EXAMPLE APPLICATION: Learning Node Reinforcement Learning Node Natural Language Ping Description: Detailed description S's natural language Ping capabilities, including algorithms, models, training data. Edges:",
+    "compression_ratio": 2.384,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:41.150545Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Named Entity Recognition Node D: Named Entity Recognition Node: Detailed description S's natural language Ping capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Named Entity Recognition Node' EXAMPLE APPLICATION: Learning Node Reinforcement Learning Node Natural Language Ping Description: Detailed description S's natural language Ping capabilities, including algorithms, models, training data. Edges:",
+    "compression_ratio": 2.384,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:41.173159Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Named Entity Recognition Node D: Named Entity Recognition Node: Detailed description S's natural language Ping capabilities, including algorithms, models, training BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Named Entity Recognition Node' EXAMPLE APPLICATION: Learning Node Reinforcement Learning Node Natural Language Ping Description: Detailed description S's natural language Ping capabilities, including algorithms, models, training data. Edges:",
+    "compression_ratio": 2.384,
+    "symbol_count": 500,
+    "timestamp": "2025-11-18T10:47:41.177564Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Named Entity Recognition Node D: Named Entity Recognition Node: Detailed S's Ping BLUEPRINT DETAILS: Θ Node Original Θ Entity Recognition Node' EXAMPLE APPLICATION: Learning Node Reinforcement Learning Node Natural Language Ping Description: Detailed S's Ping Edges:",
+    "compression_ratio": 4.382352941176471,
+    "symbol_count": 272,
+    "timestamp": "2025-11-18T10:47:41.182405Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 397.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:41.182813Z"
+  }
+]

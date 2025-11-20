@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Project Description\n\nDEFINITION:\nProject Description: sound? Type 'yes' to proceed with the next steps, or type 'no' to explore other options\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Project Description'\n\nEXAMPLE APPLICATION:\nill involve developing a comprehensive marketing strategy that includes social media, content marketing, and paid advertising.\n\nHow does this sound? Type 'yes' to proceed with the next steps, or type 'no' to explore other options.\n\nname this project and save it for later\n\nProject Name: \"Erosphere\"\n\nProject Description: Erosphere is a project that aims to develop software and sensory devices for established VR players, with a focus on creating immersive and interactive experiences that enhance th\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1119,
+    "timestamp": "2025-11-18T10:47:52.212068Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Project Description\n\nDEFINITION:\nProject Description: sound? Type 'yes' to proceed with the next steps, or type 'no' to explore other options\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Project Description'\n\nEXAMPLE APPLICATION:\nill involve developing a comprehensive marketing strategy that includes social media, content marketing, and paid advertising.\n\nHow does this sound? Type 'yes' to proceed with the next steps, or type 'no' to explore other options.\n\nname this project and save it for ",
+    "compression_ratio": 2.001788908765653,
+    "symbol_count": 559,
+    "timestamp": "2025-11-18T10:47:52.212090Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Project Description D: Project Description: sound? Type 'yes' to proceed next steps, or type 'no' to explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Project Description' EXAMPLE APPLICATION: ill involve developing a comprehensive marketing strategy includes social media, content marketing, paid advertising. How does sound? Type 'yes' to proceed next steps, or type 'no' to explore other options. name project save it",
+    "compression_ratio": 2.283673469387755,
+    "symbol_count": 490,
+    "timestamp": "2025-11-18T10:47:52.216568Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Project Description D: Project Description: sound? Type 'yes' proceed steps, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Project Description' EXAMPLE APPLICATION: involve developing comprehensive marketing strategy includes social media, content marketing, advertising. How sound? Type 'yes' proceed steps, explore other options. project",
+    "compression_ratio": 2.729268292682927,
+    "symbol_count": 410,
+    "timestamp": "2025-11-18T10:47:52.221562Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Project Description D: Project Description: sound? Type 'yes' proceed steps, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Project Description' EXAMPLE APPLICATION: involve developing comprehensive marketing strategy includes social media, content marketing, advertising. How sound? Type 'yes' proceed steps, explore other options. project",
+    "compression_ratio": 2.729268292682927,
+    "symbol_count": 410,
+    "timestamp": "2025-11-18T10:47:52.230915Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Project Description D: Project Description: sound? Type 'yes' proceed steps, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Project Description' EXAMPLE APPLICATION: involve developing comprehensive marketing strategy includes social media, content marketing, advertising. How sound? Type 'yes' proceed steps, explore other options. project",
+    "compression_ratio": 2.729268292682927,
+    "symbol_count": 410,
+    "timestamp": "2025-11-18T10:47:52.237433Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Project Description D: Project Description: Type BLUEPRINT DETAILS: Θ Node Original Θ Description' EXAMPLE APPLICATION: How Type",
+    "compression_ratio": 8.350746268656716,
+    "symbol_count": 134,
+    "timestamp": "2025-11-18T10:47:52.246714Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 373.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:52.249758Z"
+  }
+]

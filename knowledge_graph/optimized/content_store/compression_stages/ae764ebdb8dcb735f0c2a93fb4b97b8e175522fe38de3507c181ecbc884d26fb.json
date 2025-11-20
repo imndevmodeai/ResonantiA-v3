@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Codebase Analysis Pattern\n\nDEFINITION:\nSystematic pattern for comprehensive codebase exploration, analysis, and understanding. Provides structured approach to discovering system architecture, dependencies, patterns, and key components.\n\nBLUEPRINT DETAILS:\nCrystallized from 18+ codebase analysis sessions. Provides systematic approach for comprehensive codebase understanding.\n\nEXAMPLE APPLICATION:\nWhen analyzing a new codebase, systematically explore directory structure, identify key components, map dependencies, and document architectural patterns.\n\nCATEGORY: LearnedWisdom\n\nRELATIONSHIPS:\ntype: AutopoieticInsight; confidence: 0.87; occurrences: 18; success_rate: 0.85; context: High-frequency task requiring systematic approach for effective codebase understanding; recommendation: Standardize codebase analysis workflow for consistent, thorough exploration; guardian_approved: True; crystallization_date: 2025-10-16T06:13:20.615136; enables: SystematicExploration, ArchitectureDiscovery, DependencyMapping, PatternIdentification, ComponentAnalysis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1061,
+    "timestamp": "2025-11-18T10:45:50.967781Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Codebase Analysis Pattern\n\nDEFINITION:\nSystematic pattern for comprehensive codebase exploration, analysis, and understanding. Provides structured approach to discovering system architecture, dependencies, patterns, and key components.\n\nBLUEPRINT DETAILS:\nCrystallized from 18+ codebase analysis sessions. Provides systematic approach for comprehensive codebase understanding.\n\nEXAMPLE APPLICATION:\nWhen analyzing a new codebase, systematically explore directory structure, identify key components, map dependencies, and doc",
+    "compression_ratio": 2.0018867924528303,
+    "symbol_count": 530,
+    "timestamp": "2025-11-18T10:45:50.967808Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Codebase Analysis Pattern D: Satic pattern comprehensive codebase exploration, analysis, understanding. Provides structured approach to discovering S architecture, dependencies, patterns, key components. BLUEPRINT DETAILS: Crystallized 18+ codebase analysis sessions. Provides Satic approach comprehensive codebase understanding. EXAMPLE APPLICATION: analyzing a new codebase, Satically explore directory structure, identify key components, map dependencies, doc",
+    "compression_ratio": 2.267094017094017,
+    "symbol_count": 468,
+    "timestamp": "2025-11-18T10:45:50.971003Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Codebase Analysis Π D: Satic Π comprehensive codebase exploration, analysis, understanding. Provides structured approach discovering S architecture, dependencies, patterns, components. BLUEPRINT DETAILS: Crystallized codebase analysis sessions. Provides Satic approach comprehensive codebase understanding. EXAMPLE APPLICATION: analyzing codebase, Satically explore directory structure, identify components, dependencies,",
+    "compression_ratio": 2.4847775175644027,
+    "symbol_count": 427,
+    "timestamp": "2025-11-18T10:45:50.982226Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Codebase Analysis Π D: Satic Π comprehensive codebase exploration, analysis, understanding. Provides structured approach discovering S architecture, dependencies, patterns, components. BLUEPRINT DETAILS: Crystallized codebase analysis sessions. Provides Satic approach comprehensive codebase understanding. EXAMPLE APPLICATION: analyzing codebase, Satically explore directory structure, identify components, dependencies,",
+    "compression_ratio": 2.4847775175644027,
+    "symbol_count": 427,
+    "timestamp": "2025-11-18T10:45:51.010915Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Codebase Analysis Π D: Satic Π comprehensive codebase exploration, analysis, understanding. Provides structured approach discovering S architecture, dependencies, patterns, components. BLUEPRINT DETAILS: Crystallized codebase analysis sessions. Provides Satic approach comprehensive codebase understanding. EXAMPLE APPLICATION: analyzing codebase, Satically explore directory structure, identify components, dependencies,",
+    "compression_ratio": 2.4847775175644027,
+    "symbol_count": 427,
+    "timestamp": "2025-11-18T10:45:51.053200Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Codebase Analysis Π D: Satic Π Provides S BLUEPRINT DETAILS: Crystallized Provides Satic EXAMPLE APPLICATION: Satically",
+    "compression_ratio": 8.488,
+    "symbol_count": 125,
+    "timestamp": "2025-11-18T10:45:51.055480Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Π|Π",
+    "compression_ratio": 353.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:45:51.055778Z"
+  }
+]

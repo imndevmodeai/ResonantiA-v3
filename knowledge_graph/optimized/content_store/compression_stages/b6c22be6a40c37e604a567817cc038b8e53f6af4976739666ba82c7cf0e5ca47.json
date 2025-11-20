@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Emergency Response\n\nDEFINITION:\nEmergency Response: designed to provide AI education and training to humans:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Emergency Response'\n\nEXAMPLE APPLICATION:\nprevent potential risks and harm:\n    * Risk Assessment: Developing risk assessment techniques that identify potential risks and harm associated with the AI system.\n    * Safety Protocols: Implementing safety protocols that prevent the AI system from causing harm to humans or the environment.\n    * Emergency Response: Creating emergency response plans that enable humans to respond quickly and effectively in case of an AI system failure or malfunction.\n\n40. AI Education and Training: Mastermind_A\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1085,
+    "timestamp": "2025-11-18T10:47:31.779227Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Emergency Response\n\nDEFINITION:\nEmergency Response: designed to provide AI education and training to humans:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Emergency Response'\n\nEXAMPLE APPLICATION:\nprevent potential risks and harm:\n    * Risk Assessment: Developing risk assessment techniques that identify potential risks and harm associated with the AI system.\n    * Safety Protocols: Implementing safety protocols that prevent the AI system from causing harm to humans or the en",
+    "compression_ratio": 2.0018450184501844,
+    "symbol_count": 542,
+    "timestamp": "2025-11-18T10:47:31.779254Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Emergency Response D: Emergency Response: designed to provide AI education training to humans: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Emergency Response' EXAMPLE APPLICATION: prevent potential risks harm: * Risk Assessment: Developing risk assessment techniques identify potential risks harm associated AI S. * Safety Ps: Implementing safety Ps prevent AI S causing harm to humans or en",
+    "compression_ratio": 2.438202247191011,
+    "symbol_count": 445,
+    "timestamp": "2025-11-18T10:47:31.782637Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Emergency Response D: Emergency Response: designed provide AI education training humans: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Emergency Response' EXAMPLE APPLICATION: prevent potential risks harm: Risk Assessment: Developing assessment techniques identify potential risks associated AI S. Safety Ps: Implementing safety Ps prevent AI S causing humans",
+    "compression_ratio": 2.659313725490196,
+    "symbol_count": 408,
+    "timestamp": "2025-11-18T10:47:31.785676Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Emergency Response D: Emergency Response: designed provide AI education training humans: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Emergency Response' EXAMPLE APPLICATION: prevent potential risks harm: Risk Assessment: Developing assessment techniques identify potential risks associated AI S. Safety Ps: Implementing safety Ps prevent AI S causing humans",
+    "compression_ratio": 2.659313725490196,
+    "symbol_count": 408,
+    "timestamp": "2025-11-18T10:47:31.793110Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Emergency Response D: Emergency Response: designed provide AI education training humans: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Emergency Response' EXAMPLE APPLICATION: prevent potential risks harm: Risk Assessment: Developing assessment techniques identify potential risks associated AI S. Safety Ps: Implementing safety Ps prevent AI S causing humans",
+    "compression_ratio": 2.659313725490196,
+    "symbol_count": 408,
+    "timestamp": "2025-11-18T10:47:31.800537Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Emergency Response D: Emergency Response: AI BLUEPRINT DETAILS: Θ Node Original Θ Response' EXAMPLE APPLICATION: Risk Assessment: Developing AI S. Safety Ps: Implementing Ps AI S",
+    "compression_ratio": 5.896739130434782,
+    "symbol_count": 184,
+    "timestamp": "2025-11-18T10:47:31.806983Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 361.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:31.807305Z"
+  }
+]

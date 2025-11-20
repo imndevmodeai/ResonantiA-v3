@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Computer Vision and Image Processing\n\nDEFINITION:\nComputer Vision and Image Processing: Object Detection:\n\nImage Segmentation:\n\nFacial Recognition:\n\nBy integrating advanced computer vision and image processing into the SPR_compressor system, we can enable the system to understand and interpret visual data, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced audio processing and speech recognition to enable the system to understand and interpret audio data.\n\nConfidence: 3.655\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 711, type: node_format. Original SPR name: 'Computer Vision and Image Processing'\n\nEXAMPLE APPLICATION:\nNode 711: Computer Vision and Image Processing\n\nSPR: 3.655, \"Computer Vision and Image Processing\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 711\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1173,
+    "timestamp": "2025-11-18T10:47:11.323695Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Computer Vision and Image Processing\n\nDEFINITION:\nComputer Vision and Image Processing: Object Detection:\n\nImage Segmentation:\n\nFacial Recognition:\n\nBy integrating advanced computer vision and image processing into the SPR_compressor system, we can enable the system to understand and interpret visual data, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced audio processing and speech recognition to enable the system to understand and interpret audio data.\n\nConfidence: 3.655\n\nBLUEPRINT ",
+    "compression_ratio": 2.0017064846416384,
+    "symbol_count": 586,
+    "timestamp": "2025-11-18T10:47:11.323716Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Computer Vision Image Ping D: Computer Vision Image Ping: Object Detection: Image Segmentation: Facial Recognition: By integrating advanced computer vision image Ping into Θ_compressor S, we enable S to understand interpret visual data, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced audio Ping speech recognition to enable S to understand interpret audio data. Confidence: 3.655 BLUEPRINT",
+    "compression_ratio": 2.4642857142857144,
+    "symbol_count": 476,
+    "timestamp": "2025-11-18T10:47:11.325734Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Computer Vision Image Ping D: Computer Vision Image Ping: Object Detection: Image Segmentation: Facial Recognition: By integrating advanced computer vision image Ping Θ_compressor S, enable S understand interpret visual data, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced audio Ping speech recognition enable S understand interpret audio data. Confidence: 3.655 BLUEPRINT",
+    "compression_ratio": 2.6598639455782314,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:11.330709Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Computer Vision Image Ping D: Computer Vision Image Ping: Object Detection: Image Segmentation: Facial Recognition: By integrating advanced computer vision image Ping Θ_compressor S, enable S understand interpret visual data, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced audio Ping speech recognition enable S understand interpret audio data. Confidence: 3.655 BLUEPRINT",
+    "compression_ratio": 2.6598639455782314,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:11.333000Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Computer Vision Image Ping D: Computer Vision Image Ping: Object Detection: Image Segmentation: Facial Recognition: integrating advanced computer vision image Ping Θ_compressor S, enable S understand interpret visual data, enhancing ability support decision-making problem-solving. Another potential exploration integration advanced audio Ping speech recognition enable S understand interpret audio data. Confidence: 3.655 BLUEPRINT",
+    "compression_ratio": 2.6780821917808217,
+    "symbol_count": 438,
+    "timestamp": "2025-11-18T10:47:11.339065Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Computer Vision Image Ping D: Computer Vision Image Ping: Object Detection: Image Segmentation: Facial Recognition: Ping Θ_compressor S, S Another Ping S Confidence: BLUEPRINT",
+    "compression_ratio": 6.480662983425415,
+    "symbol_count": 181,
+    "timestamp": "2025-11-18T10:47:11.343804Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ",
+    "compression_ratio": 1173.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:47:11.344130Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Documentation Review Result\n\nDEFINITION:\nDocumentation Review Result: accurate and up-to-date\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Documentation Review Result'\n\nEXAMPLE APPLICATION:\nentation and update it as necessary to ensure that it remains accurate and up-to-date.\n\n3\n\nYou have selected the option to review the system documentation and update it as necessary.\n\nSystem Documentation Review:\n\nI will review the system documentation to ensure that it is accurate and up-to-date.\n\nDocumentation Review Result:\n\nThe system documentation is accurate and up-to-date. However, I have identified a few minor errors and inconsistencies that need to be corrected.\n\nDocumentation Updates:\n\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1079,
+    "timestamp": "2025-11-18T10:47:50.676080Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Documentation Review Result\n\nDEFINITION:\nDocumentation Review Result: accurate and up-to-date\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Documentation Review Result'\n\nEXAMPLE APPLICATION:\nentation and update it as necessary to ensure that it remains accurate and up-to-date.\n\n3\n\nYou have selected the option to review the system documentation and update it as necessary.\n\nSystem Documentation Review:\n\nI will review the system documentation to ensure that it is accurate and",
+    "compression_ratio": 2.0018552875695734,
+    "symbol_count": 539,
+    "timestamp": "2025-11-18T10:47:50.676102Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Documentation Review Result D: Documentation Review Result: accurate up-to-date BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Documentation Review Result' EXAMPLE APPLICATION: entation update it as necessary to ensure it remains accurate up-to-date. 3 selected option to review S documentation update it as necessary. S Documentation Review: I will review S documentation to ensure it is accurate",
+    "compression_ratio": 2.408482142857143,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:50.677093Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Documentation Review Result D: Documentation Review Result: accurate up-to-date BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Review Result' EXAMPLE APPLICATION: entation update necessary ensure remains accurate up-to-date. selected option review S documentation update necessary. S Documentation Review: I review S documentation ensure accurate",
+    "compression_ratio": 2.644607843137255,
+    "symbol_count": 408,
+    "timestamp": "2025-11-18T10:47:50.685495Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Documentation Review Result D: Documentation Review Result: accurate up-to-date BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Review Result' EXAMPLE APPLICATION: entation update necessary ensure remains accurate up-to-date. selected option review S documentation update necessary. S Documentation Review: I review S documentation ensure accurate",
+    "compression_ratio": 2.644607843137255,
+    "symbol_count": 408,
+    "timestamp": "2025-11-18T10:47:50.694342Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Documentation Review Result D: Documentation Review Result: accurate up--date BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Documentation Review Result' EXAMPLE APPLICATION: entation update necessary ensure remains accurate up--date. selected option review S documentation update necessary. S Documentation Review: I review S documentation ensure accurate",
+    "compression_ratio": 2.6707920792079207,
+    "symbol_count": 404,
+    "timestamp": "2025-11-18T10:47:50.698111Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Documentation Review Result D: Documentation Review Result: BLUEPRINT DETAILS: Θ Node Original Θ Review Result' EXAMPLE APPLICATION: S S Documentation Review: I S",
+    "compression_ratio": 6.4226190476190474,
+    "symbol_count": 168,
+    "timestamp": "2025-11-18T10:47:50.704005Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 359.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:50.704312Z"
+  }
+]

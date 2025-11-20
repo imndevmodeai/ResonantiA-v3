@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Customer Experience\n\nDEFINITION:\nDriven Customer Experience: a starting point, and future updates will refine and elaborate on the concepts and technologies presented\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Customer Experience'\n\nEXAMPLE APPLICATION:\nx document, and I will continue to provide updates and expansions as needed. The current version is a starting point, and future updates will refine and elaborate on the concepts and technologies presented.\n\nPlease type \"continue\" to proceed with the next section of the blueprint.\n\ncontinue\n\n71. AI-Driven Customer Experience: Mastermind_AI is designed to provide advanced customer experience capabilities to improve customer satisfaction:\n    * Customer Journey Mapping: Developing customer journey\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1158,
+    "timestamp": "2025-11-18T10:47:37.596767Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Customer Experience\n\nDEFINITION:\nDriven Customer Experience: a starting point, and future updates will refine and elaborate on the concepts and technologies presented\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Customer Experience'\n\nEXAMPLE APPLICATION:\nx document, and I will continue to provide updates and expansions as needed. The current version is a starting point, and future updates will refine and elaborate on the concepts and technologies presented.\n\nPlease type \"continue\" to proceed with ",
+    "compression_ratio": 2.0,
+    "symbol_count": 579,
+    "timestamp": "2025-11-18T10:47:37.596790Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Customer Experience D: Driven Customer Experience: a starting point, future updates will refine elaborate on concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Customer Experience' EXAMPLE APPLICATION: x document, I will continue to provide updates expansions as needed. current version is a starting point, future updates will refine elaborate on concepts technologies presented. Please type \"continue\" to proceed",
+    "compression_ratio": 2.2840236686390534,
+    "symbol_count": 507,
+    "timestamp": "2025-11-18T10:47:37.598567Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Customer Experience D: Driven Customer Experience: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Customer Experience' EXAMPLE APPLICATION: document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed",
+    "compression_ratio": 2.517391304347826,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:37.604055Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Customer Experience D: Driven Customer Experience: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Customer Experience' EXAMPLE APPLICATION: document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed",
+    "compression_ratio": 2.517391304347826,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:37.606522Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Customer Experience D: Driven Customer Experience: starting point, future updates refine elaborate concepts technologies presented BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Customer Experience' EXAMPLE APPLICATION: document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate concepts technologies presented. Please \"continue\" proceed",
+    "compression_ratio": 2.517391304347826,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:37.610437Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Customer Experience D: Driven Customer Experience: BLUEPRINT DETAILS: Θ Node Original Θ Customer Experience' EXAMPLE APPLICATION: I Please",
+    "compression_ratio": 7.66887417218543,
+    "symbol_count": 151,
+    "timestamp": "2025-11-18T10:47:37.615665Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 386.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:37.615983Z"
+  }
+]

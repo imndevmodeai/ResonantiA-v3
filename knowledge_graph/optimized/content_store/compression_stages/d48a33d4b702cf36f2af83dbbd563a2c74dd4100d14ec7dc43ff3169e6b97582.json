@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Vetting Agent Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to Vetting Agent. Provides the higher-order cognitive support for the operational Vetting Agent system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Vetting Agent system.\n\nEXAMPLE APPLICATION:\nProviding cognitive guidance for Vetting Agent operational processes.\n\nCATEGORY: CognitiveCapability\n\nRELATIONSHIPS:\ntype: CognitiveCorrespondence; confidence: 0.85; corresponds_to: VettingagenT; level: Above; enables: CognitiveSupport, HigherOrderProcessing, StrategicGuidance, SymmetricalArchitecture",
+    "compression_ratio": 1.0,
+    "symbol_count": 685,
+    "timestamp": "2025-11-18T10:47:02.006696Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Vetting Agent Cognitive Capability\n\nDEFINITION:\nCognitive capability corresponding to Vetting Agent. Provides the higher-order cognitive support for the operational Vetting Agent system, ensuring symmetrical architecture between cognitive and operational levels.\n\nBLUEPRINT DETAILS:\nCreated to maintain symmetrical architecture with Vet",
+    "compression_ratio": 2.002923976608187,
+    "symbol_count": 342,
+    "timestamp": "2025-11-18T10:47:02.006724Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Vetting Agent Cognitive Capability D: Cognitive capability corresponding to Vetting Agent. Provides higher-order cognitive support operational Vetting Agent S, ensuring symmetrical architecture between cognitive operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture Vet",
+    "compression_ratio": 2.2459016393442623,
+    "symbol_count": 305,
+    "timestamp": "2025-11-18T10:47:02.009458Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Vetting ABM Ω Capability D: Ω capability corresponding to Vetting ABM. Provides higher-order Ω support operational Vetting ABM S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created to maintain symmetrical architecture Vet",
+    "compression_ratio": 2.5655430711610485,
+    "symbol_count": 267,
+    "timestamp": "2025-11-18T10:47:02.011664Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Vetting ABM Ω Capability D: Ω capability corresponding Vetting ABM. Provides higher-order Ω support operational Vetting ABM S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture Vet",
+    "compression_ratio": 2.624521072796935,
+    "symbol_count": 261,
+    "timestamp": "2025-11-18T10:47:02.012916Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Vetting ABM Ω Capability D: Ω capability corresponding Vetting ABM. Provides higher-order Ω support operational Vetting ABM S, ensuring symmetrical architecture between Ω operational levels. BLUEPRINT DETAILS: Created maintain symmetrical architecture Vet",
+    "compression_ratio": 2.624521072796935,
+    "symbol_count": 261,
+    "timestamp": "2025-11-18T10:47:02.017050Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Vetting ABM Ω Capability D: Ω Vetting ABM. Provides Ω Vetting ABM S, Ω BLUEPRINT DETAILS: Created Vet",
+    "compression_ratio": 6.401869158878505,
+    "symbol_count": 107,
+    "timestamp": "2025-11-18T10:47:02.020496Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Ω|Ω",
+    "compression_ratio": 97.85714285714286,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:02.021531Z"
+  }
+]

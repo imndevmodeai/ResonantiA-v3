@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: reflection\n\nDEFINITION:\nreflection: Workflow SPR pattern from agi.txt: reflection\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: workflow_spr. Original SPR name: 'reflection'\n\nEXAMPLE APPLICATION:\nhttps://www.projectmanagement.com/\n->|/vetting|<-\nOnce a score of 0.6 is reached Integrate the prompts for specialized agent roles ensuring the workflow allows for adaptivity across various domains.\n\nWhen addressing each agent's role, enclose step-by-step instructions within ->|step|<- tags and use ->|reflection|<- tags to assess clarity and completeness.\n0.7--- reflection on each step is required Continually re-evaluate assumptions and connections within the mind map using alternative perspecti\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: workflow_spr\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1036,
+    "timestamp": "2025-11-18T10:47:21.885547Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: reflection\n\nDEFINITION:\nreflection: Workflow SPR pattern from agi.txt: reflection\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: workflow_spr. Original SPR name: 'reflection'\n\nEXAMPLE APPLICATION:\nhttps://www.projectmanagement.com/\n->|/vetting|<-\nOnce a score of 0.6 is reached Integrate the prompts for specialized agent roles ensuring the workflow allows for adaptivity across various domains.\n\nWhen addressing each agent's role, enclose step-by-step instructions within ->|step|<- tags and use -",
+    "compression_ratio": 2.0,
+    "symbol_count": 518,
+    "timestamp": "2025-11-18T10:47:21.885576Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: reflection D: reflection: Workflow Θ pattern agi.txt: reflection BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: workflow_Θ. Original Θ name: 'reflection' EXAMPLE APPLICATION: https://www.projectmanagement.com/ ->|/vetting|<- Once a score of 0.6 is reached Integrate prompts specialized agent roles ensuring workflow allows adaptivity across various domains. addressing each agent's role, enclose step-by-step instructions within ->|step|<- tags use -",
+    "compression_ratio": 2.242424242424242,
+    "symbol_count": 462,
+    "timestamp": "2025-11-18T10:47:21.893115Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: CRC D: CRC: Workflow Θ Π agi.txt: CRC BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: workflow_Θ. Original Θ name: 'CRC' EXAMPLE APPLICATION: https://www.projectmanagement.com/ ->|/vetting|<- Once a score of 0.6 is reached Integrate prompts specialized ABM roles ensuring workflow allows adaptivity across various domains. addressing each ABM's role, enclose step-by-step instructions within ->|step|<- tags use -",
+    "compression_ratio": 2.443396226415094,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:47:21.906792Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: CRC D: CRC: Workflow Θ Π agi.txt: CRC BLUEPRINT DETAILS: Θ extracted agi.txt Node type: workflow_Θ. Original Θ name: 'CRC' EXAMPLE APPLICATION: https://www.projectmanagement.com/ ->|/vetting|<- Once score reached Integrate prompts specialized ABM roles ensuring workflow allows adaptivity across various domains. addressing ABM's role, enclose step-by-step instructions within ->|step|<-",
+    "compression_ratio": 2.6361323155216283,
+    "symbol_count": 393,
+    "timestamp": "2025-11-18T10:47:21.915065Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: CRC D: CRC: Workflow Θ Π agi.txt: CRC BLUEPRINT DETAILS: Θ extracted agi.txt Node type: workflow_Θ. Original Θ name: 'CRC' EXAMPLE APPLICATION: https://www.projectmanagement.com/ ->|/vetting|<- Once score reached Integrate prompts specialized ABM roles ensuring workflow allows adaptivity across various domains. addressing ABM's role, enclose step--step instructions within ->|step|<-",
+    "compression_ratio": 2.649616368286445,
+    "symbol_count": 391,
+    "timestamp": "2025-11-18T10:47:21.923319Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: CRC D: CRC: Workflow Θ Π CRC BLUEPRINT DETAILS: Θ Node workflow_Θ. Original Θ 'CRC' EXAMPLE APPLICATION: Once Integrate ABM ABM's",
+    "compression_ratio": 7.674074074074074,
+    "symbol_count": 135,
+    "timestamp": "2025-11-18T10:47:21.930332Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Π|Θ|Θ|Θ",
+    "compression_ratio": 115.11111111111111,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:21.935288Z"
+  }
+]

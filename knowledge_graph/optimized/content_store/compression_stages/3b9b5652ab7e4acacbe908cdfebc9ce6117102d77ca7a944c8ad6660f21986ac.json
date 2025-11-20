@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Process Blueprints\n\nDEFINITION:\nThe structured, typically JSON-based, definitions of workflows that guide ArchE's execution. Each blueprint defines a sequence of tasks, their dependencies, the actions/tools to be called, and how data flows between them. They are the 'sheet music' for the Core Workflow Engine.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 7.16+.\n\nEXAMPLE APPLICATION:\nPractical application of Process Blueprints within the ResonantiA Protocol framework\n\nCATEGORY: SystemArtifact\n\nRELATIONSHIPS:\ntype: WorkflowDefinition; executed_by: CoreworkflowenginE; format: JSON; stored_in: workflows/; can_contain: PhasegateS; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 668,
+    "timestamp": "2025-11-18T10:46:54.746422Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Process Blueprints\n\nDEFINITION:\nThe structured, typically JSON-based, definitions of workflows that guide ArchE's execution. Each blueprint defines a sequence of tasks, their dependencies, the actions/tools to be called, and how data flows between them. They are the 'sheet music' for the Core Workflow Engine.\n\nBLUEPRINT DETAIL",
+    "compression_ratio": 2.0,
+    "symbol_count": 334,
+    "timestamp": "2025-11-18T10:46:54.746487Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: P Blueprints D: structured, typically JSON-based, Ds of workflows guide Æ's execution. Each blueprint defines a sequence of tasks, their dependencies, actions/tools to be called, how data flows between them. They 'sheet music' Core W. BLUEPRINT DETAIL",
+    "compression_ratio": 2.5992217898832686,
+    "symbol_count": 257,
+    "timestamp": "2025-11-18T10:46:54.747156Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: P Blueprints D: structured, typically JSON-ABM, Ds workflows guide Æ's execution. Each blueprint defines sequence tasks, their dependencies, actions/tools called, flows between them. They 'sheet music' Core W. BLUEPRINT DETAIL",
+    "compression_ratio": 2.8793103448275863,
+    "symbol_count": 232,
+    "timestamp": "2025-11-18T10:46:54.750305Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: P Blueprints D: structured, typically JSON-ABM, Ds workflows guide Æ's execution. Each blueprint defines sequence tasks, their dependencies, actions/tools called, flows between them. They 'sheet music' Core W. BLUEPRINT DETAIL",
+    "compression_ratio": 2.8793103448275863,
+    "symbol_count": 232,
+    "timestamp": "2025-11-18T10:46:54.751809Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: P Blueprints D: structured, typically JSON-ABM, Ds workflows guide Æ's execution. Each blueprint defines sequence tasks, their dependencies, actions/tools called, flows between them. They 'sheet music' Core W. BLUEPRINT DETAIL",
+    "compression_ratio": 2.8793103448275863,
+    "symbol_count": 232,
+    "timestamp": "2025-11-18T10:46:54.754539Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: P Blueprints D: JSON-ABM, Ds Æ's Each They Core W. BLUEPRINT DETAIL",
+    "compression_ratio": 9.150684931506849,
+    "symbol_count": 73,
+    "timestamp": "2025-11-18T10:46:54.757058Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 668.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:54.757565Z"
+  }
+]

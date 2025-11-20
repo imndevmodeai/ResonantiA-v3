@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Step Solution\n\nDEFINITION:\nStep Solution: by setting the executablePath option when launching Puppeteer, like this:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Step Solution'\n\nEXAMPLE APPLICATION:\ncutable. You can do this by setting the executablePath option when launching Puppeteer, like this:\n\nReplace '/usr/bin/chromium-browser' with the actual path to the Chrome browser executable on your system.\n\nI hope this helps! Let me know if you have any other questions.\n\nExample Use Cases:\n\nStep-by-Step Solution:\n\nAdvice:\n\nModel:\n\t\t\t\t\tmeta-llama/Llama-3.3-70B-Instruct · Generated content may be inaccurate\n\t\t\t\t\tor false.\n\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1011,
+    "timestamp": "2025-11-18T10:47:52.333152Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Step Solution\n\nDEFINITION:\nStep Solution: by setting the executablePath option when launching Puppeteer, like this:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Step Solution'\n\nEXAMPLE APPLICATION:\ncutable. You can do this by setting the executablePath option when launching Puppeteer, like this:\n\nReplace '/usr/bin/chromium-browser' with the actual path to the Chrome browser executable on your system.\n\nI hope this helps! Let me know if you",
+    "compression_ratio": 2.001980198019802,
+    "symbol_count": 505,
+    "timestamp": "2025-11-18T10:47:52.333172Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Step Solution D: Step Solution: by setting executablePath option launching Puppeteer, like : BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Step Solution' EXAMPLE APPLICATION: cutable. do by setting executablePath option launching Puppeteer, like : Replace '/usr/bin/chromium-browser' actual path to Chrome browser executable on your S. I hope helps! Let me KnOw if",
+    "compression_ratio": 2.4302884615384617,
+    "symbol_count": 416,
+    "timestamp": "2025-11-18T10:47:52.334257Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Step Solution D: Step Solution: setting executablePath option launching Puppeteer, BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Step Solution' EXAMPLE APPLICATION: cutable. setting executablePath option launching Puppeteer, Replace '/usr/bin/chromium-browser' actual Chrome browser executable S. I helps! Let KnOw",
+    "compression_ratio": 2.7851239669421486,
+    "symbol_count": 363,
+    "timestamp": "2025-11-18T10:47:52.337285Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Step Solution D: Step Solution: setting executablePath option launching Puppeteer, BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Step Solution' EXAMPLE APPLICATION: cutable. setting executablePath option launching Puppeteer, Replace '/usr/bin/chromium-browser' actual Chrome browser executable S. I helps! Let KnOw",
+    "compression_ratio": 2.7851239669421486,
+    "symbol_count": 363,
+    "timestamp": "2025-11-18T10:47:52.338842Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Step Solution D: Step Solution: setting executablePath option launching Puppeteer, BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Step Solution' EXAMPLE APPLICATION: cutable. setting executablePath option launching Puppeteer, Replace '/usr/bin/chromium-browser' actual Chrome browser executable S. I helps! Let KnOw",
+    "compression_ratio": 2.7851239669421486,
+    "symbol_count": 363,
+    "timestamp": "2025-11-18T10:47:52.340601Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Step Solution D: Step Solution: Puppeteer, BLUEPRINT DETAILS: Θ Node Original Θ Solution' EXAMPLE APPLICATION: Puppeteer, Replace Chrome S. I Let KnOw",
+    "compression_ratio": 6.480769230769231,
+    "symbol_count": 156,
+    "timestamp": "2025-11-18T10:47:52.343891Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 337.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:52.344351Z"
+  }
+]

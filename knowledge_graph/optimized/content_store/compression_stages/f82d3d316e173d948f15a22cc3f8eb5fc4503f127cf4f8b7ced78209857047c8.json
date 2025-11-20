@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: System Requirements\n\nDescription\n\nDEFINITION:\nSystem Requirements\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'System Requirements\n\nDescription'\n\nEXAMPLE APPLICATION:\nstem Architecture\nNode 3: System Requirements\nNode 2: System Architecture\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows.\nEdges:\nNode 4: Cognitive Architecture\nNode 5: Machine Learning\nNode 6: Natural Language Processing\nNode 3: System Requirements\n\nDescription: Detailed description of the system's requirements, including its functional, performance, and security requirements.\nEdges:\nNode 7: Functional Requirements\nNode 8: Pe\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1174,
+    "timestamp": "2025-11-18T10:47:40.542108Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: System Requirements\n\nDescription\n\nDEFINITION:\nSystem Requirements\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'System Requirements\n\nDescription'\n\nEXAMPLE APPLICATION:\nstem Architecture\nNode 3: System Requirements\nNode 2: System Architecture\n\nDescription: Detailed description of the system's architecture, including its components, interfaces, and data flows.\nEdges:\nNode 4: Cognitive Architecture\nNode 5: ",
+    "compression_ratio": 2.0,
+    "symbol_count": 587,
+    "timestamp": "2025-11-18T10:47:40.542130Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: S Requirements Description D: S Requirements Description: Detailed description of S's architecture, including its components, interfaces, data flows BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'S Requirements Description' EXAMPLE APPLICATION: stem Architecture Node 3: S Requirements Node 2: S Architecture Description: Detailed description of S's architecture, including its components, interfaces, data flows. Edges: Node 4: Cognitive Architecture Node 5:",
+    "compression_ratio": 2.3019607843137253,
+    "symbol_count": 510,
+    "timestamp": "2025-11-18T10:47:40.543154Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: S Requirements Description D: S Requirements Description: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Requirements Description' EXAMPLE APPLICATION: Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. Edges: Node Ω Architecture Node",
+    "compression_ratio": 2.5802197802197804,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:40.551033Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: S Requirements Description D: S Requirements Description: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Requirements Description' EXAMPLE APPLICATION: Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. Edges: Node Ω Architecture Node",
+    "compression_ratio": 2.5802197802197804,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:40.560798Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: S Requirements Description D: S Requirements Description: Detailed description S's architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Requirements Description' EXAMPLE APPLICATION: Architecture Node S Requirements Node S Architecture Description: Detailed description S's architecture, including components, interfaces, flows. Edges: Node Ω Architecture Node",
+    "compression_ratio": 2.5802197802197804,
+    "symbol_count": 455,
+    "timestamp": "2025-11-18T10:47:40.563252Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: S Requirements Description D: S Requirements Description: Detailed S's BLUEPRINT DETAILS: Θ Node Original Θ Requirements Description' EXAMPLE APPLICATION: Architecture Node S Requirements Node S Architecture Description: Detailed S's Edges: Node Ω Architecture Node",
+    "compression_ratio": 4.332103321033211,
+    "symbol_count": 271,
+    "timestamp": "2025-11-18T10:47:40.565613Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Ω",
+    "compression_ratio": 234.8,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:40.568278Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Three Point O ArchE\n\nDEFINITION:\nThe V3.0 implementation of the ArchE system, providing the core cognitive capabilities, workflow orchestration, and action registry. It serves as the primary operational framework with enhanced capabilities.\n\nBLUEPRINT DETAILS:\nV3.0 system implementation across Three_PointO_ArchE/ directory with comprehensive cognitive tools, workflow engine, and action registry. Includes enhanced capabilities and robust implementations.\n\nEXAMPLE APPLICATION:\nThree_PointO_ArchE provides the core operational framework for complex problem-solving, orchestrating multiple cognitive tools while maintaining IAR compliance and Cognitive Resonance throughout all operations.\n\nCATEGORY: SystemArchitecture\n\nRELATIONSHIPS:\ntype: SystemVersion; version: 3.0; provides: Core Cognitive Tools, Workflow Orchestration, Action Registry; integrates_with: Four_PointO_ArchE, Enhanced Tools, Advanced Capabilities; implements: ResonantiA Protocol v3.1-CA, IAR Compliance, Metacognitive Shifts; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1021,
+    "timestamp": "2025-11-18T10:47:01.005259Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Three Point O ArchE\n\nDEFINITION:\nThe V3.0 implementation of the ArchE system, providing the core cognitive capabilities, workflow orchestration, and action registry. It serves as the primary operational framework with enhanced capabilities.\n\nBLUEPRINT DETAILS:\nV3.0 system implementation across Three_PointO_ArchE/ directory with comprehensive cognitive tools, workflow engine, and action registry. Includes enhanced capabilities and robust implementations.\n\nEXAMPLE APPLICATION:\nThree_PointO_ArchE provi",
+    "compression_ratio": 2.0019607843137255,
+    "symbol_count": 510,
+    "timestamp": "2025-11-18T10:47:01.005614Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Three Point O Æ D: V3.0 I of Æ S, providing core cognitive capabilities, workflow orchestration, action registry. It serves as primary operational framework enhanced capabilities. BLUEPRINT DETAILS: V3.0 S I across Three_PointO_Æ/ directory comprehensive cognitive tools, W, action registry. Includes enhanced capabilities robust Is. EXAMPLE APPLICATION: Three_PointO_Æ provi",
+    "compression_ratio": 2.679790026246719,
+    "symbol_count": 381,
+    "timestamp": "2025-11-18T10:47:01.006825Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Three Point O Æ D: V3.0 I Æ S, providing Ω capabilities, workflow orchestration, action registry. It serves primary operational framework enhanced capabilities. BLUEPRINT DETAILS: V3.0 S I across Three_PointO_Æ/ directory comprehensive Ω tools, W, action registry. Includes enhanced capabilities robust Is. EXAMPLE APPLICATION: Three_PointO_Æ provi",
+    "compression_ratio": 2.884180790960452,
+    "symbol_count": 354,
+    "timestamp": "2025-11-18T10:47:01.010827Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Three Point O Æ D: V3.0 I Æ S, providing Ω capabilities, workflow orchestration, action registry. It serves primary operational framework enhanced capabilities. BLUEPRINT DETAILS: V3.0 S I across Three_PointO_Æ/ directory comprehensive Ω tools, W, action registry. Includes enhanced capabilities robust Is. EXAMPLE APPLICATION: Three_PointO_Æ provi",
+    "compression_ratio": 2.884180790960452,
+    "symbol_count": 354,
+    "timestamp": "2025-11-18T10:47:01.013287Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Three Point O Æ D: V3.0 I Æ S, providing Ω capabilities, workflow orchestration, action registry. It serves primary operational framework enhanced capabilities. BLUEPRINT DETAILS: V3.0 S I across Three_PointO_Æ/ directory comprehensive Ω tools, W, action registry. Includes enhanced capabilities robust EXAMPLE APPLICATION: Three_PointO_Æ provi",
+    "compression_ratio": 2.9171428571428573,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T10:47:01.016887Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Three Point O Æ D: V3.0 I Æ S, Ω It BLUEPRINT DETAILS: V3.0 S I Three_PointO_Æ/ Ω W, Includes EXAMPLE APPLICATION: Three_PointO_Æ",
+    "compression_ratio": 7.562962962962963,
+    "symbol_count": 135,
+    "timestamp": "2025-11-18T10:47:01.020725Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Æ|Ω|Æ|Ω",
+    "compression_ratio": 113.44444444444444,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:01.021040Z"
+  }
+]

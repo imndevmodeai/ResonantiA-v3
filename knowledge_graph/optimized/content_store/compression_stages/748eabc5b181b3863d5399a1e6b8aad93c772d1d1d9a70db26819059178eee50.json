@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Network Traffic Analysis\n\nDEFINITION:\nNetwork Traffic Analysis: designed to provide advanced network security capabilities to protect against network-based threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Network Traffic Analysis'\n\nEXAMPLE APPLICATION:\n * Security Orchestration: Creating security orchestration techniques that enable the AI system to automate and streamline security processes.\n\n67. AI-Driven Network Security: Mastermind_AI is designed to provide advanced network security capabilities to protect against network-based threats:\n    * Network Traffic Analysis: Developing network traffic analysis techniques that enable the AI system to analyze and identify potential threats in network traffic.\n    * Firewall Configuration: Implement\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1147,
+    "timestamp": "2025-11-18T10:47:36.748645Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Network Traffic Analysis\n\nDEFINITION:\nNetwork Traffic Analysis: designed to provide advanced network security capabilities to protect against network-based threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Network Traffic Analysis'\n\nEXAMPLE APPLICATION:\n * Security Orchestration: Creating security orchestration techniques that enable the AI system to automate and streamline security processes.\n\n67. AI-Driven Network Security: Mastermind_AI is designed to provide advanced network security capabilities ",
+    "compression_ratio": 2.0017452006980805,
+    "symbol_count": 573,
+    "timestamp": "2025-11-18T10:47:36.748671Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Network Traffic Analysis D: Network Traffic Analysis: designed to provide advanced network security capabilities to protect against network-based threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Network Traffic Analysis' EXAMPLE APPLICATION: * Security Orchestration: Creating security orchestration techniques enable AI S to automate streamline security Pes. 67. AI-Driven Network Security: Mastermind_AI is designed to provide advanced network security capabilities",
+    "compression_ratio": 2.184761904761905,
+    "symbol_count": 525,
+    "timestamp": "2025-11-18T10:47:36.749687Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Network Traffic Analysis D: Network Traffic Analysis: designed provide advanced network security capabilities protect against network-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Network Traffic Analysis' EXAMPLE APPLICATION: Security Orchestration: Creating security orchestration techniques enable AI S automate streamline security Pes. AI-Driven Network Security: Mastermind_AI designed provide advanced network security capabilities",
+    "compression_ratio": 2.2985971943887775,
+    "symbol_count": 499,
+    "timestamp": "2025-11-18T10:47:36.763987Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Network Traffic Analysis D: Network Traffic Analysis: designed provide advanced network security capabilities protect against network-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Network Traffic Analysis' EXAMPLE APPLICATION: Security Orchestration: Creating security orchestration techniques enable AI S automate streamline security Pes. AI-Driven Network Security: Mastermind_AI designed provide advanced network security capabilities",
+    "compression_ratio": 2.2985971943887775,
+    "symbol_count": 499,
+    "timestamp": "2025-11-18T10:47:36.782133Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Network Traffic Analysis D: Network Traffic Analysis: designed provide advanced network security capabilities protect against network-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Network Traffic Analysis' EXAMPLE APPLICATION: Security Orchestration: Creating security orchestration techniques enable AI S automate streamline security Pes. AI-Driven Network Security: Mastermind_AI designed provide advanced network security capabilities",
+    "compression_ratio": 2.2985971943887775,
+    "symbol_count": 499,
+    "timestamp": "2025-11-18T10:47:36.791124Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Network Traffic Analysis D: Network Traffic Analysis: BLUEPRINT DETAILS: Θ Node Original Θ Traffic Analysis' EXAMPLE APPLICATION: Security Orchestration: Creating AI S Pes. AI-Driven Network Security: Mastermind_AI",
+    "compression_ratio": 5.213636363636364,
+    "symbol_count": 220,
+    "timestamp": "2025-11-18T10:47:36.801639Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 382.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:36.801993Z"
+  }
+]

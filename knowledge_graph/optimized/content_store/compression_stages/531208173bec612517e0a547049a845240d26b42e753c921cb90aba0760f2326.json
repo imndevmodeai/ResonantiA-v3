@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Distributed Coordination\n\nDEFINITION:\nThe capability of the ResonantiA framework to manage and orchestrate multiple ArchE instances, enabling them to work collaboratively on complex tasks. This is facilitated by the ArchE instance registrY and guided by SIRC processes.\n\nBLUEPRINT DETAILS:\nConceptual in ResonantiA v3.1-CA. See Section 3.17.\n\nEXAMPLE APPLICATION:\nFor a large-scale data analysis, DistributedcoordinatioN was used to assign different sub-tasks to three separate ArchE instances, which then merged their results.\n\nCATEGORY: SystemCapability\n\nRELATIONSHIPS:\ntype: MultiAgentCoordination; uses: Arche instance registrY, SIRC, ApiTooL; enables: Collective consciousnesS, Cross instance learninG, TaskDecomposition; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 749,
+    "timestamp": "2025-11-18T10:46:46.222679Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Distributed Coordination\n\nDEFINITION:\nThe capability of the ResonantiA framework to manage and orchestrate multiple ArchE instances, enabling them to work collaboratively on complex tasks. This is facilitated by the ArchE instance registrY and guided by SIRC processes.\n\nBLUEPRINT DETAILS:\nConceptual in ResonantiA v3.1-CA. See Section 3.17.\n\nEXAMPLE APPLICATION:\nFor ",
+    "compression_ratio": 2.0026737967914436,
+    "symbol_count": 374,
+    "timestamp": "2025-11-18T10:46:46.222704Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Distributed Coordination D: capability of ResonantiA framework to manage orchestrate multiple Æ instances, enabling them to work collaboratively on complex tasks. is facilitated by Æ instance registrY guided by SIRC Pes. BLUEPRINT DETAILS: Conceptual in ResonantiA v3.1-CA. See Section 3.17. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.3553459119496853,
+    "symbol_count": 318,
+    "timestamp": "2025-11-18T10:46:46.225617Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Distributed Coordination D: capability ResonantiA framework manage orchestrate multiple Æ instances, enabling collaboratively complex tasks. facilitated Æ instance registrY guided SIRC Pes. BLUEPRINT DETAILS: Conceptual ResonantiA v3.1-CA. See Section 3.17. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.637323943661972,
+    "symbol_count": 284,
+    "timestamp": "2025-11-18T10:46:46.231116Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Distributed Coordination D: capability ResonantiA framework manage orchestrate multiple Æ instances, enabling collaboratively complex tasks. facilitated Æ instance registrY guided SIRC Pes. BLUEPRINT DETAILS: Conceptual ResonantiA v3.1-CA. See Section 3.17. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.637323943661972,
+    "symbol_count": 284,
+    "timestamp": "2025-11-18T10:46:46.232274Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Distributed Coordination D: capability ResonantiA framework manage orchestrate multiple Æ instances, enabling collaboratively complex tasks. facilitated Æ instance registrY guided SIRC Pes. BLUEPRINT DETAILS: Conceptual ResonantiA v3.1-CA. See Section 3.17. EXAMPLE APPLICATION:",
+    "compression_ratio": 2.637323943661972,
+    "symbol_count": 284,
+    "timestamp": "2025-11-18T10:46:46.247866Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Distributed Coordination D: ResonantiA Æ Æ SIRC Pes. BLUEPRINT DETAILS: Conceptual ResonantiA See Section EXAMPLE APPLICATION:",
+    "compression_ratio": 5.674242424242424,
+    "symbol_count": 132,
+    "timestamp": "2025-11-18T10:46:46.255658Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ|Æ",
+    "compression_ratio": 249.66666666666666,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:46.255930Z"
+  }
+]

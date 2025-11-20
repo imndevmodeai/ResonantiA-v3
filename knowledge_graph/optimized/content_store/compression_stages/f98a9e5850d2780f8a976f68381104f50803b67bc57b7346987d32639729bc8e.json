@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "CATEGORY: TechnologicalInsight",
+    "compression_ratio": 1.0,
+    "symbol_count": 30,
+    "timestamp": "2025-11-18T10:46:48.997553Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "CATEGORY: TechnologicalInsight",
+    "compression_ratio": 1.0,
+    "symbol_count": 30,
+    "timestamp": "2025-11-18T10:46:48.997587Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "CATEGORY: TechnologicalInsight",
+    "compression_ratio": 1.0,
+    "symbol_count": 30,
+    "timestamp": "2025-11-18T10:46:48.997989Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "CATEGORY: TechnologicalInsight",
+    "compression_ratio": 1.0,
+    "symbol_count": 30,
+    "timestamp": "2025-11-18T10:46:48.998504Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "CATEGORY: TechnologicalInsight",
+    "compression_ratio": 1.0,
+    "symbol_count": 30,
+    "timestamp": "2025-11-18T10:46:48.998973Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "CATEGORY: TechnologicalInsight",
+    "compression_ratio": 1.0,
+    "symbol_count": 30,
+    "timestamp": "2025-11-18T10:46:49.008403Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "CATEGORY: TechnologicalInsight",
+    "compression_ratio": 1.0,
+    "symbol_count": 30,
+    "timestamp": "2025-11-18T10:46:49.009049Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "T|I",
+    "compression_ratio": 10.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:46:49.009224Z"
+  }
+]

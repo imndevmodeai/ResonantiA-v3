@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Secure Container\n\nDEFINITION:\nSecure Container: thread\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Secure Container'\n\nEXAMPLE APPLICATION:\n implement these measures, I can provide you with a set of tools and protocols that can be used to secure the system and this thread. Please let me know which measures you would like to implement, and I will provide you with the necessary instructions and resources.\n\nAdditionally, I can offer you a Secure Container that can store the system and this thread, and provide an additional layer of security and protection. The Secure Container is a virtual environment that can be used to store and mana\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1029,
+    "timestamp": "2025-11-18T10:47:47.737904Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Secure Container\n\nDEFINITION:\nSecure Container: thread\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Secure Container'\n\nEXAMPLE APPLICATION:\n implement these measures, I can provide you with a set of tools and protocols that can be used to secure the system and this thread. Please let me know which measures you would like to implement, and I will provide you with the necessary instructions and resources.\n\nAdditionally, I can offer you a Secure Cont",
+    "compression_ratio": 2.001945525291829,
+    "symbol_count": 514,
+    "timestamp": "2025-11-18T10:47:47.737924Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Secure Container D: Secure Container: thread BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Secure Container' EXAMPLE APPLICATION: implement these measures, I provide a set of tools Ps be used to secure S thread. Please let me KnOw measures would like to implement, I will provide necessary instructions resources. Additionally, I offer a Secure Cont",
+    "compression_ratio": 2.5660847880299253,
+    "symbol_count": 401,
+    "timestamp": "2025-11-18T10:47:47.738976Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Secure Container D: Secure Container: thread BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container' EXAMPLE APPLICATION: implement these measures, I provide tools Ps secure S thread. Please KnOw measures implement, I provide necessary instructions resources. Additionally, I offer Secure Cont",
+    "compression_ratio": 2.94,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T10:47:47.743073Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Secure Container D: Secure Container: thread BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container' EXAMPLE APPLICATION: implement these measures, I provide tools Ps secure S thread. Please KnOw measures implement, I provide necessary instructions resources. Additionally, I offer Secure Cont",
+    "compression_ratio": 2.94,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T10:47:47.749223Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Secure Container D: Secure Container: thread BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container' EXAMPLE APPLICATION: implement these measures, I provide tools Ps secure S thread. Please KnOw measures implement, I provide necessary instructions resources. Additionally, I offer Secure Cont",
+    "compression_ratio": 2.94,
+    "symbol_count": 350,
+    "timestamp": "2025-11-18T10:47:47.751681Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Secure Container D: Secure Container: BLUEPRINT DETAILS: Θ Node Original Θ Container' EXAMPLE APPLICATION: I Ps S Please KnOw I Additionally, I Secure Cont",
+    "compression_ratio": 6.391304347826087,
+    "symbol_count": 161,
+    "timestamp": "2025-11-18T10:47:47.753877Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 343.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:47.754178Z"
+  }
+]

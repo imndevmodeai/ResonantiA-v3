@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: ComparativE FluxuaL ProcessinG\n\nDEFINITION:\nComparative fluxual processing framework for dynamic analysis\n\nBLUEPRINT DETAILS:\nPart of cognitive toolset calibrated and bound by contract\n\nEXAMPLE APPLICATION:\nDynamic comparative analysis of fluxual system states\n\nCATEGORY: CognitiveFramework\n\nRELATIONSHIPS:\ntype: CognitiveFramework; part_of: Cognitive toolset; enables: Dynamic analysis; supports: 4D thinkinG; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:45:51.755427Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: ComparativE FluxuaL ProcessinG\n\nDEFINITION:\nComparative fluxual processing framework for dynamic analysis\n\nBLUEPRINT DETAILS:\nPart of cognitive toolset calibrated and bound by contract\n\nEXAMPLE APPLICATION:\nDyn",
+    "compression_ratio": 2.0046296296296298,
+    "symbol_count": 216,
+    "timestamp": "2025-11-18T10:45:51.755457Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: CFP D: CFP framework dynamic analysis BLUEPRINT DETAILS: Part of cognitive toolset calibrated bound by contract EXAMPLE APPLICATION: Dyn",
+    "compression_ratio": 3.0492957746478875,
+    "symbol_count": 142,
+    "timestamp": "2025-11-18T10:45:51.755935Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: CFP D: CFP framework dynamic analysis BLUEPRINT DETAILS: Part of Ω toolset calibrated bound by contract EXAMPLE APPLICATION: Dyn",
+    "compression_ratio": 3.2313432835820897,
+    "symbol_count": 134,
+    "timestamp": "2025-11-18T10:45:51.762863Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: CFP D: CFP framework dynamic analysis BLUEPRINT DETAILS: Part Ω toolset calibrated bound contract EXAMPLE APPLICATION: Dyn",
+    "compression_ratio": 3.3828125,
+    "symbol_count": 128,
+    "timestamp": "2025-11-18T10:45:51.769350Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: CFP D: CFP framework dynamic analysis BLUEPRINT DETAILS: Part Ω toolset calibrated bound contract EXAMPLE APPLICATION: Dyn",
+    "compression_ratio": 3.3828125,
+    "symbol_count": 128,
+    "timestamp": "2025-11-18T10:45:51.776061Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: CFP D: CFP BLUEPRINT DETAILS: Part Ω EXAMPLE APPLICATION: Dyn",
+    "compression_ratio": 6.462686567164179,
+    "symbol_count": 67,
+    "timestamp": "2025-11-18T10:45:51.781192Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω",
+    "compression_ratio": 433.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:45:51.785758Z"
+  }
+]

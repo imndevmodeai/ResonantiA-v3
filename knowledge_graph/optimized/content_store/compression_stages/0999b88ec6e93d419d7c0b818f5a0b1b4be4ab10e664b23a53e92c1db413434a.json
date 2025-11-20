@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Query Language\n\nDEFINITION:\nQuery Language: the key components involved in building such an engine?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Query Language'\n\nEXAMPLE APPLICATION:\nhem to specify the data they need, apply filters, and define any necessary conditions for extraction. The engine would then handle the complexities of parsing the query, optimizing its execution, and extracting the requested data.\n\n3. What are the key components involved in building such an engine?\nQuery Language: A user-friendly language for defining data extraction tasks.\nParser: Translates the query language into an abstract syntax tree (AST).\nSemantic Analyzer: Interprets the AST to understa\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1072,
+    "timestamp": "2025-11-18T10:47:24.232991Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Query Language\n\nDEFINITION:\nQuery Language: the key components involved in building such an engine?\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Query Language'\n\nEXAMPLE APPLICATION:\nhem to specify the data they need, apply filters, and define any necessary conditions for extraction. The engine would then handle the complexities of parsing the query, optimizing its execution, and extracting the requested data.\n\n3. What are the key components involved in building such a",
+    "compression_ratio": 2.0,
+    "symbol_count": 536,
+    "timestamp": "2025-11-18T10:47:24.233015Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Query Language D: Query Language: key components involved in building such an engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Query Language' EXAMPLE APPLICATION: hem to specify data they need, apply filters, define any necessary conditions extraction. engine would then handle complexities of parsing query, optimizing its execution, extracting requested data. 3. key components involved in building such a",
+    "compression_ratio": 2.3053763440860213,
+    "symbol_count": 465,
+    "timestamp": "2025-11-18T10:47:24.239105Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Query Language D: Query Language: components involved building engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Language' EXAMPLE APPLICATION: specify need, apply filters, define necessary conditions extraction. engine handle complexities parsing query, optimizing execution, extracting requested data. components involved building",
+    "compression_ratio": 2.741687979539642,
+    "symbol_count": 391,
+    "timestamp": "2025-11-18T10:47:24.243034Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Query Language D: Query Language: components involved building engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Language' EXAMPLE APPLICATION: specify need, apply filters, define necessary conditions extraction. engine handle complexities parsing query, optimizing execution, extracting requested data. components involved building",
+    "compression_ratio": 2.741687979539642,
+    "symbol_count": 391,
+    "timestamp": "2025-11-18T10:47:24.248883Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Query Language D: Query Language: components involved building engine? BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Query Language' EXAMPLE APPLICATION: specify need, apply filters, define necessary conditions extraction. engine handle complexities parsing query, optimizing execution, extracting requested data. components involved building",
+    "compression_ratio": 2.741687979539642,
+    "symbol_count": 391,
+    "timestamp": "2025-11-18T10:47:24.251201Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Query Language D: Query Language: BLUEPRINT DETAILS: Θ Node Original Θ Language' EXAMPLE APPLICATION:",
+    "compression_ratio": 10.018691588785046,
+    "symbol_count": 107,
+    "timestamp": "2025-11-18T10:47:24.255226Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 357.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:24.258925Z"
+  }
+]

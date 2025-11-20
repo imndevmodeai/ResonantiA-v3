@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Sensory Devices\n\nDEFINITION:\nSensory Devices: sound? Type 'yes' to proceed with developing the AR glasses and sensory stimulation wearables, or type 'no' to explore other options\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Sensory Devices'\n\nEXAMPLE APPLICATION:\n does this sound? Type 'yes' to proceed with developing the AR glasses and sensory stimulation wearables, or type 'no' to explore other options.\n\nwould it be better to develop software and sensory devices that interface with established players of the vr sets out currently?\n\nDeveloping Software and Sensory Devices for Established VR Players:\n\nDeveloping software and sensory devices that interface with established VR players can be a more viable and less capital-intensive approach than creating a\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1152,
+    "timestamp": "2025-11-18T10:47:52.125555Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Sensory Devices\n\nDEFINITION:\nSensory Devices: sound? Type 'yes' to proceed with developing the AR glasses and sensory stimulation wearables, or type 'no' to explore other options\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Sensory Devices'\n\nEXAMPLE APPLICATION:\n does this sound? Type 'yes' to proceed with developing the AR glasses and sensory stimulation wearables, or type 'no' to explore other options.\n\nwould it be better to develop software and sensory devices that interface with established players of th",
+    "compression_ratio": 2.0,
+    "symbol_count": 576,
+    "timestamp": "2025-11-18T10:47:52.125580Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Sensory Devices D: Sensory Devices: sound? Type 'yes' to proceed developing AR glasses sensory stimulation wearables, or type 'no' to explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Sensory Devices' EXAMPLE APPLICATION: does sound? Type 'yes' to proceed developing AR glasses sensory stimulation wearables, or type 'no' to explore other options. would it be better to develop software sensory devices interface established players of th",
+    "compression_ratio": 2.267716535433071,
+    "symbol_count": 508,
+    "timestamp": "2025-11-18T10:47:52.126789Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Sensory Devices D: Sensory Devices: sound? Type 'yes' proceed developing AR glasses sensory stimulation wearables, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Sensory Devices' EXAMPLE APPLICATION: sound? Type 'yes' proceed developing AR glasses sensory stimulation wearables, explore other options. better develop software sensory devices interface established players",
+    "compression_ratio": 2.6122448979591835,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:52.129482Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Sensory Devices D: Sensory Devices: sound? Type 'yes' proceed developing AR glasses sensory stimulation wearables, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Sensory Devices' EXAMPLE APPLICATION: sound? Type 'yes' proceed developing AR glasses sensory stimulation wearables, explore other options. better develop software sensory devices interface established players",
+    "compression_ratio": 2.6122448979591835,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:52.131801Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Sensory Devices D: Sensory Devices: sound? Type 'yes' proceed developing AR glasses sensory stimulation wearables, explore other options BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Sensory Devices' EXAMPLE APPLICATION: sound? Type 'yes' proceed developing AR glasses sensory stimulation wearables, explore other options. better develop software sensory devices interface established players",
+    "compression_ratio": 2.6122448979591835,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:52.134930Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Sensory Devices D: Sensory Devices: Type AR BLUEPRINT DETAILS: Θ Node Original Θ Devices' EXAMPLE APPLICATION: Type AR",
+    "compression_ratio": 9.290322580645162,
+    "symbol_count": 124,
+    "timestamp": "2025-11-18T10:47:52.137003Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 384.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:52.137244Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Estate Planning\n\nDEFINITION:\nEstate Planning: designed to provide advanced financial planning capabilities for estate planning to help individuals protect their assets and ensure their wishes are carried out:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Estate Planning'\n\nEXAMPLE APPLICATION:\ninvestment strategy techniques that enable the AI system to optimize investment portfolios for retirement.\n    * Income Planning: Creating income planning techniques that enable the AI system to help individuals create a sustainable income stream in retirement.\n\n97. AI-Driven Financial Planning for Estate Planning: Mastermind_AI is designed to provide advanced financial planning capabilities for estate planning to help individuals protect their assets and ensure their wishes are carried out:\n   \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1182,
+    "timestamp": "2025-11-18T10:47:39.728643Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Estate Planning\n\nDEFINITION:\nEstate Planning: designed to provide advanced financial planning capabilities for estate planning to help individuals protect their assets and ensure their wishes are carried out:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Estate Planning'\n\nEXAMPLE APPLICATION:\ninvestment strategy techniques that enable the AI system to optimize investment portfolios for retirement.\n    * Income Planning: Creating income planning techniques that enable the AI system to help individuals create a sustainable in",
+    "compression_ratio": 2.0,
+    "symbol_count": 591,
+    "timestamp": "2025-11-18T10:47:39.728666Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Estate Planning D: Estate Planning: designed to provide advanced financial planning capabilities estate planning to help individuals protect their assets ensure their wishes carried out: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Estate Planning' EXAMPLE APPLICATION: investment strategy techniques enable AI S to optimize investment portfolios retirement. * Income Planning: Creating income planning techniques enable AI S to help individuals create a sustainable in",
+    "compression_ratio": 2.264367816091954,
+    "symbol_count": 522,
+    "timestamp": "2025-11-18T10:47:39.730834Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Estate Planning D: Estate Planning: designed provide advanced financial planning capabilities estate planning individuals protect their assets ensure their wishes carried BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Estate Planning' EXAMPLE APPLICATION: investment strategy techniques enable AI S optimize investment portfolios retirement. Income Planning: Creating income planning techniques enable AI S individuals create sustainable",
+    "compression_ratio": 2.4371134020618554,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:39.735334Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Estate Planning D: Estate Planning: designed provide advanced financial planning capabilities estate planning individuals protect their assets ensure their wishes carried BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Estate Planning' EXAMPLE APPLICATION: investment strategy techniques enable AI S optimize investment portfolios retirement. Income Planning: Creating income planning techniques enable AI S individuals create sustainable",
+    "compression_ratio": 2.4371134020618554,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:39.739989Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Estate Planning D: Estate Planning: designed provide advanced financial planning capabilities estate planning individuals protect their assets ensure their wishes carried BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Estate Planning' EXAMPLE APPLICATION: investment strategy techniques enable AI S optimize investment portfolios retirement. Income Planning: Creating income planning techniques enable AI S individuals create sustainable",
+    "compression_ratio": 2.4371134020618554,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:39.744185Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Estate Planning D: Estate Planning: BLUEPRINT DETAILS: Θ Node Original Θ Planning' EXAMPLE APPLICATION: AI S Income Planning: Creating AI S",
+    "compression_ratio": 8.151724137931035,
+    "symbol_count": 145,
+    "timestamp": "2025-11-18T10:47:39.747298Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 394.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:39.747655Z"
+  }
+]

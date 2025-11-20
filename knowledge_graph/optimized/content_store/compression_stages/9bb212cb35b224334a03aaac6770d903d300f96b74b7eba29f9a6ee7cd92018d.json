@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: The Artificial General Intelligence\n\nDEFINITION:\nThe Artificial General Intelligence: Paris\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'The Artificial General Intelligence'\n\nEXAMPLE APPLICATION:\nof France?\nAnswer: The capital of France is Paris.\nLearning: The smallest country in the world is Vatican City.\n->|/results|<-\n->|conditional|<- \nIf the AGI system is not reasoning or learning correctly, trigger a conditional step to revise and revalidate the system.\n->|/conditional|<-\n->|/step|<-\n\nThe Artificial General Intelligence (AGI) system is a type of artificial intelligence that possesses the ability to understand, learn, and apply knowledge across a wide range of tasks, similar to huma\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1085,
+    "timestamp": "2025-11-18T10:47:27.623563Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: The Artificial General Intelligence\n\nDEFINITION:\nThe Artificial General Intelligence: Paris\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'The Artificial General Intelligence'\n\nEXAMPLE APPLICATION:\nof France?\nAnswer: The capital of France is Paris.\nLearning: The smallest country in the world is Vatican City.\n->|/results|<-\n->|conditional|<- \nIf the AGI system is not reasoning or learning correctly, trigger a conditional step to revise and revalidate the system.\n->|/conditional",
+    "compression_ratio": 2.0018450184501844,
+    "symbol_count": 542,
+    "timestamp": "2025-11-18T10:47:27.623659Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Paris BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: ' Artificial General Intelligence' EXAMPLE APPLICATION: of France? Answer: capital of France is Paris. Learning: smallest country in world is Vatican City. ->|/results|<- ->|conditional|<- If AGI S is reasoning or learning correctly, trigger a conditional step to revise revalidate S. ->|/conditional",
+    "compression_ratio": 2.3036093418259025,
+    "symbol_count": 471,
+    "timestamp": "2025-11-18T10:47:27.632945Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Paris BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Artificial General Intelligence' EXAMPLE APPLICATION: France? Answer: capital France Paris. Learning: smallest country world Vatican City. ->|/results|<- ->|conditional|<- If AGI S reasoning learning correctly, trigger conditional revise revalidate S. ->|/conditional",
+    "compression_ratio": 2.4942528735632186,
+    "symbol_count": 435,
+    "timestamp": "2025-11-18T10:47:27.651831Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Paris BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Artificial General Intelligence' EXAMPLE APPLICATION: France? Answer: capital France Paris. Learning: smallest country world Vatican City. ->|/results|<- ->|conditional|<- If AGI S reasoning learning correctly, trigger conditional revise revalidate S. ->|/conditional",
+    "compression_ratio": 2.4942528735632186,
+    "symbol_count": 435,
+    "timestamp": "2025-11-18T10:47:27.662030Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Paris BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Artificial General Intelligence' EXAMPLE APPLICATION: France? Answer: capital France Paris. Learning: smallest country world Vatican City. ->|/results|<- ->|conditional|<- If AGI S reasoning learning correctly, trigger conditional revise revalidate S. ->|/conditional",
+    "compression_ratio": 2.4942528735632186,
+    "symbol_count": 435,
+    "timestamp": "2025-11-18T10:47:27.666256Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Artificial General Intelligence D: Artificial General Intelligence: Paris BLUEPRINT DETAILS: Θ Node Original Θ Artificial General Intelligence' EXAMPLE APPLICATION: France? Answer: France Paris. Learning: Vatican City. If AGI S S.",
+    "compression_ratio": 4.5974576271186445,
+    "symbol_count": 236,
+    "timestamp": "2025-11-18T10:47:27.672540Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 361.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:27.672930Z"
+  }
+]

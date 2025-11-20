@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Data Processing\n\nDEFINITION:\nData Processing: a crucial stage in any data extraction pipeline, particularly when building a machine learning engine like AgentQL\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Data Processing'\n\nEXAMPLE APPLICATION:\nraction engine, responsible for translating the optimized query plan into actions that retrieve the desired information from various sources. Its design and implementation significantly impact the efficiency, robustness, and overall effectiveness of the data extraction process.\n\n\n\nThe Importance of Data Processing in Data Extraction\nData processing is a crucial stage in any data extraction pipeline, particularly when building a machine learning engine like AgentQL. While the sources provided don\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1134,
+    "timestamp": "2025-11-18T10:47:23.906034Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Data Processing\n\nDEFINITION:\nData Processing: a crucial stage in any data extraction pipeline, particularly when building a machine learning engine like AgentQL\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Data Processing'\n\nEXAMPLE APPLICATION:\nraction engine, responsible for translating the optimized query plan into actions that retrieve the desired information from various sources. Its design and implementation significantly impact the efficiency, robustness, and overall effectiveness of the data ",
+    "compression_ratio": 2.0,
+    "symbol_count": 567,
+    "timestamp": "2025-11-18T10:47:23.906056Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Data Ping D: Data Ping: a crucial stage in any data extraction pipeline, particularly building a machine learning engine like AgentQL BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Data Ping' EXAMPLE APPLICATION: raction engine, responsible translating optimized query plan into actions retrieve desired inFion various sources. Its design I significantly impact efficiency, robustness, overall effectiveness of data",
+    "compression_ratio": 2.4334763948497855,
+    "symbol_count": 466,
+    "timestamp": "2025-11-18T10:47:23.907048Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Data Ping D: Data Ping: crucial stage extraction pipeline, particularly building machine learning engine AgentQL BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Data Ping' EXAMPLE APPLICATION: raction engine, responsible translating optimized query actions retrieve desired inFion various sources. Its design I significantly impact efficiency, robustness, overall effectiveness",
+    "compression_ratio": 2.6745283018867925,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:47:23.912780Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Data Ping D: Data Ping: crucial stage extraction pipeline, particularly building machine learning engine AgentQL BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Data Ping' EXAMPLE APPLICATION: raction engine, responsible translating optimized query actions retrieve desired inFion various sources. Its design I significantly impact efficiency, robustness, overall effectiveness",
+    "compression_ratio": 2.6745283018867925,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:47:23.915938Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Data Ping D: Data Ping: crucial stage extraction pipeline, particularly building machine learning engine AgentQL BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Data Ping' EXAMPLE APPLICATION: raction engine, responsible translating optimized query actions retrieve desired inFion various sources. Its design I significantly impact efficiency, robustness, overall effectiveness",
+    "compression_ratio": 2.6745283018867925,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:47:23.919145Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Data Ping D: Data Ping: AgentQL BLUEPRINT DETAILS: Θ Node Original Θ Ping' EXAMPLE APPLICATION: Its I",
+    "compression_ratio": 10.598130841121495,
+    "symbol_count": 107,
+    "timestamp": "2025-11-18T10:47:23.925846Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 378.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:23.926113Z"
+  }
+]

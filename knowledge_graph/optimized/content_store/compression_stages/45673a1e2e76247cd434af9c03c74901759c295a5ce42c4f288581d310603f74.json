@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Centered Design Principles\n\nDEFINITION:\nCentered Design Principles: designed with a human-centered approach, prioritizing human needs and values:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Centered Design Principles'\n\nEXAMPLE APPLICATION:\nviding explanations for the system's decisions and actions.\n    * Transparency: Providing transparency into the system's decision-making processes and data sources.\n\n23. Human-Centered Design: Mastermind_AI is designed with a human-centered approach, prioritizing human needs and values:\n    * Human-Centered Design Principles: Incorporating human-centered design principles to ensure the system is intuitive, user-friendly, and meets human needs.\n    * User Experience: Focusing on creating a positi\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1130,
+    "timestamp": "2025-11-18T10:47:29.759656Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Centered Design Principles\n\nDEFINITION:\nCentered Design Principles: designed with a human-centered approach, prioritizing human needs and values:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Centered Design Principles'\n\nEXAMPLE APPLICATION:\nviding explanations for the system's decisions and actions.\n    * Transparency: Providing transparency into the system's decision-making processes and data sources.\n\n23. Human-Centered Design: Mastermind_AI is designed with a human-centered approach, prioritizi",
+    "compression_ratio": 2.0,
+    "symbol_count": 565,
+    "timestamp": "2025-11-18T10:47:29.759682Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Centered Design Principles D: Centered Design Principles: designed a human-centered approach, prioritizing human needs values: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Centered Design Principles' EXAMPLE APPLICATION: viding explanations S's decisions actions. * Transparency: Providing transparency into S's decision-making Pes data sources. 23. Human-Centered Design: Mastermind_AI is designed a human-centered approach, prioritizi",
+    "compression_ratio": 2.310838445807771,
+    "symbol_count": 489,
+    "timestamp": "2025-11-18T10:47:29.761339Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Centered Design Principles D: Centered Design Principles: designed human-centered approach, prioritizing human needs values: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Centered Design Principles' EXAMPLE APPLICATION: viding explanations S's decisions actions. Transparency: Providing transparency S's decision-making Pes sources. Human-Centered Design: Mastermind_AI designed human-centered approach, prioritizi",
+    "compression_ratio": 2.4406047516198703,
+    "symbol_count": 463,
+    "timestamp": "2025-11-18T10:47:29.768926Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Centered Design Principles D: Centered Design Principles: designed human-centered approach, prioritizing human needs values: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Centered Design Principles' EXAMPLE APPLICATION: viding explanations S's decisions actions. Transparency: Providing transparency S's decision-making Pes sources. Human-Centered Design: Mastermind_AI designed human-centered approach, prioritizi",
+    "compression_ratio": 2.4406047516198703,
+    "symbol_count": 463,
+    "timestamp": "2025-11-18T10:47:29.777212Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Centered Design Principles D: Centered Design Principles: designed human-centered approach, prioritizing human needs values: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Centered Design Principles' EXAMPLE APPLICATION: viding explanations S's decisions actions. Transparency: Providing transparency S's decision-making Pes sources. Human-Centered Design: Mastermind_AI designed human-centered approach, prioritizi",
+    "compression_ratio": 2.4406047516198703,
+    "symbol_count": 463,
+    "timestamp": "2025-11-18T10:47:29.784541Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Centered Design Principles D: Centered Design Principles: BLUEPRINT DETAILS: Θ Node Original Θ Design Principles' EXAMPLE APPLICATION: S's Transparency: Providing S's Pes Human-Centered Design: Mastermind_AI",
+    "compression_ratio": 5.305164319248826,
+    "symbol_count": 213,
+    "timestamp": "2025-11-18T10:47:29.790104Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 376.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:29.790479Z"
+  }
+]

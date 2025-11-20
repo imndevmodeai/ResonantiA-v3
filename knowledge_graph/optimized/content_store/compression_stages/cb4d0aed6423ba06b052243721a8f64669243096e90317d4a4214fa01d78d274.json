@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: User Account Creation\n\nDEFINITION:\nUser Account Creation: available:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'User Account Creation'\n\nEXAMPLE APPLICATION:\nd permissions.\n\nUser Management:\n\nI will guide you through the process of configuring user access and permissions for the SPR_compressor system.\n\nUser Roles:\n\nThe following user roles are available:\n\nUser Accounts:\n\nYou can create new user accounts or manage existing ones. Please select an option:\n\nUser Account Creation:\n\nIf you select option 1, I will guide you through the process of creating a new user account. Please provide the following information:\n\nUser Account Management:\n\nIf you select \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1048,
+    "timestamp": "2025-11-18T10:47:49.518615Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: User Account Creation\n\nDEFINITION:\nUser Account Creation: available:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'User Account Creation'\n\nEXAMPLE APPLICATION:\nd permissions.\n\nUser Management:\n\nI will guide you through the process of configuring user access and permissions for the SPR_compressor system.\n\nUser Roles:\n\nThe following user roles are available:\n\nUser Accounts:\n\nYou can create new user accounts or manage existing ones. Please select an option:\n\nUs",
+    "compression_ratio": 2.0,
+    "symbol_count": 524,
+    "timestamp": "2025-11-18T10:47:49.518641Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: User Account Creation D: User Account Creation: available: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'User Account Creation' EXAMPLE APPLICATION: d permissions. User Management: I will guide through P of configuring user access permissions Θ_compressor S. User Roles: following user roles available: User Accounts: create new user accounts or manage existing ones. Please select an option: Us",
+    "compression_ratio": 2.344519015659955,
+    "symbol_count": 447,
+    "timestamp": "2025-11-18T10:47:49.524185Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: User Account Creation D: User Account Creation: available: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'User Account Creation' EXAMPLE APPLICATION: permissions. User Management: I guide through P configuring access permissions Θ_compressor S. User Roles: following roles available: User Accounts: create accounts manage existing ones. Please select option: Us",
+    "compression_ratio": 2.5623471882640585,
+    "symbol_count": 409,
+    "timestamp": "2025-11-18T10:47:49.535853Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: User Account Creation D: User Account Creation: available: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'User Account Creation' EXAMPLE APPLICATION: permissions. User Management: I guide through P configuring access permissions Θ_compressor S. User Roles: following roles available: User Accounts: create accounts manage existing ones. Please select option: Us",
+    "compression_ratio": 2.5623471882640585,
+    "symbol_count": 409,
+    "timestamp": "2025-11-18T10:47:49.548179Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: User Account Creation D: User Account Creation: available: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'User Account Creation' EXAMPLE APPLICATION: permissions. User Management: I guide through P configuring access permissions Θ_compressor S. User Roles: following roles available: User Accounts: create accounts manage existing ones. Please select option: Us",
+    "compression_ratio": 2.5623471882640585,
+    "symbol_count": 409,
+    "timestamp": "2025-11-18T10:47:49.556242Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: User Account Creation D: User Account Creation: BLUEPRINT DETAILS: Θ Node Original Θ Account Creation' EXAMPLE APPLICATION: User Management: I P Θ_compressor S. User Roles: User Accounts: Please Us",
+    "compression_ratio": 5.16256157635468,
+    "symbol_count": 203,
+    "timestamp": "2025-11-18T10:47:49.565798Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ",
+    "compression_ratio": 209.6,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:49.566163Z"
+  }
+]

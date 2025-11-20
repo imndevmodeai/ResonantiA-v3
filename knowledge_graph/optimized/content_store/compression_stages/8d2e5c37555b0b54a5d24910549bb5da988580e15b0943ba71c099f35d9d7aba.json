@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Dialogue Management\n\nDEFINITION:\nDialogue Management: designed to interact with humans through multiple modalities, including:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Dialogue Management'\n\nEXAMPLE APPLICATION:\nanguage Understanding: Developing language understanding capabilities that enable the system to comprehend complex language structures and nuances.\n    * Language Generation: Implementing language generation techniques that enable the system to produce coherent and contextually relevant text.\n    * Dialogue Management: Using dialogue management techniques to enable the system to engage in natural-sounding conversations with humans.\n\n32. Multimodal Interaction: Mastermind_AI is designed to intera\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1104,
+    "timestamp": "2025-11-18T10:47:31.226582Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Dialogue Management\n\nDEFINITION:\nDialogue Management: designed to interact with humans through multiple modalities, including:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Dialogue Management'\n\nEXAMPLE APPLICATION:\nanguage Understanding: Developing language understanding capabilities that enable the system to comprehend complex language structures and nuances.\n    * Language Generation: Implementing language generation techniques that enable the system to produce coherent and contextu",
+    "compression_ratio": 2.0,
+    "symbol_count": 552,
+    "timestamp": "2025-11-18T10:47:31.226606Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Dialogue Management D: Dialogue Management: designed to interact humans through multiple modalities, including: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Dialogue Management' EXAMPLE APPLICATION: anguage Understanding: Developing language understanding capabilities enable S to comprehend complex language structures nuances. * Language Generation: Implementing language generation techniques enable S to produce coherent contextu",
+    "compression_ratio": 2.271604938271605,
+    "symbol_count": 486,
+    "timestamp": "2025-11-18T10:47:31.227563Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Dialogue Management D: Dialogue Management: designed interact humans through multiple modalities, including: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Dialogue Management' EXAMPLE APPLICATION: anguage Understanding: Developing language understanding capabilities enable S comprehend complex language structures nuances. Language Generation: Implementing language generation techniques enable S produce coherent contextu",
+    "compression_ratio": 2.3389830508474576,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:31.231819Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Dialogue Management D: Dialogue Management: designed interact humans through multiple modalities, including: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Dialogue Management' EXAMPLE APPLICATION: anguage Understanding: Developing language understanding capabilities enable S comprehend complex language structures nuances. Language Generation: Implementing language generation techniques enable S produce coherent contextu",
+    "compression_ratio": 2.3389830508474576,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:31.236028Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Dialogue Management D: Dialogue Management: designed interact humans through multiple modalities, including: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Dialogue Management' EXAMPLE APPLICATION: anguage Understanding: Developing language understanding capabilities enable S comprehend complex language structures nuances. Language Generation: Implementing language generation techniques enable S produce coherent contextu",
+    "compression_ratio": 2.3389830508474576,
+    "symbol_count": 472,
+    "timestamp": "2025-11-18T10:47:31.241682Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Dialogue Management D: Dialogue Management: BLUEPRINT DETAILS: Θ Node Original Θ Management' EXAMPLE APPLICATION: Understanding: Developing S Language Generation: Implementing S",
+    "compression_ratio": 6.032786885245901,
+    "symbol_count": 183,
+    "timestamp": "2025-11-18T10:47:31.246466Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 368.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:31.249665Z"
+  }
+]

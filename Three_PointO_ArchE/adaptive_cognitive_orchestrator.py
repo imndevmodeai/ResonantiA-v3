@@ -653,9 +653,9 @@ class AdaptiveCognitiveOrchestrator:
         # SPR Manager for layer-aware retrieval
         try:
             from .spr_manager import SPRManager
-            from .config import Config
-            config = Config()
-            spr_filepath = config.get('spr_filepath', 'knowledge_graph/spr_definitions_tv.json')
+            from .config import CONFIG, SPR_JSON_FILE
+            # Use CONFIG.paths.spr_definitions or fallback to legacy SPR_JSON_FILE
+            spr_filepath = str(CONFIG.paths.spr_definitions) if hasattr(CONFIG, 'paths') else SPR_JSON_FILE
             self.spr_manager = SPRManager(spr_filepath)
             logger.info("[ACO] SPR Manager initialized for layer-aware retrieval")
         except Exception as e:
@@ -737,7 +737,7 @@ class AdaptiveCognitiveOrchestrator:
                         )
                 except Exception as e:
                     logger.warning(f"[ACO] SPR priming failed: {e}")
-            
+
             # --- Base System Processing (if available) ---
             if self.base_system:
                 self.emit_aco_event("Routing", "Routing to Cognitive Resonant Controller System (CRCS).", {})
@@ -788,7 +788,7 @@ class AdaptiveCognitiveOrchestrator:
                             "Learning", 
                             f"ACO learned pattern: {query_signature[:8]}... → {selected_layer} (success: {success_rate:.1%})", 
                             {"pattern": query_signature[:8], "layer": selected_layer, "success_rate": success_rate}
-                        )
+            )
             
             # --- Adaptation and Evolution ---
             evolution_opportunity = self._attempt_adaptation(query, pattern_analysis)

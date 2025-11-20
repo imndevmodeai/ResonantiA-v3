@@ -728,6 +728,49 @@ class IARCompliantWorkflowEngine:
         # Combine contexts: runtime_context takes precedence
         combined_context = {**initial_context, **runtime_context}
         
+        # Add a 'tasks' object to context for template references like {{ tasks.task_name.output.result }}
+        # This wraps task outputs stored directly in runtime_context
+        class TaskOutputWrapper:
+            """Wrapper to access task outputs via tasks.task_name syntax in templates"""
+            def __init__(self, runtime_ctx):
+                self._ctx = runtime_ctx
+            
+            def __getattr__(self, task_name):
+                if task_name in self._ctx:
+                    task_result = self._ctx[task_name]
+                    # Return a wrapper that allows .output.result or .result access
+                    class TaskResultWrapper:
+                        def __init__(self, result):
+                            # Store the full result
+                            self._result = result
+                            # Set result attribute
+                            self.result = result
+                            # If result is a dict, expose all keys as attributes
+                            if isinstance(result, dict):
+                                for key, value in result.items():
+                                    setattr(self, key, value)
+                                # Also create .output wrapper if 'result' key exists
+                                if 'result' in result:
+                                    self.output = TaskResultWrapper(result['result'])
+                                elif 'output' in result:
+                                    self.output = TaskResultWrapper(result['output'])
+                        
+                        def __getattr__(self, name):
+                            """Allow recursive attribute access for nested dicts"""
+                            if isinstance(self._result, dict) and name in self._result:
+                                value = self._result[name]
+                                if isinstance(value, dict):
+                                    return TaskResultWrapper(value)
+                                return value
+                            return None
+                    return TaskResultWrapper(task_result)
+                # Return empty wrapper if task not found (prevents AttributeError)
+                return type('EmptyTaskResult', (), {'result': None, 'output': None, '_result': None})()
+        
+        combined_context['tasks'] = TaskOutputWrapper(runtime_context)
+        # Also add 'inputs' for backward compatibility
+        combined_context['inputs'] = initial_context
+        
         return self._resolve_value(inputs, combined_context)
     
     def _evaluate_condition(self,
@@ -746,6 +789,37 @@ class IARCompliantWorkflowEngine:
         try:
             # Combine contexts for evaluation
             combined_context = {**initial_context, **runtime_context}
+            
+            # Add 'tasks' wrapper for template access (same as _resolve_inputs)
+            class TaskOutputWrapper:
+                def __init__(self, runtime_ctx):
+                    self._ctx = runtime_ctx
+                def __getattr__(self, task_name):
+                    if task_name in self._ctx:
+                        task_result = self._ctx[task_name]
+                        class TaskResultWrapper:
+                            def __init__(self, result):
+                                self._result = result
+                                self.result = result
+                                if isinstance(result, dict):
+                                    for key, value in result.items():
+                                        setattr(self, key, value)
+                                    if 'result' in result:
+                                        self.output = TaskResultWrapper(result['result'])
+                                    elif 'output' in result:
+                                        self.output = TaskResultWrapper(result['output'])
+                            def __getattr__(self, name):
+                                if isinstance(self._result, dict) and name in self._result:
+                                    value = self._result[name]
+                                    if isinstance(value, dict):
+                                        return TaskResultWrapper(value)
+                                    return value
+                                return None
+                        return TaskResultWrapper(task_result)
+                    return type('EmptyTaskResult', (), {'result': None, 'output': None, '_result': None})()
+            
+            combined_context['tasks'] = TaskOutputWrapper(runtime_context)
+            combined_context['inputs'] = initial_context
             
             # Use Jinja2 to render the condition string
             rendered_condition = self.jinja_env.from_string(condition_str).render(combined_context)

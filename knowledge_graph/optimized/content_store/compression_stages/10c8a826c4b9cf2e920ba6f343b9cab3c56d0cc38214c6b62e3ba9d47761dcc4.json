@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Social Impact\n\nDEFINITION:\nDriven Social Impact: designed to drive social impact and create positive change in the world:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Social Impact'\n\nEXAMPLE APPLICATION:\nservices.\n    * Co-Creation Tools: Implementing co-creation tools that enable humans and AI to work together to develop new ideas and concepts.\n    * Partnership Models: Creating partnership models that enable humans and AI to work together to create new products, services, and experiences.\n\n43. AI-Driven Social Impact: Mastermind_AI is designed to drive social impact and create positive change in the world:\n    * Social Impact Assessment: Developing social impact assessment techniques that enab\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1107,
+    "timestamp": "2025-11-18T10:47:32.177797Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Social Impact\n\nDEFINITION:\nDriven Social Impact: designed to drive social impact and create positive change in the world:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Social Impact'\n\nEXAMPLE APPLICATION:\nservices.\n    * Co-Creation Tools: Implementing co-creation tools that enable humans and AI to work together to develop new ideas and concepts.\n    * Partnership Models: Creating partnership models that enable humans and AI to work together to create new products, service",
+    "compression_ratio": 2.0018083182640143,
+    "symbol_count": 553,
+    "timestamp": "2025-11-18T10:47:32.177822Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Social Impact D: Driven Social Impact: designed to drive social impact create positive change in world: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Social Impact' EXAMPLE APPLICATION: services. * Co-Creation Tools: Implementing co-creation tools enable humans AI to work together to develop new ideas concepts. * Partnership Models: Creating partnership models enable humans AI to work together to create new products, service",
+    "compression_ratio": 2.2408906882591095,
+    "symbol_count": 494,
+    "timestamp": "2025-11-18T10:47:32.178938Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Social Impact D: Driven Social Impact: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Social Impact' EXAMPLE APPLICATION: services. Co-Creation Tools: Implementing co-creation tools enable humans AI together develop ideas concepts. Partnership Models: Creating partnership models enable humans AI together create products, service",
+    "compression_ratio": 2.4545454545454546,
+    "symbol_count": 451,
+    "timestamp": "2025-11-18T10:47:32.188094Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Social Impact D: Driven Social Impact: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Social Impact' EXAMPLE APPLICATION: services. Co-Creation Tools: Implementing co-creation tools enable humans AI together develop ideas concepts. Partnership Models: Creating partnership models enable humans AI together create products, service",
+    "compression_ratio": 2.4545454545454546,
+    "symbol_count": 451,
+    "timestamp": "2025-11-18T10:47:32.191249Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Social Impact D: Driven Social Impact: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Social Impact' EXAMPLE APPLICATION: services. Co-Creation Tools: Implementing co-creation tools enable humans AI together develop ideas concepts. Partnership Models: Creating partnership models enable humans AI together create products, service",
+    "compression_ratio": 2.4545454545454546,
+    "symbol_count": 451,
+    "timestamp": "2025-11-18T10:47:32.198713Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Social Impact D: Driven Social Impact: BLUEPRINT DETAILS: Θ Node Original Θ Social Impact' EXAMPLE APPLICATION: Co-Creation Tools: Implementing AI Partnership Models: Creating AI",
+    "compression_ratio": 5.795811518324608,
+    "symbol_count": 191,
+    "timestamp": "2025-11-18T10:47:32.205328Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 369.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:32.207485Z"
+  }
+]

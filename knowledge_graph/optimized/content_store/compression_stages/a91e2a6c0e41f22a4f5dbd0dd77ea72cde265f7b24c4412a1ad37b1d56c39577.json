@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Tax Planning\n\nDEFINITION:\nDriven Tax Planning: designed to provide advanced tax planning capabilities to minimize tax liabilities and optimize tax strategies:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Tax Planning'\n\nEXAMPLE APPLICATION:\n   * Audit Execution: Implementing audit execution techniques that enable the AI system to execute audits and identify potential issues.\n    * Assurance Services: Creating assurance services techniques that enable the AI system to provide assurance on financial statements and other reports.\n\n79. AI-Driven Tax Planning: Mastermind_AI is designed to provide advanced tax planning capabilities to minimize tax liabilities and optimize tax strategies:\n    * Tax Modeling: Developing tax modeling techni\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1143,
+    "timestamp": "2025-11-18T10:47:38.341101Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Tax Planning\n\nDEFINITION:\nDriven Tax Planning: designed to provide advanced tax planning capabilities to minimize tax liabilities and optimize tax strategies:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Tax Planning'\n\nEXAMPLE APPLICATION:\n   * Audit Execution: Implementing audit execution techniques that enable the AI system to execute audits and identify potential issues.\n    * Assurance Services: Creating assurance services techniques that enable the AI system to provide assurance on fi",
+    "compression_ratio": 2.001751313485114,
+    "symbol_count": 571,
+    "timestamp": "2025-11-18T10:47:38.341131Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Tax Planning D: Driven Tax Planning: designed to provide advanced tax planning capabilities to minimize tax liabilities optimize tax strategies: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Tax Planning' EXAMPLE APPLICATION: * Audit Execution: Implementing audit execution techniques enable AI S to execute audits identify potential issues. * Assurance Services: Creating assurance services techniques enable AI S to provide assurance on fi",
+    "compression_ratio": 2.2544378698224854,
+    "symbol_count": 507,
+    "timestamp": "2025-11-18T10:47:38.342608Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Tax Planning D: Driven Tax Planning: designed provide advanced planning capabilities minimize liabilities optimize strategies: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Tax Planning' EXAMPLE APPLICATION: Audit Execution: Implementing audit execution techniques enable AI S execute audits identify potential issues. Assurance Services: Creating assurance services techniques enable AI S provide assurance",
+    "compression_ratio": 2.431914893617021,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:47:38.350552Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Tax Planning D: Driven Tax Planning: designed provide advanced planning capabilities minimize liabilities optimize strategies: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Tax Planning' EXAMPLE APPLICATION: Audit Execution: Implementing audit execution techniques enable AI S execute audits identify potential issues. Assurance Services: Creating assurance services techniques enable AI S provide assurance",
+    "compression_ratio": 2.431914893617021,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:47:38.352912Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Tax Planning D: Driven Tax Planning: designed provide advanced planning capabilities minimize liabilities optimize strategies: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Tax Planning' EXAMPLE APPLICATION: Audit Execution: Implementing audit execution techniques enable AI S execute audits identify potential issues. Assurance Services: Creating assurance services techniques enable AI S provide assurance",
+    "compression_ratio": 2.431914893617021,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:47:38.355898Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Tax Planning D: Driven Tax Planning: BLUEPRINT DETAILS: Θ Node Original Θ Tax Planning' EXAMPLE APPLICATION: Audit Execution: Implementing AI S Assurance Services: Creating AI S",
+    "compression_ratio": 6.015789473684211,
+    "symbol_count": 190,
+    "timestamp": "2025-11-18T10:47:38.363776Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 381.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.364836Z"
+  }
+]

@@ -3,7 +3,7 @@ Knowledge Graph Integrator - Stores compressed patterns in Knowledge Graph
 Integrates with SPRManager and KnowledgeGraphManager
 """
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from .knowledge_extractor import ExtractedPattern
 from .zepto_compressor import PatternZeptoCompressor
 from ..spr_manager import SPRManager

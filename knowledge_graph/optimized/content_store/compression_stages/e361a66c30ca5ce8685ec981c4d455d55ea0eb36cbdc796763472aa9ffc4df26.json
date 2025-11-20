@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Language Modeling\n\nDEFINITION:\nLanguage Modeling: Finally, we can integrate a Computer Vision module to enable the system to understand and interpret visual data. This will enable the system to make decisions based on visual information.\n\nConfidence: 0.545\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 109, type: node_format. Original SPR name: 'LM'\n\nEXAMPLE APPLICATION:\nNode 109: Language Modeling\n\nSPR: 0.545, \"LM\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 109\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 774,
+    "timestamp": "2025-11-18T10:47:05.921677Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Language Modeling\n\nDEFINITION:\nLanguage Modeling: Finally, we can integrate a Computer Vision module to enable the system to understand and interpret visual data. This will enable the system to make decisions based on visual information.\n\nConfidence: 0.545\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 109, type: node_format. Original SPR name: 'LM'\n\nEXAMPLE APPLICATION:\nNo",
+    "compression_ratio": 2.0,
+    "symbol_count": 387,
+    "timestamp": "2025-11-18T10:47:05.921703Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Language Modeling D: Language Modeling: Finally, we integrate a Computer Vision module to enable S to understand interpret visual data. will enable S to make decisions based on visual inFion. Confidence: 0.545 BLUEPRINT DETAILS: Θ extracted agi.txt Node 109, type: node_F. Original Θ name: 'LM' EXAMPLE APPLICATION: No",
+    "compression_ratio": 2.388888888888889,
+    "symbol_count": 324,
+    "timestamp": "2025-11-18T10:47:05.922545Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Language ABM D: Language ABM: Finally, we integrate a Computer Vision module to enable S to understand interpret visual data. enable S to make decisions ABM on visual inFion. Confidence: 0.545 BLUEPRINT DETAILS: Θ extracted agi.txt Node 109, type: node_F. Original Θ name: 'LM' EXAMPLE APPLICATION: No",
+    "compression_ratio": 2.521172638436482,
+    "symbol_count": 307,
+    "timestamp": "2025-11-18T10:47:05.924537Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Language ABM D: Language ABM: Finally, integrate Computer Vision module enable S understand interpret visual data. enable S decisions ABM visual inFion. Confidence: 0.545 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: EXAMPLE APPLICATION: No",
+    "compression_ratio": 2.8145454545454545,
+    "symbol_count": 275,
+    "timestamp": "2025-11-18T10:47:05.926033Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Language ABM D: Language ABM: Finally, integrate Computer Vision module enable S understand interpret visual data. enable S decisions ABM visual inFion. Confidence: 0.545 BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: EXAMPLE APPLICATION: No",
+    "compression_ratio": 2.8145454545454545,
+    "symbol_count": 275,
+    "timestamp": "2025-11-18T10:47:05.935418Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Language ABM D: Language ABM: Finally, Computer Vision S S ABM Confidence: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICATION: No",
+    "compression_ratio": 5.48936170212766,
+    "symbol_count": 141,
+    "timestamp": "2025-11-18T10:47:05.939663Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 258.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:05.939969Z"
+  }
+]

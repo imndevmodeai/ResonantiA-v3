@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Class: TaskManager\n\nDEFINITION:\nClass: TaskManager\n\nManages tasks within a workflow, including their dependencies and status.\n\nMethods: __init__, get_ready_tasks, update_task_status\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/task_manager.py, type: python_class\n\nFULL IMPLEMENTATION CODE (task_manager.py):\n```python\nfrom typing import Dict, Any, List\n\nclass TaskManager:\n    \"\"\"\n    Manages tasks within a workflow, including their dependencies and status.\n    \"\"\"\n    def __init__(self, tasks: Dict[str, Any]):\n        self.tasks = tasks\n        self.task_statuses = {key: \"pending\" for key in tasks}\n\n    def get_ready_tasks(self) -> List[str]:\n        \"\"\"\n        Returns a list of tasks whose dependencies have been met.\n        \"\"\"\n        ready_tasks = []\n        for task_id, task in self.tasks.items():\n            if self.task_statuses[task_id] == \"pending\":\n                dependencies = task.get(\"dependencies\", [])\n                if all(self.task_statuses.get(dep) == \"completed\" for dep in dependencies):\n                    ready_tasks.append(task_id)\n        return ready_tasks\n\n    def update_task_status(self, task_id: str, status: str):\n        \"\"\"Updates the status of a task.\"\"\"\n        if task_id in self.task_statuses:\n            self.task_statuses[task_id] = status \n```\n\nEXAMPLE APPLICATION:\nClass: TaskManager\n\nManages tasks within a workflow, including their dependencies and status.\n\nMethods: __init__, get_ready_tasks, update_task_status\n\nCATEGORY: CodeKnowledge\n\nRELATIONSHIPS:\ntype: FromCodebase; source: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/task_manager.py; source_type: python_class",
+    "compression_ratio": 1.0,
+    "symbol_count": 1676,
+    "timestamp": "2025-11-18T11:00:10.774259Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Class: TaskManager\n\nDEFINITION:\nClass: TaskManager\n\nManages tasks within a workflow, including their dependencies and status.\n\nMethods: __init__, get_ready_tasks, update_task_status\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/task_manager.py, type: python_class\n\nFULL IMPLEMENTATION CODE (task_manager.py):\n```python\nfrom typing import Dict, Any, List\n\nclass TaskManager:\n    \"\"\"\n    Manages tasks within a workflow, including their dependencies and status.\n    \"\"\"\n    def __init__(self, tasks: Dict[str, Any]):\n        self.tasks = tasks\n        self.task_statuses = {key: \"pending\" for key in tasks}\n\n    def get_ready_tasks(self) -> List[str]:\n        \"\"\"\n        Returns a list of tasks whose dependencies have been met.\n        \"\"\"\n        ready_tasks = []\n        for task_id, task in ",
+    "compression_ratio": 2.0,
+    "symbol_count": 838,
+    "timestamp": "2025-11-18T11:00:10.774293Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Class: TaskManager D: Class: TaskManager Manages tasks within a workflow, including their dependencies status. Methods: __init__, get_ready_tasks, update_task_status BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/task_manager.py, type: python_class FULL I CODE (task_manager.py): ```python typing import Dict, Any, List class TaskManager: \"\"\" Manages tasks within a workflow, including their dependencies status. \"\"\" def __init__(self, tasks: Dict[str, Any]): self.tasks = tasks self.task_statuses = {key: \"pending\" key in tasks} def get_ready_tasks(self) -> List[str]: \"\"\" Returns a list of tasks whose dependencies been met. \"\"\" ready_tasks = [] task_id, task in",
+    "compression_ratio": 2.404591104734577,
+    "symbol_count": 697,
+    "timestamp": "2025-11-18T11:00:10.778480Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Class: TaskManager D: Class: TaskManager Manages tasks within workflow, including their dependencies status. Methods: __init__, get_ready_tasks, update_task_status BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/task_manager.py, type: python_class FULL I CODE (task_manager.py): ```python typing import Dict, Any, List class TaskManager: Manages tasks within workflow, including their dependencies status. __init__(self, tasks: Dict[str, Any]): self.tasks tasks self.task_statuses {key: \"pending\" tasks} get_ready_tasks(self) List[str]: Returns tasks whose dependencies ready_tasks task_id,",
+    "compression_ratio": 2.694533762057878,
+    "symbol_count": 622,
+    "timestamp": "2025-11-18T11:00:10.799730Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Class: TaskManager D: Class: TaskManager Manages tasks within workflow, including their dependencies status. Methods: __init__, get_ready_tasks, update_task_status BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/task_manager.py, type: python_class FULL I CODE (task_manager.py): ```python typing import Dict, Any, List class TaskManager: Manages tasks within workflow, including their dependencies status. __init__(self, tasks: Dict[str, Any]): self.tasks tasks self.task_statuses {key: \"pending\" tasks} get_ready_tasks(self) List[str]: Returns tasks whose dependencies ready_tasks task_id,",
+    "compression_ratio": 2.694533762057878,
+    "symbol_count": 622,
+    "timestamp": "2025-11-18T11:00:10.834736Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Class: TaskManager D: Class: TaskManager Manages tasks within workflow, including their dependencies status. Methods: __init__, get_ready_tasks, update_task_status BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/task_manager.py, type: python_class FULL I CODE (task_manager.py): ```python typing import Dict, Any, List class TaskManager: Manages tasks within workflow, including their dependencies status. __init__(self, tasks: Dict[str, Any]): self.tasks tasks self.task_statuses {key: \"pending\" tasks} get_ready_tasks(self) List[str]: Returns tasks whose dependencies ready_tasks task_id,",
+    "compression_ratio": 2.694533762057878,
+    "symbol_count": 622,
+    "timestamp": "2025-11-18T11:00:10.856253Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Class: TaskManager D: Class: TaskManager Manages Methods: BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/task_manager.py, FULL I CODE Dict, Any, List TaskManager: Manages Dict[str, Any]): List[str]: Returns",
+    "compression_ratio": 7.01255230125523,
+    "symbol_count": 239,
+    "timestamp": "2025-11-18T11:00:10.871229Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 1676.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T11:00:10.877115Z"
+  }
+]

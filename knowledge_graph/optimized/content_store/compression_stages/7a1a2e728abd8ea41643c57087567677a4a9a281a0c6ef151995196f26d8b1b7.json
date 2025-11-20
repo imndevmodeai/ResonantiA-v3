@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Route Optimization\n\nDEFINITION:\nRoute Optimization: designed to provide advanced energy capabilities to improve energy efficiency and sustainability:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Route Optimization'\n\nEXAMPLE APPLICATION:\nsafety and efficiency:\n    * Autonomous Vehicles: Developing autonomous vehicle techniques that enable the AI system to control and navigate vehicles.\n    * Traffic Management: Implementing traffic management techniques that enable the AI system to optimize traffic flow and reduce congestion.\n    * Route Optimization: Creating route optimization techniques that enable the AI system to find the most efficient routes for vehicles.\n\n64. AI-Driven Energy: Mastermind_AI is designed to provide advance\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1126,
+    "timestamp": "2025-11-18T10:47:35.996887Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Route Optimization\n\nDEFINITION:\nRoute Optimization: designed to provide advanced energy capabilities to improve energy efficiency and sustainability:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Route Optimization'\n\nEXAMPLE APPLICATION:\nsafety and efficiency:\n    * Autonomous Vehicles: Developing autonomous vehicle techniques that enable the AI system to control and navigate vehicles.\n    * Traffic Management: Implementing traffic management techniques that enable the AI system to optimize traff",
+    "compression_ratio": 2.0,
+    "symbol_count": 563,
+    "timestamp": "2025-11-18T10:47:35.996910Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Route Optimization D: Route Optimization: designed to provide advanced energy capabilities to improve energy efficiency sustainability: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Route Optimization' EXAMPLE APPLICATION: safety efficiency: * Autonomous Vehicles: Developing autonomous vehicle techniques enable AI S to control navigate vehicles. * Traffic Management: Implementing traffic management techniques enable AI S to optimize traff",
+    "compression_ratio": 2.279352226720648,
+    "symbol_count": 494,
+    "timestamp": "2025-11-18T10:47:35.998908Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Route Optimization D: Route Optimization: designed provide advanced energy capabilities improve energy efficiency sustainability: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Route Optimization' EXAMPLE APPLICATION: safety efficiency: Autonomous Vehicles: Developing autonomous vehicle techniques enable AI S control navigate vehicles. Traffic Management: Implementing traffic management techniques enable AI S optimize traff",
+    "compression_ratio": 2.3705263157894736,
+    "symbol_count": 475,
+    "timestamp": "2025-11-18T10:47:36.005717Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Route Optimization D: Route Optimization: designed provide advanced energy capabilities improve energy efficiency sustainability: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Route Optimization' EXAMPLE APPLICATION: safety efficiency: Autonomous Vehicles: Developing autonomous vehicle techniques enable AI S control navigate vehicles. Traffic Management: Implementing traffic management techniques enable AI S optimize traff",
+    "compression_ratio": 2.3705263157894736,
+    "symbol_count": 475,
+    "timestamp": "2025-11-18T10:47:36.008161Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Route Optimization D: Route Optimization: designed provide advanced energy capabilities improve energy efficiency sustainability: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Route Optimization' EXAMPLE APPLICATION: safety efficiency: Autonomous Vehicles: Developing autonomous vehicle techniques enable AI S control navigate vehicles. Traffic Management: Implementing traffic management techniques enable AI S optimize traff",
+    "compression_ratio": 2.3705263157894736,
+    "symbol_count": 475,
+    "timestamp": "2025-11-18T10:47:36.013974Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Route Optimization D: Route Optimization: BLUEPRINT DETAILS: Θ Node Original Θ Optimization' EXAMPLE APPLICATION: Autonomous Vehicles: Developing AI S Traffic Management: Implementing AI S",
+    "compression_ratio": 5.804123711340206,
+    "symbol_count": 194,
+    "timestamp": "2025-11-18T10:47:36.017742Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 375.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:36.018086Z"
+  }
+]

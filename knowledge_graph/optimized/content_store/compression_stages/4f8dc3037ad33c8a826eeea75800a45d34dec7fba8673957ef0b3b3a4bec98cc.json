@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Based Data Extraction Engine\nDeveloping\n\nDEFINITION:\nBased Data Extraction Engine\nDeveloping: crucial for efficiency [3]\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Based Data Extraction Engine\nDeveloping'\n\nEXAMPLE APPLICATION:\nmize Queries: Techniques to minimize data extraction and improve performance are crucial for efficiency [3].\nAgentQL's applications extend to web scraping, data integration from multiple sources, automation of data extraction tasks, and research endeavors [4, 5].\n\nConceptualizing a Machine Learning-Based Data Extraction Engine\nDeveloping a machine learning engine similar to AgentQL involves creating a system that can understand user requests, interpret them into executable queries, and extract t\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1118,
+    "timestamp": "2025-11-18T10:47:25.095603Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Based Data Extraction Engine\nDeveloping\n\nDEFINITION:\nBased Data Extraction Engine\nDeveloping: crucial for efficiency [3]\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Based Data Extraction Engine\nDeveloping'\n\nEXAMPLE APPLICATION:\nmize Queries: Techniques to minimize data extraction and improve performance are crucial for efficiency [3].\nAgentQL's applications extend to web scraping, data integration from multiple sources, automation of data extraction tasks, and research endeavors [4, 5].\n\nCo",
+    "compression_ratio": 2.0,
+    "symbol_count": 559,
+    "timestamp": "2025-11-18T10:47:25.095632Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Based Data Extraction Engine Developing D: Based Data Extraction Engine Developing: crucial efficiency [3] BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Based Data Extraction Engine Developing' EXAMPLE APPLICATION: mize Queries: Techniques to minimize data extraction improve performance crucial efficiency [3]. AgentQL's applications extend to web scraping, data integration multiple sources, automation of data extraction tasks, research endeavors [4, 5]. Co",
+    "compression_ratio": 2.18359375,
+    "symbol_count": 512,
+    "timestamp": "2025-11-18T10:47:25.100875Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: ABM Data Extraction Engine Developing D: ABM Data Extraction Engine Developing: crucial efficiency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Data Extraction Engine Developing' EXAMPLE APPLICATION: Queries: Techniques minimize extraction improve performance crucial efficiency AgentQL's applications extend scraping, integration multiple sources, automation extraction tasks, research endeavors Co",
+    "compression_ratio": 2.4955357142857144,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:25.108217Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: ABM Data Extraction Engine Developing D: ABM Data Extraction Engine Developing: crucial efficiency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Data Extraction Engine Developing' EXAMPLE APPLICATION: Queries: Techniques minimize extraction improve performance crucial efficiency AgentQL's applications extend scraping, integration multiple sources, automation extraction tasks, research endeavors Co",
+    "compression_ratio": 2.4955357142857144,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:25.125534Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: ABM Data Extraction Engine Developing D: ABM Data Extraction Engine Developing: crucial efficiency BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Data Extraction Engine Developing' EXAMPLE APPLICATION: Queries: Techniques minimize extraction improve performance crucial efficiency AgentQL's applications extend scraping, integration multiple sources, automation extraction tasks, research endeavors Co",
+    "compression_ratio": 2.4955357142857144,
+    "symbol_count": 448,
+    "timestamp": "2025-11-18T10:47:25.129244Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: ABM Data Extraction Engine Developing D: ABM Data Extraction Engine Developing: BLUEPRINT DETAILS: Θ Node Original Θ Data Extraction Engine Developing' EXAMPLE APPLICATION: Queries: Techniques AgentQL's Co",
+    "compression_ratio": 5.298578199052133,
+    "symbol_count": 211,
+    "timestamp": "2025-11-18T10:47:25.137200Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 372.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:25.138517Z"
+  }
+]

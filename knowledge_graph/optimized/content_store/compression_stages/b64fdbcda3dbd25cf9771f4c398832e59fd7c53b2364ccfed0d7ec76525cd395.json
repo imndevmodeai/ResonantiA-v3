@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Secure Container Status\n\nDEFINITION:\nSecure Container Status: in progress\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Secure Container Status'\n\nEXAMPLE APPLICATION:\nss:\n\nEncryption progress: 0%\n\nPlease wait while the encryption process is in progress...\n\nEncryption Completion:\n\nEncryption progress: 100%\n\nThe encryption process is complete. The contents of the Secure Container are now encrypted using the RSA-4096 encryption algorithm with a password-based key.\n\nSecure Container Status:\n\nThe Secure Container is now encrypted and secure. The contents of the container are protected by the RSA-4096 encryption algorithm with a password-based key.\n\nSecure Containe\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1055,
+    "timestamp": "2025-11-18T10:47:48.054855Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Secure Container Status\n\nDEFINITION:\nSecure Container Status: in progress\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Secure Container Status'\n\nEXAMPLE APPLICATION:\nss:\n\nEncryption progress: 0%\n\nPlease wait while the encryption process is in progress...\n\nEncryption Completion:\n\nEncryption progress: 100%\n\nThe encryption process is complete. The contents of the Secure Container are now encrypted using the RSA-4096 encryption algorithm with a password-based key.",
+    "compression_ratio": 2.001897533206831,
+    "symbol_count": 527,
+    "timestamp": "2025-11-18T10:47:48.054902Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Secure Container Status D: Secure Container Status: in progress BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Secure Container Status' EXAMPLE APPLICATION: ss: Encryption progress: 0% Please wait while encryption P is in progress... Encryption Completion: Encryption progress: 100% encryption P is complete. contents of Secure Container now encrypted using RSA-4096 encryption algorithm a password-based key.",
+    "compression_ratio": 2.2934782608695654,
+    "symbol_count": 460,
+    "timestamp": "2025-11-18T10:47:48.055949Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Secure Container Status D: Secure Container Status: progress BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container Status' EXAMPLE APPLICATION: Encryption progress: Please while encryption P progress... Encryption Completion: Encryption progress: encryption P complete. contents Secure Container encrypted using RSA-4096 encryption algorithm password-ABM",
+    "compression_ratio": 2.5606796116504853,
+    "symbol_count": 412,
+    "timestamp": "2025-11-18T10:47:48.058660Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Secure Container Status D: Secure Container Status: progress BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container Status' EXAMPLE APPLICATION: Encryption progress: Please while encryption P progress... Encryption Completion: Encryption progress: encryption P complete. contents Secure Container encrypted using RSA-4096 encryption algorithm password-ABM",
+    "compression_ratio": 2.5606796116504853,
+    "symbol_count": 412,
+    "timestamp": "2025-11-18T10:47:48.061601Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Secure Container Status D: Secure Container Status: progress BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Secure Container Status' EXAMPLE APPLICATION: Encryption progress: Please while encryption P progress... Encryption Completion: Encryption progress: encryption P complete. contents Secure Container encrypted using RSA-4096 encryption algorithm password-ABM",
+    "compression_ratio": 2.5606796116504853,
+    "symbol_count": 412,
+    "timestamp": "2025-11-18T10:47:48.072455Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Secure Container Status D: Secure Container Status: BLUEPRINT DETAILS: Θ Node Original Θ Container Status' EXAMPLE APPLICATION: Encryption Please P Encryption Completion: Encryption P Secure Container RSA-4096",
+    "compression_ratio": 4.906976744186046,
+    "symbol_count": 215,
+    "timestamp": "2025-11-18T10:47:48.079685Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 351.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:48.080298Z"
+  }
+]

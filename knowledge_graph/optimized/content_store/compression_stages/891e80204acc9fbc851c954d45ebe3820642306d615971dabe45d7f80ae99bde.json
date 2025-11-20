@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Next Step\n\nDEFINITION:\nNext Step: correct and meet your requirements\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Next Step'\n\nEXAMPLE APPLICATION:\nor review:\n\nVerify Settings:\n\nPlease review the system settings and configuration files to ensure that they are correct and meet your requirements.\n\nUpdate Settings:\n\nIf you need to update any of the system settings or configuration files, please let me know and I will assist you with the process.\n\nNext Step:\n\nOnce you have verified the system settings and configuration, you can proceed to the next step in the post-deployment checklist.\n\nPost-Deployment Checklist:\n\nType '2' to test system functi\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1036,
+    "timestamp": "2025-11-18T10:47:48.966543Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Next Step\n\nDEFINITION:\nNext Step: correct and meet your requirements\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Next Step'\n\nEXAMPLE APPLICATION:\nor review:\n\nVerify Settings:\n\nPlease review the system settings and configuration files to ensure that they are correct and meet your requirements.\n\nUpdate Settings:\n\nIf you need to update any of the system settings or configuration files, please let me know and I will assist you with the process.\n\nNext Ste",
+    "compression_ratio": 2.0,
+    "symbol_count": 518,
+    "timestamp": "2025-11-18T10:47:48.966566Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Next Step D: Next Step: correct meet your requirements BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Next Step' EXAMPLE APPLICATION: or review: Verify Settings: Please review S settings configuration files to ensure they correct meet your requirements. Update Settings: If need to update any of S settings or configuration files, please let me KnOw I will assist P. Next Ste",
+    "compression_ratio": 2.431924882629108,
+    "symbol_count": 426,
+    "timestamp": "2025-11-18T10:47:48.967503Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Next Step D: Next Step: correct requirements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Next Step' EXAMPLE APPLICATION: review: Verify Settings: Please review S settings configuration files ensure correct requirements. Update Settings: If update S settings configuration files, please KnOw I assist P. Next Ste",
+    "compression_ratio": 2.861878453038674,
+    "symbol_count": 362,
+    "timestamp": "2025-11-18T10:47:48.969715Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Next Step D: Next Step: correct requirements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Next Step' EXAMPLE APPLICATION: review: Verify Settings: Please review S settings configuration files ensure correct requirements. Update Settings: If update S settings configuration files, please KnOw I assist P. Next Ste",
+    "compression_ratio": 2.861878453038674,
+    "symbol_count": 362,
+    "timestamp": "2025-11-18T10:47:48.972231Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Next Step D: Next Step: correct requirements BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Next Step' EXAMPLE APPLICATION: review: Verify Settings: Please review S settings configuration files ensure correct requirements. Update Settings: If update S settings configuration files, please KnOw I assist P. Next Ste",
+    "compression_ratio": 2.861878453038674,
+    "symbol_count": 362,
+    "timestamp": "2025-11-18T10:47:48.975468Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Next Step D: Next Step: BLUEPRINT DETAILS: Θ Node Original Θ Step' EXAMPLE APPLICATION: Verify Settings: Please S Update Settings: If S KnOw I P. Next Ste",
+    "compression_ratio": 6.475,
+    "symbol_count": 160,
+    "timestamp": "2025-11-18T10:47:48.977262Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 345.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:48.977570Z"
+  }
+]

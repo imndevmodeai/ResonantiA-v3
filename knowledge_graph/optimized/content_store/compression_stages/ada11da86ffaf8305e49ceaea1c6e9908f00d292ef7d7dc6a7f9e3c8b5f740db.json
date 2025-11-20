@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Source          Process                  Result\n\nDEFINITION:\nSource          Process                  Result: Meaningful Insights\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Source          Process                  Result'\n\nEXAMPLE APPLICATION:\nting|<- Cross-check the SPRs for accuracy and completeness. According to [3], SPRs can be used to represent complex information in a concise and meaningful way.\n\n[3] https://en.wikipedia.org/wiki/Source,_Process,_Result\n->|/vetting|<-\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nSPRs:\n          Source          Process                  Result\n0  Machine Learning  Data Extraction  Contextually Reasoned Responses\n1  Natural Language      Text Analysis            Meaningful Insights\n->|/results|\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1135,
+    "timestamp": "2025-11-18T10:47:26.101648Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Source          Process                  Result\n\nDEFINITION:\nSource          Process                  Result: Meaningful Insights\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Source          Process                  Result'\n\nEXAMPLE APPLICATION:\nting|<- Cross-check the SPRs for accuracy and completeness. According to [3], SPRs can be used to represent complex information in a concise and meaningful way.\n\n[3] https://en.wikipedia.org/wiki/Source,_Process,_Result\n->|/vetting|<-\n->|execution|<-\n\n->|/ex",
+    "compression_ratio": 2.001763668430335,
+    "symbol_count": 567,
+    "timestamp": "2025-11-18T10:47:26.101673Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Source P Result D: Source P Result: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Source P Result' EXAMPLE APPLICATION: ting|<- Cross-check Θs accuracy completeness. According to [3], Θs be used to represent complex inFion in a concise meaningful way. [3] https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/ex",
+    "compression_ratio": 2.74818401937046,
+    "symbol_count": 413,
+    "timestamp": "2025-11-18T10:47:26.103292Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Source P Result D: Source P Result: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Source P Result' EXAMPLE APPLICATION: ting|<- Cross-check Θs accuracy completeness. According Θs represent complex inFion concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/ex",
+    "compression_ratio": 3.010610079575597,
+    "symbol_count": 377,
+    "timestamp": "2025-11-18T10:47:26.105788Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Source P Result D: Source P Result: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Source P Result' EXAMPLE APPLICATION: ting|<- Cross-check Θs accuracy completeness. According Θs represent complex inFion concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/ex",
+    "compression_ratio": 3.010610079575597,
+    "symbol_count": 377,
+    "timestamp": "2025-11-18T10:47:26.110015Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Source P Result D: Source P Result: Meaningful Insights BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Source P Result' EXAMPLE APPLICATION: ting|<- Cross-check Θs accuracy completeness. According Θs represent complex inFion concise meaningful https://en.wikipedia.org/wiki/Source,_P,_Result ->|/vetting|<- ->|execution|<- ->|/ex",
+    "compression_ratio": 3.010610079575597,
+    "symbol_count": 377,
+    "timestamp": "2025-11-18T10:47:26.112800Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Source P Result D: Source P Result: Meaningful Insights BLUEPRINT DETAILS: Θ Node Original Θ P Result' EXAMPLE APPLICATION: Cross-check Θs According Θs",
+    "compression_ratio": 7.229299363057325,
+    "symbol_count": 157,
+    "timestamp": "2025-11-18T10:47:26.114655Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ|Θ",
+    "compression_ratio": 162.14285714285714,
+    "symbol_count": 7,
+    "timestamp": "2025-11-18T10:47:26.115302Z"
+  }
+]

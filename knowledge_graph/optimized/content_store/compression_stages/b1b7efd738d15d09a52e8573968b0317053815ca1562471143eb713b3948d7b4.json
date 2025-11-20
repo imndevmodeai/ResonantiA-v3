@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Lead Scoring\n\nDEFINITION:\nLead Scoring: designed to provide advanced sales capabilities to improve sales effectiveness:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Lead Scoring'\n\nEXAMPLE APPLICATION:\nt customer behavior and preferences.\n\n58. AI-Driven Sales: Mastermind_AI is designed to provide advanced sales capabilities to improve sales effectiveness:\n    * Sales Forecasting: Developing sales forecasting techniques that enable the AI system to predict sales trends and customer behavior.\n    * Lead Scoring: Implementing lead scoring techniques that enable the AI system to identify high-quality leads.\n    * Sales Automation: Creating sales automation techniques that enable the AI system to a\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1090,
+    "timestamp": "2025-11-18T10:47:34.854985Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Lead Scoring\n\nDEFINITION:\nLead Scoring: designed to provide advanced sales capabilities to improve sales effectiveness:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Lead Scoring'\n\nEXAMPLE APPLICATION:\nt customer behavior and preferences.\n\n58. AI-Driven Sales: Mastermind_AI is designed to provide advanced sales capabilities to improve sales effectiveness:\n    * Sales Forecasting: Developing sales forecasting techniques that enable the AI system to predict sales trends and custom",
+    "compression_ratio": 2.0,
+    "symbol_count": 545,
+    "timestamp": "2025-11-18T10:47:34.855050Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Lead Scoring D: Lead Scoring: designed to provide advanced sales capabilities to improve sales effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Lead Scoring' EXAMPLE APPLICATION: t customer behavior preferences. 58. AI-Driven Sales: Mastermind_AI is designed to provide advanced sales capabilities to improve sales effectiveness: * Sales Forecasting: Developing sales forecasting techniques enable AI S to predict sales trends custom",
+    "compression_ratio": 2.193158953722334,
+    "symbol_count": 497,
+    "timestamp": "2025-11-18T10:47:34.858648Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Lead Scoring D: Lead Scoring: designed provide advanced sales capabilities improve sales effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Lead Scoring' EXAMPLE APPLICATION: customer behavior preferences. AI-Driven Sales: Mastermind_AI designed provide advanced sales capabilities improve sales effectiveness: Sales Forecasting: Developing sales forecasting techniques enable AI S predict sales trends custom",
+    "compression_ratio": 2.3290598290598292,
+    "symbol_count": 468,
+    "timestamp": "2025-11-18T10:47:34.870892Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Lead Scoring D: Lead Scoring: designed provide advanced sales capabilities improve sales effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Lead Scoring' EXAMPLE APPLICATION: customer behavior preferences. AI-Driven Sales: Mastermind_AI designed provide advanced sales capabilities improve sales effectiveness: Sales Forecasting: Developing sales forecasting techniques enable AI S predict sales trends custom",
+    "compression_ratio": 2.3290598290598292,
+    "symbol_count": 468,
+    "timestamp": "2025-11-18T10:47:34.881655Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Lead Scoring D: Lead Scoring: designed provide advanced sales capabilities improve sales effectiveness: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Lead Scoring' EXAMPLE APPLICATION: customer behavior preferences. AI-Driven Sales: Mastermind_AI designed provide advanced sales capabilities improve sales effectiveness: Sales Forecasting: Developing sales forecasting techniques enable AI S predict sales trends custom",
+    "compression_ratio": 2.3290598290598292,
+    "symbol_count": 468,
+    "timestamp": "2025-11-18T10:47:34.896093Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Lead Scoring D: Lead Scoring: BLUEPRINT DETAILS: Θ Node Original Θ Scoring' EXAMPLE APPLICATION: AI-Driven Sales: Mastermind_AI Sales Forecasting: Developing AI S",
+    "compression_ratio": 6.488095238095238,
+    "symbol_count": 168,
+    "timestamp": "2025-11-18T10:47:34.908336Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 363.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:34.909782Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Talent Acquisition\n\nDEFINITION:\nTalent Acquisition: designed to provide advanced human resources capabilities to improve employee experience and productivity:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Talent Acquisition'\n\nEXAMPLE APPLICATION:\nlity leads.\n    * Sales Automation: Creating sales automation techniques that enable the AI system to automate sales tasks and workflows.\n\n59. AI-Driven Human Resources: Mastermind_AI is designed to provide advanced human resources capabilities to improve employee experience and productivity:\n    * Talent Acquisition: Developing talent acquisition techniques that enable the AI system to identify and attract top talent.\n    * Employee Engagement: Implementing employee engagement techniques that e\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1135,
+    "timestamp": "2025-11-18T10:47:35.085672Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Talent Acquisition\n\nDEFINITION:\nTalent Acquisition: designed to provide advanced human resources capabilities to improve employee experience and productivity:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Talent Acquisition'\n\nEXAMPLE APPLICATION:\nlity leads.\n    * Sales Automation: Creating sales automation techniques that enable the AI system to automate sales tasks and workflows.\n\n59. AI-Driven Human Resources: Mastermind_AI is designed to provide advanced human resources capabilities to improve em",
+    "compression_ratio": 2.001763668430335,
+    "symbol_count": 567,
+    "timestamp": "2025-11-18T10:47:35.085707Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Talent Acquisition D: Talent Acquisition: designed to provide advanced human resources capabilities to improve employee experience productivity: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Talent Acquisition' EXAMPLE APPLICATION: lity leads. * Sales Automation: Creating sales automation techniques enable AI S to automate sales tasks workflows. 59. AI-Driven Human Resources: Mastermind_AI is designed to provide advanced human resources capabilities to improve em",
+    "compression_ratio": 2.186897880539499,
+    "symbol_count": 519,
+    "timestamp": "2025-11-18T10:47:35.086726Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Talent Acquisition D: Talent Acquisition: designed provide advanced human resources capabilities improve employee experience productivity: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Talent Acquisition' EXAMPLE APPLICATION: leads. Sales Automation: Creating sales automation techniques enable AI S automate sales tasks workflows. AI-Driven Human Resources: Mastermind_AI designed provide advanced human resources capabilities improve",
+    "compression_ratio": 2.3450413223140494,
+    "symbol_count": 484,
+    "timestamp": "2025-11-18T10:47:35.089831Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Talent Acquisition D: Talent Acquisition: designed provide advanced human resources capabilities improve employee experience productivity: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Talent Acquisition' EXAMPLE APPLICATION: leads. Sales Automation: Creating sales automation techniques enable AI S automate sales tasks workflows. AI-Driven Human Resources: Mastermind_AI designed provide advanced human resources capabilities improve",
+    "compression_ratio": 2.3450413223140494,
+    "symbol_count": 484,
+    "timestamp": "2025-11-18T10:47:35.092740Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Talent Acquisition D: Talent Acquisition: designed provide advanced human resources capabilities improve employee experience productivity: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Talent Acquisition' EXAMPLE APPLICATION: leads. Sales Automation: Creating sales automation techniques enable AI S automate sales tasks workflows. AI-Driven Human Resources: Mastermind_AI designed provide advanced human resources capabilities improve",
+    "compression_ratio": 2.3450413223140494,
+    "symbol_count": 484,
+    "timestamp": "2025-11-18T10:47:35.096426Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Talent Acquisition D: Talent Acquisition: BLUEPRINT DETAILS: Θ Node Original Θ Acquisition' EXAMPLE APPLICATION: Sales Automation: Creating AI S AI-Driven Human Resources: Mastermind_AI",
+    "compression_ratio": 5.942408376963351,
+    "symbol_count": 191,
+    "timestamp": "2025-11-18T10:47:35.099781Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 378.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:35.104633Z"
+  }
+]

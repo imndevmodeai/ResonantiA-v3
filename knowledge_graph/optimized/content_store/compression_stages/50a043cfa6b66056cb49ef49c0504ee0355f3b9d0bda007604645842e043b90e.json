@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Deep Learning\n\nDEFINITION:\nDeep Learning: will enable the system to recognize patterns and make predictions based on complex data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Deep Learning'\n\nEXAMPLE APPLICATION:\nhe system to recognize patterns and make predictions based on complex data.\n\nNode 163: Neural Network\n\nSPR: 0.815, \"Neural\"\n\nEdges:\n\nNode 164: Feedforward Neural Network\n\nSPR: 0.820, \"Feedforward\"\n\nEdges:\n\nNode 165: Recurrent Neural Network\n\nSPR: 0.825, \"Recurrent\"\n\nEdges:\n\nNext, we can integrate a Deep Learning module to enable the system to learn and make decisions based on deep learning models. This will enable the system to recognize patterns and make predictions based on complex data.\n\nNode\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1101,
+    "timestamp": "2025-11-18T10:47:45.059484Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Deep Learning\n\nDEFINITION:\nDeep Learning: will enable the system to recognize patterns and make predictions based on complex data\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Deep Learning'\n\nEXAMPLE APPLICATION:\nhe system to recognize patterns and make predictions based on complex data.\n\nNode 163: Neural Network\n\nSPR: 0.815, \"Neural\"\n\nEdges:\n\nNode 164: Feedforward Neural Network\n\nSPR: 0.820, \"Feedforward\"\n\nEdges:\n\nNode 165: Recurrent Neural Network\n\nSPR: 0.825, \"Recurrent\"\n\nEdges:\n\n",
+    "compression_ratio": 2.001818181818182,
+    "symbol_count": 550,
+    "timestamp": "2025-11-18T10:47:45.059509Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Deep Learning D: Deep Learning: will enable S to recognize patterns make predictions based on complex data BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Deep Learning' EXAMPLE APPLICATION: he S to recognize patterns make predictions based on complex data. Node 163: Neural Network Θ: 0.815, \"Neural\" Edges: Node 164: Feedforward Neural Network Θ: 0.820, \"Feedforward\" Edges: Node 165: Recurrent Neural Network Θ: 0.825, \"Recurrent\" Edges:",
+    "compression_ratio": 2.246938775510204,
+    "symbol_count": 490,
+    "timestamp": "2025-11-18T10:47:45.061556Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Deep Learning D: Deep Learning: enable S recognize patterns predictions ABM complex BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Deep Learning' EXAMPLE APPLICATION: S recognize patterns predictions ABM complex data. Node Neural Network Θ: 0.815, \"Neural\" Edges: Node Feedforward Neural Network Θ: 0.820, \"Feedforward\" Edges: Node Recurrent Neural Network Θ: 0.825, \"Recurrent\" Edges:",
+    "compression_ratio": 2.5427251732101617,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:45.064448Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Deep Learning D: Deep Learning: enable S recognize patterns predictions ABM complex BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Deep Learning' EXAMPLE APPLICATION: S recognize patterns predictions ABM complex data. Node Neural Network Θ: 0.815, \"Neural\" Edges: Node Feedforward Neural Network Θ: 0.820, \"Feedforward\" Edges: Node Recurrent Neural Network Θ: 0.825, \"Recurrent\" Edges:",
+    "compression_ratio": 2.5427251732101617,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:45.068728Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Deep Learning D: Deep Learning: enable S recognize patterns predictions ABM complex BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Deep Learning' EXAMPLE APPLICATION: S recognize patterns predictions ABM complex data. Node Neural Network Θ: 0.815, \"Neural\" Edges: Node Feedforward Neural Network Θ: 0.820, \"Feedforward\" Edges: Node Recurrent Neural Network Θ: 0.825, \"Recurrent\" Edges:",
+    "compression_ratio": 2.5427251732101617,
+    "symbol_count": 433,
+    "timestamp": "2025-11-18T10:47:45.073670Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Deep Learning D: Deep Learning: S ABM BLUEPRINT DETAILS: Θ Node Original Θ Learning' EXAMPLE APPLICATION: S ABM Node Neural Network Θ: Edges: Node Feedforward Neural Network Θ: Edges: Node Recurrent Neural Network Θ: Edges:",
+    "compression_ratio": 4.807860262008734,
+    "symbol_count": 229,
+    "timestamp": "2025-11-18T10:47:45.076154Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Θ|Θ|Θ",
+    "compression_ratio": 122.33333333333333,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:45.076604Z"
+  }
+]

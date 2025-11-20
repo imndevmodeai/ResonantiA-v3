@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Neurosymbolic Integration\n\nDEFINITION:\nNeurosymbolic Integration: a comprehensive and complex document, and I will continue to provide updates and expansions as needed\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Neurosymbolic Integration'\n\nEXAMPLE APPLICATION:\n proceed.\n\nNote: The blueprint for Mastermind_AI is a comprehensive and complex document, and I will continue to provide updates and expansions as needed. The current version is a starting point, and future updates will refine and elaborate on the concepts and technologies presented.\n\ncontinue\n\n21. Neurosymbolic Integration: Mastermind_AI incorporates neurosymbolic integration to combine the strengths of neural networks and symbolic reasoning:\n    * Neural-Symbolic Architectures: Developing arch\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1151,
+    "timestamp": "2025-11-18T10:47:29.470887Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Neurosymbolic Integration\n\nDEFINITION:\nNeurosymbolic Integration: a comprehensive and complex document, and I will continue to provide updates and expansions as needed\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Neurosymbolic Integration'\n\nEXAMPLE APPLICATION:\n proceed.\n\nNote: The blueprint for Mastermind_AI is a comprehensive and complex document, and I will continue to provide updates and expansions as needed. The current version is a starting point, and future updates will refine and elaborate on the co",
+    "compression_ratio": 2.0017391304347827,
+    "symbol_count": 575,
+    "timestamp": "2025-11-18T10:47:29.470915Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Neurosymbolic Integration D: Neurosymbolic Integration: a comprehensive complex document, I will continue to provide updates expansions as needed BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Neurosymbolic Integration' EXAMPLE APPLICATION: proceed. Note: blueprint Mastermind_AI is a comprehensive complex document, I will continue to provide updates expansions as needed. current version is a starting point, future updates will refine elaborate on co",
+    "compression_ratio": 2.2837301587301586,
+    "symbol_count": 504,
+    "timestamp": "2025-11-18T10:47:29.472775Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Neurosymbolic Integration D: Neurosymbolic Integration: comprehensive complex document, I continue provide updates expansions needed BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neurosymbolic Integration' EXAMPLE APPLICATION: proceed. Note: blueprint Mastermind_AI comprehensive complex document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate",
+    "compression_ratio": 2.5241228070175437,
+    "symbol_count": 456,
+    "timestamp": "2025-11-18T10:47:29.478491Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Neurosymbolic Integration D: Neurosymbolic Integration: comprehensive complex document, I continue provide updates expansions needed BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neurosymbolic Integration' EXAMPLE APPLICATION: proceed. Note: blueprint Mastermind_AI comprehensive complex document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate",
+    "compression_ratio": 2.5241228070175437,
+    "symbol_count": 456,
+    "timestamp": "2025-11-18T10:47:29.489991Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Neurosymbolic Integration D: Neurosymbolic Integration: comprehensive complex document, I continue provide updates expansions needed BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Neurosymbolic Integration' EXAMPLE APPLICATION: proceed. Note: blueprint Mastermind_AI comprehensive complex document, I continue provide updates expansions needed. current version starting point, future updates refine elaborate",
+    "compression_ratio": 2.5241228070175437,
+    "symbol_count": 456,
+    "timestamp": "2025-11-18T10:47:29.501645Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Neurosymbolic Integration D: Neurosymbolic Integration: I BLUEPRINT DETAILS: Θ Node Original Θ Integration' EXAMPLE APPLICATION: Note: Mastermind_AI I",
+    "compression_ratio": 7.378205128205129,
+    "symbol_count": 156,
+    "timestamp": "2025-11-18T10:47:29.511744Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 383.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:29.512024Z"
+  }
+]

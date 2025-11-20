@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Cognitive Architectures and AGI\n\nDEFINITION:\nCognitive Architectures and AGI: Cognitive Models:\n\nAGI Frameworks:\n\nCognitive Computing:\n\nBy integrating advanced cognitive architectures and AGI into the SPR_compressor system, we can enable the system to learn, reason, and make decisions in a more human-like way, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced neuroscience and neurotechnology to enable the system to understand and interact with the human brain and nervous system.\n\nConfidence: 4.435\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 867, type: node_format. Original SPR name: 'Cognitive Architectures and AGI'\n\nEXAMPLE APPLICATION:\nNode 867: Cognitive Architectures and AGI\n\nSPR: 4.435, \"Cognitive Architectures and AGI\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 867\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1183,
+    "timestamp": "2025-11-18T10:47:11.618751Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Cognitive Architectures and AGI\n\nDEFINITION:\nCognitive Architectures and AGI: Cognitive Models:\n\nAGI Frameworks:\n\nCognitive Computing:\n\nBy integrating advanced cognitive architectures and AGI into the SPR_compressor system, we can enable the system to learn, reason, and make decisions in a more human-like way, enhancing its ability to support decision-making and problem-solving.\n\nAnother potential area for exploration is the integration of advanced neuroscience and neurotechnology to enable the system to understand and interact with the human brain and nervous system.\n\nConfidenc",
+    "compression_ratio": 2.0016920473773268,
+    "symbol_count": 591,
+    "timestamp": "2025-11-18T10:47:11.618776Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Cognitive Architectures AGI D: Cognitive Architectures AGI: Cognitive Models: AGI Frameworks: Cognitive Computing: By integrating advanced cognitive architectures AGI into Θ_compressor S, we enable S to learn, reason, make decisions in a more human-like way, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced neuroscience neurotechnology to enable S to understand interact human brain nervous S. Confidenc",
+    "compression_ratio": 2.4192229038854807,
+    "symbol_count": 489,
+    "timestamp": "2025-11-18T10:47:11.620966Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Ω Architectures AGI D: Ω Architectures AGI: Ω Models: AGI Frameworks: Ω Computing: By integrating advanced Ω architectures AGI into Θ_compressor S, we enable S to learn, reason, make decisions in a more human-like way, enhancing its ability to support decision-making problem-solving. Another potential area exploration is integration of advanced neuroscience neurotechnology to enable S to understand interact human brain nervous S. Confidenc",
+    "compression_ratio": 2.6347438752783963,
+    "symbol_count": 449,
+    "timestamp": "2025-11-18T10:47:11.631097Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Ω Architectures AGI D: Ω Architectures AGI: Ω Models: AGI Frameworks: Ω Computing: By integrating advanced Ω architectures AGI Θ_compressor S, enable S learn, reason, decisions human-like enhancing ability support decision-making problem-solving. Another potential exploration integration advanced neuroscience neurotechnology enable S understand interact human brain nervous S. Confidenc",
+    "compression_ratio": 3.00253807106599,
+    "symbol_count": 394,
+    "timestamp": "2025-11-18T10:47:11.634268Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Ω Architectures AGI D: Ω Architectures AGI: Ω Models: AGI Frameworks: Ω Computing: integrating advanced Ω architectures AGI Θ_compressor S, enable S learn, reason, decisions human-like enhancing ability support decision-making problem-solving. Another potential exploration integration advanced neuroscience neurotechnology enable S understand interact human brain nervous S. Confidenc",
+    "compression_ratio": 3.0255754475703327,
+    "symbol_count": 391,
+    "timestamp": "2025-11-18T10:47:11.637070Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Ω Architectures AGI D: Ω Architectures AGI: Ω Models: AGI Frameworks: Ω Computing: Ω AGI Θ_compressor S, S Another S S. Confidenc",
+    "compression_ratio": 8.762962962962963,
+    "symbol_count": 135,
+    "timestamp": "2025-11-18T10:47:11.654671Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Ω|Ω|Ω|Ω",
+    "compression_ratio": 131.44444444444446,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:11.654982Z"
+  }
+]

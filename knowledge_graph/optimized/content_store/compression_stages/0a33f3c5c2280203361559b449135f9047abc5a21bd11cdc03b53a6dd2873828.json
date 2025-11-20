@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Decision Analysis\n\nDEFINITION:\nDecision Analysis: knowledge with humans and other systems\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Decision Analysis'\n\nEXAMPLE APPLICATION:\n knowledge.\n    * Knowledge Sharing: Creating knowledge sharing techniques that enable the AI system to share knowledge with humans and other systems.\n\n52. AI-Driven Decision Support: Mastermind_AI is designed to provide advanced decision support capabilities to support human decision-making:\n    * Decision Analysis: Developing decision analysis techniques that enable the AI system to analyze and evaluate decision options.\n    * Decision Modeling: Implementing decision modeling techniques that e\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1065,
+    "timestamp": "2025-11-18T10:47:33.593083Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Decision Analysis\n\nDEFINITION:\nDecision Analysis: knowledge with humans and other systems\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Decision Analysis'\n\nEXAMPLE APPLICATION:\n knowledge.\n    * Knowledge Sharing: Creating knowledge sharing techniques that enable the AI system to share knowledge with humans and other systems.\n\n52. AI-Driven Decision Support: Mastermind_AI is designed to provide advanced decision support capabilities to support human decision-making:",
+    "compression_ratio": 2.0018796992481205,
+    "symbol_count": 532,
+    "timestamp": "2025-11-18T10:47:33.593111Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Decision Analysis D: Decision Analysis: KnOwledge humans other Ss BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Decision Analysis' EXAMPLE APPLICATION: KnOwledge. * KnOwledge Sharing: Creating KnOwledge sharing techniques enable AI S to share KnOwledge humans other Ss. 52. AI-Driven Decision Support: Mastermind_AI is designed to provide advanced decision support capabilities to support human decision-making:",
+    "compression_ratio": 2.300215982721382,
+    "symbol_count": 463,
+    "timestamp": "2025-11-18T10:47:33.594093Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Decision Analysis D: Decision Analysis: KnOwledge humans other Ss BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decision Analysis' EXAMPLE APPLICATION: KnOwledge. KnOwledge Sharing: Creating KnOwledge sharing techniques enable AI S share KnOwledge humans other Ss. AI-Driven Decision Support: Mastermind_AI designed provide advanced decision support capabilities support human decision-making:",
+    "compression_ratio": 2.409502262443439,
+    "symbol_count": 442,
+    "timestamp": "2025-11-18T10:47:33.622779Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Decision Analysis D: Decision Analysis: KnOwledge humans other Ss BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decision Analysis' EXAMPLE APPLICATION: KnOwledge. KnOwledge Sharing: Creating KnOwledge sharing techniques enable AI S share KnOwledge humans other Ss. AI-Driven Decision Support: Mastermind_AI designed provide advanced decision support capabilities support human decision-making:",
+    "compression_ratio": 2.409502262443439,
+    "symbol_count": 442,
+    "timestamp": "2025-11-18T10:47:33.700112Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Decision Analysis D: Decision Analysis: KnOwledge humans other Ss BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Decision Analysis' EXAMPLE APPLICATION: KnOwledge. KnOwledge Sharing: Creating KnOwledge sharing techniques enable AI S share KnOwledge humans other Ss. AI-Driven Decision Support: Mastermind_AI designed provide advanced decision support capabilities support human decision-making:",
+    "compression_ratio": 2.409502262443439,
+    "symbol_count": 442,
+    "timestamp": "2025-11-18T10:47:33.712951Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Decision Analysis D: Decision Analysis: KnOwledge Ss BLUEPRINT DETAILS: Θ Node Original Θ Analysis' EXAMPLE APPLICATION: KnOwledge. KnOwledge Sharing: Creating KnOwledge AI S KnOwledge Ss. AI-Driven Decision Support: Mastermind_AI",
+    "compression_ratio": 4.512711864406779,
+    "symbol_count": 236,
+    "timestamp": "2025-11-18T10:47:33.715968Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 355.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:33.716351Z"
+  }
+]

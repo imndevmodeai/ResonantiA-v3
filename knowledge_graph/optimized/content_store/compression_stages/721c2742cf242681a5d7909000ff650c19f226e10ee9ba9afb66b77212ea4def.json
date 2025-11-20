@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Edge Embedding\n\nDEFINITION:\nEdge Embedding: Next, we can integrate a Graph Neural Network module to learn node and edge representations. This will enable the system to perform tasks such as graph classification, graph regression, and graph generation.\n\nConfidence: 0.3\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 60, type: node_format. Original SPR name: 'Edge'\n\nEXAMPLE APPLICATION:\nNode 60: Edge Embedding\n\nSPR: 0.300, \"Edge\"\n\nEdges:\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: node_format; node_number: 60\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 784,
+    "timestamp": "2025-11-18T10:47:04.507993Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Edge Embedding\n\nDEFINITION:\nEdge Embedding: Next, we can integrate a Graph Neural Network module to learn node and edge representations. This will enable the system to perform tasks such as graph classification, graph regression, and graph generation.\n\nConfidence: 0.3\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node 60, type: node_format. Original SPR name: 'Edge'\n\nEXAMPLE APPLICA",
+    "compression_ratio": 2.0,
+    "symbol_count": 392,
+    "timestamp": "2025-11-18T10:47:04.508023Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Edge Embedding D: Edge Embedding: Next, we integrate a Graph Neural Network module to learn node edge representations. will enable S to perform tasks such as graph classification, graph regression, graph generation. Confidence: 0.3 BLUEPRINT DETAILS: Θ extracted agi.txt Node 60, type: node_F. Original Θ name: 'Edge' EXAMPLE APPLICA",
+    "compression_ratio": 2.312684365781711,
+    "symbol_count": 339,
+    "timestamp": "2025-11-18T10:47:04.508871Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Edge Embedding D: Edge Embedding: Next, integrate Graph Neural Network module learn representations. enable S perform tasks graph classification, graph regression, graph generation. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Edge' EXAMPLE APPLICA",
+    "compression_ratio": 2.6397306397306397,
+    "symbol_count": 297,
+    "timestamp": "2025-11-18T10:47:04.511714Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Edge Embedding D: Edge Embedding: Next, integrate Graph Neural Network module learn representations. enable S perform tasks graph classification, graph regression, graph generation. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Edge' EXAMPLE APPLICA",
+    "compression_ratio": 2.6397306397306397,
+    "symbol_count": 297,
+    "timestamp": "2025-11-18T10:47:04.516637Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Edge Embedding D: Edge Embedding: Next, integrate Graph Neural Network module learn representations. enable S perform tasks graph classification, graph regression, graph generation. Confidence: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: node_F. Original Θ name: 'Edge' EXAMPLE APPLICA",
+    "compression_ratio": 2.6397306397306397,
+    "symbol_count": 297,
+    "timestamp": "2025-11-18T10:47:04.525404Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Edge Embedding D: Edge Embedding: Next, Graph Neural Network S Confidence: BLUEPRINT DETAILS: Θ Node Original Θ EXAMPLE APPLICA",
+    "compression_ratio": 5.894736842105263,
+    "symbol_count": 133,
+    "timestamp": "2025-11-18T10:47:04.528414Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 261.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:04.528691Z"
+  }
+]

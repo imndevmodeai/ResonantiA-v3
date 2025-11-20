@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Intrinsic Motivation Pivot\n\nDEFINITION:\nShift from extrinsic to intrinsic human motivation\n\nBLUEPRINT DETAILS:\nMotivation becomes the pursuit of experience, mastery, connection, and meaning\n\nEXAMPLE APPLICATION:\nEnabling humans to pursue intrinsic values rather than external rewards\n\nCATEGORY: PhilosophicalPrinciple\n\nRELATIONSHIPS:\ntype: PhilosophicalPrinciple; shifts_from: Extrinsic motivation; shifts_to: Intrinsic motivation; supports: Human flourishing; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 483,
+    "timestamp": "2025-11-18T10:46:49.070117Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Intrinsic Motivation Pivot\n\nDEFINITION:\nShift from extrinsic to intrinsic human motivation\n\nBLUEPRINT DETAILS:\nMotivation becomes the pursuit of experience, mastery, connection, and meaning\n\nEXAMPLE APPLICATION:\nEnabling humans to purs",
+    "compression_ratio": 2.004149377593361,
+    "symbol_count": 241,
+    "timestamp": "2025-11-18T10:46:49.070139Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Intrinsic Motivation Pivot D: Shift extrinsic to intrinsic human motivation BLUEPRINT DETAILS: Motivation becomes pursuit of experience, mastery, connection, meaning EXAMPLE APPLICATION: Enabling humans to purs",
+    "compression_ratio": 2.236111111111111,
+    "symbol_count": 216,
+    "timestamp": "2025-11-18T10:46:49.073271Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Intrinsic Motivation Pivot D: MS extrinsic intrinsic human motivation BLUEPRINT DETAILS: Motivation becomes pursuit experience, mastery, connection, meaning EXAMPLE APPLICATION: Enabling humans",
+    "compression_ratio": 2.4271356783919598,
+    "symbol_count": 199,
+    "timestamp": "2025-11-18T10:46:49.074249Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Intrinsic Motivation Pivot D: MS extrinsic intrinsic human motivation BLUEPRINT DETAILS: Motivation becomes pursuit experience, mastery, connection, meaning EXAMPLE APPLICATION: Enabling humans",
+    "compression_ratio": 2.4271356783919598,
+    "symbol_count": 199,
+    "timestamp": "2025-11-18T10:46:49.078739Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Intrinsic Motivation Pivot D: MS extrinsic intrinsic human motivation BLUEPRINT DETAILS: Motivation becomes pursuit experience, mastery, connection, meaning EXAMPLE APPLICATION: Enabling humans",
+    "compression_ratio": 2.4271356783919598,
+    "symbol_count": 199,
+    "timestamp": "2025-11-18T10:46:49.083643Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Intrinsic Motivation Pivot D: MS BLUEPRINT DETAILS: Motivation EXAMPLE APPLICATION: Enabling",
+    "compression_ratio": 4.928571428571429,
+    "symbol_count": 98,
+    "timestamp": "2025-11-18T10:46:49.084680Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "I|M|P|M|E",
+    "compression_ratio": 53.666666666666664,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:49.084896Z"
+  }
+]

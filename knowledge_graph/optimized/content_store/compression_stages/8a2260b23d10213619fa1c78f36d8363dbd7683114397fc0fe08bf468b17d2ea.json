@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Each Step\n\nDEFINITION:\nEach Step: for Each Step:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Each Step'\n\nEXAMPLE APPLICATION:\nthem on how to complete their tasks based on their specialization\n\n\nPlease provide name, system instructions, and prompts for each agent, along with the temperature,top p,top k, and repetition penalty. As well as the Step by step instructions the agent  needs to perform.\n\nDetailed Step Analysis for Each Step:\n->|step|<-\n->|thinking|<- Analyze the specific task for this step, incorporating tools when needed. ->|/thinking|<-\n->|reflection|<- Confirm the appropriateness of the step's placement and \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1016,
+    "timestamp": "2025-11-18T10:47:25.383545Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Each Step\n\nDEFINITION:\nEach Step: for Each Step:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Each Step'\n\nEXAMPLE APPLICATION:\nthem on how to complete their tasks based on their specialization\n\n\nPlease provide name, system instructions, and prompts for each agent, along with the temperature,top p,top k, and repetition penalty. As well as the Step by step instructions the agent  needs to perform.\n\nDetailed Step Analysis for Each Step:\n->|step",
+    "compression_ratio": 2.0,
+    "symbol_count": 508,
+    "timestamp": "2025-11-18T10:47:25.383578Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Each Step D: Each Step: Each Step: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Each Step' EXAMPLE APPLICATION: them on how to complete their tasks based on their specialization Please provide name, S instructions, prompts each agent, along temperature,top p,top k, repetition penalty. As well as Step by step instructions agent needs to perform. Detailed Step Analysis Each Step: ->|step",
+    "compression_ratio": 2.303854875283447,
+    "symbol_count": 441,
+    "timestamp": "2025-11-18T10:47:25.384770Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Each Step D: Each Step: Each Step: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Each Step' EXAMPLE APPLICATION: complete their tasks ABM their specialization Please provide name, S instructions, prompts ABM, along temperature,top p,top repetition penalty. As Step instructions ABM needs perform. Detailed Step Analysis Each Step: ->|step",
+    "compression_ratio": 2.6253229974160206,
+    "symbol_count": 387,
+    "timestamp": "2025-11-18T10:47:25.387153Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Each Step D: Each Step: Each Step: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Each Step' EXAMPLE APPLICATION: complete their tasks ABM their specialization Please provide name, S instructions, prompts ABM, along temperature,top p,top repetition penalty. As Step instructions ABM needs perform. Detailed Step Analysis Each Step: ->|step",
+    "compression_ratio": 2.6253229974160206,
+    "symbol_count": 387,
+    "timestamp": "2025-11-18T10:47:25.389158Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Each Step D: Each Step: Each Step: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Each Step' EXAMPLE APPLICATION: complete their tasks ABM their specialization Please provide name, S instructions, prompts ABM, along temperature,top p,top repetition penalty. Step instructions ABM needs perform. Detailed Step Analysis Each Step: ->|step",
+    "compression_ratio": 2.6458333333333335,
+    "symbol_count": 384,
+    "timestamp": "2025-11-18T10:47:25.391263Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Each Step D: Each Step: Each Step: BLUEPRINT DETAILS: Θ Node Original Θ Step' EXAMPLE APPLICATION: ABM Please S ABM, Step ABM Detailed Step Analysis Each Step:",
+    "compression_ratio": 6.157575757575757,
+    "symbol_count": 165,
+    "timestamp": "2025-11-18T10:47:25.393601Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 338.6666666666667,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:25.393903Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Scenario Realism Assessment\n\nDEFINITION:\nA critical evaluation step, often guided by the Vetting Agent, within Complex System Visioning. It scrutinizes a simulation's assumptions, parameterization, emergent dynamics, and outcomes against real-world knowledge, theoretical plausibility, and the simulation's IAR data to ensure results are properly contextualized.\n\nBLUEPRINT DETAILS:\nSee ResonantiA Protocol v3.0, Section 2.10.\n\nEXAMPLE APPLICATION:\nPractical application of Scenario Realism Assessment within the ResonantiA Protocol framework\n\nCATEGORY: SystemProcess\n\nRELATIONSHIPS:\ntype: ValidationStep; is_part_of: ComplexSystemVisioninG; guided_by: VettingAgenT; evaluates: SimulationAssumptions, ParameterFidelity, EmergentDynamics; can_trigger: Metacognitive shifT; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 794,
+    "timestamp": "2025-11-18T10:46:56.400885Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Scenario Realism Assessment\n\nDEFINITION:\nA critical evaluation step, often guided by the Vetting Agent, within Complex System Visioning. It scrutinizes a simulation's assumptions, parameterization, emergent dynamics, and outcomes against real-world knowledge, theoretical plausibility, and the simulation's IAR data to ensure results are properly contextualized.\n\nBLUEPRINT DETAILS:\nSee Reso",
+    "compression_ratio": 2.0,
+    "symbol_count": 397,
+    "timestamp": "2025-11-18T10:46:56.400913Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Scenario Realism Assessment D: A critical evaluation step, often guided by Vetting Agent, within Complex S Visioning. It scrutinizes a simulation's assumptions, parameterization, emergent dynamics, outcomes against real-world KnOwledge, theoretical plausibility, simulation's Φ data to ensure results properly contextualized. BLUEPRINT DETAILS: See Reso",
+    "compression_ratio": 2.211699164345404,
+    "symbol_count": 359,
+    "timestamp": "2025-11-18T10:46:56.404618Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Scenario Realism Assessment D: A critical evaluation step, often guided Vetting ABM, within Complex S Visioning. It scrutinizes simulation's assumptions, parameterization, emergent dynamics, outcomes against real-world KnOwledge, theoretical plausibility, simulation's Φ ensure results properly contextualized. BLUEPRINT DETAILS: See Reso",
+    "compression_ratio": 2.308139534883721,
+    "symbol_count": 344,
+    "timestamp": "2025-11-18T10:46:56.408308Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Scenario Realism Assessment D: A critical evaluation step, often guided Vetting ABM, within Complex S Visioning. It scrutinizes simulation's assumptions, parameterization, emergent dynamics, outcomes against real-world KnOwledge, theoretical plausibility, simulation's Φ ensure results properly contextualized. BLUEPRINT DETAILS: See Reso",
+    "compression_ratio": 2.308139534883721,
+    "symbol_count": 344,
+    "timestamp": "2025-11-18T10:46:56.409906Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Scenario Realism Assessment D: critical evaluation step, often guided Vetting ABM, within Complex S Visioning. It scrutinizes simulation's assumptions, parameterization, emergent dynamics, outcomes against real-world KnOwledge, theoretical plausibility, simulation's Φ ensure results properly contextualized. BLUEPRINT DETAILS: See Reso",
+    "compression_ratio": 2.3216374269005846,
+    "symbol_count": 342,
+    "timestamp": "2025-11-18T10:46:56.411767Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Scenario Realism Assessment D: Vetting ABM, Complex S Visioning. It KnOwledge, Φ BLUEPRINT DETAILS: See Reso",
+    "compression_ratio": 6.964912280701754,
+    "symbol_count": 114,
+    "timestamp": "2025-11-18T10:46:56.415474Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Φ",
+    "compression_ratio": 794.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T10:46:56.418979Z"
+  }
+]

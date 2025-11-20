@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Elliptic Curve Cryptography\n\nDEFINITION:\nElliptic Curve Cryptography: Please type \"1\" to use AES-256, \"2\" to use RSA-4096, \"3\" to use Elliptic Curve Cryptography, or \"4\" to use a custom encryption algorithm\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Elliptic Curve Cryptography'\n\nEXAMPLE APPLICATION:\nryption key, please select one of the following options:\n\nUse Existing Encryption Key:\n\nIf you want to use an existing encryption key, please enter the key below.\n\nPlease select an encryption option by typing the corresponding number.\n\nPlease type \"1\" to use AES-256, \"2\" to use RSA-4096, \"3\" to use Elliptic Curve Cryptography, or \"4\" to use a custom encryption algorithm. If you want to generate a new encryption key, please type \"generate\" and select one of the options above. If you want to use a\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1192,
+    "timestamp": "2025-11-18T10:47:47.921984Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Elliptic Curve Cryptography\n\nDEFINITION:\nElliptic Curve Cryptography: Please type \"1\" to use AES-256, \"2\" to use RSA-4096, \"3\" to use Elliptic Curve Cryptography, or \"4\" to use a custom encryption algorithm\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Elliptic Curve Cryptography'\n\nEXAMPLE APPLICATION:\nryption key, please select one of the following options:\n\nUse Existing Encryption Key:\n\nIf you want to use an existing encryption key, please enter the key below.\n\nPlease select an encryption option by typing the corresponding num",
+    "compression_ratio": 2.0,
+    "symbol_count": 596,
+    "timestamp": "2025-11-18T10:47:47.922005Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Elliptic Curve Cryptography D: Elliptic Curve Cryptography: Please type \"1\" to use AES-256, \"2\" to use RSA-4096, \"3\" to use Elliptic Curve Cryptography, or \"4\" to use a custom encryption algorithm BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Elliptic Curve Cryptography' EXAMPLE APPLICATION: ryption key, please select one of following options: Use Existing Encryption Key: If want to use an existing encryption key, please enter key below. Please select an encryption option by typing corresponding num",
+    "compression_ratio": 2.143884892086331,
+    "symbol_count": 556,
+    "timestamp": "2025-11-18T10:47:47.923052Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Elliptic Curve Cryptography D: Elliptic Curve Cryptography: Please AES-256, RSA-4096, Elliptic Curve Cryptography, custom encryption algorithm BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Elliptic Curve Cryptography' EXAMPLE APPLICATION: ryption please select following options: Use Existing Encryption Key: If existing encryption please enter Λ. Please select encryption option typing corresponding",
+    "compression_ratio": 2.6547884187082404,
+    "symbol_count": 449,
+    "timestamp": "2025-11-18T10:47:47.926518Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Elliptic Curve Cryptography D: Elliptic Curve Cryptography: Please AES-256, RSA-4096, Elliptic Curve Cryptography, custom encryption algorithm BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Elliptic Curve Cryptography' EXAMPLE APPLICATION: ryption please select following options: Use Existing Encryption Key: If existing encryption please enter Λ. Please select encryption option typing corresponding",
+    "compression_ratio": 2.6547884187082404,
+    "symbol_count": 449,
+    "timestamp": "2025-11-18T10:47:47.929781Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Elliptic Curve Cryptography D: Elliptic Curve Cryptography: Please AES-256, RSA-4096, Elliptic Curve Cryptography, custom encryption algorithm BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Elliptic Curve Cryptography' EXAMPLE APPLICATION: ryption please select following options: Use Existing Encryption Key: If existing encryption please enter Λ. Please select encryption option typing corresponding",
+    "compression_ratio": 2.6547884187082404,
+    "symbol_count": 449,
+    "timestamp": "2025-11-18T10:47:47.932285Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Elliptic Curve Cryptography D: Elliptic Curve Cryptography: Please AES-256, RSA-4096, Elliptic Curve Cryptography, BLUEPRINT DETAILS: Θ Node Original Θ Curve Cryptography' EXAMPLE APPLICATION: Use Existing Encryption Key: If Λ. Please",
+    "compression_ratio": 4.966666666666667,
+    "symbol_count": 240,
+    "timestamp": "2025-11-18T10:47:47.935152Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Λ",
+    "compression_ratio": 238.4,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:47.935533Z"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Term Care Funding\n\nDEFINITION:\nTerm Care Funding: plans and advice\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Term Care Funding'\n\nEXAMPLE APPLICATION:\nng techniques that enable the AI system to provide personalized long-term care plans and advice.\n    * Long-Term Care Insurance: Implementing long-term care insurance techniques that enable the AI system to help individuals determine the right amount of long-term care insurance coverage.\n    * Long-Term Care Funding: Creating long-term care funding techniques that enable the AI system to help individuals plan for the costs of long-term care.\n\nI have reached the end of the blueprint for Mastermin\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1042,
+    "timestamp": "2025-11-18T10:47:40.074620Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Term Care Funding\n\nDEFINITION:\nTerm Care Funding: plans and advice\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Term Care Funding'\n\nEXAMPLE APPLICATION:\nng techniques that enable the AI system to provide personalized long-term care plans and advice.\n    * Long-Term Care Insurance: Implementing long-term care insurance techniques that enable the AI system to help individuals determine the right amount of long-term care insurance coverage.\n    * Long-Term ",
+    "compression_ratio": 2.0,
+    "symbol_count": 521,
+    "timestamp": "2025-11-18T10:47:40.074700Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Term Care Funding D: Term Care Funding: plans advice BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Term Care Funding' EXAMPLE APPLICATION: ng techniques enable AI S to provide personalized long-term care plans advice. * Long-Term Care Insurance: Implementing long-term care insurance techniques enable AI S to help individuals determine right amount of long-term care insurance coverage. * Long-Term",
+    "compression_ratio": 2.3104212860310422,
+    "symbol_count": 451,
+    "timestamp": "2025-11-18T10:47:40.076085Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Term Care Funding D: Term Care Funding: plans advice BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Term Care Funding' EXAMPLE APPLICATION: techniques enable AI S provide personalized long-term plans advice. Long-Term Care Insurance: Implementing long-term insurance techniques enable AI S individuals determine right amount long-term insurance coverage. Long-Term",
+    "compression_ratio": 2.529126213592233,
+    "symbol_count": 412,
+    "timestamp": "2025-11-18T10:47:40.078431Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Term Care Funding D: Term Care Funding: plans advice BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Term Care Funding' EXAMPLE APPLICATION: techniques enable AI S provide personalized long-term plans advice. Long-Term Care Insurance: Implementing long-term insurance techniques enable AI S individuals determine right amount long-term insurance coverage. Long-Term",
+    "compression_ratio": 2.529126213592233,
+    "symbol_count": 412,
+    "timestamp": "2025-11-18T10:47:40.080162Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Term Care Funding D: Term Care Funding: plans advice BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Term Care Funding' EXAMPLE APPLICATION: techniques enable AI S provide personalized long-term plans advice. Long-Term Care Insurance: Implementing long-term insurance techniques enable AI S individuals determine right amount long-term insurance coverage. Long-Term",
+    "compression_ratio": 2.529126213592233,
+    "symbol_count": 412,
+    "timestamp": "2025-11-18T10:47:40.083618Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Term Care Funding D: Term Care Funding: BLUEPRINT DETAILS: Θ Node Original Θ Care Funding' EXAMPLE APPLICATION: AI S Long-Term Care Insurance: Implementing AI S Long-Term",
+    "compression_ratio": 5.920454545454546,
+    "symbol_count": 176,
+    "timestamp": "2025-11-18T10:47:40.085710Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 347.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:40.086064Z"
+  }
+]

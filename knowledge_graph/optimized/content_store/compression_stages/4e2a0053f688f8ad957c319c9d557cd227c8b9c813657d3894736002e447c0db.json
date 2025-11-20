@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Social Impact Optimization\n\nDEFINITION:\nSocial Impact Optimization: designed to drive social impact and create positive change in the world:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Social Impact Optimization'\n\nEXAMPLE APPLICATION:\nes.\n\n43. AI-Driven Social Impact: Mastermind_AI is designed to drive social impact and create positive change in the world:\n    * Social Impact Assessment: Developing social impact assessment techniques that enable the AI system to assess the potential social impact of new ideas and concepts.\n    * Social Impact Optimization: Implementing social impact optimization techniques that enable the AI system to optimize new ideas and concepts for maximum social impact.\n    * Social Impact Measurement: \n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1125,
+    "timestamp": "2025-11-18T10:47:32.269084Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Social Impact Optimization\n\nDEFINITION:\nSocial Impact Optimization: designed to drive social impact and create positive change in the world:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Social Impact Optimization'\n\nEXAMPLE APPLICATION:\nes.\n\n43. AI-Driven Social Impact: Mastermind_AI is designed to drive social impact and create positive change in the world:\n    * Social Impact Assessment: Developing social impact assessment techniques that enable the AI system to assess the potential social imp",
+    "compression_ratio": 2.001779359430605,
+    "symbol_count": 562,
+    "timestamp": "2025-11-18T10:47:32.269111Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Social Impact Optimization D: Social Impact Optimization: designed to drive social impact create positive change in world: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Social Impact Optimization' EXAMPLE APPLICATION: es. 43. AI-Driven Social Impact: Mastermind_AI is designed to drive social impact create positive change in world: * Social Impact Assessment: Developing social impact assessment techniques enable AI S to assess potential social imp",
+    "compression_ratio": 2.241035856573705,
+    "symbol_count": 502,
+    "timestamp": "2025-11-18T10:47:32.273303Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Social Impact Optimization D: Social Impact Optimization: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Social Impact Optimization' EXAMPLE APPLICATION: AI-Driven Social Impact: Mastermind_AI designed drive social impact create positive change world: Social Impact Assessment: Developing social impact assessment techniques enable AI S assess potential social",
+    "compression_ratio": 2.4089935760171306,
+    "symbol_count": 467,
+    "timestamp": "2025-11-18T10:47:32.280961Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Social Impact Optimization D: Social Impact Optimization: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Social Impact Optimization' EXAMPLE APPLICATION: AI-Driven Social Impact: Mastermind_AI designed drive social impact create positive change world: Social Impact Assessment: Developing social impact assessment techniques enable AI S assess potential social",
+    "compression_ratio": 2.4089935760171306,
+    "symbol_count": 467,
+    "timestamp": "2025-11-18T10:47:32.289188Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Social Impact Optimization D: Social Impact Optimization: designed drive social impact create positive change world: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Social Impact Optimization' EXAMPLE APPLICATION: AI-Driven Social Impact: Mastermind_AI designed drive social impact create positive change world: Social Impact Assessment: Developing social impact assessment techniques enable AI S assess potential social",
+    "compression_ratio": 2.4089935760171306,
+    "symbol_count": 467,
+    "timestamp": "2025-11-18T10:47:32.293129Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Social Impact Optimization D: Social Impact Optimization: BLUEPRINT DETAILS: Θ Node Original Θ Impact Optimization' EXAMPLE APPLICATION: AI-Driven Social Impact: Mastermind_AI Social Impact Assessment: Developing AI S",
+    "compression_ratio": 5.044843049327354,
+    "symbol_count": 223,
+    "timestamp": "2025-11-18T10:47:32.302950Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 375.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:32.303308Z"
+  }
+]

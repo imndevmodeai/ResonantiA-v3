@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Financial Reporting\n\nDEFINITION:\nDriven Financial Reporting: designed to provide advanced financial reporting capabilities to improve the accuracy and transparency of financial reports:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Financial Reporting'\n\nEXAMPLE APPLICATION:\nanalyze and optimize tax liabilities.\n    * Tax Planning: Implementing tax planning techniques that enable the AI system to develop and implement tax strategies.\n    * Tax Compliance: Creating tax compliance techniques that enable the AI system to ensure tax compliance and manage tax risks.\n\n80. AI-Driven Financial Reporting: Mastermind_AI is designed to provide advanced financial reporting capabilities to improve the accuracy and transparency of financial reports:\n    * Financial Statement Prep\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1177,
+    "timestamp": "2025-11-18T10:47:38.483264Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Financial Reporting\n\nDEFINITION:\nDriven Financial Reporting: designed to provide advanced financial reporting capabilities to improve the accuracy and transparency of financial reports:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Financial Reporting'\n\nEXAMPLE APPLICATION:\nanalyze and optimize tax liabilities.\n    * Tax Planning: Implementing tax planning techniques that enable the AI system to develop and implement tax strategies.\n    * Tax Compliance: Creating tax compliance techniques that enable the AI",
+    "compression_ratio": 2.001700680272109,
+    "symbol_count": 588,
+    "timestamp": "2025-11-18T10:47:38.483295Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Financial Reporting D: Driven Financial Reporting: designed to provide advanced financial reporting capabilities to improve accuracy transparency of financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Financial Reporting' EXAMPLE APPLICATION: analyze optimize tax liabilities. * Tax Planning: Implementing tax planning techniques enable AI S to develop implement tax strategies. * Tax Compliance: Creating tax compliance techniques enable AI",
+    "compression_ratio": 2.2634615384615384,
+    "symbol_count": 520,
+    "timestamp": "2025-11-18T10:47:38.484597Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Financial Reporting D: Driven Financial Reporting: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Reporting' EXAMPLE APPLICATION: analyze optimize liabilities. Tax Planning: Implementing planning techniques enable AI S develop implement strategies. Tax Compliance: Creating compliance techniques enable AI",
+    "compression_ratio": 2.42680412371134,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:38.489283Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Financial Reporting D: Driven Financial Reporting: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Reporting' EXAMPLE APPLICATION: analyze optimize liabilities. Tax Planning: Implementing planning techniques enable AI S develop implement strategies. Tax Compliance: Creating compliance techniques enable AI",
+    "compression_ratio": 2.42680412371134,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:38.492318Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Financial Reporting D: Driven Financial Reporting: designed provide advanced financial reporting capabilities improve accuracy transparency financial reports: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Financial Reporting' EXAMPLE APPLICATION: analyze optimize liabilities. Tax Planning: Implementing planning techniques enable AI S develop implement strategies. Tax Compliance: Creating compliance techniques enable AI",
+    "compression_ratio": 2.42680412371134,
+    "symbol_count": 485,
+    "timestamp": "2025-11-18T10:47:38.497731Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Financial Reporting D: Driven Financial Reporting: BLUEPRINT DETAILS: Θ Node Original Θ Financial Reporting' EXAMPLE APPLICATION: Tax Planning: Implementing AI S Tax Compliance: Creating AI",
+    "compression_ratio": 5.826732673267327,
+    "symbol_count": 202,
+    "timestamp": "2025-11-18T10:47:38.502419Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 392.3333333333333,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.502907Z"
+  }
+]

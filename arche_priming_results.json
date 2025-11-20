@@ -1,24 +1,24 @@
 {
-  "timestamp": "2025-11-08T21:40:17.492585",
+  "timestamp": "2025-11-20T06:35:11.790082",
   "protocol_version": "3.5-GP",
   "keyholder": "B.J. Lewis",
   "directives": {
     "virtual_env": {
-      "status": "warning",
-      "message": "Python executable not found in venv, using system Python",
-      "system_python": "/usr/bin/python3"
+      "status": "activated",
+      "path": "/mnt/3626C55326C514B1/Happier/arche_env",
+      "python": "/mnt/3626C55326C514B1/Happier/arche_env/bin/python3"
     },
     "zepto_system": {
       "status": "initialized",
-      "codex_size": 110,
+      "codex_size": 37,
       "compression_test": {
         "original": 47,
-        "compressed": 8
+        "compressed": 1
       }
     },
     "spr_priming": {
       "status": "initialized",
-      "sprs_loaded": 228,
+      "sprs_loaded": 3589,
       "pattern_compiled": true,
       "test_priming_count": 0
     },
@@ -34,7 +34,7 @@
     "thought_trail": {
       "status": "connected",
       "ledger_path": "Three_PointO_ArchE/ledgers/thought_trail.db",
-      "trail_length": 10374
+      "trail_length": 1
     }
   }
 }

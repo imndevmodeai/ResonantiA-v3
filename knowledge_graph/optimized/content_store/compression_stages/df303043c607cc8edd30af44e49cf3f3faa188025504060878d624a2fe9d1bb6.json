@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Knowledge Graph\nNode\n\nDEFINITION:\nKnowledge Graph\nNode: Detailed description of the system's cognitive architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Knowledge Graph\nNode'\n\nEXAMPLE APPLICATION:\necurity requirements.\nEdges:\nNode 7: Functional Requirements\nNode 8: Performance Requirements\nNode 9: Security Requirements\nNode 4: Cognitive Architecture\n\nDescription: Detailed description of the system's cognitive architecture, including its components, interfaces, and data flows.\nEdges:\nNode 10: Knowledge Graph\nNode 11: Reasoning Engine\nNode 12: Learning Mechanism\nNode 5: Machine Learning\n\nDescription: Detailed description of the system's machine learning capabilities, including its algorithm\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1148,
+    "timestamp": "2025-11-18T10:47:40.736801Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Knowledge Graph\nNode\n\nDEFINITION:\nKnowledge Graph\nNode: Detailed description of the system's cognitive architecture, including its components, interfaces, and data flows\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Knowledge Graph\nNode'\n\nEXAMPLE APPLICATION:\necurity requirements.\nEdges:\nNode 7: Functional Requirements\nNode 8: Performance Requirements\nNode 9: Security Requirements\nNode 4: Cognitive Architecture\n\nDescription: Detailed description of the system's cognitive architecture, including its componen",
+    "compression_ratio": 2.0,
+    "symbol_count": 574,
+    "timestamp": "2025-11-18T10:47:40.736834Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: K Node D: K Node: Detailed description of S's cognitive architecture, including its components, interfaces, data flows BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'K Node' EXAMPLE APPLICATION: ecurity requirements. Edges: Node 7: Functional Requirements Node 8: Performance Requirements Node 9: Security Requirements Node 4: Cognitive Architecture Description: Detailed description of S's cognitive architecture, including its componen",
+    "compression_ratio": 2.3524590163934427,
+    "symbol_count": 488,
+    "timestamp": "2025-11-18T10:47:40.738252Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: K Node D: K Node: Detailed description S's Ω architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Node' EXAMPLE APPLICATION: ecurity requirements. Edges: Node Functional Requirements Node Performance Requirements Node Security Requirements Node Ω Architecture Description: Detailed description S's Ω architecture, including componen",
+    "compression_ratio": 2.6885245901639343,
+    "symbol_count": 427,
+    "timestamp": "2025-11-18T10:47:40.740638Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: K Node D: K Node: Detailed description S's Ω architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Node' EXAMPLE APPLICATION: ecurity requirements. Edges: Node Functional Requirements Node Performance Requirements Node Security Requirements Node Ω Architecture Description: Detailed description S's Ω architecture, including componen",
+    "compression_ratio": 2.6885245901639343,
+    "symbol_count": 427,
+    "timestamp": "2025-11-18T10:47:40.742981Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: K Node D: K Node: Detailed description S's Ω architecture, including components, interfaces, flows BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: Node' EXAMPLE APPLICATION: ecurity requirements. Edges: Node Functional Requirements Node Performance Requirements Node Security Requirements Node Ω Architecture Description: Detailed description S's Ω architecture, including componen",
+    "compression_ratio": 2.6885245901639343,
+    "symbol_count": 427,
+    "timestamp": "2025-11-18T10:47:40.744890Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: K Node D: K Node: Detailed S's Ω BLUEPRINT DETAILS: Θ Node Original Θ Node' EXAMPLE APPLICATION: Edges: Node Functional Requirements Node Performance Requirements Node Security Requirements Node Ω Architecture Description: Detailed S's Ω",
+    "compression_ratio": 4.724279835390947,
+    "symbol_count": 243,
+    "timestamp": "2025-11-18T10:47:40.748016Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Ω|Θ|Θ|Ω|Ω",
+    "compression_ratio": 127.55555555555556,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:47:40.748430Z"
+  }
+]

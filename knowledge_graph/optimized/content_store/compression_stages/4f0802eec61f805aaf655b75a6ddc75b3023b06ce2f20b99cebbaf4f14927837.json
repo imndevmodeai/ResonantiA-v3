@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Refined Strategy\n\nDEFINITION:\nThe final strategic document produced by High-Stakes Vetting that explicitly addresses all vulnerabilities, ethical concerns, and catastrophic scenarios identified through adversarial analysis. Unlike the original Fused Strategic Dossier, the Refined Strategy includes risk mitigation matrices, ethical safeguards, catastrophic contingency plans, and a go/no-go decision with confidence assessment. This is the strategy that, if approved, proceeds to implementation.\n\nBLUEPRINT DETAILS:\nTypically 14K-16K tokens. Contains everything from Fused Dossier PLUS explicit mitigation plans for all identified risks.\n\nEXAMPLE APPLICATION:\nRefined strategy for platform launch includes: original growth plan, PLUS supply chain redundancy (Red Team mitigation), PLUS privacy audit process (Ethics mitigation), PLUS crisis communication protocol (Dystopian mitigation), PLUS go/no-go thresholds (confidence-based decision).\n\nCATEGORY: StrategicArtifact\n\nRELATIONSHIPS:\ntype: VettedStrategyDocument; produced_by: HighStakesVettinG; input_to: SPRDistillatioN; comprises: GoNoGoDecisioN, RiskMitigationMatriX, EthicalSafeguardS, CatastrophicContingencieS, ConfidenceAssessmenT; stronger_than: FusedStrategicDossieR; embodies: AntifragilitY; confidence: high",
+    "compression_ratio": 1.0,
+    "symbol_count": 1279,
+    "timestamp": "2025-11-18T10:46:54.935732Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Refined Strategy\n\nDEFINITION:\nThe final strategic document produced by High-Stakes Vetting that explicitly addresses all vulnerabilities, ethical concerns, and catastrophic scenarios identified through adversarial analysis. Unlike the original Fused Strategic Dossier, the Refined Strategy includes risk mitigation matrices, ethical safeguards, catastrophic contingency plans, and a go/no-go decision with confidence assessment. This is the strategy that, if approved, proceeds to implementation.\n\nBLUEPRINT DETAILS:\nTypically 14K-16K tokens. Contains everything from Fused Dossier PLUS explicit mitigation plans for all identified r",
+    "compression_ratio": 2.001564945226917,
+    "symbol_count": 639,
+    "timestamp": "2025-11-18T10:46:54.935759Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Refined Strategy D: final strategic document produced by High-Stakes Vetting explicitly addresses vulnerabilities, ethical concerns, catastrophic scenarios identified through adversarial analysis. Unlike original Fused Strategic Dossier, Refined Strategy includes risk mitigation matrices, ethical safeguards, catastrophic contingency plans, a go/no-go decision confidence assessment. is strategy , if approved, proceeds to I. BLUEPRINT DETAILS: Typically 14K-16K tokens. Contains everything Fused Dossier PLUS explicit mitigation plans identified r",
+    "compression_ratio": 2.3045045045045045,
+    "symbol_count": 555,
+    "timestamp": "2025-11-18T10:46:54.939706Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Refined Strategy D: final strategic document produced High-Stakes Vetting explicitly addresses vulnerabilities, ethical concerns, catastrophic scenarios identified through adversarial analysis. Unlike original Fused Strategic Dossier, Refined Strategy includes mitigation matrices, ethical safeguards, catastrophic contingency plans, go/no-go decision confidence assessment. strategy approved, proceeds I. BLUEPRINT DETAILS: Typically 14K-16K tokens. Contains everything Fused Dossier PLUS explicit mitigation plans identified",
+    "compression_ratio": 2.404135338345865,
+    "symbol_count": 532,
+    "timestamp": "2025-11-18T10:46:54.948749Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Refined Strategy D: final strategic document produced High-Stakes Vetting explicitly addresses vulnerabilities, ethical concerns, catastrophic scenarios identified through adversarial analysis. Unlike original Fused Strategic Dossier, Refined Strategy includes mitigation matrices, ethical safeguards, catastrophic contingency plans, go/no-go decision confidence assessment. strategy approved, proceeds I. BLUEPRINT DETAILS: Typically 14K-16K tokens. Contains everything Fused Dossier PLUS explicit mitigation plans identified",
+    "compression_ratio": 2.404135338345865,
+    "symbol_count": 532,
+    "timestamp": "2025-11-18T10:46:54.953211Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Refined Strategy D: final strategic document produced High-Stakes Vetting explicitly addresses vulnerabilities, ethical concerns, catastrophic scenarios identified through adversarial analysis. Unlike original Fused Strategic Dossier, Refined Strategy includes mitigation matrices, ethical safeguards, catastrophic contingency plans, go/no-go decision confidence assessment. strategy approved, proceeds I. BLUEPRINT DETAILS: Typically 14K-16K tokens. Contains everything Fused Dossier PLUS explicit mitigation plans identified",
+    "compression_ratio": 2.404135338345865,
+    "symbol_count": 532,
+    "timestamp": "2025-11-18T10:46:54.959502Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Refined Strategy D: High-Stakes Vetting Unlike Fused Strategic Dossier, Refined Strategy I. BLUEPRINT DETAILS: Typically 14K-16K Contains Fused Dossier PLUS",
+    "compression_ratio": 7.895061728395062,
+    "symbol_count": 162,
+    "timestamp": "2025-11-18T10:46:54.963398Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "R|S|H|S|V",
+    "compression_ratio": 142.11111111111111,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:54.963675Z"
+  }
+]

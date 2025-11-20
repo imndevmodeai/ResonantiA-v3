@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Cloud Workload Protection\n\nDEFINITION:\nCloud Workload Protection: designed to provide advanced cloud security capabilities to protect against cloud-based threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cloud Workload Protection'\n\nEXAMPLE APPLICATION:\n Security: Mastermind_AI is designed to provide advanced cloud security capabilities to protect against cloud-based threats:\n    * Cloud Security Posture Management: Developing cloud security posture management techniques that enable the AI system to assess and improve cloud security posture.\n    * Cloud Workload Protection: Implementing cloud workload protection techniques that enable the AI system to protect cloud workloads from potential threats.\n    * Cloud Compliance: Creating cloud complia\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1146,
+    "timestamp": "2025-11-18T10:47:37.400838Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Cloud Workload Protection\n\nDEFINITION:\nCloud Workload Protection: designed to provide advanced cloud security capabilities to protect against cloud-based threats:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Cloud Workload Protection'\n\nEXAMPLE APPLICATION:\n Security: Mastermind_AI is designed to provide advanced cloud security capabilities to protect against cloud-based threats:\n    * Cloud Security Posture Management: Developing cloud security posture management techniques that enable the AI system to as",
+    "compression_ratio": 2.0,
+    "symbol_count": 573,
+    "timestamp": "2025-11-18T10:47:37.400863Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Cloud Workload Protection D: Cloud Workload Protection: designed to provide advanced cloud security capabilities to protect against cloud-based threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Cloud Workload Protection' EXAMPLE APPLICATION: Security: Mastermind_AI is designed to provide advanced cloud security capabilities to protect against cloud-based threats: * Cloud Security Posture Management: Developing cloud security posture management techniques enable AI S to as",
+    "compression_ratio": 2.150093808630394,
+    "symbol_count": 533,
+    "timestamp": "2025-11-18T10:47:37.401875Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Cloud Workload Protection D: Cloud Workload Protection: designed provide advanced cloud security capabilities protect against cloud-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Cloud Workload Protection' EXAMPLE APPLICATION: Security: Mastermind_AI designed provide advanced cloud security capabilities protect against cloud-ABM threats: Cloud Security Posture Management: Developing cloud security posture management techniques enable AI S",
+    "compression_ratio": 2.2783300198807157,
+    "symbol_count": 503,
+    "timestamp": "2025-11-18T10:47:37.414035Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Cloud Workload Protection D: Cloud Workload Protection: designed provide advanced cloud security capabilities protect against cloud-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Cloud Workload Protection' EXAMPLE APPLICATION: Security: Mastermind_AI designed provide advanced cloud security capabilities protect against cloud-ABM threats: Cloud Security Posture Management: Developing cloud security posture management techniques enable AI S",
+    "compression_ratio": 2.2783300198807157,
+    "symbol_count": 503,
+    "timestamp": "2025-11-18T10:47:37.421537Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Cloud Workload Protection D: Cloud Workload Protection: designed provide advanced cloud security capabilities protect against cloud-ABM threats: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Cloud Workload Protection' EXAMPLE APPLICATION: Security: Mastermind_AI designed provide advanced cloud security capabilities protect against cloud-ABM threats: Cloud Security Posture Management: Developing cloud security posture management techniques enable AI S",
+    "compression_ratio": 2.2783300198807157,
+    "symbol_count": 503,
+    "timestamp": "2025-11-18T10:47:37.428396Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Cloud Workload Protection D: Cloud Workload Protection: BLUEPRINT DETAILS: Θ Node Original Θ Workload Protection' EXAMPLE APPLICATION: Security: Mastermind_AI Cloud Security Posture Management: Developing AI S",
+    "compression_ratio": 5.330232558139535,
+    "symbol_count": 215,
+    "timestamp": "2025-11-18T10:47:37.434825Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 382.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:37.435179Z"
+  }
+]

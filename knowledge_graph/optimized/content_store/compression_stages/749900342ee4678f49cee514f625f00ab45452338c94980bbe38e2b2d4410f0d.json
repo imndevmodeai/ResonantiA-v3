@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Module: nfl_betting_line_fetcher\n\nDEFINITION:\nNFL Betting Line Fetcher\nFetches betting lines from various sources\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_betting_line_fetcher.py, type: python_module\n\nFULL IMPLEMENTATION CODE (nfl_betting_line_fetcher.py):\n```python\n#!/usr/bin/env python3\n\"\"\"\nNFL Betting Line Fetcher\nFetches betting lines from various sources\n\"\"\"\n\nimport logging\nfrom typing import List, Dict\n\nlogger = logging.getLogger(__name__)\n\ndef fetch_betting_lines() -> List[Dict]:\n    \"\"\"\n    Fetch current betting lines\n    \n    Would integrate with:\n    - The Odds API\n    - Vegas Insider (scraping)\n    - Action Network\n    \n    Returns:\n        List of betting line dictionaries\n    \"\"\"\n    # Placeholder - would implement real API calls\n    logger.info(\"Fetching betting lines...\")\n    \n    # Example structure\n    lines = [\n        {\n            'game_id': '2025-11-09-DET-WAS',\n            'team1': 'Detroit Lions',\n            'team2': 'Washington Commanders',\n            'public_line': 3.5,\n            'public_money_pct': 0.68,\n            'timestamp': '2025-11-09T10:00:00Z'\n        }\n    ]\n    \n    return lines\n\n\n```\n\nEXAMPLE APPLICATION:\nNFL Betting Line Fetcher\nFetches betting lines from various sources\n\nCATEGORY: CodeKnowledge\n\nRELATIONSHIPS:\ntype: FromCodebase; source: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_betting_line_fetcher.py; source_type: python_module",
+    "compression_ratio": 1.0,
+    "symbol_count": 1458,
+    "timestamp": "2025-11-18T11:00:43.411963Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Module: nfl_betting_line_fetcher\n\nDEFINITION:\nNFL Betting Line Fetcher\nFetches betting lines from various sources\n\nBLUEPRINT DETAILS:\nExtracted from /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/nfl_betting_line_fetcher.py, type: python_module\n\nFULL IMPLEMENTATION CODE (nfl_betting_line_fetcher.py):\n```python\n#!/usr/bin/env python3\n\"\"\"\nNFL Betting Line Fetcher\nFetches betting lines from various sources\n\"\"\"\n\nimport logging\nfrom typing import List, Dict\n\nlogger = logging.getLogger(__name__)\n\ndef fetch_betting_lines() -> List[Dict]:\n    \"\"\"\n    Fetch current betting lines\n    \n    Would integrate with:\n    - The Odds API\n    - Vegas Insider (scraping)\n    - Action Network\n    \n    Returns:\n        List of betting ",
+    "compression_ratio": 2.0,
+    "symbol_count": 729,
+    "timestamp": "2025-11-18T11:00:43.412562Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Module: nfl_betting_line_fetcher D: NFL Betting Line Fetcher Fetches betting lines various sources BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_betting_line_fetcher.py, type: python_module FULL I CODE (nfl_betting_line_fetcher.py): ```python #!/usr/bin/env python3 \"\"\" NFL Betting Line Fetcher Fetches betting lines various sources \"\"\" import logging typing import List, Dict logger = logging.getLogger(__name__) def fetch_betting_lines() -> List[Dict]: \"\"\" Fetch current betting lines Would integrate : - Odds API - Vegas Insider (scraping) - Action Network Returns: List of betting",
+    "compression_ratio": 2.3440514469453375,
+    "symbol_count": 622,
+    "timestamp": "2025-11-18T11:00:43.416401Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Module: nfl_betting_line_fetcher D: NFL Betting Line Fetcher Fetches betting lines various sources BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_betting_line_fetcher.py, type: python_module FULL I CODE (nfl_betting_line_fetcher.py): ```python #!/usr/bin/env python3 NFL Betting Line Fetcher Fetches betting lines various sources import logging typing import List, Dict logger logging.getLogger(__name__) fetch_betting_lines() List[Dict]: Fetch current betting lines integrate Odds API Vegas Insider (scraping) Action Network Returns: List betting",
+    "compression_ratio": 2.4965753424657535,
+    "symbol_count": 584,
+    "timestamp": "2025-11-18T11:00:43.426584Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Module: nfl_betting_line_fetcher D: NFL Betting Line Fetcher Fetches betting lines various sources BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_betting_line_fetcher.py, type: python_module FULL I CODE (nfl_betting_line_fetcher.py): ```python #!/usr/bin/env python3 NFL Betting Line Fetcher Fetches betting lines various sources import logging typing import List, Dict logger logging.getLogger(__name__) fetch_betting_lines() List[Dict]: Fetch current betting lines integrate Odds API Vegas Insider (scraping) Action Network Returns: List betting",
+    "compression_ratio": 2.4965753424657535,
+    "symbol_count": 584,
+    "timestamp": "2025-11-18T11:00:43.434915Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Module: nfl_betting_line_fetcher D: NFL Betting Line Fetcher Fetches betting lines various sources BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_betting_line_fetcher.py, type: python_module FULL I CODE (nfl_betting_line_fetcher.py): ```python #!/usr/bin/env python3 NFL Betting Line Fetcher Fetches betting lines various sources import logging typing import List, Dict logger logging.getLogger(__name__) fetch_betting_lines() List[Dict]: Fetch current betting lines integrate Odds API Vegas Insider (scraping) Action Network Returns: List betting",
+    "compression_ratio": 2.4965753424657535,
+    "symbol_count": 584,
+    "timestamp": "2025-11-18T11:00:43.440543Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Module: D: NFL Betting Line Fetcher Fetches BLUEPRINT DETAILS: Extracted /mnt/3626C55326C514B1/Happier/Three_PointO_Æ/nfl_betting_line_fetcher.py, FULL I CODE NFL Betting Line Fetcher Fetches List, Dict List[Dict]: Fetch Odds API Vegas Insider Action Network Returns: List",
+    "compression_ratio": 5.244604316546763,
+    "symbol_count": 278,
+    "timestamp": "2025-11-18T11:00:43.448941Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Æ",
+    "compression_ratio": 1458.0,
+    "symbol_count": 1,
+    "timestamp": "2025-11-18T11:00:43.449765Z"
+  }
+]

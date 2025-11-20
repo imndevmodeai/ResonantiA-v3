@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Dystopian Simulation\n\nDEFINITION:\nThe creative worst-case scenario narrative that vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure that force explicit contingency planning. This mirrors pre-mortem analysis (imagine the project failed—what happened?) but uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios that might not appear in traditional risk assessments.\n\nBLUEPRINT DETAILS:\nUses temperature 0.9 for highly creative catastrophic thinking. Narrative format makes abstract risks concrete and psychologically impactful.\n\nEXAMPLE APPLICATION:\nDystopian narrative for a social media feature launch: 'The feature went viral, but not for good reasons. Users discovered they could weaponize it for harassment. Media coverage framed the company as enabling abuse. Regulatory scrutiny intensified. Users revolted. Stock dropped 40%. The feature was pulled, but trust was permanently damaged.' Result: Explicit abuse-prevention measures added to strategy.\n\nCATEGORY: RiskAnalysis\n\nRELATIONSHIPS:\ntype: CatastrophicImaginatioN; part_of: HighStakesVettinG; produces: DystopianNarrativE; enables: ContingencyPlanninG, CatastrophePreventioN; inspired_by: PremortemAnalysiS; confidence: medium",
+    "compression_ratio": 1.0,
+    "symbol_count": 1329,
+    "timestamp": "2025-11-18T10:46:46.739515Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Dystopian Simulation\n\nDEFINITION:\nThe creative worst-case scenario narrative that vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure that force explicit contingency planning. This mirrors pre-mortem analysis (imagine the project failed—what happened?) but uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios that might not appear in traditional risk assessments.\n\nBLUEPRINT DETAILS:\nUses temperature 0.9 for highly creative catastrophic thinking. Narrative format makes abstract risks concrete and psychologically impact",
+    "compression_ratio": 2.0015060240963853,
+    "symbol_count": 664,
+    "timestamp": "2025-11-18T10:46:46.739537Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Dystopian Simulation D: creative worst-case scenario narrative vividly imagines catastrophic failure modes of a strategy. Unlike abstract risk lists, Dystopian Simulation creates concrete, memorable stories of failure force explicit contingency planning. mirrors pre-mortem analysis (imagine project failed— happened?) uses high-temperature (0.9) LLM generation to explore creative catastrophic scenarios might appear in traditional risk assessments. BLUEPRINT DETAILS: Uses temperature 0.9 highly creative catastrophic thinking. Narrative F makes abstract risks concrete psychologically impact",
+    "compression_ratio": 2.215,
+    "symbol_count": 600,
+    "timestamp": "2025-11-18T10:46:46.746849Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Dystopian Simulation D: creative worst-case scenario narrative vividly imagines catastrophic failure modes strategy. Unlike abstract lists, Dystopian Simulation creates concrete, memorable stories failure force explicit contingency planning. mirrors pre-mortem analysis (imagine project failed— happened?) high-temperature (0.9) LLM generation explore creative catastrophic scenarios appear traditional assessments. BLUEPRINT DETAILS: Uses temperature highly creative catastrophic thinking. Narrative F makes abstract risks concrete psychologically impact",
+    "compression_ratio": 2.3689839572192515,
+    "symbol_count": 561,
+    "timestamp": "2025-11-18T10:46:46.755691Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Dystopian Simulation D: creative worst-case scenario narrative vividly imagines catastrophic failure modes strategy. Unlike abstract lists, Dystopian Simulation creates concrete, memorable stories failure force explicit contingency planning. mirrors pre-mortem analysis (imagine project failed— happened?) high-temperature (0.9) LLM generation explore creative catastrophic scenarios appear traditional assessments. BLUEPRINT DETAILS: Uses temperature highly creative catastrophic thinking. Narrative F makes abstract risks concrete psychologically impact",
+    "compression_ratio": 2.3689839572192515,
+    "symbol_count": 561,
+    "timestamp": "2025-11-18T10:46:46.768672Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Dystopian Simulation D: creative worst-case scenario narrative vividly imagines catastrophic failure modes strategy. Unlike abstract lists, Dystopian Simulation creates concrete, memorable stories failure force explicit contingency planning. mirrors pre-mortem analysis (imagine project failed— happened?) high-temperature (0.9) LLM generation explore creative catastrophic scenarios appear traditional assessments. BLUEPRINT DETAILS: Uses temperature highly creative catastrophic thinking. Narrative F makes abstract risks concrete psychologically impact",
+    "compression_ratio": 2.3689839572192515,
+    "symbol_count": 561,
+    "timestamp": "2025-11-18T10:46:46.780728Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Dystopian Simulation D: Unlike Dystopian Simulation LLM BLUEPRINT DETAILS: Uses Narrative F",
+    "compression_ratio": 13.70103092783505,
+    "symbol_count": 97,
+    "timestamp": "2025-11-18T10:46:46.790212Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "D|S|U|D|S",
+    "compression_ratio": 147.66666666666666,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:46.790489Z"
+  }
+]

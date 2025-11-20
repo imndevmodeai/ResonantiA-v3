@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Learning Metrics\n\nDEFINITION:\nTracks autonomy_rate, patterns_stored, llm_calls_saved, avg_compression_ratio, avg_confidence to govern capture and routing.\n\n[From Codebase]: ```python\n{\n    \"error_types_learned\": [\"unsatisfied_precondition\", \"temporal_violation\"],\n    \"improvement_over_time\": True,  # Success rate increasing\n    \"recurring_error_rate\": 0.05,  # 5% of errors are same type\n    \"error_education_effectiveness\": 0.82  # 82% improve after feedback\n}\n```\n\nBLUEPRINT DETAILS:\nAggregates autonomy_rate, patterns_stored, llm_calls_saved, avg_compression_ratio, avg_confidence; feeds policy decisions.\n\nEXAMPLE APPLICATION:\nReported autonomy_rate climbing to 0.32 with 27 LLM calls saved this week.\n\nCATEGORY: SystemCapability\n\nRELATIONSHIPS:\ntype: Telemetry; used_by: KnowledgegraphrouteR, PromotionPolicY; reported_to: VettingagenT",
+    "compression_ratio": 1.0,
+    "symbol_count": 848,
+    "timestamp": "2025-11-18T10:46:49.941440Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Learning Metrics\n\nDEFINITION:\nTracks autonomy_rate, patterns_stored, llm_calls_saved, avg_compression_ratio, avg_confidence to govern capture and routing.\n\n[From Codebase]: ```python\n{\n    \"error_types_learned\": [\"unsatisfied_precondition\", \"temporal_violation\"],\n    \"improvement_over_time\": True,  # Success rate increasing\n    \"recurring_error_rate\": 0.05,  # 5% of errors are same type\n    \"error_education_effecti",
+    "compression_ratio": 2.0,
+    "symbol_count": 424,
+    "timestamp": "2025-11-18T10:46:49.941974Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Learning Metrics D: Tracks autonomy_rate, patterns_stored, llm_calls_saved, avg_compression_ratio, avg_confidence to govern capture routing. [ Codebase]: ```python { \"error_types_learned\": [\"unsatisfied_precondition\", \"temporal_violation\"], \"improvement_over_time\": True, # Success rate increasing \"recurring_error_rate\": 0.05, # 5% of errors same type \"error_education_effecti",
+    "compression_ratio": 2.2140992167101827,
+    "symbol_count": 383,
+    "timestamp": "2025-11-18T10:46:49.951741Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Learning Metrics D: Tracks autonomy_rate, patterns_stored, llm_calls_saved, avg_compression_ratio, avg_confidence govern capture routing. Codebase]: ```python \"error_types_learned\": [\"unsatisfied_precondition\", \"temporal_violation\"], \"improvement_over_time\": True, Success increasing \"recurring_error_rate\": 0.05, errors \"error_education_effecti",
+    "compression_ratio": 2.415954415954416,
+    "symbol_count": 351,
+    "timestamp": "2025-11-18T10:46:49.961893Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Learning Metrics D: Tracks autonomy_rate, patterns_stored, llm_calls_saved, avg_compression_ratio, avg_confidence govern capture routing. Codebase]: ```python \"error_types_learned\": [\"unsatisfied_precondition\", \"temporal_violation\"], \"improvement_over_time\": True, Success increasing \"recurring_error_rate\": 0.05, errors \"error_education_effecti",
+    "compression_ratio": 2.415954415954416,
+    "symbol_count": 351,
+    "timestamp": "2025-11-18T10:46:49.972664Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Learning Metrics D: Tracks autonomy_rate, patterns_stored, llm_calls_saved, avg_compression_ratio, avg_confidence govern capture routing. Codebase]: ```python \"error_types_learned\": [\"unsatisfied_precondition\", \"temporal_violation\"], \"improvement_over_time\": True, Success increasing \"recurring_error_rate\": 0.05, errors \"error_education_effecti",
+    "compression_ratio": 2.415954415954416,
+    "symbol_count": 351,
+    "timestamp": "2025-11-18T10:46:49.982925Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Learning Metrics D: Tracks Codebase]: True, Success",
+    "compression_ratio": 14.87719298245614,
+    "symbol_count": 57,
+    "timestamp": "2025-11-18T10:46:49.998937Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "L|M|T|C|T",
+    "compression_ratio": 94.22222222222223,
+    "symbol_count": 9,
+    "timestamp": "2025-11-18T10:46:49.999156Z"
+  }
+]

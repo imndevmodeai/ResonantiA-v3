@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Natural Language Processing\nIntegrating\n\nDEFINITION:\nNatural Language Processing\nIntegrating: not integrating the AI systems correctly, trigger a conditional step to revise and revalidate the architecture\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Natural Language Processing\nIntegrating'\n\nEXAMPLE APPLICATION:\ntive tasks?\n\nPlease respond with one of the following options:\n\nPlease respond with the number of your chosen option.\n\nYes, I would like to learn more about the Cognitive Architecture\n\n->|execution|<-\n\n->|/execution|<-\n->|results|<- \nIntegrating AI systems...\nIntegrating: MasterMind_AI\nIntegrating: Natural Language Processing\nIntegrating: Decision Support System\n->|/results|<-\n->|conditional|<- \nIf the Cognitive Architecture is not integrating the AI systems correctly, trigger a conditional step\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1202,
+    "timestamp": "2025-11-18T10:47:26.628852Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Natural Language Processing\nIntegrating\n\nDEFINITION:\nNatural Language Processing\nIntegrating: not integrating the AI systems correctly, trigger a conditional step to revise and revalidate the architecture\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Natural Language Processing\nIntegrating'\n\nEXAMPLE APPLICATION:\ntive tasks?\n\nPlease respond with one of the following options:\n\nPlease respond with the number of your chosen option.\n\nYes, I would like to learn more about the Cognitive Architecture\n\n->|execution|<-\n\n->|/execution|<-\n->|res",
+    "compression_ratio": 2.0,
+    "symbol_count": 601,
+    "timestamp": "2025-11-18T10:47:26.628912Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Natural Language Ping Integrating D: Natural Language Ping Integrating: integrating AI Ss correctly, trigger a conditional step to revise revalidate architecture BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Natural Language Ping Integrating' EXAMPLE APPLICATION: tive tasks? Please respond one of following options: Please respond number of your chosen option. Yes, I would like to learn more about Cognitive Architecture ->|execution|<- ->|/execution|<- ->|res",
+    "compression_ratio": 2.3385214007782102,
+    "symbol_count": 514,
+    "timestamp": "2025-11-18T10:47:26.634517Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Natural Language Ping Integrating D: Natural Language Ping Integrating: integrating AI Ss correctly, trigger conditional revise revalidate architecture BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Integrating' EXAMPLE APPLICATION: tasks? Please respond following options: Please respond number chosen option. Yes, I learn about Ω Architecture ->|execution|<- ->|/execution|<- ->|res",
+    "compression_ratio": 2.647577092511013,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:26.639062Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Natural Language Ping Integrating D: Natural Language Ping Integrating: integrating AI Ss correctly, trigger conditional revise revalidate architecture BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Integrating' EXAMPLE APPLICATION: tasks? Please respond following options: Please respond number chosen option. Yes, I learn about Ω Architecture ->|execution|<- ->|/execution|<- ->|res",
+    "compression_ratio": 2.647577092511013,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:26.641886Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Natural Language Ping Integrating D: Natural Language Ping Integrating: integrating AI Ss correctly, trigger conditional revise revalidate architecture BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Natural Language Ping Integrating' EXAMPLE APPLICATION: tasks? Please respond following options: Please respond number chosen option. Yes, I learn about Ω Architecture ->|execution|<- ->|/execution|<- ->|res",
+    "compression_ratio": 2.647577092511013,
+    "symbol_count": 454,
+    "timestamp": "2025-11-18T10:47:26.644588Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Natural Language Ping Integrating D: Natural Language Ping Integrating: AI Ss BLUEPRINT DETAILS: Θ Node Original Θ Language Ping Integrating' EXAMPLE APPLICATION: Please Please Yes, I Ω Architecture",
+    "compression_ratio": 5.892156862745098,
+    "symbol_count": 204,
+    "timestamp": "2025-11-18T10:47:26.649790Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ|Ω",
+    "compression_ratio": 240.4,
+    "symbol_count": 5,
+    "timestamp": "2025-11-18T10:47:26.650135Z"
+  }
+]

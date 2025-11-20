@@ -545,6 +545,327 @@ class VCDTestRunner:
         meets_target = actual_coverage >= target_coverage
         
         return meets_target, actual_coverage
+    
+    def run_tests_with_fixtures(
+        self,
+        setup_func: Optional[Callable] = None,
+        teardown_func: Optional[Callable] = None
+    ) -> Dict[str, TestSuiteResult]:
+        """
+        Run tests with setup and teardown fixtures.
+        
+        Args:
+            setup_func: Optional setup function to run before tests
+            teardown_func: Optional teardown function to run after tests
+            
+        Returns:
+            Dictionary of test suite results
+        """
+        try:
+            if setup_func:
+                setup_func()
+            
+            suites = self.run_all_tests()
+            
+            if teardown_func:
+                teardown_func()
+            
+            return suites
+        except Exception as e:
+            logger.error(f"Test execution with fixtures failed: {e}")
+            return {}
+    
+    def generate_test_data(self, test_type: str, count: int = 10) -> List[Dict[str, Any]]:
+        """
+        Generate test data for various test types.
+        
+        Args:
+            test_type: Type of test data to generate
+            count: Number of test cases to generate
+            
+        Returns:
+            List of test data dictionaries
+        """
+        test_data = []
+        
+        if test_type == "performance":
+            for i in range(count):
+                test_data.append({
+                    "test_id": f"perf_test_{i}",
+                    "connection_count": 10 + i * 5,
+                    "message_rate": 100 + i * 10,
+                    "expected_response_time": 50 + i * 5
+                })
+        elif test_type == "stress":
+            for i in range(count):
+                test_data.append({
+                    "test_id": f"stress_test_{i}",
+                    "concurrent_connections": 20 + i * 10,
+                    "duration_seconds": 60 + i * 30,
+                    "expected_stability": True
+                })
+        elif test_type == "integration":
+            for i in range(count):
+                test_data.append({
+                    "test_id": f"integration_test_{i}",
+                    "components": ["vcd_bridge", "vcd_ui", "vcd_analysis_agent"],
+                    "workflow_steps": 3 + i,
+                    "expected_success": True
+                })
+        else:
+            for i in range(count):
+                test_data.append({
+                    "test_id": f"generic_test_{i}",
+                    "data": f"test_data_{i}"
+                })
+        
+        return test_data
+    
+    def export_test_results(
+        self,
+        suites: Dict[str, TestSuiteResult],
+        format: str = "json",
+        output_path: Optional[Path] = None
+    ) -> Tuple[bool, str]:
+        """
+        Export test results in various formats.
+        
+        Args:
+            suites: Dictionary of test suite results
+            format: Export format ("json", "xml", "html", "csv")
+            output_path: Optional output path
+            
+        Returns:
+            Tuple of (success, message)
+        """
+        if output_path is None:
+            timestamp = int(datetime.now().timestamp())
+            output_path = self.output_dir / f"test_results_{timestamp}.{format}"
+        
+        try:
+            if format == "json":
+                report = {
+                    "timestamp": now_iso(),
+                    "suites": {name: asdict(suite) for name, suite in suites.items()}
+                }
+                with open(output_path, 'w') as f:
+                    json.dump(report, f, indent=2)
+            
+            elif format == "xml":
+                # JUnit XML format
+                xml_lines = ['<?xml version="1.0" encoding="UTF-8"?>']
+                xml_lines.append('<testsuites>')
+                
+                for suite_name, suite in suites.items():
+                    xml_lines.append(f'  <testsuite name="{suite_name}" tests="{suite.total_tests}" failures="{suite.failed}" errors="{suite.errors}">')
+                    for result in suite.results:
+                        xml_lines.append(f'    <testcase name="{result.test_name}" time="{result.execution_time}">')
+                        if result.status == "failed":
+                            xml_lines.append(f'      <failure message="{result.error_message or "Test failed"}"/>')
+                        elif result.status == "error":
+                            xml_lines.append(f'      <error message="{result.error_message or "Test error"}"/>')
+                        xml_lines.append('    </testcase>')
+                    xml_lines.append('  </testsuite>')
+                
+                xml_lines.append('</testsuites>')
+                
+                with open(output_path, 'w') as f:
+                    f.write('\n'.join(xml_lines))
+            
+            elif format == "csv":
+                import csv
+                with open(output_path, 'w', newline='') as f:
+                    writer = csv.writer(f)
+                    writer.writerow(["Suite", "Test Name", "Type", "Status", "Execution Time", "Error Message"])
+                    for suite_name, suite in suites.items():
+                        for result in suite.results:
+                            writer.writerow([
+                                suite_name,
+                                result.test_name,
+                                result.test_type,
+                                result.status,
+                                result.execution_time,
+                                result.error_message or ""
+                            ])
+            
+            elif format == "html":
+                html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VCD Test Results</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 20px; }}
+        table {{ border-collapse: collapse; width: 100%; }}
+        th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+        th {{ background-color: #4CAF50; color: white; }}
+        .passed {{ background-color: #d4edda; }}
+        .failed {{ background-color: #f8d7da; }}
+        .error {{ background-color: #fff3cd; }}
+    </style>
+</head>
+<body>
+    <h1>VCD Test Results</h1>
+    <p>Generated: {now_iso()}</p>
+    <h2>Summary</h2>
+    <table>
+        <tr>
+            <th>Suite</th>
+            <th>Total</th>
+            <th>Passed</th>
+            <th>Failed</th>
+            <th>Errors</th>
+            <th>Pass Rate</th>
+        </tr>
+"""
+                for suite_name, suite in suites.items():
+                    pass_rate = (suite.passed / suite.total_tests * 100) if suite.total_tests > 0 else 0
+                    html += f"""
+        <tr>
+            <td>{suite_name}</td>
+            <td>{suite.total_tests}</td>
+            <td>{suite.passed}</td>
+            <td>{suite.failed}</td>
+            <td>{suite.errors}</td>
+            <td>{pass_rate:.1f}%</td>
+        </tr>
+"""
+                html += """
+    </table>
+    <h2>Test Details</h2>
+    <table>
+        <tr>
+            <th>Suite</th>
+            <th>Test Name</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Time (s)</th>
+            <th>Error</th>
+        </tr>
+"""
+                for suite_name, suite in suites.items():
+                    for result in suite.results:
+                        status_class = result.status
+                        html += f"""
+        <tr class="{status_class}">
+            <td>{suite_name}</td>
+            <td>{result.test_name}</td>
+            <td>{result.test_type}</td>
+            <td>{result.status}</td>
+            <td>{result.execution_time:.3f}</td>
+            <td>{result.error_message or ""}</td>
+        </tr>
+"""
+                html += """
+    </table>
+</body>
+</html>
+"""
+                with open(output_path, 'w') as f:
+                    f.write(html)
+            
+            else:
+                return False, f"Unsupported export format: {format}"
+            
+            return True, f"Test results exported to {output_path}"
+            
+        except Exception as e:
+            return False, f"Failed to export test results: {e}"
+    
+    def run_parallel_tests(
+        self,
+        max_workers: int = 4
+    ) -> Dict[str, TestSuiteResult]:
+        """
+        Run tests in parallel for improved performance.
+        
+        Args:
+            max_workers: Maximum number of parallel workers
+            
+        Returns:
+            Dictionary of test suite results
+        """
+        import concurrent.futures
+        
+        suites = {}
+        
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {
+                "unit": executor.submit(self.run_unit_tests),
+                "integration": executor.submit(self.run_integration_tests),
+                "performance": executor.submit(self.run_performance_tests),
+                "stress": executor.submit(self.run_stress_tests)
+            }
+            
+            for suite_name, future in futures.items():
+                try:
+                    suites[suite_name] = future.result(timeout=300)  # 5 minute timeout
+                except Exception as e:
+                    logger.error(f"Parallel test execution failed for {suite_name}: {e}")
+                    # Create error result
+                    suites[suite_name] = TestSuiteResult(
+                        suite_name=f"VCD {suite_name.capitalize()} Tests",
+                        total_tests=0,
+                        passed=0,
+                        failed=0,
+                        skipped=0,
+                        errors=1,
+                        execution_time=0.0,
+                        coverage_percentage=0.0,
+                        results=[]
+                    )
+        
+        # Generate report
+        self.generate_test_report(suites)
+        
+        return suites
+    
+    def create_ci_report(self, suites: Dict[str, TestSuiteResult]) -> Dict[str, Any]:
+        """
+        Create CI/CD compatible test report.
+        
+        Args:
+            suites: Dictionary of test suite results
+            
+        Returns:
+            CI report dictionary
+        """
+        total_tests = sum(suite.total_tests for suite in suites.values())
+        total_passed = sum(suite.passed for suite in suites.values())
+        total_failed = sum(suite.failed for suite in suites.values())
+        total_errors = sum(suite.errors for suite in suites.values())
+        
+        pass_rate = (total_passed / total_tests * 100) if total_tests > 0 else 0
+        
+        ci_report = {
+            "timestamp": now_iso(),
+            "status": "success" if total_failed == 0 and total_errors == 0 else "failure",
+            "summary": {
+                "total_tests": total_tests,
+                "passed": total_passed,
+                "failed": total_failed,
+                "errors": total_errors,
+                "pass_rate": pass_rate,
+                "meets_threshold": pass_rate >= 90.0
+            },
+            "suites": {
+                name: {
+                    "status": "success" if suite.failed == 0 and suite.errors == 0 else "failure",
+                    "passed": suite.passed,
+                    "failed": suite.failed,
+                    "errors": suite.errors,
+                    "pass_rate": (suite.passed / suite.total_tests * 100) if suite.total_tests > 0 else 0
+                }
+                for name, suite in suites.items()
+            }
+        }
+        
+        # Save CI report
+        ci_report_path = self.output_dir / f"ci_report_{int(datetime.now().timestamp())}.json"
+        with open(ci_report_path, 'w') as f:
+            json.dump(ci_report, f, indent=2)
+        
+        return ci_report
 
 
 def main():
@@ -568,6 +889,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
 
 
 

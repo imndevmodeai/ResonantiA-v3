@@ -1,0 +1,58 @@
+[
+  {
+    "stage_name": "Narrative",
+    "content": "TERM: Driven Audit\n\nDEFINITION:\nDriven Audit: designed to provide advanced audit and assurance capabilities to improve the accuracy and reliability of financial statements:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Audit'\n\nEXAMPLE APPLICATION:\n Mitigation: Implementing risk mitigation techniques that enable the AI system to develop and implement strategies to mitigate risks.\n    * Compliance Management: Creating compliance management techniques that enable the AI system to ensure regulatory compliance and manage compliance risks.\n\n78. AI-Driven Audit and Assurance: Mastermind_AI is designed to provide advanced audit and assurance capabilities to improve the accuracy and reliability of financial statements:\n    * Audit Planning: Develo\n\nCATEGORY: ExtractedKnowledge\n\nRELATIONSHIPS:\ntype: SPRFromAgi; source: agi.txt; original_format: capitalized_concept\n\nCONTEXT TYPE: Conversation-derived knowledge (no direct spec/code, enriched from agi.txt conversations)\n\nIMPLICIT KNOWLEDGE: This SPR represents knowledge understood through conversation context and osmosis",
+    "compression_ratio": 1.0,
+    "symbol_count": 1137,
+    "timestamp": "2025-11-18T10:47:38.190932Z"
+  },
+  {
+    "stage_name": "Concise",
+    "content": "TERM: Driven Audit\n\nDEFINITION:\nDriven Audit: designed to provide advanced audit and assurance capabilities to improve the accuracy and reliability of financial statements:\n\nBLUEPRINT DETAILS:\nSPR extracted from agi.txt Node ?, type: capitalized_concept. Original SPR name: 'Driven Audit'\n\nEXAMPLE APPLICATION:\n Mitigation: Implementing risk mitigation techniques that enable the AI system to develop and implement strategies to mitigate risks.\n    * Compliance Management: Creating compliance management techniques that enable the AI system to ensure regulatory compl",
+    "compression_ratio": 2.0017605633802815,
+    "symbol_count": 568,
+    "timestamp": "2025-11-18T10:47:38.190954Z"
+  },
+  {
+    "stage_name": "Nano",
+    "content": "TERM: Driven Audit D: Driven Audit: designed to provide advanced audit assurance capabilities to improve accuracy reliability of financial statements: BLUEPRINT DETAILS: Θ extracted agi.txt Node ?, type: capitalized_concept. Original Θ name: 'Driven Audit' EXAMPLE APPLICATION: Mitigation: Implementing risk mitigation techniques enable AI S to develop implement strategies to mitigate risks. * Compliance Management: Creating compliance management techniques enable AI S to ensure regulatory compl",
+    "compression_ratio": 2.283132530120482,
+    "symbol_count": 498,
+    "timestamp": "2025-11-18T10:47:38.193207Z"
+  },
+  {
+    "stage_name": "Micro",
+    "content": "TERM: Driven Audit D: Driven Audit: designed provide advanced audit assurance capabilities improve accuracy reliability financial statements: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Audit' EXAMPLE APPLICATION: Mitigation: Implementing mitigation techniques enable AI S develop implement strategies mitigate risks. Compliance Management: Creating compliance management techniques enable AI S ensure regulatory compl",
+    "compression_ratio": 2.4191489361702128,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:47:38.198637Z"
+  },
+  {
+    "stage_name": "Pico",
+    "content": "TERM: Driven Audit D: Driven Audit: designed provide advanced audit assurance capabilities improve accuracy reliability financial statements: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Audit' EXAMPLE APPLICATION: Mitigation: Implementing mitigation techniques enable AI S develop implement strategies mitigate risks. Compliance Management: Creating compliance management techniques enable AI S ensure regulatory compl",
+    "compression_ratio": 2.4191489361702128,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:47:38.202788Z"
+  },
+  {
+    "stage_name": "Femto",
+    "content": "TERM: Driven Audit D: Driven Audit: designed provide advanced audit assurance capabilities improve accuracy reliability financial statements: BLUEPRINT DETAILS: Θ extracted agi.txt Node type: capitalized_concept. Original Θ name: 'Driven Audit' EXAMPLE APPLICATION: Mitigation: Implementing mitigation techniques enable AI S develop implement strategies mitigate risks. Compliance Management: Creating compliance management techniques enable AI S ensure regulatory compl",
+    "compression_ratio": 2.4191489361702128,
+    "symbol_count": 470,
+    "timestamp": "2025-11-18T10:47:38.206964Z"
+  },
+  {
+    "stage_name": "Atto",
+    "content": "TERM: Driven Audit D: Driven Audit: BLUEPRINT DETAILS: Θ Node Original Θ Audit' EXAMPLE APPLICATION: Mitigation: Implementing AI S Compliance Management: Creating AI S",
+    "compression_ratio": 6.808383233532934,
+    "symbol_count": 167,
+    "timestamp": "2025-11-18T10:47:38.209544Z"
+  },
+  {
+    "stage_name": "Zepto",
+    "content": "Θ|Θ",
+    "compression_ratio": 379.0,
+    "symbol_count": 3,
+    "timestamp": "2025-11-18T10:47:38.209976Z"
+  }
+]
