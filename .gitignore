@@ -143,3 +143,6 @@ knowledge_graph/*.json
 
 # Files over 50MB (exclude large files)
 # Note: .git/objects/pack files are git internals and handled automatically
+
+# Files over 50MB (exclude large files)
+# Note: .git/objects/pack files are git internals and handled automatically
