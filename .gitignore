@@ -123,21 +123,24 @@ cursor_*.deb
 
 # Large files excluded from git
 Three_PointO_ArchE/ledgers/thought_trail.db
+Three_PointO_ArchE/knowledge_graph/spr_definitions_tv.json
 knowledge_graph/spr_definitions_tv.json
+**/spr_definitions_tv.json
 *.db
 *.json.backup.*
 
 # Exclude all backup and large data files
 *.backup
 *.backup.*
-*.db
 *.zip
 knowledge_graph/*.json
 !knowledge_graph/*.json.txt
 
-# Large files excluded from git
-Three_PointO_ArchE/ledgers/thought_trail.db
-knowledge_graph/spr_definitions_tv.json
-knowledge_graph/spr_definitions_tv.json.*
-*.db
+# Thought trail databases (excluded due to size)
+**/thoughttrail.db
+**/thought_trail.db
+**/ledgers/**/*.db
+
+# Files over 50MB (exclude large files)
+# Note: .git/objects/pack files are git internals and handled automatically
 
