@@ -1,0 +1,12 @@
+Develop a hyper-specific, evidence-based product strategy for ArchE that identifies a niche category with defensible moat-building capabilities. The strategy must:
+
+1. Analyze the current AI assistant/agent landscape to identify underserved niches
+2. Identify specific moat-building opportunities (technical, data, network effects, brand)
+3. Provide a detailed go-to-market plan with evidence-based validation
+4. Include competitive analysis showing why this niche is defensible
+5. Define specific product features that create switching costs and barriers to entry
+6. Provide market sizing and validation data
+7. Include a 12-month roadmap with milestones and success metrics
+
+The analysis should be dynamically generated using real-time research, competitive intelligence, and market data. All findings must be evidence-based and vetted through multiple data sources.
+

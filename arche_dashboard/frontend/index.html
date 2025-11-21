@@ -54,6 +54,7 @@
             font-size: 1.5rem;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
         }
@@ -823,10 +824,25 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
                     
                     // Store enhanced query and metadata for use
                     window.enhancedQuery = result.result.enhanced_query;
+                    
+                    // CRITICAL FIX: The enhancement engine's _find_required_capabilities() includes detected_sprs (line 480)
+                    // So required_capabilities contains BOTH SPRs and other capabilities
+                    // We'll pass ALL of required_capabilities as SPRs - the processor will validate them
+                    const detected_sprs = analysis.detected_sprs || [];
+                    const required_capabilities = analysis.required_capabilities || [];
+                    
+                    // Merge detected_sprs with required_capabilities and deduplicate
+                    // The processor's SPR manager will filter out invalid SPRs
+                    const allPotentialSprs = [...new Set([...detected_sprs, ...required_capabilities])];
+                    
                     window.enhancedQueryMetadata = {
-                        detected_sprs: analysis.detected_sprs || [],
-                        required_capabilities: analysis.required_capabilities || []
+                        detected_sprs: allPotentialSprs,  // Pass all - processor will validate
+                        required_capabilities: required_capabilities  // Keep for reference
                     };
+                    
+                    // Log for debugging
+                    console.log(`[Enhanced Query] Storing ${allPotentialSprs.length} potential SPRs (${detected_sprs.length} detected + ${required_capabilities.length} from capabilities)`);
+                    console.log(`[Enhanced Query] First 10 SPRs:`, allPotentialSprs.slice(0, 10));
                 } else {
                     throw new Error('Invalid enhancement result');
                 }
@@ -880,6 +896,18 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
             try {
                 // Use WebSocket for streaming terminal output
                 if (ws && ws.readyState === WebSocket.OPEN) {
+                    // CRITICAL: Ensure SPRs are passed correctly
+                    const sprList = window.enhancedQueryMetadata?.detected_sprs || [];
+                    const capabilitiesList = window.enhancedQueryMetadata?.required_capabilities || [];
+                    
+                    // Log what we're sending for debugging
+                    console.log(`[Submit Query] Sending ${sprList.length} SPRs and ${capabilitiesList.length} capabilities`);
+                    if (sprList.length > 0) {
+                        console.log(`[Submit Query] First 10 SPRs:`, sprList.slice(0, 10));
+                    } else {
+                        console.warn(`[Submit Query] WARNING: No SPRs to send!`);
+                    }
+                    
                     ws.send(JSON.stringify({
                         type: 'query',
                         query: queryToSubmit,
@@ -887,8 +915,8 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
                         model: document.getElementById('model-select').value || null,
                         use_rise: document.getElementById('use-rise').checked,
                         enhanced_query: window.enhancedQuery || null,
-                        detected_sprs: window.enhancedQueryMetadata?.detected_sprs || null,
-                        required_capabilities: window.enhancedQueryMetadata?.required_capabilities || null
+                        detected_sprs: sprList.length > 0 ? sprList : null,  // Only send if non-empty
+                        required_capabilities: capabilitiesList.length > 0 ? capabilitiesList : null
                     }));
                 } else {
                     // Fallback to REST API if WebSocket not available
@@ -901,8 +929,10 @@ Or: Use agent-based modeling to simulate market dynamics..."></textarea>
                         body: JSON.stringify({
                             query: queryText,  // Original query for reference
                             enhanced_query: window.enhancedQuery || null,  // Enhanced query to use
-                            detected_sprs: window.enhancedQueryMetadata?.detected_sprs || null,
-                            required_capabilities: window.enhancedQueryMetadata?.required_capabilities || null,
+                            detected_sprs: (window.enhancedQueryMetadata?.detected_sprs || []).length > 0 
+                                ? window.enhancedQueryMetadata.detected_sprs : null,
+                            required_capabilities: (window.enhancedQueryMetadata?.required_capabilities || []).length > 0
+                                ? window.enhancedQueryMetadata.required_capabilities : null,
                             provider: document.getElementById('provider-select').value,
                             model: document.getElementById('model-select').value || null,
                             use_rise: document.getElementById('use-rise').checked

@@ -1105,6 +1105,27 @@ class RISE_Orchestrator:
             # If query qualifies, execute the plan using ArchE tools
             execution_answer = None
             execution_results = None
+            execution_plan = None
+            qualification = None
+            
+            # Initialize RISE execution plan tracking
+            rise_execution_plan = {
+                'query': problem_description,
+                'timestamp': datetime.now(timezone.utc).isoformat(),
+                'session_id': self.session_id,
+                'rise_phases': {
+                    'phase_a': {'status': 'completed', 'workflow': phase_a_workflow},
+                    'phase_b': {'status': 'completed'},
+                    'phase_c': {'status': 'completed'},
+                    'phase_d': {'status': 'completed'}
+                },
+                'tasks': [],
+                'selected_tools': [],
+                'actions_taken': [],
+                'fallbacks_used': [],
+                'execution_order': [],
+                'errors': []
+            }
             
             try:
                 from .rise_execution_phase import RISEExecutionPhase
@@ -1127,6 +1148,14 @@ class RISE_Orchestrator:
                     logger.info(f"   Complexity: {qualification.get('execution_complexity')}")
                     logger.info(f"   Recommended tools: {qualification.get('recommended_tools')}")
                     
+                    # Track recommended tools
+                    rise_execution_plan['selected_tools'] = qualification.get('recommended_tools', [])
+                    rise_execution_plan['rise_phases']['phase_e'] = {
+                        'status': 'qualified',
+                        'complexity': qualification.get('execution_complexity'),
+                        'recommended_tools': qualification.get('recommended_tools', [])
+                    }
+                    
                     # Generate execution plan from final strategy
                     execution_plan = execution_phase.generate_execution_plan(
                         query=problem_description,
@@ -1138,7 +1167,21 @@ class RISE_Orchestrator:
                         }
                     )
                     
+                    # Track execution plan steps
                     if execution_plan.get('execution_steps'):
+                        for idx, step in enumerate(execution_plan.get('execution_steps', []), 1):
+                            task_id = step.get('step_id', f"step_{idx}")
+                            rise_execution_plan['tasks'].append({
+                                'task_id': task_id,
+                                'tool': step.get('tool', 'unknown'),
+                                'description': step.get('description', ''),
+                                'order': idx,
+                                'status': 'pending',
+                                'inputs': step.get('inputs', {}),
+                                'expected_output': step.get('expected_output', '')
+                            })
+                            rise_execution_plan['execution_order'].append(task_id)
+                        
                         # Execute the plan
                         execution_results = execution_phase.execute_plan(
                             execution_plan=execution_plan,
@@ -1150,18 +1193,88 @@ class RISE_Orchestrator:
                             }
                         )
                         
+                        # Track execution results
+                        if execution_results:
+                            execution_steps = execution_results.get('execution_steps', [])
+                            for step_result in execution_steps:
+                                task_id = step_result.get('step_id', 'unknown')
+                                # Update task status
+                                for task in rise_execution_plan['tasks']:
+                                    if task['task_id'] == task_id:
+                                        task['status'] = 'completed' if step_result.get('success') else 'failed'
+                                        break
+                                
+                                # Track action taken
+                                rise_execution_plan['actions_taken'].append({
+                                    'task_id': task_id,
+                                    'action': step_result.get('tool', 'unknown'),
+                                    'result': 'success' if step_result.get('success') else 'failed',
+                                    'output_preview': str(step_result.get('result', ''))[:200] if step_result.get('result') else ''
+                                })
+                                
+                                # Track errors
+                                if not step_result.get('success'):
+                                    rise_execution_plan['errors'].append({
+                                        'task_id': task_id,
+                                        'error_type': 'ExecutionError',
+                                        'error_message': step_result.get('error', 'Unknown error')
+                                    })
+                        
                         execution_answer = execution_results.get('final_answer', '')
+                        rise_execution_plan['rise_phases']['phase_e']['status'] = 'completed'
                         logger.info(f"✅ Phase E completed - Generated execution-based answer ({len(execution_answer)} chars)")
                     else:
                         logger.warning("⚠️ Phase E: Execution plan generation failed or returned no steps")
+                        rise_execution_plan['rise_phases']['phase_e']['status'] = 'failed'
+                        rise_execution_plan['errors'].append({
+                            'task_id': 'phase_e_plan_generation',
+                            'error_type': 'PlanGenerationError',
+                            'error_message': 'Execution plan generation failed or returned no steps'
+                        })
+                        if execution_plan and execution_plan.get('error'):
+                            rise_execution_plan['fallbacks_used'].append({
+                                'stage': 'phase_e_plan_generation',
+                                'reason': execution_plan.get('error', 'Unknown error'),
+                                'fallback_action': 'skip_execution'
+                            })
                 else:
                     logger.info(f"ℹ️ Phase E: Query does not qualify for execution-based answering: {qualification.get('reason')}")
+                    rise_execution_plan['rise_phases']['phase_e'] = {
+                        'status': 'not_qualified',
+                        'reason': qualification.get('reason', 'Unknown')
+                    }
                     
             except Exception as e:
                 logger.warning(f"⚠️ Phase E (Execution) failed: {e}")
                 # Don't fail the entire workflow if execution phase fails
                 execution_answer = None
                 execution_results = {'error': str(e)}
+                rise_execution_plan['rise_phases']['phase_e'] = {
+                    'status': 'error',
+                    'error': str(e)
+                }
+                rise_execution_plan['errors'].append({
+                    'task_id': 'phase_e_execution',
+                    'error_type': 'Exception',
+                    'error_message': str(e)
+                })
+            
+            # Save RISE execution plan to file
+            try:
+                project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+                playbooks_dir = os.path.join(project_root, "outputs", "query_executions", "playbooks")
+                os.makedirs(playbooks_dir, exist_ok=True)
+                
+                timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+                filename = f"rise_execution_plan_{timestamp}.json"
+                filepath = os.path.join(playbooks_dir, filename)
+                
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    json.dump(rise_execution_plan, f, indent=2, default=str)
+                
+                logger.info(f"📋 RISE execution plan saved to: {filepath}")
+            except Exception as e:
+                logger.warning(f"Failed to save RISE execution plan: {e}")
             
             logger.info(f"✅ RISE v2.0 workflow completed successfully for session {self.session_id}")
             logger.info(f"Total duration: {total_duration:.2f}s")
@@ -1170,8 +1283,12 @@ class RISE_Orchestrator:
             final_results['execution_phase'] = {
                 'qualification': qualification if 'qualification' in locals() else None,
                 'execution_results': execution_results,
-                'execution_answer': execution_answer
+                'execution_answer': execution_answer,
+                'execution_plan': execution_plan
             }
+            
+            # Add RISE execution plan to final results
+            final_results['rise_execution_plan'] = rise_execution_plan
             
             # If we have an execution answer, use it as the primary response
             if execution_answer:

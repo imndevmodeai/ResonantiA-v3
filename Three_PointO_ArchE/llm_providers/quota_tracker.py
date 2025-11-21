@@ -10,7 +10,7 @@ import os
 import json
 import logging
 from typing import Dict, Any, Optional, List
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from dataclasses import dataclass, asdict, field
 
@@ -33,15 +33,29 @@ class QuotaInfo:
         if self.reset_time and datetime.now() >= self.reset_time:
             # Reset has occurred, reset usage
             self.used_value = 0.0
-            self.reset_time = None
+            # Update reset_time to next period (for daily, next midnight)
+            if self.limit_type.endswith('_per_day'):
+                # Set to next midnight UTC
+                self.reset_time = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+            else:
+                self.reset_time = None
             return True
         return self.used_value < self.limit_value
     
     def get_remaining(self) -> float:
         """Get remaining quota."""
         if self.reset_time and datetime.now() >= self.reset_time:
+            # Reset has occurred, reset usage
+            old_used = self.used_value
             self.used_value = 0.0
-            self.reset_time = None
+            # Update reset_time to next period
+            if self.limit_type.endswith('_per_day'):
+                # Set to next midnight UTC
+                self.reset_time = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+            else:
+                self.reset_time = None
+            if old_used > 0:
+                logger.info(f"Quota reset: {self.provider}:{self.api_key_id} {self.limit_type} reset from {old_used:.0f} to 0")
         return max(0.0, self.limit_value - self.used_value)
     
     def get_usage_percentage(self) -> float:
@@ -162,6 +176,7 @@ class QuotaTracker:
                     amount: float, reset_time: Optional[datetime] = None):
         """
         Record usage for a specific provider and API key.
+        Usage accumulates and persists across restarts.
         
         Args:
             provider: Provider name
@@ -180,14 +195,29 @@ class QuotaTracker:
             self.register_api_key(provider, api_key_id, {limit_type: 1000000})  # Large default
         
         quota = self.quotas[provider][quota_id]
+        
+        # Check if reset has occurred before adding usage
+        if quota.reset_time and datetime.now() >= quota.reset_time:
+            # Reset has occurred, reset usage first
+            old_used = quota.used_value
+            quota.used_value = 0.0
+            if old_used > 0:
+                logger.info(f"Quota reset before recording: {provider}:{api_key_id} {limit_type} reset from {old_used:.0f} to 0")
+        
+        # Accumulate usage
+        old_used = quota.used_value
         quota.used_value += amount
         quota.last_updated = datetime.now()
         
+        # Set reset_time if provided, or calculate for daily limits
         if reset_time:
             quota.reset_time = reset_time
+        elif limit_type.endswith('_per_day') and not quota.reset_time:
+            # Set to next midnight UTC if not already set
+            quota.reset_time = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
         
         self._save_to_storage()
-        logger.debug(f"Recorded {amount} {limit_type} usage for {provider}:{api_key_id}")
+        logger.info(f"Recorded {amount:.0f} {limit_type} usage for {provider}:{api_key_id} (Total: {quota.used_value:.0f}/{quota.limit_value:.0f})")
     
     def check_availability(self, provider: str, api_key_id: str, limit_type: str, 
                          required_amount: float = 0.0) -> bool:
@@ -245,6 +275,7 @@ class QuotaTracker:
     def get_usage_summary(self, provider: Optional[str] = None) -> Dict[str, Any]:
         """
         Get usage summary for provider(s).
+        Usage is accumulated and persisted across restarts.
         
         Args:
             provider: Provider name (None for all providers)
@@ -262,6 +293,20 @@ class QuotaTracker:
             
             summary[prov] = {}
             for quota_id, quota in self.quotas[prov].items():
+                # Check and handle reset before getting summary
+                if quota.reset_time and datetime.now() >= quota.reset_time:
+                    # Reset has occurred, update and save
+                    old_used = quota.used_value
+                    quota.used_value = 0.0
+                    if quota.limit_type.endswith('_per_day'):
+                        quota.reset_time = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+                    else:
+                        quota.reset_time = None
+                    quota.last_updated = datetime.now()
+                    if old_used > 0:
+                        logger.info(f"Quota reset in summary: {prov}:{quota.api_key_id} {quota.limit_type} reset from {old_used:.0f} to 0")
+                        self._save_to_storage()
+                
                 key_summary = summary[prov].setdefault(quota.api_key_id, {})
                 key_summary[quota.limit_type] = {
                     "used": quota.used_value,
@@ -269,7 +314,8 @@ class QuotaTracker:
                     "remaining": quota.get_remaining(),
                     "usage_percent": quota.get_usage_percentage(),
                     "available": quota.is_available(),
-                    "reset_time": quota.reset_time.isoformat() if quota.reset_time else None
+                    "reset_time": quota.reset_time.isoformat() if quota.reset_time else None,
+                    "last_updated": quota.last_updated.isoformat()
                 }
         
         return summary

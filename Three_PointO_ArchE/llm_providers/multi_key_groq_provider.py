@@ -186,14 +186,28 @@ class MultiKeyGroqProvider(BaseLLMProvider):
         # Record that this key hit the limit
         if "tokens per day" in error_message.lower():
             limit_type = "tokens_per_day"
-            # Mark as used up
-            self.quota_tracker.record_usage(
-                provider="groq",
-                api_key_id=current_key_id,
-                limit_type=limit_type,
-                amount=1000000,  # Mark as exhausted
-                reset_time=reset_time or (datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1))
-            )
+            # Use extracted reset_time or calculate next midnight UTC
+            if not reset_time:
+                reset_time = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+            # Mark as used up (set to limit to show exhausted)
+            quota_id = f"{current_key_id}_{limit_type}"
+            if "groq" in self.quota_tracker.quotas and quota_id in self.quota_tracker.quotas["groq"]:
+                # Set to limit value to show exhausted
+                quota = self.quota_tracker.quotas["groq"][quota_id]
+                quota.used_value = quota.limit_value
+                quota.reset_time = reset_time
+                quota.last_updated = datetime.now()
+                self.quota_tracker._save_to_storage()
+                logger.warning(f"Marked {current_key_id} as exhausted (used: {quota.used_value:.0f}/{quota.limit_value:.0f})")
+            else:
+                # Fallback: record usage
+                self.quota_tracker.record_usage(
+                    provider="groq",
+                    api_key_id=current_key_id,
+                    limit_type=limit_type,
+                    amount=100000,  # Mark as exhausted
+                    reset_time=reset_time
+                )
         
         # Try to switch to another key
         best_index = self._get_best_api_key_index(estimated_tokens)
@@ -253,15 +267,18 @@ class MultiKeyGroqProvider(BaseLLMProvider):
                 if response.choices and len(response.choices) > 0:
                     response_text = response.choices[0].message.content
                     
-                    # Record usage
-                    actual_tokens = response.usage.total_tokens if hasattr(response, 'usage') else estimated_tokens
+                    # Record usage with actual token count from API response
+                    actual_tokens = response.usage.total_tokens if hasattr(response, 'usage') and response.usage else estimated_tokens
+                    # Calculate reset time: next midnight UTC
+                    reset_time = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
                     self.quota_tracker.record_usage(
                         provider="groq",
                         api_key_id=current_key_id,
                         limit_type="tokens_per_day",
                         amount=actual_tokens,
-                        reset_time=datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+                        reset_time=reset_time
                     )
+                    logger.debug(f"Recorded {actual_tokens} tokens for {current_key_id}")
                     
                     return response_text
                 else:

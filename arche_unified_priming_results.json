@@ -1,13 +1,13 @@
 {
-  "timestamp": "2025-11-20T02:29:14.935552",
+  "timestamp": "2025-11-21T07:48:13.055102",
   "protocol_version": "3.5-GP",
   "keyholder": "B.J. Lewis",
   "project_root": "/mnt/3626C55326C514B1/Happier",
-  "python_executable": "/usr/bin/python3",
-  "virtual_env": null,
+  "python_executable": "/mnt/3626C55326C514B1/Happier/arche_env/bin/python3",
+  "virtual_env": "/mnt/3626C55326C514B1/Happier/arche_env",
   "directives": {
     "virtual_env": {
-      "status": "activated",
+      "status": "already_activated",
       "path": "/mnt/3626C55326C514B1/Happier/arche_env",
       "python": "/mnt/3626C55326C514B1/Happier/arche_env/bin/python3",
       "error": null

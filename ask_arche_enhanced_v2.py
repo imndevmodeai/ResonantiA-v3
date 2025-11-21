@@ -850,6 +850,9 @@ class EnhancedRealArchEProcessor:
             except Exception as e:
                 console.print(f"[yellow]⚠️  ThoughtTrail logging failed: {e}[/yellow]")
         
+        # Extract execution plan from processor instance
+        execution_plan = getattr(self, 'last_execution_plan', None)
+        
         return {
             "query": query,
             "response": response,
@@ -860,7 +863,8 @@ class EnhancedRealArchEProcessor:
             "quantum_processing": self.config.quantum_verification["qiskit_available"] if self.config else False,
             "spr_priming": spr_stats,
             "spr_context": spr_context,
-            "zepto_compression": zepto_info
+            "zepto_compression": zepto_info,
+            "execution_plan": execution_plan
         }
     
     async def generate_comprehensive_response(self, query: str, spr_context: Dict[str, Any] = None, pre_identified_sprs: Optional[List[str]] = None, pre_identified_capabilities: Optional[List[str]] = None) -> str:
@@ -901,6 +905,16 @@ class EnhancedRealArchEProcessor:
         # Execute required capabilities if identified
         capability_results = await self._execute_required_capabilities(query, query_analysis)
         
+        # Extract and store execution plan for later access
+        execution_plan = capability_results.get('_execution_plan')
+        if execution_plan:
+            # Store in processor instance for access in process_query
+            if not hasattr(self, 'last_execution_plan'):
+                self.last_execution_plan = None
+            self.last_execution_plan = execution_plan
+            # Remove from capability_results to avoid duplication
+            capability_results = {k: v for k, v in capability_results.items() if k != '_execution_plan'}
+        
         # Add capability results to query_analysis for use in response generation
         query_analysis['capability_results'] = capability_results
         
@@ -911,7 +925,11 @@ class EnhancedRealArchEProcessor:
         """
         Analyze query using enhancement engine to determine response strategy.
         Returns analysis with intent, complexity, required capabilities, etc.
+        Includes comprehensive fallback mechanisms.
         """
+        fallback_used = False
+        fallback_reason = None
+        
         try:
             from Three_PointO_ArchE.query_enhancement_engine import create_enhancement_engine
             from pathlib import Path
@@ -921,55 +939,139 @@ class EnhancedRealArchEProcessor:
             project_root = Path(__file__).parent.parent if hasattr(self, 'config') and self.config else Path(os.getcwd())
             
             # Create enhancement engine and analyze
-            engine = create_enhancement_engine(project_root)
-            enhancement_result = engine.enhance_query(query, enhancement_level='auto')
-            
-            return {
-                'intent': enhancement_result['analysis']['intent'],
-                'complexity': enhancement_result['analysis']['complexity'],
-                'enhanced_complexity': enhancement_result['analysis'].get('enhanced_complexity', enhancement_result['analysis']['complexity']),
-                'required_capabilities': enhancement_result['analysis']['required_capabilities'],
-                'detected_sprs': enhancement_result['analysis']['detected_sprs'],
-                'analysis_types': enhancement_result['analysis']['analysis_type'],
-                'temporal_scope': enhancement_result['analysis'].get('temporal_scope'),
-                'query_structure': enhancement_result.get('query_structure', {}),
-                'enhancement_level': enhancement_result['enhancement_metadata']['level'],
-                'confidence': enhancement_result['analysis']['confidence']
-            }
-        except Exception as e:
+            try:
+                engine = create_enhancement_engine(project_root)
+                enhancement_result = engine.enhance_query(query, enhancement_level='auto')
+                
+                return {
+                    'intent': enhancement_result['analysis']['intent'],
+                    'complexity': enhancement_result['analysis']['complexity'],
+                    'enhanced_complexity': enhancement_result['analysis'].get('enhanced_complexity', enhancement_result['analysis']['complexity']),
+                    'required_capabilities': enhancement_result['analysis']['required_capabilities'],
+                    'detected_sprs': enhancement_result['analysis']['detected_sprs'],
+                    'analysis_types': enhancement_result['analysis']['analysis_type'],
+                    'temporal_scope': enhancement_result['analysis'].get('temporal_scope'),
+                    'query_structure': enhancement_result.get('query_structure', {}),
+                    'enhancement_level': enhancement_result['enhancement_metadata']['level'],
+                    'confidence': enhancement_result['analysis']['confidence'],
+                    'fallback_used': False
+                }
+            except Exception as engine_error:
+                logger.warning(f"Enhancement engine execution failed: {engine_error}")
+                fallback_used = True
+                fallback_reason = f"Engine execution error: {engine_error}"
+                raise  # Re-raise to trigger outer fallback
+                
+        except ImportError as e:
             logger.warning(f"Query enhancement engine not available, using fallback analysis: {e}")
-            # Fallback: simple keyword-based analysis
-            query_lower = query.lower()
-            return {
-                'intent': 'general',
-                'complexity': 'medium',
-                'enhanced_complexity': 'medium',
-                'required_capabilities': [],
-                'detected_sprs': [],
-                'analysis_types': ['general'],
-                'temporal_scope': None,
-                'query_structure': {},
-                'enhancement_level': 'minimal',
-                'confidence': 0.5
+            fallback_used = True
+            fallback_reason = f"Import error: {e}"
+        except Exception as e:
+            logger.warning(f"Query enhancement engine error, using fallback analysis: {e}")
+            fallback_used = True
+            fallback_reason = f"Execution error: {e}"
+        
+        # Fallback: simple keyword-based analysis
+        console.print(f"[yellow]⚠️  Using fallback query analysis: {fallback_reason}[/yellow]")
+        query_lower = query.lower()
+        
+        # Enhanced fallback: try to infer more from query
+        intent = 'general'
+        complexity = 'medium'
+        required_capabilities = []
+        analysis_types = ['general']
+        
+        # Intent detection
+        if any(word in query_lower for word in ["analyze", "analysis", "evaluate", "assess"]):
+            intent = 'analysis'
+            complexity = 'high'
+            analysis_types.append('analysis')
+        if any(word in query_lower for word in ["predict", "forecast", "future", "trend"]):
+            intent = 'prediction'
+            complexity = 'high'
+            required_capabilities.append('PredictivE ModelinG TooL')
+            analysis_types.append('predictive')
+        if any(word in query_lower for word in ["cause", "effect", "relationship", "causal"]):
+            intent = 'causal_analysis'
+            complexity = 'high'
+            required_capabilities.append('Causal InferencE')
+            analysis_types.append('causal')
+        if any(word in query_lower for word in ["simulate", "model", "agent", "abm"]):
+            intent = 'simulation'
+            complexity = 'high'
+            required_capabilities.append('Agent Based ModelinG')
+            analysis_types.append('simulation')
+        if any(word in query_lower for word in ["compare", "scenario", "alternative", "cfp"]):
+            intent = 'comparison'
+            complexity = 'high'
+            required_capabilities.append('ComparativE fluxuaL processinG')
+            analysis_types.append('comparative')
+        
+        return {
+            'intent': intent,
+            'complexity': complexity,
+            'enhanced_complexity': complexity,
+            'required_capabilities': required_capabilities,
+            'detected_sprs': [],
+            'analysis_types': analysis_types,
+            'temporal_scope': None,
+            'query_structure': {},
+            'enhancement_level': 'fallback_keyword_based',
+            'confidence': 0.5,
+            'fallback_used': True,
+            'fallback_reason': fallback_reason
             }
     
     async def _execute_required_capabilities(self, query: str, query_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """
         Execute required capabilities identified by query enhancement engine.
         Returns results from executed tools (Predictive Modeling, CFP, ABM, Causal Inference).
+        Includes comprehensive fallback mechanisms and plan logging.
         """
         capability_results = {}
         required_capabilities = query_analysis.get('required_capabilities', [])
         analysis_types = query_analysis.get('analysis_types', [])
         
+        # Initialize execution plan tracking
+        execution_plan = {
+            'query': query,
+            'timestamp': now_iso(),
+            'tasks': [],
+            'selected_tools': [],
+            'actions_taken': [],
+            'fallbacks_used': [],
+            'execution_order': [],
+            'errors': []
+        }
+        
         # Map analysis types and capabilities to tool execution
         if not required_capabilities and not analysis_types:
+            # Fallback: Use basic analysis if no capabilities identified
+            console.print("[yellow]⚠️  No specific capabilities identified, using basic analysis fallback[/yellow]")
+            execution_plan['fallbacks_used'].append({
+                'stage': 'capability_identification',
+                'reason': 'No capabilities identified',
+                'fallback_action': 'basic_analysis'
+            })
             return capability_results
         
         console.print(f"[cyan]🔧 Executing required capabilities: {len(required_capabilities)} capabilities, {len(analysis_types)} analysis types[/cyan]")
         
+        # Track selected tools
+        execution_plan['selected_tools'] = required_capabilities.copy()
+        
         # Execute Predictive Modeling if required
         if 'predictive' in analysis_types or any('predictive' in cap.lower() or 'PredictivE' in cap for cap in required_capabilities):
+            task_id = f"task_{len(execution_plan['tasks']) + 1}_predictive_modeling"
+            execution_plan['tasks'].append({
+                'task_id': task_id,
+                'tool': 'predictive_modeling',
+                'description': 'Execute predictive modeling for forecasting',
+                'order': len(execution_plan['tasks']) + 1,
+                'status': 'pending'
+            })
+            execution_plan['execution_order'].append(task_id)
+            
             try:
                 console.print("[yellow]📊 Executing Predictive Modeling...[/yellow]")
                 from Three_PointO_ArchE.predictive_modeling_tool import run_prediction
@@ -981,13 +1083,55 @@ class EnhancedRealArchEProcessor:
                     steps_to_forecast=12
                 )
                 capability_results['predictive_modeling'] = prediction_result
+                execution_plan['tasks'][-1]['status'] = 'completed'
+                execution_plan['actions_taken'].append({
+                    'task_id': task_id,
+                    'action': 'run_prediction',
+                    'result': 'success',
+                    'confidence': prediction_result.get('reflection', {}).get('confidence', 0.0)
+                })
                 console.print(f"[green]✅ Predictive Modeling completed (confidence: {prediction_result.get('reflection', {}).get('confidence', 0.0):.2f})[/green]")
+            except ImportError as e:
+                logger.warning(f"Predictive Modeling tool not available: {e}")
+                execution_plan['tasks'][-1]['status'] = 'failed'
+                execution_plan['errors'].append({
+                    'task_id': task_id,
+                    'error_type': 'ImportError',
+                    'error_message': str(e)
+                })
+                execution_plan['fallbacks_used'].append({
+                    'stage': 'predictive_modeling',
+                    'reason': f'Tool not available: {e}',
+                    'fallback_action': 'skip_predictive_modeling'
+                })
+                capability_results['predictive_modeling'] = {'error': str(e), 'fallback': True}
             except Exception as e:
                 logger.warning(f"Predictive Modeling execution failed: {e}")
-                capability_results['predictive_modeling'] = {'error': str(e)}
+                execution_plan['tasks'][-1]['status'] = 'failed'
+                execution_plan['errors'].append({
+                    'task_id': task_id,
+                    'error_type': 'ExecutionError',
+                    'error_message': str(e)
+                })
+                execution_plan['fallbacks_used'].append({
+                    'stage': 'predictive_modeling',
+                    'reason': f'Execution failed: {e}',
+                    'fallback_action': 'error_response'
+                })
+                capability_results['predictive_modeling'] = {'error': str(e), 'fallback': True}
         
         # Execute Causal Inference if required
         if 'causal' in analysis_types or any('causal' in cap.lower() or 'Causal' in cap for cap in required_capabilities):
+            task_id = f"task_{len(execution_plan['tasks']) + 1}_causal_inference"
+            execution_plan['tasks'].append({
+                'task_id': task_id,
+                'tool': 'causal_inference',
+                'description': 'Execute causal inference analysis',
+                'order': len(execution_plan['tasks']) + 1,
+                'status': 'pending'
+            })
+            execution_plan['execution_order'].append(task_id)
+            
             try:
                 console.print("[yellow]🔗 Executing Causal Inference...[/yellow]")
                 from Three_PointO_ArchE.causal_inference_tool import perform_causal_inference
@@ -999,13 +1143,55 @@ class EnhancedRealArchEProcessor:
                     outcome=None
                 )
                 capability_results['causal_inference'] = causal_result
+                execution_plan['tasks'][-1]['status'] = 'completed'
+                execution_plan['actions_taken'].append({
+                    'task_id': task_id,
+                    'action': 'perform_causal_inference',
+                    'result': 'success',
+                    'confidence': causal_result.get('reflection', {}).get('confidence', 0.0)
+                })
                 console.print(f"[green]✅ Causal Inference completed (confidence: {causal_result.get('reflection', {}).get('confidence', 0.0):.2f})[/green]")
+            except ImportError as e:
+                logger.warning(f"Causal Inference tool not available: {e}")
+                execution_plan['tasks'][-1]['status'] = 'failed'
+                execution_plan['errors'].append({
+                    'task_id': task_id,
+                    'error_type': 'ImportError',
+                    'error_message': str(e)
+                })
+                execution_plan['fallbacks_used'].append({
+                    'stage': 'causal_inference',
+                    'reason': f'Tool not available: {e}',
+                    'fallback_action': 'skip_causal_inference'
+                })
+                capability_results['causal_inference'] = {'error': str(e), 'fallback': True}
             except Exception as e:
                 logger.warning(f"Causal Inference execution failed: {e}")
-                capability_results['causal_inference'] = {'error': str(e)}
+                execution_plan['tasks'][-1]['status'] = 'failed'
+                execution_plan['errors'].append({
+                    'task_id': task_id,
+                    'error_type': 'ExecutionError',
+                    'error_message': str(e)
+                })
+                execution_plan['fallbacks_used'].append({
+                    'stage': 'causal_inference',
+                    'reason': f'Execution failed: {e}',
+                    'fallback_action': 'error_response'
+                })
+                capability_results['causal_inference'] = {'error': str(e), 'fallback': True}
         
         # Execute Agent-Based Modeling if required
         if 'simulation' in analysis_types or any('abm' in cap.lower() or 'Agent' in cap for cap in required_capabilities):
+            task_id = f"task_{len(execution_plan['tasks']) + 1}_agent_based_modeling"
+            execution_plan['tasks'].append({
+                'task_id': task_id,
+                'tool': 'agent_based_modeling',
+                'description': 'Execute agent-based modeling simulation',
+                'order': len(execution_plan['tasks']) + 1,
+                'status': 'pending'
+            })
+            execution_plan['execution_order'].append(task_id)
+            
             try:
                 console.print("[yellow]🤖 Executing Agent-Based Modeling...[/yellow]")
                 from Three_PointO_ArchE.agent_based_modeling_tool import perform_abm
@@ -1020,13 +1206,55 @@ class EnhancedRealArchEProcessor:
                     steps=100
                 )
                 capability_results['agent_based_modeling'] = abm_result
+                execution_plan['tasks'][-1]['status'] = 'completed'
+                execution_plan['actions_taken'].append({
+                    'task_id': task_id,
+                    'action': 'perform_abm',
+                    'result': 'success',
+                    'confidence': abm_result.get('reflection', {}).get('confidence', 0.0)
+                })
                 console.print(f"[green]✅ Agent-Based Modeling completed (confidence: {abm_result.get('reflection', {}).get('confidence', 0.0):.2f})[/green]")
+            except ImportError as e:
+                logger.warning(f"Agent-Based Modeling tool not available: {e}")
+                execution_plan['tasks'][-1]['status'] = 'failed'
+                execution_plan['errors'].append({
+                    'task_id': task_id,
+                    'error_type': 'ImportError',
+                    'error_message': str(e)
+                })
+                execution_plan['fallbacks_used'].append({
+                    'stage': 'agent_based_modeling',
+                    'reason': f'Tool not available: {e}',
+                    'fallback_action': 'skip_abm'
+                })
+                capability_results['agent_based_modeling'] = {'error': str(e), 'fallback': True}
             except Exception as e:
                 logger.warning(f"Agent-Based Modeling execution failed: {e}")
-                capability_results['agent_based_modeling'] = {'error': str(e)}
+                execution_plan['tasks'][-1]['status'] = 'failed'
+                execution_plan['errors'].append({
+                    'task_id': task_id,
+                    'error_type': 'ExecutionError',
+                    'error_message': str(e)
+                })
+                execution_plan['fallbacks_used'].append({
+                    'stage': 'agent_based_modeling',
+                    'reason': f'Execution failed: {e}',
+                    'fallback_action': 'error_response'
+                })
+                capability_results['agent_based_modeling'] = {'error': str(e), 'fallback': True}
         
         # Execute Comparative Fluxual Processing if required
         if 'comparative' in analysis_types or any('cfp' in cap.lower() or 'ComparativE' in cap or 'FluxuaL' in cap for cap in required_capabilities):
+            task_id = f"task_{len(execution_plan['tasks']) + 1}_cfp"
+            execution_plan['tasks'].append({
+                'task_id': task_id,
+                'tool': 'comparative_fluxual_processing',
+                'description': 'Execute comparative fluxual processing analysis',
+                'order': len(execution_plan['tasks']) + 1,
+                'status': 'pending'
+            })
+            execution_plan['execution_order'].append(task_id)
+            
             try:
                 console.print("[yellow]⚛️  Executing Comparative Fluxual Processing...[/yellow]")
                 from Three_PointO_ArchE.cfp_framework import CfpframeworK
@@ -1039,10 +1267,48 @@ class EnhancedRealArchEProcessor:
                 )
                 cfp_result = cfp.run_analysis()
                 capability_results['cfp'] = cfp_result
+                execution_plan['tasks'][-1]['status'] = 'completed'
+                execution_plan['actions_taken'].append({
+                    'task_id': task_id,
+                    'action': 'run_cfp_analysis',
+                    'result': 'success',
+                    'confidence': cfp_result.get('reflection', {}).get('confidence', 0.0)
+                })
                 console.print(f"[green]✅ CFP completed (confidence: {cfp_result.get('reflection', {}).get('confidence', 0.0):.2f})[/green]")
+            except ImportError as e:
+                logger.warning(f"CFP tool not available: {e}")
+                execution_plan['tasks'][-1]['status'] = 'failed'
+                execution_plan['errors'].append({
+                    'task_id': task_id,
+                    'error_type': 'ImportError',
+                    'error_message': str(e)
+                })
+                execution_plan['fallbacks_used'].append({
+                    'stage': 'cfp',
+                    'reason': f'Tool not available: {e}',
+                    'fallback_action': 'skip_cfp'
+                })
+                capability_results['cfp'] = {'error': str(e), 'fallback': True}
             except Exception as e:
                 logger.warning(f"CFP execution failed: {e}")
-                capability_results['cfp'] = {'error': str(e)}
+                execution_plan['tasks'][-1]['status'] = 'failed'
+                execution_plan['errors'].append({
+                    'task_id': task_id,
+                    'error_type': 'ExecutionError',
+                    'error_message': str(e)
+                })
+                execution_plan['fallbacks_used'].append({
+                    'stage': 'cfp',
+                    'reason': f'Execution failed: {e}',
+                    'fallback_action': 'error_response'
+                })
+                capability_results['cfp'] = {'error': str(e), 'fallback': True}
+        
+        # Save execution plan to file
+        self._save_execution_plan(execution_plan)
+        
+        # Store execution plan in capability_results for access by response generation
+        capability_results['_execution_plan'] = execution_plan
         
         return capability_results
     
@@ -1068,10 +1334,37 @@ class EnhancedRealArchEProcessor:
         
         return analysis_types if analysis_types else ['general']
     
+    def _save_execution_plan(self, execution_plan: Dict[str, Any]) -> str:
+        """
+        Save execution plan to a JSON file in outputs/query_executions/playbooks/
+        Returns the path to the saved file.
+        """
+        try:
+            # Create playbooks directory
+            playbooks_dir = os.path.join(project_root, "outputs", "query_executions", "playbooks")
+            os.makedirs(playbooks_dir, exist_ok=True)
+            
+            # Generate filename with timestamp
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"execution_plan_{timestamp}.json"
+            filepath = os.path.join(playbooks_dir, filename)
+            
+            # Save execution plan
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(execution_plan, f, indent=2, default=str)
+            
+            console.print(f"[green]📋 Execution plan saved to: {filepath}[/green]")
+            return filepath
+        except Exception as e:
+            logger.warning(f"Failed to save execution plan: {e}")
+            console.print(f"[yellow]⚠️  Could not save execution plan: {e}[/yellow]")
+            return ""
+    
     async def _generate_universal_response(self, query: str, query_analysis: Dict[str, Any], spr_context: Dict[str, Any]) -> str:
         """
         Generate response using universal, capability-driven approach.
         Dynamically constructs LLM prompt based on query analysis.
+        Includes comprehensive fallback mechanisms.
         """
         spr_count = spr_context.get("primed_count", 0) if spr_context else 0
         spr_info = f"\n**SPRs Primed**: {spr_count} cognitive keys activated" if spr_count > 0 else ""
@@ -1081,8 +1374,10 @@ class EnhancedRealArchEProcessor:
         
         if not llm_provider:
             # Fallback to template-based response if no LLM
+            console.print("[yellow]⚠️  No LLM provider configured, using template fallback[/yellow]")
             return self._generate_template_response(query, query_analysis, spr_context)
         
+        # Try primary LLM provider first
         try:
             from Three_PointO_ArchE.tools.synthesis_tool import invoke_llm_for_synthesis
             
@@ -1101,10 +1396,39 @@ class EnhancedRealArchEProcessor:
                 return self._format_llm_response(query, query_analysis, llm_result['generated_text'], spr_context)
             else:
                 logger.warning("LLM returned invalid result, using template")
+                console.print("[yellow]⚠️  LLM returned invalid result, using template fallback[/yellow]")
                 return self._generate_template_response(query, query_analysis, spr_context)
                 
+        except ImportError as e:
+            logger.warning(f"LLM synthesis tool not available: {e}")
+            console.print(f"[yellow]⚠️  LLM synthesis tool not available, using template fallback: {e}[/yellow]")
+            return self._generate_template_response(query, query_analysis, spr_context)
         except Exception as e:
             logger.warning(f"LLM-based response generation failed, using template: {e}")
+            console.print(f"[yellow]⚠️  LLM generation failed, using template fallback: {e}[/yellow]")
+            
+            # Try fallback LLM provider if available
+            fallback_providers = ['groq', 'openai', 'anthropic']
+            for fallback_provider in fallback_providers:
+                if fallback_provider != llm_provider:
+                    try:
+                        console.print(f"[blue]🔄 Trying fallback LLM provider: {fallback_provider}[/blue]")
+                        from Three_PointO_ArchE.tools.synthesis_tool import invoke_llm_for_synthesis
+                        prompt = self._construct_dynamic_prompt(query, query_analysis, spr_context)
+                        llm_result = await invoke_llm_for_synthesis(
+                            prompt,
+                            provider=fallback_provider,
+                            max_tokens=4000,
+                            temperature=0.7
+                        )
+                        if llm_result and isinstance(llm_result, dict) and 'generated_text' in llm_result:
+                            console.print(f"[green]✅ Fallback provider {fallback_provider} succeeded[/green]")
+                            return self._format_llm_response(query, query_analysis, llm_result['generated_text'], spr_context)
+                    except Exception as fallback_error:
+                        logger.warning(f"Fallback provider {fallback_provider} also failed: {fallback_error}")
+                        continue
+            
+            # All LLM attempts failed, use template
             return self._generate_template_response(query, query_analysis, spr_context)
     
     def _construct_dynamic_prompt(self, query: str, query_analysis: Dict[str, Any], spr_context: Dict[str, Any]) -> str:
@@ -1826,6 +2150,14 @@ class EnhancedUnifiedArchEProcessor:
         if self.config.enable_mandates:
             self.display_mandate_status()
         
+        # Explicitly cleanup browser processes/webdrivers
+        try:
+            from Three_PointO_ArchE.browser_cleanup import cleanup_browser_processes
+            cleanup_browser_processes()
+            console.print("[dim]✓ Browser processes cleaned up[/dim]")
+        except Exception as e:
+            logger.debug(f"Browser cleanup not available or failed: {e}")
+        
         await self.vcd.disconnect()
         console.print("[green]✅ Shutdown Complete[/green]")
     
@@ -1860,7 +2192,7 @@ class EnhancedUnifiedArchEProcessor:
 
 # --- REPORTING (Enhanced) ---
 def present_enhanced_results(results: Dict[str, Any], config: EnhancedUnifiedArchEConfig):
-    """Present comprehensive enhanced results"""
+    """Present comprehensive enhanced results with improved layout for process visibility"""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # Use outputs/query_executions directory for reports
@@ -1868,73 +2200,268 @@ def present_enhanced_results(results: Dict[str, Any], config: EnhancedUnifiedArc
     os.makedirs(outputs_dir, exist_ok=True)
     report_path = os.path.join(outputs_dir, f"arche_enhanced_v2_report_{timestamp}.md")
     
-    # Extract response
+    # Extract response and execution data
     if isinstance(results, dict):
-        response = results.get("response", str(results))
+        response = results.get("response", results.get("final_answer", results.get("execution_answer", str(results))))
+        # Check for both execution_plan formats (from RealArchE or RISE)
+        execution_plan = results.get("execution_plan") or results.get("rise_execution_plan")
+        # If RISE results, also check phase_results for additional context
+        rise_phases = results.get("rise_phases") or (results.get("phase_results") if isinstance(results.get("phase_results"), dict) else None)
     else:
         response = str(results)
+        execution_plan = None
+        rise_phases = None
     
-    # Write enhanced report
-    with open(report_path, "w") as f:
-        f.write("# ArchE Enhanced Unified Query Report v2.0\n\n")
-        f.write(f"**Timestamp**: {timestamp}\n")
-        f.write(f"**Session ID**: {config.session_id}\n\n")
+    # Write enhanced report with improved layout
+    with open(report_path, "w", encoding="utf-8") as f:
+        # Header
+        f.write("# 🧠 ArchE Enhanced Unified Query Report v2.0\n\n")
+        f.write("---\n\n")
+        f.write(f"**Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"**Session ID**: `{config.session_id}`\n")
+        f.write(f"**Report File**: `{os.path.basename(report_path)}`\n\n")
+        f.write("---\n\n")
         
-        f.write("## Environment Detection\n\n")
-        f.write(f"- Cursor Environment: {config.cursor_detection['in_cursor']}\n")
-        f.write(f"- Detection Confidence: {config.cursor_detection['confidence']:.1%}\n")
-        f.write(f"- LLM Provider: {config.llm_config['provider']}\n")
-        f.write(f"- LLM Model: {config.llm_config['model']}\n")
-        f.write(f"- Configuration Method: {config.llm_config['method']}\n\n")
+        # Table of Contents
+        f.write("## 📑 Table of Contents\n\n")
+        f.write("1. [Executive Summary](#executive-summary)\n")
+        f.write("2. [System Configuration](#system-configuration)\n")
+        f.write("3. [Execution Plan & Process Flow](#execution-plan--process-flow)\n")
+        f.write("4. [Tool Usage & Actions](#tool-usage--actions)\n")
+        f.write("5. [IAR Summaries](#iar-summaries)\n")
+        f.write("6. [Final Answer](#final-answer)\n")
+        f.write("7. [Detailed Results](#detailed-results)\n\n")
+        f.write("---\n\n")
         
-        f.write("## Quantum Processing\n\n")
-        f.write(f"- Quantum Status: {config.quantum_verification['quantum_status']}\n")
-        f.write(f"- Qiskit Available: {config.quantum_verification['qiskit_available']}\n")
-        f.write(f"- Quantum Functions: {len(config.quantum_verification['quantum_functions_available'])}\n\n")
+        # Executive Summary
+        f.write("## 📊 Executive Summary\n\n")
+        f.write("| Metric | Value |\n")
+        f.write("|--------|-------|\n")
+        f.write(f"| **Query Processed** | ✅ |\n")
+        f.write(f"| **LLM Provider** | {config.llm_config['provider']} |\n")
+        f.write(f"| **LLM Model** | {config.llm_config['model']} |\n")
+        if execution_plan:
+            total_tasks = len(execution_plan.get('tasks', []))
+            successful_tasks = sum(1 for t in execution_plan.get('tasks', []) if t.get('status') == 'completed' or t.get('status') == 'success')
+            f.write(f"| **Total Tasks** | {total_tasks} |\n")
+            f.write(f"| **Successful Tasks** | {successful_tasks}/{total_tasks} |\n")
+            f.write(f"| **Tools Used** | {len(execution_plan.get('selected_tools', []))} |\n")
+            f.write(f"| **Fallbacks Triggered** | {len(execution_plan.get('fallbacks_used', []))} |\n")
+        f.write(f"| **SPRs Available** | {config.spr_count} |\n")
+        f.write("\n---\n\n")
         
-        f.write("## Unified Features Active\n\n")
-        f.write(f"- Query Superposition: {'✅' if config.enable_superposition else '❌'}\n")
-        f.write(f"- Tool Inventory: {'✅' if config.enable_tool_inventory else '❌'}\n")
-        f.write(f"- 13 Mandates: {'✅' if config.enable_mandates else '❌'}\n")
-        f.write(f"- VCD Integration: {'✅' if config.enable_vcd else '❌'}\n")
-        f.write(f"- Real Processor: {'✅' if config.enable_real_processor else '❌'}\n")
-        f.write(f"- Quantum Verification: {'✅' if config.enable_quantum_verification else '❌'}\n")
-        f.write(f"- Cursor Auto-Config: {'✅' if config.enable_cursor_auto_config else '❌'}\n")
-        f.write(f"- SPR Auto-Priming: {'✅' if config.spr_manager else '❌'} ({config.spr_count} SPRs available)\n")
-        f.write(f"- Zepto Compression: {'✅' if config.enable_zepto_compression else '❌'}\n")
-        f.write(f"- COG (CrystallizedObjectiveGenerator): {'✅' if config.enable_cog else '❌'}\n")
-        f.write(f"- ThoughtTrail (Updated API): {'✅' if config.enable_thought_trail else '❌'}\n")
-        f.write(f"- VCDAnalysisAgent: {'✅' if config.enable_vcd_analysis else '❌'}\n\n")
+        # System Configuration
+        f.write("## ⚙️ System Configuration\n\n")
+        f.write("### Environment Detection\n\n")
+        f.write("| Setting | Value |\n")
+        f.write("|---------|-------|\n")
+        f.write(f"| Cursor Environment | {'✅' if config.cursor_detection['in_cursor'] else '❌'} |\n")
+        f.write(f"| Detection Confidence | {config.cursor_detection['confidence']:.1%} |\n")
+        f.write(f"| LLM Provider | {config.llm_config['provider']} |\n")
+        f.write(f"| LLM Model | {config.llm_config['model']} |\n")
+        f.write(f"| Configuration Method | {config.llm_config['method']} |\n\n")
         
-        # Add SPR priming details if available
+        f.write("### Active Features\n\n")
+        f.write("| Feature | Status |\n")
+        f.write("|---------|--------|\n")
+        f.write(f"| Query Superposition | {'✅' if config.enable_superposition else '❌'} |\n")
+        f.write(f"| Tool Inventory | {'✅' if config.enable_tool_inventory else '❌'} |\n")
+        f.write(f"| 13 Mandates | {'✅' if config.enable_mandates else '❌'} |\n")
+        f.write(f"| VCD Integration | {'✅' if config.enable_vcd else '❌'} |\n")
+        f.write(f"| Real Processor | {'✅' if config.enable_real_processor else '❌'} |\n")
+        f.write(f"| Quantum Verification | {'✅' if config.enable_quantum_verification else '❌'} |\n")
+        f.write(f"| SPR Auto-Priming | {'✅' if config.spr_manager else '❌'} ({config.spr_count} SPRs) |\n")
+        f.write(f"| Zepto Compression | {'✅' if config.enable_zepto_compression else '❌'} |\n")
+        f.write(f"| ThoughtTrail | {'✅' if config.enable_thought_trail else '❌'} |\n\n")
+        
+        f.write("### Quantum Processing\n\n")
+        f.write(f"- **Status**: {config.quantum_verification['quantum_status']}\n")
+        f.write(f"- **Qiskit Available**: {'✅' if config.quantum_verification['qiskit_available'] else '❌'}\n")
+        f.write(f"- **Quantum Functions**: {len(config.quantum_verification['quantum_functions_available'])}\n\n")
+        f.write("---\n\n")
+        
+        # Execution Plan & Process Flow
+        if execution_plan:
+            f.write("## 🔄 Execution Plan & Process Flow\n\n")
+            
+            # RISE Phase Information (if available)
+            if rise_phases or (execution_plan.get('rise_phases') if isinstance(execution_plan, dict) else None):
+                phases = rise_phases or execution_plan.get('rise_phases', {})
+                f.write("### RISE Phases Execution\n\n")
+                f.write("| Phase | Status | Workflow |\n")
+                f.write("|-------|--------|----------|\n")
+                for phase_name, phase_data in phases.items():
+                    if isinstance(phase_data, dict):
+                        status = phase_data.get('status', 'unknown')
+                        workflow = phase_data.get('workflow', 'N/A')
+                        status_icon = '✅' if status == 'completed' else '❌' if status == 'failed' else '⏳'
+                        f.write(f"| {phase_name.upper()} | {status_icon} {status} | `{workflow}` |\n")
+                    else:
+                        f.write(f"| {phase_name.upper()} | {phase_data} | - |\n")
+                f.write("\n")
+            
+            # Execution Overview
+            f.write("### Execution Overview\n\n")
+            f.write("| Metric | Value |\n")
+            f.write("|--------|-------|\n")
+            tasks = execution_plan.get('tasks', execution_plan.get('execution_steps', []))
+            f.write(f"| **Total Tasks** | {len(tasks)} |\n")
+            exec_order = execution_plan.get('execution_order', [])
+            if exec_order:
+                f.write(f"| **Execution Order** | {' → '.join(exec_order[:10])}{'...' if len(exec_order) > 10 else ''} |\n")
+            selected_tools = execution_plan.get('selected_tools', execution_plan.get('tools', []))
+            if selected_tools:
+                f.write(f"| **Tools Selected** | {', '.join(selected_tools)} |\n")
+            f.write(f"| **Fallbacks Used** | {len(execution_plan.get('fallbacks_used', []))} |\n")
+            f.write(f"| **Errors Encountered** | {len(execution_plan.get('errors', []))} |\n")
+            if execution_plan.get('timestamp'):
+                f.write(f"| **Plan Timestamp** | {execution_plan.get('timestamp')} |\n")
+            f.write("\n")
+            
+            # Task Execution Flow
+            f.write("### Task Execution Flow\n\n")
+            tasks = execution_plan.get('tasks', execution_plan.get('execution_steps', []))
+            if tasks:
+                f.write("| Order | Task ID | Tool/Action | Status | Description |\n")
+                f.write("|-------|---------|-------------|--------|-------------|\n")
+                for i, task in enumerate(tasks, 1):
+                    # Handle both task dict and step dict formats
+                    if isinstance(task, dict):
+                        task_id = task.get('task_id', task.get('step_id', task.get('step', f'task_{i}')))
+                        tool = task.get('tool', task.get('action', task.get('tool_name', 'N/A')))
+                        status = task.get('status', 'unknown')
+                        description = task.get('description', task.get('name', task.get('step_description', 'N/A')))[:60]
+                    else:
+                        task_id = f'task_{i}'
+                        tool = 'N/A'
+                        status = 'unknown'
+                        description = str(task)[:60]
+                    
+                    status_icon = '✅' if status in ['completed', 'success'] else '❌' if status == 'failed' else '⏳'
+                    f.write(f"| {i} | `{task_id}` | `{tool}` | {status_icon} {status} | {description} |\n")
+                f.write("\n")
+            else:
+                f.write("*No tasks recorded in execution plan.*\n\n")
+            
+            # Actions Taken
+            actions = execution_plan.get('actions_taken', [])
+            if actions:
+                f.write("### Actions Taken\n\n")
+                f.write("| Step | Action | Tool | Status | Duration |\n")
+                f.write("|------|--------|------|--------|----------|\n")
+                for i, action in enumerate(actions, 1):
+                    action_name = action.get('action', action.get('tool', 'N/A'))
+                    tool = action.get('tool', action.get('provider', 'N/A'))
+                    status = action.get('status', 'unknown')
+                    duration = action.get('duration', action.get('execution_time', 'N/A'))
+                    if isinstance(duration, (int, float)):
+                        duration = f"{duration:.2f}s"
+                    f.write(f"| {i} | `{action_name}` | `{tool}` | {status} | {duration} |\n")
+                f.write("\n")
+            
+            # Fallbacks Used
+            fallbacks = execution_plan.get('fallbacks_used', [])
+            if fallbacks:
+                f.write("### Fallback Events\n\n")
+                f.write("| Event | From Provider | To Provider | Reason |\n")
+                f.write("|-------|---------------|-------------|--------|\n")
+                for i, fallback in enumerate(fallbacks, 1):
+                    from_prov = fallback.get('from', fallback.get('original_provider', 'N/A'))
+                    to_prov = fallback.get('to', fallback.get('fallback_provider', 'N/A'))
+                    reason = fallback.get('reason', fallback.get('error', 'N/A'))[:50]
+                    f.write(f"| {i} | `{from_prov}` | `{to_prov}` | {reason} |\n")
+                f.write("\n")
+            
+            # Errors
+            errors = execution_plan.get('errors', [])
+            if errors:
+                f.write("### Errors Encountered\n\n")
+                for i, error in enumerate(errors, 1):
+                    f.write(f"#### Error {i}\n\n")
+                    f.write(f"- **Task**: `{error.get('task', 'N/A')}`\n")
+                    f.write(f"- **Type**: `{error.get('type', 'N/A')}`\n")
+                    f.write(f"- **Message**: {error.get('message', error.get('error', 'N/A'))}\n\n")
+            
+            f.write("---\n\n")
+        
+        # Tool Usage & Actions
+        if execution_plan and execution_plan.get('selected_tools'):
+            f.write("## 🛠️ Tool Usage & Actions\n\n")
+            f.write("### Tools Selected\n\n")
+            for i, tool in enumerate(execution_plan.get('selected_tools', []), 1):
+                f.write(f"{i}. **{tool}**\n")
+            f.write("\n")
+            
+            # Tool execution details
+            if execution_plan.get('actions_taken'):
+                f.write("### Tool Execution Details\n\n")
+                for action in execution_plan.get('actions_taken', []):
+                    tool_name = action.get('tool', action.get('action', 'N/A'))
+                    f.write(f"#### {tool_name}\n\n")
+                    f.write(f"- **Status**: {action.get('status', 'N/A')}\n")
+                    f.write(f"- **Provider**: {action.get('provider', 'N/A')}\n")
+                    if action.get('duration'):
+                        f.write(f"- **Duration**: {action.get('duration', 'N/A')}\n")
+                    f.write("\n")
+            
+            f.write("---\n\n")
+        
+        # IAR Summaries
+        if execution_plan and execution_plan.get('tasks'):
+            f.write("## 📋 IAR Summaries (Integrated Action Reflection)\n\n")
+            f.write("### Task IAR Summaries\n\n")
+            for i, task in enumerate(execution_plan.get('tasks', []), 1):
+                task_id = task.get('task_id', task.get('step_id', f'task_{i}'))
+                reflection = task.get('reflection', {})
+                if reflection:
+                    f.write(f"#### Task {i}: {task_id}\n\n")
+                    f.write(f"- **Status**: {reflection.get('status', 'N/A')}\n")
+                    f.write(f"- **Confidence**: {reflection.get('confidence', 0):.2f}\n")
+                    f.write(f"- **Summary**: {reflection.get('summary', 'N/A')}\n")
+                    issues = reflection.get('potential_issues', [])
+                    if issues:
+                        f.write(f"- **Issues**: {len(issues)} issue(s) detected\n")
+                        for issue in issues[:3]:  # Show first 3
+                            f.write(f"  - {issue}\n")
+                    f.write("\n")
+            f.write("---\n\n")
+        
+        # SPR Priming (if available)
         if isinstance(results, dict) and results.get("spr_priming"):
             spr_priming = results["spr_priming"]
-            f.write("## SPR Priming Results\n\n")
-            f.write(f"- SPRs Primed from Query: {spr_priming.get('sprs_primed', 0)}\n")
-            f.write(f"- Total SPRs Available: {spr_priming.get('total_sprs_available', 0)}\n")
-            f.write(f"- SPR Manager Status: {'Active' if spr_priming.get('spr_manager_active') else 'Inactive'}\n\n")
-            
-            # Include primed SPR definitions if available
-            if results.get("spr_context") and results["spr_context"].get("spr_definitions"):
-                f.write("### Primed SPR Definitions\n\n")
-                for spr_id, spr_data in list(results["spr_context"]["spr_definitions"].items())[:10]:
-                    f.write(f"**{spr_id}** ({spr_data.get('category', 'Unknown')})\n")
-                    f.write(f"- Term: {spr_data.get('term', '')}\n")
-                    f.write(f"- Definition: {spr_data.get('definition', '')[:200]}...\n\n")
-                if len(results["spr_context"]["spr_definitions"]) > 10:
-                    f.write(f"*... and {len(results['spr_context']['spr_definitions']) - 10} more SPRs*\n\n")
+            f.write("## 🧠 SPR Priming Results\n\n")
+            f.write("| Metric | Value |\n")
+            f.write("|--------|-------|\n")
+            f.write(f"| SPRs Primed from Query | {spr_priming.get('sprs_primed', 0)} |\n")
+            f.write(f"| Total SPRs Available | {spr_priming.get('total_sprs_available', 0)} |\n")
+            f.write(f"| SPR Manager Status | {'✅ Active' if spr_priming.get('spr_manager_active') else '❌ Inactive'} |\n\n")
+            f.write("---\n\n")
         
-        # Add Zepto compression details if available
+        # Zepto Compression (if available)
         if isinstance(results, dict) and results.get("zepto_compression") and results["zepto_compression"].get("compressed"):
             zepto = results["zepto_compression"]
-            f.write("## Zepto SPR Compression Results\n\n")
-            f.write(f"- Compression Ratio: {zepto.get('compression_ratio', 0):.1f}:1\n")
-            f.write(f"- Original Size: {zepto.get('original_size', 0)} characters\n")
-            f.write(f"- Zepto Size: {zepto.get('zepto_size', 0)} characters\n")
-            f.write(f"- Zepto SPR Preview: `{zepto.get('zepto_spr', '')}`\n\n")
+            f.write("## ⚡ Zepto SPR Compression Results\n\n")
+            f.write("| Metric | Value |\n")
+            f.write("|--------|-------|\n")
+            f.write(f"| Compression Ratio | {zepto.get('compression_ratio', 0):.1f}:1 |\n")
+            f.write(f"| Original Size | {zepto.get('original_size', 0):,} characters |\n")
+            f.write(f"| Zepto Size | {zepto.get('zepto_size', 0):,} characters |\n")
+            f.write(f"| Zepto SPR Preview | `{zepto.get('zepto_spr', '')[:100]}...` |\n\n")
+            f.write("---\n\n")
         
-        f.write("## Analysis Results\n\n")
+        # Final Answer
+        f.write("## ✅ Final Answer\n\n")
         f.write(response)
+        f.write("\n\n---\n\n")
+        
+        # Detailed Results (Collapsible)
+        f.write("## 📄 Detailed Results\n\n")
+        f.write("<details>\n")
+        f.write("<summary>Click to expand full results data</summary>\n\n")
+        f.write("```json\n")
+        f.write(json.dumps(results, indent=2, default=str))
+        f.write("\n```\n\n")
+        f.write("</details>\n\n")
     
     # Console output
     console.rule("[bold green]Final Results[/bold green]")

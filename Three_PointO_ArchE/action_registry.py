@@ -1936,17 +1936,26 @@ try:
         Args:
             file_patterns (list): List of file patterns to match (e.g., ['*zepto*.md', '*specification*.md'])
             zepto_engine_integration (bool): Whether to integrate with Zepto engine for state updates
+            workspace_root (str, optional): Root directory of the workspace. If not provided, will be auto-detected.
             
         Returns:
             Dictionary containing ingestion results
         """
         try:
             from .specification_ingestion_workflow import SpecificationIngestionWorkflow
+            from pathlib import Path
             
             file_patterns = kwargs.get('file_patterns', ['*zepto*.md', '*specification*.md'])
             zepto_integration = kwargs.get('zepto_engine_integration', True)
             
-            workflow = SpecificationIngestionWorkflow()
+            # Determine workspace root: use provided value, or auto-detect from current file location
+            workspace_root = kwargs.get('workspace_root')
+            if not workspace_root:
+                # Auto-detect: action_registry.py is in Three_PointO_ArchE/, so parent.parent is project root
+                workspace_root = str(Path(__file__).parent.parent)
+                logger.info(f"Auto-detected workspace_root: {workspace_root}")
+            
+            workflow = SpecificationIngestionWorkflow(workspace_root=workspace_root)
             
             # Integrate Zepto engine if requested
             if zepto_integration:

@@ -3,92 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FaceCheck Data Processor</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #444; text-align: center; }
-        textarea, input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; margin-bottom: 10px; }
-        textarea { height: 300px; }
-        input[type="submit"] { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; display: block; width: 100%; }
-        input[type="submit"]:hover { background-color: #0056b3; }
-        .loader { display: none; margin: 15px auto; border: 5px solid #f3f3f3; border-radius: 50%; border-top: 5px solid #3498db; width: 50px; height: 50px; animation: spin 1s linear infinite; }
-        .or-separator { text-align: center; margin: 20px 0; font-weight: bold; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
+    <title>Zepto Compression Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>FaceCheck Data Processor</h1>
-        
-        <!-- URL Form -->
-        <form id="url-form">
-            <input type="text" id="facecheck_url" placeholder="Paste FaceCheck.ID search URL here...">
-            <input type="submit" value="Process from URL">
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h1>Zepto Compression</h1>
+                </div>
+                <nav class="nav-tabs">
+                    <a href="/" class="nav-tab {{ 'active' if mode == 'combined' else '' }}">Both</a>
+                    <a href="/compress" class="nav-tab {{ 'active' if mode == 'compress' else '' }}">Compress</a>
+                    <a href="/decompress" class="nav-tab {{ 'active' if mode == 'decompress' else '' }}">Decompress</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Compression Section -->
+            <section class="section compress-section" id="compress-section" style="display: {{ 'none' if mode == 'decompress' else 'block' }};">
+                <div class="section-header">
+                    <h2>Compress to Zepto SPR</h2>
+                    <p class="section-description">Upload a file or paste text to compress to Zepto SPR format (100:1 to 1000:1 compression). Supports: JSON, JSONL, TXT, MD, DOC, DOCX, RTF, ODT, and many other text-based formats.</p>
+                </div>
+
+                <div class="card">
+                    <form id="compress-form" class="form">
+                        <div class="form-group">
+                            <label for="compress-file" class="file-label">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                                <span>Choose File</span>
+                                <input type="file" id="compress-file" name="file" accept=".txt,.md,.markdown,.json,.jsonl,.py,.js,.jsx,.ts,.tsx,.html,.htm,.css,.xml,.csv,.tsv,.log,.yaml,.yml,.doc,.docx,.rtf,.odt,.sh,.bash,.sql,.r,.tex,.latex,.rst,.env,.ini,.cfg,.conf,.properties,.toml,.gitignore,.dockerfile,.makefile,.cmake,.vim,.vimrc" class="file-input">
+                            </label>
+                            <div class="file-info" id="compress-file-info"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="compress-text" class="label">Or Paste Text</label>
+                            <textarea id="compress-text" name="text" class="textarea" rows="8" placeholder="Paste your text here..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="target-stage" class="label">Compression Stage</label>
+                            <select id="target-stage" name="target_stage" class="select">
+                                <option value="Zepto" selected>Zepto (Maximum - 100:1 to 1000:1)</option>
+                                <option value="Atto">Atto (Very High - 50:1 to 100:1)</option>
+                                <option value="Femto">Femto (High - 20:1 to 50:1)</option>
+                                <option value="Pico">Pico (Medium-High - 10:1 to 20:1)</option>
+                                <option value="Micro">Micro (Medium - 5:1 to 10:1)</option>
+                                <option value="Nano">Nano (Low-Medium - 2:1 to 5:1)</option>
+                                <option value="Concise">Concise (Low - 1.5:1 to 2:1)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="compress-btn">
+                            <span class="btn-text">Compress</span>
+                            <svg class="btn-spinner" style="display: none;" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.25"/>
+                                <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                            </svg>
+                        </button>
         </form>
 
-        <div class="or-separator">OR</div>
+                    <!-- Compression Results -->
+                    <div id="compress-results" class="results" style="display: none;">
+                        <div class="results-header">
+                            <h3>Compression Results</h3>
+                            <button class="btn-icon" id="compress-close-results" aria-label="Close results">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
 
-        <!-- JSON Form -->
-        <form id="json-form">
-            <textarea id="json_data" placeholder="Paste your FaceCheck JSON data here..."></textarea>
-            <input type="submit" value="Process from JSON">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-label">Original Size</div>
+                                <div class="stat-value" id="compress-original-size">-</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Zepto Size</div>
+                                <div class="stat-value" id="compress-zepto-size">-</div>
+                            </div>
+                            <div class="stat-card highlight">
+                                <div class="stat-label">Compression Ratio</div>
+                                <div class="stat-value" id="compress-ratio">-</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Processing Time</div>
+                                <div class="stat-value" id="compress-time">-</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="label">Zepto SPR Output</label>
+                            <div class="code-container">
+                                <pre class="code-output" id="compress-zepto-output"></pre>
+                                <button class="btn-copy" data-target="compress-zepto-output" aria-label="Copy">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="label">Codex (Full Symbol Dictionary)</label>
+                            <div class="code-container">
+                                <pre class="code-output" id="compress-codex-output"></pre>
+                                <button class="btn-copy" data-target="compress-codex-output" aria-label="Copy">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <small class="form-hint">Shows the full codex (all symbols). For decompression, only new entries created during this compression are needed.</small>
+                        </div>
+
+                        <div class="download-buttons">
+                            <button class="btn btn-secondary" id="download-zepto">Download Zepto SPR</button>
+                            <button class="btn btn-secondary" id="download-codex">Download Codex</button>
+                            <button class="btn btn-secondary" id="download-stages">Download Stages</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Decompression Section -->
+            <section class="section decompress-section" id="decompress-section" style="display: {{ 'none' if mode == 'compress' else 'block' }};">
+                <div class="section-header">
+                    <h2>Decompress from Zepto SPR</h2>
+                    <p class="section-description">Paste Zepto SPR text and optionally provide codex for decompression</p>
+                </div>
+
+                <div class="card">
+                    <form id="decompress-form" class="form">
+                        <div class="form-group">
+                            <label for="decompress-zepto" class="label">Zepto SPR Text</label>
+                            <textarea id="decompress-zepto" name="zepto_spr" class="textarea" rows="6" placeholder="Paste Zepto SPR text here..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="decompress-codex" class="label">Codex (Optional but Recommended)</label>
+                            <textarea id="decompress-codex" name="codex" class="textarea codex-textarea" rows="8" placeholder='Paste codex JSON here (e.g., {"symbol": {...}})...'></textarea>
+                            <small class="form-hint">The codex is required for accurate decompression. It's usually provided with the Zepto SPR output.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="decompress-stages" class="label">Compression Stages (Optional)</label>
+                            <textarea id="decompress-stages" name="compression_stages" class="textarea codex-textarea" rows="6" placeholder='Paste compression stages JSON here...'></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="decompress-btn">
+                            <span class="btn-text">Decompress</span>
+                            <svg class="btn-spinner" style="display: none;" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.25"/>
+                                <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                            </svg>
+                        </button>
         </form>
 
-        <div id="loader" class="loader"></div>
+                    <!-- Decompression Results -->
+                    <div id="decompress-results" class="results" style="display: none;">
+                        <div class="results-header">
+                            <h3>Decompression Results</h3>
+                            <button class="btn-icon" id="decompress-close-results" aria-label="Close results">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-label">Zepto Size</div>
+                                <div class="stat-value" id="decompress-zepto-size">-</div>
+                            </div>
+                            <div class="stat-card highlight">
+                                <div class="stat-label">Decompressed Size</div>
+                                <div class="stat-value" id="decompress-output-size">-</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Processing Time</div>
+                                <div class="stat-value" id="decompress-time">-</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="label">Decompressed Text</label>
+                            <div class="code-container">
+                                <pre class="code-output" id="decompress-output"></pre>
+                                <button class="btn-copy" data-target="decompress-output" aria-label="Copy">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="download-buttons">
+                            <button class="btn btn-secondary" id="download-decompressed">Download Decompressed Text</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
     </div>
 
-    <script>
-        function handleResponse(response) {
-            if (!response.ok) {
-                return response.text().then(text => { throw new Error(text) });
-            }
-            return response.text();
-        }
-
-        function displayResult(html) {
-            document.open();
-            document.write(html);
-            document.close();
-        }
-
-        function handleError(error) {
-            document.open();
-            document.write(error.message);
-            document.close();
-        }
-
-        document.getElementById('url-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            document.getElementById('loader').style.display = 'block';
-
-            const facecheckUrl = document.getElementById('facecheck_url').value;
-            fetch(`/from-url?url=${encodeURIComponent(facecheckUrl)}`)
-                .then(handleResponse)
-                .then(displayResult)
-                .catch(handleError)
-                .finally(() => {
-                    document.getElementById('loader').style.display = 'none';
-                });
-        });
-
-        document.getElementById('json-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            document.getElementById('loader').style.display = 'block';
-
-            const jsonData = document.getElementById('json_data').value;
-            fetch('/process', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: jsonData
-            })
-                .then(handleResponse)
-                .then(displayResult)
-                .catch(handleError)
-                .finally(() => {
-                    document.getElementById('loader').style.display = 'none';
-                });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>

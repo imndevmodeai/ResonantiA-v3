@@ -207,3 +207,624 @@ SUMMARY: 6/6 directives successfully initialized
 2025-11-20 02:31:39,059 - __main__ - INFO - 
 Priming results saved to: /mnt/3626C55326C514B1/Happier/arche_unified_priming_results.json
 2025-11-20 02:31:39,059 - __main__ - INFO - ArchE Unified Initialization Complete!
+2025-11-21 03:23:56,390 - __main__ - INFO - ================================================================================
+2025-11-21 03:23:56,391 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE INITIATED
+2025-11-21 03:23:56,394 - __main__ - INFO - Protocol: PRIME_ARCHE_PROTOCOL_3.5-GP
+2025-11-21 03:23:56,397 - __main__ - INFO - Keyholder: B.J. Lewis (IMnDEVmode)
+2025-11-21 03:23:56,399 - __main__ - INFO - Project Root: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:23:56,399 - __main__ - INFO - Python: /mnt/3626C55326C514B1/Happier/arche_env/bin/python3
+2025-11-21 03:23:56,400 - __main__ - INFO - Virtual Environment: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 03:23:56,403 - __main__ - INFO - ================================================================================
+2025-11-21 03:23:56,406 - __main__ - INFO - 
+[DIRECTIVE 0] Virtual Environment Activation (MANDATORY)
+2025-11-21 03:23:56,406 - __main__ - INFO - ✅ Virtual environment already activated: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 03:23:56,406 - __main__ - INFO - 
+[DIRECTIVE 0.1] Zepto Compression/Decompression System Initialization
+2025-11-21 03:23:56,459 - Three_PointO_ArchE.temporal_core - INFO - ⏰ Temporal Core initialized - All timestamps are UTC
+2025-11-21 03:23:56,459 - Three_PointO_ArchE.temporal_core - INFO -    Current system time: 2025-11-21T08:23:56.459485Z
+2025-11-21 03:23:56,459 - Three_PointO_ArchE.temporal_core - INFO -    ArchE Epoch: 2024-01-01T00:00:00Z
+2025-11-21 03:24:07,268 - __main__ - ERROR - ❌ ERROR: Zepto system initialization failed: expected an indented block after 'else' statement on line 164 (__init__.py, line 166)
+2025-11-21 03:24:07,274 - __main__ - INFO - 
+[DIRECTIVE 1] SPR Auto-Priming System
+2025-11-21 03:24:07,297 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:24:07,298 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:24:12,405 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 03:24:12,939 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 03:24:12,978 - __main__ - INFO - ✅ SPR Manager initialized
+2025-11-21 03:24:12,979 - __main__ - INFO -    Loaded SPRs: 3589
+2025-11-21 03:24:12,981 - __main__ - INFO -    Primed SPRs in test scan: 0
+2025-11-21 03:24:12,982 - __main__ - INFO - 
+[DIRECTIVE 2] Session Auto-Capture System
+2025-11-21 03:24:12,992 - Three_PointO_ArchE.session_auto_capture - INFO - SessionAutoCapture initialized, output to: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:24:13,005 - __main__ - INFO - ✅ SessionAutoCapture initialized
+2025-11-21 03:24:13,006 - __main__ - INFO -    Output directory: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:24:13,007 - __main__ - INFO -    Status: Active - Captures all messages, IAR entries, SPRs, and insights automatically
+2025-11-21 03:24:13,009 - __main__ - INFO - 
+[DIRECTIVE 3] Autopoietic Learning Loop
+2025-11-21 03:24:21,377 - qiskit.passmanager.base_tasks - INFO - Pass: UnrollCustomDefinitions - 0.36979 (ms)
+2025-11-21 03:24:21,378 - qiskit.passmanager.base_tasks - INFO - Pass: BasisTranslator - 0.29302 (ms)
+2025-11-21 03:24:21,435 - __main__ - ERROR - ❌ ERROR: Autopoietic Learning Loop initialization failed: expected an indented block after 'else' statement on line 164 (__init__.py, line 166)
+2025-11-21 03:24:21,443 - __main__ - INFO - 
+[DIRECTIVE 4] ThoughtTrail Monitoring
+2025-11-21 03:24:21,448 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:24:21,449 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:24:21,460 - __main__ - INFO - ✅ ThoughtTrail initialized
+2025-11-21 03:24:21,460 - __main__ - INFO -    Buffer size: 1000 thoughts
+2025-11-21 03:24:21,461 - __main__ - INFO -    Status: Active - Captures every IAR entry for pattern detection
+2025-11-21 03:24:21,461 - __main__ - INFO -   - Universal Ledger path: Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:24:21,463 - __main__ - INFO -   - Total entries in ledger: 1
+2025-11-21 03:24:21,465 - __main__ - INFO - Storing initialized systems in global namespace...
+2025-11-21 03:24:21,466 - __main__ - INFO - ✅ Systems stored and ready for use
+2025-11-21 03:24:21,466 - __main__ - INFO - 
+================================================================================
+2025-11-21 03:24:21,466 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE COMPLETE
+2025-11-21 03:24:21,467 - __main__ - INFO - ================================================================================
+2025-11-21 03:24:21,469 - __main__ - INFO - 
+SUMMARY: 4/6 directives successfully initialized
+2025-11-21 03:24:21,472 - __main__ - WARNING - ⚠️  SOME SYSTEMS OFFLINE - Review errors above
+2025-11-21 03:24:21,473 - __main__ - WARNING -    ArchE may have limited functionality
+2025-11-21 03:24:21,476 - __main__ - INFO - 
+Priming results saved to: /mnt/3626C55326C514B1/Happier/arche_unified_priming_results.json
+2025-11-21 03:24:21,476 - __main__ - INFO - ArchE Unified Initialization Complete!
+2025-11-21 03:25:28,551 - __main__ - INFO - ================================================================================
+2025-11-21 03:25:28,552 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE INITIATED
+2025-11-21 03:25:28,552 - __main__ - INFO - Protocol: PRIME_ARCHE_PROTOCOL_3.5-GP
+2025-11-21 03:25:28,552 - __main__ - INFO - Keyholder: B.J. Lewis (IMnDEVmode)
+2025-11-21 03:25:28,553 - __main__ - INFO - Project Root: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:25:28,555 - __main__ - INFO - Python: /mnt/3626C55326C514B1/Happier/arche_env/bin/python3
+2025-11-21 03:25:28,557 - __main__ - INFO - Virtual Environment: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 03:25:28,557 - __main__ - INFO - ================================================================================
+2025-11-21 03:25:28,558 - __main__ - INFO - 
+[DIRECTIVE 0] Virtual Environment Activation (MANDATORY)
+2025-11-21 03:25:28,560 - __main__ - INFO - ✅ Virtual environment already activated: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 03:25:28,560 - __main__ - INFO - 
+[DIRECTIVE 0.1] Zepto Compression/Decompression System Initialization
+2025-11-21 03:25:28,597 - Three_PointO_ArchE.temporal_core - INFO - ⏰ Temporal Core initialized - All timestamps are UTC
+2025-11-21 03:25:28,597 - Three_PointO_ArchE.temporal_core - INFO -    Current system time: 2025-11-21T08:25:28.597399Z
+2025-11-21 03:25:28,597 - Three_PointO_ArchE.temporal_core - INFO -    ArchE Epoch: 2024-01-01T00:00:00Z
+2025-11-21 03:25:33,001 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:25:33,001 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:25:35,095 - __main__ - INFO - ✅ PatternCrystallizationEngine initialized
+2025-11-21 03:25:35,098 - __main__ - WARNING - ⚠️  Warning: PRIME_ARCHE_PROTOCOL_3.5-GP.md not found at /mnt/3626C55326C514B1/Happier/PRIME_ARCHE_PROTOCOL_3.5-GP.md
+2025-11-21 03:25:35,100 - __main__ - INFO - 
+[DIRECTIVE 1] SPR Auto-Priming System
+2025-11-21 03:25:43,002 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 03:25:43,534 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 03:25:43,577 - __main__ - INFO - ✅ SPR Manager initialized
+2025-11-21 03:25:43,577 - __main__ - INFO -    Loaded SPRs: 3589
+2025-11-21 03:25:43,578 - __main__ - INFO -    Primed SPRs in test scan: 0
+2025-11-21 03:25:43,648 - __main__ - INFO - 
+[DIRECTIVE 2] Session Auto-Capture System
+2025-11-21 03:25:43,650 - Three_PointO_ArchE.session_auto_capture - INFO - SessionAutoCapture initialized, output to: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:25:43,664 - __main__ - INFO - ✅ SessionAutoCapture initialized
+2025-11-21 03:25:43,665 - __main__ - INFO -    Output directory: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:25:43,666 - __main__ - INFO -    Status: Active - Captures all messages, IAR entries, SPRs, and insights automatically
+2025-11-21 03:25:43,667 - __main__ - INFO - 
+[DIRECTIVE 3] Autopoietic Learning Loop
+2025-11-21 03:25:49,417 - qiskit.passmanager.base_tasks - INFO - Pass: UnrollCustomDefinitions - 0.24843 (ms)
+2025-11-21 03:25:49,418 - qiskit.passmanager.base_tasks - INFO - Pass: BasisTranslator - 0.16403 (ms)
+2025-11-21 03:25:49,456 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - ✅ Base CRCS system imported successfully
+2025-11-21 03:25:50,067 - __main__ - ERROR - ❌ ERROR: Autopoietic Learning Loop initialization failed: expected an indented block after 'else' statement on line 75 (synthesis_tool.py, line 76)
+2025-11-21 03:25:50,080 - __main__ - INFO - 
+[DIRECTIVE 4] ThoughtTrail Monitoring
+2025-11-21 03:25:50,086 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:25:50,088 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:25:50,101 - __main__ - INFO - ✅ ThoughtTrail initialized
+2025-11-21 03:25:50,102 - __main__ - INFO -    Buffer size: 1000 thoughts
+2025-11-21 03:25:50,105 - __main__ - INFO -    Status: Active - Captures every IAR entry for pattern detection
+2025-11-21 03:25:50,106 - __main__ - INFO -   - Universal Ledger path: Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:25:50,108 - __main__ - INFO -   - Total entries in ledger: 1
+2025-11-21 03:25:50,109 - __main__ - INFO - Storing initialized systems in global namespace...
+2025-11-21 03:25:50,110 - __main__ - INFO - ✅ Systems stored and ready for use
+2025-11-21 03:25:50,115 - __main__ - INFO - 
+================================================================================
+2025-11-21 03:25:50,116 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE COMPLETE
+2025-11-21 03:25:50,117 - __main__ - INFO - ================================================================================
+2025-11-21 03:25:50,118 - __main__ - INFO - 
+SUMMARY: 5/6 directives successfully initialized
+2025-11-21 03:25:50,119 - __main__ - WARNING - ⚠️  SOME SYSTEMS OFFLINE - Review errors above
+2025-11-21 03:25:50,123 - __main__ - WARNING -    ArchE may have limited functionality
+2025-11-21 03:25:50,125 - __main__ - INFO - 
+Priming results saved to: /mnt/3626C55326C514B1/Happier/arche_unified_priming_results.json
+2025-11-21 03:25:50,126 - __main__ - INFO - ArchE Unified Initialization Complete!
+2025-11-21 03:26:46,189 - __main__ - INFO - ================================================================================
+2025-11-21 03:26:46,193 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE INITIATED
+2025-11-21 03:26:46,194 - __main__ - INFO - Protocol: PRIME_ARCHE_PROTOCOL_3.5-GP
+2025-11-21 03:26:46,196 - __main__ - INFO - Keyholder: B.J. Lewis (IMnDEVmode)
+2025-11-21 03:26:46,197 - __main__ - INFO - Project Root: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:26:46,199 - __main__ - INFO - Python: /mnt/3626C55326C514B1/Happier/arche_env/bin/python3
+2025-11-21 03:26:46,200 - __main__ - INFO - Virtual Environment: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 03:26:46,203 - __main__ - INFO - ================================================================================
+2025-11-21 03:26:46,205 - __main__ - INFO - 
+[DIRECTIVE 0] Virtual Environment Activation (MANDATORY)
+2025-11-21 03:26:46,206 - __main__ - INFO - ✅ Virtual environment already activated: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 03:26:46,207 - __main__ - INFO - 
+[DIRECTIVE 0.1] Zepto Compression/Decompression System Initialization
+2025-11-21 03:26:46,263 - Three_PointO_ArchE.temporal_core - INFO - ⏰ Temporal Core initialized - All timestamps are UTC
+2025-11-21 03:26:46,264 - Three_PointO_ArchE.temporal_core - INFO -    Current system time: 2025-11-21T08:26:46.264853Z
+2025-11-21 03:26:46,266 - Three_PointO_ArchE.temporal_core - INFO -    ArchE Epoch: 2024-01-01T00:00:00Z
+2025-11-21 03:26:51,647 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:26:51,648 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:26:53,358 - __main__ - INFO - ✅ PatternCrystallizationEngine initialized
+2025-11-21 03:26:53,362 - __main__ - WARNING - ⚠️  Warning: PRIME_ARCHE_PROTOCOL_3.5-GP.md not found at /mnt/3626C55326C514B1/Happier/PRIME_ARCHE_PROTOCOL_3.5-GP.md
+2025-11-21 03:26:53,363 - __main__ - INFO - 
+[DIRECTIVE 1] SPR Auto-Priming System
+2025-11-21 03:27:04,415 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 03:27:04,952 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 03:27:05,001 - __main__ - INFO - ✅ SPR Manager initialized
+2025-11-21 03:27:05,001 - __main__ - INFO -    Loaded SPRs: 3589
+2025-11-21 03:27:05,002 - __main__ - INFO -    Primed SPRs in test scan: 0
+2025-11-21 03:27:05,079 - __main__ - INFO - 
+[DIRECTIVE 2] Session Auto-Capture System
+2025-11-21 03:27:05,083 - Three_PointO_ArchE.session_auto_capture - INFO - SessionAutoCapture initialized, output to: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:27:05,094 - __main__ - INFO - ✅ SessionAutoCapture initialized
+2025-11-21 03:27:05,095 - __main__ - INFO -    Output directory: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:27:05,096 - __main__ - INFO -    Status: Active - Captures all messages, IAR entries, SPRs, and insights automatically
+2025-11-21 03:27:05,096 - __main__ - INFO - 
+[DIRECTIVE 3] Autopoietic Learning Loop
+2025-11-21 03:27:11,558 - qiskit.passmanager.base_tasks - INFO - Pass: UnrollCustomDefinitions - 2.76041 (ms)
+2025-11-21 03:27:11,559 - qiskit.passmanager.base_tasks - INFO - Pass: BasisTranslator - 0.04458 (ms)
+2025-11-21 03:27:11,608 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - ✅ Base CRCS system imported successfully
+2025-11-21 03:27:12,110 - __main__ - ERROR - ❌ ERROR: Autopoietic Learning Loop initialization failed: expected an indented block after 'else' statement on line 82 (synthesis_tool.py, line 83)
+2025-11-21 03:27:12,116 - __main__ - INFO - 
+[DIRECTIVE 4] ThoughtTrail Monitoring
+2025-11-21 03:27:12,120 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:27:12,122 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:27:12,132 - __main__ - INFO - ✅ ThoughtTrail initialized
+2025-11-21 03:27:12,133 - __main__ - INFO -    Buffer size: 1000 thoughts
+2025-11-21 03:27:12,133 - __main__ - INFO -    Status: Active - Captures every IAR entry for pattern detection
+2025-11-21 03:27:12,133 - __main__ - INFO -   - Universal Ledger path: Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:27:12,133 - __main__ - INFO -   - Total entries in ledger: 1
+2025-11-21 03:27:12,133 - __main__ - INFO - Storing initialized systems in global namespace...
+2025-11-21 03:27:12,133 - __main__ - INFO - ✅ Systems stored and ready for use
+2025-11-21 03:27:12,133 - __main__ - INFO - 
+================================================================================
+2025-11-21 03:27:12,133 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE COMPLETE
+2025-11-21 03:27:12,133 - __main__ - INFO - ================================================================================
+2025-11-21 03:27:12,133 - __main__ - INFO - 
+SUMMARY: 5/6 directives successfully initialized
+2025-11-21 03:27:12,133 - __main__ - WARNING - ⚠️  SOME SYSTEMS OFFLINE - Review errors above
+2025-11-21 03:27:12,133 - __main__ - WARNING -    ArchE may have limited functionality
+2025-11-21 03:27:12,134 - __main__ - INFO - 
+Priming results saved to: /mnt/3626C55326C514B1/Happier/arche_unified_priming_results.json
+2025-11-21 03:27:12,134 - __main__ - INFO - ArchE Unified Initialization Complete!
+2025-11-21 03:28:08,206 - __main__ - INFO - ================================================================================
+2025-11-21 03:28:08,207 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE INITIATED
+2025-11-21 03:28:08,208 - __main__ - INFO - Protocol: PRIME_ARCHE_PROTOCOL_3.5-GP
+2025-11-21 03:28:08,209 - __main__ - INFO - Keyholder: B.J. Lewis (IMnDEVmode)
+2025-11-21 03:28:08,209 - __main__ - INFO - Project Root: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:28:08,210 - __main__ - INFO - Python: /mnt/3626C55326C514B1/Happier/arche_env/bin/python3
+2025-11-21 03:28:08,211 - __main__ - INFO - Virtual Environment: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 03:28:08,211 - __main__ - INFO - ================================================================================
+2025-11-21 03:28:08,212 - __main__ - INFO - 
+[DIRECTIVE 0] Virtual Environment Activation (MANDATORY)
+2025-11-21 03:28:08,212 - __main__ - INFO - ✅ Virtual environment already activated: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 03:28:08,213 - __main__ - INFO - 
+[DIRECTIVE 0.1] Zepto Compression/Decompression System Initialization
+2025-11-21 03:28:08,229 - Three_PointO_ArchE.temporal_core - INFO - ⏰ Temporal Core initialized - All timestamps are UTC
+2025-11-21 03:28:08,230 - Three_PointO_ArchE.temporal_core - INFO -    Current system time: 2025-11-21T08:28:08.230230Z
+2025-11-21 03:28:08,230 - Three_PointO_ArchE.temporal_core - INFO -    ArchE Epoch: 2024-01-01T00:00:00Z
+2025-11-21 03:28:13,827 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:28:13,828 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:28:15,897 - __main__ - INFO - ✅ PatternCrystallizationEngine initialized
+2025-11-21 03:28:15,900 - __main__ - WARNING - ⚠️  Warning: PRIME_ARCHE_PROTOCOL_3.5-GP.md not found at /mnt/3626C55326C514B1/Happier/PRIME_ARCHE_PROTOCOL_3.5-GP.md
+2025-11-21 03:28:15,902 - __main__ - INFO - 
+[DIRECTIVE 1] SPR Auto-Priming System
+2025-11-21 03:28:23,283 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 03:28:23,765 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 03:28:23,795 - __main__ - INFO - ✅ SPR Manager initialized
+2025-11-21 03:28:23,797 - __main__ - INFO -    Loaded SPRs: 3589
+2025-11-21 03:28:23,797 - __main__ - INFO -    Primed SPRs in test scan: 0
+2025-11-21 03:28:23,844 - __main__ - INFO - 
+[DIRECTIVE 2] Session Auto-Capture System
+2025-11-21 03:28:23,846 - Three_PointO_ArchE.session_auto_capture - INFO - SessionAutoCapture initialized, output to: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:28:23,857 - __main__ - INFO - ✅ SessionAutoCapture initialized
+2025-11-21 03:28:23,859 - __main__ - INFO -    Output directory: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:28:23,860 - __main__ - INFO -    Status: Active - Captures all messages, IAR entries, SPRs, and insights automatically
+2025-11-21 03:28:23,860 - __main__ - INFO - 
+[DIRECTIVE 3] Autopoietic Learning Loop
+2025-11-21 03:28:28,634 - qiskit.passmanager.base_tasks - INFO - Pass: UnrollCustomDefinitions - 0.22793 (ms)
+2025-11-21 03:28:28,641 - qiskit.passmanager.base_tasks - INFO - Pass: BasisTranslator - 0.88859 (ms)
+2025-11-21 03:28:28,697 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - ✅ Base CRCS system imported successfully
+2025-11-21 03:28:39,196 - WDM - INFO - ====== WebDriver manager ======
+2025-11-21 03:28:39,560 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-11-21 03:28:39,899 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-11-21 03:28:40,047 - WDM - INFO - Driver [/home/newbu/.wdm/drivers/chromedriver/linux64/141.0.7390.122/chromedriver] found in cache
+2025-11-21 03:28:41,594 - Three_PointO_ArchE.action_registry - INFO - Enhanced Perception Engine available
+2025-11-21 03:28:41,600 - Three_PointO_ArchE.action_registry - INFO - ActionRegistry initialized.
+2025-11-21 03:28:41,734 - Three_PointO_ArchE.llm_providers.google - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-11-21 03:28:41,746 - Three_PointO_ArchE.llm_providers.base - INFO - GoogleProvider initialized successfully.
+2025-11-21 03:28:41,760 - Three_PointO_ArchE.action_registry - INFO - GeminiCapabilities initialized and available in ActionRegistry.
+2025-11-21 03:28:41,770 - Three_PointO_ArchE.action_registry - INFO - Action 'execute_code_standalone' registered.
+2025-11-21 03:28:41,952 - Three_PointO_ArchE.action_registry - INFO - Action 'search_web' registered.
+2025-11-21 03:28:42,058 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_text_llm' registered.
+2025-11-21 03:28:42,199 - Three_PointO_ArchE.action_registry - INFO - Action 'display_output' registered.
+2025-11-21 03:28:42,293 - Three_PointO_ArchE.action_registry - INFO - Action 'calculate_math' registered.
+2025-11-21 03:28:42,406 - Three_PointO_ArchE.action_registry - INFO - Action 'string_template' registered.
+2025-11-21 03:28:42,485 - Three_PointO_ArchE.action_registry - INFO - Action 'save_to_file' registered.
+2025-11-21 03:28:42,593 - Three_PointO_ArchE.action_registry - INFO - Action 'predict_nfl_game' registered.
+2025-11-21 03:28:42,673 - Three_PointO_ArchE.action_registry - INFO - Action 'web_search' registered.
+2025-11-21 03:28:42,742 - Three_PointO_ArchE.action_registry - INFO - Action 'analyze_spr_definitions' registered.
+2025-11-21 03:28:42,780 - Three_PointO_ArchE.action_registry - INFO - Action 'evaluate_error_handling' registered.
+2025-11-21 03:28:42,821 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_comprehensive_report' registered.
+2025-11-21 03:28:42,839 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_spr_recommendations' registered.
+2025-11-21 03:28:42,855 - Three_PointO_ArchE.action_registry - INFO - Action 'synthesize_search_results' registered.
+2025-11-21 03:28:42,882 - Three_PointO_ArchE.action_registry - INFO - Action 'execute_code' registered.
+2025-11-21 03:28:42,907 - Three_PointO_ArchE.action_registry - INFO - Registered canonical 'execute_code' from code_executor.py
+2025-11-21 03:28:42,915 - Three_PointO_ArchE.action_registry - INFO - Action 'execute_code_gemini' registered.
+2025-11-21 03:28:42,939 - Three_PointO_ArchE.action_registry - INFO - Action 'handle_files' registered.
+2025-11-21 03:28:42,975 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_grounding' registered.
+2025-11-21 03:28:42,995 - Three_PointO_ArchE.action_registry - INFO - Action 'call_function' registered.
+2025-11-21 03:28:43,016 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_structured_output' registered.
+2025-11-21 03:28:43,043 - Three_PointO_ArchE.action_registry - INFO - Actions from GeminiCapabilities registered (execute_code_gemini, handle_files, etc.).
+2025-11-21 03:28:43,047 - Three_PointO_ArchE.causal_inference_tool - INFO - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-11-21 03:28:43,050 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_causal_inference' registered.
+2025-11-21 03:28:43,075 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_causal_inference' registered.
+2025-11-21 03:28:43,083 - Three_PointO_ArchE.agent_based_modeling_tool - INFO - Mesa library loaded successfully for ABM.
+2025-11-21 03:28:43,084 - Three_PointO_ArchE.agent_based_modeling_tool - INFO - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-11-21 03:28:43,084 - Three_PointO_ArchE.agent_based_modeling_tool - INFO - SciPy library loaded successfully for ABM analysis.
+2025-11-21 03:28:43,085 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_abm' registered.
+2025-11-21 03:28:43,107 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_abm' registered.
+2025-11-21 03:28:43,116 - Three_PointO_ArchE.cfp_framework - INFO - quantum_utils.py loaded successfully for CFP. Qiskit available: True
+2025-11-21 03:28:43,117 - Three_PointO_ArchE.action_registry - INFO - Action 'run_cfp' registered.
+2025-11-21 03:28:43,134 - Three_PointO_ArchE.action_registry - INFO - Action 'run_cfp' registered from CfpframeworK wrapper.
+2025-11-21 03:28:43,134 - Three_PointO_ArchE.action_registry - INFO - Missing action registrations completed.
+2025-11-21 03:28:43,140 - Three_PointO_ArchE.action_registry - INFO - Action 'invoke_specialist_agent' registered.
+2025-11-21 03:28:43,149 - Three_PointO_ArchE.action_registry - INFO - Action 'invoke_specialist_agent' registered.
+2025-11-21 03:28:43,149 - Three_PointO_ArchE.action_registry - INFO - Action 'run_autopoietic_self_analysis' registered.
+2025-11-21 03:28:43,166 - Three_PointO_ArchE.action_registry - INFO - Action 'run_autopoietic_self_analysis' registered.
+2025-11-21 03:28:43,182 - Three_PointO_ArchE.tools.code_executor - WARNING - Using fallback config for code_executor.py
+2025-11-21 03:28:43,183 - Three_PointO_ArchE.tools.code_executor - ERROR - Docker library not found. Docker sandboxing will be unavailable. Install 'docker' package.
+2025-11-21 03:28:43,190 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 03:28:43,212 - Three_PointO_ArchE.llm_providers - INFO - 🔑 Using MultiKeyGroqProvider with 1 API key
+2025-11-21 03:28:43,220 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Loaded quota data from /mnt/3626C55326C514B1/Happier/outputs/llm_quota_tracker.json
+2025-11-21 03:28:43,226 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Registered API key groq_key_1 for provider groq
+2025-11-21 03:28:43,859 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 03:28:43,860 - Three_PointO_ArchE.llm_providers.base - INFO - MultiKeyGroqProvider initialized successfully.
+2025-11-21 03:28:43,900 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 03:28:43,922 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized with provider: groq
+2025-11-21 03:28:43,923 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized.
+2025-11-21 03:28:43,928 - Three_PointO_ArchE.synergistic_inquiry - INFO - Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+2025-11-21 03:28:43,928 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 03:28:43,928 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 03:28:43,944 - Three_PointO_ArchE.llm_providers - INFO - 🔑 Using MultiKeyGroqProvider with 1 API key
+2025-11-21 03:28:43,953 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Registered API key groq_key_1 for provider groq
+2025-11-21 03:28:44,092 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 03:28:44,095 - Three_PointO_ArchE.llm_providers.base - INFO - MultiKeyGroqProvider initialized successfully.
+2025-11-21 03:28:44,142 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 03:28:44,156 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized with provider: groq
+2025-11-21 03:28:44,158 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized.
+2025-11-21 03:28:44,158 - Three_PointO_ArchE.synergistic_inquiry - INFO - Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+2025-11-21 03:28:44,159 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 03:28:44,159 - Three_PointO_ArchE.action_registry - INFO - Action 'run_playbook' registered.
+2025-11-21 03:28:44,168 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_dynamic_workflow' registered.
+2025-11-21 03:28:44,184 - Three_PointO_ArchE.action_registry - INFO - Playbook Orchestrator actions ('run_playbook', 'generate_dynamic_workflow') registered.
+2025-11-21 03:28:44,195 - Three_PointO_ArchE.llm_providers - INFO - 🔑 Using MultiKeyGroqProvider with 1 API key
+2025-11-21 03:28:44,198 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Registered API key groq_key_1 for provider groq
+2025-11-21 03:28:44,282 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 03:28:44,283 - Three_PointO_ArchE.llm_providers.base - INFO - MultiKeyGroqProvider initialized successfully.
+2025-11-21 03:28:44,323 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 03:28:44,358 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized with provider: groq
+2025-11-21 03:28:44,359 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized.
+2025-11-21 03:28:44,359 - Three_PointO_ArchE.synergistic_inquiry - INFO - Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+2025-11-21 03:28:44,360 - Three_PointO_ArchE.action_registry - INFO - Action 'run_synergistic_inquiry' registered.
+2025-11-21 03:28:44,372 - Three_PointO_ArchE.action_registry - INFO - Synergistic Inquiry action ('run_synergistic_inquiry') registered.
+2025-11-21 03:28:44,372 - Three_PointO_ArchE.action_registry - INFO - Action 'enhanced_web_search' registered.
+2025-11-21 03:28:44,383 - Three_PointO_ArchE.action_registry - INFO - Action 'enhanced_page_analysis' registered.
+2025-11-21 03:28:44,396 - Three_PointO_ArchE.action_registry - INFO - Enhanced Perception Engine actions ('enhanced_web_search', 'enhanced_page_analysis') registered with workflow-compatible wrappers.
+2025-11-21 03:28:44,397 - Three_PointO_ArchE.action_registry - INFO - Action 'compress_to_zepto_spr' registered.
+2025-11-21 03:28:44,411 - Three_PointO_ArchE.action_registry - INFO - Action 'decompress_from_zepto_spr' registered.
+2025-11-21 03:28:44,431 - Three_PointO_ArchE.action_registry - INFO - Universal Zepto SPR processing actions ('compress_to_zepto_spr', 'decompress_from_zepto_spr') registered.
+2025-11-21 03:28:44,446 - Three_PointO_ArchE.action_registry - INFO - Action 'calculate_zepto_resonance' registered.
+2025-11-21 03:28:44,466 - Three_PointO_ArchE.action_registry - INFO - Action 'disengage_safety_dampeners' registered.
+2025-11-21 03:28:44,489 - Three_PointO_ArchE.action_registry - INFO - Action 'engage_safety_dampeners' registered.
+2025-11-21 03:28:44,506 - Three_PointO_ArchE.action_registry - INFO - Action 'ingest_specifications' registered.
+2025-11-21 03:28:44,533 - Three_PointO_ArchE.action_registry - INFO - Zepto-Resonance actions registered: calculate_zepto_resonance, disengage_safety_dampeners, engage_safety_dampeners, ingest_specifications
+2025-11-21 03:28:44,539 - Three_PointO_ArchE.action_registry - INFO - Loaded 36 actions from cache.
+2025-11-21 03:28:44,629 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - ✅ RISE Orchestrator imported successfully
+2025-11-21 03:28:44,701 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:28:44,705 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:28:44,708 - CRCS - INFO - Initialized 3 domain controllers
+2025-11-21 03:28:44,709 - CRCS - INFO - Cognitive Resonant Controller System initialized
+2025-11-21 03:28:44,712 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [PatternEngine] Initialized with learning capabilities
+2025-11-21 03:28:44,713 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [DomainDetector] Initialized with detection capabilities
+2025-11-21 03:28:44,714 - Three_PointO_ArchE.rise_orchestrator - INFO - RISE: activated arche_env virtualenv paths for current session
+2025-11-21 03:28:44,717 - Three_PointO_ArchE.rise_orchestrator - INFO - RISE: GEMINI_API_KEY available for LLM tool
+2025-11-21 03:28:44,719 - Three_PointO_ArchE.rise_orchestrator - INFO - RISE_Orchestrator initialized with workflows_dir: /mnt/3626C55326C514B1/Happier/workflows
+2025-11-21 03:28:48,285 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 03:28:49,620 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 03:28:49,717 - Three_PointO_ArchE.rise_orchestrator - INFO - SPRManager initialized with default path: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/../knowledge_graph/spr_definitions_tv.json
+2025-11-21 03:28:49,769 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:28:49,777 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:28:49,789 - Three_PointO_ArchE.zepto_resonance_engine - INFO - ZeptoResonanceEngine initialized (Safeties: ON)
+2025-11-21 03:28:49,794 - Three_PointO_ArchE.workflow_engine - INFO - Zepto-Resonance Engine initialized. ⚶ State detection active.
+2025-11-21 03:28:49,985 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_system_genesis_action' registered.
+2025-11-21 03:28:50,164 - Three_PointO_ArchE.action_registry - INFO - Action 'run_code_linter' registered.
+2025-11-21 03:28:50,263 - Three_PointO_ArchE.action_registry - INFO - Action 'run_workflow_suite' registered.
+2025-11-21 03:28:50,307 - Three_PointO_ArchE.action_registry - INFO - Action 'analyze_failure' registered.
+2025-11-21 03:28:50,361 - Three_PointO_ArchE.action_registry - INFO - Action 'fix_template' registered.
+2025-11-21 03:28:50,401 - Three_PointO_ArchE.action_registry - INFO - Action 'fix_action' registered.
+2025-11-21 03:28:50,448 - Three_PointO_ArchE.action_registry - INFO - Action 'validate_workflow' registered.
+2025-11-21 03:28:50,484 - Three_PointO_ArchE.action_registry - INFO - Action 'validate_action' registered.
+2025-11-21 03:28:50,522 - Three_PointO_ArchE.action_registry - INFO - Action 'self_heal_output' registered.
+2025-11-21 03:28:50,555 - Three_PointO_ArchE.action_registry - INFO - Action 'for_each' registered.
+2025-11-21 03:28:50,592 - Three_PointO_ArchE.workflow_engine - INFO - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-11-21 03:28:50,592 - Three_PointO_ArchE.utopian_solution_synthesizer - INFO - ✅ UtopianSolutionSynthesizer initialized with full capabilities
+2025-11-21 03:28:55,999 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 03:28:56,027 - Three_PointO_ArchE.llm_providers - INFO - 🔑 Using MultiKeyGroqProvider with 1 API key
+2025-11-21 03:28:56,030 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Registered API key groq_key_1 for provider groq
+2025-11-21 03:28:56,390 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 03:28:56,395 - Three_PointO_ArchE.llm_providers.base - INFO - MultiKeyGroqProvider initialized successfully.
+2025-11-21 03:28:56,596 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 03:28:56,910 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized with provider: groq
+2025-11-21 03:28:56,919 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized.
+2025-11-21 03:28:56,930 - Three_PointO_ArchE.synergistic_inquiry - INFO - Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+2025-11-21 03:28:56,937 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 03:28:56,942 - Three_PointO_ArchE.rise_orchestrator - INFO - 🎭 PlaybookOrchestrator initialized - dynamic workflow generation enabled
+2025-11-21 03:28:56,945 - Three_PointO_ArchE.rise_orchestrator - INFO - 🔬 Federated search agents initialized - multi-disciplinary search enabled
+2025-11-21 03:28:57,028 - Three_PointO_ArchE.autopoietic_self_analysis - INFO - [AutopoieticSelfAnalysis] Initialized with root: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:28:57,045 - Three_PointO_ArchE.autopoietic_self_analysis - INFO - [IAR] initialization/system_startup: Self-analysis system ready to compare map and territory
+2025-11-21 03:28:57,049 - Three_PointO_ArchE.codebase_archaeologist - INFO - CodebaseArchaeologist initialized with root: /mnt/3626C55326C514B1/Happier
+2025-11-21 03:28:57,054 - Three_PointO_ArchE.rise_orchestrator - INFO - 🔍 CodebaseArchaeologist initialized - self-referential synthesis enabled
+2025-11-21 03:28:57,090 - Three_PointO_ArchE.codebase_archaeology_actions - INFO - CodebaseArchaeologist instance set for action registry
+2025-11-21 03:28:57,097 - Three_PointO_ArchE.rise_orchestrator - INFO - ✅ CodebaseArchaeologist linked to action registry
+2025-11-21 03:28:57,098 - Three_PointO_ArchE.rise_orchestrator - INFO - 🚀 RISE_Orchestrator initialized successfully
+2025-11-21 03:28:57,109 - Three_PointO_ArchE.rise_orchestrator - INFO - 📁 Workflows directory: /mnt/3626C55326C514B1/Happier/workflows
+2025-11-21 03:28:57,115 - Three_PointO_ArchE.rise_orchestrator - INFO - 🔧 Workflow engine: IARCompliantWorkflowEngine
+2025-11-21 03:28:57,129 - Three_PointO_ArchE.rise_orchestrator - INFO - 🧠 SPR Manager: SPRManager
+2025-11-21 03:28:57,136 - Three_PointO_ArchE.rise_orchestrator - INFO - 📝 Thought Trail: ThoughtTrail
+2025-11-21 03:28:57,140 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - RISE Orchestrator integrated successfully
+2025-11-21 03:28:57,174 - Three_PointO_ArchE.aco_layer_learning - INFO - ACO Layer Learning System initialized with 0 learned patterns
+2025-11-21 03:28:57,179 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [ACO] Layer learning system initialized
+2025-11-21 03:29:02,449 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 03:29:02,471 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 03:29:02,490 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [ACO] SPR Manager initialized for layer-aware retrieval
+2025-11-21 03:29:02,491 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [ACO] Initialized with evolution capabilities and Russian Doll layer learning
+2025-11-21 03:29:02,497 - Three_PointO_ArchE.autopoietic_learning_loop - INFO - [ALL] Autopoietic Learning Loop initialized - Guardian review: True
+2025-11-21 03:29:02,498 - __main__ - INFO - ✅ AutopoieticLearningLoop initialized
+2025-11-21 03:29:02,506 - __main__ - INFO -    Status: Active, Guardian review required for wisdom crystallization
+2025-11-21 03:29:02,506 - __main__ - INFO -    Note: Learning loop uses PatternCrystallizationEngine for Zepto compression of wisdom
+2025-11-21 03:29:02,507 - __main__ - INFO -   - Guardian review: True
+2025-11-21 03:29:02,507 - __main__ - INFO -   - Auto-crystallization: False
+2025-11-21 03:29:02,507 - __main__ - INFO -   - Stardust captured: 0
+2025-11-21 03:29:02,507 - __main__ - INFO - 
+[DIRECTIVE 4] ThoughtTrail Monitoring
+2025-11-21 03:29:02,517 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:29:02,517 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:29:02,529 - __main__ - INFO - ✅ ThoughtTrail initialized
+2025-11-21 03:29:02,530 - __main__ - INFO -    Buffer size: 1000 thoughts
+2025-11-21 03:29:02,530 - __main__ - INFO -    Status: Active - Captures every IAR entry for pattern detection
+2025-11-21 03:29:02,530 - __main__ - INFO -   - Universal Ledger path: Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 03:29:02,530 - __main__ - INFO -   - Total entries in ledger: 1
+2025-11-21 03:29:02,530 - __main__ - INFO - Storing initialized systems in global namespace...
+2025-11-21 03:29:02,531 - __main__ - INFO - ✅ Systems stored and ready for use
+2025-11-21 03:29:02,531 - __main__ - INFO - 
+================================================================================
+2025-11-21 03:29:02,531 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE COMPLETE
+2025-11-21 03:29:02,531 - __main__ - INFO - ================================================================================
+2025-11-21 03:29:02,532 - __main__ - INFO - 
+SUMMARY: 6/6 directives successfully initialized
+2025-11-21 03:29:02,533 - __main__ - INFO - 🎉 ALL SYSTEMS ONLINE - ArchE FULLY PRIMED AND OPERATIONAL
+2025-11-21 03:29:02,536 - __main__ - INFO - 
+Priming results saved to: /mnt/3626C55326C514B1/Happier/arche_unified_priming_results.json
+2025-11-21 03:29:02,538 - __main__ - INFO - ArchE Unified Initialization Complete!
+2025-11-21 07:48:13,048 - __main__ - INFO - ================================================================================
+2025-11-21 07:48:13,051 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE INITIATED
+2025-11-21 07:48:13,052 - __main__ - INFO - Protocol: PRIME_ARCHE_PROTOCOL_3.5-GP
+2025-11-21 07:48:13,052 - __main__ - INFO - Keyholder: B.J. Lewis (IMnDEVmode)
+2025-11-21 07:48:13,052 - __main__ - INFO - Project Root: /mnt/3626C55326C514B1/Happier
+2025-11-21 07:48:13,052 - __main__ - INFO - Python: /mnt/3626C55326C514B1/Happier/arche_env/bin/python3
+2025-11-21 07:48:13,053 - __main__ - INFO - Virtual Environment: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 07:48:13,053 - __main__ - INFO - ================================================================================
+2025-11-21 07:48:13,056 - __main__ - INFO - 
+[DIRECTIVE 0] Virtual Environment Activation (MANDATORY)
+2025-11-21 07:48:13,057 - __main__ - INFO - ✅ Virtual environment already activated: /mnt/3626C55326C514B1/Happier/arche_env
+2025-11-21 07:48:13,060 - __main__ - INFO - 
+[DIRECTIVE 0.1] Zepto Compression/Decompression System Initialization
+2025-11-21 07:48:13,107 - Three_PointO_ArchE.temporal_core - INFO - ⏰ Temporal Core initialized - All timestamps are UTC
+2025-11-21 07:48:13,107 - Three_PointO_ArchE.temporal_core - INFO -    Current system time: 2025-11-21T12:48:13.107616Z
+2025-11-21 07:48:13,107 - Three_PointO_ArchE.temporal_core - INFO -    ArchE Epoch: 2024-01-01T00:00:00Z
+2025-11-21 07:48:16,825 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:16,827 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:17,887 - __main__ - INFO - ✅ PatternCrystallizationEngine initialized
+2025-11-21 07:48:17,888 - __main__ - WARNING - ⚠️  Warning: PRIME_ARCHE_PROTOCOL_3.5-GP.md not found at /mnt/3626C55326C514B1/Happier/PRIME_ARCHE_PROTOCOL_3.5-GP.md
+2025-11-21 07:48:17,888 - __main__ - INFO - 
+[DIRECTIVE 1] SPR Auto-Priming System
+2025-11-21 07:48:23,303 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 07:48:23,716 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 07:48:23,744 - __main__ - INFO - ✅ SPR Manager initialized
+2025-11-21 07:48:23,745 - __main__ - INFO -    Loaded SPRs: 3589
+2025-11-21 07:48:23,749 - __main__ - INFO -    Primed SPRs in test scan: 0
+2025-11-21 07:48:23,794 - __main__ - INFO - 
+[DIRECTIVE 2] Session Auto-Capture System
+2025-11-21 07:48:23,799 - Three_PointO_ArchE.session_auto_capture - INFO - SessionAutoCapture initialized, output to: /mnt/3626C55326C514B1/Happier
+2025-11-21 07:48:23,810 - __main__ - INFO - ✅ SessionAutoCapture initialized
+2025-11-21 07:48:23,813 - __main__ - INFO -    Output directory: /mnt/3626C55326C514B1/Happier
+2025-11-21 07:48:23,813 - __main__ - INFO -    Status: Active - Captures all messages, IAR entries, SPRs, and insights automatically
+2025-11-21 07:48:23,814 - __main__ - INFO - 
+[DIRECTIVE 3] Autopoietic Learning Loop
+2025-11-21 07:48:26,624 - qiskit.passmanager.base_tasks - INFO - Pass: UnrollCustomDefinitions - 0.22578 (ms)
+2025-11-21 07:48:26,624 - qiskit.passmanager.base_tasks - INFO - Pass: BasisTranslator - 0.06628 (ms)
+2025-11-21 07:48:26,642 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - ✅ Base CRCS system imported successfully
+2025-11-21 07:48:32,802 - WDM - INFO - ====== WebDriver manager ======
+2025-11-21 07:48:33,011 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-11-21 07:48:33,138 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-11-21 07:48:33,228 - WDM - INFO - Driver [/home/newbu/.wdm/drivers/chromedriver/linux64/141.0.7390.122/chromedriver] found in cache
+2025-11-21 07:48:33,976 - Three_PointO_ArchE.action_registry - INFO - Enhanced Perception Engine available
+2025-11-21 07:48:33,977 - Three_PointO_ArchE.action_registry - INFO - ActionRegistry initialized.
+2025-11-21 07:48:33,983 - Three_PointO_ArchE.llm_providers.google - INFO - Google Generative AI client configured successfully with advanced capabilities.
+2025-11-21 07:48:33,987 - Three_PointO_ArchE.llm_providers.base - INFO - GoogleProvider initialized successfully.
+2025-11-21 07:48:33,989 - Three_PointO_ArchE.action_registry - INFO - GeminiCapabilities initialized and available in ActionRegistry.
+2025-11-21 07:48:33,991 - Three_PointO_ArchE.action_registry - INFO - Action 'execute_code_standalone' registered.
+2025-11-21 07:48:33,999 - Three_PointO_ArchE.action_registry - INFO - Action 'search_web' registered.
+2025-11-21 07:48:34,011 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_text_llm' registered.
+2025-11-21 07:48:34,040 - Three_PointO_ArchE.action_registry - INFO - Action 'display_output' registered.
+2025-11-21 07:48:34,050 - Three_PointO_ArchE.action_registry - INFO - Action 'calculate_math' registered.
+2025-11-21 07:48:34,062 - Three_PointO_ArchE.action_registry - INFO - Action 'string_template' registered.
+2025-11-21 07:48:34,071 - Three_PointO_ArchE.action_registry - INFO - Action 'save_to_file' registered.
+2025-11-21 07:48:34,081 - Three_PointO_ArchE.action_registry - INFO - Action 'predict_nfl_game' registered.
+2025-11-21 07:48:34,088 - Three_PointO_ArchE.action_registry - INFO - Action 'web_search' registered.
+2025-11-21 07:48:34,098 - Three_PointO_ArchE.action_registry - INFO - Action 'analyze_spr_definitions' registered.
+2025-11-21 07:48:34,108 - Three_PointO_ArchE.action_registry - INFO - Action 'evaluate_error_handling' registered.
+2025-11-21 07:48:34,117 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_comprehensive_report' registered.
+2025-11-21 07:48:34,131 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_spr_recommendations' registered.
+2025-11-21 07:48:34,141 - Three_PointO_ArchE.action_registry - INFO - Action 'synthesize_search_results' registered.
+2025-11-21 07:48:34,150 - Three_PointO_ArchE.action_registry - INFO - Action 'execute_code' registered.
+2025-11-21 07:48:34,158 - Three_PointO_ArchE.action_registry - INFO - Registered canonical 'execute_code' from code_executor.py
+2025-11-21 07:48:34,158 - Three_PointO_ArchE.action_registry - INFO - Action 'execute_code_gemini' registered.
+2025-11-21 07:48:34,167 - Three_PointO_ArchE.action_registry - INFO - Action 'handle_files' registered.
+2025-11-21 07:48:34,176 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_grounding' registered.
+2025-11-21 07:48:34,183 - Three_PointO_ArchE.action_registry - INFO - Action 'call_function' registered.
+2025-11-21 07:48:34,190 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_structured_output' registered.
+2025-11-21 07:48:34,196 - Three_PointO_ArchE.action_registry - INFO - Actions from GeminiCapabilities registered (execute_code_gemini, handle_files, etc.).
+2025-11-21 07:48:34,200 - Three_PointO_ArchE.causal_inference_tool - INFO - Actual causal inference libraries loaded: DoWhy, statsmodels
+2025-11-21 07:48:34,200 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_causal_inference' registered.
+2025-11-21 07:48:34,209 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_causal_inference' registered.
+2025-11-21 07:48:34,215 - Three_PointO_ArchE.agent_based_modeling_tool - INFO - Mesa library loaded successfully for ABM.
+2025-11-21 07:48:34,215 - Three_PointO_ArchE.agent_based_modeling_tool - INFO - Matplotlib/NetworkX library loaded successfully for ABM visualization.
+2025-11-21 07:48:34,215 - Three_PointO_ArchE.agent_based_modeling_tool - INFO - SciPy library loaded successfully for ABM analysis.
+2025-11-21 07:48:34,216 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_abm' registered.
+2025-11-21 07:48:34,226 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_abm' registered.
+2025-11-21 07:48:34,230 - Three_PointO_ArchE.cfp_framework - INFO - quantum_utils.py loaded successfully for CFP. Qiskit available: True
+2025-11-21 07:48:34,230 - Three_PointO_ArchE.action_registry - INFO - Action 'run_cfp' registered.
+2025-11-21 07:48:34,238 - Three_PointO_ArchE.action_registry - INFO - Action 'run_cfp' registered from CfpframeworK wrapper.
+2025-11-21 07:48:34,238 - Three_PointO_ArchE.action_registry - INFO - Missing action registrations completed.
+2025-11-21 07:48:34,238 - Three_PointO_ArchE.action_registry - INFO - Action 'invoke_specialist_agent' registered.
+2025-11-21 07:48:34,244 - Three_PointO_ArchE.action_registry - INFO - Action 'invoke_specialist_agent' registered.
+2025-11-21 07:48:34,247 - Three_PointO_ArchE.action_registry - INFO - Action 'run_autopoietic_self_analysis' registered.
+2025-11-21 07:48:34,254 - Three_PointO_ArchE.action_registry - INFO - Action 'run_autopoietic_self_analysis' registered.
+2025-11-21 07:48:34,263 - Three_PointO_ArchE.tools.code_executor - WARNING - Using fallback config for code_executor.py
+2025-11-21 07:48:34,264 - Three_PointO_ArchE.tools.code_executor - ERROR - Docker library not found. Docker sandboxing will be unavailable. Install 'docker' package.
+2025-11-21 07:48:34,264 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 07:48:34,271 - Three_PointO_ArchE.llm_providers - INFO - 🔑 Using MultiKeyGroqProvider with 1 API key
+2025-11-21 07:48:34,273 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Loaded quota data from /mnt/3626C55326C514B1/Happier/outputs/llm_quota_tracker.json
+2025-11-21 07:48:34,275 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Registered API key groq_key_1 for provider groq
+2025-11-21 07:48:34,702 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 07:48:34,702 - Three_PointO_ArchE.llm_providers.base - INFO - MultiKeyGroqProvider initialized successfully.
+2025-11-21 07:48:34,744 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 07:48:34,754 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized with provider: groq
+2025-11-21 07:48:34,755 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized.
+2025-11-21 07:48:34,755 - Three_PointO_ArchE.synergistic_inquiry - INFO - Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+2025-11-21 07:48:34,756 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 07:48:34,756 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 07:48:34,773 - Three_PointO_ArchE.llm_providers - INFO - 🔑 Using MultiKeyGroqProvider with 1 API key
+2025-11-21 07:48:34,779 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Registered API key groq_key_1 for provider groq
+2025-11-21 07:48:34,835 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 07:48:34,836 - Three_PointO_ArchE.llm_providers.base - INFO - MultiKeyGroqProvider initialized successfully.
+2025-11-21 07:48:34,869 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 07:48:34,887 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized with provider: groq
+2025-11-21 07:48:34,887 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized.
+2025-11-21 07:48:34,888 - Three_PointO_ArchE.synergistic_inquiry - INFO - Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+2025-11-21 07:48:34,888 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 07:48:34,889 - Three_PointO_ArchE.action_registry - INFO - Action 'run_playbook' registered.
+2025-11-21 07:48:34,899 - Three_PointO_ArchE.action_registry - INFO - Action 'generate_dynamic_workflow' registered.
+2025-11-21 07:48:34,909 - Three_PointO_ArchE.action_registry - INFO - Playbook Orchestrator actions ('run_playbook', 'generate_dynamic_workflow') registered.
+2025-11-21 07:48:34,919 - Three_PointO_ArchE.llm_providers - INFO - 🔑 Using MultiKeyGroqProvider with 1 API key
+2025-11-21 07:48:34,921 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Registered API key groq_key_1 for provider groq
+2025-11-21 07:48:34,968 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 07:48:34,968 - Three_PointO_ArchE.llm_providers.base - INFO - MultiKeyGroqProvider initialized successfully.
+2025-11-21 07:48:35,006 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 07:48:35,017 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized with provider: groq
+2025-11-21 07:48:35,017 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized.
+2025-11-21 07:48:35,018 - Three_PointO_ArchE.synergistic_inquiry - INFO - Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+2025-11-21 07:48:35,023 - Three_PointO_ArchE.action_registry - INFO - Action 'run_synergistic_inquiry' registered.
+2025-11-21 07:48:35,037 - Three_PointO_ArchE.action_registry - INFO - Synergistic Inquiry action ('run_synergistic_inquiry') registered.
+2025-11-21 07:48:35,038 - Three_PointO_ArchE.action_registry - INFO - Action 'enhanced_web_search' registered.
+2025-11-21 07:48:35,051 - Three_PointO_ArchE.action_registry - INFO - Action 'enhanced_page_analysis' registered.
+2025-11-21 07:48:35,059 - Three_PointO_ArchE.action_registry - INFO - Enhanced Perception Engine actions ('enhanced_web_search', 'enhanced_page_analysis') registered with workflow-compatible wrappers.
+2025-11-21 07:48:35,060 - Three_PointO_ArchE.action_registry - INFO - Action 'compress_to_zepto_spr' registered.
+2025-11-21 07:48:35,071 - Three_PointO_ArchE.action_registry - INFO - Action 'decompress_from_zepto_spr' registered.
+2025-11-21 07:48:35,081 - Three_PointO_ArchE.action_registry - INFO - Universal Zepto SPR processing actions ('compress_to_zepto_spr', 'decompress_from_zepto_spr') registered.
+2025-11-21 07:48:35,088 - Three_PointO_ArchE.action_registry - INFO - Action 'calculate_zepto_resonance' registered.
+2025-11-21 07:48:35,095 - Three_PointO_ArchE.action_registry - INFO - Action 'disengage_safety_dampeners' registered.
+2025-11-21 07:48:35,108 - Three_PointO_ArchE.action_registry - INFO - Action 'engage_safety_dampeners' registered.
+2025-11-21 07:48:35,124 - Three_PointO_ArchE.action_registry - INFO - Action 'ingest_specifications' registered.
+2025-11-21 07:48:35,134 - Three_PointO_ArchE.action_registry - INFO - Zepto-Resonance actions registered: calculate_zepto_resonance, disengage_safety_dampeners, engage_safety_dampeners, ingest_specifications
+2025-11-21 07:48:35,138 - Three_PointO_ArchE.action_registry - INFO - Loaded 36 actions from cache.
+2025-11-21 07:48:35,183 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - ✅ RISE Orchestrator imported successfully
+2025-11-21 07:48:35,195 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:35,199 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:35,199 - CRCS - INFO - Initialized 3 domain controllers
+2025-11-21 07:48:35,199 - CRCS - INFO - Cognitive Resonant Controller System initialized
+2025-11-21 07:48:35,199 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [PatternEngine] Initialized with learning capabilities
+2025-11-21 07:48:35,199 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [DomainDetector] Initialized with detection capabilities
+2025-11-21 07:48:35,200 - Three_PointO_ArchE.rise_orchestrator - INFO - RISE: activated arche_env virtualenv paths for current session
+2025-11-21 07:48:35,200 - Three_PointO_ArchE.rise_orchestrator - INFO - RISE: GEMINI_API_KEY available for LLM tool
+2025-11-21 07:48:35,202 - Three_PointO_ArchE.rise_orchestrator - INFO - RISE_Orchestrator initialized with workflows_dir: /mnt/3626C55326C514B1/Happier/workflows
+2025-11-21 07:48:38,719 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 07:48:39,125 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 07:48:39,141 - Three_PointO_ArchE.rise_orchestrator - INFO - SPRManager initialized with default path: /mnt/3626C55326C514B1/Happier/Three_PointO_ArchE/../knowledge_graph/spr_definitions_tv.json
+2025-11-21 07:48:39,145 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:39,146 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:39,147 - Three_PointO_ArchE.zepto_resonance_engine - INFO - ZeptoResonanceEngine initialized (Safeties: ON)
+2025-11-21 07:48:39,147 - Three_PointO_ArchE.workflow_engine - INFO - Zepto-Resonance Engine initialized. ⚶ State detection active.
+2025-11-21 07:48:39,164 - Three_PointO_ArchE.action_registry - INFO - Action 'perform_system_genesis_action' registered.
+2025-11-21 07:48:39,184 - Three_PointO_ArchE.action_registry - INFO - Action 'run_code_linter' registered.
+2025-11-21 07:48:39,212 - Three_PointO_ArchE.action_registry - INFO - Action 'run_workflow_suite' registered.
+2025-11-21 07:48:39,223 - Three_PointO_ArchE.action_registry - INFO - Action 'analyze_failure' registered.
+2025-11-21 07:48:39,237 - Three_PointO_ArchE.action_registry - INFO - Action 'fix_template' registered.
+2025-11-21 07:48:39,253 - Three_PointO_ArchE.action_registry - INFO - Action 'fix_action' registered.
+2025-11-21 07:48:39,268 - Three_PointO_ArchE.action_registry - INFO - Action 'validate_workflow' registered.
+2025-11-21 07:48:39,284 - Three_PointO_ArchE.action_registry - INFO - Action 'validate_action' registered.
+2025-11-21 07:48:39,310 - Three_PointO_ArchE.action_registry - INFO - Action 'self_heal_output' registered.
+2025-11-21 07:48:39,346 - Three_PointO_ArchE.action_registry - INFO - Action 'for_each' registered.
+2025-11-21 07:48:39,359 - Three_PointO_ArchE.workflow_engine - INFO - IARCompliantWorkflowEngine initialized with full vetting capabilities
+2025-11-21 07:48:39,359 - Three_PointO_ArchE.utopian_solution_synthesizer - INFO - ✅ UtopianSolutionSynthesizer initialized with full capabilities
+2025-11-21 07:48:41,838 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 07:48:41,863 - Three_PointO_ArchE.llm_providers - INFO - 🔑 Using MultiKeyGroqProvider with 1 API key
+2025-11-21 07:48:41,864 - Three_PointO_ArchE.llm_providers.quota_tracker - INFO - Registered API key groq_key_1 for provider groq
+2025-11-21 07:48:41,900 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 07:48:41,900 - Three_PointO_ArchE.llm_providers.base - INFO - MultiKeyGroqProvider initialized successfully.
+2025-11-21 07:48:41,930 - Three_PointO_ArchE.llm_providers.multi_key_groq_provider - INFO - Groq client initialized with key 1/1
+2025-11-21 07:48:41,942 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized with provider: groq
+2025-11-21 07:48:41,942 - Three_PointO_ArchE.synthesis_engine - INFO - SynthesisEngine initialized.
+2025-11-21 07:48:41,943 - Three_PointO_ArchE.synergistic_inquiry - INFO - Synergistic Inquiry Orchestrator initialized with 5 specialized agents and a Synthesis Engine.
+2025-11-21 07:48:41,945 - Three_PointO_ArchE.playbook_orchestrator - INFO - PlaybookActionRegistry initialized with core strategic actions and ResonantiA capabilities.
+2025-11-21 07:48:41,946 - Three_PointO_ArchE.rise_orchestrator - INFO - 🎭 PlaybookOrchestrator initialized - dynamic workflow generation enabled
+2025-11-21 07:48:41,946 - Three_PointO_ArchE.rise_orchestrator - INFO - 🔬 Federated search agents initialized - multi-disciplinary search enabled
+2025-11-21 07:48:41,951 - Three_PointO_ArchE.autopoietic_self_analysis - INFO - [AutopoieticSelfAnalysis] Initialized with root: /mnt/3626C55326C514B1/Happier
+2025-11-21 07:48:41,953 - Three_PointO_ArchE.autopoietic_self_analysis - INFO - [IAR] initialization/system_startup: Self-analysis system ready to compare map and territory
+2025-11-21 07:48:41,954 - Three_PointO_ArchE.codebase_archaeologist - INFO - CodebaseArchaeologist initialized with root: /mnt/3626C55326C514B1/Happier
+2025-11-21 07:48:41,955 - Three_PointO_ArchE.rise_orchestrator - INFO - 🔍 CodebaseArchaeologist initialized - self-referential synthesis enabled
+2025-11-21 07:48:41,956 - Three_PointO_ArchE.codebase_archaeology_actions - INFO - CodebaseArchaeologist instance set for action registry
+2025-11-21 07:48:41,956 - Three_PointO_ArchE.rise_orchestrator - INFO - ✅ CodebaseArchaeologist linked to action registry
+2025-11-21 07:48:41,956 - Three_PointO_ArchE.rise_orchestrator - INFO - 🚀 RISE_Orchestrator initialized successfully
+2025-11-21 07:48:41,956 - Three_PointO_ArchE.rise_orchestrator - INFO - 📁 Workflows directory: /mnt/3626C55326C514B1/Happier/workflows
+2025-11-21 07:48:41,957 - Three_PointO_ArchE.rise_orchestrator - INFO - 🔧 Workflow engine: IARCompliantWorkflowEngine
+2025-11-21 07:48:41,957 - Three_PointO_ArchE.rise_orchestrator - INFO - 🧠 SPR Manager: SPRManager
+2025-11-21 07:48:41,957 - Three_PointO_ArchE.rise_orchestrator - INFO - 📝 Thought Trail: ThoughtTrail
+2025-11-21 07:48:41,957 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - RISE Orchestrator integrated successfully
+2025-11-21 07:48:41,962 - Three_PointO_ArchE.aco_layer_learning - INFO - ACO Layer Learning System initialized with 0 learned patterns
+2025-11-21 07:48:41,963 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [ACO] Layer learning system initialized
+2025-11-21 07:48:45,787 - Three_PointO_ArchE.spr_manager - INFO - Successfully loaded 3589 SPR definitions from /mnt/3626C55326C514B1/Happier/knowledge_graph/spr_definitions_tv.json (list format)
+2025-11-21 07:48:45,815 - Three_PointO_ArchE.spr_manager - INFO - Compiled SPR pattern for 3589 keys.
+2025-11-21 07:48:45,857 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [ACO] SPR Manager initialized for layer-aware retrieval
+2025-11-21 07:48:45,862 - Three_PointO_ArchE.adaptive_cognitive_orchestrator - INFO - [ACO] Initialized with evolution capabilities and Russian Doll layer learning
+2025-11-21 07:48:45,900 - Three_PointO_ArchE.autopoietic_learning_loop - INFO - [ALL] Autopoietic Learning Loop initialized - Guardian review: True
+2025-11-21 07:48:45,905 - __main__ - INFO - ✅ AutopoieticLearningLoop initialized
+2025-11-21 07:48:45,909 - __main__ - INFO -    Status: Active, Guardian review required for wisdom crystallization
+2025-11-21 07:48:45,913 - __main__ - INFO -    Note: Learning loop uses PatternCrystallizationEngine for Zepto compression of wisdom
+2025-11-21 07:48:45,918 - __main__ - INFO -   - Guardian review: True
+2025-11-21 07:48:45,919 - __main__ - INFO -   - Auto-crystallization: False
+2025-11-21 07:48:45,922 - __main__ - INFO -   - Stardust captured: 0
+2025-11-21 07:48:45,925 - __main__ - INFO - 
+[DIRECTIVE 4] ThoughtTrail Monitoring
+2025-11-21 07:48:45,939 - Three_PointO_ArchE.ledgers.universal_ledger - INFO - Universal Ledger initialized successfully at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:45,945 - Three_PointO_ArchE.thought_trail - INFO - ThoughtTrail initialized. Now writing to Universal Ledger at Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:45,970 - __main__ - INFO - ✅ ThoughtTrail initialized
+2025-11-21 07:48:45,976 - __main__ - INFO -    Buffer size: 1000 thoughts
+2025-11-21 07:48:45,980 - __main__ - INFO -    Status: Active - Captures every IAR entry for pattern detection
+2025-11-21 07:48:45,984 - __main__ - INFO -   - Universal Ledger path: Three_PointO_ArchE/ledgers/thought_trail.db
+2025-11-21 07:48:45,984 - __main__ - INFO -   - Total entries in ledger: 1
+2025-11-21 07:48:45,985 - __main__ - INFO - Storing initialized systems in global namespace...
+2025-11-21 07:48:45,988 - __main__ - INFO - ✅ Systems stored and ready for use
+2025-11-21 07:48:45,991 - __main__ - INFO - 
+================================================================================
+2025-11-21 07:48:45,994 - __main__ - INFO - ARCHÉ UNIFIED PRIMING SEQUENCE COMPLETE
+2025-11-21 07:48:46,004 - __main__ - INFO - ================================================================================
+2025-11-21 07:48:46,008 - __main__ - INFO - 
+SUMMARY: 6/6 directives successfully initialized
+2025-11-21 07:48:46,012 - __main__ - INFO - 🎉 ALL SYSTEMS ONLINE - ArchE FULLY PRIMED AND OPERATIONAL
+2025-11-21 07:48:46,025 - __main__ - INFO - 
+Priming results saved to: /mnt/3626C55326C514B1/Happier/arche_unified_priming_results.json
+2025-11-21 07:48:46,027 - __main__ - INFO - ArchE Unified Initialization Complete!

@@ -55,10 +55,32 @@ def invoke_llm_for_synthesis(**kwargs) -> Dict[str, Any]:
         provider_name = kwargs.get('provider') # Can be None, factory will use default
 
         # Use the factory to get the correct, configured provider instance
-        provider = get_llm_provider(provider_name)
+        # Check if fallback provider is enabled
+        enable_fallback = kwargs.get('enable_fallback', os.getenv('ARCHE_ENABLE_LLM_FALLBACK', 'true').lower() == 'true')
+        
+        if enable_fallback:
+            try:
+                from Three_PointO_ArchE.llm_providers.fallback_provider import FallbackLLMProvider
+                # Use fallback provider with cascading loopback
+                # Fallback chain: groq (both keys) -> cursor -> google -> openai -> mistral
+                provider = FallbackLLMProvider(
+                    primary_provider=provider_name or 'groq',
+                    fallback_chain=['groq', 'cursor', 'google', 'openai', 'mistral'],
+                    enable_zepto=kwargs.get('enable_zepto', os.getenv('ARCHE_ENABLE_ZEPTO_LLM', 'false').lower() == 'true')
+                )
+                logger.info(f"Using FallbackLLMProvider with primary: {provider_name or 'groq'}")
+            except ImportError:
+                logger.warning("FallbackLLMProvider not available, using direct provider")
+                provider = get_llm_provider(provider_name)
+        else:
+            provider = get_llm_provider(provider_name)
         
         # Determine which model to use (input > provider default > provider backup)
-        model_to_use = model or get_model_for_provider(provider._provider_name)
+        # For fallback provider, use primary provider's model
+        if hasattr(provider, 'primary_provider'):
+            model_to_use = model or get_model_for_provider(provider.primary_provider)
+        else:
+            model_to_use = model or get_model_for_provider(provider._provider_name)
 
         logger.info(f"Invoking LLM provider '{provider._provider_name}' with model '{model_to_use}'.")
 

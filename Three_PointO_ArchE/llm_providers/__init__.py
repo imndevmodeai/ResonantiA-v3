@@ -1,7 +1,10 @@
 # This package contains various LLM provider implementations
 import os
+import logging
 from .base import BaseLLMProvider, LLMProviderError
 from .cursor_arche import CursorArchEProvider
+
+logger = logging.getLogger(__name__)
 
 # Optional imports - handle missing dependencies gracefully
 try:
@@ -37,6 +40,14 @@ except ImportError:
     IntelligentLLMOrchestrator = None
     MultiKeyGroqProvider = None
     INTELLIGENT_ORCHESTRATOR_AVAILABLE = False
+
+# Fallback provider with cascading loopback
+try:
+    from .fallback_provider import FallbackLLMProvider
+    FALLBACK_PROVIDER_AVAILABLE = True
+except ImportError:
+    FallbackLLMProvider = None
+    FALLBACK_PROVIDER_AVAILABLE = False
 from ..thought_trail import log_to_thought_trail
 
 @log_to_thought_trail
@@ -109,7 +120,50 @@ def get_llm_provider(provider_name: str = None, api_key: str = None):
             raise ValueError(f"Groq provider not available. Install with: pip install groq")
         if GroqProvider is None:
             raise ValueError(f"Groq provider not available. Install with: pip install groq")
-        return GroqProvider(api_key=api_key)
+        
+        # Check if multiple Groq API keys are available - use MultiKeyGroqProvider if so
+        if INTELLIGENT_ORCHESTRATOR_AVAILABLE and MultiKeyGroqProvider is not None:
+            # Check for multiple keys in environment
+            groq_keys = []
+            if api_key:
+                groq_keys.append(api_key)
+            else:
+                # Check environment variables
+                primary_key = os.getenv("GROQ_API_KEY")
+                if primary_key:
+                    groq_keys.append(primary_key)
+                # Check for numbered keys
+                i = 1
+                while True:
+                    key = os.getenv(f"GROQ_API_KEY_{i}")
+                    if not key:
+                        break
+                    if key not in groq_keys:
+                        groq_keys.append(key)
+                    i += 1
+                # Also check GROQ_API_KEY_2 directly
+                key_2 = os.getenv("GROQ_API_KEY_2")
+                if key_2 and key_2 not in groq_keys:
+                    groq_keys.append(key_2)
+            
+            # Use MultiKeyGroqProvider if we have multiple keys
+            if len(groq_keys) > 1:
+                logger.info(f"🔑 Using MultiKeyGroqProvider with {len(groq_keys)} API keys")
+                return MultiKeyGroqProvider(api_keys=groq_keys)
+            elif len(groq_keys) == 1:
+                # Single key - use regular provider or MultiKey with one key
+                logger.info(f"🔑 Using MultiKeyGroqProvider with 1 API key")
+                return MultiKeyGroqProvider(api_keys=groq_keys)
+            else:
+                # No keys found - try to use MultiKeyGroqProvider which will load from env
+                try:
+                    return MultiKeyGroqProvider()
+                except ValueError:
+                    # Fallback to single-key provider if MultiKey fails
+                    return GroqProvider(api_key=api_key)
+        else:
+            # MultiKeyGroqProvider not available, use regular provider
+            return GroqProvider(api_key=api_key)
     elif provider_name_lower == 'mistral':
         if not MISTRAL_AVAILABLE:
             raise ValueError(f"Mistral provider not available. Install with: pip install mistralai")
